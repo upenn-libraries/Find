@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:15.3
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  solrcloud:
+    image: solr:9
+    ports:
+      - "8983:8983"
+    volumes:
+      - solrcloud_data:/var/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr
+      - start
+      - -c
+      - -f
+
+volumes:
+  db_data:
+  solrcloud_data:
