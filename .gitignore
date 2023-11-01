@@ -29,3 +29,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore Solr directory contents - it is only used for fleeting config and data files
+/solr/*
+!/solr/
+!/solr/.keep
