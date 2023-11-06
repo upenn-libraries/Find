@@ -1,5 +1,7 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
+# User model
+class User < ApplicationRecord
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
   # Include default devise modules. Others available are:

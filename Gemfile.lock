@@ -99,6 +99,7 @@ GEM
       warden (~> 1.2.3)
     devise-guests (0.8.1)
       devise
+    diff-lcs (1.5.0)
     erubi (1.12.0)
     execjs (2.9.1)
     faraday (2.7.10)
@@ -330,6 +331,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  rspec-rails (~> 6.0.0)
   sassc-rails (~> 2.1)
   sprockets-rails
   stimulus-rails
