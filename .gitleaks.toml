@@ -173,7 +173,10 @@ title = "Find Catalog Gitleaks config"
     files = [
         '''(.*?)(bin|csv|doc|gif|jpg|md|pdf)$''',
         '''\.gitleaks\.toml''',
-        '''docker-compose.yml'''
+        '''docker-compose.yml''',
+        '''config/initializers/devise.rb''',
+        '''app/models/solr_document.rb''',
+        '''config/locales/devise.en.yml'''
     ]
     regexes = [
         # Values set by Ansible variables
