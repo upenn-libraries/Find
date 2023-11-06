@@ -87,6 +87,14 @@ GEM
     builder (3.2.4)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    dartsass-ruby (3.0.2)
+      sass-embedded (~> 1.54, < 1.67)
+    dartsass-sprockets (3.0.0)
+      dartsass-ruby (~> 3.0)
+      railties (>= 4.0.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -106,9 +114,10 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (3.25.0-arm64-darwin)
+    google-protobuf (3.25.0-x86_64-linux)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -135,6 +144,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    libv8-node (18.16.0.0-arm64-darwin)
+    libv8-node (18.16.0.0-x86_64-linux)
     loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -146,6 +157,8 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
+    mini_racer (0.8.0)
+      libv8-node (~> 18.16.0.0)
     minitest (5.20.0)
     msgpack (1.7.2)
     net-imap (0.4.2)
@@ -216,6 +229,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
+    rsolr (2.5.0)
+      builder (>= 2.1.2)
+      faraday (>= 0.9, < 3, != 2.0.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -264,14 +280,10 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
+    sass-embedded (1.66.1-arm64-darwin)
+      google-protobuf (~> 3.23)
+    sass-embedded (1.66.1-x86_64-linux-gnu)
+      google-protobuf (~> 3.23)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -323,16 +335,18 @@ DEPENDENCIES
   blacklight (>= 6.1)
   bootsnap
   bootstrap (~> 5.1)
+  dartsass-sprockets
   debug
   devise
   devise-guests (~> 0.8)
   faraday
   importmap-rails
+  mini_racer
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  rsolr
   rspec-rails (~> 6.0.0)
-  sassc-rails (~> 2.1)
   sprockets-rails
   stimulus-rails
   turbo-rails
