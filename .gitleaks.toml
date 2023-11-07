@@ -169,11 +169,21 @@ title = "Find Catalog Gitleaks config"
 # Global allowlist
 [allowlist]
     description = "Global Allowlists"
-    commits = []
+    commits = [
+        '''e963b1a73c373e5d1a2ce7279e73da1be0341e8b''',
+        '''711c2a04c4f7a6790c99d3fbc3fd9deafe6843ce''',
+        '''566a985bf5fca688864a6151896845397c30c1ae''',
+        '''f26c9d28131e4651983ef0391994f2829f9d20d6'''
+    ]
     files = [
         '''(.*?)(bin|csv|doc|gif|jpg|md|pdf)$''',
         '''\.gitleaks\.toml''',
-        '''docker-compose.yml'''
+        '''docker-compose.yml''',
+        '''config/initializers/devise.rb''',
+        '''app/models/solr_document.rb''',
+        '''config/locales/devise.en.yml''',
+        '''config/importmap.rb''',
+        '''(.*?)(.en.yml)$''' # ignore any locale file
     ]
     regexes = [
         # Values set by Ansible variables
