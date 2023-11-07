@@ -20,7 +20,7 @@ namespace :tools do
         puts 'Creating Solr collections for development and test'
         SolrTools.create_collection 'find-development', configset_name
         SolrTools.create_collection 'find-test', configset_name
-        puts "Indexing record into Solr from #{latest_solrjson_file}"
+        puts "Indexing records into Solr from #{latest_solrjson_file}"
         SolrTools.load_data 'find-development', Rails.root.join('solr', latest_solrjson_file)
       rescue StandardError => e
         puts "Problem configuring Solr: #{e.message}"
