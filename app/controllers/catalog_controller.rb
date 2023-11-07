@@ -111,16 +111,13 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case
     #   sensitive when searching values)
 
-    # config.add_facet_field 'format', label: 'Format'
-    # config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    # config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    # config.add_facet_field 'language_ssim', label: 'Language', limit: true
-    # config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
-    # config.add_facet_field 'subject_geo_ssim', label: 'Region'
-    # config.add_facet_field 'subject_era_ssim', label: 'Era'
-    #
-    # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', pivot: %w[format language_ssim],
-    #                                               collapsing: true
+    config.add_facet_field 'format_facet', label: I18n.t('facets.format')
+    config.add_facet_field 'creator_facet', label: I18n.t('facets.creator')
+    config.add_facet_field 'subject_facet', label: I18n.t('facets.subject')
+    config.add_facet_field 'language_facet', label: I18n.t('facets.language')
+    config.add_facet_field 'library_facet', label: I18n.t('facets.library')
+    config.add_facet_field 'location_facet', label: I18n.t('facets.location')
+    config.add_facet_field 'genre_facet', label: I18n.t('facets.genre')
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

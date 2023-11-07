@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  facets:
+    format: 'Format'
+    creator: 'Author/Creator'
+    subject: 'Subject'
+    language: 'Language'
+    library: 'Library'
+    location: 'Specific Location'
+    genre: 'Genre'
