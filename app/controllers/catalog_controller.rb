@@ -4,6 +4,10 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
+  # This constant is used in the qf/pf params sent to Solr. These fields are those that are searched over when
+  # performing a search.
+  QUERY_FIELDS = %i[id creator_search title_search subject_search genre_search isxn_search].freeze
+
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
   # uncomment:
@@ -31,18 +35,18 @@ class CatalogController < ApplicationController
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = {
-      rows: 10
+      qt: 'search', qf: QUERY_FIELDS.join(' '), pf: QUERY_FIELDS.join(' ')
     }
 
     # solr path which will be added to solr base url before the other solr params.
-    # config.solr_path = 'select'
-    # config.document_solr_path = 'get'
+    config.solr_path = 'select'
+    config.document_solr_path = 'get'
 
     # items to show per page, each number in the array represent another option to choose from.
-    # config.per_page = [10,20,50,100]
+    config.per_page = [10, 20, 50, 100]
 
     # solr field configuration for search results/index views
-    # config.index.title_field = 'title_tsim'
+    config.index.title_field = 'title_ss'
     # config.index.display_type_field = 'format'
     # config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -73,7 +77,7 @@ class CatalogController < ApplicationController
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
     # solr field configuration for document/show views
-    # config.show.title_field = 'title_tsim'
+    config.show.title_field = 'title_ss'
     # config.show.display_type_field = 'format'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
     #
@@ -213,11 +217,7 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
 
-    # Configuration for autocomplete suggester
-    config.autocomplete_enabled = true
-    config.autocomplete_path = 'suggest'
-    # if the name of the solr.SuggestComponent provided in your solrconfig.xml is not the
-    # default 'mySuggester', uncomment and provide it below
-    # config.autocomplete_suggester = 'mySuggester'
+    # Disable autocomplete suggester
+    config.autocomplete_enabled = false
   end
 end
