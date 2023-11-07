@@ -31,13 +31,19 @@
 
 en:
   facets:
-    format: 'Format'
     creator: 'Author/Creator'
-    subject: 'Subject'
+    format: 'Format'
+    genre: 'Genre'
     language: 'Language'
     library: 'Library'
     location: 'Specific Location'
-    genre: 'Genre'
+    subject: 'Subject'
   results:
     creator: 'Author/Creator'
     format: 'Format'
+  sort:
+    creator_asc: 'Author/Creator (a-z)'
+    creator_desc: 'Author/Creator (z-a)'
+    relevance: 'Relevance'
+    title_asc: 'Title (a-z)'
+    title_desc: 'Title (z-a)'
