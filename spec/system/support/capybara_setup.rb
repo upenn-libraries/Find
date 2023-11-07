@@ -25,10 +25,6 @@ Capybara.server_host = '0.0.0.0'
 Capybara.app_host = 'http://host.docker.internal'
 
 RSpec.configure do |config|
-  # Not loading Bootstrap Icons from CDN to prevent inconsistent errors from bootstrap modals
-  config.before(:each, type: :system) do
-    page.driver.browser.url_blacklist = %r{'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css'}
-  end
   # Make sure this hook runs before others
   config.prepend_before(:each, type: :system) do
     # Use JS driver always
