@@ -38,3 +38,6 @@ en:
     library: 'Library'
     location: 'Specific Location'
     genre: 'Genre'
+  results:
+    creator: 'Author/Creator'
+    format: 'Format'
