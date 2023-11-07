@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  results:
+    creator: 'Author/Creator'
+    format: 'Format'
