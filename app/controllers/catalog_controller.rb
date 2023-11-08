@@ -135,20 +135,18 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    # config.add_show_field 'title_tsim', label: 'Title'
-    # config.add_show_field 'title_vern_ssim', label: 'Title'
-    # config.add_show_field 'subtitle_tsim', label: 'Subtitle'
-    # config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
-    # config.add_show_field 'author_tsim', label: 'Author'
-    # config.add_show_field 'author_vern_ssim', label: 'Author'
-    # config.add_show_field 'format', label: 'Format'
-    # config.add_show_field 'url_fulltext_ssim', label: 'URL'
-    # config.add_show_field 'url_suppl_ssim', label: 'More Information'
-    # config.add_show_field 'language_ssim', label: 'Language'
-    # config.add_show_field 'published_ssim', label: 'Published'
-    # config.add_show_field 'published_vern_ssim', label: 'Published'
-    # config.add_show_field 'lc_callnum_ssim', label: 'Call number'
-    # config.add_show_field 'isbn_ssim', label: 'ISBN'
+    config.add_show_field 'title_ss', label: I18n.t('show.title')
+    config.add_show_field 'creator_ss', label: I18n.t('show.creator')
+    config.add_show_field 'format_ss', label: I18n.t('show.format')
+    config.add_show_field 'edition_ss', label: I18n.t('show.edition')
+    config.add_show_field 'series_ss', label: I18n.t('show.series')
+    config.add_show_field 'subject_ss', label: I18n.t('show.subject.all')
+    config.add_show_field 'mesh_subject_ss', label: I18n.t('show.subject.mesh')
+    config.add_show_field 'local_subject_ss', label: I18n.t('show.subject.local')
+    config.add_show_field 'genre_ss', label: I18n.t('show.genre')
+    config.add_show_field 'place_of_pub_ss', label: I18n.t('show.place-of-publication')
+    config.add_show_field 'language_ss', label: I18n.t('show.language')
+    config.add_show_field 'notes_ss', label: I18n.t('show.notes')
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

@@ -41,6 +41,20 @@ en:
   results:
     creator: 'Author/Creator'
     format: 'Format'
+  show:
+    title: 'Title'
+    creator: 'Author/Creator'
+    format: 'Format'
+    edition: 'Edition'
+    series: 'Series'
+    subject:
+      all: 'Subjects (All)'
+      mesh: 'MeSh Subjects'
+      local: 'Local Subjects'
+    genre: 'Genre'
+    place-of-publication: 'Place of Publication'
+    language: 'Language'
+    notes: 'Notes'
   sort:
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
