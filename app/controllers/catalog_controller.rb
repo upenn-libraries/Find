@@ -44,8 +44,7 @@ class CatalogController < ApplicationController
     config.json_solr_path = 'advanced'
 
     # Display link to advanced search form
-     config.advanced_search.enabled = true
-
+    config.advanced_search.enabled = true
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
