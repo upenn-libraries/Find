@@ -41,6 +41,11 @@ class CatalogController < ApplicationController
     # solr path which will be added to solr base url before the other solr params.
     config.solr_path = 'select'
     config.document_solr_path = 'get'
+    config.json_solr_path = 'advanced'
+
+    # Display link to advanced search form
+     config.advanced_search.enabled = true
+
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
@@ -171,6 +176,17 @@ class CatalogController < ApplicationController
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
+
+    QUERY_FIELDS.each do |query_field|
+      next if query_field == :id
+
+      config.add_search_field(query_field) do |field|
+        # solr_parameters hash are sent to Solr as ordinary url query params.
+        field.include_in_advanced_search = true
+        field.include_in_simple_select = false
+        field.solr_parameters = { qf: query_field }
+      end
+    end
 
     # config.add_search_field('title') do |field|
     #   # solr_parameters hash are sent to Solr as ordinary url query params.
