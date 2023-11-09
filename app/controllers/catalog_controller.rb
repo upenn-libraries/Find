@@ -183,7 +183,7 @@ class CatalogController < ApplicationController
         # solr_parameters hash are sent to Solr as ordinary url query params.
         field.include_in_advanced_search = true
         field.include_in_simple_select = false
-        field.solr_parameters = { qf: query_field }
+        field.clause_params = { edismax: { qf: query_field } }
       end
     end
 
