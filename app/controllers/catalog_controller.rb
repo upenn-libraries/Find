@@ -179,7 +179,9 @@ class CatalogController < ApplicationController
     QUERY_FIELDS.each do |query_field|
       next if query_field == :id
 
-      config.add_search_field(query_field) do |field|
+      label = query_field.to_s.split('_').first.titleize
+
+      config.add_search_field(query_field, label: label) do |field|
         # solr_parameters hash are sent to Solr as ordinary url query params.
         field.include_in_advanced_search = true
         field.include_in_simple_select = false
