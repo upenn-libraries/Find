@@ -30,6 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  advanced:
+    creator: 'Author/Creator'
+    genre: 'Genre'
+    subject: 'Subject'
+    title: 'Title'
   facets:
     creator: 'Author/Creator'
     format: 'Format'
