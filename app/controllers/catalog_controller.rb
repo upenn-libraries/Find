@@ -211,7 +211,7 @@ class CatalogController < ApplicationController
     QUERY_FIELDS.each do |query_field|
       next if query_field.in? %i[id isxn_search]
 
-      label = I18n.t("advanced.#{query_field.to_s.split('_').first}")
+      label = I18n.t("advanced.#{query_field}")
 
       config.add_search_field(query_field, label: label) do |field|
         field.include_in_advanced_search = true

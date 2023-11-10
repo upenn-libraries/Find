@@ -31,10 +31,10 @@
 
 en:
   advanced:
-    creator: 'Author/Creator'
-    genre: 'Genre'
-    subject: 'Subject'
-    title: 'Title'
+    creator_search: 'Author/Creator'
+    genre_search: 'Genre'
+    subject_search: 'Subject'
+    title_search: 'Title'
   facets:
     creator: 'Author/Creator'
     format: 'Format'
