@@ -171,7 +171,9 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', label: 'All Fields'
+    config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
+      field.include_in_advanced_search = false
+    end
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
@@ -208,7 +210,15 @@ class CatalogController < ApplicationController
 
     # Add search fields to blacklight's built-in advanced search form.
     # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
-    # search parameters in a clause_params hash.
+    # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
+    # clause_params will build a request using the json_solr_path configuration.
+
+    config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: QUERY_FIELDS.join(' '), pf: QUERY_FIELDS.join(' ') } }
+    end
+
     QUERY_FIELDS.each do |query_field|
       next if query_field.in? %i[id isxn_search]
 
