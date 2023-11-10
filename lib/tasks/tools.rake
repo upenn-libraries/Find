@@ -12,7 +12,11 @@ namespace :tools do
       system('docker-compose exec solrcloud solr auth enable -credentials catalog:catalog')
       begin
         latest_configset_file = Rails.root.join('solr').glob('configset_*.zip').max_by { |f| File.mtime(f) }
+        raise StandardError, 'Configset file missing' unless latest_configset_file
+
         latest_solrjson_file = Rails.root.join('solr').glob('solrjson_*.jsonl').max_by { |f| File.mtime(f) }
+        raise StandardError, 'Solr JSON file missing' unless latest_solrjson_file
+
         config_zip_path = Rails.root.join('solr', latest_configset_file)
         configset_name = "find-configset-#{latest_configset_file.basename.to_s.split('_').last.gsub('.zip', '')}"
         puts "Loading Solr configset from : #{latest_configset_file}"
