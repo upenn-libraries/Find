@@ -41,6 +41,10 @@ class CatalogController < ApplicationController
     # solr path which will be added to solr base url before the other solr params.
     config.solr_path = 'select'
     config.document_solr_path = 'get'
+    config.json_solr_path = 'advanced'
+
+    # Display link to advanced search form
+    config.advanced_search.enabled = true
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
@@ -200,6 +204,21 @@ class CatalogController < ApplicationController
     #     pf: '${subject_pf}'
     #   }
     # end
+
+    # Add search fields to blacklight's built-in advanced search form.
+    # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
+    # search parameters in a clause_params hash.
+    QUERY_FIELDS.each do |query_field|
+      next if query_field.in? %i[id isxn_search]
+
+      label = I18n.t("advanced.#{query_field}")
+
+      config.add_search_field(query_field, label: label) do |field|
+        field.include_in_advanced_search = true
+        field.include_in_simple_select = false
+        field.clause_params = { edismax: { qf: query_field, pf: query_field } }
+      end
+    end
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and

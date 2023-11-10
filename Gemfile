@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 
-gem 'blacklight', '>= 6.1'
+gem 'blacklight', '~> 8.0'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1'
 gem 'dartsass-sprockets'
