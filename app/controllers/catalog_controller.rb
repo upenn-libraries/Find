@@ -209,7 +209,15 @@ class CatalogController < ApplicationController
 
     # Add search fields to blacklight's built-in advanced search form.
     # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
-    # search parameters in a clause_params hash.
+    # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
+    # clause_params will build a request using the json_solr_path configuration.
+
+    config.add_search_field 'all_fields_advanced', label: 'All Fields' do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: QUERY_FIELDS.join(' '), pf: QUERY_FIELDS.join(' ') } }
+    end
+
     QUERY_FIELDS.each do |query_field|
       next if query_field.in? %i[id isxn_search]
 
