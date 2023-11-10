@@ -177,7 +177,7 @@ class CatalogController < ApplicationController
     # of Solr search fields.
 
     QUERY_FIELDS.each do |query_field|
-      next if query_field == :id
+      next if query_field.in? %i[id isxn_search]
 
       label = query_field.to_s.split('_').first.titleize
 
