@@ -170,7 +170,7 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', label: 'All Fields' do |field|
+    config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
       field.include_in_advanced_search = false
     end
 
@@ -212,7 +212,7 @@ class CatalogController < ApplicationController
     # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
     # clause_params will build a request using the json_solr_path configuration.
 
-    config.add_search_field 'all_fields_advanced', label: 'All Fields' do |field|
+    config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: QUERY_FIELDS.join(' '), pf: QUERY_FIELDS.join(' ') } }

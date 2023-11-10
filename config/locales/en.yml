@@ -31,6 +31,7 @@
 
 en:
   advanced:
+    all_fields: 'All Fields'
     creator_search: 'Author/Creator'
     genre_search: 'Genre'
     subject_search: 'Subject'
@@ -46,6 +47,8 @@ en:
   results:
     creator: 'Author/Creator'
     format: 'Format'
+  search:
+    all_fields: 'All Fields'
   show:
     creator: 'Author/Creator'
     edition: 'Edition'
