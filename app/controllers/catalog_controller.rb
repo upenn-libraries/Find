@@ -119,13 +119,14 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case
     #   sensitive when searching values)
 
-    config.add_facet_field 'format_facet', label: I18n.t('facets.format')
-    config.add_facet_field 'creator_facet', label: I18n.t('facets.creator')
-    config.add_facet_field 'subject_facet', label: I18n.t('facets.subject')
-    config.add_facet_field 'language_facet', label: I18n.t('facets.language')
-    config.add_facet_field 'library_facet', label: I18n.t('facets.library')
-    config.add_facet_field 'location_facet', label: I18n.t('facets.location')
-    config.add_facet_field 'genre_facet', label: I18n.t('facets.genre')
+    config.add_facet_field 'access_facet', label: I18n.t('facets.access')
+    config.add_facet_field 'format_facet', label: I18n.t('facets.format'), limit: true
+    config.add_facet_field 'creator_facet', label: I18n.t('facets.creator'), limit: true
+    config.add_facet_field 'subject_facet', label: I18n.t('facets.subject'), limit: true
+    config.add_facet_field 'language_facet', label: I18n.t('facets.language'), limit: true
+    config.add_facet_field 'library_facet', label: I18n.t('facets.library'), limit: true
+    config.add_facet_field 'location_facet', label: I18n.t('facets.location'), limit: true
+    config.add_facet_field 'genre_facet', label: I18n.t('facets.genre'), limit: true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

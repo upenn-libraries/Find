@@ -36,6 +36,7 @@ en:
     subject_search: 'Subject'
     title_search: 'Title'
   facets:
+    access: 'Access'
     creator: 'Author/Creator'
     format: 'Format'
     genre: 'Genre'
