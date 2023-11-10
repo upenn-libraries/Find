@@ -176,21 +176,6 @@ class CatalogController < ApplicationController
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    # Add search fields to blacklight's built-in advanced search form.
-    # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
-    # search parameters in a clause_params hash.
-    QUERY_FIELDS.each do |query_field|
-      next if query_field.in? %i[id isxn_search]
-
-      label = I18n.t("advanced.#{query_field.to_s.split('_').first}")
-
-      config.add_search_field(query_field, label: label) do |field|
-        field.include_in_advanced_search = true
-        field.include_in_simple_select = false
-        field.clause_params = { edismax: { qf: query_field, pf: query_field } }
-      end
-    end
-
     # config.add_search_field('title') do |field|
     #   # solr_parameters hash are sent to Solr as ordinary url query params.
     #   field.solr_parameters = {
@@ -219,6 +204,21 @@ class CatalogController < ApplicationController
     #     pf: '${subject_pf}'
     #   }
     # end
+
+    # Add search fields to blacklight's built-in advanced search form.
+    # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
+    # search parameters in a clause_params hash.
+    QUERY_FIELDS.each do |query_field|
+      next if query_field.in? %i[id isxn_search]
+
+      label = I18n.t("advanced.#{query_field.to_s.split('_').first}")
+
+      config.add_search_field(query_field, label: label) do |field|
+        field.include_in_advanced_search = true
+        field.include_in_simple_select = false
+        field.clause_params = { edismax: { qf: query_field, pf: query_field } }
+      end
+    end
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
