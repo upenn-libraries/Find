@@ -25,8 +25,10 @@ plenty of guidance available on the open web about installing and using these to
 users 🌈 this is free and straightforward. [Install docker engine](https://docs.docker.com/engine/install/) and then
 [add the compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually).
 
-For Mac users, follow [the installation instructions](https://docs.docker.com/desktop/install/mac-install/), but at some
-point a license is needed for full functionality.
+For Mac users, the easiest and recommended way to get Docker Compose is to 
+[install Docker Desktop](https://docs.docker.com/desktop/install/mac-install/). While this is enough to get the 
+application running, you should request membership to the Penn Libraries Docker Team license 
+from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full functionality.
 
 ## Starting App Services
 
