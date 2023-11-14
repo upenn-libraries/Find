@@ -11,7 +11,7 @@ Eventually, this app will also contain patron account management functionality.
 
 ## Requirements
 
-Your development machine will need te following:
+Your development machine will need the following:
 
 ### Ruby
 
