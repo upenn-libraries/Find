@@ -9,6 +9,27 @@ by the [`pennmarc`](https://gitlab.library.upenn.edu/dld/catalog/pennmarc) gem
 
 Eventually, this app will also contain patron account management functionality.
 
+## Requirements
+
+Your development machine will need the following:
+
+### Ruby
+
+I suggest installing Ruby via [`rbenv`](https://github.com/rbenv/rbenv) or [`asdf`](https://asdf-vm.com/). There is
+plenty of guidance available on the open web about installing and using these tools. The `.ruby-version` and
+`.tool-versions` files in this repo explicitly define the version of Ruby to be installed.
+
+### Docker Compose
+
+[Docker compose](https://docs.docker.com/compose/install/) is required to run the application services. For 🌈 linux 
+users 🌈 this is free and straightforward. [Install docker engine](https://docs.docker.com/engine/install/) and then
+[add the compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually).
+
+For Mac users, the easiest and recommended way to get Docker Compose is to 
+[install Docker Desktop](https://docs.docker.com/desktop/install/mac-install/). While this is enough to get the 
+application running, you should request membership to the Penn Libraries Docker Team license 
+from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full functionality.
+
 ## Starting App Services
 
 Helpful Rake tasks have been created to wrap up the initialization process for the development environment. Prior to
