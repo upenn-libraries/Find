@@ -180,6 +180,7 @@ title = "Find Catalog Gitleaks config"
         '''(.*?)(bin|csv|doc|gif|jpg|md|pdf)$''',
         '''\.gitleaks\.toml''',
         '''docker-compose.yml''',
+        '''config/initializers/alma.rb''',
         '''config/initializers/devise.rb''',
         '''app/models/solr_document.rb''',
         '''config/locales/devise.en.yml''',
