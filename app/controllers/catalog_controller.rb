@@ -152,7 +152,6 @@ class CatalogController < ApplicationController
     config.add_show_field :production_publication_show, label: I18n.t('show.place-of-publication'), accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes'), accessor: :marc
-    config.add_show_field :bogus_helper, label: 'Test', accessor: :marc
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
