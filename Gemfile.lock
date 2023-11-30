@@ -382,6 +382,7 @@ DEPENDENCIES
   devise-guests (~> 0.8)
   faraday
   importmap-rails
+  marc
   mini_racer
   pennmarc (~> 1)
   pg (~> 1.1)
