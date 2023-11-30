@@ -12,6 +12,8 @@ module LazyMARCParsing
   # @param [Symbol, String] field
   # @return [Object]
   def marc(field, *opts)
+    raise NameError, "PennMARC parser does not support calling #{field}" unless pennmarc.respond_to? field
+
     if opts.any?
       pennmarc.public_send(field.to_sym, marc_record, **opts.first)
     else
