@@ -50,7 +50,7 @@ class CatalogController < ApplicationController
     config.per_page = [10, 20, 50, 100]
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_ss'
+    config.index.title_field = :title_ss
     # config.index.display_type_field = 'format'
     # config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -81,7 +81,7 @@ class CatalogController < ApplicationController
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
     # solr field configuration for document/show views
-    config.show.title_field = 'title_ss'
+    config.show.title_field = :title_ss
     # config.show.display_type_field = 'format'
     # config.show.thumbnail_field = 'thumbnail_path_ss'
     #
@@ -119,14 +119,14 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case
     #   sensitive when searching values)
 
-    config.add_facet_field 'access_facet', label: I18n.t('facets.access')
-    config.add_facet_field 'format_facet', label: I18n.t('facets.format'), limit: true
-    config.add_facet_field 'creator_facet', label: I18n.t('facets.creator'), limit: true
-    config.add_facet_field 'subject_facet', label: I18n.t('facets.subject'), limit: true
-    config.add_facet_field 'language_facet', label: I18n.t('facets.language'), limit: true
-    config.add_facet_field 'library_facet', label: I18n.t('facets.library'), limit: true
-    config.add_facet_field 'location_facet', label: I18n.t('facets.location'), limit: true
-    config.add_facet_field 'genre_facet', label: I18n.t('facets.genre'), limit: true
+    config.add_facet_field :access_facet, label: I18n.t('facets.access')
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
+    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true
+    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
+    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -135,23 +135,23 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'creator_ss', label: I18n.t('results.creator')
-    config.add_index_field 'format_ss', label: I18n.t('results.format')
+    config.add_index_field :creator_ss, label: I18n.t('results.creator')
+    config.add_index_field :format_ss, label: I18n.t('results.format')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'title_ss', label: I18n.t('show.title')
-    config.add_show_field 'creator_ss', label: I18n.t('show.creator')
-    config.add_show_field 'format_ss', label: I18n.t('show.format')
-    config.add_show_field 'edition_ss', label: I18n.t('show.edition')
-    config.add_show_field 'series_ss', label: I18n.t('show.series')
-    config.add_show_field 'subject_ss', label: I18n.t('show.subject.all')
-    config.add_show_field 'mesh_subject_ss', label: I18n.t('show.subject.mesh')
-    config.add_show_field 'local_subject_ss', label: I18n.t('show.subject.local')
-    config.add_show_field 'genre_ss', label: I18n.t('show.genre')
-    config.add_show_field 'place_of_pub_ss', label: I18n.t('show.place-of-publication')
-    config.add_show_field 'language_ss', label: I18n.t('show.language')
-    config.add_show_field 'notes_ss', label: I18n.t('show.notes')
+    config.add_show_field :title_show, label: I18n.t('show.title'), accessor: :marc
+    config.add_show_field :creator_show, label: I18n.t('show.creator'), accessor: :marc
+    config.add_show_field :format_show, label: I18n.t('show.format'), accessor: :marc
+    config.add_show_field :edition_show, label: I18n.t('show.edition'), accessor: :marc
+    config.add_show_field :series_show, label: I18n.t('show.series'), accessor: :marc
+    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc
+    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.mesh'), accessor: :marc
+    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
+    config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
+    config.add_show_field :production_publication_show, label: I18n.t('show.place-of-publication'), accessor: :marc
+    config.add_show_field :language_show, label: I18n.t('show.language'), accessor: :marc
+    config.add_show_field :note_notes_show, label: I18n.t('show.notes'), accessor: :marc
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

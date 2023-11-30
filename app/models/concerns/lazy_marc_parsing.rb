@@ -23,7 +23,7 @@ module LazyMARCParsing
 
   # @return [MARC::Record]
   def marc_record
-    @marc_record ||= MARC::XMLReader.new(StringIO.new(self[MARCXML_FIELD].first)).first
+    @marc_record ||= MARC::XMLReader.new(StringIO.new(self[MARCXML_FIELD])).first
   end
 
   # @return [PennMARC::Parser]
