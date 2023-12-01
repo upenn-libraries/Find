@@ -119,6 +119,18 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case
     #   sensitive when searching values)
 
+    # Configure database facets
+
+    # lambda to control database facets display
+    database_selected = lambda { |controller, _config, _field|
+      controller.params.dig(:f, :format_facet)&.include?('Database & Article Index')
+    }
+
+    config.add_facet_field 'db_subject_facet', label: I18n.t('facets.databases.subject'),
+                                               show: database_selected, sort: 'alpha', limit: 20
+    config.add_facet_field 'db_type_facet', label: I18n.t('facets.databases.type'), show: database_selected
+
+    # Configure general facets
     config.add_facet_field 'access_facet', label: I18n.t('facets.access')
     config.add_facet_field 'format_facet', label: I18n.t('facets.format'), limit: true
     config.add_facet_field 'creator_facet', label: I18n.t('facets.creator'), limit: true

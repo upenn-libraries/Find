@@ -39,6 +39,9 @@ en:
   facets:
     access: 'Access'
     creator: 'Author/Creator'
+    databases:
+      subject: 'Database Subject'
+      type: 'Database Type'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
