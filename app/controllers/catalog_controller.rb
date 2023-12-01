@@ -261,4 +261,8 @@ class CatalogController < ApplicationController
     # Disable autocomplete suggester
     config.autocomplete_enabled = false
   end
+  def databases
+    # replace string value with PennMarc constant when available
+    redirect_to search_catalog_path({ 'f[format_facet][]': 'Database & Article Index' })
+  end
 end
