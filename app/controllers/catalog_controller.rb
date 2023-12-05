@@ -126,8 +126,8 @@ class CatalogController < ApplicationController
       controller.params.dig(:f, :format_facet)&.include?('Database & Article Index')
     }
 
-    config.add_facet_field 'db_subject_facet', label: I18n.t('facets.databases.subject'),
-                                               show: database_selected, sort: 'alpha', limit: 20
+    config.add_facet_field 'db_sub_subject_facet', label: I18n.t('facets.databases.subject'),
+                                               show: database_selected
     config.add_facet_field 'db_type_facet', label: I18n.t('facets.databases.type'), show: database_selected
 
     # Configure general facets
