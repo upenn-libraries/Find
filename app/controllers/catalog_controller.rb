@@ -123,7 +123,7 @@ class CatalogController < ApplicationController
 
     # lambda to control database facets display
     database_selected = lambda { |controller, _config, _field|
-      controller.params.dig(:f, :format_facet)&.include?('Database & Article Index')
+      controller.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
@@ -263,6 +263,6 @@ class CatalogController < ApplicationController
   end
   def databases
     # replace string value with PennMarc constant when available
-    redirect_to search_catalog_path({ 'f[format_facet][]': 'Database & Article Index' })
+    redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 end

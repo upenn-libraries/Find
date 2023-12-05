@@ -12,7 +12,7 @@ module Find
 
     # @return [Boolean]
     def database_search?
-      @params.dig(:f, :format_facet)&.include?('Database & Article Index') || false
+      @params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE) || false
     end
   end
 end
