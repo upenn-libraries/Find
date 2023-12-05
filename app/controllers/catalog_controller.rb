@@ -126,19 +126,19 @@ class CatalogController < ApplicationController
       controller.params.dig(:f, :format_facet)&.include?('Database & Article Index')
     }
 
-    config.add_facet_field 'db_sub_subject_facet', label: I18n.t('facets.databases.subject'),
+    config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
                                                show: database_selected
-    config.add_facet_field 'db_type_facet', label: I18n.t('facets.databases.type'), show: database_selected
+    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
 
     # Configure general facets
-    config.add_facet_field 'access_facet', label: I18n.t('facets.access')
-    config.add_facet_field 'format_facet', label: I18n.t('facets.format'), limit: true
-    config.add_facet_field 'creator_facet', label: I18n.t('facets.creator'), limit: true
-    config.add_facet_field 'subject_facet', label: I18n.t('facets.subject'), limit: true
-    config.add_facet_field 'language_facet', label: I18n.t('facets.language'), limit: true
-    config.add_facet_field 'library_facet', label: I18n.t('facets.library'), limit: true
-    config.add_facet_field 'location_facet', label: I18n.t('facets.location'), limit: true
-    config.add_facet_field 'genre_facet', label: I18n.t('facets.genre'), limit: true
+    config.add_facet_field :access_facet, label: I18n.t('facets.access')
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
+    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true
+    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
+    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
