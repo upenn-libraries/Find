@@ -262,7 +262,6 @@ class CatalogController < ApplicationController
     config.autocomplete_enabled = false
   end
   def databases
-    # replace string value with PennMarc constant when available
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 end
