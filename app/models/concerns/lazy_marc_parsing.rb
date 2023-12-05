@@ -2,8 +2,8 @@
 
 # Given a Solr field defined in MARCXML_FIELD, this module provides a #marc method that receives
 # a parameter corresponding to a method call that a PennMARC parser will respond to.
-# The parser and the MARC::Record are memoized but the parsed values are not. Eventually we could
-# do that using instance_variable_set or somesuch.
+# @todo The parser and the MARC::Record are memoized but the parsed values are not. If these lazily-parsed values end up
+#       being used more than once, there could be a benefit to memoizing them.
 module LazyMARCParsing
   extend ActiveSupport::Concern
 
