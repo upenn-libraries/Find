@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+# Given a Solr field defined in MARCXML_FIELD, this module provides a #marc method that receives
+# a parameter corresponding to a method call that a PennMARC parser will respond to.
+# @todo The parser and the MARC::Record are memoized but the parsed values are not. If these lazily-parsed values end up
+#       being used more than once, there could be a benefit to memoizing them.
+module LazyMARCParsing
+  extend ActiveSupport::Concern
+
+  MARCXML_FIELD = 'marcxml_marcxml'
+
+  # @param [Symbol, String] field
+  # @param [Array] opts params to be sent to PennMARC method
+  # @return [Object]
+  def marc(field, *opts)
+    raise NameError, "PennMARC parser does not support calling #{field}" unless pennmarc.respond_to? field
+
+    if opts.any?
+      pennmarc.public_send(field.to_sym, marc_record, **opts.first)
+    else
+      pennmarc.public_send(field.to_sym, marc_record)
+    end
+  end
+
+  private
+
+  # @return [MARC::Record]
+  def marc_record
+    @marc_record ||= MARC::XMLReader.new(StringIO.new(self[MARCXML_FIELD])).first
+  end
+
+  # @return [PennMARC::Parser]
+  def pennmarc
+    @pennmarc ||= PennMARC::Parser.new
+  end
+end
