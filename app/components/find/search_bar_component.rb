@@ -4,7 +4,6 @@ module Find
   # Our SearchBarComponent that overrides Blacklight::SearchBarComponent in order to accommodate
   # databases search.
   class SearchBarComponent < Blacklight::SearchBarComponent
-
     # Ensure correct locale scope if handling databases search
     def before_render
       super
