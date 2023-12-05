@@ -34,6 +34,8 @@
   </div>
 <% end %>
 
+<%= link_to 'Databases', databases_catalog_path,  class: 'btn btn-secondary'%>
+
 <% if advanced_search_enabled? %>
   <%= link_to t('blacklight.advanced_search.more_options'), @advanced_search_url, class: 'advanced_search btn btn-secondary'%>
 <% end %>
