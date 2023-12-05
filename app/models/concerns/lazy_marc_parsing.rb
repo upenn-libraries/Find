@@ -10,6 +10,7 @@ module LazyMARCParsing
   MARCXML_FIELD = 'marcxml_marcxml'
 
   # @param [Symbol, String] field
+  # @param [Array] opts params to be sent to PennMARC method
   # @return [Object]
   def marc(field, *opts)
     raise NameError, "PennMARC parser does not support calling #{field}" unless pennmarc.respond_to? field

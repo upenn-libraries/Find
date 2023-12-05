@@ -9,14 +9,32 @@ shared_examples_for 'LazyMARCParsing' do
     allow(object).to receive(:pennmarc).and_return parser
   end
 
-  context 'with valid call to PennMARC' do
+  context 'with valid calls to PennMARC' do
     before do
       allow(parser).to receive(:respond_to?).with(:title_show).and_return true
-      allow(parser).to receive(:method_missing).with(:title_show, anything).and_return 'A Title'
     end
 
-    it 'delegates calls to parser' do
-      expect(object.marc(:title_show)).to eq 'A Title'
+    context 'with no options' do
+      before do
+        allow(parser).to receive(:method_missing).with(:title_show, kind_of(MARC::Record)).and_return 'A Title'
+      end
+
+      it 'delegates calls to parser' do
+        expect(object.marc(:title_show)).to eq 'A Title'
+      end
+    end
+
+    context 'with options' do
+      before do
+        allow(parser).to(
+          receive(:method_missing).with(:title_show, kind_of(MARC::Record), anything).and_return('A Title')
+        )
+      end
+
+      it 'passes along options to the specified PennMARC method' do
+        expect(object.marc(:title_show, some_option: false)).to eq 'A Title'
+        expect(parser).to have_received(:method_missing).with(:title_show, kind_of(MARC::Record), some_option: false)
+      end
     end
   end
 
