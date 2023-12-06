@@ -208,7 +208,7 @@ class CatalogController < ApplicationController
     #   }
     # end
 
-    # Add search fields to blacklight's built-in advanced search form.
+    # Add search fields to Blacklight's built-in advanced search form.
     # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
     # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
     # clause_params will build a request using the json_solr_path configuration.
