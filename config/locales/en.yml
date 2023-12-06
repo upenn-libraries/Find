@@ -47,7 +47,16 @@ en:
     subject: 'Subject'
   results:
     creator: 'Author/Creator'
+    edition: 'Edition'
+    conference: 'Conference name'
+    series: 'Series'
+    publication: 'Publication'
+    production: 'Production'
+    distribution: 'Distribution'
+    manufacture: 'Manufacture'
+    contained_within: 'Contained in'
     format: 'Format'
+    full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
   show:
