@@ -34,3 +34,5 @@
 /solr/*
 !/solr/
 !/solr/.keep
+
+.DS_store
