@@ -149,18 +149,63 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field :title_show, label: I18n.t('show.title'), accessor: :marc
-    config.add_show_field :creator_show, label: I18n.t('show.creator'), accessor: :marc
-    config.add_show_field :format_show, label: I18n.t('show.format'), accessor: :marc
-    config.add_show_field :edition_show, label: I18n.t('show.edition'), accessor: :marc
-    config.add_show_field :series_show, label: I18n.t('show.series'), accessor: :marc
+    config.add_show_field :title_show, label: I18n.t('show.title.main'), accessor: :marc
+    config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc, link_to_facet: true
+    config.add_show_field :production_publication_show, label: I18n.t('show.production.publication'), accessor: :marc
+    config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
+    config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
+    config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'), accessor: :marc, link_to_facet: true
+    config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc, link_to_facet: true
+    config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
+    config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
+    config.add_show_field :production_manufacture_show, label: I18n.t('show.production.manufacture'), accessor: :marc
+    config.add_show_field :relation_contained_in_show, label: I18n.t('show.relation.contained_in'), accessor: :marc
+    # config.add_show_field :link_full_text, label: I18n.t('show.link_full_text'), accessor: :marc
+    config.add_show_field :title_standardized, label: I18n.t('show.title.standardized'), accessor: :marc, link_to_facet: true
+    config.add_show_field :title_other, label: I18n.t('show.title.other'), accessor: :marc
+    config.add_show_field :format_cartographic_show, label: I18n.t('show.format.cartographic'), accessor: :marc
+    config.add_show_field :identifier_fingerprint_show, label: I18n.t('show.identifier.fingerprint'), accessor: :marc
+    config.add_show_field :note_arrangement_show, label: I18n.t('show.notes.arrangement'), accessor: :marc
+    config.add_show_field :title_former, label: I18n.t('show.title.former'), accessor: :marc, link_to_facet: true
+    config.add_show_field :series_get_continues_display, label: I18n.t('show.series.continues'), accessor: :marc
+    config.add_show_field :series_get_continued_by_display, label: I18n.t('show.series.continued_by'), accessor: :marc
     config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc
-    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.mesh'), accessor: :marc
+    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
-    config.add_show_field :production_publication_show, label: I18n.t('show.place-of-publication'), accessor: :marc
+    config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'), accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language'), accessor: :marc
-    config.add_show_field :note_notes_show, label: I18n.t('show.notes'), accessor: :marc
+    config.add_show_field :note_system_details_display, label: I18n.t('show.notes.system_details'), accessor: :marc
+    config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
+    config.add_show_field :note_summary_show, label: I18n.t('show.notes.summary'), accessor: :marc
+    config.add_show_field :note_contents_show, label: I18n.t('show.notes.contents'), accessor: :marc
+    config.add_show_field :note_participant_show, label: I18n.t('show.notes.participant'), accessor: :marc
+    config.add_show_field :note_credits_show, label: I18n.t('show.notes.credits'), accessor: :marc
+    config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
+    config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
+    # config.add_show_field :link_offsite, label: I18n.t('show.link_offsite'), accessor: :marc
+    config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
+    config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc # needs render as links
+    config.add_show_field :note_chronology_show, label: I18n.t('show.notes.chronology'), accessor: :marc # needs render as links
+    config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'), accessor: :marc
+    config.add_show_field :citation_cited_in_show, label: I18n.t('show.citation.cited_in'), accessor: :marc
+    config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'), accessor: :marc
+    config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
+    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc # needs render as links
+    config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
+    config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
+    config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc # needs render as links
+    config.add_show_field :relation_constituent_unit_show, label: I18n.t('show.relation.constituent_unit'), accessor: :marc
+    config.add_show_field :relation_has_supplement_show, label: I18n.t('show.relation.has_supplement'), accessor: :marc
+    config.add_show_field :format_other_show, label: I18n.t('show.format.other'), accessor: :marc
+    config.add_show_field :identifier_isbn_show, label: I18n.t('show.identifier.isbn'), accessor: :marc
+    config.add_show_field :identifier_issn_show, label: I18n.t('show.identifier.issn'), accessor: :marc
+    config.add_show_field :identifier_oclc_id_show, label: I18n.t('show.identifier.oclc_id'), accessor: :marc
+    config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'), accessor: :marc
+    config.add_show_field :link_web, label: I18n.t('show.link.web'), accessor: :marc # needs special method `render_web_link_display`?
+    config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
+    # doesn't exist yet?
+    # config.add_show_field :bound_with, label: I18n.t('show.bound_with'), accessor: :marc
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
