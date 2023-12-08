@@ -12,13 +12,15 @@ module SearchFieldConfig
     qf: 'creator_search^3
          title_search^2.5
          title_aux_search^1.5
-         subject_search^1.0
-         id^1.0',
+         subject_search^1
+         isxn_search^1
+         id^1',
     pf: 'creator_search^3
          title_search^2.5
          title_aux_search^1.5
-         subject_search^1.0
-         id^1.0',
+         subject_search^1
+         isxn_search^1
+         id^1',
     ps: '3'
   }.freeze
 
