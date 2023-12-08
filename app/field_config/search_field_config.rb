@@ -8,6 +8,7 @@
 module SearchFieldConfig
   # For guidance, Franklin field configuration and boosts can be seen here: https://gitlab.library.upenn.edu/franklin/franklin-solr-config/-/blob/pod/conf/solrconfig.xml#L795
   # TODO: lots of work to do here in the name of relevance
+  # TODO: move this to the solr config when it become more static
   ALL_FIELDS = {
     qf: 'creator_search^3
          title_search^2.5
