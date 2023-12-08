@@ -40,6 +40,9 @@ en:
   facets:
     access: 'Access'
     creator: 'Author/Creator'
+    databases:
+      subject: 'Database Subject'
+      type: 'Database Type'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
@@ -60,6 +63,10 @@ en:
     full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
+    form:
+      database:
+          search:
+              placeholder: 'Find databases & articles'
   show:
     creator: 'Author/Creator'
     edition: 'Edition'

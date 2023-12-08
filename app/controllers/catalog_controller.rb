@@ -4,6 +4,10 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
+  # This constant is used in the qf/pf params sent to Solr. These fields are those that are searched over when
+  # performing a search.
+  QUERY_FIELDS = %i[id creator_search title_search subject_search genre_search isxn_search].freeze
+
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
   # uncomment:
@@ -54,7 +58,7 @@ class CatalogController < ApplicationController
     # Some components can be configured
     # config.index.document_component = MyApp::SearchResultComponent
     # config.index.constraints_component = MyApp::ConstraintsComponent
-    # config.index.search_bar_component = MyApp::SearchBarComponent
+    config.index.search_bar_component = Find::SearchBarComponent
     # config.index.search_header_component = MyApp::SearchHeaderComponent
     # config.index.document_actions.delete(:bookmark)
 
@@ -87,6 +91,18 @@ class CatalogController < ApplicationController
     # config.show.sidebar_component = MyApp::SidebarComponent
     # config.show.embed_component = MyApp::EmbedComponent
 
+    # Configure database facets
+
+    # lambda to control database facets display
+    database_selected = lambda { |controller, _config, _field|
+      controller.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
+    }
+
+    config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
+                                                  show: database_selected
+    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
+
+    # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
     config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true
@@ -135,9 +151,9 @@ class CatalogController < ApplicationController
       field.solr_parameters = SearchFieldConfig::ALL_FIELDS
     end
 
-    # Configure search fields to Blacklight's built-in advanced search form.
-    # Advanced search relies on Solr's json query dsl. In order to make a valid json query, we have to include our
-    # search parameters in a clause_params hash. The default Blacklight processor chain ensures that the presence of
+    # Add search fields to Blacklight's built-in advanced search form.
+    # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
+    # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
     # clause_params will build a request using the json_solr_path configuration.
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
@@ -193,5 +209,9 @@ class CatalogController < ApplicationController
 
     # Disable autocomplete suggester
     config.autocomplete_enabled = false
+  end
+
+  def databases
+    redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 end
