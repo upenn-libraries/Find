@@ -151,7 +151,6 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field :title_show, label: I18n.t('show.title.main'), accessor: :marc
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc, link_to_facet: true
-    config.add_show_field :production_publication_show, label: I18n.t('show.production.publication'), accessor: :marc
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'), accessor: :marc, link_to_facet: true
