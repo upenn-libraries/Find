@@ -4,10 +4,6 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  # This constant is used in the qf/pf params sent to Solr. These fields are those that are searched over when
-  # performing a search.
-  QUERY_FIELDS = %i[id creator_search title_search subject_search genre_search isxn_search].freeze
-
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
   # uncomment:
