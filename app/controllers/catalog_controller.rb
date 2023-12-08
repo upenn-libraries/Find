@@ -139,6 +139,7 @@ class CatalogController < ApplicationController
     config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
     config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
     config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
+    config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

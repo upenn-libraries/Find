@@ -38,6 +38,7 @@ en:
     title_search: 'Title'
   facets:
     access: 'Access'
+    classification: 'Classification'
     creator: 'Author/Creator'
     databases:
       subject: 'Database Subject'
