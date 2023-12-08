@@ -60,7 +60,7 @@ class CatalogController < ApplicationController
     # Some components can be configured
     # config.index.document_component = MyApp::SearchResultComponent
     # config.index.constraints_component = MyApp::ConstraintsComponent
-    # config.index.search_bar_component = MyApp::SearchBarComponent
+    config.index.search_bar_component = Find::SearchBarComponent
     # config.index.search_header_component = MyApp::SearchHeaderComponent
     # config.index.document_actions.delete(:bookmark)
 
@@ -119,6 +119,18 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case
     #   sensitive when searching values)
 
+    # Configure database facets
+
+    # lambda to control database facets display
+    database_selected = lambda { |controller, _config, _field|
+      controller.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
+    }
+
+    config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
+                                                  show: database_selected
+    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
+
+    # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
     config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true
@@ -257,5 +269,8 @@ class CatalogController < ApplicationController
 
     # Disable autocomplete suggester
     config.autocomplete_enabled = false
+  end
+  def databases
+    redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 end
