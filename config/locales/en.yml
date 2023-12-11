@@ -81,7 +81,8 @@ en:
       issn: 'ISSN'
       oclc_id: 'OCLC'
       publisher_number: 'Publisher Number'
-    language: 'Language'
+    language:
+      main: 'Language'
     link:
       full_text: 'Online'
       web: 'Web Link'
@@ -89,7 +90,6 @@ en:
       access_restriction: 'Access Restriction'
       arrangement: 'Arrangement'
       biography: 'Biography/History'
-      chronology: 'Penn Chronology'
       contents: 'Contents'
       credits: 'Credits'
       finding_aid: 'Finding Aid/Index'
@@ -106,9 +106,10 @@ en:
       place_of_publication: 'Place of Publication'
       publication: 'Publication'
     relation:
+      chronology: 'Penn Chronology'
+      constituent_unit: 'Constituent Unit'
       contained_in: 'Contained In'
       contains: 'Contains'
-      constituent_unit: 'Constituent Unit'
       has_supplement: 'Has Supplement'
       publications_about: 'Publications about'
       related_collections: 'Related Collections'

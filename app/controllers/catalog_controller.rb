@@ -173,8 +173,8 @@ class CatalogController < ApplicationController
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'), accessor: :marc
-    config.add_show_field :language_show, label: I18n.t('show.language'), accessor: :marc
-    config.add_show_field :note_system_details_display, label: I18n.t('show.notes.system_details'), accessor: :marc
+    config.add_show_field :language_show, label: I18n.t('show.language.main'), accessor: :marc
+    config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
     config.add_show_field :note_summary_show, label: I18n.t('show.notes.summary'), accessor: :marc
     config.add_show_field :note_contents_show, label: I18n.t('show.notes.contents'), accessor: :marc
@@ -185,7 +185,7 @@ class CatalogController < ApplicationController
     # config.add_show_field :link_offsite, label: I18n.t('show.link_offsite'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
     config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc # needs render as links
-    config.add_show_field :note_chronology_show, label: I18n.t('show.notes.chronology'), accessor: :marc # needs render as links
+    config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc # needs render as links
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'), accessor: :marc
     config.add_show_field :citation_cited_in_show, label: I18n.t('show.citation.cited_in'), accessor: :marc
     config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'), accessor: :marc
