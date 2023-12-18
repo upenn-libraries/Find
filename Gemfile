@@ -8,6 +8,7 @@ ruby '3.2.2'
 gem 'blacklight', '~> 8.0'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1'
+gem 'config'
 gem 'dartsass-sprockets'
 gem 'devise'
 gem 'devise-guests', '~> 0.8'

@@ -4,31 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title><%= render_page_title %></title>
-    <script>
-      document.querySelector('html').classList.remove('no-js');
-    </script>
     <%= opensearch_description_tag application_name, opensearch_catalog_url(format: 'xml') %>
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload"  %>
-    <% if defined? Importmap %>
-      <%= javascript_importmap_tags %>
-    <% elsif defined? Propshaft %>
-      <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <% else %>
-      <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-      <%= javascript_include_tag "blacklight/blacklight", type: 'module' %>
-      <script type="module">
-        import githubAutoCompleteElement from 'https://cdn.skypack.dev/@github/auto-complete-element';
-      </script>
-    <% end %>
-
+    <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.esm.js" %>
+    <script>
+        document.querySelector('html').classList.remove('no-js');
+    </script>
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
-
-    <link href="https://cdn.jsdelivr.net/npm/@penn-libraries/web@^0.0.5/dist/web/web.css" rel="stylesheet"/>
-    <script type="module" src='https://cdn.jsdelivr.net/npm/@penn-libraries/web@^0.0.5/dist/web/web.esm.js'></script>
   </head>
   <body class="<%= render_body_class %>">
     <nav id="skip-link" role="navigation" aria-label="<%= t('blacklight.skip_links.label') %>">
