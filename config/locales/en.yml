@@ -39,9 +39,14 @@ en:
     genre_search: 'Genre'
     subject_search: 'Subject'
     title_search: 'Title'
+    journal_title_search: 'Journal Title'
   facets:
     access: 'Access'
+    classification: 'Classification'
     creator: 'Author/Creator'
+    databases:
+      subject: 'Database Subject'
+      type: 'Database Type'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
@@ -50,9 +55,22 @@ en:
     subject: 'Subject'
   results:
     creator: 'Author/Creator'
+    edition: 'Edition'
+    conference: 'Conference name'
+    series: 'Series'
+    publication: 'Publication'
+    production: 'Production'
+    distribution: 'Distribution'
+    manufacture: 'Manufacture'
+    contained_within: 'Contained in'
     format: 'Format'
+    full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
+    form:
+      database:
+          search:
+              placeholder: 'Find databases & articles'
   show:
     creator: 'Author/Creator'
     edition: 'Edition'
