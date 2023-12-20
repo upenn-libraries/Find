@@ -125,7 +125,7 @@ class CatalogController < ApplicationController
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
     config.add_index_field :format_ss, label: I18n.t('results.format'), separator: ', '
-    config.add_index_field :full_text_links_ss, label: I18n.t('results.full_text')
+    config.add_index_field :full_text_links_ss, label: I18n.t('results.full_text'), helper_method: :render_as_links
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -140,14 +140,14 @@ class CatalogController < ApplicationController
     config.add_show_field :production_manufacture_show, label: I18n.t('show.production.manufacture'), accessor: :marc
     config.add_show_field :relation_contained_in_show, label: I18n.t('show.relation.contained_in'), accessor: :marc
     # config.add_show_field :link_full_text, label: I18n.t('show.link_full_text'), accessor: :marc
-    config.add_show_field :title_standardized, label: I18n.t('show.title.standardized'), accessor: :marc, link_to_facet: true
-    config.add_show_field :title_other, label: I18n.t('show.title.other'), accessor: :marc
+    config.add_show_field :title_standardized_show, label: I18n.t('show.title.standardized'), accessor: :marc, link_to_facet: true
+    config.add_show_field :title_other_show, label: I18n.t('show.title.other'), accessor: :marc
     config.add_show_field :format_cartographic_show, label: I18n.t('show.format.cartographic'), accessor: :marc
     config.add_show_field :identifier_fingerprint_show, label: I18n.t('show.identifier.fingerprint'), accessor: :marc
     config.add_show_field :note_arrangement_show, label: I18n.t('show.notes.arrangement'), accessor: :marc
-    config.add_show_field :title_former, label: I18n.t('show.title.former'), accessor: :marc, link_to_facet: true
-    config.add_show_field :series_get_continues_display, label: I18n.t('show.series.continues'), accessor: :marc
-    config.add_show_field :series_get_continued_by_display, label: I18n.t('show.series.continued_by'), accessor: :marc
+    config.add_show_field :title_former_show, label: I18n.t('show.title.former'), accessor: :marc, link_to_facet: true
+    config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
+    config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
     config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc
     config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
@@ -164,16 +164,16 @@ class CatalogController < ApplicationController
     config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
     # config.add_show_field :link_offsite, label: I18n.t('show.link_offsite'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
-    config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc # needs render as links
-    config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc # needs render as links
+    config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc # render search/facet
+    config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc # render search/facet
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'), accessor: :marc
     config.add_show_field :citation_cited_in_show, label: I18n.t('show.citation.cited_in'), accessor: :marc
     config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'), accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
-    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc # needs render as links
+    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc # render search/facet
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
-    config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc # needs render as links
+    config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc # render search/facet
     config.add_show_field :relation_constituent_unit_show, label: I18n.t('show.relation.constituent_unit'), accessor: :marc
     config.add_show_field :relation_has_supplement_show, label: I18n.t('show.relation.has_supplement'), accessor: :marc
     config.add_show_field :format_other_show, label: I18n.t('show.format.other'), accessor: :marc
