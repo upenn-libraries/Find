@@ -30,15 +30,23 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  header:
+    service_name: 'Find'
+    service_lede: 'Books, articles, and more'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
     genre_search: 'Genre'
     subject_search: 'Subject'
     title_search: 'Title'
+    journal_title_search: 'Journal Title'
   facets:
     access: 'Access'
+    classification: 'Classification'
     creator: 'Author/Creator'
+    databases:
+      subject: 'Database Subject'
+      type: 'Database Type'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
@@ -59,6 +67,10 @@ en:
     full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
+    form:
+      database:
+          search:
+              placeholder: 'Find databases & articles'
   show:
     citation:
       cited_as: 'Cited as'

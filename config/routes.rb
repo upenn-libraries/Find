@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    get 'databases', to: 'catalog#databases'
   end
   devise_for :users
 
