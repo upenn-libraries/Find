@@ -1,0 +1,60 @@
+.navbar-search {
+  background: var(--color-bg-gradient-2);
+  padding: 1.25rem 0;
+  margin-top: -2px;
+}
+
+.search-query-form {
+  display: flex;
+  width: 100%;
+  font-size: 1.125rem;
+  box-shadow: rgba(31, 35, 40, 0.04) 0px 1px 0px 0px;
+}
+
+.search-q {
+  all: unset;
+  background: var(--color-bg-default);
+  padding: 0 1rem;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+  color: var(--color-default);
+  border: solid 1px var(--color-default);
+  border-right: none;
+  flex-grow: 1;
+}
+
+.search-btn {
+  all: unset;
+  background: var(--color-bg-accent-emphasis);
+  color: var(--color-fg-on-emphasis);
+  padding: calc(0.5rem - 1px) 2rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+  cursor: pointer;
+  font-weight: 500;
+  border-bottom: solid 2px var(--color-fg-default);
+}
+
+.index_title > a {
+  color: var(--color-default);
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 2px;
+}
+
+.index_title > a:hover {
+  text-decoration-thickness: 3px;
+  background: var(--color-bg-accent);
+  color: var(--color-accent);
+}
+
+.facet-limit-active .card-header .btn,
+.facet-limit-active .card-header .btn:active {
+  background: var(--color-success);
+  color: var(--color-on-emphasis);
+}
+
+.facet-limit-active .card-header .btn:hover {
+  border: none;
+}
+
+.facet-limit-active .card-header .btn {
+  border: none;
+}

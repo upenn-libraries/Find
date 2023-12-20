@@ -52,11 +52,8 @@ class CatalogController < ApplicationController
     # config.index.document_presenter_class = MyApp::IndexPresenter
 
     # Some components can be configured
-    # config.index.document_component = MyApp::SearchResultComponent
-    # config.index.constraints_component = MyApp::ConstraintsComponent
+    config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
-    # config.index.search_header_component = MyApp::SearchHeaderComponent
-    # config.index.document_actions.delete(:bookmark)
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -71,8 +68,10 @@ class CatalogController < ApplicationController
     config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
 
-    config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
-    config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
+    # TODO: Our override of the TopNavbarComponent means render_nav_actions is never called in any view. We need a new
+    #       place to render these "nav actions", or commit to doing away with them.
+    # config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
+    # config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
     # solr field configuration for document/show views
     config.show.title_field = :title_ss
