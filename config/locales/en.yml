@@ -30,6 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  header:
+    service_name: 'Find'
+    service_lede: 'Books, articles, and more'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
