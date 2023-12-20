@@ -52,11 +52,8 @@ class CatalogController < ApplicationController
     # config.index.document_presenter_class = MyApp::IndexPresenter
 
     # Some components can be configured
-    # config.index.document_component = MyApp::SearchResultComponent
-    # config.index.constraints_component = MyApp::ConstraintsComponent
+    config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
-    # config.index.search_header_component = MyApp::SearchHeaderComponent
-    # config.index.document_actions.delete(:bookmark)
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
