@@ -1,0 +1,8 @@
+<div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="Login options">
+  <div class="btn-group me-2 p-2" role="group" aria-label="Developer login area">
+    <%= button_to 'Developer Log In', user_developer_omniauth_authorize_path, class: 'btn btn-outline-primary', data: { turbo: false } %>
+  </div>
+  <div class="btn-group me-2 p-2" role="group" aria-label="PennKey login area">
+    <%= button_to 'PennKey Log In', user_saml_omniauth_authorize_path, class: 'btn btn-outline-primary' %>
+  </div>
+</div>
