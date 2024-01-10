@@ -1,0 +1,14 @@
+<% if @lazy %>
+  <turbo-frame id="availability_<%= @document.id %>" src="<%= availability_solr_document_path(@document.id) %>" target="_top">
+    <div>
+      Lazy loading availability information
+    </div>
+  </turbo-frame>
+<% else %>
+  <%# TODO: We might not need a turbo-frame when displaying the full availability information, but having a turbo-frame shouldn't have negative effects. %>
+  <turbo-frame id="availability_<%= @document.id %>" target="_top">
+    <div>
+      Placeholder availability information
+    </div>
+  </turbo-frame>
+<% end %>

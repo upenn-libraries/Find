@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
+
+    member do
+      get 'availability'
+    end
   end
 
   resources :bookmarks do

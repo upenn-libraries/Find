@@ -54,6 +54,8 @@ class CatalogController < ApplicationController
     # Some components can be configured
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
+    config.index.document_component = Find::DocumentComponent
+    config.show.document_component = Find::DocumentComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -209,5 +211,14 @@ class CatalogController < ApplicationController
 
   def databases
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
+  end
+
+  # Returns brief availability information.
+  def availability
+    @document = search_service.fetch(params[:id])
+
+    respond_to do |format|
+      format.html { render(Find::AvailabilityComponent.new(document: @document, brief: true)) }
+    end
   end
 end
