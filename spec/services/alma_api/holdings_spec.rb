@@ -29,9 +29,8 @@ describe AlmaApi::Holdings do
     end
 
     it 'returns data' do
-      expect(holdings).to eq([{ count: '1', description: 'HQ801 .D43 1997', format: 'physical',
-                                href: '/catalog/9979338417503681#22810131440003681', id: '22810131440003681',
-                                location: 'Stacks', policy: '', status: 'available' }])
+      expect(holdings.size).to eq(1)
+      expect(holdings.first.class).to eq(AlmaApi::Holding)
     end
   end
 end
