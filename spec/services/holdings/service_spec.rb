@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe AlmaApi::Holdings do
+describe Holdings::Service do
   let(:mms_id) { '9979338417503681' }
 
   describe '.find' do
@@ -29,8 +29,9 @@ describe AlmaApi::Holdings do
     end
 
     it 'returns data' do
-      expect(holdings.size).to eq(1)
-      expect(holdings.first.class).to eq(AlmaApi::Holding)
+      expect(holdings).to eq([{ count: '1', description: 'HQ801 .D43 1997', format: '',
+                                href: '/catalog/9979338417503681#22810131440003681', id: '22810131440003681',
+                                location: 'Van Pelt Library', policy: '', status: 'available', type: 'physical' }])
     end
   end
 end

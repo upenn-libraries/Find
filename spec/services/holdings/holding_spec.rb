@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe AlmaApi::Holding do
+describe Holdings::Holding do
   let(:mms_id) { '9979338417503681' }
   let(:physical_holding) do
     described_class.new(mms_id, { 'holding_id' => '22810131440003681',
