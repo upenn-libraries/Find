@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Holdings
+module Inventory
   # Retrieves holdings from Alma real time availability api
   class Service
     class << self
@@ -28,7 +28,7 @@ module Holdings
       # @return [Array<Holdings::Holding>]
       def holdings(mms_id, holding_data)
         holding_data.map do |holding|
-          Holdings::Holding.new(mms_id, holding)
+          Inventory::Holding.new(mms_id, holding)
         end
       end
     end

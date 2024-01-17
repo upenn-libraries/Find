@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Holdings::Service do
+describe Inventory::Service do
   let(:mms_id) { '9979338417503681' }
 
   describe '.find' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Holdings
+module Inventory
   # Represents an individual holding returned from the Alma real time availability API
   class Holding
     attr_accessor :raw
