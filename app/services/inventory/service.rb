@@ -1,11 +1,22 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Retrieves holdings from Alma real time availability api
+  # Retrieves inventory from Alma real time availability api
   class Service
     class << self
+
+      # Retrieve real time availability of single inventory resource from Alma
       # @param [String] mms_id
-      # @param [Integer] _brief_count
+      # @param [Integer] brief_count
+      # @return [Array<Hash>]
+      def find(mms_id, brief_count = 3)
+        availability_data = Alma::Bib.get_availability([mms_id])
+        inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h).first(brief_count)
+      end
+
+      # Retrieve real time availability of inventory from Alma
+      # @param [Array<String>] mms_ids
+      # @param [Integer] brief_count
       # @return [Array<Hash>]
       def find(mms_id, _brief_count = 3)
         availability_data = Alma::Bib.get_availability([mms_id])
@@ -19,16 +30,16 @@ module Inventory
       # @param [String] mms_id
       # @param [Alma::AvailabilityResponse] availability_data
       # @return [Array<Hash>]
-      def holding_data(mms_id, availability_data)
+      def inventory_data(mms_id, availability_data)
         availability_data.availability.dig(mms_id, :holdings)
       end
 
       # @param [String] mms_id
-      # @param [Array<Hash>] holding_data
+      # @param [Array<Hash>] inventory_data
       # @return [Array<Holdings::Holding>]
-      def holdings(mms_id, holding_data)
-        holding_data.map do |holding|
-          Inventory::Holding.new(mms_id, holding)
+      def inventory(mms_id, inventory_data)
+        inventory_data.map do |data|
+          Inventory::Holding.new(mms_id, data)
         end
       end
     end
