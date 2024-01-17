@@ -4,6 +4,9 @@ module Inventory
   # Retrieves inventory from Alma real time availability api
   class Service
     MAX_BIBS_GET = 100 # 100 is Alma API max
+    PHYSICAL = 'physical'
+    ELECTRONIC = 'electronic'
+
     class Error < StandardError; end
     class << self
 
@@ -27,7 +30,20 @@ module Inventory
 
         mms_ids.map do |mms_id|
           inventory_data  = inventory_data(mms_id, availability_data)
-          { mms_id.to_sym => { inventory: inventory(mms_id, inventory_data).map(&:to_h).first(brief_count) } }
+          { mms_id.to_sym => inventory(mms_id, inventory_data).map(&:to_h).first(brief_count) }
+        end
+      end
+
+      # Factory class method to create Inventory subclasses
+      def create(type, mms_id, raw_api_data)
+        case type&.downcase
+        when PHYSICAL
+          Inventory::Physical.new(mms_id, raw_api_data)
+        when ELECTRONIC
+          # potentially make some other api calls here for e-collection or service info
+          Inventory::Electronic.new(mms_id, raw_api_data)
+        else
+          raise Error, "Type: #{type} not found"
         end
       end
 
@@ -42,10 +58,10 @@ module Inventory
 
       # @param [String] mms_id
       # @param [Array<Hash>] inventory_data
-      # @return [Array<Holdings::Holding>]
+      # @return [Array<Inventory::Base>]
       def inventory(mms_id, inventory_data)
         inventory_data.map do |data|
-          Inventory::Holding.new(mms_id, data)
+          create(data['inventory_type'], mms_id, data)
         end
       end
     end
