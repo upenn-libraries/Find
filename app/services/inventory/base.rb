@@ -5,8 +5,8 @@ module Inventory
   class Base
     attr_reader :status, :policy, :description, :format, :id, :href, :raw_api_data, :mms_id
 
-    # @param[mms_id]
-    # @param[raw_api_data] raw_api_data hash containing inventory data retrieved from Alma real time availability API
+    # @param[String] mms_id
+    # @param[Hash] raw_api_data hash containing inventory data retrieved from Alma real time availability API
     # See Alma::AvailabilityResponse for mapping of values into the raw_api_data hash
     def initialize(mms_id, raw_api_data)
       @mms_id = mms_id

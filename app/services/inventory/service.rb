@@ -11,7 +11,7 @@ module Inventory
     class << self
       # Retrieve real time availability of single inventory resource from Alma
       # @param [String] mms_id single mms_id
-      # @param [Integer] brief_count
+      # @param [Integer] brief_count limits how many inventory values we return
       # @return [Hash]
       def find(mms_id, brief_count = 3)
         availability_data = Alma::Bib.get_availability([mms_id])
