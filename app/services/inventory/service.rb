@@ -37,6 +37,10 @@ module Inventory
       end
 
       # Factory class method to create Inventory subclasses
+      # @param[String] type type of inventory
+      # @param[String] mms_id
+      # @param[Hash] raw_api_data single hash from array of inventory data
+      # @return[Inventory::Base]
       def create(type, mms_id, raw_api_data)
         case type&.downcase
         when PHYSICAL
@@ -53,7 +57,7 @@ module Inventory
 
       # Dig for inventory data ("holdings") from Alma::AvailabilityResponse
       # @param [String] mms_id
-      # @param [Alma::AvailabilityResponse] availability_data
+      # @param [Alma::AvailabilityResponse] availability_data that Alma::Bib.get_availability call returns
       # @return [Array<Hash>]
       def inventory_data(mms_id, availability_data)
         availability_data.availability.dig(mms_id, :holdings)
