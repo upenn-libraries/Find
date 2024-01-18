@@ -3,27 +3,28 @@
 module Inventory
   # Physical holding class
   class Physical < Base
+    # @return [String, nil]
     def status
       raw_api_data['availability']
     end
 
-    # @return [NilClass]
+    # @return [String, nil]
     def policy; end
 
-    # @return [String]
+    # @return [String, nil]
     def description
       raw_api_data['call_number']
     end
 
-    # @return [NilClass]
+    # @return [String, nil]
     def format; end
 
-    # @return [String]
+    # @return [String, nil]
     def id
       raw_api_data['holding_id']
     end
 
-    # @return [String, NilClass]
+    # @return [String, nil]
     def href
       return nil if id.blank?
 
@@ -31,4 +32,3 @@ module Inventory
     end
   end
 end
-

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Retrieves inventory from Alma real time availability api
+  # Retrieves inventory ("holdings") from Alma real time availability api
   class Service
     MAX_BIBS_GET = 100 # 100 is Alma API max
     PHYSICAL = 'physical'
@@ -45,12 +45,13 @@ module Inventory
           # potentially make some other api calls here for e-collection or service info
           Inventory::Electronic.new(mms_id, raw_api_data)
         else
-          raise Error, "Type: #{type} not found"
+          raise Error, "Type: '#{type}' not found"
         end
       end
 
       private
 
+      # Dig for inventory data ("holdings") from Alma::AvailabilityResponse
       # @param [String] mms_id
       # @param [Alma::AvailabilityResponse] availability_data
       # @return [Array<Hash>]
@@ -58,6 +59,7 @@ module Inventory
         availability_data.availability.dig(mms_id, :holdings)
       end
 
+      # Create Inventory classes using inventory data
       # @param [String] mms_id
       # @param [Array<Hash>] inventory_data
       # @return [Array<Inventory::Base>]
