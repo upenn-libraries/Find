@@ -32,7 +32,7 @@
 en:
   header:
     service_name: 'Find'
-    service_lede: 'Books, articles, and more'
+    service_lede: 'books, articles, and more'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
