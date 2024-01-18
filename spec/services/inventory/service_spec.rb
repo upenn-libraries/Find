@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  let(:bib_response) do
-    { '9977048531103681' =>
+  let(:data) do
+    { '9979338417503681' =>
         { holdings: [{ 'holding_id' => '22810131440003681',
                        'institution' => '01UPENN_INST',
                        'library_code' => 'VanPeltLib',
@@ -19,24 +19,26 @@ describe Inventory::Service do
   end
 
   describe '.find' do
-    let(:inventory) { described_class.find('9977048531103681') }
+    let(:inventory) { described_class.find('9979338417503681') }
 
     before do
       availability_double = instance_double(Alma::AvailabilityResponse)
       allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
-      allow(availability_double).to receive(:availability).and_return(bib_response)
+      allow(availability_double).to receive(:availability).and_return(data)
     end
 
-    it 'returns expected inventory data' do
-      expect(inventory).to eq([{ count: '1', description: 'HQ801 .D43 1997', format: nil,
-                                 href: '/catalog/9977048531103681#22810131440003681', id: '22810131440003681',
-                                 location: 'Van Pelt Library', policy: nil, status: 'available', type: 'physical' }])
+    it 'returns expected hash value' do
+      expect(inventory).to eq({ inventory: [{ count: '1', description: 'HQ801 .D43 1997', format: nil,
+                                              href: '/catalog/9979338417503681#22810131440003681',
+                                              id: '22810131440003681', location: 'Van Pelt Library', policy: nil,
+                                              status: 'available', type: 'physical' }],
+                                total: 1 })
     end
   end
 
   describe '.find_many' do
     let(:inventory) { described_class.find_many(%w[id1 id2]) }
-    let(:response) do
+    let(:data) do
       { 'id1' => { holdings: [{ 'inventory_type' => 'electronic' }] },
         'id2' => { holdings: [{ 'inventory_type' => 'physical' }] } }
     end
@@ -44,19 +46,55 @@ describe Inventory::Service do
     before do
       availability_double = instance_double(Alma::AvailabilityResponse)
       allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
-      allow(availability_double).to receive(:availability).and_return(response)
+      allow(availability_double).to receive(:availability).and_return(data)
     end
 
-    it 'returns expected inventory data' do
-      expect(inventory.size).to eq 2
+    it 'returns the expected hash value' do
+      expect(inventory).to eq({ id1: { inventory: [{ status: nil, policy: nil, description: nil, format: nil, id: nil,
+                                                     count: nil, location: nil, href: nil, type: 'electronic' }],
+                                       total: 1 }, id2: { inventory: [{ status: nil, policy: nil, description: nil,
+                                                                        format: nil, id: nil, location: nil, count: nil,
+                                                                        href: nil, type: 'physical' }], total: 1 } })
     end
 
-    it 'has the inventory data for each mms_id' do
-      expect(inventory).to contain_exactly(
-        { id1: [{ status: nil, policy: nil, description: nil, format: nil, count: nil, location: nil, id: nil,
-                  href: nil, type: 'electronic' }] }, { id2: [{ status: nil, policy: nil, description: nil, format: nil,
-                                                                count: nil, location: nil, id: nil, href: nil,
-                                                                type: 'physical' }] })
+    context 'when provided more mms_ids than allowed' do
+      let(:mms_ids) { Array.new(described_class::MAX_BIBS_GET + 1, 'id') }
+
+      let(:inventory) { described_class.find_many(mms_ids) }
+
+      it 'raises error' do
+        expect { inventory }.to raise_error(
+          described_class::Error, "Too many MMS IDs provided, exceeds max allowed of #{described_class::MAX_BIBS_GET}."
+        )
+      end
+    end
+  end
+
+  describe '.create' do
+    let(:inventory_class) { described_class.create(type, '9999999999', {}) }
+
+    context 'with physical inventory type' do
+      let(:type) { described_class::PHYSICAL }
+
+      it 'returns Inventory::Physical object' do
+        expect(inventory_class).to be_a(Inventory::Physical)
+      end
+    end
+
+    context 'with electronic inventory type' do
+      let(:type) { described_class::ELECTRONIC }
+
+      it 'returns Inventory::Electronic object' do
+        expect(inventory_class).to be_a(Inventory::Electronic)
+      end
+    end
+
+    context 'with uncategorized inventory type' do
+      let(:type) { 'unknown' }
+
+      it 'raises an Import::Service::Error' do
+        expect { inventory_class }.to raise_error(described_class::Error, "Type: 'unknown' not found")
+      end
     end
   end
 end
