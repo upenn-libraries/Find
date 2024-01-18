@@ -1,6 +1,11 @@
 <pennlibs-header href="/"
                  service-name="<%= t('header.service_name') %>"
                  service-lede="<%= t('header.service_lede') %>">
+  <% if user %>
+    <a href="/bookmarks">Bookmarks</a>
+  <% else %>
+    <a href="/login">Login</a>
+  <% end %>
 </pennlibs-header>
 
 <%= search_bar %>

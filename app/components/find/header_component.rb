@@ -7,11 +7,12 @@ module Find
       component.new(blacklight_config: blacklight_config)
     }
 
-    attr_reader :blacklight_config
+    attr_reader :blacklight_config, :user
 
     # @param [Blacklight::Configuration] blacklight_config
-    def initialize(blacklight_config:)
+    def initialize(blacklight_config:, user:)
       @blacklight_config = blacklight_config
+      @user = user
     end
 
     # Hack from Blacklight::HeaderComponentso that the default lambdas are triggered
