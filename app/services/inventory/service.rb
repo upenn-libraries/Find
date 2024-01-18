@@ -9,28 +9,30 @@ module Inventory
 
     class Error < StandardError; end
     class << self
-
       # Retrieve real time availability of single inventory resource from Alma
-      # @param [String] mms_id
+      # @param [String] mms_id single mms_id
       # @param [Integer] brief_count
-      # @return [Array<Hash>]
+      # @return [Hash]
       def find(mms_id, brief_count = 3)
         availability_data = Alma::Bib.get_availability([mms_id])
-        inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h).first(brief_count)
+        inventory = inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h)
+        { inventory: inventory.first(brief_count), total: inventory.length }
       end
 
       # Retrieve real time availability of inventory from Alma
       # @param [Array<String>] mms_ids
       # @param [Integer] brief_count
-      # @return [Array<Hash>]
+      # @return [Hash] hash with mms_id as top-level keys
       def find_many(mms_ids, brief_count = 3)
         raise Error, "Too many MMS IDs provided, exceeds max allowed of #{MAX_BIBS_GET}." if mms_ids.size > MAX_BIBS_GET
 
         availability_data = Alma::Bib.get_availability(mms_ids)
 
-        mms_ids.map do |mms_id|
-          inventory_data  = inventory_data(mms_id, availability_data)
-          { mms_id.to_sym => inventory(mms_id, inventory_data).map(&:to_h).first(brief_count) }
+        mms_ids.each_with_object({}) do |mms_id, result_hash|
+          inventory_data = inventory_data(mms_id, availability_data)
+          inventory = inventory(mms_id, inventory_data).map(&:to_h)
+
+          result_hash[mms_id.to_sym] = { inventory: inventory.first(brief_count), total: inventory.length }
         end
       end
 
