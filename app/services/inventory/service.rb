@@ -21,7 +21,7 @@ module Inventory
 
       # Retrieve real time availability of inventory from Alma
       # @param [Array<String>] mms_ids
-      # @param [Integer] brief_count
+      # @param [Integer] brief_count limits how many inventory values we return
       # @return [Hash] hash with mms_id as top-level keys
       def find_many(mms_ids, brief_count = 3)
         raise Error, "Too many MMS IDs provided, exceeds max allowed of #{MAX_BIBS_GET}." if mms_ids.size > MAX_BIBS_GET
