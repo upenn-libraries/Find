@@ -50,8 +50,7 @@ describe Inventory::Service do
     end
 
     it 'uses entry mms_ids as top-level fields in the hash' do
-      expect(inventory[:id1]).to be_present
-      expect(inventory[:id2]).to be_present
+      expect(inventory.keys).to contain_exactly(:id1, :id2)
     end
 
     it 'returns both physical and electronic entries' do
