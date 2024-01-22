@@ -7,7 +7,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  devise :rememberable, :timeoutable
+  # if we want rememberable, we have to do a DB migration to include t.datetime "remember_created_at"
+  # devise :rememberable, :timeoutable
+  devise :timeoutable
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer saml]
   else
@@ -18,8 +20,9 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }, if: :provider_provided?
 
   def self.from_omniauth(auth)
+    email = "#{auth.info.uid}@upenn.edu"
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+      user.email = email
     end
   end
 
