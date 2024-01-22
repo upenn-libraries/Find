@@ -20,7 +20,7 @@ describe Inventory::Physical do
 
   describe '#href' do
     it 'returns the expected path' do
-      expect(inventory.href).to eq("/catalog/#{mms_id}##{inventory.id}")
+      expect(inventory.href).to eq Rails.application.routes.url_helpers.solr_document_path(mms_id, anchor: inventory.id)
     end
   end
 end

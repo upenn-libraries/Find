@@ -28,7 +28,7 @@ module Inventory
     def href
       return nil if id.blank?
 
-      "/catalog/#{mms_id}##{id}"
+      Rails.application.routes.url_helpers.solr_document_path(mms_id, anchor: id)
     end
   end
 end
