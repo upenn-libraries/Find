@@ -2,7 +2,7 @@
 
 class AddProviderToUsers < ActiveRecord::Migration[7.0]
   def change
-    change_table :users do |t|
+    change_table :users, bulk: true do |t|
       # omniauthable
       t.string :provider
       t.string :uid
