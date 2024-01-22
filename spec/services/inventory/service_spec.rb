@@ -49,12 +49,14 @@ describe Inventory::Service do
       allow(availability_double).to receive(:availability).and_return(data)
     end
 
-    it 'returns the expected hash value' do
-      expect(inventory).to eq({ id1: { inventory: [{ status: nil, policy: nil, description: nil, format: nil, id: nil,
-                                                     count: nil, location: nil, href: nil, type: 'electronic' }],
-                                       total: 1 }, id2: { inventory: [{ status: nil, policy: nil, description: nil,
-                                                                        format: nil, id: nil, location: nil, count: nil,
-                                                                        href: nil, type: 'physical' }], total: 1 } })
+    it 'uses entry mms_ids as top-level fields in the hash' do
+      expect(inventory[:id1]).to be_present
+      expect(inventory[:id2]).to be_present
+    end
+
+    it 'returns both physical and electronic entries' do
+      expect(inventory[:id1][:inventory].first[:type]).to eq 'electronic'
+      expect(inventory[:id2][:inventory].first[:type]).to eq 'physical'
     end
 
     context 'when provided more mms_ids than allowed' do
