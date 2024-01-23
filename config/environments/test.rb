@@ -59,4 +59,10 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:developer] = {
+    'provider' => 'developer',
+    'uid' => 'aalten'
+  }
 end
