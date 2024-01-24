@@ -3,9 +3,9 @@
 require 'system_helper'
 
 describe 'login page' do
-  before { visit root_path }
+  before { visit login_path }
 
   it 'renders the page' do
-    expect(page).to have_text('login')
+    expect(page).to have_text('Login')
   end
 end
