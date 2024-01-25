@@ -60,7 +60,6 @@ Rails.application.configure do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new({
                                                               info: OmniAuth::AuthHash::InfoHash.new({
-                                                                                                       email: 'aalten',
                                                                                                        provider: 'saml',
                                                                                                        uid: 'aalten'
                                                                                                      })

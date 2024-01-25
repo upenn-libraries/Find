@@ -12,8 +12,6 @@ gem 'bootstrap', '~> 5.1'
 gem 'config'
 gem 'devise'
 gem 'devise-guests', '~> 0.8'
-gem 'factory_bot_rails'
-gem 'faker'
 gem 'faraday'
 gem 'importmap-rails'
 gem 'marc'
@@ -36,6 +34,8 @@ gem 'view_component', '~> 2.66'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 6.0.0'
 end
 
