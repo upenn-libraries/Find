@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }, if: :provider_provided?
 
   def self.from_omniauth(auth)
-    email = "#{auth.info.uid}@upenn.edu"
+    email = "#{auth.info.email}@upenn.edu"
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = email
     end

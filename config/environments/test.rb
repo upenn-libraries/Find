@@ -58,8 +58,11 @@ Rails.application.configure do
   # config.action_view.annotate_rendered_view_with_filenames = true
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:developer] = {
-    'provider' => 'developer',
-    'uid' => 'aalten'
-  }
+  OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new({
+                                                              info: OmniAuth::AuthHash::InfoHash.new({
+                                                                                                       email: 'aalten',
+                                                                                                       provider: 'saml',
+                                                                                                       uid: 'aalten'
+                                                                                                     })
+                                                            })
 end
