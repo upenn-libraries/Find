@@ -26,6 +26,13 @@ class User < ApplicationRecord
     end
   end
 
+  def exists_in_alma?
+    user = Alma::User.find(uid)
+    user.instance_of?(Alma::User)
+  rescue Alma::User::ResponseError
+    false
+  end
+
   # Configuration added by Blacklight; Blacklight::User uses a method key on your
   # user class to get a user-displayable login/identifier for
   # the account.

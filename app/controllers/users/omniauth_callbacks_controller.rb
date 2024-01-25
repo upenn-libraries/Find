@@ -6,22 +6,22 @@ module Users
     skip_before_action :verify_authenticity_token, only: %i[developer failure]
 
     def developer
-      auth_request = request.env['omniauth.auth']
-      if registered_in_alma?(auth_request['uid'])
-        @user = User.from_omniauth(auth_request)
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+      if @user.exists_in_alma?
         handle_user(user: @user, kind: 'developer')
       else
+        @user.destroy
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end
     end
 
     def saml
-      auth_request = request.env['omniauth.auth']
-      if registered_in_alma?(auth_request['uid'])
-        @user = User.from_omniauth(request.env['omniauth.auth'])
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+      if @user.exists_in_alma?
         handle_user(user: @user, kind: 'saml')
       else
+        @user.destroy
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end
@@ -49,11 +49,12 @@ module Users
       end
     end
 
-    def registered_in_alma?(uid)
-      user = Alma::User.find(uid)
-      user.instance_of?(Alma::User)
-    rescue Alma::User::ResponseError
-      false
-    end
+    #
+    # def registered_in_alma?(uid)
+    #   user = Alma::User.find(uid)
+    #   user.present?
+    # rescue Alma::User::ResponseError
+    #   false
+    # end
   end
 end
