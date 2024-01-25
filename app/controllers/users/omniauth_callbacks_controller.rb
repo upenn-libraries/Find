@@ -48,13 +48,5 @@ module Users
         redirect_to login_path
       end
     end
-
-    #
-    # def registered_in_alma?(uid)
-    #   user = Alma::User.find(uid)
-    #   user.present?
-    # rescue Alma::User::ResponseError
-    #   false
-    # end
   end
 end
