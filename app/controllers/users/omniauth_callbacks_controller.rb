@@ -6,7 +6,7 @@ module Users
     skip_before_action :verify_authenticity_token, only: %i[developer failure]
 
     def developer
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      @user = User.from_omniauth_developer(request.env['omniauth.auth'])
       if @user.exists_in_alma?
         handle_user(user: @user, kind: 'developer')
       else
@@ -17,7 +17,7 @@ module Users
     end
 
     def saml
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      @user = User.from_omniauth_saml(request.env['omniauth.auth'])
       if @user.exists_in_alma?
         handle_user(user: @user, kind: 'saml')
       else

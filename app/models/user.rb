@@ -19,8 +19,21 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :uid, uniqueness: { scope: :provider }, if: :provider_provided?
 
-  def self.from_omniauth(auth)
-    email = "#{auth.info.email}@upenn.edu"
+  # @param [OmniAuth::AuthHash] auth
+  # @return [User, nil]
+  def self.from_omniauth_saml(auth)
+    where(provider: auth.provider, uid: auth.info.uid.gsub('@upenn.edu', '')).first_or_create do |user|
+      user.email = auth.uid
+    end
+  end
+
+  # @param [OmniAuth::AuthHash] auth
+  # @return [User]
+  def self.from_omniauth_developer(auth)
+    return unless Rails.env.development?
+
+    # we require an email, this is a good enough guess until we get a value from the IdP
+    email = "#{auth.info.uid}@upenn.edu"
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = email
     end
