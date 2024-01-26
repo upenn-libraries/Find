@@ -29,7 +29,7 @@ describe 'Omniauth Callbacks Requests' do
       post user_saml_omniauth_callback_path(uid: 'aalten')
     end
 
-    it 'returns success message' do
+    it 'returns failure message' do
       follow_redirect!
       expect(response.body).to include('not registered in our library system')
     end
