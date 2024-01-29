@@ -5,27 +5,24 @@
 
 $font-family-sans-serif: 'Hind Madurai', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-$white:    #fff !default;
-$gray-100: #F2F3F5 !default;
-$gray-200: #F2F3F5 !default;
-$gray-300: #F2F3F5 !default;
-$gray-400: #595F6A !default;
-$gray-500: #595F6A !default;
-$gray-600: #595F6A !default;
-$gray-700: #2D3545 !default;
-$gray-800: #2D3545 !default;
-$gray-900: #2D3545 !default;
-$black:    #000 !default;
-
-$blue:    #1B5993 !default;
-$indigo:  #7707AC !default;
-$purple:  #7707AC !default;
-$pink:    #BE0000 !default;
-$red:     #BE0000 !default;
-$orange:  #9F6127 !default;
-$yellow:  #9F6127 !default;
-$green:   #288441 !default;
-$teal:    #288441 !default;
-$cyan:    #288441 !default;
-
 $line-height-base: 1.4;
+
+$primary:       #0E5696 !default;
+$secondary:     #595F6A !default;
+$success:       #267434 !default;
+$info:          #80317F !default;
+$warning:       #BD4718 !default;
+$danger:        #BD4718 !default;
+$light:         #F5F5F6 !default;
+$dark:          #2D3545!default;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);

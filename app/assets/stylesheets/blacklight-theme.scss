@@ -1,7 +1,7 @@
 .navbar-search {
   background: var(--color-bg-gradient-2);
-  padding: 1.25rem 0;
-  margin-top: -2px;
+  padding: 1.5rem 0;
+  margin-bottom: 1rem;
 }
 
 .search-query-form {
@@ -16,8 +16,8 @@
   background: var(--color-bg-default);
   padding: 0 1rem;
   border-radius: 0.25rem 0 0 0.25rem !important;
-  color: var(--color-default);
-  border: solid 1px var(--color-default);
+  color: var(--color-fg-default);
+  border: solid 1px var(--color-fg-subtle);
   border-right: none;
   flex-grow: 1;
 }
@@ -26,29 +26,28 @@
   all: unset;
   background: var(--color-bg-accent-emphasis);
   color: var(--color-fg-on-emphasis);
-  padding: calc(0.5rem - 1px) 2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 0 0.25rem 0.25rem 0;
   cursor: pointer;
-  font-weight: 500;
-  border-bottom: solid 2px var(--color-fg-default);
+  border: solid 1px var(--color-fg-subtle);
 }
 
 .index_title > a {
-  color: var(--color-default);
-  text-decoration-color: var(--color-accent);
-  text-underline-offset: 2px;
+  color: var(--color-fg-default);
+  text-decoration-color: var(--color-fg-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .index_title > a:hover {
-  text-decoration-thickness: 3px;
-  background: var(--color-bg-accent);
-  color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  color: var(--color-fg-accent);
 }
 
 .facet-limit-active .card-header .btn,
 .facet-limit-active .card-header .btn:active {
-  background: var(--color-success);
-  color: var(--color-on-emphasis);
+  background: var(--color-fg-success);
+  color: var(--color-fg-on-emphasis);
 }
 
 .facet-limit-active .card-header .btn:hover {
