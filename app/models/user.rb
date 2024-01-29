@@ -23,7 +23,7 @@ class User < ApplicationRecord
   # @return [User, nil]
   def self.from_omniauth_saml(auth)
     where(provider: auth.provider, uid: auth.info.uid.gsub('@upenn.edu', '')).first_or_create do |user|
-      user.email = auth.uid
+      user.email = auth.info.uid
     end
   end
 
