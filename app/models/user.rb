@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
     # we require an email, this is a good enough guess until we get a value from the IdP
     email = "#{auth.info.uid}@upenn.edu"
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.info.uid).first_or_create do |user|
       user.email = email
     end
   end
