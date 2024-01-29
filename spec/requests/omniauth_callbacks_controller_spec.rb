@@ -8,7 +8,7 @@ describe 'Omniauth Callbacks Requests' do
       allow(User).to receive(:new).and_return(user)
       allow(user).to receive(:exists_in_alma?).and_return(true)
 
-      post user_saml_omniauth_callback_path(uid: 'aalten')
+      post user_saml_omniauth_callback_path
     end
 
     it 'returns success message' do
@@ -26,7 +26,7 @@ describe 'Omniauth Callbacks Requests' do
       allow(User).to receive(:new).and_return(user)
       allow(user).to receive(:exists_in_alma?).and_return(false)
 
-      post user_saml_omniauth_callback_path(uid: 'aalten')
+      post user_saml_omniauth_callback_path
     end
 
     it 'returns failure message' do
