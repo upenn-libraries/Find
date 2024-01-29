@@ -2,10 +2,10 @@
                  service-name="<%= t('header.service_name') %>"
                  service-lede="<%= t('header.service_lede') %>">
   <% if user %>
-    <%= link_to 'Bookmarks', bookmarks_path %>
-    <%= button_to 'Sign Out', sign_out_path %>
+    <%= link_to t('header.bookmarks'), bookmarks_path %>
+    <%= button_to t('header.sign_out'), sign_out_path %>
   <% else %>
-    <%= link_to 'Login', login_path %>
+    <%= link_to t('header.login'), login_path %>
   <% end %>
 </pennlibs-header>
 

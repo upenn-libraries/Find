@@ -10,6 +10,7 @@ module Find
     attr_reader :blacklight_config, :user
 
     # @param [Blacklight::Configuration] blacklight_config
+    # @param [User] user
     def initialize(blacklight_config:, user:)
       @blacklight_config = blacklight_config
       @user = user
