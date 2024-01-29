@@ -6,11 +6,55 @@ class User < ApplicationRecord
   include Blacklight::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+
+  # if we want rememberable, we have to do a DB migration to include t.datetime "remember_created_at"
+  # devise :rememberable, :timeoutable
+  devise :timeoutable
+  if Rails.env.development?
+    devise :omniauthable, omniauth_providers: %i[developer saml]
+  else
+    devise :omniauthable, omniauth_providers: %i[saml]
+  end
+
+  validates :email, presence: true, uniqueness: true
+  validates :uid, uniqueness: { scope: :provider }, if: :provider_provided?
+
+  # @param [OmniAuth::AuthHash] auth
+  # @return [User, nil]
+  def self.from_omniauth_saml(auth)
+    where(provider: auth.provider, uid: auth.info.uid.gsub('@upenn.edu', '')).first_or_initialize do |user|
+      user.email = auth.info.uid
+    end
+  end
+
+  # @param [OmniAuth::AuthHash] auth
+  # @return [User]
+  def self.from_omniauth_developer(auth)
+    return unless Rails.env.development?
+
+    # we require an email, this is a good enough guess until we get a value from the IdP
+    email = "#{auth.info.uid}@upenn.edu"
+    where(provider: auth.provider, uid: auth.info.uid).first_or_initialize do |user|
+      user.email = email
+    end
+  end
+
+  def exists_in_alma?
+    user = Alma::User.find(uid)
+    user.instance_of?(Alma::User)
+  rescue Alma::User::ResponseError
+    false
+  end
 
   # Configuration added by Blacklight; Blacklight::User uses a method key on your
   # user class to get a user-displayable login/identifier for
   # the account.
   self.string_display_key ||= :email
+
+  private
+
+  # @return [TrueClass, FalseClass]
+  def provider_provided?
+    provider.present?
+  end
 end

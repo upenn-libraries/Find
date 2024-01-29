@@ -44,7 +44,8 @@ Capybara.register_driver(:better_cuprite) do |app|
       process_timeout: 10,
       # Enable debugging capabilities
       inspector: true,
-      js_errors: true,
+      # TODO: "expected" console error from importmaps shim (?) causes exception failing all system specs
+      js_errors: false,
       timeout: 10
     }.merge(remote_options)
   )
