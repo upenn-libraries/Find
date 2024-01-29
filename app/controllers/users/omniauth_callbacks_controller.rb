@@ -10,7 +10,7 @@ module Users
       if @user.exists_in_alma?
         handle_user(user: @user, kind: 'developer')
       else
-        @user.destroy
+        @user.destroy if @user.new_record?
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end
@@ -21,7 +21,7 @@ module Users
       if @user.exists_in_alma?
         handle_user(user: @user, kind: 'saml')
       else
-        @user.destroy
+        @user.destroy if @user.new_record?
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end

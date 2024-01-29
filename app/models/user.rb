@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # @param [OmniAuth::AuthHash] auth
   # @return [User, nil]
   def self.from_omniauth_saml(auth)
-    where(provider: auth.provider, uid: auth.info.uid.gsub('@upenn.edu', '')).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.info.uid.gsub('@upenn.edu', '')).first_or_initialize do |user|
       user.email = auth.info.uid
     end
   end
@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
     # we require an email, this is a good enough guess until we get a value from the IdP
     email = "#{auth.info.uid}@upenn.edu"
-    where(provider: auth.provider, uid: auth.info.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.info.uid).first_or_initialize do |user|
       user.email = email
     end
   end
