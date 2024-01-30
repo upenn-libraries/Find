@@ -9,8 +9,8 @@
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.css" %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload"  %>
-    <%= javascript_import_module_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.esm.js" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.esm.js" %>
     <script>
         document.querySelector('html').classList.remove('no-js');
     </script>
