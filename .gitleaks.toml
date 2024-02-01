@@ -181,7 +181,8 @@ title = "Find Catalog Gitleaks config"
         '''1e30a366877c57d4ac517030b3a2a8ee62e4a245''',
         '''47fbde52e515deb823ac7b390cd5a0a06819181d''',
         '''cc9f8dd77dd8cac18d57c64ec219fc9e5a4da5f7''',
-        '''b7b963dd99c6a4b2794b99128af692461b5a0a8f'''
+        '''b7b963dd99c6a4b2794b99128af692461b5a0a8f''',
+        '''2798261819342a6ee6fa319bf1e9151cf88a4ddb'''
     ]
     files = [
         '''(.*?)(bin|csv|doc|gif|jpg|md|pdf)$''',
