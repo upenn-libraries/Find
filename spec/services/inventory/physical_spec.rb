@@ -15,7 +15,7 @@ describe Inventory::Physical do
                                   'call_number_type' => '0',
                                   'priority' => '1',
                                   'library' => 'Van Pelt Library',
-                                  'inventory_type' => 'physical' })
+                                  'inventory_type' => 'physical' }, [])
   end
 
   describe '#href' do

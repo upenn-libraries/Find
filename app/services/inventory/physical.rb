@@ -3,25 +3,45 @@
 module Inventory
   # Physical holding class
   class Physical < Base
+    attr_reader :items
+
+    # @param [String] mms_id
+    # @param [Hash] raw_availability_data from Alma real time availability request
+    # @param [Array<Alma::BibItem>] items array of items from Alma::BibItem request
+    def initialize(mms_id, raw_availability_data, items)
+      super(mms_id, raw_availability_data)
+      @items = items
+    end
+
+    # @note possible values seem to be "available", "unavailable", and "check_holdings" when present
+    # @note "check holdings" seems to signify an item in special collections where we need to make an aeon link
     # @return [String, nil]
     def status
-      raw_api_data['availability']
+      raw_availability_data['availability']
     end
 
     # @return [String, nil]
-    def policy; end
+    def policy
+      return if items.empty?
+
+      items.first.dig('item_data', 'policy', 'desc')
+    end
 
     # @return [String, nil]
     def description
-      raw_api_data['call_number']
+      raw_availability_data['call_number']
     end
 
     # @return [String, nil]
-    def format; end
+    def format
+      return if items.empty?
+
+      items.first.dig('item_data', 'physical_material_type', 'desc')
+    end
 
     # @return [String, nil]
     def id
-      raw_api_data['holding_id']
+      raw_availability_data['holding_id']
     end
 
     # @return [String, nil]
