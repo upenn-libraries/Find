@@ -4,6 +4,11 @@
   margin-bottom: 1rem;
 }
 
+.navbar-search > .container {
+  justify-content: center;
+  gap: 1.5rem;
+}
+
 .search-query-form {
   display: flex;
   width: 100%;

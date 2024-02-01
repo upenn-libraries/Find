@@ -79,6 +79,10 @@ en:
       database:
           search:
               placeholder: 'Find databases & articles'
+    button:
+      label: "Find it"
+    advanced:
+      label: "Advanced"
   show:
     creator: 'Author/Creator'
     edition: 'Edition'
