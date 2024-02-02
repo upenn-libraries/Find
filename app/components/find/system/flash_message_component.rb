@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 # Copied from Blacklight version 8.1.0
 
 module Find
   module System
-    # Copied over so that we can adjut the html.erb to use
+    # Copied over so that we can adjust the html.erb to use
     # alert-dismissible to fix the layout issue with the
     # close "X" and fix the semantics to be button rather
     # than button_tag.
@@ -32,10 +33,10 @@ module Find
 
       def alert_class(type)
         case type.to_s
-        when 'success' then "alert-success"
-        when 'notice'  then "alert-info"
-        when 'alert'   then "alert-warning"
-        when 'error'   then "alert-danger"
+        when 'success' then 'alert-success'
+        when 'notice'  then 'alert-info'
+        when 'alert'   then 'alert-warning'
+        when 'error'   then 'alert-danger'
         else "alert-#{type}"
         end
       end

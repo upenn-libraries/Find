@@ -9,6 +9,7 @@ module Find
     renders_many :before_input_groups
 
     # rubocop:disable Metrics/ParameterLists
+    # rubocop:disable Metrics/MethodLength
     def initialize(
       url:, params:,
       advanced_search_url: nil,
@@ -44,7 +45,7 @@ module Find
       if @autofocus.nil?
         blacklight_config.enable_search_bar_autofocus &&
           controller.is_a?(Blacklight::Catalog) &&
-          controller.action_name == "index" &&
+          controller.action_name == 'index' &&
           !controller.has_search_parameters?
       else
         @autofocus
@@ -54,7 +55,10 @@ module Find
     def search_fields
       @search_fields ||= blacklight_config.search_fields.values
                                           .select { |field_def| helpers.should_render_field?(field_def) }
-                                          .collect { |field_def| [helpers.label_for_search_field(field_def.key), field_def.key] }
+                                          .collect do |field_def|
+        [helpers.label_for_search_field(field_def.key),
+         field_def.key]
+      end
     end
 
     def advanced_search_enabled?

@@ -70,11 +70,5 @@ TODO
 ### Running Rubocop
 
 ```bash
-rubocop
-```
-
-OR
-
-```bash
 bundle exec rubocop
 ```

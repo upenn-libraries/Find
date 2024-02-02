@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Copied from Blacklight version 8.1.0
 
 module Find

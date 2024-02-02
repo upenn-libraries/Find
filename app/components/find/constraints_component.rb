@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-# Copied from Blacklight version 8.1.0
 
 module Find
+  # Local component copied from Blacklight version 8.1.0
   class ConstraintsComponent < Blacklight::Component
     renders_many :query_constraints_area
     renders_many :facet_constraints_area
@@ -54,7 +54,8 @@ module Find
         )
       else
         ''.html_safe
-      end + helpers.render(@facet_constraint_component.with_collection(clause_presenters.to_a, **@facet_constraint_component_options))
+      end + helpers.render(@facet_constraint_component.with_collection(clause_presenters.to_a,
+                                                                       **@facet_constraint_component_options))
     end
 
     def remove_path
@@ -62,7 +63,8 @@ module Find
     end
 
     def facet_constraints
-      helpers.render(@facet_constraint_component.with_collection(facet_item_presenters.to_a, **@facet_constraint_component_options))
+      helpers.render(@facet_constraint_component.with_collection(facet_item_presenters.to_a,
+                                                                 **@facet_constraint_component_options))
     end
 
     def render?
