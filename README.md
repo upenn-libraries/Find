@@ -72,3 +72,9 @@ TODO
 ```bash
 rubocop
 ```
+
+OR
+
+```bash
+bundle exec rubocop
+```
