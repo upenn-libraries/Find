@@ -14,7 +14,6 @@ module Inventory
     end
 
     # @note possible values seem to be "available", "unavailable", and "check_holdings" when present
-    # @note "check holdings" seems to signify an item in special collections where we need to make an aeon link
     # @return [String, nil]
     def status
       raw_availability_data['availability']
