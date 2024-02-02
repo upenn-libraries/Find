@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# Copied from Blacklight version 8.1.0
 
 module Find
   # For rendering "Find it" rather than blacklight's icon with a hidden label

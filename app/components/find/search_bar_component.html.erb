@@ -1,3 +1,12 @@
+<%
+  # Copied from Blacklight version 8.1.0
+  
+  # Adapted for the search box to be customized.
+  # - "Find it" button label
+  # - Center search box
+  # - Rename advanced search link to match page heading
+%>
+
 <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
   <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
   <% if search_fields.length > 1 %>
