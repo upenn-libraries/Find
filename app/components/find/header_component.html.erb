@@ -1,6 +1,13 @@
+<%
+  # Copied from Blacklight version 8.1.0
+
+  # Uses the custom pennlibs-header design system component.
+%>
+
 <pennlibs-header href="/"
                  service-name="<%= t('header.service_name') %>"
                  service-lede="<%= t('header.service_lede') %>">
+  <%= link_to 'Databases', databases_catalog_path %>
   <% if user %>
     <%= link_to t('header.bookmarks'), bookmarks_path %>
     <%= button_to t('header.sign_out'), sign_out_path %>

@@ -75,10 +75,10 @@ en:
     full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
-    form:
-      database:
-          search:
-              placeholder: 'Find databases & articles'
+    button:
+      label: "Find it"
+    advanced:
+      label: "Advanced"
   show:
     creator: 'Author/Creator'
     edition: 'Edition'

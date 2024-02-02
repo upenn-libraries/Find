@@ -54,6 +54,7 @@ class CatalogController < ApplicationController
     # Some components can be configured
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
+    config.index.constraints_component = Find::ConstraintsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
