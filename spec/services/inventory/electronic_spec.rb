@@ -9,7 +9,7 @@ describe Inventory::Electronic do
                                               'collection' => 'Nature Publishing Journals',
                                               'coverage_statement' => 'Available from 1869 volume: 1 issue: 1.',
                                               'interface_name' => 'Nature',
-                                              'inventory_type' => 'electronic' })
+                                              'inventory_type' => 'electronic' }, {})
   end
 
   describe '#href' do

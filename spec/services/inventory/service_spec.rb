@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  let(:data) do
+  let(:availability_data) do
     { '9979338417503681' =>
         { holdings: [{ 'holding_id' => '22810131440003681',
                        'institution' => '01UPENN_INST',
@@ -18,35 +18,40 @@ describe Inventory::Service do
                        'inventory_type' => 'physical' }] } }
   end
 
+  let(:item_data) do
+    { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
+      'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
+  end
+
+  before do
+    availability_double = instance_double(Alma::AvailabilityResponse)
+    allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
+    allow(availability_double).to receive(:availability).and_return(availability_data)
+
+    bib_item_double = instance_double(Alma::BibItem)
+    allow(described_class).to receive(:find_items).and_return([bib_item_double])
+    allow(bib_item_double).to receive(:item_data).and_return(item_data)
+
+    allow(described_class).to receive(:find_portfolio).and_return({})
+  end
+
   describe '.find' do
     let(:inventory) { described_class.find('9979338417503681') }
 
-    before do
-      availability_double = instance_double(Alma::AvailabilityResponse)
-      allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
-      allow(availability_double).to receive(:availability).and_return(data)
-    end
-
     it 'returns expected hash value' do
-      expect(inventory).to eq({ inventory: [{ count: '1', description: 'HQ801 .D43 1997', format: nil,
+      expect(inventory).to eq({ inventory: [{ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
                                               href: '/catalog/9979338417503681#22810131440003681',
-                                              id: '22810131440003681', location: 'Van Pelt Library', policy: nil,
-                                              status: 'available', type: 'physical' }],
+                                              id: '22810131440003681', location: 'Van Pelt Library',
+                                              policy: 'Book/serial', status: 'available', type: 'physical' }],
                                 total: 1 })
     end
   end
 
   describe '.find_many' do
     let(:inventory) { described_class.find_many(%w[id1 id2]) }
-    let(:data) do
+    let(:availability_data) do
       { 'id1' => { holdings: [{ 'inventory_type' => 'electronic' }] },
         'id2' => { holdings: [{ 'inventory_type' => 'physical' }] } }
-    end
-
-    before do
-      availability_double = instance_double(Alma::AvailabilityResponse)
-      allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
-      allow(availability_double).to receive(:availability).and_return(data)
     end
 
     it 'uses entry mms_ids as top-level fields in the hash' do
