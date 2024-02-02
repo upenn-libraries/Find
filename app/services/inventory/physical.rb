@@ -24,7 +24,7 @@ module Inventory
     def policy
       return if items.empty?
 
-      items.first.dig('item_data', 'policy', 'desc')
+      items.first.item_data.dig('policy', 'desc')
     end
 
     # @return [String, nil]
@@ -36,7 +36,7 @@ module Inventory
     def format
       return if items.empty?
 
-      items.first.dig('item_data', 'physical_material_type', 'desc')
+      items.first.item_data.dig('physical_material_type', 'desc')
     end
 
     # @return [String, nil]

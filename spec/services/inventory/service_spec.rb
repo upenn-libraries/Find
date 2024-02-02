@@ -19,8 +19,8 @@ describe Inventory::Service do
   end
 
   let(:item_data) do
-    [{ 'item_data' => { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
-                        'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } } }]
+    { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
+      'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
   end
 
   before do
@@ -28,7 +28,10 @@ describe Inventory::Service do
     allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
     allow(availability_double).to receive(:availability).and_return(availability_data)
 
-    allow(described_class).to receive(:find_items).and_return(item_data)
+    bib_item_double = instance_double(Alma::BibItem)
+    allow(described_class).to receive(:find_items).and_return([bib_item_double])
+    allow(bib_item_double).to receive(:item_data).and_return(item_data)
+
     allow(described_class).to receive(:find_portfolio).and_return({})
   end
 
