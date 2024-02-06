@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Copied from Blacklight version 8.1.0
+
 module Find
   # Our HeaderComponent that displays the Web Component header and the search bar component
   class HeaderComponent < Blacklight::Component
@@ -7,11 +9,13 @@ module Find
       component.new(blacklight_config: blacklight_config)
     }
 
-    attr_reader :blacklight_config
+    attr_reader :blacklight_config, :user
 
     # @param [Blacklight::Configuration] blacklight_config
-    def initialize(blacklight_config:)
+    # @param [User] user
+    def initialize(blacklight_config:, user:)
       @blacklight_config = blacklight_config
+      @user = user
     end
 
     # Hack from Blacklight::HeaderComponentso that the default lambdas are triggered

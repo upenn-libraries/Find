@@ -2,45 +2,8 @@
   Bootstrap Theme
   
   This stylesheet is responsible for adding cascading styles on Bootstrap.
-
-  In this stylesheet:
-  - Buttons
-  - Layout
 */
 
-
-/*
-  Buttons
-*/
-.btn,
-.btn:hover,
-.btn:active,
-.btn.show,
-.btn:first-child:active {
-  all: unset;
-  cursor: pointer;
-  font-weight: 500;
-  display: inline-flex;
-  padding: 0.5rem 1rem;
-  color: var(--color-fg-default);
-  border-radius: 0.25rem;
-  background: var(--color-bg-subtle);
-  border-bottom: 2px solid var(--color-fg-muted);
-  box-sizing: border-box;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.btn:hover {
-  outline: solid 1px var(--color-fg-muted);
-}
-
-.btn-primary,
-.btn-primary:hover {
-  background: var(--color-bg-accent-emphasis);
-  color: var(--color-fg-on-emphasis);
-  border-bottom: solid 2px var(--color-fg-default);
-}
 
 /*
   Layout

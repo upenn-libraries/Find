@@ -25,7 +25,7 @@ Rails.application.configure do
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
@@ -34,9 +34,6 @@ Rails.application.configure do
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
-
-  # Store uploaded files on the local file system in a temporary directory.
-  config.active_storage.service = :test
 
   config.action_mailer.perform_caching = false
 
@@ -59,4 +56,9 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new({ provider: 'test',
+                                                              info: OmniAuth::AuthHash::InfoHash
+                                                                      .new({ uid: 'aalten@upenn.edu' }) })
 end
