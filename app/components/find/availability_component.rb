@@ -10,6 +10,9 @@ module Find
       @document = document
       @brief = brief
       @lazy = lazy
+      inventory = Inventory::Service.find(document.id) unless lazy
+      @entries = inventory[:inventory] unless lazy
+      @count = inventory[:total].to_i unless lazy
     end
   end
 end
