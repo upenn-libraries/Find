@@ -14,6 +14,13 @@
             <%= render(Find::InventoryEntryComponent.new(holding_data: entry)) %>
           </li>
         <% end %>
+        <% if @brief %>
+          <li class="list-group-item">
+            <a href="<%= solr_document_path(@document.id) %>#availability_<%= @document.id %>">
+              See <%= @count %> holdings
+            </a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </turbo-frame>
