@@ -14,7 +14,7 @@ describe 'Omniauth Callbacks Requests' do
 
       it 'returns success message' do
         follow_redirect!
-        expect(response.body).to include('Successfully authenticated from saml account.')
+        expect(response.body).to include(I18n.t('devise.omniauth_callbacks.success', kind: 'saml'))
       end
 
       it 'creates a user' do
@@ -32,7 +32,7 @@ describe 'Omniauth Callbacks Requests' do
 
       it 'returns failure message' do
         follow_redirect!
-        expect(response.body).to include('not registered in our library system')
+        expect(response.body).to include(I18n.t('devise.omniauth_callbacks.alma_failure'))
       end
 
       it 'does not create a user' do
@@ -81,7 +81,7 @@ describe 'Omniauth Callbacks Requests' do
 
       it 'returns success message' do
         follow_redirect!
-        expect(response.body).to include('Successfully authenticated from alma account.')
+        expect(response.body).to include(I18n.t('devise.omniauth_callbacks.success', kind: 'alma'))
       end
 
       it 'creates a user' do
@@ -98,7 +98,7 @@ describe 'Omniauth Callbacks Requests' do
 
       it 'returns failure message' do
         follow_redirect!
-        expect(response.body).to include('not registered in our library system')
+        expect(response.body).to include(I18n.t('devise.omniauth_callbacks.alma_failure'))
       end
 
       it 'does not create a user' do

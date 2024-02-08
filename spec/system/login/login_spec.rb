@@ -14,9 +14,9 @@ describe 'login page' do
     end
 
     it 'renders the success message' do
-      expect(page).to have_text('Continue with PennKey')
-      click_on('Continue with PennKey')
-      expect(page).to have_text('Successfully authenticated from saml account.')
+      expect(page).to have_text(I18n.t('login.pennkey'))
+      click_on(I18n.t('login.pennkey'))
+      expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success', kind: 'saml'))
     end
   end
 
@@ -27,9 +27,9 @@ describe 'login page' do
     end
 
     it 'renders the failure message' do
-      expect(page).to have_text('Continue with PennKey')
-      click_on('Continue with PennKey')
-      expect(page).to have_text('not registered in our library system')
+      expect(page).to have_text(I18n.t('login.pennkey'))
+      click_on(I18n.t('login.pennkey'))
+      expect(page).to have_text(I18n.t('devise.omniauth_callbacks.alma_failure'))
     end
   end
 
