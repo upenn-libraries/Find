@@ -61,4 +61,8 @@ Rails.application.configure do
   OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new({ provider: 'test',
                                                               info: OmniAuth::AuthHash::InfoHash
                                                                       .new({ uid: 'aalten@upenn.edu' }) })
+
+  OmniAuth.config.mock_auth[:alma] = OmniAuth::AuthHash.new({ provider: 'alma',
+                                                              info: OmniAuth::AuthHash::InfoHash
+                                                                      .new({ uid: 'courtesy@borrower.com' }) })
 end

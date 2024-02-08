@@ -27,6 +27,16 @@ module Users
       end
     end
 
+    def alma
+      if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
+        @user = User.from_omniauth_alma(request.env['omniauth.auth'])
+        handle_user(user: @user, kind: 'alma')
+      else
+        redirect_to alma_login_path
+        set_flash_message(:alert, :alma_failure)
+      end
+    end
+
     def failure
       flash.alert = 'Problem with authentication, try again.'
       redirect_to root_path

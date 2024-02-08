@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     post 'sign_out', to: 'devise/sessions#destroy'
   end
 
-  get 'login', to: 'login#index'
+  scope :login do
+    get '/', to: 'login#index', as: 'login'
+    get 'alma', to: 'login#alma', as: 'alma_login'
+  end
+
   authenticated do
     root to: 'catalog#index', as: 'authenticated_root'
   end
