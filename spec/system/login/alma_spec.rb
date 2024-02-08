@@ -3,7 +3,7 @@
 require 'system_helper'
 
 describe 'index page' do
-  let(:user) { create(:user, :courtesy_borrower) }
+  let(:user) { create(:user, :alma_authenticated) }
 
   before { visit alma_login_path }
 
@@ -15,7 +15,7 @@ describe 'index page' do
     it 'renders success message' do
       fill_in :email, with: user.email
       fill_in :password, with: '123456789'
-      click_on I18n.t('login.borrower.login')
+      click_on I18n.t('login.alma.login')
       expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success', kind: user.provider))
     end
   end
@@ -28,7 +28,7 @@ describe 'index page' do
     it 'renders failure message' do
       fill_in :email, with: user.email
       fill_in :password, with: '123456789'
-      click_on I18n.t('login.borrower.login')
+      click_on I18n.t('login.alma.login')
       expect(page).to have_text(I18n.t('devise.omniauth_callbacks.alma_failure'))
     end
   end

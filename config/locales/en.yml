@@ -57,7 +57,7 @@ en:
     location: 'Specific Location'
     subject: 'Subject'
   login:
-    borrower:
+    alma:
       credentials:
         email: 'Email'
         password: 'Password'

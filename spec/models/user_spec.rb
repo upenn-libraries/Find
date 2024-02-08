@@ -43,7 +43,7 @@ describe User do
     let(:returned_user) { described_class.from_omniauth_alma(auth_info) }
 
     context 'when the user already exists' do
-      let(:user) { create(:user, :courtesy_borrower) }
+      let(:user) { create(:user, :alma_authenticated) }
 
       it 'finds and returns the user' do
         expect(returned_user.uid).to eq user.uid
@@ -52,7 +52,7 @@ describe User do
     end
 
     context 'when the user does not exist' do
-      let(:user) { build(:user, :courtesy_borrower) }
+      let(:user) { build(:user, :alma_authenticated) }
 
       it 'creates and returns the user' do
         expect(returned_user.uid).to eq user.uid

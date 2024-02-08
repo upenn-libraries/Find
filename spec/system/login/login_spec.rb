@@ -35,9 +35,9 @@ describe 'login page' do
 
   context 'when user is a courtesy borrower' do
     it 'they can navigate to the courtesy borrower login page' do
-      expect(page).to have_button(I18n.t('login.borrower.name'))
-      click_on(I18n.t('login.borrower.name'))
-      expect(page).to have_text(I18n.t('login.borrower.heading'))
+      expect(page).to have_button(I18n.t('login.alma.name'))
+      click_on(I18n.t('login.alma.name'))
+      expect(page).to have_text(I18n.t('login.alma.heading'))
     end
   end
 end

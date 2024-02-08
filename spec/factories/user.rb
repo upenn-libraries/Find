@@ -11,7 +11,7 @@ FactoryBot.define do
     email { "#{identifier}@upenn.edu" }
   end
 
-  trait :courtesy_borrower do
+  trait :alma_authenticated do
     transient do
       identifier { Faker::Internet.email }
     end
