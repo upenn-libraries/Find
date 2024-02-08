@@ -1,3 +1,8 @@
 <div id="holding_<%= @id %>">
-  <a href="<%= @href %>"><%= @status.titleize %></a> - <%= @format %> - <%= @description %> - <%= @location %>
+  <% case @type %>
+  <% when 'physical' %>
+    <a href="<%= @href %>"><%= @status.titleize %></a> - <%= @format %> - <%= @description %> - <%= @location %>
+  <% when 'electronic' %>
+    <a href="<%= @href %>"><%= @status.titleize %></a> - <%= @format %> - <%= @description %> - <%= @location %>
+  <% end %>
 </div>

@@ -8,6 +8,7 @@ module Find
       @holding_data = holding_data
       @id = holding_data[:id]
       @status = holding_data[:status]
+      @status = 'See options' if holding_data[:status] == 'check_holdings'
       @description = holding_data[:description]
       @format = holding_data[:format]
       @location = holding_data[:location]
