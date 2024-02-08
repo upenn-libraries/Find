@@ -1,0 +1,85 @@
+<%= content_tag @component,
+  id: @id,
+  data: {
+    'document-id': @document.id.to_s.parameterize,
+    'document-counter': @counter,
+  },
+  itemscope: true,
+  itemtype: @document.itemtype,
+  class: classes.flatten.join(' ') do %>
+  <%= header %>
+  <% if body.present? %>
+    <%= body %>
+  <% else %>
+    <div class="document-main-section">
+      <div class="row">
+        <div class="document__inventory col-lg-3">
+          <h2 class="h5 document__inventory-heading">Inventory</h2>
+          <div class="document__inventory-list" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="active inventory-item inventory-item--primary" id="v-pills-1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-1" type="button" role="tab" aria-controls="v-pills-1" aria-selected="true">
+              <span class="inventory-item__description">Available from 1869 volume: 1 issue: 1</span>
+              <span class="inventory-item__location">Nature Publishing Journals | Online</span>
+            </button>
+            <button class="inventory-item invetory-item--primary" id="v-pills-2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2" type="button" role="tab" aria-controls="v-pills-2" aria-selected="false">
+              <span class="inventory-item__location">Pennsylvania Hospital Library</span>  
+              <span class="inventory-item__description">QC 903.2 .U6 C64</span>
+              <span class="inventory-item__policy">Available</span>
+            </button>
+            <button class="inventory-item" id="v-pills-3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-3" type="button" role="tab" aria-controls="v-pills-3" aria-selected="false">
+              <span class="inventory-item__description">Available</span>
+              <span class="inventory-item__location">LIBRA</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane show active document__tabpanel" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+            <%= title %>
+            <%= embed %>
+            <%= content %>
+            <%= metadata %>
+            <% metadata_sections.each do |section| %>
+              <%= section %>
+            <% end %>
+
+            <% partials.each do |partial| %>
+              <%= partial %>
+            <% end %>
+          </div>
+          <div class="tab-pane document__tabpanel" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab" tabindex="0">
+            <%= title %>
+
+            <div class="document-inventory-container">
+              <p class="document-inventory">
+                <span class="document-inventory__location">Pennsylvania Hospital Library</span>  
+                <span class="document-inventory__description">QC 903.2 .U6 C64</span>
+              </p>
+
+              <p class="document-inventory__availability document-inventory__availability--primary">
+                <span class="document-inventory__policy">Available for checkout <span>
+                <span class="document-inventory__directions">On shelf, 1 copy</span>
+              </p>
+
+              <button class="btn btn-success btn-lg">Request item</button>
+            </div>
+
+            <%= embed %>
+            <%= content %>
+            <%= metadata %>
+            <% metadata_sections.each do |section| %>
+              <%= section %>
+            <% end %>
+
+            <% partials.each do |partial| %>
+              <%= partial %>
+            <% end %>
+          </div>
+          <div class="tab-pane document__tabpanel" id="v-pills-3" role="tabpanel" ria-labelledby="v-pills-3-tab" tabindex="0">Panel 3</div>
+        </div>
+      </div>
+    </div>
+
+    <%= thumbnail %>
+  <% end %>
+  <%= footer %>
+<% end %>

@@ -1,0 +1,53 @@
+.inventory-item {
+  all: unset;
+  padding: 0.75rem 1rem;
+  border: solid 1px var(--color-bg-default);
+  border-left: solid 3px var(--color-bg-subtle);
+  font-size: 0.875rem;
+}
+
+.inventory-item:hover {
+  border-left-color: var(--color-fg-accent);
+}
+
+.inventory-item.active {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+  border: solid 1px var(--color-fg-subtle);
+  border-left: solid 3px var(--color-bg-accent-emphasis);
+  border-radius: 0.5rem;
+}
+
+.inventory-item.active:focus,
+.inventory-item:focus {
+  box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
+}
+
+.inventory-item:hover .inventory-item__description {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-fg-accent);
+}
+
+.inventory-item__description,
+.inventory-item__location,
+.inventory-item__policy {
+  display: block;
+}
+
+.invetory-item--primary .inventory-item__policy {
+  color: var(--color-fg-success);
+}
+
+.inventory-item__description {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inventory-item__location {
+
+}
+
+.inventory-item__policy {
+  font-weight: 500;
+}
