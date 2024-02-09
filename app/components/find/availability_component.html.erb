@@ -16,7 +16,7 @@
         <% end %>
         <% if @brief && @count > 1 %>
           <li class="list-group-item">
-            <a href="<%= solr_document_path(@document.id) %>#availability_<%= @document.id %>">
+            <a href="<%= solr_document_path(@document.id) %>">
               See <%= @count %> holdings
             </a>
           </li>
