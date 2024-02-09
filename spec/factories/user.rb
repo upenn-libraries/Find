@@ -10,4 +10,14 @@ FactoryBot.define do
     uid { identifier }
     email { "#{identifier}@upenn.edu" }
   end
+
+  trait :alma_authenticated do
+    transient do
+      identifier { Faker::Internet.email }
+    end
+
+    provider { 'alma' }
+    uid { identifier }
+    email { identifier }
+  end
 end

@@ -11,9 +11,9 @@ class User < ApplicationRecord
   # devise :rememberable, :timeoutable
   devise :timeoutable
   if Rails.env.development?
-    devise :omniauthable, omniauth_providers: %i[developer saml]
+    devise :omniauthable, omniauth_providers: %i[developer alma saml]
   else
-    devise :omniauthable, omniauth_providers: %i[saml]
+    devise :omniauthable, omniauth_providers: %i[alma saml]
   end
 
   validates :email, presence: true, uniqueness: true
@@ -37,6 +37,22 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.info.uid).first_or_initialize do |user|
       user.email = email
     end
+  end
+
+  # @param [OmniAuth::AuthHash] auth
+  # @return [User]
+  def self.from_omniauth_alma(auth)
+    where(provider: auth.provider, uid: auth.info.uid).first_or_initialize do |user|
+      user.email = auth.info.uid
+    end
+  end
+
+  # @param [Hash] credentials
+  # @return [Boolean]
+  def self.authenticated_by_alma?(credentials)
+    Alma::User.authenticate(credentials)
+  rescue StandardError
+    false
   end
 
   def exists_in_alma?

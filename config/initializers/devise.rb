@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'omniauth/strategies/alma'
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -270,6 +271,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :developer, fields: [:uid]
+
+  config.omniauth :alma, strategy_class: OmniAuth::Strategies::Alma
 
   config.omniauth :saml, {
     sp_entity_id: ENV.fetch('SHIB_SP_ENTITY_ID', nil),
