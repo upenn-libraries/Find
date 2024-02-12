@@ -1,0 +1,60 @@
+.holdings {
+  list-style: none;
+  padding: 0;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.holdings__other-link {
+  text-decoration: none;
+}
+
+.holdings__other-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-gray-6);
+}
+
+.holding__item {
+  --holding-accent-color: var(--color-gray-6);
+}
+
+.holding__item--available {
+  --holding-accent-color: #288441;
+}
+
+.holding__link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+
+  border-left: solid 3px var(--holding-accent-color);
+  padding: 0 0.5rem;
+  line-height: 1.25;
+}
+
+.holding__header {
+  color: var(--holding-accent-color);
+}
+
+.holding__main {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--holding-accent-color);
+}
+
+.holding__link:hover .holding__main {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.holding__link--more {
+  text-underline-offset: 1px;
+}
+
+.holding__link--more:hover {
+  text-decoration: underline;
+}

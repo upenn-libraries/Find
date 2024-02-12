@@ -1,8 +1,18 @@
-<div id="holding_<%= id %>">
+<a href="/" class="holding__link">
   <% case type %>
   <% when 'physical' %>
-    <a href="<%= href %>"><%= status.titleize %></a> - <%= entry_format %> - <%= description %> - <%= location %>
+    <span class="holding__header">
+      <%= status.titleize %>
+    </span>
+    <span class="holding__main">
+      <%= [entry_format, description, location].join(' - ') %>
+    </span>
   <% when 'electronic' %>
-    <a href="<%= href %>"><%= status.titleize %></a> - <%= entry_format %> - <%= description %> - <%= location %>
+    <span class="holding__header">
+      <%= status.titleize %>
+    </span>
+    <span class="holding__main">
+      <%= [entry_format, description, location].join(' - ') %>
+    </span>
   <% end %>
-</div>
+</a>
