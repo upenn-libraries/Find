@@ -93,6 +93,16 @@ class SolrTools
     raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
   end
 
+  def self.clear_collection(collection_name)
+    body = "{'delete': {'query': '*:*'}}"
+    response = connection.post("/solr/#{collection_name}/update") do |req|
+      req.params = { commit: 'true' }
+      req.headers['Content-Type'] = 'application/json'
+      req.body = body
+    end
+    raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
+  end
+
   def self.connection
     Faraday.new('http://localhost:8983/') do |faraday|
       faraday.request :authorization, :basic, 'catalog', 'catalog'
