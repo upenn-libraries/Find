@@ -57,10 +57,16 @@ en:
     location: 'Specific Location'
     subject: 'Subject'
   login:
-    pennkey: 'Continue with PennKey'
-    borrower: 'Courtesy Borrower'
+    alma:
+      credentials:
+        email: 'Email'
+        password: 'Password'
+      heading: 'Courtesy Borrower Login'
+      login: 'Borrower Login'
+      name: 'Courtesy Borrower'
     developer: 'Developer'
     help: 'Help with your library account'
+    pennkey: 'Continue with PennKey'
   results:
     creator: 'Author/Creator'
     edition: 'Edition'

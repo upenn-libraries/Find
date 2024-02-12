@@ -1,0 +1,19 @@
+<div class="login__container">
+  <h1 class="login__heading"><%= t('login.alma.heading') %></h1>
+  <div class="login__options">
+    <%= form_with(url: user_alma_omniauth_callback_path, method: :post) do |form| %>
+      <div class="mb-3">
+        <%= form.label(:email, t('login.alma.credentials.email'), { class: 'form-label' }) %>
+        <%= form.email_field(:email, { class: 'form-control' }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :password, t('login.alma.credentials.password'), { class: 'form-label' }%>
+        <%= form.password_field(:password, { class: 'form-control' }) %>
+      </div>
+
+      <%= submit_tag(t('login.alma.login'), { class: 'btn btn-primary' }) %>
+    <% end %>
+  </div>
+  <a href="https://guides.library.upenn.edu/franklinaccount" class="login__help-link"><%= t('login.help') %></a>
+</div>

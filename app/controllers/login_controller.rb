@@ -9,4 +9,6 @@ class LoginController < ApplicationController
       render :index
     end
   end
+
+  def alma; end
 end
