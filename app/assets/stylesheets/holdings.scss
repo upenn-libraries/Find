@@ -26,6 +26,18 @@
   --holding-accent-color: #288441;
 }
 
+.holding__item--unavailable {
+  --holding-accent-color: #BE0000;
+}
+
+.holding__item--check_holdings {
+  --holding-accent-color: #1B5993;
+}
+
+.holding__item--other {
+  --holding-accent-color: #7707AC;
+}
+
 .holding__link {
   text-decoration: none;
   display: flex;

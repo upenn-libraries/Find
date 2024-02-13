@@ -10,7 +10,8 @@
     <div>
       <ol class="holdings">
         <% @entries.each do |entry| %>
-          <li class="holding__item holding__item--<%= entry[:status] %>">
+          <li class="holding__item holding__item--<%= entry[:status].present? ? entry[:status]&.parameterize :
+                                                        'holding__item--other' %>">
             <%= render(Find::InventoryEntryComponent.new(holding_data: entry)) %>
           </li>
         <% end %>

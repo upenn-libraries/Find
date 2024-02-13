@@ -1,18 +1,18 @@
-<a href="/" class="holding__link">
+<a href="<%= href %>" class="holding__link">
   <% case type %>
   <% when 'physical' %>
     <span class="holding__header">
-      <%= status.titleize %>
+      <%= status.capitalize %>
     </span>
     <span class="holding__main">
-      <%= [entry_format, description, location].join(' - ') %>
+      <%= [entry_format, description, location].compact_blank.join(' - ') %>
     </span>
   <% when 'electronic' %>
-    <span class="holding__header">
-      <%= status.titleize %>
-    </span>
     <span class="holding__main">
-      <%= [entry_format, description, location].join(' - ') %>
+      <%= [entry_format, description, location].compact_blank.join(' - ') %>
+    </span>
+    <span class="holding__footer">
+      <%= status.capitalize %> online
     </span>
   <% end %>
 </a>
