@@ -13,7 +13,7 @@ describe 'Catalog Index Page' do
   it 'displays facets' do
     within('div.blacklight-access_facet') do
       expect(page).to have_text I18n.t('facets.access')
-      click_on 'Access'
+      click_on I18n.t('facets.access')
       expect(page).to have_text 'At the library'
     end
   end
