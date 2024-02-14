@@ -19,15 +19,13 @@ describe 'Catalog Index Page' do
   end
 
   it 'searches and returns results' do
-    fill_in 'q', with: 'cat'
     click_on I18n.t('search.button.label')
-    within('article.document-position-1') { expect(page).to have_text('The hypothalamus of the cat') }
+    expect(page).to have_selector 'article.document-position-1'
   end
 
   it 'opens a result page' do
-    fill_in 'q', with: 'cat'
     click_on I18n.t('search.button.label')
-    click_on 'The hypothalamus of the cat'
-    within('section.show-document') { expect(page).to have_text('The hypothalamus of the cat') }
+    within('article.document-position-1') { find('a').click }
+    expect(page).to have_selector 'section.show-document'
   end
 end

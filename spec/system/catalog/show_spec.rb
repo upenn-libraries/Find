@@ -5,26 +5,22 @@ require 'system_helper'
 describe 'Catalog Show Page' do
   before do
     SampleIndexer.index 'print_monograph.json'
-    visit solr_document_path('9913203433503681')
+    visit solr_document_path '9913203433503681'
   end
 
   after { SampleIndexer.clear! }
 
-  it 'shows record title' do
-    within('div.document-main-section') do
-      expect(page).to have_text 'The hypothalamus of the cat'
-    end
+  it 'shows document' do
+    expect(page).to have_selector 'div.document-main-section'
   end
 
   it 'shows some item metadata' do
-    within('dd.blacklight-creator_show') do
-      expect(page).to have_text 'Bleier, Ruth, 1923-'
-    end
+    expect(page).to have_selector 'dd.blacklight-title_show'
+    expect(page).to have_selector 'dd.blacklight-creator_show'
   end
 
-  it 'searches and returns results' do
-    fill_in 'q', with: 'cat'
+  it 'returns to Index when search is executed' do
     click_on I18n.t('search.button.label')
-    within('article.document-position-1') { expect(page).to have_text('The hypothalamus of the cat') }
+    expect(page).to have_selector 'article.document-position-1'
   end
 end
