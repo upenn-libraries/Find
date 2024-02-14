@@ -1,0 +1,8 @@
+<h4>Web Links</h4>
+<% if @field.values.present? %>
+  <ul>
+    <% @field.values.each do |value| %>
+      <a href="<%= value[:link_url] %>"><%= value[:link_text] %></a>
+    <% end %>
+  </ul>
+<% end %>

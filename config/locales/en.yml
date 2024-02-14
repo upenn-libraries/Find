@@ -99,6 +99,7 @@ en:
       local: 'Local Subjects'
       mesh: 'MeSh Subjects'
     title: 'Title'
+    web_links: 'Web Links'
   sort:
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
