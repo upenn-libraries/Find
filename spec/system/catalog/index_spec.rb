@@ -14,7 +14,7 @@ describe 'Catalog Index Page' do
     within('div.blacklight-access_facet') do
       expect(page).to have_text I18n.t('facets.access')
       click_on I18n.t('facets.access')
-      expect(page).to have_text 'At the library'
+      expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
     end
   end
 
