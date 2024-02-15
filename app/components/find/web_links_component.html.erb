@@ -1,8 +1,8 @@
-<h4>Web Links</h4>
-<% if @field.values.present? %>
-  <ul>
-    <% @field.values.each do |value| %>
-      <a href="<%= value[:link_url] %>"><%= value[:link_text] %></a>
-    <% end %>
-  </ul>
-<% end %>
+<h5>Online</h5>
+<ul class="list-group list-group-flush">
+  <% @field.values.each do |value| %>
+    <li class="list-group-item">
+      <a href="<%= value[:link_url] %>" target="_blank"><%= value[:link_text] %></a>
+    </li>
+  <% end %>
+</ul>
