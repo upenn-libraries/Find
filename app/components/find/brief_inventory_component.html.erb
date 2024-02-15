@@ -1,9 +1,9 @@
 <ol class="holdings">
   <%= static_entries %>
-  <% if inventory_present? %>
+  <% if @total_count.positive? %>
   <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
-    <%# TODO: Show some styled skeleton <li>'s for expected inventory entries. They will be replaced when tubro-frame loads. %>
-    <% skeleton_count.times do |_i| %>
+    <%# TODO: Do something better here, these spinners look ugly %>
+    <% skeleton_count.times do %>
       <li class="holding-item holding__loading spinner-border text-dark" role="status">
         <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
       </li>

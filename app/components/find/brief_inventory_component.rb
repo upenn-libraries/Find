@@ -15,11 +15,9 @@ module Find
       @document = document
     end
 
-    # @return [Boolean]
-    def inventory_present?
-      @total_count.positive?
-    end
-
+    # Get "full text link" (856 with indicator 0 or 1) values and render them using the
+    # view component used in the dynamic inventory rendering
+    # @return [String]
     def static_entries
       return unless @document
 
@@ -34,9 +32,10 @@ module Find
       safe_join li_elements
     end
 
+    # How many entries are _not_ displayed?
     # @return [Integer]
     def show_more_count
-      @total_count - skeleton_count
+      @show_more_count ||= @total_count - skeleton_count
     end
 
     # Skeleton should never show more than the brief_count from Inventory::Service
