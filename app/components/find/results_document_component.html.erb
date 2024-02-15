@@ -1,4 +1,4 @@
-<%# Copied template from Blacklight v8.1.0 to add availability information %>
+<%# Copied template from Blacklight v8.1.0 to add inventory information %>
 
 <%= content_tag @component,
                 id: @id,
@@ -18,7 +18,7 @@
       <%= embed %>
       <%= content %>
       <%= metadata %>
-      <%= inventory %>
+      <%= brief_inventory %>
       <% metadata_sections.each do |section| %>
         <%= section %>
       <% end %>

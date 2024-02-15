@@ -57,8 +57,8 @@ class CatalogController < ApplicationController
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
     config.index.constraints_component = Find::ConstraintsComponent
-    config.index.document_component = Find::DocumentComponent
-    config.show.document_component = Find::DocumentComponent
+    config.index.document_component = Find::ResultsDocumentComponent
+    # config.show.document_component = Find::DocumentComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -214,11 +214,11 @@ class CatalogController < ApplicationController
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 
-  # Returns inventory information.
+  # Returns inventory information for filling in a Turbo Frame
   def inventory
     respond_to do |format|
       format.html do
-        render(Find::DynamicInventoryComponent.new(id: params[:id], entries: @inventory[:inventory]),
+        render(Find::DynamicInventoryComponent.new(id: params[:id].to_s, entries: @inventory[:inventory]),
                layout: false)
       end
     end
@@ -227,6 +227,6 @@ class CatalogController < ApplicationController
   private
 
   def load_inventory
-    @inventory = Inventory::Service.find(params[:id])
+    @inventory = Inventory::Service.find(params[:id].to_s)
   end
 end

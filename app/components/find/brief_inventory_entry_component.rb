@@ -2,7 +2,7 @@
 
 module Find
   # Component that displays a records availability information.
-  class InventoryEntryComponent < ViewComponent::Base
+  class BriefInventoryEntryComponent < ViewComponent::Base
     attr_accessor :data
 
     # @param [Hash] data

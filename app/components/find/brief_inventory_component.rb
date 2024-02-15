@@ -2,7 +2,7 @@
 
 module Find
   # Component that displays a records inventory information.
-  class InventoryComponent < ViewComponent::Base
+  class BriefInventoryComponent < ViewComponent::Base
     # @param record_id [String]
     # @param [Hash, nil] inventory
     # @param count [String] number of entries to display
@@ -18,10 +18,10 @@ module Find
       return unless @document
 
       li_elements = @document.inventory_link_data&.map do |link_data|
-        render(Find::InventoryEntryComponent.new(data: {
-                                                   type: 'electronic', status: 'available', location: 'Online',
-                                                   description: link_data[:link_text], href: link_data[:link_url]
-                                                 }))
+        render(Find::BriefInventoryEntryComponent.new(
+                 data: { type: 'electronic', status: 'available', location: 'Online',
+                         description: link_data[:link_text], href: link_data[:link_url] }
+        ))
       end
       return if li_elements.blank?
 
