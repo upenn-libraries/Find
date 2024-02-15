@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Find
-  # Component that displays a set of InventoryEntries for a given record.
-  class InventoryEntriesComponent < ViewComponent::Base
+  # Component that renders a set of InventoryEntries for use in in filling-in a Turbo Frame.
+  class DynamicInventoryComponent < ViewComponent::Base
     # @param [String] id
     # @param [Hash] entries
     def initialize(id:, entries:)

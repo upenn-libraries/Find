@@ -218,8 +218,7 @@ class CatalogController < ApplicationController
   def inventory
     respond_to do |format|
       format.html do
-        # TODO: do this another way? or rename the component to indicate its dynamic/turbo-ness
-        render(Find::InventoryEntriesComponent.new(id: params[:id], entries: @inventory[:inventory]),
+        render(Find::DynamicInventoryComponent.new(id: params[:id], entries: @inventory[:inventory]),
                layout: false)
       end
     end

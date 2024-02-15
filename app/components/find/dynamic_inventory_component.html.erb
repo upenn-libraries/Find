@@ -1,0 +1,5 @@
+<turbo-frame id="inventory_<%= @id %>" target="_top">
+  <% @entries.each do |entry| %>
+    <%= render(Find::InventoryEntryComponent.new(data: entry)) %>
+  <% end %>
+</turbo-frame>
