@@ -1,18 +1,17 @@
-<a href="<%= href %>" class="holding__link">
-  <% case type %>
-  <% when 'physical' %>
-    <span class="holding__header">
-      <%= status.capitalize %>
-    </span>
-    <span class="holding__main">
-      <%= [entry_format, description, location].compact_blank.join(' - ') %>
-    </span>
-  <% when 'electronic' %>
-    <span class="holding__main">
-      <%= [entry_format, description, location].compact_blank.join(' - ') %>
-    </span>
-    <span class="holding__footer">
-      <%= status.capitalize %> online
-    </span>
+<li class="<%= classes.join(' ') %>">
+  <a href="<%= href %>" class="holding__link">
+  <% if header_content.present? %>
+  <span class="holding__header">
+    <%= header_content %>
+  </span>
   <% end %>
-</a>
+  <span class="holding__main">
+    <%= main_content %>
+  </span>
+  <% if footer_content.present? %>
+  <span class="holding__footer">
+    <%= footer_content %>
+  </span>
+  <% end %>
+  </a>
+</li>

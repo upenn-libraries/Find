@@ -1,7 +1,6 @@
 .holdings {
   list-style: none;
   padding: 0;
-
   display: inline-flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -19,7 +18,20 @@
 }
 
 .holding__item {
+  margin-bottom: 0.5rem; // TODO: MK added this for spacing between li's, please fix :/
   --holding-accent-color: var(--color-gray-6);
+}
+
+/* Ugly skeleton style added by MK - see inventory_component.html.erb */
+.holding__item--skeleton {
+  height: 2rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-gray-6);
+  border-left: solid 3px var(--color-gray-6);
+  padding: 0 0.5rem;
+  line-height: 1.25;
 }
 
 .holding__item--available {
@@ -42,7 +54,6 @@
   text-decoration: none;
   display: flex;
   flex-direction: column;
-
   border-left: solid 3px var(--holding-accent-color);
   padding: 0 0.5rem;
   line-height: 1.25;

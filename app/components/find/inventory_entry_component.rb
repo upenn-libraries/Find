@@ -2,49 +2,69 @@
 
 module Find
   # Component that displays a records availability information.
-  class InventoryEntryComponent < Blacklight::Component
-    attr_accessor :holding_data
+  class InventoryEntryComponent < ViewComponent::Base
+    attr_accessor :data
 
-    # @param [Hash] holding_data
-    def initialize(holding_data:)
-      @holding_data = holding_data
+    # @param [Hash] data
+    def initialize(data:)
+      @data = data
     end
 
-    # @return [String] id
-    def id
-      holding_data[:id]
+    def physical?
+      data[:type] == 'physical'
+    end
+
+    def available?
+      data[:status] == 'available'
+    end
+
+    def header_content
+      return unless physical?
+
+      join_fields status, data[:location]
+    end
+
+    def main_content
+      join_fields data[:format], data[:description]
+    end
+
+    def footer_content
+      return if physical?
+
+      join_fields status
+    end
+
+    def href
+      data[:href]
     end
 
     # @return [String] status
     def status
-      return 'See options' if holding_data[:status] == 'check_holdings'
+      return I18n.t('inventory.entries.status.check_holdings') if data[:status] == 'check_holdings'
+      return I18n.t('inventory.entries.status.unavailable') unless available?
+      return I18n.t('inventory.entries.status.available_electronic') if available? && !physical?
+      return I18n.t('inventory.entries.status.available_physical') if available? && physical?
 
-      holding_data[:status]
+      data[:status].capitalize
     end
 
-    # @return [String] description
-    def description
-      holding_data[:description]
+    def classes
+      classes = ['holding__item']
+      classes << if available?
+                   'holding__item--available'
+                 elsif data[:status] == 'unavailable'
+                   'holding__item--unavailable'
+                 elsif data[:status] == 'check_holdings'
+                   'holding__item--check_holdings'
+                 else
+                   'holding__item--other'
+                 end
     end
 
-    # @return [String] entry_format
-    def entry_format
-      holding_data[:format]
-    end
+    private
 
-    # @return [String] location
-    def location
-      holding_data[:location]
-    end
-
-    # @return [String] type
-    def type
-      holding_data[:type]
-    end
-
-    # @return [String] href
-    def href
-      holding_data[:href]
+    def join_fields(*fields)
+      fields.compact_blank.join(' - ')
     end
   end
 end

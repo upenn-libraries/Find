@@ -4,6 +4,8 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
+  before_action :load_inventory, only: :inventory
+
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
   # uncomment:
@@ -128,7 +130,6 @@ class CatalogController < ApplicationController
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
     config.add_index_field :format_ss, label: I18n.t('results.format'), separator: ', '
-    config.add_index_field :full_text_links_ss, label: I18n.t('results.full_text')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -213,12 +214,20 @@ class CatalogController < ApplicationController
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 
-  # Returns brief availability information.
-  def availability
-    @document = search_service.fetch(params[:id])
-
+  # Returns inventory information.
+  def inventory
     respond_to do |format|
-      format.html { render(Find::AvailabilityComponent.new(document: @document, brief: true)) }
+      format.html do
+        # TODO: do this another way? or rename the component to indicate its dynamic/turbo-ness
+        render(Find::InventoryEntriesComponent.new(id: params[:id], entries: @inventory[:inventory]),
+               layout: false)
+      end
     end
+  end
+
+  private
+
+  def load_inventory
+    @inventory = Inventory::Service.find(params[:id])
   end
 end

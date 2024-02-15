@@ -43,6 +43,15 @@ en:
     subject_search: 'Subject'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
+  inventory:
+    entries:
+      loading: 'Loading option...'
+      status:
+        check_holdings: 'See options'
+        unavailable: 'Requestable'
+        available_electronic: 'Available online'
+        available_physical: 'Available for checkout'
+    see_all: 'See all options'
   facets:
     access: 'Access'
     classification: 'Classification'
@@ -78,7 +87,6 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
-    full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
     button:

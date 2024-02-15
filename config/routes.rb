@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     concerns :exportable
 
     member do
-      get 'availability'
+      get 'inventory'
     end
   end
 

@@ -5,6 +5,7 @@ module Inventory
   # of inventory it's handling.
   class Service
     MAX_BIBS_GET = 100 # 100 is Alma API max
+    BRIEF_RECORD_COUNT = 3
     PHYSICAL = 'physical'
     ELECTRONIC = 'electronic'
 
@@ -14,7 +15,7 @@ module Inventory
       # @param [String] mms_id single mms_id
       # @param [Integer] brief_count limits how many inventory values we return
       # @return [Hash]
-      def find(mms_id, brief_count = 3)
+      def find(mms_id, brief_count = BRIEF_RECORD_COUNT)
         availability_data = Alma::Bib.get_availability([mms_id])
         inventory = inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h)
         { inventory: inventory.first(brief_count), total: inventory.length }
