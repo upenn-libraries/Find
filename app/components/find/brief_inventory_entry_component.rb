@@ -10,34 +10,41 @@ module Find
       @data = data
     end
 
+    # @return [Boolean]
     def physical?
       data[:type] == 'physical'
     end
 
+    # @return [Boolean]
     def available?
       data[:status] == 'available'
     end
 
+    # @return [String]
     def header_content
       return unless physical?
 
       join_fields status, data[:location]
     end
 
+    # @return [String]
     def main_content
       join_fields data[:format], data[:description]
     end
 
+    # @return [String]
     def footer_content
       return if physical?
 
       join_fields status
     end
 
+    # @return [String]
     def href
       data[:href]
     end
 
+    # User-friendly display value for inventory entry status
     # @return [String] status
     def status
       return I18n.t('inventory.entries.status.check_holdings') if data[:status] == 'check_holdings'
@@ -48,6 +55,8 @@ module Find
       data[:status].capitalize
     end
 
+    # Classes to use in rendering the inventory entry element
+    # @return [Array<String (frozen)>]
     def classes
       classes = ['holding__item']
       classes << if available?
@@ -63,6 +72,8 @@ module Find
 
     private
 
+    # @param [Array] fields
+    # @return [String]
     def join_fields(*fields)
       fields.compact_blank.join(' - ')
     end

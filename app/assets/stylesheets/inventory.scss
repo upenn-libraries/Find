@@ -22,18 +22,6 @@
   --holding-accent-color: var(--color-gray-6);
 }
 
-/* Ugly skeleton style added by MK - see inventory_component.html.erb */
-.holding__item--skeleton {
-  height: 2rem;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-gray-6);
-  border-left: solid 3px var(--color-gray-6);
-  padding: 0 0.5rem;
-  line-height: 1.25;
-}
-
 .holding__item--available {
   --holding-accent-color: #288441;
 }
@@ -67,6 +55,12 @@
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--holding-accent-color);
+}
+
+.holding__loading {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
 }
 
 .holding__link:hover .holding__main {

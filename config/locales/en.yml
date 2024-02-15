@@ -51,7 +51,7 @@ en:
         unavailable: 'Requestable'
         available_electronic: 'Available online'
         available_physical: 'Available for checkout'
-    see_all: 'See all options'
+    see_all: 'See %{count} more %{options}'
   facets:
     access: 'Access'
     classification: 'Classification'

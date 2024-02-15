@@ -1,17 +1,20 @@
 <ol class="holdings">
   <%= static_entries %>
-  <% if @count > 0 %>
+  <% if inventory_present? %>
   <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
     <%# TODO: Show some styled skeleton <li>'s for expected inventory entries. They will be replaced when tubro-frame loads. %>
-    <% (0...@count).each do |_i| %>
-      <li class="holding__item--skeleton"><%= t('inventory.entries.loading') %></li>
+    <% skeleton_count.times do |_i| %>
+      <li class="holding-item holding__loading spinner-border text-dark" role="status">
+        <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
+      </li>
     <% end %>
   </turbo-frame>
-  <li>
-    <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
-<!--      <%#= @count %> other <%#= 'option'.pluralize(@count) %> <%# TODO: fix count to show count of *undisplayed* records, if there are any %>-->
-      <%= t('inventory.see_all') %>
-    </a>
-  </li>
+    <% if show_more_count.positive? %>
+    <li>
+      <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
+        <%= t('inventory.see_all', count: show_more_count, options: 'option'.pluralize(show_more_count)) %>
+      </a>
+    </li>
+    <% end %>
   <% end %>
 </ol>
