@@ -9,6 +9,15 @@
   gap: 1.5rem;
 }
 
+.navbar-search a {
+  color: var(--color-fg-default);
+  text-decoration: none;
+}
+
+.navbar-search a:hover {
+  text-decoration: underline;
+}
+
 .search-query-form {
   display: flex;
   width: 100%;
