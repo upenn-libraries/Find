@@ -2,10 +2,16 @@
   <%= static_entries %>
   <% if @total_count.positive? %>
   <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
-    <%# TODO: Do something better here, these spinners look ugly %>
     <% skeleton_count.times do %>
-      <li class="holding-item holding__loading spinner-border text-dark" role="status">
-        <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
+      <li class="holding__item holding__item--loading placeholder-glow" role="status">
+        <div class="placeholder-glow">
+          <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
+          <span class="placeholder col-3"></span>
+        </div>
+        <div class="placeholder-glow">
+          <span class="placeholder col-1"></span>
+          <span class="placeholder col-3"></span>
+        </div>
       </li>
     <% end %>
   </turbo-frame>

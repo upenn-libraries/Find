@@ -1,10 +1,15 @@
 .holdings {
   list-style: none;
   padding: 0;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.5rem;
   margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.holdings > turbo-frame {
+  display: contents;
 }
 
 .holdings__other-link {
@@ -14,34 +19,23 @@
 .holdings__other-link:hover {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: var(--color-gray-6);
+  text-decoration-color: var(--color-fg-subtle);
 }
 
 .holding__item {
-  margin-bottom: 0.5rem; // TODO: MK added this for spacing between li's, please fix :/
-  --holding-accent-color: var(--color-gray-6);
+  --holding-accent-color: var(--color-fg-subtle);
 }
 
 .holding__item--available {
-  --holding-accent-color: #288441;
+  --holding-accent-color: var(--color-fg-success);
 }
 
-.holding__item--unavailable {
-  --holding-accent-color: #BE0000;
-}
-
-.holding__item--check_holdings {
-  --holding-accent-color: #1B5993;
-}
-
-.holding__item--other {
-  --holding-accent-color: #7707AC;
-}
-
+.holding__item--loading,
 .holding__link {
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  color: var(--color-fg-subtle);
   border-left: solid 3px var(--holding-accent-color);
   padding: 0 0.5rem;
   line-height: 1.25;
@@ -52,15 +46,9 @@
 }
 
 .holding__main {
-  font-size: 1.15rem;
   font-weight: 600;
+  font-size: 1.1rem;
   color: var(--holding-accent-color);
-}
-
-.holding__loading {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0.5rem;
 }
 
 .holding__link:hover .holding__main {

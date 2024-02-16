@@ -24,19 +24,17 @@ module Find
     def header_content
       return unless physical?
 
-      join_fields status, data[:location]
+      join_fields status
     end
 
     # @return [String]
     def main_content
-      join_fields data[:format], data[:description]
+      join_fields data[:description]
     end
 
     # @return [String]
     def footer_content
-      return if physical?
-
-      join_fields status
+      join_fields data[:format], data[:location]
     end
 
     # @return [String]
@@ -64,7 +62,7 @@ module Find
                  elsif data[:status] == 'unavailable'
                    'holding__item--unavailable'
                  elsif data[:status] == 'check_holdings'
-                   'holding__item--check_holdings'
+                   'holding__item--check-holdings'
                  else
                    'holding__item--other'
                  end
