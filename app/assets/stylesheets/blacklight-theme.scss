@@ -80,18 +80,6 @@
   color: var(--color-fg-subtle);
 }
 
-@media (min-width: 992px) {
-  .documents-list {
-    margin-left: 2rem;
-  }
-
-  .document-counter {
-    position: absolute;
-    margin-left: -1.75rem;
-    margin-top: 0.2rem;
-  }
-}
-
 .documents-list .document {
   border-bottom-style: solid;
   padding-top: 0;
@@ -121,7 +109,7 @@
   display: block;
   width: 100%;
   font-size: 0.875em;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.025em;
   font-weight: 600;
   text-align: left;
   padding: 0;
