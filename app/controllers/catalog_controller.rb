@@ -142,7 +142,8 @@ class CatalogController < ApplicationController
     config.add_show_field :production_publication_show, label: I18n.t('show.place-of-publication'), accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes'), accessor: :marc
-    config.add_show_field :link_web_links, label: I18n.t('show.web_links'), accessor: :marc, component: Find::WebLinksComponent
+    config.add_show_field :link_web_links, label: I18n.t('show.web_links'),
+                                           accessor: :marc, component: Find::WebLinksComponent
 
     config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
       field.include_in_advanced_search = false

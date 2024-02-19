@@ -1,8 +1,14 @@
-<h5>Online</h5>
-<ul class="list-group list-group-flush">
-  <% @field.values.each do |value| %>
-    <li class="list-group-item">
-      <a href="<%= value[:link_url] %>" target="_blank"><%= value[:link_text] %></a>
-    </li>
+<%= render(@layout.new(field: @field)) do |component| %>
+  <% component.with_label do %>
+    <%= label %>
   <% end %>
-</ul>
+  <% component.with_value do %>
+    <ul class="list-group">
+      <% @field.values.each do |value| %>
+        <li class="list-group-item">
+          <%= link_to value[:link_text], value[:link_url], target: '_blank' %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
