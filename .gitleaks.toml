@@ -195,7 +195,7 @@ title = "Find Catalog Gitleaks config"
         '''app/models/solr_document.rb''',
         '''config/locales/devise.en.yml''',
         '''config/importmap.rb''',
-        '''(.*?)(.en.yml)$''' # ignore any locale file
+        '''(.*)(en.yml)$''' # ignore any locale file
     ]
     regexes = [
         # Values set by Ansible variables
