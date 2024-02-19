@@ -86,19 +86,73 @@ en:
     advanced:
       label: "Advanced"
   show:
-    creator: 'Author/Creator'
-    edition: 'Edition'
-    format: 'Format'
+    citation:
+      cited_as: 'Cited as'
+      cited_in: 'Cited in'
+    creator:
+      conference_detail: 'Conference Name'
+      contributor: 'Contributor'
+      main: 'Author/Creator'
+    edition:
+      main: 'Edition'
+      other: 'Other Edition'
+    format:
+      cartographic: 'Cartographic Data'
+      main: 'Format'
+      other: 'Other Format'
     genre: 'Genre'
-    language: 'Language'
-    notes: 'Notes'
-    place-of-publication: 'Place of Publication'
-    series: 'Series'
+    identifier:
+      fingerprint: 'Fingerprint'
+      isbn: 'ISBN'
+      issn: 'ISSN'
+      oclc_id: 'OCLC'
+      publisher_number: 'Publisher Number'
+    language:
+      main: 'Language'
+    link:
+      full_text: 'Online'
+      web: 'Web Link'
+    notes:
+      access_restriction: 'Access Restriction'
+      arrangement: 'Arrangement'
+      biography: 'Biography/History'
+      contents: 'Contents'
+      credits: 'Credits'
+      finding_aid: 'Finding Aid/Index'
+      local_notes: 'Local Notes'
+      main: 'Notes'
+      participant: 'Participant'
+      provenance: 'Penn Provenance'
+      summary: 'Summary'
+      system_details: 'System Details'
+    production:
+      distribution: 'Distribution'
+      main: 'Production'
+      manufacture: 'Manufacture'
+      place_of_publication: 'Place of Publication'
+      publication: 'Publication'
+    relation:
+      chronology: 'Penn Chronology'
+      constituent_unit: 'Constituent Unit'
+      contained_in: 'Contained In'
+      contains: 'Contains'
+      has_supplement: 'Has Supplement'
+      publications_about: 'Publications about'
+      related_collections: 'Related Collections'
+      related_work: 'Related Work'
+    series:
+      main: 'Series'
+      continues: 'Continues'
+      continued_by: 'Continued By'
     subject:
       all: 'Subjects (All)'
       local: 'Local Subjects'
-      mesh: 'MeSh Subjects'
-    title: 'Title'
+      medical: 'Medical Subjects'
+    title:
+      former: 'Former Title'
+      main: 'Title'
+      standardized: 'Standardized Title'
+      other: 'Other Title'
   sort:
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
