@@ -1,0 +1,15 @@
+<div class="login__container">
+  <h1 class="login__heading">Login</h1>
+  <p class="login__lede">Access your library account and Find.</p>
+  <div class="login__options">
+    <%= button_to t('login.pennkey'), user_saml_omniauth_authorize_path, class: 'btn btn-primary' %>
+    <span>Or</span>
+    <%= button_to t('login.alma.name'), user_alma_omniauth_authorize_path,  class: 'btn btn-outline-primary', data: {turbo: false} %>
+    <% if Rails.env.development? %>
+      <span>Or</span>
+      <%= button_to t('login.developer'), user_developer_omniauth_authorize_path, class: 'btn btn-outline-primary', data: { turbo: false } %>
+    <% end %>
+  </div>
+
+  <a href="https://guides.library.upenn.edu/franklinaccount" class="login__help-link"><%= t('login.help') %></a>
+</div>

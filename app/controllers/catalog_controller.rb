@@ -54,6 +54,7 @@ class CatalogController < ApplicationController
     # Some components can be configured
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
+    config.index.constraints_component = Find::ConstraintsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -198,7 +199,6 @@ class CatalogController < ApplicationController
 
     config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
       field.include_in_advanced_search = false
-      field.solr_parameters = SearchFieldConfig::ALL_FIELDS
     end
 
     # Add search fields to Blacklight's built-in advanced search form.
@@ -209,37 +209,37 @@ class CatalogController < ApplicationController
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::ALL_FIELDS }
+      field.clause_params = { edismax: { qf: '${qf}', pf: '${pf}' } }
     end
 
     config.add_search_field('creator_search', label: I18n.t('advanced.creator_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::CREATOR }
+      field.clause_params = { edismax: { qf: '${creator_qf}', pf: '${creator_pf}' } }
     end
 
     config.add_search_field('title_search', label: I18n.t('advanced.title_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::TITLE }
+      field.clause_params = { edismax: { qf: '${title_qf}', pf: '${title_pf}' } }
     end
 
     config.add_search_field('journal_title_search', label: I18n.t('advanced.journal_title_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::JOURNAL_TITLE }
+      field.clause_params = { edismax: { qf: '${journal_title_qf}', pf: '${journal_title_pf}' } }
     end
 
     config.add_search_field('subject_search', label: I18n.t('advanced.subject_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::SUBJECT }
+      field.clause_params = { edismax: { qf: '${subject_qf}', pf: '${subject_pf}' } }
     end
 
     config.add_search_field('genre_search', label: I18n.t('advanced.genre_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: SearchFieldConfig::GENRE }
+      field.clause_params = { edismax: { qf: '${genre_qf}', pf: '${genre_pf}' } }
     end
 
     # "sort results by" select (pulldown)

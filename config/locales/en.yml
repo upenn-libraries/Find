@@ -31,8 +31,11 @@
 
 en:
   header:
+    bookmarks: 'Bookmarks'
+    login: 'Login'
+    service_lede: 'books, articles, and more'
     service_name: 'Find'
-    service_lede: 'Books, articles, and more'
+    sign_out: 'Sign Out'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
@@ -53,6 +56,17 @@ en:
     library: 'Library'
     location: 'Specific Location'
     subject: 'Subject'
+  login:
+    alma:
+      credentials:
+        email: 'Email'
+        password: 'Password'
+      heading: 'Courtesy Borrower Login'
+      login: 'Borrower Login'
+      name: 'Courtesy Borrower'
+    developer: 'Developer'
+    help: 'Help with your library account'
+    pennkey: 'Continue with PennKey'
   results:
     creator: 'Author/Creator'
     edition: 'Edition'
@@ -67,10 +81,10 @@ en:
     full_text: 'Online resource'
   search:
     all_fields: 'All Fields'
-    form:
-      database:
-          search:
-              placeholder: 'Find databases & articles'
+    button:
+      label: "Find it"
+    advanced:
+      label: "Advanced"
   show:
     citation:
       cited_as: 'Cited as'
