@@ -33,7 +33,7 @@
 .holding__item--loading,
 .holding__link {
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   color: var(--color-fg-subtle);
   border-left: solid 3px var(--holding-accent-color);
