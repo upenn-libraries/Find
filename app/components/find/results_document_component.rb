@@ -14,9 +14,5 @@ module Find
       super
       set_slot(:brief_inventory, nil) unless brief_inventory
     end
-
-    def brief_count
-
-    end
   end
 end

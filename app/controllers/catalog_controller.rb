@@ -4,7 +4,10 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  before_action :load_inventory, only: :inventory
+  # "show" is defined in Blacklight::Catalog
+  # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action :load_full_inventory, only: :show
+  # rubocop:enable Rails/LexicallyScopedActionFilter
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
@@ -58,7 +61,7 @@ class CatalogController < ApplicationController
     config.index.search_bar_component = Find::SearchBarComponent
     config.index.constraints_component = Find::ConstraintsComponent
     config.index.document_component = Find::ResultsDocumentComponent
-    # config.show.document_component = Find::DocumentComponent
+    config.show.document_component = Find::ShowDocumentComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -216,6 +219,8 @@ class CatalogController < ApplicationController
 
   # Returns inventory information for filling in a Turbo Frame
   def inventory
+    @inventory = Inventory::Service.find(params[:id].to_s)
+
     respond_to do |format|
       format.html do
         render(Find::DynamicInventoryComponent.new(id: params[:id].to_s, entries: @inventory[:inventory]),
@@ -226,7 +231,7 @@ class CatalogController < ApplicationController
 
   private
 
-  def load_inventory
-    @inventory = Inventory::Service.find(params[:id].to_s)
+  def load_full_inventory
+    @inventory = Inventory::Service.find params[:id.to_s], false
   end
 end

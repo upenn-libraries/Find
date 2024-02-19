@@ -44,6 +44,9 @@ en:
     title_search: 'Title'
     journal_title_search: 'Journal Title'
   inventory:
+    show:
+      navigation:
+        header: 'Inventory'
     entries:
       loading: 'Loading option...'
       status:
