@@ -125,9 +125,7 @@ class CatalogController < ApplicationController
     config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
-    config.add_index_field :format_ss, label: I18n.t('results.format'), separator: ', '
-    config.add_index_field :full_text_links_ss, label: I18n.t('results.full_text'),
-                                                helper_method: :render_links_from_hash
+    config.add_index_field :format_ss, label: I18n.t('results.format')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -142,8 +140,6 @@ class CatalogController < ApplicationController
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
     config.add_show_field :production_manufacture_show, label: I18n.t('show.production.manufacture'), accessor: :marc
     config.add_show_field :relation_contained_in_show, label: I18n.t('show.relation.contained_in'), accessor: :marc
-    config.add_show_field :link_full_text_links, label: I18n.t('show.link.full_text'), accessor: :marc,
-                                                 helper_method: :render_links_from_hash
     config.add_show_field :title_standardized_show, label: I18n.t('show.title.standardized'), accessor: :marc
     config.add_show_field :title_other_show, label: I18n.t('show.title.other'), accessor: :marc
     config.add_show_field :format_cartographic_show, label: I18n.t('show.format.cartographic'), accessor: :marc
@@ -152,8 +148,7 @@ class CatalogController < ApplicationController
     config.add_show_field :title_former_show, label: I18n.t('show.title.former'), accessor: :marc
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
-    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc,
-                                         helper_method: :render_subject_facet_links
+    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc
     config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
@@ -168,7 +163,6 @@ class CatalogController < ApplicationController
     config.add_show_field :note_credits_show, label: I18n.t('show.notes.credits'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
     config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
-    # config.add_show_field :link_offsite, label: I18n.t('show.link_offsite'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
     config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc
     config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc
@@ -191,11 +185,10 @@ class CatalogController < ApplicationController
     config.add_show_field :identifier_oclc_id_show, label: I18n.t('show.identifier.oclc_id'), accessor: :marc
     config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'),
                                                              accessor: :marc
-    config.add_show_field :link_web_links, label: I18n.t('show.link.web'), accessor: :marc,
-                                           helper_method: :render_as_links
+    config.add_show_field :link_web_links, label: I18n.t('show.link.web'), accessor: :marc
     config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
-    # doesn't exist yet?
-    # config.add_show_field :bound_with, label: I18n.t('show.bound_with'), accessor: :marc
+    # TODO: populate this field
+    # config.add_show_field :bound_with_show, label: I18n.t('show.bound_with'), accessor: :marc
 
     config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
       field.include_in_advanced_search = false
