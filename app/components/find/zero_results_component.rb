@@ -41,8 +41,8 @@ module Find
     # Penn Libraries website search link with query
     # @return [String]
     def website_search_url
-      URI::HTTPS.build(host: 'library.upenn.edu', path: '/search-results',
-                       query: URI.encode_www_form({ q: '#gsc.tab=0', 'gsc.q': query })).to_s
+      URI::HTTPS.build(host: 'www.library.upenn.edu', path: '/search-results',
+                       query: URI.encode_www_form({ q: query })).to_s
     end
 
     # Google Scholar link with query

@@ -7,8 +7,8 @@ en:
         modify_search: "If you still haven't found what you're looking for, try these options:"
         options:
           simplify: 'Remove some of your applied limits.'
-          articles_html: 'If you are searching for an article, <a href="%{query_url}">try your search in Articles+</a>.'
-          borrowdirect_html: 'Penn Libraries may not have what you are looking for. <a href="%{query_url}">Try your search in BorrowDirect+</a> for access via a partner library.'
-          website_html: 'Try <a href="%{query_url}">your search on the Penn Libraries homepage</a>.'
-          scholar_html: 'Try your <a href="%{query_url}">search in Google Scholar</a>'
-          help_html: '<a href="%{url}">Ask us</a> for help.'
+          articles: 'If you are searching for an article, try your search in Articles+.'
+          borrowdirect: 'Penn Libraries may not have what you are looking for. Try your search in BorrowDirect+ for access via a partner library.'
+          website: 'Try your search on the Penn Libraries homepage.'
+          scholar: 'Try your search in Google Scholar'
+          help: 'Ask us for help.'

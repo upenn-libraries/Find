@@ -5,10 +5,10 @@
     <% if filters_present? %>
     <li><%= t('blacklight.search.zero_results.options.simplify') %></li>
     <% end %>
-    <li><%= t('blacklight.search.zero_results.options.articles_html', query_url: articles_search_url) %></li>
-    <li><%= t('blacklight.search.zero_results.options.borrowdirect_html', query_url: borrowdirect_search_url) %></li>
-    <li><%= t('blacklight.search.zero_results.options.website_html', query_url: website_search_url) %></li>
-    <li><%= t('blacklight.search.zero_results.options.scholar_html', query_url: scholar_search_url) %></li>
-    <li><%= t('blacklight.search.zero_results.options.help_html', url: ask_url) %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.articles'), articles_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.borrowdirect'), borrowdirect_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.website'), website_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.scholar'), scholar_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.help'), ask_url %></li>
   </ul>
 </div>
