@@ -27,7 +27,7 @@ module Find
     # Articles+ link with query
     # @return [String]
     def articles_search_url
-      URI::HTTPS.build(host: 'upenn.summon.serialssolutions.com', path: '#!/search',
+      URI::HTTPS.build(host: 'upenn.summon.serialssolutions.com', path: '/search',
                        query: URI.encode_www_form({ ho: 't', 'include.ft.matches': 't', l: 'en', q: query })).to_s
     end
 
