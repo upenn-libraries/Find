@@ -4,9 +4,9 @@ module Find
   # Component that displays a records inventory information.
   class BriefInventoryComponent < ViewComponent::Base
     # @param record_id [String]
-    # @param [Hash, nil] inventory
-    # @param count [String] number of inventory entries from SolrDocument
-    # @param [SolrDocument] document
+    # @param inventory [Hash, nil]
+    # @param count [String]number of inventory entries from SolrDocument
+    # @param document [SolrDocument]
     def initialize(record_id:, count: nil, inventory: nil, document: nil)
       @id = record_id
       @entries = inventory[:inventory] if inventory

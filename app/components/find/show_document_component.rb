@@ -8,8 +8,8 @@ module Find
       Find::InventoryNavigationComponent.new(inventory: @inventory, document: @document, params: @params)
     }
 
-    # @option [Array] inventory used to render InventoryNavigationComponent
-    # @option [ActionController::Parameters] params from request
+    # @option inventory [Array] inventory data used to render InventoryNavigationComponent
+    # @option params [ActionController::Parameters] parameters from request
     def initialize(document_counter: nil, **args)
       super
       @inventory = args[:inventory]

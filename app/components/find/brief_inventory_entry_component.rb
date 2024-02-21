@@ -5,7 +5,7 @@ module Find
   class BriefInventoryEntryComponent < ViewComponent::Base
     attr_accessor :data
 
-    # @param [Hash] data
+    # @param data [Hash]
     def initialize(data:)
       @data = data
     end
@@ -70,7 +70,7 @@ module Find
 
     private
 
-    # @param [Array] fields
+    # @param fields [Array]
     # @return [String]
     def join_fields(*fields)
       fields.compact_blank.join(' - ')

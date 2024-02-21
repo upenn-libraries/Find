@@ -3,9 +3,9 @@
 module Find
   # Render's vertical navigation pane for record show page inventory entries
   class InventoryNavigationComponent < ViewComponent::Base
-    # @param [Array] inventory
-    # @param [SolrDocument] document being rendered
-    # @param [ActionController::Parameters] params from request
+    # @param inventory [Array]
+    # @param document [SolrDocument] the document being rendered
+    # @param params [ActionController::Parameters] parameters from request
     def initialize(inventory:, document:, params:)
       @inventory = inventory
       @document = document
@@ -13,7 +13,7 @@ module Find
     end
 
     # Is a passed-in entry currently selected? Used to add 'active' class
-    # @param [Hash] entry
+    # @param entry [Hash]
     # @return [Boolean]
     def active?(entry)
       # activate the holding specified in the params, if set
