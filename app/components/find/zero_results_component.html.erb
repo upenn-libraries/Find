@@ -1,0 +1,14 @@
+<h2><%= t('blacklight.search.zero_results.title') %></h2>
+<div id="documents" class="noresults">
+  <span class="noresults-body"><%= t('blacklight.search.zero_results.modify_search') %></span>
+  <ul class="noresults-options">
+    <% if filters_present? %>
+    <li><%= t('blacklight.search.zero_results.options.simplify') %></li>
+    <% end %>
+    <li><%= link_to t('blacklight.search.zero_results.options.articles'), articles_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.borrowdirect'), borrowdirect_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.website'), website_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.scholar'), scholar_search_url %></li>
+    <li><%= link_to t('blacklight.search.zero_results.options.help'), ask_url %></li>
+  </ul>
+</div>

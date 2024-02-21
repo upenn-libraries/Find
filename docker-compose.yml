@@ -23,7 +23,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
   solrcloud:
-    image: solr:9
+    image: solr:9.3
     ports:
       - "8983:8983"
     volumes:
