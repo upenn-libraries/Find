@@ -40,7 +40,7 @@ describe Inventory::Service do
 
     it 'returns expected hash value' do
       expect(inventory).to eq({ inventory: [{ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
-                                              href: '/catalog/9979338417503681#22810131440003681',
+                                              href: '/catalog/9979338417503681?hld_id=22810131440003681',
                                               id: '22810131440003681', location: 'Van Pelt Library',
                                               policy: 'Book/serial', status: 'available', type: 'physical' }],
                                 total: 1 })
