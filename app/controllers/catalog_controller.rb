@@ -280,6 +280,6 @@ class CatalogController < ApplicationController
   private
 
   def load_full_inventory
-    @inventory = Inventory::Service.find params[:id.to_s], false
+    @inventory = Inventory::Service.find params[:id].to_s, false
   end
 end

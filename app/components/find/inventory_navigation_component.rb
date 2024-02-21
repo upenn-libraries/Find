@@ -3,7 +3,7 @@
 module Find
   # Render's vertical navigation pane for record show page inventory entries
   class InventoryNavigationComponent < ViewComponent::Base
-    # @param inventory [Array]
+    # @param inventory [Hash] inventory data hash
     # @param document [SolrDocument] the document being rendered
     # @param params [ActionController::Parameters] parameters from request
     def initialize(inventory:, document:, params:)
