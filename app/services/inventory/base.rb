@@ -20,7 +20,10 @@ module Inventory
 
     # @return [String, nil]
     def location
-      raw_availability_data['library']
+      location_code = raw_availability_data['location_code']
+      return unless location_code
+
+      location_override || PennMARC::Mappers.location[location_code.to_sym][:display]
     end
 
     # @return [String, nil]
@@ -34,6 +37,24 @@ module Inventory
         status: status, policy: policy, description: description, format: format, count: count,
         location: location, id: id, href: href, type: type
       }
+    end
+
+    private
+
+    # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We
+    # utilize the PennMARC location overrides mapper to return such locations.
+    # @return [String, nil]
+    def location_override
+      location_code = raw_availability_data['location_code']
+      call_number = raw_availability_data['call_number']
+
+      return unless location_code && call_number
+
+      override = PennMARC::Mappers.location_overrides.select do |_key, value|
+        value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
+      end
+
+      override.dig(override.keys.first, :specific_location)
     end
   end
 end
