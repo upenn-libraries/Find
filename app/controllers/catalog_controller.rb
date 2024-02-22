@@ -75,6 +75,7 @@ class CatalogController < ApplicationController
     config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
     config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
+    config.add_show_tools_partial(:librarian_view, modal: false)
 
     # TODO: Our override of the TopNavbarComponent means render_nav_actions is never called in any view. We need a new
     #       place to render these "nav actions", or commit to doing away with them.
@@ -275,6 +276,10 @@ class CatalogController < ApplicationController
                layout: false)
       end
     end
+  end
+
+  def librarian_view
+    @document = search_service.fetch(params[:id])
   end
 
   private
