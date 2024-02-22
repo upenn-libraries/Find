@@ -10,9 +10,9 @@ module Find
       return next_step(values) if values.blank?
       return next_step(values.first) if values.length == 1
 
-      joined = content_tag :ul, id: "#{config.key}-list", class: 'list-unstyled' do
+      joined = content_tag :ul, id: "#{config.key}-list", class: list_classes(values).join(' ') do
         values.each do |value|
-          list_item = content_tag(:li, format_value(value))
+          list_item = content_tag(:li, format_value(value), class: list_item_classes(value).join(' '))
           concat list_item
         end
       end
@@ -30,6 +30,18 @@ module Find
 
     def link_hash?(value)
       value.instance_of?(Hash) && value.key?(:link_text) && value.key?(:link_url)
+    end
+
+    def list_classes(values)
+      classes = ['list-unstyled']
+      classes << 'list-group' if link_hash?(values.first)
+      classes
+    end
+
+    def list_item_classes(value)
+      classes = []
+      classes << 'list-group-item' if link_hash?(value)
+      classes
     end
   end
 end
