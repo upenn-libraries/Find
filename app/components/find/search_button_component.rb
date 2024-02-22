@@ -3,7 +3,7 @@
 # Copied from Blacklight version 8.1.0
 
 module Find
-  # For rendering "Find it" rather than blacklight's icon with a hidden label
+  # For rendering "Find it" rather than Blacklight's icon with a hidden label
   # A label comes with more affordances such as being able to select the control
   # with voice when an icon could be difficult to know how to target.
   class SearchButtonComponent < Blacklight::Component

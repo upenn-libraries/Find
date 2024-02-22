@@ -11,14 +11,14 @@ module Find
 
     attr_reader :blacklight_config, :user
 
-    # @param [Blacklight::Configuration] blacklight_config
-    # @param [User] user
+    # @param blacklight_config [Blacklight::Configuration]
+    # @param user [User]
     def initialize(blacklight_config:, user:)
       @blacklight_config = blacklight_config
       @user = user
     end
 
-    # Hack from Blacklight::HeaderComponentso that the default lambdas are triggered
+    # Hack from Blacklight::HeaderComponent so that the default lambdas are triggered
     # so that we don't have to do c.with_top_bar() in the call.
     def before_render
       set_slot(:search_bar, nil) unless search_bar

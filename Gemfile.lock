@@ -211,6 +211,7 @@ GEM
     language_server-protocol (3.17.0.3)
     library_stdnums (1.6.0)
     libv8-node (18.16.0.0-arm64-darwin)
+    libv8-node (18.16.0.0-x86_64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -246,6 +247,8 @@ GEM
       net-protocol
     nio4r (2.7.0)
     nokogiri (1.16.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
@@ -367,7 +370,6 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-      rubocop-ast (>= 1.30.0, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
     rubocop-rspec (2.26.1)
@@ -443,6 +445,7 @@ PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
