@@ -47,7 +47,7 @@ module Inventory
     def href
       return nil if id.blank?
 
-      Rails.application.routes.url_helpers.solr_document_path(mms_id, anchor: id)
+      Rails.application.routes.url_helpers.solr_document_path(mms_id, hld_id: id)
     end
   end
 end

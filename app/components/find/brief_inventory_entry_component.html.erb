@@ -1,0 +1,17 @@
+<li class="<%= classes.join(' ') %>">
+  <a href="<%= href %>" class="holding__link">
+  <% if header_content.present? %>
+  <span class="holding__header">
+    <%= header_content %>
+  </span>
+  <% end %>
+  <span class="holding__main">
+    <%= main_content %>
+  </span>
+  <% if footer_content.present? %>
+  <span class="holding__footer">
+    <%= footer_content %>
+  </span>
+  <% end %>
+  </a>
+</li>
