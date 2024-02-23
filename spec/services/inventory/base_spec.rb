@@ -20,7 +20,7 @@ describe Inventory::Base do
       let(:raw_availability_data) { { 'location_code' => 'vanp', 'call_number' => 'ML3534 .D85 1984' } }
 
       it 'returns expected value' do
-        expect(inventory.location).to eq 'Van Pelt - Albrecht Music Library'
+        expect(inventory.location).to eq PennMARC::Mappers.location_overrides[:albrecht][:specific_location]
       end
     end
   end
