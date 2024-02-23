@@ -54,7 +54,7 @@ module Inventory
         value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
       end
 
-      override&.dig(override.key, :specific_location)
+      override&.last&.dig(:specific_location)
     end
   end
 end
