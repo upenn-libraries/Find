@@ -3,17 +3,17 @@
 module Find
   # Builds array of links from link hashes
   class LinkToProcessor < Blacklight::Rendering::AbstractStep
-    include ActionView::Helpers::TextHelper
+    include ActionView::Helpers::UrlHelper
 
     def render
       return next_step(values) if values.blank?
       return next_step(values) unless link_hash?(values.first)
 
-      joined = values.filter_map do |value|
-        content_tag(:a, value[:link_text], href: value[:link_url])
+      links = values.filter_map do |value|
+        link_to(value[:link_text], value[:link_url])
       end
 
-      next_step(joined)
+      next_step links
     end
 
     private

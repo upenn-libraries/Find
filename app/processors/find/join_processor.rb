@@ -17,7 +17,7 @@ module Find
         end
       end
 
-      next_step(joined)
+      next_step joined
     end
   end
 end
