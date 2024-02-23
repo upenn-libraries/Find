@@ -30,6 +30,11 @@ For Mac users, the easiest and recommended way to get Docker Compose is to
 application running, you should request membership to the Penn Libraries Docker Team license 
 from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full functionality.
 
+### Developer Credentials
+ 
+Request the necessary [credential file](https://edgeguides.rubyonrails.org/security.html#custom-credentials) from the 
+repository owner and place it in the `config/credentials` directory.
+
 ## Starting App Services
 
 Helpful Rake tasks have been created to wrap up the initialization process for the development environment. Prior to
@@ -58,6 +63,25 @@ newest `solrjson_*.jsonl` file in the `solr` directory.
 
 ## Developing
 
+### Install dependencies
+
+```bash
+bundle install
+```
+
+#### Postgres
+For MacOS users the `pg` gem may fail to install with an error concerning the `libpq` library.
+
+[Refer to this gist](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e) to address this issue.
+
+### Start the development server
+
+```bash
+bundle exec rails server
+```
+ 
+View the app at `localhost:3000`
+
 ### Project Values
 
 1. Excellent test coverage
@@ -65,7 +89,9 @@ newest `solrjson_*.jsonl` file in the `solr` directory.
 
 ### Running Tests
 
-TODO
+```bash
+bundle exec rspec
+```
 
 ### Running Rubocop
 
