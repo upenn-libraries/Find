@@ -10,14 +10,11 @@ module Find
       return next_step(values) if values.blank?
       return next_step(values.first) if values.length == 1
 
-      joined = content_tag :ul do
-        values.each do |value|
-          list_item = content_tag(:li, value)
-          concat list_item
-        end
+      list = content_tag :ul do
+        safe_join(values.filter_map { |value| content_tag(:li, value) })
       end
 
-      next_step joined
+      next_step list
     end
   end
 end
