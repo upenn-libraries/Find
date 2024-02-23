@@ -13,7 +13,7 @@ module Find
       joined = content_tag :ul do
         values.each do |value|
           list_item = content_tag(:li, value)
-          concat sanitize(list_item)
+          concat list_item
         end
       end
 

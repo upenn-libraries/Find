@@ -37,9 +37,10 @@ describe Find::JoinProcessor do
        '<a href="https://test-again.com/">Test Again</a>']
     end
 
-    it 'displays links in unordered list' do
-      expect(processor.render).to eq('<ul><li><a href="https://test.com/">Test</a></li>' \
-                                       '<li><a href="https://test-again.com/">Test Again</a></li></ul>')
+    it 'displays escaped links in unordered list' do
+      expect(processor.render).to eq('<ul><li>&lt;a href=&quot;https://test.com/&quot;&gt;Test&lt;/a&gt;</li>' \
+                                       '<li>&lt;a href=&quot;https://test-again.com/&quot;&gt;Test Again&lt;/a&gt;' \
+                                       '</li></ul>')
     end
   end
 end
