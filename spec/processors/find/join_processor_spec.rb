@@ -19,32 +19,27 @@ describe Find::JoinProcessor do
     let(:values) { ['Chapter 1', 'Chapter 2'] }
 
     it 'concatenates values into an unordered list' do
-      expect(processor.render).to eq('<ul id="field-list" class="list-unstyled">' \
-                                       '<li class="">Chapter 1</li><li class="">Chapter 2</li></ul>')
+      expect(processor.render).to eq('<ul><li>Chapter 1</li><li>Chapter 2</li></ul>')
     end
   end
 
   context 'with a link value' do
-    let(:values) { [{ link_text: 'test link', link_url: 'https://www.link.com/' }] }
+    let(:values) { ['<a href="https://test.com/">Test</a>'] }
 
-    it 'converts link values into styled list' do
-      expect(processor.render).to eq('<ul id="field-list" class="list-unstyled list-group">' \
-                                       '<li class="list-group-item">' \
-                                       '<a href="https://www.link.com/">test link</a></li></ul>')
+    it 'displays link' do
+      expect(processor.render).to eq('<a href="https://test.com/">Test</a>')
     end
   end
 
   context 'with multiple link values' do
     let(:values) do
-      [{ link_text: 'test link', link_url: 'https://www.link.com/' },
-       { link_text: 'another test link', link_url: 'https://www.another-link.com/' }]
+      ['<a href="https://test.com/">Test</a>',
+       '<a href="https://test-again.com/">Test Again</a>']
     end
 
-    it 'converts multiple link values into styled list' do
-      expect(processor.render).to eq('<ul id="field-list" class="list-unstyled list-group">' \
-                                       '<li class="list-group-item"><a href="https://www.link.com/">test link</a>' \
-                                       '</li><li class="list-group-item"><a href="https://www.another-link.com/">' \
-                                       'another test link</a></li></ul>')
+    it 'displays links in unordered list' do
+      expect(processor.render).to eq('<ul><li><a href="https://test.com/">Test</a></li>' \
+                                       '<li><a href="https://test-again.com/">Test Again</a></li></ul>')
     end
   end
 end
