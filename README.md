@@ -30,7 +30,7 @@ For Mac users, the easiest and recommended way to get Docker Compose is to
 application running, you should request membership to the Penn Libraries Docker Team license 
 from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full functionality.
 
-### Developer Credentials
+### Development Credentials
  
 Request the necessary [credential file](https://edgeguides.rubyonrails.org/security.html#custom-credentials) from the 
 repository owner and place it in the `config/credentials` directory.
