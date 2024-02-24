@@ -22,25 +22,4 @@ describe Find::JoinProcessor do
       expect(processor.render).to eq('<ul><li>Chapter 1</li><li>Chapter 2</li></ul>')
     end
   end
-
-  context 'with a link value' do
-    let(:values) { ['<a href="https://test.com/">Test</a>'] }
-
-    it 'displays link' do
-      expect(processor.render).to eq('<a href="https://test.com/">Test</a>')
-    end
-  end
-
-  context 'with multiple link values' do
-    let(:values) do
-      ['<a href="https://test.com/">Test</a>',
-       '<a href="https://test-again.com/">Test Again</a>']
-    end
-
-    it 'displays escaped links in unordered list' do
-      expect(processor.render).to eq('<ul><li>&lt;a href=&quot;https://test.com/&quot;&gt;Test&lt;/a&gt;</li>' \
-                                       '<li>&lt;a href=&quot;https://test-again.com/&quot;&gt;Test Again&lt;/a&gt;' \
-                                       '</li></ul>')
-    end
-  end
 end

@@ -11,7 +11,7 @@ module Find
       return next_step(values.first) if values.length == 1
 
       list = content_tag :ul do
-        safe_join(values.filter_map { |value| content_tag(:li, value) })
+        safe_join(values.filter_map { |value| content_tag(:li, value.html_safe) })
       end
 
       next_step list
