@@ -166,6 +166,10 @@ en:
       other: 'Other Title'
     web_links:
       main: 'Online'
+  librarian_view:
+    title: 'Librarian View'
+    leader: 'LEADER %{leader}'
+    back: '&laquo; Back to Record'
   sort:
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'

@@ -3,10 +3,12 @@
 require 'system_helper'
 
 describe 'Catalog Show Page' do
+  let(:bib) { '9913203433503681' }
+
   before do
     SampleIndexer.index 'print_monograph.json'
     allow(Inventory::Service).to receive(:find).and_return({ inventory: [], total: 0 })
-    visit solr_document_path '9913203433503681'
+    visit solr_document_path bib
   end
 
   after { SampleIndexer.clear! }
@@ -23,5 +25,9 @@ describe 'Catalog Show Page' do
   it 'returns to Index when search is executed' do
     click_on I18n.t('search.button.label')
     expect(page).to have_selector 'article.document-position-1'
+  end
+
+  it 'displays Librarian view link' do
+    expect(page).to have_link 'Librarian view', href: "/catalog/#{bib}/librarian_view"
   end
 end

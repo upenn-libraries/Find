@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 describe SolrDocument do
-  it_behaves_like 'LazyMARCParsing'
+  it_behaves_like 'MARCParsing'
 end

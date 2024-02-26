@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples_for 'LazyMARCParsing' do
+shared_examples_for 'MARCParsing' do
   let(:object) { described_class.new(source_hash) }
   let(:source_hash) { { id: ['1234567891234567'], marcxml_marcxml: '<record></record>' } }
   let(:parser) { instance_double PennMARC::Parser }
