@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
+  let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
   let(:availability_data) do
     { '9979338417503681' =>
         { holdings: [{ 'holding_id' => '22810131440003681',
@@ -36,14 +37,14 @@ describe Inventory::Service do
   end
 
   describe '.find' do
-    let(:inventory) { described_class.find('9979338417503681') }
+    let(:response) { described_class.find(document) }
 
     it 'returns expected hash value' do
-      expect(inventory).to eq({ inventory: [{ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
-                                              href: '/catalog/9979338417503681?hld_id=22810131440003681',
-                                              id: '22810131440003681', location: 'Van Pelt Library',
-                                              policy: 'Book/serial', status: 'available', type: 'physical' }],
-                                total: 1 })
+      expect(response.entries.first).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
+                                             href: '/catalog/9979338417503681?hld_id=22810131440003681',
+                                             id: '22810131440003681', location: 'Van Pelt Library',
+                                             policy: 'Book/serial', status: 'available', type: 'physical' })
+      expect(response.total_count).to eq 1
     end
   end
 

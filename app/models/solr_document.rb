@@ -5,6 +5,16 @@ class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
 
+  # @return [Inventory::Response]
+  def brief_inventory
+    @brief_inventory ||= Inventory::Service.find self
+  end
+
+  # @return [Inventory::Response]
+  def full_inventory
+    @full_inventory ||= Inventory::Service.find self, false
+  end
+
   # Return inventory count from stored fields, whether physical or electronic
   # @return [Integer]
   def inventory_count

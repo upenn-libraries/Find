@@ -10,19 +10,24 @@ module Inventory
     ELECTRONIC = 'electronic'
 
     class Error < StandardError; end
+
     class << self
       # Retrieve real time availability of single inventory resource from Alma
-      # @param mms_id [String] single mms_id
+      # @param document [SolrDocument] document for which inventory should be gathered
       # @param brief_limit [Integer, FalseClass] if set, limits how many inventory values we return
-      # @return [Hash]
-      def find(mms_id, brief_limit = BRIEF_RECORD_COUNT)
+      # @return [Inventory::Response]
+      def find(document, brief_limit = BRIEF_RECORD_COUNT)
+        mms_id = document&.id
+        raise Error, 'Cannot retrieve inventory without a SolrDocument' unless mms_id
+
         availability_data = Alma::Bib.get_availability([mms_id])
         inventory = inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h)
-        { inventory: brief_limit ? inventory.first(brief_limit) : inventory,
-          total: inventory.length }
+        Inventory::Response.new entries: brief_limit ? inventory.first(brief_limit) : inventory,
+                                total_count: inventory.length, document: document, limit: brief_limit
       end
 
       # Retrieve real time availability of inventory from Alma
+      # @todo if we're going to use this, it may need to be revised to receive SolrDocuments
       # @param mms_ids [Array<String>]
       # @param brief_count [Integer] limits how many inventory values we return
       # @return [Hash] hash with mms_id as top-level keys
