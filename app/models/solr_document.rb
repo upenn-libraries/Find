@@ -3,7 +3,7 @@
 # Represents a single document returned from Solr
 class SolrDocument
   include Blacklight::Solr::Document
-  include LazyMARCParsing
+  include MARCParsing
 
   # Return inventory count from stored fields, whether physical or electronic
   # @return [Integer]
