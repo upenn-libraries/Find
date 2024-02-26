@@ -1,0 +1,39 @@
+<%# This template was adapted from blacklight-marc %>
+<%# https://github.com/projectblacklight/blacklight-marc/blob/7c27d41abc2fb88c5104bfbaac15622aec1c23b3/app/views/catalog/_marc_view.html.erb %>
+
+<div class="pb-2">
+  <%= link_to sanitize(t('librarian_view.back')), solr_document_path(@document) %>
+</div>
+
+<h3><%= t('librarian_view.title') %></h3>
+
+<div id="marc_view" class="marc_view">
+  <div class="field"><%= t('librarian_view.leader', leader: @document.marc_record.leader) %></div>
+  <%- @document.marc_record.each do |field| -%>
+    <div class="field">
+      <%- if field.is_a?(MARC::ControlField) -%>
+        <div class="tag_ind">
+          <span class="tag"><%= field.tag %></span>
+        </div>
+        <span class="control_field_values">
+        <%= h(field.value) %>
+      </span>
+      <%- else -%>
+        <div class="tag_ind">
+          <span class="tag"><%= field.tag %></span>
+          <div class="ind1">
+            <%= field.try(:indicator1).present? ? field.indicator1 : "&nbsp;".html_safe -%>
+          </div>
+          <div class="ind2">
+            <%= field.try(:indicator2).present? ? field.indicator2 : "&nbsp;".html_safe -%>
+          </div>
+        </div>
+        <div class="subfields">
+          <%- field.each do |sub| -%>
+            <span class="sub_code"><%= sub.code %>|</span> <%= sub.value %>
+          <%- end -%>
+        </div>
+      <%- end -%>
+    </div>
+  <%- end -%>
+</div>

@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-# Given a Solr field defined in MARCXML_FIELD, this module provides a #marc method that receives
-# a parameter corresponding to a method call that a PennMARC parser will respond to.
-# @todo The parser and the MARC::Record are memoized but the parsed values are not. If these lazily-parsed values end up
-#       being used more than once, there could be a benefit to memoizing them.
-module LazyMARCParsing
+# Concern centralizing methods that create a MARC::Record object and parse data out of it.
+module MARCParsing
   extend ActiveSupport::Concern
 
   MARCXML_FIELD = 'marcxml_marcxml'
 
+  # Given a Solr field defined in MARCXML_FIELD, this method receives a parameter corresponding to a
+  # method call that a PennMARC parser will respond to.
+  # @todo Notably, the parsed values are not memoized. If these lazily-parsed values end up
+  #       being used more than once, there could be a benefit to memoizing them.
+  #
   # @param [Symbol, String] field
   # @param [Array] opts params to be sent to PennMARC method
   # @return [Object]
@@ -22,12 +24,14 @@ module LazyMARCParsing
     end
   end
 
-  private
-
+  # Returns MARC record.
+  #
   # @return [MARC::Record]
   def marc_record
     @marc_record ||= MARC::XMLReader.new(StringIO.new(self[MARCXML_FIELD])).first
   end
+
+  private
 
   # @return [PennMARC::Parser]
   def pennmarc
