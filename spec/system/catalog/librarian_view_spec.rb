@@ -13,11 +13,11 @@ describe 'Catalog Show Page' do
   after { SampleIndexer.clear! }
 
   it 'renders title' do
-    expect(page).to have_content 'Librarian View'
+    expect(page).to have_content I18n.t('librarian_view.title')
   end
 
   it 'renders expected fields' do
-    expect(page).to have_selector '.field', text: /^LEADER/
+    expect(page).to have_selector '.field', text: /^#{I18n.t('librarian_view.leader', leader: '')}/
     expect(page).to have_selector '.field', text: /^001/
   end
 end
