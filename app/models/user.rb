@@ -17,7 +17,8 @@ class User < ApplicationRecord
   end
 
   validates :email, presence: true, uniqueness: true
-  validates :uid, uniqueness: { scope: :provider }, if: :provider_provided?
+  validates :uid, presence: true, uniqueness: { scope: :provider, unless: :guest }
+  validates :provider, presence: true
 
   # @param [OmniAuth::AuthHash] auth
   # @return [User, nil]
@@ -69,8 +70,7 @@ class User < ApplicationRecord
 
   private
 
-  # @return [TrueClass, FalseClass]
-  def provider_provided?
-    provider.present?
+  def guest?
+    guest == true
   end
 end
