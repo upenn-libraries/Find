@@ -70,6 +70,7 @@ class User < ApplicationRecord
 
   private
 
+  # @return [TrueClass, FalseClass]
   def guest?
     guest == true
   end
