@@ -36,63 +36,74 @@ describe Inventory::Service do
     allow(described_class).to receive(:find_portfolio).and_return({})
   end
 
-  describe '.find' do
-    let(:response) { described_class.find(document) }
+  describe '.all' do
+    let(:response) { described_class.all(document) }
 
-    it 'returns expected hash value' do
+    it 'returns a Inventory::Response object' do
+      expect(response).to be_a Inventory::Response
+    end
+
+    it 'returns expected entry values' do
       expect(response.entries.first).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
                                              href: '/catalog/9979338417503681?hld_id=22810131440003681',
                                              id: '22810131440003681', location: 'Van Pelt Library',
                                              policy: 'Book/serial', status: 'available', type: 'physical' })
-      expect(response.total_count).to eq 1
+    end
+
+    it 'returns a remainder' do
+      expect(response.remainder).to be 0
     end
   end
 
-  describe '.find_many' do
-    let(:inventory) { described_class.find_many(%w[id1 id2]) }
-    let(:availability_data) do
-      { 'id1' => { holdings: [{ 'inventory_type' => 'electronic' }] },
-        'id2' => { holdings: [{ 'inventory_type' => 'physical' }] } }
-    end
 
-    it 'uses entry mms_ids as top-level fields in the hash' do
-      expect(inventory.keys).to contain_exactly(:id1, :id2)
-    end
 
-    it 'returns both physical and electronic entries' do
-      expect(inventory[:id1][:inventory].first[:type]).to eq 'electronic'
-      expect(inventory[:id2][:inventory].first[:type]).to eq 'physical'
-    end
 
-    context 'when provided more mms_ids than allowed' do
-      let(:mms_ids) { Array.new(described_class::MAX_BIBS_GET + 1, 'id') }
 
-      let(:inventory) { described_class.find_many(mms_ids) }
-
-      it 'raises error' do
-        expect { inventory }.to raise_error(
-          described_class::Error, "Too many MMS IDs provided, exceeds max allowed of #{described_class::MAX_BIBS_GET}."
-        )
-      end
-    end
-  end
-
-  describe '.create' do
-    let(:inventory_class) { described_class.create(type, '9999999999', {}) }
+  # describe '.find_many' do
+  #   let(:inventory) { described_class.find_many(%w[id1 id2]) }
+  #   let(:availability_data) do
+  #     { 'id1' => { holdings: [{ 'inventory_type' => 'electronic' }] },
+  #       'id2' => { holdings: [{ 'inventory_type' => 'physical' }] } }
+  #   end
+  #
+  #   it 'uses entry mms_ids as top-level fields in the hash' do
+  #     expect(inventory.keys).to contain_exactly(:id1, :id2)
+  #   end
+  #
+  #   it 'returns both physical and electronic entries' do
+  #     expect(inventory[:id1][:inventory].first[:type]).to eq 'electronic'
+  #     expect(inventory[:id2][:inventory].first[:type]).to eq 'physical'
+  #   end
+  #
+  #   context 'when provided more mms_ids than allowed' do
+  #     let(:mms_ids) { Array.new(described_class::MAX_BIBS_GET + 1, 'id') }
+  #
+  #     let(:inventory) { described_class.find_many(mms_ids) }
+  #
+  #     it 'raises error' do
+  #       expect { inventory }.to raise_error(
+  #         described_class::Error, "Too many MMS IDs provided, exceeds max allowed of #{described_class::MAX_BIBS_GET}."
+  #       )
+  #     end
+  #   end
+  # end
+  #
+  describe '.create_entries' do
+    let(:inventory_class) { described_class.send(:create_entry, '9999999999', { inventory_type: type }) }
 
     context 'with physical inventory type' do
-      let(:type) { described_class::PHYSICAL }
+      let(:type) { Inventory::Entry::PHYSICAL }
 
-      it 'returns Inventory::Physical object' do
-        expect(inventory_class).to be_a(Inventory::Physical)
+      it 'returns Inventory::Entry::Physical object' do
+        expect(inventory_class).to be_a(Inventory::Entry::Physical)
       end
     end
 
     context 'with electronic inventory type' do
-      let(:type) { described_class::ELECTRONIC }
+      let(:type) { Inventory::Entry::ELECTRONIC }
 
-      it 'returns Inventory::Electronic object' do
-        expect(inventory_class).to be_a(Inventory::Electronic)
+      it 'returns Inventory::Entry::Electronic object' do
+        expect(inventory_class).to be_a(Inventory::Entry::Electronic)
       end
     end
 

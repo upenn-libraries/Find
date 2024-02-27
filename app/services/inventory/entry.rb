@@ -2,7 +2,11 @@
 
 module Inventory
   # Base class that all Inventory classes inherit from
-  class Base
+  class Entry
+    PHYSICAL = 'physical'
+    ELECTRONIC = 'electronic'
+    RESOURCE_LINK = 'resource_link'
+
     attr_reader :status, :policy, :description, :format, :id, :href, :raw_availability_data, :mms_id
 
     # @param[String] mms_id

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Base do
+describe Inventory::Entry do
   describe '#location' do
     let(:raw_availability_data) { {} }
     let(:inventory) do

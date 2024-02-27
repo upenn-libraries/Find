@@ -3,13 +3,13 @@
 module Inventory
   # Response object for Inventory Service calls
   class Response
-    attr_accessor :entries, :total_count
-    attr_reader :limit
+    attr_accessor :entries, :total_count, :limit
 
-    def initialize(entries:, total_count: nil, limit: nil)
+    # @param [Array] entries
+    # @param [Integer] remainder
+    def initialize(entries:, remainder:)
       @entries = entries
-      @total_count = total_count
-      @limit = limit
+      @remainder = remainder
     end
 
     def each(&)

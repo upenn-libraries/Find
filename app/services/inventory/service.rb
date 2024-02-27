@@ -5,45 +5,64 @@ module Inventory
   # of inventory it's handling.
   class Service
     MAX_BIBS_GET = 100 # 100 is Alma API max
-    BRIEF_RECORD_COUNT = 3
-    PHYSICAL = 'physical'
-    ELECTRONIC = 'electronic'
-    RESOURCE_LINK = 'resource_link'
+    DEFAULT_LIMIT = 3
 
     class Error < StandardError; end
 
     class << self
+      # Returns the whole inventory for a Bib record. It will extract resource links from the MARC record and fetch
+      # additional inventory data from Alma. The number of records returned can be limited via a parameter.
+      #
       # @param document [SolrDocument]
       # @param limit [Integer]
       # @return [Inventory::Response]
-      def find(document, limit: BRIEF_RECORD_COUNT)
-        response = Inventory::Response.new(entries: Array.wrap(inventory_from_marc(document)), limit: limit)
-        api_inventory = inventory_from_api(document.id)
-        response.entries += api_inventory[:entries]
-        response.total_count = api_inventory[:total_count]
-        response
+      def all(document, limit = DEFAULT_LIMIT)
+        marc = from_marc(document, limit)
+        api = from_api(document, limit)
+
+        Inventory::Response.new(
+          entries: marc[:entries] + api[:entries],
+          remainder: marc[:remainder] + api[:remainder]
+        )
       end
 
+      # Get inventory entries stored in the document's MARC fields
       # @param document [SolrDocument]
       # @return [Inventory::Response]
-      def find_in_marc(document)
-        inventory = inventory_from_marc(document)
-        Inventory::Response.new(entries: inventory)
+      def resource_links(document, limit = nil)
+        inventory = from_marc(document, limit)
+
+        Inventory::Response.new(
+          entries: inventory[:entries],
+          remainder: inventory[:remainder]
+        )
       end
 
-      # Retrieve real time availability of single inventory resource from Alma
-      # @param document [SolrDocument] document for which inventory should be gathered
-      # @param brief_limit [Integer, FalseClass] if set, limits how many inventory values we return
-      # @return [Inventory::Response]
-      # def find(document, brief_limit = BRIEF_RECORD_COUNT)
-      #   mms_id = document&.id
-      #   raise Error, 'Cannot retrieve inventory without a SolrDocument' unless mms_id
+      # def entry(mms_id, holding_id, portfolio_id)
+      #   return FullEntry.new()
+      # end
       #
-      #   availability_data = Alma::Bib.get_availability([mms_id])
-      #   inventory = inventory(mms_id, inventory_data(mms_id, availability_data)).map(&:to_h)
-      #   inventory += inventory_from_marc(document)
-      #   Inventory::Response.new entries: brief_limit ? inventory.first(brief_limit) : inventory,
-      #                           total_count: inventory.length, document: document, limit: brief_limit
+      # # @return [Inventory::Entry]
+      # def electronic_entry
+      #   # call alma api(s) for portfolio/e-collection/service
+      #   # collate data
+      #   # create new object?
+      #   # return hash
+      #   {
+      #     notes: '',
+      #     call_number: '',
+      #     link: '',
+      #     coverage: '',
+      #     more_data: ''
+      #   }
+      # end
+      #
+      # def physical_entry
+      #
+      # end
+      #
+      # def resource_entry
+      #   # from marc
       # end
 
       # Retrieve real time availability of inventory from Alma
@@ -51,30 +70,33 @@ module Inventory
       # @param mms_ids [Array<String>]
       # @param brief_count [Integer] limits how many inventory values we return
       # @return [Hash] hash with mms_id as top-level keys
-      def find_many(mms_ids, brief_count = 3)
-        raise Error, "Too many MMS IDs provided, exceeds max allowed of #{MAX_BIBS_GET}." if mms_ids.size > MAX_BIBS_GET
+      # def find_many(mms_ids, brief_count = 3)
+      #   raise Error, "Too many MMS IDs provided, exceeds max allowed of #{MAX_BIBS_GET}." if mms_ids.size > MAX_BIBS_GET
+      #
+      #   availability_data = Alma::Bib.get_availability(mms_ids)
+      #
+      #   mms_ids.each_with_object({}) do |mms_id, result_hash|
+      #     inventory_data = inventory_data(mms_id, availability_data)
+      #     inventory = inventory(mms_id, inventory_data).map(&:to_h)
+      #
+      #     result_hash[mms_id.to_sym] = { inventory: inventory.first(brief_count), total: inventory.length }
+      #   end
+      # end
 
-        availability_data = Alma::Bib.get_availability(mms_ids)
+      private
 
-        mms_ids.each_with_object({}) do |mms_id, result_hash|
-          inventory_data = inventory_data(mms_id, availability_data)
-          inventory = inventory(mms_id, inventory_data).map(&:to_h)
-
-          result_hash[mms_id.to_sym] = { inventory: inventory.first(brief_count), total: inventory.length }
-        end
-      end
-
-      # Factory class method to create Inventory subclasses
+      # Factory class method to create Inventory::Entry objects.
+      #
       # @param mms_id [String]
-      # @param raw_availability_data [Hash] single hash from array of inventory data
-      # @return [Inventory::Base]
-      def create(mms_id, raw_availability_data)
-        case raw_availability_data['inventory_type']&.downcase
-        when PHYSICAL
-          items = find_items(mms_id, raw_availability_data['holding_id'])
-          Inventory::Physical.new(mms_id, raw_availability_data, items)
-        when ELECTRONIC
-          portfolio = find_portfolio(raw_availability_data['portfolio_pid'], raw_availability_data['collection_id'])
+      # @param raw_data [Hash] single hash from array of inventory data
+      # @return [Inventory::Entry]
+      def create_entry(mms_id, raw_data)
+        case raw_data['inventory_type']&.downcase
+        when Entry::PHYSICAL
+          items = find_items(mms_id, raw_data['holding_id'])
+          Inventory::Entry::Physical.new(mms_id, raw_data, items)
+        when Entry::ELECTRONIC
+          portfolio = find_portfolio(raw_data['portfolio_pid'], raw_data['collection_id'])
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
           # additional values of interest:
@@ -83,53 +105,54 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Electronic.new(mms_id, raw_availability_data, { portfolio: portfolio })
+          Inventory::Entry::Electronic.new(mms_id, raw_data, { portfolio: portfolio })
+        when Entry::RESOURCE_LINK
+          Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
-          raise Error, "Type: '#{type}' not found"
+          raise Error, "Type: '#{raw_data['inventory_type']}' not found"
         end
       end
 
-      private
-
-      def inventory_from_api(mms_id, limit: nil)
-        availability_data = Alma::Bib.get_availability([mms_id])
-        inventory_data = inventory_data(mms_id, availability_data)[0..limit]
-        inventory_entries = inventory(mms_id, inventory_data)&.map(&:to_h)
-        { entries: inventory_entries,
-          total_count: availability_data.availability.dig(mms_id, :holdings).length }
+      # Returns inventory that cannot be extracted from the MARC document and has to be retrieved by making additional
+      # Alma API calls.
+      #
+      # @param mms_id [Object]
+      # @param limit [Integer, nil]
+      # @return [Hash] returns hash containing entries and a number of remainder entries that are not included in the
+      #                entries array
+      def from_api(mms_id, limit)
+        holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
+        entries = api_entries(holdings, limit: limit)
+        { entries: entries, remainder: holdings.length - entries.length }
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
       # this only includes resources links available in the Bib MARC record.
       #
-      # @param [SolrDocument] document
+      # @param document [SolrDocument] document containing MARC with resource links
+      # @param _limit [Integer, nil]
       # @return [Array<Inventory::ResourceLink>, nil]
-      def inventory_from_marc(document)
-        document.marc_resource_links.each_with_index.map do |link_data, i|
-          Inventory::ResourceLink.new(id: i, href: link_data[:link_url], description: link_data[:link_text]).to_h
+      def from_marc(document, _limit) # find_resource_links
+        entries = document.marc_resource_links.map do |link_data|
+          create_entry(document.id, { type: RESOURCE_LINK, href: link_data[:link_url], description: link_data[:link_text] })
         end
+        { entries: entries, remainder: 0 }
       end
 
-      # Dig for inventory data ("holdings") from Alma::AvailabilityResponse
-      # @param mms_id [String]
-      # @param availability_data [Alma::AvailabilityResponse] data that Alma::Bib.get_availability call returns
-      # @return [Array<Hash>]
-      def inventory_data(mms_id, availability_data)
-        availability_data.availability.dig(mms_id, :holdings)
-      end
-
-      # Create Inventory classes using inventory data
-      # @param mms_id [String]
-      # @param inventory_data [Array<Hash>, nil]
-      # @return [Array<Inventory::Base>, nil]
-      def inventory(mms_id, inventory_data)
-        inventory_data&.map do |data|
-          create(mms_id, data)
-        end
+      # Converts holdings information retrieved from Alma into Inventory::Entry objects.
+      #
+      # @param holdings [Array] holdings data from Availability API call
+      # @param limit [Integer, nil] limit number of returned objects
+      # @return [Array<Inventory::Entry>]
+      def api_entries(holdings, limit: nil)
+        sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
+        limited_data = sorted_data[0..limit] # limit entries prior to turning them into objects
+        limited_data.map { |data| create_entry(mms_id, data) }
       end
 
       # Retrieve item data for physical inventory
+      #
       # @param mms_id [String]
       # @param holding_id [String]
       # @param options [Hash] additional parameters to pass to the request (e.g. limit, offset)
@@ -142,6 +165,7 @@ module Inventory
       end
 
       # Retrieve portfolio data for electronic inventory
+      #
       # @param portfolio_id [String, Nil]
       # @param collection_id [String]
       # @param service_id [String, Nil]
@@ -153,6 +177,7 @@ module Inventory
       end
 
       # Retrieve collection data for electronic inventory
+      #
       # @param collection_id [String]
       # @return [Hash]
       def find_collection(collection_id)
@@ -160,6 +185,7 @@ module Inventory
       end
 
       # Retrieve service data for electronic inventory
+      #
       # @param collection_id [String]
       # @param service_id [String]
       # @return [Hash]

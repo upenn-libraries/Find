@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Electronic do
+describe Inventory::Entry::Electronic do
   let(:inventory) do
     described_class.new('9977047322103681', { 'portfolio_pid' => '53496697910003681',
                                               'collection_id' => '61496697940003681',

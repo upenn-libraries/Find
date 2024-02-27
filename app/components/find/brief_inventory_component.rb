@@ -43,7 +43,7 @@ module Find
     def skeleton_count
       return unless @total_count
 
-      [@total_count, Inventory::Service::BRIEF_RECORD_COUNT].min
+      [@total_count, Inventory::Service::DEFAULT_LIMIT].min
     end
   end
 end
