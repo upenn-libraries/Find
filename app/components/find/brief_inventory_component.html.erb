@@ -1,7 +1,7 @@
 <ol class="holdings">
-  <%= static_entries %>
   <% if @total_count.positive? %>
   <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
+    <%= resource_link_entries %>
     <% skeleton_count.times do %>
       <li class="holding__item holding__item--loading placeholder-glow" role="status">
         <div class="placeholder-glow">

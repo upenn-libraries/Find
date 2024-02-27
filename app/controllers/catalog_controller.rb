@@ -4,10 +4,7 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  # "show" is defined in Blacklight::Catalog
-  # rubocop:disable Rails/LexicallyScopedActionFilter
-  before_action :load_full_inventory, only: :show
-  # rubocop:enable Rails/LexicallyScopedActionFilter
+  before_action :load_document, only: %i[inventory librarian_view]
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
@@ -267,24 +264,19 @@ class CatalogController < ApplicationController
   end
 
   # Returns inventory information for filling in a Turbo Frame
+  # @todo move to a new InventoryController?
   def inventory
-    @inventory = Inventory::Service.find(params[:id].to_s)
-
     respond_to do |format|
-      format.html do
-        render(Find::DynamicInventoryComponent.new(id: params[:id].to_s, entries: @inventory[:inventory]),
-               layout: false)
-      end
+      format.html { render(Find::DynamicInventoryComponent.new(document: @document), layout: false) }
     end
   end
 
-  def librarian_view
-    @document = search_service.fetch(params[:id])
-  end
+  def librarian_view; end
 
   private
 
-  def load_full_inventory
-    @inventory = Inventory::Service.find params[:id].to_s, false
+  # @return [SolrDocument]
+  def load_document
+    @document = search_service.fetch(params[:id])
   end
 end

@@ -3,11 +3,10 @@
 module Find
   # Render's vertical navigation pane for record show page inventory entries
   class InventoryNavigationComponent < ViewComponent::Base
-    # @param inventory [Hash] inventory data hash
     # @param document [SolrDocument] the document being rendered
     # @param params [ActionController::Parameters] parameters from request
-    def initialize(inventory:, document:, params:)
-      @inventory = inventory
+    def initialize(document:, params:)
+      @inventory = document.inventory
       @document = document
       @params = params
     end
@@ -20,12 +19,7 @@ module Find
       return params[:hld_id] == entry[:id] if @params.key? :hld_id
 
       # otherwise activate the first holding
-      entry[:id] == inventory_entries.first&.dig(:id)
-    end
-
-    # @return [Hash]
-    def inventory_entries
-      @inventory[:inventory]
+      entry[:id] == @inventory.entries.first&.dig(:id)
     end
   end
 end

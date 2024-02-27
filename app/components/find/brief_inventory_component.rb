@@ -18,14 +18,14 @@ module Find
     # Get "full text link" (856 with indicator 0 or 1) values and render them using the
     # view component used in the dynamic inventory rendering
     # @return [String]
-    def static_entries
-      return unless @document
+    def resource_link_entries
+      return if @document.blank?
 
-      li_elements = @document.inventory_link_data&.map do |link_data|
-        render(Find::BriefInventoryEntryComponent.new(
-                 data: { type: 'electronic', status: 'available', location: 'Online',
-                         description: link_data[:link_text], href: link_data[:link_url] }
-               ))
+      marc_entries = Inventory::Service.find_in_marc(@document).entries
+      return unless marc_entries.any?
+
+      li_elements = marc_entries.map do |entry|
+        render(Find::BriefInventoryEntryComponent.new(data: entry))
       end
       return if li_elements.blank?
 

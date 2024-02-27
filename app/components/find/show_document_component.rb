@@ -5,7 +5,7 @@ module Find
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
-      Find::InventoryNavigationComponent.new(inventory: @inventory, document: @document, params: @params)
+      Find::InventoryNavigationComponent.new(document: @document, params: @params)
     }
 
     # @option inventory [Array] inventory data used to render InventoryNavigationComponent

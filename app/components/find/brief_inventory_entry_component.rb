@@ -12,7 +12,7 @@ module Find
 
     # @return [Boolean]
     def physical?
-      data[:type] == 'physical'
+      data[:type] == Inventory::Service::PHYSICAL
     end
 
     # @return [Boolean]
