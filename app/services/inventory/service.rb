@@ -16,7 +16,7 @@ module Inventory
       # @param document [SolrDocument]
       # @param limit [Integer]
       # @return [Inventory::Response]
-      def all(document, limit = DEFAULT_LIMIT)
+      def all(document, limit: DEFAULT_LIMIT)
         marc = from_marc(document, limit)
         api = from_api(document.id, limit)
 
@@ -147,7 +147,7 @@ module Inventory
       # @return [Array<Inventory::Entry>]
       def api_entries(holdings, mms_id, limit: nil)
         sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
-        limited_data = sorted_data[0..limit] # limit entries prior to turning them into objects
+        limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
 

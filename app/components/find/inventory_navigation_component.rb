@@ -6,7 +6,7 @@ module Find
     # @param document [SolrDocument] the document being rendered
     # @param params [ActionController::Parameters] parameters from request
     def initialize(document:, params:)
-      @inventory = document.inventory
+      @inventory = document.inventory(limit: nil)
       @document = document
       @params = params
     end

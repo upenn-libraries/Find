@@ -12,7 +12,7 @@ module Find
     end
 
     def remainder
-      [skeleton_entries - Inventory::Service::DEFAULT_LIMIT, 0].max
+      document.inventory_count - skeleton_entries
     end
 
     def skeleton_entries
