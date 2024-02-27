@@ -2,6 +2,7 @@
 
 <div class="row">
   <%= inventory_navigation %>
+
   <%= content_tag @component,
                   id: @id,
                   data: {
@@ -17,7 +18,7 @@
     <% else %>
       <div class="document-main-section">
         <%= title %>
-        <div id="document-inventory-entry-detail">Write some JS to render inventory details here</div>
+        <%= inventory_content %>
         <%= embed %>
         <%= content %>
         <%= metadata %>
