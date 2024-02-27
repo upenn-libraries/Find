@@ -65,24 +65,6 @@ module Inventory
       #   # from marc
       # end
 
-      # Retrieve real time availability of inventory from Alma
-      # @todo if we're going to use this, it may need to be revised to receive SolrDocuments
-      # @param mms_ids [Array<String>]
-      # @param brief_count [Integer] limits how many inventory values we return
-      # @return [Hash] hash with mms_id as top-level keys
-      # def find_many(mms_ids, brief_count = 3)
-      #   raise Error, "Too many MMS IDs provided, exceeds max allowed of #{MAX_BIBS_GET}." if mms_ids.size > MAX_BIBS_GET
-      #
-      #   availability_data = Alma::Bib.get_availability(mms_ids)
-      #
-      #   mms_ids.each_with_object({}) do |mms_id, result_hash|
-      #     inventory_data = inventory_data(mms_id, availability_data)
-      #     inventory = inventory(mms_id, inventory_data).map(&:to_h)
-      #
-      #     result_hash[mms_id.to_sym] = { inventory: inventory.first(brief_count), total: inventory.length }
-      #   end
-      # end
-
       private
 
       # Factory class method to create Inventory::Entry objects.
@@ -117,7 +99,7 @@ module Inventory
       #
       # @param mms_id [String]
       # @param limit [Integer, nil]
-      # @return [Hash{Symbol->Array<Inventory::Entry> | Integer}] returns hash containing entries and a number of remainder entries that are not included in the
+      # @return [Hash] returns hash containing entries and a number of remainder entries that are not included in the
       #                entries array
       def from_api(mms_id, limit)
         holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?

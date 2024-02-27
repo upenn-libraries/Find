@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  let(:mms_id) { '9979338417503681' }
-  let(:document) { SolrDocument.new({ id: mms_id }) }
+  let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
   let(:availability_data) do
-    { mms_id =>
+    { '9979338417503681' =>
         { holdings: [{ 'holding_id' => '22810131440003681',
                        'institution' => '01UPENN_INST',
                        'library_code' => 'VanPeltLib',
@@ -56,39 +55,6 @@ describe Inventory::Service do
     end
   end
 
-
-
-
-
-  # describe '.find_many' do
-  #   let(:inventory) { described_class.find_many(%w[id1 id2]) }
-  #   let(:availability_data) do
-  #     { 'id1' => { holdings: [{ 'inventory_type' => 'electronic' }] },
-  #       'id2' => { holdings: [{ 'inventory_type' => 'physical' }] } }
-  #   end
-  #
-  #   it 'uses entry mms_ids as top-level fields in the hash' do
-  #     expect(inventory.keys).to contain_exactly(:id1, :id2)
-  #   end
-  #
-  #   it 'returns both physical and electronic entries' do
-  #     expect(inventory[:id1][:inventory].first[:type]).to eq 'electronic'
-  #     expect(inventory[:id2][:inventory].first[:type]).to eq 'physical'
-  #   end
-  #
-  #   context 'when provided more mms_ids than allowed' do
-  #     let(:mms_ids) { Array.new(described_class::MAX_BIBS_GET + 1, 'id') }
-  #
-  #     let(:inventory) { described_class.find_many(mms_ids) }
-  #
-  #     it 'raises error' do
-  #       expect { inventory }.to raise_error(
-  #         described_class::Error, "Too many MMS IDs provided, exceeds max allowed of #{described_class::MAX_BIBS_GET}."
-  #       )
-  #     end
-  #   end
-  # end
-  #
   describe '.create_entries' do
     let(:inventory_class) { described_class.send(:create_entry, '9999999999', { 'inventory_type' => type }) }
 
