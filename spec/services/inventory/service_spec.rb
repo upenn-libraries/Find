@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
+  let(:mms_id) { '9979338417503681' }
+  let(:document) { SolrDocument.new({ id: mms_id }) }
   let(:availability_data) do
-    { '9979338417503681' =>
+    { mms_id =>
         { holdings: [{ 'holding_id' => '22810131440003681',
                        'institution' => '01UPENN_INST',
                        'library_code' => 'VanPeltLib',
@@ -44,10 +45,10 @@ describe Inventory::Service do
     end
 
     it 'returns expected entry values' do
-      expect(response.entries.first).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
-                                             href: '/catalog/9979338417503681?hld_id=22810131440003681',
-                                             id: '22810131440003681', location: 'Van Pelt Library',
-                                             policy: 'Book/serial', status: 'available', type: 'physical' })
+      expect(response.entries.first.to_h).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
+                                                  href: '/catalog/9979338417503681?hld_id=22810131440003681',
+                                                  id: '22810131440003681', location: 'Van Pelt Library',
+                                                  policy: 'Book/serial', status: 'available', type: 'physical' })
     end
 
     it 'returns a remainder' do
@@ -89,7 +90,7 @@ describe Inventory::Service do
   # end
   #
   describe '.create_entries' do
-    let(:inventory_class) { described_class.send(:create_entry, '9999999999', { inventory_type: type }) }
+    let(:inventory_class) { described_class.send(:create_entry, '9999999999', { 'inventory_type' => type }) }
 
     context 'with physical inventory type' do
       let(:type) { Inventory::Entry::PHYSICAL }

@@ -18,7 +18,7 @@ module Inventory
       # @return [Inventory::Response]
       def all(document, limit = DEFAULT_LIMIT)
         marc = from_marc(document, limit)
-        api = from_api(document, limit)
+        api = from_api(document.id, limit)
 
         Inventory::Response.new(
           entries: marc[:entries] + api[:entries],
@@ -117,13 +117,13 @@ module Inventory
       # Returns inventory that cannot be extracted from the MARC document and has to be retrieved by making additional
       # Alma API calls.
       #
-      # @param mms_id [Object]
+      # @param mms_id [String]
       # @param limit [Integer, nil]
       # @return [Hash] returns hash containing entries and a number of remainder entries that are not included in the
       #                entries array
       def from_api(mms_id, limit)
         holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
-        entries = api_entries(holdings, limit: limit)
+        entries = api_entries(holdings, mms_id, limit: limit)
         { entries: entries, remainder: holdings.length - entries.length }
       end
 
@@ -132,7 +132,7 @@ module Inventory
       #
       # @param document [SolrDocument] document containing MARC with resource links
       # @param _limit [Integer, nil]
-      # @return [Array<Inventory::ResourceLink>, nil]
+      # @return [Hash, nil]
       def from_marc(document, _limit) # find_resource_links
         entries = document.marc_resource_links.map do |link_data|
           create_entry(document.id, { type: RESOURCE_LINK, href: link_data[:link_url], description: link_data[:link_text] })
@@ -143,9 +143,10 @@ module Inventory
       # Converts holdings information retrieved from Alma into Inventory::Entry objects.
       #
       # @param holdings [Array] holdings data from Availability API call
+      # @param mms_id [String]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def api_entries(holdings, limit: nil)
+      def api_entries(holdings, mms_id, limit: nil)
         sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
         limited_data = sorted_data[0..limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data) }
