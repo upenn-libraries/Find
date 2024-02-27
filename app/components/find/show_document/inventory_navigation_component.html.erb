@@ -1,0 +1,18 @@
+<div class="document__inventory col-lg-3">
+  <h2 class="h5 document__inventory-heading"><%= t('inventory.show.navigation.header') %></h2>
+  <div class="document__inventory-list nav-pills" id="inventory-pills-tab" role="tablist" aria-orientation="vertical">
+    <% inventory_entries.each_with_index do |entry, i| %>
+      <button class="inventory-item inventory-item--primary <%= " active" if active?(entry) %>"
+              id="inventory-pills-<%= i %>"
+              data-bs-toggle="pill"
+              data-bs-target="#inventory-<%= i %>"
+              type="button"
+              role="tab"
+              aria-controls="inventory-<%= i %>"
+              aria-selected="<% active?(entry) ? 'true' : 'false' %>">
+        <span class="inventory-item__description"><%= entry[:description] %></span>
+        <span class="inventory-item__location"><%= entry[:location] %></span>
+      </button>
+    <% end %>
+  </div>
+</div>

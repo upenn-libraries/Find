@@ -5,7 +5,11 @@ module Find
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
-      Find::InventoryNavigationComponent.new(inventory: @inventory, document: @document, params: @params)
+      Find::ShowDocument::InventoryNavigationComponent.new(inventory: @inventory, selected_id: @selected_id)
+    }
+
+    renders_one :inventory_content, lambda {
+      Find::ShowDocument::InventoryContentComponent.new(inventory: @inventory, selected_id: @selected_id)
     }
 
     # @option inventory [Array] inventory data used to render InventoryNavigationComponent
@@ -13,7 +17,7 @@ module Find
     def initialize(document_counter: nil, **args)
       super
       @inventory = args[:inventory]
-      @params = args[:params]
+      @selected_id = args[:params][:hld_id] || @inventory[:inventory].first&.dig(:id)
     end
 
     # @return [Array] classes to use for component element
@@ -21,14 +25,10 @@ module Find
       super.append('col-lg-9')
     end
 
-    # @return [String] inventory id to use when rendering detailed inventory info
-    def selected_inventory_id
-      @params[:hld_id] || @inventory[:inventory].first&.dig(:id)
-    end
-
     def before_render
       super
       set_slot(:inventory_navigation, nil) unless inventory_navigation
+      set_slot(:inventory_content, nil) unless inventory_content
     end
   end
 end
