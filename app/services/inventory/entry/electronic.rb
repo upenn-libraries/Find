@@ -15,10 +15,10 @@ module Inventory
       attr_reader :portfolio
 
       # @param [String] mms_id
-      # @param [Hash] raw_availability_data from Alma real time availability request
+      # @param [Hash] data from Alma real time availability request
       # @param [Hash{Symbol=>Hash}] electronic_api_data
-      def initialize(mms_id, raw_availability_data, electronic_api_data = {})
-        super(mms_id, raw_availability_data)
+      def initialize(mms_id, data, electronic_api_data = {})
+        super(mms_id, data)
         @portfolio = electronic_api_data[:portfolio]
         @collection = electronic_api_data[:collection]
         @service = electronic_api_data[:service]
@@ -26,7 +26,7 @@ module Inventory
 
       # @return [String, nil]
       def status
-        raw_availability_data['activation_status']
+        data[:activation_status]
       end
 
       # @return [String, nil]
@@ -34,7 +34,7 @@ module Inventory
 
       # @return [String, nil]
       def description
-        raw_availability_data['collection']
+        data[:collection]
       end
 
       # @return [String, nil]
@@ -46,7 +46,7 @@ module Inventory
 
       # @return [String, nil]
       def id
-        raw_availability_data['portfolio_pid']
+        data[:portfolio_pid]
       end
 
       # @note for a collection record (e.g. 9977925541303681) Electronic Collection API returns

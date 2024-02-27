@@ -1,8 +1,8 @@
 <ol class="holdings">
-  <% if @total_count.positive? %>
-  <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
+  <% if inventory.entries.any? %>
+  <turbo-frame id="inventory_<%= id %>" src="<%= inventory_solr_document_path(id) %>" target="_top">
     <%= resource_link_entries %>
-    <% skeleton_count.times do %>
+    <% inventory.entries.length.times do %>
       <li class="holding__item holding__item--loading placeholder-glow" role="status">
         <div class="placeholder-glow">
           <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
@@ -15,10 +15,10 @@
       </li>
     <% end %>
   </turbo-frame>
-    <% if show_more_count.positive? %>
+    <% if inventory.remainder.positive? %>
     <li>
       <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
-        <%= t('inventory.see_all', count: show_more_count, options: 'option'.pluralize(show_more_count)) %>
+        <%= t('inventory.see_all', count: inventory.remainder, options: 'option'.pluralize(inventory.remainder)) %>
       </a>
     </li>
     <% end %>

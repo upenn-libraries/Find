@@ -7,17 +7,17 @@ module Inventory
       attr_reader :items
 
       # @param [String] mms_id
-      # @param [Hash] raw_availability_data from Alma real time availability request
+      # @param [Hash] data from Alma real time availability request
       # @param [Array<Alma::BibItem>] items array of items from Alma::BibItem request
-      def initialize(mms_id, raw_availability_data, items)
-        super(mms_id, raw_availability_data)
+      def initialize(mms_id, data, items)
+        super(mms_id, data)
         @items = items
       end
 
       # @note possible values seem to be "available", "unavailable", and "check_holdings" when present
       # @return [String, nil]
       def status
-        raw_availability_data['availability']
+        data[:availability]
       end
 
       # @return [String, nil]
@@ -29,7 +29,7 @@ module Inventory
 
       # @return [String, nil]
       def description
-        raw_availability_data['call_number']
+        data[:call_number]
       end
 
       # @return [String, nil]
@@ -41,7 +41,7 @@ module Inventory
 
       # @return [String, nil]
       def id
-        raw_availability_data['holding_id']
+        data[:holding_id]
       end
 
       # @return [String, nil]

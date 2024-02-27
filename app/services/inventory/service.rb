@@ -91,12 +91,10 @@ module Inventory
       # @param raw_data [Hash] single hash from array of inventory data
       # @return [Inventory::Entry]
       def create_entry(mms_id, raw_data)
-        case raw_data['inventory_type']&.downcase
+        case raw_data[:inventory_type]&.downcase
         when Entry::PHYSICAL
-          items = find_items(mms_id, raw_data['holding_id'])
-          Inventory::Entry::Physical.new(mms_id, raw_data, items)
+          Inventory::Entry::Physical.new(mms_id, raw_data, find_items(mms_id, raw_data['holding_id']))
         when Entry::ELECTRONIC
-          portfolio = find_portfolio(raw_data['portfolio_pid'], raw_data['collection_id'])
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
           # additional values of interest:
@@ -105,9 +103,9 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic.new(mms_id, raw_data, { portfolio: portfolio })
-        when Entry::RESOURCE_LINK
-          Inventory::Entry::ResourceLink.new(**raw_data)
+          Inventory::Entry::Electronic
+            .new(mms_id, raw_data, { portfolio: find_portfolio(raw_data['portfolio_pid'], raw_data['collection_id']) })
+        when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
           raise Error, "Type: '#{raw_data['inventory_type']}' not found"
@@ -119,7 +117,7 @@ module Inventory
       #
       # @param mms_id [String]
       # @param limit [Integer, nil]
-      # @return [Hash] returns hash containing entries and a number of remainder entries that are not included in the
+      # @return [Hash{Symbol->Array<Inventory::Entry> | Integer}] returns hash containing entries and a number of remainder entries that are not included in the
       #                entries array
       def from_api(mms_id, limit)
         holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
@@ -132,10 +130,11 @@ module Inventory
       #
       # @param document [SolrDocument] document containing MARC with resource links
       # @param _limit [Integer, nil]
-      # @return [Hash, nil]
-      def from_marc(document, _limit) # find_resource_links
+      # @return [Hash{Symbol->Array<Inventory::Entry> | Integer}]
+      def from_marc(document, _limit)
         entries = document.marc_resource_links.map do |link_data|
-          create_entry(document.id, { type: RESOURCE_LINK, href: link_data[:link_url], description: link_data[:link_text] })
+          create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK,
+                                      href: link_data[:link_url], description: link_data[:link_text] })
         end
         { entries: entries, remainder: 0 }
       end
@@ -149,7 +148,7 @@ module Inventory
       def api_entries(holdings, mms_id, limit: nil)
         sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
         limited_data = sorted_data[0..limit] # limit entries prior to turning them into objects
-        limited_data.map { |data| create_entry(mms_id, data) }
+        limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
 
       # Retrieve item data for physical inventory

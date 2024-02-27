@@ -16,10 +16,10 @@ module Find
     # @return [Boolean]
     def active?(entry)
       # activate the holding specified in the params, if set
-      return params[:hld_id] == entry[:id] if @params.key? :hld_id
+      return params[:hld_id] == entry.id if @params.key? :hld_id
 
       # otherwise activate the first holding
-      entry[:id] == @inventory.entries.first&.dig(:id)
+      entry.id == @inventory.entries.first&.id
     end
   end
 end

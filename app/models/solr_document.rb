@@ -8,7 +8,7 @@ class SolrDocument
   # @param [Hash] args
   # @return [Inventory::Response]
   def inventory(**args)
-    Inventory::Service.find self, **args
+    Inventory::Service.all self, **args
   end
 
   # Return inventory count from stored fields, whether physical or electronic
