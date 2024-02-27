@@ -7,7 +7,7 @@ describe 'Catalog Show Page' do
 
   before do
     SampleIndexer.index 'print_monograph.json'
-    allow(Inventory::Service).to receive(:find).and_return(Inventory::Response.new(entries: [], total_count: 0))
+    allow(Inventory::Service).to receive(:all).and_return(Inventory::Response.new(entries: [], remainder: 0))
     visit solr_document_path bib
   end
 

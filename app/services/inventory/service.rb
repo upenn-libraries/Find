@@ -75,7 +75,7 @@ module Inventory
       def create_entry(mms_id, raw_data)
         case raw_data[:inventory_type]&.downcase
         when Entry::PHYSICAL
-          Inventory::Entry::Physical.new(mms_id, raw_data, find_items(mms_id, raw_data['holding_id']))
+          Inventory::Entry::Physical.new(mms_id, raw_data)
         when Entry::ELECTRONIC
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
@@ -85,12 +85,11 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic
-            .new(mms_id, raw_data, { portfolio: find_portfolio(raw_data[:portfolio_pid], raw_data[:collection_id]) })
+          Inventory::Entry::Electronic.new(mms_id, raw_data)
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
-          raise Error, "Type: '#{raw_data['inventory_type']}' not found"
+          raise Error, "Type: '#{raw_data[:inventory_type]}' not found"
         end
       end
 
@@ -131,48 +130,6 @@ module Inventory
         sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
-      end
-
-      # Retrieve item data for physical inventory
-      #
-      # @param mms_id [String]
-      # @param holding_id [String]
-      # @param options [Hash] additional parameters to pass to the request (e.g. limit, offset)
-      # @note should we return the entire Alma::BibItemSet instead?
-      # @return [Array<Alma::BibItem>] array of items
-      def find_items(mms_id, holding_id, **options)
-        default_options = { holding_id: holding_id, expand: 'due_date,due_date_policy' }
-        resp = Alma::BibItem.find(mms_id, default_options.merge(options))
-        resp.items
-      end
-
-      # Retrieve portfolio data for electronic inventory
-      #
-      # @param portfolio_id [String, Nil]
-      # @param collection_id [String]
-      # @param service_id [String, Nil]
-      # @return [Hash]
-      def find_portfolio(portfolio_id, collection_id = nil, service_id = nil)
-        Alma::Electronic.get(collection_id: collection_id,
-                             service_id: service_id,
-                             portfolio_id: portfolio_id)&.data || {}
-      end
-
-      # Retrieve collection data for electronic inventory
-      #
-      # @param collection_id [String]
-      # @return [Hash]
-      def find_collection(collection_id)
-        Alma::Electronic.get(collection_id: collection_id)&.data || {}
-      end
-
-      # Retrieve service data for electronic inventory
-      #
-      # @param collection_id [String]
-      # @param service_id [String]
-      # @return [Hash]
-      def find_service(collection_id, service_id)
-        Alma::Electronic.get(collection_id: collection_id, service_id: service_id)&.data || {}
       end
     end
   end

@@ -4,16 +4,6 @@ module Inventory
   class Entry
     # Physical holding class
     class Physical < Inventory::Entry
-      attr_reader :items
-
-      # @param [String] mms_id
-      # @param [Hash] data from Alma real time availability request
-      # @param [Array<Alma::BibItem>] items array of items from Alma::BibItem request
-      def initialize(mms_id, data, items)
-        super(mms_id, data)
-        @items = items
-      end
-
       # @note possible values seem to be "available", "unavailable", and "check_holdings" when present
       # @return [String, nil]
       def status
@@ -49,6 +39,18 @@ module Inventory
         return nil if id.blank?
 
         Rails.application.routes.url_helpers.solr_document_path(mms_id, hld_id: id)
+      end
+
+      private
+
+      def items
+        @items ||= find_items
+      end
+
+      def find_items(**options)
+        default_options = { holding_id: id, expand: 'due_date,due_date_policy' }
+        resp = Alma::BibItem.find(mms_id, default_options.merge(options))
+        resp.items || []
       end
     end
   end

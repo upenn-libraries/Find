@@ -24,16 +24,17 @@ describe Inventory::Service do
       'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
   end
 
+  # mock Alma API gem behavior for physical inventory
+  # TODO: add to a shared context? could be useful in future specs
   before do
     availability_double = instance_double(Alma::AvailabilityResponse)
     allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
     allow(availability_double).to receive(:availability).and_return(availability_data)
-
+    bib_item_set_double = instance_double(Alma::BibItemSet)
+    allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
     bib_item_double = instance_double(Alma::BibItem)
-    allow(described_class).to receive(:find_items).and_return([bib_item_double])
+    allow(bib_item_set_double).to receive(:items).and_return([bib_item_double])
     allow(bib_item_double).to receive(:item_data).and_return(item_data)
-
-    allow(described_class).to receive(:find_portfolio).and_return({})
   end
 
   describe '.all' do
@@ -56,7 +57,7 @@ describe Inventory::Service do
   end
 
   describe '.create_entries' do
-    let(:inventory_class) { described_class.send(:create_entry, '9999999999', { 'inventory_type' => type }) }
+    let(:inventory_class) { described_class.send(:create_entry, '9999999999', { inventory_type: type }) }
 
     context 'with physical inventory type' do
       let(:type) { Inventory::Entry::PHYSICAL }

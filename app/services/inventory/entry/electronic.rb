@@ -12,18 +12,6 @@ module Inventory
                  rfr_id: 'info:sid/primo.exlibrisgroup.com',
                  'u.ignore_date_coverage': true }.freeze
 
-      attr_reader :portfolio
-
-      # @param [String] mms_id
-      # @param [Hash] data from Alma real time availability request
-      # @param [Hash{Symbol=>Hash}] electronic_api_data
-      def initialize(mms_id, data, electronic_api_data = {})
-        super(mms_id, data)
-        @portfolio = electronic_api_data[:portfolio]
-        @collection = electronic_api_data[:collection]
-        @service = electronic_api_data[:service]
-      end
-
       # @return [String, nil]
       def status
         data[:activation_status]
@@ -59,6 +47,35 @@ module Inventory
         query = URI.encode_www_form(params)
 
         URI::HTTPS.build(host: HOST, path: PATH, query: query).to_s
+      end
+
+      # Accumulate notes via secondary API calls
+      # @return [Array]
+      def notes
+        [portfolio['authentication_note'],
+         portfolio['public_note'],
+         collection['authentication_note'],
+         collection['public_note'],
+         service['authentication_note'],
+         service['public_note']]
+      end
+
+      private
+
+      def portfolio
+        @portfolio ||= Alma::Electronic.get(collection_id: data[:collection_id], service_id: nil,
+                                            portfolio_id: data[:portfolio_pid])&.data || {}
+      end
+
+      def collection
+        @collection ||= Alma::Electronic.get(collection_id: data[:collection_id])&.data || {}
+      end
+
+      def service
+        @service ||= Alma::Electronic.get(
+          collection_id: data[:collection_id],
+          service_id: portfolio.dig('electronic_collection', 'service', 'value')
+        )&.data || {}
       end
     end
   end
