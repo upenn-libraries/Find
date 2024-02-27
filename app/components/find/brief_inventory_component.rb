@@ -3,13 +3,20 @@
 module Find
   # Component that displays a records inventory information.
   class BriefInventoryComponent < ViewComponent::Base
-    attr_reader :id, :document, :inventory
+    attr_reader :id, :document
 
     # @param document [SolrDocument]
     def initialize(document:)
       @id = document.id
       @document = document
-      @inventory = document.inventory # makes API calls!
+    end
+
+    def remainder
+      [skeleton_entries - Inventory::Service::DEFAULT_LIMIT, 0].max
+    end
+
+    def skeleton_entries
+      [document.inventory_count, Inventory::Service::DEFAULT_LIMIT].min
     end
 
     # Get "full text link" (856 with indicator 0 or 1) values and render them using the
