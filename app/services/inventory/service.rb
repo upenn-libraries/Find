@@ -104,7 +104,7 @@ module Inventory
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
           Inventory::Entry::Electronic
-            .new(mms_id, raw_data, { portfolio: find_portfolio(raw_data['portfolio_pid'], raw_data['collection_id']) })
+            .new(mms_id, raw_data, { portfolio: find_portfolio(raw_data[:portfolio_pid], raw_data[:collection_id]) })
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
