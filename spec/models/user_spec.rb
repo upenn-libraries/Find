@@ -72,4 +72,23 @@ describe User do
       end
     end
   end
+
+  it 'requires a uid when a provider is set' do
+    user = build(:user, uid: nil, provider: 'test')
+    expect(user.valid?).to be false
+    expect(user.errors[:uid]).to include "can't be blank"
+  end
+
+  it 'requires a unique uid per provider' do
+    create(:user, uid: 'test', provider: 'saml')
+    user = build(:user, uid: 'test', provider: 'saml')
+    expect(user.valid?).to be false
+    expect(user.errors[:uid]).to include 'has already been taken'
+  end
+
+  it 'requires a provider when a uid is set' do
+    user = build(:user, uid: 'test', provider: nil)
+    expect(user.valid?).to be false
+    expect(user.errors[:provider]).to include "can't be blank"
+  end
 end
