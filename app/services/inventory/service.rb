@@ -20,50 +20,23 @@ module Inventory
         marc = from_marc(document, limit)
         api = from_api(document.id, limit)
 
-        Inventory::Response.new(
-          entries: marc[:entries] + api[:entries],
-          remainder: marc[:remainder] + api[:remainder]
-        )
+        Inventory::Response.new(entries: marc + api)
       end
 
       # Get inventory entries stored in the document's MARC fields
       # @param document [SolrDocument]
       # @return [Inventory::Response]
       def resource_links(document, limit = nil)
-        inventory = from_marc(document, limit)
+        entries = from_marc(document, limit)
 
-        Inventory::Response.new(
-          entries: inventory[:entries],
-          remainder: inventory[:remainder]
-        )
+        Inventory::Response.new(entries: entries)
       end
 
-      # def entry(mms_id, holding_id, portfolio_id)
-      #   return FullEntry.new()
-      # end
-      #
-      # # @return [Inventory::Entry]
-      # def electronic_entry
-      #   # call alma api(s) for portfolio/e-collection/service
-      #   # collate data
-      #   # create new object?
-      #   # return hash
-      #   {
-      #     notes: '',
-      #     call_number: '',
-      #     link: '',
-      #     coverage: '',
-      #     more_data: ''
-      #   }
-      # end
-      #
-      # def physical_entry
-      #
-      # end
-      #
-      # def resource_entry
-      #   # from marc
-      # end
+      def electronic_detail(mms_id, holding_id, collection_id)
+        Inventory::ElectronicDetail.new(
+          mms_id: mms_id, holding_id: holding_id, collection_id: collection_id
+        )
+      end
 
       private
 
@@ -98,12 +71,10 @@ module Inventory
       #
       # @param mms_id [String]
       # @param limit [Integer, nil]
-      # @return [Hash] returns hash containing entries and a number of remainder entries that are not included in the
-      #                entries array
+      # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
         holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
-        entries = api_entries(holdings, mms_id, limit: limit)
-        { entries: entries, remainder: holdings.length - entries.length }
+        api_entries(holdings, mms_id, limit: limit)
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
@@ -111,13 +82,12 @@ module Inventory
       #
       # @param document [SolrDocument] document containing MARC with resource links
       # @param _limit [Integer, nil]
-      # @return [Hash{Symbol->Array<Inventory::Entry> | Integer}]
+      # @return [Array<Inventory::Entry>]
       def from_marc(document, _limit)
-        entries = document.marc_resource_links.map do |link_data|
+        document.marc_resource_links.map do |link_data|
           create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK,
                                       href: link_data[:link_url], description: link_data[:link_text] })
         end
-        { entries: entries, remainder: 0 }
       end
 
       # Converts holdings information retrieved from Alma into Inventory::Entry objects.

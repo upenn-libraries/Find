@@ -50,10 +50,6 @@ describe Inventory::Service do
                                                   id: '22810131440003681', location: 'Van Pelt Library',
                                                   policy: 'Book/serial', status: 'available', type: 'physical' })
     end
-
-    it 'returns a remainder' do
-      expect(response.remainder).to be 0
-    end
   end
 
   describe '.create_entries' do

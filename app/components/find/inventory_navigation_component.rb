@@ -19,7 +19,7 @@ module Find
       return params[:hld_id] == entry.id if @params.key? :hld_id
 
       # otherwise activate the first holding
-      entry.id == @inventory.entries.first&.id
+      entry.id == @inventory.first&.id
     end
   end
 end

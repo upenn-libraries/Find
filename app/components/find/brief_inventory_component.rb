@@ -25,7 +25,7 @@ module Find
     def resource_link_entries
       return if document.blank?
 
-      marc_entries = Inventory::Service.resource_links(document).entries
+      marc_entries = Inventory::Service.resource_links(document)
       return unless marc_entries.any?
 
       li_elements = marc_entries.map do |entry|

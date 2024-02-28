@@ -37,8 +37,13 @@ module Inventory
         data[:portfolio_pid]
       end
 
+      # @return [String, nil]
+      def collection_id
+        data[:collection_id]
+      end
+
       # @note for a collection record (e.g. 9977925541303681) Electronic Collection API returns
-      #   "url_override" field that has a neat hdl.library.upenn.edu link to the electronic collection
+      #       "url_override" field that has a neat hdl.library.upenn.edu link to the electronic collection
       # @return [String, nil]
       def href
         return nil if id.blank?
@@ -46,36 +51,20 @@ module Inventory
         params = { **PARAMS, portfolio_pid: id }
         query = URI.encode_www_form(params)
 
-        URI::HTTPS.build(host: HOST, path: PATH, query: query).to_s
-      end
+        # TODO: check if collection has url_override and use it (from @collection)
 
-      # Accumulate notes via secondary API calls
-      # @return [Array]
-      def notes
-        [portfolio['authentication_note'],
-         portfolio['public_note'],
-         collection['authentication_note'],
-         collection['public_note'],
-         service['authentication_note'],
-         service['public_note']]
+        URI::HTTPS.build(host: HOST, path: PATH, query: query).to_s
       end
 
       private
 
       def portfolio
-        @portfolio ||= Alma::Electronic.get(collection_id: data[:collection_id], service_id: nil,
-                                            portfolio_id: data[:portfolio_pid])&.data || {}
+        @portfolio ||= Alma::Electronic.get(collection_id: collection_id, service_id: nil,
+                                            portfolio_id: id)&.data || {}
       end
 
       def collection
-        @collection ||= Alma::Electronic.get(collection_id: data[:collection_id])&.data || {}
-      end
-
-      def service
-        @service ||= Alma::Electronic.get(
-          collection_id: data[:collection_id],
-          service_id: portfolio.dig('electronic_collection', 'service', 'value')
-        )&.data || {}
+        @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
       end
     end
   end

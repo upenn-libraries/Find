@@ -3,13 +3,13 @@
 module Inventory
   # Response object for Inventory Service calls
   class Response
-    attr_reader :entries, :remainder
+    include Enumerable
+
+    attr_reader :entries
 
     # @param [Array] entries
-    # @param [Integer] remainder number of entries that are not included in the entries array
-    def initialize(entries:, remainder:)
+    def initialize(entries:)
       @entries = entries
-      @remainder = remainder
     end
 
     def each(&)
