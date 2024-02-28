@@ -5,9 +5,9 @@ module Inventory
   class ElectronicDetail
     attr_accessor :mms_id, :portfolio_id, :collection_id
 
-    def initialize(mms_id:, holding_id:, collection_id:)
+    def initialize(mms_id:, portfolio_id:, collection_id:)
       @mms_id = mms_id
-      @holding_id = holding_id
+      @portfolio_id = portfolio_id
       @collection_id = collection_id
     end
 

@@ -32,9 +32,9 @@ module Inventory
         Inventory::Response.new(entries: entries)
       end
 
-      def electronic_detail(mms_id, holding_id, collection_id)
+      def electronic_detail(mms_id, portfolio_id, collection_id)
         Inventory::ElectronicDetail.new(
-          mms_id: mms_id, holding_id: holding_id, collection_id: collection_id
+          mms_id: mms_id, portfolio_id: portfolio_id, collection_id: collection_id
         )
       end
 
