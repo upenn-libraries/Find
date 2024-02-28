@@ -24,16 +24,22 @@ describe Inventory::Service do
       'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
   end
 
-  # mock Alma API gem behavior for physical inventory
+  # mock Alma API gem behavior for physical inventory lookups
   # TODO: add to a shared context? could be useful in future specs
   before do
+    # stub Alma API gem availability response to return a double
     availability_double = instance_double(Alma::AvailabilityResponse)
     allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
+    # stub response double to return the availability data we want it to
     allow(availability_double).to receive(:availability).and_return(availability_data)
+
+    # stub Alma API gem item lookup to return a double for an Alma::BibItemSet
     bib_item_set_double = instance_double(Alma::BibItemSet)
     allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
     bib_item_double = instance_double(Alma::BibItem)
+    # stub the set to return our item double
     allow(bib_item_set_double).to receive(:items).and_return([bib_item_double])
+    # stub the item_data for the Alma::BibItem object
     allow(bib_item_double).to receive(:item_data).and_return(item_data)
   end
 
