@@ -1,11 +1,11 @@
 .document__inventory {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   padding-bottom: 1rem;
   margin-bottom: 2rem;
 }
 
 .document__inventory-heading {
-  padding: 0 1rem 0.5rem;
+  padding: 0 1rem 0.75rem;
 }
 
 .document__inventory-list {
@@ -14,7 +14,6 @@
 }
 
 .document__tabpanel {
-  padding: 0.5rem;
   margin-bottom: 2rem;
 }
 
@@ -49,7 +48,6 @@
 
 .document-inventory-container {
   margin-top: 0.5rem;
-  margin-bottom: 2rem;
 }
 
 .document-inventory__availability--primary {
@@ -73,9 +71,9 @@
 }
 
 .document-inventory__directions {
-  font-size: 0.875rem;
   color: var(--color-fg-default);
   font-weight: 400;
+  font-size: 0.9rem;
 }
 
 .inventory-item__copies {
@@ -132,4 +130,8 @@
 
 .inventory-item__policy {
   font-weight: 500;
+}
+
+.document-inventory__notes {
+  margin-top: 1rem;
 }

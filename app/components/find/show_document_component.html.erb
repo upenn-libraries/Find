@@ -17,7 +17,37 @@
     <% else %>
       <div class="document-main-section">
         <%= title %>
-        <div id="document-inventory-entry-detail">Write some JS to render inventory details here</div>
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane show active document__tabpanel" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-0-tab" tabindex="0">
+            <div class="document-inventory-container">
+              <p class="document-inventory__availability document-inventory__availability--primary">
+                <span class="document-inventory__policy">Available from 1869 volume: 1 issue: 1.<span>
+                <span class="document-inventory__directions">Online</span>
+              </p>
+
+              <button class="btn btn-success btn-lg">Nature Publishing Journals</button>
+
+              <p class="document-inventory__notes">
+                In this database, you may need to navigate or search to view your article.
+              </p>
+            </div>
+          </div>
+          <div class="tab-pane document__tabpanel" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+            <div class="document-inventory-container">
+              <p class="document-inventory">
+                <span class="document-inventory__location">Pennsylvania Hospital Library</span>  
+                <span class="document-inventory__description">QC 903.2 .U6 C64</span>
+              </p>
+
+              <p class="document-inventory__availability document-inventory__availability--primary">
+                <span class="document-inventory__policy">Available for checkout<span>
+                <span class="document-inventory__directions">[long request policy decription or online]</span>
+              </p>
+
+              <button class="btn btn-success btn-lg">Request item</button>
+            </div>
+          </div>
+        </div>
         <%= embed %>
         <%= content %>
         <%= metadata %>

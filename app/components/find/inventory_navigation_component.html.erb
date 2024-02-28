@@ -1,10 +1,10 @@
 <div class="document__inventory col-lg-3">
-  <h2 class="h5 document__inventory-heading"><%= t('inventory.show.navigation.header') %></h2>
+  <h2 class="h5 document__inventory-heading">[count] <%= t('inventory.show.navigation.header') %></h2>
   <div class="document__inventory-list" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <% inventory_entries.each_with_index do |entry, i| %>
       <button class="inventory-item inventory-item--primary<%= " active" if active?(entry) %>" id="v-pills-<%= i %>-tab" data-bs-toggle="pill" data-bs-target="#v-pills-<%= i %>" type="button" role="tab" aria-controls="v-pills-<%= i %>" aria-selected="true">
-        <span class="inventory-item__description"><%= entry[:description] %></span>
-        <span class="inventory-item__location"><%= entry[:location] %></span>
+        <span class="inventory-item__description"><%= entry[:description] %>[coverage or callnumber here]</span>
+        <span class="inventory-item__location"><%= entry[:location] %> [online provider or physical location here]</span>
       </button>
     <% end %>
   </div>
