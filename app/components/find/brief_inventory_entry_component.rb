@@ -36,7 +36,7 @@ module Find
 
     # @return [String]
     def footer_content
-      join_fields entry.format, entry.description
+      join_fields entry.format, entry.location
     end
 
     # User-friendly display value for inventory entry status
