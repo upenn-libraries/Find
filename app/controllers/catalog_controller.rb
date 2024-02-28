@@ -193,10 +193,10 @@ class CatalogController < ApplicationController
     config.add_show_field :identifier_oclc_id_show, label: I18n.t('show.identifier.oclc_id'), accessor: :marc
     config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'),
                                                              accessor: :marc
-    config.add_show_field :link_web_links, label: I18n.t('show.link.web'), accessor: :marc
     config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
     # TODO: populate this field
     # config.add_show_field :bound_with_show, label: I18n.t('show.bound_with'), accessor: :marc
+    config.add_show_field :link_web_links, label: I18n.t('show.web_links.main'), accessor: :marc
 
     config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
       field.include_in_advanced_search = false

@@ -164,6 +164,8 @@ en:
       main: 'Title'
       standardized: 'Standardized Title'
       other: 'Other Title'
+    web_links:
+      main: 'Online'
   librarian_view:
     title: 'Librarian View'
     leader: 'LEADER %{leader}'
