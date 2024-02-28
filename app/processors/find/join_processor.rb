@@ -10,9 +10,11 @@ module Find
       return next_step(values) if values.blank?
       return next_step(values.first) if values.length == 1
 
+      # rubocop:disable Rails/OutputSafety
       list = content_tag :ul do
         safe_join(values.filter_map { |value| content_tag(:li, value.html_safe) })
       end
+      # rubocop:enable Rails/OutputSafety
 
       next_step list
     end
