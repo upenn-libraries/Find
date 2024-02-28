@@ -18,12 +18,9 @@ module Inventory
     # Accumulate notes via secondary API calls
     # @return [Array]
     def notes
-      [portfolio['authentication_note'],
-       portfolio['public_note'],
-       collection['authentication_note'],
-       collection['public_note'],
-       service['authentication_note'],
-       service['public_note']]
+      # TODO: get notes from portfolio. if needed check collection (if available) and then service (if available) for
+      #       notes. it looks like we can stop searching as soon as we get a non-blank value for either public_note or
+      #       authentication_note.
     end
 
     private
