@@ -25,6 +25,7 @@ module Inventory
 
       # Get inventory entries stored in the document's MARC fields
       # @param document [SolrDocument]
+      # @param limit [Integer, nil]
       # @return [Inventory::Response]
       def resource_links(document, limit = nil)
         entries = from_marc(document, limit)
@@ -32,6 +33,10 @@ module Inventory
         Inventory::Response.new(entries: entries)
       end
 
+      # @param mms_id [String]
+      # @param portfolio_id [String]
+      # @param collection_id [String, nil]
+      # @return [Inventory::ElectronicDetail]
       def electronic_detail(mms_id, portfolio_id, collection_id)
         Inventory::ElectronicDetail.new(
           mms_id: mms_id, portfolio_id: portfolio_id, collection_id: collection_id
