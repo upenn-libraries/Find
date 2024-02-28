@@ -58,7 +58,7 @@ describe Inventory::Service do
     end
   end
 
-  describe '.create_entries' do
+  describe '.create_entry' do
     let(:inventory_class) { described_class.send(:create_entry, '9999999999', { inventory_type: type }) }
 
     context 'with physical inventory type' do
