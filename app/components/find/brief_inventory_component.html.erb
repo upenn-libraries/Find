@@ -1,26 +1,24 @@
 <ol class="holdings">
-  <%= static_entries %>
-  <% if @total_count.positive? %>
-  <turbo-frame id="inventory_<%= @id %>" src="<%= inventory_solr_document_path(@id) %>" target="_top">
-    <% skeleton_count.times do %>
-      <li class="holding__item holding__item--loading placeholder-glow" role="status">
-        <div class="placeholder-glow">
-          <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
-          <span class="placeholder col-3"></span>
-        </div>
-        <div class="placeholder-glow">
-          <span class="placeholder col-1"></span>
-          <span class="placeholder col-3"></span>
-        </div>
-      </li>
-    <% end %>
-  </turbo-frame>
-    <% if show_more_count.positive? %>
-    <li>
-      <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
-        <%= t('inventory.see_all', count: show_more_count, options: 'option'.pluralize(show_more_count)) %>
-      </a>
+  <turbo-frame id="inventory_<%= id %>" src="<%= inventory_solr_document_path(id) %>" target="_top">
+    <%= resource_link_entries %>
+    <% skeleton_entries.times do %>
+    <li class="holding__item holding__item--loading placeholder-glow" role="status">
+      <div class="placeholder-glow">
+        <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
+        <span class="placeholder col-3"></span>
+      </div>
+      <div class="placeholder-glow">
+        <span class="placeholder col-1"></span>
+        <span class="placeholder col-3"></span>
+      </div>
     </li>
     <% end %>
+  </turbo-frame>
+  <% if remainder.positive? %>
+  <li>
+    <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
+      <%= t('inventory.see_all', count: remainder, options: 'option'.pluralize(remainder)) %>
+    </a>
+  </li>
   <% end %>
 </ol>

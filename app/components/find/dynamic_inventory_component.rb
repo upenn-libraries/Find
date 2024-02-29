@@ -3,11 +3,10 @@
 module Find
   # Component that renders a set of InventoryEntries for use in in filling-in a Turbo Frame.
   class DynamicInventoryComponent < ViewComponent::Base
-    # @param id [String]
-    # @param [Hash] entries
-    def initialize(id:, entries:)
-      @id = id
-      @entries = entries
+    # @param document[SolrDocument]
+    def initialize(document:)
+      @id = document.id
+      @entries = document.inventory
     end
   end
 end

@@ -4,11 +4,7 @@ module Find
   # DocumentComponent that inherits from Blacklight::DocumentComponent in order to display
   # inventory information and provide other customizations.
   class ResultsDocumentComponent < Blacklight::DocumentComponent
-    renders_one :brief_inventory, lambda {
-      Find::BriefInventoryComponent.new(
-        record_id: @document.id, count: @document.inventory_count, document: @document
-      )
-    }
+    renders_one :brief_inventory, -> { Find::BriefInventoryComponent.new(document: @document) }
 
     def before_render
       super

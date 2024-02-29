@@ -3,21 +3,23 @@
 module Find
   # Component that displays a records availability information.
   class BriefInventoryEntryComponent < ViewComponent::Base
-    attr_accessor :data
+    attr_accessor :entry
 
-    # @param data [Hash]
-    def initialize(data:)
-      @data = data
+    delegate :href, to: :entry
+
+    # @param entry [Inventory::Entry]
+    def initialize(entry:)
+      @entry = entry
     end
 
     # @return [Boolean]
     def physical?
-      data[:type] == 'physical'
+      entry.type == Inventory::Entry::PHYSICAL
     end
 
     # @return [Boolean]
     def available?
-      data[:status] == 'available'
+      entry.status == 'available'
     end
 
     # @return [String]
@@ -29,28 +31,23 @@ module Find
 
     # @return [String]
     def main_content
-      join_fields data[:description]
+      join_fields entry.description
     end
 
     # @return [String]
     def footer_content
-      join_fields data[:format], data[:location]
-    end
-
-    # @return [String]
-    def href
-      data[:href]
+      join_fields entry.format, entry.location
     end
 
     # User-friendly display value for inventory entry status
     # @return [String] status
     def status
-      return I18n.t('inventory.entries.status.check_holdings') if data[:status] == 'check_holdings'
+      return I18n.t('inventory.entries.status.check_holdings') if entry.status == 'check_holdings'
       return I18n.t('inventory.entries.status.unavailable') unless available?
       return I18n.t('inventory.entries.status.available_electronic') if available? && !physical?
       return I18n.t('inventory.entries.status.available_physical') if available? && physical?
 
-      data[:status].capitalize
+      entry.status.capitalize
     end
 
     # Classes to use in rendering the inventory entry element
@@ -59,9 +56,9 @@ module Find
       classes = ['holding__item']
       classes << if available?
                    'holding__item--available'
-                 elsif data[:status] == 'unavailable'
+                 elsif entry.status == 'unavailable'
                    'holding__item--unavailable'
-                 elsif data[:status] == 'check_holdings'
+                 elsif entry.status == 'check_holdings'
                    'holding__item--check-holdings'
                  else
                    'holding__item--other'
