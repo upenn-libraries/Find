@@ -46,11 +46,10 @@ describe Inventory::ElectronicDetail::Notes do
         expect(notes.update(new_data)).to eq data
       end
 
-      it 'sets the data instance variable to a new hash' do
-        data_before_update = notes.data
+      it 'does not alter stored note data' do
+        stored_data = notes.data
         notes.update(new_data)
-        expect(data_before_update).not_to equal notes.data
-        expect(data_before_update).to eq notes.data
+        expect(notes.data).to eq stored_data
       end
     end
 
@@ -61,7 +60,7 @@ describe Inventory::ElectronicDetail::Notes do
         expect(notes.update(new_data)).to eq({ 'public_note' => 'updated', 'authentication_note' => 'auth note' })
       end
 
-      it 'updates the data instance variable' do
+      it 'alters stored note data' do
         notes.update(new_data)
         expect(notes.data).to eq({ 'public_note' => 'updated', 'authentication_note' => 'auth note' })
       end
@@ -74,7 +73,7 @@ describe Inventory::ElectronicDetail::Notes do
         expect(notes.update(new_data)).to be_nil
       end
 
-      it 'does not update the data instance variable' do
+      it 'does not alter stored note data' do
         notes.update(new_data)
         expect(notes.data).to eq data.except('not-a-note')
       end

@@ -83,6 +83,8 @@ module Inventory
         data.values.any?(&:blank?)
       end
 
+      # Create a new stored data hash that updates blank notes with new note data, while preserving the non-blank notes.
+      #
       # @param [Hash] new_data
       # @return [Hash, Nil]
       def update(new_data)
