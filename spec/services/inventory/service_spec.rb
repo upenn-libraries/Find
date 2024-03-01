@@ -55,15 +55,41 @@ describe Inventory::Service do
 
   # TODO: add more substance here as this method is more clearly defined
   describe '.electronic_detail' do
-    let(:mms_id) { '' }
-    let(:portfolio_id) { '' }
-    let(:collection_id) { '' }
+    let(:mms_id) { '9977568423203681' }
+    let(:portfolio_id) { '53596869850003681' }
+    let(:collection_id) { '61468384380003681' }
 
     it 'returns an ElectronicDetail object' do
-      value = described_class.electronic_detail(
-        mms_id, portfolio_id, collection_id
-      )
+      value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
       expect(value).to be_an Inventory::ElectronicDetail
+    end
+
+    context 'when portfolio_id is nil' do
+      let(:portfolio_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
+    end
+
+    context 'when collection_id is nil' do
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
+    end
+
+    context 'when both electronic identifiers are nil' do
+      let(:portfolio_id) { nil }
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
     end
   end
 
