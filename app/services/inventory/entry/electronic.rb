@@ -26,6 +26,11 @@ module Inventory
       end
 
       # @return [String, nil]
+      def coverage_statement
+        data[:coverage_statement]
+      end
+
+      # @return [String, nil]
       def format
         return if portfolio.blank?
 
