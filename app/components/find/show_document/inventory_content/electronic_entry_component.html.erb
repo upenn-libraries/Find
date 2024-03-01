@@ -1,0 +1,12 @@
+<p class="document-inventory__availability document-inventory__availability--primary">
+  <span class="inventory-item__description"><%= entry.description %></span>
+  <span class="document-inventory__policy"><%= entry.policy %></span>
+  <span class="document-inventory__coverage_statement"><%= entry.coverage_statement %></span>
+</p>
+
+<button class="btn btn-success btn-lg"><%= entry.description %></button>
+
+<!-- here is where we will load a turbo frame that will render a "notes" field via the ElectronicDetail -->
+<p class="document-inventory__notes">
+  In this database, you may need to navigate or search to view your article.
+</p>

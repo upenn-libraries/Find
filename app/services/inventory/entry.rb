@@ -35,6 +35,18 @@ module Inventory
       data[:inventory_type]
     end
 
+    def electronic?
+      type == ELECTRONIC
+    end
+
+    def physical?
+      type == PHYSICAL
+    end
+
+    def resource_link?
+      type == RESOURCE_LINK
+    end
+
     private
 
     # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We

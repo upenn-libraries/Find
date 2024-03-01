@@ -2,7 +2,8 @@
 
 module Find
   module ShowDocument
-    # Render's vertical navigation pane for record show page inventory entries
+    # Renders vertical navigation pane for record show page inventory entries. Uses tab pill nav functionality
+    # provided by Bootstrap.
     class InventoryNavigationComponent < ViewComponent::Base
       # @param inventory [Hash] inventory data hash
       # @param selected_id [String] entry id for selected entry
@@ -20,4 +21,3 @@ module Find
     end
   end
 end
-

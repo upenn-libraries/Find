@@ -1,0 +1,9 @@
+<p class="document-inventory">
+  <span class="document-inventory__location"><%= entry.location %></span>
+</p>
+<p class="document-inventory__availability document-inventory__availability--primary">
+  <span class="document-inventory__status"><%= entry.status %></span>
+</p>
+<a class="btn btn-success btn-lg" href="<%= entry.href %>" role="button" target="_blank">
+  <%= entry.description %>
+</a>
