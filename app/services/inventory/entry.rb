@@ -35,14 +35,6 @@ module Inventory
       data[:inventory_type]
     end
 
-    # @return [Hash]
-    def to_h
-      {
-        status: status, policy: policy, description: description, format: format, count: count,
-        location: location, id: id, href: href, type: type
-      }
-    end
-
     private
 
     # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We

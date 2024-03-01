@@ -48,11 +48,8 @@ describe Inventory::Service do
       expect(response).to be_a Inventory::Response
     end
 
-    it 'returns expected entry values' do
-      expect(response.first.to_h).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
-                                          href: '/catalog/9979338417503681?hld_id=22810131440003681',
-                                          id: '22810131440003681', location: 'Van Pelt Library',
-                                          policy: 'Book/serial', status: 'available', type: 'physical' })
+    it 'iterates over returned entries' do
+      expect(response.first).to be_a Inventory::Entry
     end
   end
 

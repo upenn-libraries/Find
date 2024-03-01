@@ -26,6 +26,11 @@ module Inventory
       end
 
       # @return [String, nil]
+      def coverage_statement
+        data[:coverage_statement]
+      end
+
+      # @return [String, nil]
       def format
         return if portfolio.blank?
 
@@ -63,8 +68,8 @@ module Inventory
                                             portfolio_id: id)&.data || {}
       end
 
-      def collection
-        @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
+      def ecollection
+        @ollection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
       end
     end
   end
