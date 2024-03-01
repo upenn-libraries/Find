@@ -18,27 +18,86 @@ module Inventory
     # Accumulate notes via secondary API calls
     # @return [Array]
     def notes
-      # TODO: get notes from portfolio. if needed check collection (if available) and then service (if available) for
-      #       notes. it looks like we can stop searching as soon as we get a non-blank value for either public_note or
-      #       authentication_note.
+      notes = Notes.new(portfolio)
+
+      return notes.all if collection_id.blank?
+
+      notes.update(service) if service_id && notes.missing?
+
+      notes.update(collection) if notes.missing?
+
+      notes.all
     end
 
     private
 
+    # @return [Hash]
     def portfolio
+      return {} if portfolio_id.blank?
+
       @portfolio ||= Alma::Electronic.get(collection_id: collection_id, service_id: nil,
                                           portfolio_id: portfolio_id)&.data || {}
     end
 
+    # @return [Hash]
     def collection
+      return {} if collection_id.blank?
+
       @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
     end
 
+    # @return [Hash]
     def service
+      return {} if service_id.blank? || collection_id.blank?
+
       @service ||= Alma::Electronic.get(
         collection_id: collection_id,
-        service_id: portfolio.dig('electronic_collection', 'service', 'value')
+        service_id: service_id
       )&.data || {}
+    end
+
+    # @return [String, Nil]
+    def service_id
+      @service_id = portfolio.dig('electronic_collection', 'service', 'value')
+    end
+
+    # Represents notes from Alma electronic api
+    class Notes
+      attr_accessor :data
+
+      FIELDS = %w[public_note authentication_note].freeze
+
+      # @param [Hash] data
+      def initialize(data = {})
+        @data = fetch(data)
+      end
+
+      # @param [Hash] data
+      # @return [Hash]
+      def fetch(data)
+        FIELDS.index_with { |field| data[field] }
+      end
+
+      # @return [Boolean]
+      def missing?
+        data.values.any?(&:blank?)
+      end
+
+      # Create a new stored data hash that updates blank notes with new note data, while preserving the non-blank notes.
+      #
+      # @param [Hash] new_data
+      # @return [Hash, Nil]
+      def update(new_data)
+        new_notes = fetch(new_data)
+        return if new_notes.values.all?(&:blank?)
+
+        @data = @data.merge(new_notes) { |_k, old_value, new_value| old_value.presence || new_value.presence }
+      end
+
+      # @return [Array]
+      def all
+        data.values.compact_blank
+      end
     end
   end
 end

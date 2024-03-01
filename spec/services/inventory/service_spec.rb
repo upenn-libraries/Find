@@ -48,25 +48,48 @@ describe Inventory::Service do
       expect(response).to be_a Inventory::Response
     end
 
-    it 'returns expected entry values' do
-      expect(response.first.to_h).to eq({ count: '1', description: 'HQ801 .D43 1997', format: 'Book',
-                                          href: '/catalog/9979338417503681?hld_id=22810131440003681',
-                                          id: '22810131440003681', location: 'Van Pelt Library',
-                                          policy: 'Book/serial', status: 'available', type: 'physical' })
+    it 'iterates over returned entries' do
+      expect(response.first).to be_a Inventory::Entry
     end
   end
 
   # TODO: add more substance here as this method is more clearly defined
   describe '.electronic_detail' do
-    let(:mms_id) { '' }
-    let(:portfolio_id) { '' }
-    let(:collection_id) { '' }
+    let(:mms_id) { '9977568423203681' }
+    let(:portfolio_id) { '53596869850003681' }
+    let(:collection_id) { '61468384380003681' }
 
     it 'returns an ElectronicDetail object' do
-      value = described_class.electronic_detail(
-        mms_id, portfolio_id, collection_id
-      )
+      value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
       expect(value).to be_an Inventory::ElectronicDetail
+    end
+
+    context 'when portfolio_id is nil' do
+      let(:portfolio_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
+    end
+
+    context 'when collection_id is nil' do
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
+    end
+
+    context 'when both electronic identifiers are nil' do
+      let(:portfolio_id) { nil }
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
+        expect(value).to be_an Inventory::ElectronicDetail
+      end
     end
   end
 

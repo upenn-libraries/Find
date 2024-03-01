@@ -30,6 +30,11 @@ module Inventory
       end
 
       # @return [String, nil]
+      def coverage_statement
+        data[:holding_info]
+      end
+
+      # @return [String, nil]
       def id
         data[:holding_id]
       end
