@@ -68,8 +68,8 @@ module Inventory
                                             portfolio_id: id)&.data || {}
       end
 
-      def ecollection
-        @ollection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
+      def collection
+        @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
       end
     end
   end
