@@ -4,6 +4,16 @@ describe Inventory::ElectronicDetail::Notes do
   let(:data) { { 'public_note' => 'pub note', 'authentication_note' => 'auth note' } }
   let(:notes) { described_class.new(data) }
 
+  describe '#initialize' do
+    context 'when data argument is empty' do
+      let(:data) { {} }
+
+      it 'creates data hash with note fields' do
+        expect(notes.data.map { |k, _v| k }).to eq(described_class::FIELDS)
+      end
+    end
+  end
+
   describe '#fetch' do
     let(:data) { { 'public_note' => 'pub note', 'authentication_note' => 'auth note', 'not-a-note' => 'nope' } }
 
@@ -72,8 +82,16 @@ describe Inventory::ElectronicDetail::Notes do
   end
 
   describe '#all' do
-    it 'returns all notes' do
+    it 'returns all present notes' do
       expect(notes.all).to contain_exactly(data['public_note'], data['authentication_note'])
+    end
+
+    context 'with blank notes' do
+      let(:data) { { 'public_note' => '', 'authentication_note' => '' } }
+
+      it 'removes them' do
+        expect(notes.all).to eq []
+      end
     end
   end
 end
