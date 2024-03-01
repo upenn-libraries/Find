@@ -31,22 +31,32 @@ module Inventory
 
     private
 
+    # @return [Hash]
     def portfolio
+      return {} if portfolio_id.blank?
+
       @portfolio ||= Alma::Electronic.get(collection_id: collection_id, service_id: nil,
                                           portfolio_id: portfolio_id)&.data || {}
     end
 
+    # @return [Hash]
     def collection
+      return {} if collection_id.blank?
+
       @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
     end
 
+    # @return [Hash]
     def service
+      return {} if service_id.blank? || collection_id.blank?
+
       @service ||= Alma::Electronic.get(
         collection_id: collection_id,
         service_id: service_id
       )&.data || {}
     end
 
+    # @return [String, Nil]
     def service_id
       @service_id = portfolio.dig('electronic_collection', 'service', 'value')
     end
@@ -84,7 +94,7 @@ module Inventory
 
       # @return [Array]
       def all
-        data.values
+        data.values.compact_blank
       end
     end
   end
