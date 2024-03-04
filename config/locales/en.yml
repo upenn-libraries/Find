@@ -46,7 +46,8 @@ en:
   inventory:
     show:
       navigation:
-        header: 'Inventory'
+        header: 'option'
+        header_plural: 'options'
     entries:
       loading: 'Loading option...'
       status:

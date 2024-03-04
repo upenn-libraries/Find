@@ -1,6 +1,6 @@
 <div class="tab-content" id="inventory-pills-tabContent">
   <% @inventory.each_with_index do |entry, i| %>
-    <div class="tab-pane fade<%= " show active" if active?(entry) %>" id="inventory-<%= i %>" role="tabpanel" aria-labelledby="inventory-<%= i %>-tab" tabindex="0">
+    <div class="tab-pane<%= " show active" if active?(entry) %>" id="inventory-<%= i %>" role="tabpanel" aria-labelledby="inventory-<%= i %>-tab" tabindex="0">
       <div class="document-inventory-container">
         <%= render_entry(entry) %>
       </div>

@@ -1,5 +1,7 @@
 <div class="document__inventory col-lg-3">
-  <h2 class="h5 document__inventory-heading"><%= t('inventory.show.navigation.header') %></h2>
+  <h2 class="h5 document__inventory-heading">
+    <%= @inventory.count %> <%= @inventory.count > 1 ? t('inventory.show.navigation.header_plural') : t('inventory.show.navigation.header') %>
+  </h2>
   <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical">
     <% @inventory.each_with_index do |entry, i| %>
       <button class="inventory-item inventory-item--primary <%= " active" if active?(entry) %>"
@@ -10,8 +12,9 @@
               role="tab"
               aria-controls="inventory-<%= i %>"
               aria-selected="<% active?(entry) ? 'true' : 'false' %>">
-        <span class="inventory-item__description"><%= entry.description %></span>
-        <span class="inventory-item__location"><%= entry.location %></span>
+        <span class="inventory-item__header"><%= entry.location %></span>
+        <span class="inventory-item__main"><%= entry.description %></span>
+        <span class="inventory-item__footer">Available</span>
       </button>
     <% end %>
   </div>

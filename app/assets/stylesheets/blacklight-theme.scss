@@ -120,7 +120,7 @@
 }
 
 .document-metadata dt:not(:first-of-type) {
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 }
 
 .document-metadata dd {
@@ -128,4 +128,28 @@
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.document-metadata ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+  list-style-type: "- ";
+}
+
+.documents-list .document-metadata ul {
+  list-style: none;
+}
+
+.document-metadata ul ::marker {
+  color: var(--color-fg-subtle);
+}
+
+.show-tools {
+  display: none;
+}
+
+pennlibs-footer {
+  display: block;
+  padding-top: 3rem;
 }

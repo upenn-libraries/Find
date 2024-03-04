@@ -1,11 +1,10 @@
 <p class="document-inventory">
-  <span class="document-inventory__location"><%= entry.location %></span>
-  <span class="document-inventory__description"><%= entry.description %></span>
+  <span class="inventory-item__header"><%= entry.location %></span>
+  <span class="inventory-item__main"><%= entry.description %> <%= entry.coverage_statement %></span>
 </p>
-<p class="document-inventory__availability document-inventory__availability--primary">
-  <span class="document-inventory__status"><%= entry.status %></span>
-  <span class="document-inventory__coverage_statement"><%= entry.coverage_statement %></span>
-  <span class="document-inventory__directions">[long request policy description or online]</span> <!-- this is a field we don't have yet, just render an empty element -->
+<p class="inventory-item__availability inventory-item__availability--primary">
+  <span class="inventory-item__availability-main"><%= entry.status %></span>
+  <span class="inventory-item__availability-footer">[long request policy description or online]</span> <!-- this is a field we don't have yet, just render an empty element -->
 </p>
 
 <button class="btn btn-success btn-lg">Request item</button>
