@@ -16,4 +16,12 @@
   <% end %>
 </pennlibs-header>
 
+<% Alert.all.each do |alert| %>
+  <% if alert.on %>
+    <div class="alert alert-primary" role="alert">
+      <%= alert.text.html_safe %>
+    </div>
+  <% end %>
+<% end %>
+
 <%= search_bar %>
