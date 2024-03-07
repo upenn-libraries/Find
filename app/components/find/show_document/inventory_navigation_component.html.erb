@@ -14,6 +14,9 @@
               aria-selected="<% active?(entry) ? 'true' : 'false' %>">
         <span class="inventory-item__header"><%= entry.location %></span>
         <span class="inventory-item__main"><%= entry.description %></span>
+        <% if entry.electronic? %>
+          <span class="inventory-item__main"><%= entry.coverage_statement %></span>
+        <% end %>
         <span class="inventory-item__footer">Available</span>
       </button>
     <% end %>
