@@ -23,8 +23,8 @@ class AlertWebhooksController < ApplicationController
   def update_alert(payload)
     payload.each_key do |key|
       Alert.find_by(scope: key).update(
-        on: payload[key]['on'],
-        text: sanitize(payload[key]['text'], tags: ALLOWED_HTML_TAGS)
+        on: payload.dig(key, 'on'),
+        text: sanitize(payload.dig(key, 'text'), tags: ALLOWED_HTML_TAGS)
       )
     end
   end
