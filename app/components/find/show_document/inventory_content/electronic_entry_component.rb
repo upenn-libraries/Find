@@ -5,7 +5,7 @@ module Find
     module InventoryContent
       # Component rendering the full view of a Electronic entry.
       class ElectronicEntryComponent < ViewComponent::Base
-        attr_reader :entry, :include_details
+        attr_reader :entry
 
         # @param entry [Inventory::Entry]
         def initialize(entry:)
