@@ -15,7 +15,7 @@
         <span class="inventory-item__header"><%= entry.location %></span>
         <span class="inventory-item__main"><%= entry.description %></span>
         <% unless entry.resource_link? %>
-          <span class="inventory-item__main"><%= entry.coverage_statement %></span>
+          <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
         <% end %>
         <span class="inventory-item__footer">Available</span>
       </button>

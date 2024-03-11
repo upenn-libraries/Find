@@ -49,6 +49,17 @@
   font-weight: 500;
 }
 
+.inventory-item__sub-main {
+  display: block;
+}
+
+.inventory-item .inventory-item__sub-main {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
 .inventory-item__footer {
   color: var(--color-fg-success);
   font-weight: 600;
@@ -104,9 +115,13 @@
   box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
 }
 
-.inventory-item:hover .inventory-item__main {
+.inventory-item .inventory-item__main {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  text-decoration-color: var(--color-fg-accent);
+  text-decoration-color: var(--color-fg-default);
+}
+
+.inventory-item:hover .inventory-item__main {
+  text-decoration-thickness: 2px;
 }
