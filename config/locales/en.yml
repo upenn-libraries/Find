@@ -167,7 +167,7 @@ en:
     web_links:
       main: 'Online'
   librarian_view:
-    title: 'Librarian View'
+    title: 'Staff View'
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   sort:
