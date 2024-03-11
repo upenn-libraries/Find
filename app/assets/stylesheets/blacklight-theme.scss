@@ -52,13 +52,13 @@
 
 .index_title > a {
   color: var(--color-fg-accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 .index_title > a:hover {
-  text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
 }
 
 .facet-limit-active .card-header .btn,
