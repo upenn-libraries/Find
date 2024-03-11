@@ -11,11 +11,13 @@
 
 .navbar-search a {
   color: var(--color-fg-default);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-fg-subtle);
 }
 
 .navbar-search a:hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .search-query-form {
