@@ -22,10 +22,14 @@ class AlertWebhooksController < ApplicationController
 
   def update_alert(payload)
     payload.each_key do |key|
-      Alert.find_by(scope: key).update(
+      alert = Alert.find_by(scope: key)
+      return head :not_found if alert.blank?
+
+      alert.update(
         on: payload.dig(key, 'on'),
         text: sanitize(payload.dig(key, 'text'), tags: ALLOWED_HTML_TAGS)
       )
     end
+    head :ok
   end
 end

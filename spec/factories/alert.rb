@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :alert do
     scope { 'alert' }
-    on { true }
+    on { false }
     text { '<p>text text</p>' }
   end
 end
