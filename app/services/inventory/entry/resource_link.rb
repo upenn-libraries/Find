@@ -4,15 +4,19 @@ module Inventory
   class Entry
     # Represents an inventory entry that comes from the MARC record
     class ResourceLink < Inventory::Entry
-      attr_reader :href, :description, :type
+      ID_PREFIX = 'resource_link_'
 
-      # @param inventory_type [Object]
+      attr_reader :href, :description, :type, :id
+
+      # @param inventory_type [String]
       # @param href [String]
       # @param description [String]
-      def initialize(inventory_type:, href:, description:)
+      # @param id [String]
+      def initialize(inventory_type:, href:, description:, id:)
         @href = href
         @description = description.strip
         @type = inventory_type
+        @id = "#{ID_PREFIX}#{id}"
       end
 
       # @return [nil]
