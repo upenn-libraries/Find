@@ -2,6 +2,6 @@
   "invalid": {
     "trigger": "enabled",
     "on": true,
-    "text": "<p>General Alert</p>"
+    "text": "<p>Invalid Alert</p>"
   }
 }

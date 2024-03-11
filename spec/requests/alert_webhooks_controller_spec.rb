@@ -6,27 +6,31 @@ describe 'Alert Webhooks Requests' do
   before do
     create(:alert, scope: 'alert')
     create(:alert, scope: 'find_only_alert')
+    allow(Rails.application.credentials).to receive(:alert_webhooks_token).and_return('1234')
   end
 
   context 'when receiving POST request' do
     it 'validates message integrity' do
-      pending('header auth must be implemented')
-      post webhooks_alerts_path, params: {}, headers: { 'signature': 'baaaaaaad' }
+      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks),
+                                 headers: { 'Token': 'baaaaaaad' }
       expect(response).to have_http_status :unauthorized
     end
 
     it 'handles general alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks)
+      headers = { 'Token': '1234' }
+      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks), headers: headers
       expect(response).to have_http_status :ok
     end
 
     it 'handles find only alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('find_only_updated', :alert_webhooks)
+      headers = { 'Token': '1234' }
+      post webhooks_alerts_path, params: json_fixture('find_only_updated', :alert_webhooks), headers: headers
       expect(response).to have_http_status :ok
     end
 
     it 'handles invalid alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('invalid_updated', :alert_webhooks)
+      headers = { 'Token': '1234' }
+      post webhooks_alerts_path, params: json_fixture('invalid_updated', :alert_webhooks), headers: headers
       expect(response).to have_http_status :not_found
     end
   end

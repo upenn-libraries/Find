@@ -4,7 +4,7 @@
 class AlertWebhooksController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
-  skip_before_action :verify_authenticity_token
+  before_action :validate, only: [:listen]
 
   ALLOWED_HTML_TAGS = %w[p a strong em ul ol li].freeze
 
@@ -31,5 +31,18 @@ class AlertWebhooksController < ApplicationController
       )
     end
     head :ok
+  end
+
+  # Check request header against rails credentials
+  # @return [Boolean]
+  def valid_token?
+    token = request.get_header('Token') || request.get_header('HTTP_TOKEN')
+    token == Rails.application.credentials.alert_webhooks_token
+  end
+
+  # Validates alert webhook post requests
+  # @return [Boolean]
+  def validate
+    valid_token? || head(:unauthorized)
   end
 end

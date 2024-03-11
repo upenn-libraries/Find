@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :alert do
     scope { 'alert' }
     on { false }
-    text { '<p>text text</p>' }
+    text { '<p>Test Text</p>' }
   end
 end
