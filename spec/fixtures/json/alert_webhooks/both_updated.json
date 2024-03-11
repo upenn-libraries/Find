@@ -1,0 +1,12 @@
+{
+  "alert": {
+    "trigger": "enabled",
+    "on": true,
+    "text": "<p>General Alert</p>"
+  },
+  "find_only_alert": {
+    "trigger": "enabled",
+    "on": true,
+    "text": "<p>Find Only Alert</p>"
+  }
+}
