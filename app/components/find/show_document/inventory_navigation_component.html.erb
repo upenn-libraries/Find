@@ -1,6 +1,6 @@
 <div class="document__inventory col-lg-3">
   <h2 class="h5 document__inventory-heading">
-    <%= @inventory.count %> <%= @inventory.count > 1 ? t('inventory.show.navigation.header_plural') : t('inventory.show.navigation.header') %>
+    <%= @inventory.count %> <%= @inventory.count == 1 ? t('inventory.show.navigation.header') : t('inventory.show.navigation.header_plural') %>
   </h2>
   <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical">
     <% @inventory.each_with_index do |entry, i| %>
