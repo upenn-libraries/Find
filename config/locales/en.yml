@@ -47,7 +47,6 @@ en:
     show:
       navigation:
         header: 'option'
-        header_plural: 'options'
     entries:
       loading: 'Loading option...'
       status:
