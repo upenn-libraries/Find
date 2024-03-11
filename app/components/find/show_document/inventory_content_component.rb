@@ -4,7 +4,7 @@ module Find
   module ShowDocument
     # Renders tab content for all inventory entries. Uses Bootstrap's tab functionality.
     class InventoryContentComponent < ViewComponent::Base
-      # @param inventory [Hash] inventory data hash
+      # @param inventory [Inventory::Response] inventory response
       # @param selected_id [String] entry id for selected entry
       def initialize(inventory:, selected_id:)
         @inventory = inventory
@@ -12,7 +12,7 @@ module Find
       end
 
       # Is a passed-in entry currently selected? Used to add 'active' class
-      # @param entry [Hash]
+      # @param entry [Inventory::Entry] inventory entry
       # @return [Boolean]
       def active?(entry)
         @selected_id == entry.id

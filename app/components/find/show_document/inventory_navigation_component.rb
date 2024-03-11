@@ -5,7 +5,7 @@ module Find
     # Renders vertical navigation pane for record show page inventory entries. Uses tab pill nav functionality
     # provided by Bootstrap.
     class InventoryNavigationComponent < ViewComponent::Base
-      # @param inventory [Hash] inventory data hash
+      # @param inventory [Inventory::Response] inventory response object
       # @param selected_id [String] entry id for selected entry
       def initialize(inventory:, selected_id:)
         @inventory = inventory
@@ -13,7 +13,7 @@ module Find
       end
 
       # Is a passed-in entry currently selected? Used to add 'active' class
-      # @param entry [Hash]
+      # @param entry [Inventory::Entry]
       # @return [Boolean]
       def active?(entry)
         @selected_id == entry.id

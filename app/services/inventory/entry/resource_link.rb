@@ -8,7 +8,7 @@ module Inventory
 
       attr_reader :href, :description, :type, :id
 
-      # @param inventory_type [Object]
+      # @param inventory_type [String]
       # @param href [String]
       # @param description [String]
       # @param id [String]
