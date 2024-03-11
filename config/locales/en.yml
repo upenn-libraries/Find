@@ -166,7 +166,7 @@ en:
       other: 'Other Title'
     web_links:
       main: 'Online'
-  librarian_view:
+  staff_view:
     title: 'Staff View'
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
