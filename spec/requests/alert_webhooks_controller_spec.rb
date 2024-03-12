@@ -11,8 +11,8 @@ describe 'Alert Webhooks Requests' do
 
   context 'when receiving POST request' do
     it 'validates message integrity' do
-      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks),
-                                 headers: { 'Token': 'baaaaaaad' }
+      headers = { 'Token': 'baaaaaaad' }
+      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks), headers: headers
       expect(response).to have_http_status :unauthorized
     end
 
@@ -32,6 +32,12 @@ describe 'Alert Webhooks Requests' do
       headers = { 'Token': '1234' }
       post webhooks_alerts_path, params: json_fixture('invalid_updated', :alert_webhooks), headers: headers
       expect(response).to have_http_status :not_found
+    end
+
+    it 'handles bad JSON' do
+      headers = { 'Token': '1234' }
+      post webhooks_alerts_path, params: 'bad params', headers: headers
+      expect(response).to have_http_status :unprocessable_entity
     end
   end
 end

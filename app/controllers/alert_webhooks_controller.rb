@@ -8,32 +8,36 @@ class AlertWebhooksController < ApplicationController
 
   ALLOWED_HTML_TAGS = %w[p a strong em ul ol li].freeze
 
+  # Listens for and handles webhook events from Drupal
   def listen
     payload = JSON.parse(request.body.string)
-    update_alert(payload)
+    find_and_update_alert(payload)
   rescue JSON::ParserError => _e
+    # TODO: notify with honeybadger
     head(:unprocessable_entity)
   rescue ActiveRecord::RecordInvalid => _e
-    # TODO: Notify of error
+    # TODO: notify with honeybadger
     head(:internal_server_error)
   end
 
   private
 
-  def update_alert(payload)
-    payload.each_key do |key|
-      alert = Alert.find_by(scope: key)
+  # @param [Hash] payload
+  # @return [TrueClass]
+  def find_and_update_alert(payload)
+    payload.each_key do |scope|
+      alert = Alert.find_by(scope: scope)
       return head :not_found if alert.blank?
 
       alert.update(
-        on: payload.dig(key, 'on'),
-        text: sanitize(payload.dig(key, 'text'), tags: ALLOWED_HTML_TAGS)
+        on: payload.dig(scope, 'on'),
+        text: sanitize(payload.dig(scope, 'text'), tags: ALLOWED_HTML_TAGS)
       )
     end
     head :ok
   end
 
-  # Check request header against rails credentials
+  # Check request header token against rails credentials
   # @return [Boolean]
   def valid_token?
     token = request.get_header('Token') || request.get_header('HTTP_TOKEN')
