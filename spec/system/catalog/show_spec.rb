@@ -27,7 +27,7 @@ describe 'Catalog Show Page' do
     expect(page).to have_selector 'article.document-position-1'
   end
 
-  it 'displays Librarian view link' do
-    expect(page).to have_link 'Librarian view', href: "/catalog/#{bib}/librarian_view"
+  it 'displays Staff view link' do
+    expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{bib}/staff_view"
   end
 end

@@ -12,3 +12,5 @@ en:
           website: 'Try your search on the Penn Libraries homepage.'
           scholar: 'Try your search in Google Scholar'
           help: 'Ask us for help.'
+    tools:
+      staff_view: 'Staff View'

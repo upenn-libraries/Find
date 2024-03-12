@@ -4,7 +4,7 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  before_action :load_document, only: %i[inventory librarian_view]
+  before_action :load_document, only: %i[inventory staff_view]
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
@@ -72,7 +72,7 @@ class CatalogController < ApplicationController
     config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
     config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
-    config.add_show_tools_partial(:librarian_view, modal: false)
+    config.add_show_tools_partial(:staff_view, modal: false)
 
     # TODO: Our override of the TopNavbarComponent means render_nav_actions is never called in any view. We need a new
     #       place to render these "nav actions", or commit to doing away with them.
@@ -271,7 +271,7 @@ class CatalogController < ApplicationController
     end
   end
 
-  def librarian_view; end
+  def staff_view; end
 
   private
 

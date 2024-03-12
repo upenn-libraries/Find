@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     member do
-      get 'librarian_view'
+      get 'staff_view'
     end
 
     concerns :exportable
