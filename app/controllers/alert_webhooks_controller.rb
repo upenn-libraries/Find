@@ -6,7 +6,7 @@ class AlertWebhooksController < ApplicationController
 
   before_action :validate, only: [:listen]
 
-  ALLOWED_HTML_TAGS = %w[p a strong em ul ol li].freeze
+  ALLOWED_HTML_TAGS = %w[p a strong em ul ol li br].freeze
 
   # Listens for and handles webhook events from Drupal
   def listen
@@ -29,9 +29,11 @@ class AlertWebhooksController < ApplicationController
       alert = Alert.find_by(scope: scope)
       return head :not_found if alert.blank?
 
+      on = payload.dig(scope, 'on')
+      text = payload.dig(scope, 'text')
       alert.update(
-        on: payload.dig(scope, 'on'),
-        text: sanitize(payload.dig(scope, 'text'), tags: ALLOWED_HTML_TAGS)
+        on: confirm_on(on, text),
+        text: sanitize(text, tags: ALLOWED_HTML_TAGS)
       )
     end
     head :ok
@@ -48,5 +50,15 @@ class AlertWebhooksController < ApplicationController
   # @return [Boolean]
   def validate
     valid_token? || head(:unauthorized)
+  end
+
+  # Don't turn the alert on if the incoming text is blank
+  # @param [String] on
+  # @param [String] text
+  # @return [TrueClass, FalseClass]
+  def confirm_on(on, text)
+    return false if text.empty?
+
+    on
   end
 end

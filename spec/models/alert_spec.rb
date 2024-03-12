@@ -7,10 +7,15 @@ describe Alert do
     expect(alert.errors[:on].join).to include 'is not included'
   end
 
-  it 'requires valid text' do
-    alert = build(:alert, text: nil)
+  it 'requires valid text if on is true' do
+    alert = build(:alert, on: true, text: '')
     expect(alert.valid?).to be false
     expect(alert.errors[:text].join).to include "can't be blank"
+  end
+
+  it 'does not require text if on is false' do
+    alert = build(:alert, on: false, text: '')
+    expect(alert.valid?).to be true
   end
 
   it 'limits amount of alerts' do

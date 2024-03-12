@@ -44,4 +44,15 @@ describe 'alert display' do
       end
     end
   end
+
+  context 'with empty text and on set to true' do
+    let(:scopes) { %w[alert] }
+    let(:fixture) { 'empty_text_updated' }
+
+    it 'does not display alert' do
+      within('div.webhook-alerts') do
+        expect(page).not_to have_selector('div.alert')
+      end
+    end
+  end
 end

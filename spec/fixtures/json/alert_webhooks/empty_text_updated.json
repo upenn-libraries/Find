@@ -1,0 +1,7 @@
+{
+  "alert": {
+    "trigger": "enabled",
+    "on": true,
+    "text": ""
+  }
+}
