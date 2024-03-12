@@ -89,8 +89,8 @@ module Inventory
       # @param _limit [Integer, nil]
       # @return [Array<Inventory::Entry>]
       def from_marc(document, _limit)
-        document.marc_resource_links.map do |link_data|
-          create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK,
+        document.marc_resource_links.map.with_index do |link_data, i|
+          create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK, id: i,
                                       href: link_data[:link_url], description: link_data[:link_text] })
         end
       end

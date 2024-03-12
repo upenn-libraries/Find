@@ -1,11 +1,13 @@
-.document__inventory {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
 .document__inventory-heading {
   padding: 0 1rem 0.5rem;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+  font-weight: 500;
+  padding: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .document__inventory-list {
@@ -36,15 +38,35 @@
   margin-bottom: 0.5rem;
 }
 
-.document-inventory__location {
+.inventory-item__header {
   display: block;
   color: var(--color-fg-subtle);
 }
 
-.document-inventory__description {
+.inventory-item__main {
   display: block;
   font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.inventory-item__sub-main {
+  display: block;
+}
+
+.inventory-item .inventory-item__sub-main {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.inventory-item__footer {
+  color: var(--color-fg-success);
   font-weight: 600;
+}
+
+.document__inventory-list .inventory-item__main {
+  font-size: 1rem;
 }
 
 .document-inventory-container {
@@ -52,36 +74,21 @@
   margin-bottom: 2rem;
 }
 
-.document-inventory__availability--primary {
+.inventory-item__availability--primary {
   border-left: solid 3px var(--color-bg-success-emphasis);
   padding-left: 0.75rem;
 }
 
-.document-inventory__availability--primary .document-inventory__policy {
+.inventory-item__availability--primary .inventory-item__availability-main {
   color: var(--color-fg-success);
   font-weight: 600;
-}
-
-.document-inventory__policy,
-.document-inventory__directions {
-  display: block;
-}
-
-.document-inventory__policy {
   font-size: 1.15rem;
-  line-height: 1.2;
 }
 
-.document-inventory__directions {
-  font-size: 0.875rem;
-  color: var(--color-fg-default);
-  font-weight: 400;
-}
-
-.inventory-item__copies {
-  font-size: 1rem;
-  color: var(--color-fg-default);
-  font-weight: 400;
+.inventory-item__availability-main,
+.inventory-item__availability-footer {
+  display: block;
+  line-height: 1.25;
 }
 
 .inventory-item {
@@ -108,28 +115,13 @@
   box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
 }
 
-.inventory-item:hover .inventory-item__description {
+.inventory-item .inventory-item__main {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  text-decoration-color: var(--color-fg-accent);
+  text-decoration-color: var(--color-fg-default);
 }
 
-.inventory-item__description,
-.inventory-item__location,
-.inventory-item__policy {
-  display: block;
-}
-
-.inventory-item--primary .inventory-item__policy {
-  color: var(--color-fg-success);
-}
-
-.inventory-item__description {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.inventory-item__policy {
-  font-weight: 500;
+.inventory-item:hover .inventory-item__main {
+  text-decoration-thickness: 2px;
 }

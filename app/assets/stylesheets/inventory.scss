@@ -14,11 +14,12 @@
 
 .holdings__other-link {
   text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .holdings__other-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
   text-decoration-color: var(--color-fg-subtle);
 }
 
@@ -49,10 +50,12 @@
   font-weight: 600;
   font-size: 1.1rem;
   color: var(--holding-accent-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 .holding__link:hover .holding__main {
-  text-decoration: underline;
   text-decoration-thickness: 2px;
 }
 

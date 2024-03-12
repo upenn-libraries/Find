@@ -36,7 +36,9 @@ module Find
 
     # @return [String]
     def footer_content
-      join_fields entry.format, entry.location
+      fields = [entry.format, entry.location]
+      fields << entry.coverage_statement if entry.electronic?
+      join_fields(*fields)
     end
 
     # User-friendly display value for inventory entry status

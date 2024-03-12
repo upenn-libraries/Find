@@ -2,13 +2,13 @@
 <%# https://github.com/projectblacklight/blacklight-marc/blob/7c27d41abc2fb88c5104bfbaac15622aec1c23b3/app/views/catalog/_marc_view.html.erb %>
 
 <div class="pb-2">
-  <%= link_to sanitize(t('librarian_view.back')), solr_document_path(@document) %>
+  <%= link_to sanitize(t('staff_view.back')), solr_document_path(@document) %>
 </div>
 
-<h3><%= t('librarian_view.title') %></h3>
+<h3><%= t('staff_view.title') %></h3>
 
 <div id="marc_view" class="marc_view">
-  <div class="field"><%= t('librarian_view.leader', leader: @document.marc_record.leader) %></div>
+  <div class="field"><%= t('staff_view.leader', leader: @document.marc_record.leader) %></div>
   <%- @document.marc_record.each do |field| -%>
     <div class="field">
       <%- if field.is_a?(MARC::ControlField) -%>
