@@ -24,6 +24,9 @@ module Find
       set_slot(:search_bar, nil) unless search_bar
     end
 
+    # Join alert text values for display
+    # @param [Array] alerts
+    # @return [String]
     def join_alert_values(alerts)
       alerts.filter_map { |alert| alert.text if alert.on }.join
     end
