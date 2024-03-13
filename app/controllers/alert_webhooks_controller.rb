@@ -22,7 +22,8 @@ class AlertWebhooksController < ApplicationController
 
   private
 
-  # @param [Hash] payload
+  # Find alert(s) based on incoming payload and update the values specified
+  # @param [Hash] payloa
   # @return [TrueClass]
   def find_and_update_alert(payload)
     payload.each_key do |scope|
