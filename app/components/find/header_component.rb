@@ -23,5 +23,9 @@ module Find
     def before_render
       set_slot(:search_bar, nil) unless search_bar
     end
+
+    def join_alert_values(alerts)
+      alerts.filter_map { |alert| alert.text if alert.on }.join
+    end
   end
 end

@@ -17,12 +17,10 @@
 </pennlibs-header>
 
 <div class="webhook-alerts">
-  <% Alert.all.each do |alert| %>
-    <% if alert.on %>
-      <div class="alert alert-primary" role="alert">
-        <%= alert.text.html_safe %>
-      </div>
-    <% end %>
+  <% if Alert.all.any?(&:on) %>
+    <div class="alert alert-primary" role="alert">
+      <%= join_alert_values(Alert.all).html_safe %>
+    </div>
   <% end %>
 </div>
 

@@ -29,11 +29,9 @@ class AlertWebhooksController < ApplicationController
       alert = Alert.find_by(scope: scope)
       return head :not_found if alert.blank?
 
-      on = payload.dig(scope, 'on')
-      text = payload.dig(scope, 'text')
       alert.update(
-        on: confirm_on(on, text),
-        text: sanitize(text, tags: ALLOWED_HTML_TAGS)
+        on: confirm_on(payload.dig(scope, 'on'), payload.dig(scope, 'text')),
+        text: sanitize(payload.dig(scope, 'text'), tags: ALLOWED_HTML_TAGS)
       )
     end
     head :ok

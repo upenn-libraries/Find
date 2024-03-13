@@ -39,8 +39,8 @@ describe 'alert display' do
     let(:fixture) { 'both_updated' }
 
     it 'displays both alerts' do
-      within('div.webhook-alerts') do
-        expect(page).to have_selector('div.alert', count: 2)
+      within('div.alert') do
+        expect(page).to have_selector('p', count: 2)
       end
     end
   end
