@@ -11,7 +11,7 @@ describe 'Alert Webhooks Requests' do
 
   context 'when receiving POST request' do
     let(:token) { '1234' }
-    let(:headers) { { 'Token': token } }
+    let(:headers) { { 'Authorization': "Bearer #{token}" } }
 
     it 'validates message integrity' do
       post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks), headers: { 'Token': 'bad' }

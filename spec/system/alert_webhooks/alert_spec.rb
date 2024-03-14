@@ -8,7 +8,8 @@ describe 'alert display' do
   before do
     allow(Rails.application.credentials).to receive(:alert_webhooks_token).and_return('1234')
     scopes.each { |scope| create(:alert, scope: scope) }
-    post webhooks_alerts_path, params: json_fixture(fixture, :alert_webhooks), headers: { 'Token': '1234' }
+    post webhooks_alerts_path, params: json_fixture(fixture, :alert_webhooks),
+                               headers: { 'Authorization': 'Bearer 1234' }
     visit root_path
   end
 

@@ -2,7 +2,8 @@
 
 # webhook alert controller
 class AlertWebhooksController < ApplicationController
-  before_action :validate, only: [:listen]
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate
 
   # Listens for and handles webhook events from Drupal
   def listen
@@ -34,17 +35,23 @@ class AlertWebhooksController < ApplicationController
     head :ok
   end
 
-  # Check request header token against rails credentials
-  # @return [Boolean]
-  def valid_token?
-    token = request.get_header('Token') || request.get_header('HTTP_TOKEN')
-    token == Rails.application.credentials.alert_webhooks_token
-  end
+  # # Check request header token against rails credentials
+  # # @return [Boolean]
+  # def valid_token?
+  #   token = request.get_header('Token') || request.get_header('HTTP_TOKEN')
+  #   token == Rails.application.credentials.alert_webhooks_token
+  # end
+  #
+  # # Validates alert webhook post requests
+  # # @return [Boolean]
+  # def validate
+  #   valid_token? || head(:unauthorized)
+  # end
 
-  # Validates alert webhook post requests
-  # @return [Boolean]
-  def validate
-    valid_token? || head(:unauthorized)
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      ActiveSupport::SecurityUtils.secure_compare(token, Rails.application.credentials.alert_webhooks_token)
+    end
   end
 
   # Don't turn the alert on if the incoming text is blank
