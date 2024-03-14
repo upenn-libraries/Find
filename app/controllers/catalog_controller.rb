@@ -61,6 +61,9 @@ class CatalogController < ApplicationController
     config.show.document_component = Find::ShowDocumentComponent
     config.show.show_tools_component = Find::ShowToolsComponent
 
+    config.track_search_session.item_pagination_component = Find::ServerItemPaginationComponent
+    config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
+
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
 

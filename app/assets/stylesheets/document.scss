@@ -133,3 +133,26 @@
 .inventory-item__policy {
   font-weight: 500;
 }
+
+.document-bar {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: solid 1px var(--color-bg-subtle);
+}
+
+.document-bar,
+.document-bar__back-and-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.document-bar__back-and-pagination > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.document-bar__back-and-pagination strong {
+  font-weight: 500;
+}
