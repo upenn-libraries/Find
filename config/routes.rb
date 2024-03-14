@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     member do
-      get 'librarian_view'
+      get 'staff_view'
     end
 
     concerns :exportable
@@ -45,8 +45,6 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  post 'webhooks/alerts', to: 'alert_webhooks#listen'
 end

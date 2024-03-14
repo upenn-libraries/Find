@@ -1,0 +1,11 @@
+<p class="document-inventory">
+  <span class="inventory-item__header"><%= entry.location %></span>
+  <span class="inventory-item__main"><%= entry.description %></span>
+  <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
+</p>
+<p class="inventory-item__availability inventory-item__availability--primary">
+  <span class="inventory-item__availability-main"><%= entry.status %></span>
+  <span class="inventory-item__availability-footer">[long request policy description or online]</span> <!-- this is a field we don't have yet, just render an empty element -->
+</p>
+
+<button class="btn btn-success btn-lg">Request item</button>

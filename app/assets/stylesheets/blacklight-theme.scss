@@ -11,11 +11,13 @@
 
 .navbar-search a {
   color: var(--color-fg-default);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-fg-subtle);
 }
 
 .navbar-search a:hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .search-query-form {
@@ -52,13 +54,13 @@
 
 .index_title > a {
   color: var(--color-fg-accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 .index_title > a:hover {
-  text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
 }
 
 .facet-limit-active .card-header .btn,
@@ -120,7 +122,7 @@
 }
 
 .document-metadata dt:not(:first-of-type) {
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 }
 
 .document-metadata dd {
@@ -128,4 +130,24 @@
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.document-metadata ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+  list-style-type: "- ";
+}
+
+.documents-list .document-metadata ul {
+  list-style: none;
+}
+
+.document-metadata ul ::marker {
+  color: var(--color-fg-subtle);
+}
+
+pennlibs-footer {
+  display: block;
+  padding-top: 3rem;
 }

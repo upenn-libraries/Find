@@ -1,0 +1,7 @@
+{
+  "invalid": {
+    "trigger": "enabled",
+    "on": true,
+    "text": "<p>Invalid Alert</p>"
+  }
+}

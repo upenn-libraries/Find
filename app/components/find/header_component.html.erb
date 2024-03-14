@@ -16,4 +16,12 @@
   <% end %>
 </pennlibs-header>
 
+<div class="webhook-alerts">
+  <% if alerts.any?(&:on) %>
+    <div class="alert alert-primary" role="alert">
+      <%= joined_alert_values.html_safe %>
+    </div>
+  <% end %>
+</div>
+
 <%= search_bar %>

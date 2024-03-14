@@ -4,7 +4,7 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  before_action :load_document, only: %i[inventory librarian_view]
+  before_action :load_document, only: %i[inventory staff_view]
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
@@ -75,7 +75,7 @@ class CatalogController < ApplicationController
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
     config.add_show_tools_partial(:citation)
-    config.add_show_tools_partial(:librarian_view, modal: false)
+    config.add_show_tools_partial(:staff_view, modal: false)
 
     # TODO: Our override of the TopNavbarComponent means render_nav_actions is never called in any view. We need a new
     #       place to render these "nav actions", or commit to doing away with them.
@@ -133,7 +133,7 @@ class CatalogController < ApplicationController
     config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
-    config.add_index_field :format_ss, label: I18n.t('results.format')
+    config.add_index_field :format_facet, label: I18n.t('results.format')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -274,7 +274,7 @@ class CatalogController < ApplicationController
     end
   end
 
-  def librarian_view; end
+  def staff_view; end
 
   private
 

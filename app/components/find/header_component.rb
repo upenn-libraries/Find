@@ -23,5 +23,17 @@ module Find
     def before_render
       set_slot(:search_bar, nil) unless search_bar
     end
+
+    # Memoize alerts to prevent doubling database queries
+    # @return [Array]
+    def alerts
+      @alerts ||= Alert.all
+    end
+
+    # Join alert text values for display
+    # @return [String]
+    def joined_alert_values
+      alerts.filter_map { |alert| alert.text if alert.on }.join
+    end
   end
 end
