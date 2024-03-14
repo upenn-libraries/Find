@@ -24,4 +24,9 @@ describe Alert do
     expect(alert.valid?).to be false
     expect(alert.errors[:base].join).to include 'count exceeded'
   end
+
+  it 'sanitizes incoming HTML' do
+    alert = create(:alert, text: '<script>This is a test!</script>')
+    expect(alert.text).to eq 'This is a test!'
+  end
 end

@@ -2,11 +2,7 @@
 
 # webhook alert controller
 class AlertWebhooksController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
-
   before_action :validate, only: [:listen]
-
-  ALLOWED_HTML_TAGS = %w[p a strong em ul ol li br].freeze
 
   # Listens for and handles webhook events from Drupal
   def listen
@@ -32,7 +28,7 @@ class AlertWebhooksController < ApplicationController
 
       alert.update(
         on: confirm_on(payload.dig(scope, 'on'), payload.dig(scope, 'text')),
-        text: sanitize(payload.dig(scope, 'text'), tags: ALLOWED_HTML_TAGS)
+        text: payload.dig(scope, 'text')
       )
     end
     head :ok

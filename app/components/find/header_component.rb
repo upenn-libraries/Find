@@ -24,10 +24,15 @@ module Find
       set_slot(:search_bar, nil) unless search_bar
     end
 
+    # Memoize alerts to prevent doubling database queries
+    # @return [Array]
+    def alerts
+      @alerts ||= Alert.all
+    end
+
     # Join alert text values for display
-    # @param [Array] alerts
     # @return [String]
-    def join_alert_values(alerts)
+    def joined_alert_values
       alerts.filter_map { |alert| alert.text if alert.on }.join
     end
   end
