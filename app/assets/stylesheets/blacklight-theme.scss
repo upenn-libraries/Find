@@ -1,7 +1,7 @@
 .navbar-search {
   background: var(--color-bg-gradient-2);
   padding: 1.5rem 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .navbar-search > .container {
@@ -150,4 +150,8 @@
 pennlibs-footer {
   display: block;
   padding-top: 3rem;
+}
+
+label.toggle-bookmark {
+  min-width: auto;
 }
