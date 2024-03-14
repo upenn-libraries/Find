@@ -35,21 +35,9 @@ class AlertWebhooksController < ApplicationController
     head :ok
   end
 
-  # # Check request header token against rails credentials
-  # # @return [Boolean]
-  # def valid_token?
-  #   token = request.get_header('Token') || request.get_header('HTTP_TOKEN')
-  #   token == Rails.application.credentials.alert_webhooks_token
-  # end
-  #
-  # # Validates alert webhook post requests
-  # # @return [Boolean]
-  # def validate
-  #   valid_token? || head(:unauthorized)
-  # end
-
+  # Ensure incoming payload contains token that matches stored token.
   def authenticate
-    authenticate_or_request_with_http_token do |token, options|
+    authenticate_or_request_with_http_token do |token|
       ActiveSupport::SecurityUtils.secure_compare(token, Rails.application.credentials.alert_webhooks_token)
     end
   end
