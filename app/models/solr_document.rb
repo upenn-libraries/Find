@@ -14,7 +14,7 @@ class SolrDocument
   # Return inventory count from stored fields, whether physical or electronic
   # @return [Integer]
   def inventory_count
-    fetch(:physical_holding_count_i) + fetch(:electronic_portfolio_count_i)
+    fetch(:physical_holding_count_i) + fetch(:electronic_portfolio_count_i) + marc_resource_links.length
   end
 
   # Parse fill_text_link_ss JSON field to return resource links from MARC 856
@@ -23,6 +23,6 @@ class SolrDocument
     links_data = fetch :full_text_links_ss, nil
     return [] if links_data.blank?
 
-    JSON.parse(links_data.first, symbolize_names: true)
+    @marc_resource_links ||= JSON.parse(links_data.first, symbolize_names: true)
   end
 end

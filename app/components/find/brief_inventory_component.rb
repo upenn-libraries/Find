@@ -11,8 +11,16 @@ module Find
       @document = document
     end
 
+    # Determine the number of inventory entries _NOT_ displayed
+    # @return [Integer]
     def remainder
-      document.inventory_count - skeleton_entries
+      subtrahend = if document.marc_resource_links.any?
+                     skeleton_entries +
+                       [Inventory::Service::RESOURCE_LINK_LIMIT, document.marc_resource_links.count].min
+                   else
+                     skeleton_entries
+                   end
+      document.inventory_count - subtrahend
     end
 
     def skeleton_entries
