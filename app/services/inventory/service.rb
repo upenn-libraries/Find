@@ -102,7 +102,7 @@ module Inventory
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
       def api_entries(holdings, mms_id, limit: nil)
-        sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
+        sorted_data = Inventory::Sort::Factory.create(holdings).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
