@@ -43,6 +43,21 @@ namespace :tools do
     puts 'Migrating databases...'
     system('RAILS_ENV=development rake db:migrate')
     system('RAILS_ENV=test rake db:migrate')
+    # Create or find alerts
+    Rake::Task['tools:create_alerts'].execute
+  end
+
+  desc 'Create alerts'
+  task create_alerts: :environment do
+    puts 'Creating alerts...'
+    Alert.find_or_create_by(scope: 'alert') do |alert|
+      alert.on = false
+      alert.text = '<p>General alert</p>'
+    end
+    Alert.find_or_create_by(scope: 'find_only_alert') do |alert|
+      alert.on = false
+      alert.text = '<p>Find only alert</p>'
+    end
   end
 
   desc 'Stop running containers'
