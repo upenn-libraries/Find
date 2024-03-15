@@ -13,17 +13,15 @@ module Find
 
     # Determine the number of inventory entries _NOT_ displayed
     # @return [Integer]
-    def remainder
-      subtrahend = if document.marc_resource_links.any?
-                     skeleton_entries +
-                       [Inventory::Service::RESOURCE_LINK_LIMIT, document.marc_resource_links.count].min
-                   else
-                     skeleton_entries
-                   end
-      document.inventory_count - subtrahend
+    def remainder_count
+      resource_link_remainder = [document.marc_resource_links.count - Inventory::Service::RESOURCE_LINK_LIMIT, 0].max
+      inventory_remainder = [document.inventory_count - Inventory::Service::DEFAULT_LIMIT, 0].max
+      resource_link_remainder + inventory_remainder
     end
 
-    def skeleton_entries
+    # Determine the number of "skeleton" entries to render
+    # @return [Integer]
+    def skeleton_entry_count
       [document.inventory_count, Inventory::Service::DEFAULT_LIMIT].min
     end
 
