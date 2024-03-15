@@ -121,6 +121,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
+    config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss, label: I18n.t('results.creator')
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
     config.add_index_field :conference_ss, label: I18n.t('results.conference')
@@ -130,7 +131,6 @@ class CatalogController < ApplicationController
     config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
-    config.add_index_field :format_facet, label: I18n.t('results.format')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display

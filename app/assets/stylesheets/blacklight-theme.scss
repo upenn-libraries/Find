@@ -90,6 +90,7 @@
 
 .documents-list .document .document-title-heading {
   margin-bottom: 0.25rem;
+  font-size: 1.35rem;
 }
 
 .documents-list .document-metadata dt {
@@ -104,6 +105,10 @@
 
 .documents-list .document-metadata dd {
   color: var(--color-fg-subtle);
+}
+
+.documents-list .blacklight-format_facet {
+  font-weight: 500;
 }
 
 .document-metadata.row {
