@@ -1,3 +1,6 @@
+<%# Copied template from Blacklight v8.1.0 to add in our "document bar" that includes the show tools, bookmark button
+    and removes the setting of "sidebar" content (which used to render the show tools) %>
+
 <div class="document-bar">
   <div class="document-bar__back-and-pagination">
     <%= render blacklight_config.track_search_session.applied_params_component.new if blacklight_config.track_search_session.applied_params_component %>
