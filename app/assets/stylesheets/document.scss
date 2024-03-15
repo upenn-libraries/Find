@@ -1,5 +1,4 @@
 .document__inventory-heading {
-  padding: 0 1rem 0.5rem;
   display: block;
   width: 100%;
   font-size: 1rem;
@@ -56,7 +55,7 @@
 .inventory-item .inventory-item__sub-main {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -118,10 +117,42 @@
 .inventory-item .inventory-item__main {
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: .15em;
   text-decoration-color: var(--color-fg-default);
 }
 
 .inventory-item:hover .inventory-item__main {
   text-decoration-thickness: 2px;
+}
+
+.inventory-item__description {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inventory-item__policy {
+  font-weight: 500;
+}
+
+.document-bar {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: solid 1px var(--color-bg-subtle);
+}
+
+.document-bar,
+.document-bar__back-and-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.document-bar__back-and-pagination > span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.document-bar__back-and-pagination strong {
+  font-weight: 500;
 }

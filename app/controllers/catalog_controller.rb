@@ -59,6 +59,11 @@ class CatalogController < ApplicationController
     config.index.constraints_component = Find::ConstraintsComponent
     config.index.document_component = Find::ResultsDocumentComponent
     config.show.document_component = Find::ShowDocumentComponent
+    config.show.show_tools_component = Find::ShowToolsComponent
+
+    # Configure local components for search session components that make the show page toolbar possible
+    config.track_search_session.item_pagination_component = Find::ServerItemPaginationComponent
+    config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -67,10 +72,9 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.add_show_tools_partial(:bookmark, component: Blacklight::Document::BookmarkComponent,
+    config.add_show_tools_partial(:bookmark, component: Find::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
-    config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false)
 

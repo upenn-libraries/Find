@@ -1,6 +1,6 @@
-<%# copied from Blacklight v8.1.0 to pass additional params into Find::ShowDocumentComponent %>
+<%# copied from Blacklight v8.1.0 to pass additional params into Find::ShowDocumentComponent and remove the display
+    of the pagination component, which is now rendered in show.html.erb as part of our local "document bar". %>
 
-<%= render blacklight_config.track_search_session.item_pagination_component.new(search_context: @search_context, search_session: search_session, current_document: @document) if blacklight_config.track_search_session.item_pagination_component %>
 <% @page_title = t('blacklight.search.show.title', document_title: document_presenter(@document).html_title, application_name: application_name).html_safe %>
 <% content_for(:head) { render_link_rel_alternates } %>
 
