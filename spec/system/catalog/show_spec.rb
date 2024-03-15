@@ -28,6 +28,7 @@ describe 'Catalog Show Page' do
   end
 
   it 'displays Staff view link' do
+    click_on I18n.t('blacklight.tools.title')
     expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{bib}/staff_view"
   end
 end
