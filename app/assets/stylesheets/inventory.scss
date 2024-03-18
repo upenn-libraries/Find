@@ -15,7 +15,7 @@
 .holdings__other-link {
   text-decoration: none;
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: .15em;
 }
 
 .holdings__other-link:hover {
@@ -52,7 +52,7 @@
   color: var(--holding-accent-color);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: .15em;
 }
 
 .holding__link:hover .holding__main {

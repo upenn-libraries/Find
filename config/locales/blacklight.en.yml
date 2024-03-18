@@ -1,6 +1,11 @@
 en:
+  views:
+    pagination:
+      previous: 'Previous'
+      next: 'Next'
   blacklight:
     application_name: 'Find | Penn Libraries'
+    back_to_search: 'Back to Results'
     search:
       zero_results:
         title: 'No results found'
