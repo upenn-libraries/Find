@@ -79,6 +79,7 @@ module Inventory
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
         holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
+        holdings = check_ecollection(mms_id, limit) if holdings.empty?
         api_entries(holdings, mms_id, limit: limit)
       end
 
@@ -105,6 +106,33 @@ module Inventory
         sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
+      end
+
+      # Handle "standalone" collection case, aka "Collection level record with collection as inventory"
+      # An availability call will return no indication that collections exist other than no holdings,
+      # but there may also be cases where we want to check for these collections even if portfolio info is returned?
+      # KatBur mentions Kanopy (MMS ID 9962827293503681) but that returns no portfolios....
+      # @todo Return Inventory Entry objects?
+      # @todo Also the skeleton rending will not function in this case....
+      # @todo this creates a total nonsensical mess with example record 9977925541303681
+      def check_ecollection(mms_id, limit = nil)
+        collections = Alma::Electronic.get mms_id: mms_id
+        collections = collections['electronic_collection']
+        limited_collections = limit ? collections.first(limit) : collections
+        limited_collections.filter_map do |collection_hash| # return hashes similar to portfolio??
+          collection = Alma::Electronic.get(collection_id: collection_hash['id'])
+          next if collection['id'].blank?
+
+          { portfolio_pid: nil, # no portfolio id - this will be problematic for generating links
+            collection_id: collection['id'],
+            activation_status: 'Available',
+            library_code: collection.dig('library', 'value'),
+            collection: collection['public_name_override'] || collection['public_name'],
+            coverage_statement: nil, # no viable value to use, may not be applicable
+            interface_name: collection.dig('interface', 'name'),
+            url: collection['url_override'] || collection['url'],
+            inventory_type: 'electronic' }
+        end
       end
     end
   end
