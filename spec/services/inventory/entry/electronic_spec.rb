@@ -43,6 +43,12 @@ describe Inventory::Entry::Electronic do
     end
   end
 
+  describe '#location' do
+    it 'returns nil' do
+      expect(entry.location).to be_nil
+    end
+  end
+
   describe '#format' do
     it 'returns the expected format'
   end

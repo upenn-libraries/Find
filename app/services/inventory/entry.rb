@@ -37,6 +37,10 @@ module Inventory
       raise NotImplementedError
     end
 
+    def location
+      raise NotImplementedError
+    end
+
     # @return [String, nil]
     def type
       data[:inventory_type]
