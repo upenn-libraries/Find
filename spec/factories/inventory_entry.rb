@@ -5,13 +5,15 @@ FactoryBot.define do
     mms_id { '1234567890' }
     inventory_type { Inventory::Entry::ELECTRONIC }
     activation_status { 'Available' }
-    collection { 'Gale Academic OneFile' }
     coverage_statement { 'Available from 01/06/2000 until 12/23/2021.' }
     portfolio_id { nil }
+    collection { 'Gale Academic OneFile' }
     collection_id { nil }
 
+    # If collection and collection_id are not explicitly passed in, factorybot thinks they are an association
+    # and ignores them. https://github.com/thoughtbot/factory_bot/issues/1142
     skip_create
-    initialize_with { new(**attributes) }
+    initialize_with { new(collection: collection, collection_id: collection_id, **attributes) }
   end
 
   factory :physical_entry, class: 'Inventory::Entry::Physical' do
@@ -28,7 +30,6 @@ FactoryBot.define do
   end
 
   factory :resource_link_entry, class: 'Inventory::Entry::ResourceLink' do
-    mms_id { '1234567890' }
     inventory_type { Inventory::Entry::RESOURCE_LINK }
     id { 1 }
     href { 'http://hdl.library.upenn.edu/1017/126017' }

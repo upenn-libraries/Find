@@ -47,6 +47,10 @@ module Inventory
         data[:collection_id]
       end
 
+      def location
+        nil
+      end
+
       # @note for a collection record (e.g. 9977925541303681) Electronic Collection API returns
       #       "url_override" field that has a neat hdl.library.upenn.edu link to the electronic collection
       # @return [String, nil]

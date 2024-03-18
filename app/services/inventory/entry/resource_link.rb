@@ -6,7 +6,7 @@ module Inventory
     class ResourceLink < Inventory::Entry
       ID_PREFIX = 'resource_link_'
 
-      attr_reader :href, :description, :type, :id
+      attr_reader :id, :type, :href, :description
 
       # @param inventory_type [String]
       # @param href [String]
@@ -19,11 +19,6 @@ module Inventory
         @id = "#{ID_PREFIX}#{id}"
       end
 
-      # @return [nil]
-      def count
-        nil
-      end
-
       # @return [String]
       def location
         'Online'
@@ -32,6 +27,10 @@ module Inventory
       # @return [String]
       def status
         'available'
+      end
+
+      def format
+        nil
       end
     end
   end
