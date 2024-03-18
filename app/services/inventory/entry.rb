@@ -12,7 +12,7 @@ module Inventory
     # @param [String] mms_id
     # @param [Hash] data hash containing inventory data retrieved from Alma real time availability API
     # See Alma::AvailabilityResponse for mapping of values into the raw_availability_data hash
-    def initialize(mms_id, data)
+    def initialize(mms_id:, **data)
       @mms_id = mms_id
       @data = data
     end

@@ -55,7 +55,7 @@ module Inventory
       def create_entry(mms_id, raw_data)
         case raw_data[:inventory_type]&.downcase
         when Entry::PHYSICAL
-          Inventory::Entry::Physical.new(mms_id, raw_data)
+          Inventory::Entry::Physical.new(mms_id: mms_id, **raw_data)
         when Entry::ELECTRONIC
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
@@ -65,7 +65,7 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic.new(mms_id, raw_data)
+          Inventory::Entry::Electronic.new(mms_id: mms_id, **raw_data)
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
