@@ -1,1 +1,14 @@
 pennlibs_web_version: '0.1.0'
+locations:
+  offsite:
+    - lippb10
+    - athstorcir
+    - stor
+    - storcirc
+    - storcrstxt
+    - storm
+  unavailable:
+    - athNoCirc
+    - storNoCirc
+    - vpunavail
+    - vanpNocirc

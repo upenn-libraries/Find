@@ -7,17 +7,14 @@ module Inventory
       BASE_SCORE = 0
       DECREMENT = -1
       MULTIPLIER = 2
-
-      OFFSITE_LOCATIONS = %w[offsitede lippb10 athstor athstorcir stor storcirc storcrstxt storfine storm storlimit
-                             storrare storspec oostor scrunning].freeze
-      UNAVAILABLE_LOCATIONS = %w[athNoCirc storNoCirc vpunavail vanpNocirc].freeze
-      LOCATIONS_MAP = [{ locations: OFFSITE_LOCATIONS, score: DECREMENT },
-                       { locations: UNAVAILABLE_LOCATIONS, score: DECREMENT * MULTIPLIER }].freeze
+      MAP = [{ locations: Inventory::Mappings.offsite_locations, score: DECREMENT },
+             { locations: Inventory::Mappings.unavailable_locations,
+               score: DECREMENT * MULTIPLIER }].freeze
       class << self
         # @return [Integer]
         # returns a number value that maps onto a location.
         def score(inventory)
-          LOCATIONS_MAP.each do |locations|
+          MAP.each do |locations|
             score = score_for_locations(inventory, locations[:locations], locations[:score])
             return score if score.nonzero?
           end
