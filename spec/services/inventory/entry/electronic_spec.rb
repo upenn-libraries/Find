@@ -3,10 +3,16 @@
 describe Inventory::Entry::Electronic do
   let(:entry) do
     create(
-      :electronic_entry, mms_id: '9977047322103681', portfolio_pid: '53496697910003681',
-      collection_id: '61496697940003681', activation_status: 'Available', library_code: 'VanPeltLib',
-      collection: 'Nature Publishing Journals', coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
-      interface_name: 'Nature', inventory_type: 'electronic'
+      :electronic_entry,
+      mms_id: '9977047322103681',
+      portfolio_pid: '53496697910003681',
+      collection_id: '61496697940003681',
+      activation_status: 'Available',
+      library_code: 'VanPeltLib',
+      collection: 'Nature Publishing Journals',
+      coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
+      interface_name: 'Nature',
+      inventory_type: 'electronic'
     )
   end
 
