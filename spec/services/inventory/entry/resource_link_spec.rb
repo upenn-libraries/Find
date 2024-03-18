@@ -30,7 +30,7 @@ describe Inventory::Entry::ResourceLink do
   end
 
   describe '#format' do
-    it 'returns the expected format' do
+    it 'returns nil' do
       expect(entry.format).to be_nil
     end
   end
