@@ -46,7 +46,6 @@
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: solid 1px var(--bs-border-color);
-  flex-wrap: wrap;
 }
 
 .document-bar,
@@ -54,6 +53,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .document-bar__back-and-pagination > span {
