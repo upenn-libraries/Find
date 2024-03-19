@@ -24,10 +24,6 @@ module Find
       super.append('col-lg-9')
     end
 
-    def format
-      @document.marc(:format_facet).join(', ')
-    end
-
     def before_render
       super
       set_slot(:inventory_navigation, nil) unless inventory_navigation

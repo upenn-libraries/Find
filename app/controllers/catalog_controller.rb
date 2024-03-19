@@ -138,7 +138,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field :title_show, label: I18n.t('show.title.main'), accessor: :marc
+    config.add_show_field :format_facet, label: I18n.t('results.format')
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc

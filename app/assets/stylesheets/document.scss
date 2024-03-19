@@ -1,3 +1,7 @@
+.document__inventory {
+  margin-bottom: 1.5rem;
+}
+
 .document__inventory-heading {
   display: block;
   width: 100%;
@@ -26,6 +30,7 @@
 
 .documentHeader > h1 {
   font-size: 1.75rem;
+  margin-bottom: 0;
 }
 
 .show-document {
@@ -37,107 +42,11 @@
   margin-bottom: 0.5rem;
 }
 
-.inventory-item__header {
-  display: block;
-  color: var(--color-fg-subtle);
-}
-
-.inventory-item__main {
-  display: block;
-  font-size: 1.15rem;
-  font-weight: 500;
-}
-
-.inventory-item__sub-main {
-  display: block;
-}
-
-.inventory-item .inventory-item__sub-main {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.inventory-item__footer {
-  color: var(--color-fg-success);
-  font-weight: 600;
-}
-
-.document__inventory-list .inventory-item__main {
-  font-size: 1rem;
-}
-
-.document-inventory-container {
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.inventory-item__availability--primary {
-  border-left: solid 3px var(--color-bg-success-emphasis);
-  padding-left: 0.75rem;
-}
-
-.inventory-item__availability--primary .inventory-item__availability-main {
-  color: var(--color-fg-success);
-  font-weight: 600;
-  font-size: 1.15rem;
-}
-
-.inventory-item__availability-main,
-.inventory-item__availability-footer {
-  display: block;
-  line-height: 1.25;
-}
-
-.inventory-item {
-  all: unset;
-  padding: 0.75rem 1rem;
-  border: solid 1px var(--color-bg-default);
-  border-left: solid 3px var(--color-bg-subtle);
-  font-size: 0.875rem;
-}
-
-.inventory-item:hover {
-  border-left-color: var(--color-fg-accent);
-}
-
-.inventory-item.active {
-  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
-  border: solid 1px var(--color-fg-subtle);
-  border-left: solid 3px var(--color-bg-accent-emphasis);
-  border-radius: 0.5rem;
-}
-
-.inventory-item.active:focus,
-.inventory-item:focus {
-  box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
-}
-
-.inventory-item .inventory-item__main {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .15em;
-  text-decoration-color: var(--color-fg-default);
-}
-
-.inventory-item:hover .inventory-item__main {
-  text-decoration-thickness: 2px;
-}
-
-.inventory-item__description {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.inventory-item__policy {
-  font-weight: 500;
-}
-
 .document-bar {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: solid 1px var(--color-bg-subtle);
+  border-bottom: solid 1px var(--bs-border-color);
+  flex-wrap: wrap;
 }
 
 .document-bar,
@@ -155,4 +64,10 @@
 
 .document-bar__back-and-pagination strong {
   font-weight: 500;
+}
+
+.show-document__format {
+  font-weight: 500;
+  color: var(--color-fg-subtle);
+  margin-bottom: 0;
 }
