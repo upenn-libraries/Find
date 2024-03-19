@@ -14,6 +14,7 @@ module Inventory
         @location_overrides ||= PennMARC::Mappers.location_overrides
       end
 
+      # @note this data is to be moved in to the location map provided by PennMARC
       # @return [Array]
       def aeon_locations
         @aeon_locations ||= load_file('config/translation_maps/aeon_locations.yml')
