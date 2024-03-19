@@ -21,9 +21,9 @@ module Inventory
       # @return [Integer]
       def service_score(data)
         collection = data['collection']
-        collection_score = mappings.electronic_services_rankings['collection'][collection]
+        collection_score = mappings.electronic_scoring[:collection][collection]
         interface = data['interface_name']
-        interface_score = mappings.electronic_services_rankings['interface'][interface]
+        interface_score = mappings.electronic_scoring[:interface][interface]
 
         [collection_score, interface_score].compact.max || BASE_SCORE
       end

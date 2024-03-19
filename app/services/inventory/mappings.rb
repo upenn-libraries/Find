@@ -30,8 +30,8 @@ module Inventory
       end
 
       # @return [Hash]
-      def electronic_services_rankings
-        @electronic_services_rankings ||= load_file('config/translation_maps/electronic_services_rankings.yml')
+      def electronic_scoring
+        Settings.electronic_scoring
       end
 
       private
