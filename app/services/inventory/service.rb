@@ -47,7 +47,7 @@ module Inventory
 
       private
 
-      # Factory class method to create Inventory::Entry objects.
+      # Factory method to create Inventory::Entry objects.
       #
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
@@ -55,7 +55,7 @@ module Inventory
       def create_entry(mms_id, raw_data)
         case raw_data[:inventory_type]&.downcase
         when Entry::PHYSICAL
-          Inventory::Entry::Physical.new(mms_id, raw_data)
+          Inventory::Entry::Physical.new(mms_id, raw_data, mappings)
         when Entry::ELECTRONIC
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
@@ -65,7 +65,7 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic.new(mms_id, raw_data)
+          Inventory::Entry::Electronic.new(mms_id, raw_data, mappings)
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
@@ -98,16 +98,21 @@ module Inventory
         end
       end
 
-      # Converts holdings information retrieved from Alma into Inventory::Entry objects.
+      # Converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
-      # @param holdings [Array] holdings data from Availability API call
+      # @param inventory_data [Array] inventory data from Availability API call
       # @param mms_id [String]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def api_entries(holdings, mms_id, limit: nil)
-        sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
+      def api_entries(inventory_data, mms_id, limit: nil)
+        sorted_data = Inventory::Sort::Factory.create(inventory_data, mappings).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
+      end
+
+      # @return [Class<Inventory::Mappings>]
+      def mappings
+        @mappings ||= Inventory::Mappings
       end
     end
   end
