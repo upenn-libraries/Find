@@ -56,7 +56,7 @@ module Find
     # @return [Array<String (frozen)>]
     def classes
       classes = ['holding__item']
-      classes << if available?
+      classes << if available? || !physical?
                    'holding__item--available'
                  elsif entry.status == 'unavailable'
                    'holding__item--unavailable'

@@ -109,7 +109,7 @@ en:
       other: 'Other Edition'
     format:
       cartographic: 'Cartographic Data'
-      main: 'Format'
+      main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
     identifier:
