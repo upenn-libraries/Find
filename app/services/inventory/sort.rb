@@ -3,12 +3,11 @@
 module Inventory
   # Base class to sort inventory data from Alma Availability API
   class Sort
-    attr_reader :inventory_data, :mappings
+    attr_reader :inventory_data
 
     # @param inventory_data [Array] inventory data from Alma Availability API
-    def initialize(inventory_data, mappings = Inventory::Mappings)
+    def initialize(inventory_data)
       @inventory_data = inventory_data
-      @mappings = mappings
     end
 
     # Sorting method that subclasses override. We use the Put gem, which doesn't change how sort_by works, but provides
