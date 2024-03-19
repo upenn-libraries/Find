@@ -25,7 +25,7 @@ module Inventory
           # favor inventory deemed available, that is inventory with an available status or inventory requestable
           # through aeon
           [(Put.first if unsorted_inventory.available?),
-           # do not favor unavailable inventory, in practice this means ranking s 'check_holdings' status higher than
+           # do not favor unavailable inventory, in practice this means ranking a 'check_holdings' status higher than
            # 'unavailable'
            (Put.last if unsorted_inventory.unavailable?),
            # favor inventory with 'higher' priority, we use an ascending order here because a lower number
@@ -59,17 +59,17 @@ module Inventory
           @mappings = mappings
         end
 
-        # @return[Boolean]
+        # @return [Boolean]
         def available?
           (data['availability'] == AVAILABLE) || aeon_requestable?
         end
 
-        # @return[Boolean]
+        # @return [Boolean]
         def unavailable?
           data['availability'] == UNAVAILABLE
         end
 
-        # @return[Boolean]
+        # @return [Boolean]
         def coverage_statement?
           data['coverage_statement'].present?
         end
@@ -80,14 +80,14 @@ module Inventory
         end
 
         # Retrieve priority while accounting for undesirable locations
-        # @return[Integer]
+        # @return [Integer]
         def priority
           return DEFAULT_PRIORITY if undesirable_location?
 
           data.fetch('priority', DEFAULT_PRIORITY).to_i
         end
 
-        # @return[Integer]
+        # @return [Integer]
         def location_score
           Inventory::Sort::LocationScore.score(data)
         end
