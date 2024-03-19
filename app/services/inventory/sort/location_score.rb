@@ -5,14 +5,17 @@ module Inventory
     # Provides a sortable value for the locations of physical inventory
     class LocationScore
       BASE_SCORE = 0
-      DECREMENT = -1
-      MULTIPLIER = 2
-      MAP = [{ locations: Inventory::Mappings.offsite_locations, score: DECREMENT },
+      OFFSITE_SCORE = - 1
+      UNAVAILABLE_SCORE = -2
+      MAP = [{ locations: Inventory::Mappings.offsite_locations, score: OFFSITE_SCORE },
              { locations: Inventory::Mappings.unavailable_locations,
-               score: DECREMENT * MULTIPLIER }].freeze
+               score: UNAVAILABLE_SCORE }].freeze
       class << self
         # @return [Integer]
-        # returns a number value that maps onto a location.
+        # First checks if the location is offsite or unavailable, and returns the corresponding low score.
+        # If inventory is located in neither of these less desirable locations they receive the higher base score.
+        # We score unavailable locations the least, offsite locations the second least, and all other locations receive
+        # an equally high base score.
         def score(inventory)
           MAP.each do |locations|
             score = score_for_locations(inventory, locations[:locations], locations[:score])

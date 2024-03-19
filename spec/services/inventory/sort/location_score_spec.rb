@@ -23,7 +23,7 @@ describe Inventory::Sort::LocationScore do
       let(:data) { { 'location_code' => 'stor' } }
 
       it 'returns the expected value' do
-        expect(score).to eq described_class::DECREMENT
+        expect(score).to eq described_class::OFFSITE_SCORE
       end
     end
 
@@ -31,7 +31,7 @@ describe Inventory::Sort::LocationScore do
       let(:data) { { 'location_code' => 'vpunavail' } }
 
       it 'returns the expected value' do
-        expect(score).to eq described_class::DECREMENT * described_class::MULTIPLIER
+        expect(score).to eq described_class::UNAVAILABLE_SCORE
       end
     end
   end
