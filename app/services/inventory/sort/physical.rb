@@ -101,7 +101,7 @@ module Inventory
 
         # @return [Boolean]
         def aeon_requestable?
-          aeon_location? && data['availability'] != UNAVAILABLE
+          aeon_location? && (data['availability'] != UNAVAILABLE)
         end
 
         # @return [Boolean]
