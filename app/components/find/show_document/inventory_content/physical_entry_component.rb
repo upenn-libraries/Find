@@ -11,6 +11,23 @@ module Find
         def initialize(entry:)
           @entry = entry
         end
+
+        # @return [String]
+        def availability_status
+          label_for value: entry.status, field: :status
+        end
+
+        # @return [String]
+        def availability_description
+          label_for value: entry.status, field: :description
+        end
+
+        private
+
+        def label_for(value:, field:)
+          scope = [:alma, :availability, value.to_sym, :physical]
+          I18n.t(field.to_sym, scope: scope)
+        end
       end
     end
   end

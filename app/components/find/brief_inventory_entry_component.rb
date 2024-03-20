@@ -44,10 +44,10 @@ module Find
     # User-friendly display value for inventory entry status
     # @return [String] status
     def status
-      return I18n.t('inventory.entries.status.check_holdings') if entry.status == 'check_holdings'
-      return I18n.t('inventory.entries.status.unavailable') unless available?
-      return I18n.t('inventory.entries.status.available_electronic') if available? && !physical?
-      return I18n.t('inventory.entries.status.available_physical') if available? && physical?
+      return I18n.t('alma.availability.check_holdings.physical.status') if entry.status == 'check_holdings'
+      return I18n.t('alma.availability.unavailable.physical.status') unless available?
+      return I18n.t('alma.availability.available.electronic.status') if available? && !physical?
+      return I18n.t('alma.availability.available.physical.status') if available? && physical?
 
       entry.status.capitalize
     end
