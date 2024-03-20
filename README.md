@@ -9,6 +9,12 @@ by the [`pennmarc`](https://gitlab.library.upenn.edu/dld/catalog/pennmarc) gem
 
 Eventually, this app will also contain patron account management functionality.
 
+1. [Requirements](#requirements)
+2. [Starting Services](#starting-app-services)
+   1. [Loading Data](#loading-data)
+3. [Developing](#developing)
+4. [Contributing](#contributing)
+
 ## Requirements
 
 Your development machine will need the following:
@@ -82,18 +88,25 @@ bundle exec rails server
  
 View the app at `localhost:3000`
 
-### Project Values
+## Contributing
 
-1. Excellent test coverage
-2. Adherence to code style embodied in [`upennlib-rubocop`](https://gitlab.library.upenn.edu/dld/upennlib-rubocop)
+In order to contribute productively while fostering the project values, familiarize yourself with the established
+[Gitlab Collaboration Workflow](https://upennlibrary.atlassian.net/wiki/spaces/DLD/pages/498073672/GitLab+Collaboration+Workflow)
+as well as the [Ruby on Rails Development Guidelines](https://upennlibrary.atlassian.net/wiki/spaces/DLD/pages/495616001/Ruby-on-Rails+Development+Guidelines).
 
-### Running Tests
+### Running the Test Suite
+
+When adding new features, be sure to consider the need for test coverage.
+
+Run the full application test suite with:
 
 ```bash
 bundle exec rspec
 ```
 
-### Running Rubocop
+### Rubocop
+
+This project is committed to the code style embodied in [`upennlib-rubocop`](https://gitlab.library.upenn.edu/dld/upennlib-rubocop). You can check for issues by running:
 
 ```bash
 bundle exec rubocop
