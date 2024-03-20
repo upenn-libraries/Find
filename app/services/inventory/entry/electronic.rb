@@ -5,11 +5,11 @@ module Inventory
     # Electronic holding class
     class Electronic < Inventory::Entry
       # Base host, path, and params to electronic resource (portfolio)
-      HOST = 'upenn.alma.exlibrisgroup.com'
-      PATH = '/view/uresolver/01UPENN_INST/openurl'
+      HOST = Inventory::Constants::ERESOURCE_LINK_HOST
+      PATH = Inventory::Constants::ERESOURCE_LINK_PATH
       PARAMS = { Force_direct: true,
                  portfolio_pid: nil,
-                 rfr_id: 'info:sid/primo.exlibrisgroup.com',
+                 rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
                  'u.ignore_date_coverage': true }.freeze
 
       # @return [String, nil]

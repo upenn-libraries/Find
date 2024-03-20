@@ -14,11 +14,11 @@ en:
             description: 'Item cannot be checked out at the library but can be requested.'
           electronic:
             status: 'By Request'
-            description: 'This should not obtain, right?.'
+            description: 'This resource is unavailable.'
         check_holdings:
           physical:
             status: 'Mixed Availability'
             description: 'Some items are available, others may be requested.'
           electronic:
             status: 'Mixed Availability'
-            description: 'This should not obtain, right?'
+            description: 'This resource may be unavailable.'

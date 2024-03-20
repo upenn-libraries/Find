@@ -31,7 +31,7 @@ module Inventory
 
       # @return [String]
       def status
-        'available'
+        Inventory::Constants::AVAILABLE
       end
     end
   end

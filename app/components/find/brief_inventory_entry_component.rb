@@ -19,7 +19,7 @@ module Find
 
     # @return [Boolean]
     def available?
-      entry.status == 'available'
+      entry.status == Inventory::Constants::AVAILABLE
     end
 
     # @return [String]
@@ -44,7 +44,9 @@ module Find
     # User-friendly display value for inventory entry status
     # @return [String] status
     def status
-      return I18n.t('alma.availability.check_holdings.physical.status') if entry.status == 'check_holdings'
+      if entry.status == Inventory::Constants::CHECK_HOLDINGS
+        return I18n.t('alma.availability.check_holdings.physical.status')
+      end
       return I18n.t('alma.availability.unavailable.physical.status') unless available?
       return I18n.t('alma.availability.available.electronic.status') if available? && !physical?
       return I18n.t('alma.availability.available.physical.status') if available? && physical?
@@ -58,9 +60,9 @@ module Find
       classes = ['holding__item']
       classes << if available?
                    'holding__item--available'
-                 elsif entry.status == 'unavailable'
+                 elsif entry.status == Inventory::Constants::UNAVAILABLE
                    'holding__item--unavailable'
-                 elsif entry.status == 'check_holdings'
+                 elsif entry.status == Inventory::Constants::CHECK_HOLDINGS
                    'holding__item--check-holdings'
                  else
                    'holding__item--other'
