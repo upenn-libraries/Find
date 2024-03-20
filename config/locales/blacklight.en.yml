@@ -19,3 +19,4 @@ en:
           help: 'Ask us for help.'
     tools:
       staff_view: 'Staff View'
+      login_for_email: 'Login to Email'
