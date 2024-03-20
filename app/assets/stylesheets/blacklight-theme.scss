@@ -25,6 +25,10 @@
   width: 75%;
   font-size: 1.125rem;
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+
+  @media (max-width: 620px) {
+    width: 100%;
+  }
 }
 
 .search-q {
@@ -90,6 +94,7 @@
 
 .documents-list .document .document-title-heading {
   margin-bottom: 0.25rem;
+  font-size: 1.35rem;
 }
 
 .documents-list .document-metadata dt {
@@ -104,6 +109,10 @@
 
 .documents-list .document-metadata dd {
   color: var(--color-fg-subtle);
+}
+
+.documents-list .blacklight-format_facet {
+  font-weight: 500;
 }
 
 .document-metadata.row {
