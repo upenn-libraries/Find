@@ -10,7 +10,7 @@ module Inventory
       # @return [Array]
       def sort
         inventory_data.sort_by do |data|
-          unsorted_inventory = UnsortedInventory.new(data, mappings)
+          unsorted_inventory = UnsortedInventory.new(data)
           # The Put DSL wraps each criteria value in a Put::PutThings object for convenience. We can use Put.first
           # and Put.last to convert boolean values into values that can be compared. On the other hand,
           # Put.asc  and Put.desc handles values that have their own comparators such as Integers or Strings.
@@ -51,12 +51,11 @@ module Inventory
         # are ranked higher.
         DEFAULT_PRIORITY = 100
 
-        attr_reader :data, :mappings
+        attr_reader :data
 
         # @param [Hash] data
-        def initialize(data, mappings)
+        def initialize(data)
           @data = data
-          @mappings = mappings
         end
 
         # @return [Boolean]
@@ -96,7 +95,7 @@ module Inventory
 
         # @return [Boolean]
         def aeon_location?
-          data['location_code'].in?(mappings.aeon_locations)
+          data['location_code'].in?(Inventory::Mappings.aeon_locations)
         end
 
         # @return [Boolean]
@@ -106,7 +105,7 @@ module Inventory
 
         # @return [Boolean]
         def undesirable_location?
-          undesirable_locations = mappings.offsite_locations + mappings.unavailable_locations
+          undesirable_locations = Inventory::Mappings.offsite_locations + Inventory::Mappings.unavailable_locations
           data['location_code'].in?(undesirable_locations)
         end
       end
