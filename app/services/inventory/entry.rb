@@ -9,8 +9,8 @@ module Inventory
 
     attr_reader :status, :policy, :description, :format, :id, :href, :data, :mms_id
 
-    # @param [String] mms_id
-    # @param [Hash] data hash containing inventory data retrieved from Alma real time availability API
+    # @param mms_id [String]
+    # @param data [Hash] hash containing inventory data retrieved from Alma real time availability API
     # See Alma::AvailabilityResponse for mapping of values into the raw_availability_data hash
     def initialize(mms_id, data)
       @mms_id = mms_id
@@ -27,7 +27,7 @@ module Inventory
       location_code = data[:location_code]
       return unless location_code
 
-      location_override || PennMARC::Mappers.location[location_code.to_sym][:display]
+      location_override || Inventory::Mappings.locations[location_code.to_sym][:display]
     end
 
     # @return [String, nil]
@@ -58,7 +58,7 @@ module Inventory
 
       return unless location_code && call_number
 
-      override = PennMARC::Mappers.location_overrides.find do |_key, value|
+      override = Inventory::Mappings.location_overrides.find do |_key, value|
         value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
       end
 
