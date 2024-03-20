@@ -56,7 +56,7 @@ module Inventory
         location_code = data[:location_code]
         return unless location_code
 
-        location_override || PennMARC::Mappers.location[location_code.to_sym][:display]
+        location_override || Inventory::Mappings.locations[location_code.to_sym][:display]
       end
 
       private
@@ -80,7 +80,7 @@ module Inventory
 
         return unless location_code && call_number
 
-        override = PennMARC::Mappers.location_overrides.find do |_key, value|
+        override = Inventory::Mappings.location_overrides.find do |_key, value|
           value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
         end
 

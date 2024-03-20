@@ -47,7 +47,7 @@ module Inventory
 
       private
 
-      # Factory class method to create Inventory::Entry objects.
+      # Factory method to create Inventory::Entry objects.
       #
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
@@ -98,14 +98,14 @@ module Inventory
         end
       end
 
-      # Converts holdings information retrieved from Alma into Inventory::Entry objects.
+      # Converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
-      # @param holdings [Array] holdings data from Availability API call
+      # @param inventory_data [Array] inventory data from Availability API call
       # @param mms_id [String]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def api_entries(holdings, mms_id, limit: nil)
-        sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
+      def api_entries(inventory_data, mms_id, limit: nil)
+        sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
