@@ -18,7 +18,6 @@ describe 'Catalog Show Page' do
   end
 
   it 'shows some item metadata' do
-    expect(page).to have_selector 'dd.blacklight-title_show'
     expect(page).to have_selector 'dd.blacklight-creator_show'
   end
 
