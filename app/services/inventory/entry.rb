@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Base class that all Inventory classes inherit from. Defines methods that each entry should define.
+  # Abstract class that all Inventory entry classes inherit from. Establishes API that subclasses should adhere to.
   class Entry
     PHYSICAL = 'physical'
     ELECTRONIC = 'electronic'
@@ -17,6 +17,10 @@ module Inventory
       @data = data
     end
 
+    def id
+      raise NotImplementedError
+    end
+
     def description
       raise NotImplementedError
     end
@@ -25,11 +29,11 @@ module Inventory
       raise NotImplementedError
     end
 
-    def id
+    def location
       raise NotImplementedError
     end
 
-    def href
+    def policy
       raise NotImplementedError
     end
 
@@ -37,25 +41,27 @@ module Inventory
       raise NotImplementedError
     end
 
-    def location
+    def coverage_statement
       raise NotImplementedError
     end
 
-    # @return [String, nil]
-    def type
-      data[:inventory_type]
+    def href
+      raise NotImplementedError
     end
 
+    # @return [Boolean]
     def electronic?
-      type == ELECTRONIC
+      false
     end
 
+    # @return [Boolean]
     def physical?
-      type == PHYSICAL
+      false
     end
 
+    # @return [Boolean]
     def resource_link?
-      type == RESOURCE_LINK
+      false
     end
   end
 end

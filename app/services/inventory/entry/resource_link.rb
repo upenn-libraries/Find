@@ -6,16 +6,14 @@ module Inventory
     class ResourceLink < Inventory::Entry
       ID_PREFIX = 'resource_link_'
 
-      attr_reader :id, :type, :href, :description
+      attr_reader :id, :href, :description
 
-      # @param inventory_type [String]
       # @param href [String]
       # @param description [String]
       # @param id [String]
-      def initialize(inventory_type:, href:, description:, id:)
+      def initialize(href:, description:, id:, **)
         @href = href
         @description = description.strip
-        @type = inventory_type
         @id = "#{ID_PREFIX}#{id}"
       end
 
@@ -24,13 +22,29 @@ module Inventory
         'Online'
       end
 
+      # Policy not available for resource link.
+      def policy
+        nil
+      end
+
       # @return [String]
       def status
         'available'
       end
 
+      # Format not available for resource link.
       def format
         nil
+      end
+
+      # Coverage statement not available for resource link.
+      def coverage_statement
+        nil
+      end
+
+      # @return [Boolean]
+      def resource_link?
+        true
       end
     end
   end

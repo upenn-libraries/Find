@@ -35,6 +35,18 @@ describe Inventory::Entry::ResourceLink do
     end
   end
 
+  describe '#policy' do
+    it 'returns nil' do
+      expect(entry.policy).to be_nil
+    end
+  end
+
+  describe '#coverage_statement' do
+    it 'returns nil' do
+      expect(entry.coverage_statement).to be_nil
+    end
+  end
+
   describe '#location' do
     it 'returns expected location' do
       expect(entry.location).to eq 'Online'

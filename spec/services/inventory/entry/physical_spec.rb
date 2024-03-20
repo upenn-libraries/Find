@@ -17,14 +17,34 @@ describe Inventory::Entry::Physical do
       location_code: 'vanp',
       call_number_type: '0',
       priority: '1',
+      holding_info: 'v1',
       library: 'Van Pelt Library',
       inventory_type: 'physical'
     )
   end
 
+  # Mocking response for items.
+  before do
+    bib_item_set = instance_double('Alma::BibItemSet')
+    allow(bib_item_set).to receive(:items).and_return(
+      [
+        Alma::BibItem.new(
+          { 'item_data'=> { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
+        )
+      ]
+    )
+    allow(Alma::BibItem).to receive(:find).with(mms_id, any_args).and_return(bib_item_set)
+  end
+
   describe '#status' do
     it 'returns expected status' do
       expect(entry.status).to eq 'available'
+    end
+  end
+
+  describe '#policy' do
+    it 'returns expected policy' do
+      expect(entry.policy).to eql 'Non-circ'
     end
   end
 
@@ -47,7 +67,15 @@ describe Inventory::Entry::Physical do
   end
 
   describe '#format' do
-    it 'returns the expected format'
+    it 'returns the expected format' do
+      expect(entry.format).to eq 'Book'
+    end
+  end
+
+  describe '#coverage_statement' do
+    it 'returns expected value' do
+      expect(entry.coverage_statement).to eql 'v1'
+    end
   end
 
   describe '#count' do
@@ -62,7 +90,7 @@ describe Inventory::Entry::Physical do
 
       it 'returns expected value' do
         location_code = entry.data[:location_code].to_sym
-        expect(entry.location).to eq PennMARC::Mappers.location[location_code][:display]
+        expect(entry.location).to eq Inventory::Mappings.locations[location_code][:display]
       end
     end
 
@@ -70,7 +98,7 @@ describe Inventory::Entry::Physical do
       let(:entry) { create(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984') }
 
       it 'returns expected value' do
-        expect(entry.location).to eq PennMARC::Mappers.location_overrides[:albrecht][:specific_location]
+        expect(entry.location).to eq Inventory::Mappings.location_overrides[:albrecht][:specific_location]
       end
     end
   end

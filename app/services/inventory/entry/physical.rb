@@ -47,16 +47,22 @@ module Inventory
       end
 
       # @return [String, nil]
-      def count
-        data[:total_items]
-      end
-
-      # @return [String, nil]
       def location
         location_code = data[:location_code]
         return unless location_code
 
         location_override || Inventory::Mappings.locations[location_code.to_sym][:display]
+      end
+
+      # Number of items for this physical holding.
+      #
+      # @return [String, nil]
+      def count
+        data[:total_items]
+      end
+
+      def physical?
+        true
       end
 
       private

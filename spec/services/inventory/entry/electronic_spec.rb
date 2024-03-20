@@ -55,8 +55,22 @@ describe Inventory::Entry::Electronic do
     end
   end
 
+  describe '#policy' do
+    it 'returns nil' do
+      expect(entry.policy).to be_nil
+    end
+  end
+
   describe '#format' do
-    it 'returns the expected format'
+    it 'returns nil' do
+      expect(entry.format).to be_nil
+    end
+  end
+
+  describe '#collection_id' do
+    it 'returns expected value' do
+      expect(entry.collection_id).to eql '61496697940003681'
+    end
   end
 
   describe '#electronic?' do
