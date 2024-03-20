@@ -26,7 +26,7 @@ module Find
     def header_content
       return unless physical?
 
-      join_fields status
+      join_fields entry.human_readable_status
     end
 
     # @return [String]
@@ -39,19 +39,6 @@ module Find
       fields = [entry.format, entry.location]
       fields << entry.coverage_statement if entry.electronic?
       join_fields(*fields)
-    end
-
-    # User-friendly display value for inventory entry status
-    # @return [String] status
-    def status
-      if entry.status == Inventory::Constants::CHECK_HOLDINGS
-        return I18n.t('alma.availability.check_holdings.physical.status')
-      end
-      return I18n.t('alma.availability.unavailable.physical.status') unless available?
-      return I18n.t('alma.availability.available.electronic.status') if available? && !physical?
-      return I18n.t('alma.availability.available.physical.status') if available? && physical?
-
-      entry.status.capitalize
     end
 
     # Classes to use in rendering the inventory entry element

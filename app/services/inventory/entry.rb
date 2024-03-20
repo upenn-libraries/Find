@@ -17,6 +17,17 @@ module Inventory
       @data = data
     end
 
+    # User-friendly display value for inventory entry status
+    # @return [String] status
+    def human_readable_status
+      return I18n.t('alma.availability.available.physical.status') if available? && physical?
+      return I18n.t('alma.availability.available.electronic.status') if available? && !physical?
+      return I18n.t('alma.availability.check_holdings.physical.status') if status == Constants::CHECK_HOLDINGS
+      return I18n.t('alma.availability.unavailable.physical.status') if status == Constants::UNAVAILABLE
+
+      entry.status.capitalize
+    end
+
     # @return [String, nil]
     def count
       data[:total_items]
@@ -45,6 +56,11 @@ module Inventory
 
     def resource_link?
       type == RESOURCE_LINK
+    end
+
+    # @return [Boolean]
+    def available?
+      status == Constants::AVAILABLE
     end
 
     private

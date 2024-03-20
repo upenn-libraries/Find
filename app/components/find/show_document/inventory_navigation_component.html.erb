@@ -17,7 +17,7 @@
         <% unless entry.resource_link? %>
           <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
         <% end %>
-        <span class="inventory-item__footer"><%= status_for(entry) %></span>
+        <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
       </button>
     <% end %>
   </div>
