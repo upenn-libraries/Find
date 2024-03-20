@@ -29,7 +29,7 @@ describe Inventory::Entry::Physical do
     allow(bib_item_set).to receive(:items).and_return(
       [
         Alma::BibItem.new(
-          { 'item_data'=> { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
+          { 'item_data' => { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
         )
       ]
     )
