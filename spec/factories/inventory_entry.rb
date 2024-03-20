@@ -6,7 +6,7 @@ FactoryBot.define do
     inventory_type { Inventory::Entry::ELECTRONIC }
     activation_status { 'Available' }
     coverage_statement { 'Available from 01/06/2000 until 12/23/2021.' }
-    portfolio_id { nil }
+    portfolio_pid { nil }
     collection { 'Gale Academic OneFile' }
     collection_id { nil }
 
