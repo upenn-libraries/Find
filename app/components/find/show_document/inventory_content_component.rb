@@ -19,7 +19,8 @@ module Find
       end
 
       def render_entry(entry)
-        component_class = "Find::ShowDocument::InventoryContent::#{entry.type.camelize}EntryComponent".constantize
+        type = entry.class.name.split('::').last
+        component_class = "Find::ShowDocument::InventoryContent::#{type}EntryComponent".constantize
         render(component_class.new(entry: entry))
       end
     end

@@ -13,12 +13,9 @@ module Inventory
                  'u.ignore_date_coverage': true }.freeze
 
       # @return [String, nil]
-      def status
-        data[:activation_status]
+      def id
+        data[:portfolio_pid]
       end
-
-      # @return [String, nil]
-      def policy; end
 
       # @return [String, nil]
       def description
@@ -26,25 +23,30 @@ module Inventory
       end
 
       # @return [String, nil]
+      def status
+        data[:activation_status]
+      end
+
+      # No location available for electronic entries.
+      def location
+        nil
+      end
+
+      # No policy available for electronic entries.
+      #
+      # @return [nil]
+      def policy
+        nil
+      end
+
+      # Format is only exposed via the Inventory::ElectronicDetail object to prevent additional API calls.
+      def format
+        nil
+      end
+
+      # @return [String, nil]
       def coverage_statement
         data[:coverage_statement]
-      end
-
-      # @return [String, nil]
-      def format
-        return if portfolio.blank?
-
-        portfolio.dig('material_type', 'desc')
-      end
-
-      # @return [String, nil]
-      def id
-        data[:portfolio_pid]
-      end
-
-      # @return [String, nil]
-      def collection_id
-        data[:collection_id]
       end
 
       # @note for a collection record (e.g. 9977925541303681) Electronic Collection API returns
@@ -61,21 +63,13 @@ module Inventory
         URI::HTTPS.build(host: HOST, path: PATH, query: query).to_s
       end
 
-      private
-
-      # @return [Hash]
-      def portfolio
-        return {} if id.blank?
-
-        @portfolio ||= Alma::Electronic.get(collection_id: collection_id, service_id: nil,
-                                            portfolio_id: id)&.data || {}
+      # @return [String, nil]
+      def collection_id
+        data[:collection_id]
       end
 
-      # @return [Hash]
-      def collection
-        return {} if collection_id.blank?
-
-        @collection ||= Alma::Electronic.get(collection_id: collection_id)&.data || {}
+      def electronic?
+        true
       end
     end
   end
