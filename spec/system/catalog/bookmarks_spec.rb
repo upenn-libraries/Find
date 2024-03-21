@@ -14,6 +14,10 @@ describe 'Catalog Bookmarks Page' do
 
   after { SampleIndexer.clear! }
 
+  it 'displays some bookmarks' do
+    expect(page).to have_selector('article.document-position-1')
+  end
+
   it 'does not display the staff view tool' do
     within('div.bookmarksTools') do
       expect(page).not_to have_text('Staff View')
