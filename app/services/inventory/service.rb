@@ -114,9 +114,8 @@ module Inventory
       # KatBur mentions Kanopy (MMS ID 9962827293503681) but that returns no portfolios....
       # @todo Return Inventory Entry objects?
       # @todo Also the skeleton rending will not function in this case....
-      # @todo this creates a total nonsensical mess with example record 9977925541303681
       def check_ecollection(mms_id, limit = nil)
-        collections = Alma::Electronic.get mms_id: mms_id
+        collections = Alma::Bib.get_collections mms_id
         collections = collections['electronic_collection']
         limited_collections = limit ? collections.first(limit) : collections
         limited_collections.filter_map do |collection_hash| # return hashes similar to portfolio??
@@ -127,9 +126,9 @@ module Inventory
             collection_id: collection['id'],
             activation_status: 'Available',
             library_code: collection.dig('library', 'value'),
-            collection: collection['public_name_override'] || collection['public_name'],
+            collection: collection.dig('interface', 'name'),
             coverage_statement: nil, # no viable value to use, may not be applicable
-            interface_name: collection.dig('interface', 'name'),
+            interface_name: collection['public_name_override'] || collection['public_name'],
             url: collection['url_override'] || collection['url'],
             inventory_type: 'electronic' }
         end
