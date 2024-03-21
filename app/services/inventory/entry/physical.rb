@@ -4,10 +4,21 @@ module Inventory
   class Entry
     # Physical holding class
     class Physical < Inventory::Entry
-      # @note possible values seem to be "available", "unavailable", and "check_holdings" when present
       # @return [String, nil]
       def status
         data[:availability]
+      end
+
+      # User-friendly display value for inventory entry status
+      # @return [String, nil]
+      def human_readable_status
+        case status
+        when Constants::AVAILABLE then I18n.t('alma.availability.available.physical.status')
+        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.status')
+        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.status')
+        else
+          status&.capitalize
+        end
       end
 
       # @return [String, nil]

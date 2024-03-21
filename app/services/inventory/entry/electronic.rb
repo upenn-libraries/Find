@@ -27,6 +27,20 @@ module Inventory
         data[:activation_status]
       end
 
+      # User-friendly display value for inventory entry status
+      # Electronic resources _should_ *ALWAYS* be "Available" - otherwise we shouldn't show them. If this proves to be
+      # true we can simplify this.
+      # @return [String, nil] status
+      def human_readable_status
+        case status&.downcase
+        when Constants::AVAILABLE then I18n.t('alma.availability.available.electronic.status')
+        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.electronic.status')
+        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.electronic.status')
+        else
+          status&.capitalize
+        end
+      end
+
       # No location available for electronic entries.
       def location
         nil
