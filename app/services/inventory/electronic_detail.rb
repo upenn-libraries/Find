@@ -29,6 +29,13 @@ module Inventory
       notes.all
     end
 
+    # @return [String, nil]
+    def format
+      return if portfolio.blank?
+
+      portfolio.dig('material_type', 'desc')
+    end
+
     private
 
     # @return [Hash]
