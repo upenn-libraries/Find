@@ -5,9 +5,9 @@ describe Inventory::Sort::Physical do
 
   describe '#sort' do
     let(:data) do
-      [{  'availability' => 'unavailable' },
-       {  'availability' => 'available' },
-       {  'availability' => 'check_holdings' }]
+      [{  'availability' => Inventory::Constants::UNAVAILABLE },
+       {  'availability' => Inventory::Constants::AVAILABLE },
+       {  'availability' => Inventory::Constants::CHECK_HOLDINGS }]
     end
 
     it 'puts available holdings first' do
@@ -20,9 +20,9 @@ describe Inventory::Sort::Physical do
 
     context 'when there is a tie in availability' do
       let(:data) do
-        [{ 'priority' => '3', 'availability' => 'available' },
-         { 'priority' => '1', 'availability' => 'unavailable' },
-         { 'priority' => '2', 'availability' => 'available' }]
+        [{ 'priority' => '3', 'availability' => Inventory::Constants::AVAILABLE },
+         { 'priority' => '1', 'availability' => Inventory::Constants::UNAVAILABLE },
+         { 'priority' => '2', 'availability' => Inventory::Constants::AVAILABLE }]
       end
 
       it 'sorts by priority' do
@@ -32,11 +32,11 @@ describe Inventory::Sort::Physical do
 
     context 'when there is a tie in availability and priority' do
       let(:data) do
-        [{ 'availability' => 'available',
+        [{ 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'stor',
            'coverage_statement' => 'hi',
            'priority' => '1' },
-         { 'availability' => 'available',
+         { 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'afro',
            'priority' => '1' }]
       end
@@ -48,12 +48,12 @@ describe Inventory::Sort::Physical do
 
     context 'when there is a tie in availability, priority, and location' do
       let(:data) do
-        [{ 'availability' => 'available',
+        [{ 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'vanp',
            'priority' => '1',
            'total_items' => '2',
            'non_available_items' => '1' },
-         { 'availability' => 'available',
+         { 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'afro',
            'priority' => '1',
            'total_items' => '2',
@@ -67,12 +67,12 @@ describe Inventory::Sort::Physical do
 
     context 'when there is a tie in availability, priority, location, and available items' do
       let(:data) do
-        [{ 'availability' => 'available',
+        [{ 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'vanp',
            'priority' => '1',
            'total_items' => '2',
            'non_available_items' => '1' },
-         { 'availability' => 'available',
+         { 'availability' => Inventory::Constants::AVAILABLE,
            'location_code' => 'afro',
            'priority' => '1',
            'total_items' => '2',

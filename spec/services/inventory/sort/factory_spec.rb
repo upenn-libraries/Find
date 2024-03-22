@@ -5,7 +5,7 @@ describe Inventory::Sort::Factory do
     let(:sorter) { described_class.create(data) }
 
     context 'with physical holdings' do
-      let(:data) { [{ 'inventory_type' => 'physical' }] }
+      let(:data) { [{ 'inventory_type' => Inventory::Entry::PHYSICAL }] }
 
       it 'returns an Inventory::Sort::Physical object' do
         expect(sorter).to be_a Inventory::Sort::Physical
@@ -13,7 +13,7 @@ describe Inventory::Sort::Factory do
     end
 
     context 'with electronic holdings' do
-      let(:data) { [{ 'inventory_type' => 'electronic' }] }
+      let(:data) { [{ 'inventory_type' => Inventory::Entry::ELECTRONIC }] }
 
       it 'returns an Inventory::Sort::Electronic object' do
         expect(sorter).to be_a Inventory::Sort::Electronic
