@@ -38,7 +38,7 @@ describe Inventory::Entry::Physical do
 
   describe '#status' do
     it 'returns expected status' do
-      expect(entry.status).to eq 'available'
+      expect(entry.status).to eq Inventory::Constants::AVAILABLE
     end
   end
 

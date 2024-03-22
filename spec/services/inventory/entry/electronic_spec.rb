@@ -7,7 +7,7 @@ describe Inventory::Entry::Electronic do
       mms_id: '9977047322103681',
       portfolio_pid: '53496697910003681',
       collection_id: '61496697940003681',
-      activation_status: 'Available',
+      activation_status: Inventory::Constants::AVAILABLE.capitalize,
       library_code: 'VanPeltLib',
       collection: 'Nature Publishing Journals',
       coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
@@ -18,7 +18,7 @@ describe Inventory::Entry::Electronic do
 
   describe '#status' do
     it 'returns expected status' do
-      expect(entry.status).to eq 'Available'
+      expect(entry.status).to eq Inventory::Constants::AVAILABLE.capitalize
     end
   end
 
