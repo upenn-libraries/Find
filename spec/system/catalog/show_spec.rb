@@ -26,8 +26,29 @@ describe 'Catalog Show Page' do
     expect(page).to have_selector 'article.document-position-1'
   end
 
-  it 'displays Staff view link' do
-    click_on I18n.t('blacklight.tools.title')
-    expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{bib}/staff_view"
+  context 'with show tools' do
+    context 'when a user is signed in' do
+      before do
+        sign_in create(:user)
+        visit solr_document_path bib
+      end
+
+      it 'displays a link to email the record' do
+        click_on I18n.t('blacklight.tools.title')
+        expect(page).to have_link 'Email', href: "/catalog/#{bib}/email"
+      end
+    end
+
+    context 'when a user is not signed in' do
+      it 'displays a link to login' do
+        click_on I18n.t('blacklight.tools.title')
+        expect(page).to have_link I18n.t('blacklight.tools.login_for_email'), href: "#{login_path}?id=#{bib}"
+      end
+    end
+
+    it 'displays Staff view link' do
+      click_on I18n.t('blacklight.tools.title')
+      expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{bib}/staff_view"
+    end
   end
 end

@@ -14,14 +14,14 @@ module Find
 
     # @return [Boolean]
     def available?
-      entry.status == 'available'
+      entry.status == Inventory::Constants::AVAILABLE
     end
 
     # @return [String]
     def header_content
       return unless physical?
 
-      join_fields status
+      join_fields entry.human_readable_status
     end
 
     # @return [String]
@@ -36,26 +36,15 @@ module Find
       join_fields(*fields)
     end
 
-    # User-friendly display value for inventory entry status
-    # @return [String] status
-    def status
-      return I18n.t('inventory.entries.status.check_holdings') if entry.status == 'check_holdings'
-      return I18n.t('inventory.entries.status.unavailable') unless available?
-      return I18n.t('inventory.entries.status.available_electronic') if available? && !physical?
-      return I18n.t('inventory.entries.status.available_physical') if available? && physical?
-
-      entry.status.capitalize
-    end
-
     # Classes to use in rendering the inventory entry element
     # @return [Array<String (frozen)>]
     def classes
       classes = ['holding__item']
       classes << if available? || !physical?
                    'holding__item--available'
-                 elsif entry.status == 'unavailable'
+                 elsif entry.status == Inventory::Constants::UNAVAILABLE
                    'holding__item--unavailable'
-                 elsif entry.status == 'check_holdings'
+                 elsif entry.status == Inventory::Constants::CHECK_HOLDINGS
                    'holding__item--check-holdings'
                  else
                    'holding__item--other'

@@ -10,14 +10,14 @@ describe Inventory::Service do
                          'library_code' => 'VanPeltLib',
                          'location' => 'Stacks',
                          'call_number' => 'HQ801 .D43 1997',
-                         'availability' => 'available',
+                         'availability' => Inventory::Constants::AVAILABLE,
                          'total_items' => '1',
                          'non_available_items' => '0',
                          'location_code' => 'vanp',
                          'call_number_type' => '0',
                          'priority' => '1',
                          'library' => 'Van Pelt Library',
-                         'inventory_type' => 'physical' }] } }
+                         'inventory_type' => Inventory::Entry::PHYSICAL }] } }
     end
     let(:item_data) do
       { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },

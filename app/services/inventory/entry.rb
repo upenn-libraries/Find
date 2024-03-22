@@ -29,6 +29,10 @@ module Inventory
       raise NotImplementedError
     end
 
+    def human_readable_status
+      raise NotImplementedError
+    end
+
     def location
       raise NotImplementedError
     end
