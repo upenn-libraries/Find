@@ -80,9 +80,8 @@ module Inventory
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
-        holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
-        holdings = check_ecollection(mms_id, limit) if holdings.empty?
-        api_entries(holdings, mms_id, limit: limit)
+        inventory = gather_inventory_for mms_id: mms_id
+        api_entries(inventory, mms_id, limit: limit)
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
@@ -134,6 +133,15 @@ module Inventory
             interface_name: collection['public_name_override'] || collection['public_name'],
             url: collection['url_override'] || collection['url'],
             inventory_type: 'electronic' }
+        end
+
+        def gather_inventory(mms_id:)
+          holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
+          # check for holding type, if electronic, check for collections
+          # perform collection API call
+          # for each collection, fabricate hash of data from returned collection object
+          # return aggregate array
+          holdings = check_ecollection(mms_id, limit) if holdings.empty?
         end
       end
     end
