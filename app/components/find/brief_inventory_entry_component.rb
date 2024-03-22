@@ -5,16 +5,11 @@ module Find
   class BriefInventoryEntryComponent < ViewComponent::Base
     attr_accessor :entry
 
-    delegate :href, to: :entry
+    delegate :href, :physical?, to: :entry
 
     # @param entry [Inventory::Entry]
     def initialize(entry:)
       @entry = entry
-    end
-
-    # @return [Boolean]
-    def physical?
-      entry.type == Inventory::Entry::PHYSICAL
     end
 
     # @return [Boolean]
@@ -56,7 +51,7 @@ module Find
     # @return [Array<String (frozen)>]
     def classes
       classes = ['holding__item']
-      classes << if available?
+      classes << if available? || !physical?
                    'holding__item--available'
                  elsif entry.status == 'unavailable'
                    'holding__item--unavailable'

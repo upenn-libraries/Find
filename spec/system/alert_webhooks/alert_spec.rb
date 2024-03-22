@@ -18,7 +18,7 @@ describe 'alert display' do
     let(:fixture) { 'general_updated' }
 
     it 'displays updated general alert' do
-      within('div.webhook-alerts') do
+      within('.site-alerts__container') do
         expect(page).to have_text 'General Alert'
       end
     end
@@ -29,7 +29,7 @@ describe 'alert display' do
     let(:fixture) { 'find_only_updated' }
 
     it 'displays updated find only alert' do
-      within('div.webhook-alerts') do
+      within('.site-alerts__container') do
         expect(page).to have_text 'Find Only Alert'
       end
     end
@@ -51,7 +51,7 @@ describe 'alert display' do
     let(:fixture) { 'empty_text_updated' }
 
     it 'does not display alert' do
-      within('div.webhook-alerts') do
+      within('.site-alerts__container') do
         expect(page).not_to have_selector('div.alert')
       end
     end

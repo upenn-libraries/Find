@@ -18,7 +18,6 @@ describe 'Catalog Show Page' do
   end
 
   it 'shows some item metadata' do
-    expect(page).to have_selector 'dd.blacklight-title_show'
     expect(page).to have_selector 'dd.blacklight-creator_show'
   end
 
@@ -28,6 +27,7 @@ describe 'Catalog Show Page' do
   end
 
   it 'displays Staff view link' do
+    click_on I18n.t('blacklight.tools.title')
     expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{bib}/staff_view"
   end
 end

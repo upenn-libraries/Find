@@ -59,6 +59,11 @@ class CatalogController < ApplicationController
     config.index.constraints_component = Find::ConstraintsComponent
     config.index.document_component = Find::ResultsDocumentComponent
     config.show.document_component = Find::ShowDocumentComponent
+    config.show.show_tools_component = Find::ShowToolsComponent
+
+    # Configure local components for search session components that make the show page toolbar possible
+    config.track_search_session.item_pagination_component = Find::ServerItemPaginationComponent
+    config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -67,10 +72,9 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.add_show_tools_partial(:bookmark, component: Blacklight::Document::BookmarkComponent,
+    config.add_show_tools_partial(:bookmark, component: Find::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
-    config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false)
 
@@ -121,6 +125,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
+    config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss, label: I18n.t('results.creator')
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
     config.add_index_field :conference_ss, label: I18n.t('results.conference')
@@ -130,11 +135,10 @@ class CatalogController < ApplicationController
     config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
-    config.add_index_field :format_facet, label: I18n.t('results.format')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field :title_show, label: I18n.t('show.title.main'), accessor: :marc
+    config.add_show_field :format_facet, label: I18n.t('results.format')
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc

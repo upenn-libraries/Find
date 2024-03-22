@@ -1,0 +1,9 @@
+<%# Copied template from Blacklight v8.1.0 to remove sidebar area %>
+
+<% content_for(:content) do %>
+  <section class="<%= show_content_classes %>">
+    <%= yield %>
+  </section>
+<% end %>
+
+<%= render template: "layouts/blacklight/base" %>

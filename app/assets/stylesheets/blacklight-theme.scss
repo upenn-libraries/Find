@@ -1,7 +1,7 @@
 .navbar-search {
   background: var(--color-bg-gradient-2);
   padding: 1.5rem 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .navbar-search > .container {
@@ -12,7 +12,7 @@
 .navbar-search a {
   color: var(--color-fg-default);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: .15em;
   text-decoration-color: var(--color-fg-subtle);
 }
 
@@ -20,11 +20,15 @@
   text-decoration-thickness: 2px;
 }
 
-.search-query-form {
+.navbar-search .search-query-form {
   display: flex;
-  width: 100%;
+  width: 75%;
   font-size: 1.125rem;
-  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+
+  @media (max-width: 620px) {
+    width: 100%;
+  }
 }
 
 .search-q {
@@ -56,7 +60,7 @@
   color: var(--color-fg-accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: .15em;
 }
 
 .index_title > a:hover {
@@ -90,6 +94,7 @@
 
 .documents-list .document .document-title-heading {
   margin-bottom: 0.25rem;
+  font-size: 1.35rem;
 }
 
 .documents-list .document-metadata dt {
@@ -104,6 +109,10 @@
 
 .documents-list .document-metadata dd {
   color: var(--color-fg-subtle);
+}
+
+.documents-list .blacklight-format_facet {
+  font-weight: 500;
 }
 
 .document-metadata.row {
@@ -150,4 +159,8 @@
 pennlibs-footer {
   display: block;
   padding-top: 3rem;
+}
+
+label.toggle-bookmark {
+  min-width: auto;
 }

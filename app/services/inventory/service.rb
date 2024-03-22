@@ -6,6 +6,7 @@ module Inventory
   class Service
     MAX_BIBS_GET = 100 # 100 is Alma API max
     DEFAULT_LIMIT = 3
+    RESOURCE_LINK_LIMIT = 2
 
     class Error < StandardError; end
 
@@ -14,11 +15,12 @@ module Inventory
       # additional inventory data from Alma. The number of records returned can be limited via a parameter.
       #
       # @param document [SolrDocument]
-      # @param limit [Integer]
+      # @param api_limit [Integer]
+      # @param marc_limit [Integer]
       # @return [Inventory::Response]
-      def all(document, limit: DEFAULT_LIMIT)
-        marc = from_marc(document, limit)
-        api = from_api(document.id, limit)
+      def all(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
+        marc = from_marc(document, marc_limit)
+        api = from_api(document.id, api_limit)
 
         Inventory::Response.new(entries: marc + api)
       end
@@ -27,7 +29,7 @@ module Inventory
       # @param document [SolrDocument]
       # @param limit [Integer, nil]
       # @return [Inventory::Response]
-      def resource_links(document, limit = nil)
+      def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
 
         Inventory::Response.new(entries: entries)
@@ -45,7 +47,7 @@ module Inventory
 
       private
 
-      # Factory class method to create Inventory::Entry objects.
+      # Factory method to create Inventory::Entry objects.
       #
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
@@ -53,7 +55,7 @@ module Inventory
       def create_entry(mms_id, raw_data)
         case raw_data[:inventory_type]&.downcase
         when Entry::PHYSICAL
-          Inventory::Entry::Physical.new(mms_id, raw_data)
+          Inventory::Entry::Physical.new(mms_id: mms_id, **raw_data)
         when Entry::ELECTRONIC
           # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
           # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
@@ -63,7 +65,7 @@ module Inventory
           # - get policy?
           # - are all of these relevant all the time? if some of this information is only relevant on show page then our
           # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic.new(mms_id, raw_data)
+          Inventory::Entry::Electronic.new(mms_id: mms_id, **raw_data)
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
           # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
@@ -87,23 +89,24 @@ module Inventory
       # this only includes resources links available in the Bib MARC record.
       #
       # @param document [SolrDocument] document containing MARC with resource links
-      # @param _limit [Integer, nil]
+      # @param limit [Integer]
       # @return [Array<Inventory::Entry>]
-      def from_marc(document, _limit)
-        document.marc_resource_links.map.with_index do |link_data, i|
+      def from_marc(document, limit)
+        entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
+        entries.map.with_index do |link_data, i|
           create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK, id: i,
                                       href: link_data[:link_url], description: link_data[:link_text] })
         end
       end
 
-      # Converts holdings information retrieved from Alma into Inventory::Entry objects.
+      # Converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
-      # @param holdings [Array] holdings data from Availability API call
+      # @param inventory_data [Array] inventory data from Availability API call
       # @param mms_id [String]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def api_entries(holdings, mms_id, limit: nil)
-        sorted_data = holdings # TODO: add sorting logic, e.g., .sort_by { |entry| some_complex_logic }
+      def api_entries(inventory_data, mms_id, limit: nil)
+        sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
