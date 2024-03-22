@@ -1,0 +1,24 @@
+en:
+  alma:
+    availability:
+        available:
+          physical:
+            status: 'Available for checkout'
+            description: 'This item can be checked out by visiting the library.'
+          electronic:
+            status: 'Available online'
+            description: 'Online access to this resource is provided by Penn Libraries'
+        unavailable:
+          physical:
+            status: 'By Request'
+            description: 'Item cannot be checked out at the library but can be requested.'
+          electronic:
+            status: 'By Request'
+            description: 'This resource is unavailable.'
+        check_holdings:
+          physical:
+            status: 'Mixed Availability'
+            description: 'Some items are available, others may be requested.'
+          electronic:
+            status: 'Mixed Availability'
+            description: 'This resource may be unavailable.'

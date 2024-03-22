@@ -5,11 +5,11 @@ module Inventory
     # Electronic holding class
     class Electronic < Inventory::Entry
       # Base host, path, and params to electronic resource (portfolio)
-      HOST = 'upenn.alma.exlibrisgroup.com'
-      PATH = '/view/uresolver/01UPENN_INST/openurl'
+      HOST = Inventory::Constants::ERESOURCE_LINK_HOST
+      PATH = Inventory::Constants::ERESOURCE_LINK_PATH
       PARAMS = { Force_direct: true,
                  portfolio_pid: nil,
-                 rfr_id: 'info:sid/primo.exlibrisgroup.com',
+                 rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
                  'u.ignore_date_coverage': true }.freeze
 
       # @return [String, nil]
@@ -25,6 +25,20 @@ module Inventory
       # @return [String, nil]
       def status
         data[:activation_status]
+      end
+
+      # User-friendly display value for inventory entry status
+      # Electronic resources _should_ *ALWAYS* be "Available" - otherwise we shouldn't show them. If this proves to be
+      # true we can simplify this.
+      # @return [String, nil] status
+      def human_readable_status
+        case status&.downcase
+        when Constants::AVAILABLE then I18n.t('alma.availability.available.electronic.status')
+        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.electronic.status')
+        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.electronic.status')
+        else
+          status&.capitalize
+        end
       end
 
       # No location available for electronic entries.

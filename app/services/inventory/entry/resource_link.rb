@@ -29,7 +29,13 @@ module Inventory
 
       # @return [String]
       def status
-        'available'
+        Inventory::Constants::AVAILABLE
+      end
+
+      # ResourceLink entries are always available
+      # @return [String]
+      def human_readable_status
+        I18n.t('alma.availability.available.electronic.status')
       end
 
       # Format not available for resource link.

@@ -7,18 +7,24 @@ describe Inventory::Entry::Electronic do
       mms_id: '9977047322103681',
       portfolio_pid: '53496697910003681',
       collection_id: '61496697940003681',
-      activation_status: 'Available',
+      activation_status: Inventory::Constants::AVAILABLE.capitalize,
       library_code: 'VanPeltLib',
       collection: 'Nature Publishing Journals',
       coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
       interface_name: 'Nature',
-      inventory_type: 'electronic'
+      inventory_type: Inventory::Entry::ELECTRONIC
     )
   end
 
   describe '#status' do
     it 'returns expected status' do
-      expect(entry.status).to eq 'Available'
+      expect(entry.status).to eq Inventory::Constants::AVAILABLE.capitalize
+    end
+  end
+
+  describe '#human_readable_status' do
+    it 'returns expected human_readable_status' do
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.electronic.status')
     end
   end
 
@@ -43,8 +49,9 @@ describe Inventory::Entry::Electronic do
   describe '#href' do
     it 'returns the expected URI' do
       expect(entry.href).to eq(
-        "https://#{described_class::HOST}#{described_class::PATH}?Force_direct=true&portfolio_pid=" \
-        "#{entry.id}&rfr_id=info%3Asid%2Fprimo.exlibrisgroup.com&u.ignore_date_coverage=true"
+        "https://#{Inventory::Constants::ERESOURCE_LINK_HOST}#{Inventory::Constants::ERESOURCE_LINK_PATH}?" \
+        "Force_direct=true&portfolio_pid=#{entry.id}&" \
+        "rfr_id=#{CGI.escape(Inventory::Constants::ERESOURCE_LINK_RFR_ID)}&u.ignore_date_coverage=true"
       )
     end
   end

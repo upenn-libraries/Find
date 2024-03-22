@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :electronic_entry, class: 'Inventory::Entry::Electronic' do
     mms_id { '1234567890' }
-    activation_status { 'Available' }
+    activation_status { Inventory::Constants::AVAILABLE.capitalize }
     coverage_statement { 'Available from 01/06/2000 until 12/23/2021.' }
     portfolio_pid { '12345' }
     collection { 'Gale Academic OneFile' }
@@ -17,7 +17,7 @@ FactoryBot.define do
 
   factory :physical_entry, class: 'Inventory::Entry::Physical' do
     mms_id { '1234567890' }
-    availability { 'available' }
+    availability { Inventory::Constants::AVAILABLE }
     call_number { 'QD1 .C48' }
     holding_info { '1965-1971' }
     location_code { 'chemperi' }

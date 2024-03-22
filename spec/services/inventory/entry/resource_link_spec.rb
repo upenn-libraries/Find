@@ -7,7 +7,13 @@ describe Inventory::Entry::ResourceLink do
 
   describe '#status' do
     it 'returns expected status' do
-      expect(entry.status).to eq 'available'
+      expect(entry.status).to eq Inventory::Constants::AVAILABLE
+    end
+  end
+
+  describe '#human_readable_status' do
+    it 'returns expected human_readable_status' do
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.electronic.status')
     end
   end
 

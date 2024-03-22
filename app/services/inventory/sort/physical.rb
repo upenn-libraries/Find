@@ -44,9 +44,6 @@ module Inventory
 
       # Provides a convenient interface to retrieve sorting criteria for unsorted data
       class UnsortedInventory
-        AVAILABLE = 'available'
-        UNAVAILABLE = 'unavailable'
-
         # default priority value to use for unprioritized items. This number must be large because lower priority values
         # are ranked higher.
         DEFAULT_PRIORITY = 100
@@ -60,12 +57,12 @@ module Inventory
 
         # @return [Boolean]
         def available?
-          (data['availability'] == AVAILABLE) || aeon_requestable?
+          (data['availability'] == Inventory::Constants::AVAILABLE) || aeon_requestable?
         end
 
         # @return [Boolean]
         def unavailable?
-          data['availability'] == UNAVAILABLE
+          data['availability'] == Inventory::Constants::UNAVAILABLE
         end
 
         # @return [Boolean]
@@ -100,7 +97,7 @@ module Inventory
 
         # @return [Boolean]
         def aeon_requestable?
-          aeon_location? && (data['availability'] != UNAVAILABLE)
+          aeon_location? && (data['availability'] != Inventory::Constants::UNAVAILABLE)
         end
 
         # @return [Boolean]
