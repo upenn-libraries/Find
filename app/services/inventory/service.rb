@@ -80,7 +80,7 @@ module Inventory
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
-        inventory = gather_inventory_for mms_id: mms_id
+        inventory = gather_api_inventory mms_id: mms_id
         api_entries(inventory, mms_id, limit: limit)
       end
 
@@ -98,7 +98,7 @@ module Inventory
         end
       end
 
-      # Converts inventory information retrieved from Alma into Inventory::Entry objects.
+      # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
       # @param inventory_data [Array] inventory data from Availability API call
       # @param mms_id [String]
@@ -110,39 +110,50 @@ module Inventory
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
       end
 
-      # Handle "standalone" collection case, aka "Collection level record with collection as inventory"
-      # An availability call will return no indication that collections exist other than no holdings,
-      # but there may also be cases where we want to check for these collections even if portfolio info is returned?
-      # KatBur mentions Kanopy (MMS ID 9962827293503681) but that returns no portfolios....
-      # @todo Return Inventory Entry objects?
-      # @todo Also the skeleton rending will not function in this case....
-      def check_ecollection(mms_id, limit = nil)
-        collections = Alma::Bib.get_collections mms_id
-        collections = collections['electronic_collection']
-        limited_collections = limit ? collections.first(limit) : collections
-        limited_collections.filter_map do |collection_hash| # return hashes similar to portfolio??
-          collection = Alma::Electronic.get(collection_id: collection_hash['id'])
-          next if collection['id'].blank?
+      # Some electronic records have inventory as "E-Collection" records, which are not returned in the availability
+      # call. In this case, we check the Bib record for associated collections and shim them into a hash that can be
+      # used to build out an electronic inventory entry.
+      # @param mms_id [String]
+      # @return [Array, Array<Hash>]
+      def ecollection_inventory(mms_id)
+        ecollections = Alma::Bib.get_ecollections mms_id
+        ecollections['electronic_collection'].map.with_index do |collection_hash, index|
+          ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
 
-          { portfolio_pid: nil, # no portfolio id - this will be problematic for generating links
-            collection_id: collection['id'],
-            activation_status: 'Available',
-            library_code: collection.dig('library', 'value'),
-            collection: collection.dig('interface', 'name'),
-            coverage_statement: nil, # no viable value to use, may not be applicable
-            interface_name: collection['public_name_override'] || collection['public_name'],
-            url: collection['url_override'] || collection['url'],
-            inventory_type: 'electronic' }
+          ecollection_to_hash(ecollection, index)
         end
+      end
 
-        def gather_inventory(mms_id:)
-          holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings) # TODO: handle API error?
-          # check for holding type, if electronic, check for collections
-          # perform collection API call
-          # for each collection, fabricate hash of data from returned collection object
-          # return aggregate array
-          holdings = check_ecollection(mms_id, limit) if holdings.empty?
-        end
+      # @param mms_id [String]
+      # @return [null]
+      def gather_api_inventory(mms_id:)
+        inventory = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
+        return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
+
+        # for _ALL_ electronic cases, also check for ecollections
+        # TODO: figure out if we need to _ALWAYS_ check for ecollections - even if portfolios or (maybe?) resource link
+        #       entries are retunred
+        # return inventory unless holdings.empty? # uncomment this if we only want to check if no portfolios are present
+        ecollections = ecollection_inventory(mms_id)
+        inventory + ecollections
+      end
+
+      # Convert an Alma Collection object into a hash of data that can be used to build an electronic inventory entry
+      # @todo this is ugly - but doesn't seem worth adding in an additional Entry class for this edge case as that would
+      #       have impacts all throughout the app.
+      # @param collection [Alma::Electronic::Collection]
+      # @param index [Integer]
+      # @return [Hash{Symbol->String (frozen)}]
+      def ecollection_to_hash(collection, index)
+        { portfolio_pid: "ecollection_#{index + 1}",
+          collection_id: collection['id'],
+          activation_status: Inventory::Constants::AVAILABLE.capitalize,
+          library_code: collection.dig('library', 'value'),
+          collection: collection.dig('interface', 'name'),
+          coverage_statement: collection.dig('cdi_info', 'cdi_type', 'value'),
+          interface_name: collection['public_name_override'] || collection['public_name'],
+          url: collection['url_override'] || collection['url'],
+          inventory_type: Inventory::Entry::ELECTRONIC }
       end
     end
   end

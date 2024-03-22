@@ -1,5 +1,5 @@
 module AlmaGetBibCollections
-  def get_collections(id, args = {})
+  def get_ecollections(id, args = {})
     response = HTTParty.get(
       "#{self.bibs_base_path}/#{id}/e-collections",
       query: { mms_id: id }.merge(args),
