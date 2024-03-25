@@ -10,19 +10,16 @@ module Illiad
 
     attr_reader :data, :user_id
 
-    class << self
+    # @param user_id [String]
+    # @param options [Hash] request options
+    # @return [Illiad::User]
+    def self.find(user_id:, **options)
+      response = faraday.get("#{BASE_PATH}/#{user_id}", options)
 
-      # @param user_id [String]
-      # @param options [Hash] request options
-      # @return [Illiad::User]
-      def find(user_id:, **options)
-        response = faraday.get("#{BASE_PATH}/#{user_id}", options)
-
-        Illiad::User.new(data: response.body)
-      end
-
-      def create; end
+      new(data: response.body)
     end
+
+    def self.create; end
 
     # @param data [Hash] User data from Illiad Api response
     def initialize(data:)
@@ -35,7 +32,7 @@ module Illiad
     def requests(**options)
       response = faraday.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options)
 
-      Illiad::RequestSet.new(requests: response.body)
+      @requests ||= Illiad::RequestSet.new(requests: response.body)
     end
   end
 end

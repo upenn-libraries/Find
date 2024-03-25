@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Illiad
-
   # Provides a Faraday::Connection to perform requests
   # @return [Faraday::Connection]
   module Connection
