@@ -1,32 +1,38 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  describe '.all' do
-    let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
+  # Mock Alma API gem behavior for physical inventory lookups.
+  # TODO: share this context among other specs?
+  shared_context 'with mocked Alma availability requests' do
     let(:availability_data) do
-      { '9979338417503681' =>
-          { holdings: [{ 'holding_id' => '22810131440003681',
-                         'institution' => '01UPENN_INST',
-                         'library_code' => 'VanPeltLib',
-                         'location' => 'Stacks',
-                         'call_number' => 'HQ801 .D43 1997',
-                         'availability' => Inventory::Constants::AVAILABLE,
-                         'total_items' => '1',
-                         'non_available_items' => '0',
-                         'location_code' => 'vanp',
-                         'call_number_type' => '0',
-                         'priority' => '1',
-                         'library' => 'Van Pelt Library',
-                         'inventory_type' => Inventory::Entry::PHYSICAL }] } }
+      base_holding = { 'holding_id' => '22810131440003681',
+                       'institution' => '01UPENN_INST',
+                       'library_code' => 'VanPeltLib',
+                       'location' => 'Stacks',
+                       'call_number' => 'HQ801 .D43 1997',
+                       'availability' => Inventory::Constants::AVAILABLE,
+                       'total_items' => '1',
+                       'non_available_items' => '0',
+                       'location_code' => 'vanp',
+                       'call_number_type' => '0',
+                       'priority' => '1',
+                       'library' => 'Van Pelt Library',
+                       'inventory_type' => Inventory::Entry::PHYSICAL }
+
+      holdings = (1..4).map do |i|
+        base_holding.dup.tap do |h|
+          h['holding_id'] = i
+          h['call_number'] = "#{h['call_number']} copy i"
+        end
+      end
+
+      { mms_id => { holdings: holdings } }
     end
     let(:item_data) do
       { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
         'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
     end
-    let(:response) { described_class.all(document) }
 
-    # mock Alma API gem behavior for physical inventory lookups
-    # TODO: add to a shared context? could be useful in future specs
     before do
       # stub Alma API gem availability response to return a double
       availability_double = instance_double(Alma::AvailabilityResponse)
@@ -43,6 +49,14 @@ describe Inventory::Service do
       # stub the item_data for the Alma::BibItem object
       allow(bib_item_double).to receive(:item_data).and_return(item_data)
     end
+  end
+
+  describe '.full' do
+    include_context 'with mocked Alma availability requests'
+
+    let(:mms_id) { '9979338417503681' }
+    let(:document) { SolrDocument.new({ id: mms_id }) }
+    let(:response) { described_class.full(document) }
 
     it 'returns a Inventory::Response object' do
       expect(response).to be_a Inventory::Response
@@ -50,6 +64,48 @@ describe Inventory::Service do
 
     it 'iterates over returned entries' do
       expect(response.first).to be_a Inventory::Entry
+    end
+
+    it 'returns all entries' do
+      expect(response.count).to be 4
+    end
+  end
+
+  describe '.brief' do
+    include_context 'with mocked Alma availability requests'
+
+    let(:mms_id) { '9979338417503681' }
+    let(:document) { SolrDocument.new({ id: mms_id }) }
+    let(:response) { described_class.brief(document) }
+
+    # Mocking resource links.
+    before do
+      allow(document).to receive(:marc_resource_links).and_return(
+        [{ link_text: 'Intro', link_url: "http://book.com/intro" },
+         { link_text: 'Part 1', link_url: "http://book.com/part1" },
+         { link_text: 'Part 2', link_url: "http://book.com/part2" }]
+      )
+    end
+
+    it 'returns a Inventory::Response object' do
+      expect(response).to be_a Inventory::Response
+    end
+
+    it 'iterates over returned entries' do
+      expect(response.first).to be_a Inventory::Entry
+    end
+
+    it 'returns only 5 entries' do
+      expect(response.count).to be 5
+    end
+
+    it 'returns only 3 api entries' do
+      expect(response.select { |e| e.physical? }.count).to be Inventory::Service::DEFAULT_LIMIT
+
+    end
+
+    it 'returns only 2 resource links' do
+      expect(response.select { |e| e.resource_link? }.count).to be Inventory::Service::RESOURCE_LINK_LIMIT
     end
   end
 
