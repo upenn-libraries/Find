@@ -75,9 +75,9 @@ module Illiad
       DateTime.new(data[:TransactionDate])
     end
 
-    # @return [String, nil]
+    # @return [DateTime]
     def due_date
-      data[:DueDate]
+      DateTime.new(data[:DueDate])
     end
 
     # @return [Boolean]
@@ -89,7 +89,7 @@ module Illiad
     def books_by_mail?
       return loan? unless loan?
 
-      item_data.title.start_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
+      item_data.title&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
     end
 
     # @return [Boolean]
