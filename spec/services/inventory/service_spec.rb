@@ -17,20 +17,7 @@ describe Inventory::Service do
     context 'with a record having Physical inventory' do
       let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
       let(:availability_data) do
-        { '9979338417503681' =>
-            { holdings: [{ 'holding_id' => '22810131440003681',
-                           'institution' => '01UPENN_INST',
-                           'library_code' => 'VanPeltLib',
-                           'location' => 'Stacks',
-                           'call_number' => 'HQ801 .D43 1997',
-                           'availability' => Inventory::Constants::AVAILABLE,
-                           'total_items' => '1',
-                           'non_available_items' => '0',
-                           'location_code' => 'vanp',
-                           'call_number_type' => '0',
-                           'priority' => '1',
-                           'library' => 'Van Pelt Library',
-                           'inventory_type' => Inventory::Entry::PHYSICAL }] } }
+        { '9979338417503681' => { holdings: [build(:physical_availability_data)] } }
       end
       let(:item_data) do
         { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
@@ -60,23 +47,8 @@ describe Inventory::Service do
     context 'with a record having Electronic inventory' do
       let(:document) { SolrDocument.new({ id: '9977568423203681' }) }
       let(:availability_data) do
-        { '9977568423203681' =>
-            { holdings: [{ 'portfolio_pid' => '53671045450003681',
-                           'collection_id' => '61468379530003681',
-                           'activation_status' => Inventory::Constants::ELEC_AVAILABLE,
-                           'library_code' => 'VanPeltLib',
-                           'collection' => 'Publisher website',
-                           'public_note' => '<font color="red"><b>Note: Use this link</b></font>',
-                           'coverage_statement' => 'Available from 1851.',
-                           'interface_name' => 'Miscellaneous Ejournals',
-                           'inventory_type' => Inventory::Entry::ELECTRONIC },
-                         { 'portfolio_pid' => '53601356980003681',
-                           'collection_id' => '61468362070003681',
-                           'activation_status' => Inventory::Constants::ELEC_UNAVAILABLE,
-                           'collection' => 'Factiva',
-                           'coverage_statement' => 'Available from 01/29/2012.',
-                           'interface_name' => 'Factiva',
-                           'inventory_type' => Inventory::Entry::ELECTRONIC }] } }
+        { '9977568423203681' => { holdings: [build(:electronic_availability_data),
+                                             build(:electronic_availability_data, :unavailable)] } }
       end
 
       it 'does not include unavailable entries' do
@@ -86,8 +58,6 @@ describe Inventory::Service do
       end
     end
   end
-
-
 
   # TODO: add more substance here as this method is more clearly defined
   describe '.electronic_detail' do
