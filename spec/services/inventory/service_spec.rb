@@ -81,9 +81,9 @@ describe Inventory::Service do
     # Mocking resource links.
     before do
       allow(document).to receive(:marc_resource_links).and_return(
-        [{ link_text: 'Intro', link_url: "http://book.com/intro" },
-         { link_text: 'Part 1', link_url: "http://book.com/part1" },
-         { link_text: 'Part 2', link_url: "http://book.com/part2" }]
+        [{ link_text: 'Intro', link_url: 'http://book.com/intro' },
+         { link_text: 'Part 1', link_url: 'http://book.com/part1' },
+         { link_text: 'Part 2', link_url: 'http://book.com/part2' }]
       )
     end
 
@@ -100,12 +100,11 @@ describe Inventory::Service do
     end
 
     it 'returns only 3 api entries' do
-      expect(response.select { |e| e.physical? }.count).to be Inventory::Service::DEFAULT_LIMIT
-
+      expect(response.count(&:physical?)).to be Inventory::Service::DEFAULT_LIMIT
     end
 
     it 'returns only 2 resource links' do
-      expect(response.select { |e| e.resource_link? }.count).to be Inventory::Service::RESOURCE_LINK_LIMIT
+      expect(response.count(&:resource_link?)).to be Inventory::Service::RESOURCE_LINK_LIMIT
     end
   end
 

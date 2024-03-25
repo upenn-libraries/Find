@@ -5,7 +5,7 @@ require 'system_helper'
 describe 'Catalog Index Page' do
   before do
     SampleIndexer.index 'print_monograph.json'
-    allow(Inventory::Service).to receive(:all).and_return(Inventory::Response.new(entries: []))
+    allow(Inventory::Service).to receive(:brief).and_return(Inventory::Response.new(entries: []))
     visit root_path
   end
 
@@ -24,9 +24,15 @@ describe 'Catalog Index Page' do
     expect(page).to have_selector 'article.document-position-1'
   end
 
-  it 'opens a result page' do
-    click_on I18n.t('search.button.label')
-    within('article.document-position-1') { find('a').click }
-    expect(page).to have_selector 'section.show-document'
+  context 'when navigating to a SHOW page' do
+    before do
+      allow(Inventory::Service).to receive(:full).and_return(Inventory::Response.new(entries: []))
+    end
+
+    it 'opens a result page' do
+      click_on I18n.t('search.button.label')
+      within('article.document-position-1') { find('a').click }
+      expect(page).to have_selector 'section.show-document'
+    end
   end
 end

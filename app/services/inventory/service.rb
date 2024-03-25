@@ -11,7 +11,6 @@ module Inventory
     class Error < StandardError; end
 
     class << self
-
       # Returns full inventory for a bib record.
       #
       # This method extracts all resources links for the MARC record and fetches additional inventory data from Alma.
