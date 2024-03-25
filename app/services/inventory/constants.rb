@@ -6,6 +6,8 @@ module Inventory
     AVAILABLE = 'available'
     CHECK_HOLDINGS = 'check_holdings'
     UNAVAILABLE = 'unavailable'
+    ELEC_AVAILABLE = 'Available'
+    ELEC_UNAVAILABLE = 'Not Available'
 
     # Values used to generate links to electronic items
     ERESOURCE_LINK_HOST = 'upenn.alma.exlibrisgroup.com'
