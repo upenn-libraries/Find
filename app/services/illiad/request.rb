@@ -2,13 +2,16 @@
 
 module Illiad
   # Represents a request in Illiad
-  # provides class methods to submit and find requests in Illiad
+  # provides class methods to create, find, and update requests in Illiad
   class Request
-    include Connection
+    class Error < StandardError; end
+    extend Connection
 
     BASE_PATH = '/Transaction'
     NOTES_PATH = '/notes'
-    # These constants can probably live on the class that prepares yhe data we send
+    ROUTE_PATH = '/route'
+    CANCELLED_BY_USER_STATUS = ''
+    # These constants can probably live on the class that prepares the data we send
     # in our requests to Illiad
     BOOKS_BY_MAIL = 'Books by Mail'
     BOOKS_BY_MAIL_REGEX = /^BBM /
@@ -17,34 +20,48 @@ module Illiad
 
     attr_reader :data, :item_data, :id, :user
 
-    # Create a new request in Illiad
+    # Create a new request in Illiad, defaults to 'Article' type unless 'RequestType' parameter included in data hash
+    # Wraps the POST 'Transaction' endpoint
     # @param data [Hash] Illiad transaction data
+    # @param data [String] :UserName required field
+    # @param data [String] :ProcessType required field
     # @return [Illiad::Request]
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request
       response = faraday.post(BASE_PATH, data)
-
+      rescue_errors(custom_error: Error)
       new(data: response.body)
     end
 
-    # Create a note for a request
+    # Find an Illiad request
+    # Wraps the GET 'Transaction' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @return [Illiad::Request]
+    def self.find(id:)
+      response = faraday.get("#{BASE_PATH}/#{id}", options)
+      rescue_errors(custom_error: Error)
+      new(data: response.body)
+    end
+
+    # Cancel an Illiad request
+    # Wraps the PUT 'Routing Transaction Request' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @return [Hash]
+    def self.cancel(id:)
+      response = faraday.put("#{BASE_PATH}/#{id}#{ROUTE_PATH}", { Status: CANCELLED_BY_USER_STATUS })
+      rescue_errors(custom_error: Error)
+      response.body
+    end
+
+    # Create a note for an Illiad request
+    # Wraps POST 'Transaction Note' endpoint
     # @param id [Integer] Illiad transaction number
     # @param note [String]
     # @return [Hash]
     def self.add_note(id:, note:)
-      response = faraday.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
-
+      response = faraday.post("#{BASE_PATH}/#{id}#{NOTES_PATH}", { Note: note })
+      rescue_errors(custom_error: Error)
       response.body
-    end
-
-    # Find an Illiad request
-    # @param id [Integer] Illiad transaction number
-    # @param options [Hash] request options
-    # @return [Illiad::Response]
-    def self.find(id:, **options)
-      response = faraday.get("#{BASE_PATH}/#{id}", options)
-
-      new(data: response.body)
     end
 
     # @param data [Hash]
@@ -72,12 +89,12 @@ module Illiad
 
     # @return [DateTime, nil]
     def date
-      DateTime.new(data[:TransactionDate])
+      DateTime.strptime(data[:TransactionDate]) if data[:TransactionDate].present?
     end
 
-    # @return [DateTime]
+    # @return [DateTime, nil]
     def due_date
-      DateTime.new(data[:DueDate])
+      DateTime.strptime(data[:DueDate]) if data[:TransactionDate].present?
     end
 
     # @return [Boolean]

@@ -4,11 +4,9 @@ module Illiad
   # Provides a Faraday::Connection to perform requests
   # @return [Faraday::Connection]
   module Connection
-    include ApiDefaults
-
     # Establish Faraday connection with default values
-    def faraday(options)
-      Faraday.new(url: base_url, **options) do |config|
+    def faraday
+      Faraday.new(url: base_url) do |config|
         # Sets the required credentials in the Authorization header
         config.request :authorization, authorization_field, credential
         # Sets the Content-Type header to application/json on each request.
@@ -27,6 +25,45 @@ module Illiad
           config.response :json
         end
       end
+    end
+
+    # @return [String]
+    def secure_version_path
+      '/SystemInfo/SecurePlatformVersion'
+    end
+
+    private
+
+    # @return [Symbol]
+    def authorization_field
+      :''
+    end
+
+    # @return [String]
+    def base_url
+      ''
+    end
+
+    # @return [String]
+    def credential
+      ''
+    end
+
+    # Handle errors raised on bad responses
+    # @param custom_error [Class<StandardError>]
+    def rescue_errors(custom_error:)
+    rescue Faraday::Error => e
+      raise custom_error, "Illiad API error. #{error_messages(e)}".strip
+    end
+
+    # Retrieve error message and validation errors for bad (400) requests
+    # @param error [Faraday::Error]
+    # @return [String]
+    def error_messages(error)
+      error_message = error.response_body['Message']
+      validation_errors = error.response_body['ModelState'].flat_map { |_field, value| value }.join(' ')
+
+      "#{error_message} #{validation_errors}".strip
     end
   end
 end
