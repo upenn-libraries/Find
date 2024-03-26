@@ -1,16 +1,18 @@
 <div class="request__container">
   <h1 class="request__heading"><%= t('item_requests.heading') %></h1>
   <div class="request__options">
-    <%= form_with(url: '/') do |form| %>
+    <%= form_with(url: submit_item_request_path, method: :post) do |form| %>
       <div class="mb-3">
         <%= form.label :item, t('item_requests.item_label'), { class: 'form-label' } %>
-        <%= form.select(:item, @item_labels, {}, { class: 'form-select' }) %>
+        <%= form.select(:item, @item_labels, {}, { class: 'form-select'} ) %>
       </div>
 
       <div class="mb-3">
         <%= form.label :location,t('item_requests.location_label'), { class: 'form-label' } %>
-        <%= form.select(:location, %w[location_one location_two], {}, { class: 'form-select' }) %>
+        <%= form.select(:location, options_for_select(@locations, 'VanPeltLib'), {}, { class: 'form-select' }) %>
       </div>
+
+      <%= form.hidden_field :mms_id, value: @mms_id %>
 
       <%= submit_tag(t('item_requests.request'), { class: 'btn btn-success' }) %>
     <% end %>
