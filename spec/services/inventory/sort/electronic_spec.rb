@@ -3,7 +3,10 @@
 describe Inventory::Sort::Electronic do
   describe '.sort' do
     let(:sorted_data) { described_class.new(data).sort }
-    let(:data) { [{ 'interface_name' => 'Nature' }, { 'collection' => 'Publisher website' }] }
+    let(:data) do
+      [build(:electronic_availability_data, interface_name: 'Nature'),
+       build(:electronic_availability_data, collection: 'Publisher website')]
+    end
 
     it 'sorts by highest valued collection or interface' do
       expect(sorted_data).to eq [data.last, data.first]
