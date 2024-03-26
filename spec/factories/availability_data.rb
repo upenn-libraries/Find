@@ -59,9 +59,9 @@ FactoryBot.define do
     sequence(:num) { |n| n }
 
     link_text { "Part #{num}" }
-    link_url { "https://www.apotheca.com/record/#{num}/" }
+    link_url { "https://www.colenda.com/record/#{num}/" }
 
     skip_create
-    initialize_with { attributes.stringify_keys }
+    initialize_with { attributes }
   end
 end

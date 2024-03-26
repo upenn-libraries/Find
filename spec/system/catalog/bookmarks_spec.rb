@@ -4,7 +4,7 @@ require 'system_helper'
 
 describe 'Catalog Bookmarks Page' do
   before do
-    allow(Inventory::Service).to receive(:all).and_return(Inventory::Response.new(entries: []))
+    allow(Inventory::Service).to receive(:brief).and_return(Inventory::Response.new(entries: []))
     SampleIndexer.index 'print_monograph.json'
     visit root_path
     click_on 'Find it'

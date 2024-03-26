@@ -7,7 +7,7 @@ describe 'Catalog Show Page' do
 
   before do
     SampleIndexer.index 'print_monograph.json'
-    allow(Inventory::Service).to receive(:all).and_return(Inventory::Response.new(entries: []))
+    allow(Inventory::Service).to receive(:full).and_return(Inventory::Response.new(entries: []))
     visit solr_document_path bib
   end
 
@@ -21,9 +21,15 @@ describe 'Catalog Show Page' do
     expect(page).to have_selector 'dd.blacklight-creator_show'
   end
 
-  it 'returns to Index when search is executed' do
-    click_on I18n.t('search.button.label')
-    expect(page).to have_selector 'article.document-position-1'
+  context 'when returning to search results' do
+    before do
+      allow(Inventory::Service).to receive(:brief).and_return(Inventory::Response.new(entries: []))
+    end
+
+    it 'returns to Index' do
+      click_on I18n.t('search.button.label')
+      expect(page).to have_selector 'article.document-position-1'
+    end
   end
 
   context 'with show tools' do

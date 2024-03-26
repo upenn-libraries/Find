@@ -11,21 +11,38 @@ module Inventory
     class Error < StandardError; end
 
     class << self
-      # Returns the whole inventory for a Bib record. It will extract resource links from the MARC record and fetch
-      # additional inventory data from Alma. The number of records returned can be limited via a parameter.
+      # Returns full inventory for a bib record.
+      #
+      # This method extracts all resources links for the MARC record and fetches additional inventory data from Alma.
+      #
+      # @param document [SolrDocument]
+      # @return [Inventory::Response]
+      def full(document)
+        marc = from_marc(document, nil)
+        api = from_api(document.id, nil)
+
+        Inventory::Response.new(entries: marc + api)
+      end
+
+      # Returns a brief inventory for a bib record.
+      #
+      # This method extracts resource links from the MARC record and fetches additional inventory data from Alma. The
+      # number of records returned are limited by defaults, but those can be customized if a different number of
+      # results is desired.
       #
       # @param document [SolrDocument]
       # @param api_limit [Integer]
       # @param marc_limit [Integer]
       # @return [Inventory::Response]
-      def all(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
+      def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
         marc = from_marc(document, marc_limit)
         api = from_api(document.id, api_limit)
 
         Inventory::Response.new(entries: marc + api)
       end
 
-      # Get inventory entries stored in the document's MARC fields
+      # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
+      #
       # @param document [SolrDocument]
       # @param limit [Integer, nil]
       # @return [Inventory::Response]
@@ -89,7 +106,7 @@ module Inventory
       # this only includes resources links available in the Bib MARC record.
       #
       # @param document [SolrDocument] document containing MARC with resource links
-      # @param limit [Integer]
+      # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
       def from_marc(document, limit)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
