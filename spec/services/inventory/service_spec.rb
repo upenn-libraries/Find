@@ -24,7 +24,7 @@ describe Inventory::Service do
       end
 
       it 'retrieves format data for an item' do
-        expect(response.first.format).to eq 'Book'
+        expect(response.first.format).to eq item_data['physical_material_type']['desc']
       end
     end
 
@@ -36,9 +36,7 @@ describe Inventory::Service do
       end
 
       it 'does not include unavailable entries' do
-        expect(
-          response.collect(&:status)
-        ).not_to include Inventory::Constants::ELEC_UNAVAILABLE
+        expect(response.collect(&:status)).not_to include Inventory::Constants::ELEC_UNAVAILABLE
       end
     end
   end
@@ -107,7 +105,7 @@ describe Inventory::Service do
     context 'with resource link inventory type' do
       let(:data) { { inventory_type: Inventory::Entry::RESOURCE_LINK, href: '', description: '', id: 1 } }
 
-      it 'returns Inventory::Entry::Electronic object' do
+      it 'returns Inventory::Entry::ResourceLink object' do
         expect(inventory_class).to be_a(Inventory::Entry::ResourceLink)
       end
     end
