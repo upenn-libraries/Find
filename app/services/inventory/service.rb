@@ -81,6 +81,7 @@ module Inventory
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
         inventory = gather_api_inventory mms_id: mms_id
+        inventory = only_available(inventory) if are_electronic?(inventory)
         api_entries(inventory, mms_id, limit: limit)
       end
 
@@ -108,6 +109,22 @@ module Inventory
         sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
+      end
+
+      # Return only available electronic holdings
+      # @param holdings [Array]
+      # @return [Array]
+      def only_available(holdings)
+        holdings.select { |h| h['activation_status'] == Constants::ELEC_AVAILABLE }
+      end
+
+      # Is the holdings data of the electronic type?
+      # @param holdings [Array]
+      # @return [Boolean]
+      def are_electronic?(holdings)
+        return false unless holdings.any?
+
+        holdings.first['inventory_type'] == Entry::ELECTRONIC
       end
 
       # Some electronic records have inventory as "E-Collection" records, which are not returned in the availability

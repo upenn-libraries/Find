@@ -2,54 +2,42 @@
 
 describe Inventory::Service do
   describe '.all' do
-    let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
-    let(:availability_data) do
-      { '9979338417503681' =>
-          { holdings: [{ 'holding_id' => '22810131440003681',
-                         'institution' => '01UPENN_INST',
-                         'library_code' => 'VanPeltLib',
-                         'location' => 'Stacks',
-                         'call_number' => 'HQ801 .D43 1997',
-                         'availability' => Inventory::Constants::AVAILABLE,
-                         'total_items' => '1',
-                         'non_available_items' => '0',
-                         'location_code' => 'vanp',
-                         'call_number_type' => '0',
-                         'priority' => '1',
-                         'library' => 'Van Pelt Library',
-                         'inventory_type' => Inventory::Entry::PHYSICAL }] } }
-    end
-    let(:item_data) do
-      { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
-        'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
-    end
     let(:response) { described_class.all(document) }
 
-    # mock Alma API gem behavior for physical inventory lookups
-    # TODO: add to a shared context? could be useful in future specs
-    before do
-      # stub Alma API gem availability response to return a double
-      availability_double = instance_double(Alma::AvailabilityResponse)
-      allow(Alma::Bib).to receive(:get_availability).and_return(availability_double)
-      # stub response double to return the availability data we want it to
-      allow(availability_double).to receive(:availability).and_return(availability_data)
+    include_context 'with stubbed availability_data'
 
-      # stub Alma API gem item lookup to return a double for an Alma::BibItemSet
-      bib_item_set_double = instance_double(Alma::BibItemSet)
-      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      bib_item_double = instance_double(Alma::BibItem)
-      # stub the set to return our item double
-      allow(bib_item_set_double).to receive(:items).and_return([bib_item_double])
-      # stub the item_data for the Alma::BibItem object
-      allow(bib_item_double).to receive(:item_data).and_return(item_data)
+    context 'with a record having Physical inventory' do
+      let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
+      let(:availability_data) do
+        { '9979338417503681' => { holdings: [build(:physical_availability_data)] } }
+      end
+      let(:item_data) { build(:item_data) }
+
+      include_context 'with stubbed availability item_data'
+
+      it 'returns a Inventory::Response object' do
+        expect(response).to be_a Inventory::Response
+      end
+
+      it 'iterates over returned entries' do
+        expect(response.first).to be_a Inventory::Entry
+      end
+
+      it 'retrieves format data for an item' do
+        expect(response.first.format).to eq item_data['physical_material_type']['desc']
+      end
     end
 
-    it 'returns a Inventory::Response object' do
-      expect(response).to be_a Inventory::Response
-    end
+    context 'with a record having Electronic inventory' do
+      let(:document) { SolrDocument.new({ id: '9977568423203681' }) }
+      let(:availability_data) do
+        { '9977568423203681' => { holdings: [build(:electronic_availability_data),
+                                             build(:electronic_availability_data, :unavailable)] } }
+      end
 
-    it 'iterates over returned entries' do
-      expect(response.first).to be_a Inventory::Entry
+      it 'does not include unavailable entries' do
+        expect(response.collect(&:status)).not_to include Inventory::Constants::ELEC_UNAVAILABLE
+      end
     end
   end
 
@@ -117,7 +105,7 @@ describe Inventory::Service do
     context 'with resource link inventory type' do
       let(:data) { { inventory_type: Inventory::Entry::RESOURCE_LINK, href: '', description: '', id: 1 } }
 
-      it 'returns Inventory::Entry::Electronic object' do
+      it 'returns Inventory::Entry::ResourceLink object' do
         expect(inventory_class).to be_a(Inventory::Entry::ResourceLink)
       end
     end
