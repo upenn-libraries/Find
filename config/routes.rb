@@ -47,4 +47,6 @@ Rails.application.routes.draw do
   end
 
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
+
+  get 'item_requests/new', to: 'item_requests#new', as: 'new_item_request'
 end

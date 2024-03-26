@@ -54,6 +54,11 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
+  item_requests:
+    request: 'Request item'
+    heading: 'Request'
+    item_label: 'Item'
+    location_label: 'Location'
   search:
     all_fields: 'All Fields'
     button:
