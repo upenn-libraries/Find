@@ -148,6 +148,8 @@ module Inventory
       # @return [Array, Array<Hash>]
       def ecollection_inventory(mms_id)
         ecollections = Alma::Bib.get_ecollections mms_id
+        return [] if ecollections.key? 'errorsExist'
+
         ecollections['electronic_collection'].map.with_index { |collection_hash, index|
           ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
           hash = ecollection_to_hash(ecollection, index)
