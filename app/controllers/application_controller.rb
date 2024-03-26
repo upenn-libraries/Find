@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
   # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
   layout :determine_layout if respond_to? :layout
-  after_action :store_action
+  after_action :store_action, unless: :should_not_store_action?
+
+  def store_action
+    store_location_for(:user, request.fullpath)
+  end
 
   # In this application, it is important to redirect a user back to where they come from after they log in.
   # To do this, we use some built in Devise helpers to save a load stored locations. For example, if a user has
@@ -29,16 +33,14 @@ class ApplicationController < ActionController::Base
   # In some cases we may find it necessary to add to this list of exclusions. For example, if another login strategy
   # is added with a new login path, we'd want to stick that here. If we develop another service that makes a lot of
   # requests to another internal endpoint, that might be necessary to add.
-  def store_action
-    return unless request.get?
-    return unless is_navigational_format?
-    return if devise_controller?
-    return if request.xhr?
-    return if turbo_frame_request?
-    return if request.path == login_path
-    return if request.path == alma_login_path
-    return if request.path.ends_with? '/inventory'
-
-    store_location_for(:user, request.fullpath)
+  def should_not_store_action?
+    !request.get? ||
+      !is_navigational_format? ||
+      devise_controller? ||
+      request.xhr? ||
+      turbo_frame_request? ||
+      request.path == login_path ||
+      request.path == alma_login_path ||
+      request.path.ends_with?('inventory')
   end
 end
