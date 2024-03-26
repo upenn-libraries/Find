@@ -5,10 +5,14 @@ class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
 
-  # @param [Hash] args
   # @return [Inventory::Response]
-  def inventory(**args)
-    Inventory::Service.all self, **args
+  def full_inventory
+    Inventory::Service.full self
+  end
+
+  # @return [Inventory::Response]
+  def brief_inventory
+    Inventory::Service.brief self
   end
 
   # Return the sum of physical and electronic inventory entries from stored fields
