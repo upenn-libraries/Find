@@ -277,6 +277,16 @@ class CatalogController < ApplicationController
     end
   end
 
+  def electronic_detail
+    respond_to do |format|
+      format.html do
+        render(Find::ShowDocument::ElectronicDetailComponent.new(
+                 detail: Inventory::Service.electronic_detail(params[:id].to_s, params[:pid].to_s, params[:cid].to_s)
+               ), layout: false)
+      end
+    end
+  end
+
   def staff_view; end
 
   private

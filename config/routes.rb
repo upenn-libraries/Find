@@ -21,20 +21,19 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+
     get 'databases', to: 'catalog#databases'
   end
 
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
-    member do
-      get 'staff_view'
-    end
-
     concerns :exportable
 
     member do
       get 'inventory'
+      get 'staff_view'
+      get 'electronic_detail/:pid/:cid', to: 'catalog#electronic_detail', as: :electronic_detail
     end
   end
 
