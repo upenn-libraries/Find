@@ -29,4 +29,19 @@ describe 'Catalog Index Page' do
     within('article.document-position-1') { find('a').click }
     expect(page).to have_selector 'section.show-document'
   end
+
+  context 'when logged out' do
+    let(:user) { create(:user) }
+
+    before do
+      allow(User).to receive(:new).and_return(user)
+      allow(user).to receive(:exists_in_alma?).and_return(true)
+    end
+
+    it 'redirects to index page after login' do
+      visit login_path
+      click_on I18n.t('login.pennkey')
+      expect(page).to have_current_path(root_path)
+    end
+  end
 end
