@@ -117,11 +117,13 @@ module Inventory
       # @return [Array, Array<Hash>]
       def ecollection_inventory(mms_id)
         ecollections = Alma::Bib.get_ecollections mms_id
-        ecollections['electronic_collection'].map.with_index do |collection_hash, index|
+        ecollections['electronic_collection'].map.with_index { |collection_hash, index|
           ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
+          hash = ecollection_to_hash(ecollection, index)
+          next if hash[:url].blank? # Don't show an entry if we don't have a URL
 
-          ecollection_to_hash(ecollection, index)
-        end
+          hash
+        }.compact_blank
       end
 
       # @param mms_id [String]
@@ -131,16 +133,11 @@ module Inventory
         return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
 
         # for _ALL_ electronic cases, also check for ecollections
-        # TODO: figure out if we need to _ALWAYS_ check for ecollections - even if portfolios or (maybe?) resource link
-        #       entries are retunred
-        # return inventory unless holdings.empty? # uncomment this if we only want to check if no portfolios are present
         ecollections = ecollection_inventory(mms_id)
         inventory + ecollections
       end
 
       # Convert an Alma Collection object into a hash of data that can be used to build an electronic inventory entry
-      # @todo this is ugly - but doesn't seem worth adding in an additional Entry class for this edge case as that would
-      #       have impacts all throughout the app.
       # @param collection [Alma::Electronic::Collection]
       # @param index [Integer]
       # @return [Hash{Symbol->String (frozen)}]
@@ -149,10 +146,10 @@ module Inventory
           collection_id: collection['id'],
           activation_status: Inventory::Constants::AVAILABLE.capitalize,
           library_code: collection.dig('library', 'value'),
-          collection: collection.dig('interface', 'name'),
-          coverage_statement: collection.dig('cdi_info', 'cdi_type', 'value'),
-          interface_name: collection['public_name_override'] || collection['public_name'],
-          url: collection['url_override'] || collection['url'],
+          collection: collection['public_name_override'].presence || collection['public_name'].presence || 'Online',
+          coverage_statement: '', # TODO: Where is the coverage statement? 9979027310203681 should show coverage for Factiva.
+          interface_name: collection.dig('interface', 'name'),
+          url: collection['url_override'].presence || collection['url'],
           inventory_type: Inventory::Entry::ELECTRONIC }
       end
     end
