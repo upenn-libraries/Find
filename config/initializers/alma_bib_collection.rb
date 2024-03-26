@@ -10,7 +10,7 @@
 #
 # I wrote this in such a way that it could be offered as an MR to the Alma gem, eventually.
 #
-# rubocop:disable Style
+# rubocop:disable Style, Metrics
 module AlmaGetBibCollections
   # @param id [String]
   # @return [Array]
@@ -31,4 +31,4 @@ module AlmaGetBibCollections
 end
 
 Alma::Bib.extend(AlmaGetBibCollections)
-# rubocop:enable Style
+# rubocop:enable Style, Metrics

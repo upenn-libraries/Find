@@ -132,7 +132,11 @@ module Inventory
         inventory = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
 
-        # for _ALL_ electronic cases, also check for ecollections
+        # There is some confusion about whether we need to _ALWAYS_ check for ecollections - even if portfolios or
+        # entries are returned. Franklin only checks if the availability call returns no portfolios, so let's do that
+        # for now.
+        return inventory unless inventory.empty?
+
         ecollections = ecollection_inventory(mms_id)
         inventory + ecollections
       end
@@ -142,15 +146,15 @@ module Inventory
       # @param index [Integer]
       # @return [Hash{Symbol->String (frozen)}]
       def ecollection_to_hash(collection, index)
-        { portfolio_pid: "ecollection_#{index + 1}",
-          collection_id: collection['id'],
-          activation_status: Inventory::Constants::AVAILABLE.capitalize,
-          library_code: collection.dig('library', 'value'),
-          collection: collection['public_name_override'].presence || collection['public_name'].presence || 'Online',
-          coverage_statement: '', # TODO: Where is the coverage statement? 9979027310203681 should show coverage for Factiva.
-          interface_name: collection.dig('interface', 'name'),
-          url: collection['url_override'].presence || collection['url'],
-          inventory_type: Inventory::Entry::ELECTRONIC }
+        { 'portfolio_pid' => "ecollection_#{index + 1}",
+          'collection_id' => collection['id'],
+          'activation_status' => Inventory::Constants::AVAILABLE.capitalize,
+          'library_code' => collection.dig('library', 'value'),
+          'collection' => collection['public_name_override'].presence || collection['public_name'].presence || 'Online',
+          'coverage_statement' => '', # ecollections API doesn't return coverage
+          'interface_name' => collection.dig('interface', 'name'),
+          'url' => collection['url_override'].presence || collection['url'],
+          'inventory_type' => Inventory::Entry::ELECTRONIC }
       end
     end
   end
