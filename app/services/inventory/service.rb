@@ -127,6 +127,20 @@ module Inventory
         holdings.first['inventory_type'] == Entry::ELECTRONIC
       end
 
+      # @param mms_id [String]
+      # @return [null]
+      def gather_api_inventory(mms_id:)
+        inventory = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
+        return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
+
+        # There is some confusion about whether we need to _ALWAYS_ check for ecollections - even if portfolios or
+        # entries are returned. Franklin only checks for ecollections if the availability call returns no portfolios,
+        # so let's do that for now.
+        return inventory unless inventory.empty?
+
+        inventory + ecollection_inventory(mms_id)
+      end
+
       # Some electronic records have inventory as "E-Collection" records, which are not returned in the availability
       # call. In this case, we check the Bib record for associated collections and shim them into a hash that can be
       # used to build out an electronic inventory entry.
@@ -137,25 +151,10 @@ module Inventory
         ecollections['electronic_collection'].map.with_index { |collection_hash, index|
           ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
           hash = ecollection_to_hash(ecollection, index)
-          next if hash[:url].blank? # Don't show an entry if we don't have a URL
+          next if hash['url'].blank? # Don't show an entry if we don't have a URL
 
           hash
         }.compact_blank
-      end
-
-      # @param mms_id [String]
-      # @return [null]
-      def gather_api_inventory(mms_id:)
-        inventory = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
-        return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
-
-        # There is some confusion about whether we need to _ALWAYS_ check for ecollections - even if portfolios or
-        # entries are returned. Franklin only checks if the availability call returns no portfolios, so let's do that
-        # for now.
-        return inventory unless inventory.empty?
-
-        ecollections = ecollection_inventory(mms_id)
-        inventory + ecollections
       end
 
       # Convert an Alma Collection object into a hash of data that can be used to build an electronic inventory entry
