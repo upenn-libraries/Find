@@ -32,10 +32,10 @@ module Inventory
       # true we can simplify this.
       # @return [String, nil] status
       def human_readable_status
-        case status&.downcase
-        when Constants::AVAILABLE then I18n.t('alma.availability.available.electronic.status')
+        case status
+        when Constants::ELEC_AVAILABLE then I18n.t('alma.availability.available.electronic.status')
         when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.electronic.status')
-        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.electronic.status')
+        when Constants::ELEC_UNAVAILABLE then I18n.t('alma.availability.unavailable.electronic.status')
         else
           status&.capitalize
         end
