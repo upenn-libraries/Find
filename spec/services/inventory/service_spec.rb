@@ -11,10 +11,7 @@ describe Inventory::Service do
       let(:availability_data) do
         { '9979338417503681' => { holdings: [build(:physical_availability_data)] } }
       end
-      let(:item_data) do
-        { 'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' },
-          'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' } }
-      end
+      let(:item_data) { build(:item_data) }
 
       include_context 'with stubbed availability item_data'
 
@@ -24,6 +21,10 @@ describe Inventory::Service do
 
       it 'iterates over returned entries' do
         expect(response.first).to be_a Inventory::Entry
+      end
+
+      it 'retrieves format data for an item' do
+        expect(response.first.format).to eq 'Book'
       end
     end
 
