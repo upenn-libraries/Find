@@ -74,18 +74,9 @@ module Inventory
         when Entry::PHYSICAL
           Inventory::Entry::Physical.new(mms_id: mms_id, **raw_data)
         when Entry::ELECTRONIC
-          # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
-          # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
-          # additional values of interest:
-          # - get authentication notes / public notes when not found on portfolio
-          # - get coverage when not found on availability data or portfolio
-          # - get policy?
-          # - are all of these relevant all the time? if some of this information is only relevant on show page then our
-          # service needs a clean way of knowing when to make these potential additional requests
           Inventory::Entry::Electronic.new(mms_id: mms_id, **raw_data)
         when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
         else
-          # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
           raise Error, "Type: '#{raw_data[:inventory_type]}' not found"
         end
       end
@@ -147,15 +138,15 @@ module Inventory
       # @param mms_id [String]
       # @return [null]
       def gather_api_inventory(mms_id:)
-        inventory = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
-        return inventory if inventory.any? && inventory.first[:inventory_type] == Inventory::Entry::PHYSICAL
+        holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
+        return holdings if holdings.any? && are_electronic?(holdings)
 
         # There is some confusion about whether we need to _ALWAYS_ check for ecollections - even if portfolios or
         # entries are returned. Franklin only checks for ecollections if the availability call returns no portfolios,
         # so let's do that for now.
-        return inventory unless inventory.empty?
+        return holdings unless holdings.empty?
 
-        inventory + ecollection_inventory(mms_id)
+        holdings + ecollection_inventory(mms_id)
       end
 
       # Some electronic records have inventory as "E-Collection" records, which are not returned in the availability

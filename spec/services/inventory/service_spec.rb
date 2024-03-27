@@ -40,6 +40,25 @@ describe Inventory::Service do
       end
     end
 
+    context 'with a record having only Electronic inventory from a Collection record' do
+      let(:availability_data) { { mms_id => { holdings: [] } } }
+      let(:ecollections_data) { [build(:brief_ecollection_data)] }
+      let(:ecollection_data) { build(:full_ecollection_data) }
+
+      include_context 'with stubbed ecollections_data'
+      include_context 'with stubbed ecollection_data'
+
+      it 'returns a single electronic inventory entry' do
+        expect(response.first).to be_a Inventory::Entry::Electronic
+      end
+
+      it 'has the expected attribute values' do
+        entry = response.first
+        expect(entry.description).to eq ecollection_data['public_name_override']
+        expect(entry.href).to eq ecollection_data['url_override']
+      end
+    end
+
     context 'with a record having 4 electronic inventory entries' do
       let(:availability_data) do
         { mms_id => { holdings: build_list(:electronic_availability_data, 4) } }
