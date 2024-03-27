@@ -1,0 +1,89 @@
+<h1 class="page__heading">Request an item</h1>
+<p class="page__lede">Describe any item you need and we'll get it to you.</p>
+
+<div class="row">
+  <div class="col-5">
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required>
+      </div>
+      <div class="form-group mt-3">
+        <label for="author">Author</label>
+        <input class="form-control" id="author" required>
+      </div>
+      <div class="form-group mt-3">
+        <label for="year-of-publication">Year of publication</label>
+        <input class="form-control" id="year-of-publication" required>
+      </div>
+
+      <div class="form-group mt-4">
+        <fieldset>
+          <legend class="h5">Is this an article or chapter?</legend>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="is-article" id="article-no" value="article-no" checked>
+            <label class="form-check-label" for="article-no">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="is-article" id="article-yes" value="article-yes">
+            <label class="form-check-label" for="article-yes">Yes</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="interlibrary-loan__article-fields">
+        <div class="form-group mt-2">
+          <label for="Volume">Volume</label>
+          <input type="text" class="form-control" id="Volume">
+        </div>
+        <div class="form-group mt-3">
+          <label for="Issue">Issue</label>
+          <input class="form-control" id="Issue">
+        </div>
+        <div class="form-group mt-3">
+          <label for="pages">Pages</label>
+          <input class="form-control" id="pages">
+        </div>
+      </div>
+
+      <div class="form-group mt-4">
+        <fieldset>
+          <legend class="h5">How would you like this item delivered?</legend>
+          <p>Items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>. Articles, chapters, or a page range are sent to your email as a PDF.</p>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
+            <label class="form-check-label" for="delivery-pickup">
+              Pick up
+            </label>
+
+            <div class="input-group mb-2 mt-1">
+              <select class="custom-select p-2 rounded" id="inputGroupSelect01">
+                <option selected>Van Pelt Library</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
+            <label class="form-check-label" for="delivery-mail">Mail <br>
+            <small id="delivery-mail-help" class="form-text text-muted">For those registered with <a href="https://upenn.libwizard.com/f/books-by-mail">Books by Mail</a> at no charge.</small></label>
+          </div>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="radio" name="delivery" id="delivery-email" value="delivery-email" checked>
+            <label class="form-check-label" for="delivery-email">Email a PDF</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="btn btn-success btn-lg mt-4">Request it</button>
+    </form>
+  </div>
+</div>
+
+
+<!--
+https://franklin.library.upenn.edu/forms/resourcesharing
+https://franklin.library.upenn.edu/forms/ill?requesttype=book 
+-->
