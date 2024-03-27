@@ -6,7 +6,7 @@ module Find
     # @param document[SolrDocument]
     def initialize(document:)
       @id = document.id
-      @entries = document.inventory
+      @entries = document.brief_inventory
     end
   end
 end
