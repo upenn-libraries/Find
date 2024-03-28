@@ -65,7 +65,6 @@ module Inventory
 
       # @return [String, nil]
       def href
-        return ecollection_url if data[:url].present?
         return nil if id.blank?
 
         params = { **PARAMS, portfolio_pid: id }
@@ -75,15 +74,11 @@ module Inventory
       end
 
       # @return [String, nil]
-      def ecollection_url
-        data[:url]
-      end
-
-      # @return [String, nil]
       def collection_id
         data[:collection_id]
       end
 
+      # @return [Boolean]
       def electronic?
         true
       end

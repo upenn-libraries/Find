@@ -40,7 +40,7 @@ describe Inventory::Service do
       end
     end
 
-    context 'with a record having only Electronic inventory from a Collection record' do
+    context 'with a record having only Ecollection inventory' do
       let(:availability_data) { { mms_id => { holdings: [] } } }
       let(:ecollections_data) { [build(:brief_ecollection_data)] }
       let(:ecollection_data) { build(:full_ecollection_data) }
@@ -49,7 +49,7 @@ describe Inventory::Service do
       include_context 'with stubbed ecollection_data'
 
       it 'returns a single electronic inventory entry' do
-        expect(response.first).to be_a Inventory::Entry::Electronic
+        expect(response.first).to be_a Inventory::Entry::Ecollection
       end
 
       it 'has the expected attribute values' do
@@ -166,6 +166,14 @@ describe Inventory::Service do
 
       it 'returns Inventory::Entry::Electronic object' do
         expect(inventory_class).to be_a(Inventory::Entry::Electronic)
+      end
+    end
+
+    context 'with ecollection inventory type' do
+      let(:data) { { inventory_type: Inventory::Entry::ECOLLECTION } }
+
+      it 'returns Inventory::Entry::Electronic object' do
+        expect(inventory_class).to be_a(Inventory::Entry::Ecollection)
       end
     end
 

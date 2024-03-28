@@ -5,13 +5,14 @@ module Inventory
   class Entry
     PHYSICAL = 'physical'
     ELECTRONIC = 'electronic'
+    ECOLLECTION = 'ecollection'
     RESOURCE_LINK = 'resource_link'
 
     attr_reader :data, :mms_id
 
     # @param mms_id [String]
     # @param data [Hash] hash containing inventory data retrieved from Alma real time availability API
-    # See Alma::AvailabilityResponse for mapping of values into the raw_availability_data hash
+    # See Alma::AvailabilityResponse for mapping of values into the data hash
     def initialize(mms_id:, **data)
       @mms_id = mms_id
       @data = data

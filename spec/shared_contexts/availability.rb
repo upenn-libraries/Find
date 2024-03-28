@@ -35,12 +35,7 @@ end
 shared_context 'with stubbed ecollection_data' do
   before do
     ecollection_double = instance_double(Alma::Electronic::Collection)
-    allow(ecollection_double).to receive(:[]) do |arg|
-      ecollection_data[arg]
-    end
-    allow(ecollection_double).to receive(:dig) do |arg|
-      ecollection_data[arg]
-    end
+    allow(ecollection_double).to receive(:data).and_return(ecollection_data)
     allow(Alma::Electronic).to receive(:get).and_return(ecollection_double)
   end
 end

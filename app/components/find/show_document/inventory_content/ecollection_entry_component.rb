@@ -3,8 +3,8 @@
 module Find
   module ShowDocument
     module InventoryContent
-      # Component rendering the full view of a Electronic entry.
-      class ElectronicEntryComponent < ViewComponent::Base
+      # Component rendering the full view of a Ecollection entry.
+      class EcollectionEntryComponent < ViewComponent::Base
         attr_reader :entry
 
         # @param entry [Inventory::Entry]
