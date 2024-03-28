@@ -51,6 +51,7 @@ module Users
         redirect_to login_path
         set_flash_message :notice, :no_access
       elsif user.save
+        session[:user_group] = user.group
         sign_in_and_redirect user, event: :authentication
         set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
       else

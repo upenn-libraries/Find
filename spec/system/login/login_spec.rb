@@ -5,11 +5,14 @@ require 'system_helper'
 describe 'login page' do
   let(:user) { build(:user) }
 
-  before { visit login_path }
+  before do
+    allow(User).to receive(:new).and_return(user)
+    allow(user).to receive(:group).and_return('Faculty Staff')
+    visit login_path
+  end
 
   context 'when user exists in Alma' do
     before do
-      allow(User).to receive(:new).and_return(user)
       allow(user).to receive(:exists_in_alma?).and_return(true)
     end
 
@@ -22,7 +25,6 @@ describe 'login page' do
 
   context 'when user does not exist in Alma' do
     before do
-      allow(User).to receive(:new).and_return(user)
       allow(user).to receive(:exists_in_alma?).and_return(false)
     end
 

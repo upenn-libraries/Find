@@ -5,7 +5,11 @@ require 'system_helper'
 describe 'index page' do
   let(:user) { create(:user, :alma_authenticated) }
 
-  before { visit alma_login_path }
+  before do
+    allow(User).to receive(:new).and_return(user)
+    allow(user).to receive(:group).and_return('Faculty Staff')
+    visit alma_login_path
+  end
 
   context 'when Alma authentication succeeds' do
     before do

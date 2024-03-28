@@ -63,6 +63,10 @@ class User < ApplicationRecord
     false
   end
 
+  def group
+    Alma::User.find(uid).response.dig('user_group', 'desc')
+  end
+
   # Configuration added by Blacklight; Blacklight::User uses a method key on your
   # user class to get a user-displayable login/identifier for
   # the account.

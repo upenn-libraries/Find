@@ -3,10 +3,15 @@
 describe 'Omniauth Callbacks Requests' do
   let(:user) { build(:user) }
 
+  before do
+    allow(User).to receive(:new).and_return(user)
+    allow(user).to receive(:group).and_return('Library Staff')
+  end
+
   context 'with saml authentication' do
     context 'when the user has an Alma account' do
       before do
-        allow(User).to receive(:new).and_return(user)
+        # allow(User).to receive(:new).and_return(user)
         allow(user).to receive(:exists_in_alma?).and_return(true)
 
         post user_saml_omniauth_callback_path
@@ -24,7 +29,7 @@ describe 'Omniauth Callbacks Requests' do
 
     context 'when the user does not have an Alma account' do
       before do
-        allow(User).to receive(:new).and_return(user)
+        # allow(User).to receive(:new).and_return(user)
         allow(user).to receive(:exists_in_alma?).and_return(false)
 
         post user_saml_omniauth_callback_path
@@ -44,7 +49,7 @@ describe 'Omniauth Callbacks Requests' do
       let(:user) { create(:user) }
 
       before do
-        allow(User).to receive(:new).and_return(user)
+        # allow(User).to receive(:new).and_return(user)
         allow(user).to receive(:exists_in_alma?).and_return(false)
 
         post user_saml_omniauth_callback_path
@@ -59,7 +64,7 @@ describe 'Omniauth Callbacks Requests' do
       let(:user) { build(:user) }
 
       before do
-        allow(User).to receive(:new).and_return(user)
+        # allow(User).to receive(:new).and_return(user)
         allow(user).to receive(:exists_in_alma?).and_return(false)
 
         post user_saml_omniauth_callback_path
