@@ -57,8 +57,11 @@ en:
   item_requests:
     request: 'Request item'
     heading: 'Request'
+    holding_label: 'Holding'
     item_label: 'Item'
     location_label: 'Location'
+    add_comments: 'Add Comments'
+    comments_label: 'Comments'
   search:
     all_fields: 'All Fields'
     button:

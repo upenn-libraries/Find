@@ -1,20 +1,39 @@
 <div class="request__container">
   <h1 class="request__heading"><%= t('item_requests.heading') %></h1>
-  <div class="request__options">
+  <div class="request__options" data-controller="item-labels">
     <%= form_with(url: submit_item_request_path, method: :post) do |form| %>
       <div class="mb-3">
-        <%= form.label :item, t('item_requests.item_label'), { class: 'form-label' } %>
-        <%= form.select(:item, @item_labels, {}, { class: 'form-select'} ) %>
+        <%= form.label :holding_id, t('item_requests.holding_label'), { class: 'form-label' } %>
+        <%= form.select(:holding_id, options_for_select(@holding_labels, @holding_id), {},
+                        { class: 'form-select',
+                          data: { action: 'change->item-labels#selectChanged' } }) %>
       </div>
 
       <div class="mb-3">
-        <%= form.label :location,t('item_requests.location_label'), { class: 'form-label' } %>
-        <%= form.select(:location, options_for_select(@locations, 'VanPeltLib'), {}, { class: 'form-select' }) %>
+        <%= form.label :item, t('item_requests.item_label'), { class: 'form-label' } %>
+        <%= form.select(:item, @item_labels, {}, { class: 'form-select',
+                                                   data: { item_labels_target: 'itemSelect' } }) %>
       </div>
 
-      <%= form.hidden_field :mms_id, value: @mms_id %>
+      <div class="mb-3">
+        <%= form.label :location, t('item_requests.location_label'), { class: 'form-label' } %>
+        - <%= session[:user_group] %>
+        <%= form.select(:location, options_for_select(Settings.locations[:pickup], @default_library),
+                        {}, { class: 'form-select' }) %>
+      </div>
 
-      <%= submit_tag(t('item_requests.request'), { class: 'btn btn-success' }) %>
+      <div class="mb-3">
+        <%= link_to t('item_requests.add_comments'), '', { data: { action: 'click->item-labels#showCommentsArea' } } %>
+        <div class="d-none" data-item-labels-target="commentsArea">
+          <%= form.label :location, t('item_requests.comments_label'), { class: 'form-label' } %>
+          <%= form.text_area :comments, class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= form.hidden_field :mms_id, value: @mms_id, data: { item_labels_target: 'mmsIdField' } %>
+
+      <%= submit_tag(t('item_requests.request'), { class: 'btn btn-success',
+                                                   data: { item_labels_target: 'requestItemButton' } }) %>
     <% end %>
   </div>
 </div>

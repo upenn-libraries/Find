@@ -50,4 +50,5 @@ Rails.application.routes.draw do
 
   get 'item_requests/new', to: 'item_requests#new', as: 'new_item_request'
   post 'item_requests/submit', to: 'item_requests#submit', as: 'submit_item_request'
+  get 'item_requests/item_labels', to: 'item_requests#item_labels', as: 'item_labels'
 end
