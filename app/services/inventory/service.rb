@@ -134,13 +134,13 @@ module Inventory
         ecollections = Alma::Bib.get_ecollections mms_id
         return [] if ecollections.key? 'errorsExist'
 
-        ecollections['electronic_collection'].map.with_index { |collection_hash, index|
+        ecollections['electronic_collection'].filter_map do |collection_hash|
           ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
           next unless ecollection
 
           hash = ecollection.data
-          hash.merge({ 'id' => index, 'inventory_type' => Entry::ECOLLECTION })
-        }.compact_blank
+          hash.merge({'inventory_type' => Entry::ECOLLECTION })
+        end
       end
 
       # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
