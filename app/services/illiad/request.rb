@@ -7,9 +7,9 @@ module Illiad
     class Error < StandardError; end
     extend Connection
 
-    BASE_PATH = '/Transaction'
-    NOTES_PATH = '/notes'
-    ROUTE_PATH = '/route'
+    BASE_PATH = 'transaction'
+    NOTES_PATH = 'notes'
+    ROUTE_PATH = 'route'
     CANCELLED_BY_USER_STATUS = ''
     # These constants can probably live on the class that prepares the data we send
     # in our requests to Illiad
@@ -18,7 +18,7 @@ module Illiad
     ARTICLE = 'Article'
     LOAN = 'Loan'
 
-    attr_reader :data, :item_data, :id, :user
+    attr_reader :data, :item, :id, :user
 
     # Create a new request in Illiad, defaults to 'Article' type unless 'RequestType' parameter included in data hash
     # Wraps the POST 'Transaction' endpoint
@@ -29,8 +29,9 @@ module Illiad
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request
       response = faraday.post(BASE_PATH, data)
-      rescue_errors(custom_error: Error)
       new(data: response.body)
+    rescue Faraday::Error => e
+      raise Error, error_message(e)
     end
 
     # Find an Illiad request
@@ -38,9 +39,10 @@ module Illiad
     # @param id [Integer] Illiad transaction number
     # @return [Illiad::Request]
     def self.find(id:)
-      response = faraday.get("#{BASE_PATH}/#{id}", options)
-      rescue_errors(custom_error: Error)
+      response = faraday.get("#{BASE_PATH}/#{id}")
       new(data: response.body)
+    rescue Faraday::Error => e
+      raise Error, error_message(e)
     end
 
     # Cancel an Illiad request
@@ -49,8 +51,9 @@ module Illiad
     # @return [Hash]
     def self.cancel(id:)
       response = faraday.put("#{BASE_PATH}/#{id}#{ROUTE_PATH}", { Status: CANCELLED_BY_USER_STATUS })
-      rescue_errors(custom_error: Error)
       response.body
+    rescue Faraday::Error => e
+      raise Error, error_message(e)
     end
 
     # Create a note for an Illiad request
@@ -60,16 +63,17 @@ module Illiad
     # @return [Hash]
     def self.add_note(id:, note:)
       response = faraday.post("#{BASE_PATH}/#{id}#{NOTES_PATH}", { Note: note })
-      rescue_errors(custom_error: Error)
       response.body
+    rescue Faraday::Error => e
+      raise Error, error_message(e)
     end
 
     # @param data [Hash]
     def initialize(data:)
       @data = data.symbolize_keys
-      @item_data = ItemData.new(@data)
-      @id = data[:TransactionNumber]
-      @user = data[:UserName]
+      @item = Item.new(data: @data)
+      @id = @data[:TransactionNumber]
+      @user = @data[:Username]
     end
 
     # @return [String, nil]
@@ -89,12 +93,12 @@ module Illiad
 
     # @return [DateTime, nil]
     def date
-      DateTime.strptime(data[:TransactionDate]) if data[:TransactionDate].present?
+      DateTime.parse(data[:TransactionDate]) if data[:TransactionDate].present?
     end
 
     # @return [DateTime, nil]
     def due_date
-      DateTime.strptime(data[:DueDate]) if data[:TransactionDate].present?
+      DateTime.parse(data[:DueDate]) if data[:TransactionDate].present?
     end
 
     # @return [Boolean]
@@ -106,7 +110,7 @@ module Illiad
     def books_by_mail?
       return loan? unless loan?
 
-      item_data.title&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
+      item.title&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
     end
 
     # @return [Boolean]

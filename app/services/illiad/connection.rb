@@ -22,8 +22,8 @@ module Illiad
           fmt.filter(/^(Authorization: ).*$/i, '\1[REDACTED]')
           # Parses JSON response bodies.
           # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
-          config.response :json
         end
+        config.response :json
       end
     end
 
@@ -49,19 +49,20 @@ module Illiad
       ''
     end
 
-    # Handle errors raised on bad responses
-    # @param custom_error [Class<StandardError>]
-    def rescue_errors(custom_error:)
-    rescue Faraday::Error => e
-      raise custom_error, "Illiad API error. #{error_messages(e)}".strip
-    end
-
-    # Retrieve error message and validation errors for bad (400) requests
+    # Set error message for unsuccessful requests
     # @param error [Faraday::Error]
     # @return [String]
-    def error_messages(error)
-      error_message = error.response_body['Message']
-      validation_errors = error.response_body['ModelState'].flat_map { |_field, value| value }.join(' ')
+    def error_message(error)
+      "Illiad API error. #{validation_errors(error)}".strip
+    end
+
+    # Retrieve validation error messages provided with some 400 responses
+    # @return [String, nil]
+    def validation_errors(error)
+      return if error.response_body.blank?
+
+      error_message = error.response_body&.fetch('Message')
+      validation_errors = error.response_body&.fetch('ModelState')&.flat_map { |_field, value| value }&.join(' ')
 
       "#{error_message} #{validation_errors}".strip
     end

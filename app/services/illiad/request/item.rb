@@ -3,8 +3,8 @@
 module Illiad
   class Request
     # Interface to access Illiad item metadata
-    class ItemData
-      def initialize(data)
+    class Item
+      def initialize(data:)
         @data = data
       end
 
@@ -46,11 +46,6 @@ module Illiad
       # @return [String, nil]
       def issn
         @data[:ISSN]
-      end
-
-      # @return [String, nil]
-      def citation_source
-        @data[:CitedIn]
       end
     end
   end

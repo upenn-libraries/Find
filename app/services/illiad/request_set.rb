@@ -18,7 +18,7 @@ module Illiad
 
     # @return [Array<Illiad::Request>]
     def loans
-      @loans ||= select(&:loans?)
+      @loans ||= select(&:loan?)
     end
 
     # @return [Array<Illiad::Request>]
