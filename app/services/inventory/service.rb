@@ -52,6 +52,8 @@ module Inventory
         Inventory::Response.new(entries: entries)
       end
 
+      # Return an ElectronicDetail object with additional portfolio record information
+      #
       # @param mms_id [String]
       # @param portfolio_id [String]
       # @param collection_id [String, nil]
@@ -64,32 +66,6 @@ module Inventory
 
       private
 
-      # Factory method to create Inventory::Entry objects.
-      #
-      # @param mms_id [String]
-      # @param raw_data [Hash] single hash from array of inventory data
-      # @return [Inventory::Entry]
-      def create_entry(mms_id, raw_data)
-        case raw_data[:inventory_type]&.downcase
-        when Entry::PHYSICAL
-          Inventory::Entry::Physical.new(mms_id: mms_id, **raw_data)
-        when Entry::ELECTRONIC
-          # potentially make some other api calls here for e-collection or service info if we're unsatisfied with
-          # portfolio data. It's probably best to place this logic in it's own method or class. Below are some of the
-          # additional values of interest:
-          # - get authentication notes / public notes when not found on portfolio
-          # - get coverage when not found on availability data or portfolio
-          # - get policy?
-          # - are all of these relevant all the time? if some of this information is only relevant on show page then our
-          # service needs a clean way of knowing when to make these potential additional requests
-          Inventory::Entry::Electronic.new(mms_id: mms_id, **raw_data)
-        when Entry::RESOURCE_LINK then Inventory::Entry::ResourceLink.new(**raw_data)
-        else
-          # when we're here we're dealing with a bib that doesn't have real time availability data (e.g. a collection)
-          raise Error, "Type: '#{raw_data[:inventory_type]}' not found"
-        end
-      end
-
       # Returns inventory that cannot be extracted from the MARC document and has to be retrieved by making additional
       # Alma API calls.
       #
@@ -97,9 +73,43 @@ module Inventory
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(mms_id, limit)
-        holdings = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
-        holdings = only_available(holdings) if are_electronic?(holdings)
-        api_entries(holdings, mms_id, limit: limit)
+        inventory_data = from_availability(mms_id)
+        inventory_data += from_ecollections(mms_id) if should_check_for_ecollections?(inventory_data)
+        api_entries(inventory_data, mms_id, limit: limit)
+      end
+
+      # Determine if we should check for Ecollections based on given inventory data - this may change.
+      #
+      # @note Can we know if a MMS ID is physical and skip this step? Physical items cannot have ecollections.
+      # @param inventory_data [Array]
+      # @return [Boolean]
+      def should_check_for_ecollections?(inventory_data)
+        inventory_data.none?
+      end
+
+      # Factory method to create Inventory::Entry objects.
+      #
+      # @param mms_id [String]
+      # @param raw_data [Hash] single hash from array of inventory data
+      # @return [Inventory::Entry]
+      def create_entry(mms_id, raw_data)
+        case raw_data[:inventory_type]&.downcase
+        when Entry::PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
+        when Entry::ELECTRONIC then Entry::Electronic.new(mms_id: mms_id, **raw_data)
+        when Entry::ECOLLECTION then Entry::Ecollection.new(mms_id: mms_id, **raw_data)
+        when Entry::RESOURCE_LINK then Entry::ResourceLink.new(**raw_data)
+        else
+          raise Error, "Type: '#{raw_data[:inventory_type]}' not found"
+        end
+      end
+
+      # Grabs inventory data from Alma Bib Availability API. Returns only active entries if entries are electronic.
+      #
+      # @param mms_id [String]
+      # @return [Array]
+      def from_availability(mms_id)
+        data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
+        electronic_inventory?(data) ? only_available(data) : data
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
@@ -116,7 +126,24 @@ module Inventory
         end
       end
 
-      # Converts inventory information retrieved from Alma into Inventory::Entry objects.
+      # Retrieve ECollection inventory data from Alma API calls
+      #
+      # @param mms_id [String]
+      # @return [Array]
+      def from_ecollections(mms_id)
+        ecollections = Alma::Bib.get_ecollections mms_id
+        return [] if ecollections.key? 'errorsExist'
+
+        ecollections['electronic_collection'].filter_map do |collection_hash|
+          ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
+          next unless ecollection
+
+          hash = ecollection.data
+          hash.merge({ 'inventory_type' => Entry::ECOLLECTION })
+        end
+      end
+
+      # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
       # @param inventory_data [Array] inventory data from Availability API call
       # @param mms_id [String]
@@ -129,19 +156,21 @@ module Inventory
       end
 
       # Return only available electronic holdings
+      #
       # @param holdings [Array]
       # @return [Array]
       def only_available(holdings)
         holdings.select { |h| h['activation_status'] == Constants::ELEC_AVAILABLE }
       end
 
-      # Is the holdings data of the electronic type?
-      # @param holdings [Array]
+      # Check if inventory data is present and for electronic inventory
+      #
+      # @param inventory_data [Array<Hash>]
       # @return [Boolean]
-      def are_electronic?(holdings)
-        return false unless holdings.any?
+      def electronic_inventory?(inventory_data)
+        return false unless inventory_data
 
-        holdings.first['inventory_type'] == Entry::ELECTRONIC
+        inventory_data.any? && inventory_data.first['inventory_type'].in?(Constants::ELECTRONIC_TYPES)
       end
     end
   end
