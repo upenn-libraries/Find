@@ -68,5 +68,10 @@ module Inventory
     def resource_link?
       false
     end
+
+    # @return [Boolean]
+    def ecollection?
+      false
+    end
   end
 end

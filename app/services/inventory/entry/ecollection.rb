@@ -55,6 +55,11 @@ module Inventory
       def electronic?
         true
       end
+
+      # @return [Boolean]
+      def ecollection?
+        true
+      end
     end
   end
 end
