@@ -22,7 +22,7 @@ describe Inventory::Sort::Factory do
 
     context 'with ecollection holdings' do
       let(:data) do
-        [build(:full_ecollection_data).merge({ 'inventory_type' => Inventory::Entry::ECOLLECTION })]
+        [build(:ecollection_data).merge({ 'inventory_type' => Inventory::Entry::ECOLLECTION })]
       end
 
       it 'returns an Inventory::Sort::Electronic object' do
