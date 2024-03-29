@@ -122,7 +122,7 @@ describe 'Catalog Show Page' do
     include_examples 'core show page features'
   end
 
-  context 'for show tools' do
+  context 'when interacting with show tools' do
     include_context 'with electronic journal record'
 
     let(:mms_id) { electronic_journal_bib }
