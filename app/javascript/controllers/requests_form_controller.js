@@ -4,16 +4,15 @@ export default class extends Controller {
     static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea']
 
     connect() {
-        console.log('Connected to item labels controller!')
+        console.log('Connected to requests form controller!')
         console.log(this.itemSelectTarget)
     }
 
     selectChanged(event) {
         const holdingValue = event.target.value
         const mmsIdValue = this.mmsIdFieldTarget.value
-        const url = `/item_requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
+        const url = `/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
 
-        // Disable select box while fetch is being made
         this.itemSelectTarget.disabled = true;
         this.requestItemButtonTarget.disabled = true;
 

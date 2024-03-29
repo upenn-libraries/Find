@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Item requesting controller
-class ItemRequestsController < ApplicationController
+class RequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_mms_id
   before_action :set_holding_id, only: %w[new]
@@ -51,7 +51,7 @@ class ItemRequestsController < ApplicationController
   end
 
   def set_default_library
-    # Implement some logic here to detemine default library selection based on user group
+    # Implement some logic here to determine default library selection based on user group
     # User group is stored in session[:user_group] if the user exists in Alma
     @default_library = 'VanPeltLib'
   end

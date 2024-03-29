@@ -54,7 +54,7 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
-  item_requests:
+  requests:
     request: 'Request item'
     heading: 'Request'
     holding_label: 'Holding'

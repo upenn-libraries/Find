@@ -1,0 +1,39 @@
+<div class="request__container">
+  <h1 class="request__heading"><%= t('requests.heading') %></h1>
+  <div class="request__options" data-controller="requests-form">
+    <%= form_with(url: submit_request_path, method: :post) do |form| %>
+      <div class="mb-3">
+        <%= form.label :holding_id, t('requests.holding_label'), { class: 'form-label' } %>
+        <%= form.select(:holding_id, options_for_select(@holding_labels, @holding_id), {},
+                        { class: 'form-select',
+                          data: { action: 'change->requests-form#selectChanged' } }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :item, t('requests.item_label'), { class: 'form-label' } %>
+        <%= form.select(:item, @item_labels, {}, { class: 'form-select',
+                                                   data: { requests_form_target: 'itemSelect' } }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :location, t('requests.location_label'), { class: 'form-label' } %>
+        - <%= session[:user_group] %>
+        <%= form.select(:location, options_for_select(Settings.locations[:pickup], @default_library),
+                        {}, { class: 'form-select' }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= link_to t('requests.add_comments'), '', { data: { action: 'click->requests-form#showCommentsArea' } } %>
+        <div class="d-none" data-requests-form-target="commentsArea">
+          <%= form.label :location, t('requests.comments_label'), { class: 'form-label' } %>
+          <%= form.text_area :comments, class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= form.hidden_field :mms_id, value: @mms_id, data: { requests_form_target: 'mmsIdField' } %>
+
+      <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
+                                                   data: { requests_form_target: 'requestItemButton' } }) %>
+    <% end %>
+  </div>
+</div>
