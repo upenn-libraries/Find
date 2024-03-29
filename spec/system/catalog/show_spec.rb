@@ -104,7 +104,7 @@ describe 'Catalog Show Page' do
 
   # Record with 4 electronic holdings
   context 'when viewing a electronic journal record' do
-    include_context 'with electronic journal record'
+    include_context 'with electronic journal record with 4 electronic entries'
 
     let(:mms_id) { electronic_journal_bib }
     let(:entries) { electronic_journal_entries }
@@ -114,7 +114,7 @@ describe 'Catalog Show Page' do
 
   # Record with 2 physical holdings
   context 'when viewing a print monograph record' do
-    include_context 'with print monograph record'
+    include_context 'with print monograph record with 2 physical entries'
 
     let(:mms_id) { print_monograph_bib }
     let(:entries) { print_monograph_entries }
@@ -123,7 +123,7 @@ describe 'Catalog Show Page' do
   end
 
   context 'when interacting with show tools' do
-    include_context 'with electronic journal record'
+    include_context 'with electronic journal record with 4 electronic entries'
 
     let(:mms_id) { electronic_journal_bib }
 
@@ -137,20 +137,20 @@ describe 'Catalog Show Page' do
 
       it 'displays a link to email the record' do
         click_on I18n.t('blacklight.tools.title')
-        expect(page).to have_link 'Email', href: "/catalog/#{mms_id}/email"
+        expect(page).to have_link 'Email', href: email_solr_document_path(mms_id)
       end
     end
 
     context 'when a user is not signed in' do
       it 'displays a link to login' do
         click_on I18n.t('blacklight.tools.title')
-        expect(page).to have_link(I18n.t('blacklight.tools.login_for_email'), href: "#{login_path}?id=#{mms_id}")
+        expect(page).to have_link(I18n.t('blacklight.tools.login_for_email'), href: login_path(id: mms_id))
       end
     end
 
     it 'displays Staff view link' do
       click_on I18n.t('blacklight.tools.title')
-      expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: "/catalog/#{mms_id}/staff_view"
+      expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: staff_view_solr_document_path(mms_id)
     end
   end
 end

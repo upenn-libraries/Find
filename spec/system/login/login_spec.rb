@@ -44,7 +44,7 @@ describe 'login page' do
   end
 
   context 'when logging in from a record page' do
-    include_context 'with electronic journal record'
+    include_context 'with electronic journal record with 4 electronic entries'
 
     before do
       allow(User).to receive(:new).and_return(user)

@@ -3,8 +3,8 @@
 require 'system_helper'
 
 describe 'Catalog Index Page' do
-  include_context 'with print monograph record'
-  include_context 'with electronic journal record'
+  include_context 'with print monograph record with 2 physical entries'
+  include_context 'with electronic journal record with 4 electronic entries'
 
   context 'with an empty search' do
     before { visit search_catalog_path(params: { q: '', search_field: 'all_fields' }) }

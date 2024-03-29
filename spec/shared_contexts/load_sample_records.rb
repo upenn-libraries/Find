@@ -22,7 +22,7 @@ shared_context 'with print journal record' do
   end
 end
 
-shared_context 'with print monograph record' do
+shared_context 'with print monograph record with 2 physical entries' do
   let(:print_monograph_bib) { '9913203433503681' }
   let(:print_monograph_entries) do
     [create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: '1234',
@@ -63,7 +63,7 @@ shared_context 'with electronic database record' do
 end
 
 # Index electronic journal records in to Solr and return inventory when requested.
-shared_context 'with electronic journal record' do
+shared_context 'with electronic journal record with 4 electronic entries' do
   let(:electronic_journal_bib) { '9977047322103681' }
   let(:electronic_journal_entries) do
     [create(:electronic_entry, mms_id: electronic_journal_bib, activation_status: 'Available',
