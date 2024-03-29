@@ -31,7 +31,7 @@ module Find
 
     # @return [String]
     def footer_content
-      fields = [entry.format, entry.location]
+      fields = [entry.location]
       fields << entry.coverage_statement if entry.electronic?
       join_fields(*fields)
     end
