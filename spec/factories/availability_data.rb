@@ -55,21 +55,14 @@ FactoryBot.define do
     initialize_with { attributes.stringify_keys }
   end
 
-  factory(:brief_ecollection_data, class: Hash) do
-    id { '61570554750003689' }
-
-    skip_create
-    initialize_with { attributes.stringify_keys }
-  end
-
-  factory(:full_ecollection_data, class: Hash) do
+  factory(:ecollection_data, class: Hash) do
     id { '61570554750003689' }
     public_name { 'Oxford Handbooks Online Sociology' }
     public_name_override { 'Handbook - Sociology' }
     url { 'https://www.vendor.com/pages/resource' }
     url_override { 'https://hdl.library.upenn.edu/custom/url' }
-    authentication_note { 'Authentication note' }
-    public_note { 'Public note' }
+    authentication_note { 'Ecollection authentication note' }
+    public_note { 'Ecollection public note' }
 
     skip_create
     initialize_with { attributes.stringify_keys }

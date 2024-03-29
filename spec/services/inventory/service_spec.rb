@@ -42,8 +42,8 @@ describe Inventory::Service do
 
     context 'with a record having only Ecollection inventory' do
       let(:availability_data) { { mms_id => { holdings: [] } } }
-      let(:ecollections_data) { [build(:brief_ecollection_data)] }
-      let(:ecollection_data) { build(:full_ecollection_data) }
+      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
+      let(:ecollection_data) { build(:ecollection_data) }
 
       include_context 'with stubbed ecollections_data'
       include_context 'with stubbed ecollection_data'
