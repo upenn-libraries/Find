@@ -109,7 +109,7 @@ module Inventory
       # @return [Array]
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
-        present_and_physical?(data) ? data : only_available(data)
+        electronic_inventory?(data) ? only_available(data) : data
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
@@ -139,7 +139,7 @@ module Inventory
           next unless ecollection
 
           hash = ecollection.data
-          hash.merge({'inventory_type' => Entry::ECOLLECTION })
+          hash.merge({ 'inventory_type' => Entry::ECOLLECTION })
         end
       end
 
@@ -163,12 +163,14 @@ module Inventory
         holdings.select { |h| h['activation_status'] == Constants::ELEC_AVAILABLE }
       end
 
+      # Check if inventory data is present and for electronic inventory
+      #
       # @param inventory_data [Array<Hash>]
       # @return [Boolean]
-      def present_and_physical?(inventory_data)
+      def electronic_inventory?(inventory_data)
         return false unless inventory_data
 
-        inventory_data.any? && inventory_data.first['inventory_type'] == Entry::PHYSICAL
+        inventory_data.any? && inventory_data.first['inventory_type'].in?(Constants::ELECTRONIC_TYPES)
       end
     end
   end
