@@ -3,14 +3,9 @@
 require 'system_helper'
 
 describe 'Catalog Show Page' do
-  let(:bib) { '9913203433503681' }
+  include_context 'with print monograph record'
 
-  before do
-    SampleIndexer.index 'print_monograph.json'
-    visit staff_view_solr_document_path bib
-  end
-
-  after { SampleIndexer.clear! }
+  before { visit staff_view_solr_document_path(print_monograph_bib) }
 
   it 'renders title' do
     expect(page).to have_content I18n.t('staff_view.title')
