@@ -3,11 +3,6 @@ import {Controller} from "@hotwired/stimulus";
 export default class extends Controller {
     static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea']
 
-    connect() {
-        console.log('Connected to requests form controller!')
-        console.log(this.itemSelectTarget)
-    }
-
     selectChanged(event) {
         const holdingValue = event.target.value
         const mmsIdValue = this.mmsIdFieldTarget.value
