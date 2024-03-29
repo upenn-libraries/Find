@@ -40,6 +40,25 @@ describe Inventory::Service do
       end
     end
 
+    context 'with a record having only Ecollection inventory' do
+      let(:availability_data) { { mms_id => { holdings: [] } } }
+      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
+      let(:ecollection_data) { build(:ecollection_data) }
+
+      include_context 'with stubbed ecollections_data'
+      include_context 'with stubbed ecollection_data'
+
+      it 'returns a single electronic inventory entry' do
+        expect(response.first).to be_a Inventory::Entry::Ecollection
+      end
+
+      it 'has the expected attribute values' do
+        entry = response.first
+        expect(entry.description).to eq ecollection_data['public_name_override']
+        expect(entry.href).to eq ecollection_data['url_override']
+      end
+    end
+
     context 'with a record having 4 electronic inventory entries' do
       let(:availability_data) do
         { mms_id => { holdings: build_list(:electronic_availability_data, 4) } }
@@ -147,6 +166,14 @@ describe Inventory::Service do
 
       it 'returns Inventory::Entry::Electronic object' do
         expect(inventory_class).to be_a(Inventory::Entry::Electronic)
+      end
+    end
+
+    context 'with ecollection inventory type' do
+      let(:data) { { inventory_type: Inventory::Entry::ECOLLECTION } }
+
+      it 'returns Inventory::Entry::Electronic object' do
+        expect(inventory_class).to be_a(Inventory::Entry::Ecollection)
       end
     end
 
