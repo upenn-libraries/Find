@@ -5,7 +5,7 @@ describe Inventory::Sort::Factory do
     let(:sorter) { described_class.create(data) }
 
     context 'with physical holdings' do
-      let(:data) { [{ 'inventory_type' => Inventory::Entry::PHYSICAL }] }
+      let(:data) { [build(:physical_availability_data)] }
 
       it 'returns an Inventory::Sort::Physical object' do
         expect(sorter).to be_a Inventory::Sort::Physical
@@ -13,7 +13,17 @@ describe Inventory::Sort::Factory do
     end
 
     context 'with electronic holdings' do
-      let(:data) { [{ 'inventory_type' => Inventory::Entry::ELECTRONIC }] }
+      let(:data) { [build(:electronic_availability_data)] }
+
+      it 'returns an Inventory::Sort::Electronic object' do
+        expect(sorter).to be_a Inventory::Sort::Electronic
+      end
+    end
+
+    context 'with ecollection holdings' do
+      let(:data) do
+        [build(:ecollection_data).merge({ 'inventory_type' => Inventory::Entry::ECOLLECTION })]
+      end
 
       it 'returns an Inventory::Sort::Electronic object' do
         expect(sorter).to be_a Inventory::Sort::Electronic

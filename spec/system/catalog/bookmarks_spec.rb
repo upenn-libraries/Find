@@ -3,16 +3,14 @@
 require 'system_helper'
 
 describe 'Catalog Bookmarks Page' do
+  include_context 'with print monograph record with 2 physical entries'
+
   before do
-    allow(Inventory::Service).to receive(:all).and_return(Inventory::Response.new(entries: []))
-    SampleIndexer.index 'print_monograph.json'
     visit root_path
     click_on 'Find it'
     check 'Bookmark'
     visit bookmarks_path
   end
-
-  after { SampleIndexer.clear! }
 
   it 'displays some bookmarks' do
     expect(page).to have_selector('article.document-position-1')

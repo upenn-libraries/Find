@@ -22,7 +22,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec/{support,shared_examples}/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/{support,shared_examples,shared_contexts}/**/*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -66,4 +66,14 @@ RSpec.configure do |config|
   # RSpec Devise Helpers
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # Clean out Solr core before each test.
+  config.before do
+    SampleIndexer.clear!
+  end
+
+  # Clean out Solr core after the last test completes.
+  config.after(:suite) do
+    SampleIndexer.clear!
+  end
 end

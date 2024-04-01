@@ -15,7 +15,7 @@ module Find
     # @option params [ActionController::Parameters] parameters from request
     def initialize(**args)
       super
-      @inventory = @document.inventory(api_limit: nil, marc_limit: nil)
+      @inventory = @document.full_inventory
       @selected_id = args[:params][:hld_id] || @inventory.first&.id
     end
 
