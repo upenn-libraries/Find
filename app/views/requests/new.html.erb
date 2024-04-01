@@ -17,7 +17,6 @@
 
       <div class="mb-3">
         <%= form.label :location, t('requests.location_label'), { class: 'form-label' } %>
-        - <%= session[:user_group] %>
         <%= form.select(:location, options_for_select(Settings.locations[:pickup], @default_library),
                         {}, { class: 'form-select' }) %>
       </div>

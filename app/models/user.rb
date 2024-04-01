@@ -64,7 +64,7 @@ class User < ApplicationRecord
   end
 
   def group
-    Alma::User.find(uid).response.dig('user_group', 'desc')
+    @group ||= Alma::User.find(uid).response.dig('user_group', 'desc')
   end
 
   # Configuration added by Blacklight; Blacklight::User uses a method key on your
