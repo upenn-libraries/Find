@@ -70,4 +70,14 @@ RSpec.configure do |config|
   # RSpec Devise Helpers
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # Clean out Solr core before each test.
+  config.before do
+    SampleIndexer.clear!
+  end
+
+  # Clean out Solr core after the last test completes.
+  config.after(:suite) do
+    SampleIndexer.clear!
+  end
 end
