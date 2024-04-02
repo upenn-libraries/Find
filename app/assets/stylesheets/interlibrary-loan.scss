@@ -1,10 +1,13 @@
-.interlibrary-loan__article-fields {
-  border-left: solid 2px var(--bs-border-color);
-  padding-left: 1rem;
-  margin-left: 0.25rem;
-  padding-bottom: 0.5rem;
+.interlibrary-loan__scan-or-loanable {
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.interlibrary-loan__article-description {
-
+.interlibrary-loan__scan-or-loanable > .btn {
+  border: solid 1px var(--color-fg-subtle);
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.15rem;
 }

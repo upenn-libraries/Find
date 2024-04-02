@@ -1,84 +1,151 @@
 <h1 class="page__heading">Request an item</h1>
-<p class="page__lede">Describe any item you need and we'll get it to you.</p>
+<p class="page__lede">Describe any article, chapter, book, or other item — whether or not it's in our collection — and we'll get it delivered to you.</p>
 
-<div class="row">
-  <div class="col-5">
+<h2 class="h4 mt-4">What kind of item are you requesting?</h2>
+
+<nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-4 interlibrary-loan__scan-or-loanable">
+  <label class="btn btn-light">
+    <input type="radio" name="interlibrary-loan__scan-or-loanable" id="ill-pills-0" class="active form-check-input" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="true" id="ill-0-tab" checked />
+    <span>Article or chapter</span>
+  </label>
+  <label class="btn btn-light">
+    <input type="radio" id="ill-pills-1" name="interlibrary-loan__scan-or-loanable" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="true" class="form-check-input" />
+    <span>Book or physical item</span>
+  </label>
+</nav>
+
+<div class="tab-content" id="ill-tabContent">
+  <div class="tab-pane fade show active" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
     <form>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" required>
-      </div>
-      <div class="form-group mt-3">
-        <label for="author">Author</label>
-        <input class="form-control" id="author" required>
-      </div>
-      <div class="form-group mt-3">
-        <label for="year-of-publication">Year of publication</label>
-        <input class="form-control" id="year-of-publication" required>
-      </div>
+      <div class="row">
+        <div class="col-7">
+          <h2 class="h4 mt-2 mb-2">Describe the article or chapter</h2>
+          <p>This item is delivered electronically as a PDF and is often ready in 2-3 buisness days.</p>
 
-      <div class="form-group mt-4">
-        <fieldset>
-          <legend class="h5">Is this an article or chapter?</legend>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="is-article" id="article-no" value="article-no" checked>
-            <label class="form-check-label" for="article-no">No</label>
+          <div class="form-group mt-2">
+            <label for="journal">Journal or book title <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="journal" required>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="is-article" id="article-yes" value="article-yes">
-            <label class="form-check-label" for="article-yes">Yes</label>
+          <div class="form-group mt-3">
+            <label for="journal">Article or chapter title <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="journal" required>
           </div>
-        </fieldset>
-      </div>
+          <div class="form-group mt-3">
+            <label for="author">Author <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="author">
+          </div>
+          <div class="form-group mt-3">
+            <label for="rftdate">Publication date <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="rftdate" required>
+          </div>
+          <div class="form-group mt-3">
+            <label for="volume">Volume</label>
+            <input type="text" class="form-control" id="volume">
+          </div>
+          <div class="form-group mt-3">
+            <label for="issue">Issue</label>
+            <input type="text" class="form-control" id="issue">
+          </div>
+          <div class="form-group mt-3">
+            <label for="pages">Pages</label>
+            <input type="text" class="form-control" id="pages">
+          </div>
+          <div class="form-group mt-3">
+            <label for="comments">Comments</label>
+            <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+            <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
+          </div>
 
-      <div class="interlibrary-loan__article-fields">
-        <div class="form-group mt-2">
-          <label for="Volume">Volume</label>
-          <input type="text" class="form-control" id="Volume">
+          <p class="mt-4">We'll send you an email notification when it is ready.</p>
+
+          <button class="btn btn-success">Make request</button>
         </div>
-        <div class="form-group mt-3">
-          <label for="Issue">Issue</label>
-          <input class="form-control" id="Issue">
-        </div>
-        <div class="form-group mt-3">
-          <label for="pages">Pages</label>
-          <input class="form-control" id="pages">
-        </div>
       </div>
-
-      <div class="form-group mt-4">
-        <fieldset>
-          <legend class="h5">How would you like this item delivered?</legend>
-          <p>Items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>. Articles, chapters, or a page range are sent to your email as a PDF.</p>
-          <div class="form-check mt-3">
-            <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
-            <label class="form-check-label" for="delivery-pickup">
-              Pick up
-            </label>
-
-            <div class="input-group mb-2 mt-1">
-              <select class="custom-select p-2 rounded" id="inputGroupSelect01">
-                <option selected>Van Pelt Library</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-check mt-3">
-            <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
-            <label class="form-check-label" for="delivery-mail">Mail <br>
-            <small id="delivery-mail-help" class="form-text text-muted">For those registered with <a href="https://upenn.libwizard.com/f/books-by-mail">Books by Mail</a> at no charge.</small></label>
-          </div>
-          <div class="form-check mt-3">
-            <input class="form-check-input" type="radio" name="delivery" id="delivery-email" value="delivery-email" checked>
-            <label class="form-check-label" for="delivery-email">Email a PDF</label>
-          </div>
-        </fieldset>
-      </div>
-
-      <button type="submit" class="btn btn-success btn-lg mt-4">Request it</button>
     </form>
+  </div>
+  <div class="tab-pane fade" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
+    <form>
+      <div class="row">
+        <div class="col-7">
+          <h2 class="h4 mt-2 mb-2">Describe the book or physical item</h2>
+          <p>Processing time for physical items (loans) can vary widely depending on the nature and availability of the item.</p>
+
+          <div class="form-group mt-2">
+            <label for="title">Title <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="title" required>
+          </div>
+          <div class="form-group mt-3">
+            <label for="author">Author <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="author">
+          </div>
+          <div class="form-group mt-3">
+            <label for="year">Year of publication <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control" id="year" required>
+          </div>
+          <div class="form-group mt-3">
+            <label for="edition">Edition</label>
+            <input type="text" class="form-control" id="edition">
+          </div>
+          <div class="form-group mt-3">
+            <label for="publisher">Publisher</label>
+            <input type="text" class="form-control" id="publisher">
+          </div>
+          <div class="form-group mt-3">
+            <label for="place">Place of publication</label>
+            <input type="text" class="form-control" id="place">
+          </div>
+          <div class="form-group mt-3">
+            <label for="isbn">ISBN</label>
+            <input type="text" class="form-control" id="isbn">
+          </div>
+          <div class="form-group mt-3">
+            <label for="comments">Comments</label>
+            <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+            <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
+          </div>
+
+           <fieldset>
+            <legend class="h4 mt-4">How would you like this item delivered?</legend>
+            <p>Items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>.</p>
+            <div class="form-check mt-3">
+              <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
+              <label class="form-check-label" for="delivery-pickup">
+                Pick up
+              </label>
+
+              <div class="input-group mb-2 mt-1">
+                <select name="pickup_location" id="pickup_location" label="Location" class="custom-select p-2 rounded" required="required">
+                  <option value="">Pick up location</option>
+                  <option value="Van Pelt Library">Van Pelt Library</option>
+                  <option value="Lockers at Van Pelt">Lockers at Van Pelt Library</option>
+                  <option value="Annenberg Library">Annenberg Library</option>
+                  <option value="Biotech Commons">Holman Biotech Commons</option>
+                  <option value="Chemistry Library">Chemistry Library</option>
+                  <option value="Dental Library">Dental Medicine Library</option>
+                  <option value="Lockers at Dental">Lockers at Dental Medicine Library</option>
+                  <option value="Fine Arts Library">Fisher Fine Arts Library</option>
+                  <option value="Katz Library">Library at the Katz Center</option>
+                  <option value="Math/Physics/Astronomy Library">Math/Physics/Astronomy Library</option>
+                  <option value="Museum Library">Museum Library</option>
+                  <option value="New Bolton Center">New Bolton Center</option>
+                  <option value="PA Hospital Library">Pennsylvania Hospital Library</option>
+                  <option value="Veterinary Library">Veterinary Medicine Library</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-check mt-3">
+              <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
+              <label class="form-check-label" for="delivery-mail">Mail <br>
+              <small id="delivery-mail-help" class="form-text text-muted">For those registered with <a href="https://upenn.libwizard.com/f/books-by-mail">Books by Mail</a> at no charge.</small></label>
+            </div>
+          </fieldset>
+
+          <p class="mt-4">We'll send you an email notification when it is ready.</p>
+
+          <button class="btn btn-success">Make request</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
