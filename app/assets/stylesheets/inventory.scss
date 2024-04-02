@@ -99,10 +99,8 @@
 }
 
 .document-inventory-container {
-  margin: 1.5rem 0;
-  padding-bottom: 1.5rem;
-  margin-top: 1.25rem;
-  border-bottom: solid 1px var(--bs-border-color);
+  margin-top: 1rem;
+  margin-bottom: 1.75rem;
 }
 
 .inventory-item__availability--primary {
@@ -125,25 +123,34 @@
 .inventory-item {
   all: unset;
   padding: 0.75rem 1rem;
-  border: solid 1px var(--color-bg-default);
+  border: solid 1px transparent;
+  border-bottom-color: var(--bs-border-color);
+  border-right-color: var(--bs-border-color);
   border-left: solid 3px var(--bs-border-color);
   font-size: 0.875rem;
+  background: var(--color-bg-subtle);
 }
 
-.inventory-item:hover {
+.inventory-item:hover,
+.inventory-item:focus {
   border-left-color: var(--color-fg-accent);
 }
 
 .inventory-item.active {
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
   border: solid 1px var(--color-fg-subtle);
-  border-left: solid 3px var(--color-bg-accent-emphasis);
-  border-radius: 0.5rem;
-}
-
-.inventory-item.active:focus,
-.inventory-item:focus {
-  box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
+  border-left: solid 6px var(--color-bg-accent-emphasis);
+  background: var(--color-bg-default);
+  padding-left: calc(1rem - 3px + .2rem);
+  padding-top: 0.95rem;
+  padding-bottom: 0.95rem;
+  z-index: 2;
+  margin: -0.2rem;
+  
+  @media (min-width: 992px) {
+    clip-path: inset(-0.5rem 1px -0.5rem -0.5rem);
+    margin-right: 0;
+  }
 }
 
 .inventory-item .inventory-item__main {
@@ -153,6 +160,7 @@
   text-decoration-color: var(--color-fg-default);
 }
 
+.inventory-item:focus .inventory-item__main,
 .inventory-item:hover .inventory-item__main {
   text-decoration-thickness: 2px;
 }
@@ -172,4 +180,17 @@
   margin-top: 0.5rem;
   color: var(--color-fg-subtle);
   margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .show-document-container {
+    padding: 1.5rem;
+    border: solid 1px var(--color-fg-subtle);
+    border-radius: 0.5rem;
+    box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+
+    margin-left: calc(var(--bs-gutter-x) * -1 - 0.15rem);
+    background: var(--color-bg-default);
+    height: 100%;
+  }
 }

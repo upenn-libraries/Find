@@ -1,19 +1,20 @@
 # frozen_string_literal: true
 
 describe Inventory::Service do
-  describe '.all' do
-    let(:response) { described_class.all(document) }
-
+  describe '.full' do
     include_context 'with stubbed availability_data'
 
+    let(:response) { described_class.full(document) }
+    let(:mms_id) { '9979338417503681' }
+    let(:document) { SolrDocument.new({ id: mms_id }) }
+
     context 'with a record having Physical inventory' do
-      let(:document) { SolrDocument.new({ id: '9979338417503681' }) }
+      include_context 'with stubbed availability item_data'
+
       let(:availability_data) do
-        { '9979338417503681' => { holdings: [build(:physical_availability_data)] } }
+        { mms_id => { holdings: [build(:physical_availability_data)] } }
       end
       let(:item_data) { build(:item_data) }
-
-      include_context 'with stubbed availability item_data'
 
       it 'returns a Inventory::Response object' do
         expect(response).to be_a Inventory::Response
@@ -29,15 +30,81 @@ describe Inventory::Service do
     end
 
     context 'with a record having Electronic inventory' do
-      let(:document) { SolrDocument.new({ id: '9977568423203681' }) }
       let(:availability_data) do
-        { '9977568423203681' => { holdings: [build(:electronic_availability_data),
-                                             build(:electronic_availability_data, :unavailable)] } }
+        { mms_id => { holdings: [build(:electronic_availability_data),
+                                 build(:electronic_availability_data, :unavailable)] } }
       end
 
       it 'does not include unavailable entries' do
         expect(response.collect(&:status)).not_to include Inventory::Constants::ELEC_UNAVAILABLE
       end
+    end
+
+    context 'with a record having only Ecollection inventory' do
+      let(:availability_data) { { mms_id => { holdings: [] } } }
+      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
+      let(:ecollection_data) { build(:ecollection_data) }
+
+      include_context 'with stubbed ecollections_data'
+      include_context 'with stubbed ecollection_data'
+
+      it 'returns a single electronic inventory entry' do
+        expect(response.first).to be_a Inventory::Entry::Ecollection
+      end
+
+      it 'has the expected attribute values' do
+        entry = response.first
+        expect(entry.description).to eq ecollection_data['public_name_override']
+        expect(entry.href).to eq ecollection_data['url_override']
+      end
+    end
+
+    context 'with a record having 4 electronic inventory entries' do
+      let(:availability_data) do
+        { mms_id => { holdings: build_list(:electronic_availability_data, 4) } }
+      end
+
+      it 'returns all entries' do
+        expect(response.count).to be 4
+      end
+    end
+  end
+
+  describe '.brief' do
+    include_context 'with stubbed availability_data'
+    include_context 'with stubbed availability item_data'
+
+    let(:mms_id) { '9979338417503681' }
+    let(:document) { SolrDocument.new({ id: mms_id }) }
+    let(:response) { described_class.brief(document) }
+    let(:availability_data) do
+      { mms_id => { holdings: build_list(:physical_availability_data, 4) } }
+    end
+    let(:item_data) { build(:item_data) }
+
+    # Mocking resource links.
+    before do
+      allow(document).to receive(:marc_resource_links).and_return(build_list(:resource_link_data, 3))
+    end
+
+    it 'returns a Inventory::Response object' do
+      expect(response).to be_a Inventory::Response
+    end
+
+    it 'iterates over returned entries' do
+      expect(response.first).to be_a Inventory::Entry
+    end
+
+    it 'returns only 5 entries' do
+      expect(response.count).to be 5
+    end
+
+    it 'returns only 3 api entries' do
+      expect(response.count(&:physical?)).to be Inventory::Service::DEFAULT_LIMIT
+    end
+
+    it 'returns only 2 resource links' do
+      expect(response.count(&:resource_link?)).to be Inventory::Service::RESOURCE_LINK_LIMIT
     end
   end
 
@@ -99,6 +166,14 @@ describe Inventory::Service do
 
       it 'returns Inventory::Entry::Electronic object' do
         expect(inventory_class).to be_a(Inventory::Entry::Electronic)
+      end
+    end
+
+    context 'with ecollection inventory type' do
+      let(:data) { { inventory_type: Inventory::Entry::ECOLLECTION } }
+
+      it 'returns Inventory::Entry::Electronic object' do
+        expect(inventory_class).to be_a(Inventory::Entry::Ecollection)
       end
     end
 

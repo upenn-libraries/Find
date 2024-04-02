@@ -24,3 +24,18 @@ shared_context 'with stubbed availability item_data' do
     allow(bib_item_double).to receive(:item_data).and_return(item_data)
   end
 end
+
+shared_context 'with stubbed ecollections_data' do
+  let(:ecollections_response) { { 'electronic_collection' => ecollections_data, 'total_record_count' => 1 } }
+  before do
+    allow(Alma::Bib).to receive(:get_ecollections).and_return(ecollections_response)
+  end
+end
+
+shared_context 'with stubbed ecollection_data' do
+  before do
+    ecollection_double = instance_double(Alma::Electronic::Collection)
+    allow(ecollection_double).to receive(:data).and_return(ecollection_data)
+    allow(Alma::Electronic).to receive(:get).and_return(ecollection_double)
+  end
+end
