@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :illiad_user_data, class: Hash do
+  # attributes for Illiad Api version 1
+  # use `add_attribute` to alleviate some of the ugliness when defining PascalCase fields using the shorthand. This is
+  # equivalent to the shorthand method to define attributes used in other factories.
+  factory :illiad_user_response, class: Hash do
     add_attribute(:UserName) { 'testuser' }
     add_attribute(:ExternalUserId) { 'testuser' }
     add_attribute(:LastName) { 'User' }
@@ -50,6 +53,6 @@ FactoryBot.define do
     add_attribute(:MobilePhone) { nil }
 
     skip_create
-    initialize_with { attributes.stringify_keys }
+    initialize_with { attributes }
   end
 end

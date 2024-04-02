@@ -5,12 +5,11 @@ module Illiad
   # provides class methods to create, find, and update requests in Illiad
   class Request
     class Error < StandardError; end
-    extend Connection
 
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
-    CANCELLED_BY_USER_STATUS = ''
+    CANCELLED_BY_USER_STATUS = 'Cancelled by User'
     # These constants can probably live on the class that prepares the data we send
     # in our requests to Illiad
     BOOKS_BY_MAIL = 'Books by Mail'
@@ -20,6 +19,17 @@ module Illiad
 
     attr_reader :data, :item, :id, :user
 
+    # Find an Illiad request
+    # Wraps the GET 'Transaction' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @return [Illiad::Request]
+    def self.find(id:)
+      response = Connection.create.get("#{BASE_PATH}/#{id}")
+      new(**response.body)
+    rescue Faraday::Error => e
+      raise Error, Connection.error_messages(error: e)
+    end
+
     # Create a new request in Illiad, defaults to 'Article' type unless 'RequestType' parameter included in data hash
     # Wraps the POST 'Transaction' endpoint
     # @param data [Hash] Illiad transaction data
@@ -28,32 +38,21 @@ module Illiad
     # @return [Illiad::Request]
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request
-      response = faraday.post(BASE_PATH, data)
-      new(data: response.body)
+      response = Connection.create.post(BASE_PATH, data)
+      new(**response.body)
     rescue Faraday::Error => e
-      raise Error, error_message(e)
+      raise Error, Connection.error_messages(error: e)
     end
 
-    # Find an Illiad request
-    # Wraps the GET 'Transaction' endpoint
-    # @param id [Integer] Illiad transaction number
-    # @return [Illiad::Request]
-    def self.find(id:)
-      response = faraday.get("#{BASE_PATH}/#{id}")
-      new(data: response.body)
-    rescue Faraday::Error => e
-      raise Error, error_message(e)
-    end
-
-    # Cancel an Illiad request
+    # Update request with cancelled status
     # Wraps the PUT 'Routing Transaction Request' endpoint
     # @param id [Integer] Illiad transaction number
-    # @return [Hash]
+    # @return [Illiad::Request]
     def self.cancel(id:)
-      response = faraday.put("#{BASE_PATH}/#{id}#{ROUTE_PATH}", { Status: CANCELLED_BY_USER_STATUS })
-      response.body
+      response = Connection.create.put("#{BASE_PATH}/#{id}/#{ROUTE_PATH}", { Status: CANCELLED_BY_USER_STATUS })
+      new(**response.body)
     rescue Faraday::Error => e
-      raise Error, error_message(e)
+      raise Error, Connection.error_messages(error: e)
     end
 
     # Create a note for an Illiad request
@@ -62,16 +61,15 @@ module Illiad
     # @param note [String]
     # @return [Hash]
     def self.add_note(id:, note:)
-      response = faraday.post("#{BASE_PATH}/#{id}#{NOTES_PATH}", { Note: note })
+      response = Connection.create.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
       response.body
     rescue Faraday::Error => e
-      raise Error, error_message(e)
+      raise Error, Connection.error_messages(error: e)
     end
 
     # @param data [Hash]
-    def initialize(data:)
+    def initialize(**data)
       @data = data.symbolize_keys
-      @item = Item.new(data: @data)
       @id = @data[:TransactionNumber]
       @user = @data[:Username]
     end
@@ -79,11 +77,6 @@ module Illiad
     # @return [String, nil]
     def request_type
       data[:RequestType]
-    end
-
-    # @return [String, nil]
-    def document_type
-      data[:DocumentType]
     end
 
     # @return [String, nil]
@@ -98,7 +91,7 @@ module Illiad
 
     # @return [DateTime, nil]
     def due_date
-      DateTime.parse(data[:DueDate]) if data[:TransactionDate].present?
+      DateTime.parse(data[:DueDate]) if data[:DueDate].present?
     end
 
     # @return [Boolean]
@@ -110,7 +103,7 @@ module Illiad
     def books_by_mail?
       return loan? unless loan?
 
-      item.title&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
+      data[:LoanTitle]&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
     end
 
     # @return [Boolean]

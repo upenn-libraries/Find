@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :illiad_user, class: 'Illiad::User' do
-    data { FactoryBot.build(:illiad_user_data) }
+    sequence(:UserName) { |n| "testuser#{n}" }
 
     skip_create
-    initialize_with { Illiad::User.new(data: data) }
+    initialize_with { Illiad::User.new(**attributes) }
   end
 end

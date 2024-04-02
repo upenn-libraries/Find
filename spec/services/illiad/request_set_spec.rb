@@ -2,9 +2,9 @@
 
 describe Illiad::RequestSet do
   let(:requests) do
-    [build(:illiad_loan_request_data),
-     build(:illiad_scan_request_data),
-     build(:illiad_books_by_mail_request_data)]
+    [build(:illiad_api_request_response, :loan),
+     build(:illiad_api_request_response, :books_by_mail),
+     build(:illiad_api_request_response, :scan)]
   end
   let(:request_set) { build(:illiad_request_set, requests: requests) }
 

@@ -2,28 +2,27 @@
 
 FactoryBot.define do
   factory :illiad_request, class: 'Illiad::Request' do
-    for_loan
+    sequence(:TransactionNumber) { |n| n }
+    add_attribute(:Username) { 'testuser' }
+    add_attribute(:ProcessType) { 'Borrowing' }
+    add_attribute(:RequestType) { 'Article' }
 
     skip_create
-    initialize_with { Illiad::Request.new(data: data) }
-  end
+    initialize_with { Illiad::Request.new(**attributes) }
 
-  factory :illiad_item, class: 'Illiad::Request::Item' do
-    for_loan
+    trait :loan do
+      add_attribute(:RequestType) { 'Loan' }
+      add_attribute(:LoanTitle) { 'Autobiography' }
+    end
 
-    skip_create
-    initialize_with { Illiad::Request::Item.new(data: data.symbolize_keys) }
-  end
+    trait :books_by_mail do
+      loan
+      add_attribute(:LoanTitle) { 'BBM Autobiography' }
+      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
+    end
 
-  trait :for_loan do
-    data { FactoryBot.build(:illiad_loan_request_data) }
-  end
-
-  trait :for_books_by_mail do
-    data { FactoryBot.build(:illiad_books_by_mail_request_data) }
-  end
-
-  trait :for_scan do
-    data { FactoryBot.build(:illiad_scan_request_data) }
+    trait :scan do
+      add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+    end
   end
 end

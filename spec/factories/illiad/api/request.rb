@@ -1,45 +1,28 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :illiad_loan_request_data, class: Hash do
-    illiad_request_defaults
-    add_attribute(:RequestType) { 'Loan' }
-    add_attribute(:LoanAuthor) { 'B Franklin' }
-    add_attribute(:LoanTitle) { 'Autobiography' }
-    add_attribute(:LoanPublisher) { 'Penn Press' }
-    add_attribute(:LoanPlace) { 'Philadelphia PA' }
-    add_attribute(:LoanDate) { '2020' }
-    add_attribute(:LoanEdition) { nil }
-
-    factory :illiad_books_by_mail_request_data, class: Hash do
-      add_attribute(:LoanTitle) { 'BBM Autobiography' }
-      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
-    end
-
-    skip_create
-    initialize_with { attributes.stringify_keys }
-  end
-
-  factory :illiad_scan_request_data, class: Hash do
-    illiad_request_defaults
-    add_attribute(:RequestType) { 'Article' }
-    add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
-    add_attribute(:PhotoJournalVolume) { 'v5' }
-    add_attribute(:PhotoJournalIssue) { '2' }
-    add_attribute(:PhotoJournalMonth) { nil }
-    add_attribute(:PhotoJournalYear) { '2020' }
-    add_attribute(:PhotoJournalInclusivePages) { '1-10' }
-    add_attribute(:PhotoArticleAuthor) { '' }
-    add_attribute(:PhotoArticleTitle) { 'Article Title' }
-
-    skip_create
-    initialize_with { attributes.stringify_keys }
-  end
-
-  trait :illiad_request_defaults do
+  factory :illiad_api_request_response, class: Hash do
+    # attributes for Illiad Api version 1
+    # use `add_attribute` to alleviate some of the ugliness when defining PascalCase fields using the shorthand. This is
+    # equivalent to the shorthand method to define attributes used in other factories.
     sequence(:TransactionNumber) { |num| num }
-    add_attribute(:Username) { 'testuser' }
-    add_attribute(:CitedIn) { '' }
+    add_attribute(:Username) { nil }
+    add_attribute(:RequestType) { nil }
+    add_attribute(:LoanAuthor) { nil }
+    add_attribute(:LoanTitle) { nil }
+    add_attribute(:LoanPublisher) { nil }
+    add_attribute(:LoanPlace) { nil }
+    add_attribute(:LoanDate) { nil }
+    add_attribute(:LoanEdition) { nil }
+    add_attribute(:PhotoJournalTitle) { nil }
+    add_attribute(:PhotoJournalVolume) { nil }
+    add_attribute(:PhotoJournalIssue) { nil }
+    add_attribute(:PhotoJournalMonth) { nil }
+    add_attribute(:PhotoJournalYear) { nil }
+    add_attribute(:PhotoJournalInclusivePages) { nil }
+    add_attribute(:PhotoArticleAuthor) { nil }
+    add_attribute(:PhotoArticleTitle) { nil }
+    add_attribute(:CitedIn) { nil }
     add_attribute(:CitedTitle) { nil }
     add_attribute(:CitedDate) { nil }
     add_attribute(:CitedVolume) { nil }
@@ -143,5 +126,36 @@ FactoryBot.define do
     add_attribute(:DOI) { nil }
     add_attribute(:LastOverdueNoticeSent) { nil }
     add_attribute(:ExternalRequest) { nil }
+
+    trait :loan do
+      add_attribute(:RequestType) { 'Loan' }
+      add_attribute(:LoanAuthor) { 'B Franklin' }
+      add_attribute(:LoanTitle) { 'Autobiography' }
+      add_attribute(:LoanPublisher) { 'Penn Press' }
+      add_attribute(:LoanPlace) { 'Philadelphia PA' }
+      add_attribute(:LoanDate) { '2020' }
+      add_attribute(:LoanEdition) { nil }
+    end
+
+    trait :books_by_mail do
+      loan
+      add_attribute(:LoanTitle) { 'BBM Autobiography' }
+      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
+    end
+
+    trait :scan do
+      add_attribute(:RequestType) { 'Article' }
+      add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+      add_attribute(:PhotoJournalVolume) { 'v5' }
+      add_attribute(:PhotoJournalIssue) { '2' }
+      add_attribute(:PhotoJournalMonth) { nil }
+      add_attribute(:PhotoJournalYear) { '2020' }
+      add_attribute(:PhotoJournalInclusivePages) { '1-10' }
+      add_attribute(:PhotoArticleAuthor) { '' }
+      add_attribute(:PhotoArticleTitle) { 'Article Title' }
+    end
+
+    skip_create
+    initialize_with { attributes }
   end
 end

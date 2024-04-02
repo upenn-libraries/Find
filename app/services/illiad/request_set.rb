@@ -9,7 +9,7 @@ module Illiad
 
     # @param requests [Array]
     def initialize(requests:)
-      @requests = requests.map { |req| Illiad::Request.new(data: req) }
+      @requests = requests.map { |req| Illiad::Request.new(**req) }
     end
 
     def each(&)
