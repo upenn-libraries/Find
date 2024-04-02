@@ -6,8 +6,8 @@ describe Illiad::Request do
   let(:request) { build(:illiad_request, :loan) }
 
   describe '.submit' do
-    let(:request_body) { attributes_for(:illiad_request, :loan) }
-    let(:response_body) { FactoryBot.json(:illiad_api_request_response, :loan) }
+    let(:request_body) { { UserName: 'testuser', RequestType: 'Borrowing' } }
+    let(:response_body) { build(:illiad_api_request_response, :loan) }
 
     context 'with a successful api request' do
       before { stub_submit_request_success(request_body: request_body, response_body: response_body) }
@@ -18,7 +18,7 @@ describe Illiad::Request do
     end
 
     context 'with an unsuccessful api request' do
-      let(:response_body) { FactoryBot.json(:illiad_api_error_response, :with_model_error) }
+      let(:response_body) { build(:illiad_api_error_response, :with_model_error) }
 
       before { stub_submit_request_failure(request_body: request_body, response_body: response_body) }
 
@@ -31,7 +31,7 @@ describe Illiad::Request do
 
   describe '.find' do
     context 'with a successful api request' do
-      let(:response_body) { FactoryBot.json(:illiad_api_request_response, :loan) }
+      let(:response_body) { build(:illiad_api_request_response, :loan) }
 
       before { stub_find_request_success(id: request.id, response_body: response_body) }
 
@@ -41,7 +41,7 @@ describe Illiad::Request do
     end
 
     context 'with an unsuccessful api request' do
-      let(:response_body) { FactoryBot.json(:illiad_api_error_response) }
+      let(:response_body) { build(:illiad_api_error_response) }
 
       before { stub_find_request_failure(id: request.id, response_body: response_body) }
 
@@ -52,51 +52,21 @@ describe Illiad::Request do
     end
   end
 
-  describe '.cancel' do
-    context 'with a successful api request' do
-      let(:response_body) do
-        json(:illiad_api_request_response, :loan, TransactionStatus: Illiad::Request::CANCELLED_BY_USER_STATUS)
-      end
-
-      before { stub_cancel_request_success(id: request.id, response_body: response_body) }
-
-      it 'returns an Illiad::Response' do
-        expect(described_class.cancel(id: request.id)).to be_a(described_class)
-      end
-
-      it 'updates the transaction status' do
-        status = described_class.cancel(id: request.id).status
-        expect(status).to eq Illiad::Request::CANCELLED_BY_USER_STATUS
-      end
-    end
-
-    context 'with an unsuccessful api request' do
-      let(:response_body) { FactoryBot.json(:illiad_api_error_response, :with_model_error) }
-
-      before { stub_cancel_request_failure(id: request.id, response_body: response_body) }
-
-      it 'raises an error' do
-        expect { described_class.cancel(id: request.id) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
-      end
-    end
-  end
-
   describe '.add_note' do
     context 'with a successful api request' do
       let(:note) { 'test note' }
-      let(:response_body) { FactoryBot.json(:illiad_api_note_response, Note: note) }
+      let(:response_body) { build(:illiad_api_note_response, Note: note) }
 
       before { stub_add_note_success(id: request.id, note: note, response_body: response_body) }
 
-      it 'returns the json data from the Illiad API' do
-        expect(described_class.add_note(id: request.id, note: note)).to eq JSON.parse(response_body)
+      it 'returns the illiad note data' do
+        expect(described_class.add_note(id: request.id, note: note)).to eq response_body
       end
     end
 
     context 'with an unsuccessful api request' do
       let(:note) { 'test note' }
-      let(:response_body) { FactoryBot.json(:illiad_api_error_response, :with_model_error) }
+      let(:response_body) { build(:illiad_api_error_response, :with_model_error) }
 
       before { stub_add_note_failure(id: request.id, note: note, response_body: response_body) }
 

@@ -9,7 +9,6 @@ module Illiad
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
-    CANCELLED_BY_USER_STATUS = 'Cancelled by User'
     # These constants can probably live on the class that prepares the data we send
     # in our requests to Illiad
     BOOKS_BY_MAIL = 'Books by Mail'
@@ -17,7 +16,7 @@ module Illiad
     ARTICLE = 'Article'
     LOAN = 'Loan'
 
-    attr_reader :data, :item, :id, :user
+    attr_reader :data, :id, :user
 
     # Find an Illiad request
     # Wraps the GET 'Transaction' endpoint
@@ -39,17 +38,6 @@ module Illiad
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request
       response = Connection.create.post(BASE_PATH, data)
-      new(**response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
-    end
-
-    # Update request with cancelled status
-    # Wraps the PUT 'Routing Transaction Request' endpoint
-    # @param id [Integer] Illiad transaction number
-    # @return [Illiad::Request]
-    def self.cancel(id:)
-      response = Connection.create.put("#{BASE_PATH}/#{id}/#{ROUTE_PATH}", { Status: CANCELLED_BY_USER_STATUS })
       new(**response.body)
     rescue Faraday::Error => e
       raise Error, Connection.error_messages(error: e)

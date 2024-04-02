@@ -3,12 +3,14 @@
 HTTP_METHODS = %i[get post put].freeze
 
 shared_context 'with stubbed illiad request data' do
+  # when including this context, declare a memoized helper :illiad_api_response that will be the return value of
+  # the illiad api request
   before do
     connection = instance_double(Faraday::Connection)
     response = instance_double(Faraday::Response)
     allow(Faraday).to receive(:new).and_return(connection)
     allow(connection).to receive_messages(HTTP_METHODS.index_with { response })
-    allow(response).to receive(:body).and_return(illiad_response_data)
+    allow(response).to receive(:body).and_return(illiad_api_response)
   end
 end
 
