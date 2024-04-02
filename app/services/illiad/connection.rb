@@ -3,68 +3,65 @@
 module Illiad
   # Provides a Faraday::Connection to perform requests
   # @return [Faraday::Connection]
-  module Connection
+  class Connection
+    ERROR_MESSAGE = 'Illiad Api Error.'
+    HTTP_METHODS = %i[get post patch].freeze
+
     # Establish Faraday connection with default values
-    def faraday
-      Faraday.new(url: base_url) do |config|
-        # Sets the required credentials in the Authorization header
-        config.request :authorization, authorization_field, credential
-        # Sets the Content-Type header to application/json on each request.
-        # Also, if the request body is a Hash, it will automatically be encoded as JSON.
-        config.request :json
-        # Retries request for certain exceptions
-        config.request :retry, exceptions: Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS + [Faraday::ConnectionFailed],
-                               methods: %i[get post patch delete], interval: 1, max: 3
-        # Raises an error on 4xx and 5xx responses.
-        config.response :raise_error
-        # Use rails logger and filter out sensitive information
-        config.response :logger, Rails.logger, headers: true, bodies: false, log_level: :info do |fmt|
-          fmt.filter(/^(Authorization: ).*$/i, '\1[REDACTED]')
-          # Parses JSON response bodies.
-          # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
+    class << self
+      def create
+        Faraday.new(url: base_url) do |config|
+          # Sets the required credentials in the Authorization header
+          config.headers[authorization_header] = credential
+          # Sets the Content-Type header to application/json on each request.
+          # Also, if the request body is a Hash, it will automatically be encoded as JSON.
+          config.request :json
+          # Retries request for certain exceptions
+          config.request :retry, exceptions: exceptions_to_retry, methods: HTTP_METHODS, interval: 1, max: 3
+          # Raises an error on 4xx and 5xx responses.
+          config.response :raise_error
+          # Use rails logger and filter out sensitive information
+          config.response :logger, Rails.logger, headers: true, bodies: false, log_level: :info do |fmt|
+            fmt.filter(/^(#{authorization_header}: ).*$/i, '\1[REDACTED]')
+            # Parses JSON response bodies.
+            # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
+          end
+          config.response :json
         end
-        config.response :json
       end
-    end
 
-    # @return [String]
-    def secure_version_path
-      '/SystemInfo/SecurePlatformVersion'
-    end
+      # Retrieve error messages from body of bad responses
+      # @return [String]
+      def error_messages(error:)
+        return ERROR_MESSAGE if error.response_body.blank?
 
-    private
+        error_message = error.response_body&.dig('Message')
+        validation_errors = error.response_body&.dig('ModelState')&.flat_map { |_field, value| value }&.join(' ')
 
-    # @return [Symbol]
-    def authorization_field
-      :''
-    end
+        "#{ERROR_MESSAGE} #{error_message} #{validation_errors}".strip
+      end
 
-    # @return [String]
-    def base_url
-      ''
-    end
+      private
 
-    # @return [String]
-    def credential
-      ''
-    end
+      # @return [String]
+      def authorization_header
+        'Apikey'
+      end
 
-    # Set error message for unsuccessful requests
-    # @param error [Faraday::Error]
-    # @return [String]
-    def error_message(error)
-      "Illiad API error. #{validation_errors(error)}".strip
-    end
+      # @return [String]
+      def base_url
+        Settings.illiad_base_url
+      end
 
-    # Retrieve validation error messages provided with some 400 responses
-    # @return [String, nil]
-    def validation_errors(error)
-      return if error.response_body.blank?
+      # @return [String]
+      def credential
+        Rails.application.credentials.illiad_api_key
+      end
 
-      error_message = error.response_body&.fetch('Message')
-      validation_errors = error.response_body&.fetch('ModelState')&.flat_map { |_field, value| value }&.join(' ')
-
-      "#{error_message} #{validation_errors}".strip
+      # @return [Array]
+      def exceptions_to_retry
+        Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS + [Faraday::ConnectionFailed]
+      end
     end
   end
 end
