@@ -48,7 +48,11 @@ Rails.application.routes.draw do
 
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
 
-  get 'requests/new', to: 'requests#new', as: 'new_request'
-  post 'requests/submit', to: 'requests#submit', as: 'submit_request'
-  get 'requests/item_labels', to: 'requests#item_labels', as: 'item_labels'
+  scope :account do
+    scope :requests do
+      get 'new', to: 'requests#new', as: 'new_request'
+      post 'submit', to: 'requests#submit', as: 'submit_request'
+      get 'item_labels', to: 'requests#item_labels', as: 'item_labels'
+    end
+  end
 end
