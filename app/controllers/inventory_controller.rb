@@ -12,7 +12,7 @@ class InventoryController < ApplicationController
   # Returns brief inventory information for a record.
   def brief
     respond_to do |format|
-      format.html { render(Find::DynamicInventoryComponent.new(document: @document), layout: false) }
+      format.html { render(Inventory::BriefInventoryComponent.new(document: @document), layout: false) }
     end
   end
 
@@ -22,7 +22,7 @@ class InventoryController < ApplicationController
     respond_to do |format|
       format.html do
         render(
-          Find::ShowDocument::ElectronicDetailComponent.new(
+          Inventory::ElectronicDetailComponent.new(
             detail: Inventory::Service.electronic_detail(params[:id], params[:pid], params[:cid])
           ), layout: false
         )
