@@ -56,10 +56,10 @@ en:
     format: 'Format'
   requests:
     request: 'Request item'
-    heading: 'Request'
+    heading: 'Request item'
     holding_label: 'Holding'
     item_label: 'Item'
-    location_label: 'Location'
+    location_label: 'Pick up location'
     add_comments: 'Add Comments'
     comments_label: 'Comments'
   search:
