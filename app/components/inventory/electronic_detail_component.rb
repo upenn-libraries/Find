@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 module Inventory
   # Component for rendering electronic detail information (notes)
   class ElectronicDetailComponent < ViewComponent::Base
