@@ -6,7 +6,7 @@ export default class extends Controller {
     selectChanged(event) {
         const holdingValue = event.target.value
         const mmsIdValue = this.mmsIdFieldTarget.value
-        const url = `/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
+        const url = `/account/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
 
         this.itemSelectTarget.disabled = true;
         this.requestItemButtonTarget.disabled = true;
