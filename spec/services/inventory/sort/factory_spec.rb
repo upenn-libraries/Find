@@ -20,6 +20,16 @@ describe Inventory::Sort::Factory do
       end
     end
 
+    context 'with ecollection holdings' do
+      let(:data) do
+        [build(:ecollection_data).merge({ 'inventory_type' => Inventory::Entry::ECOLLECTION })]
+      end
+
+      it 'returns an Inventory::Sort::Electronic object' do
+        expect(sorter).to be_a Inventory::Sort::Electronic
+      end
+    end
+
     context 'with an unknown type' do
       let(:data) { [{ 'inventory_type' => 'unknown' }] }
 
