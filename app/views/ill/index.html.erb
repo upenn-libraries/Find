@@ -1,27 +1,22 @@
 <h1 class="page__heading">Request an item</h1>
-<p class="page__lede">Describe any article, chapter, book, or other item — whether or not it's in our collection — and we'll get it delivered to you.</p>
+<p class="page__lede">Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you.</p>
 
-<h2 class="h4 mt-4">What kind of item are you requesting?</h2>
+<h2 class="h4 mt-3">What's the item you are requesting?</h2>
 
-<nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-4 interlibrary-loan__scan-or-loanable">
-  <label class="btn btn-light">
-    <input type="radio" name="interlibrary-loan__scan-or-loanable" id="ill-pills-0" class="active form-check-input" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="true" id="ill-0-tab" checked />
-    <span>Article or chapter</span>
-  </label>
-  <label class="btn btn-light">
-    <input type="radio" id="ill-pills-1" name="interlibrary-loan__scan-or-loanable" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="true" class="form-check-input" />
-    <span>Book or physical item</span>
-  </label>
+<nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
+  <button class="btn btn-outline-dark" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" id="ill-0-tab">
+    Article or chapter
+  </button>
+  <button class="btn btn-outline-dark" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1">
+    Book or other item
+  </button>
 </nav>
 
 <div class="tab-content" id="ill-tabContent">
-  <div class="tab-pane fade show active" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
+  <div class="tab-pane fade show" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
     <form>
       <div class="row">
-        <div class="col-7">
-          <h2 class="h4 mt-2 mb-2">Describe the article or chapter</h2>
-          <p>This item is delivered electronically as a PDF and is often ready in 2-3 buisness days.</p>
-
+        <div class="col-md-7">
           <div class="form-group mt-2">
             <label for="journal">Journal or book title <small class="text-muted">(required)</small></label>
             <input type="text" class="form-control" id="journal" required>
@@ -38,27 +33,33 @@
             <label for="rftdate">Publication date <small class="text-muted">(required)</small></label>
             <input type="text" class="form-control" id="rftdate" required>
           </div>
-          <div class="form-group mt-3">
-            <label for="volume">Volume</label>
-            <input type="text" class="form-control" id="volume">
-          </div>
-          <div class="form-group mt-3">
-            <label for="issue">Issue</label>
-            <input type="text" class="form-control" id="issue">
-          </div>
-          <div class="form-group mt-3">
-            <label for="pages">Pages</label>
-            <input type="text" class="form-control" id="pages">
-          </div>
-          <div class="form-group mt-3">
-            <label for="comments">Comments</label>
-            <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
-            <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
-          </div>
 
-          <p class="mt-4">We'll send you an email notification when it is ready.</p>
+          <details class="mt-3">
+            <summary>Volume, issue, pages, and comments <small class="text-muted">(optional)</small></summary>
+            <div class="form-group mt-3">
+              <label for="volume">Volume</label>
+              <input type="text" class="form-control" id="volume">
+            </div>
+            <div class="form-group mt-3">
+              <label for="issue">Issue</label>
+              <input type="text" class="form-control" id="issue">
+            </div>
+            <div class="form-group mt-3">
+              <label for="pages">Pages</label>
+              <input type="text" class="form-control" id="pages">
+            </div>
+            <div class="form-group mt-3">
+              <label for="comments">Comments</label>
+              <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+              <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
+            </div>
+          </details>
 
-          <button class="btn btn-success">Make request</button>
+          <p class="mt-4 mb-1">Articles or book chapters are delivered electronically as a PDF and are often ready in 2-3 buisness days.</p>
+
+          <p>We'll send you an email notification when it is ready.</p>
+
+          <button class="btn btn-success btn-lg">Place request</button>
         </div>
       </div>
     </form>
@@ -66,10 +67,7 @@
   <div class="tab-pane fade" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
     <form>
       <div class="row">
-        <div class="col-7">
-          <h2 class="h4 mt-2 mb-2">Describe the book or physical item</h2>
-          <p>Processing time for physical items (loans) can vary widely depending on the nature and availability of the item.</p>
-
+        <div class="col-md-7">
           <div class="form-group mt-2">
             <label for="title">Title <small class="text-muted">(required)</small></label>
             <input type="text" class="form-control" id="title" required>
@@ -82,31 +80,34 @@
             <label for="year">Year of publication <small class="text-muted">(required)</small></label>
             <input type="text" class="form-control" id="year" required>
           </div>
-          <div class="form-group mt-3">
-            <label for="edition">Edition</label>
-            <input type="text" class="form-control" id="edition">
-          </div>
-          <div class="form-group mt-3">
-            <label for="publisher">Publisher</label>
-            <input type="text" class="form-control" id="publisher">
-          </div>
-          <div class="form-group mt-3">
-            <label for="place">Place of publication</label>
-            <input type="text" class="form-control" id="place">
-          </div>
-          <div class="form-group mt-3">
-            <label for="isbn">ISBN</label>
-            <input type="text" class="form-control" id="isbn">
-          </div>
-          <div class="form-group mt-3">
-            <label for="comments">Comments</label>
-            <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
-            <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
-          </div>
+          <details class="mt-3">
+            <summary>Edition, publisher, place of publication, ISBN, and comments <small class="text-muted">(optional)</small></summary>
+            <div class="form-group mt-3">
+              <label for="edition">Edition</label>
+              <input type="text" class="form-control" id="edition">
+            </div>
+            <div class="form-group mt-3">
+              <label for="publisher">Publisher</label>
+              <input type="text" class="form-control" id="publisher">
+            </div>
+            <div class="form-group mt-3">
+              <label for="place">Place of publication</label>
+              <input type="text" class="form-control" id="place">
+            </div>
+            <div class="form-group mt-3">
+              <label for="isbn">ISBN</label>
+              <input type="text" class="form-control" id="isbn">
+            </div>
+            <div class="form-group mt-3">
+              <label for="comments">Comments</label>
+              <textarea type="text" class="form-control" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+              <small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small>
+            </div>
+          </details>
 
            <fieldset>
             <legend class="h4 mt-4">How would you like this item delivered?</legend>
-            <p>Items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>.</p>
+            <p>Books or other items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>.</p>
             <div class="form-check mt-3">
               <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
               <label class="form-check-label" for="delivery-pickup">
@@ -140,9 +141,10 @@
             </div>
           </fieldset>
 
-          <p class="mt-4">We'll send you an email notification when it is ready.</p>
+          <p class="mt-4 mb-1">Processing time can vary widely depending on the nature and availability of the item.</p>
+          <p>We'll send you an email notification when it is ready.</p>
 
-          <button class="btn btn-success">Make request</button>
+          <button class="btn btn-success btn-lg">Place request</button>
         </div>
       </form>
     </div>

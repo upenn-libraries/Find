@@ -1,13 +1,11 @@
 .interlibrary-loan__scan-or-loanable {
   display: flex;
   align-items: baseline;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .interlibrary-loan__scan-or-loanable > .btn {
-  border: solid 1px var(--color-fg-subtle);
   display: flex;
   gap: 0.5rem;
-  font-size: 1.15rem;
 }
