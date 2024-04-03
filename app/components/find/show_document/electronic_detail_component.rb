@@ -13,7 +13,7 @@ module Find
       end
 
       def formatted_notes
-        notes.join.html_safe
+        sanitize(notes.join)
       end
     end
   end

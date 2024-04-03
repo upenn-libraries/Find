@@ -38,9 +38,15 @@ module Inventory
 
     private
 
+    # Retrieves portfolio for electronic holding.
+    #
+    # Note: While this request seems to require portfolio_id, collection_id and service_id, it seems to work without
+    #       sending a service_id. All of our up-to date records should contain a portfolio and collection id. We are
+    #       moving away from standalone records.
+    #
     # @return [Hash]
     def portfolio
-      return {} if portfolio_id.blank?
+      return {} if portfolio_id.blank? || collection_id.blank?
 
       @portfolio ||= Alma::Electronic.get(collection_id: collection_id, service_id: nil,
                                           portfolio_id: portfolio_id)&.data || {}

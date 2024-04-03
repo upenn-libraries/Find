@@ -6,5 +6,11 @@
 
 <a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
 
-<%# TODO: will need to handle the potential for pid or cid to be null in this route %>
-<turbo-frame id="electronic_detail_<%= entry.id %>" src="<%= electronic_detail_solr_document_path(params[:id], entry.id, entry.collection_id) %>" target="_top"></turbo-frame>
+<%# Lazy loading additional details if electronic entry contains an id and a collection_id. %>
+<% if entry.id && entry.collection_id %>
+  <turbo-frame id="electronic_detail_<%= entry.id %>"
+               src="<%= electronic_detail_inventory_path(params[:id], entry.id, entry.collection_id) %>"
+               target="_top">
+    <p>Checking for additional details.</p>
+  </turbo-frame>
+<% end %>

@@ -4,7 +4,7 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
-  before_action :load_document, only: %i[inventory staff_view]
+  before_action :load_document, only: %i[staff_view]
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
@@ -267,24 +267,6 @@ class CatalogController < ApplicationController
 
   def databases
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
-  end
-
-  # Returns inventory information for filling in a Turbo Frame
-  # @todo move to a new InventoryController?
-  def inventory
-    respond_to do |format|
-      format.html { render(Find::DynamicInventoryComponent.new(document: @document), layout: false) }
-    end
-  end
-
-  def electronic_detail
-    respond_to do |format|
-      format.html do
-        render(Find::ShowDocument::ElectronicDetailComponent.new(
-                 detail: Inventory::Service.electronic_detail(params[:id].to_s, params[:pid].to_s, params[:cid].to_s)
-               ), layout: false)
-      end
-    end
   end
 
   def staff_view; end

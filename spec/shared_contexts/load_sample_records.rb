@@ -70,7 +70,7 @@ shared_context 'with electronic journal record with 4 electronic entries' do
                                collection: 'Nature Publishing Journals', portfolio_pid: '1',
                                coverage_statement: 'Available from 1869 volume: 1 issue: 1.'),
      create(:electronic_entry, mms_id: electronic_journal_bib, activation_status: 'Available',
-                               collection: 'Gale Academic OneFile', portfolio_pid: '2',
+                               collection: 'Gale Academic OneFile', portfolio_pid: '2', collection_id: '1234',
                                coverage_statement: 'Available from 01/06/2000 until 12/23/2021.'),
      create(:electronic_entry, mms_id: electronic_journal_bib, activation_status: 'Available',
                                collection: 'Academic Search Premier', portfolio_pid: '3',
@@ -83,11 +83,19 @@ shared_context 'with electronic journal record with 4 electronic entries' do
   before do
     SampleIndexer.index 'electronic_journal.json'
 
+    # Mock request to render inventory in index and show pages.
     allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
                                                .and_return(Inventory::Response.new(entries: electronic_journal_entries))
     allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
                                                 .and_return(
                                                   Inventory::Response.new(entries: electronic_journal_entries.first(3))
                                                 )
+    # Mock extra calls to retrieve notes.
+    details_params = { mms_id: electronic_journal_bib, portfolio_id: '2', collection_id: '1234' }
+    details = instance_double(
+      Inventory::ElectronicDetail, **details_params,
+      notes: ['In this database, you may need to navigate to view your article.']
+    )
+    allow(Inventory::ElectronicDetail).to receive(:new).with(**details_params).and_return(details)
   end
 end

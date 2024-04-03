@@ -31,9 +31,14 @@ Rails.application.routes.draw do
     concerns :exportable
 
     member do
-      get 'inventory'
       get 'staff_view'
-      get 'electronic_detail/:pid/:cid', to: 'catalog#electronic_detail', as: :electronic_detail
+    end
+  end
+
+  resources :inventory, only: [] do
+    member do
+      get 'brief'
+      get 'portfolio/:pid/collection/:cid/detail', to: 'inventory#electronic_detail', as: :electronic_detail
     end
   end
 
