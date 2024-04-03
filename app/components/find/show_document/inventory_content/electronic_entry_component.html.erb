@@ -10,6 +10,7 @@
 <% if entry.id && entry.collection_id %>
   <turbo-frame id="electronic_detail_<%= entry.id %>"
                src="<%= electronic_detail_inventory_path(params[:id], entry.id, entry.collection_id) %>"
+               loading="lazy"
                target="_top">
     <p>Checking for additional details.</p>
   </turbo-frame>
