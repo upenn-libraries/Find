@@ -14,6 +14,8 @@
     <script>
         document.querySelector('html').classList.remove('no-js');
     </script>
+    <script async src="https://cse.google.com/cse.js?cx=b48f73a4ce5df420e">
+    </script>
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
@@ -33,6 +35,11 @@
       <div class="row">
         <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
+
+      <div class="gcse-search"></div>
+      <!-- <div class="gcse-searchbox"></div> -->
+      <!-- <div class="gcse-searchbox-only"></div> -->
+      <!-- <div class="gcse-searchresults-only"></div> -->
     </main>
 
     <pennlibs-footer></pennlibs-footer>
