@@ -25,11 +25,10 @@ module Illiad
       new(**response.body)
     end
 
-    # Create a new request in Illiad, defaults to 'Article' type unless 'RequestType' parameter included in data hash
+    # Create a new request in Illiad. Requires UserName and ProcessType fields. Illiad Api sets RequestType to 'Article'
+    # if data does not include 'RequestType' field.
     # Wraps the POST 'Transaction' endpoint
     # @param data [Hash] Illiad transaction data
-    # @param data [String] :UserName required field
-    # @param data [String] :ProcessType required field
     # @return [Illiad::Request]
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request

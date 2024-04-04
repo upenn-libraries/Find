@@ -18,7 +18,6 @@ module Illiad
     # Illiad API documentation states that _only_ UserName is required. User
     # create requests fail, though, with an empty 400 response if NVTGC field is not also specified.
     # @param data [Hash] user data
-    # @param data [String] 'UserName' required field
     # @return [Illiad::User]
     def self.create(data:)
       response = Client.post(BASE_PATH, data)
@@ -32,11 +31,11 @@ module Illiad
 
     # Get all of a user's requests
     # @param options [Hash] request options
-    # @param [String] :filter filter expression
-    # @param [String] :order_by sort the results
-    # @param [String] :top the maximum number of records to return
-    # @param [String] :skip the number of results to skip before retrieving records
-    # @return [Illiad::RequestSet]
+    # @option options [String] :filter filter expression
+    # @option options [String] :order_by sort the results
+    # @option options [String] :top the maximum number of records to return
+    # @option options [String] :skip the number of results to skip before retrieving records
+    # @option [Illiad::RequestSet]
     def self.requests(user_id:, **options)
       response = Client.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options)
       Illiad::RequestSet.new(requests: response.body)
