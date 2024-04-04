@@ -11,6 +11,11 @@ module Find
         def initialize(entry:)
           @entry = entry
         end
+
+        # Additional details should only be displayed if both and id and a collection_id is present.
+        def additional_details?
+          entry.id && entry.collection_id
+        end
       end
     end
   end

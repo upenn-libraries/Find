@@ -6,8 +6,8 @@
 
 <a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
 
-<%# Lazy loading additional details if electronic entry contains an id and a collection_id. %>
-<% if entry.id && entry.collection_id %>
+<%# Lazy loading additional details %>
+<% if additional_details? %>
   <turbo-frame id="electronic_detail_<%= entry.id %>"
                src="<%= electronic_detail_inventory_path(params[:id], entry.id, entry.collection_id) %>"
                loading="lazy"
