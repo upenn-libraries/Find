@@ -14,7 +14,7 @@ module Illiad
     ARTICLE = 'Article'
     LOAN = 'Loan'
 
-    attr_reader :data, :id, :user
+    attr_reader :data
 
     # Find an Illiad request
     # Wraps the GET 'Transaction' endpoint
@@ -50,8 +50,16 @@ module Illiad
     # @param data [Hash]
     def initialize(**data)
       @data = data.symbolize_keys
-      @id = @data[:TransactionNumber]
-      @user = @data[:Username]
+    end
+
+    # @return [Integer, nil]
+    def id
+      data[:TransactionNumber]
+    end
+
+    # @return [String, nil]
+    def user
+      data[:Username]
     end
 
     # @return [String, nil]

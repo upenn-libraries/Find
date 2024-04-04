@@ -6,7 +6,7 @@ module Illiad
     BASE_PATH = 'users'
     USER_REQUESTS_BASE_PATH = 'Transaction/UserRequests'
 
-    attr_reader :data, :id
+    attr_reader :data
 
     # @param id [String] Illiad user id
     # @return [Illiad::User]
@@ -45,7 +45,11 @@ module Illiad
     # @param data [Hash] User data from Illiad Api response
     def initialize(**data)
       @data = data.symbolize_keys
-      @id = @data[:UserName]
+    end
+
+    # @return [String, nil]
+    def id
+      data[:UserName]
     end
 
     # Get all of the user's requests
