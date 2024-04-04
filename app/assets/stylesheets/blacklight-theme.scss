@@ -164,3 +164,44 @@ pennlibs-footer {
 label.toggle-bookmark {
   min-width: auto;
 }
+
+.constraints-container {
+  margin-bottom: 1rem !important;
+  gap: 0.5rem;
+}
+
+.facets-header,
+.facets-heading {
+  margin: 0;
+  padding: 0;
+}
+
+.facets-heading {
+  font-size: 1.25rem;
+  margin: 0.25rem 0;
+}
+
+.facet-limit {
+  margin-bottom: 0.5rem;
+}
+
+.facet-field-heading > .btn {
+  padding: 0.5rem 0.75rem !important;
+}
+
+.facet-content .card-body {
+  padding: 0.5rem 0.75rem;
+}
+
+.sort-pagination {
+  justify-content: baseline;
+}
+
+.applied-filter,
+.search-widgets > * {
+  margin: 0 !important;
+}
+
+.search-widgets {
+  gap: 0.5rem;
+}

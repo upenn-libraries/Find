@@ -17,6 +17,13 @@ en:
           website: 'Try your search on the Penn Libraries homepage.'
           scholar: 'Try your search in Google Scholar'
           help: 'Ask us for help.'
+      pagination_info:
+        single_item_found: '1 %{entry_name} found'
+        pages:
+          one: '%{start_num} - %{end_num} of %{total_num}'
+          other: '%{start_num} - %{end_num} of %{total_num}'
+      entry_pagination_info:
+        other: '%{current} of %{total}'
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
