@@ -6,7 +6,7 @@ module Illiad
     module Request
       # @param request_body [Hash]
       # @param response_body [Hash]
-      # # @return [WebMock::RequestStub]
+      # @return [WebMock::RequestStub]
       def stub_submit_request_success(request_body:, response_body:)
         stub_request(:post, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}")
           .with(body: request_body, headers: json_headers)
@@ -15,7 +15,7 @@ module Illiad
 
       # @param request_body [Hash]
       # @param response_body [Hash]
-      # # @return [WebMock::RequestStub]
+      # @return [WebMock::RequestStub]
       def stub_submit_request_failure(request_body:, response_body:)
         stub_request(:post, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}")
           .with(body: request_body, headers: json_headers)

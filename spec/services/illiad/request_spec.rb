@@ -22,7 +22,7 @@ describe Illiad::Request do
 
       before { stub_submit_request_failure(request_body: request_body, response_body: response_body) }
 
-      it 'raises an error ' do
+      it 'raises an error' do
         expect { described_class.submit(data: request_body) }
           .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
       end

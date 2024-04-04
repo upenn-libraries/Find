@@ -23,9 +23,9 @@ module Illiad
           # Use rails logger and filter out sensitive information
           config.response :logger, Rails.logger, headers: true, bodies: false, log_level: :info do |fmt|
             fmt.filter(/^(#{authorization_header}: ).*$/i, '\1[REDACTED]')
-            # Parses JSON response bodies.
-            # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
           end
+          # Parses JSON response bodies.
+          # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
           config.response :json
         end
       end

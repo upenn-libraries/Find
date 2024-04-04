@@ -6,7 +6,7 @@ module Illiad
     module User
       # @param id [Integer, String] Illiad username
       # @param response_body [Hash]
-      # # @return [WebMock::RequestStub]
+      # @return [WebMock::RequestStub]
       def stub_find_user_success(id:, response_body:)
         stub_request(:get, "#{Settings.illiad_base_url}/#{Illiad::User::BASE_PATH}/#{id}")
           .with(headers: default_headers)
