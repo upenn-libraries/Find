@@ -24,7 +24,7 @@ describe Illiad::Request do
 
       it 'raises an error' do
         expect { described_class.submit(data: request_body) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end
@@ -47,7 +47,7 @@ describe Illiad::Request do
 
       it 'raises an error ' do
         expect { described_class.find(id: request.id) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end
@@ -72,7 +72,7 @@ describe Illiad::Request do
 
       it 'raises an error ' do
         expect { described_class.add_note(id: request.id, note: note) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end

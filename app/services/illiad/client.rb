@@ -2,14 +2,16 @@
 
 module Illiad
   # Provides a Faraday::Connection to perform requests
-  # @return [Faraday::Connection]
-  class Connection
+  class Client
+    class Error < StandardError; end
+
     ERROR_MESSAGE = 'Illiad Api Error.'
     HTTP_METHODS = %i[get post patch].freeze
 
     # Establish Faraday connection with default values
+    # @return [Faraday::Connection]
     class << self
-      def create
+      def connection
         Faraday.new(url: base_url) do |config|
           # Sets the required credentials in the Authorization header
           config.headers[authorization_header] = credential
@@ -28,6 +30,39 @@ module Illiad
           # If the response body is not valid JSON, it will raise a Faraday::ParsingError.
           config.response :json
         end
+      end
+
+      # @overload get(url, params, headers)
+      #   positional arguments to pass to Faraday get request
+      #   @param url [String]
+      #   @param params [Hash]
+      #   @param headers [Hash]
+      def get(*args)
+        connection.get(*args)
+      rescue Faraday::Error => e
+        raise Error, error_messages(error: e)
+      end
+
+      # @overload post(url, body, headers)
+      #   positional arguments to pass to Faraday post request
+      #   @param url [String]
+      #   @param body [Hash]
+      #   @param headers [Hash]
+      def post(*args)
+        connection.post(*args)
+      rescue Faraday::Error => e
+        raise Error, error_messages(error: e)
+      end
+
+      # @overload patch(url, body, headers)
+      #   positional arguments to pass to Faraday patch request
+      #   @param url [String]
+      #   @param body [Hash]
+      #   @param headers [Hash]
+      def patch(*args)
+        connection.patch(*args)
+      rescue Faraday::Error => e
+        raise Error, error_messages(error: e)
       end
 
       # Retrieve error messages from body of bad responses

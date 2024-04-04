@@ -19,7 +19,7 @@ describe Illiad::User do
 
       it 'raises an error' do
         expect { described_class.find(id: illiad_user.id) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end
@@ -45,7 +45,7 @@ describe Illiad::User do
 
       it 'raises an error' do
         expect { described_class.create(data: request_body) }
-          .to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end
@@ -69,7 +69,7 @@ describe Illiad::User do
       before { stub_user_requests_failure(user_id: illiad_user.id, response_body: response_body) }
 
       it 'raises an error' do
-        expect { requests }.to raise_error(described_class::Error, /#{Illiad::Connection::ERROR_MESSAGE}/)
+        expect { requests }.to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
     end
   end

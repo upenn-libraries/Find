@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Illiad::Connection do
+describe Illiad::Client do
   describe '.create' do
     it 'returns a Faraday::Connection' do
-      expect(described_class.create).to be_a Faraday::Connection
+      expect(described_class.connection).to be_a Faraday::Connection
     end
   end
 

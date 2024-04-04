@@ -3,8 +3,6 @@
 module Illiad
   # Finds and represents an Illiad User
   class User
-    class Error < StandardError; end
-
     BASE_PATH = 'users'
     USER_REQUESTS_BASE_PATH = 'Transaction/UserRequests'
 
@@ -13,10 +11,8 @@ module Illiad
     # @param id [String] Illiad user id
     # @return [Illiad::User]
     def self.find(id:)
-      response = Connection.create.get("#{BASE_PATH}/#{id}")
+      response = Client.get("#{BASE_PATH}/#{id}")
       new(**response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # Illiad API documentation states that _only_ UserName is required. User
@@ -25,10 +21,8 @@ module Illiad
     # @param data [String] 'UserName' required field
     # @return [Illiad::User]
     def self.create(data:)
-      response = Connection.create.post(BASE_PATH, data)
+      response = Client.post(BASE_PATH, data)
       new(**response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # @note the api does not support updating a user
@@ -44,10 +38,8 @@ module Illiad
     # @param [String] :skip the number of results to skip before retrieving records
     # @return [Illiad::RequestSet]
     def self.requests(user_id:, **options)
-      response = Connection.create.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options)
+      response = Client.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options)
       Illiad::RequestSet.new(requests: response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # @param data [Hash] User data from Illiad Api response

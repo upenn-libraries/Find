@@ -4,8 +4,6 @@ module Illiad
   # Represents a request in Illiad
   # provides class methods to create, find, and update requests in Illiad
   class Request
-    class Error < StandardError; end
-
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
@@ -23,10 +21,8 @@ module Illiad
     # @param id [Integer] Illiad transaction number
     # @return [Illiad::Request]
     def self.find(id:)
-      response = Connection.create.get("#{BASE_PATH}/#{id}")
+      response = Client.get("#{BASE_PATH}/#{id}")
       new(**response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # Create a new request in Illiad, defaults to 'Article' type unless 'RequestType' parameter included in data hash
@@ -37,10 +33,8 @@ module Illiad
     # @return [Illiad::Request]
     def self.submit(data:)
       # we need to first prepare this data, it needs to look different for book/scan/book-by-mail request
-      response = Connection.create.post(BASE_PATH, data)
+      response = Client.post(BASE_PATH, data)
       new(**response.body)
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # Create a note for an Illiad request
@@ -49,10 +43,8 @@ module Illiad
     # @param note [String]
     # @return [Hash]
     def self.add_note(id:, note:)
-      response = Connection.create.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
+      response = Client.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
       response.body
-    rescue Faraday::Error => e
-      raise Error, Connection.error_messages(error: e)
     end
 
     # @param data [Hash]
