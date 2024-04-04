@@ -88,9 +88,7 @@ module Illiad
 
     # @return [Boolean]
     def books_by_mail?
-      return loan? unless loan?
-
-      data[:LoanTitle]&.starts_with?(BOOKS_BY_MAIL_REGEX) && data[:ItemInfo1] == BOOKS_BY_MAIL
+      data[:ItemInfo1] == BOOKS_BY_MAIL
     end
 
     # @return [Boolean]
