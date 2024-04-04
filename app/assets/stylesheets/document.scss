@@ -42,28 +42,6 @@
   margin-bottom: 0.5rem;
 }
 
-.document-bar {
-  margin-bottom: 1rem;
-}
-
-.document-bar,
-.document-bar__back-and-pagination {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.document-bar__back-and-pagination > span {
-  display: flex;
-  gap: 0.5rem;
-  align-items: baseline;
-}
-
-.document-bar__back-and-pagination strong {
-  font-weight: 500;
-}
-
 .show-document__format {
   font-weight: 500;
   color: var(--color-fg-subtle);

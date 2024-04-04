@@ -17,20 +17,13 @@
 <% if total_pages > 1 -%>
   <%# #render checks if total_pages > 1, so we can't put our fallback 
   in here .. -%>
-  <div class="document-bar__back-and-pagination">
+  <div class="pagination-bar__previous-and-next">
     <%= paginator.render do -%>
-    <span>
       <%= prev_page_tag %>
-      <span>
-        <%= page_entries_info %>
-      </span>
+      <span><%= page_entries_info %></span>
       <%= next_page_tag %>
-    </span>
     <% end -%>
+  </div>
 <% else -%>
-  <span>
-      <%= page_entries_info %>
-    </span>
+  <span><%= page_entries_info %></span>
 <% end -%>
-</div>
-
