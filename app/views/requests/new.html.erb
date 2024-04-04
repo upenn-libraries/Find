@@ -14,7 +14,9 @@
           <div class="mb-3">
             <%= form.label :item, t('requests.item_label'), { class: 'form-label' } %>
             <%= form.select(:item, @item_labels, {}, { class: 'form-select',
-                                                      data: { requests_form_target: 'itemSelect' } }) %>
+                                                       data: { requests_form_target: 'itemSelect' },
+                                                       disabled: @item_labels.empty?,
+            }) %>
           </div>
 
           <div class="mb-3">
@@ -34,7 +36,7 @@
           <%= form.hidden_field :mms_id, value: @mms_id, data: { requests_form_target: 'mmsIdField' } %>
 
           <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
-                                                      data: { requests_form_target: 'requestItemButton' } }) %>
+                                                  data: { requests_form_target: 'requestItemButton' } }) %>
         <% end %>
       </div>
     </div>
