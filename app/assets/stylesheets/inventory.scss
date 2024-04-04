@@ -170,8 +170,10 @@
   font-size: 1rem;
 }
 
-.inventory-item__policy {
-  font-weight: 500;
+.inventory-item__status {
+  display: block;
+  color: var(--color-fg-success);
+  font-weight: 700;
 }
 
 .inventory-item__notes {
