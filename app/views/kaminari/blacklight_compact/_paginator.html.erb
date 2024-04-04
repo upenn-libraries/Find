@@ -19,9 +19,9 @@
   in here .. -%>
   <div class="pagination-bar__previous-and-next">
     <%= paginator.render do -%>
-      <%= prev_page_tag %>
+      <%= prev_page_tag unless current_page.first? %>
       <span><%= page_entries_info %></span>
-      <%= next_page_tag %>
+      <%= next_page_tag unless current_page.last? %>
     <% end -%>
   </div>
 <% else -%>
