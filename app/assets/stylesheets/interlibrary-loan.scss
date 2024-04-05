@@ -9,3 +9,25 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.interlibary-loan__optional-fields-summary {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-color: var(--color-fg-subtle);
+}
+
+.interlibary-loan__optional-fields-summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 2px;
+}
+
+.interlibary-loan__forms a {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+.interlibary-loan__forms a:hover {
+  text-decoration-thickness: 2px;
+}
