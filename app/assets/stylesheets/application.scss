@@ -1,14 +1,15 @@
-@import './bootstrap-variables';
+@import 'bootstrap-variables';
 @import 'bootstrap';
-@import './bootstrap-theme';
+@import 'bootstrap-theme';
 
 @import 'blacklight/blacklight';
-@import './blacklight-theme';
+@import 'blacklight-theme';
 
-@import './inventory';
-@import './document';
-@import './login-page';
-@import './marc-view';
-@import './web-components';
-@import './site-alerts';
-@import './interlibrary-loan';
+@import 'inventory';
+@import 'document';
+@import 'login-page';
+@import 'marc-view';
+@import 'web-components';
+@import 'site-alerts';
+@import 'pagination';
+@import 'interlibrary-loan';
