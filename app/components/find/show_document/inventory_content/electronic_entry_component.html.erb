@@ -1,12 +1,16 @@
 <p class="inventory-item__availability inventory-item__availability--primary">
   <span class="inventory-item__main"><%= entry.description %></span>
-  <span class="inventory-item__policy"><%= entry.policy %></span>
   <span class="inventory-item__coverage_statement"><%= entry.coverage_statement %></span>
+  <span class="inventory-item__status"><%= entry.human_readable_status %></span>
 </p>
 
-<button class="btn btn-success"><%= entry.description %></button>
+<a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
 
-<!-- here is where we will load a turbo frame that will render a "notes" field via the ElectronicDetail -->
-<p class="inventory-item__notes">
-  In this database, you may need to navigate or search to view your article.
-</p>
+<%# Lazy loading additional details %>
+<% if additional_details? %>
+  <turbo-frame id="electronic_detail_<%= entry.id %>"
+               src="<%= electronic_detail_inventory_path(params[:id], entry.id, entry.collection_id) %>"
+               loading="lazy"
+               target="_top">
+  </turbo-frame>
+<% end %>

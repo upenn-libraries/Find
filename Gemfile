@@ -13,6 +13,7 @@ gem 'config'
 gem 'devise'
 gem 'devise-guests', '~> 0.8'
 gem 'faraday'
+gem 'faraday-retry'
 gem 'importmap-rails'
 gem 'marc'
 gem 'mini_racer'
@@ -47,4 +48,5 @@ end
 group :test do
   gem 'capybara'
   gem 'cuprite'
+  gem 'webmock'
 end
