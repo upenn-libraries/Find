@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
   before_action :set_holding_id, only: %w[new]
   before_action :set_holding_labels, only: %w[new]
   before_action :set_item_labels, only: %w[new item_labels]
-  before_action :set_default_library, only: %w[new]
+  before_action :set_user_group, only: %w[new]
 
   def new; end
 
@@ -17,9 +17,9 @@ class RequestsController < ApplicationController
   #                'comment' => request.comments }
 
   def submit
-    # have all the item details needed (coming from form)
-    # build our request POST body
-    # send via Alma::BibRequest.submit
+    # have all the item details needed (mms_id, holding_id, pickup_location, comments)
+    # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
+    # send via Alma::BibRequest.submit OR Alma::ItemRequest.submit
     # handle response, showing confirmation and/or error - maybe even send an email
     flash[:notice] = 'Requesting submission needs to be implemented.'
     redirect_to solr_document_path(id: params[:mms_id])
@@ -30,6 +30,10 @@ class RequestsController < ApplicationController
   end
 
   private
+
+  def request_params
+    params.permit(:mms_id, :holding_id, :item_pid, :pickup_location, :comments)
+  end
 
   def set_mms_id
     @mms_id = params[:mms_id]
@@ -50,10 +54,10 @@ class RequestsController < ApplicationController
     @item_labels = items.filter_map { |item| item_label(item) }.sort
   end
 
-  def set_default_library
+  def set_user_group
     # Implement some logic here to determine default library selection based on user group
     # User group is stored in session[:user_group] if the user exists in Alma
-    @default_library = 'VanPeltLib'
+    @user_group = session[:user_group]
   end
 
   def holding_label(holding)

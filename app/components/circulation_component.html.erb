@@ -1,0 +1,32 @@
+<ul class="list-group">
+  <% if user_is_facex? %>
+    <li class="list-group-item">
+      <label for="office-radio">
+        <input type="radio" name="delivery" value="office" id="office-radio" checked/>
+        Office Delivery
+      </label>
+      <p>
+        Some more stuff about office delivery...
+      </p>
+    </li>
+  <% end %>
+  <li class="list-group-item">
+    <label for="pickup-radio">
+      <input type="radio" name="delivery" value="pickup" id="pickup-radio" <%= user_is_facex? ? '' : 'checked' %>/>
+      Pickup at Penn
+    </label>
+    <p>
+      <%= form.select(:pickup_location, options_for_select(Settings.locations[:pickup], default_pickup_location),
+                      {}, { class: 'form-select' }) %>
+    </p>
+  </li>
+  <li class="list-group-item">
+    <label for="mail-radio">
+      <input type="radio" name="delivery" value="office" id="mail-radio"/>
+      Books by Mail
+    </label>
+    <p>
+      Some more stuff about books by mail...
+    </p>
+  </li>
+</ul>
