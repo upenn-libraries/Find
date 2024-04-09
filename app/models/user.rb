@@ -9,10 +9,10 @@ class User < ApplicationRecord
 
   # if we want rememberable, we have to do a DB migration to include t.datetime "remember_created_at"
   # devise :rememberable, :timeoutable
-  devise :timeoutable
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer alma saml]
   else
+    devise :timeoutable
     devise :omniauthable, omniauth_providers: %i[alma saml]
   end
 
