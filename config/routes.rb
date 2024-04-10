@@ -55,10 +55,10 @@ Rails.application.routes.draw do
     resources :requests, only: %i[index new create]
 
     # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
-    scope controller: :requests do
+    scope controller: :requests, path: 'requests' do
       get 'ill/new', action: 'ill', to: :ill_new, as: 'ill_new_request'
       get ':system/:id', action: 'show', to: :show, as: 'request', constraints: { system: /(ill|ils)/ }
-      post 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
+      patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
       delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
     end
 
