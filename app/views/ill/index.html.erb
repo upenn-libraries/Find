@@ -17,17 +17,23 @@
     <form>
       <div class="row">
         <div class="col-md-7">
-          <div class="form-group mt-2">
-            <label for="journal">Journal or book title <small class="text-muted">(required)</small></label>
+          <div class="form-group mt-2 form-group--error">
+            <label for="journal">
+              Journal or book title <small class="text-muted">(required)</small>
+              <p class="form-group__error-text">Enter a journal or book title</p>
+            </label>
             <input type="text" class="form-control mt-1" id="journal" required>
           </div>
           <div class="form-group mt-3">
-            <label for="journal">Article or chapter title <small class="text-muted">(required)</small></label>
-            <input type="text" class="form-control mt-1" id="journal" required>
+            <label for="article">Article or chapter title <small class="text-muted">(required)</small></label>
+            <input type="text" class="form-control mt-1" id="article" required>
           </div>
-          <div class="form-group mt-3">
-            <label for="author">Author <small class="text-muted">(required)</small></label>
-            <input type="text" class="form-control mt-1" id="author">
+          <div class="form-group mt-3 form-group--error">
+            <label for="article-author">
+              Author <small class="text-muted">(required)</small>
+              <p class="form-group__error-text">Enter an author</p>
+            </label>
+            <input type="text" class="form-control mt-1" id="article-author">
           </div>
           <div class="form-group mt-3">
             <label for="rftdate">Publication date <small class="text-muted">(required)</small></label>

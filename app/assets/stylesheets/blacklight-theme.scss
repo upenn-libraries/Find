@@ -246,3 +246,19 @@ form {
 form {
   --bs-border-color: var(--color-fg-subtle);
 }
+
+.form-group--error {
+  padding-left: 0.75rem;
+  border-left: solid 0.25rem var(--color-fg-attention);
+}
+
+.form-group__error-text {
+  color: var(--color-fg-attention);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.form-group--error input {
+  border-color: var(--color-fg-attention);
+  border-width: 2px;
+}
