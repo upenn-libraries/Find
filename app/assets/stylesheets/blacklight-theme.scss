@@ -205,3 +205,19 @@ label.toggle-bookmark {
 .search-widgets {
   gap: 0.5rem;
 }
+
+.form-select,
+.form-check-input {
+  border-color: var(--color-fg-subtle);
+}
+
+.form-select-an-item {
+  border-bottom: solid 1px var(--bs-border-color);
+  border-top: solid 1px var(--bs-border-color);
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+
+.form-select-an-item .form-select {
+  width: auto;
+}
