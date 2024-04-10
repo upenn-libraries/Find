@@ -211,13 +211,18 @@ label.toggle-bookmark {
   border-color: var(--color-fg-subtle);
 }
 
-.form-select-an-item {
+.fulfillment-form {
   border-bottom: solid 1px var(--bs-border-color);
   border-top: solid 1px var(--bs-border-color);
   padding: 1rem 0;
   margin: 1rem 0;
 }
 
-.form-select-an-item .form-select {
+.fulfillment-form .form-select {
   width: auto;
+}
+
+.fulfillment__summary {
+  display: list-item;
+  width: max-content;
 }
