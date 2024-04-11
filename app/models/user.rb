@@ -56,9 +56,9 @@ class User < ApplicationRecord
     false
   end
 
-  def exists_in_alma?
-    user = Alma::User.find(uid)
-    user.instance_of?(Alma::User)
+  # @return [Alma::User, FalseClass]
+  def alma_record
+    Alma::User.find(uid)
   rescue Alma::User::ResponseError
     false
   end

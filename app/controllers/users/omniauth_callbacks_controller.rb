@@ -6,11 +6,13 @@ module Users
     skip_before_action :verify_authenticity_token, only: %i[developer failure]
 
     def developer
-      @user = User.from_omniauth_developer(request.env['omniauth.auth'])
-      if @user.exists_in_alma?
-        handle_user(user: @user, kind: 'developer')
+      user = User.from_omniauth_developer(request.env['omniauth.auth'])
+      alma_user = @user.alma_record
+      if alma_user
+        user.ils_group = alma_user.user_group['value']
+        handle_user(user: user, kind: 'developer')
       else
-        @user.destroy if @user.new_record?
+        user.destroy if user.new_record?
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end
@@ -18,7 +20,9 @@ module Users
 
     def saml
       @user = User.from_omniauth_saml(request.env['omniauth.auth'])
-      if @user.exists_in_alma?
+      alma_user = @user.alma_record
+      if alma_user
+        @user.ils_group = alma_user.user_group['value']
         handle_user(user: @user, kind: 'saml')
       else
         @user.destroy if @user.new_record?
@@ -29,8 +33,10 @@ module Users
 
     def alma
       if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
-        @user = User.from_omniauth_alma(request.env['omniauth.auth'])
-        handle_user(user: @user, kind: 'alma')
+        user = User.from_omniauth_alma(request.env['omniauth.auth'])
+        alma_user = user.alma_record
+        user.ils_group = alma_user.user_group['value']
+        handle_user(user: user, kind: 'alma')
       else
         redirect_to alma_login_path
         set_flash_message(:alert, :alma_failure)
