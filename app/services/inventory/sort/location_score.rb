@@ -7,8 +7,8 @@ module Inventory
       BASE_SCORE = 0
       OFFSITE_SCORE = - 1
       UNAVAILABLE_SCORE = -2
-      MAP = [{ locations: Inventory::Mappings.offsite_locations, score: OFFSITE_SCORE },
-             { locations: Inventory::Mappings.unavailable_locations,
+      MAP = [{ locations: Mappings.offsite_locations, score: OFFSITE_SCORE },
+             { locations: Mappings.unavailable_locations,
                score: UNAVAILABLE_SCORE }].freeze
       class << self
         # @return [Integer]
