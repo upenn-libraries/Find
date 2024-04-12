@@ -10,3 +10,13 @@ Alma.configure do |config|
   # By default timeout is set to 5 seconds; can only provide integers
   config.timeout = 10
 end
+
+module Alma
+  # this monkeypatch allows us to override what type of item is returned by Alma,
+  # meaning that our PennItem class now works with the BibItemSet
+  class BibItemSet
+    def single_record_class
+      Items::PennItem
+    end
+  end
+end
