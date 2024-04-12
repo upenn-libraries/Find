@@ -1,6 +1,5 @@
-<%= render RequestComponent.new(mms_id: @mms_id,
+<%= render Account::Requests::FormComponent.new(mms_id: @mms_id,
                                 holding_id: @holding_id,
-                                holding_labels: @holding_labels,
-                                item_labels: @item_labels,
-                                user_id: current_user.uid,
-                                user_group: @user_group) %>
+                                holdings: @holdings,
+                                items: @items,
+                                alma_user: @alma_user) %>

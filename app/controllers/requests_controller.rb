@@ -4,10 +4,10 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_mms_id
-  before_action :set_holding_id, only: %w[new]
-  before_action :set_holding_labels, only: %w[new]
-  before_action :set_item_labels, only: %w[new item_labels]
-  before_action :set_user_group, only: %w[new]
+  before_action :set_holding_id, only: :new
+  before_action :set_holdings, only: :new
+  before_action :set_items, only: %w[new item_labels]
+  before_action :set_alma_user, only: :new
 
   def new; end
 
@@ -25,15 +25,21 @@ class RequestsController < ApplicationController
     redirect_to solr_document_path(id: params[:mms_id])
   end
 
+  # return fulfillment options based on mms id/holding id/item id
+  def options
+    # @item = Alma::BibItem.find()
+    @user = current_user
+    # options = Items::Service.options_for(mms_id:, holding_id:, item_id:, user_id:)
+    # ex:, options = [:delivery, :pickup]
+    # TODO: return turbo frame content with option form radio button elements
+    # render Account::Requests::OptionsComponent.new(options: options)
+  end
+
   def item_labels
-    render json: @item_labels
+    render json: @items.map(&:select_label)
   end
 
   private
-
-  def request_params
-    params.permit(:mms_id, :holding_id, :item_pid, :pickup_location, :comments)
-  end
 
   def set_mms_id
     @mms_id = params[:mms_id]
@@ -43,29 +49,24 @@ class RequestsController < ApplicationController
     @holding_id = params[:holding_id]
   end
 
-  def set_holding_labels
-    holdings = Alma::Bib.get_availability([params[:mms_id]])
-                        .availability.dig(params[:mms_id], :holdings)
-    @holding_labels = holdings.filter_map { |holding| holding_label(holding) }
+  # @return [Alma::BibItemSet]
+  def set_holdings
+    @holdings = Alma::Bib.get_availability([params[:mms_id]])
+                         .availability.dig(params[:mms_id], :holdings)
   end
 
-  def set_item_labels
-    items = Alma::BibItem.find(params[:mms_id], holding_id: params[:holding_id])
-    @item_labels = items.filter_map { |item| item_label(item) }.sort
+  # @return [Alma::BibItemSet]
+  def set_items
+    @items = Items::Service.items_for(mms_id: params[:mms_id],
+                                      holding_id: params[:holding_id])
+    @item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
+                                    item_pid: @items.first.item_data['pid'])
   end
 
-  def set_user_group
+  def set_alma_user
     # Implement some logic here to determine default library selection based on user group
     # User group is stored in session[:user_group] if the user exists in Alma
-    @user_group = session[:user_group]
-  end
-
-  def holding_label(holding)
-    [[holding['library'], holding['call_number']].compact_blank.join(' - '), holding['holding_id']]
-  end
-
-  def item_label(item)
-    [[item.description, item.physical_material_type['desc'], item.public_note,
-      item.library_name].compact_blank.join(' - '), item.item_data['pid']]
+    # @user_group = session[:user_group]
+    @alma_user = Alma::User.find(current_user.uid)
   end
 end
