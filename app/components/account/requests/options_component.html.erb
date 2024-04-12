@@ -1,0 +1,7 @@
+<ul class="list-group">
+  <% if user_is_facex? %>
+    <%= render Account::Requests::Options::OfficeComponent.new(user_address: user_address, form: form) %>
+  <% end %>
+  <%= render Account::Requests::Options::PickupComponent.new(facex: user_is_facex?, default_pickup_location: default_pickup_location, form: form) %>
+  <%= render Account::Requests::Options::MailComponent.new(form: form) %>
+</ul>

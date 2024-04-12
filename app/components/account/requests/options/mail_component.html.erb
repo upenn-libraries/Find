@@ -1,0 +1,12 @@
+<li class="list-group-item">
+  <%= form.radio_button :delivery, 'mail' %>
+  <%= form.label :delivery_mail, 'Books by Mail' %>
+  <p>
+    Users must <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>register for Books by Mail</a>
+    before submitting requests.
+  </p>
+  <p>
+    <%= form.check_box :bbm_validation, { required: true } %>
+    <%= form.label :bbm_validation, 'I am a registered Books by Mail user' %>
+  </p>
+</li>

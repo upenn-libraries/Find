@@ -6,22 +6,22 @@
         <%= form_with(url: submit_request_path, method: :post) do |form| %>
           <div class="mb-3">
             <%= form.label :holding_id, t('requests.holding_label'), { class: 'form-label' } %>
-            <%= form.select(:holding_id, options_for_select(@holding_labels, @holding_id), {},
+            <%= form.select(:holding_id, options_for_select(holding_labels, @holding_id), {},
                             { class: 'form-select',
                               data: { action: 'change->requests-form#selectChanged' } }) %>
           </div>
 
           <div class="mb-3">
             <%= form.label :item_pid, t('requests.item_label'), { class: 'form-label' } %>
-            <%= form.select(:item_pid, @item_labels, {}, { class: 'form-select',
+            <%= form.select(:item_pid, item_labels, {}, { class: 'form-select',
                                                            data: { requests_form_target: 'itemSelect' },
-                                                           disabled: @item_labels.empty?,
+                                                           disabled: item_labels.empty?,
             }) %>
           </div>
 
           <div class="mb-3">
             <%= form.label :circulation, "Delivery Options", { class: 'form-label' } %>
-            <%= render CirculationComponent.new(user_group: @user_group, form: form) %>
+            <%= render Account::Requests::OptionsComponent.new(alma_user: @alma_user, form: form) %>
           </div>
 
           <div class="mb-3">

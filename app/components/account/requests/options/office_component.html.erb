@@ -1,0 +1,18 @@
+<li class="list-group-item">
+  <%= form.radio_button :delivery, 'office', { checked: true } %>
+  <%= form.label :delivery_office, 'Office Delivery' %>
+  <p>
+    <% if user_address_set? %>
+      If this is not your preferred delivery address, please contact
+      <a href='mailto:pld@pobox.upenn.edu'>Faculty Express</a>
+      <div class="alert alert-info">
+        <%= @user_address.join('<br>').html_safe %>
+      </div>
+    <% else %>
+      <div class="alert alert-warning">
+        You do not have a preferred Faculty Express delivery address. Please set one up by contacting
+        <a href='mailto:pld@pobox.upenn.edu'>Faculty Express</a>
+      </div>
+    <% end %>
+    </p>
+    </li>
