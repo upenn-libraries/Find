@@ -7,10 +7,9 @@ module Users
 
     def developer
       user = User.from_omniauth_developer(request.env['omniauth.auth'])
-      alma_user = @user.alma_record
+      alma_user = user.alma_record
       if alma_user
-        user.ils_group = alma_user.user_group['value']
-        handle_user(user: user, kind: 'developer')
+        handle_user(user: user, alma_user: alma_user, kind: 'developer')
       else
         user.destroy if user.new_record?
         redirect_to login_path
@@ -19,13 +18,12 @@ module Users
     end
 
     def saml
-      @user = User.from_omniauth_saml(request.env['omniauth.auth'])
-      alma_user = @user.alma_record
+      user = User.from_omniauth_saml(request.env['omniauth.auth'])
+      alma_user = user.alma_record
       if alma_user
-        @user.ils_group = alma_user.user_group['value']
-        handle_user(user: @user, kind: 'saml')
+        handle_user(user: user, alma_user: alma_user, kind: 'saml')
       else
-        @user.destroy if @user.new_record?
+        user.destroy if user.new_record?
         redirect_to login_path
         set_flash_message(:alert, :alma_failure)
       end
@@ -34,9 +32,7 @@ module Users
     def alma
       if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
         user = User.from_omniauth_alma(request.env['omniauth.auth'])
-        alma_user = user.alma_record
-        user.ils_group = alma_user.user_group['value']
-        handle_user(user: user, kind: 'alma')
+        handle_user(user: user, alma_user: user.alma_record, kind: 'alma')
       else
         redirect_to alma_login_path
         set_flash_message(:alert, :alma_failure)
@@ -51,12 +47,11 @@ module Users
     private
 
     # @param [User] user
+    # @param alma_user [Alma::User]
     # @param [String] kind
-    def handle_user(user:, kind:)
-      if !user
-        redirect_to login_path
-        set_flash_message :notice, :no_access
-      elsif user.save
+    def handle_user(user:, alma_user:, kind:)
+      user.ils_group = alma_user.user_group['value']
+      if user.save
         sign_in_and_redirect user, event: :authentication
         set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
       else

@@ -6,8 +6,10 @@ describe 'Omniauth Callbacks Requests' do
   context 'with saml authentication' do
     context 'when the user has an Alma account' do
       before do
+        mock_alma_user = instance_double Alma::User
+        allow(mock_alma_user).to receive(:method_missing).with(:user_group).and_return({ 'value' => 'patron' })
         allow(User).to receive(:new).and_return(user)
-        allow(user).to receive(:exists_in_alma?).and_return(true)
+        allow(user).to receive(:alma_record).and_return(mock_alma_user)
 
         post user_saml_omniauth_callback_path
       end
@@ -20,12 +22,16 @@ describe 'Omniauth Callbacks Requests' do
       it 'creates a user' do
         expect(User.all.count).to eq 1
       end
+
+      it 'sets the user ils_group value' do
+        expect(user.ils_group).to eq 'patron'
+      end
     end
 
     context 'when the user does not have an Alma account' do
       before do
         allow(User).to receive(:new).and_return(user)
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+        allow(user).to receive(:alma_record).and_return(false)
 
         post user_saml_omniauth_callback_path
       end
@@ -45,7 +51,7 @@ describe 'Omniauth Callbacks Requests' do
 
       before do
         allow(User).to receive(:new).and_return(user)
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+        allow(user).to receive(:alma_record).and_return(false)
 
         post user_saml_omniauth_callback_path
       end
@@ -60,7 +66,7 @@ describe 'Omniauth Callbacks Requests' do
 
       before do
         allow(User).to receive(:new).and_return(user)
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+        allow(user).to receive(:alma_record).and_return(false)
 
         post user_saml_omniauth_callback_path
       end
@@ -75,6 +81,10 @@ describe 'Omniauth Callbacks Requests' do
     context 'when authentication succeeds' do
       before do
         allow(User).to receive(:authenticated_by_alma?).and_return(true)
+        mock_alma_user = instance_double Alma::User
+        allow(mock_alma_user).to receive(:method_missing).with(:user_group).and_return({ 'value' => 'patron' })
+        allow(User).to receive(:new).and_return(user)
+        allow(user).to receive(:alma_record).and_return(mock_alma_user)
 
         post user_alma_omniauth_callback_path
       end
@@ -86,6 +96,10 @@ describe 'Omniauth Callbacks Requests' do
 
       it 'creates a user' do
         expect(User.all.count).to eq 1
+      end
+
+      it 'sets the user ils_group value' do
+        expect(user.ils_group).to eq 'patron'
       end
     end
 
