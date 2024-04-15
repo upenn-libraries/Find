@@ -1,9 +1,9 @@
 import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea']
+    static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea', 'holdingSelect']
 
-    selectChanged(event) {
+    holdingSelectChanged(event) {
         const holdingValue = event.target.value
         const mmsIdValue = this.mmsIdFieldTarget.value
         const url = `/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
@@ -22,6 +22,16 @@ export default class extends Controller {
                     this.itemSelectTarget.disabled = false;
                 })
         }
+    }
+
+   itemSelectChanged(event) {
+        const mmsIdValue = this.mmsIdFieldTarget.value
+        const holdingValue = this.holdingSelectTarget.value
+        const itemValue = event.target.value
+        const url = `/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+        const frame = document.getElementById('options_frame')
+
+        frame.src = url
     }
 
     showCommentsArea(event) {

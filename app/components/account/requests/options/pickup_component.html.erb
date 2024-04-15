@@ -1,8 +1,7 @@
 <li class="list-group-item">
-  <%= form.radio_button :delivery, 'pickup', { checked: (true unless @facex) } %>
-  <%= form.label :delivery_pickup, 'Pickup at Penn' %>
+  <%= radio_button_tag :delivery, 'pickup', { checked: (true unless @facex) } %>
+  <%= label_tag :delivery_pickup, 'Pickup at Penn' %>
   <p class="mt-1">
-    <%= form.select(:pickup_location, options_for_select(Settings.locations[:pickup], @default_pickup_location),
-                    {}, { class: 'form-select' }) %>
+    <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup], @default_pickup_location), { class: 'form-select' }) %>
   </p>
 </li>

@@ -4,6 +4,8 @@ module Account
   module Requests
     # renders form for new request
     class FormComponent < ViewComponent::Base
+      include Turbo::FramesHelper
+
       attr_accessor :holdings, :items
 
       def initialize(mms_id:, holding_id:, holdings:, items:, alma_user:)

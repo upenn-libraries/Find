@@ -1,6 +1,6 @@
 <li class="list-group-item">
-  <%= form.radio_button :delivery, 'office', { checked: true } %>
-  <%= form.label :delivery_office, 'Office Delivery' %>
+  <%= radio_button_tag :delivery, 'office', { checked: true } %>
+  <%= label_tag :delivery_office, 'Office Delivery' %>
   <p>
     <% if user_address_set? %>
       If this is not your preferred delivery address, please contact

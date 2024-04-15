@@ -4,14 +4,14 @@ module Account
   module Requests
     # renders the circulation options for physical holdings
     class OptionsComponent < ViewComponent::Base
-      attr_accessor :form
+      include Turbo::FramesHelper
 
       DEFAULT_PICKUP = 'VanPeltLib'
       DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
 
-      def initialize(alma_user:, form:)
+      def initialize(item:, alma_user:)
+        @item = item
         @alma_user = alma_user
-        @form = form
       end
 
       def default_pickup_location

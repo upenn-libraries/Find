@@ -5,12 +5,10 @@ module Account
     module Options
       # pickup component logic
       class PickupComponent < ViewComponent::Base
-        attr_accessor :form
 
-        def initialize(facex:, default_pickup_location:, form:)
+        def initialize(facex:, default_pickup_location:)
           @facex = facex
           @default_pickup_location = default_pickup_location
-          @form = form
         end
       end
     end

@@ -8,6 +8,10 @@ module Items
       false
     end
 
+    def pid
+      item_data['pid']
+    end
+
     def select_label
       [[description, physical_material_type['desc'], public_note, library_name]
         .compact_blank.join(' - '), item_data['pid']]

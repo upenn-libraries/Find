@@ -5,11 +5,9 @@ module Account
     module Options
       # office delivery component logic
       class OfficeComponent < ViewComponent::Base
-        attr_accessor :form
 
-        def initialize(user_address:, form:)
+        def initialize(user_address:)
           @user_address = user_address
-          @form = form
         end
 
         def user_address_set?
