@@ -6,7 +6,6 @@ export default class extends Controller {
     holdingSelectChanged(event) {
         const mmsIdValue = this.mmsIdFieldTarget.value
         const holdingValue = event.target.value
-        const itemValue = this.itemSelectTarget.value
         const url = `/account/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
 
         this.itemSelectTarget.disabled = true;
@@ -16,8 +15,10 @@ export default class extends Controller {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    const itemValue = this.itemSelectTarget.value
                     this.populateItemSelect(data);
+                    const mmsIdValue = this.mmsIdFieldTarget.value
+                    const holdingValue = event.target.value
+                    const itemValue = this.itemSelectTarget.value
                     const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
                     const frame = document.getElementById('options_frame')
 

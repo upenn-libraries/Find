@@ -8,12 +8,11 @@ module Account
 
       attr_accessor :holdings, :items
 
-      def initialize(mms_id:, holding_id:, holdings:, items:, alma_user:)
+      def initialize(mms_id:, holding_id:, holdings:, items:)
         @mms_id = mms_id
         @holding_id = holding_id
         @holdings = holdings
         @items = items
-        @alma_user = alma_user
       end
 
       def holding_labels

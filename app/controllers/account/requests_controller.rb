@@ -8,7 +8,6 @@ module Account
     before_action :set_holding_id, only: :new
     before_action :set_holdings, only: :new
     before_action :set_items, only: %w[new item_labels options]
-    before_action :set_alma_user, only: %w[new options]
 
     # Returns form for initializing a new request. TODO: May return a turbo frame response.
     # GET /account/requests/new
@@ -46,7 +45,7 @@ module Account
       @item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
                                       item_pid: params[:item_pid] || @items.first.item_data['pid'])
       # options would be passed into the component to determine which options are available
-      render(Account::Requests::OptionsComponent.new(item: @item, alma_user: @alma_user), layout: false)
+      render(Account::Requests::OptionsComponent.new(item: @item, user: current_user), layout: false)
     end
 
     # Send json array of item labels to populate Item dropdown on holding change
@@ -75,13 +74,6 @@ module Account
     def set_items
       @items = Items::Service.items_for(mms_id: params[:mms_id],
                                         holding_id: params[:holding_id])
-    end
-
-    def set_alma_user
-      # Implement some logic here to determine default library selection based on user group
-      # User group is stored in session[:user_group] if the user exists in Alma
-      # @user_group = session[:user_group]
-      @alma_user = Alma::User.find(current_user.uid)
     end
   end
 end

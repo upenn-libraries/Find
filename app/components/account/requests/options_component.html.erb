@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'options_frame' do %>
-  <p><%= @item.pid %></p>
+  <p><%= item.pid %></p>
   <ul class="list-group">
     <% if user_is_facex? %>
       <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address)) %>

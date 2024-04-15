@@ -6,12 +6,16 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      DEFAULT_PICKUP = 'VanPeltLib'
+      FACULTY_EXPRESS_CODE = 'FacEXP'
+      STUDENT_GROUP_CODES = %w[undergrad graduate].freeze
       DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
+      DEFAULT_PICKUP = 'VanPeltLib'
 
-      def initialize(item:, alma_user:)
+      attr_accessor :item, :user
+
+      def initialize(item:, user:)
         @item = item
-        @alma_user = alma_user
+        @user = user
       end
 
       def default_pickup_location
@@ -23,21 +27,15 @@ module Account
       def user_address
         return unless user_is_facex?
 
-        Illiad::User.find(id: user_id).address
+        Illiad::User.find(id: user.uid).address
       end
 
       def user_is_student?
-        @alma_user.user_group['desc'].include? 'Student'
+        STUDENT_GROUP_CODES.include? user.ils_group
       end
 
       def user_is_facex?
-        @alma_user.user_group['desc'] == 'Faculty Express'
-      end
-
-      private
-
-      def user_id
-        @alma_user.user_identifier.first['value']
+        user.ils_group == FACULTY_EXPRESS_CODE
       end
     end
   end
