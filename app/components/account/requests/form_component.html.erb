@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-7">
       <div class="request__options" data-controller="requests-form">
-        <%= form_with(url: submit_request_path, method: :post) do |form| %>
+        <%= form_with(url: requests_path, method: :post) do |form| %>
           <div class="mb-3">
             <%= form.label :holding_id, t('requests.holding_label'), { class: 'form-label' } %>
             <%= form.select(:holding_id, options_for_select(holding_labels, @holding_id), {},

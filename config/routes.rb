@@ -52,10 +52,20 @@ Rails.application.routes.draw do
 
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
 
-  scope :requests do
-    get 'new', to: 'requests#new', as: 'new_request'
-    post 'submit', to: 'requests#submit', as: 'submit_request'
-    get 'item_labels', to: 'requests#item_labels', as: 'item_labels'
-    get 'options', to: 'requests#options', as: 'request_options'
+  namespace :account, as: nil do
+    resource :profile, only: %i[show edit update], controller: 'profile'
+    resources :requests, only: %i[index new create]
+
+    # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
+    scope controller: :requests, path: 'requests' do
+      get 'ill/new', action: 'ill', to: :ill_new, as: 'ill_new_request'
+      get ':system/:id', action: 'show', to: :show, as: 'request', constraints: { system: /(ill|ils)/ }
+      patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
+      delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
+      get 'item_labels', action: 'item_labels', as: 'item_labels'
+      get 'options', action: 'options', as: 'request_options'
+    end
+
+    get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
   end
 end

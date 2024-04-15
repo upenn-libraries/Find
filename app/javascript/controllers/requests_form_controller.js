@@ -4,9 +4,10 @@ export default class extends Controller {
     static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea', 'holdingSelect']
 
     holdingSelectChanged(event) {
-        const holdingValue = event.target.value
         const mmsIdValue = this.mmsIdFieldTarget.value
-        const url = `/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
+        const holdingValue = event.target.value
+        const itemValue = this.itemSelectTarget.value
+        const url = `/account/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
 
         this.itemSelectTarget.disabled = true;
         this.requestItemButtonTarget.disabled = true;
@@ -15,11 +16,9 @@ export default class extends Controller {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    this.populateItemSelect(data);
-                    const mmsIdValue = this.mmsIdFieldTarget.value
-                    const holdingValue = event.target.value
                     const itemValue = this.itemSelectTarget.value
-                    const url = `/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+                    this.populateItemSelect(data);
+                    const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
                     const frame = document.getElementById('options_frame')
 
                     frame.src = url
@@ -35,7 +34,7 @@ export default class extends Controller {
         const mmsIdValue = this.mmsIdFieldTarget.value
         const holdingValue = this.holdingSelectTarget.value
         const itemValue = event.target.value
-        const url = `/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+        const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
         const frame = document.getElementById('options_frame')
 
         frame.src = url
