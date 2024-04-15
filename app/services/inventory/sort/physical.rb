@@ -92,7 +92,7 @@ module Inventory
 
         # @return [Boolean]
         def aeon_location?
-          data['location_code'].in?(Inventory::Mappings.aeon_locations)
+          data['location_code'].in?(Mappings.aeon_locations)
         end
 
         # @return [Boolean]
@@ -102,7 +102,7 @@ module Inventory
 
         # @return [Boolean]
         def undesirable_location?
-          undesirable_locations = Inventory::Mappings.offsite_locations + Inventory::Mappings.unavailable_locations
+          undesirable_locations = Mappings.offsite_locations + Mappings.unavailable_locations
           data['location_code'].in?(undesirable_locations)
         end
       end

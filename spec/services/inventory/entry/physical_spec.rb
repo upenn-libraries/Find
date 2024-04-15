@@ -96,7 +96,7 @@ describe Inventory::Entry::Physical do
 
       it 'returns expected value' do
         location_code = entry.data[:location_code].to_sym
-        expect(entry.location).to eq Inventory::Mappings.locations[location_code][:display]
+        expect(entry.location).to eq Mappings.locations[location_code][:display]
       end
     end
 
@@ -104,7 +104,7 @@ describe Inventory::Entry::Physical do
       let(:entry) { create(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984') }
 
       it 'returns expected value' do
-        expect(entry.location).to eq Inventory::Mappings.location_overrides[:albrecht][:specific_location]
+        expect(entry.location).to eq Mappings.location_overrides[:albrecht][:specific_location]
       end
     end
   end
