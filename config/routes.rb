@@ -50,8 +50,6 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'webhooks/alerts', to: 'alert_webhooks#listen'
-
   namespace :account, as: nil do
     resource :profile, only: %i[show edit update], controller: 'profile'
     resources :requests, only: %i[index new create]
@@ -68,4 +66,6 @@ Rails.application.routes.draw do
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
   end
+
+  post 'webhooks/alerts', to: 'alert_webhooks#listen'
 end

@@ -3,13 +3,13 @@
 require 'system_helper'
 
 describe 'index page' do
-  let(:user) { create(:user, :alma_authenticated) }
+  let(:user) { build(:user, :alma_authenticated) }
+  let(:alma_user_group) { 'patron' }
 
-  before do
-    allow(User).to receive(:new).and_return(user)
-    allow(user).to receive(:group).and_return('Faculty Staff')
-    visit alma_login_path
-  end
+  include_context 'with User.new returning user'
+  include_context 'with mock alma_record on user having alma_user_group user group'
+
+  before { visit alma_login_path }
 
   context 'when Alma authentication succeeds' do
     before do

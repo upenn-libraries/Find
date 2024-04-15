@@ -2,17 +2,15 @@
 
 describe 'Omniauth Callbacks Requests' do
   let(:user) { build(:user) }
+  let(:alma_user_group) { 'patron' }
 
-  before do
-    allow(User).to receive(:new).and_return(user)
-    allow(user).to receive(:group).and_return('Library Staff')
-  end
+  include_context 'with User.new returning user'
 
   context 'with saml authentication' do
     context 'when the user has an Alma account' do
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(true)
+      include_context 'with mock alma_record on user having alma_user_group user group'
 
+      before do
         post user_saml_omniauth_callback_path
       end
 
@@ -24,12 +22,16 @@ describe 'Omniauth Callbacks Requests' do
       it 'creates a user' do
         expect(User.all.count).to eq 1
       end
+
+      it 'sets the user ils_group value' do
+        expect(user.ils_group).to eq alma_user_group
+      end
     end
 
     context 'when the user does not have an Alma account' do
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+      include_context 'with user alma_record lookup returning false'
 
+      before do
         post user_saml_omniauth_callback_path
       end
 
@@ -46,9 +48,9 @@ describe 'Omniauth Callbacks Requests' do
     context 'when the alma request fails with a user in the database' do
       let(:user) { create(:user) }
 
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+      include_context 'with user alma_record lookup returning false'
 
+      before do
         post user_saml_omniauth_callback_path
       end
 
@@ -60,9 +62,9 @@ describe 'Omniauth Callbacks Requests' do
     context 'when the alma request fails without a user in the database' do
       let(:user) { build(:user) }
 
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(false)
+      include_context 'with user alma_record lookup returning false'
 
+      before do
         post user_saml_omniauth_callback_path
       end
 
@@ -74,9 +76,10 @@ describe 'Omniauth Callbacks Requests' do
 
   context 'with Alma authentication' do
     context 'when authentication succeeds' do
+      include_context 'with mock alma_record on user having alma_user_group user group'
+
       before do
         allow(User).to receive(:authenticated_by_alma?).and_return(true)
-
         post user_alma_omniauth_callback_path
       end
 
@@ -88,12 +91,15 @@ describe 'Omniauth Callbacks Requests' do
       it 'creates a user' do
         expect(User.all.count).to eq 1
       end
+
+      it 'sets the user ils_group value' do
+        expect(user.ils_group).to eq alma_user_group
+      end
     end
 
     context 'when authentication fails' do
       before do
         allow(User).to receive(:authenticated_by_alma?).and_return(false)
-
         post user_alma_omniauth_callback_path
       end
 

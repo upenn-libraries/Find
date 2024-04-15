@@ -4,18 +4,15 @@ require 'system_helper'
 
 describe 'login page' do
   let(:user) { build(:user) }
+  let(:alma_user_group) { 'patron' }
 
-  before do
-    allow(User).to receive(:new).and_return(user)
-    allow(user).to receive(:group).and_return('Test User Group')
-    visit login_path
-  end
+  include_context 'with User.new returning user'
 
   context 'when logging in ' do
+    before { visit login_path }
+
     context 'when user exists in Alma' do
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(true)
-      end
+      include_context 'with mock alma_record on user having alma_user_group user group'
 
       it 'renders the success message' do
         expect(page).to have_text(I18n.t('login.pennkey'))
@@ -25,9 +22,7 @@ describe 'login page' do
     end
 
     context 'when user does not exist in Alma' do
-      before do
-        allow(user).to receive(:exists_in_alma?).and_return(false)
-      end
+      include_context 'with user alma_record lookup returning false'
 
       it 'renders the failure message' do
         expect(page).to have_text(I18n.t('login.pennkey'))
@@ -47,10 +42,9 @@ describe 'login page' do
 
   context 'when logging in from a record page' do
     include_context 'with electronic journal record with 4 electronic entries'
+    include_context 'with mock alma_record on user having alma_user_group user group'
 
     before do
-      allow(user).to receive(:exists_in_alma?).and_return(true)
-
       visit solr_document_path(electronic_journal_bib)
       visit login_path
     end
