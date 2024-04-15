@@ -33,13 +33,5 @@ class Mappings
     def electronic_scoring
       Settings.electronic_scoring
     end
-
-    private
-
-    # @param path [String] path to mapping file relative to root directory
-    # @return [Hash, Array]
-    def load_file(path)
-      YAML.safe_load(File.read(Rails.root.join(path)))
-    end
   end
 end
