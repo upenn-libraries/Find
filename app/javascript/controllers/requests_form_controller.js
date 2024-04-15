@@ -16,6 +16,13 @@ export default class extends Controller {
                 .then(response => response.json())
                 .then(data => {
                     this.populateItemSelect(data);
+                    const mmsIdValue = this.mmsIdFieldTarget.value
+                    const holdingValue = event.target.value
+                    const itemValue = this.itemSelectTarget.value
+                    const url = `/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+                    const frame = document.getElementById('options_frame')
+
+                    frame.src = url
                 })
                 .catch(error => {
                     console.error('Error:', error)
