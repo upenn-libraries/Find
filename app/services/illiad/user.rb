@@ -51,6 +51,11 @@ module Illiad
       data[:UserName]
     end
 
+    # @return [Array]
+    def address
+      [data[:Address2], data[:Zip]]
+    end
+
     # Get all of the user's requests
     # @param options [Hash] request options
     # @param [String] :filter filter expression

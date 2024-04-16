@@ -61,6 +61,13 @@ class User < ApplicationRecord
     false
   end
 
+  # @return [Illiad::User, FalseClass]
+  def illiad_record
+    Illiad::User.find(id: uid)
+  rescue Illiad::Client::Error
+    false
+  end
+
   private
 
   # @return [TrueClass, FalseClass]

@@ -1,4 +1,10 @@
 en:
+  account:
+    profile:
+      terms:
+        fines: 'Fines & Fees'
+        user_group: 'Patron Group'
+        bbm_delivery_address: 'Books by Mail Delivery Address'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'

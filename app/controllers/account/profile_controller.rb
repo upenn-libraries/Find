@@ -4,7 +4,7 @@ module Account
   # Controller for user-profile-related actions.
   class ProfileController < AccountController
     # GET /account/profile
-    # Show user details (user group, addresses, service eligibility, fines/fees form Alma
+    # Show user details (user group, addresses, service eligibility, fines/fees form Alma)
     def show; end
 
     # GET /account/profile/edit
