@@ -1,11 +1,15 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <p><%= item.pid %></p>
   <ul class="list-group">
-    <% if user_is_facex? %>
+    <% if options.include? :office %>
       <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address)) %>
     <% end %>
-    <%= render(Account::Requests::Options::PickupComponent.new(facex: user_is_facex?,
-                                                               default_pickup_location: default_pickup_location)) %>
-    <%= render Account::Requests::Options::MailComponent.new %>
+    <% if options.include? :pickup %>
+      <%= render(Account::Requests::Options::PickupComponent
+                   .new(default_pickup_location: default_pickup_location, options: options)) %>
+    <% end %>
+    <% if options.include? :mail %>
+      <%= render Account::Requests::Options::MailComponent.new %>
+    <% end %>
   </ul>
 <% end %>

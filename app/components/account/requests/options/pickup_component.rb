@@ -6,15 +6,15 @@ module Account
       # pickup component logic
       class PickupComponent < ViewComponent::Base
 
-        attr_accessor :facex, :default_pickup_location
+        attr_accessor :default_pickup_location, :options
 
-        def initialize(facex:, default_pickup_location:)
-          @facex = facex
+        def initialize(default_pickup_location:, options:)
           @default_pickup_location = default_pickup_location
+          @options = options
         end
 
         def checked?
-          facex ? nil : { checked: true }
+          options.include? :office ? nil : { checked: true }
         end
       end
     end

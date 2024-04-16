@@ -13,6 +13,13 @@ module Account
     # GET /account/requests/new
     def new; end
 
+    # Form for initializing an ILL form.
+    # GET /account/request/ill/new
+    def ill
+      @item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
+                                      item_pid: params[:item_pid])
+    end
+
     def create
       # have all the item details needed (mms_id, holding_id, pickup_location, comments)
       # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
@@ -42,10 +49,11 @@ module Account
     # GET /account/requests/options
     def options
       # options = Items::Service.options_for(mms_id:, holding_id:, item_id:, user_id:)
-      @item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
-                                      item_pid: params[:item_pid] || @items.first.item_data['pid'])
+      item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
+                                     item_pid: params[:item_pid] || @items.first.item_data['pid'])
+      options = Items::Service.options_for(user: current_user)
       # options would be passed into the component to determine which options are available
-      render(Account::Requests::OptionsComponent.new(item: @item, user: current_user), layout: false)
+      render(Account::Requests::OptionsComponent.new(item: item, user: current_user, options: options), layout: false)
     end
 
     # Send json array of item labels to populate Item dropdown on holding change

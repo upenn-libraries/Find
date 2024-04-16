@@ -6,36 +6,35 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      FACULTY_EXPRESS_CODE = 'FacEXP'
-      STUDENT_GROUP_CODES = %w[undergrad graduate].freeze
+      STUDENT_GROUP_CODES = %w[undergrad graduate GIC].freeze
       DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
       DEFAULT_PICKUP = 'VanPeltLib'
 
-      attr_accessor :item, :user
+      attr_accessor :item, :user, :options
 
-      def initialize(item:, user:)
+      def initialize(item:, user:, options:)
         @item = item
         @user = user
+        @options = options
       end
 
+      # @return [String]
       def default_pickup_location
         return DEFAULT_STUDENT_PICKUP if user_is_student?
 
         DEFAULT_PICKUP
       end
 
+      # @return [Array<String>, nil]
       def user_address
-        return unless user_is_facex?
+        return unless options.include? :office
 
         Illiad::User.find(id: user.uid).address
       end
 
+      # @return [TrueClass, FalseClass]
       def user_is_student?
         STUDENT_GROUP_CODES.include? user.ils_group
-      end
-
-      def user_is_facex?
-        user.ils_group == FACULTY_EXPRESS_CODE
       end
     end
   end
