@@ -1,0 +1,18 @@
+<%# Copied from Blacklight v8.1.0 to load additional results component amid catalog results %>
+<%# Container for all documents in index list view %>
+<% view_config = local_assigns[:view_config] || blacklight_config&.view_config(document_index_view_type) %>
+<div id="documents" class="documents-<%= view_config&.key || document_index_view_type %>">
+  <% documents.map { |doc| document_presenter(doc) }.each_with_index do |doc, i| %>
+    <% counter = (@response&.start || 0) + i %>
+    <%= render view_config.document_component.with_collection([doc], partials: view_config.partials, counter_offset:
+      counter) %>
+
+    <%# Render Additional Results component after the second doc, unless there's only one %>
+    <% if (counter == 1) || (documents.size == 1) %>
+      <%= render AdditionalResults::AdditionalResultsComponent.new(query: params[:q], class: (documents.size > 1 ?
+                                                                                                'border-bottom' : '')
+      ) %>
+    <% end %>
+
+  <% end %>
+</div>

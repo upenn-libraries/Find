@@ -1,0 +1,7 @@
+<turbo-frame id="additional-results__sources">
+  <% @sources.each_with_index do |source, i| %>
+    <div class="additional-results__source <%= i > 0 ? 'border-top' : '' %>">
+      <%= render AdditionalResults::ResultsSource::ResultsSourceComponent.new(query: @query, source: source) %>
+    </div>
+  <% end %>
+</turbo-frame>

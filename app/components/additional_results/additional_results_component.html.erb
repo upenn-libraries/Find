@@ -1,0 +1,12 @@
+<% if @query.present? && @sources.any? %>
+  <div class="additional-results documents-list <%= @classes %>">
+    <div class='card col-12 mb-3'>
+      <turbo-frame id="additional-results__sources" src="<%= additional_results_catalog_path(params: { q: @query }) %>">
+        <div class="card-body">
+          <!-- Change this text if other sources are added in the future -->
+          Loading Articles+ results...
+        </div>
+      </turbo-frame>
+    </div>
+  </div>
+<% end %>

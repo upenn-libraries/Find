@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     concerns :searchable
 
     get 'databases', to: 'catalog#databases'
+    get 'additional_results', to: 'catalog#additional_results'
   end
 
   concern :exportable, Blacklight::Routes::Exportable.new

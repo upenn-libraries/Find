@@ -213,6 +213,7 @@ title = "Find Catalog Gitleaks config"
         '''config/initializers/alma.rb''',
         '''config/initializers/devise.rb''',
         '''app/models/solr_document.rb''',
+        '''app/components/additional_results/results_source/articles/summon_component.rb''',
         '''config/locales/devise.en.yml''',
         '''config/importmap.rb''',
         '''(.*)(en.yml)$''',
