@@ -1,7 +1,7 @@
 import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'commentsArea', 'holdingSelect']
+    static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'requestScanButton', 'commentsArea', 'holdingSelect']
 
     holdingSelectChanged(event) {
         const mmsIdValue = this.mmsIdFieldTarget.value
@@ -31,12 +31,16 @@ export default class extends Controller {
         }
     }
 
-   itemSelectChanged(event) {
+    itemSelectChanged(event) {
         const mmsIdValue = this.mmsIdFieldTarget.value
         const holdingValue = this.holdingSelectTarget.value
         const itemValue = event.target.value
         const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
         const frame = document.getElementById('options_frame')
+
+        // update URL for request scan button (href value of button)
+        const illUrl = `/account/requests/ill?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+        this.requestScanButtonTarget.href = illUrl
 
         frame.src = url
     }
@@ -59,4 +63,6 @@ export default class extends Controller {
         this.itemSelectTarget.disabled = data.length < 1;
         this.requestItemButtonTarget.disabled = false;
     }
+
+
 }
