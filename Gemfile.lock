@@ -251,11 +251,11 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.2-arm64-darwin)
+    nokogiri (1.16.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-darwin)
+    nokogiri (1.16.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-linux)
+    nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     omniauth (2.1.2)
       hashie (>= 3.4.6)
@@ -273,7 +273,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.16)
+    pennmarc (1.0.17)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
