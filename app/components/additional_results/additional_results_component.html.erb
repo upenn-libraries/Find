@@ -1,6 +1,7 @@
 <% if @query.present? && @validated_sources.any? %>
   <div class="documents-list <%= @classes %>">
     <div class='card col-12 mb-3'>
+
       <% @validated_sources.each_with_index do |source, i| %>
         <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
           <turbo-frame id="additional-results__source-<%= i %>"
@@ -9,6 +10,7 @@
           </turbo-frame>
         </div>
       <% end %>
+
     </div>
   </div>
 <% end %>
