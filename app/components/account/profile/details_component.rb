@@ -6,8 +6,6 @@ module Account
     class DetailsComponent < ViewComponent::Base
       attr_reader :user
 
-      delegate :total_fines, to: :alma_user
-
       # @param user [User]
       def initialize(user:)
         @user = user
@@ -15,7 +13,16 @@ module Account
 
       # @return [String, nil]
       def alma_user_group
+        return unless alma_user
+
         alma_user.user_group['desc']
+      end
+
+      # @return [Float, nil]
+      def total_fines
+        return unless alma_user
+
+        alma_user.total_fines
       end
 
       # books by mail delivery address in two parts
