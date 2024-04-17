@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Broker
   class Outcome
     def initialize
@@ -5,7 +7,7 @@ module Broker
       # - error messages?
       # - confirmation number?
       # - backend name?
-      # - brief request info (title, fulfillment option)
+      # - brief request info (title, fulfillment option) "description"?
     end
   end
 end
