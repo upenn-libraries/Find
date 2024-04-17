@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Namespace for classes that interact with the Summon API (Articles+)
-module ArticlesPlus
+module Articles
   # Represents a single document returned from the Summon service (Articles+)
   #
   # @see https://www.rubydoc.info/gems/summon/2.0.2/Summon/Document
@@ -30,7 +30,7 @@ module ArticlesPlus
 
     # @return [AuthorsList] a comma-separated list of the document's authors, in 'first last' format
     def authors_list
-      ArticlesPlus::AuthorsList.new(doc.authors).list if doc.authors.present?
+      Articles::AuthorsList.new(doc.authors).list if doc.authors.present?
     end
 
     # @return [String] the document's publication year

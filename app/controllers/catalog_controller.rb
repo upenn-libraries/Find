@@ -5,7 +5,6 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
 
   before_action :load_document, only: %i[staff_view]
-  attr_reader :additional_results_sources
 
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,

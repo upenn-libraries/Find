@@ -1,7 +1,6 @@
-<turbo-frame id="additional-results__sources">
-  <% @sources.each_with_index do |source, i| %>
-    <div class="additional-results__source <%= i > 0 ? 'border-top' : '' %>">
-      <%= render AdditionalResults::ResultsSource::ResultsSourceComponent.new(query: @query, source: source) %>
-    </div>
-  <% end %>
-</turbo-frame>
+<% @validated_sources.each_with_index do |source, i| %>
+  <turbo-frame id="additional-results__source-<%= i %>">
+    <% component = Object.const_get("AdditionalResults::Sources::#{source.camelcase}Component") %>
+    <%= render component.new(query: @query) %>
+  </turbo-frame>
+<% end %>

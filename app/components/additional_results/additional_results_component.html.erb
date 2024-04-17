@@ -1,12 +1,14 @@
-<% if @query.present? && @sources.any? %>
-  <div class="additional-results documents-list <%= @classes %>">
+<% if @query.present? && @validated_sources.any? %>
+  <div class="<%= @classes %>">
     <div class='card col-12 mb-3'>
-      <turbo-frame id="additional-results__sources" src="<%= additional_results_catalog_path(params: { q: @query }) %>">
-        <div class="card-body">
-          <!-- Change this text if other sources are added in the future -->
-          Loading Articles+ results...
+      <% @validated_sources.each_with_index do |source, i| %>
+        <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
+          <turbo-frame id="additional-results__source-<%= i %>"
+                       src="<%= additional_results_catalog_path(params: { q: @query}) %>">
+            Loading <%= source_display_name(source) %> results...
+          </turbo-frame>
         </div>
-      </turbo-frame>
+      <% end %>
     </div>
   </div>
 <% end %>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ArticlesPlus
+module Articles
   # Manages facets and their document counts as returned from the Summon API
   #
   # @see https://www.rubydoc.info/gems/summon/2.0.2/Summon/Facet
@@ -13,7 +13,7 @@ module ArticlesPlus
   class FacetManager
     attr_reader :counts
 
-    # @param search [ArticlesPlus::Search] an Articles+ search service
+    # @param search [Articles::Search] an Articles+ search service
     def initialize(search:)
       @search = search
       # If there was an error connecting to the Summon API or no documents were

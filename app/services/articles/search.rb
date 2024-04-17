@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ArticlesPlus
+module Articles
   # Class to initialize the Summon service and retrieve Articles+ results
   #
   # @see https://www.rubydoc.info/gems/summon/2.0.2/Summon Summon gem documentation
@@ -17,7 +17,7 @@ module ArticlesPlus
         access_id: summon_credentials[:id],
         secret_key: summon_credentials[:key]
       )
-      @facet_manager = ArticlesPlus::FacetManager.new(search: self)
+      @facet_manager = Articles::FacetManager.new(search: self)
     end
 
     # Performs a query of the Summon API and stores the response
@@ -34,25 +34,25 @@ module ArticlesPlus
                                      's.ho' => 't',
                                      's.ps' => 3,
                                      's.secure' => 't',
-                                     's.ff' => 'ContentType,or'
+                                     's.ff' => 'ContentType,or,1,6'
                                    })
     rescue Summon::Transport::TransportError => e
       handle_error(e)
     end
 
-    # @return [Array<ArticlesPlus::Document>, nil] documents returned from the search
+    # @return [Array<Articles::Document>, nil] documents returned from the search
     def documents
       return unless success?
 
       response.documents.map do |document|
-        ArticlesPlus::Document.new(document)
+        Articles::Document.new(document)
       end
     end
 
     # @param query [String] the search query string from which to generate the URL
     # @return [String] URL linking to the results of the search on Articles+
     def summon_url(query: query_string)
-      URI::HTTPS.build(host: Settings.summon.base_url,
+      URI::HTTPS.build(host: Settings.additional_results_sources.summon.base_url,
                        path: '/search',
                        query: query).to_s
     end
@@ -78,7 +78,7 @@ module ArticlesPlus
     # @return [Hash] credentials for accessing the Summon API
     def summon_credentials
       {
-        id: Settings.summon.access_id,
+        id: Settings.additional_results_sources.summon.access_id,
         key: Rails.application.credentials[:summon_api_key]
       }
     end

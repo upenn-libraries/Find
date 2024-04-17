@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ArticlesPlus
+module Articles
   # Generates a comma-separated list of authors returned from the Summon service
   # (Articles+) with names in'first last' format
   class AuthorsList
