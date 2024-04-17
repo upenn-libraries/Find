@@ -1,2 +1,33 @@
-<h1>Account Profile</h1>
+<h1 class="page__heading">Account Overview</h1>
+<p class="page__lede mb-4">View loans and requests on your shelf, change your mailing address and account preferences, and pay fines.</p>
 <%= render Account::Profile::DetailsComponent.new(user: current_user) %>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title h4">Shelf</h2>
+        <p class="card-text">Renew items you've loaned or requested and see when they're due.</p>
+        <a href="#" class="btn btn-primary">Loans and requests</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title h4">Settings</h2>
+        <p class="card-text">Change your books by mail address and update account preferences.</p>
+        <a href="#" class="btn btn-primary">Account settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title h4">Fines and fees</h2>
+        <p class="card-text">Pay fines for lost or damanged items. We do not charge overdue fees.</p>
+        <a href="#" class="btn btn-primary">Pay fines</a>
+      </div>
+    </div>
+  </div>
+</div>
