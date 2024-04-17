@@ -11,6 +11,7 @@ en:
     service_lede: 'books, articles, and more'
     service_name: 'Find'
     sign_out: 'Sign Out'
+    account: 'Account'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'

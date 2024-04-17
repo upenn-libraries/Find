@@ -20,6 +20,7 @@
   <%= link_to 'Databases', databases_catalog_path %>
   <% if user %>
     <%= link_to t('header.bookmarks'), bookmarks_path %>
+    <%= button_to t('header.account'), '/account' %>
     <%= button_to t('header.sign_out'), sign_out_path %>
   <% else %>
     <%= link_to t('header.login'), login_path %>
