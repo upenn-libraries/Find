@@ -66,16 +66,16 @@ class CatalogController < ApplicationController
     config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
-                                                if: :render_bookmarks_control?)
+                                     if: :render_bookmarks_control?)
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
     config.add_show_tools_partial(:bookmark, component: Find::BookmarkComponent,
-                                             if: :render_bookmarks_control?)
+                                  if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
-                                          validator: :validate_email_params)
+                                  validator: :validate_email_params)
     config.add_show_tools_partial(:login_for_email, unless: :user_signed_in?, modal: false, path: 'login_path')
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false, unless: :bookmarks?)
@@ -106,7 +106,7 @@ class CatalogController < ApplicationController
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
-                                                  show: database_selected
+                           show: database_selected
     config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
 
     # Configure general facets
@@ -145,7 +145,7 @@ class CatalogController < ApplicationController
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
-                                                           accessor: :marc
+                          accessor: :marc
     config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
@@ -164,7 +164,7 @@ class CatalogController < ApplicationController
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
-                                                        accessor: :marc
+                          accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language.main'), accessor: :marc
     config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
@@ -178,24 +178,24 @@ class CatalogController < ApplicationController
     config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc
     config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'),
-                                                              accessor: :marc
+                          accessor: :marc
     config.add_show_field :citation_cited_in_show, label: I18n.t('show.citation.cited_in'), accessor: :marc
     config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'),
-                                                             accessor: :marc
+                          accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
     config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc
     config.add_show_field :relation_constituent_unit_show, label: I18n.t('show.relation.constituent_unit'),
-                                                           accessor: :marc
+                          accessor: :marc
     config.add_show_field :relation_has_supplement_show, label: I18n.t('show.relation.has_supplement'), accessor: :marc
     config.add_show_field :format_other_show, label: I18n.t('show.format.other'), accessor: :marc
     config.add_show_field :identifier_isbn_show, label: I18n.t('show.identifier.isbn'), accessor: :marc
     config.add_show_field :identifier_issn_show, label: I18n.t('show.identifier.issn'), accessor: :marc
     config.add_show_field :identifier_oclc_id_show, label: I18n.t('show.identifier.oclc_id'), accessor: :marc
     config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'),
-                                                             accessor: :marc
+                          accessor: :marc
     config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
     # TODO: populate this field
     # config.add_show_field :bound_with_show, label: I18n.t('show.bound_with'), accessor: :marc
@@ -277,9 +277,12 @@ class CatalogController < ApplicationController
     end
   end
 
+  # Renders additional results from a specified source for use in the Additional Results component
   def additional_results
     respond_to do |format|
-      format.html { render(AdditionalResults::ResultsContentComponent.new(query: params[:q]), layout: false) }
+      source_id = params[:source_id] || 'summon' # Default to Articles+ results
+
+      format.html { render(AdditionalResults::ResultsSourceComponent.new(source_id), layout: false) }
     end
   end
 

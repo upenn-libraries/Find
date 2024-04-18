@@ -7,12 +7,14 @@
     <%= render view_config.document_component.with_collection([doc], partials: view_config.partials, counter_offset:
       counter) %>
 
-    <%# Render Additional Results component after the second catalog result, unless there's only one catalog result %>
+    <%# Render Additional Results component after the second catalog result (unless there's only one catalog result) %>
     <% if (counter == 1) || (documents.size == 1) %>
       <%= render AdditionalResults::AdditionalResultsComponent.new(
         query: params[:q],
         class: (documents.size > 1 ? 'border-bottom' : '')
-      ) %>
+      ) do |component| %>
+        <% component.with_results_source('summon') %>
+      <% end %>
     <% end %>
 
   <% end %>

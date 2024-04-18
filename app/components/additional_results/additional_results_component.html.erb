@@ -1,16 +1,17 @@
-<% if @query.present? && @validated_sources.any? %>
-  <div class="documents-list <%= @classes %>">
-    <div class='card col-12 mb-3'>
+<div class="documents-list <%= @classes %>">
+  <div class='card col-12 mb-3'>
 
-      <% @validated_sources.each_with_index do |source, i| %>
+    <% results_sources.each_with_index do |component, i| %>
+      <% source = component.source %>
+      <% if valid_source?(source) %>
         <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
-          <turbo-frame id="additional-results__source-<%= i %>"
-                       src="<%= additional_results_catalog_path(params: { q: @query}) %>">
+          <turbo-frame id="additional-results-source__<%= source %>"
+                       src="<%= source_results_path(source: source, query: @query) %>">
             <h2 class="h5 mb-0">Looking for <strong><%= source_display_name(source) %></strong> results...</h2>
           </turbo-frame>
         </div>
       <% end %>
+    <% end %>
 
-    </div>
   </div>
-<% end %>
+</div>

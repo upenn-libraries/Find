@@ -12,5 +12,7 @@
     <li><%= link_to t('blacklight.search.zero_results.options.help'), ask_url %></li>
   </ul>
 
-  <%= render AdditionalResults::AdditionalResultsComponent.new(query: params[:q]) %>
+  <%= render AdditionalResults::AdditionalResultsComponent.new(query: params[:q]) do |component| %>
+    <% component.with_results_source('summon') %>
+  <% end %>
 </div>
