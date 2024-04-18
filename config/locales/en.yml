@@ -1,8 +1,30 @@
 en:
   account:
-    profile:
+    show:
+      page_heading: 'Account Overview'
+      page_lede: 'Renew items on your shelf, change your account preferences, manage your bookmarked items, and pay fines.'
+      cards:
+        shelf:
+          title: 'Shelf'
+          description: "Renew items you've loaned or requested and see when they're due."
+        settings:
+          title: 'Settings'
+          description: 'Change your books by mail address and update account preferences.'
+        bookmarks:
+            title: 'Bookmarks'
+            description: 'Email and create citations from your list of bookmarked items.'
+        fines_and_fees:
+          title: 'Fines and Fees'
+          description: 'Pay fines for lost or damaged items. We do not charge overdue fees.'
+    fines_and_fees:
+      page_heading: 'Fines and Fees'
+      page_lede: 'Your fines and fees for lost or damaged items.'
       terms:
-        fines: 'Fines & Fees'
+        fines_and_fees: 'Fines & Fees'
+    settings:
+      page_heading: 'Account Settings'
+      page_lede: 'Your account preferences.'
+      terms:
         user_group: 'Patron Group'
         bbm_delivery_address: 'Books by Mail Delivery Address'
   header:

@@ -52,7 +52,7 @@ module Illiad
     end
 
     # @return [Array]
-    def address
+    def bbm_delivery_address
       [data[:Address2], data[:Zip]]
     end
 

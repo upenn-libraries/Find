@@ -19,7 +19,7 @@
                  service-lede="<%= t('header.service_lede') %>">
   <%= link_to 'Databases', databases_catalog_path %>
   <% if user %>
-    <%= button_to t('header.account'), '/account' %>
+    <%= link_to t('header.account'), account_path %>
     <%= button_to t('header.sign_out'), sign_out_path %>
   <% else %>
     <%= link_to t('header.login'), login_path %>

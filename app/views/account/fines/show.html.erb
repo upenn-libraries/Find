@@ -1,0 +1,12 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/app/assets/config">Find</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="/account">Account</a></li>
+    <li class="breadcrumb-item" aria-current="page">Fines and Fees</li>
+  </ol>
+</nav>
+
+<h1 class="page__heading"><%= t('account.fines_and_fees.page_heading') %></h1>
+<p class="page__lede mb-3"><%= t('account.fines_and_fees.page_lede') %></p>
+
+<%= render Account::FinesComponent.new(user: current_user) %>
