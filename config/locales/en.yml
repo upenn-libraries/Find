@@ -22,7 +22,7 @@ en:
       terms:
         fines_and_fees: 'Fines & Fees'
     settings:
-      page_heading: 'Account Settings'
+      page_heading: 'Settings'
       page_lede: 'Your account preferences.'
       terms:
         user_group: 'Patron Group'
