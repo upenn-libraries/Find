@@ -5,6 +5,11 @@ module Items
   # adds necessary functionality to determine item checkout status for rendering circulation options
   class PennItem < Alma::BibItem
     IN_HOUSE_POLICY_CODE = 'InHouseView'
+    UNSCANNABLE_MATERIAL_TYPES = %w[
+      RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE
+        AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
+        LPTOP EQUIP OTHER AUDIOVM
+    ].freeze
 
     # @return [TrueClass, FalseClass]
     def checkoutable?
@@ -40,6 +45,21 @@ module Items
                    holding_data['location']['value']
                  end
       Mappings.aeon_locations.include? location
+    end
+
+    # Is the item able to be Scan&Deliver'd?
+    # @return [TrueClass, FalseClass]
+    def scannable?
+      return false if at_hsp?
+
+      aeon_requestable? ||
+        !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
+    end
+
+    # Is the item a Historical Society of Pennsylvania record? If so, it cannot be requested.
+    # @return [TrueClass, FalseClass]
+    def at_hsp?
+      library == 'HSPLib'
     end
 
     # @return [TrueClass, FalseClass]

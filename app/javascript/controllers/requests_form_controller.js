@@ -9,7 +9,7 @@ export default class extends Controller {
         const url = `/account/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
 
         this.itemSelectTarget.disabled = true;
-        this.requestItemButtonTarget.disabled = true;
+        // this.requestItemButtonTarget.disabled = true;
 
         if (holdingValue) {
             fetch(url)
@@ -20,6 +20,7 @@ export default class extends Controller {
                     const holdingValue = event.target.value
                     const itemValue = this.itemSelectTarget.value
                     const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+                    // TODO: change this to stimulus target
                     const frame = document.getElementById('options_frame')
 
                     frame.src = url
@@ -36,6 +37,7 @@ export default class extends Controller {
         const holdingValue = this.holdingSelectTarget.value
         const itemValue = event.target.value
         const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
+        // TODO: change this to stimulus target
         const frame = document.getElementById('options_frame')
 
         // update URL for request scan button (href value of button)
@@ -61,7 +63,7 @@ export default class extends Controller {
         });
 
         this.itemSelectTarget.disabled = data.length < 1;
-        this.requestItemButtonTarget.disabled = false;
+        // this.requestItemButtonTarget.disabled = false;
     }
 
 

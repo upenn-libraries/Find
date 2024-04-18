@@ -1,0 +1,13 @@
+<li class="list-group-item">
+  <% if options.include? :pickup %>
+    <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
+                                            data: { requests_form_target: 'requestsItemButton' } }) %>
+  <% elsif options.include? :aeon %>
+    <%= link_to 'Request to View', '', { class: 'btn btn-primary',
+                                         data: { requests_form_target: 'requestViewButton' } } %>
+  <% end %>
+  <% if options.include? :scan %>
+    <%= link_to 'Request Scan', ill_new_request_path, { class: "btn btn-outline-secondary",
+                                                        data: { requests_form_target: 'requestScanButton' } } %>
+  <% end %>
+</li>

@@ -35,10 +35,18 @@ module Items
     end
 
     # @return [Array]
-    def self.options_for(user:)
-      options = [:pickup]
-      options << :office if user.ils_group == FACULTY_EXPRESS_CODE
-      options << :mail unless user.ils_group == COURTESY_BORROWER_CODE
+    def self.options_for(item:, ils_group:)
+      options = []
+      if item.checkoutable?
+        options << :pickup
+        options << :office if ils_group == FACULTY_EXPRESS_CODE
+        options << :mail unless ils_group == COURTESY_BORROWER_CODE
+        options << :scan if item.scannable?
+      elsif item.aeon_requestable?
+        options << :aeon
+      elsif item.at_archives?
+        options << :archives
+      end
       options
     end
   end

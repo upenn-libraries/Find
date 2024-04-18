@@ -39,11 +39,6 @@
           </div>
 
           <%= form.hidden_field :mms_id, value: @mms_id, data: { requests_form_target: 'mmsIdField' } %>
-
-          <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
-                                                  data: { requests_form_target: 'requestItemButton' } }) %>
-          <%= link_to 'Request Scan', ill_new_request_path, { class: "btn btn-outline-secondary",
-                                                              data: { requests_form_target: 'requestScanButton' } } %>
         <% end %>
       </div>
     </div>

@@ -51,7 +51,7 @@ module Account
       # options = Items::Service.options_for(mms_id:, holding_id:, item_id:, user_id:)
       item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
                                      item_pid: params[:item_pid] || @items.first.item_data['pid'])
-      options = Items::Service.options_for(user: current_user)
+      options = Items::Service.options_for(item: item, ils_group: current_user.ils_group)
       # options would be passed into the component to determine which options are available
       render(Account::Requests::OptionsComponent.new(item: item, user: current_user, options: options), layout: false)
     end
