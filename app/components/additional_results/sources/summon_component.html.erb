@@ -1,64 +1,56 @@
-<div class="row align-items-center mb-2">
-
-  <%# Additional Results source title %>
-  <div class="col">
-    <h3 class="card-title mb-2 fs-4">Articles+</h3>
-  </div>
-
-  <%# Link to all results on Articles+ %>
-  <% if documents.present? && search.record_count > 3 %>
-    <div class="view-all col-auto mb-1">
-      <%= link_to "View all #{record_count} results",
-                  summon_url,
-                  class: 'btn btn-sm btn-primary',
-                  target: '_blank',
-                  rel: 'noopener'
-      %>
-    </div>
-  <% end %>
-
-</div>
-
 <% if documents.present? %>
 
-  <%# List top results followed by facet counts %>
-  <div class="row mb-2">
-    <div class="col">
-      <h4 class="card-title fs-5 mb-2">Top results</h4>
-      <ol>
-        <% documents.each do |doc| %>
-          <%# Link to and display info for each result %>
-          <li class="mb-2">
-            <dl class="document-metadata dl-invert row">
-
-              <%# Linked document title %>
-              <dt>Title</dt>
-              <dd>
-                <%= link_to doc.title.html_safe, doc.link %>
-              </dd>
-
-              <%# Authors, publication, publication year %>
-              <% if info_display(doc).present? %>
-                <dt>Document Information</dt>
-                <dd>
-                  <%= info_display(doc).html_safe %>
-                </dd>
-              <% end %>
-
-              <%# Format and availability %>
-              <% if availability_display(doc).present? %>
-                <dt>Format and Availability</dt>
-                <dd class="holdings">
-                  <%= availability_display(doc).html_safe %>
-                </dd>
-              <% end %>
-
-            </dl>
-          </li>
-        <% end %>
-      </ol>
+  <div class="row align-items-center mb-1">
+    <%# Additional Results source title %>
+    <div class="col-sm">
+      <h2 class="h5 mb-2">Your search also found results in <strong>Articles+</strong></h2>
     </div>
+
+    <%# Link to all results on Articles+ %>
+    <% if search.record_count > 3 %>
+      <div class="view-all col-sm-auto mb-1">
+        <%= link_to "View #{record_count} articles+ results",
+                    summon_url,
+                    class: 'btn btn-sm btn-primary',
+                    target: '_blank',
+                    rel: 'noopener'
+        %>
+      </div>
+    <% end %>
   </div>
+
+  <%# List top results followed by facet counts %>
+  <ol>
+    <% documents.each do |doc| %>
+      <%# Link to and display info for each result %>
+      <li class="mb-2">
+        <dl class="document-metadata dl-invert row">
+
+          <%# Linked document title %>
+          <dt>Title</dt>
+          <dd>
+            <%= link_to doc.title.html_safe, doc.link, class: "text-bolder" %>
+          </dd>
+
+          <%# Authors, publication, publication year %>
+          <% if info_display(doc).present? %>
+            <dt>Document Information</dt>
+            <dd>
+              <%= info_display(doc).html_safe %>
+            </dd>
+          <% end %>
+
+          <%# Format and availability %>
+          <% if availability_display(doc).present? %>
+            <dt>Format and Availability</dt>
+            <dd class="holdings">
+              <%= availability_display(doc).html_safe %>
+            </dd>
+          <% end %>
+        </dl>
+      </li>
+    <% end %>
+  </ol>
 
   <% if render_facet_counts?('ContentType') %>
     <%# List document counts for 'ContentType' facet %>
@@ -73,14 +65,6 @@
       </div>
     </div>
   <% end %>
-
 <% else %>
-
-  <%# Handle no results case %>
-  <div class="row mt-1">
-    <div class="col">
-      <p class="mb-0">No Articles+ results found</p>
-    </div>
-  </div>
-
+<h2 class="h5 mb-0">Your search found no results in <strong>Articles+</strong></h2>
 <% end %>
