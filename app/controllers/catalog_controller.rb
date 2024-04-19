@@ -269,14 +269,6 @@ class CatalogController < ApplicationController
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 
-  # Returns inventory information for filling in a Turbo Frame
-  # @todo move to a new InventoryController?
-  def inventory
-    respond_to do |format|
-      format.html { render(Find::DynamicInventoryComponent.new(document: @document), layout: false) }
-    end
-  end
-
   # Renders additional results from a specified source for use in the Additional Results component
   def additional_results
     respond_to do |format|
