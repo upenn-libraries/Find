@@ -1,12 +1,14 @@
 en:
   additional_results:
-    title:
-      loading_html: 'Looking for <strong>%{source_display}</strong> results...'
-      results_html: 'Your search also found results in <strong>%{source_display}</strong>'
-      no_results_html: 'Your search found no results in <strong>%{source_display}</strong>'
+    loading_html: 'Looking for <strong>%{source_display}</strong> results...'
+    results_found_both_html: 'Your search also found results in <strong>%{source_display}</strong>'
+    results_found_source_only_html: 'Your search found results in <strong>%{source_display}</strong>'
+    no_results_html: 'Your search found no results in <strong>%{source_display}</strong>'
     view_all: 'View all %{count} %{source_display} results'
     summon:
-      title_heading: 'Title'
-      info_heading: 'Document Information'
-      availability_heading: 'Format and Availability'
-      fulltext: 'Full text online'
+      display_name: 'Articles+'
+      fields:
+        title: 'Title'
+        info: 'Document Information'
+        availability: 'Format and Availability'
+        fulltext: 'Full text online'

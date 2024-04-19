@@ -25,7 +25,7 @@ module Articles
 
     # @return [String] the document's full text online status
     def fulltext_online
-      I18n.t('additional_results.summon.fulltext') if doc.fulltext
+      I18n.t('additional_results.summon.fields.fulltext') if doc.fulltext
     end
 
     # @return [String] a comma-separated list of the document's authors, in 'first last' format

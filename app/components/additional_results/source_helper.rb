@@ -10,8 +10,8 @@ module AdditionalResults
     #   as explicitly set in Settings.additional_results_sources, defined in a
     #   source's display_name method, or inferred from the source name
     def source_display_name(source)
-      if Settings.additional_results_sources[source]&.display_name
-        Settings.additional_results_sources[source].display_name
+      if I18n.exists?("additional_results.#{source}.display_name", locale: :en)
+        I18n.t("additional_results.#{source}.display_name", locale: :en)
       elsif source.respond_to?(:display_name) && source.display_name
         source.display_name
       else

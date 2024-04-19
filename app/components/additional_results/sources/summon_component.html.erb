@@ -3,7 +3,10 @@
   <div class="row align-items-center mb-1">
     <%# Additional Results source title %>
     <div class="col-sm">
-      <h2 class="h5 mb-0"><%= t('additional_results.title.results_html', source_display: display_name) %></h2>
+      <h2 class="h5 mb-0">
+        <%= t('additional_results.results_found_both_html', source_display: display_name) %>
+      </h2>
+
     </div>
 
     <%# Link to all results on Articles+ %>
@@ -27,14 +30,14 @@
         <dl class="document-metadata dl-invert row">
 
           <%# Linked document title %>
-          <dt><%= t('additional_results.summon.title_heading') %></dt>
+          <dt><%= t('additional_results.summon.fields.title') %></dt>
           <dd>
-            <%= link_to doc.title.html_safe, doc.link, class: "fw-bolder" %>
+            <%= link_to doc.title.html_safe, doc.link %>
           </dd>
 
           <%# Authors, publication, publication year %>
           <% if info_display(doc).present? %>
-            <dt><%= t('additional_results.summon.info_heading') %></dt>
+            <dt><%= t('additional_results.summon.fields.info') %></dt>
             <dd>
               <%= info_display(doc).html_safe %>
             </dd>
@@ -42,7 +45,7 @@
 
           <%# Format and availability %>
           <% if availability_display(doc).present? %>
-            <dt><%= t('additional_results.summon.availability_heading') %></dt>
+            <dt><%= t('additional_results.summon.fields.availability') %></dt>
             <dd class="holdings">
               <%= availability_display(doc).html_safe %>
             </dd>
@@ -67,6 +70,6 @@
   <% end %>
 <% else %>
   <h2 class="h5 mb-0">
-    <%= t('additional_results.title.no_results_html', source_display: display_name) %>
+    <%= t('additional_results.no_results_html', source_display: display_name) %>
   </h2>
 <% end %>
