@@ -2,7 +2,7 @@
 
 module Articles
   # Generates a comma-separated list of authors returned from the Summon service
-  # (Articles+) with names in'first last' format
+  # (Articles+) with names in 'first last' format
   class AuthorsList
     # @param authors [Array<Summon::Author>] an array of authors
     def initialize(authors)
