@@ -1,4 +1,5 @@
 <%= turbo_frame_tag 'options_frame' do %>
+  <%= label_tag :delivery_options, "Delivery Options", { class: 'form-label' } %>
   <p><%= item.pid %></p>
   <ul class="list-group">
     <% if options.include? :pickup %>
@@ -27,6 +28,24 @@
         Pick the damn thing up at the archives.
       </li>
     <% end %>
-    <%= render(Account::Requests::ButtonsComponent.new(options: options)) %>
+
+    <% if options.include? :pickup %>
+      <div class="add-comments">
+        <%= link_to t('requests.add_comments'), '', { data: { action: 'click->requests-form#showCommentsArea' } } %>
+      </div>
+    <% end %>
   </ul>
+  <div class="request-buttons">
+    <% if options.include? :pickup %>
+      <div class="d-none" data-requests-form-target="commentsArea">
+        <%= label_tag :location, t('requests.comments_label'), { class: 'form-label' } %>
+        <%= text_area_tag :comments, class: 'form-control' %>
+      </div>
+      <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
+                                              data: { requests_form_target: 'requestsItemButton' } }) %>
+    <% elsif options.include? :aeon %>
+      <%= link_to 'Request to View', '', { class: 'btn btn-primary',
+                                           data: { requests_form_target: 'requestViewButton' } } %>
+    <% end %>
+  </div>
 <% end %>
