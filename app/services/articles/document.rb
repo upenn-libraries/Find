@@ -25,10 +25,10 @@ module Articles
 
     # @return [String] the document's full text online status
     def fulltext_online
-      'Full text online' if doc.fulltext
+      I18n.t('additional_results.summon.fulltext') if doc.fulltext
     end
 
-    # @return [AuthorsList] a comma-separated list of the document's authors, in 'first last' format
+    # @return [String] a comma-separated list of the document's authors, in 'first last' format
     def authors_list
       Articles::AuthorsList.new(doc.authors).list if doc.authors.present?
     end

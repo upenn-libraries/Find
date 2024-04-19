@@ -15,6 +15,14 @@ module AdditionalResults
         @facet_counts = @search.facet_counts || nil
       end
 
+      # Returns Summon's display name from settings, or defaults to Articles+
+      # if not set
+      #
+      # @return [String] the display name for Summon as a results source
+      def display_name
+        Settings.additional_results_sources['summon']&.display_name || 'Articles+'
+      end
+
       # Generates a comma-delimited overall record count for the search results
       #
       # @return [Integer] the number of documents matching the search query
@@ -60,7 +68,7 @@ module AdditionalResults
         num_counts > 1
       end
 
-      # Generates a link for a facet count that displays the its label and
+      # Generates a link for a facet count that displays its label and
       # document count and links out to the facet-filtered results on Articles+
       #
       # @see Articles::FacetManager#map_facet_counts
@@ -79,7 +87,7 @@ module AdditionalResults
 
       private
 
-      # Italizes the document's publication title if it exists
+      # Italicizes the document's publication title if it exists
       #
       # @param doc [Articles::Document] the document object
       def publication_title_display(doc)

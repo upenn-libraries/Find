@@ -7,10 +7,16 @@ module AdditionalResults
 
     # @param source [String] the results source id
     # @return [String] the display name for an additional results source, either
-    #   explicitly as explicitly set in Settings.additional_results_sources or
-    #   inferred from the source name
+    #   as explicitly set in Settings.additional_results_sources, defined in a
+    #   source's display_name method, or inferred from the source name
     def source_display_name(source)
-      Settings.additional_results_sources[source]&.display_name || source.titleize
+      if Settings.additional_results_sources[source]&.display_name
+        Settings.additional_results_sources[source].display_name
+      elsif source.respond_to?(:display_name) && source.display_name
+        source.display_name
+      else
+        source.titleize
+      end
     end
 
     # @param source [String] the results source id

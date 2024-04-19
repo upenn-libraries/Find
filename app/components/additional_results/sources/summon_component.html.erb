@@ -3,13 +3,13 @@
   <div class="row align-items-center mb-1">
     <%# Additional Results source title %>
     <div class="col-sm">
-      <h2 class="h5 mb-2">Your search also found results in <strong>Articles+</strong></h2>
+      <h2 class="h5 mb-0"><%= t('additional_results.title.results_html', source_display: display_name) %></h2>
     </div>
 
     <%# Link to all results on Articles+ %>
     <% if search.record_count > 3 %>
       <div class="view-all col-sm-auto mb-1">
-        <%= link_to "View #{record_count} articles+ results",
+        <%= link_to t('additional_results.view_all', count: record_count, source_display: display_name),
                     summon_url,
                     class: 'btn btn-sm btn-primary',
                     target: '_blank',
@@ -27,14 +27,14 @@
         <dl class="document-metadata dl-invert row">
 
           <%# Linked document title %>
-          <dt>Title</dt>
+          <dt><%= t('additional_results.summon.title_heading') %></dt>
           <dd>
-            <%= link_to doc.title.html_safe, doc.link, class: "text-bolder" %>
+            <%= link_to doc.title.html_safe, doc.link, class: "fw-bolder" %>
           </dd>
 
           <%# Authors, publication, publication year %>
           <% if info_display(doc).present? %>
-            <dt>Document Information</dt>
+            <dt><%= t('additional_results.summon.info_heading') %></dt>
             <dd>
               <%= info_display(doc).html_safe %>
             </dd>
@@ -42,7 +42,7 @@
 
           <%# Format and availability %>
           <% if availability_display(doc).present? %>
-            <dt>Format and Availability</dt>
+            <dt><%= t('additional_results.summon.availability_heading') %></dt>
             <dd class="holdings">
               <%= availability_display(doc).html_safe %>
             </dd>
@@ -66,5 +66,7 @@
     </div>
   <% end %>
 <% else %>
-<h2 class="h5 mb-0">Your search found no results in <strong>Articles+</strong></h2>
+  <h2 class="h5 mb-0">
+    <%= t('additional_results.title.no_results_html', source_display: display_name) %>
+  </h2>
 <% end %>
