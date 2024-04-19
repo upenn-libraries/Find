@@ -1,13 +1,13 @@
 <%= turbo_frame_tag 'form_frame' do %>
   <div class="request__container">
-    <h1 class="request__heading"><%= t('requests.heading') %></h1>
+    <h1 class="request__heading"><%= t('requests.form.heading') %></h1>
     <div class="row">
       <div class="col-md-7">
         <div class="request__options" data-controller="item-select comments">
           <%= form_with(url: requests_path, method: :post) do |form| %>
             <div class="mb-3">
-              <%= form.label :item_pid, t('requests.item_label'), { class: 'form-label' } %>
-              <%= form.select(:item_pid, item_labels, { include_blank: 'Select an item...' },
+              <%= form.label :item_pid, t('requests.form.item_label'), { class: 'form-label' } %>
+              <%= form.select(:item_pid, item_labels, { include_blank: t('requests.form.item_placeholder') },
                               { class: 'form-select',
                                 data: { item_select_target: 'select',
                                         action: 'change->item-select#selectChanged' },
@@ -15,6 +15,7 @@
             </div>
 
             <template id="options_loading_template" data-item-select-target="optionsLoadingTemplate">
+              <%# TODO: spinner? %>
               <p>Loading....</p>
             </template>
 

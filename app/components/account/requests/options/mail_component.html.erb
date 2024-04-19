@@ -1,12 +1,11 @@
 <li class="list-group-item">
-  <%= radio_button_tag :options, 'mail' %>
-  <%= label_tag :options_mail, 'Books by Mail' %>
+  <%= radio_button_tag :option, 'mail' %>
+  <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
   <p>
-    Users must <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>register for Books by Mail</a>
-    before submitting requests.
+    <%= t('requests.form.options.mail.message') %>
   </p>
   <p>
     <%= check_box_tag :bbm_validation, { required: true } %>
-    <%= label_tag :bbm_validation, 'I am a registered Books by Mail user' %>
+    <%= label_tag :bbm_validation, t('requests.form.options.mail.validation') %>
   </p>
 </li>

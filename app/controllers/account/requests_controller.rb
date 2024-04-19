@@ -19,6 +19,8 @@ module Account
                                       item_pid: params[:item_pid])
     end
 
+    # Submission logic using form params and request broker service
+    # POST /account/request/submit
     def create
       # have all the item details needed (mms_id, holding_id, pickup_location, comments)
       # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
@@ -48,25 +50,31 @@ module Account
     # GET /account/requests/options
     def options
       # options = Items::Service.options_for(mms_id:, holding_id:, item_id:, user_id:)
-      item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
-                                     item_pid: params[:item_pid] || @items.first.item_data['pid'])
+      item = Items::Service.item_for(mms_id: params[:mms_id],
+                                     holding_id: params[:holding_id],
+                                     item_pid: params[:item_pid])
       options = Items::Service.options_for(item: item, ils_group: current_user.ils_group)
       # options would be passed into the component to determine which options are available
       render(Account::Requests::OptionsComponent.new(item: item, user: current_user, options: options), layout: false)
     end
 
-    # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
-    def form # TODO: better name
-      render(Account::Requests::FormComponent.new(mms_id: @mms_id, holding_id: @holding_id, items: @items), layout: false)
+    # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
+    # TODO: better name?
+    def form
+      render(Account::Requests::FormComponent.new(mms_id: @mms_id,
+                                                  holding_id: @holding_id,
+                                                  items: @items), layout: false)
     end
 
     private
 
+    # @return [String]
     def set_mms_id
       @mms_id = params[:mms_id]
     end
 
+    # @return [String]
     def set_holding_id
       @holding_id = params[:holding_id]
     end

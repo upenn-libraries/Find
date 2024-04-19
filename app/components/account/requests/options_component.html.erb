@@ -1,12 +1,12 @@
 <%= turbo_frame_tag 'options_frame' do %>
-  <%= label_tag :delivery_options, "Delivery Options", { class: 'form-label' } %>
+  <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label' } %>
   <p><%= item.pid %></p>
   <ul class="list-group">
     <% if options.include? :pickup %>
       <% if options.include? :scan %>
         <li class="list-group-item">
-          <%= radio_button_tag :delivery, 'scan', { checked: true } %>
-          <%= label_tag :delivery_scan, 'Get a Scan' %>
+          <%= radio_button_tag :option, 'scan', { checked: true } %>
+          <%= label_tag :option_scan, t('requests.form.options.scan') %>
         </li>
       <% end %>
       <% if options.include? :office %>
@@ -19,13 +19,11 @@
       <% end %>
     <% elsif options.include? :aeon %>
       <li class="list-group-item">
-        This item is available for viewing in the special collections reading room by submitting a viewing request in
-        the Aeon Special Collections system. You will need to create an account and request an appointment time to view
-        the item in the reading room.
+        <%= t('requests.form.options.aeon.message') %>
       </li>
     <% elsif options.include? :archives %>
       <li class="list-group-item">
-        Pick the damn thing up at the archives.
+        <%= t('requests.form.options.archives.message') %>
       </li>
     <% end %>
   </ul>
@@ -41,8 +39,8 @@
       <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
                                               data: { item_select_target: 'requestItemButton' } }) %>
   <% elsif options.include? :aeon %>
-    <%= link_to 'Request to View', '', { class: 'btn btn-primary',
-                                         data: { item_select_target: 'requestViewButton' } } %>
+    <%= link_to t('requests.form.options.aeon.button'), '', { class: 'btn btn-primary',
+                                                              data: { item_select_target: 'requestViewButton' } } %>
     </div>
   <% end %>
 <% end %>
