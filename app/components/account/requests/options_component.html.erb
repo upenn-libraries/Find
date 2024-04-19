@@ -5,12 +5,12 @@
     <% if options.include? :pickup %>
       <% if options.include? :scan %>
         <li class="list-group-item">
-          <%= radio_button_tag :delivery, 'scan' %>
+          <%= radio_button_tag :delivery, 'scan', { checked: true } %>
           <%= label_tag :delivery_scan, 'Get a Scan' %>
         </li>
       <% end %>
       <% if options.include? :office %>
-        <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address)) %>
+        <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address, options: options)) %>
       <% end %>
       <%= render(Account::Requests::Options::PickupComponent
                    .new(default_pickup_location: default_pickup_location, options: options)) %>
@@ -28,24 +28,21 @@
         Pick the damn thing up at the archives.
       </li>
     <% end %>
-
-    <% if options.include? :pickup %>
-      <div class="add-comments">
-        <%= link_to t('requests.add_comments'), '', { data: { action: 'click->requests-form#showCommentsArea' } } %>
-      </div>
-    <% end %>
   </ul>
-  <div class="request-buttons">
-    <% if options.include? :pickup %>
-      <div class="d-none" data-requests-form-target="commentsArea">
+  <% if options.include? :pickup %>
+    <div class="add-comments mt-2">
+      <%= link_to t('requests.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
+      <div class="d-none" data-comments-target="commentsArea">
         <%= label_tag :location, t('requests.comments_label'), { class: 'form-label' } %>
-        <%= text_area_tag :comments, class: 'form-control' %>
+        <%= text_area_tag :comments, '', { class: 'form-control' } %>
       </div>
+    </div>
+    <div class="request-buttons mt-2">
       <%= submit_tag(t('requests.request'), { class: 'btn btn-success',
-                                              data: { requests_form_target: 'requestsItemButton' } }) %>
-    <% elsif options.include? :aeon %>
-      <%= link_to 'Request to View', '', { class: 'btn btn-primary',
-                                           data: { requests_form_target: 'requestViewButton' } } %>
-    <% end %>
-  </div>
+                                              data: { item_select_target: 'requestItemButton' } }) %>
+  <% elsif options.include? :aeon %>
+    <%= link_to 'Request to View', '', { class: 'btn btn-primary',
+                                         data: { item_select_target: 'requestViewButton' } } %>
+    </div>
+  <% end %>
 <% end %>

@@ -2,11 +2,11 @@ import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
     static targets = [
-        'itemSelect', 'mmsIdField', 'holdingIdField', 'commentsArea',
+        'select', 'mmsIdField', 'holdingIdField', 'commentsArea',
         'optionsFrame', 'optionsLoadingTemplate'
     ]
 
-    itemSelectChanged(event) {
+    selectChanged(event) {
         const mmsIdValue = this.mmsIdFieldTarget.value
         const holdingValue = this.holdingIdFieldTarget.value
         const itemValue = event.target.value
@@ -14,11 +14,5 @@ export default class extends Controller {
 
         this.optionsFrameTarget.src = url
         this.optionsFrameTarget.innerHTML = this.optionsLoadingTemplateTarget.innerHTML
-    }
-
-    showCommentsArea(event) {
-        event.preventDefault();
-        event.target.classList.add('d-none')
-        this.commentsAreaTarget.classList.remove('d-none')
     }
 }

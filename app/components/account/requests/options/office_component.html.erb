@@ -1,12 +1,12 @@
 <li class="list-group-item">
-  <%= radio_button_tag :delivery, 'office', { checked: true } %>
-  <%= label_tag :delivery_office, 'Office Delivery' %>
+  <%= radio_button_tag :options, 'office', checked? %>
+  <%= label_tag :options_office, 'Office Delivery' %>
   <p>
     <% if user_address_set? %>
       If this is not your preferred delivery address, please contact
       <a href='mailto:pld@pobox.upenn.edu'>Faculty Express</a>
       <div class="alert alert-info">
-        <%= @user_address.join('<br>').html_safe %>
+        <%= user_address.join('<br>').html_safe %>
       </div>
     <% else %>
       <div class="alert alert-warning">
