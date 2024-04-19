@@ -1,46 +1,32 @@
-<div class="request__container">
-  <h1 class="request__heading"><%= t('requests.heading') %></h1>
-  <div class="row">
-    <div class="col-md-7">
-      <div class="request__options" data-controller="requests-form">
-        <%= form_with(url: requests_path, method: :post) do |form| %>
-          <div class="mb-3">
-            <%= form.label :holding_id, t('requests.holding_label'), { class: 'form-label' } %>
-            <%= form.select(:holding_id, options_for_select(holding_labels, @holding_id), {},
-                            { class: 'form-select',
-                              data: { requests_form_target: 'holdingSelect',
-                                      action: 'change->requests-form#holdingSelectChanged' } }) %>
-          </div>
-
-          <div class="mb-3">
-            <%= form.label :item_pid, t('requests.item_label'), { class: 'form-label' } %>
-            <%= form.select(:item_pid, item_labels, {}, { class: 'form-select',
-                                                          data: { requests_form_target: 'itemSelect',
-                                                                  action: 'change->requests-form#itemSelectChanged' },
-                                                          disabled: item_labels.empty? }) %>
-          </div>
-
-          <div class="mb-3">
-            <%= form.label :circulation, "Delivery Options", { class: 'form-label' } %>
-            <%= turbo_frame_tag 'options_frame', src: request_options_path(mms_id: @mms_id,
-                                                                           holding_id: @holding_id) do %>
-              <p>
-                Loading...
-              </p>
-            <% end %>
-          </div>
-
-          <div class="mb-3">
-            <%= link_to t('requests.add_comments'), '', { data: { action: 'click->requests-form#showCommentsArea' } } %>
-            <div class="d-none" data-requests-form-target="commentsArea">
-              <%= form.label :location, t('requests.comments_label'), { class: 'form-label' } %>
-              <%= form.text_area :comments, class: 'form-control' %>
+<%= turbo_frame_tag 'form_frame' do %>
+  <div class="request__container">
+    <h1 class="request__heading"><%= t('requests.heading') %></h1>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="request__options" data-controller="requests-form">
+          <%= form_with(url: requests_path, method: :post) do |form| %>
+            <div class="mb-3">
+              <%= form.label :item_pid, t('requests.item_label'), { class: 'form-label' } %>
+              <%= form.select(:item_pid, item_labels, { include_blank: 'Select an item...' },
+                              { class: 'form-select',
+                                data: { requests_form_target: 'itemSelect',
+                                        action: 'change->requests-form#itemSelectChanged' },
+                                disabled: item_labels.empty? }) %>
             </div>
-          </div>
 
-          <%= form.hidden_field :mms_id, value: @mms_id, data: { requests_form_target: 'mmsIdField' } %>
-        <% end %>
+            <template id="options_loading_template" data-requests-form-target="optionsLoadingTemplate">
+              <p>Loading....</p>
+            </template>
+
+            <div class="mb-3">
+              <%= turbo_frame_tag 'options_frame', data: { requests_form_target: 'optionsFrame' } %>
+            </div>
+
+            <%= form.hidden_field :mms_id, value: @mms_id, data: { requests_form_target: 'mmsIdField' } %>
+            <%= form.hidden_field :holding_id, value: @holding_id, data: { requests_form_target: 'holdingIdField' } %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

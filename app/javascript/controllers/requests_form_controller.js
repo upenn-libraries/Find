@@ -1,50 +1,19 @@
 import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ['itemSelect', 'mmsIdField', 'requestItemButton', 'requestScanButton', 'commentsArea', 'holdingSelect']
-
-    holdingSelectChanged(event) {
-        const mmsIdValue = this.mmsIdFieldTarget.value
-        const holdingValue = event.target.value
-        const url = `/account/requests/item_labels?mms_id=${mmsIdValue}&holding_id=${holdingValue}`
-
-        this.itemSelectTarget.disabled = true;
-        // this.requestItemButtonTarget.disabled = true;
-
-        if (holdingValue) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    this.populateItemSelect(data);
-                    const mmsIdValue = this.mmsIdFieldTarget.value
-                    const holdingValue = event.target.value
-                    const itemValue = this.itemSelectTarget.value
-                    const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
-                    // TODO: change this to stimulus target
-                    const frame = document.getElementById('options_frame')
-
-                    frame.src = url
-                })
-                .catch(error => {
-                    console.error('Error:', error)
-                    this.itemSelectTarget.disabled = false;
-                })
-        }
-    }
+    static targets = [
+        'itemSelect', 'mmsIdField', 'holdingIdField', 'commentsArea',
+        'optionsFrame', 'optionsLoadingTemplate'
+    ]
 
     itemSelectChanged(event) {
         const mmsIdValue = this.mmsIdFieldTarget.value
-        const holdingValue = this.holdingSelectTarget.value
+        const holdingValue = this.holdingIdFieldTarget.value
         const itemValue = event.target.value
         const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
-        // TODO: change this to stimulus target
-        const frame = document.getElementById('options_frame')
 
-        // update URL for request scan button (href value of button)
-        const illUrl = `/account/requests/ill?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`
-        this.requestScanButtonTarget.href = illUrl
-
-        frame.src = url
+        this.optionsFrameTarget.src = url
+        this.optionsFrameTarget.innerHTML = this.optionsLoadingTemplateTarget.innerHTML
     }
 
     showCommentsArea(event) {
@@ -52,19 +21,4 @@ export default class extends Controller {
         event.target.classList.add('d-none')
         this.commentsAreaTarget.classList.remove('d-none')
     }
-
-    populateItemSelect(data) {
-        this.itemSelectTarget.innerHTML = '';
-        data.forEach(item => {
-            const optionElement = document.createElement('option');
-            optionElement.textContent = item[0];
-            optionElement.value = item[1];
-            this.itemSelectTarget.appendChild(optionElement);
-        });
-
-        this.itemSelectTarget.disabled = data.length < 1;
-        // this.requestItemButtonTarget.disabled = false;
-    }
-
-
 }

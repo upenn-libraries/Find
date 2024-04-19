@@ -60,8 +60,8 @@ Rails.application.routes.draw do
       get ':system/:id', action: 'show', to: :show, as: 'request', constraints: { system: /(ill|ils)/ }
       patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
       delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
-      get 'item_labels', action: 'item_labels', as: 'item_labels'
       get 'options', action: 'options', as: 'request_options'
+      get 'form', action: 'form', as: 'request_form'
     end
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".

@@ -6,19 +6,12 @@ module Account
     class FormComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      attr_accessor :holdings, :items
+      attr_accessor :items
 
-      def initialize(mms_id:, holding_id:, holdings:, items:)
+      def initialize(mms_id:, holding_id:, items:)
         @mms_id = mms_id
         @holding_id = holding_id
-        @holdings = holdings
         @items = items
-      end
-
-      def holding_labels
-        holdings.map do |holding|
-          [[holding['library'], holding['call_number']].compact_blank.join(' - '), holding['holding_id']]
-        end
       end
 
       def item_labels

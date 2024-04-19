@@ -5,9 +5,8 @@ module Account
   class RequestsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_mms_id
-    before_action :set_holding_id, only: :new
-    before_action :set_holdings, only: :new
-    before_action :set_items, only: %w[new item_labels options]
+    before_action :set_holding_id, only: %w[new form]
+    before_action :set_items, only: %w[new item_labels options form]
 
     # Returns form for initializing a new request. TODO: May return a turbo frame response.
     # GET /account/requests/new
@@ -56,10 +55,10 @@ module Account
       render(Account::Requests::OptionsComponent.new(item: item, user: current_user, options: options), layout: false)
     end
 
-    # Send json array of item labels to populate Item dropdown on holding change
-    # GET /account/requests/item_labels
-    def item_labels
-      render json: @items.map(&:select_label)
+    # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
+    # Returns form with item select dropdown and sets up turbo frame for displaying options.
+    def form # TODO: better name
+      render(Account::Requests::FormComponent.new(mms_id: @mms_id, holding_id: @holding_id, items: @items), layout: false)
     end
 
     private
@@ -70,12 +69,6 @@ module Account
 
     def set_holding_id
       @holding_id = params[:holding_id]
-    end
-
-    # @return [Alma::BibItemSet]
-    def set_holdings
-      @holdings = Alma::Bib.get_availability([params[:mms_id]])
-                           .availability.dig(params[:mms_id], :holdings)
     end
 
     # @return [Alma::BibItemSet]

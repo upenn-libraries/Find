@@ -1,4 +1,3 @@
-<%= render Account::Requests::FormComponent.new(mms_id: @mms_id,
-                                holding_id: @holding_id,
-                                holdings: @holdings,
-                                items: @items) %>
+<%= turbo_frame_tag 'form_frame', src: request_form_path(mms_id: @mms_id, holding_id: @holding_id) do %>
+  <div>Loading...</div>
+<% end %>
