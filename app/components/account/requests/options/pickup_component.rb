@@ -5,7 +5,6 @@ module Account
     module Options
       # pickup component logic
       class PickupComponent < ViewComponent::Base
-
         attr_accessor :default_pickup_location, :options
 
         def initialize(default_pickup_location:, options:)
@@ -14,7 +13,7 @@ module Account
         end
 
         def checked?
-          options.include? :office ? nil : { checked: true }
+          options.include?(:office) ? nil : { checked: true }
         end
       end
     end

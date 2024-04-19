@@ -1,12 +1,13 @@
-# TODO: figure out a less stupid name
+# frozen_string_literal: true
 
+# TODO: figure out a less stupid name
 module Items
   # service for various item methods
   class Service
-    ALMA_BASE_URL = 'https://api-na.hosted.exlibrisgroup.com/almaws'.freeze
+    ALMA_BASE_URL = 'https://api-na.hosted.exlibrisgroup.com/almaws'
 
-    FACULTY_EXPRESS_CODE = 'FacEXP'.freeze
-    COURTESY_BORROWER_CODE = 'courtesy'.freeze
+    FACULTY_EXPRESS_CODE = 'FacEXP'
+    COURTESY_BORROWER_CODE = 'courtesy'
     STUDENT_GROUP_CODES = %w[undergrad graduate GIC].freeze
 
     DEFAULT_REQUEST_HEADERS =

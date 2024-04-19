@@ -17,7 +17,7 @@ module Account
         end
 
         def checked?
-          options.include? :scan ? nil : { checked: true }
+          options.include?(:scan) ? nil : { checked: true }
         end
       end
     end
