@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Account
-  # Item requesting controller
-  class RequestsController < ApplicationController
-    before_action :authenticate_user!
+  # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
+  # Illiad transactions & Alma loans).
+  class RequestsController < AccountController
     before_action :set_mms_id
     before_action :set_holding_id, only: %w[new form]
-    before_action :set_items, only: %w[new item_labels options form]
+    before_action :set_items, only: %w[new options form]
 
     # Returns form for initializing a new request. TODO: May return a turbo frame response.
     # GET /account/requests/new
