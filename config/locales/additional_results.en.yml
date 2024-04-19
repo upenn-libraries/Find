@@ -1,8 +1,7 @@
 en:
   additional_results:
     loading_html: 'Looking for <strong>%{source_display}</strong> results...'
-    results_found_both_html: 'Your search also found results in <strong>%{source_display}</strong>'
-    results_found_source_only_html: 'Your search found results in <strong>%{source_display}</strong>'
+    results_found_html: 'Your search found results in <strong>%{source_display}</strong>'
     no_results_html: 'Your search found no results in <strong>%{source_display}</strong>'
     view_all: 'View all %{count} %{source_display} results'
     summon:

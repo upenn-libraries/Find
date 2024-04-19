@@ -1,75 +1,80 @@
-<% if documents.present? %>
+<div class="<%= @classes %>">
+  <% if documents.present? %>
 
-  <div class="row align-items-center mb-1">
-    <%# Additional Results source title %>
-    <div class="col-sm">
-      <h2 class="h5 mb-0">
-        <%= t('additional_results.results_found_both_html', source_display: display_name) %>
-      </h2>
+    <div class="row align-items-center mb-1">
+      <%# Additional Results source title %>
+      <div class="col-sm">
+        <h2 class="h5 mb-0">
+          <%= t('additional_results.results_found_html', source_display: display_name) %>
+        </h2>
 
+      </div>
+
+      <%# Link to all results on Articles+ %>
+      <% if search.record_count > 3 %>
+        <div class="view-all col-sm-auto mb-1">
+          <%= link_to t('additional_results.view_all', count: record_count, source_display: display_name),
+                      summon_url,
+                      class: 'btn btn-sm btn-primary',
+                      target: '_blank',
+                      rel: 'noopener'
+          %>
+        </div>
+      <% end %>
     </div>
 
-    <%# Link to all results on Articles+ %>
-    <% if search.record_count > 3 %>
-      <div class="view-all col-sm-auto mb-1">
-        <%= link_to t('additional_results.view_all', count: record_count, source_display: display_name),
-                    summon_url,
-                    class: 'btn btn-sm btn-primary',
-                    target: '_blank',
-                    rel: 'noopener'
-        %>
-      </div>
-    <% end %>
-  </div>
+    <%# List top results followed by facet counts %>
+    <ol>
+      <% documents.each do |doc| %>
+        <%# Link to and display info for each result %>
+        <li class="mb-2">
+          <dl class="document-metadata dl-invert row">
 
-  <%# List top results followed by facet counts %>
-  <ol>
-    <% documents.each do |doc| %>
-      <%# Link to and display info for each result %>
-      <li class="mb-2">
-        <dl class="document-metadata dl-invert row">
-
-          <%# Linked document title %>
-          <dt><%= t('additional_results.summon.fields.title') %></dt>
-          <dd>
-            <%= link_to doc.title.html_safe, doc.link %>
-          </dd>
-
-          <%# Authors, publication, publication year %>
-          <% if info_display(doc).present? %>
-            <dt><%= t('additional_results.summon.fields.info') %></dt>
+            <%# Linked document title %>
+            <dt><%= t('additional_results.summon.fields.title') %></dt>
             <dd>
-              <%= info_display(doc).html_safe %>
+              <%= link_to doc.title.html_safe, doc.link %>
             </dd>
-          <% end %>
 
-          <%# Format and availability %>
-          <% if availability_display(doc).present? %>
-            <dt><%= t('additional_results.summon.fields.availability') %></dt>
-            <dd class="holdings">
-              <%= availability_display(doc).html_safe %>
-            </dd>
-          <% end %>
-        </dl>
-      </li>
-    <% end %>
-  </ol>
+            <%# Authors, publication, publication year %>
+            <% if info_display(doc).present? %>
+              <dt><%= t('additional_results.summon.fields.info') %></dt>
+              <dd>
+                <%= info_display(doc).html_safe %>
+              </dd>
+            <% end %>
 
-  <% if render_facet_counts?('ContentType') %>
-    <%# List document counts for 'ContentType' facet %>
-    <div class="row">
-      <div class="col">
-        <ul class="list-inline mb-0">
-          <%# Link each facet label/count to a filtered Articles+ results page %>
-          <% facet_counts['ContentType'].each do |count| %>
-            <%= facet_count_link(count) %>
-          <% end %>
-        </ul>
+            <%# Format and availability %>
+            <% if availability_display(doc).present? %>
+              <dt><%= t('additional_results.summon.fields.availability') %></dt>
+              <dd class="holdings">
+                <%= availability_display(doc).html_safe %>
+              </dd>
+            <% end %>
+          </dl>
+        </li>
+      <% end %>
+    </ol>
+
+    <% if render_facet_counts?('ContentType') %>
+      <%# List document counts for 'ContentType' facet %>
+      <div class="row">
+        <div class="col">
+          <ul class="list-inline mb-0">
+            <%# Link each facet label/count to a filtered Articles+ results page %>
+            <% facet_counts['ContentType'].each do |count| %>
+              <%= facet_count_link(count) %>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
+    <% end %>
+
+  <% else %>
+
+    <h2 class="h5 mb-0">
+      <%= t('additional_results.no_results_html', source_display: display_name) %>
+    </h2>
+
   <% end %>
-<% else %>
-  <h2 class="h5 mb-0">
-    <%= t('additional_results.no_results_html', source_display: display_name) %>
-  </h2>
-<% end %>
+</div>

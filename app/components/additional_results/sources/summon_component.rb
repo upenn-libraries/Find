@@ -9,8 +9,9 @@ module AdditionalResults
       attr_reader :search, :facet_counts
 
       # @param query [String] the search term
-      def initialize(query:)
+      def initialize(query:, **options)
         @query = query
+        @classes = Array.wrap(options[:class])&.join(' ')
         @search = Articles::Search.new(query_term: query)
         @facet_counts = @search.facet_counts || nil
       end
