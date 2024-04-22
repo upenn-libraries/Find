@@ -4,6 +4,7 @@ module AdditionalResults
   # Renders results from sources other than the catalog
   class ResultsSourceComponent < ViewComponent::Base
     include AdditionalResults::SourceHelper
+    include Turbo::FramesHelper
 
     attr_reader :source
 
@@ -22,7 +23,7 @@ module AdditionalResults
 
     # @return [String] the component to render in the additional results turbo frame
     def call
-      content_tag 'turbo-frame', id: "additional-results-source__#{source}" do
+      turbo_frame_tag "additional-results-source__#{source}" do
         render source_component(source).new(query: params[:q], class: @classes)
       end
     end
