@@ -32,21 +32,25 @@ module Items
     def self.items_for(mms_id:, holding_id:)
       raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
-      Alma::BibItem.find(mms_id, holding_id: holding_id)
+      item_set = Alma::BibItem.find(mms_id, holding_id: holding_id)
+      if item_set.items.blank?
+        Alma::BibItemSet.new
+      else
+        item_set
+      end
     end
 
     # @return [Array]
     def self.options_for(item:, ils_group:)
+      return [:aeon] if item.aeon_requestable?
+      return [:archives] if item.at_archives?
+
       options = []
       if item.checkoutable?
         options << :pickup
         options << :office if ils_group == FACULTY_EXPRESS_CODE
         options << :mail unless ils_group == COURTESY_BORROWER_CODE
         options << :scan if item.scannable?
-      elsif item.aeon_requestable?
-        options << :aeon
-      elsif item.at_archives?
-        options << :archives
       end
       options
     end
