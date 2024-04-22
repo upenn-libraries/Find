@@ -269,15 +269,6 @@ class CatalogController < ApplicationController
     redirect_to search_catalog_path({ 'f[format_facet][]': PennMARC::Database::DATABASES_FACET_VALUE })
   end
 
-  # Renders additional results from a specified source for use in the Additional Results component
-  def additional_results
-    respond_to do |format|
-      source_id = params[:source_id] || 'summon' # Default to Articles+ results
-
-      format.html { render(AdditionalResults::ResultsSourceComponent.new(source_id), layout: false) }
-    end
-  end
-
   def staff_view; end
 
   private

@@ -3,8 +3,6 @@
 module AdditionalResults
   # Helper methods for interacting with additional results sources
   module SourceHelper
-    include Rails.application.routes.url_helpers
-
     # @param source [String] the results source id
     # @return [String] the display name for an additional results source, either
     #   as explicitly set in Settings.additional_results_sources, defined in a
@@ -23,7 +21,7 @@ module AdditionalResults
     # @param query [String] the search term
     # @return [String] the src path for the source's turbo frame component
     def source_results_path(source:, query:)
-      additional_results_catalog_path(params: { source_id: source, q: query })
+      additional_results_path(source, q: query)
     end
 
     # @param source [String] the results source id
