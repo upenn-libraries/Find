@@ -4,6 +4,6 @@ module Account
   # Controller for user-fines-related actions.
   class FinesController < AccountController
     # GET /account/fines-and-fees
-    def show; end
+    def index; end
   end
 end

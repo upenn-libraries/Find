@@ -64,7 +64,7 @@ Rails.application.routes.draw do
     end
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
-    get 'fines-and-fees', to: 'fines#show'
+    get 'fines-and-fees', to: 'fines#index'
   end
 
   post 'webhooks/alerts', to: 'alert_webhooks#listen'

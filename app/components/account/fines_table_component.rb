@@ -2,7 +2,7 @@
 
 module Account
   # Show user fines and fees
-  class FinesComponent < ViewComponent::Base
+  class FinesTableComponent < ViewComponent::Base
     attr_reader :user
 
     # @param user [User]
@@ -12,9 +12,9 @@ module Account
 
     # @return [Float]
     def total_fines
-      return 0.0 unless alma_user
+      return number_to_currency(0) unless alma_user
 
-      alma_user.total_fines
+      number_to_currency(alma_user.total_fines)
     end
 
     private
@@ -22,6 +22,17 @@ module Account
     # @return [Alma::User, FalseClass]
     def alma_user
       @alma_user ||= user.alma_record
+    end
+
+    # @return [Alma::FineSet, nil]
+    def fine_set
+      return unless alma_user
+
+      @fine_set ||= begin
+        alma_user.fines
+      rescue StandardError => _e
+        nil
+      end
     end
   end
 end

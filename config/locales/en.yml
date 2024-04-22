@@ -19,8 +19,17 @@ en:
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
+      table:
+        th:
+          type: 'Type'
+          title: 'Title'
+          date_charged: 'Charged'
+          last_transaction: 'Last Transaction'
+          original_amount: 'Original Amount'
+          balance: 'Balance'
+          total: 'Total'
       terms:
-        fines_and_fees: 'Fines & Fees'
+        balance: 'Outstanding Balance'
     settings:
       page_heading: 'Settings'
       page_lede: 'Your account preferences.'

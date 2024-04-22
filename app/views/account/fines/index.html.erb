@@ -9,4 +9,4 @@
 <h1 class="page__heading"><%= t('account.fines_and_fees.page_heading') %></h1>
 <p class="page__lede mb-3"><%= t('account.fines_and_fees.page_lede') %></p>
 
-<%= render Account::FinesComponent.new(user: current_user) %>
+<%= render Account::FinesTableComponent.new(user: current_user) %>
