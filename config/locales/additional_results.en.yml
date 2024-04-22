@@ -4,6 +4,7 @@ en:
     results_found_html: 'Your search found results in <strong>%{source}</strong>'
     no_results_html: 'Your search found no results in <strong>%{source}</strong>'
     view_all: 'View all %{count} %{source} results'
+    turbo_frame_id: '%{source}-frame'
     summon:
       display_name: 'Articles+'
       fields:

@@ -4,6 +4,7 @@
 module AdditionalResults
   # Renders container for results from sources other than the catalog
   class AdditionalResultsComponent < ViewComponent::Base
+    include Turbo::FramesHelper
     include AdditionalResults::SourceHelper
 
     renders_many :results_sources, AdditionalResults::ResultsSourceComponent

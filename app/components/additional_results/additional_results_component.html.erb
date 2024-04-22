@@ -3,14 +3,13 @@
 
     <% results_sources.each_with_index do |component, i| %>
       <% source = component.source %>
-      <% if valid_source?(source) %>
+      <% if valid?(source) %>
         <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
-          <turbo-frame id="additional-results-source__<%= source %>"
-                       src="<%= source_results_path(source: source, query: @query) %>">
+          <%= turbo_frame_tag turbo_id(source), src: results_path(source: source, query: @query) do %>
             <h2 class="h5 mb-0">
-              <%= t('additional_results.loading_html', source: source_display_name(source)) %>
+              <%= t('additional_results.loading_html', source: display_name(source)) %>
             </h2>
-          </turbo-frame>
+          <% end %>
         </div>
       <% end %>
     <% end %>

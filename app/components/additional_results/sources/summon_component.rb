@@ -4,6 +4,8 @@ module AdditionalResults
   module Sources
     # Renders additional search results from the Summon API (Articles+)
     class SummonComponent < ViewComponent::Base
+      include AdditionalResults::SourceHelper
+
       delegate :documents, :summon_url, to: :search
 
       attr_reader :search, :facet_counts
@@ -14,14 +16,6 @@ module AdditionalResults
         @classes = Array.wrap(options[:class])&.join(' ')
         @search = Articles::Search.new(query_term: query)
         @facet_counts = @search.facet_counts || nil
-      end
-
-      # Returns Summon's display name from settings, or defaults to Articles+
-      # if not set
-      #
-      # @return [String] the display name for Summon as a results source
-      def display_name
-        Settings.additional_results_sources['summon']&.display_name || 'Articles+'
       end
 
       # Generates a comma-delimited overall record count for the search results

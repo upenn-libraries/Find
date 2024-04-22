@@ -18,13 +18,13 @@ module AdditionalResults
 
     # @return [Boolean] true if the source id has a corresponding component class
     def render?
-      valid_source?(source)
+      valid?(source)
     end
 
     # @return [String] the component to render in the additional results turbo frame
     def call
-      turbo_frame_tag "additional-results-source__#{source}" do
-        render source_component(source).new(query: params[:q], class: @classes)
+      turbo_frame_tag turbo_id(source) do
+        render component(source).new(query: params[:q], class: @classes)
       end
     end
   end
