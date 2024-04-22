@@ -52,7 +52,7 @@ module Illiad
     end
 
     def address
-      [data[:Address], data[:Address2]]
+      [data[:Address2], data[:Zip]]
     end
 
     # Get all of the user's requests
