@@ -8,8 +8,8 @@ module AdditionalResults
     #   as explicitly set in Settings.additional_results_sources, defined in a
     #   source's display_name method, or inferred from the source name
     def display_name(source)
-      if I18n.exists?("additional_results.#{source}.display_name", locale: :en)
-        I18n.t("additional_results.#{source}.display_name", locale: :en)
+      if I18n.exists?("additional_results.#{source}.display_name")
+        I18n.t("additional_results.#{source}.display_name")
       else
         source.titleize
       end
