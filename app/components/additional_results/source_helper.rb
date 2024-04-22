@@ -31,7 +31,7 @@ module AdditionalResults
     # @param source [String] the results source id
     # @return [String] the id for the source's turbo frame
     def turbo_id(source)
-      I18n.t('additional_results.turbo_frame_id', source: source, locale: :en)
+      I18n.t('additional_results.turbo_frame_id', source: source)
     end
 
     # @param source [String] the results source id
