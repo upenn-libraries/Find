@@ -4,7 +4,7 @@ require 'system_helper'
 
 describe 'login page' do
   let(:user) { build(:user) }
-  let(:alma_user_group) { 'patron' }
+  let(:alma_user_group) { { 'value' => 'patron' } }
 
   include_context 'with User.new returning user'
 

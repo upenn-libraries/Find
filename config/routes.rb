@@ -50,8 +50,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resource 'account', only: %i[show], controller: 'account'
   namespace :account, as: nil do
-    resource :profile, only: %i[show edit update], controller: 'profile'
+    resource :settings, only: %i[show edit update], controller: 'settings'
     resources :requests, only: %i[index new create]
 
     # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
@@ -63,6 +64,7 @@ Rails.application.routes.draw do
     end
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
+    get 'fines-and-fees', to: 'fines#index'
   end
 
   get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'

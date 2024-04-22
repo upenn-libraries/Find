@@ -2,7 +2,7 @@
 
 describe 'Omniauth Callbacks Requests' do
   let(:user) { build(:user) }
-  let(:alma_user_group) { 'patron' }
+  let(:alma_user_group) { { 'value' => 'patron' } }
 
   include_context 'with User.new returning user'
 
@@ -24,7 +24,7 @@ describe 'Omniauth Callbacks Requests' do
       end
 
       it 'sets the user ils_group value' do
-        expect(user.ils_group).to eq alma_user_group
+        expect(user.ils_group).to eq alma_user_group['value']
       end
     end
 
@@ -93,7 +93,7 @@ describe 'Omniauth Callbacks Requests' do
       end
 
       it 'sets the user ils_group value' do
-        expect(user.ils_group).to eq alma_user_group
+        expect(user.ils_group).to eq alma_user_group['value']
       end
     end
 

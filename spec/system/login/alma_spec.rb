@@ -4,7 +4,7 @@ require 'system_helper'
 
 describe 'index page' do
   let(:user) { build(:user, :alma_authenticated) }
-  let(:alma_user_group) { 'patron' }
+  let(:alma_user_group) { { 'value' => 'patron' } }
 
   include_context 'with User.new returning user'
   include_context 'with mock alma_record on user having alma_user_group user group'
