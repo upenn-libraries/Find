@@ -5,6 +5,7 @@ module Account
   class FineRowComponent < ViewComponent::Base
     attr_reader :fine
 
+    # @param fine [Alma::Record]
     def initialize(fine:)
       @fine = fine
     end
