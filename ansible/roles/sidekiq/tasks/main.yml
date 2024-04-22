@@ -1,0 +1,10 @@
+---
+- name: Deploy Sidekiq environment
+  docker_stack:
+    name: "catalog-find"
+    compose:
+      - "{{ lookup('template', 'docker-compose.yml.j2', template_vars={'item': item} ) | from_yaml }}"
+    state: present
+  changed_when: false
+  no_log: true
+  loop: "{{ sidekiq.instances }}"

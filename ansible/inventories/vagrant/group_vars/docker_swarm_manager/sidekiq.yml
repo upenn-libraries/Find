@@ -1,0 +1,10 @@
+---
+sidekiq:
+  instances:
+    - name: default
+      queues:
+        - high
+        - medium
+        - low
+      concurrency: 5
+      replicas: 1

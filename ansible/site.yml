@@ -1,0 +1,76 @@
+---
+- name: "Provision Docker Swarm Cluster"
+  hosts: all
+  become: true
+  collections:
+    - ansible.utils
+    - ansible.netcommon
+  tasks:
+    - ansible.builtin.import_tasks: "provision_docker.yml"
+      when: is_development | default (false, true)
+
+- name: "Deploy application"
+  hosts: docker_swarm_manager
+  become: true
+  gather_facts: true
+  tasks:
+    - ansible.builtin.import_role:
+        name: catalog-find
+        tasks_from: symlink_project
+      tags: catalog-find
+    - name: Copy Solr configs from indexing repo
+      block:
+      - name: "Clone the indexing repo"
+        ansible.builtin.git:
+          dest: "{{ catalog_indexing_config_repo_path }}"
+          repo: "{{ catalog_indexing_config_repo_name }}"
+          force: "{{ catalog_indexing_config_repo_force | bool }}"
+          single_branch: true
+          update: "{{ catalog_indexing_config_repo_update | bool }}"
+          version: "{{ catalog_indexing_config_repo_branch }}"
+      - name: Copy content of directory 'files'
+        copy:
+          src: /tmp/catalog-indexing/rails_app/solr/
+          dest: /catalog-find/rails_app/solr/
+          remote_src: true
+      when: is_development | default (false, true)
+    - ansible.builtin.import_role:
+        name: traefik
+      tags: traefik
+      when: is_development | default (false, true)
+    - ansible.builtin.import_role:
+        name: zookeeper
+      tags: zookeeper
+      when: is_development | default (false, true)
+    - ansible.builtin.import_role:
+        name: solr
+      tags: solr
+      when: is_development | default (false, true)
+    - ansible.builtin.import_role:
+        name: redis
+      tags: redis
+    - ansible.builtin.import_role:
+        name: postgres
+      tags: postgres
+    - ansible.builtin.import_role:
+        name: catalog-find
+      tags: catalog-find
+    - ansible.builtin.import_role:
+        name: sidekiq
+      tags: sidekiq
+    - ansible.builtin.import_role:
+        name: chrome
+      tags: chrome
+      when: is_development | default (false, true)
+  post_tasks:
+    - name: Recursively remove project directory
+      ansible.builtin.file:
+        path: "{{ project_root }}"
+        state: absent
+    - name: Prune images that are older than 2+ hours
+      community.docker.docker_prune:
+        images: true
+        images_filters:
+          dangling: false
+          until: 2h
+      when: not is_development | default (false, true)

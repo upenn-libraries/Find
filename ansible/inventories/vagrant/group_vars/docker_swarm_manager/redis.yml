@@ -1,0 +1,28 @@
+---
+redis:
+  image:
+    name: "redis"
+    tag: "7.0-alpine"
+  port: 6379
+  replicas: 1
+  versioned_configs:
+    redis_conf:
+      filename: "redis.conf.j2"
+      version: 1
+    users_acl:
+      filename: "users.acl.j2"
+      users: [
+        {
+          name: "sidekiq",
+          acl_rules: "+@all ~*",
+          password: "password",
+          version: 1
+        },
+        {
+          name: "default",
+          acl_rules: "+@all ~*",
+          password: "password",
+          version: 1
+        }
+      ]
+      version: 1

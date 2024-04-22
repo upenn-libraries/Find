@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  redis:
+    image: ${REDIS_IMAGE_NAME}:${REDIS_IMAGE_TAG}
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    configs:
+      - source: redis_config
+        target: "/usr/local/etc/redis/redis.conf"
+      - source: redis_users_acl
+        target: "/usr/local/etc/redis/users.acl"
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.redis == true"
+      replicas: ${REPLICAS}
+      update_config:
+        order: "start-first"
+        parallelism: 1
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      retries: 6
+      start_period: 30s
+      timeout: 30s
+    logging:
+      driver: json-file
+      options:
+        max-file: "3"
+        max-size: "10m"
+    networks:
+      - redis
+    volumes:
+      - redis_data:/data
+
+configs:
+  redis_config:
+    external: true
+    name: ${REDIS_REDIS_CONF}
+  redis_users_acl:
+    external: true
+    name: ${REDIS_USERS_ACL}
+
+networks:
+  redis:
+    driver: overlay
+    name: redis
+    attachable: true
+
+volumes:
+  redis_data:
