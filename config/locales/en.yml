@@ -15,7 +15,7 @@ en:
             description: 'Email and create citations from your list of bookmarked items.'
         fines_and_fees:
           title: 'Fines and Fees'
-          description: 'Pay fines for lost or damaged items. We do not charge overdue fees.'
+          description: 'View fines for lost or damaged items. We do not charge overdue fees for regular books.'
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
