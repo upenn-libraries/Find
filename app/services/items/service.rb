@@ -32,12 +32,7 @@ module Items
     def self.items_for(mms_id:, holding_id:)
       raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
-      item_set = Alma::BibItem.find(mms_id, holding_id: holding_id)
-      if item_set.items.blank?
-        Alma::BibItemSet.new
-      else
-        item_set
-      end
+      Alma::BibItem.find(mms_id, holding_id: holding_id)
     end
 
     # @return [Array]
