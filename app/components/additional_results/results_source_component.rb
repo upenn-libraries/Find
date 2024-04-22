@@ -3,16 +3,16 @@
 module AdditionalResults
   # Renders results from sources other than the catalog
   class ResultsSourceComponent < ViewComponent::Base
-    include AdditionalResults::SourceHelper
     include Turbo::FramesHelper
+    include AdditionalResults::SourceHelper
 
     attr_reader :source
 
-    # @param query [String] the search term
+    # @param source [String] the results source from which to render results
     # @param options [Hash] options for the component
-    # @option options [String] :class Class(es) to apply to the component template
-    def initialize(source_id, **options)
-      @source = source_id
+    # @option options [String] :class class(es) to apply to the component template
+    def initialize(source, **options)
+      @source = source
       @classes = Array.wrap(options[:class])&.join(' ')
     end
 

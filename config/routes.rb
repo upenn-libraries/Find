@@ -65,6 +65,6 @@ Rails.application.routes.draw do
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
   end
 
-  get 'additional_results(/:source_id)', to: 'additional_results#results', as: 'additional_results'
+  get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
 end
