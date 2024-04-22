@@ -75,6 +75,11 @@ module Items
     end
 
     # @return [TrueClass, FalseClass]
+    def at_archives?
+      library_name == 'University Archives'
+    end
+
+    # @return [TrueClass, FalseClass]
     def in_house_use_only?
       item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||
         holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
