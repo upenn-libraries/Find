@@ -95,7 +95,7 @@ describe 'Fines and Fees index page' do
 
     it 'shows the total balance row' do
       within('.table') do
-        expect(page).to have_text 'Total'
+        expect(page).to have_text I18n.t('account.fines_and_fees.table.th.total')
         expect(page).to have_text "$#{total_fines}"
       end
     end
