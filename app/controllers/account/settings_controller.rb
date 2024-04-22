@@ -9,10 +9,10 @@ module Account
 
     # GET /account/settings/edit
     # Form to allow users to change editable information.
-    def edit; end
+    # def edit; end
 
-    # PATCH /account/settings
-    # Update user data in Alma (Illiad API offers no user update capability).
-    def update; end
+    # # PATCH /account/settings
+    # # Update user data in Alma (Illiad API offers no user update capability).
+    # def update; end
   end
 end
