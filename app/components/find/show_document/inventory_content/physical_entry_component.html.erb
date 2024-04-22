@@ -8,5 +8,5 @@
   <span class="inventory-item__availability-footer"><%= availability_description %></span>
 </p>
 
-<%= link_to I18n.t('requests.request'), new_request_path(mms_id: entry.mms_id, holding_id: entry.id),
+<%= link_to I18n.t('requests.form.request_item'), new_request_path(mms_id: entry.mms_id, holding_id: entry.id),
             class: 'btn btn-success btn-lg' %>

@@ -2,7 +2,7 @@
   <%= radio_button_tag :option, 'mail' %>
   <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
   <p>
-    <%= t('requests.form.options.mail.message') %>
+    <%= t('requests.form.options.mail.message').html_safe %>
   </p>
   <p>
     <%= check_box_tag :bbm_validation, { required: true } %>
