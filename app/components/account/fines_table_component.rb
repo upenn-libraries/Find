@@ -12,24 +12,19 @@ module Account
 
     # @return [Float]
     def total_fines
-      return number_to_currency(0) unless alma_user
+      return number_to_currency(0) unless user.alma_record
 
-      number_to_currency(alma_user.total_fines)
+      number_to_currency(user.alma_record.total_fines)
     end
 
     private
 
-    # @return [Alma::User, FalseClass]
-    def alma_user
-      @alma_user ||= user.alma_record
-    end
-
     # @return [Alma::FineSet, nil]
     def fine_set
-      return unless alma_user
+      return unless user.alma_record
 
       @fine_set ||= begin
-        alma_user.fines
+        user.alma_record.fines
       rescue StandardError => _e
         nil
       end
