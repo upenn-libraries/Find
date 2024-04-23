@@ -6,7 +6,7 @@ catalog_find_image_tag: "development"
 catalog_find_port: 3000
 catalog_find_rails_env: "development"
 catalog_find_replicas: 1
-catalog_find_solr_url: "http://solr-1:8983"
+catalog_find_solr_url: "http://admin:password@solr-1:8983/solr/find-development"
 catalog_find_solr_admin_url: "http://catalog-find-dev.library.upenn.int/solr1/#/"
 catalog_find_url: "catalog-find-dev.library.upenn.edu"
 catalog_find_versioned_secrets:
