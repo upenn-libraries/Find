@@ -1,10 +1,10 @@
 ---
 solr_collections:
-  - name: catalog-find-development
+  - name: find-development
     configset: catalog-find
     replicas: 1
     shards: 1
-  - name: catalog-find-test
+  - name: find-test
     configset: catalog-find
     replicas: 1
     shards: 1
