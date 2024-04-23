@@ -4,7 +4,7 @@
 shared_context 'with mock alma_record on user having alma_user_group user group' do
   before do
     mock_alma_user = instance_double Alma::User
-    allow(mock_alma_user).to receive(:method_missing).with(:user_group).and_return({ 'value' => alma_user_group })
+    allow(mock_alma_user).to receive(:method_missing).with(:user_group).and_return(alma_user_group)
     allow(user).to receive(:alma_record).and_return(mock_alma_user)
   end
 end

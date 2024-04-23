@@ -59,9 +59,20 @@ class User < ApplicationRecord
 
   # @return [Alma::User, FalseClass]
   def alma_record
-    Alma::User.find(uid)
-  rescue Alma::User::ResponseError
-    false
+    @alma_record ||= begin
+      Alma::User.find(uid)
+    rescue Alma::User::ResponseError
+      false
+    end
+  end
+
+  # @return [Illiad::User, FalseClass]
+  def illiad_record
+    @illiad_record ||= begin
+      Illiad::User.find(id: uid)
+    rescue Illiad::Client::Error
+      false
+    end
   end
 
   private

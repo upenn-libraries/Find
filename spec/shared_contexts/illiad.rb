@@ -16,7 +16,7 @@ shared_context 'with stubbed illiad api error' do
   before do
     connection = instance_double(Faraday::Connection)
     allow(Faraday).to receive(:new).and_return(connection)
-    HTTP_METHODS.each do |method|
+    Illiad::Client::HTTP_METHODS.each do |method|
       allow(connection).to receive(method).and_raise(Faraday::Error)
     end
   end
