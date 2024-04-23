@@ -15,9 +15,8 @@ module Broker
                    else
                      ::Alma::BibRequest.submit(params)
                    end
-        Outcome.new(
-          # confirmation_number: request.id
-        )
+        confirmation_number = response[:confirmation_number] # TODO: validate how to get this
+        Outcome.new(request: request, confirmation_number: confirmation_number)
       end
 
       def submission_body_from(request)

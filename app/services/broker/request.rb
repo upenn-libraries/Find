@@ -5,6 +5,14 @@ module Broker
   class Request
     class LogicFailure < StandardError; end
 
+    module FulfillmentOptions
+      AEON = :aeon
+      ELECTRONIC = :electronic
+      HOME_DELIVERY = :home_delivery
+      OFFICE_DELIVERY = :office_delivery
+      PICKUP = :pickup
+    end
+
     attr_reader :user, :item_parameters, :fulfillment_options, :scan_details
 
     # Create a new Request to Broker
@@ -30,7 +38,7 @@ module Broker
     end
 
     def destination
-      if scan? || books_by_mail? || delivery?
+      if scan? || books_by_mail? || delivery? || ill_pickup?
         :illiad
       elsif aeon?
         :aeon
@@ -42,23 +50,29 @@ module Broker
     end
 
     def scan?
-      fulfillment_options[:electronic] == true
+      fulfillment_options[:method] == FulfillmentOptions::ELECTRONIC
     end
 
     def books_by_mail?
-      fulfillment_options[:home_delivery] == true
+      fulfillment_options[:method] == FulfillmentOptions::HOME_DELIVERY
     end
 
     def delivery?
-      fulfillment_options[:facex_delivery] == true
+      fulfillment_options[:method] == FulfillmentOptions::OFFICE_DELIVERY
     end
 
     def aeon?
-      fulfillment_options[:aeon] == true
+      fulfillment_options[:method] == FulfillmentOptions::AEON
     end
 
     def pickup?
-      fulfillment_options[:pickup_location].present?
+      fulfillment_options[:method] == FulfillmentOptions::PICKUP &&
+        (item_parameters[:holding_id].present? || item_parameters[:item_id].present?)
+    end
+
+    def ill_pickup?
+      fulfillment_options[:method] == FulfillmentOptions::PICKUP &&
+        (item_parameters[:holding_id].blank? && item_parameters[:item_id].blank?)
     end
   end
 end

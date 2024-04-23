@@ -26,9 +26,7 @@ module Broker
         find_or_create(user: request.user) # user is an app User, which may eventually respond to `illiad_record`
         transaction = ::Illiad::Request.submit data: body
         add_notes(request, transaction) # notes require confirmation (transaction) number
-        Outcome.new(
-          # confirmation_number: request.id
-        )
+        Outcome.new(request: request, confirmation_number: transaction.id)
       end
 
       def find_or_create(user:)

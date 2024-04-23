@@ -24,6 +24,12 @@ module Broker
           raise
         end
       end
+
+      # @param request [Broker::Request]
+      # @param outcome [Broker::Outcome]
+      def notify(request, outcome)
+        # TODO: send email to request.user
+      end
     end
   end
 end
