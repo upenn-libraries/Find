@@ -51,9 +51,11 @@ module Illiad
       data[:UserName]
     end
 
-    def address
+    # @return [Array]
+    def bbm_delivery_address
       [data[:Address2], data[:Zip]]
     end
+
 
     # Get all of the user's requests
     # @param options [Hash] request options
