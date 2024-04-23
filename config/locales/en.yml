@@ -2,20 +2,20 @@ en:
   account:
     show:
       page_heading: 'Account Overview'
-      page_lede: 'Renew items on your shelf, view your account preferences, manage your bookmarked items, and see fines.'
+      page_lede: 'View and renew items on your shelf, manage and export bookmarked items, view fines, and check on your mailing address.'
       cards:
         shelf:
           title: 'Shelf'
-          description: "Renew items you've loaned or requested and see when they're due."
+          description: "Renew items you've loaned and see when they're due."
         settings:
           title: 'Settings'
-          description: 'View your books by mail address and account details.'
+          description: 'View your Books by Mail address and account details.'
         bookmarks:
             title: 'Bookmarks'
-            description: 'Email and create citations from your list of bookmarked items.'
+            description: 'Email and create citations from your bookmarked items.'
         fines_and_fees:
           title: 'Fines and Fees'
-          description: 'View fines for lost or damaged items. We do not charge overdue fees for regular books.'
+          description: 'View fines for overdue, lost, or damaged items.'
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
@@ -30,12 +30,14 @@ en:
           total: 'Total'
       terms:
         balance: 'Outstanding Balance'
+      callout_guide: 'How to pay fines and fees'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your account preferences.'
+      page_lede: 'Your Books by Mail address and account details.'
       terms:
         user_group: 'Patron Group'
         bbm_delivery_address: 'Books by Mail Delivery Address'
+      callout_guide_bbm: 'Set your address with Books by Mail'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
@@ -178,3 +180,14 @@ en:
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
+  footer:
+    account:
+      heading: 'Account'
+      shelf: 'Shelf'
+      settings: 'Settings'
+      bookmarks: 'Bookmarks'
+      fines: 'Fines and fees'
+      interlibrary_loan_form: 'Request an item'
+  callout:
+    guide: "Guide"
+
