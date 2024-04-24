@@ -1,6 +1,5 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label' } %>
-  <p><%= item.pid %></p>
   <ul class="list-group">
     <% if options.include? :pickup %>
       <% if options.include? :scan %>
@@ -22,9 +21,9 @@
         <%= t('requests.form.options.aeon.message') %>
       </li>
     <% elsif options.include? :archives %>
-      <li class="list-group-item">
+      <div class="alert alert-info">
         <%= t('requests.form.options.archives.message').html_safe %>
-      </li>
+      </div>
     <% end %>
   </ul>
   <% if options.include? :pickup %>

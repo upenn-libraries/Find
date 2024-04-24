@@ -21,6 +21,10 @@ module Items
         !in_house_use_only?
     end
 
+    def bib_data
+      @item.fetch('bib_data', {})
+    end
+
     # @return [String]
     def pid
       item_data['pid']
@@ -52,8 +56,7 @@ module Items
     def scannable?
       return false if at_hsp?
 
-      aeon_requestable? ||
-        !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
+      aeon_requestable? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
     end
 
     # Is the item a Historical Society of Pennsylvania record? If so, it cannot be requested.
@@ -76,7 +79,8 @@ module Items
 
     # @return [TrueClass, FalseClass]
     def at_archives?
-      library_name == 'University Archives'
+      library_name == 'University Archives' ||
+        holding_data.dig('library', 'desc') == 'University Archives'
     end
 
     # @return [TrueClass, FalseClass]
@@ -89,8 +93,12 @@ module Items
     # second value is the submitted value for backend processing.
     # @return [Array]
     def select_label
-      [[description, physical_material_type['desc'], public_note, library_name]
-        .compact_blank.join(' - '), item_data['pid']]
+      if item_data.present?
+        [[description, physical_material_type['desc'], public_note, library_name]
+          .compact_blank.join(' - '), item_data['pid']]
+      else
+        [[holding_data['call_number'], 'Restricted Access'].compact_blank.join(' - '), 'no-item']
+      end
     end
   end
 end

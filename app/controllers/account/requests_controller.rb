@@ -46,16 +46,20 @@ module Account
     # DELETE /account/requests/ils/:id
     def delete; end
 
-    # return fulfillment options based on mms id/holding id/item id
+    # Return fulfillment options based on mms id/holding id/item id. Options are dependent
+    # on properties of an item and user group. Returns a rendered OptionsComponent which uses
+    # those options to determine what actions are available to the user.
     # GET /account/requests/options
     def options
-      # options = Items::Service.options_for(mms_id:, holding_id:, item_id:, user_id:)
-      item = Items::Service.item_for(mms_id: params[:mms_id],
-                                     holding_id: params[:holding_id],
-                                     item_pid: params[:item_pid])
+      item = if params[:item_pid] == 'no-item'
+               Items::Service.items_for(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
+             else
+               Items::Service.item_for(mms_id: params[:mms_id],
+                                       holding_id: params[:holding_id],
+                                       item_pid: params[:item_pid])
+             end
       options = Items::Service.options_for(item: item, ils_group: current_user.ils_group)
-      # options would be passed into the component to determine which options are available
-      render(Account::Requests::OptionsComponent.new(item: item, user: current_user, options: options), layout: false)
+      render(Account::Requests::OptionsComponent.new(user: current_user, options: options), layout: false)
     end
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.

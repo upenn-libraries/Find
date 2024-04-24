@@ -12,8 +12,7 @@ module Account
 
       attr_accessor :item, :user, :options
 
-      def initialize(item:, user:, options:)
-        @item = item
+      def initialize(user:, options:)
         @user = user
         @options = options
       end
