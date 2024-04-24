@@ -18,7 +18,7 @@ module Account
     end
 
     # books by mail delivery address in two parts
-    # @return [Array]
+    # @return [Array, nil]
     def bbm_delivery_address
       return unless user.illiad_record
 
