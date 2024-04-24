@@ -18,11 +18,11 @@ module Account
     end
 
     # books by mail delivery address in two parts
-    # @return [Array, nil]
+    # @return [Array<String>, nil]
     def bbm_delivery_address
       return unless user.illiad_record
 
-      user.illiad_record.bbm_delivery_address.join(' ').split('/')
+      user.illiad_record.bbm_delivery_address.join(' ').split('/').compact_blank
     end
   end
 end
