@@ -5,3 +5,5 @@ postgres_database_versioned_secrets:
   database_password:
     value: "password"
     version: "1"
+
+postgres_docker_node_constraint: catalog_find_postgres

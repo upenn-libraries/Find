@@ -7,7 +7,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.labels.catalog_find == true"
+          - "node.labels.catalog_find_app == true"
       replicas: ${APP_REPLICAS}
       update_config:
         order: "start-first"
@@ -28,16 +28,16 @@ services:
       SHIB_SP_ENTITY_ID: "https://${APP_URL}/shibboleth"
       SOLR_URL: "${SOLR_URL}"
       SOLR_ADMIN_URL: "${SOLR_ADMIN_URL}"
-    # healthcheck:
-    #   test:
-    #     [
-    #       "CMD-SHELL",
-    #       "curl -fsSL localhost:${APP_PORT} || exit 1",
-    #     ]
-    #   interval: 10s
-    #   retries: 6
-    #   start_period: 10s
-    #   timeout: 10s
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsSL localhost:${APP_PORT} || exit 1",
+        ]
+      interval: 10s
+      retries: 6
+      start_period: 10s
+      timeout: 10s
     networks:
       - postgres
       - redis

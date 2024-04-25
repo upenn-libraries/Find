@@ -9,7 +9,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.labels.sidekiq == true"
+          - "node.labels.catalog_find_sidekiq == true"
       update_config:
         order: "start-first"
         parallelism: 1

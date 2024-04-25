@@ -12,7 +12,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.labels.redis == true"
+          - "node.labels.catalog_find_redis == true"
       replicas: ${REPLICAS}
       update_config:
         order: "start-first"
