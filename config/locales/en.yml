@@ -94,9 +94,9 @@ en:
     format: 'Format'
   requests:
     form:
-      heading: 'Request item'
-      item_label: 'Item'
-      item_placeholder: 'Select an item...'
+      heading: 'Request an item'
+      item_label: 'What item are you requesting?'
+      item_placeholder: 'Choose an item...'
       buttons:
         scan: 'Request Scan'
         delivery: 'Request Delivery'
@@ -104,23 +104,24 @@ en:
         mail: 'Request by Mail'
         aeon: 'Request to View'
       options:
-        label: 'Options'
-        scan: 'Get a Scan'
+        label: 'How would you like it delivered?'
+        scan: 'Scan it and email me a PDF'
         office:
-          label: 'Office Delivery'
+          label: 'Mail it via FacultyEXPRESS Office Delivery'
           info: "If this is not your preferred delivery address, please contact <a href='mailto:pld@pobox.upenn.edu'>Faculty Express</a>"
           warning: "You do not have a preferred Faculty Express delivery address. Please set one up by contacting<a href='mailto:pld@pobox.upenn.edu'>Faculty Express</a>"
         pickup:
-          label: 'Pickup at Penn'
+          label: 'Pick up'
         mail:
-          label: 'Books by Mail'
+          label: 'Mail it via Books by Mail'
           message: "Users must <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>register for Books by Mail</a> before submitting requests."
           validation: 'I am a registered Books by Mail user'
         aeon:
           message: 'This item is available for viewing in the special collections reading room by submitting a viewing request in the Aeon Special Collections system. You will need to create an account and request an appointment time to view the item in the reading room.'
         archives:
           message: "Accessing this item requires <a href='https://archives.upenn.edu/research/visit'>visiting</a> the <a href='https://archives.upenn.edu/archives-info/contact'>Penn University Archives & Records Center</a>."
-      request_item: 'Request item'
+      request_item: 'Request an item'
+      log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add Comments'
       comments_label: 'Comments'
   search:

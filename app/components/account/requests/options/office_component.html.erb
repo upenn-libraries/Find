@@ -3,7 +3,9 @@
   <%= label_tag :option_office, t('requests.form.options.office.label') %>
   <p>
     <% if user_address_set? %>
-      <%= t('requests.form.options.office.info').html_safe %>
+      <small class="text-muted">
+        <%= t('requests.form.options.office.info').html_safe %>
+      </small>
     <div class="alert alert-info">
       <%= user_address.join('<br>').html_safe %>
     </div>

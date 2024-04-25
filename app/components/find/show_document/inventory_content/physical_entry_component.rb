@@ -5,11 +5,15 @@ module Find
     module InventoryContent
       # Component rendering the full view of a Physical entry.
       class PhysicalEntryComponent < ViewComponent::Base
-        attr_reader :entry
+        include Turbo::FramesHelper
+
+        attr_reader :entry, :user
 
         # @param entry [Inventory::Entry]
-        def initialize(entry:)
+        # @param user [User] user is necessary to show `Log in to request item`
+        def initialize(entry:, user: nil)
           @entry = entry
+          @user = user
         end
 
         # @return [String]

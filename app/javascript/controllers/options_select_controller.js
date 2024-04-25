@@ -8,7 +8,6 @@ export default class extends Controller {
     "mailButton",
     "viewButton",
     "optionsFrame",
-    "bbmValidation",
   ];
 
   connect() {
@@ -49,7 +48,8 @@ export default class extends Controller {
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return document.querySelector('input[name="option"]:checked').value;
+    return this.optionsFrameTarget.querySelector('input[name="option"]:checked')
+      .value;
   }
 
   // Return an array of all button targets

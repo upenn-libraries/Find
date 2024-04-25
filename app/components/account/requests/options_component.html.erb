@@ -17,13 +17,12 @@
         <li class="list-group-item">
           <%= radio_button_tag :option, 'mail', false, data: { action: 'change->options-select#optionChanged' } %>
           <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
-          <p>
-            <%= t('requests.form.options.mail.message').html_safe %>
-          </p>
-          <p>
-            <%= check_box_tag :bbm_validation, 'bbm_validation', false, data: { options_select_target: 'bbmValidation' } %>
-            <%= label_tag :bbm_validation, t('requests.form.options.mail.validation') %>
-          </p>
+          <div>
+            <small class="text-muted">
+              <%= t('requests.form.options.mail.message').html_safe %>
+            </small>
+          </div>
+          <%# TODO: bbm validation? popup? %>
         </li>
         </ul>
       <% end %>
@@ -46,10 +45,12 @@
     </div>
   <% end %>
   <div class="request-buttons">
-    <%= link_to t('requests.form.buttons.scan'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'scanButton' } } %>
-    <%= link_to t('requests.form.buttons.delivery'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'officeButton' } } %>
+    <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
+    <%= link_to t('requests.form.buttons.scan'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'scanButton' } } %>
+    <%= link_to t('requests.form.buttons.delivery'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'officeButton' } } %>
     <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success', data: { options_select_target: 'pickupButton' } } %>
-    <%= link_to t('requests.form.buttons.mail'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'mailButton' } } %>
+    <%= link_to t('requests.form.buttons.mail'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'mailButton' } } %>
+    <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
     <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'viewButton' } } %>
   </div>
 <% end %>

@@ -1,10 +1,10 @@
 <%= turbo_frame_tag 'form_frame' do %>
-  <div class="request__container">
-    <h1 class="request__heading"><%= t('requests.form.heading') %></h1>
+  <div class="fulfillment__container">
+    <h4 class="fulfillment__heading"><%= t('requests.form.heading') %></h4>
     <div class="row">
       <div class="col-md-7">
-        <div class="request__options" data-controller="item-select comments options-select">
-          <%= form_with(url: requests_path, method: :post) do |form| %>
+        <div data-controller="item-select comments options-select">
+          <%= form_with(url: requests_path, method: :post, html: { class: 'fulfillment-form' }) do |form| %>
             <% if items.length > 1 %>
               <div class="mb-2">
                 <%= form.label :item_pid, t('requests.form.item_label'), { class: 'form-label' } %>

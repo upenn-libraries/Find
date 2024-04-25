@@ -1,0 +1,16 @@
+.fulfillment-form .form-select {
+  width: auto;
+  border-color: var(--color-fg-subtle);
+}
+
+.fulfillment__summary {
+  display: list-item;
+  width: max-content;
+}
+
+.fulfillment__container {
+  border-bottom: solid 1px var(--bs-border-color);
+  border-top: solid 1px var(--bs-border-color);
+  padding: 1rem 0;
+  margin: 1rem 0;
+}

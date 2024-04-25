@@ -8,5 +8,14 @@
   <span class="inventory-item__availability-footer"><%= availability_description %></span>
 </p>
 
-<%= link_to I18n.t('requests.form.request_item'), new_request_path(mms_id: entry.mms_id, holding_id: entry.id),
-            class: 'btn btn-success btn-lg' %>
+<% if user.nil? %>
+  <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success' %>
+<% else %>
+  <details class="fulfillment">
+    <summary class="btn btn-success btn-lg fulfillment__summary"><%= t('requests.form.request_item') %></summary>
+    <%= turbo_frame_tag 'form_frame', src: request_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
+      <%# TODO: spinner? %>
+      <div>Loading...</div>
+    <% end %>
+  </details>
+<% end %>

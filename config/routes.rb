@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   resource 'account', only: %i[show], controller: 'account'
   namespace :account, as: nil do
     resource :settings, only: %i[show edit update], controller: 'settings'
-    resources :requests, only: %i[index new create]
+    resources :requests, only: %i[index create]
 
     # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
     scope controller: :requests, path: 'requests' do

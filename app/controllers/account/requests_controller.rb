@@ -5,19 +5,12 @@ module Account
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
     before_action :set_mms_id
-    before_action :set_holding_id, only: %w[new form]
-    before_action :set_items, only: %w[new options form]
-
-    # Returns form for initializing a new request. TODO: May return a turbo frame response.
-    # GET /account/requests/new
-    def new; end
+    before_action :set_holding_id, only: :form
+    before_action :set_items, only: :form
 
     # Form for initializing an ILL form.
     # GET /account/request/ill/new
-    def ill
-      @item = Items::Service.item_for(mms_id: params[:mms_id], holding_id: params[:holding_id],
-                                      item_pid: params[:item_pid])
-    end
+    def ill; end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
@@ -64,7 +57,7 @@ module Account
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
-    # TODO: better name?
+    # TODO: better name? maybe fulfillment form
     def form
       render(Account::Requests::FormComponent.new(mms_id: @mms_id,
                                                   holding_id: @holding_id,
