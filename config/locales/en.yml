@@ -104,7 +104,7 @@ en:
         mail: 'Request by Mail'
         aeon: 'Request to View'
       options:
-        label: 'Delivery Options'
+        label: 'Options'
         scan: 'Get a Scan'
         office:
           label: 'Office Delivery'

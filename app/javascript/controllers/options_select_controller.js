@@ -2,78 +2,63 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = [
-    "requestScanButton",
-    "requestDeliveryButton",
-    "requestPickupButton",
-    "requestMailButton",
-    "requestViewButton",
+    "scanButton",
+    "officeButton",
+    "pickupButton",
+    "mailButton",
+    "viewButton",
     "optionsFrame",
   ];
 
   connect() {
-    // Listen for the load of the frame containing the radio buttons.
-    // Check which radio button is selected and show the corresponding button.
+    // Listen for the load of the frame containing the radio buttons
+    // Check which radio button is selected and show the corresponding button
     this.optionsFrameTarget.addEventListener("turbo:frame-load", () => {
-      switch (this.frameType()) {
-        case "options":
-          const selectedOption = document.querySelector(
-            'input[name="option"]:checked',
-          ).value;
-          this.optionChanged({ target: { value: selectedOption } });
-          break;
-        case "aeon":
-          this.showButton(this.requestViewButtonTarget);
-          break;
+      const frameType = this.frameType();
+      if (frameType === "options") {
+        this.optionChanged({ target: { value: this.selectedOptionValue() } });
+      } else if (frameType === "aeon") {
+        this.hideAllButtons();
+        this.viewButtonTarget.classList.remove("d-none");
       }
     });
   }
 
+  // Show the button corresponding to the selected radio button
+  // `event.target.value` will contain the new value of the radio button
   optionChanged(event) {
-    // This method will be called when the value of the radio button changes.
-    // `event.target.value` will contain the new value of the radio button.
-    switch (event.target.value) {
-      case "scan":
-        this.showButton(this.requestScanButtonTarget, event);
-        break;
-      case "office":
-        this.showButton(this.requestDeliveryButtonTarget, event);
-        break;
-      case "pickup":
-        this.showButton(this.requestPickupButtonTarget, event);
-        break;
-      case "mail":
-        this.showButton(this.requestMailButtonTarget, event);
-        break;
-      default:
-        this.hideAllButtons();
-    }
-  }
-
-  showButton(target, event) {
     this.hideAllButtons();
-    target.classList.remove("d-none");
+    this[`${event.target.value}ButtonTarget`].classList.remove("d-none");
   }
 
+  // Hide all buttons
   hideAllButtons() {
-    [
-      this.requestScanButtonTarget,
-      this.requestDeliveryButtonTarget,
-      this.requestPickupButtonTarget,
-      this.requestMailButtonTarget,
-      this.requestViewButtonTarget,
-    ].forEach((button) => {
+    this.buttonTargets().forEach((button) => {
       button.classList.add("d-none");
     });
   }
 
-  // Determine whether the options frame contains a div with class 'options', 'aeon', or 'archives'.
+  // Determine whether the options frame contains an element with class 'radio-options', 'aeon', or 'archives'
   frameType() {
-    if (this.optionsFrameTarget.querySelector(".radio-options")) {
+    if (this.optionsFrameTarget.querySelector(".radio-options"))
       return "options";
-    } else if (this.optionsFrameTarget.querySelector(".aeon")) {
-      return "aeon";
-    } else if (this.optionsFrameTarget.querySelector(".archives")) {
-      return "archives";
-    }
+    if (this.optionsFrameTarget.querySelector(".aeon")) return "aeon";
+    if (this.optionsFrameTarget.querySelector(".archives")) return "archives";
+  }
+
+  // Get the value of the selected radio button
+  selectedOptionValue() {
+    return document.querySelector('input[name="option"]:checked').value;
+  }
+
+  // Return an array of all button targets
+  buttonTargets() {
+    return [
+      this.scanButtonTarget,
+      this.officeButtonTarget,
+      this.pickupButtonTarget,
+      this.mailButtonTarget,
+      this.viewButtonTarget,
+    ];
   }
 }

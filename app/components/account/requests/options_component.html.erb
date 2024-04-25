@@ -1,43 +1,41 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label' } %>
-  <ul class="list-group">
-    <% if options.include? :pickup %>
-      <div class="radio-options">
-        <% if options.include? :scan %>
-          <li class="list-group-item">
-            <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
-            <%= label_tag :option_scan, t('requests.form.options.scan') %>
-          </li>
-        <% end %>
-        <% if options.include? :office %>
-          <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address, options: options)) %>
-        <% end %>
-        <%= render(Account::Requests::Options::PickupComponent
-                     .new(default_pickup_location: default_pickup_location, options: options)) %>
-        <% if options.include? :mail %>
-          <li class="list-group-item">
-            <%= radio_button_tag :option, 'mail', false, data: { action: 'change->options-select#optionChanged' } %>
-            <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
-            <p>
-              <%= t('requests.form.options.mail.message').html_safe %>
-            </p>
-            <p>
-              <%= check_box_tag :bbm_validation, { required: true } %>
-              <%= label_tag :bbm_validation, t('requests.form.options.mail.validation') %>
-            </p>
-          </li>
-          </div>
-        <% end %>
-    <% elsif options.include? :aeon %>
-      <div class="aeon alert alert-info">
-        <%= t('requests.form.options.aeon.message') %>
-      </div>
-    <% elsif options.include? :archives %>
-      <div class="archives alert alert-info">
-        <%= t('requests.form.options.archives.message').html_safe %>
-      </div>
-    <% end %>
-  </ul>
+  <% if options.include? :pickup %>
+    <ul class="list-group radio-options">
+      <% if options.include? :scan %>
+        <li class="list-group-item">
+          <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
+          <%= label_tag :option_scan, t('requests.form.options.scan') %>
+        </li>
+      <% end %>
+      <% if options.include? :office %>
+        <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address, options: options)) %>
+      <% end %>
+      <%= render(Account::Requests::Options::PickupComponent
+                   .new(default_pickup_location: default_pickup_location, options: options)) %>
+      <% if options.include? :mail %>
+        <li class="list-group-item">
+          <%= radio_button_tag :option, 'mail', false, data: { action: 'change->options-select#optionChanged' } %>
+          <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
+          <p>
+            <%= t('requests.form.options.mail.message').html_safe %>
+          </p>
+          <p>
+            <%= check_box_tag :bbm_validation, { required: true } %>
+            <%= label_tag :bbm_validation, t('requests.form.options.mail.validation') %>
+          </p>
+        </li>
+        </ul>
+      <% end %>
+  <% elsif options.include? :aeon %>
+    <div class="aeon alert alert-info">
+      <%= t('requests.form.options.aeon.message') %>
+    </div>
+  <% elsif options.include? :archives %>
+    <div class="archives alert alert-info">
+      <%= t('requests.form.options.archives.message').html_safe %>
+    </div>
+  <% end %>
   <% if options.include? :pickup %>
     <div class="add-comments mt-2 mb-2">
       <%= link_to t('requests.form.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
@@ -48,10 +46,10 @@
     </div>
   <% end %>
   <div class="request-buttons">
-    <%= link_to t('requests.form.buttons.scan'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'requestScanButton' } } %>
-    <%= link_to t('requests.form.buttons.delivery'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'requestDeliveryButton' } } %>
-    <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success', data: { options_select_target: 'requestPickupButton' } } %>
-    <%= link_to t('requests.form.buttons.mail'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'requestMailButton' } } %>
-    <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'requestViewButton' } } %>
+    <%= link_to t('requests.form.buttons.scan'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'scanButton' } } %>
+    <%= link_to t('requests.form.buttons.delivery'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'officeButton' } } %>
+    <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success', data: { options_select_target: 'pickupButton' } } %>
+    <%= link_to t('requests.form.buttons.mail'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'mailButton' } } %>
+    <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'viewButton' } } %>
   </div>
 <% end %>

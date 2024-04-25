@@ -5,7 +5,7 @@
       <div class="col-md-7">
         <div class="request__options" data-controller="item-select comments options-select">
           <%= form_with(url: requests_path, method: :post) do |form| %>
-            <div class="mb-3">
+            <div class="mb-2">
               <%= form.label :item_pid, t('requests.form.item_label'), { class: 'form-label' } %>
               <%= form.select(:item_pid, item_labels, { include_blank: t('requests.form.item_placeholder') },
                               { class: 'form-select',
@@ -19,10 +19,8 @@
               <p>Loading....</p>
             </template>
 
-            <div class="mb-3">
-              <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame',
-                                                           options_select_target: 'optionsFrame' } %>
-            </div>
+            <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame',
+                                                         options_select_target: 'optionsFrame' } %>
 
             <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
             <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>

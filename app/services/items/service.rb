@@ -46,7 +46,8 @@ module Items
       # Fake an item when a holding has no items, ugh
       [PennItem.new({
                       'bib_data' => holdings['bib_data'],
-                      'holding_data' => nested_holding_data(mms_id: mms_id, holding_id: holding_id),
+                      'holding_data' => holdings_for(mms_id: mms_id)['holding']
+                                          &.find { |holding| holding['holding_id'] == holding_id },
                       'item_data' => {}
                     })]
     end
@@ -79,12 +80,6 @@ module Items
         options << :scan if item.scannable?
       end
       options
-    end
-
-    private
-
-    def nested_holding_data(mms_id:, holding_id:)
-      holdings_for(mms_id: mms_id)['holding']&.find { |holding| holding['holding_id'] == holding_id }
     end
   end
 end
