@@ -4,7 +4,7 @@ require 'system_helper'
 
 describe 'Account Settings show page' do
   let(:user) { build(:user) }
-  let(:alma_user_data) { { user_group: { 'desc' => 'undergraduate' }, full_name: 'First Last', total_loans: 100 } }
+  let(:alma_user_data) { { user_group: { 'desc' => 'undergraduate' }, full_name: 'First Last' } }
 
   include_context 'with mock alma_record on user'
 
