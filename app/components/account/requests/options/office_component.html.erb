@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <%= radio_button_tag :option, 'office', checked? %>
+  <%= radio_button_tag :option, 'office', checked?, data: { action: 'change->options-select#optionChanged'} %>
   <%= label_tag :option_office, t('requests.form.options.office.label') %>
   <p>
     <% if user_address_set? %>

@@ -97,6 +97,12 @@ en:
       heading: 'Request item'
       item_label: 'Item'
       item_placeholder: 'Select an item...'
+      buttons:
+        scan: 'Request Scan'
+        delivery: 'Request Delivery'
+        pickup: 'Request Pickup'
+        mail: 'Request by Mail'
+        aeon: 'Request to View'
       options:
         label: 'Delivery Options'
         scan: 'Get a Scan'
@@ -111,7 +117,6 @@ en:
           message: "Users must <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>register for Books by Mail</a> before submitting requests."
           validation: 'I am a registered Books by Mail user'
         aeon:
-          button: 'Request to View'
           message: 'This item is available for viewing in the special collections reading room by submitting a viewing request in the Aeon Special Collections system. You will need to create an account and request an appointment time to view the item in the reading room.'
         archives:
           message: "Accessing this item requires <a href='https://archives.upenn.edu/research/visit'>visiting</a> the <a href='https://archives.upenn.edu/archives-info/contact'>Penn University Archives & Records Center</a>."

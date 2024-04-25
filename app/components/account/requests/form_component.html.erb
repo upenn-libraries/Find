@@ -3,7 +3,7 @@
     <h1 class="request__heading"><%= t('requests.form.heading') %></h1>
     <div class="row">
       <div class="col-md-7">
-        <div class="request__options" data-controller="item-select comments">
+        <div class="request__options" data-controller="item-select comments options-select">
           <%= form_with(url: requests_path, method: :post) do |form| %>
             <div class="mb-3">
               <%= form.label :item_pid, t('requests.form.item_label'), { class: 'form-label' } %>
@@ -20,7 +20,8 @@
             </template>
 
             <div class="mb-3">
-              <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame' } %>
+              <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame',
+                                                           options_select_target: 'optionsFrame' } %>
             </div>
 
             <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
