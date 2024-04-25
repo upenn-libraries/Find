@@ -24,20 +24,21 @@ en:
           type: 'Type'
           title: 'Title'
           date_charged: 'Charged'
-          last_transaction: 'Last Transaction'
-          original_amount: 'Original Amount'
+          last_transaction: 'Last transaction'
+          original_amount: 'Original amount'
           balance: 'Balance'
           total: 'Total'
       terms:
-        balance: 'Outstanding Balance'
+        balance: 'Outstanding balance'
       callout_guide: 'How to pay fines and fees'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your Books by Mail address and account details.'
+      page_lede: 'Your request item delivery address and account details.'
       terms:
-        user_group: 'Patron Group'
-        bbm_delivery_address: 'Books by Mail Delivery Address'
-      callout_guide_bbm: 'Set your address with Books by Mail'
+        user_group: 'Patron group'
+        bbm_delivery_address: 'Delivery address for Books by Mail'
+      bbm_empty: "You don't have a delivery address set."
+      callout_guide_bbm: 'Set your address with Books by Mail.'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
