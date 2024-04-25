@@ -21,7 +21,7 @@
             <%= t('requests.form.options.mail.message').html_safe %>
           </p>
           <p>
-            <%= check_box_tag :bbm_validation, { required: true } %>
+            <%= check_box_tag :bbm_validation, 'bbm_validation', false, data: { options_select_target: 'bbmValidation' } %>
             <%= label_tag :bbm_validation, t('requests.form.options.mail.validation') %>
           </p>
         </li>

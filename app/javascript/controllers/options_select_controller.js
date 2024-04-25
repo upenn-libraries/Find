@@ -8,6 +8,7 @@ export default class extends Controller {
     "mailButton",
     "viewButton",
     "optionsFrame",
+    "bbmValidation",
   ];
 
   connect() {

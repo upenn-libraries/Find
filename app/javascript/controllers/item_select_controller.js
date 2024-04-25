@@ -5,21 +5,30 @@ export default class extends Controller {
     "select",
     "mmsIdField",
     "holdingIdField",
-    "commentsArea",
+    "itemPidField",
     "optionsFrame",
     "optionsLoadingTemplate",
   ];
 
-  selectChanged(event) {
-    const mmsIdValue = this.mmsIdFieldTarget.value;
-    const holdingValue = this.holdingIdFieldTarget.value;
-    const itemValue = event.target.value;
-    const url = `/account/requests/options?mms_id=${mmsIdValue}&holding_id=${holdingValue}&item_pid=${itemValue}`;
-
-    if (itemValue.length > 0) {
-      this.optionsFrameTarget.src = url;
-      this.optionsFrameTarget.innerHTML =
-        this.optionsLoadingTemplateTarget.innerHTML;
+  connect() {
+    if (!this.hasSelectTarget) {
+      this.updateOptionsFrame(this.buildUrl(this.itemPidFieldTarget.value));
     }
+  }
+
+  selectChanged(event) {
+    if (event.target.value.length > 0) {
+      this.updateOptionsFrame(this.buildUrl(event.target.value));
+    }
+  }
+
+  buildUrl(itemValue) {
+    return `/account/requests/options?mms_id=${this.mmsIdFieldTarget.value}&holding_id=${this.holdingIdFieldTarget.value}&item_pid=${itemValue}`;
+  }
+
+  updateOptionsFrame(url) {
+    this.optionsFrameTarget.src = url;
+    this.optionsFrameTarget.innerHTML =
+      this.optionsLoadingTemplateTarget.innerHTML;
   }
 }
