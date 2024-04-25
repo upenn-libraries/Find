@@ -19,6 +19,10 @@ module Broker
         Outcome.new(request: request, confirmation_number: confirmation_number)
       end
 
+      def validate(request:)
+        # TODO: implement
+      end
+
       def submission_body_from(request)
         { request_type: 'HOLD',
           user_id: request.user.id, # TODO: is this the right way to the user id?

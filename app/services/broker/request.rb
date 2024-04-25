@@ -33,8 +33,9 @@ module Broker
     end
 
     def self.submit(user:, item_parameters: {}, fulfillment_options: {}, scan_details: {})
-      Service.submit(new(user: user, item_parameters: item_parameters, fulfillment_options: fulfillment_options,
-                         scan_details: scan_details))
+      request = new(user: user, item_parameters: item_parameters, fulfillment_options: fulfillment_options,
+                         scan_details: scan_details)
+      Service.new(request: request).submit
     end
 
     def destination
