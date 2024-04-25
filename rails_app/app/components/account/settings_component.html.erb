@@ -1,0 +1,11 @@
+<dl>
+  <dt><%= t('account.settings.terms.user_group') %></dt>
+  <dd><%= alma_user_group %></dd>
+
+  <dt><%= t('account.settings.terms.bbm_delivery_address') %></dt>
+  <dd>
+    <% bbm_delivery_address.each do |ele| %>
+      <%= ele %><br/>
+    <% end %>
+  </dd>
+</dl>

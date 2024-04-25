@@ -205,3 +205,33 @@ label.toggle-bookmark {
 .search-widgets {
   gap: 0.5rem;
 }
+
+.page__heading {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.page__lede {
+  font-size: 1.15rem;
+  margin-bottom: 0;
+  max-width: 48ch;
+}
+
+.cards-as-links a.card {
+  display: block;
+  text-decoration: none;
+}
+
+.cards-as-links a.card:hover {
+  background: var(--color-info-bg);
+  --bs-card-border-color: var(--color-fg-default);
+}
+
+.cards-as-links a.card:hover .card-title  {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
