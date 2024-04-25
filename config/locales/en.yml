@@ -9,7 +9,7 @@ en:
           description: "Renew items you've loaned and see when they're due."
         settings:
           title: 'Settings'
-          description: 'View your Books by Mail address and account details.'
+          description: 'Your account details and request item delivery address.'
         bookmarks:
             title: 'Bookmarks'
             description: 'Email and create citations from your bookmarked items.'
@@ -33,12 +33,13 @@ en:
       callout_guide: 'How to pay fines and fees'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your request item delivery address and account details.'
+      page_lede: 'Your account details and request item delivery address.'
       terms:
         user_group: 'Patron group'
         bbm_delivery_address: 'Delivery address for Books by Mail'
       bbm_empty: "You don't have a delivery address set."
-      callout_guide_bbm: 'Set your address with Books by Mail.'
+      callout_guide_bbm: 'Set your address with Books by Mail'
+      callout_guide_update_details: 'Updating your account details'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
