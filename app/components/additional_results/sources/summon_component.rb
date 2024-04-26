@@ -6,7 +6,7 @@ module AdditionalResults
     class SummonComponent < ViewComponent::Base
       include AdditionalResults::SourceHelper
 
-      delegate :documents, :summon_url, to: :search
+      delegate :documents, to: :search
 
       attr_reader :search, :facet_counts
 
@@ -15,7 +15,13 @@ module AdditionalResults
         @query = query
         @classes = Array.wrap(options[:class])&.join(' ')
         @search = Articles::Search.new(query_term: query)
-        @facet_counts = @search.facet_counts || nil
+        @facet_counts = @search.facet_manager&.counts || nil
+      end
+
+      # @param query [String] the query string
+      # @return [String] the URL linking to the results of the search on Articles+
+      def summon_url
+        Articles::Search.summon_url(query: @search.query_string)
       end
 
       # Generates a comma-delimited overall record count for the search results

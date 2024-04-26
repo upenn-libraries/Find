@@ -14,13 +14,9 @@ module Articles
     attr_reader :counts
 
     # @param search [Articles::Search] an Articles+ search service
-    def initialize(search:)
-      @search = search
-      # If there was an error connecting to the Summon API or no documents were
-      # found, don't try to build the facet counts
-      return unless @search.success?
-
-      @facets = @search.response.facets
+    def initialize(facets:, query_string:)
+      @facets = facets
+      @query_string = query_string
       @counts = map_facet_counts
     end
 
@@ -36,7 +32,7 @@ module Articles
           {
             label: count.value,
             doc_count: count.count,
-            url: @search.summon_url(query: facet_count_query_string(facet.display_name, count.value))
+            url: Search.summon_url(query: facet_count_query_string(facet.display_name, count.value))
           }
         end
       end
@@ -49,7 +45,7 @@ module Articles
     # @param facet_count_label [String]
     # @return [String]
     def facet_count_query_string(facet_display_name, facet_count_label)
-      query_string = @search.query_string
+      query_string = @query_string
       query_string += "&s.fvf=#{facet_display_name},#{CGI.escape(facet_count_label)},f"
 
       query_string.encode('utf-8')

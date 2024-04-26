@@ -1,1 +1,5 @@
 illiad_base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
+additional_results_sources:
+  summon:
+    access_id: 'upenn'
+    base_url: 'upenn.summon.serialssolutions.com'
