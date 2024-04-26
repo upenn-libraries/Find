@@ -7,7 +7,7 @@
 module AlmaBibItemFindOne
   def find_one(mms_id:, holding_id:, item_pid:, options: {})
     url = "#{bibs_base_path}/#{mms_id}/holdings/#{holding_id}/items/#{item_pid}"
-    response = HTTParty.get(url, headers:, query: options, timeout:)
+    response = HTTParty.get(url, headers: headers, query: options, timeout: timeout)
     new(response)
   end
 end
