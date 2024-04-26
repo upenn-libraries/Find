@@ -36,21 +36,6 @@
     </main>
 
     <pennlibs-footer></pennlibs-footer>
-
-    <script>
-      document.querySelector('pennlibs-footer').navigation = [
-        {
-          heading: "<%= t('footer.account.heading') %>",
-          links: [
-            { label: "<%= t('footer.account.shelf') %>", href: "<%= shelf_path %>" },
-            { label: "<%= t('footer.account.bookmarks') %>", href: "<%= bookmarks_path %>" },
-            { label: "<%= t('footer.account.fines') %>", href: "<%= fines_and_fees_path %>" },
-            { label: "<%= t('footer.account.settings') %>", href: "<%= settings_path %>" },
-          ]
-        }
-      ];
-    </script>
-
     <%= render partial: 'shared/modal' %>
   </body>
 <% end %>
