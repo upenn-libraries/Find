@@ -12,10 +12,27 @@
   <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success' %>
 <% else %>
   <details class="fulfillment">
-    <summary class="btn btn-success btn-lg fulfillment__summary"><%= t('requests.form.request_item') %></summary>
+    <summary class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>
     <%= turbo_frame_tag 'form_frame', src: request_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
-      <%# TODO: spinner? %>
-      <div>Loading...</div>
+      <div class="fulfillment__container">
+        <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>
+        <div class="row">
+          <div class="col-md-7 placeholder-glow">
+            <p class="mb-2"><span class="placeholder w-75"></span></p>
+            <ul class="list-group radio-options">
+              <li class="list-group-item placeholder-glow">
+                <span class="placeholder w-75"></span>
+                <span class="placeholder w-50"></span>
+              </li>
+              <li class="list-group-item placeholder-glow">
+                <span class="placeholder w-75"></span>
+                <span class="placeholder w-50"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn btn-success mt-3 btn-lg" disabled>Place request</button>
+      </div>
     <% end %>
   </details>
 <% end %>
