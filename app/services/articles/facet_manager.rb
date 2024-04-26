@@ -11,22 +11,18 @@ module Articles
   #   facetFields documentation (Summon API) with further details on the fields
   #   available to Facet and FacetCount
   class FacetManager
-    attr_reader :counts
-
-    # @param search [Articles::Search] an Articles+ search service
+    # @param facets [Array<Summon::Facet>]
+    # @param query_string [String]
     def initialize(facets:, query_string:)
       @facets = facets
       @query_string = query_string
-      @counts = map_facet_counts
     end
-
-    private
 
     # Maps the document counts for each facet to a hash, allowing for easy reference
     # to document counts by facet display name
     #
     # @return [Hash, nil] facet count data by facet display name (label, count, and url for each)
-    def map_facet_counts
+    def counts
       @facets&.each_with_object({}) do |facet, counts|
         counts[facet.display_name] = facet.counts.map do |count|
           {
@@ -37,6 +33,8 @@ module Articles
         end
       end
     end
+
+    private
 
     # Generates a query string to filter Articles+ search results by the
     # specified facet and count

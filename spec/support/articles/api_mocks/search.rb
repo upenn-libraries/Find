@@ -22,11 +22,6 @@ module Articles
       def articles_file_fixture(filename)
         Rails.root.join 'spec/fixtures/json/articles', filename
       end
-
-      def articles_file_fixture_contents(fixture)
-        file_contents = File.read(articles_file_fixture(fixture))
-        JSON.parse(file_contents)
-      end
     end
   end
 end

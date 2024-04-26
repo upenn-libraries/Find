@@ -68,7 +68,7 @@ describe Articles::Search do
     before { stub_summon_search_success(query: query_term, fixture: fixture) }
 
     it 'returns actual query string from Summon response' do
-      expect(search.query_string).to eq(fixture_contents['query']['queryString'])
+      expect(search.query_string).to eq('s.normalized.subjects=f&s.secure=t&s.light=t&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7')
     end
   end
 

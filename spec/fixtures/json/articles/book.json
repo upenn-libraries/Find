@@ -8,7 +8,7 @@
   "pageCount": 8830232,
   "recordCount": 26490696,
   "query": {
-    "queryString": "s.normalized.subjects=f&s.secure=t&s.light=t&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7",
+            "queryString": "s.normalized.subjects=f&s.secure=t&s.light=t&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7",
     "pageNumber": 1,
     "pageSize": 3,
     "isHighlightingEnabled": false,
