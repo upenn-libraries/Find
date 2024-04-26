@@ -4,9 +4,7 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :set_mms_id
-    before_action :set_holding_id, only: :form
-    before_action :set_items, only: :form
+    before_action :set_mms_id, :set_holding_id, :set_items, only: :form
 
     # Form for initializing an ILL form.
     # GET /account/request/ill/new
@@ -45,13 +43,13 @@ module Account
     # GET /account/requests/options
     def options
       item = if params[:item_pid] == 'no-item'
-               Items::Service.items_for(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
+               Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
-               Items::Service.item_for(mms_id: params[:mms_id],
-                                       holding_id: params[:holding_id],
-                                       item_pid: params[:item_pid])
+               Inventory::Service::Physical.item(mms_id: params[:mms_id],
+                                                 holding_id: params[:holding_id],
+                                                 item_pid: params[:item_pid])
              end
-      options = Items::Service.options_for(item: item, ils_group: current_user.ils_group)
+      options = Inventory::Service::Physical.fulfillment_options(item: item, ils_group: current_user.ils_group)
       render(Account::Requests::OptionsComponent.new(user: current_user, options: options), layout: false)
     end
 
@@ -78,8 +76,8 @@ module Account
 
     # @return [Alma::BibItemSet]
     def set_items
-      @items = Items::Service.items_for(mms_id: params[:mms_id],
-                                        holding_id: params[:holding_id])
+      @items = Inventory::Service::Physical.items(mms_id: params[:mms_id],
+                                                  holding_id: params[:holding_id])
     end
   end
 end

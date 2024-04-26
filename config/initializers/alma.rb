@@ -16,7 +16,7 @@ module Alma
   # meaning that our PennItem class now works with the BibItemSet
   class BibItemSet
     def single_record_class
-      Items::PennItem
+      Inventory::Service::Item
     end
   end
 end
