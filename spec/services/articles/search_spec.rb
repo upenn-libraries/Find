@@ -34,7 +34,7 @@ describe Articles::Search do
     end
   end
 
-  describe '#document' do
+  describe '#documents' do
     context 'when response is successful' do
       before { stub_summon_search_success(query: query_term, fixture: fixture) }
 

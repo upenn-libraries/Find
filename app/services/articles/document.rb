@@ -33,9 +33,9 @@ module Articles
       Articles::AuthorsList.new(doc.authors).list if doc.authors.present?
     end
 
-    # @return [String] the document's publication year
+    # @return [String, nil] the document's publication year if present
     def publication_year
-      doc.publication_date&.year.to_s
+      doc.publication_date&.year&.to_s
     end
   end
 end

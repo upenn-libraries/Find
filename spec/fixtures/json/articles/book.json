@@ -482,7 +482,7 @@
       ]
     },
     {
-      "hasFullText": true,
+      "hasFullText": false,
       "isFullTextHit": false,
       "isPrint": false,
       "inHoldings": true,
@@ -523,9 +523,7 @@
       "EISSN": [
         "1878-2620"
       ],
-      "Author": [
-        "Li, Mary Kathryn"
-      ],
+      "Author": [],
       "ISSN": [
         "1499-4046"
       ],
@@ -840,14 +838,7 @@
       "SourceType": [
         "Aggregation Database"
       ],
-      "Author_xml": [
-        {
-          "sequence": "1",
-          "givenname": "Mary Kathryn",
-          "surname": "Li",
-          "fullname": "Li, Mary Kathryn"
-        }
-      ],
+      "Author_xml": [],
       "PublicationYear": [
         "2022"
       ],
@@ -924,12 +915,6 @@
         "Mon Apr 15 23:54:12 EDT 2024",
         "Thu Oct 12 14:46:58 EDT 2023",
         "Wed Jan 31 07:01:54 EST 2024"
-      ],
-      "PublicationDate_xml": [
-        {
-          "year": "2013",
-          "text": "2013"
-        }
       ],
       "PublicationSeriesTitle": [
         "Routledge Research in Cultural and Media Studies"
@@ -1116,9 +1101,6 @@
       "Abstract": [
         "Literary culture has become a form of popular culture over the last fifteen years thanks to the success of televised book clubs, film adaptations, big-box book stores, online bookselling, and face-to-face and online book groups. This volume offers the first critical analysis of mass reading events and the contemporary meanings of reading in the UK, USA, and Canada based on original interviews and surveys with readers and event organizers.\nThe resurgence of book groups has inspired new cultural formations of what the authors call \"shared reading.\" They interrogate the enduring attraction of an old technology for readers, community organizers, and government agencies, exploring the social practices inspired by the sharing of books in public spaces and revealing the complex ideological investments made by readers, cultural workers, institutions, and the mass media in the meanings of reading."
       ],
-      "PublicationYear": [
-        "2013"
-      ],
       "SourceID": [
         "askewsholts",
         "proquest",
@@ -1139,11 +1121,6 @@
       ],
       "Title": [
         "Reading Beyond the Book"
-      ],
-      "PublicationDate": [
-        "2013",
-        "20130402",
-        "2013-04-02"
       ],
       "PageCount": [
         "370"

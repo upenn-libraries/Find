@@ -4,42 +4,67 @@ describe Articles::Document do
   include Articles::ApiMocks::Search
 
   let(:documents) { Articles::Search.new(query_term: 'book').documents }
+  let(:doc) { documents.first }
+  let(:doc_no_author_no_fulltext) { documents.second }
+  let(:doc_w_subtitle_no_date) { documents.last }
 
   before do
-    stub_summon_search_success(query: 'book', fixture: 'articles/book.json')
+    stub_summon_search_success(query: 'book', fixture: 'book.json')
   end
 
   describe '#title' do
     context 'when title does not have a subtitle' do
-      it 'return title'
+      it 'returns title' do
+        expect(doc.title).to eq('How to do things with books in victorian britain')
+      end
     end
 
     context 'when title has a subtitle' do
-      it 'appends subtitle to title'
+      it 'appends subtitle to title' do
+        expect(doc_w_subtitle_no_date.title).to eq('Reading Beyond the Book: The Social Practices of Contemporary Literary Culture')
+      end
     end
   end
 
   describe '#fulltext_online' do
     context 'when document is fulltext' do
-      it 'return true'
+      it 'returns Full Text Online string' do
+        expect(doc.fulltext_online).to eq('Full text online')
+      end
     end
 
-    context 'when document is not fulltext'
+    context 'when document is not fulltext' do
+      it 'returns nil' do
+        expect(doc_no_author_no_fulltext.fulltext_online).to be_nil
+      end
+    end
   end
 
   describe '#authors_list' do
-    context 'when authors are present'
+    context 'when authors are present' do
+      it 'returns a string' do
+        expect(doc.authors_list).to be_a(String)
+      end
+    end
 
-    context 'when authors are not present'
+    context 'when authors are not present' do
+      it 'returns nil' do
+        expect(doc_no_author_no_fulltext.authors_list).to be_nil
+      end
+    end
   end
 
   describe 'publication_year' do
-    context 'when publication date is present'
+    context 'when publication date is present' do
+      it 'returns the year as a string' do
+        expect(doc.publication_year).to eq('2012')
+      end
+    end
 
-    context 'when publication date is not present'
-  end
-
-  it 'has the expected values' do
-    expect(articles_document.title).to eq 'How to do things with books in victorian britain'
+    context 'when publication date is not present' do
+      it 'returns nil' do
+        expect(doc_w_subtitle_no_date.publication_year).to be_nil
+      end
+    end
   end
 end
