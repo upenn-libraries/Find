@@ -4,10 +4,15 @@ module Articles
   # Generates a comma-separated list of authors returned from the Summon service
   # (Articles+) with names in 'first last' format
   class AuthorsList
+    attr_reader :list
+
     # @param authors [Array<Summon::Author>] an array of authors
     def initialize(authors)
       @authors = authors.collect(&:fullname)
+      @list = build_list
     end
+
+    private
 
     # @return [Array<String>] an array of authors in 'first last' format
     def first_last
@@ -18,7 +23,7 @@ module Articles
 
     # @return [String] a comma-separated list of authors, truncated to first
     #   three names and 'et al.' if necessary
-    def list
+    def build_list
       if @authors.length > 3
         first_last[0..1].push('et al.').join(', ')
       else

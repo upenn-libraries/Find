@@ -21,9 +21,9 @@ module Articles
     # Maps the document counts for each facet to a hash, allowing for easy reference
     # to document counts by facet display name
     #
-    # @return [Hash, nil] facet count data by facet display name (label, count, and url for each)
+    # @return [Hash] facet count data by facet display name (label, count, and url for each)
     def counts
-      @facets&.each_with_object({}) do |facet, counts|
+      @facets.each_with_object({}) do |facet, counts|
         counts[facet.display_name] = facet.counts.map do |count|
           {
             label: count.value,

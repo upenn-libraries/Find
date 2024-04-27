@@ -65,7 +65,7 @@ module AdditionalResults
       # @param facet_display_name [String] the display name for the facet (ex: 'ContentType')
       # @return [Boolean] true if there is more than one facet count
       def render_facet_counts?(facet_display_name)
-        num_counts = facet_counts[facet_display_name].present? ? facet_counts[facet_display_name].size : 0
+        num_counts = facet_counts[facet_display_name].present? ? facet_counts[facet_display_name].count : 0
         num_counts > 1
       end
 

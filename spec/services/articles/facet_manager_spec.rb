@@ -8,60 +8,40 @@ describe Articles::FacetManager do
   let(:original_query) { search.query_string }
 
   describe '.new' do
-    context 'when search response is successful' do
-      before { stub_summon_search_success(query: 'book', fixture: 'book.json') }
+    before { stub_summon_search_success(query: 'book', fixture: 'book.json') }
 
-      it 'returns an Articles::FacetManager object' do
-        expect(facet_manager).to be_a described_class
-      end
-    end
-
-    context 'when search response is not successful' do
-      before { stub_summon_search_failure(query: 'book') }
-
-      it 'returns nil' do
-        expect(facet_manager).to be_nil
-      end
+    it 'returns an Articles::FacetManager object' do
+      expect(facet_manager).to be_a described_class
     end
   end
 
   describe '#counts' do
-    context 'when search response is successful' do
-      let(:format_counts) { facet_manager.counts['ContentType'] }
-      let(:count_labels) do
-        ['Book Review', 'Book / eBook', 'Newspaper Article',
-         'Journal Article', 'Book Chapter', 'Magazine Article']
-      end
-
-      before { stub_summon_search_success(query: 'book', fixture: 'book.json') }
-
-      it 'has expected number of facet counts for a given facet field' do
-        expect(format_counts.count).to eq(6)
-      end
-
-      it 'returns expected facet count labels for a given facet field' do
-        expect(format_counts.first[:label]).to eq(count_labels.first)
-      end
-
-      it 'returns expected facet count doc counts for a given facet field' do
-        expect(format_counts.first[:doc_count]).to eq(12_865_640)
-      end
-
-      it 'returns expected facet count urls for a given facet field' do
-        second_count_query = "&s.fvf=ContentType,#{CGI.escape(count_labels.second)},f"
-
-        expect(format_counts.second[:url]).to eq(
-          Articles::Search.summon_url(query: "#{original_query}#{second_count_query}")
-        )
-      end
+    let(:format_counts) { facet_manager.counts['ContentType'] }
+    let(:count_labels) do
+      ['Book Review', 'Book / eBook', 'Newspaper Article',
+       'Journal Article', 'Book Chapter', 'Magazine Article']
     end
 
-    context 'when search response is not successful' do
-      before { stub_summon_search_failure(query: 'book') }
+    before { stub_summon_search_success(query: 'book', fixture: 'book.json') }
 
-      it 'does not return facet counts' do
-        expect(facet_manager).not_to respond_to(:counts)
-      end
+    it 'has expected number of facet counts for a given facet field' do
+      expect(format_counts.count).to eq(6)
+    end
+
+    it 'returns expected facet count labels for a given facet field' do
+      expect(format_counts.first[:label]).to eq(count_labels.first)
+    end
+
+    it 'returns expected facet count doc counts for a given facet field' do
+      expect(format_counts.first[:doc_count]).to eq(12_865_640)
+    end
+
+    it 'returns expected facet count urls for a given facet field' do
+      second_count_query = "&s.fvf=ContentType,#{CGI.escape(count_labels.second)},f"
+
+      expect(format_counts.second[:url]).to eq(
+        Articles::Search.summon_url(query: "#{original_query}#{second_count_query}")
+      )
     end
   end
 end

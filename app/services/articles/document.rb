@@ -12,6 +12,7 @@ module Articles
     attr_reader :doc
 
     delegate :link, :publication_title, :content_type, to: :doc
+    delegate :list, to: :authors, prefix: true
 
     # @param document [Summon::Document] the document object
     def initialize(document)
@@ -28,9 +29,11 @@ module Articles
       I18n.t('additional_results.summon.fields.fulltext') if doc.fulltext
     end
 
-    # @return [String] a comma-separated list of the document's authors, in 'first last' format
-    def authors_list
-      Articles::AuthorsList.new(doc.authors).list if doc.authors.present?
+    # @return [Array<String>, nil] an array of the document's authors' full names in last, first format
+    def authors
+      return unless doc.authors.present?
+
+      @authors ||= Articles::AuthorsList.new(doc.authors)
     end
 
     # @return [String, nil] the document's publication year if present
