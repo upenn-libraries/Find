@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Items::Service do
-  describe '.item_for' do
+describe Inventory::Service::Physical do
+  describe '.item' do
     let(:item_data) do
       {
         'bib_data' => {},
@@ -15,16 +15,17 @@ describe Items::Service do
       allow(Alma::BibItem).to receive(:find_one).and_return(bib_item_double)
     end
 
-    it 'returns a PennItem' do
-      expect(described_class.item_for(mms_id: '123', holding_id: '456', item_pid: '789')).to be_a Items::PennItem
+    it 'returns a Item' do
+      expect(described_class.item(mms_id: '123', holding_id: '456', item_pid: '789'))
+        .to be_a Inventory::Service::Item
     end
 
     it 'raises an ArgumentError if a parameter is missing' do
-      expect { described_class.item_for(mms_id: '123', holding_id: '456', item_pid: nil) }.to raise_error ArgumentError
+      expect { described_class.item(mms_id: '123', holding_id: '456', item_pid: nil) }.to raise_error ArgumentError
     end
   end
 
-  describe '.items_for' do
+  describe '.items' do
     let(:item_data) do
       {
         'bib_data' => {},
@@ -34,22 +35,22 @@ describe Items::Service do
     end
 
     it 'returns an array of PennItems when items are present' do
-      bib_item_set_double = instance_double(Alma::BibItemSet, items: [Items::PennItem.new(item_data)])
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [Inventory::Service::Item.new(item_data)])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      expect(described_class.items_for(mms_id: '123', holding_id: '456')).to all(be_a Items::PennItem)
+      expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
 
     it 'returns an array of PennItems when items are not present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      allow(Items::PennItem).to receive(:new).and_return(Items::PennItem.new(item_data))
-      expect(described_class.items_for(mms_id: '123', holding_id: '456')).to all(be_a Items::PennItem)
+      allow(Inventory::Service::Item).to receive(:new).and_return(Inventory::Service::Item.new(item_data))
+      expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
 
     it 'raises an ArgumentError if a parameter is missing'
   end
 
-  describe '.options_for' do
+  describe '.options' do
     it 'returns an array of options'
     context 'when the item is aeon requestable' do
       it 'returns only aeon option'
