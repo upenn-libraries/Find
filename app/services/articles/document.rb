@@ -12,7 +12,6 @@ module Articles
     attr_reader :doc
 
     delegate :link, :publication_title, :content_type, to: :doc
-    delegate :list, to: :authors, prefix: true
 
     # @param document [Summon::Document] the document object
     def initialize(document)
@@ -24,19 +23,19 @@ module Articles
       doc.subtitle.present? ? "#{doc.title}: #{doc.subtitle}" : doc.title
     end
 
-    # @return [String] the document's full text online status
+    # @return [String, nil] the document's full text online status
     def fulltext_online
       I18n.t('additional_results.summon.fields.fulltext') if doc.fulltext
     end
 
-    # @return [Array<String>, nil] an array of the document's authors' full names in last, first format
+    # @return [String, nil] a comma-separated list of the document's authors
     def authors
       return unless doc.authors.present?
 
       @authors ||= Articles::AuthorsList.new(doc.authors)
     end
 
-    # @return [String, nil] the document's publication year if present
+    # @return [String, nil] the document's publication year
     def publication_year
       doc.publication_date&.year&.to_s
     end

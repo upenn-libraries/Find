@@ -6,7 +6,6 @@ describe Articles::Search do
   let(:query_term) { 'book' }
   let(:search) { described_class.new(query_term: query_term) }
   let(:fixture) { 'book.json' }
-  let(:fixture_contents) { articles_file_fixture_contents(fixture) }
 
   describe '.new' do
     it 'returns an Articles::Search object' do

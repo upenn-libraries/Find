@@ -39,7 +39,7 @@ module AdditionalResults
       # @return [String] a comma-separated string containing the document's authors,
       #   publication title, and publication year
       def info_display(doc)
-        info = [doc.authors_list, publication_title_display(doc), doc.publication_year]
+        info = [doc.authors&.list, publication_title_display(doc), doc.publication_year]
         info.compact.join(', ')
       end
 

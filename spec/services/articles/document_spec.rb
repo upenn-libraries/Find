@@ -40,16 +40,16 @@ describe Articles::Document do
     end
   end
 
-  describe '#authors' do
+  describe '#authors_list' do
     context 'when authors are present' do
-      it 'returns an Articles::AuthorsList object' do
-        expect(doc.authors).to be_a(Articles::AuthorsList)
+      it 'returns a string' do
+        expect(doc.authors.list).to be_a(String)
       end
     end
 
     context 'when authors are not present' do
-      it 'returns nil' do
-        expect(doc_no_author_no_fulltext.authors).to be_nil
+      it 'does not respond to the list method' do
+        expect(doc_no_author_no_fulltext.authors).not_to respond_to(:list)
       end
     end
   end
