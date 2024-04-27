@@ -2,17 +2,10 @@
 
 describe Inventory::Service::Physical do
   describe '.item' do
-    let(:item_data) do
-      {
-        'bib_data' => {},
-        'holding_data' => {},
-        'item_data' => {}
-      }
-    end
+    let(:item) { build :item }
 
     before do
-      bib_item_double = instance_double(Alma::BibItem, item: item_data)
-      allow(Alma::BibItem).to receive(:find_one).and_return(bib_item_double)
+      allow(Alma::BibItem).to receive(:find_one).and_return(item)
     end
 
     it 'returns a Item' do
@@ -26,16 +19,10 @@ describe Inventory::Service::Physical do
   end
 
   describe '.items' do
-    let(:item_data) do
-      {
-        'bib_data' => {},
-        'holding_data' => {},
-        'item_data' => {}
-      }
-    end
+    let(:item) { build :item }
 
     it 'returns an array of PennItems when items are present' do
-      bib_item_set_double = instance_double(Alma::BibItemSet, items: [Inventory::Service::Item.new(item_data)])
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [item])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
       expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
@@ -43,28 +30,60 @@ describe Inventory::Service::Physical do
     it 'returns an array of PennItems when items are not present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      allow(Inventory::Service::Item).to receive(:new).and_return(Inventory::Service::Item.new(item_data))
+      allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
       expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
 
-    it 'raises an ArgumentError if a parameter is missing'
+    it 'raises an ArgumentError if a parameter is missing' do
+      expect { described_class.items(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
+    end
   end
 
-  describe '.options' do
-    it 'returns an array of options'
+  describe '.fulfillment_options' do
+    it 'returns an array of options' do
+      item = build :item, :checkoutable
+      expect(described_class.fulfillment_options(item: item, ils_group: 'group')).to be_an Array
+    end
+
     context 'when the item is aeon requestable' do
-      it 'returns only aeon option'
+      let(:item) { build :item, :aeon_requestable }
+
+      it 'returns only aeon option' do
+        expect(described_class.fulfillment_options(item: item, ils_group: 'group')).to eq [:aeon]
+      end
     end
 
     context 'when the item is at archives' do
-      it 'returns only archives option'
+      let(:item) { build :item, :at_archives }
+
+      it 'returns only archives option' do
+        expect(described_class.fulfillment_options(item: item, ils_group: 'group')).to eq [:archives]
+      end
     end
 
     context 'when the item is checkoutable' do
-      it 'returns pickup option'
-      it 'returns office option if ils_group is faculty express'
-      it 'returns mail option if ils_group is not courtesy borrower'
-      it 'returns scan option if item is scannable'
+      let(:item) { build :item, :checkoutable }
+
+      it 'returns pickup option' do
+        options = described_class.fulfillment_options(item: item, ils_group: 'undergrad')
+        expect(options).to include :pickup
+      end
+
+      it 'returns office option if ils_group is faculty express' do
+        options = described_class.fulfillment_options(item: item, ils_group: 'FacEXP')
+        expect(options).to include :office
+      end
+
+      it 'returns mail option if ils_group is not courtesy borrower' do
+        options = described_class.fulfillment_options(item: item, ils_group: 'not_courtesy')
+        expect(options).to include :mail
+      end
+
+      it 'returns scan option if item is scannable' do
+        item = build :item, :scannable
+        options = described_class.fulfillment_options(item: item, ils_group: 'group')
+        expect(options).to include :scan
+      end
     end
   end
 end
