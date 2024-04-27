@@ -14,7 +14,7 @@ describe Articles::AuthorsList do
 
   describe '.new' do
     it 'returns an Articles::AuthorsList object' do
-      expect(four_authors).to be_a(Articles::AuthorsList)
+      expect(four_authors).to be_a(described_class)
     end
 
     it 'builds an authors list' do

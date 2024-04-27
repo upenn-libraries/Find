@@ -28,9 +28,9 @@ module Articles
       I18n.t('additional_results.summon.fields.fulltext') if doc.fulltext
     end
 
-    # @return [String, nil] a comma-separated list of the document's authors
+    # @return [Articles::AuthorsList, nil] the document's authors, as an AuthorsList object
     def authors
-      return unless doc.authors.present?
+      return if doc.authors.blank?
 
       @authors ||= Articles::AuthorsList.new(doc.authors)
     end

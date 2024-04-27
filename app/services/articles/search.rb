@@ -31,16 +31,10 @@ module Articles
     # @return [Summon::Search, nil] successful search response from the Summon API,
     #   or no respone if there was an error
     def response
-      @response ||= client.search({
-                                    's.q' => @query_term,
-                                    's.dym' => 'f',
-                                    's.light' => 't',
-                                    's.ho' => 't',
-                                    's.ps' => 3,
-                                    's.secure' => 't',
-                                    's.hl' => 'f',
-                                    's.ff' => 'ContentType,or,1,6'
-                                  })
+      @response ||= client.search({ 's.q' => @query_term, 's.dym' => 'f',
+                                    's.light' => 't', 's.ho' => 't',
+                                    's.ps' => 3, 's.secure' => 't',
+                                    's.hl' => 'f', 's.ff' => 'ContentType,or,1,6' })
     rescue Summon::Transport::TransportError => e
       handle_error(e)
       nil

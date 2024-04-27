@@ -21,7 +21,8 @@ describe Articles::Document do
 
     context 'when title has a subtitle' do
       it 'appends subtitle to title' do
-        expect(doc_w_subtitle_no_date.title).to eq('Reading Beyond the Book: The Social Practices of Contemporary Literary Culture')
+        expected_title = 'Reading Beyond the Book: The Social Practices of Contemporary Literary Culture'
+        expect(doc_w_subtitle_no_date.title).to eq(expected_title)
       end
     end
   end

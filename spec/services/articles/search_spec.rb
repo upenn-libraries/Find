@@ -42,15 +42,15 @@ describe Articles::Search do
       end
 
       it 'return expected number of documents' do
-        expect(search.documents.count).to be 3
+        expect(search.documents&.count).to be 3
       end
 
       it 'returns expected documents' do
-        expect(search.documents.map(&:title)).to match_array([
-                                                               'How to do things with books in victorian britain',
-                                                               'BOOK',
-                                                               'Reading Beyond the Book: The Social Practices of Contemporary Literary Culture'
-                                                             ])
+        first_title = 'How to do things with books in victorian britain'
+        second_title = 'BOOK'
+        third_title = 'Reading Beyond the Book: The Social Practices of Contemporary Literary Culture'
+
+        expect(search.documents&.map(&:title)).to match_array([first_title, second_title, third_title])
       end
     end
 
@@ -67,7 +67,11 @@ describe Articles::Search do
     before { stub_summon_search_success(query: query_term, fixture: fixture) }
 
     it 'returns actual query string from Summon response' do
-      expect(search.query_string).to eq('s.normalized.subjects=f&s.secure=t&s.light=t&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7')
+      expected_query_string = 's.normalized.subjects=f&s.secure=t&s.light=t'
+      expected_query_string += '&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f'
+      expected_query_string += '&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7'
+
+      expect(search.query_string).to eq(expected_query_string)
     end
   end
 
