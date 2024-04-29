@@ -16,6 +16,9 @@ en:
         fines_and_fees:
           title: 'Fines and Fees'
           description: 'View fines for overdue, lost, or damaged items.'
+    bookmarks:
+      page_heading: 'Bookmarks'
+      page_lede: 'View your saved catalog records.'
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
