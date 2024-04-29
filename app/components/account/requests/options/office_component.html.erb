@@ -1,18 +1,16 @@
 <li class="list-group-item">
   <%= radio_button_tag :option, 'office', checked?, data: { action: 'change->options-select#optionChanged'} %>
   <%= label_tag :option_office, t('requests.form.options.office.label') %>
-  <p>
-    <% if user_address_set? %>
-      <small class="text-muted">
-        <%= t('requests.form.options.office.info').html_safe %>
-      </small>
-    <div class="alert alert-info">
+  <% if user_address_set? %>
+    <p class="alert alert-info my-2">
       <%= user_address.join('<br>').html_safe %>
-    </div>
+    </p>
+    <small class="text-muted">
+      <%= t('requests.form.options.office.info').html_safe %>
+    </small>
   <% else %>
-    <div class="alert alert-warning">
+    <div class="alert alert-warning my-2">
       <%= t('requests.form.options.office.warning').html_safe %>
     </div>
   <% end %>
-  </p>
 </li>

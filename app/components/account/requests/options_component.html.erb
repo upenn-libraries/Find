@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'options_frame' do %>
-  <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label' } %>
   <% if options.include? :pickup %>
-    <ul class="list-group radio-options">
+    <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label h6' } %>
+    <ul class="list-group js_radio-options mb-3">
       <% if options.include? :scan %>
         <li class="list-group-item">
           <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
@@ -27,30 +27,20 @@
         </ul>
       <% end %>
   <% elsif options.include? :aeon %>
-    <div class="aeon alert alert-info">
-      <%= t('requests.form.options.aeon.message') %>
-    </div>
+    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_message').html_safe %></p>
+    <p class="mb-3"><%= t('requests.form.options.aeon.access_message').html_safe %></p>
   <% elsif options.include? :archives %>
-    <div class="archives alert alert-info">
+    <p class="js_archives alert alert-info mb-0">
       <%= t('requests.form.options.archives.message').html_safe %>
-    </div>
-  <% end %>
-  <% if options.include? :pickup %>
-    <div class="add-comments mt-2 mb-2">
-      <%= link_to t('requests.form.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
-      <div class="d-none" data-comments-target="commentsArea">
-        <%= label_tag :location, t('requests.form.comments_label'), { class: 'form-label' } %>
-        <%= text_area_tag :comments, '', { class: 'form-control' } %>
-      </div>
-    </div>
+    </p>
   <% end %>
   <div class="request-buttons">
     <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
-    <%= link_to t('requests.form.buttons.scan'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'scanButton' } } %>
-    <%= link_to t('requests.form.buttons.delivery'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'officeButton' } } %>
-    <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success', data: { options_select_target: 'pickupButton' } } %>
-    <%= link_to t('requests.form.buttons.mail'), ill_new_request_path, { class: 'd-none btn btn-success', data: { options_select_target: 'mailButton' } } %>
+    <%= link_to t('requests.form.buttons.scan'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'scanButton' } } %>
+    <%= link_to t('requests.form.buttons.delivery'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'officeButton' } } %>
+    <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'pickupButton' } } %>
+    <%= link_to t('requests.form.buttons.mail'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'mailButton' } } %>
     <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
-    <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success', data: { options_select_target: 'viewButton' } } %>
+    <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'viewButton' } } %>
   </div>
 <% end %>
