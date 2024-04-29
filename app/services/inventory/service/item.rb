@@ -11,6 +11,8 @@ module Inventory
         AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
         LPTOP EQUIP OTHER AUDIOVM
       ].freeze
+      FACULTY_EXPRESS_CODE = 'FacEXP'
+      COURTESY_BORROWER_CODE = 'courtesy'
 
       # @return [TrueClass, FalseClass]
       def checkoutable?
@@ -25,11 +27,6 @@ module Inventory
       # @return [Hash]
       def bib_data
         @item.fetch('bib_data', {})
-      end
-
-      # @return [String]
-      def pid
-        item_data['pid']
       end
 
       # @return [String]
@@ -101,6 +98,23 @@ module Inventory
         else
           [[holding_data['call_number'], 'Restricted Access'].compact_blank.join(' - '), 'no-item']
         end
+      end
+
+      # Return an array of fulfillment options for a given item and ils_group
+      # @param ils_group [String] the ILS group code
+      # @return [Array<Symbol>]
+      def fulfillment_options(ils_group:)
+        return [:aeon] if aeon_requestable?
+        return [:archives] if at_archives?
+
+        options = []
+        if checkoutable?
+          options << :pickup
+          options << :office if ils_group == FACULTY_EXPRESS_CODE
+          options << :mail unless ils_group == COURTESY_BORROWER_CODE
+          options << :scan if scannable?
+        end
+        options
       end
     end
   end

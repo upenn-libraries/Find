@@ -49,7 +49,7 @@ module Account
                                                  holding_id: params[:holding_id],
                                                  item_pid: params[:item_pid])
              end
-      options = Inventory::Service::Physical.fulfillment_options(item: item, ils_group: current_user.ils_group)
+      options = item.fulfillment_options(ils_group: current_user.ils_group)
       render(Account::Requests::OptionsComponent.new(user: current_user, options: options), layout: false)
     end
 

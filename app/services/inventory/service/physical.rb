@@ -5,9 +5,6 @@ module Inventory
   class Service
     # Retrieves Alma physical item data
     class Physical
-      FACULTY_EXPRESS_CODE = 'FacEXP'
-      COURTESY_BORROWER_CODE = 'courtesy'
-
       class BoundwithError < StandardError; end
 
       # Get a single Item for a given mms_id, holding_id, and item_pid
@@ -44,24 +41,6 @@ module Inventory
                                                             &.find { |holding| holding['holding_id'] == holding_id },
                                         'item_data' => {}
                                       })]
-      end
-
-      # Return an array of fulfillment options for a given item and ils_group
-      # @params item [Inventory::Service::Item] the item to check
-      # @params ils_group [String] the ILS group code
-      # @return [Array<Symbol>]
-      def self.fulfillment_options(item:, ils_group:)
-        return [:aeon] if item.aeon_requestable?
-        return [:archives] if item.at_archives?
-
-        options = []
-        if item.checkoutable?
-          options << :pickup
-          options << :office if ils_group == FACULTY_EXPRESS_CODE
-          options << :mail unless ils_group == COURTESY_BORROWER_CODE
-          options << :scan if item.scannable?
-        end
-        options
       end
     end
   end
