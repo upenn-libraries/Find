@@ -182,14 +182,6 @@ en:
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
-  footer:
-    account:
-      heading: 'Account'
-      shelf: 'Shelf'
-      settings: 'Settings'
-      bookmarks: 'Bookmarks'
-      fines: 'Fines and fees'
-      interlibrary_loan_form: 'Request an item'
   callout:
     guide: "Guide"
 
