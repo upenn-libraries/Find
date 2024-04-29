@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if options.include? :pickup %>
     <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label h6' } %>
-    <ul class="list-group radio-options mb-3">
+    <ul class="list-group js_radio-options mb-3">
       <% if options.include? :scan %>
         <li class="list-group-item">
           <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
@@ -27,10 +27,10 @@
         </ul>
       <% end %>
   <% elsif options.include? :aeon %>
-    <p><%= t('requests.form.options.aeon.kislak_message').html_safe %></p>
-    <p class="mb-0"><%= t('requests.form.options.aeon.access_message').html_safe %></p>
+    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_message').html_safe %></p>
+    <p class="mb-3"><%= t('requests.form.options.aeon.access_message').html_safe %></p>
   <% elsif options.include? :archives %>
-    <p class="archives alert alert-info mb-0">
+    <p class="js_archives alert alert-info mb-0">
       <%= t('requests.form.options.archives.message').html_safe %>
     </p>
   <% end %>

@@ -38,12 +38,12 @@ export default class extends Controller {
     });
   }
 
-  // Determine whether the options frame contains an element with class 'radio-options', 'aeon', or 'archives'
+  // Determine whether the options frame contains an element with class 'js_radio-options', 'aeon', or 'archives'
   frameType() {
-    if (this.optionsFrameTarget.querySelector(".radio-options"))
+    if (this.optionsFrameTarget.querySelector(".js_radio-options"))
       return "options";
-    if (this.optionsFrameTarget.querySelector(".aeon")) return "aeon";
-    if (this.optionsFrameTarget.querySelector(".archives")) return "archives";
+    if (this.optionsFrameTarget.querySelector(".js_aeon")) return "aeon";
+    if (this.optionsFrameTarget.querySelector(".js_archives")) return "archives";
   }
 
   // Get the value of the selected radio button
