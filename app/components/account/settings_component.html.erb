@@ -29,7 +29,9 @@
   </table>
 </div>
 
-<p class="callout mt-1"> <strong><%= t('callout.guide') %>:</strong> <a href="https://guides.library.upenn.edu/circulation/Yourlibraryaccount"><%= t('account.settings.callout_guide_update_details') %></a></p>
+<p class="callout mt-1">
+  <%= t('account.settings.callout_update_details').html_safe %>
+</p>
 
 <h2 class="h5 mt-4"><%= t('account.settings.terms.bbm_delivery_address') %></h2>
 <% if bbm_delivery_address.present? %>
@@ -42,6 +44,6 @@
   <p class="text-muted"><%= t('account.settings.bbm_empty') %></p>
 <% end %>
 <p class="callout">
-  <strong><%= t('callout.guide') %>:</strong> <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail"><%= t('account.settings.callout_guide_bbm') %></a>
+  <%= t('account.settings.callout_set_your_address').html_safe %>
 </p>
 
