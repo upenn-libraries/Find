@@ -159,7 +159,7 @@ rspec_app_test:
         echo "Waiting for solr api to be ready"
         sleep "10s"
       done
-    - until [ -s \"${CI_PROJECT_DIR}/rails_app/solr/conf\" ]; do sleep 1; echo 'Waiting for solr conf to exist'; done
+    - until [ -s "${CI_PROJECT_DIR}/rails_app/solr/conf" ]; do sleep 1; echo 'Waiting for solr conf to exist'; done
     - cd ${CI_PROJECT_DIR}/rails_app/
     - bundle add rspec_junit_formatter
     - bundle exec rake db:migrate
