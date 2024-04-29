@@ -4,28 +4,28 @@
 </dl>
 
 <% if fine_set.present? %>
-<table class="table table-responsive">
-  <thead>
-  <tr>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.type') %></th>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.title') %></th>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.date_charged') %></th>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.last_transaction') %></th>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.original_amount') %></th>
-    <th scope="col"><%= t('account.fines_and_fees.table.th.balance') %></th>
-  </tr>
-  </thead>
-  <tbody>
-    <% fine_set&.each do |fine| %>
-      <%= render(Account::FineRowComponent.new(fine: fine)) %>
-  <% end %>
-  <tr>
-    <th><%= t('account.fines_and_fees.table.th.total') %></th>
-    <td colspan="4"></td>
-    <td><%= total_fines %></td>
-  </tr>
-  </tbody>
-</table>
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.type') %></th>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.title') %></th>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.date_charged') %></th>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.last_transaction') %></th>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.original_amount') %></th>
+      <th scope="col"><%= t('account.fines_and_fees.table.th.balance') %></th>
+    </tr>
+    </thead>
+    <tbody>
+      <% fine_set&.each do |fine| %>
+        <%= render(Account::FineRowComponent.new(fine: fine)) %>
+    <% end %>
+    <tr>
+      <th><%= t('account.fines_and_fees.table.th.total') %></th>
+      <td colspan="4"></td>
+      <td><%= total_fines %></td>
+    </tr>
+    </tbody>
+  </table>
 <% end %>
 
 <p class="callout">
