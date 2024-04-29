@@ -43,7 +43,8 @@ export default class extends Controller {
     if (this.optionsFrameTarget.querySelector(".js_radio-options"))
       return "options";
     if (this.optionsFrameTarget.querySelector(".js_aeon")) return "aeon";
-    if (this.optionsFrameTarget.querySelector(".js_archives")) return "archives";
+    if (this.optionsFrameTarget.querySelector(".js_archives"))
+      return "archives";
   }
 
   // Get the value of the selected radio button

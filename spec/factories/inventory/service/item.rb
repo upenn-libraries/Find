@@ -10,6 +10,7 @@ FactoryBot.define do
       }
     end
 
+    skip_create
     initialize_with { new(item) }
   end
 
