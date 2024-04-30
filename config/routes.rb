@@ -68,6 +68,4 @@ Rails.application.routes.draw do
   end
 
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
-
-  get "/account/request-an-item", to: "ill#index"
 end
