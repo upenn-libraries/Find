@@ -137,6 +137,7 @@ rspec_app_test:
     APP_URL: "find.test.com"
     CI_DEBUG_SERVICES: "true"
     CHROME_URL: "http://chrome:3000"
+    DATABASE_HOST: "postgres"
     DATABASE_NAME: "find_test"
     DATABASE_PASSWORD: "rspec_test"
     DATABASE_USER: "rspec_test"

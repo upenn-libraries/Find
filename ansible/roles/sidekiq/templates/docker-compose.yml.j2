@@ -18,6 +18,7 @@ services:
       APP_UID: ${UID:-1000}
       APP_GID: ${GID:-1000}
 {% endif %}
+      DATABASE_HOST: "postgres"
       DATABASE_NAME: "{{ postgres_database_name }}"
       DATABASE_PASSWORD: /run/secrets/database_password
       DATABASE_USER: "{{ postgres_database_user }}"
