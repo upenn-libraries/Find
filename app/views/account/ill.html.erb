@@ -1,14 +1,14 @@
-<h1 class="page__heading">Request an item</h1>
-<p class="page__lede">Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you.</p>
+<h1 class="page__heading"><%= t('account.ill.page_heading') %></h1>
+<p class="page__lede"><%= t('account.ill.page_lede') %></p>
 
-<h2 class="h4 mt-3">What's the item you are requesting?</h2>
+<h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 
 <nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
   <button class="btn btn-outline-dark" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" id="ill-0-tab">
-    Article or chapter
+    <%= t('account.ill.request_type.scan') %>
   </button>
   <button class="btn btn-outline-dark" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1">
-    Book or other item
+    <%= t('account.ill.request_type.loan') %>
   </button>
 </nav>
 
@@ -19,48 +19,48 @@
         <div class="col-md-7">
           <div class="form-group mt-2 form-group--error">
             <label for="journal">
-              Journal or book title <small class="text-muted">(required)</small>
-              <p class="form-group__error-text">Enter a journal or book title</p>
+              <%= t('account.ill.form.scan.journal_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+              <p class="form-group__error-text"><%= t('account.ill.form.scan.journal_title.help_text') %></p>
             </label>
             <input type="text" class="form-control mt-1" id="journal" required>
           </div>
           <div class="form-group mt-3">
-            <label for="article">Article or chapter title <small class="text-muted">(required)</small></label>
+            <label for="article"><%= t('account.ill.form.scan.article_title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
             <input type="text" class="form-control mt-1" id="article" required>
           </div>
           <div class="form-group mt-3 form-group--error">
             <label for="article-author">
-              Author <small class="text-muted">(required)</small>
-              <p class="form-group__error-text">Enter an author</p>
+              <%= t('account.ill.form.scan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+              <p class="form-group__error-text"><%= t('account.ill.form.scan.author.help_text') %></p>
             </label>
             <input type="text" class="form-control mt-1" id="article-author">
           </div>
           <div class="form-group mt-3">
-            <label for="rftdate">Publication date <small class="text-muted">(required)</small></label>
+            <label for="rftdate"><%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
             <input type="text" class="form-control mt-1" id="rftdate" required>
           </div>
           <div class="form-group mt-3">
-            <label for="volume">Volume</label>
+            <label for="volume"><%= t('account.ill.form.scan.volume') %></label>
             <input type="text" class="form-control mt-1" id="volume">
           </div>
           <div class="form-group mt-3">
-            <label for="issue">Issue</label>
+            <label for="issue"><%= t('account.ill.form.scan.issue') %></label>
             <input type="text" class="form-control mt-1" id="issue">
           </div>
           <div class="form-group mt-3">
-            <label for="pages">Pages</label>
+            <label for="pages"><%= t('account.ill.form.scan.pages') %></label>
             <input type="text" class="form-control mt-1" id="pages">
           </div>
           <div class="form-group mt-3">
-            <label for="comments">Comments<br><small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small></label>
+            <label for="comments"><%= t('account.ill.form.scan.comments.label') %><br><small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.scan.comments.help_text') %></small></label>
             <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
           </div>
 
-          <p class="mt-4 mb-1">Articles and chapters are delivered electronically as a PDF and are often ready in 2-3 business days.</p>
+          <p class="mt-4 mb-1"><%= t('account.ill.form.scan.delivery_msg') %></p>
 
-          <p>We'll send you an email notification when it is ready.</p>
+          <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-          <button class="btn btn-success btn-lg">Place request</button>
+          <button class="btn btn-success btn-lg"><%= t('account.ill.form.scan.submit') %></button>
         </div>
       </div>
     </form>
@@ -70,50 +70,51 @@
       <div class="row">
         <div class="col-md-7">
           <div class="form-group mt-2">
-            <label for="title">Title <small class="text-muted">(required)</small></label>
+            <label for="title"><%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
             <input type="text" class="form-control mt-1" id="title" required>
           </div>
           <div class="form-group mt-3">
-            <label for="author">Author <small class="text-muted">(required)</small></label>
+            <label for="author"><%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
             <input type="text" class="form-control mt-1" id="author">
           </div>
           <div class="form-group mt-3">
-            <label for="year">Year of publication <small class="text-muted">(required)</small></label>
+            <label for="year"><%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
             <input type="text" class="form-control mt-1" id="year" required>
           </div>
           <div class="form-group mt-3">
-            <label for="edition">Edition</label>
+            <label for="edition"><%= t('account.ill.form.loan.edition') %></label>
             <input type="text" class="form-control mt-1" id="edition">
           </div>
           <div class="form-group mt-3">
-            <label for="publisher">Publisher</label>
+            <label for="publisher"><%= t('account.ill.form.loan.publisher') %></label>
             <input type="text" class="form-control mt-1" id="publisher">
           </div>
           <div class="form-group mt-3">
-            <label for="place">Place of publication</label>
+            <label for="place"><%= t('account.ill.form.loan.place_of_publication') %></label>
             <input type="text" class="form-control mt-1" id="place">
           </div>
           <div class="form-group mt-3">
-            <label for="isbn">ISBN</label>
+            <label for="isbn"><%= t('account.ill.form.loan.isbn') %></label>
             <input type="text" class="form-control mt-1" id="isbn">
           </div>
           <div class="form-group mt-3">
-            <label for="comments">Comments<br><small id="comments-help" class="form-text text-muted">Describe the item further to help us find it.</small></label>
+            <label for="comments"><%= t('account.ill.form.loan.comments.label') %><br><small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.loan.comments.help_text') %></small></label>
             <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
           </div>
 
           <fieldset>
-            <legend class="h4 mt-4">How would you like this item delivered?</legend>
-            <p>Books or other items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail">mail delivery</a>.</p>
+            <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
+            <p><%= t('account.ill.form.loan.delivery.help_text_html') %></p>
             <div class="form-check mt-3">
               <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
               <label class="form-check-label" for="delivery-pickup">
-                Pick up
+                <%= t('account.ill.form.loan.delivery.options.pickup.label') %>
               </label>
 
               <div class="input-group mb-2 mt-1">
                 <select name="pickup_location" id="pickup_location" label="Location" class="custom-select p-2 rounded" required="required">
-                  <option value="">Pick up location</option>
+                  <option value=""><%= t('account.ill.form.loan.delivery.options.pickup.blank') %></option>
+                  <%# TODO: These options should come from a set of configurable options contained in Settings. Ticket in Find#113 %>
                   <option value="Van Pelt Library">Van Pelt Library</option>
                   <option value="Lockers at Van Pelt">Lockers at Van Pelt Library</option>
                   <option value="Annenberg Library">Annenberg Library</option>
@@ -134,22 +135,16 @@
             <div class="form-check mt-3">
               <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
               <label class="form-check-label" for="delivery-mail">Mail <br>
-              <small id="delivery-mail-help" class="form-text text-muted">For those registered with <a href="https://upenn.libwizard.com/f/books-by-mail">Books by Mail</a> at no charge to you.</small></label>
+              <small id="delivery-mail-help" class="form-text text-muted"><%=t('account.ill.form.loan.delivery.options.mail.help_text_html') %></small></label>
             </div>
           </fieldset>
 
-          <p class="mt-4 mb-1">Processing time can vary widely depending on the nature and availability of the item.</p>
-          <p>We'll send you an email notification when it is ready.</p>
+          <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
+          <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-          <button class="btn btn-success btn-lg">Place request</button>
+          <button class="btn btn-success btn-lg"><%= t('account.ill.form.loan.submit') %></button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
-
-
-<!--
-https://franklin.library.upenn.edu/forms/resourcesharing
-https://franklin.library.upenn.edu/forms/ill?requesttype=book 
--->
