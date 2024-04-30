@@ -8,7 +8,7 @@
       counter) %>
 
     <%# Render Additional Results component after the second catalog result (unless there's only one catalog result) %>
-    <% if (counter == 1) || (documents.size == 1) %>
+    <% if (counter == Settings.additional_results_sources.position) || (documents.size == 1) %>
       <%= render AdditionalResults::AdditionalResultsComponent.new(
         query: params[:q],
         class: (documents.size > 1 ? 'border-bottom' : '')

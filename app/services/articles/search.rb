@@ -17,7 +17,7 @@ module Articles
       @query_term = query_term
       @client = Summon::Service.new(
         access_id: Settings.additional_results_sources.summon.access_id,
-        secret_key: Rails.application.credentials[:summon_api_key]
+        secret_key: Settings.additional_results_sources.summon.api_key
       )
     end
 
