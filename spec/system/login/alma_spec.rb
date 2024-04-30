@@ -3,7 +3,11 @@
 require 'system_helper'
 
 describe 'index page' do
-  let(:user) { create(:user, :alma_authenticated) }
+  let(:user) { build(:user, :alma_authenticated) }
+  let(:alma_user_group) { { 'value' => 'patron' } }
+
+  include_context 'with User.new returning user'
+  include_context 'with mock alma_record on user having alma_user_group user group'
 
   before { visit alma_login_path }
 

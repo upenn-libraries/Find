@@ -50,6 +50,23 @@ Rails.application.routes.draw do
     end
   end
 
+  resource 'account', only: %i[show], controller: 'account'
+  namespace :account, as: nil do
+    resource :settings, only: %i[show edit update], controller: 'settings'
+    resources :requests, only: %i[index new create]
+
+    # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
+    scope controller: :requests, path: 'requests' do
+      get 'ill/new', action: 'ill', to: :ill_new, as: 'ill_new_request'
+      get ':system/:id', action: 'show', to: :show, as: 'request', constraints: { system: /(ill|ils)/ }
+      patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
+      delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
+    end
+
+    get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
+    get 'fines-and-fees', to: 'fines#index'
+  end
+
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
 
   get "/account/request-an-item", to: "ill#index"
