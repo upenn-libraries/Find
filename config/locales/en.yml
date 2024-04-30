@@ -105,7 +105,7 @@ en:
         aeon: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
-        scan: 'Scan it and email me a PDF'
+        scan: 'Scan a section and email me a PDF'
         office:
           label: 'Mail it via FacultyEXPRESS Office Delivery'
           info: "<a href='https://guides.library.upenn.edu/resourcesharing/facex' target='_blank'>Change your delivery address and contact Faculty Express</a>"
