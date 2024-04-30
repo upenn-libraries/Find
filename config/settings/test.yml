@@ -1,1 +1,2 @@
+solr_url: <%= DockerSecrets.lookup(:solr_url, ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-test')) %>
 illiad_base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
