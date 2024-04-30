@@ -14,19 +14,19 @@ describe Inventory::Service::Item do
   end
 
   describe 'bib_data' do
-    let(:item) { build :item, :with_bib_data }
+    let(:item) { build :item }
 
     it 'returns a Hash' do
       expect(item.bib_data).to be_a Hash
     end
 
     it 'returns the bib data' do
-      expect(item.bib_data).to eq({ 'title' => 'The Title' })
+      expect(item.bib_data).to eq(item.item['bib_data'])
     end
   end
 
   describe 'user_due_date_policy' do
-    let(:item) { build :item, :with_user_due_date_policy }
+    let(:item) { build :item, :not_checkoutable }
 
     it 'returns a String' do
       expect(item.user_due_date_policy).to be_a String
@@ -44,7 +44,7 @@ describe Inventory::Service::Item do
     end
 
     it 'returns false if item is not loanable' do
-      item = build :item, :with_user_due_date_policy
+      item = build :item, :not_checkoutable
       expect(item.loanable?).to be false
     end
   end
@@ -63,7 +63,7 @@ describe Inventory::Service::Item do
 
   describe 'scannable?' do
     it 'returns true if item is scannable' do
-      item = build :item, :scannable
+      item = build :item
       expect(item.scannable?).to be true
     end
 
@@ -135,8 +135,10 @@ describe Inventory::Service::Item do
 
   describe 'select_label' do
     it 'returns the correct label for the item' do
-      item = build :item, :with_item_data
-      expect(item.select_label).to contain_exactly 'MS 1234 - Book', '123456789'
+      item = build :item
+      expect(item.select_label)
+        .to contain_exactly "#{item.description} - #{item.physical_material_type['desc']} - #{item.library_name}",
+                            item.item_data['pid']
     end
   end
 
@@ -181,7 +183,7 @@ describe Inventory::Service::Item do
       end
 
       it 'returns scan option if item is scannable' do
-        item = build :item, :scannable
+        item = build :item
         options = item.fulfillment_options(ils_group: 'group')
         expect(options).to include :scan
       end

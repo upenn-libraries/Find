@@ -4,9 +4,18 @@ FactoryBot.define do
   factory :item, class: 'Inventory::Service::Item' do
     item do
       {
-        'bib_data' => {},
+        'bib_data' => {
+          'title' => Faker::Book.title
+        },
         'holding_data' => {},
-        'item_data' => {}
+        'item_data' => {
+          'base_status' => { 'value' => '1' },
+          'description' => "MS #{Faker::Number.number(digits: 4)}",
+          'location' => { 'value' => 'library' },
+          'library' => { 'desc' => 'The Library' },
+          'pid' => Faker::Number.number(digits: 10),
+          'physical_material_type' => { 'desc' => 'Book' }
+        }
       }
     end
 
@@ -23,27 +32,10 @@ FactoryBot.define do
     end
   end
 
-  trait :with_bib_data do
+  trait :not_checkoutable do
     item do
       item = attributes_for(:item)[:item]
-      item['bib_data'] = { 'title' => 'The Title' }
-      item
-    end
-  end
-
-  trait :with_item_data do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['pid'] = '123456789'
-      item['item_data']['description'] = 'MS 1234'
-      item['item_data']['physical_material_type'] = { 'desc' => 'Book' }
-      item
-    end
-  end
-
-  trait :with_user_due_date_policy do
-    item do
-      item = attributes_for(:item)[:item]
+      item['item_data']['base_status'] = { 'value' => '0' }
       item['item_data']['due_date_policy'] = 'Not loanable'
       item
     end
@@ -53,14 +45,6 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'scyarn' }
-      item
-    end
-  end
-
-  trait :scannable do
-    item do
-      item = attributes_for(:item, :checkoutable)[:item]
-      item['item_data']['physical_material_type'] = { 'value' => 'book' }
       item
     end
   end
@@ -100,7 +84,7 @@ FactoryBot.define do
   trait :at_archives do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['location'] = { 'value' => 'Library' }
+      item['item_data']['location'] = { 'value' => 'univarch' }
       item['item_data']['library'] = { 'desc' => 'University Archives' }
       item
     end
