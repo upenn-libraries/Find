@@ -1,2 +1,2 @@
-solr_url: <%= ENV['SOLR_URL'] %>
+solr_url: <%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>
 illiad_base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
