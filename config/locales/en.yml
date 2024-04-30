@@ -2,7 +2,7 @@ en:
   account:
     show:
       page_heading: 'Account Overview'
-      page_lede: 'View and renew items on your shelf, manage and export bookmarked items, view fines, and check on your mailing address.'
+      page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
         shelf:
           title: 'Shelf'
@@ -12,13 +12,13 @@ en:
           description: 'Your account details and request item delivery address.'
         bookmarks:
             title: 'Bookmarks'
-            description: 'Email and create citations from your bookmarked items.'
+            description: 'Create citations and email bookmarked items.'
         fines_and_fees:
           title: 'Fines and Fees'
           description: 'View fines for overdue, lost, or damaged items.'
     bookmarks:
       page_heading: 'Bookmarks'
-      page_lede: 'View your saved catalog records.'
+      page_lede: 'Create citations and email bookmarked items.'
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
