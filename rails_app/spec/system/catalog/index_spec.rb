@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Catalog Index Page' do
+  include Articles::ApiMocks::Search
+
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with electronic journal record with 4 electronic entries'
 
@@ -56,7 +58,10 @@ describe 'Catalog Index Page' do
   end
 
   context 'with search term' do
-    before { visit search_catalog_path(params: { q: 'nature', search_field: 'all_fields' }) }
+    before do
+      stub_summon_search_success(query: 'nature', fixture: 'book.json')
+      visit search_catalog_path(params: { q: 'nature', search_field: 'all_fields' })
+    end
 
     it 'displays one search result' do
       expect(page).to have_selector 'article.document', count: 1

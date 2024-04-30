@@ -1,21 +1,26 @@
 default: &default
   adapter: postgresql
-  database: <%= ENV['DATABASE_NAME'] %>
   encoding: unicode
-  host: postgres
-  password: <%= DockerSecrets.lookup(:database_password, ENV['DATABASE_PASSWORD']) %>
+  host: localhost
+  port: 5432
+  password: <%= DockerSecrets.lookup(:database_password, ENV.fetch('DATABASE_PASSWORD', 'password')) %>
   pool: <%= ENV['DB_POOL'] || ENV['RAILS_MAX_THREADS'] || 5 %>
-  username: <%= ENV['DATABASE_USER'] %>
-  variables:
-    tcp_keepalives_idle: 60
-    tcp_keepalives_interval: 60
-    tcp_keepalives_count: 100
+  username: <%= ENV.fetch('DATABASE_USER', 'postgres') %>
 
 development:
   <<: *default
+  database: find_development
 
 test:
   <<: *default
+  database: find_test
+
+staging:
+  <<: *default
+  database: find_staging
 
 production:
   <<: *default
+  database: find_production
+  username: find
+  password: <%= ENV["READ_DATABASE_PASSWORD"] %>

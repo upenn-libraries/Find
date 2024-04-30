@@ -1,0 +1,1177 @@
+{
+  "version": "2.0.0",
+  "sessionId": "SUMMON-SESSION-MACN7QPNW9-19981-3",
+  "elapsedQueryTime": 1038,
+  "queryTime": 1017,
+  "internalSolrQueryTime": 1024,
+  "totalRequestTime": 1149,
+  "pageCount": 8830232,
+  "recordCount": 26490696,
+  "query": {
+            "queryString": "s.normalized.subjects=f&s.secure=t&s.light=t&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7",
+    "pageNumber": 1,
+    "pageSize": 3,
+    "isHighlightingEnabled": false,
+    "isDidYouMeanEnabled": false,
+    "isHoldingsOnlyEnabled": true,
+    "textQueries": [
+      {
+        "textQuery": "book",
+        "removeCommand": "removeTextQuery(book)"
+      }
+    ],
+    "facets": [
+      {
+        "fieldName": "ContentType",
+        "combineMode": "or",
+        "pageNumber": 1,
+        "pageSize": 6,
+        "removeCommand": "removeFacetField(ContentType)"
+      }
+    ]
+  },
+  "facetFields": [
+    {
+      "fieldName": "ContentType_mfacet",
+      "displayName": "ContentType",
+      "combineMode": "or",
+      "pageNumber": 1,
+      "pageSize": 6,
+      "hasMoreFacets": "yes",
+      "hasLimitingValue": true,
+      "hasAppliedValue": false,
+      "removeCommand": "removeFacetField(ContentType)",
+      "listValuesCommand": "listFacetValues(ContentType,or)",
+      "removeValueFiltersCommand": "removeFacetValueFilter(ContentType)",
+      "counts": [
+        {
+          "value": "Book Review",
+          "count": 12865640,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Book Review)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Book Review:t)"
+        },
+        {
+          "value": "Book / eBook",
+          "count": 3493493,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Book / eBook)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Book / eBook:t)"
+        },
+        {
+          "value": "Newspaper Article",
+          "count": 2858840,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Newspaper Article)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Newspaper Article:t)"
+        },
+        {
+          "value": "Journal Article",
+          "count": 2620596,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Journal Article)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Journal Article:t)"
+        },
+        {
+          "value": "Book Chapter",
+          "count": 2078439,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Book Chapter)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Book Chapter:t)"
+        },
+        {
+          "value": "Magazine Article",
+          "count": 964793,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": true,
+          "applyCommand": "addFacetValueFilters(ContentType,Magazine Article)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Magazine Article:t)"
+        }
+      ]
+    }
+  ],
+  "recommendationLists": {
+    "customBlock": [
+      {
+        "title": "Accessing Electronic Resources",
+        "content": "<p>Follow the following guide for help accessing resources on and off-campus:</p>\r\n<p><a href=\"https://guides.library.upenn.edu/usingeresources/ezproxy\">Accessing Electronic Resources</a></p>\r\n<p>Note that&nbsp;use of Penn Libraries licensed resources is generally restricted to current students, faculty, and staff.&nbsp;&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"box-sizing: border-box; font-size: 14px;\">&nbsp;</span></p>",
+        "priority_i": "100003862"
+      },
+      {
+        "title": "Using Franklin Articles+",
+        "content": "<p>Franklin Articles+, a large multidisciplinary database offering access to many resources, provides paths to full-text differently. More help on searching article databases is available in the guide: <a href=\"https://guides.library.upenn.edu/articlesplus/toc\">Using Franklin Articles+</a></p>",
+        "priority_i": "100003863"
+      },
+      {
+        "title": "Searching for Books?",
+        "content": "<p>If you would like to find a print book in the library please follow the guide here:</p>\r\n<p><a href=\"https://guides.library.upenn.edu/franklincatalog\">Using Franklin Catalog</a></p>\r\n<p>alternatively link back to the main <a href=\"https://franklin.library.upenn.edu/\">Franklin search page</a></p>",
+        "priority_i": "100003864"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "hasFullText": true,
+      "isFullTextHit": false,
+      "isPrint": false,
+      "inHoldings": true,
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.title=How+to+do+things+with+books+in+Victorian+Britain&rft.au=Price%2C+Leah&rft.date=2012-01-01&rft.isbn=9780691114170&rft_id=info:doi/10.1515%2F9781400842186&rft.externalDocID=R04726853",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV3db9MwELdYeWFPoIEWPkZAYi-oEMdO7Dyhtss2UBcKbbdHy0ncqqxrqzWr4L_n7DhZuw4hxEuUOJF1urucfT_fB0Jv7tiDs1YnYd96yUWkoxo4bmpcoB9cdKK477e_2JILOhHmBjz42Qc5vZL35DboLFUd1fir6iv1aWKP0zWq5OFhL04SAS7v4HAFAl0fAGFXf97hO3L8v3oCY6ApOu_2H3SlnhQG4B40Bq6gM3C9s52uH22PIN1abv4-1ztR08nTALT6IxMwez7R4L42BhZNqE1q1Ta-qyyybCEEE4tRQQiVJ-mF2upRXHbx2LKrgSlBUdbH8jjVjaxuF5A6rO-7Lj0ZwgZgB-3Af95A-63uWUsMkxZowkkSH4nTr92jz8lJv4bBvND3wePS_nJFQVUXqabIlkYFGj5uULCLduXyEtYCWCeK5VbggC4-O17UYF4VcAqOzkJdT9V4vgl3bS3GZocxeIwaOuvkCXqgZnvIA2m4xdzN524pDVdLwzXScCczt5aGa6XxFJ0fx4POadO2tmhKhgk47inBMoXNMONR7slMYRqkLApGfBQymnl5xglhJMJSUSJDTqk_CnPFVE4Vl0qFZB-5mEc4SmkK_KM0I0GqRjIkKXxC0sz3qIPervFHrKbm_H0pNpjooINNtgmpT7xELUsHuetsFIuyCoroDXttk4nvMwc9M6wV5fw_RFYUbDFe_XTQnuW1fcUIeMg-TLnGeHE_Wa8raZTvbayyiNsdzjjB-PnfCH-BHt0q-0vUKK5v1Cv00BiZgz-r5m9PUnF9",
+      "ExternalDocumentID": [
+        "9781400842186",
+        "R04726853",
+        "EBC878311",
+        "735482",
+        "j.ctt7pgvx",
+        "PUPB0001527"
+      ],
+      "DBID": [
+        "E06",
+        "CBS"
+      ],
+      "IngestDate": [
+        "Wed Jan 31 09:19:21 EST 2024",
+        "Sun Mar 10 09:59:12 EDT 2024",
+        "Tue Apr 09 00:17:47 EDT 2024",
+        "Thu Mar 14 08:43:33 EDT 2024",
+        "Tue Nov 14 07:38:15 EST 2023",
+        "Wed Nov 08 01:00:50 EST 2023",
+        "Sat Apr 06 03:43:58 EDT 2024"
+      ],
+      "PublicationDate_xml": [
+        {
+          "year": "2012",
+          "text": "2012"
+        }
+      ],
+      "Score": [
+        "6.2028184"
+      ],
+      "DatabaseTitleList": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "PublicationPlace": [
+        "Princeton"
+      ],
+      "URI": [
+        "http://portal.igpublish.com/iglibrary/search/PUPB0001527.html",
+        "https://www.jstor.org/stable/j.ctt7pgvx",
+        "https://www.perlego.com/book/735482/how-to-do-things-with-books-in-victorian-britain-pdf",
+        "https://muse.jhu.edu/book/30461",
+        "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=878311",
+        "http://gateway.proquest.com/openurl?ctx_ver=Z39.88-2003&xri:pqil:res_ver=0.2&res_id=xri:ilcs-us&rft_id=xri:ilcs:rec:abell:R04726853",
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9781400842186&uid=none"
+      ],
+      "PublicationPlace_xml": [
+        {
+          "name": "Princeton"
+        }
+      ],
+      "Publisher_xml": [
+        {
+          "name": "Princeton University Press"
+        }
+      ],
+      "ID": [
+        "FETCH-LOGICAL-a71378-b31ab416789d0ace145b795f8f674c0dc8337391ae43a68442f6de7ed4e8aee63"
+      ],
+      "Publisher": [
+        "Princeton University Press"
+      ],
+      "DOI": [
+        "10.1515/9781400842186"
+      ],
+      "AbstractList": [
+        "No detailed description available for \"How to Do Things with Books in Victorian Britain\".",
+        "How to Do Things with Books in Victorian Britain asks how our culture came to frown on using books for any purpose other than reading. When did the coffee-table book become an object of scorn? Why did law courts forbid witnesses to kiss the Bible? What made Victorian cartoonists mock commuters who hid behind the newspaper, ladies who matched their books' binding to their dress, and servants who reduced newspapers to fish 'n' chips wrap? Shedding new light on novels by Thackeray, Dickens, the Brontës, Trollope, and Collins, as well as the urban sociology of Henry Mayhew, Leah Price also uncovers the lives and afterlives of anonymous religious tracts and household manuals. From knickknacks to wastepaper, books mattered to the Victorians in ways that cannot be explained by their printed content alone. And whether displayed, defaced, exchanged, or discarded, printed matter participated, and still participates, in a range of transactions that stretches far beyond reading. Supplementing close readings with a sensitive reconstruction of how Victorians thought and felt about books, Price offers a new model for integrating literary theory with cultural history. How to Do Things with Books in Victorian Britain reshapes our understanding of the interplay between words and objects in the nineteenth century and beyond.",
+        "<![CDATA[\nHow to Do Things with Books in Victorian Britain asks how our culture came to frown on using books for any purpose other than reading. When did the coffee-table book become an object of scorn? Why did law courts forbid witnesses to kiss the Bible? What made Victorian cartoonists mock commuters who hid behind the newspaper, ladies who matched their books' binding to their dress, and servants who reduced newspapers to fish 'n' chips wrap?\nShedding new light on novels by Thackeray, Dickens, the Bront&#235;s, Trollope, and Collins, as well as the urban sociology of Henry Mayhew, Leah Price also uncovers the lives and afterlives of anonymous religious tracts and household manuals. From knickknacks to wastepaper, books mattered to the Victorians in ways that cannot be explained by their printed content alone. And whether displayed, defaced, exchanged, or discarded, printed matter participated, and still participates, in a range of transactions that stretches far beyond reading.\nSupplementing close readings with a sensitive reconstruction of how Victorians thought and felt about books, Price offers a new model for integrating literary theory with cultural history. How to Do Things with Books in Victorian Britain reshapes our understanding of the interplay between words and objects in the nineteenth century and beyond.\n]]>",
+        "How to Do Things with Books in Victorian Britainasks how our culture came to frown on using books for any purpose other than reading. When did the coffee-table book become an object of scorn? Why did law courts forbid witnesses to kiss the Bible? What made Victorian cartoonists mock commuters who hid behind the newspaper, ladies who matched their books' binding to their dress, and servants who reduced newspapers to fish 'n' chips wrap?\nShedding new light on novels by Thackeray, Dickens, the Brontës, Trollope, and Collins, as well as the urban sociology of Henry Mayhew, Leah Price also uncovers the lives and afterlives of anonymous religious tracts and household manuals. From knickknacks to wastepaper, books mattered to the Victorians in ways that cannot be explained by their printed content alone. And whether displayed, defaced, exchanged, or discarded, printed matter participated, and still participates, in a range of transactions that stretches far beyond reading.\nSupplementing close readings with a sensitive reconstruction of how Victorians thought and felt about books, Price offers a new model for integrating literary theory with cultural history.How to Do Things with Books in Victorian Britainreshapes our understanding of the interplay between words and objects in the nineteenth century and beyond."
+      ],
+      "Language": [
+        "English"
+      ],
+      "Author": [
+        "Leah Price"
+      ],
+      "PublicationCentury": [
+        "2000"
+      ],
+      "IsScholarly": [
+        "false"
+      ],
+      "PublicationDecade": [
+        "2010"
+      ],
+      "ProviderPackageCode": [
+        "J-X"
+      ],
+      "SubjectTermsDisplay": [
+        "19Th Century",
+        "1DBKE",
+        "Books & Reading",
+        "DS",
+        "English, Irish, Scottish, Welsh",
+        "European",
+        "History",
+        "Literary Criticism",
+        "Modern"
+      ],
+      "LCCallNum_Ident": [
+        "Z1003.5.G7"
+      ],
+      "GroupedDBID": [
+        "-VX",
+        ".PA",
+        "05P",
+        "089",
+        "20A",
+        "38.",
+        "A4J",
+        "AABBV",
+        "AAGED",
+        "AAGSB",
+        "AAIOF",
+        "AAMYY",
+        "AANXU",
+        "AAUSU",
+        "AAVCP",
+        "AAYCG",
+        "AAZEP",
+        "ABAWK",
+        "ABCYV",
+        "ABCYY",
+        "ABDZV",
+        "ABFFQ",
+        "ABHWV",
+        "ABYBY",
+        "ACBCG",
+        "ACFYN",
+        "ACHKM",
+        "ACISH",
+        "ACKJY",
+        "ACLGP",
+        "ACQYL",
+        "ADDXO",
+        "ADYGQ",
+        "AEAED",
+        "AEDVL",
+        "AERYV",
+        "AFHFQ",
+        "AGLEC",
+        "AIADE",
+        "AIBWD",
+        "AIGZA",
+        "AILDO",
+        "AIUUY",
+        "AIXPE",
+        "ALMA_UNASSIGNED_HOLDINGS",
+        "AOURY",
+        "APFVE",
+        "ARPAB",
+        "AZVGL",
+        "AZZ",
+        "BBABE",
+        "BECJT",
+        "BFATZ",
+        "BTNHK",
+        "CZZ",
+        "DGSIF",
+        "DGVNY",
+        "DHNOV",
+        "DUGUG",
+        "E06",
+        "EBSCA",
+        "EBZNK",
+        "ECOWB",
+        "ECYUO",
+        "ETMTL",
+        "FILVX",
+        "FURLO",
+        "HELXT",
+        "I4C",
+        "J-X",
+        "JJU",
+        "JLPMJ",
+        "JSXJJ",
+        "KBOFU",
+        "MUSTB",
+        "MYL",
+        "NRCWT",
+        "QD8",
+        "SUPCW",
+        "TI5",
+        "XI1",
+        "YSPEL",
+        "~I6",
+        "AFCMX",
+        "AHOTY",
+        "CBS"
+      ],
+      "LCCallNum": [
+        "Z1003.5.G7"
+      ],
+      "SubjectTerms": [
+        "19Th Century",
+        "1DBKE",
+        "Authors",
+        "Bibliography",
+        "Book industries and trade",
+        "Books & Reading",
+        "Books and reading",
+        "Books and reading in literature",
+        "Books in literature",
+        "Dickens, Charles",
+        "English fiction",
+        "English Literature",
+        "English, Irish, Scottish, Welsh",
+        "European",
+        "Fiction",
+        "Great Britain",
+        "History",
+        "History and criticism",
+        "History of Publishing and Bookselling",
+        "Language & Literature",
+        "LITERARY CRITICISM",
+        "Mayhew, Henry",
+        "Modern",
+        "Nineteenth Century",
+        "Psychological aspects",
+        "Reading",
+        "Social aspects",
+        "Trollope, Anthony",
+        "Victorian Publishing"
+      ],
+      "Discipline": [
+        "Library & Information Science"
+      ],
+      "ContentType": [
+        "eBook",
+        "Book"
+      ],
+      "SourceType": [
+        "Aggregation Database",
+        "Index Database",
+        "Publisher"
+      ],
+      "Edition": [
+        "1"
+      ],
+      "Author_xml": [
+        {
+          "sequence": "1",
+          "fullname": "Price, Leah"
+        }
+      ],
+      "ISBN": [
+        "9780691159546",
+        "9780691114170",
+        "0691159548",
+        "069111417X",
+        "1400842182",
+        "9781400842186"
+      ],
+      "EISBN": [
+        "1400842182",
+        "9781400842186"
+      ],
+      "Abstract": [
+        "How to Do Things with Books in Victorian Britainasks how our culture came to frown on using books for any purpose other than reading. When did the coffee-table book become an object of scorn? Why did law courts forbid witnesses to kiss the Bible? What made Victorian cartoonists mock commuters who hid behind the newspaper, ladies who matched their books' binding to their dress, and servants who reduced newspapers to fish 'n' chips wrap?\nShedding new light on novels by Thackeray, Dickens, the Brontës, Trollope, and Collins, as well as the urban sociology of Henry Mayhew, Leah Price also uncovers the lives and afterlives of anonymous religious tracts and household manuals. From knickknacks to wastepaper, books mattered to the Victorians in ways that cannot be explained by their printed content alone. And whether displayed, defaced, exchanged, or discarded, printed matter participated, and still participates, in a range of transactions that stretches far beyond reading.\nSupplementing close readings with a sensitive reconstruction of how Victorians thought and felt about books, Price offers a new model for integrating literary theory with cultural history.How to Do Things with Books in Victorian Britainreshapes our understanding of the interplay between words and objects in the nineteenth century and beyond."
+      ],
+      "PublicationYear": [
+        "2012"
+      ],
+      "SourceID": [
+        "askewsholts",
+        "chadwyckhealey",
+        "proquest",
+        "projectmuse",
+        "perlego",
+        "jstor",
+        "igpublishing"
+      ],
+      "Copyright_xml": [
+        {
+          "notice": "2012 Princeton University Press"
+        }
+      ],
+      "SSID": [
+        "ssj0000622966"
+      ],
+      "Title": [
+        "How to do things with books in victorian britain"
+      ],
+      "PageCount": [
+        "360"
+      ],
+      "PublicationDate": [
+        "2012.",
+        "20120409",
+        "2012",
+        "2012-04-09"
+      ],
+      "OCLC": [
+        "782923556"
+      ],
+      "Genre": [
+        "Electronic books"
+      ],
+      "DEWEY": [
+        "028/.9094109034"
+      ],
+      "MergedId": [
+        "FETCHMERGED-LOGICAL-a71378-b31ab416789d0ace145b795f8f674c0dc8337391ae43a68442f6de7ed4e8aee63"
+      ],
+      "PQID": [
+        "EBC878311"
+      ],
+      "Copyright": [
+        "2012 Princeton University Press"
+      ],
+      "IsPeerReviewed": [
+        "false"
+      ],
+      "thumbnail_s": [
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=http%3A%2F%2Fportal.igpublish.com%2Figlibrary%2Famazonbuffer%2FPUPB0001527_null_0_320.png"
+      ],
+      "thumbnail_m": [
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fmuse.jhu.edu%2Fbook%2F30461%2Fimage%2Ffront_cover.jpg%3Fformat%3D180",
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F2186%2F9781400842186.jpg"
+      ],
+      "thumbnail_l": [
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.perlego.com%2Fbooks%2FRM_Books%2Fingram_csplus_gexhsuob%2F9781400842186.jpg"
+      ],
+      "link.rule.ids": [
+        "307,308,787,791,793,794,4071,27993"
+      ],
+      "linkProvider": [
+        "Library Catalog"
+      ],
+      "LinkModel": [
+        "OpenURL"
+      ],
+      "BookMark": [
+        "eNp1kUtPGzEUhV3RIijNklVVaTalYhHqtz3LEkFBQgIh2q3l8dxknJhxGDsJ-fcMDKLqgru7Op_OuQ-EDgk-IYKIn6XShGOsOSVafkCf3xq6g0a9iGVJiCgFl7toX2laUiaE3EOjlOa4L0lpKeU-whdxU-RY1LHIjW9nqdj43BRVjItU-LZYe5dj521bVJ3P1rdf0KepDQlG6GPuVnCA_p6f3U0uxlfXvy8nv67GVhGm9LhixFacSKXLGlsHhItKlWKqp1Jxh2unGVOsJBY4s1JzTqeyBgU1B20BJDtAx4OxTQvYpCaGnMw6wMtk5r_1e_b7wLrG1putWzRgA2yNrSAEc4u5olIL1nNHA7fs4sMKUjYvdg7a3Nlgzk4nWmlGSA_-eAPn4PL9KoF5J_rrKwldgFk0A6SY4Jr26rdBnaf-iq_a3Lic1XK2fvyX42fLVRV8en6BWXb-3nZbc_Pn5rR_FRFUsSfqH5FH"
+      ],
+      "DatabaseName": [
+        "Princeton University Press eBooks",
+        "Annual Bibliography of English Language and Literature"
+      ],
+      "ParticipantIDs": [
+        "askewsholts_vlebooks_9781400842186",
+        "chadwyckhealey_abell_R04726853",
+        "proquest_ebookcentral_EBC878311",
+        "projectmuse_ebooks_9781400842186",
+        "perlego_books_735482",
+        "jstor_books_j_ctt7pgvx",
+        "igpublishing_primary_PUPB0001527"
+      ]
+    },
+    {
+      "hasFullText": false,
+      "isFullTextHit": false,
+      "isPrint": false,
+      "inHoldings": true,
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.atitle=BOOK&rft.jtitle=Journal+of+nutrition+education+and+behavior&rft.au=Li%2C+Mary+Kathryn&rft.date=2022-02-01&rft.issn=1499-4046&rft.eissn=1878-2620&rft.volume=54&rft.issue=2&rft.spage=197&rft_id=info:doi/10.1016%2Fj.jneb.2020.09.009&rft.externalDBID=n%2Fa&rft.externalDocID=10_1016_j_jneb_2020_09_009",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV3dSwJBEB9CX3qJ0iD74nrIl1Duy3SfQk2JotPQ8HG5sw0UvUI0uP--mf04D0tIelmO4di73Zmd3Zn5zSzA1YY-eG62g_pLPxgxQjU0nAr5BQa1UZt1Bm7rUd9tRYkwK7Tg42o4m4e_5DZQliqhGhNzr9TdRIfTyatkO6_9ThBwNHmH5S9kaJaAzDYrr3ztdf8rJ0hDSaG82x1kJe0UCfiMEoMtygy2f5KaVq_3tOW8Gpu6_braq8Exm0T_FNoz0TlAiYRqLJI461lAo9ROURpKGaI1hPaldhEKRWug1UlF7LMaVJWB1pLiZtSho7C3P9S08hhMq9NYRGiju7asNWuz9aZkAvEbe1WKIDTgtCmnPjj1wW3GZS5n3q0zRrdZVJ1KGlHScJ90TDqBSmH9Nv8jc0hRsFh52hgewoGedqupOHQEeyIuQLEZh8uPeWKVLQnclRGRApTuJ2KJNF3idWYFhlMFupRb86oIOWLuMbjdzrD9UDFf5p-q3gjfPlbvBCynwRwW-RHarb4_9mqReA9vvejNF140dm2_BDc79Hi609tnsL8WnHPILRcrcQF5uY4v5fx_A3cFPYc",
+      "ExternalDocumentID": [
+        "10_1016_j_jneb_2020_09_009"
+      ],
+      "Issue": [
+        "2"
+      ],
+      "IngestDate": [
+        "Mon Apr 15 04:48:41 EDT 2024"
+      ],
+      "DBID": [
+        "AAYXX",
+        "CITATION"
+      ],
+      "PublicationDate_xml": [
+        {
+          "month": "02",
+          "year": "2022",
+          "text": "2022-02-00"
+        }
+      ],
+      "Score": [
+        "5.5106015"
+      ],
+      "ID": [
+        "FETCH-crossref_primary_10_1016_j_jneb_2020_09_0093"
+      ],
+      "DOI": [
+        "10.1016/j.jneb.2020.09.009"
+      ],
+      "Language": [
+        "English"
+      ],
+      "EISSN": [
+        "1878-2620"
+      ],
+      "Author": [],
+      "ISSN": [
+        "1499-4046"
+      ],
+      "PublicationCentury": [
+        "2000"
+      ],
+      "PublicationDecade": [
+        "2020"
+      ],
+      "IsScholarly": [
+        "true"
+      ],
+      "PublicationTitle": [
+        "Journal of nutrition education and behavior"
+      ],
+      "ProviderPackageCode": [
+        "CITATION",
+        "AAYXX"
+      ],
+      "GroupedDBID": [
+        "---",
+        "--K",
+        "--M",
+        "-ET",
+        ".1-",
+        ".FO",
+        ".GJ",
+        ".~1",
+        "0-V",
+        "04C",
+        "0R~",
+        "186",
+        "1B1",
+        "1P~",
+        "1~.",
+        "1~5",
+        "29L",
+        "2QV",
+        "36B",
+        "3EH",
+        "3V.",
+        "4.4",
+        "457",
+        "4G.",
+        "53G",
+        "5GY",
+        "5VS",
+        "6PF",
+        "7-5",
+        "71M",
+        "7RV",
+        "7X2",
+        "85S",
+        "88E",
+        "88I",
+        "8A4",
+        "8C1",
+        "8FE",
+        "8FH",
+        "8FI",
+        "8FJ",
+        "8FQ",
+        "8G5",
+        "8P~",
+        "A8Z",
+        "AABSN",
+        "AABVA",
+        "AACTN",
+        "AADFP",
+        "AAEDT",
+        "AAEDW",
+        "AAFJI",
+        "AAGJA",
+        "AAGUQ",
+        "AAIAV",
+        "AAIKC",
+        "AAIKJ",
+        "AAKOC",
+        "AALCJ",
+        "AALRI",
+        "AAMNW",
+        "AAOAW",
+        "AAQFI",
+        "AAQQT",
+        "AATLK",
+        "AAWTL",
+        "AAXUO",
+        "AAYOK",
+        "AAYXX",
+        "ABBQC",
+        "ABDBF",
+        "ABFRF",
+        "ABGRD",
+        "ABIVO",
+        "ABJNI",
+        "ABLVK",
+        "ABMAC",
+        "ABMMH",
+        "ABMZM",
+        "ABOYX",
+        "ABXDB",
+        "ABYKQ",
+        "ACBNA",
+        "ACDAQ",
+        "ACGFO",
+        "ACGFS",
+        "ACGOD",
+        "ACJTP",
+        "ACNCT",
+        "ACRLP",
+        "ACXNI",
+        "ADBBV",
+        "ADEZE",
+        "ADHUB",
+        "ADMUD",
+        "ADQTV",
+        "AEBSH",
+        "AEFWE",
+        "AEKER",
+        "AENEX",
+        "AEQOU",
+        "AEVXI",
+        "AFFDN",
+        "AFKRA",
+        "AFKWA",
+        "AFRAH",
+        "AFRHN",
+        "AFTJW",
+        "AFXBA",
+        "AFXIZ",
+        "AFYLN",
+        "AGHFR",
+        "AGNAY",
+        "AGUBO",
+        "AGYEJ",
+        "AHMBA",
+        "AI.",
+        "AIEXJ",
+        "AIKHN",
+        "AIKWM",
+        "AISVY",
+        "AITUG",
+        "AJBFU",
+        "AJOXV",
+        "AJRQY",
+        "AJUYK",
+        "AKRWK",
+        "AKYCK",
+        "ALMA_UNASSIGNED_HOLDINGS",
+        "AMFUW",
+        "AMRAJ",
+        "ANZVX",
+        "AOMHK",
+        "ARALO",
+        "AVARZ",
+        "AXJTR",
+        "B-7",
+        "B0M",
+        "BCU",
+        "BEC",
+        "BKOJK",
+        "BKOMP",
+        "BLXMC",
+        "BMSDO",
+        "BNPGV",
+        "BVXVI",
+        "C45",
+        "CBWCG",
+        "CCPQU",
+        "CITATION",
+        "COPKO",
+        "CS3",
+        "DU5",
+        "DXH",
+        "E.L",
+        "EAD",
+        "EAP",
+        "EAS",
+        "EBC",
+        "EBD",
+        "EBS",
+        "ECF",
+        "ECT",
+        "EFJIC",
+        "EHN",
+        "EHX",
+        "EIHBH",
+        "EJD",
+        "EMB",
+        "EMK",
+        "EMOBN",
+        "ENB",
+        "ENC",
+        "ENX",
+        "EO9",
+        "EP2",
+        "EP3",
+        "ESTFP",
+        "ESX",
+        "EX3",
+        "F5P",
+        "FAFAN",
+        "FDB",
+        "FEDTE",
+        "FIRID",
+        "FNPLU",
+        "FYGXN",
+        "G8K",
+        "GBLVA",
+        "HF~",
+        "HMCUK",
+        "HVGLF",
+        "HX~",
+        "HZ~",
+        "H~9",
+        "IHE",
+        "J1W",
+        "KOM",
+        "L7B",
+        "LCYCR",
+        "M0P",
+        "M1P",
+        "M2M",
+        "M3G",
+        "M41",
+        "MO0",
+        "N9A",
+        "NAHTW",
+        "NAPCQ",
+        "NCXOZ",
+        "NEJ",
+        "NHB",
+        "O-L",
+        "O9-",
+        "OAUVE",
+        "OD~",
+        "OHT",
+        "OKEIE",
+        "OO0",
+        "OVD",
+        "OZT",
+        "P-8",
+        "P-9",
+        "PADUT",
+        "PC.",
+        "PQQKQ",
+        "PRBVW",
+        "PROAC",
+        "PSQYO",
+        "PSYQQ",
+        "Q38",
+        "RIG",
+        "ROL",
+        "RPZ",
+        "SDF",
+        "SDG",
+        "SEL",
+        "SES",
+        "SEW",
+        "SJFOW",
+        "SNC",
+        "SND",
+        "SNG",
+        "SPCBC",
+        "SSA",
+        "SSB",
+        "SSH",
+        "SSO",
+        "SSY",
+        "SSZ",
+        "SV3",
+        "T5K",
+        "TEORI",
+        "TUS",
+        "TWZ",
+        "UBH",
+        "UHB",
+        "UKHRP",
+        "UKR",
+        "UNMZH",
+        "UPT",
+        "VH1",
+        "VQP",
+        "WH7",
+        "WOW",
+        "WQ9",
+        "XOL",
+        "XZL",
+        "YHZ",
+        "YQT",
+        "YRY",
+        "YZZ",
+        "Z5R",
+        "ZCA",
+        "ZCG",
+        "ZHY",
+        "~8M",
+        "~G-",
+        "~KM"
+      ],
+      "Discipline": [
+        "Education",
+        "Anatomy & Physiology",
+        "Diet & Clinical Nutrition"
+      ],
+      "Volume": [
+        "54"
+      ],
+      "ContentType": [
+        "Journal Article"
+      ],
+      "SourceType": [
+        "Aggregation Database"
+      ],
+      "Author_xml": [],
+      "PublicationYear": [
+        "2022"
+      ],
+      "StartPage": [
+        "197"
+      ],
+      "SourceID": [
+        "crossref"
+      ],
+      "SSID": [
+        "ssj0015209"
+      ],
+      "Title": [
+        "BOOK"
+      ],
+      "PublicationDate": [
+        "2022-02-00"
+      ],
+      "DatabaseTitle": [
+        "CrossRef"
+      ],
+      "MergedId": [
+        "FETCHMERGED-crossref_primary_10_1016_j_jneb_2020_09_0093"
+      ],
+      "IsPeerReviewed": [
+        "true"
+      ],
+      "thumbnail_s": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/sc.gif&issn=1499-4046&client=summon"
+      ],
+      "thumbnail_m": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/mc.gif&issn=1499-4046&client=summon"
+      ],
+      "thumbnail_l": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/lc.gif&issn=1499-4046&client=summon"
+      ],
+      "link.rule.ids": [
+        "315,787,791,27992,27993"
+      ],
+      "linkProvider": [
+        "Elsevier"
+      ],
+      "LinkModel": [
+        "OpenURL"
+      ],
+      "BookMark": [
+        "eNqdzTsKAjEURuGLRHB8bMA9JP6JMU5aRREsprG_jJIBgy8SLdy9ky3YnebwEc01lIZ2i6jiI5yVgYGCV4AfUKXrdS2NMxB9W--lhXUjGuccAb0y8BWJTdMcpzTs2lsOMxLv9AkTMvvdaXuQl_TMOYWOX-l6b9OXNbhwHLlwXDiG555b_jX9ADbHMo0"
+      ],
+      "DatabaseName": [
+        "CrossRef"
+      ],
+      "ParticipantIDs": [
+        "crossref_primary_10_1016_j_jneb_2020_09_009"
+      ]
+    },
+    {
+      "hasFullText": true,
+      "isFullTextHit": false,
+      "isPrint": false,
+      "inHoldings": true,
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.title=Reading+beyond+the+book%3A+the+social+practices+of+contemporary+literary+culture&rft.au=Sedo%2C+Danielle+Fuller+And+Denel+Rehberg&rft.series=Routledge+research+in+cultural+and+media+studies&rft.date=2013-04-02&rft.pub=Routledge&rft.isbn=9780203067741&rft.volume=49&rft_id=info:doi/10.4324%2F9780203067741&rft.externalDocID=9780203067741",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV1db9MwFLWAvrCn8SEx2JBBoi9VII7dpOYBxKpMCGnRUDvtMbIbRyBKJ5GuEv-ee_2RJhGCIV6iNHGcNOfG9r0-95iQF4P24PzDvMg-XxRXElkNMxZhXGAxvZrLfJGcfvLzMJgIcwMe_Oa1Wn9Xv8ltwCxVZDX-DOtKvf_qp9MxqhSzy4u8KEpweZfjHQDaPQBghy9v_Iqf_a-dwDGwFMy7_QdbaSuFA7APFgNbsBnYDobT7U8vzu3I9BPtMlpwOIolAu3Dh9ZDTlXj2OgdYauQyjxxUh6tuSxMdb1PZV8byzZBXr5lQG8MSvt_aWW28D-aZk9TmngtIhuWaUVCMNZvM16sOG5gQfrQBS4jIaJ47-j2OU_Bp8WpUZS1c3pYoZF2uqbD9h7lBB3FY3BVX0K7d_4uGSVixqERH0HPn5-3ETkYfKapSJ0QK9b8pnfdATlQzTfoeaBX2jYDZdt-T8798GR5SEYGc1YekDtm85Cc-FwUOqY-2QzthfpW_BEpPNbUYU0BX4pYv7V7DmnaIk2va9pFmgakqUf6Mbk8y5fzj5FfViNSAtUEI5mZJKsYkwpnbaGHqZmSIjU8rqYmiVdxlqhVXWuRapOxSsu0rrTCGWIoL2r-hFA2k0xqAadgPL3iU21qlXJdCcP1KonFEXnZeVnlbm2n_puy90b_UIgxDp5DzLPkFoVm8oi866JRbm20q3ZL07jy4Owipv0nKHcuKA13if5WweDRacC7tA_kqdRlfjpn6OLE7OltXsEzcn__YRyTe9sfN-aEjGxD-Nwb6C_LGa7D",
+      "ExternalDocumentID": [
+        "9781135080389",
+        "9781135080372",
+        "9780203067741",
+        "EBC1163801",
+        "10_4324_9780203067741_version2"
+      ],
+      "IngestDate": [
+        "Wed Jan 31 07:44:16 EST 2024",
+        "Wed Jan 31 09:18:11 EST 2024",
+        "Wed Jan 31 08:29:52 EST 2024",
+        "Mon Apr 15 23:54:12 EDT 2024",
+        "Thu Oct 12 14:46:58 EDT 2023",
+        "Wed Jan 31 07:01:54 EST 2024"
+      ],
+      "PublicationSeriesTitle": [
+        "Routledge Research in Cultural and Media Studies"
+      ],
+      "Score": [
+        "5.264398"
+      ],
+      "DatabaseTitleList": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "URI": [
+        "https://www.taylorfrancis.com/books/9781135080389",
+        "https://www.taylorfrancis.com/books/9781135080372",
+        "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=1163801",
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9780203067741",
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9781135080372",
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9781135080389&uid=none"
+      ],
+      "PublicationPlace_xml": [
+        {
+          "name": "Oxford"
+        }
+      ],
+      "PublicationPlace": [
+        "Oxford"
+      ],
+      "Publisher_xml": [
+        {
+          "name": "Routledge"
+        },
+        {
+          "name": "Taylor and Francis"
+        },
+        {
+          "name": "Taylor & Francis Group"
+        }
+      ],
+      "ID": [
+        "FETCH-LOGICAL-a46071-97e27d119a6437376f1a946e30d5e20c072acffb46be71db96fdba49086434f3"
+      ],
+      "DOI": [
+        "10.4324/9780203067741"
+      ],
+      "Publisher": [
+        "Routledge",
+        "Taylor and Francis",
+        "Taylor & Francis Group"
+      ],
+      "AbstractList": [
+        "Literary culture has become a form of popular culture over the last fifteen years thanks to the success of televised book clubs, film adaptations, big-box book stores, online bookselling, and face-to-face and online book groups. This volume offers the first critical analysis of mass reading events and the contemporary meanings of reading in the UK, USA, and Canada based on original interviews and surveys with readers and event organizers.\nThe resurgence of book groups has inspired new cultural formations of what the authors call \"shared reading.\" They interrogate the enduring attraction of an old technology for readers, community organizers, and government agencies, exploring the social practices inspired by the sharing of books in public spaces and revealing the complex ideological investments made by readers, cultural workers, institutions, and the mass media in the meanings of reading.\nIntroduction. 1.Reading 2. Television 3. Radio 4. Money 5. Worker 6. Reader 7. Book\nDanielle Fuller is Senior Lecturer in the Department of American & Canadian Studies at the University of Birmingham, UK.\nDeNel Rehberg Sedo is Associate Professor in the Department of Communication Studies at Mount Saint Vincent University, Canada.\n'This is more than just an excellent study of books and reading in the twenty first century. It's a superb piece of cultural sociology.'\n-- David Hesmondhalgh , University of Leeds\n'In Beyond the Book , Fuller and Rehberg Sedo set out a carefully argued and highly readable account of \"Mass Reading Events\" (MREs) in Britain, Canada and the USA, supporting careful empirical research with sophisticated political and economic analysis of the reading industry. Their findings testify to the persistence of a book culture with long historical roots, despite radical upheavals in media structures and delivery platforms. Students and scholars of media and reading will especially appreciate the way the authors comprehensively pull together theoretical and empirical literature on current reading practices. This insightful and well-informed book is essential for anyone interested in the place of texts and reading in contemporary media-saturated life.'\n-- Christine Pawley , University of Wisconsin-Madison\n'This lively, methodologically adventurous book should be read by everyone interested in the fate of reading in our digital age. Why, the authors wonder, have community organizers, universities, and even both local and national governments turned to the promotion of mass reading events at the very moment when our media landscape seems to be changing so radically? Investigating how the community reading of books is financed, organized, promoted on radio and television, and then experienced and evaluated by the many who participate in this widespread activity, the authors explore with great verve and insight the significance of the fact that a book reading industry has flourished even as digital media garner more and more of our collective attention.'\n-- Janice Radway , Walter Dill Scott, Northwestern University\n'Using an impressive range of empirical material gathered from organizers and participants, this book offers a compelling account of the significance of Mass Reading Events in today’s ‘reading industry’. In the tradition of Janice Radway and Elizabeth Long it reminds us that attention to actual readers and their practices is vital if we are to make sense of the changes and continuities evident in contemporary literary culture.'\n--David Wright , University of Warwick\n'[T]his is a remarkably in-depth study that teases out many insights into what reading means to readers, how book culture combines prestige with consumerism, how the radical potential for growth through literature is entangled with a conservative desire to belong and be comforted, and what role books and reading have in mass media and popular culture. This book is an important and insightful interdisciplinary contribution to reading studies.'\n-- Barbara Fister , Gustavus Adolphus College\n'There is no question but that this book opens up a substantial development of the last two decades, one which has not only reconfigured in significant ways the cultural place of book-reading, but also shifted the workings of the publishing industry. It is also good to see book-readers becoming a focus of research in their own right, outside broad social histories...[I give] my overwhelming recommendation of [this book]. [It] deserves to be very widely read...'\n-- Martin Barker, Participations: Journal of Audience & Reception Studies\n'As a guide to understanding how and why people gather to read in a digital age, Reading Beyond the Book is a much-needed and theoretically informed study of popular iterations of reading practice in our neoliberal world.'\n--Tony Tremblay, TOPIA: Canadian Journal of Cultural Studies",
+        "Literary culture has become a form of popular culture over the last fifteen years thanks to the success of televised book clubs, film adaptations, big-box book stores, online bookselling, and face-to-face and online book groups. This volume offers the first critical analysis of mass reading events and the contemporary meanings of reading in the UK, USA, and Canada based on original interviews and surveys with readers and event organizers.\nThe resurgence of book groups has inspired new cultural formations of what the authors call \"shared reading.\" They interrogate the enduring attraction of an old technology for readers, community organizers, and government agencies, exploring the social practices inspired by the sharing of books in public spaces and revealing the complex ideological investments made by readers, cultural workers, institutions, and the mass media in the meanings of reading.",
+        "This volume offers the first critical analysis of mass reading events and the contemporary meanings of reading in the UK, USA, and Canada based on original interviews and surveys with readers and event organisers. The authors interrogate the enduring attraction of an old technology for readers, community organizers, and government agencies, exploring the social practices inspired by the sharing of books in public spaces and revealing the complex ideological investments made by readers, cultural workers, institutions, and the mass media in the meanings of reading."
+      ],
+      "Language": [
+        "English"
+      ],
+      "Author": [
+        "Fuller, Danielle",
+        "Rehberg Sedo, DeNel"
+      ],
+      "PublicationCentury": [
+        "2000"
+      ],
+      "PublicationDecade": [
+        "2010"
+      ],
+      "IsScholarly": [
+        "false"
+      ],
+      "LCCallNum_Ident": [
+        "Z1003 .F863 2013"
+      ],
+      "GroupedDBID": [
+        "-VX",
+        "089",
+        "20A",
+        "38.",
+        "A4J",
+        "AABBV",
+        "ABARN",
+        "ABBFG",
+        "ABQPQ",
+        "ABYSD",
+        "ACGYG",
+        "ACLGV",
+        "ACNUM",
+        "ADTEY",
+        "ADVEM",
+        "AERYV",
+        "AEUHU",
+        "AFXGA",
+        "AGWCO",
+        "AIXXW",
+        "AJFER",
+        "AKQZE",
+        "ALMA_UNASSIGNED_HOLDINGS",
+        "AXTGW",
+        "AZZ",
+        "BBABE",
+        "CQYVH",
+        "CZZ",
+        "EBATF",
+        "EKLKH",
+        "GQITE",
+        "INALI",
+        "JTX",
+        "MYL",
+        "PQQKQ",
+        "CRHBD"
+      ],
+      "SubjectTerms": [
+        "book club",
+        "Book clubs (Discussion groups)",
+        "book group",
+        "Books and reading",
+        "bookselling",
+        "bookstores",
+        "Case studies",
+        "culture",
+        "Group reading",
+        "literary",
+        "literature",
+        "Literature & Culture",
+        "mass",
+        "media",
+        "Media Studies",
+        "Popular Culture",
+        "Publishing",
+        "reader",
+        "Reading promotion",
+        "Sedo"
+      ],
+      "Discipline": [
+        "Library & Information Science"
+      ],
+      "Volume": [
+        "49"
+      ],
+      "ContentType": [
+        "eBook"
+      ],
+      "SourceType": [
+        "Aggregation Database",
+        "Publisher"
+      ],
+      "Edition": [
+        "1"
+      ],
+      "Author_xml": [
+        {
+          "sequence": "1",
+          "givenname": "Danielle",
+          "surname": "Fuller",
+          "fullname": "Fuller, Danielle"
+        },
+        {
+          "sequence": "2",
+          "givenname": "DeNel",
+          "surname": "Rehberg Sedo",
+          "fullname": "Rehberg Sedo, DeNel"
+        }
+      ],
+      "ISBN": [
+        "9780415532952",
+        "0415532957",
+        "9781138929937",
+        "113892993X"
+      ],
+      "EISBN": [
+        "9780203067741",
+        "9781135080389",
+        "0203067746",
+        "1135080380",
+        "9780415532952",
+        "0415532957",
+        "9781135080372",
+        "1135080372"
+      ],
+      "Abstract": [
+        "Literary culture has become a form of popular culture over the last fifteen years thanks to the success of televised book clubs, film adaptations, big-box book stores, online bookselling, and face-to-face and online book groups. This volume offers the first critical analysis of mass reading events and the contemporary meanings of reading in the UK, USA, and Canada based on original interviews and surveys with readers and event organizers.\nThe resurgence of book groups has inspired new cultural formations of what the authors call \"shared reading.\" They interrogate the enduring attraction of an old technology for readers, community organizers, and government agencies, exploring the social practices inspired by the sharing of books in public spaces and revealing the complex ideological investments made by readers, cultural workers, institutions, and the mass media in the meanings of reading."
+      ],
+      "SourceID": [
+        "askewsholts",
+        "proquest",
+        "informaworld"
+      ],
+      "Copyright_xml": [
+        {
+          "notice": "2013 Taylor & Francis"
+        }
+      ],
+      "SSID": [
+        "ssib021912587",
+        "ssib047259752",
+        "ssj0000856646",
+        "ssib014242624",
+        "ssib036567526",
+        "ssib045138564"
+      ],
+      "Title": [
+        "Reading Beyond the Book"
+      ],
+      "PageCount": [
+        "370"
+      ],
+      "OCLC": [
+        "836402566"
+      ],
+      "Subtitle": [
+        "The Social Practices of Contemporary Literary Culture"
+      ],
+      "DEWEY": [
+        "028.9"
+      ],
+      "MergedId": [
+        "FETCHMERGED-LOGICAL-a46071-97e27d119a6437376f1a946e30d5e20c072acffb46be71db96fdba49086434f3"
+      ],
+      "PQID": [
+        "EBC1163801"
+      ],
+      "Copyright": [
+        "2013 Taylor & Francis"
+      ],
+      "IsPeerReviewed": [
+        "false"
+      ],
+      "thumbnail_m": [
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F7741%2F9780203067741.jpg",
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F0372%2F9781135080372.jpg",
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F0389%2F9781135080389.jpg"
+      ],
+      "link.rule.ids": [
+        "307,787,791,793,24831,27993"
+      ],
+      "linkProvider": [
+        "ProQuest Ebooks"
+      ],
+      "LinkModel": [
+        "OpenURL"
+      ],
+      "BookMark": [
+        "eNqN0UlLw0AUAOARFyy1R_Ham3iovjdr5mhLXaAgiJ7DJJmxoTGjM2lL_31Tc5CCYI8PvrcTcolwyxnld1olQIGBVIrjERnsxcddzFEIRrWgZ6SXMMmBCinPySDGMgOKGqlIVI9cvVpTlPXHcGw3vi6GzdwOx94vLsipM1W0A3LShKXtk_eH6dvkaTR7eXye3M9GhktQONLKUlUgaiM5U0xJh0ZzaRkUwlLIQVGTO5dxmVmFRaalKzLDNSSt5471yU1X18SFXce5r5qYriqbtSPEtN0DkQlIgCX6cKvo__b3Xq297uxX8N9LG5v0h-W2boKp0ul4gihZAjvJO1nWzodPs_ahKtLGbCofXDB1Xsa_G0wPS0NId__dT09XNsTS15RtAW1fklQ"
+      ],
+      "ParticipantIDs": [
+        "askewsholts_vlebooks_9781135080389",
+        "askewsholts_vlebooks_9781135080372",
+        "askewsholts_vlebooks_9780203067741",
+        "proquest_ebookcentral_EBC1163801",
+        "informaworld_taylorfrancisbooks_9780203067741",
+        "informaworld_taylorfrancisbooks_10_4324_9780203067741_version2"
+      ]
+    }
+  ],
+  "clientId": "S5WC9ES2BJ"
+}
