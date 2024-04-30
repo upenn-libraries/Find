@@ -1,0 +1,403 @@
+{
+  "version": "2.0.0",
+  "sessionId": "SUMMON-SESSION-MACN7QPNW9-69257-1",
+  "elapsedQueryTime": 3,
+  "queryTime": 89,
+  "internalSolrQueryTime": 329,
+  "totalRequestTime": 16,
+  "pageCount": 1,
+  "recordCount": 2,
+  "query": {
+    "queryString": "s.normalized.subjects=f\u0026s.secure=t\u0026s.light=t\u0026s.dailyCatalog=t\u0026s.q=wagjio\u0026s.dym=f\u0026s.ho=t\u0026s.rapido=f\u0026s.hl=f\u0026s.ps=3\u0026s.shortenurl=f\u0026s.ff=ContentType%2Cor%2C1%2C7",
+    "pageNumber": 1,
+    "pageSize": 3,
+    "isHighlightingEnabled": false,
+    "isDidYouMeanEnabled": false,
+    "isHoldingsOnlyEnabled": true,
+    "textQueries": [
+      {
+        "textQuery": "wagjio",
+        "removeCommand": "removeTextQuery(wagjio)"
+      }
+    ],
+    "facetFields": [
+      {
+        "fieldName": "ContentType",
+        "combineMode": "or",
+        "pageNumber": 1,
+        "pageSize": 6,
+        "removeCommand": "removeFacetField(ContentType)"
+      }
+    ]
+  },
+  "facetFields": [
+    {
+      "fieldName": "ContentType_mfacet",
+      "displayName": "ContentType",
+      "combineMode": "or",
+      "pageNumber": 1,
+      "pageSize": 6,
+      "hasMoreFacets": "no",
+      "hasLimitingValue": false,
+      "hasAppliedValue": false,
+      "removeCommand": "removeFacetField(ContentType)",
+      "listValuesCommand": "listFacetValues(ContentType,or)",
+      "removeValueFiltersCommand": "removeFacetValueFilter(ContentType)",
+      "counts": [
+        {
+          "value": "Newspaper Article",
+          "count": 2,
+          "isApplied": false,
+          "isNegated": false,
+          "isFurtherLimiting": false,
+          "applyCommand": "addFacetValueFilters(ContentType,Newspaper Article)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Newspaper Article:t)"
+        }
+      ]
+    }
+  ],
+  "recommendationLists": {
+    "customBlock": [
+      {
+        "title": "Accessing Electronic Resources",
+        "content": "\u003cp\u003eFollow the following guide for help accessing resources on and off-campus:\u003c/p\u003e\r\n\u003cp\u003e\u003ca href=\"https://guides.library.upenn.edu/usingeresources/ezproxy\"\u003eAccessing Electronic Resources\u003c/a\u003e\u003c/p\u003e\r\n\u003cp\u003eNote that\u0026nbsp;use of Penn Libraries licensed resources is generally restricted to current students, faculty, and staff.\u0026nbsp;\u0026nbsp;\u003c/p\u003e\r\n\u003cp\u003e\u0026nbsp;\u003c/p\u003e\r\n\u003cp\u003e\u003cspan style=\"box-sizing: border-box; font-size: 14px;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/p\u003e",
+        "priority_i": "100003862"
+      },
+      {
+        "title": "Using Franklin Articles+",
+        "content": "\u003cp\u003eFranklin Articles+, a large multidisciplinary database offering access to many resources, provides paths to full-text differently. More help on searching article databases is available in the guide: \u003ca href=\"https://guides.library.upenn.edu/articlesplus/toc\"\u003eUsing Franklin Articles+\u003c/a\u003e\u003c/p\u003e",
+        "priority_i": "100003863"
+      },
+      {
+        "title": "Searching for Books?",
+        "content": "\u003cp\u003eIf you would like to find a print book in the library please follow the guide here:\u003c/p\u003e\r\n\u003cp\u003e\u003ca href=\"https://guides.library.upenn.edu/franklincatalog\"\u003eUsing Franklin Catalog\u003c/a\u003e\u003c/p\u003e\r\n\u003cp\u003ealternatively link back to the main \u003ca href=\"https://franklin.library.upenn.edu/\"\u003eFranklin search page\u003c/a\u003e\u003c/p\u003e",
+        "priority_i": "100003864"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "hasFullText": true,
+      "isFullTextHit": true,
+      "isPrint": false,
+      "inHoldings": true,
+      "openUrl": "institution=01UPENN_INST\u0026vid=01UPENN_INST%3AServices\u0026%3Fctx_ver=Z39.88-2004\u0026ctx_enc=info%3Aofi%2Fenc%3AUTF-8\u0026rfr_id=info%3Asid%2Fsummon.serialssolutions.com\u0026rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal\u0026rft.genre=article\u0026rft.atitle=April+27%2C+1992+%28Page+12+of+20%29\u0026rft.jtitle=The+Sheboygan+Press+%281924-%29\u0026rft.date=1992-04-27\u0026rft.pub=Gannett+Media+Corp\u0026rft.issn=0749-7121\u0026rft.spage=12",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwY2BQRCsPfB2d_cwDA_zCLXXNLIEpRBe8V8w03NnSNdjIyYuJIQu2EQYaubAyEVxQp-Qng8bI9YFVC1C3EbA2ty8o1AXdGgWaXYVdoYF0OgF8NrgAWFKBy2vwGdGGRmZGJubMDKygmTBghmD18AsI94Qc0mmpa25oZIhRGoOrGDcBBthFhZCFJZjmo57fSB-PCDIIgkrBgsSC1CIFR0giE2JgSs0TYZBzLCjKzFEwMtdRAK0tVdAIAJZMCoZGCvlpCkYGmqIMcm6uIc4eujDXxWfkFcQjXGUswaCQammQZJlqCGmNAHN9kplparJRmqVxooVJoolRsiSDOA7dUjhlpBm4IEtdTXSNzGUYWEqKSlNlGVjBvpODRgcAa7im3g",
+      "linkToHtml": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwY2BQRCsPfB2d_cwDA_zCLXXNLIEpRBe8V8w03NnSNdjIyQs62lYMXVMJKxDBpXRKfjJogFwfWK8AtRoBq3L7gkJd0JVRoKlV6P0ZzAysJibG5hYsDKwefgHhnpCDNy11zQ2NDDFKWHC14SbAABs7hywWgc8gFwBLN6Sl1LAzGcl3nCCDIKi0KkgsSC1ScIQkBiEGptQ8EQY5x4KizBwFI3MdBdAaUAWNAGAJomBopJCfpmBkoCnKIOfmGuLsoQuzND4jryAeYZmxBINCqqVBkmWqIaTVAMydSWamqclGaZbGiRYmiSZGyZIM4jh0S-GUkWfg9Ajx9Yn38fTzlmbggixPNdE1MpdhYCkpKk2VZWAFB5McNLgBaqONYQ",
+      "IngestDate": [
+        "Sat Jan 06 21:58:29 EST 2024"
+      ],
+      "DBID": [
+        "HNPUS",
+        "HNPWI",
+        "POOQU"
+      ],
+      "PublicationDate_xml": [
+        {
+          "month": "04",
+          "year": "1992",
+          "text": "19920427",
+          "day": "27"
+        }
+      ],
+      "Score": [
+        "1.358768"
+      ],
+      "URI": [
+        "https://search.proquest.com/docview/2386922929"
+      ],
+      "PublicationPlace_xml": [
+        {
+          "name": "Sheboygan, Wisconsin"
+        }
+      ],
+      "PublicationPlace": [
+        "Sheboygan, Wisconsin"
+      ],
+      "Publisher_xml": [
+        {
+          "name": "Gannett Media Corp"
+        }
+      ],
+      "ID": [
+        "FETCH-proquest_hnp_23869229293"
+      ],
+      "PQPubID": [
+        "4682315"
+      ],
+      "Publisher": [
+        "Gannett Media Corp"
+      ],
+      "Language": [
+        "English"
+      ],
+      "ISSN": [
+        "0749-7121"
+      ],
+      "PublicationCentury": [
+        "1900"
+      ],
+      "PublicationDecade": [
+        "1990"
+      ],
+      "IsScholarly": [
+        "false"
+      ],
+      "PublicationTitle": [
+        "The Sheboygan Press (1924-)"
+      ],
+      "GroupedDBID": [
+        "GROUPED_PQ_HIST_NEWS",
+        "HNPUS",
+        "POOQU"
+      ],
+      "ContentType": [
+        "Newspaper Article"
+      ],
+      "SourceType": [
+        "Aggregation Database"
+      ],
+      "PublicationYear": [
+        "1992"
+      ],
+      "StartPage": [
+        "12"
+      ],
+      "SourceID": [
+        "proquest"
+      ],
+      "Copyright_xml": [
+        {
+          "notice": "Copyright Gannett Co., Inc. Apr 27, 1992"
+        }
+      ],
+      "Title": [
+        "April 27, 1992 (Page 12 of 20)"
+      ],
+      "PublicationDate": [
+        "19920427"
+      ],
+      "Genre": [
+        "News"
+      ],
+      "DatabaseTitle": [
+        "ProQuest Historical Newspapers: Wisconsin Collection",
+        "ProQuest Digitized Newspapers: U.S.Midwest Historical",
+        "ProQuest Historical Newspapers: U.S. Collection"
+      ],
+      "MergedId": [
+        "FETCHMERGED-proquest_hnp_23869229293"
+      ],
+      "PQID": [
+        "2386922929"
+      ],
+      "Copyright": [
+        "Copyright Gannett Co., Inc. Apr 27, 1992"
+      ],
+      "IsPeerReviewed": [
+        "false"
+      ],
+      "thumbnail_s": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/sc.gif\u0026issn=0749-7121\u0026client=summon"
+      ],
+      "thumbnail_m": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/mc.gif\u0026issn=0749-7121\u0026client=summon"
+      ],
+      "thumbnail_l": [
+        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/lc.gif\u0026issn=0749-7121\u0026client=summon"
+      ],
+      "Database_xml": [
+        {
+          "sequence": "1",
+          "dbid": "HNPWI",
+          "name": "ProQuest Historical Newspapers: Wisconsin Collection",
+          "url": "http://proxy.library.upenn.edu/login?url=http://hdl.library.upenn.edu/1017/126247",
+          "sourceTypes": [
+            "Aggregation Database"
+          ]
+        }
+      ],
+      "link.rule.ids": [
+        "306,787,790,791,38583,44378"
+      ],
+      "linkProvider": [
+        "ProQuest"
+      ],
+      "LinkModel": [
+        "DirectLink"
+      ],
+      "IEDL.DBID": [
+        "HNPWI"
+      ],
+      "BookMark": [
+        "eNpjYeA0MDex1DU3NDLkZJBzLCjKzFEwMtdRMLS0NFLQCEhMT1UwNFLIT1MwMtDkYWBNS8wpTuVlYCkpKk3lZpBzcw1x9tAtKMovLE0tLonPyCuINzK2MLM0MrI0sjQmqAAAav4glA"
+      ],
+      "DatabaseName": [
+        "ProQuest Historical Newspapers: U.S. Collection",
+        "ProQuest Historical Newspapers: Wisconsin Collection",
+        "ProQuest Digitized Newspapers: U.S.Midwest Historical"
+      ],
+      "ParticipantIDs": [
+        "proquest_hnp_2386922929"
+      ]
+    },
+    {
+      "hasFullText": true,
+      "isFullTextHit": true,
+      "isPrint": false,
+      "inHoldings": true,
+      "openUrl": "institution=01UPENN_INST\u0026vid=01UPENN_INST%3AServices\u0026%3Fctx_ver=Z39.88-2004\u0026ctx_enc=info%3Aofi%2Fenc%3AUTF-8\u0026rfr_id=info%3Asid%2Fsummon.serialssolutions.com\u0026rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal\u0026rft.genre=article\u0026rft.atitle=December+26%2C+1890+%28Page+4+of+4%29\u0026rft.jtitle=The+Cincinnati+Post+%281890-1958%29\u0026rft.date=1890-12-26\u0026rft.pub=Gannett+Media+Corp\u0026rft.spage=4",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwY2BQRCsPfB2d_cwDA_zCLXXNLIEpRBe8V8w03NnSNdjIyYuJIQu2EQYaubAyEVxQp-Qng8bI9YHtbhNjE2D1bmFfUKgLujUKNLsKu0ID6XQC-GxwAbCkApfX4DOiDY3MgDUZMwMraCbMhIWB1cMvwN8DtQQ2glYrbgIMsMsJIYtJMM1EPbORPo4XZBAElXwFiQWpRQqOkIQlxMCUmifCIO-SmpwKukFEwchMR8HQwtJAQSMAWCApmCjkpymYaIoyyLm5hjh76MKcF5-RVxCPcJaxBINCqqVBkmWqIaQJAszqSWamqclGaZbGiRYmiSZGyZIM4jh0S-GUkQZt2rcEr_8wMpNhYCkpKk2VZWAFe08OGgcA3hilXA",
+      "linkToHtml": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwY2BQRCsPfB2d_cwDA_zCLXXNLIEpRBe8V8w03NnSNdjIyQs62lYMXVMJKxDBpXRKfjJogFwf2Og2MTYB1u0W9gWFuqAro0BTq9D7M5gZWE1AB_SwMLB6-AX4e6CWqkbQqsJNgAE2Xg5ZIAKfNS4AlmhIy6dh5zCS7yBBBkFQCVWQWJBapOAISQBCDEypeSIM8i6pyamgmz4UjMx0FAwtLA0UNAKABYeCiUJ-moKJpiiDnJtriLOHLszW-Iy8gniEbcYSDAqplgZJlqmGkKYCMEsmmZmmJhulWRonWpgkmhglSzKI49AthVNGnoHTI8TXJ97H089bGrTR3hK8ZsPITIaBpaSoNFWWgRUcTnLQMAYAsuaL3w",
+      "IngestDate": [
+        "Wed Jan 24 10:02:35 EST 2024"
+      ],
+      "DBID": [
+        "AELNY",
+        "HNPOH",
+        "HNPUS",
+        "POOQU"
+      ],
+      "PublicationDate_xml": [
+        {
+          "month": "12",
+          "year": "1890",
+          "text": "18901226",
+          "day": "26"
+        }
+      ],
+      "Score": [
+        "1.341859"
+      ],
+      "URI": [
+        "https://search.proquest.com/docview/2604345148"
+      ],
+      "PublicationPlace_xml": [
+        {
+          "name": "Cincinnati, Ohio"
+        }
+      ],
+      "PublicationPlace": [
+        "Cincinnati, Ohio"
+      ],
+      "Publisher_xml": [
+        {
+          "name": "Gannett Media Corp"
+        }
+      ],
+      "ID": [
+        "FETCH-proquest_hnp_26043451483"
+      ],
+      "PQPubID": [
+        "5324112"
+      ],
+      "Publisher": [
+        "Gannett Media Corp"
+      ],
+      "Language": [
+        "English"
+      ],
+      "PublicationCentury": [
+        "1800"
+      ],
+      "PublicationDecade": [
+        "1890"
+      ],
+      "IsScholarly": [
+        "false"
+      ],
+      "PublicationTitle": [
+        "The Cincinnati Post (1890-1958)"
+      ],
+      "GroupedDBID": [
+        "AELNY",
+        "GROUPED_PQ_HIST_NEWS",
+        "HNPUS",
+        "POOQU"
+      ],
+      "ContentType": [
+        "Newspaper Article"
+      ],
+      "SourceType": [
+        "Aggregation Database"
+      ],
+      "PublicationYear": [
+        "1890"
+      ],
+      "StartPage": [
+        "4"
+      ],
+      "SourceID": [
+        "proquest"
+      ],
+      "Copyright_xml": [
+        {
+          "notice": "Copyright Gannett Media Corp Dec 26, 1890"
+        }
+      ],
+      "Title": [
+        "December 26, 1890 (Page 4 of 4)"
+      ],
+      "PublicationDate": [
+        "18901226"
+      ],
+      "Genre": [
+        "News"
+      ],
+      "DatabaseTitle": [
+        "ProQuest Historical Newspapers: Ohio Collection (All Years)",
+        "ProQuest Digitized Newspapers: U.S.Midwest Historical",
+        "ProQuest Historical Newspapers: Ohio Collection",
+        "ProQuest Historical Newspapers: U.S. Collection"
+      ],
+      "MergedId": [
+        "FETCHMERGED-proquest_hnp_26043451483"
+      ],
+      "PQID": [
+        "2604345148"
+      ],
+      "Copyright": [
+        "Copyright Gannett Media Corp Dec 26, 1890"
+      ],
+      "IsPeerReviewed": [
+        "false"
+      ],
+      "Database_xml": [
+        {
+          "sequence": "1",
+          "dbid": "HNPOH",
+          "name": "ProQuest Historical Newspapers: Ohio Collection",
+          "url": "http://proxy.library.upenn.edu/login?url=http://hdl.library.upenn.edu/1017/126244",
+          "sourceTypes": [
+            "Aggregation Database"
+          ]
+        }
+      ],
+      "link.rule.ids": [
+        "306,787,790,791,38584,44373"
+      ],
+      "linkProvider": [
+        "ProQuest"
+      ],
+      "LinkModel": [
+        "DirectLink"
+      ],
+      "IEDL.DBID": [
+        "HNPOH"
+      ],
+      "BookMark": [
+        "eNrjZJB3SU1OzU1KLVIwMtNRMLSwNFDQCEhMT1UwUchPUzDR5GFgTUvMKU7lZWApKSpN5WaQc3MNcfbQLSjKLyxNLS6Jz8griDcyMzAxNjE1NLEwJqgAANtIH1w"
+      ],
+      "DatabaseName": [
+        "ProQuest Historical Newspapers: Ohio Collection (All Years)",
+        "ProQuest Historical Newspapers: Ohio Collection",
+        "ProQuest Historical Newspapers: U.S. Collection",
+        "ProQuest Digitized Newspapers: U.S.Midwest Historical"
+      ],
+      "ParticipantIDs": [
+        "proquest_hnp_2604345148"
+      ]
+    }
+  ],
+  "clientId": "S5WC9ES2BJ"
+}
