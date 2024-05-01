@@ -107,7 +107,7 @@ en:
         label: 'How would you like it delivered?'
         scan: 'Scan a section and email me a PDF'
         office:
-          label: 'Mail it via FacultyEXPRESS Office Delivery'
+          label: 'Office Delivery via FacultyEXPRESS'
           info: "<a href='https://guides.library.upenn.edu/resourcesharing/facex' target='_blank'>Change your delivery address and contact Faculty Express</a>"
           warning: "You do not have a preferred Faculty Express delivery address. Set one up by contacting<a href='https://guides.library.upenn.edu/resourcesharing/facex' target='_blank'>Faculty Express</a>"
         pickup:
