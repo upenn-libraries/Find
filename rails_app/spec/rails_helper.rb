@@ -12,11 +12,7 @@ require 'webmock/rspec'
 # Allow connections to localhost, solr, and solr-1 when running tests.
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: [
-    "chrome",
-    "solr",
-    "solr-1"
-  ]
+  allow: %w[chrome solr solr-1]
 )
 
 # Add additional requires below this line. Rails is not loaded until this point!
