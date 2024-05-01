@@ -1,0 +1,8 @@
+en:
+  urls:
+    guides:
+      finesfees: "https://guides.library.upenn.edu/circulation/vpfinesfees"
+      bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
+      account: "https://guides.library.upenn.edu/circulation/Yourlibraryaccount"
+    forms:
+      bbm: ""
