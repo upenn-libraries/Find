@@ -1,0 +1,31 @@
+<%# Copied template from Blacklight v8.1.0 to add breadcrumbs navigation %>
+
+<% @page_title = t('blacklight.bookmarks.page_title', :application_name => application_name) %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Find</a></li>
+    <li class="breadcrumb-item"><a href="/account">Account</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Bookmarks</li>
+  </ol>
+</nav>
+
+<div id="content" class="col-md-12">
+  <h1 class='page__heading'><%= t('account.bookmarks.page_heading') %></h1>
+  <p class="page__lede mb-3"><%= t('account.bookmarks.page_lede') %></p>
+
+  <%- if current_or_guest_user.blank? -%>
+
+    <h2 class='section-heading'><%= t('blacklight.bookmarks.need_login') %></h2>
+
+  <%- elsif @response.documents.blank? -%>
+
+    <h2 class='section-heading'><%= t('blacklight.bookmarks.no_bookmarks') %></h2>
+  <% else %>
+    <%= render 'sort_and_per_page' %>
+    <%= render partial: 'tools', locals: { document_list: @response.documents } %>
+    <h2 class='section-heading sr-only visually-hidden'><%= t('blacklight.bookmarks.list_title') %></h2>
+    <%= render_document_index @response.documents %>
+    <%= render 'results_pagination' %>
+  <% end %>
+</div>
