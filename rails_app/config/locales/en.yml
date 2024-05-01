@@ -17,6 +17,56 @@ en:
         fines_and_fees:
           title: 'Fines and Fees'
           description: 'View fines for overdue, lost, or damaged items.'
+    ill:
+      page_heading: 'Request an item'
+      page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
+      request_type:
+        prompt: "What's the item you are requesting?"
+        scan: 'Article or chapter'
+        loan: 'Book or other item'
+      form:
+        scan:
+          journal_title:
+            label: 'Journal or book title'
+            help_text: 'Enter a journal or book title'
+          article_title: 'Article or chapter title'
+          author:
+            label: 'Author'
+            help_text: 'Enter an author'
+          publication_date: 'Publication date'
+          volume: 'Volume'
+          issue: 'Issue'
+          pages: 'Pages'
+          comments:
+            label: 'Comments'
+            help_text: 'Describe the item further to help us find it.'
+          submit: 'Place request'
+          delivery_msg: 'Articles and chapters are delivered electronically as a PDF and are often ready in 2-3 business days.'
+        loan:
+          title: 'Title'
+          author: 'Author'
+          publication_year: 'Year of publication'
+          edition: 'Edition'
+          publisher: 'Publisher'
+          place_of_publication: 'Place of publication'
+          isbn: 'ISBN'
+          comments:
+            label: 'Comments'
+            help_text: 'Describe the item further to help us find it.'
+          delivery:
+            label: 'How would you like this item delivered?'
+            help_text_html: 'Books or other items are available for <a href="%{pickup_url}" target="_blank">pick up</a> or <a href="%{bbm_url}" target="_blank">mail delivery</a>.'
+            options:
+              pickup:
+                label: 'Pick up'
+                blank: 'Pick up location'
+              mail:
+                label: 'Mail'
+                help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
+          delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
+          submit: 'Place request'
+        required: '(required)'
+        email_notification_msg: "We'll send you an email notification when it is ready."
     bookmarks:
       page_heading: 'Bookmarks'
       page_lede: 'Create citations and email bookmarked items.'

@@ -9,7 +9,7 @@ module Account
     def new; end
 
     # Form for initializing an ILL form.
-    # GET /account/request/ill/new
+    # GET /account/requests/ill/new
     def ill; end
 
     # Submit endpoint for a request form.
