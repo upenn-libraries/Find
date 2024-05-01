@@ -146,6 +146,7 @@ rspec_app_test:
     RAILS_SYSTEM_TESTING_SCREENSHOT_HTML: "1"
     REDIS_URL: "redis:6379"
     SOLR_URL: "http://solr:8983"
+    SOLR_TEST_URL: http://solr:8983/solr/find-test
   before_script:
     - mkdir -p /tmp/indexing && cd /tmp/indexing
     - git clone -n --depth=1 --filter=tree:0 https://gitlab.library.upenn.edu/dld/catalog/catalog-indexing.git .

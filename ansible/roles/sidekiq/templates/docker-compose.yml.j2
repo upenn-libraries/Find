@@ -17,6 +17,7 @@ services:
 {% if is_development == true %}
       APP_UID: ${UID:-1000}
       APP_GID: ${GID:-1000}
+      SOLR_TEST_URL: "{{ catalog_find_solr_test_url }}"
 {% endif %}
       DATABASE_HOST: "postgres"
       DATABASE_NAME: "{{ postgres_database_name }}"
@@ -57,8 +58,6 @@ services:
         gid: "1000"
         mode: 0440
       - redis_sidekiq_password
-      - solr_username
-      - solr_password
 {% if is_development == false %}
       - honeybadger_api_key
 {% endif %}
@@ -87,12 +86,6 @@ secrets:
   redis_sidekiq_password:
     external: true
     name: "{{ 'redis_sidekiq_password_v' ~ redis.versioned_configs.users_acl.users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
-  solr_username:
-    external: true
-    name: "{{ 'catalog_find_solr_username_v' ~ catalog_find_versioned_secrets.solr_username.version }}"
-  solr_password:
-    external: true
-    name: "{{ 'catalog_find_solr_password_v' ~ catalog_find_versioned_secrets.solr_password.version }}"
 {% if is_development == false %}
   honeybadger_api_key:
     external: true

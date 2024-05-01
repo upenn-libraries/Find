@@ -50,8 +50,6 @@ services:
         gid: "1000"
         mode: 0440
       - redis_sidekiq_password
-      - solr_username
-      - solr_password
 
 networks:
   postgres:
@@ -71,9 +69,3 @@ secrets:
   redis_sidekiq_password:
     external: true
     name: ${REDIS_SIDEKIQ_PASSWORD}
-  solr_username:
-    external: true
-    name: ${SOLR_USERNAME}
-  solr_password:
-    external: true
-    name: ${SOLR_PASSWORD}

@@ -56,6 +56,7 @@
     APP_PORT: "{{ catalog_find_port }}"
     APP_REPLICAS: "{{ catalog_find_replicas }}"
     APP_URL: "{{ catalog_find_url }}"
+    CHROME_PORT: "{{ chrome.port }}"
     DATABASE_NAME: "{{ postgres_database_name }}"
     DATABASE_PASSWORD: "{{ 'postgres_database_password_v' ~ postgres_database_versioned_secrets.database_password.version }}"
     DATABASE_USER: "{{ postgres_database_user }}"
@@ -65,10 +66,9 @@
     REDIS_SIDEKIQ_PASSWORD: "{{ 'redis_sidekiq_password_v' ~ redis.versioned_configs.users_acl.users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
     REDIS_PORT: "{{ redis.port }}"
     SOLR_ADMIN_URL: "{{ catalog_find_solr_admin_url }}"
-    SOLR_PASSWORD: "{{ 'catalog_find_solr_password_v' ~ catalog_find_versioned_secrets.solr_password.version }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
+    SOLR_TEST_URL: "{{ catalog_find_solr_test_url }}"
     SOLR_URL: "{{ catalog_find_solr_url }}"
-    SOLR_USERNAME: "{{ 'catalog_find_solr_username_v' ~ catalog_find_versioned_secrets.solr_username.version }}"
   changed_when: false
   no_log: true
   when: is_development | default (false, true)
@@ -109,8 +109,6 @@
     REDIS_PORT: "{{ redis.port }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
     SOLR_URL: "{{ catalog_find_solr_url }}"
-    SOLR_USERNAME: "{{ 'catalog_find_solr_username_v' ~ catalog_find_versioned_secrets.solr_username.version }}"
-    SOLR_PASSWORD: "{{ 'catalog_find_solr_password_v' ~ catalog_find_versioned_secrets.solr_password.version }}"
   changed_when: false
   no_log: true
   when: not is_development | default (false, true)
