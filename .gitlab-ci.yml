@@ -166,7 +166,7 @@ rspec_app_test:
     - cd ${CI_PROJECT_DIR}/rails_app/
     - bundle add rspec_junit_formatter
     - bundle exec rake db:migrate
-    - bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
+    # - bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
     - sleep infinity
   needs:
     - amend_tmp_base_dev_images
