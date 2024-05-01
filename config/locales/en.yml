@@ -55,14 +55,14 @@ en:
             help_text: 'Describe the item further to help us find it.'
           delivery:
             label: 'How would you like this item delivered?'
-            help_text_html: 'Books or other items are available for <a href="https://guides.library.upenn.edu/circulation/PickUpatPenn" target="_blank">pick up</a> or <a href="https://guides.library.upenn.edu/circulation/vpbooksbymail" target="_blank">mail delivery</a>.'
+            help_text_html: 'Books or other items are available for <a href="%{pickup_url}" target="_blank">pick up</a> or <a href="%{bbm_url}" target="_blank">mail delivery</a>.'
             options:
               pickup:
                 label: 'Pick up'
                 blank: 'Pick up location'
               mail:
                 label: 'Mail'
-                help_text_html: 'For those registered with <a href="https://upenn.libwizard.com/f/books-by-mail" target="_blank">Books by Mail</a> at no charge to you.'
+                help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'

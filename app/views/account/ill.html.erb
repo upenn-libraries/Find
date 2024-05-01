@@ -104,7 +104,7 @@
 
           <fieldset>
             <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
-            <p><%= t('account.ill.form.loan.delivery.help_text_html') %></p>
+            <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
             <div class="form-check mt-3">
               <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
               <label class="form-check-label" for="delivery-pickup">
@@ -135,7 +135,7 @@
             <div class="form-check mt-3">
               <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
               <label class="form-check-label" for="delivery-mail">Mail <br>
-              <small id="delivery-mail-help" class="form-text text-muted"><%=t('account.ill.form.loan.delivery.options.mail.help_text_html') %></small></label>
+              <small id="delivery-mail-help" class="form-text text-muted"><%=t('account.ill.form.loan.delivery.options.mail.help_text_html', bbm_form: t('urls.forms.bbm')) %></small></label>
             </div>
           </fieldset>
 
