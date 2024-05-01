@@ -27,6 +27,7 @@ services:
       APP_GID: ${GID:-1000}
       CHROME_URL: "http://chrome:${CHROME_PORT}"
       SOLR_TEST_URL: "${SOLR_TEST_URL}"
+      VAGRANT: "true"
     healthcheck:
       retries: 8
       start_period: 20s
