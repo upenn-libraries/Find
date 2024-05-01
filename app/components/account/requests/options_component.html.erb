@@ -8,7 +8,7 @@
           <%= label_tag :option_scan, t('requests.form.options.scan.label') %>
           <div>
             <small class="text-muted">
-              <%= t('requests.form.options.scan.info').html_safe %>
+              <%= t('requests.form.options.scan.info_html', url: t('urls.request_options.scan_info')) %>
             </small>
           </div>
         </li>
@@ -24,7 +24,7 @@
           <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
           <div>
             <small class="text-muted">
-              <%= t('requests.form.options.mail.message').html_safe %>
+              <%= t('requests.form.options.mail.info_html', url: t('urls.request_options.mail_info')) %>
             </small>
           </div>
           <%# TODO: bbm validation? popup? %>
@@ -32,20 +32,32 @@
         </ul>
       <% end %>
   <% elsif options.include? :aeon %>
-    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_message').html_safe %></p>
-    <p class="mb-3"><%= t('requests.form.options.aeon.access_message').html_safe %></p>
+    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.request_options.aeon_kislak_info')) %></p>
+    <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
   <% elsif options.include? :archives %>
-    <p class="js_archives alert alert-info mb-0">
-      <%= t('requests.form.options.archives.message').html_safe %>
+    <p class="js_archives alert alert-info mb-3">
+      <%= t('requests.form.options.archives.info_html', url: t('urls.request_options.archives_info')) %>
     </p>
   <% end %>
   <div class="request-buttons">
     <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
-    <%= link_to t('requests.form.buttons.scan'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'scanButton' } } %>
-    <%= link_to t('requests.form.buttons.delivery'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'officeButton' } } %>
-    <%= submit_tag t('requests.form.buttons.pickup'), { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'pickupButton' } } %>
-    <%= link_to t('requests.form.buttons.mail'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'mailButton' } } %>
+    <%= link_to t('requests.form.buttons.scan'),
+                ill_new_request_path,
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'scanButton', turbo_frame: '_top' } } %>
+    <%= submit_tag t('requests.form.buttons.delivery'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'officeButton' } } %>
+    <%= submit_tag t('requests.form.buttons.pickup'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'pickupButton' } } %>
+    <%= submit_tag t('requests.form.buttons.mail'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'mailButton' } } %>
     <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
-    <%= link_to t('requests.form.buttons.aeon'), '', { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'viewButton' } } %>
+    <%= link_to t('requests.form.buttons.aeon'),
+                '',
+                { class: 'dta-none btn btn-success btn-lg',
+                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } } %>
   </div>
 <% end %>

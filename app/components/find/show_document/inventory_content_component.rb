@@ -8,6 +8,7 @@ module Find
 
       # @param inventory [Inventory::Response] inventory response
       # @param selected_id [String] entry id for selected entry
+      # @param user [User] current user
       def initialize(inventory:, selected_id:, user: nil)
         @inventory = inventory
         @selected_id = selected_id
@@ -21,6 +22,9 @@ module Find
         @selected_id == entry.id
       end
 
+      # Render the appropriate entry component based on the entry type
+      # @param entry [Inventory::Entry] inventory entry
+      # @return [ActionView::OutputBuffer] HTML content for entry component
       def render_entry(entry)
         type = entry.class.name.split('::').last
         component_class = "Find::ShowDocument::InventoryContent::#{type}EntryComponent".constantize

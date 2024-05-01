@@ -6,11 +6,11 @@
       <%= user_address.join('<br>').html_safe %>
     </p>
     <small class="text-muted">
-      <%= t('requests.form.options.office.info').html_safe %>
+      <%= t('requests.form.options.office.info_html', url: t('urls.request_options.office_info')) %>
     </small>
   <% else %>
     <div class="alert alert-warning my-2">
-      <%= t('requests.form.options.office.warning').html_safe %>
+      <%= t('requests.form.options.office.warning_html', url: t('urls.request_options.office_warning')) %>
     </div>
   <% end %>
 </li>
