@@ -46,9 +46,17 @@ class SolrTools
     raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
   end
 
+  # Returns name of current collection configured in the Solr URL.
+  def self.current_collection_name
+    uri = URI.parse(Settings.solr_url)
+    uri.path.delete_prefix('/solr/')
+  end
+
   def self.connection
-    Faraday.new('http://localhost:8983/') do |faraday|
-      faraday.request :authorization, :basic, 'catalog', 'catalog'
+    uri = URI.parse(Settings.solr_url) # Parsing out connection details from URL.
+
+    Faraday.new("#{uri.scheme}://#{uri.host}:#{uri.port}") do |faraday|
+      faraday.request :authorization, :basic, uri.user, uri.password
       faraday.adapter :net_http
     end
   end
