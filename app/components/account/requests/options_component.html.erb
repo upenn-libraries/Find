@@ -5,7 +5,12 @@
       <% if options.include? :scan %>
         <li class="list-group-item">
           <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
-          <%= label_tag :option_scan, t('requests.form.options.scan') %>
+          <%= label_tag :option_scan, t('requests.form.options.scan.label') %>
+          <div>
+            <small class="text-muted">
+              <%= t('requests.form.options.scan.info').html_safe %>
+            </small>
+          </div>
         </li>
       <% end %>
       <% if options.include? :office %>

@@ -105,7 +105,9 @@ en:
         aeon: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
-        scan: 'Scan a section and email me a PDF'
+        scan:
+          label: 'Scan a section and email me a PDF'
+          info: "<a href=https://guides.library.upenn.edu/resourcesharing/requestscan target=_blank>About request scan</a>"
         office:
           label: 'Office Delivery via FacultyEXPRESS'
           info: "<a href='https://guides.library.upenn.edu/resourcesharing/facex' target='_blank'>Change your delivery address and contact Faculty Express</a>"
@@ -115,8 +117,7 @@ en:
           message: "<a href='https://guides.library.upenn.edu/circulation/PickUpatPenn' target='_blank'>How to Pickup @ Penn</a>"
         mail:
           label: 'Mail it via Books by Mail'
-          message: "Users must <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>register for Books by Mail</a> before submitting requests."
-          validation: 'I am a registered Books by Mail user'
+          message: "Registration with <a href='https://upenn.libwizard.com/f/books-by-mail' target='_blank'>Books by Mail</a> is required."
         aeon:
           kislak_message: 'Materials kept by the <a href="https://www.library.upenn.edu/kislak/kislak-center-reading-room">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
           access_message: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
