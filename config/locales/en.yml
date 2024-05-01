@@ -42,7 +42,7 @@ en:
         bbm_delivery_address: 'Delivery address for Books by Mail'
       bbm_empty: "You don't have a delivery address set."
       callout_set_your_address: '<a href=https://guides.library.upenn.edu/circulation/vpbooksbymail target=_blank>Set your address with Books by Mail</a>'
-      callout_update_details: '<a href=https://guides.library.upenn.edu/circulation/Yourlibraryaccount target=_blank>Updating your contact information</a>'
+      callout_update_details: '<a href=https://guides.library.upenn.edu/circulation/Yourlibraryaccount target=_blank>Update your contact information</a>'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
