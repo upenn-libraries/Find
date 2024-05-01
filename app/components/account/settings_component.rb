@@ -5,9 +5,18 @@ module Account
   class SettingsComponent < ViewComponent::Base
     attr_reader :user
 
+    delegate :email, to: :user
+
     # @param user [User]
     def initialize(user:)
       @user = user
+    end
+
+    # @return [String, nil]
+    def full_name
+      return unless user.alma_record
+
+      user.alma_record.full_name
     end
 
     # @return [String, nil]
@@ -18,11 +27,11 @@ module Account
     end
 
     # books by mail delivery address in two parts
-    # @return [Array]
+    # @return [Array<String>, nil]
     def bbm_delivery_address
       return unless user.illiad_record
 
-      user.illiad_record.bbm_delivery_address.join(' ').split('/')
+      user.illiad_record.bbm_delivery_address.join(' ').split('/').compact_blank
     end
   end
 end

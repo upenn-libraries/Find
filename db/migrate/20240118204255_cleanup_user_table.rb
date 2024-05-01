@@ -3,7 +3,7 @@
 # Remove some fields created during Blacklight installation that we won't ever need because
 # we won't be using database-backed authentication
 class CleanupUserTable < ActiveRecord::Migration[7.0]
-  # NOTE: not reversible
+  # rubocop:disable Rails/ReversibleMigration
   def change
     change_table :users, bulk: true do |t|
       t.remove :encrypted_password, type: :string
@@ -13,4 +13,5 @@ class CleanupUserTable < ActiveRecord::Migration[7.0]
       t.remove_index name: 'index_users_on_reset_password_token', if_exists: true
     end
   end
+  # rubocop:enable Rails/ReversibleMigration
 end

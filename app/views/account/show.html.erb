@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/app/assets/config">Find</a></li>
+    <li class="breadcrumb-item"><a href="/">Find</a></li>
     <li class="breadcrumb-item active" aria-current="page">Account</li>
   </ol>
 </nav>
@@ -18,14 +18,6 @@
     </a>
   </div>
   <div class="col-lg-3 col-sm-6">
-    <a href="<%= settings_path %>" class="card mb-3">
-      <div class="card-body">
-        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.settings.title') %></h2><i class="bi bi-gear h4 mb-0"></i></span>
-        <p class="card-text"><%= t('account.show.cards.settings.description') %></p>
-      </div>
-    </a>
-  </div>
-  <div class="col-lg-3 col-sm-6">
     <a href="<%= bookmarks_path %>" class="card mb-3">
       <div class="card-body">
         <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.bookmarks.title') %></h2><i class="bi bi-bookmark h4 mb-0"></i></span>
@@ -38,6 +30,14 @@
       <div class="card-body">
         <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.fines_and_fees.title') %></h2><i class="bi bi-currency-dollar h4 mb-0"></i></span>
         <p class="card-text"><%= t('account.show.cards.fines_and_fees.description') %></p>
+      </div>
+    </a>
+  </div>
+  <div class="col-lg-3 col-sm-6">
+    <a href="<%= settings_path %>" class="card mb-3">
+      <div class="card-body">
+        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.settings.title') %></h2><i class="bi bi-gear h4 mb-0"></i></span>
+        <p class="card-text"><%= t('account.show.cards.settings.description') %></p>
       </div>
     </a>
   </div>

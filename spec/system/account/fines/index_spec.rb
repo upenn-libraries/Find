@@ -87,17 +87,9 @@ describe 'Fines and Fees index page' do
       visit fines_and_fees_path
     end
 
-    it 'does not show the fine' do
-      within('.table') do
-        expect(page).not_to have_text(single_fine.dig('type', 'desc'))
-      end
-    end
-
-    it 'shows the total balance row' do
-      within('.table') do
-        expect(page).to have_text I18n.t('account.fines_and_fees.table.th.total')
-        expect(page).to have_text "$#{total_fines}"
-      end
+    it 'does not show the table' do
+      expect(page).not_to have_selector('.table')
+      expect(page).not_to have_text(I18n.t('account.fines_and_fees.table.th.last_transaction'))
     end
   end
 end
