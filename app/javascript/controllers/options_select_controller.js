@@ -30,7 +30,8 @@ export default class extends Controller {
   optionChanged(event) {
     this.hideAllButtons();
     this[`${event.target.value}ButtonTarget`].classList.remove("d-none");
-    this.toggleComments(event);
+    // TODO: reenable this when we have more information about comments
+    // this.toggleComments(event);
   }
 
   // Hide all buttons

@@ -34,13 +34,6 @@
       <%= t('requests.form.options.archives.message').html_safe %>
     </p>
   <% end %>
-  <div class="d-none comment-box mb-2" data-options-select-target="addComments">
-    <%= link_to t('requests.form.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
-    <div class="d-none" data-comments-target="commentsArea">
-      <%= label_tag :location, t('requests.form.comments_label'), { class: 'form-label' } %>
-      <%= text_area_tag :comments, '', { class:'form-control'} %>
-    </div>
-  </div>
   <div class="request-buttons">
     <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
     <%= link_to t('requests.form.buttons.scan'), ill_new_request_path, { class: 'd-none btn btn-success btn-lg', data: { options_select_target: 'scanButton' } } %>
