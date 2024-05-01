@@ -116,8 +116,7 @@ rspec_app_test:
         done \n
         until [ -s \"${CI_PROJECT_DIR}/rails_app/solr/conf\" ]; do sleep 1; echo 'Waiting for solr conf to exist'; done \n
         .${ZK_SCRIPT_LOCATION}/zkcli.sh -zkhost 127.0.0.1:9983 -cmd upconfig -confname ${SOLR_TEST_CONFIGNAME} -confdir ${CI_PROJECT_DIR}/rails_app/solr/conf && \n
-        ./opt/bitnami/solr/bin/solr create_collection -c ${SOLR_TEST_COLLECTION} && \n
-        .${ZK_SCRIPT_LOCATION}/zkcli.sh -zkhost 127.0.0.1:9983 -cmd linkconfig -collection ${SOLR_TEST_COLLECTION} -confname ${SOLR_TEST_CONFIGNAME} \n
+        ./opt/bitnami/solr/bin/solr create_collection -c ${SOLR_TEST_COLLECTION} -n ${SOLR_TEST_CONFIGNAME} \n
         wait"
       ]
       variables:
@@ -166,8 +165,7 @@ rspec_app_test:
     - cd ${CI_PROJECT_DIR}/rails_app/
     - bundle add rspec_junit_formatter
     - bundle exec rake db:migrate
-    # - bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
-    - sleep infinity
+    - bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
   needs:
     - amend_tmp_base_dev_images
   coverage: '/\(\d+.\d+\%\) covered/'
