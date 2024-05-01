@@ -7,7 +7,7 @@ module Account
     before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
 
     # Form for initializing an ILL form.
-    # GET /account/request/ill/new
+    # GET /account/requests/ill/new
     def ill; end
 
     # Submission logic using form params and request broker service
