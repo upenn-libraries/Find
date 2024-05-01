@@ -67,5 +67,6 @@ Rails.application.routes.draw do
     get 'fines-and-fees', to: 'fines#index'
   end
 
+  get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
 end

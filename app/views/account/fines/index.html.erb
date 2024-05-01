@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/app/assets/config">Find</a></li>
+    <li class="breadcrumb-item"><a href="/">Find</a></li>
     <li class="breadcrumb-item"><a href="/account">Account</a></li>
     <li class="breadcrumb-item active" aria-current="page">Fines and Fees</li>
   </ol>
@@ -10,3 +10,7 @@
 <p class="page__lede mb-3"><%= t('account.fines_and_fees.page_lede') %></p>
 
 <%= render Account::FinesTableComponent.new(user: current_user) %>
+
+<p class="callout">
+  <strong><%= t('account.guide_callout') %></strong> <%= t('account.fines_and_fees.how_to_pay_html', url: t('urls.guides.finesfees') ) %>
+</p>

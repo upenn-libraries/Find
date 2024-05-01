@@ -90,7 +90,7 @@ module Illiad
 
       # @return [String]
       def credential
-        Rails.application.credentials.illiad_api_key
+        Settings.illiad.api_key
       end
 
       # @return [Array]

@@ -1,21 +1,22 @@
 en:
   account:
+    guide_callout: 'Guide:'
     show:
       page_heading: 'Account Overview'
-      page_lede: 'Renew items on your shelf, view your account preferences, manage your bookmarked items, and see fines.'
+      page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
         shelf:
           title: 'Shelf'
-          description: "Renew items you've loaned or requested and see when they're due."
+          description: "Renew items you've loaned and see when they're due."
         settings:
           title: 'Settings'
-          description: 'View your books by mail address and account details.'
+          description: 'Your account details and request item delivery address.'
         bookmarks:
             title: 'Bookmarks'
-            description: 'Email and create citations from your list of bookmarked items.'
+            description: 'Create citations and email bookmarked items.'
         fines_and_fees:
           title: 'Fines and Fees'
-          description: 'View fines for lost or damaged items. We do not charge overdue fees for regular books.'
+          description: 'View fines for overdue, lost, or damaged items.'
     ill:
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
@@ -66,6 +67,9 @@ en:
           submit: 'Place request'
         required: '(required)'
         email_notification_msg: "We'll send you an email notification when it is ready."
+    bookmarks:
+      page_heading: 'Bookmarks'
+      page_lede: 'Create citations and email bookmarked items.'
     fines_and_fees:
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
@@ -74,18 +78,22 @@ en:
           type: 'Type'
           title: 'Title'
           date_charged: 'Charged'
-          last_transaction: 'Last Transaction'
-          original_amount: 'Original Amount'
+          last_transaction: 'Last transaction'
+          original_amount: 'Original amount'
           balance: 'Balance'
           total: 'Total'
       terms:
-        balance: 'Outstanding Balance'
+        balance: 'Outstanding balance'
+      how_to_pay_html: '<a href="%{url}" target=_blank>How to pay fines and fees</a>'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your account preferences.'
+      page_lede: 'Your account details and item delivery address.'
       terms:
-        user_group: 'Patron Group'
-        bbm_delivery_address: 'Books by Mail Delivery Address'
+        user_group: 'Patron group'
+        bbm_delivery_address: 'Delivery address for Books by Mail'
+      bbm_empty: "You don't have a delivery address set."
+      set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
+      update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
@@ -228,3 +236,4 @@ en:
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
+
