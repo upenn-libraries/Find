@@ -2,7 +2,7 @@
 
 Alma.configure do |config|
   # You have to set the apikey
-  config.apikey = Rails.application.credentials.alma_api_key
+  config.apikey = Settings.alma.api_key
 
   # By default enable_loggable is set to false
   config.enable_loggable = false

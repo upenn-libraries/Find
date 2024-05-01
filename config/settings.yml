@@ -1,4 +1,8 @@
 pennlibs_web_version: '0.1.0'
+alma:
+  api_key: '<%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>'
+illiad:
+  api_key: '<%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>'
 locations:
   offsite:
     - lippb10
