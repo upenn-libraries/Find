@@ -62,7 +62,7 @@ Rails.application.routes.draw do
       patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
       delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
       get 'options', action: 'options', as: 'request_options'
-      get 'form', action: 'form', as: 'request_form'
+      get 'fulfillment_form', action: 'fulfillment_form', as: 'request_fulfillment_form'
     end
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".

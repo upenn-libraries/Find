@@ -13,7 +13,7 @@
 <% else %>
   <details class="fulfillment">
     <summary class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>
-    <%= turbo_frame_tag 'form_frame', src: request_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
+    <%= turbo_frame_tag 'form_frame', src: request_fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
       <div class="fulfillment__container">
         <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>
         <div class="row">

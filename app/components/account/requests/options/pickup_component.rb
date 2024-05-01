@@ -3,7 +3,7 @@
 module Account
   module Requests
     module Options
-      # pickup component logic
+      # Pickup component logic
       class PickupComponent < ViewComponent::Base
         attr_accessor :default_pickup_location, :options
 
@@ -12,8 +12,11 @@ module Account
           @options = options
         end
 
+        # If the options for the item include a scan or office option, don't check the pickup option
+        # Otherwise, check the pickup option
+        # @return [Hash, NilClass]
         def checked?
-          options.include?(:scan) ? nil : { checked: true }
+          %i[scan office].any? { |option| options.include?(option) } ? nil : { checked: true }
         end
       end
     end

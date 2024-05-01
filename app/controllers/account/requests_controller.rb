@@ -4,7 +4,7 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :set_mms_id, :set_holding_id, :set_items, only: :form
+    before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
 
     # Form for initializing an ILL form.
     # GET /account/request/ill/new
@@ -55,8 +55,7 @@ module Account
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
-    # TODO: better name? maybe fulfillment form
-    def form
+    def fulfillment_form
       render(Account::Requests::FormComponent.new(mms_id: @mms_id,
                                                   holding_id: @holding_id,
                                                   items: @items), layout: false)
