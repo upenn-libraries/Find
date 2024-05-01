@@ -1,0 +1,18 @@
+<div class="documents-list <%= @classes %>">
+  <div class='card col-12 mb-3'>
+
+    <% results_sources.each_with_index do |component, i| %>
+      <% source = component.source %>
+      <% if valid?(source) %>
+        <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
+          <%= turbo_frame_tag turbo_id(source), src: results_path(source: source, query: @query) do %>
+            <h2 class="h5 mb-0">
+              <%= t('additional_results.header_text.loading_html', source: display_name(source)) %>
+            </h2>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
