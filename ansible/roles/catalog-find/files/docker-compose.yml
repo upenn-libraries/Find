@@ -35,7 +35,6 @@ services:
       timeout: 10s
     networks:
       - postgres
-      - redis
       - traefik
     secrets:
       - database_password
@@ -47,8 +46,6 @@ services:
 
 networks:
   postgres:
-    external: true
-  redis:
     external: true
   traefik:
     external: true
