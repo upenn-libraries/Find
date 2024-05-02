@@ -79,7 +79,7 @@ networks:
 secrets:
   database_password:
     external: true
-    name: "{{ 'postgres_database_password_v' ~ postgres_database_versioned_secrets.database_password.version }}"
+    name: "{{ postgres_database_versioned_secrets.database_password.secret_name_prefix + postgres_database_versioned_secrets.database_password.version }}"
   rails_master_key:
     external: true
     name: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"

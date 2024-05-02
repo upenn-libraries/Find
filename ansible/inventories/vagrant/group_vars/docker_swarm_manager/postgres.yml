@@ -3,6 +3,7 @@ postgres_database_name: "find_development"
 
 postgres_database_versioned_secrets:
   database_password:
+    secret_name_prefix: "catalog_find_postgres_password_v"
     value: "password"
     version: "1"
 
