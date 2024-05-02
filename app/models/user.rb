@@ -2,12 +2,15 @@
 
 # User model
 class User < ApplicationRecord
+  # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  devise :timeoutable
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer alma saml]
   else
+    devise :timeoutable
     devise :omniauthable, omniauth_providers: %i[alma saml]
   end
 

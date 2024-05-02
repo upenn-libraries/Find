@@ -150,6 +150,42 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
+  requests:
+    form:
+      heading: 'Request an item'
+      item_label: 'What item are you requesting?'
+      item_placeholder: 'Choose an item...'
+      buttons:
+        scan: 'Continue to request a scan'
+        delivery: 'Place delivery request'
+        pickup: 'Place pickup request'
+        mail: 'Place mail request'
+        aeon: 'Schedule visit'
+        placeholder: 'Request item'
+      options:
+        label: 'How would you like it delivered?'
+        scan:
+          info_html: '<a href="%{url}" target=_blank>About request scan</a>'
+          label: 'Scan a section and email me a PDF'
+        office:
+          label: 'Office Delivery via FacultyEXPRESS'
+          info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
+          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
+        pickup:
+          label: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        mail:
+          label: 'Mail it via Books by Mail'
+          info_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
+        aeon:
+          kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
+          access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
+        archives:
+          info_html: 'Accessing this item requires <a href="https://archives.upenn.edu/research/visit">visiting</a> the <a href="https://archives.upenn.edu/archives-info/contact">Penn University Archives & Records Center</a>.'
+      request_item: 'Request an item'
+      log_in_to_request_item: 'Log in to request item'
+      add_comments: 'Add comments'
+      comments_label: 'Comments'
   search:
     all_fields: 'All Fields'
     button:

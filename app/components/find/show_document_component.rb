@@ -9,7 +9,7 @@ module Find
     }
 
     renders_one :inventory_content, lambda {
-      Find::ShowDocument::InventoryContentComponent.new(inventory: @inventory, selected_id: @selected_id)
+      Find::ShowDocument::InventoryContentComponent.new(inventory: @inventory, selected_id: @selected_id, user: @user)
     }
 
     # @option params [ActionController::Parameters] parameters from request
@@ -17,6 +17,7 @@ module Find
       super
       @inventory = @document.full_inventory
       @selected_id = args[:params][:hld_id] || @inventory.first&.id
+      @user = args[:user]
     end
 
     # @return [Array] classes to use for component element
