@@ -32,7 +32,7 @@ if running with Parallels:
 vagrant up --provider=parallels --provision
 ```
 
-This will run the [vagrant/Vagrantfile](vagrant/Vagrantfile) which will bring up an Ubuntu VM and run the Ansible script which will provision a single node Docker Swarm behind nginx with a self-signed certificate to mimic a load balancer. Your hosts file will be modified; the domain `apotheca-dev.library.upenn.edu` will be added and mapped to the Ubuntu VM. Once the Ansible script has completed and the Docker Swarm is deployed you can access the application by navigating to [https://apotheca-dev.library.upenn.edu](https://apotheca-dev.library.upenn.edu).
+This will run the [vagrant/Vagrantfile](vagrant/Vagrantfile) which will bring up an Ubuntu VM and run the Ansible script which will provision a single node Docker Swarm behind nginx with a self-signed certificate to mimic a load balancer. Your hosts file will be modified; the domain `catalog-find-dev.library.upenn.edu` will be added and mapped to the Ubuntu VM. Once the Ansible script has completed and the Docker Swarm is deployed you can access the application by navigating to [https://apotheca-dev.library.upenn.edu](https://apotheca-dev.library.upenn.edu).
 
 ### Stopping
 
@@ -60,15 +60,25 @@ vagrant ssh
 
 #### Vagrant Services
 
-1. [The Find Rails app]()
-2. [Solr]()
+1. [The Find Rails app](https://catalog-find-dev.library.upenn.edu/)
+2. [Solr](https://catalog-find-dev.library.upenn.int/solr/#/)
 3. [Postgres]()
 4. [Chrome]()
 
 ## Working with local services in Docker
 
-TODO
+### Initializing
+
+1. `cd rails_app`
+2. Install gems to local ruby with `BUNDLE_IGNORE_CONFIG=true bundle install`
+3. Startup docker services with `BUNDLE_IGNORE_CONFIG=true bundle exec rake tools:start` TODO: add instructions about including Solr configset & SolrJSON files
+4. Continuing to use `BUNDLER_IGNORE_CONFIG=true`, you can run you own server process, rails console, debugger, whatevs. Also ensure `rails_app` is configured as the working directory.
 
 ## Working with a remote Solr index
 
-TODO (change `rails_app/config/blacklight.yml` to remote solr URL and restart app server. must use Wireguard. Don't nuke the index (SolrTools).)
+1. Using Wireguard VPN...
+2. Get production Solr collection URL
+3. Update [blacklight.yml](rails_app/config/blacklight.yml) `development.url` value to the above URL value, including any auth credentials
+4. Restart the Rails server by running `touch tmp/restart.txt` command in the running `catalog-find_catalog_find` container
+5. DO NOT commit this change OR run any SolrTools methods (TODO: don't trust anyone to actually follow this guidance)
+

@@ -25,7 +25,7 @@ end
 
 # Arrange nodes in reverse order so the manager is the last vm to be provisioned
 cluster = {
-  "catalog-find-manager" => { :ip => "10.10.2.149", :cpus => 4, :mem => 8192, :port => 2525 }
+  "catalog-find-manager" => { :ip => "10.10.2.149", :cpus => 4, :mem => 8192, :port => 2626 }
 }
 
 Vagrant.configure("2") do |config|
