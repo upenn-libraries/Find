@@ -34,7 +34,7 @@ services:
       start_period: 10s
       timeout: 10s
     networks:
-      - postgres
+      - catalog_find_postgres
       - traefik
     secrets:
       - database_password
@@ -45,7 +45,7 @@ services:
         mode: 0440
 
 networks:
-  postgres:
+  catalog_find_postgres:
     external: true
   traefik:
     external: true
