@@ -17,6 +17,7 @@ services:
       timeout: 120s
     secrets:
       - honeybadger_api_key
+      - solr_url
     volumes:
       - app_storage:/home/app/storage
 
