@@ -1,0 +1,5 @@
+[staging]
+swarm-01
+
+[docker_swarm_manager]
+swarm-01
