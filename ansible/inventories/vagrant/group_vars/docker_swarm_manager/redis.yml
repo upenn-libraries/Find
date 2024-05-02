@@ -2,7 +2,7 @@
 redis:
   image:
     name: "redis"
-    tag: "7.0-alpine"
+    tag: "7.2-alpine"
   port: 6379
   replicas: 1
   versioned_configs:
