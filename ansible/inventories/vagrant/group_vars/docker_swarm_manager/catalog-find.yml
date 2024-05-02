@@ -11,5 +11,5 @@ catalog_find_solr_test_url: "http://{{ solr_custom_env_variables.SOLR_ADMIN_USER
 catalog_find_url: "catalog-find-dev.library.upenn.edu"
 catalog_find_versioned_secrets:
   rails_master_key:
-    value: "d387ab7464fc5b8bb2e5c0dcd4105355"
-    version: "1"
+    value: "{{ catalog_find_vault_values.secret.rails_master_key }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
