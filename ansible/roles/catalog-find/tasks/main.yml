@@ -65,7 +65,6 @@
     REDIS_SIDEKIQ_USER: "sidekiq"
     REDIS_SIDEKIQ_PASSWORD: "{{ 'redis_sidekiq_password_v' ~ redis.versioned_configs.users_acl.users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
     REDIS_PORT: "{{ redis.port }}"
-    SOLR_ADMIN_URL: "{{ catalog_find_solr_admin_url }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
     SOLR_TEST_URL: "{{ catalog_find_solr_test_url }}"
     SOLR_URL: "{{ catalog_find_solr_url }}"
@@ -108,7 +107,7 @@
     REDIS_SIDEKIQ_PASSWORD: "{{ 'redis_sidekiq_password_v' ~ redis.versioned_configs.users_acl.users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
     REDIS_PORT: "{{ redis.port }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
-    SOLR_URL: "{{ catalog_find_solr_url }}"
+    SOLR_URL: "{{ 'catalog_find_solr_url_v' ~ catalog_find_versioned_secrets.solr_url.version }}"
   changed_when: false
   no_log: true
   when: not is_development | default (false, true)

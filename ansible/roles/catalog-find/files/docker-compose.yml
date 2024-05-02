@@ -26,8 +26,6 @@ services:
       REDIS_SIDEKIQ_USER: "${REDIS_SIDEKIQ_USER}"
       REDIS_SIDEKIQ_PASSWORD: "${REDIS_SIDEKIQ_PASSWORD}"
       SHIB_SP_ENTITY_ID: "https://${APP_URL}/shibboleth"
-      SOLR_URL: "${SOLR_URL}"
-      SOLR_ADMIN_URL: "${SOLR_ADMIN_URL}"
     healthcheck:
       test:
         [

@@ -24,6 +24,9 @@ secrets:
   honeybadger_api_key:
     external: true
     name: ${HONEYBADGER_API_KEY}
+  solr_url:
+    external: true
+    name: ${SOLR_URL}
 
 volumes:
   app_storage:
