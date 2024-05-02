@@ -17,7 +17,7 @@ module Account
       # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
       # use our request broker service (coming soon) to send the request
       # handle response, showing confirmation and/or error - maybe even send an email
-      flash[:notice] = 'Requesting submission needs to be implemented.'
+      flash[:notice] = 'Your request has not been submitted. Requesting submission is not yet functional in Find.'
       redirect_to solr_document_path(id: params[:mms_id])
     end
 
