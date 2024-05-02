@@ -55,9 +55,9 @@
     - ansible.builtin.import_role:
         name: catalog-find
       tags: catalog-find
-    - ansible.builtin.import_role:
-        name: sidekiq
-      tags: sidekiq
+    # - ansible.builtin.import_role:
+    #     name: sidekiq
+    #   tags: sidekiq
     - ansible.builtin.import_role:
         name: chrome
       tags: chrome
