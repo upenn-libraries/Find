@@ -1,0 +1,63 @@
+<%= turbo_frame_tag 'options_frame' do %>
+  <% if options.include? :pickup %>
+    <%= label_tag :delivery_options, t('requests.form.options.label'), { class: 'form-label h6' } %>
+    <ul class="list-group js_radio-options mb-3">
+      <% if options.include? :scan %>
+        <li class="list-group-item">
+          <%= radio_button_tag :option, 'scan', true, data: { action: 'change->options-select#optionChanged' } %>
+          <%= label_tag :option_scan, t('requests.form.options.scan.label') %>
+          <div>
+            <small class="text-muted">
+              <%= t('requests.form.options.scan.info_html', url: t('urls.request_options.scan_info')) %>
+            </small>
+          </div>
+        </li>
+      <% end %>
+      <% if options.include? :office %>
+        <%= render(Account::Requests::Options::OfficeComponent.new(user_address: user_address, options: options)) %>
+      <% end %>
+      <%= render(Account::Requests::Options::PickupComponent
+                   .new(default_pickup_location: default_pickup_location, options: options)) %>
+      <% if options.include? :mail %>
+        <li class="list-group-item">
+          <%= radio_button_tag :option, 'mail', false, data: { action: 'change->options-select#optionChanged' } %>
+          <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
+          <div>
+            <small class="text-muted">
+              <%= t('requests.form.options.mail.info_html', url: t('urls.request_options.mail_info')) %>
+            </small>
+          </div>
+          <%# TODO: bbm validation? popup? %>
+        </li>
+        </ul>
+      <% end %>
+  <% elsif options.include? :aeon %>
+    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.request_options.aeon_kislak_info')) %></p>
+    <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
+  <% elsif options.include? :archives %>
+    <p class="js_archives alert alert-info mb-3">
+      <%= t('requests.form.options.archives.info_html', url: t('urls.request_options.archives_info')) %>
+    </p>
+  <% end %>
+  <div class="request-buttons">
+    <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
+    <%= link_to t('requests.form.buttons.scan'),
+                ill_new_request_path,
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'scanButton', turbo_frame: '_top' } } %>
+    <%= submit_tag t('requests.form.buttons.delivery'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'officeButton', turbo_frame: '_top' } } %>
+    <%= submit_tag t('requests.form.buttons.pickup'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'pickupButton', turbo_frame: '_top' } } %>
+    <%= submit_tag t('requests.form.buttons.mail'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: 'mailButton', turbo_frame: '_top' } } %>
+    <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
+    <%= link_to t('requests.form.buttons.aeon'),
+                '',
+                { class: 'dta-none btn btn-success btn-lg',
+                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } } %>
+  </div>
+<% end %>
