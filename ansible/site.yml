@@ -46,9 +46,9 @@
         name: solr
       tags: solr
       when: is_development | default (false, true)
-    - ansible.builtin.import_role:
-        name: redis
-      tags: redis
+    # - ansible.builtin.import_role:
+    #     name: redis
+    #   tags: redis
     - ansible.builtin.import_role:
         name: postgres
       tags: postgres
