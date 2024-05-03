@@ -1,0 +1,17 @@
+.home-content {
+  a:not(.btn) {
+    text-underline-offset: .15em;
+
+    &:hover,
+    &:focus {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  dt {
+    font-weight: $font-weight-normal;
+  }
+  dd {
+    margin-bottom: 1rem;
+  }
+}

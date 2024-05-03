@@ -7,6 +7,8 @@ $font-family-sans-serif: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", R
 
 $line-height-base: 1.4;
 
+$font-weight-semibold: 500;
+
 $primary:       #0E5696 !default;
 $secondary:     #595F6A !default;
 $success:       #267434 !default;
@@ -14,7 +16,7 @@ $info:          #80317F !default;
 $warning:       #BD4718 !default;
 $danger:        #BD4718 !default;
 $light:         #F5F5F6 !default;
-$dark:          #2D3545!default;
+$dark:          #2D3545 !default;
 
 $theme-colors: (
   "primary":    $primary,
