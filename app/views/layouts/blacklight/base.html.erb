@@ -38,15 +38,15 @@
     <pennlibs-footer>
       <section>
         <h2><%= t('footer.account.heading') %></h2>
-        <a href="<%= shelf_path %>"><%= t('footer.account.shelf') %></a>
-        <a href="<%= bookmarks_path %>"><%= t('footer.account.bookmarks') %></a>
-        <a href="<%= fines_and_fees_path %>"><%= t('footer.account.fines') %></a>
-        <a href="<%= settings_path %>"><%= t('footer.account.settings') %></a>
+        <%= link_to t('footer.account.shelf'), shelf_path %>
+        <%= link_to t('footer.account.bookmarks'), bookmarks_path %>
+        <%= link_to t('footer.account.fines'), fines_and_fees_path %>
+        <%= link_to t('footer.account.settings'), settings_path %>
       </section>
       <section>
         <h2><%= t('footer.resources.heading') %></h2>
         <%= link_to t('footer.resources.databases'), databases_catalog_path %>
-        <a href="https://upenn.summon.serialssolutions.com/"><%= t('footer.resources.articles_plus') %></a>
+        <%= link_to t('footer.resources.articles_plus'), Settings.additional_results_sources.summon.base_url %>
       </section>
     </pennlibs-footer>
     <%= render partial: 'shared/modal' %>
