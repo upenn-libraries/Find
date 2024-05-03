@@ -44,9 +44,9 @@
         <a href="<%= settings_path %>"><%= t('footer.account.settings') %></a>
       </section>
       <section>
-        <h2>Resources</h2>
-        <%= link_to 'Databases', databases_catalog_path %>
-        <a href="https://upenn.summon.serialssolutions.com/">Articles+</a>
+        <h2><%= t('footer.resources.heading') %></h2>
+        <%= link_to t('footer.resources.databases'), databases_catalog_path %>
+        <a href="https://upenn.summon.serialssolutions.com/"><%= t('footer.resources.articles_plus') %></a>
       </section>
     </pennlibs-footer>
     <%= render partial: 'shared/modal' %>

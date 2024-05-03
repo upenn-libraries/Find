@@ -108,8 +108,10 @@ en:
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
       settings: 'Settings'
-    find:
+    resources:
+      heading: 'Resources'
       databases: 'Databases'
+      articles_plus: 'Articles+'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
