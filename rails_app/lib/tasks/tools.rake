@@ -14,9 +14,6 @@ namespace :tools do
         latest_configset_file = Rails.root.join('solr').glob('configset_*.zip').max_by { |f| File.mtime(f) }
         raise StandardError, 'Configset file missing' unless latest_configset_file
 
-        latest_solrjson_file = Rails.root.join('solr').glob('solrjson_*.jsonl').max_by { |f| File.mtime(f) }
-        raise StandardError, 'Solr JSON file missing' unless latest_solrjson_file
-
         config_zip_path = Rails.root.join('solr', latest_configset_file)
         configset_name = "find-configset-#{latest_configset_file.basename.to_s.split('_').last.gsub('.zip', '')}"
         puts "Loading Solr configset from : #{latest_configset_file}"
@@ -24,8 +21,7 @@ namespace :tools do
         puts 'Creating Solr collections for development and test'
         SolrTools.create_collection 'find-development', configset_name
         SolrTools.create_collection 'find-test', configset_name
-        puts "Indexing records into Solr from #{latest_solrjson_file}"
-        SolrTools.load_data 'find-development', Rails.root.join('solr', latest_solrjson_file)
+        Rake::Task['tools:index_sample_file'].execute
       rescue StandardError => e
         puts "Problem configuring Solr: #{e.message}"
         puts 'Stopping services'
@@ -45,6 +41,20 @@ namespace :tools do
     system('RAILS_ENV=test rake db:migrate')
     # Create or find alerts
     Rake::Task['tools:create_alerts'].execute
+  end
+
+  desc 'Index record to Solr from JSONL file in storage dir'
+  task index_sample_file: :environment do
+    latest_solrjson_file = Rails.root.join('solr').glob('solrjson_*.jsonl').max_by { |f| File.mtime(f) }
+    raise StandardError, 'Solr JSON file missing' unless latest_solrjson_file
+
+    unless SolrTools.collection_exists?('find-development')
+      raise StandardError, '"find-development" collection does not exist'
+    end
+
+    puts "Loading latest SolrJSON #{latest_solrjson_file} file from storage dir."
+    SolrTools.load_data 'find-development', Rails.root.join('solr', latest_solrjson_file)
+    puts 'Records indexed!'
   end
 
   desc 'Create alerts'
