@@ -14,5 +14,5 @@ catalog_find_versioned_secrets:
     value: "{{ catalog_find_vault_values.secret.rails_master_key }}"
     version: "{{ catalog_find_vault_values.metadata.version }}"
   solr_url:
-    value: "http://{{ catalog_solr_vault_values.secret.username }}:{{ catalog_solr_vault_values.secret.password }}@catalog-manager-prod01.library.upenn.int/solr/find-development"
+    value: "http://{{ catalog_solr_vault_values.secret.username }}:{{ catalog_solr_vault_values.secret.password }}@catalog-manager-prod01.library.upenn.int/solr/catalog-production"
     version: "{{ catalog_solr_vault_values.metadata.version }}"
