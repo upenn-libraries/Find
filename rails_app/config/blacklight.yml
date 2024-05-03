@@ -5,6 +5,9 @@ development:
 test: &test
   adapter: solr
   url: <%= Settings.solr_url %>
+staging:
+  adapter: solr
+  url: <%= Settings.solr_url %>
 production:
   adapter: solr
   url: <%= Settings.solr_url %>
