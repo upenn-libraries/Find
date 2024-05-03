@@ -7,6 +7,8 @@ en:
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
+    external_services:
+      summon: "https://upenn.summon.serialssolutions.com/"
     request_options:
       scan_info: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office_info: "https://guides.library.upenn.edu/resourcesharing/facex"
