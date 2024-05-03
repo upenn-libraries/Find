@@ -22,5 +22,3 @@ staging:
 production:
   <<: *default
   database: find_production
-  username: find
-  password: <%= ENV["READ_DATABASE_PASSWORD"] %>
