@@ -46,7 +46,7 @@
       <section>
         <h2><%= t('footer.resources.heading') %></h2>
         <%= link_to t('footer.resources.databases'), databases_catalog_path %>
-        <%= link_to t('footer.resources.articles_plus'), Settings.additional_results_sources.summon.base_url %>
+        <%= link_to t('footer.resources.articles_plus'), t('urls.external_services.summon') %>
       </section>
     </pennlibs-footer>
     <%= render partial: 'shared/modal' %>
