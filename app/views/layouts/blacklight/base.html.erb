@@ -35,7 +35,19 @@
       </div>
     </main>
 
-    <pennlibs-footer></pennlibs-footer>
+    <pennlibs-footer>
+      <section>
+        <h2><%= t('footer.account.heading') %></h2>
+        <a href="<%= shelf_path %>"><%= t('footer.account.shelf') %></a>
+        <a href="<%= bookmarks_path %>"><%= t('footer.account.bookmarks') %></a>
+        <a href="<%= fines_and_fees_path %>"><%= t('footer.account.fines') %></a>
+        <a href="<%= settings_path %>"><%= t('footer.account.settings') %></a>
+      </section>
+      <section>
+        <h2>Find</h2>
+        <%= link_to 'Databases', databases_catalog_path %>
+      </section>
+    </pennlibs-footer>
     <%= render partial: 'shared/modal' %>
   </body>
 <% end %>

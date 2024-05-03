@@ -101,6 +101,15 @@ en:
     service_name: 'Find'
     sign_out: 'Sign Out'
     account: 'Account'
+  footer:
+    account:
+      heading: 'Account'
+      shelf: 'Shelf'
+      bookmarks: 'Bookmarks'
+      fines: 'Fines and fees'
+      settings: 'Settings'
+    find:
+      databases: 'Databases'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
