@@ -8,6 +8,36 @@ describe 'Catalog Index Page' do
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with electronic journal record with 4 electronic entries'
 
+  context 'without a search' do
+    before { visit search_catalog_path }
+
+    it 'displays facets' do
+      within('div.blacklight-access_facet') do
+        expect(page).to have_text I18n.t('facets.access')
+        click_on I18n.t('facets.access')
+        expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
+      end
+    end
+
+    it 'links to chat' do
+      chat_url = I18n.t('urls.help.chat', request_url: current_url)
+      expect(page).to have_link I18n.t('home.help.connect.chat.title'), href: chat_url
+    end
+
+    it 'links to ask' do
+      expect(page).to have_link I18n.t('home.help.connect.ask.title'), href: I18n.t('urls.help.ask')
+    end
+
+    it 'links to appointment scheduling' do
+      expect(page).to have_link I18n.t('home.help.connect.appointment.title'), href: I18n.t('urls.help.appointment')
+    end
+
+    it 'links to libraries and hours' do
+      expect(page).to have_link I18n.t('home.help.self_service.libraries'), href: I18n.t('urls.help.libraries')
+      expect(page).to have_link I18n.t('home.help.self_service.lib_hours'), href: I18n.t('urls.help.lib_hours')
+    end
+  end
+
   context 'with an empty search' do
     before { visit search_catalog_path(params: { q: '', search_field: 'all_fields' }) }
 
