@@ -22,8 +22,7 @@ en:
     help:
       appointment: "https://libcal.library.upenn.edu/appointments"
       ask: "https://faq.library.upenn.edu/ask"
-      chat: "https://faq.library.upenn
-          .edu/chat/widget/15c79c53182e201520a47857fb3d1e96?referer=%{request_url}%2F&referer_title=Find&auth_id=0"
+      chat: "https://faq.library.upenn.edu/chat/widget/15c79c53182e201520a47857fb3d1e96?referer=%{request_url}%2F&referer_title=Find&auth_id=0"
       faq: "https://faq.library.upenn.edu"
       guides: "https://guides.library.upenn.edu"
       lib_hours: "https://www.library.upenn.edu/about/hours"
