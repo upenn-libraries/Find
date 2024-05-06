@@ -9,9 +9,9 @@ en:
         title: 'Manage your Library Account.'
         description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
     feedback:
-      description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are requesting feedback to ensure it meets your needs.'
+      title: 'We want your feedback!'
+      description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are <a href="%{url}" target="_blank">requesting feedback</a> to ensure it meets your needs.'
       release_notes: 'New features and improvements will be added throughout the summer and fall. Check the <a href="%{url}" target="_blank">release notes</a> for the latest updates.'
-      button: 'Share your questions or comments'
     help:
       heading: Where can I get help?
       connect:

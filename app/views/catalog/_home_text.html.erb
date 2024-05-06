@@ -17,14 +17,12 @@
 
       <%# Feedback card %>
       <div class="callout my-0">
+        <h2 class="h4 mb-3"><%= t('home.feedback.title') %></h2>
         <p class="card-text">
-          <%= t('home.feedback.description') %>
-        </p>
-        <p class="card-text text-end mb-0">
-          <%= link_to(t('home.feedback.button'), t('urls.forms.feedback', request_url: request.original_url), class: 'btn btn-primary', target: '_blank') %>
+          <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
         </p>
         <%# @todo Uncomment this and add link to release notes once they exist %>
-        <!-- <p><%# t('home.feedback.release_notes') %></p> -->
+        <!-- <p><%# t('home.feedback.release_notes').html_safe %></p> -->
       </div>
 
     </div>
