@@ -1,121 +1,162 @@
 <div class="home-content ms-lg-3">
-
-  <div class="row mt-3 g-4 mb-4">
+  <div class="row g-4 mb-4">
     <div class="col-md-7">
+
+      <%# Info card %>
       <div class="home-content__info card mb-4">
         <div class="card-body">
-          <h2 class="h4 mb-3">What Can I Do Here?</h2>
-          <div class="card-text">
-            <p>
-              <span class="fw-bolder">Discover library materials.</span> Use the search box to find books, ebooks, articles, journals, digital media, and more.
-            </p>
-
-            <p>
-              <span class="fw-bolder">Manage your Library Account.</span> Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.
-            </p>
-          </div>
+          <h2 class="h4 mb-3"><%= t('home.info.heading') %></h2>
+          <p class="card-text">
+            <span class="fw-bolder"><%= t('home.info.discover.title') %></span> <%= t('home.info.discover.description') %>
+          </p>
+          <p class="card-text">
+            <span class="fw-bolder"><%= t('home.info.manage.title') %></span> <%= t('home.info.manage.description') %>
+          </p>
         </div>
       </div>
 
+      <%# Feedback card %>
       <div class="callout my-0">
-        <p class="mb-3">We are currently in the process of revamping and redesigning the Franklin catalog and are requesting feedback to ensure it meets your needs.</p>
-
-        <p class="text-end mb-0">
-          <%= link_to('Share your questions or comments', "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=#{request.original_url}", class: 'btn btn-primary') %>
+        <p class="card-text">
+          <%= t('home.feedback.description') %>
         </p>
-
+        <p class="card-text text-end mb-0">
+          <%= link_to(t('home.feedback.button'), t('urls.forms.feedback', request_url: request.original_url), class: 'btn btn-primary', target: '_blank') %>
+        </p>
         <%# @todo Uncomment this and add link to release notes once they exist %>
-        <!-- <p>New features and improvements will be added throughout the summer and fall. Check the release notes
-        for the latest updates.</p> -->
+        <!-- <p><%# t('home.feedback.release_notes') %></p> -->
       </div>
+
     </div>
     <div class="home-content__help col-md-5">
+
+      <%# Help card %>
       <div class="card h-100">
         <div class="card-body">
-          <h2 class="h4 mb-3">Where can I get help?</h2>
+          <h2 class="h4 mb-3"><%= t('home.help.heading') %></h2>
 
-          <h3 class="h5">Connect with us</h3>
-
+          <%# Connect with us links %>
+          <h3 class="h5"><%= t('home.help.connect.title') %></h3>
           <ul class="list-unstyled card-text mb-4">
             <li class="mb-2">
-              <%= link_to('Chat', "https://faq.library.upenn
-          .edu/chat/widget/15c79c53182e201520a47857fb3d1e96?referer=#{request.original_url}%2F&referer_title=Find&auth_id=0") %>: Get live assistance M-F 9-5
+              <%= link_to(t('home.help.connect.chat.title'), t('urls.help.chat', request_url: request.original_url), target: '_blank') %>: <%= t('home.help.connect.chat.description') %>
             </li>
             <li class="mb-2">
-              <%= link_to('Ask', 'https://faq.library.upenn.edu/ask') %>: Send us a question and we’ll respond in 24 hours or less
+              <%= link_to(t('home.help.connect.ask.title'), t('urls.help.ask'), target: '_blank') %>: <%= t('home.help.connect.ask.description') %>
             </li>
             <li class="mb-2">
-              <%= link_to('Make an appointment', 'https://libcal.library.upenn.edu/appointments') %>: Consult a subject specialist
+              <%= link_to(t('home.help.connect.appointment.title'), t('urls.help.appointment'), target: '_blank') %>: <%= t('home.help.connect.appointment.description') %>
             </li>
           </ul>
 
-          <h3 class="h5">Self-service</h3>
-
+          <%# Self-service links %>
+          <h3 class="h5"><%= t('home.help.self_service.title') %></h3>
           <ul class="list-unstyled card-text mb-1">
             <li class="mb-2">
-              <%= link_to('Check our FAQ', 'https://faq.library.upenn.edu/') %>
+              <%= link_to(t('home.help.self_service.faq'), t('urls.help.faq'), target: '_blank') %>
             </li>
             <li class="mb-2">
-              <%= link_to('View our research guides', 'https://guides.library.upenn.edu/hometabs') %>
+              <%= link_to(t('home.help.self_service.guides'), t('urls.help.guides'), target: '_blank') %>
             </li>
             <li class="mb-2">
-              <%= link_to('Visit a Library Location', 'https://www.library.upenn.edu/libraries-locations') %> <%= link_to('(see hours)', 'https://www.library.upenn.edu/about/hours') %>
+              <%= link_to(t('home.help.self_service.libraries'), t('urls.help.libraries'), target: '_blank') %> <%= link_to(t('home.help.self_service.lib_hours'), t('urls.help.lib_hours'), target: '_blank') %>
             </li>
           </ul>
         </div>
       </div>
+
     </div>
   </div>
-
   <div class="row g-4">
     <div class="col">
+
+      <%# More resources card %>
       <div class="card home-content__resources">
         <div class="card-body">
-          <h2 class="h4 mb-3">More resources for your research</h2>
-          <p class="mb-4">Expand your search using one of the following specialized tools.</p>
-          <div class="row gx-5">
-            <div class="col-sm-6">
-              <h3 class="h5 mb-3">Research materials</h3>
+          <div class="card-text">
+            <h2 class="h4 mb-3"><%= t('home.resources.title') %></h2>
+            <p class="mb-4"><%= t('home.resources.lede') %></p>
+            <div class="row gx-5">
 
-              <dl class="card-text">
-                <dt><%= link_to('Articles+', 'https://upenn.summon.serialssolutions.com/') %></dt>
-                <dd>Full-text articles and book chapters</dd>
+              <%# Research resource links %>
+              <div class="col-sm-6">
+                <h3 class="h5 mb-3"><%= t('home.resources.research.title') %></h3>
+                <dl class="mb-4 mb-sm-0">
+                  <dt>
+                    <%= link_to(t('home.resources.research.articles.title'), t('urls.external_services.summon'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.research.articles.description') %>
+                  </dd>
 
-                <dt><%= link_to('BorrowDirect', 'https://upenn-borrowdirect.reshare.indexdata.com/') %> | <%= link_to('EasyBorrow', 'https://ezborrow.reshare.indexdata.com/') %></dt>
-                <dd>Borrow materials or request scans from partner libraries</dd>
+                  <dt>
+                    <%= link_to(t('home.resources.research.borrow.title.borrowdirect'), t('urls.external_services.borrowdirect'), target: '_blank') %> | <%= link_to(t('home.resources.research.borrow.title.easyborrow'), t('urls.external_services.easyborrow'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.research.borrow.description') %>
+                  </dd>
 
-                <dt><%= link_to('ScholarlyCommons', 'https://repository.upenn.edu/home') %></dt>
-                <dd>Penn dissertations, Penn faculty papers, and Penn Libraries publications</dd>
+                  <dt>
+                    <%= link_to(t('home.resources.research.scholarlycommons.title'), t('urls.external_services.scholarlycommons'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.research.scholarlycommons.description') %>
+                  </dd>
 
-                <dt><%= link_to('Search Center', 'https://www.law.upenn.edu/library/research.php') %></dt>
-                <dd>Biddle Law Library catalog</dd>
+                  <dt>
+                    <%= link_to(t('home.resources.research.search_center.title'), t('urls.external_services.search_center'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.research.search_center.description') %>
+                  </dd>
 
-                <dt><%= link_to('WorldCat', 'http://hdl.library.upenn.edu/1017/7158') %></dt>
-                <dd>Union catalog listing 540 million records held by member institutions</dd>
-              </dl>
-            </div>
+                  <dt>
+                    <%= link_to(t('home.resources.research.worldcat.title'), t('urls.external_services.worldcat'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.research.worldcat.description') %>
+                  </dd>
+                </dl>
+              </div>
 
-            <div class="col-sm-6">
-              <h3 class="h5 mb-3">Additional archival materials</h3>
+              <%# Archival resource links %>
+              <div class="col-sm-6">
+                <h3 class="h5 mb-3"><%= t('home.resources.archival.title') %></h3>
 
-              <dl class="card-text">
-                <dt><%= link_to('JSTOR collections', 'https://www.jstor.org/site/upenn/') %></dt>
-                <dd>Image collections from Penn and other institutions</dd>
+                <dl class="mb-0">
+                  <dt>
+                    <%= link_to(t('home.resources.archival.jstor.title'), t('urls.external_services.jstor'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.archival.jstor.description') %>
+                  </dd>
 
-                <dt><%= link_to('Colenda Digital Repository', 'https://colenda.library.upenn.edu/') %></dt>
-                <dd>Digitized and born-digital material</dd>
+                  <dt>
+                    <%= link_to(t('home.resources.archival.colenda.title'), t('urls.external_services.colenda'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.archival.colenda.description') %>
+                  </dd>
 
-                <dt><%= link_to('OPenn', 'https://openn.library.upenn.edu/') %></dt>
-                <dd>Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions</dd>
+                  <dt>
+                    <%= link_to(t('home.resources.archival.openn.title'), t('urls.external_services.openn'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.archival.openn.description') %>
+                  </dd>
 
-                <dt><%= link_to('Philadelphia Area Archives', 'https://findingaids.library.upenn.edu/') %></dt>
-                <dd>Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region</dd>
-              </dl>
+                  <dt>
+                    <%= link_to(t('home.resources.archival.finding_aids.title'), t('urls.external_services.finding_aids'), target: '_blank') %>
+                  </dt>
+                  <dd>
+                    <%= t('home.resources.archival.finding_aids.description') %>
+                  </dd>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
