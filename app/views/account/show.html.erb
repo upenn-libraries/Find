@@ -1,9 +1,7 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Find</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Account</li>
-  </ol>
-</nav>
+<%= render Find::Breadcrumbs::BreadcrumbsComponent.new do |component|%>
+  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>%>
+  <% component.with_breadcrumb(active: true) { t('account.breadcrumbs.base') } %>
+<% end %>
 
 <h1 class="page__heading"><%= t('account.show.page_heading') %></h1>
 <p class="page__lede mb-4"><%= t('account.show.page_lede') %></p>
