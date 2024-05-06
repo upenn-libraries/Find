@@ -42,7 +42,7 @@ en:
         borrow:
           title:
             borrowdirect: 'BorrowDirect'
-            easyborrow: 'EasyBorrow'
+            easyborrow: 'EZBorrow'
           description: 'Borrow materials or request scans from partner libraries'
         scholarlycommons:
           title: 'ScholarlyCommons'
