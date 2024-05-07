@@ -1,5 +1,5 @@
 
-<%= render Find::Breadcrumbs::BreadcrumbsComponent.new do |component|%>
+<%= render BreadcrumbsComponent.new do |component|%>
   <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
   <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
   <% component.with_breadcrumb(active: true) { t('account.settings.page_heading') } %>

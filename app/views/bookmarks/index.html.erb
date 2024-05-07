@@ -2,7 +2,7 @@
 
 <% @page_title = t('blacklight.bookmarks.page_title', :application_name => application_name) %>
 
-<%= render Find::Breadcrumbs::BreadcrumbsComponent.new do |component|%>
+<%= render BreadcrumbsComponent.new do |component|%>
   <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
   <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
   <% component.with_breadcrumb(active: true) { t('account.bookmarks.page_heading') } %>
