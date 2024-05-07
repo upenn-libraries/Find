@@ -3,6 +3,7 @@
 # Component to create breadcrumbs.
 class BreadcrumbsComponent < ViewComponent::Base
   renders_many :breadcrumbs, BreadcrumbComponent
+
   def initialize(**options)
     @options = options
 
