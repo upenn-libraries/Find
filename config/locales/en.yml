@@ -68,6 +68,9 @@ en:
           title: 'Philadelphia Area Archives'
           description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
   account:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Account'
     guide_callout: 'Guide:'
     show:
       page_heading: 'Account Overview'
