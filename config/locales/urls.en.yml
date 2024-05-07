@@ -7,8 +7,26 @@ en:
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
+      feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"
     external_services:
+      borrowdirect: "https://upenn-borrowdirect.reshare.indexdata.com"
+      colenda: "https://colenda.library.upenn.edu"
+      easyborrow: "https://ezborrow.reshare.indexdata.com"
+      finding_aids: "https://findingaids.library.upenn.edu"
+      jstor: "https://www.jstor.org/site/upenn"
+      openn: "https://openn.library.upenn.edu"
+      scholarlycommons: "https://repository.upenn.edu/home"
+      search_center: "https://www.law.upenn.edu/library/research.php"
       summon: "https://upenn.summon.serialssolutions.com/"
+      worldcat: "http://hdl.library.upenn.edu/1017/7158"
+    help:
+      appointment: "https://libcal.library.upenn.edu/appointments"
+      ask: "https://faq.library.upenn.edu/ask"
+      chat: "https://faq.library.upenn.edu/chat/widget/15c79c53182e201520a47857fb3d1e96?referer=%{request_url}%2F&referer_title=Find&auth_id=0"
+      faq: "https://faq.library.upenn.edu"
+      guides: "https://guides.library.upenn.edu"
+      lib_hours: "https://www.library.upenn.edu/about/hours"
+      libraries: "https://www.library.upenn.edu/libraries-locations"
     request_options:
       scan_info: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office_info: "https://guides.library.upenn.edu/resourcesharing/facex"

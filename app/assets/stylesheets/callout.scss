@@ -13,7 +13,7 @@
   margin: 0;
 }
 
-.callout > a {
+.callout > a:not(.btn) {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
