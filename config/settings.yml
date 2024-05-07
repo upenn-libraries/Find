@@ -3,6 +3,9 @@ alma:
   api_key: '<%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>'
 illiad:
   api_key: '<%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>'
+google_analytics:
+  production_gtag: 'GTM-KMLQ6V6W'
+  staging_gtag: 'GTM-WS2TBPLM'
 locations:
   offsite:
     - lippb10
