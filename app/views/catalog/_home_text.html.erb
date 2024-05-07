@@ -15,16 +15,12 @@
         </div>
       </div>
 
-      <%# Feedback card %>
-      <%# @todo Convert to CalloutComponent once exists %>
-      <div class="callout my-0">
-        <h2 class="h4 mb-3"><%= t('home.feedback.title') %></h2>
-        <p class="card-text">
+      <%= render CalloutComponent.new(m_class: 'mb-0') do |callout| %>
+        <% callout.with_heading t('home.feedback.title') %>
+        <p>
           <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
         </p>
-        <%# @todo Uncomment this and add link to release notes once they exist %>
-        <!-- <p><%# t('home.feedback.release_notes').html_safe %></p> -->
-      </div>
+      <% end %>
 
     </div>
     <div class="home-content__help col-md-5">
