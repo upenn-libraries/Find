@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../app/utilities/docker_secrets'
+
 Config.setup do |config|
   # Name of the constant exposing loaded settings
   config.const_name = 'Settings'
@@ -56,5 +58,5 @@ Config.setup do |config|
 
   # Evaluate ERB in YAML config files at load time.
   #
-  # config.evaluate_erb_in_yaml = true
+  config.evaluate_erb_in_yaml = true
 end

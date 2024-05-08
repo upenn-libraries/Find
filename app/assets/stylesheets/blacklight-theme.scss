@@ -165,6 +165,26 @@ label.toggle-bookmark {
   min-width: auto;
 }
 
+.page__heading {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.page__lede {
+  font-size: 1.2rem;
+  max-width: 52ch;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+form {
+  --bs-border-color: var(--color-fg-subtle);
+}
+
 .constraints-container {
   margin-bottom: 1rem !important;
   gap: 0.5rem;
@@ -204,4 +224,60 @@ label.toggle-bookmark {
 
 .search-widgets {
   gap: 0.5rem;
+}
+
+.page__heading {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.page__lede {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  max-width: 52ch;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+form {
+  --bs-border-color: var(--color-fg-subtle);
+}
+
+.form-group--error {
+  padding-left: 0.75rem;
+  border-left: solid 0.25rem var(--color-fg-attention);
+}
+
+.form-group__error-text {
+  color: var(--color-fg-attention);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.form-group--error input {
+  border-color: var(--color-fg-attention);
+  border-width: 2px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.cards-as-links a.card {
+  display: block;
+  text-decoration: none;
+}
+
+.cards-as-links a.card:hover {
+  background: var(--color-info-bg);
+  --bs-card-border-color: var(--color-fg-default);
+}
+
+.cards-as-links a.card:hover .card-title  {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }

@@ -1,10 +1,184 @@
 en:
+  home:
+    info:
+      heading: 'What can I do here?'
+      discover:
+        title: 'Discover library materials.'
+        description: 'Use the search box to find books, ebooks, articles, journals, digital media, and more.'
+      manage:
+        title: 'Manage your Library Account.'
+        description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
+    feedback:
+      title: 'We want your feedback!'
+      description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are <a href="%{url}" target="_blank">requesting feedback</a> to ensure it meets your needs.'
+      release_notes: 'New features and improvements will be added throughout the summer and fall. Check the <a href="%{url}" target="_blank">release notes</a> for the latest updates.'
+    help:
+      heading: Where can I get help?
+      connect:
+        title: 'Connect with us'
+        chat:
+          title: 'Chat'
+          description: 'Get live assistance M-F 9-5'
+        ask:
+          title: 'Ask'
+          description: 'Send us a question and we’ll respond in 24 hours or less'
+        appointment:
+          title: 'Make an appointment'
+          description: 'Consult a subject specialist'
+      self_service:
+        title: 'Self-service'
+        faq: 'Check our FAQ'
+        guides: 'View our research guides'
+        libraries: 'Visit a library location'
+        lib_hours: '(see hours)'
+    resources:
+      title: 'More resources for your research'
+      lede: 'Expand your search using one of the following specialized tools.'
+      research:
+        title: 'Research materials'
+        articles:
+          title: 'Articles+'
+          description: 'Full-text articles and book chapters'
+        borrow:
+          title:
+            borrowdirect: 'BorrowDirect'
+            easyborrow: 'EZBorrow'
+          description: 'Borrow materials or request scans from partner libraries'
+        scholarlycommons:
+          title: 'ScholarlyCommons'
+          description: 'Penn dissertations, Penn faculty papers, and Penn Libraries publications'
+        search_center:
+          title: 'Search Center'
+          description: 'Biddle Law Library catalog'
+        worldcat:
+          title: 'WorldCat'
+          description: 'Union catalog listing 540 million records held by member institutions'
+      archival:
+        title: 'Additional archival materials'
+        jstor:
+          title: 'JSTOR'
+          description: 'Image collections from Penn and other institutions'
+        colenda:
+          title: 'Colenda Digital Repository'
+          description: 'Digitized and born-digital material'
+        openn:
+          title: 'OPenn'
+          description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
+        finding_aids:
+          title: 'Philadelphia Area Archives'
+          description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
+  account:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Account'
+    guide_callout: 'Guide:'
+    show:
+      page_heading: 'Account Overview'
+      page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
+      cards:
+        shelf:
+          title: 'Shelf'
+          description: "Renew items you've loaned and see when they're due."
+        settings:
+          title: 'Settings'
+          description: 'Your account details and request item delivery address.'
+        bookmarks:
+            title: 'Bookmarks'
+            description: 'Create citations and email bookmarked items.'
+        fines_and_fees:
+          title: 'Fines and Fees'
+          description: 'View fines for overdue, lost, or damaged items.'
+    ill:
+      page_heading: 'Request an item'
+      page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
+      request_type:
+        prompt: "What's the item you are requesting?"
+        scan: 'Article or chapter'
+        loan: 'Book or other item'
+      form:
+        scan:
+          journal_title:
+            label: 'Journal or book title'
+            help_text: 'Enter a journal or book title'
+          article_title: 'Article or chapter title'
+          author:
+            label: 'Author'
+            help_text: 'Enter an author'
+          publication_date: 'Publication date'
+          volume: 'Volume'
+          issue: 'Issue'
+          pages: 'Pages'
+          comments:
+            label: 'Comments'
+            help_text: 'Describe the item further to help us find it.'
+          submit: 'Place request'
+          delivery_msg: 'Articles and chapters are delivered electronically as a PDF and are often ready in 2-3 business days.'
+        loan:
+          title: 'Title'
+          author: 'Author'
+          publication_year: 'Year of publication'
+          edition: 'Edition'
+          publisher: 'Publisher'
+          place_of_publication: 'Place of publication'
+          isbn: 'ISBN'
+          comments:
+            label: 'Comments'
+            help_text: 'Describe the item further to help us find it.'
+          delivery:
+            label: 'How would you like this item delivered?'
+            help_text_html: 'Books or other items are available for <a href="%{pickup_url}" target="_blank">pick up</a> or <a href="%{bbm_url}" target="_blank">mail delivery</a>.'
+            options:
+              pickup:
+                label: 'Pick up'
+                placeholder: 'Choose a pickup location...'
+              mail:
+                label: 'Mail'
+                help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
+          delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
+          submit: 'Place request'
+        required: '(required)'
+        email_notification_msg: "We'll send you an email notification when it is ready."
+    bookmarks:
+      page_heading: 'Bookmarks'
+      page_lede: 'Create citations and email bookmarked items.'
+    fines_and_fees:
+      page_heading: 'Fines and Fees'
+      page_lede: 'Your fines and fees for lost or damaged items.'
+      table:
+        th:
+          type: 'Type'
+          title: 'Title'
+          date_charged: 'Charged'
+          last_transaction: 'Last transaction'
+          original_amount: 'Original amount'
+          balance: 'Balance'
+          total: 'Total'
+      terms:
+        balance: 'Outstanding balance'
+      how_to_pay_html: '<a href="%{url}" target=_blank>How to pay fines and fees</a>'
+    settings:
+      page_heading: 'Settings'
+      page_lede: 'Your account details and item delivery address.'
+      terms:
+        user_group: 'Patron group'
+        bbm_delivery_address: 'Delivery address for Books by Mail'
+      bbm_empty: "You don't have a delivery address set."
+      set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
+      update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
     service_lede: 'books, articles, and more'
     service_name: 'Find'
     sign_out: 'Sign Out'
+    account: 'Account'
+  footer:
+    account:
+      heading: 'Account'
+      shelf: 'Shelf'
+      bookmarks: 'Bookmarks'
+      fines: 'Fines and fees'
+      settings: 'Settings'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
@@ -12,6 +186,7 @@ en:
     subject_search: 'Subject'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
+    isxn_search: 'ISBN/ISSN'
   inventory:
     show:
       navigation:
@@ -54,12 +229,49 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
+  requests:
+    form:
+      heading: 'Request an item'
+      item_label: 'What item are you requesting?'
+      item_placeholder: 'Choose an item...'
+      buttons:
+        scan: 'Continue to request a scan'
+        delivery: 'Place delivery request'
+        pickup: 'Place pickup request'
+        mail: 'Place mail request'
+        aeon: 'Schedule visit'
+        placeholder: 'Request item'
+      options:
+        label: 'How would you like it delivered?'
+        scan:
+          info_html: '<a href="%{url}" target=_blank>About request scan</a>'
+          label: 'Email me a chapter or section'
+        office:
+          label: 'Office Delivery via FacultyEXPRESS'
+          info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
+          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
+        pickup:
+          label: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        mail:
+          label: 'Mail it via Books by Mail'
+          info_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
+        aeon:
+          kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
+          access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
+        archives:
+          info_html: 'Accessing this item requires <a href="https://archives.upenn.edu/research/visit">visiting</a> the <a href="https://archives.upenn.edu/archives-info/contact">Penn University Archives & Records Center</a>.'
+      request_item: 'Request an item'
+      log_in_to_request_item: 'Log in to request item'
+      add_comments: 'Add comments'
+      comments_label: 'Comments'
   search:
     all_fields: 'All Fields'
     button:
       label: "Find it"
     advanced:
       label: "Advanced"
+    databases: "Databases"
   show:
     citation:
       cited_as: 'Cited as'
@@ -140,3 +352,4 @@ en:
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
+

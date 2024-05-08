@@ -1,4 +1,10 @@
-pennlibs_web_version: '0.1.0'
+pennlibs_web_version: '0.1.1'
+alma:
+  api_key: '<%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>'
+illiad:
+  api_key: '<%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>'
+google_analytics:
+  id: ~
 locations:
   offsite:
     - lippb10
@@ -12,6 +18,39 @@ locations:
     - storNoCirc
     - vpunavail
     - vanpNocirc
+  pickup:
+    - - Van Pelt Library
+      - VanPeltLib
+    - - Lockers at Van Pelt Library
+      - VPLOCKER
+    - - Annenberg Library
+      - AnnenLib
+    - - Athenaeum Library
+      - AthLib
+    - - Holman Biotech Commons
+      - BiomLib
+    - - Chemistry Library
+      - ChemLib
+    - - Dental Medicine Library
+      - DentalLib
+    - - Lockers at Dental Medicine Library
+      - DENTLOCKER
+    - - Fisher Fine Arts Library
+      - FisherFAL
+    - - Library at the Katz Center
+      - KatzLib
+    - - Math/Physics/Astronomy Library
+      - MPALib
+    - - Museum Library
+      - MuseumLib
+    - - Ormandy Music and Media Center
+      - MusicLib
+    - - Pennsylvania Hospital Library - 800 Spruce St.
+      - PAHospLib
+    - - Veterinary Library - New Bolton Center
+      - VetNBLib
+    - - Veterinary Library - Penn Campus
+      - VetPennLib
 electronic_scoring:
   collection:
     Publisher website: 100

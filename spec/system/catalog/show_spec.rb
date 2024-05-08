@@ -136,6 +136,112 @@ describe 'Catalog Show Page' do
     include_examples 'core show page features'
   end
 
+  # Request options for a physical holding
+  context 'when requesting a physical holding' do
+    include_context 'with print monograph record with 2 physical entries'
+
+    let(:user) { create :user }
+    let(:mms_id) { print_monograph_bib }
+    let(:entries) { print_monograph_entries }
+
+    before do
+      sign_in user
+      visit solr_document_path(mms_id)
+      click_button entries.second.description
+    end
+
+    it 'shows the button to request the item' do
+      within('details.fulfillment') do
+        expect(page).to have_selector 'summary', text: I18n.t('requests.form.request_item')
+      end
+    end
+
+    context 'with a holding that has one checkoutable item' do
+      let(:item) { build :item, :checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'automatically shows request options when there is a single item' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_radio-options'
+        end
+      end
+
+      it 'selects the first option' do
+        within('.js_radio-options') do
+          expect(first('input[type="radio"]')[:checked]).to be true
+        end
+      end
+
+      it 'shows the right button' do
+        within('.request-buttons') do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+    end
+
+    context 'with a holding that has multiple checkoutable items' do
+      let(:items) { build_list :item, 2, :checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return(items)
+        allow(Inventory::Service::Physical).to receive(:item).and_return(items.first)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the item dropdown when there are more than one item' do
+        expect(page).to have_selector 'select#item_pid'
+      end
+
+      it 'shows request options when an item is selected' do
+        find('select#item_pid').find(:option, items.first.description).select_option
+        expect(page).to have_selector '.js_radio-options'
+      end
+    end
+
+    context 'with an aeon requestable item' do
+      let(:item) { build :item, :aeon_requestable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the aeon request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_aeon'
+        end
+      end
+
+      it 'shows the right button' do
+        within('.request-buttons') do
+          expect(page).to have_link I18n.t('requests.form.buttons.aeon')
+        end
+      end
+    end
+
+    context 'with an item at the archives' do
+      let(:item) { build :item, :at_archives }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_archives'
+        end
+      end
+    end
+  end
+
   context 'when interacting with show tools' do
     include_context 'with electronic journal record with 4 electronic entries'
 
