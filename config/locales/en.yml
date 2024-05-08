@@ -186,6 +186,7 @@ en:
     subject_search: 'Subject'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
+    isxn_search: 'ISBN/ISSN'
   inventory:
     show:
       navigation:
