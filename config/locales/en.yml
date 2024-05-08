@@ -179,10 +179,6 @@ en:
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
       settings: 'Settings'
-    resources:
-      heading: 'Resources'
-      databases: 'Databases'
-      articles_plus: 'Articles+'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
@@ -248,7 +244,7 @@ en:
         label: 'How would you like it delivered?'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
-          label: 'Scan a section and email me a PDF'
+          label: 'Email me a chapter or section'
         office:
           label: 'Office Delivery via FacultyEXPRESS'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
@@ -274,6 +270,7 @@ en:
       label: "Find it"
     advanced:
       label: "Advanced"
+    databases: "Databases"
   show:
     citation:
       cited_as: 'Cited as'
