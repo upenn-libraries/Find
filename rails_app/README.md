@@ -7,7 +7,7 @@ index. Records are harvested from our ILS (Alma) by the
 by the [`pennmarc`](https://gitlab.library.upenn.edu/dld/catalog/pennmarc) gem 
 ([docs](https://rubygems.org/gems/pennmarc)).
 
-Eventually, this app will also contain patron account management functionality.
+High-level information about this repo and the available working environments can be found at the [top-level README](README.md).
 
 1. [Requirements](#requirements)
 2. [Starting Services](#starting-app-services)
@@ -25,6 +25,12 @@ I suggest installing Ruby via [`rbenv`](https://github.com/rbenv/rbenv) or [`asd
 plenty of guidance available on the open web about installing and using these tools. The `.ruby-version` and
 `.tool-versions` files in this repo explicitly define the version of Ruby to be installed.
 
+> __Important Note:__ The available Vagrant environment relies on a Bundler configuration that houses the installed gems in the `vendor/bundle` directory.
+> If you want to use local services, and a local Ruby interpreter (via `rbenv`, `asdf` or somesuch), you'll need to instruct bundler to ignore this configuration when running commands with `bundle` (including `bundle exec`).
+>
+> To ignore the vagrant-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you cna prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
+
+
 ### Docker Compose
 
 [Docker compose](https://docs.docker.com/compose/install/) is required to run the application services. For 🌈 linux 
@@ -38,8 +44,15 @@ from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full f
 
 ### Development Credentials
  
-Request the necessary [credential file](https://edgeguides.rubyonrails.org/security.html#custom-credentials) from the 
-repository owner and place it in the `config/credentials` directory.
+Building the Vagrant environment should pull in the needed development key. If using the Vagrant environment for development, all secret values will be pulled from Vault. 
+
+Settings files are, and should continue to be, structured to support credentials being made available by different means. For example, the Alma API keys is available via `DockerSecrets` in the Vagrant environment, but via the encrypted credential file when not using the Vagrant environment.
+
+New credential values added to the Settings should be added **BOTH** to the Penn Vault as well as the encrypted Rails `development.yml.enc` file. This can be done with:
+
+```bash
+EDITOR=nano bundle exec rails credentials:edit -e development
+```
 
 ## Starting App Services
 

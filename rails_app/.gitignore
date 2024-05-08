@@ -41,3 +41,5 @@ vendor/bundle
 /config/credentials/production.key
 
 /config/credentials/staging.key
+
+.byebug_history

@@ -2,11 +2,15 @@
 
 See the [README](rails_app/README.md) for the Rails app for more information about the application.
 
+We are working to support [development in a Vagrant environment](#working-with-the-vagrant-environment) as well as [a development environment using local Ruby and docker services](#working-with-local-services-in-docker). Choose your poison.
+
 ## Relation to other Projects
 
-TODO
+In deployed environments, Find is configured to point at a Solr index that is built and maintained by the [catalog-indexing](https://gitlab.library.upenn.edu/dld/catalog/catalog-indexing) app.
 
-## Working with the Vagrant environment
+## Developing
+
+### Working with the Vagrant environment
 
 > Caveat: The vagrant development environment has only been tested in the local environments our developers currently have. This currently includes Linux, Intel-based Macs and M1 Macs.
 
@@ -17,8 +21,14 @@ You may need to update the VirtualBox configuration for the creation of a host-o
 ```
 * 10.0.0.0/8
 ```
+#### Vagrant Services
 
-### Starting
+1. [The Find Rails app](https://catalog-find-dev.library.upenn.edu/)
+2. [Solr](https://catalog-find-dev.library.upenn.int/solr/#/)
+3. Postgres
+4. Chrome (for running system tests)
+
+#### Starting
 
 From the [vagrant](vagrant) directory run:
 
@@ -32,9 +42,9 @@ if running with Parallels:
 vagrant up --provider=parallels --provision
 ```
 
-This will run the [vagrant/Vagrantfile](vagrant/Vagrantfile) which will bring up an Ubuntu VM and run the Ansible script which will provision a single node Docker Swarm behind nginx with a self-signed certificate to mimic a load balancer. Your hosts file will be modified; the domain `catalog-find-dev.library.upenn.edu` will be added and mapped to the Ubuntu VM. Once the Ansible script has completed and the Docker Swarm is deployed you can access the application by navigating to [https://apotheca-dev.library.upenn.edu](https://apotheca-dev.library.upenn.edu).
+This will run the [vagrant/Vagrantfile](vagrant/Vagrantfile) which will bring up an Ubuntu VM and run the Ansible script which will provision a single node Docker Swarm behind nginx with a self-signed certificate to mimic a load balancer. Your hosts file will be modified; the domain `catalog-find-dev.library.upenn.edu` will be added and mapped to the Ubuntu VM. Once the Ansible script has completed and the Docker Swarm is deployed you can access the application by navigating to [https://catalog-find-dev.library.upenn.edu/](https://catalog-find-dev.library.upenn.edu/).
 
-### Stopping
+#### Stopping
 
 To stop the development environment, from the `vagrant` directory run:
 
@@ -42,7 +52,7 @@ To stop the development environment, from the `vagrant` directory run:
 vagrant halt
 ```
 
-### Destroying
+#### Destroying
 
 To destroy the development environment, from the `vagrant` directory run:
 
@@ -50,7 +60,7 @@ To destroy the development environment, from the `vagrant` directory run:
 vagrant destroy -f
 ```
 
-### SSH
+#### SSH
 
 You may ssh into the Vagrant VM by running:
 
@@ -58,23 +68,22 @@ You may ssh into the Vagrant VM by running:
 vagrant ssh
 ```
 
-#### Vagrant Services
 
-1. [The Find Rails app](https://catalog-find-dev.library.upenn.edu/)
-2. [Solr](https://catalog-find-dev.library.upenn.int/solr/#/)
-3. [Postgres]()
-4. [Chrome]()
 
 ## Working with local services in Docker
 
+> __Important Note:__ The available Vagrant environment relies on a Bundler configuration that houses the installed gems in the `vendor/bundle` directory.
+> If you want to use local services, and a local Ruby interpreter (via `rbenv`, `asdf` or somesuch), you'll need to instruct bundler to ignore this configuration when running commands with `bundle` (including `bundle exec`).
+> 
+> To ignore the vagrant-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you cna prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
+
 ### Initializing
 
-1. `cd rails_app`
-2. Install gems to local ruby with `BUNDLE_IGNORE_CONFIG=true bundle install`
-3. Startup docker services with `BUNDLE_IGNORE_CONFIG=true bundle exec rake tools:start` TODO: add instructions about including Solr configset & SolrJSON files
-4. Continuing to use `BUNDLER_IGNORE_CONFIG=true`, you can run you own server process, rails console, debugger, whatevs. Also ensure `rails_app` is configured as the working directory.
+Guidance for working in this environment - with the above provisio - can be found in the [Rails App README file](rails_app/README.md).
 
 ## Working with a remote Solr index
+
+> TODO: This needs to be confirmed as functional
 
 1. Using Wireguard VPN...
 2. Get production Solr collection URL
