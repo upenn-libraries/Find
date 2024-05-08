@@ -251,8 +251,6 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: '${isxn_qf}', pf: '${isxn_pf}' } }
     end
-
-
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
