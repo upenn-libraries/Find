@@ -13,7 +13,7 @@ module Broker
       PICKUP = :pickup
     end
 
-    attr_reader :user, :item_parameters, :fulfillment_options, :scan_details
+    attr_reader :user, :item_parameters, :fulfillment_options, :scan_details, :destination
 
     # Create a new Request to Broker
     #
@@ -30,6 +30,7 @@ module Broker
       @item_parameters = item_parameters
       @fulfillment_options = fulfillment_options
       @scan_details = scan_details
+      set_destination # set destination upon initialization so errors can be caught prior to submission
     end
 
     def self.submit(user:, item_parameters: {}, fulfillment_options: {}, scan_details: {})
@@ -38,16 +39,16 @@ module Broker
       Service.new(request: request).submit
     end
 
-    def destination
-      if scan? || books_by_mail? || delivery? || ill_pickup?
-        :illiad
-      elsif aeon?
-        :aeon
-      elsif pickup?
-        :alma
-      else
-        raise LogicFailure, "Could not determine a backend for request: #{inspect}"
-      end
+    def set_destination
+      @destination = if scan? || books_by_mail? || delivery? || ill_pickup?
+                       :illiad
+                     elsif aeon?
+                       :aeon
+                     elsif pickup?
+                       :alma
+                     else
+                       raise LogicFailure, "Could not determine a backend for request: #{inspect}"
+                     end
     end
 
     def scan?

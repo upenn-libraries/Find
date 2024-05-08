@@ -5,7 +5,7 @@ module Broker
   # Usage: Service.new(request: YOUR_REQUEST).submit
   #        Will return a successful or failed Broker::Outcome
   class Service
-    attr_reader :request, :backend
+    attr_reader :request, :backend, :errors
 
     def initialize(request:)
       @request = request
@@ -14,8 +14,10 @@ module Broker
 
     # @return [Broker::Outcome]
     def submit
-      @errors = backend.validate(request) # return early with Outcome if validation fails...
-      outcome = backend.submit(request) # this returns outcome, but we could build the outcome here - except that the different backend submission methods will return inconsistent objects
+      @errors = backend.validate(request: request) # return early with Outcome if validation fails...
+      return failed_outcome if errors.any?
+
+      outcome = backend.submit(request: request)
       notify
       outcome
     end
@@ -24,35 +26,22 @@ module Broker
       # TODO: send email
     end
 
-    class << self
+    private
 
-      # @return [Broker::Outcome]
-      def submit(request)
-        backend = backend_class(request) # instantiate backend class
-        backend.validate(request: request) # raise ValidationError
-        outcome = backend.submit(request: request) # call backend submit class method
-        notify(request, outcome) # send confirmation email with tracking number
-        outcome
-      rescue Broker::ValidationError => e
-        # TODO: set errors and return an Outcome
+    # @return [Broker::Backend]
+    def backend_class(request)
+      case request.destination
+      when :alma then Broker::Backend::Alma
+      when :illiad then Broker::Backend::Illiad
+      when :aeon then Broker::Backend::Aeon
+      else
+        raise
       end
+    end
 
-      # @return [Broker::Backend]
-      def backend_class(request)
-        case request.destination
-        when :alma then Broker::Alma
-        when :illiad then Broker::Illiad
-        when :aeon then Broker::Aeon
-        else
-          raise
-        end
-      end
-
-      # @param request [Broker::Request]
-      # @param outcome [Broker::Outcome]
-      def notify(request, outcome)
-        # TODO: send email to request.user
-      end
+    # @return [Broker::Outcome]
+    def failed_outcome
+      Outcome.new(request: request, errors: errors)
     end
   end
 end
