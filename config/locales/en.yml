@@ -130,7 +130,7 @@ en:
             options:
               pickup:
                 label: 'Pick up'
-                blank: 'Pick up location'
+                placeholder: 'Choose a pickup location...'
               mail:
                 label: 'Mail'
                 help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
