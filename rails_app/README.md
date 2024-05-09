@@ -9,17 +9,22 @@ by the [`pennmarc`](https://gitlab.library.upenn.edu/dld/catalog/pennmarc) gem
 
 High-level information about this repo and the available working environments can be found at the [top-level README](README.md).
 
-1. [Requirements](#requirements)
-2. [Starting Services](#starting-app-services)
-   1. [Loading Data](#loading-data)
-3. [Developing](#developing)
-4. [Contributing](#contributing)
+1. [Local Development Environment](#local-development-environment)
+   1. [Requirements](#requirements)
+   2. [Starting Services](#starting-app-services)
+   3. [Loading Data](#loading-data)
+   4. [Developing](#developing)
+2. [Contributing](#contributing)
+   1. [Running the Test Suite](#running-the-test-suite)
+   2. [Rubocop](#rubocop)
 
-## Requirements
+## Local Development Environment
+
+### Requirements
 
 Your development machine will need the following:
 
-### Ruby
+#### Ruby
 
 I suggest installing Ruby via [`rbenv`](https://github.com/rbenv/rbenv) or [`asdf`](https://asdf-vm.com/). There is
 plenty of guidance available on the open web about installing and using these tools. The `.ruby-version` and
@@ -30,8 +35,7 @@ plenty of guidance available on the open web about installing and using these to
 >
 > To ignore the vagrant-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you cna prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
 
-
-### Docker Compose
+#### Docker Compose
 
 [Docker compose](https://docs.docker.com/compose/install/) is required to run the application services. For 🌈 linux 
 users 🌈 this is free and straightforward. [Install docker engine](https://docs.docker.com/engine/install/) and then
@@ -42,7 +46,7 @@ For Mac users, the easiest and recommended way to get Docker Compose is to
 application running, you should request membership to the Penn Libraries Docker Team license 
 from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full functionality.
 
-### Development Credentials
+#### Development Credentials
  
 Building the Vagrant environment should pull in the needed development key. If using the Vagrant environment for development, all secret values will be pulled from Vault. 
 
@@ -54,7 +58,7 @@ New credential values added to the Settings should be added **BOTH** to the Penn
 EDITOR=nano bundle exec rails credentials:edit -e development
 ```
 
-## Starting App Services
+### Starting App Services
 
 Helpful Rake tasks have been created to wrap up the initialization process for the development environment. Prior to
 starting this app, ensure you have a copy of the Solr configset and some sample data from another developer or by 
@@ -80,20 +84,20 @@ this task, ensure you have a copy of the Solr configset as a zip file as well as
 to create new collections using the newest `configset_*.zip` file in the `solr` directory, then load the records in the 
 newest `solrjson_*.jsonl` file in the `solr` directory.
 
-## Developing
+### Developing
 
-### Install dependencies
+#### Install dependencies
 
 ```bash
 bundle install
 ```
 
-#### Postgres
+##### Postgres
 For MacOS users the `pg` gem may fail to install with an error concerning the `libpq` library.
 
 [Refer to this gist](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e) to address this issue.
 
-### Start the development server
+#### Start the development server
 
 ```bash
 bundle exec rails server
