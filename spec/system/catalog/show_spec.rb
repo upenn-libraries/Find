@@ -273,4 +273,39 @@ describe 'Catalog Show Page' do
       expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: staff_view_solr_document_path(mms_id)
     end
   end
+
+  context 'when viewing inventory navigation pane' do
+    include_context 'with print monograph record with 2 physical entries'
+
+    before { visit(solr_document_path(print_monograph_bib)) }
+
+    it 'applies the correct class when holding is available' do
+      expect(page).to have_button(class: 'inventory-item__availability--easy')
+    end
+
+    context 'when holdings have an availability status other than "available"' do
+      include_context 'with print monograph record with 2 physical entries' do
+        let(:print_monograph_entries) do
+          [create(:physical_entry, mms_id: print_monograph_bib, availability: 'unavailable', holding_id: '1234',
+                                   call_number: 'Oversize QL937 B646 1961', holding_info: 'first copy',
+                                   location_code: 'veteresov', inventory_type: 'physical'),
+           create(:physical_entry, mms_id: print_monograph_bib, availability: 'check holdings', holding_id: '5678',
+                                   call_number: 'Oversize QL937 B646 1961 copy 2', holding_info: 'second copy',
+                                   location_code: 'veteresov', inventory_type: 'physical')]
+        end
+      end
+
+      it 'applies the correct class when availability status is "unavailable"' do
+        within('#inventory-pills-tab') do
+          expect(page).to have_button(class: 'inventory-item__availability--difficult')
+        end
+      end
+
+      it 'applies the correct class when availability status is "check holdings"' do
+        within('#inventory-pills-tab') do
+          expect(page).to have_button(class: 'inventory-item__availability')
+        end
+      end
+    end
+  end
 end
