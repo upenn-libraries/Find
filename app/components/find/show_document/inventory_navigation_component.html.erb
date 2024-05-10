@@ -4,7 +4,7 @@
   </h2>
   <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical">
     <% @inventory.each_with_index do |entry, i| %>
-      <button class="inventory-item inventory-item--primary <%= " active" if active?(entry) %>"
+      <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
               id="inventory-pills-<%= i %>"
               data-bs-toggle="pill"
               data-bs-target="#inventory-<%= i %>"

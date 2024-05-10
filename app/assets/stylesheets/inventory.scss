@@ -90,7 +90,7 @@
 }
 
 .inventory-item__footer {
-  color: var(--color-fg-success);
+  color: var(--holding-accent-color);
   font-weight: 600;
 }
 
@@ -103,13 +103,29 @@
   margin-bottom: 1.75rem;
 }
 
-.inventory-item__availability--primary {
-  border-left: solid 3px var(--color-bg-success-emphasis);
+.inventory-item__availability {
+  --holding-accent-color: var(--color-fg-subtle);
+}
+
+.inventory-item__availability--easy {
+  --holding-accent-color: var(--color-fg-success);
+}
+
+.inventory-item__availability--difficult {
+  --holding-accent-color: var(--color-fg-subtle);
+}
+
+.inventory-item__status--blocked {
+  --holding-accent-color: var(--color-fg-attention);
+}
+
+.inventory-item__availability-summary {
+  border-left: solid 3px var(--holding-accent-color);
   padding-left: 0.75rem;
 }
 
-.inventory-item__availability--primary .inventory-item__availability-main {
-  color: var(--color-fg-success);
+.inventory-item__availability-summary .inventory-item__availability-main {
+  color: var(--holding-accent-color);
   font-weight: 600;
   font-size: 1.15rem;
 }
