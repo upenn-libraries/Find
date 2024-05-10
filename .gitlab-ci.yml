@@ -286,37 +286,37 @@ remove_tmp_registry:
     - build
 # -- End - remove tmp registry repository
 
-# # Deploy staging
-# deploy_staging:
-#   stage: deploy
-#   extends:
-#     - .deploy
-#   variables:
-#     IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}
-#   environment:
-#     name: staging
-#     url: https://find-staging.library.upenn.edu
-#   needs:
-#     - copy_app_docker_images
-#   only:
-#     - main
-#   tags:
-#     - deploy
+# Deploy staging
+deploy_staging:
+  stage: deploy
+  extends:
+    - .deploy
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}
+  environment:
+    name: staging
+    url: https://find-staging.library.upenn.edu
+  needs:
+    - copy_app_docker_images
+  only:
+    - main
+  tags:
+    - deploy
 
-# #Deploy production
-# deploy_production:
-#   stage: deploy
-#   extends:
-#     - .deploy
-#   variables:
-#     IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}
-#   environment:
-#     name: production
-#     url: https://find.library.upenn.edu
-#   needs:
-#     - copy_app_docker_images
-#   rules:
-#     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+(\.[a-zA-Z0-9]+)?$/
-#   tags:
-#     - deploy
-# #-- End - deployment
+#Deploy production
+deploy_production:
+  stage: deploy
+  extends:
+    - .deploy
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}
+  environment:
+    name: production
+    url: https://find.library.upenn.edu
+  needs:
+    - copy_app_docker_images
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+(\.[a-zA-Z0-9]+)?$/
+  tags:
+    - deploy
+#-- End - deployment
