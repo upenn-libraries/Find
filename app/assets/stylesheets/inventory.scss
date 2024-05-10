@@ -103,6 +103,22 @@
   margin-bottom: 1.75rem;
 }
 
+.inventory-item__availability {
+  color: var(--color-fg-accent);
+}
+
+.inventory-item__availability--easy {
+  color: var(--color-fg-success);
+}
+
+.inventory-item__availability--difficult {
+  color: var(--color-fg-default);
+}
+
+.inventory-item__status--blocked {
+  color: var(--color-fg-attention);
+}
+
 .inventory-item__availability--primary {
   border-left: solid 3px var(--color-bg-success-emphasis);
   padding-left: 0.75rem;
