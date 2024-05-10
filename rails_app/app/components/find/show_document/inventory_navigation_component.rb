@@ -18,6 +18,19 @@ module Find
       def active?(entry)
         @selected_id == entry.id
       end
+
+      # Classes to use in rendering the inventory entry element
+      # @return [Array<String (frozen)>]
+      def classes(entry)
+        classes = ['inventory-item']
+        classes << if entry.status == Inventory::Constants::AVAILABLE || !entry.physical?
+                     'inventory-item__availability--easy'
+                   elsif entry.status == Inventory::Constants::UNAVAILABLE
+                     'inventory-item__availability--difficult'
+                   else
+                     'inventory-item__availability'
+                   end
+      end
     end
   end
 end

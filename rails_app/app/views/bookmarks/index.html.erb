@@ -2,13 +2,11 @@
 
 <% @page_title = t('blacklight.bookmarks.page_title', :application_name => application_name) %>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Find</a></li>
-    <li class="breadcrumb-item"><a href="/account">Account</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Bookmarks</li>
-  </ol>
-</nav>
+<%= render BreadcrumbsComponent.new do |component|%>
+  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
+  <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
+  <% component.with_breadcrumb(active: true) { t('account.bookmarks.page_heading') } %>
+<% end %>
 
 <div id="content" class="col-md-12">
   <h1 class='page__heading'><%= t('account.bookmarks.page_heading') %></h1>

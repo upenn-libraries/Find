@@ -1,0 +1,26 @@
+.home-content {
+  /* Align homepage boxes with facet sidebar heading */
+  margin-top: .66rem;
+
+  /* Homepage links */
+  a:not(.btn) {
+    text-underline-offset: .15em;
+
+    &:hover,
+    &:focus {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  /* Homepage "more resources" lists */
+  dt {
+    font-weight: $font-weight-normal;
+  }
+  dd {
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

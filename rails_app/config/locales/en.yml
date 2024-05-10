@@ -1,5 +1,76 @@
 en:
+  home:
+    info:
+      heading: 'What can I do here?'
+      discover:
+        title: 'Discover library materials.'
+        description: 'Use the search box to find books, ebooks, articles, journals, digital media, and more.'
+      manage:
+        title: 'Manage your Library Account.'
+        description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
+    feedback:
+      title: 'We want your feedback!'
+      description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are <a href="%{url}" target="_blank">requesting feedback</a> to ensure it meets your needs.'
+      release_notes: 'New features and improvements will be added throughout the summer and fall. Check the <a href="%{url}" target="_blank">release notes</a> for the latest updates.'
+    help:
+      heading: Where can I get help?
+      connect:
+        title: 'Connect with us'
+        chat:
+          title: 'Chat'
+          description: 'Get live assistance M-F 9-5'
+        ask:
+          title: 'Ask'
+          description: 'Send us a question and we’ll respond in 24 hours or less'
+        appointment:
+          title: 'Make an appointment'
+          description: 'Consult a subject specialist'
+      self_service:
+        title: 'Self-service'
+        faq: 'Check our FAQ'
+        guides: 'View our research guides'
+        libraries: 'Visit a library location'
+        lib_hours: '(see hours)'
+    resources:
+      title: 'More resources for your research'
+      lede: 'Expand your search using one of the following specialized tools.'
+      research:
+        title: 'Research materials'
+        articles:
+          title: 'Articles+'
+          description: 'Full-text articles and book chapters'
+        borrow:
+          title:
+            borrowdirect: 'BorrowDirect'
+            easyborrow: 'EZBorrow'
+          description: 'Borrow materials or request scans from partner libraries'
+        scholarlycommons:
+          title: 'ScholarlyCommons'
+          description: 'Penn dissertations, Penn faculty papers, and Penn Libraries publications'
+        search_center:
+          title: 'Search Center'
+          description: 'Biddle Law Library catalog'
+        worldcat:
+          title: 'WorldCat'
+          description: 'Union catalog listing 540 million records held by member institutions'
+      archival:
+        title: 'Additional archival materials'
+        jstor:
+          title: 'JSTOR'
+          description: 'Image collections from Penn and other institutions'
+        colenda:
+          title: 'Colenda Digital Repository'
+          description: 'Digitized and born-digital material'
+        openn:
+          title: 'OPenn'
+          description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
+        finding_aids:
+          title: 'Philadelphia Area Archives'
+          description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
   account:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Account'
     guide_callout: 'Guide:'
     show:
       page_heading: 'Account Overview'
@@ -59,7 +130,7 @@ en:
             options:
               pickup:
                 label: 'Pick up'
-                blank: 'Pick up location'
+                placeholder: 'Choose a pickup location...'
               mail:
                 label: 'Mail'
                 help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
@@ -101,6 +172,13 @@ en:
     service_name: 'Find'
     sign_out: 'Sign Out'
     account: 'Account'
+  footer:
+    account:
+      heading: 'Account'
+      shelf: 'Shelf'
+      bookmarks: 'Bookmarks'
+      fines: 'Fines and fees'
+      settings: 'Settings'
   advanced:
     all_fields: 'All Fields'
     creator_search: 'Author/Creator'
@@ -108,6 +186,7 @@ en:
     subject_search: 'Subject'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
+    isxn_search: 'ISBN/ISSN'
   inventory:
     show:
       navigation:
@@ -166,7 +245,7 @@ en:
         label: 'How would you like it delivered?'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
-          label: 'Scan a section and email me a PDF'
+          label: 'Email me a chapter or section'
         office:
           label: 'Office Delivery via FacultyEXPRESS'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
@@ -192,6 +271,7 @@ en:
       label: "Find it"
     advanced:
       label: "Advanced"
+    databases: "Databases"
   show:
     citation:
       cited_as: 'Cited as'
