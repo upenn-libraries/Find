@@ -1,0 +1,3 @@
+{% for user in redis.versioned_configs.users_acl.users  -%}
+    user {{ user.name }} on {{ user.acl_rules }} >{{ user.password }}
+{% endfor %}

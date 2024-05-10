@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  catalog_find:
+    deploy:
+      labels:
+        - "traefik.enable=true"
+
+        - "traefik.http.routers.catalog_find.entrypoints=web"
+        - "traefik.http.routers.catalog_find.rule=Host(`${APP_URL}`)"
+        - "traefik.http.routers.catalog_find.service=catalog_find"
+        - "traefik.http.services.catalog_find.loadbalancer.server.port=${APP_PORT}"
+
+        - "traefik.http.routers.catalog_find.middlewares=catalog_find_https"
+        - "traefik.http.middlewares.catalog_find_https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.catalog_find_https.redirectscheme.permanent=true"
+
+        - "traefik.http.routers.catalog_find_secure.entrypoints=websecure"
+        - "traefik.http.routers.catalog_find_secure.rule=Host(`${APP_URL}`)"
+        - "traefik.http.routers.catalog_find_secure.service=catalog_find_secure"
+        - "traefik.http.services.catalog_find_secure.loadbalancer.server.port=${APP_PORT}"
+
+        - "traefik.http.routers.catalog_find_secure.tls=true"
+        - "traefik.http.routers.catalog_find_secure.tls.certresolver=letsencrypt"
+    environment:
+      APP_UID: ${UID:-1000}
+      APP_GID: ${GID:-1000}
+      CHROME_URL: "http://chrome:${CHROME_PORT}"
+      SOLR_TEST_URL: "${SOLR_TEST_URL}"
+      SOLR_URL: "${SOLR_URL}"
+      VAGRANT: "true"
+    healthcheck:
+      retries: 8
+      start_period: 20s
+    volumes:
+      - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app

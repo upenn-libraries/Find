@@ -1,0 +1,14 @@
+---
+postgres_database_name: "find_staging"
+
+postgres_database_versioned_secrets:
+  database_password:
+    secret_name_prefix: "catalog_find_postgres_password_v"
+    value: "{{ catalog_find_vault_values.secret.database_password }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
+
+postgres_docker_image_tag: 16.2
+
+postgres_docker_node_constraint: catalog_find_postgres
+postgres_docker_stack_name: catalog-find
+postgres_network: catalog_find_postgres

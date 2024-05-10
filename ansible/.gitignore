@@ -1,0 +1,7 @@
+# Ignore ansible galaxy roles
+roles/catalog-find/files/src/*
+roles/atosatto.docker-swarm
+roles/postgres
+roles/solr
+roles/traefik
+roles/zookeeper

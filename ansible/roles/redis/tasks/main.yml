@@ -1,0 +1,45 @@
+---
+- name: Create redis dir
+  file:
+    path: "{{ project_root ~ '/redis' }}"
+    state: directory
+    mode: 0440
+
+- name: Create template configs
+  docker_config:
+    name: "{{ 'catalog_find_redis_' ~ item.key ~ '_v' ~ item.value.version }}"
+    data: "{{ lookup('template', item.value.filename) }}"
+    state: present
+  with_dict:
+    - "{{ redis.versioned_configs }}"
+
+- name: Create versioned docker secrets
+  docker_secret:
+    name: "{{ 'catalog_find_redis_' ~ item.name ~ '_password_v' ~ item.version }}"
+    data: "{{ item.password }}"
+    state: present
+  loop: "{{ redis.versioned_configs.users_acl.users }}"
+  tags: versioned_secrets
+  no_log: true
+
+- name: Copy docker-compose files
+  copy:
+    src: "docker-compose.yml"
+    dest: "{{ project_root ~ '/redis/' }}"
+    mode: 0440
+
+- name: Deploy Redis
+  docker_stack:
+    name: "catalog-find"
+    compose:
+      - "{{ project_root ~ '/redis/docker-compose.yml' }}"
+    state: present
+  changed_when: false
+  environment:
+    REDIS_REDIS_CONF: "{{ 'catalog_find_redis_redis_conf_v' ~ redis.versioned_configs.redis_conf.version }}"
+    REDIS_USERS_ACL: "{{ 'catalog_find_redis_users_acl_v' ~ redis.versioned_configs.users_acl.version }}"
+    REDIS_IMAGE_NAME: "{{ redis.image.name }}"
+    REDIS_IMAGE_TAG: "{{ redis.image.tag }}"
+    REDIS_PORT: "{{ redis.port }}"
+    REPLICAS: "{{ redis.replicas }}"
+  no_log: true

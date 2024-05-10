@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  catalog_find:
+    image: ${APP_IMAGE_NAME}:${APP_IMAGE_TAG}
+    command: ["bundle", "exec", "puma", "-b", "tcp://0.0.0.0:${APP_PORT}"]
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.catalog_find_app == true"
+      replicas: ${APP_REPLICAS}
+      update_config:
+        order: "start-first"
+        parallelism: 1
+    environment:
+      APP_URL: ${APP_URL}
+      APP_IMAGE_TAG: ${APP_IMAGE_TAG}
+      DATABASE_HOST: "postgres"
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_PASSWORD: "/run/secrets/database_password"
+      DATABASE_USER: "${DATABASE_USER}"
+      RAILS_ENV: "${RAILS_ENV}"
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      SHIB_SP_ENTITY_ID: "https://${APP_URL}/shibboleth"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsSL localhost:${APP_PORT} || exit 1",
+        ]
+      interval: 10s
+      retries: 6
+      start_period: 10s
+      timeout: 10s
+    networks:
+      - catalog_find_postgres
+      - traefik
+    secrets:
+      - database_password
+      - source: rails_master_key
+        target: /home/app/config/credentials/${RAILS_ENV}.key
+        uid: "1000"
+        gid: "1000"
+        mode: 0440
+
+networks:
+  catalog_find_postgres:
+    external: true
+  traefik:
+    external: true
+
+secrets:
+  database_password:
+    external: true
+    name: ${DATABASE_PASSWORD}
+  rails_master_key:
+    external: true
+    name: ${RAILS_MASTER_KEY}

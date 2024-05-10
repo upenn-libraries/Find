@@ -1,0 +1,15 @@
+---
+catalog_find_build_docker_image: false
+catalog_find_image_name: "catalog-find"
+catalog_find_image_registry: "gitlab.library.upenn.edu/dld/catalog/catalog-find"
+catalog_find_image_tag: "development"
+catalog_find_port: 3000
+catalog_find_rails_env: "development"
+catalog_find_replicas: 1
+catalog_find_solr_url: "http://{{ solr_custom_env_variables.SOLR_ADMIN_USERNAME }}:{{ solr_custom_env_variables.SOLR_ADMIN_PASSWORD }}@solr-1:8983/solr/find-development"
+catalog_find_solr_test_url: "http://{{ solr_custom_env_variables.SOLR_ADMIN_USERNAME }}:{{ solr_custom_env_variables.SOLR_ADMIN_PASSWORD }}@solr-1:8983/solr/find-test"
+catalog_find_url: "catalog-find-dev.library.upenn.edu"
+catalog_find_versioned_secrets:
+  rails_master_key:
+    value: "{{ catalog_find_vault_values.secret.rails_master_key }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"

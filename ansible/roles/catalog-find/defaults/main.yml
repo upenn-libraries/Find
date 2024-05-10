@@ -1,0 +1,9 @@
+---
+catalog_find_build_docker_image: false
+catalog_find_image_name: "catalog-find"
+catalog_find_image_registry: "gitlab.library.upenn.edu/dld/catalog/find"
+catalog_find_image_tag: "main-development"
+catalog_find_port: 3000
+catalog_find_rails_env: "development"
+catalog_find_replicas: 1
+catalog_find_url: "catalog-find-dev.library.upenn.edu"
