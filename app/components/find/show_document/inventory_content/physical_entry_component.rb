@@ -21,6 +21,18 @@ module Find
           label_for value: entry.status, field: :description
         end
 
+        # Class to use when rendering the availability summary
+        # @return [String]
+        def availability_class
+          if entry.status == Inventory::Constants::AVAILABLE
+            'inventory-item__availability--easy'
+          elsif entry.status == Inventory::Constants::UNAVAILABLE
+            'inventory-item__availability--difficult'
+          else
+            'inventory-item__availability'
+          end
+        end
+
         private
 
         # Look up scoped labels in the Alma locale file
