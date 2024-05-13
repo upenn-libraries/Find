@@ -6,7 +6,7 @@ describe 'Alert Webhooks Requests' do
   before do
     create(:alert, scope: 'alert')
     create(:alert, scope: 'find_only_alert')
-    allow(Rails.application.credentials).to receive(:alert_webhooks_token).and_return(token)
+    allow(Settings).to receive(:alert_webhooks_token).and_return(token)
   end
 
   context 'when receiving POST request' do
