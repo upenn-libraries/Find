@@ -5,6 +5,8 @@ en:
       bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
       account: "https://guides.library.upenn.edu/circulation/Yourlibraryaccount"
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
+      scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
+      office: "https://guides.library.upenn.edu/resourcesharing/facex"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"
@@ -27,8 +29,6 @@ en:
       guides: "https://guides.library.upenn.edu"
       lib_hours: "https://www.library.upenn.edu/about/hours"
       libraries: "https://www.library.upenn.edu/libraries-locations"
-    request_options:
-      scan_info: "https://guides.library.upenn.edu/resourcesharing/requestscan"
-      office_info: "https://guides.library.upenn.edu/resourcesharing/facex"
-      aeon_kislak_info: "https://www.library.upenn.edu/kislak/kislak-center-reading-room"
-      archives_info: "https://archives.upenn.edu/research/visit"
+    requesting_info:
+      kislak_reading_room: "https://www.library.upenn.edu/kislak/kislak-center-reading-room"
+      archives: "https://archives.upenn.edu/research/visit"
