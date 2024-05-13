@@ -1,0 +1,26 @@
+<h3><%= entry.title %></h3>
+<p><%= entry.author %></p>
+
+<p><%= render(Account::ShelfStatusComponent.new(entry)) %></p>
+
+<% if entry.mms_id %>
+  <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id) %>
+<% end %>
+
+
+<% if entry.ils_loan? && entry.renewable? %>
+  <%= form_with url: ils_renew_request_path(entry.id), method: :patch do |form| %>
+    <%= form.submit t('account.shelf.renew.button'), class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<% if entry.ils_hold? && !entry.resource_sharing? %>
+  <%= form_with url: ils_hold_request_path(entry.id), method: :delete do |form| %>
+    <%= form.submit t('account.shelf.cancel.button'), class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+<div>
+  <p><%= entry.class.name.demodulize.titleize %> ID: <%= entry.id %></p>
+  <p>Last Updated At: <%= entry.last_updated_at %></p>
+</div>

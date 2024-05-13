@@ -6,6 +6,10 @@ module Account
   class RequestsController < AccountController
     before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
 
+    rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |_e|
+      redirect_back_or_to requests_path, alert: 'There was an unexpected issue with your request.'
+    end
+
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill; end
@@ -23,19 +27,47 @@ module Account
 
     # List all shelf entries. Supports sort & filter params.
     # GET /account/requests and GET /account/shelf
-    def index; end
+    def index
+      @listing = shelf_service.find_all
+    end
 
-    # Show all details of a shelf entry. May not be needed based on index page design.
-    # GET /account/requests/:system/:id
-    def show; end
+    # GET /account/requests/:system/:type/:id
+    def show
+      @entry = shelf_service.find(params[:system], params[:type], params[:id])
+    end
 
-    # Renew an Alma loan.
-    # POST /account/requests/ils/:id/renew
-    def renew; end
+    # Renew an Alma loan. Displaying the messages returned by the Alma gem.
+    # POST /account/requests/ils/loan/:id/renew
+    def renew
+      response = shelf_service.renew_loan(params[:id])
+
+      flash_type = response.renewed? ? :notice : :alert
+      flash[flash_type] = response.message
+
+      redirect_to request_path(:ils, :loan, params[:id])
+    end
+
+    # Renew all eligible Alma loans. Displaying the messages returned by the Alma gem.
+    # POST /account/requests/ils/loan/renew_all
+    def renew_all
+      responses = shelf_service.renew_all_loans
+
+      alert_text = t('account.shelf.renew_all.alerts',
+                     alerts: responses.map { |r| t('account.shelf.renew_all.alert', alert: r.message) }.join)
+
+      flash_type = responses.all?(:renewed?) ? :notice : :alert
+      flash[flash_type] = alert_text
+
+      redirect_to requests_path
+    end
 
     # Cancel an Alma HOLD request.
-    # DELETE /account/requests/ils/:id
-    def delete; end
+    # DELETE /account/requests/ils/hold/:id
+    def delete
+      shelf_service.cancel_hold(params[:id])
+
+      redirect_to request_path(:ils, :hold, params[:id]), notice: 'Hold cancelled'
+    end
 
     # Return fulfillment options based on mms id/holding id/item id. Options are dependent
     # on properties of an item and user group. Returns a rendered OptionsComponent which uses
@@ -62,6 +94,10 @@ module Account
     end
 
     private
+
+    def shelf_service
+      @shelf_service ||= Shelf::Service.new(current_user.uid)
+    end
 
     # @return [String]
     def set_mms_id

@@ -1,0 +1,22 @@
+<% if @listing.count.zero? %>
+  <div class="alert alert-light">
+    <p class="mb-0"><%= t('account.shelf.no_items') %></p>
+  </div>
+<% else %>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col"><%= t('account.shelf.table.th.index') %></th>
+        <th scope="col"><%= t('account.shelf.table.th.title') %></th>
+        <th scope="col" colSpan="2"><%= t('account.shelf.table.th.status') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @listing.each_with_index do |entry, index| %>
+        <%= render Account::ShelfListingEntryComponent.new(entry, index + 1) %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

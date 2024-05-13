@@ -71,14 +71,14 @@ module Illiad
       data[:TransactionStatus]
     end
 
-    # @return [DateTime, nil]
+    # @return [Time, nil]
     def date
-      DateTime.parse(data[:TransactionDate]) if data[:TransactionDate].present?
+      Time.zone.parse(data[:TransactionDate]) if data[:TransactionDate].present?
     end
 
-    # @return [DateTime, nil]
+    # @return [Time, nil]
     def due_date
-      DateTime.parse(data[:DueDate]) if data[:DueDate].present?
+      Time.zone.parse(data[:DueDate]) if data[:DueDate].present?
     end
 
     # @return [Boolean]
