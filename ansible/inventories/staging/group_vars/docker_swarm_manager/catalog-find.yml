@@ -16,5 +16,16 @@ catalog_find_versioned_secrets:
   solr_url:
     value: "http://{{ catalog_solr_vault_values.secret.username }}:{{ catalog_solr_vault_values.secret.password }}@catalog-manager-stg01.library.upenn.int/solr/catalog-staging"
     version: "{{ catalog_solr_vault_values.metadata.version }}"
-
+  alert_webhooks_token:
+    value: "{{ catalog_find_vault_values.secret.alert_webhooks_token }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
+  alma_api_key:
+    value: "{{ catalog_find_vault_values.secret.alma_api_key }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
+  illiad_api_key:
+    value: "{{ catalog_find_vault_values.secret.illiad_api_key }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
+  summon_api_key:
+    value: "{{ catalog_find_vault_values.secret.summon_api_key }}"
+    version: "{{ catalog_find_vault_values.metadata.version }}"
 

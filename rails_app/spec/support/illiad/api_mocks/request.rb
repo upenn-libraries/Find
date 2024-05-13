@@ -8,7 +8,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_submit_request_success(request_body:, response_body:)
-        stub_request(:post, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}")
+        stub_request(:post, "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}")
           .with(body: request_body, headers: json_headers)
           .to_return_json(status: 200, body: response_body)
       end
@@ -17,7 +17,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_submit_request_failure(request_body:, response_body:)
-        stub_request(:post, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}")
+        stub_request(:post, "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}")
           .with(body: request_body, headers: json_headers)
           .to_return_json(status: 400, body: response_body)
       end
@@ -26,7 +26,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_find_request_success(id:, response_body:)
-        stub_request(:get, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}/#{id}")
+        stub_request(:get, "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}")
           .with(headers: default_headers)
           .to_return_json(status: 200, body: response_body)
       end
@@ -35,7 +35,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_find_request_failure(id:, response_body:)
-        stub_request(:get, "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}/#{id}")
+        stub_request(:get, "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}")
           .with(headers: default_headers)
           .to_return_json(status: 404, body: response_body)
       end
@@ -46,7 +46,7 @@ module Illiad
       # @return [WebMock::RequestStub]
       def stub_add_note_success(id:, note:, response_body:)
         stub_request(:post,
-                     "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::NOTES_PATH}")
+                     "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::NOTES_PATH}")
           .with(body: { Note: note }, headers: json_headers)
           .to_return_json(status: 200, body: response_body)
       end
@@ -57,7 +57,7 @@ module Illiad
       # @return [WebMock::RequestStub]
       def stub_add_note_failure(id:, note:, response_body:)
         stub_request(:post,
-                     "#{Settings.illiad_base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::NOTES_PATH}")
+                     "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::NOTES_PATH}")
           .with(body: { Note: note }, headers: json_headers)
           .to_return_json(status: 400, body: response_body)
       end

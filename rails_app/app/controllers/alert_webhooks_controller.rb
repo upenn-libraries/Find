@@ -38,7 +38,7 @@ class AlertWebhooksController < ApplicationController
   # Ensure incoming payload contains token that matches stored token.
   def authenticate
     authenticate_or_request_with_http_token do |token|
-      ActiveSupport::SecurityUtils.secure_compare(token, Rails.application.credentials.alert_webhooks_token)
+      ActiveSupport::SecurityUtils.secure_compare(token, Settings.alert_webhooks_token)
     end
   end
 
