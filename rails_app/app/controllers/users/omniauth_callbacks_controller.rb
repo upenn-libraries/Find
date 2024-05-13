@@ -3,7 +3,7 @@
 module Users
   # custom Omniauth callbacks
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    skip_before_action :verify_authenticity_token, only: %i[developer failure]
+    skip_before_action :verify_authenticity_token, only: %i[developer failure saml]
 
     def developer
       user = User.from_omniauth_developer(request.env['omniauth.auth'])
