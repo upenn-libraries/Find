@@ -77,10 +77,6 @@ vagrant ssh
 > 
 > To ignore the vagrant-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you can prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
 
-### Debugging in RubyMine
-
-> In order for Rubymine to properly identify your Rails executable, you should open the project in in the `rails_app` directory. Assuming you have configured your Ruby SDK (to use `rbenv` or `asdf`) in RubyMine, you should be able to run the Rails server from the IDE. Rubymine will prompt you to install the necessary debugging gems if you have not already done so.
-
 ### Initializing
 
 Guidance for working in this environment - with the above provision - can be found in the [Rails App README file](rails_app/README.md).
