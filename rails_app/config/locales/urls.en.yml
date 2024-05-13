@@ -30,6 +30,5 @@ en:
     request_options:
       scan_info: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office_info: "https://guides.library.upenn.edu/resourcesharing/facex"
-      mail_info: "https://upenn.libwizard.com/f/books-by-mail"
       aeon_kislak_info: "https://www.library.upenn.edu/kislak/kislak-center-reading-room"
       archives_info: "https://archives.upenn.edu/research/visit"
