@@ -8,4 +8,4 @@ additional_results_sources:
 google_analytics:
   id: 'GTM-KMLQ6V6W'
 honeybadger:
-  api_key: <%= DockerSecrets.lookup(:honeybadger_api_key, Rails.application.credentials.honeybadger_api_key) %>
+  api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>

@@ -23,6 +23,3 @@ development_environments:
 
 # Enable verbose debug logging (useful for troubleshooting).
 debug: false
-
-exceptions:
-  unwrap: true # Reports #original_exception or #cause one level up from rescued exception when available.
