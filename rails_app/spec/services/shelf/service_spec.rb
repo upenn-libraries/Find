@@ -6,7 +6,7 @@ describe Shelf::Service do
 
   shared_context 'with mocked alma loans request' do
     before do
-      loan_set = instance_double(Alma::LoanSet) # TODO: maybe add total count
+      loan_set = instance_double(Alma::LoanSet, total_record_count: loans.count)
       allow(Alma::Loan).to receive(:where_user).with(user_id, any_args).and_return(loan_set)
       allow(loan_set).to receive(:map) { |&block| loans.map(&block) }
       allow(loan_set).to receive(:select) { |&block| loans.select(&block) }
@@ -15,16 +15,18 @@ describe Shelf::Service do
 
   shared_context 'with mocked alma holds request' do
     before do
-      request_set = instance_double(Alma::RequestSet) # TODO: maybe add total count
+      request_set = instance_double(Alma::RequestSet, total_record_count: holds.count)
       allow(Alma::UserRequest).to receive(:where_user).with(user_id, any_args).and_return(request_set)
       allow(request_set).to receive(:map) { |&block| holds.map(&block) }
     end
   end
 
   shared_context 'with mocked illiad transaction requests' do
+    let(:display_status_set) { build(:illiad_display_status_set) }
     let(:ill_request_set) { build(:illiad_request_set, requests: ill_requests) }
 
     before do
+      allow(Illiad::DisplayStatus).to receive(:find_all).and_return(display_status_set)
       allow(Illiad::User).to receive(:requests).with(user_id: user_id, filter: anything).and_return(ill_request_set)
     end
   end
@@ -209,10 +211,12 @@ describe Shelf::Service do
   end
 
   describe '#ill_transaction' do
+    let(:display_status_set) { build(:illiad_display_status_set) }
     let(:ill_transaction) { create(:illiad_request, Username: user_id) }
 
     context 'when successful' do
       before do
+        allow(Illiad::DisplayStatus).to receive(:find_all).and_return(display_status_set)
         allow(Illiad::Request).to receive(:find).with(id: ill_transaction.id).and_return(ill_transaction)
       end
 

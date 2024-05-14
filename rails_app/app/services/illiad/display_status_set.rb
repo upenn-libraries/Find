@@ -5,22 +5,22 @@ module Illiad
   class DisplayStatusSet
     include Enumerable
 
-    attr_reader :display_statues
+    attr_reader :display_statuses
 
-    # @param display_statues [Array]
-    def initialize(display_statues:)
-      @display_statues = display_statues.map { |req| Illiad::DisplayStatus.new(**req) }
+    # @param display_statuses [Array]
+    def initialize(display_statuses:)
+      @display_statuses = display_statuses.map { |req| Illiad::DisplayStatus.new(**req) }
     end
 
     def each(&)
-      display_statues.each(&)
+      display_statuses.each(&)
     end
 
     # Returns display status if one is available, otherwise returns original status.
     #
     # @return [String] display status
-    def for(status)
-      display_statues.find { |s| s.transaction_status == status }&.display_status || status
+    def display_for(status)
+      display_statuses.find { |s| s.transaction_status == status }&.display_status || status
     end
   end
 end
