@@ -8,6 +8,7 @@ module Shelf
 
     # Catch all for errors raised when making requests to Illiad.
     class IlliadRequestError < StandardError; end
+    ILS_REQUEST_LIMIT = 50
 
     attr_reader :user_id
 
@@ -63,24 +64,46 @@ module Shelf
     # Does not return renewable information because expanding the request to include renewable information
     # increases the wait time significantly.
     #
-    # TODO: iterate through and grab all loans if there are more than 100
     # @raise [Shelf::Service::AlmaRequestError] when unsuccessful
     # @return [Array<Shelf::Entry::IlsLoan>] when successful
     def ils_loans
-      Alma::Loan.where_user(user_id, { expand: '' })
-                .map { |l| Entry::IlsLoan.new(l.response) }
+      offset = 0
+      loans = []
+
+      loop do
+        response = Alma::Loan.where_user(user_id, { expand: '', offset: offset, limit: ILS_REQUEST_LIMIT })
+        loans += response.map { |l| Entry::IlsLoan.new(l.response) }
+
+        break if response.total_record_count == loans.count
+
+        offset += ILS_REQUEST_LIMIT
+      end
+
+      loans
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
 
     # Returns all Alma holds for the given user
     #
-    # TODO: need to iterate thought all the holds if there are more than 100
     # @raise [Shelf::Service::AlmaRequestError] when unsuccessful
     # @return [Array<Shelf::Entry::IlsHold>] when successful
     def ils_holds
-      Alma::UserRequest.where_user(user_id, { request_type: 'HOLD' })
-                       .map { |l| Entry::IlsHold.new(l.response) }
+      offset = 0
+      holds = []
+
+      loop do
+        response = Alma::UserRequest.where_user(
+          user_id, { request_type: 'HOLD', offset: offset, limit: ILS_REQUEST_LIMIT }
+        )
+        holds += response.map { |l| Entry::IlsHold.new(l.response) }
+
+        break if response.total_record_count == holds.count
+
+        offset += ILS_REQUEST_LIMIT
+      end
+
+      holds
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
