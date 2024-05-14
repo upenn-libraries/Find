@@ -7,6 +7,8 @@ illiad:
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~
+honeybadger:
+  api_key: '12345'
 locations:
   offsite:
     - lippb10

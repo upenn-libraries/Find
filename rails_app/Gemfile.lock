@@ -186,6 +186,7 @@ GEM
       activesupport (>= 6.1)
     hashdiff (1.0.1)
     hashie (5.0.0)
+    honeybadger (5.10.0)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
@@ -487,6 +488,7 @@ DEPENDENCIES
   faker
   faraday
   faraday-retry
+  honeybadger
   importmap-rails
   marc
   mini_racer
