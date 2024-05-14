@@ -3,8 +3,8 @@ en:
     availability:
         available:
           physical:
-            status: 'Available for checkout'
-            description: 'This item can be checked out by visiting the library.'
+            status: 'Available for access'
+            description: 'This item can be accessed using the button below.'
           electronic:
             status: 'Available online'
             description: 'Online access to this resource is provided by Penn Libraries'

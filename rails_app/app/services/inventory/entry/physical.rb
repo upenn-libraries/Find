@@ -13,7 +13,8 @@ module Inventory
       # @return [String, nil]
       def human_readable_status
         case status
-        when Constants::AVAILABLE then I18n.t('alma.availability.available.physical.status')
+        when Constants::AVAILABLE
+          available_status_for_policy
         when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.status')
         when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.status')
         else
@@ -21,11 +22,19 @@ module Inventory
         end
       end
 
+      def available_status_for_policy
+        if first_item.checkoutable?
+          I18n.t('alma.availability.available.physical.status')
+        else
+          I18n.t('alma.availability.unavailable.physical.status')
+        end
+      end
+
       # @return [String, nil]
       def policy
-        return if items.empty?
+        return unless first_item
 
-        items.first.item_data.dig('policy', 'desc')
+        first_item.item_data.dig('policy', 'desc')
       end
 
       # @return [String, nil]
@@ -35,9 +44,9 @@ module Inventory
 
       # @return [String, nil]
       def format
-        return if items.empty?
+        return unless first_item
 
-        items.first.item_data.dig('physical_material_type', 'desc')
+        first_item.item_data.dig('physical_material_type', 'desc')
       end
 
       # @return [String, nil]
@@ -86,6 +95,14 @@ module Inventory
         default_options = { holding_id: id, expand: 'due_date,due_date_policy' }
         resp = Alma::BibItem.find(mms_id, default_options.merge(options))
         resp.items || []
+      end
+
+      def first_item(**options)
+        default_options = { holding_id: id, expand: 'due_date,due_date_policy' }
+        resp = Alma::BibItem.find(mms_id, default_options.merge(options))
+        return false if resp.items.empty?
+
+        @first_item ||= Inventory::Service::Item.new resp.items.first
       end
 
       # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We
