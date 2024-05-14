@@ -8,9 +8,7 @@ module Illiad
 
     def self.find_all
       response = Client.get(BASE_PATH)
-      response.body.map do |display_status_data|
-        new(**display_status_data)
-      end
+      Illiad::DisplayStatusSet.new(display_statues: response.body)
     end
 
     def initialize(data)

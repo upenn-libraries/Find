@@ -4,13 +4,15 @@ module Shelf
   module Entry
     # Shelf entry for a transaction/request in Illiad.
     class IllTransaction < Base
-      attr_reader :request
+      attr_reader :request, :display_statues
 
       delegate :id, to: :request
 
-      # @param [Illiad::Request]
-      def initialize(request)
+      # @param [Illiad::Request] request
+      # @param [Illiad:DisplayStatus::Set] display_statues
+      def initialize(request, display_statues)
         @request = request
+        @display_statues = display_statues
       end
 
       def title
@@ -33,7 +35,7 @@ module Shelf
         if request.status == 'Request Finished' && request.data[:SystemID] == 'Reshare:upennbd'
           'Shipped by BorrowDirect Partner'
         else
-          request.status
+          display_statues.for(request.status)
         end
       end
 

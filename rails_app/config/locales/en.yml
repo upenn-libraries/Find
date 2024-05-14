@@ -169,6 +169,7 @@ en:
       page_heading: 'Shelf'
       page_lede: "View and renew items you've loaned or requested from the library."
       no_items: 'You have no items on your shelf.'
+      identifier: '%{system} %{type} ID: %{id}'
       table:
         th:
           index: '#'

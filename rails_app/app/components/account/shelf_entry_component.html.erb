@@ -21,6 +21,5 @@
 <% end %>
 
 <div>
-  <p><%= entry.class.name.demodulize.titleize %> ID: <%= entry.id %></p>
-  <p>Last Updated At: <%= entry.last_updated_at %></p>
+  <p><%= t('account.shelf.identifier', system: entry.system.upcase, type: entry.type.capitalize, id: entry.id) %></p>
 </div>

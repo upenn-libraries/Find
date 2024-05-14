@@ -104,7 +104,7 @@ module Shelf
       # rubocop:enable Layout/LineLength
 
       Illiad::User.requests(user_id: user_id, filter: filter)
-                  .map { |t| Entry::IllTransaction.new(t) }
+                  .map { |t| Entry::IllTransaction.new(t, illiad_display_statues) }
     rescue StandardError => e
       raise IlliadRequestError, e.message
     end
@@ -112,12 +112,12 @@ module Shelf
     # Look up Illiad transaction based on id.
     #
     # @raise [Shelf::Service::IlliadRequestError] when unsuccessful
-    # @return [Array<Shelf::Entry::IllTransaction>] when successful
+    # @return [Shelf::Entry::IllTransaction] when successful
     def ill_transaction(id)
       request = Illiad::Request.find(id: id)
       raise IlliadRequestError, 'Transaction does not belong to user.' unless request.user == user_id
 
-      Entry::IllTransaction.new(request)
+      Entry::IllTransaction.new(request, illiad_display_statues)
     rescue StandardError => e
       raise IlliadRequestError, e.message
     end
@@ -141,6 +141,13 @@ module Shelf
                 .then { |h| Entry::IlsHold.new(h.response) }
     rescue StandardError => e
       raise AlmaRequestError, e.message
+    end
+
+    # Return all Illiad display statues
+    #
+    # @return [Illiad::DisplayStatusSet]
+    def illiad_display_statues
+      @illiad_display_statues ||= Illiad::DisplayStatus.find_all
     end
   end
 end
