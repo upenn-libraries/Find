@@ -17,6 +17,8 @@ module Shelf
       end
 
       def mms_id
+        return nil if resource_sharing?
+
         raw_data['mms_id']
       end
 
@@ -51,6 +53,11 @@ module Shelf
         raise 'Renewable attribute unavailable' if raw_data['renewable'].nil?
 
         raw_data['renewable']
+      end
+
+      # Returns true if its a loan is for a resource sharing item from another library.
+      def resource_sharing?
+        raw_data.dig('library', 'value') == 'RES_SHARE'
       end
 
       def system

@@ -29,8 +29,18 @@ describe Shelf::Entry::IlsLoan do
   end
 
   describe '#mms_id' do
-    it 'returns expected mms_id' do
-      expect(loan.mms_id).to eql alma_loan.mms_id
+    context 'when not a resource sharing loan' do
+      it 'returns expected mms_id' do
+        expect(loan.mms_id).to eql alma_loan.mms_id
+      end
+    end
+
+    context 'when it is a resource sharing loan' do
+      let(:alma_loan) { create(:alma_loan, :resource_sharing) }
+
+      it 'returns nil' do
+        expect(loan.mms_id).to be_nil
+      end
     end
   end
 
@@ -88,12 +98,27 @@ describe Shelf::Entry::IlsLoan do
       it 'returns true' do
         expect(loan.renewable?).to be true
       end
-
     end
 
     context 'when renewable data not present' do
       it 'raises an error' do
         expect { loan.renewable? }.to raise_error 'Renewable attribute unavailable'
+      end
+    end
+  end
+
+  describe '#resource_sharing?' do
+    context 'when resource sharing loan' do
+      let(:alma_loan) { create(:alma_loan, :resource_sharing) }
+
+      it 'returns true' do
+        expect(loan.resource_sharing?).to be true
+      end
+    end
+
+    context 'when not a resource sharing loan' do
+      it 'returns false' do
+        expect(loan.resource_sharing?).to be false
       end
     end
   end

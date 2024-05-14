@@ -41,6 +41,12 @@ FactoryBot.define do
       due_date { 5.days.ago.utc.iso8601 }
     end
 
+    trait :resource_sharing do
+      library { { 'value' => 'RES_SHARE', 'desc' => 'Resource Sharing Library' } }
+      location_code { { 'value' => 'OUT_RS_REQ', 'name' => 'Out on Loan ' } }
+      item_policy { { 'value' => 'bd', 'description' => 'Borrow Direct' } } # This value changes based the system used.
+    end
+
     skip_create
     initialize_with { Alma::Loan.new(attributes.deep_stringify_keys) }
   end
