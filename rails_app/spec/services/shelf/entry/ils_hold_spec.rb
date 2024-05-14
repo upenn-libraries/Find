@@ -126,7 +126,7 @@ describe Shelf::Entry::IlsHold do
 
   describe '#type' do
     it 'returns expected type' do
-      expect(hold.type).to eql :hold
+      expect(hold.type).to be :hold
     end
   end
 

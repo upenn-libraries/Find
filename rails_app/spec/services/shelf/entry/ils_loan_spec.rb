@@ -131,7 +131,7 @@ describe Shelf::Entry::IlsLoan do
 
   describe '#type' do
     it 'returns expected type' do
-      expect(loan.type).to eql :loan
+      expect(loan.type).to be :loan
     end
   end
 
