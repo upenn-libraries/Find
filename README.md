@@ -79,7 +79,7 @@ vagrant ssh
 
 ### Initializing
 
-Guidance for working in this environment - with the above provisio - can be found in the [Rails App README file](rails_app/README.md).
+Guidance for working in this environment - with the above provision - can be found in the [Rails App README file](rails_app/README.md).
 
 ## Working with a remote Solr index
 
