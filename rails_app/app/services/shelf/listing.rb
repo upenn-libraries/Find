@@ -15,6 +15,11 @@ module Shelf
       entries.each(&)
     end
 
+    # Returns true if loans are present.
+    def loans?
+      entries.any?(&:ils_loan?)
+    end
+
     private
 
     # Books from external libraries are checked out to patrons via Alma. In these cases, there is a record in Alma and

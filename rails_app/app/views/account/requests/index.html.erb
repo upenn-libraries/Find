@@ -9,11 +9,14 @@
     <h1 class="page__heading"><%= t('account.shelf.page_heading') %></h1>
     <p class="page__lede mb-3"><%= t('account.shelf.page_lede') %></p>
   </div>
-  <div>
-    <%= form_with url: ils_renew_all_request_path, method: :patch do |form| %>
-      <%= form.submit t('account.shelf.renew_all.button'), class: "btn btn-success" %>
-    <% end %>
-  </div>
+
+  <% if @listing.loans? %>
+    <div>
+      <%= form_with url: ils_renew_all_request_path, method: :patch do |form| %>
+        <%= form.submit t('account.shelf.renew_all.button'), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <%= render(Account::ShelfListingComponent.new(@listing)) %>
