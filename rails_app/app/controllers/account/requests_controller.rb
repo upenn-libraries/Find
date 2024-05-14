@@ -6,7 +6,9 @@ module Account
   class RequestsController < AccountController
     before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
 
-    rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |_e|
+    rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
+      # TODO: need to send error to Honeybadger.
+      Rails.logger.error(e.message)
       redirect_back_or_to requests_path, alert: 'There was an unexpected issue with your request.'
     end
 

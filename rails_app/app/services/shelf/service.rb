@@ -33,7 +33,6 @@ module Shelf
       renewable_loans = Alma::Loan.where_user(user_id).select(&:renewable?)
       renewable_loans.map { |loan| renew_loan(loan.loan_id) }
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -44,7 +43,6 @@ module Shelf
     def renew_loan(loan_id)
       Alma::User.renew_loan({ user_id: user_id, loan_id: loan_id })
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -55,7 +53,6 @@ module Shelf
     def cancel_hold(hold_id)
       Alma::User.cancel_request({ user_id: user_id, request_id: hold_id })
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -73,7 +70,6 @@ module Shelf
       Alma::Loan.where_user(user_id, { expand: '' })
                 .map { |l| Entry::IlsLoan.new(l.response) }
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -86,7 +82,6 @@ module Shelf
       Alma::UserRequest.where_user(user_id, { request_type: 'HOLD' })
                        .map { |l| Entry::IlsHold.new(l.response) }
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -111,7 +106,6 @@ module Shelf
       Illiad::User.requests(user_id: user_id, filter: filter)
                   .map { |t| Entry::IllTransaction.new(t) }
     rescue StandardError => e
-      log_error(e)
       raise IlliadRequestError, e.message
     end
 
@@ -125,7 +119,6 @@ module Shelf
 
       Entry::IllTransaction.new(request)
     rescue StandardError => e
-      log_error(e)
       raise IlliadRequestError, e.message
     end
 
@@ -136,7 +129,6 @@ module Shelf
       Alma::User.find_loan({ user_id: user_id, loan_id: id })
                 .then { |l| Entry::IlsLoan.new(l.response) }
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
     end
 
@@ -148,16 +140,7 @@ module Shelf
       Alma::User.find_request({ user_id: user_id, request_id: id })
                 .then { |h| Entry::IlsHold.new(h.response) }
     rescue StandardError => e
-      log_error(e)
       raise AlmaRequestError, e.message
-    end
-
-    # Log error and send to Honeybadger.
-    #
-    # @param [Exception]
-    def log_error(exception)
-      # TODO: need to send error to Honeybadger.
-      Rails.logger.error(exception.message)
     end
   end
 end
