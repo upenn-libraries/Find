@@ -47,6 +47,11 @@ FactoryBot.define do
       item_policy { { 'value' => 'bd', 'description' => 'Borrow Direct' } } # This value changes based the system used.
     end
 
+    trait :borrow_direct do
+      resource_sharing
+      item_barcode { 'PUBD-1234' }
+    end
+
     skip_create
     initialize_with { Alma::Loan.new(attributes.deep_stringify_keys) }
   end

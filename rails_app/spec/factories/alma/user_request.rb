@@ -38,6 +38,11 @@ FactoryBot.define do
       resource_sharing { {} } # TODO: Need to get some sample data.
     end
 
+    trait :borrow_direct do
+      resource_sharing
+      item_barcode { 'PUBD-1234' }
+    end
+
     skip_create
     initialize_with { Alma::UserRequest.new(attributes.deep_stringify_keys) }
   end
