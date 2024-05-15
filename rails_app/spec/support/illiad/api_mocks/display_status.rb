@@ -7,7 +7,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_display_status_find_all_success(response_body:)
-        stub_request(:get, "#{Settings.illiad_base_url}/#{Illiad::DisplayStatus::BASE_PATH}")
+        stub_request(:get, "#{Settings.illiad.base_url}/#{Illiad::DisplayStatus::BASE_PATH}")
           .with(headers: default_headers)
           .to_return(status: 200, body: response_body)
       end
@@ -15,7 +15,7 @@ module Illiad
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]
       def stub_display_status_find_all_failure(response_body:)
-        stub_request(:get, "#{Settings.illiad_base_url}/#{Illiad::DisplayStatus::BASE_PATH}")
+        stub_request(:get, "#{Settings.illiad.base_url}/#{Illiad::DisplayStatus::BASE_PATH}")
           .with(headers: default_headers)
           .to_return_json(status: 401, body: response_body)
       end
