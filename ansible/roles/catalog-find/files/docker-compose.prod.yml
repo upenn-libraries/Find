@@ -18,6 +18,10 @@ services:
     secrets:
       - honeybadger_api_key
       - solr_url
+      - alert_webhooks_token
+      - alma_api_key
+      - illiad_api_key
+      - summon_api_key
     volumes:
       - app_storage:/home/app/storage
 
@@ -28,6 +32,18 @@ secrets:
   solr_url:
     external: true
     name: ${SOLR_URL}
+  alert_webhooks_token:
+    external: true
+    name: ${ALERT_WEBHOOKS_TOKEN}
+  alma_api_key:
+    external: true
+    name: ${ALMA_API_KEY}
+  illiad_api_key:
+    external: true
+    name: ${ILLIAD_API_KEY}
+  summon_api_key:
+    external: true
+    name: ${SUMMON_API_KEY}
 
 volumes:
   app_storage:

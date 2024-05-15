@@ -105,6 +105,12 @@ bundle exec rails server
  
 View the app at `localhost:3000`
 
+### Start the development server in RubyMine
+
+In order for Rubymine to properly identify your Rails executable, you should open the project in in the `rails_app` directory. Additionally, you will have to edit your run configuration to include the following environment variable: `BUNDLE_IGNORE_CONFIG=true`. Details about this can be found in the [top-level README](README.md). 
+
+Assuming you have configured your Ruby SDK (to use `rbenv` or `asdf`) in RubyMine, you should be able to run the Rails server from the IDE. If you'd like to run the server in debugging mode, Rubymine will prompt you to install the necessary debugging gems if you have not already done so.
+
 ## Contributing
 
 In order to contribute productively while fostering the project values, familiarize yourself with the established

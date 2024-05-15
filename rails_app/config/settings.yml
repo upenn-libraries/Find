@@ -1,10 +1,14 @@
 pennlibs_web_version: '0.1.1'
 alma:
-  api_key: '<%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>'
+  api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
-  api_key: '<%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>'
+  base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
+  api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
+alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~
+honeybadger:
+  api_key: '12345'
 locations:
   offsite:
     - lippb10

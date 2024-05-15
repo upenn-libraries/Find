@@ -8,7 +8,7 @@
           <%= label_tag :option_scan, t('requests.form.options.scan.label') %>
           <div>
             <small class="text-muted">
-              <%= t('requests.form.options.scan.info_html', url: t('urls.request_options.scan_info')) %>
+              <%= t('requests.form.options.scan.info_html', url: t('urls.guides.scan')) %>
             </small>
           </div>
         </li>
@@ -24,7 +24,7 @@
           <%= label_tag :option_mail, t('requests.form.options.mail.label') %>
           <div>
             <small class="text-muted">
-              <%= t('requests.form.options.mail.info_html', url: t('urls.request_options.mail_info')) %>
+              <%= t('requests.form.options.mail.info_html', url: t('urls.forms.bbm')) %>
             </small>
           </div>
           <%# TODO: bbm validation? popup? %>
@@ -32,11 +32,11 @@
         </ul>
       <% end %>
   <% elsif options.include? :aeon %>
-    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.request_options.aeon_kislak_info')) %></p>
+    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.requesting_info.kislak_reading_room')) %></p>
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
   <% elsif options.include? :archives %>
     <p class="js_archives alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', url: t('urls.request_options.archives_info')) %>
+      <%= t('requests.form.options.archives.info_html', url: t('urls.requesting_info.archives')) %>
     </p>
   <% end %>
   <div class="request-buttons">

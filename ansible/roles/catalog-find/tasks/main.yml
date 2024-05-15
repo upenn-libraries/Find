@@ -102,6 +102,10 @@
     RAILS_MASTER_KEY: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
     SOLR_URL: "{{ 'catalog_find_solr_url_v' ~ catalog_find_versioned_secrets.solr_url.version }}"
+    ALERT_WEBHOOKS_TOKEN: "{{ 'catalog_find_alert_webhooks_token_v' ~ catalog_find_versioned_secrets.alert_webhooks_token.version }}"
+    ALMA_API_KEY: "{{ 'catalog_find_alma_api_key_v' ~ catalog_find_versioned_secrets.alma_api_key.version }}"
+    ILLIAD_API_KEY: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
+    SUMMON_API_KEY: "{{ 'catalog_find_summon_api_key_v' ~ catalog_find_versioned_secrets.summon_api_key.version }}"
   changed_when: false
   no_log: true
   when: not is_development | default (false, true)

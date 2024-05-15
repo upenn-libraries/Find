@@ -1,8 +1,7 @@
 solr_url: <%= ENV.fetch('SOLR_TEST_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-test') %>
-illiad_base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
 additional_results_sources:
   position: 1
   summon:
     access_id: 'upenn'
     base_url: 'upenn.summon.serialssolutions.com'
-    api_key: '<%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>'
+    api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>

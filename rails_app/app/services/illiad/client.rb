@@ -85,7 +85,7 @@ module Illiad
 
       # @return [String]
       def base_url
-        Settings.illiad_base_url
+        Settings.illiad.base_url
       end
 
       # @return [String]
