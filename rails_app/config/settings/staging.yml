@@ -1,9 +1,11 @@
-  solr_url: <%= DockerSecrets.lookup(:solr_url, ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development')) %>
-  additional_results_sources:
-    position: 1
-    summon:
-      access_id: 'upenn'
-      base_url: 'upenn.summon.serialssolutions.com'
-      api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
+solr_url: <%= DockerSecrets.lookup(:solr_url, ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development')) %>
+additional_results_sources:
+  position: 1
+  summon:
+    access_id: 'upenn'
+    base_url: 'upenn.summon.serialssolutions.com'
+    api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 google_analytics:
   id: 'GTM-WS2TBPLM'
+honeybadger:
+  api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
