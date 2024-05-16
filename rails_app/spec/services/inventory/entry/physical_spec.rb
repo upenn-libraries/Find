@@ -25,15 +25,12 @@ describe Inventory::Entry::Physical do
 
   # Mocking response for items.
   before do
-    bib_item_set = instance_double('Alma::BibItemSet')
-    allow(bib_item_set).to receive(:items).and_return(
-      [
-        Alma::BibItem.new(
-          { 'item_data' => { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
-        )
-      ]
+    allow(Inventory::Service::Physical).to receive(:items).with(any_args).and_return(
+      [Inventory::Service::Item.new(
+        { 'item_data' => { 'policy' => { 'desc' => 'Non-circ' }, 'library' => { 'desc' => 'vanpelt' },
+                           'location' => { 'value' => 'stacks' }, 'physical_material_type' => { 'desc' => 'Book' } } }
+      )]
     )
-    allow(Alma::BibItem).to receive(:find).with(mms_id, any_args).and_return(bib_item_set)
   end
 
   describe '#status' do
@@ -44,7 +41,7 @@ describe Inventory::Entry::Physical do
 
   describe '#human_readable_status' do
     it 'returns expected human_readable_status' do
-      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.physical.status')
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.physical.circulates.label')
     end
   end
 

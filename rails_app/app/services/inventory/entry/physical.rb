@@ -130,23 +130,16 @@ module Inventory
 
       private
 
-      def items
-        @items ||= find_items
-      end
-
-      def find_items(**options)
-        default_options = { holding_id: id, expand: 'due_date,due_date_policy' }
-        resp = Alma::BibItem.find(mms_id, default_options.merge(options))
-        resp.items || []
-      end
-
-      def first_item(**options)
+      # @return [Inventory::Service::Item, nil]
+      def first_item
         @first_item ||= retrieve_first_item(mms_id, id)
       end
 
+      # @param mms_id [String] mms_id
+      # @param holding_id [String]
       def retrieve_first_item(mms_id, holding_id)
         items = Inventory::Service::Physical.items(mms_id: mms_id, holding_id: holding_id)
-        return false if items.empty?
+        return nil if items.empty?
 
         items.first
       end
