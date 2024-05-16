@@ -36,6 +36,7 @@ module Articles
                                     's.ps' => 3, 's.secure' => 't',
                                     's.hl' => 'f', 's.ff' => 'ContentType,or,1,6' })
     rescue Summon::Transport::TransportError => e
+      Honeybadger.notify(e)
       handle_error(e)
       nil
     end
@@ -90,7 +91,6 @@ module Articles
     #
     # @param error [Summon::Transport::TransportError] the error to handle
     def handle_error(error)
-      # @todo Notify with Honeybadger
       if error.is_a? Summon::Transport::AuthorizationError
         Rails.logger.error 'Could not connect to the Summon service. Check your access id and secret key.'
       else
