@@ -107,6 +107,14 @@ describe Inventory::Entry::Physical do
         expect(entry.location).to eq Mappings.location_overrides[:albrecht][:specific_location]
       end
     end
+
+    context 'when location code is not found in mappings' do
+      let(:entry) { create(:physical_entry, location_code: 'invalid', location: 'alma_location') }
+
+      it 'defaults to alma location value' do
+        expect(entry.location).to eq 'alma_location'
+      end
+    end
   end
 
   describe '#electronic?' do
