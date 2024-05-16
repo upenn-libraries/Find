@@ -18,7 +18,7 @@ module Find
 
         # @return [String]
         def availability_description
-          label_for value: entry.status, field: :description
+          entry.human_readable_status_description
         end
 
         # Class to use when rendering the availability summary
@@ -31,17 +31,6 @@ module Find
           else
             'inventory-item__availability'
           end
-        end
-
-        private
-
-        # Look up scoped labels in the Alma locale file
-        # @param value [String, Symbol]
-        # @param field [String, Symbol]
-        # @return [String]
-        def label_for(value:, field:)
-          scope = [:alma, :availability, value.to_sym, :physical]
-          I18n.t(field.to_sym, scope: scope)
         end
       end
     end

@@ -9,24 +9,67 @@ module Inventory
         data[:availability]
       end
 
+      # Not all "Available" things are actually available - check policy and other attributes for more fidelity in our
+      # messaging.
+      # @return [Symbol]
+      def refined_status
+        @refined_status ||= begin
+          if first_item.offsite?
+            :offsite
+          elsif first_item.aeon_requestable?
+            :appointment
+          elsif first_item.in_house_use_only?
+            :in_house
+          elsif first_item.checkoutable?
+            :circulates
+          else
+            status.to_sym
+          end
+        end
+      end
+
       # User-friendly display value for inventory entry status
       # @return [String, nil]
       def human_readable_status
         case status
-        when Constants::AVAILABLE
-          available_status_for_policy
-        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.status')
-        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.status')
+        when Constants::AVAILABLE then available_status_label
+        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.label')
+        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.label')
         else
           status&.capitalize
         end
       end
 
-      def available_status_for_policy
-        if first_item.checkoutable?
-          I18n.t('alma.availability.available.physical.status')
+      # User-friendly display value for inventory entry status description - a more detailed description of
+      # what the status indicates
+      # @return [String, nil]
+      def human_readable_status_description
+        case status
+        when Constants::AVAILABLE then available_status_description
+        when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.description')
+        when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.description')
         else
-          I18n.t('alma.availability.unavailable.physical.status')
+          nil
+        end
+      end
+
+      def available_status_label
+        case refined_status
+        when :offsite then I18n.t('alma.availability.available.physical.offsite.label')
+        when :appointment then I18n.t('alma.availability.available.physical.appointment.label')
+        when :in_house then I18n.t('alma.availability.available.physical.in_house.label')
+        else
+          I18n.t('alma.availability.available.physical.circulates.label')
+        end
+      end
+
+      def available_status_description
+        case refined_status
+        when :offsite then I18n.t('alma.availability.available.physical.offsite.description')
+        when :appointment then I18n.t('alma.availability.available.physical.appointment.description')
+        when :in_house then I18n.t('alma.availability.available.physical.in_house.description')
+        else
+          I18n.t('alma.availability.available.physical.circulates.description')
         end
       end
 
@@ -98,11 +141,14 @@ module Inventory
       end
 
       def first_item(**options)
-        default_options = { holding_id: id, expand: 'due_date,due_date_policy' }
-        resp = Alma::BibItem.find(mms_id, default_options.merge(options))
-        return false if resp.items.empty?
+        @first_item ||= retrieve_first_item(mms_id, id)
+      end
 
-        @first_item ||= Inventory::Service::Item.new resp.items.first
+      def retrieve_first_item(mms_id, holding_id)
+        items = Inventory::Service::Physical.items(mms_id: mms_id, holding_id: holding_id)
+        return false if items.empty?
+
+        items.first
       end
 
       # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We
