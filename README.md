@@ -4,6 +4,19 @@ See the [README](rails_app/README.md) for the Rails app for more information abo
 
 We are working to support [development in a Vagrant environment](#working-with-the-vagrant-environment) as well as [a development environment using local Ruby and docker services](#working-with-local-services-in-docker). Choose your poison.
 
+1. [Relation to other Projects](#relation-to-other-projects)
+2. [Developing](#developing)
+   1. [Working with the Vagrant environment](#working-with-the-vagrant-environment)
+      1. [Vagrant Services](#vagrant-services)
+      2. [Starting](#starting)
+      3. [Stopping](#stopping)
+      4. [Destroying](#destroying)
+      5. [SSH](#ssh)
+      6. [Interacting with the Rails Application](#interacting-with-the-rails-application)
+      7. [Loading Sample Data](#loading-sample-data)
+   2. [Working with local services in Docker](#working-with-local-services-in-docker)
+      1. [Initializing](#initializing)
+3. [Working with a remote Solr index](#working-with-a-remote-solr-index)
 ## Relation to other Projects
 
 In deployed environments, Find is configured to point at a Solr index that is built and maintained by the [catalog-indexing](https://gitlab.library.upenn.edu/dld/catalog/catalog-indexing) app.
@@ -68,7 +81,25 @@ You may ssh into the Vagrant VM by running:
 vagrant ssh
 ```
 
+#### Interacting with the Rails Application
 
+Once your vagrant environment is set up you can ssh into the vagrant box to interact with the application:
+
+1. Enter the Vagrant VM by running `vagrant ssh` in the `/vagrant` directory
+2. Start a shell in the `find` container:
+```
+  docker exec -it catalog-find_catalog_find.1.{whatever} sh
+```
+
+#### Loading Sample Data
+
+To index some same records into the Solr instance:
+
+1. Start a shell in the find app, see [interacting-with-the-rails-application](#interacting-with-the-rails-application)
+2. Run rake tasks:
+```bash
+bundle exec rake tools:index_sample_file
+```
 
 ## Working with local services in Docker
 
