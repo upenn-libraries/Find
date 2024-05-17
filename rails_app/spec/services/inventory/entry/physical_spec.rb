@@ -34,13 +34,6 @@ describe Inventory::Entry::Physical do
       ]
     )
     allow(Alma::BibItem).to receive(:find).with(mms_id, any_args).and_return(bib_item_set)
-
-    # allow(Inventory::Service::Physical).to receive(:items).with(any_args).and_return(
-    #   [Inventory::Service::Item.new(
-    #     { 'item_data' => { 'policy' => { 'desc' => 'Non-circ' }, 'library' => { 'desc' => 'vanpelt' },
-    #                        'location' => { 'value' => 'stacks' }, 'physical_material_type' => { 'desc' => 'Book' } } }
-    #   )]
-    # )
   end
 
   describe '#status' do

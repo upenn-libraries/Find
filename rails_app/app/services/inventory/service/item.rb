@@ -78,7 +78,7 @@ module Inventory
 
       # @return [Boolean]
       def at_archives?
-        library_name == Constants::ARCHIVES_LIBRARY ||
+        library == Constants::ARCHIVES_LIBRARY ||
           holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY
       end
 

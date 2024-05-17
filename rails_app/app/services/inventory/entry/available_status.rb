@@ -13,7 +13,7 @@ module Inventory
         @location = location_code
       end
 
-      # Return a refines available status, because some things Alma reports as unavailable are available under only
+      # Return a refines available status, because some things Alma reports as available are available only under
       # some restrictions we want to make explicit in our status display.
       # @return [Symbol]
       def refined
