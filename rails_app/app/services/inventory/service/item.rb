@@ -61,7 +61,7 @@ module Inventory
       # Is the item a Historical Society of Pennsylvania record? If so, it cannot be requested.
       # @return [Boolean]
       def at_hsp?
-        library == 'HSPLib'
+        library == Constants::HSP_LIBRARY
       end
 
       # @return [Boolean]
@@ -78,15 +78,10 @@ module Inventory
 
       # @return [Boolean]
       def at_archives?
-        library_name == 'University Archives' ||
-          holding_data.dig('library', 'desc') == 'University Archives'
+        library_name == Constants::ARCHIVES_LIBRARY ||
+          holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY
       end
 
-      # @return [Boolean]
-      def offsite?
-        library_name.include? 'LIBRA'
-      end
-      
       # @return [Boolean]
       def in_house_use_only?
         item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||

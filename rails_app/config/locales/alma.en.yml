@@ -9,9 +9,9 @@ en:
             circulates:
               label: 'Available for checkout'
               description: 'This item can be checked out by visiting the library.'
-            in_house:
-              label: 'Available for use'
-              description: 'This item can only be used at the library.'
+            unrequestable:
+              label: 'Available in person'
+              description: 'This item cannot be requested but can be accessed at the library.'
             appointment:
               label: 'Available by appointment'
               description: 'Access to this material can be arranged with an appointment.'
