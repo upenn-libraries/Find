@@ -62,7 +62,7 @@ module Inventory
         location_code = data[:location_code]
         return unless location_code
 
-        location_override || Mappings.locations[location_code.to_sym][:display]
+        location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
       end
 
       # Number of items for this physical holding.
