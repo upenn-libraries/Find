@@ -2,7 +2,9 @@
 
 module Inventory
   class Entry
-    # Class for clarifying what "available" means as an inventory status
+    # Class for clarifying what "available" means as an inventory status. Material at ome Penn locations can only be
+    # accesses by request even though Alma reports it as "Available". This class adjusts the terminology used when
+    # labeling availability so that it displays appropriate guidance for the holding's location
     class AvailableStatus
       attr_accessor :library, :location
 
@@ -14,7 +16,8 @@ module Inventory
       end
 
       # Return a refines available status, because some things Alma reports as available are available only under
-      # some restrictions we want to make explicit in our status display.
+      # some restrictions we want to make explicit in our status display. Order of the logic here matters, so that
+      # items at LIBRA that require an Aeon Request are properly handled, for example.
       # @return [Symbol]
       def refined
         @refined ||= if aeon_location?
