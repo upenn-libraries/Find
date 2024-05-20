@@ -11,7 +11,7 @@ describe Inventory::Entry::Physical do
       library_code: 'VanPeltLib',
       location: 'Stacks',
       call_number: 'HQ801 .D43 1997',
-      availability: Inventory::Constants::AVAILABLE,
+      availability: Inventory::Constants::UNAVAILABLE,
       total_items: '1',
       non_available_items: '0',
       location_code: 'vanp',
@@ -38,13 +38,13 @@ describe Inventory::Entry::Physical do
 
   describe '#status' do
     it 'returns expected status' do
-      expect(entry.status).to eq Inventory::Constants::AVAILABLE
+      expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
     end
   end
 
   describe '#human_readable_status' do
     it 'returns expected human_readable_status' do
-      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.physical.status')
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.unavailable.physical.label')
     end
   end
 
