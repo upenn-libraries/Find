@@ -4,7 +4,7 @@ en:
         available:
           physical:
             offsite:
-              label: 'Available from offsite'
+              label: 'Available from offsite location'
               description: 'This item is stored in our repository but can be checked out.'
             circulates:
               label: 'Available for checkout'
