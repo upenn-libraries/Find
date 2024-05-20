@@ -17,7 +17,8 @@ describe 'login page' do
       it 'renders the success message' do
         expect(page).to have_text(I18n.t('login.pennkey'))
         click_on(I18n.t('login.pennkey'))
-        expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success', kind: 'saml'))
+        expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success',
+                                         kind: I18n.t('devise.omniauth_callbacks.saml_kind')))
       end
     end
 
