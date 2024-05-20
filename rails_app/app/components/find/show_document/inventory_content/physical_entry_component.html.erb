@@ -5,7 +5,7 @@
 </p>
 <p class="<%= availability_class %> inventory-item__availability-summary">
   <span class="inventory-item__availability-main"><%= entry.human_readable_status %></span>
-  <span class="inventory-item__availability-footer"><%= availability_description %></span>
+  <span class="inventory-item__availability-footer"><%= entry.human_readable_status_description %></span>
 </p>
 
 <% if user.nil? %>

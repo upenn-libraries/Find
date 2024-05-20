@@ -16,11 +16,6 @@ module Find
           @user = user
         end
 
-        # @return [String]
-        def availability_description
-          entry.human_readable_status_description
-        end
-
         # Class to use when rendering the availability summary
         # @return [String]
         def availability_class
