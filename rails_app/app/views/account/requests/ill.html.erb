@@ -4,56 +4,64 @@
 <h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 
 <nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
-  <button class="btn btn-outline-dark" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" id="ill-0-tab">
+  <button class="btn btn-outline-dark <%= @ill_params.scan? ? 'active' : '' %>" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="<%= @ill_params.scan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.scan') %>
   </button>
-  <button class="btn btn-outline-dark" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1">
+  <button class="btn btn-outline-dark <%= @ill_params.loan? ? 'active' : '' %>" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="<%= @ill_params.loan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.loan') %>
   </button>
 </nav>
 
 <div class="tab-content interlibary-loan__forms" id="ill-tabContent">
-  <div class="tab-pane fade show" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
+  <div class="tab-pane fade <%= @ill_params.scan? ? 'active show' : '' %>" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
     <form>
       <div class="row">
         <div class="col-md-7">
           <div class="form-group mt-2 form-group--error">
-            <label for="journal">
+            <%= label_tag :journal do %>
               <%= t('account.ill.form.scan.journal_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
               <p class="form-group__error-text"><%= t('account.ill.form.scan.journal_title.help_text') %></p>
-            </label>
-            <input type="text" class="form-control mt-1" id="journal" required>
+            <% end %>
+            <%= text_field_tag :journal, @ill_params.journal, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3">
-            <label for="article"><%= t('account.ill.form.scan.article_title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="article" required>
+            <%= label_tag :article do %>
+              <%= t('account.ill.form.scan.article_title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+            <% end %>
+            <%= text_field_tag :article, @ill_params.chaptitle || @ill_params.article, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3 form-group--error">
-            <label for="article-author">
+            <%= label_tag :author do %>
               <%= t('account.ill.form.scan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
               <p class="form-group__error-text"><%= t('account.ill.form.scan.author.help_text') %></p>
-            </label>
-            <input type="text" class="form-control mt-1" id="article-author">
+            <% end %>
+            <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3">
-            <label for="rftdate"><%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="rftdate" required>
+            <%= label_tag :rftdate do %>
+              <%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+            <% end %>
+            <%= text_field_tag :rftdate, @ill_params.rftdate, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3">
-            <label for="volume"><%= t('account.ill.form.scan.volume') %></label>
-            <input type="text" class="form-control mt-1" id="volume">
+            <%= label_tag :volume, t('account.ill.form.scan.volume') %>
+            <%= text_field_tag :volume, @ill_params.volume, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="issue"><%= t('account.ill.form.scan.issue') %></label>
-            <input type="text" class="form-control mt-1" id="issue">
+            <%= label_tag :issue, t('account.ill.form.scan.issue') %>
+            <%= text_field_tag :issue, @ill_params.issue, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="pages"><%= t('account.ill.form.scan.pages') %></label>
-            <input type="text" class="form-control mt-1" id="pages">
+            <%= label_tag :pages, t('account.ill.form.scan.pages') %>
+            <%= text_field_tag :pages, @ill_params.pages, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="comments"><%= t('account.ill.form.scan.comments.label') %><br><small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.scan.comments.help_text') %></small></label>
-            <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+            <%= label_tag :comments do %>
+              <%= t('account.ill.form.scan.comments.label') %>
+              <br>
+              <small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.scan.comments.help_text') %></small>
+            <% end %>
+            <%= text_area_tag :comments, @ill_params.comments, class: 'form-control mt-1', aria: { describedby: 'comments-help' }, rows: 4 %>
           </div>
 
           <p class="mt-4 mb-1"><%= t('account.ill.form.scan.delivery_msg') %></p>
@@ -65,46 +73,53 @@
       </div>
     </form>
   </div>
-  <div class="tab-pane fade" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
+  <div class="tab-pane fade <%= @ill_params.loan? ? 'active show' : '' %>" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
     <form>
       <div class="row">
         <div class="col-md-7">
           <div class="form-group mt-2">
-            <label for="title"><%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="title" required>
+            <%= label_tag :title do %>
+              <%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+            <% end %>
+            <%= text_field_tag :title, @ill_params.booktitle, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3">
-            <label for="author"><%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="author">
+            <%= label_tag :author do %>
+              <%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+            <% end %>
+            <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="year"><%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="year" required>
+            <%= label_tag :year do %>
+              <%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+            <% end %>
+            <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true %>
           </div>
           <div class="form-group mt-3">
-            <label for="edition"><%= t('account.ill.form.loan.edition') %></label>
-            <input type="text" class="form-control mt-1" id="edition">
+            <%= label_tag :edition, t('account.ill.form.loan.edition') %>
+            <%= text_field_tag :edition, @ill_params.edition, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="publisher"><%= t('account.ill.form.loan.publisher') %></label>
-            <input type="text" class="form-control mt-1" id="publisher">
+            <%= label_tag :publisher, t('account.ill.form.loan.publisher') %>
+            <%= text_field_tag :publisher, @ill_params.publisher, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="place"><%= t('account.ill.form.loan.place_of_publication') %></label>
-            <input type="text" class="form-control mt-1" id="place">
+            <%= label_tag :place, t('account.ill.form.loan.place_of_publication') %>
+            <%= text_field_tag :place, @ill_params.place, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="isbn"><%= t('account.ill.form.loan.isbn') %></label>
-            <input type="text" class="form-control mt-1" id="isbn">
+            <%= label_tag :isbn,  t('account.ill.form.loan.isbn') %>
+            <%= text_field_tag :isbn, @ill_params.isbn, class: 'form-control mt-1' %>
           </div>
           <div class="form-group mt-3">
-            <label for="comments"><%= t('account.ill.form.loan.comments.label') %>
+            <%= label_tag :comments do %>
+              <%= t('account.ill.form.loan.comments.label') %>
               <br>
               <small id="comments-help" class="form-text text-muted">
                 <%= t('account.ill.form.loan.comments.help_text') %>
               </small>
-            </label>
-            <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
+            <% end %>
+            <%= text_area_tag :comments, @ill_params.comments, class: 'form-control mt-1', aria: { describedby: 'comments-help' }, rows: 4 %>
           </div>
 
           <fieldset>

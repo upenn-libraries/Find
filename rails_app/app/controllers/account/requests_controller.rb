@@ -8,7 +8,9 @@ module Account
 
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
-    def ill; end
+    def ill
+      @ill_params = IllFormParams.new(params.except(:controller, :action).to_unsafe_h)
+    end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
