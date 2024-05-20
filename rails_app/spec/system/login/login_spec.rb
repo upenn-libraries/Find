@@ -18,7 +18,7 @@ describe 'login page' do
         expect(page).to have_text(I18n.t('login.pennkey'))
         click_on(I18n.t('login.pennkey'))
         expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success',
-                                         kind: I18n.t('devise.omniauth_callbacks.saml_kind')))
+                                         kind: I18n.t('devise.omniauth_callbacks.saml_display_value')))
       end
     end
 

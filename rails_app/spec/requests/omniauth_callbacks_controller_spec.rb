@@ -17,7 +17,7 @@ describe 'Omniauth Callbacks Requests' do
       it 'returns success message' do
         follow_redirect!
         expect(response.body).to include(I18n.t('devise.omniauth_callbacks.success',
-                                                kind: I18n.t('devise.omniauth_callbacks.saml_kind')))
+                                                kind: I18n.t('devise.omniauth_callbacks.saml_display_value')))
       end
 
       it 'creates a user' do
@@ -87,7 +87,7 @@ describe 'Omniauth Callbacks Requests' do
       it 'returns success message' do
         follow_redirect!
         expect(response.body).to include(I18n.t('devise.omniauth_callbacks.success',
-                                                kind: I18n.t('devise.omniauth_callbacks.alma_kind')))
+                                                kind: I18n.t('devise.omniauth_callbacks.alma_display_value')))
       end
 
       it 'creates a user' do

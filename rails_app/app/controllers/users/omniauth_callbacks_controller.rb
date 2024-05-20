@@ -21,7 +21,7 @@ module Users
       user = User.from_omniauth_saml(request.env['omniauth.auth'])
       alma_user = user.alma_record
       if alma_user
-        handle_user(user: user, alma_user: alma_user, kind: I18n.t('devise.omniauth_callbacks.saml_kind'))
+        handle_user(user: user, alma_user: alma_user, kind: I18n.t('devise.omniauth_callbacks.saml_display_value'))
       else
         user.destroy if user.new_record?
         redirect_to login_path
@@ -32,7 +32,8 @@ module Users
     def alma
       if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
         user = User.from_omniauth_alma(request.env['omniauth.auth'])
-        handle_user(user: user, alma_user: user.alma_record, kind: I18n.t('devise.omniauth_callbacks.alma_kind'))
+        handle_user(user: user, alma_user: user.alma_record,
+                    kind: I18n.t('devise.omniauth_callbacks.alma_display_value'))
       else
         redirect_to alma_login_path
         set_flash_message(:alert, :alma_failure)
