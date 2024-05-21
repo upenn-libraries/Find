@@ -15,6 +15,7 @@ FactoryBot.define do
     trait :loan do
       add_attribute(:RequestType) { 'Loan' }
       add_attribute(:LoanTitle) { 'Autobiography' }
+      add_attribute(:LoanAuthor) { 'Random, Author' }
     end
 
     trait :books_by_mail do
@@ -25,6 +26,7 @@ FactoryBot.define do
 
     trait :scan do
       add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+      add_attribute(:PhotoArticleAuthor) { 'Random, Author' }
     end
 
     trait :cancelled do

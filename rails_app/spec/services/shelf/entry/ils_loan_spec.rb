@@ -55,7 +55,7 @@ describe Shelf::Entry::IlsLoan do
 
     context 'when not overdue' do
       it 'returns expected status' do
-        expect(loan.status).to match(/DUE: \w+ \d+, \d{4}/)
+        expect(loan.status).to match(/\d{2}\/\d{2}\/\d{2}/)
       end
     end
   end

@@ -48,7 +48,7 @@ describe Shelf::Entry::IllTransaction do
       let(:illiad_transaction) { create(:illiad_request, :scan) }
 
       it 'returns expected author' do
-        expect(transaction.author).to eql illiad_transaction.data[:PhotoJournalAuthor]
+        expect(transaction.author).to eql illiad_transaction.data[:PhotoArticleAuthor]
       end
     end
   end

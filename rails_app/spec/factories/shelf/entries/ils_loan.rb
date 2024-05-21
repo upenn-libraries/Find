@@ -2,10 +2,18 @@
 
 FactoryBot.define do
   factory :ils_loan, class: 'Shelf::Entry::IlsLoan' do
-    data { attributes_for(:alma_loan) }
+    data { attributes_for(:alma_loan, :renewable) }
+
+    trait :not_renewable do
+      data { attributes_for(:alma_loan, :not_renewable) }
+    end
+
+    trait :resource_sharing do
+      data { attributes_for(:alma_loan, :not_renewable, :resource_sharing) }
+    end
 
     trait :borrow_direct do
-      data { attributes_for(:alma_loan, :borrow_direct) }
+      data { attributes_for(:alma_loan, :not_renewable, :borrow_direct) }
     end
 
     skip_create
