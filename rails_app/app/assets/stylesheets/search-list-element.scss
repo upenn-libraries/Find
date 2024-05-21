@@ -5,10 +5,9 @@
   --bs-border-color: var(--color-fg-subtle);
 }
 
-.search-list__input {
- 
-}
-
-[hidden] {
-  visibility: hidden;
+.search-list__no-results {
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: -0.40rem;
+  
 }

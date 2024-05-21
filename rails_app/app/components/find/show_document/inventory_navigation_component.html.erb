@@ -11,7 +11,8 @@
             type="button"
             role="tab"
             aria-controls="inventory-<%= i %>"
-            aria-selected="<% active?(entry) ? 'true' : 'false' %>">
+            aria-selected="<% active?(entry) ? 'true' : 'false' %>"
+            data-search-list-item>
       <span class="inventory-item__header"><%= entry.location %></span>
       <span class="inventory-item__main"><%= entry.description %></span>
       <% unless entry.resource_link? %>

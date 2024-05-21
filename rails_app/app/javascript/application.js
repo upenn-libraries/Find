@@ -5,15 +5,30 @@ import "popper";
 import "bootstrap";
 import Blacklight from "blacklight";
 
+/**
+ * Search List custom element adds search
+ * functionaility by keyword on the textContent
+ * of elements with the [data-search-list-item]
+ * attribute.
+ * 
+ * Example HTML:
+ * 
+ * <search-list>
+ *   <ul>
+ *     <li data-search-list-item></li>
+ *     <li data-search-list-item></li>
+ *   </ul>
+ * </search-list>
+ */
 class SearchList extends HTMLElement {
   constructor() {
     super();
 
-    const LIST_LENGTH_THRESHOLD = 12;
+    const LIST_LENGTH_THRESHOLD = 9;
 
-    this.searchableNodes = this.childNodes;
+    this.searchableElements = this.querySelectorAll('[data-search-list-item]');
 
-    if (this.childElementCount > LIST_LENGTH_THRESHOLD) {
+    if (this.searchableElements.length > LIST_LENGTH_THRESHOLD) {
       this.addSearch();
     }
   }
@@ -33,8 +48,8 @@ class SearchList extends HTMLElement {
     let inputEl = document.createElement('input');
     inputEl.setAttribute("type", "text");
     inputEl.setAttribute("class", "form-control search-list__input")
-    inputEl.setAttribute("placeholder", "Search options");
-    inputEl.setAttribute("aria-label", "Search options");
+    inputEl.setAttribute("placeholder", "Search this list");
+    inputEl.setAttribute("aria-label", "Search this list");
 
     containerEl.appendChild(inputEl);
 
@@ -43,11 +58,14 @@ class SearchList extends HTMLElement {
   }
 
   search() {
+    // Remove any existing no results elements
+    this.querySelectorAll('.search-list__no-results').forEach(el => el.remove());
+
+    // 
     const term = this.inputEl.value.toLowerCase();
-    const elements = this.querySelectorAll('.inventory-item');
     let visibleElements = 0;
 
-    elements.forEach(node => {
+    this.searchableElements.forEach(node => {
       if (node.textContent.toLowerCase().includes(term) || term.length === 0) {
         node.removeAttribute('hidden')
         visibleElements++
@@ -56,13 +74,17 @@ class SearchList extends HTMLElement {
       }
     })
 
-    this.querySelectorAll('.search-list__no-results').forEach(el => el.remove());
+    let noResultsElement = document.createElement('small');
+    noResultsElement.setAttribute("class", "search-list__no-results text-muted");
 
     if (visibleElements === 0) {
-      let noResultsElement = document.createElement('p');
-      noResultsElement.textContent = `No options match for "${term}".`
-      noResultsElement.setAttribute("class", "search-list__no-results pr-3");
-      this.append(noResultsElement);
+      noResultsElement.textContent = `No results for "${term}"`
+    } else {
+      noResultsElement.textContent = `${visibleElements} of ${this.searchableElements.length} results for "${term}"`
+    }
+
+    if (term.length > 0) {
+      this.inputEl.insertAdjacentElement('afterend', noResultsElement);
     }
   }
 }
