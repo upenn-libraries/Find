@@ -58,10 +58,8 @@ class SearchList extends HTMLElement {
   }
 
   search() {
-    // Remove any existing no results elements
     this.querySelectorAll('.search-list__no-results').forEach(el => el.remove());
 
-    // 
     const term = this.inputEl.value.toLowerCase();
     let visibleElements = 0;
 
