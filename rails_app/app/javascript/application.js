@@ -45,14 +45,25 @@ class SearchList extends HTMLElement {
   search() {
     const term = this.inputEl.value.toLowerCase();
     const elements = this.querySelectorAll('.inventory-item');
+    let visibleElements = 0;
 
     elements.forEach(node => {
       if (node.textContent.toLowerCase().includes(term) || term.length === 0) {
         node.removeAttribute('hidden')
+        visibleElements++
       } else {
         node.setAttribute('hidden', true)
       }
     })
+
+    this.querySelectorAll('.search-list__no-results').forEach(el => el.remove());
+
+    if (visibleElements === 0) {
+      let noResultsElement = document.createElement('p');
+      noResultsElement.textContent = `No options match for "${term}".`
+      noResultsElement.setAttribute("class", "search-list__no-results pr-3");
+      this.append(noResultsElement);
+    }
   }
 }
 
