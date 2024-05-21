@@ -174,16 +174,17 @@ en:
         th:
           index: '#'
           title: 'Title'
-          status: 'Status'
+          status: 'Due date / Status'
       renew_all:
         button: 'Renew all eligible'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
-      bib_record_link: 'Record'
+      bib_record_link: 'View title record page'
       renew:
-        button: 'Renew'
+        button: 'Renew this title'
       cancel:
         button: 'Cancel'
+      identifier_label: 'Identifier'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'

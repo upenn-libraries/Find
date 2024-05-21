@@ -60,7 +60,7 @@ module Shelf
       # @param [Time] date
       # @return [String]
       def format_date(date)
-        date.in_time_zone.strftime('%B %e, %Y')
+        date.in_time_zone.strftime('%m/%d/%y')
       end
 
       def ils_loan?

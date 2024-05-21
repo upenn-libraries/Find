@@ -26,7 +26,7 @@ module Shelf
         return nil unless due_date
 
         if due_date >= Time.current
-          "DUE: #{format_date(due_date)}"
+          "#{format_date(due_date)}"
         else
           'OVERDUE'
         end

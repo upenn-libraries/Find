@@ -1,25 +1,35 @@
-<h3><%= entry.title %></h3>
-<p><%= entry.author %></p>
+<h1 class="page__heading"><%= entry.title %></h1>
+<p class="page__lede"><%= entry.author %></p>
 
-<p><%= render(Account::ShelfStatusComponent.new(entry)) %></p>
+<div class="col col-md-7">
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row"><%= t('account.shelf.table.th.status') %></th>
+          <td><%= render(Account::ShelfStatusComponent.new(entry)) %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('account.shelf.identifier_label') %></th>
+          <td><%= t('account.shelf.identifier', system: entry.system.upcase, type: entry.type.capitalize, id: entry.id) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<% if entry.mms_id %>
-  <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id) %>
-<% end %>
-
-
-<% if entry.ils_loan? && entry.renewable? %>
-  <%= form_with url: ils_renew_request_path(entry.id), method: :patch do |form| %>
-    <%= form.submit t('account.shelf.renew.button'), class: "btn btn-primary" %>
+<div class="d-flex flex-wrap">
+  <% if entry.ils_loan? && entry.renewable? %>
+    <%= form_with url: ils_renew_request_path(entry.id), method: :patch do |form| %>
+      <%= form.submit t('account.shelf.renew.button'), class: "btn btn-success" %>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if entry.ils_hold? && !entry.resource_sharing? %>
-  <%= form_with url: ils_hold_request_path(entry.id), method: :delete do |form| %>
-    <%= form.submit t('account.shelf.cancel.button'), class: "btn btn-danger" %>
+  <% if entry.ils_hold? && !entry.resource_sharing? %>
+    <%= form_with url: ils_hold_request_path(entry.id), method: :delete do |form| %>
+      <%= form.submit t('account.shelf.cancel.button'), class: "btn btn-danger" %>
+    <% end %>
   <% end %>
-<% end %>
 
-<div>
-  <p><%= t('account.shelf.identifier', system: entry.system.upcase, type: entry.type.capitalize, id: entry.id) %></p>
+  <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: "btn btn-link" %>
 </div>
