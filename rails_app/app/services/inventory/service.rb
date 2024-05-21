@@ -82,7 +82,7 @@ module Inventory
       #
       # @note Can we know if a MMS ID is physical and skip this step? Physical items cannot have ecollections.
       # @param inventory_data [Array]
-      # @return [Boolean]
+      # @return [Boolean, NilClass]
       def should_check_for_ecollections?(inventory_data)
         inventory_data&.none?
       end
@@ -140,7 +140,7 @@ module Inventory
 
           hash = ecollection.data
           hash.merge({ 'inventory_type' => Entry::ECOLLECTION })
-        end
+        end || []
       end
 
       # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
