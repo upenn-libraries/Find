@@ -49,7 +49,7 @@ describe Shelf::Entry::IlsHold do
       let(:alma_hold) { create(:alma_hold, :on_hold_shelf) }
 
       it 'includes request status and expiry date' do
-        expect(hold.status).to match(/^#{alma_hold.request_status.tr('_', ' ')} until \d{2}\/\d{2}\/\d{2}$/i)
+        expect(hold.status).to match(%r{^#{alma_hold.request_status.tr('_', ' ')} until \d{2}/\d{2}/\d{2}$}i)
       end
     end
 

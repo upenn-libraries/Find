@@ -22,7 +22,7 @@ describe Shelf::Listing do
     end
 
     it 'sorts entries' do
-      expect(listing.first.last_updated_at).to satisfy { |d| d > listing.to_a.second.last_updated_at }
+      expect(listing.first.last_updated_at).to(satisfy { |d| d > listing.to_a.second.last_updated_at })
     end
   end
 

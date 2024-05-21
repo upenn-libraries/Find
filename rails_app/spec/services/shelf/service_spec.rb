@@ -61,8 +61,9 @@ describe Shelf::Service do
     let(:id) { '123456' }
 
     it 'calls the appropriate method' do
-      expect(shelf).to receive(:ill_transaction).with(id)
+      allow(shelf).to receive(:ill_transaction)
       shelf.find(:ill, :transaction, id)
+      expect(shelf).to have_received(:ill_transaction).with(id)
     end
   end
 
@@ -74,10 +75,11 @@ describe Shelf::Service do
     end
 
     it 'attempts to renew every renewable loan' do
-      expect(shelf).to receive(:renew_loan).with(loans[0].loan_id)
-      expect(shelf).to receive(:renew_loan).with(loans[1].loan_id)
-      expect(shelf).not_to receive(:renew_loan).with(loans[2].loan_id)
+      allow(shelf).to receive(:renew_loan)
       shelf.renew_all_loans
+      expect(shelf).to have_received(:renew_loan).with(loans[0].loan_id)
+      expect(shelf).to have_received(:renew_loan).with(loans[1].loan_id)
+      expect(shelf).not_to have_received(:renew_loan).with(loans[2].loan_id)
     end
   end
 
@@ -86,8 +88,9 @@ describe Shelf::Service do
 
     context 'when successful' do
       it 'calls renew_loan' do
-        expect(Alma::User).to receive(:renew_loan).with({ user_id: user_id, loan_id: loan_id })
+        allow(Alma::User).to receive(:renew_loan)
         shelf.renew_loan(loan_id)
+        expect(Alma::User).to have_received(:renew_loan).with({ user_id: user_id, loan_id: loan_id })
       end
     end
 
@@ -107,8 +110,9 @@ describe Shelf::Service do
 
     context 'when successful' do
       it 'calls cancel_request' do
-        expect(Alma::User).to receive(:cancel_request).with({ user_id: user_id, request_id: request_id })
+        allow(Alma::User).to receive(:cancel_request)
         shelf.cancel_hold(request_id)
+        expect(Alma::User).to have_received(:cancel_request).with({ user_id: user_id, request_id: request_id })
       end
     end
 

@@ -20,8 +20,7 @@ describe 'Account Shelf show page' do
     let(:entry) { create(:ill_transaction) }
 
     it 'displays all expected information' do
-      expect(page).to have_text entry.title
-      expect(page).to have_text entry.author
+      expect(page).to have_text "#{entry.title} #{entry.author}"
       expect(page).to have_text entry.status
     end
 
@@ -39,8 +38,7 @@ describe 'Account Shelf show page' do
     let(:entry) { create(:ils_hold) }
 
     it 'displays all expected information' do
-      expect(page).to have_text entry.title
-      expect(page).to have_text entry.author
+      expect(page).to have_text "#{entry.title} #{entry.author}"
       expect(page).to have_text entry.status
     end
 
@@ -71,8 +69,7 @@ describe 'Account Shelf show page' do
     let(:entry) { create(:ils_loan) }
 
     it 'displays all expected information' do
-      expect(page).to have_text entry.title
-      expect(page).to have_text entry.author
+      expect(page).to have_text "#{entry.title} #{entry.author}"
       expect(page).to have_text entry.status
     end
 
