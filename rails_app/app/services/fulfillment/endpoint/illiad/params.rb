@@ -3,8 +3,13 @@
 module Fulfillment
   class Endpoint
     class Illiad
+      # This class accepts a hash of parameters that are sent to the ILL form and provides clear methods for retrieving
+      # information about the request being made. The params are both OpenParams and custom parameters. This class is
+      # used both when rendering the form and when submitting the request to Illiad.
       class Params
         attr_reader :open_params
+
+        # TODO: we should memoize all of these methods
 
         def initialize(open_params)
           @open_params = open_params
@@ -17,10 +22,10 @@ module Fulfillment
         #   - 'pid'
         #   - 'source'
 
-        # Questions:
-        #  - Is extracting the pmid still needed?
+        # TODO: this should be memoized
 
-        def request_type # used to be requesttype
+        # Request type. Used to be requesttype.
+        def request_type
           if search('genre', 'rft.genre')&.downcase == 'unknown'
             'Book'
           else
@@ -40,72 +45,93 @@ module Fulfillment
           search('Author', 'author', 'aau', 'au', 'rft.au') || combined_name
         end
 
-        def chaptitle
+        # Chapter title. Used to be chaptitle.
+        def chapter_title
           search('chaptitle')
         end
 
-        def booktitle
-          search('title', 'Book', 'bookTitle', 'booktitle', 'rft.title') || ''
+        # Book title. Used to be booktitle.
+        def book_title
+          search('title', 'Book', 'bookTitle', 'booktitle', 'rft.title')
         end
 
         def edition
-          search('edition', 'rft.edition') || ''
+          search('edition', 'rft.edition')
         end
 
         def publisher
-          search('publisher', 'Publisher', 'rft.pub') || ''
+          search('publisher', 'Publisher', 'rft.pub')
         end
 
         def place
-          search('place', 'PubliPlace', 'rft.place') || ''
+          search('place', 'PubliPlace', 'rft.place')
         end
 
         def journal
-          search('Journal', 'journal', 'rft.btitle', 'rft.jtitle', 'rft.title', 'title') || ''
+          return open_params['bookTitle'] if open_params['bookTitle'].present? && request_type == 'bookitem'
+
+          search('Journal', 'journal', 'rft.btitle', 'rft.jtitle', 'rft.title', 'title')
         end
+
+        # Instead of using this method we should be able to use params.book_title || params.journal
+        # def title
+        #   book_title || journal
+        # end
 
         def article
-          search('Article', 'article', 'atitle', 'rft.atitle') || ''
+          search('Article', 'article', 'atitle', 'rft.atitle')
         end
 
-        def pmonth # only used when form is submitted
+        # Month of publication (usually used for Journals). Used when submitting Illiad request. Used to be pmonth.
+        def month
           search('pmonth', 'rft.month') || ''
         end
 
-        def rftdate # TODO: maybe convert to `date`
+        # TODO: maybe convert to `date`
+        def rftdate
           search('rftdate', 'rft.date')
         end
 
         def year
-          search('Year', 'year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
+          # Relais/BD sends dates through as rft.date but it may be a book request
+          if borrow_direct? && request_type == 'Book'
+            open_params['date'].presence || rftdate
+          else
+            search('Year', 'year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
+          end
         end
 
         def volume
-          search('Volume', 'volume', 'rft.volume') || ''
+          search('Volume', 'volume', 'rft.volume')
         end
 
         def issue
-          search('Issue', 'issue', 'rft.issue') || ''
+          search('Issue', 'issue', 'rft.issue')
         end
 
         def issn
-          search('issn', 'ISSN', 'rft.issn') || ''
+          search('issn', 'ISSN', 'rft.issn')
         end
 
         def isbn
-          search('isbn', 'ISBN', 'rft.isbn') || ''
+          search('isbn', 'ISBN', 'rft.isbn')
         end
 
-        def sid # Field was removed from form, should be sent in form submission
-          search('sid', 'rfr_id') || ''
+        # Citation source.
+        #
+        # This field was in our previous form but was removed in this iteration. This value is
+        # used when submitting an Illiad request.
+        def sid
+          search('sid', 'rfr_id')
         end
 
         def comments
-          search('UserId', 'comments') || ''
+          search('UserId', 'comments')
         end
 
+        # Bib id for record in Alma. Used when submitting Illiad request.
         def bibid
-          search('record_id', 'id', 'bibid') || ''
+          search('record_id', 'id', 'bibid')
         end
 
         def pages
@@ -113,7 +139,7 @@ module Fulfillment
           epage = search('Epage', 'epage', 'rft.epage')
 
           if open_params['Pages'].present? && spage.empty?
-            spage, epage = open_params['Pages'].split(/-/);
+            spage, epage = open_params['Pages'].split(/-/)
           end
 
           pages = open_params['pages'].presence
@@ -123,21 +149,34 @@ module Fulfillment
           pages
         end
 
+        # Pubmed identifier. Used when submitting Illiad request.
+        def pmid
+          return nil unless open_params['rft_id'].present? && open_paramsp['rft_id'].starts_with?('pmid')
+
+          open_params['rft_id'].split(':')[1]
+        end
+
+        # Return true if this is a BorrowDirect request.
+        def borrow_direct?
+          sid == 'BD' || open_params['bd'] == 'true'
+        end
+
+        # Request to checkout a book or other physical item.
         def loan?
           return false if open_params.blank?
 
           request_type == 'Book'
         end
 
-        # Request to scan of an article or chapter.
+        # Request to scan an article or chapter.
         def scan?
           return false if open_params.blank?
 
           request_type == 'Article'
         end
 
-        # Sequentially looks up each key provided and returns the first value that returns true to `present?`. Returns nil
-        # if none of the keys returned a non-blank value.
+        # Sequentially looks up each key provided and returns the first value that returns true to `present?`.
+        # Returns nil if none of the keys returned a non-blank value.
         def search(*keys)
           selected_key = keys.find do |key|
             open_params[key].present?
