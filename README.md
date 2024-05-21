@@ -114,11 +114,8 @@ Guidance for working in this environment - with the above provision - can be fou
 
 ## Working with a remote Solr index
 
-> TODO: This needs to be confirmed as functional
-
 1. Using Wireguard VPN...
-2. Get production Solr collection URL
-3. Update [blacklight.yml](rails_app/config/blacklight.yml) `development.url` value to the above URL value, including any auth credentials
-4. Restart the Rails server by running `touch tmp/restart.txt` command in the running `catalog-find_catalog_find` container
-5. DO NOT commit this change OR run any SolrTools methods (TODO: don't trust anyone to actually follow this guidance)
-
+2. Get a deployed Solr collection URL complete with included basic auth credentials. Somethings like: `http://staging-admin:staging-solr-pw@catalog-manager-stg01.library.upenn.int/solr1/catalog-staging`.
+3. Add a local settings file at `rails_app/config/settings.local.yml` that defines a `solr_url` setting with the deployed Solr URL.
+4. In the Vagrant environment, restart the Rails server by running `touch tmp/restart.txt` command in the running `catalog-find_catalog_find` container.
+5. DO NOT run any SolrTools methods that are going to modify the deployed Solr collection!
