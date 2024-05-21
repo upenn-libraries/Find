@@ -35,7 +35,15 @@ FactoryBot.define do
     end
 
     trait :resource_sharing do
-      resource_sharing { {} } # TODO: Need to get some sample data.
+      resource_sharing do
+        {
+          'id' => '57423926250003681',
+          'partner' => { 'value' => 'ReShare_BorrowDirect', 'desc' => 'ReShare_BorrowDirect', 'link' => 'https://api-na.hosted.exlibrisgroup.com/almaws/v1/partners/ReShare_BorrowDirect' },
+          'status' => { 'value' => 'RECEIVED_PHYSICALLY', 'desc' => 'Physically received by library' },
+          'external_id' => 'PUBD-1234',
+          'link' => 'https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/80251771/resource-sharing-requests/57423926250003681'
+        }
+      end
     end
 
     trait :borrow_direct do
