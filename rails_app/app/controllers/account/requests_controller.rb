@@ -9,7 +9,7 @@ module Account
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
-      @ill_params = IllFormParams.new(params.except(:controller, :action).to_unsafe_h)
+      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(params.except(:controller, :action).to_unsafe_h)
     end
 
     # Submission logic using form params and request broker service
