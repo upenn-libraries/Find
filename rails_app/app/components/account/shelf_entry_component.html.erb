@@ -10,7 +10,7 @@
           <td><%= render(Account::ShelfStatusComponent.new(entry)) %></td>
         </tr>
         <tr>
-          <th scope="row"><%= t('account.shelf.identifier_label') %></th>
+          <th scope="row"><%= t('account.shelf.table.th.identifier') %></th>
           <td><%= t('account.shelf.identifier', system: entry.system.upcase, type: entry.type.capitalize, id: entry.id) %></td>
         </tr>
       </tbody>
@@ -31,5 +31,7 @@
     <% end %>
   <% end %>
 
-  <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: "btn btn-link" %>
+  <% if entry.mms_id %>
+    <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: "btn btn-link" %>
+  <% end %>
 </div>

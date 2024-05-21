@@ -175,6 +175,7 @@ en:
           index: '#'
           title: 'Title'
           status: 'Due date / Status'
+          identifier: 'Identifier'
       renew_all:
         button: 'Renew all eligible'
         alerts: '<ul>%{alerts}</ul>'
@@ -184,7 +185,6 @@ en:
         button: 'Renew this title'
       cancel:
         button: 'Cancel'
-      identifier_label: 'Identifier'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'
