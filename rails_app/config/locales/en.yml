@@ -231,7 +231,7 @@ en:
     format: 'Format'
   requests:
     boundwith:
-      in_progress: 'This item is bound with others. We're still working on requesting for these types of items.'
+      in_progress: 'This item is bound with others. We are still working on requesting for these types of items.'
     form:
       heading: 'Request an item'
       item_label: 'What item are you requesting?'
