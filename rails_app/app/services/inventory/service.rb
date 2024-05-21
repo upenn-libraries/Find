@@ -84,7 +84,7 @@ module Inventory
       # @param inventory_data [Array]
       # @return [Boolean]
       def should_check_for_ecollections?(inventory_data)
-        inventory_data.none?
+        inventory_data&.none?
       end
 
       # Factory method to create Inventory::Entry objects.
@@ -134,7 +134,7 @@ module Inventory
         ecollections = Alma::Bib.get_ecollections mms_id
         return [] if ecollections.key? 'errorsExist'
 
-        ecollections['electronic_collection'].filter_map do |collection_hash|
+        ecollections['electronic_collection']&.filter_map do |collection_hash|
           ecollection = Alma::Electronic.get(collection_id: collection_hash['id'])
           next unless ecollection
 
