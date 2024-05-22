@@ -73,7 +73,6 @@ en:
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_title: 'My Account - %{application_name}'
       page_heading: 'Account Overview'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
@@ -90,7 +89,6 @@ en:
           title: 'Fines and Fees'
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
-      page_title: 'ILL Request - %{application_name}'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
       request_type:
@@ -141,11 +139,9 @@ en:
         required: '(required)'
         email_notification_msg: "We'll send you an email notification when it is ready."
     bookmarks:
-      page_title: 'Bookmarks - %{application_name}'
       page_heading: 'Bookmarks'
       page_lede: 'Create citations and email bookmarked items.'
     fines_and_fees:
-      page_title: 'Fines and Fees - %{application_name}'
       page_heading: 'Fines and Fees'
       page_lede: 'Your fines and fees for lost or damaged items.'
       table:
@@ -161,7 +157,6 @@ en:
         balance: 'Outstanding balance'
       how_to_pay_html: '<a href="%{url}" target=_blank>How to pay fines and fees</a>'
     settings:
-      page_title: 'Account Settings - %{application_name}'
       page_heading: 'Settings'
       page_lede: 'Your account details and item delivery address.'
       terms:
@@ -171,7 +166,7 @@ en:
       set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
       update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
     shelf:
-      page_title: 'Shelf - %{application_name}'
+      page_heading: 'Shelf'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'

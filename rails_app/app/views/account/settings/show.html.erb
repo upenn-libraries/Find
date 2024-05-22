@@ -1,4 +1,4 @@
-<% @page_title = t('account.settings.page_title', application_name: application_name) %>
+<%= page_title t('account.settings.page_heading') %>
 
 <%= render BreadcrumbsComponent.new do |component|%>
   <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
