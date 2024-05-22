@@ -84,7 +84,7 @@ module Fulfillment
 
         # Month of publication (usually used for Journals). Used when submitting Illiad request. Used to be pmonth.
         def month
-          search('pmonth', 'rft.month') || ''
+          search('pmonth', 'rft.month')
         end
 
         # TODO: maybe convert to `date`

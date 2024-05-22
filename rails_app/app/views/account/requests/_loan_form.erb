@@ -1,0 +1,85 @@
+<%= form_with(url: requests_path, method: :post) do %>
+  <%= hidden_field_tag :requesttype, 'Book' if @ill_params.open_params.blank? %>
+
+  <%= render 'hidden_fields' %>
+
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group mt-2">
+        <%= label_tag :title do %>
+          <%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <%= text_field_tag :title, @ill_params.book_title, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :author do %>
+          <%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :year do %>
+          <%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :edition, t('account.ill.form.loan.edition') %>
+        <%= text_field_tag :edition, @ill_params.edition, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :publisher, t('account.ill.form.loan.publisher') %>
+        <%= text_field_tag :publisher, @ill_params.publisher, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :place, t('account.ill.form.loan.place_of_publication') %>
+        <%= text_field_tag :place, @ill_params.place, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :isbn,  t('account.ill.form.loan.isbn') %>
+        <%= text_field_tag :isbn, @ill_params.isbn, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :comments do %>
+          <%= t('account.ill.form.loan.comments.label') %>
+          <br>
+          <small id="comments-help" class="form-text text-muted">
+            <%= t('account.ill.form.loan.comments.help_text') %>
+          </small>
+        <% end %>
+        <%= text_area_tag :comments, @ill_params.comments, class: 'form-control mt-1', aria: { describedby: 'comments-help' }, rows: 4 %>
+      </div>
+
+      <fieldset>
+        <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
+        <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
+          <label class="form-check-label" for="delivery-pickup">
+            <%= t('account.ill.form.loan.delivery.options.pickup.label') %>
+          </label>
+
+          <div class="input-group mb-2 mt-1">
+            <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup]), {
+              include_blank: t('account.ill.form.loan.delivery.options.pickup.placeholder'),
+              id: 'pickup_location',
+              label: 'Location',
+              class: 'custom-select p-2 rounded',
+              required: 'required'
+            }) %>
+          </div>
+        </div>
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
+          <label class="form-check-label" for="delivery-mail">Mail <br>
+            <small id="delivery-mail-help" class="form-text text-muted"><%=t('account.ill.form.loan.delivery.options.mail.help_text_html', bbm_form: t('urls.forms.bbm')) %></small></label>
+        </div>
+      </fieldset>
+
+      <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
+      <p><%= t('account.ill.form.email_notification_msg') %></p>
+
+      <button type="submit" class="btn btn-success btn-lg"><%= t('account.ill.form.loan.submit') %></button>
+    </div>
+  </div>
+<% end %>
