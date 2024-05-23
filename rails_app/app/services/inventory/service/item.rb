@@ -11,8 +11,6 @@ module Inventory
         AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
         LPTOP EQUIP OTHER AUDIOVM
       ].freeze
-      FACULTY_EXPRESS_CODE = 'FacEXP'
-      COURTESY_BORROWER_CODE = 'courtesy'
 
       # @return [Boolean]
       def checkoutable?
@@ -110,8 +108,8 @@ module Inventory
         options = []
         if checkoutable?
           options << :pickup
-          options << :office if ils_group == FACULTY_EXPRESS_CODE
-          options << :mail unless ils_group == COURTESY_BORROWER_CODE
+          options << :office if ils_group == User::FACULTY_EXPRESS_GROUP
+          options << :mail unless ils_group == User::COURTESY_BORROWER_GROUP
           options << :scan if scannable?
         end
         options

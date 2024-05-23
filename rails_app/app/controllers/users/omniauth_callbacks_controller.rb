@@ -47,6 +47,10 @@ module Users
     # @param [User] user
     # @param [String] kind
     def handle_user(user:, kind:)
+      # Caching Alma group code in DB at login time. Subsequent user requests will user this value.
+      # This means that a user will have to logout and log back in to refresh their ILS group.
+      user.ils_group = user.alma_record.user_group['value']
+
       if user.save
         sign_in_and_redirect user, event: :authentication
         set_flash_message(:notice, :success, kind: kind) if is_navigational_format?

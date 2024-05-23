@@ -3,7 +3,6 @@
 require 'system_helper'
 
 describe 'Catalog Show Page' do
-
   # Shared example to be able to test features across different types of records.
   shared_examples 'core show page features' do
     let(:params) { {} }
@@ -142,7 +141,7 @@ describe 'Catalog Show Page' do
     include_context 'with print monograph record with 2 physical entries'
     include_context 'with mock alma_record on user'
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:alma_user_data) { { user_group: { 'value' => 'undergrad', 'desc' => 'undergraduate' } } }
 
     let(:mms_id) { print_monograph_bib }

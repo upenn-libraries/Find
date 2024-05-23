@@ -7,6 +7,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
+  FACULTY_EXPRESS_GROUP = 'FacEXP'
+  COURTESY_BORROWER_GROUP = 'courtesy'
+  STUDENT_GROUPS = %w[undergrad graduate GIC].freeze
+
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer alma saml]
   else
@@ -57,11 +61,14 @@ class User < ApplicationRecord
     false
   end
 
-  # Returns object contains the value (code) and desc (description) of the user's alma group.
-  def alma_group
-    return unless alma_record?
+  # @return [TrueClass, FalseClass]
+  def student?
+    STUDENT_GROUPS.include? ils_group
+  end
 
-    OpenStruct.new(**alma_record.user_group)
+  # @return [TrueClass, FalseClass]
+  def faculty_express?
+    ils_group == FACULTY_EXPRESS_GROUP
   end
 
   # Returns true if an alma record is present for user.
