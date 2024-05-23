@@ -27,7 +27,7 @@ module Account
       def user_address
         return unless options.include? :office
 
-        Illiad::User.find(id: user.uid).bbm_delivery_address
+        user.illiad_record.bbm_delivery_address
       end
     end
   end
