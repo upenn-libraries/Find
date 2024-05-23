@@ -18,6 +18,11 @@ module Fulfillment
       end
     end
 
+    # @return [String (frozen), nil]
+    def message
+      @errors&.to_sentence
+    end
+
     # @return [Boolean]
     def success?
       @state == :success

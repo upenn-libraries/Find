@@ -17,9 +17,13 @@ module Fulfillment
       @errors = endpoint.validate(request: request) # return early with Outcome if validation fails...
       return failed_outcome if errors.any?
 
-      outcome = endpoint.submit(request: request)
+      outcome = endpoint.submit(request: request) # this could return an error...rescue?
       notify
       outcome
+    rescue StandardError => e
+      errors << 'An internal error occurred.'
+      Honeybadger.notify(e)
+      failed_outcome
     end
 
     def notify
@@ -28,7 +32,7 @@ module Fulfillment
 
     private
 
-    # @return [Fulfillment::Endpoint]
+    # @return [<Fulfillment::Endpoint>]
     def endpoint_class(request)
       case request.destination
       when :alma then Fulfillment::Endpoint::Alma

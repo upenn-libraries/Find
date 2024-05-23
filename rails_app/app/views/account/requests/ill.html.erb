@@ -3,7 +3,7 @@
 
 <h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 
-<nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
+<nav role="tablist" id="ill-tab" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
   <button class="btn btn-outline-dark <%= @ill_params.scan? ? 'active' : '' %>" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="<%= @ill_params.scan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.scan') %>
   </button>

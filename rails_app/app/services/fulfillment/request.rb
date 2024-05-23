@@ -5,6 +5,10 @@ module Fulfillment
   class Request
     class LogicFailure < StandardError; end
 
+    ITEM_PARAMETERS = %w[mms_id holding_id item_pid title author year edition publisher place isbn comments].freeze
+    FULFILLMENT_PARAMETERS = %w[option pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
+    SCAN_DETAIL_PARAMETERS = %w[journal article author rftdate volume issue pages comments].freeze
+
     module Options
       AEON = :aeon
       ELECTRONIC = :electronic
@@ -13,7 +17,7 @@ module Fulfillment
       PICKUP = :pickup
     end
 
-    attr_reader :user, :item_parameters, :fulfillment_options, :scan_details, :destination
+    attr_reader :user, :raw_params, :item_parameters, :fulfillment_options, :scan_details, :destination
 
     # Create a new Request to Broker
     #
@@ -25,17 +29,22 @@ module Fulfillment
     #    We have to also consider the "Proxy" request functionality. These submissions will go to the ILL backend.
     # 2. Item Request form: form submission will include item identifiers and fulfillment options. No scan details.
     #    Aeon requests will come from here.
-    def initialize(user:, item_parameters: {}, fulfillment_options: {}, scan_details: {})
+    # @param [User] user
+    # @param [ActionController::Params]
+    def initialize(user:, params:)
       @user = user
-      @item_parameters = item_parameters
-      @fulfillment_options = fulfillment_options
-      @scan_details = scan_details
+      @raw_params = params
+      @item_parameters = params.permit(ITEM_PARAMETERS)
+      @fulfillment_options = params.permit(FULFILLMENT_PARAMETERS)
+      @scan_details = params.permit(SCAN_DETAIL_PARAMETERS)
       set_destination # set destination upon initialization so errors can be caught prior to submission
     end
 
-    def self.submit(user:, item_parameters: {}, fulfillment_options: {}, scan_details: {})
-      request = new(user: user, item_parameters: item_parameters, fulfillment_options: fulfillment_options,
-                    scan_details: scan_details)
+    # Convenience method for submitting directly
+    # @param [User] user
+    # @param [ActionController::Params]
+    def self.submit(user:, params:)
+      request = new(user: user, params: params)
       Service.new(request: request).submit
     end
 
@@ -68,7 +77,7 @@ module Fulfillment
     end
 
     def pickup?
-      fulfillment_options[:method] == Options::PICKUP &&
+      fulfillment_options[:option].to_sym == Options::PICKUP &&
         (item_parameters[:holding_id].present? || item_parameters[:item_id].present?)
     end
 

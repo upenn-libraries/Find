@@ -15,12 +15,14 @@ module Account
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      # have all the item details needed (mms_id, holding_id, pickup_location, comments)
-      # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
-      # use our request broker service (coming soon) to send the request
-      # handle response, showing confirmation and/or error - maybe even send an email
-      flash[:notice] = 'Your request has not been submitted. Requesting submission is not yet functional in Find.'
-      redirect_to solr_document_path(id: params[:mms_id])
+      outcome = Fulfillment::Request.submit(user: current_user, params: params)
+      if outcome.success?
+        flash[:notice] = 'Your request has been successfully submitted.'
+        redirect_to shelf_path
+      else
+        flash[:alert] = "We could not submit your request due to the following: #{outcome.message}"
+        redirect_back_or_to root_path
+      end
     end
 
     # List all shelf entries. Supports sort & filter params.
