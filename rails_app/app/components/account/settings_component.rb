@@ -21,9 +21,7 @@ module Account
 
     # @return [String, nil]
     def alma_user_group
-      return unless user.alma_record
-
-      user.alma_record.user_group['desc']
+      user.alma_group.desc
     end
 
     # books by mail delivery address in two parts

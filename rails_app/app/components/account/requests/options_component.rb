@@ -33,7 +33,7 @@ module Account
 
       # @return [TrueClass, FalseClass]
       def user_is_student?
-        STUDENT_GROUP_CODES.include? user.ils_group
+        STUDENT_GROUP_CODES.include? user.alma_group.value
       end
     end
   end

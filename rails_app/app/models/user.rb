@@ -57,6 +57,18 @@ class User < ApplicationRecord
     false
   end
 
+  # Returns object contains the value (code) and desc (description) of the user's alma group.
+  def alma_group
+    return unless alma_record?
+
+    OpenStruct.new(**alma_record.user_group)
+  end
+
+  # Returns true if an alma record is present for user.
+  def alma_record?
+    alma_record.present?
+  end
+
   # @return [Alma::User, FalseClass]
   def alma_record
     @alma_record ||= begin
