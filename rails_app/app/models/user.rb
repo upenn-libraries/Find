@@ -53,6 +53,7 @@ class User < ApplicationRecord
     end
   end
 
+  # Returns true if provided credentials match an ALma internal account
   # @param [Hash] credentials
   # @return [Boolean]
   def self.authenticated_by_alma?(credentials)
@@ -61,17 +62,20 @@ class User < ApplicationRecord
     false
   end
 
-  # @return [TrueClass, FalseClass]
+  # Returns true of a user's group is considered a "student" group
+  # @return [Boolean]
   def student?
     STUDENT_GROUPS.include? ils_group
   end
 
-  # @return [TrueClass, FalseClass]
+  # Returns true if a user is in the Alma FaxEx group
+  # @return [Boolean]
   def faculty_express?
     ils_group == FACULTY_EXPRESS_GROUP
   end
 
   # Returns true if an alma record is present for user.
+  # @return [Boolean]
   def alma_record?
     alma_record.present?
   end
@@ -96,12 +100,12 @@ class User < ApplicationRecord
 
   private
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def provider_provided?
     provider.present?
   end
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def uid_provided?
     uid.present?
   end
