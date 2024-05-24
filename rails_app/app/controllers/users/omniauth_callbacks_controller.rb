@@ -47,7 +47,7 @@ module Users
     # @param [User] user
     # @param [String] kind
     def handle_user(user:, kind:)
-      # Caching Alma group code in DB at login time. Subsequent user requests will user this value.
+      # Caching Alma group code in DB at login time. Subsequent user requests will use this value.
       # This means that a user will have to logout and log back in to refresh their ILS group.
       user.ils_group = user.alma_record.user_group['value']
 
