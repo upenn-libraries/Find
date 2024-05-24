@@ -14,7 +14,9 @@ module LayoutHelper
   # Set content for the page title which is read and displayed by Blacklight's base layout
   # @param title [String] the title of the page
   # @return [String (frozen)]
-  def page_title(title)
-    content_for(:page_title) { "#{title} - #{application_name}" }
+  def page_title(title, document_title: nil)
+    return content_for(:page_title) { "#{title} - #{application_name}" } if document_title.nil?
+
+    content_for(:page_title) { "#{title} - #{document_title} - #{application_name}" }
   end
 end
