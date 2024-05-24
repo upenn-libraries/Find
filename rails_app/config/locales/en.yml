@@ -165,6 +165,8 @@ en:
       bbm_empty: "You don't have a delivery address set."
       set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
       update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
+    shelf:
+      page_heading: 'Shelf'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
