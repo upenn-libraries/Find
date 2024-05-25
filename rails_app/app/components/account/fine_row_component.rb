@@ -27,6 +27,9 @@ module Account
 
     # @return [String, nil]
     def last_transaction
+      # sometimes a fee doesn't include any transactions, not even an empty set
+      return unless fine.respond_to? :transaction
+
       date = fine.transaction&.first&.fetch('transaction_time')
 
       return unless date
