@@ -87,19 +87,14 @@ RUN apt-get update && apt-get install -y \
     mkdir -p ${PROJECT_ROOT}/tmp/pids && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
+COPY --chown=app:app --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-COPY --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
+COPY --chown=app:app --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
-    SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
-    find . -type d -exec chmod 755 {} + && \
-    find . -type f -exec chmod 644 {} + && \
-    find bin -type f -exec chmod 744 {} + && \
-    chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}.0/bin/ && \
-    chown -R app:app .
+  SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+  chmod 744 -R ./bin && \
+  chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}.0/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

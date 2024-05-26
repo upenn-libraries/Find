@@ -7,6 +7,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
+  FACULTY_EXPRESS_GROUP = 'FacEXP'
+  COURTESY_BORROWER_GROUP = 'courtesy'
+  STUDENT_GROUPS = %w[undergrad graduate GIC].freeze
+
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer alma saml]
   else
@@ -49,12 +53,31 @@ class User < ApplicationRecord
     end
   end
 
+  # Returns true if provided credentials match an ALma internal account
   # @param [Hash] credentials
   # @return [Boolean]
   def self.authenticated_by_alma?(credentials)
     Alma::User.authenticate(credentials)
   rescue StandardError
     false
+  end
+
+  # Returns true of a user's group is considered a "student" group
+  # @return [Boolean]
+  def student?
+    STUDENT_GROUPS.include? ils_group
+  end
+
+  # Returns true if a user is in the Alma FaxEx group
+  # @return [Boolean]
+  def faculty_express?
+    ils_group == FACULTY_EXPRESS_GROUP
+  end
+
+  # Returns true if an alma record is present for user.
+  # @return [Boolean]
+  def alma_record?
+    alma_record.present?
   end
 
   # @return [Alma::User, FalseClass]
@@ -77,12 +100,12 @@ class User < ApplicationRecord
 
   private
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def provider_provided?
     provider.present?
   end
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def uid_provided?
     uid.present?
   end
