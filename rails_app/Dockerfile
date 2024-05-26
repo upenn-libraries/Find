@@ -93,6 +93,7 @@ COPY --chown=app:app --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
   SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+  find . -type d -exec chmod 755 {} + && \
   chmod 744 -R ./bin && \
   chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}.0/bin/
 
@@ -146,6 +147,7 @@ COPY --chown=app:app --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
     SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+    find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
     chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}.0/bin/
 
