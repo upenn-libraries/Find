@@ -28,6 +28,8 @@ en:
       password_change:
         subject: "Password Changed"
     omniauth_callbacks:
+      saml_display_value: "PennKey"
+      alma_display_value: "Alma"
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
       alma_failure: "The credentials you have entered to authenticate are not registered in our library system. If you are a CHOP affiliate, contact libbiomcircprint@pobox.upenn.edu. If you are a Penn alumnus, visit https://guides.library.upenn.edu/alumniservices/eres. Otherwise, Please contact the circulation desk at vpcircdk@pobox.upenn.edu for assistance."

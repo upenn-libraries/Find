@@ -6,7 +6,6 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      STUDENT_GROUP_CODES = %w[undergrad graduate GIC].freeze
       DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
       DEFAULT_PICKUP = 'VanPeltLib'
 
@@ -19,7 +18,7 @@ module Account
 
       # @return [String]
       def default_pickup_location
-        return DEFAULT_STUDENT_PICKUP if user_is_student?
+        return DEFAULT_STUDENT_PICKUP if user.student?
 
         DEFAULT_PICKUP
       end
@@ -28,12 +27,7 @@ module Account
       def user_address
         return unless options.include? :office
 
-        Illiad::User.find(id: user.uid).bbm_delivery_address
-      end
-
-      # @return [TrueClass, FalseClass]
-      def user_is_student?
-        STUDENT_GROUP_CODES.include? user.ils_group
+        user.illiad_record.bbm_delivery_address
       end
     end
   end
