@@ -16,8 +16,6 @@ module LayoutHelper
   # @param document_title [String, nil] the title of the document
   # @return [String (frozen)]
   def page_title(title, document_title: nil)
-    return content_for(:page_title) { "#{title} - #{application_name}" } if document_title.nil?
-
-    content_for(:page_title) { "#{title} - #{document_title} - #{application_name}" }
+    content_for(:page_title) {[title, document_title, application_name].compact.join(' - ')}
   end
 end
