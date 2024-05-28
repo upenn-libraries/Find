@@ -21,7 +21,7 @@ shared_context 'with mock alma_record on user' do
         allow(mock_alma_user).to receive(:method_missing).with(field).and_return(value)
       end
     end
-    allow(user).to receive(:alma_record).and_return(mock_alma_user)
+    allow(Alma::User).to receive(:find).with(user.uid).and_return(mock_alma_user)
   end
 end
 
