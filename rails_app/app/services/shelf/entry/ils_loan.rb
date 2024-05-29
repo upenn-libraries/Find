@@ -50,7 +50,7 @@ module Shelf
       # Returns true if item is renewable. Raises an error if the renewable attribute is not available in the
       # data provided.
       def renewable?
-        raise 'Renewable attribute unavailable' if raw_data['renewable'].nil?
+        raise Shelf::Service::AlmaRequestError, 'Renewable attribute unavailable' if raw_data['renewable'].nil?
 
         raw_data['renewable']
       end

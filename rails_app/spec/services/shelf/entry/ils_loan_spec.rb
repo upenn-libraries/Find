@@ -102,7 +102,7 @@ describe Shelf::Entry::IlsLoan do
 
     context 'when renewable data not present' do
       it 'raises an error' do
-        expect { loan.renewable? }.to raise_error 'Renewable attribute unavailable'
+        expect { loan.renewable? }.to raise_error Shelf::Service::AlmaRequestError, 'Renewable attribute unavailable'
       end
     end
   end
