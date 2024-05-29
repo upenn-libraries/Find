@@ -86,7 +86,6 @@ describe Shelf::Entry::IllTransaction do
   describe '#last_updated_at' do
     it 'returns expected last updated at date' do
       expect(transaction.last_updated_at).to be_a Time
-      # TODO: strftime('%FT%R%S%3N' )
       expect(transaction.last_updated_at).to eql illiad_transaction.date
     end
   end
