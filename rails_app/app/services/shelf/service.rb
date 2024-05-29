@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Shelf
-  # Service that returns all the items on a user's "shelf", which includes Alma holds, Alma loads and ILL transactions.
+  # Service that returns all the items on a user's "shelf", which includes Alma holds, Alma loans and ILL transactions.
   class Service
     # Catch all for errors raised when making requests to Alma.
     class AlmaRequestError < StandardError; end

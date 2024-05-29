@@ -44,7 +44,7 @@ FactoryBot.define do
     trait :resource_sharing do
       library { { 'value' => 'RES_SHARE', 'desc' => 'Resource Sharing Library' } }
       location_code { { 'value' => 'OUT_RS_REQ', 'name' => 'Out on Loan ' } }
-      item_policy { { 'value' => 'bd', 'description' => 'Borrow Direct' } } # This value changes based the system used.
+      item_policy { { 'value' => 'bd', 'description' => 'Borrow Direct' } } # This value changes based on the system used.
     end
 
     trait :borrow_direct do

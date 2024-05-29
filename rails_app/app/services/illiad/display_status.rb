@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Illiad
-  # Represents a DisplayStatus Illiad
+  # Represents a DisplayStatus from Illiad
   # provides class methods to find all display status rules in Illiad
   class DisplayStatus
     BASE_PATH = 'DisplayStatus'
