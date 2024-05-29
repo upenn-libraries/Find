@@ -32,7 +32,8 @@ module Inventory
         holdings = Alma::BibHolding.find_all(mms_id: mms_id)
 
         # TODO: implement boundwith support, see example mms_id: 9920306003503681
-        raise BoundwithError if holdings['holding'].blank?
+        # raise BoundwithError if holdings['holding'].blank?
+        return [] if holdings['items'].blank?
 
         # Fake an item when a holding has no items, ugh
         [Inventory::Service::Item.new({

@@ -5,7 +5,9 @@
       <div class="col-md-7">
         <div data-controller="item-select comments">
           <%= form_with(url: requests_path, method: :post, html: { class: 'fulfillment-form' }) do |form| %>
-            <% if items.length > 1 %>
+            <% if items.empty? %> <%# TODO: This won't be needed when we solve bound-with requesting! %>
+              <p><%= t('requests.boundwith.in_progress') %></p>
+            <% elsif items.length > 1 %>
               <div class="mb-3">
                 <%= form.label :item_pid, t('requests.form.item_label'), { class: 'form-label h6' } %>
                 <%= form.select(:item_pid, item_labels, { include_blank: t('requests.form.item_placeholder') },

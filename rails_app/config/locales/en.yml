@@ -165,6 +165,8 @@ en:
       bbm_empty: "You don't have a delivery address set."
       set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
       update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
+    shelf:
+      page_heading: 'Shelf'
   header:
     bookmarks: 'Bookmarks'
     login: 'Login'
@@ -230,6 +232,8 @@ en:
     contained_within: 'Contained in'
     format: 'Format'
   requests:
+    boundwith:
+      in_progress: 'This item is bound with others. We are still working on requesting for these types of items.'
     form:
       heading: 'Request an item'
       item_label: 'What item are you requesting?'
@@ -352,4 +356,3 @@ en:
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
-

@@ -11,10 +11,8 @@ module Inventory
         AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
         LPTOP EQUIP OTHER AUDIOVM
       ].freeze
-      FACULTY_EXPRESS_CODE = 'FacEXP'
-      COURTESY_BORROWER_CODE = 'courtesy'
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def checkoutable?
         in_place? &&
           loanable? &&
@@ -35,12 +33,12 @@ module Inventory
       end
 
       # This is tailored to the user_id, if provided
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def loanable?
         !user_due_date_policy&.include? 'Not loanable'
       end
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def aeon_requestable?
         location = if item_data.dig('location', 'value')
                      item_data['location']['value']
@@ -51,7 +49,7 @@ module Inventory
       end
 
       # Is the item able to be Scan&Deliver'd?
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def scannable?
         return false if at_hsp?
 
@@ -59,30 +57,30 @@ module Inventory
       end
 
       # Is the item a Historical Society of Pennsylvania record? If so, it cannot be requested.
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def at_hsp?
-        library == 'HSPLib'
+        library == Constants::HSP_LIBRARY
       end
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def on_reserve?
         item_data.dig('policy', 'value') == 'reserve' ||
           holding_data.dig('temp_policy', 'value') == 'reserve'
       end
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def at_reference?
         item_data.dig('policy', 'value') == 'reference' ||
           holding_data.dig('temp_policy', 'value') == 'reference'
       end
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def at_archives?
-        library_name == 'University Archives' ||
-          holding_data.dig('library', 'desc') == 'University Archives'
+        library == Constants::ARCHIVES_LIBRARY ||
+          holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY
       end
 
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       def in_house_use_only?
         item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||
           holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
@@ -110,8 +108,8 @@ module Inventory
         options = []
         if checkoutable?
           options << :pickup
-          options << :office if ils_group == FACULTY_EXPRESS_CODE
-          options << :mail unless ils_group == COURTESY_BORROWER_CODE
+          options << :office if ils_group == User::FACULTY_EXPRESS_GROUP
+          options << :mail unless ils_group == User::COURTESY_BORROWER_GROUP
           options << :scan if scannable?
         end
         options

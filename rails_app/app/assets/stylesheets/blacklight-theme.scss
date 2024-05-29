@@ -158,7 +158,34 @@
 
 pennlibs-footer {
   display: block;
-  padding-top: 3rem;
+}
+
+.site-feedback {
+  background: var(--color-bg-subtle);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.site-feedback a {
+  color: var(--color-fg-accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: .15em;
+  text-decoration-color: var(--color-fg-accent);
+}
+
+.site-feedback a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.site-feedback p {
+  max-width: 60ch;
+  margin-bottom: 0;
+}
+
+.site-feedback i {
+  font-size: 1.5rem;
+  color: var(--color-fg-subtle);
 }
 
 label.toggle-bookmark {
