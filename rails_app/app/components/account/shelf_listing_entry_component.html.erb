@@ -1,0 +1,15 @@
+ <tr>
+  <td>
+    <%= index %>
+  </td>
+  <td>
+    <%= link_to entry.title, request_path(entry.system, entry.type, entry.id) %> <%= entry.author %>
+  </td>
+  <td nowrap="nowrap">
+    <%= render(Account::ShelfStatusComponent.new(entry)) %>
+    <% if entry.ils_hold? %>
+      <span>Pick up: <%= entry.pickup_location %></span>
+    <% end %>
+  </td>
+</tr>
+

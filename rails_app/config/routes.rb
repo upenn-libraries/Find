@@ -55,12 +55,16 @@ Rails.application.routes.draw do
     resource :settings, only: %i[show edit update], controller: 'settings'
     resources :requests, only: %i[index create]
 
-    # In order to get the path helpers to end in `_request` we had to define the additional action in this way.
+    # In order to get the path helpers to end in `_request` we had to define the additional actions in this way.
     scope controller: :requests, path: 'requests' do
       get 'ill/new', action: 'ill', to: :ill_new, as: 'ill_new_request'
-      get ':system/:id', action: 'show', to: :show, as: 'request', constraints: { system: /(ill|ils)/ }
-      patch 'ils/:id/renew', action: 'renew', to: :renew, as: :ils_renew_request
-      delete 'ils/:id', action: 'delete', to: :delete, as: :ils_request
+
+      get ':system/:type/:id', action: :show, as: 'request',
+                               constraints: { system: /(ill|ils)/, type: /(loan|hold|transaction)/ }
+      patch 'ils/loan/renew_all', action: :renew_all, as: :ils_renew_all_request
+      patch 'ils/loan/:id/renew', action: :renew, as: :ils_renew_request
+      delete 'ils/hold/:id', action: :delete, as: :ils_hold_request
+
       get 'options', action: 'options', as: 'request_options'
       get 'fulfillment_form', action: 'fulfillment_form', as: 'request_fulfillment_form'
     end

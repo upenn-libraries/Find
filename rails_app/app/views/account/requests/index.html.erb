@@ -1,6 +1,24 @@
 <%= page_title t('account.shelf.page_heading') %>
 
-<h1 class="page__heading">Shelf</h1>
-<p class="page__lede mb-3">What you've borrowed or requested from the library.</p>
+<%= render BreadcrumbsComponent.new do |component|%>
+  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
+  <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
+  <% component.with_breadcrumb(active: true) { t('account.shelf.page_heading') } %>
+<% end %>
 
-<%#= render(Account::ShelfComponent.new(@listing)) %>
+<div class="d-md-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h1 class="page__heading"><%= t('account.shelf.page_heading') %></h1>
+    <p class="page__lede mb-3"><%= t('account.shelf.page_lede') %></p>
+  </div>
+
+  <% if @listing.loans? %>
+    <div>
+      <%= form_with url: ils_renew_all_request_path, method: :patch do |form| %>
+        <%= form.submit t('account.shelf.renew_all.button'), class: "btn btn-success" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= render(Account::ShelfListingComponent.new(@listing)) %>
