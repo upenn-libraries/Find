@@ -78,7 +78,7 @@ describe Shelf::Entry::IllTransaction do
       let(:illiad_transaction) { create(:illiad_request, :cancelled) }
 
       it 'returns expected status' do
-        expect(transaction.status).to eql 'Cancelled By ILL Staff'
+        expect(transaction.status).to eql Illiad::Request::CANCELLED
       end
     end
   end

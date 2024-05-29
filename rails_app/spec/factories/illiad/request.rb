@@ -30,14 +30,14 @@ FactoryBot.define do
     end
 
     trait :cancelled do
-      add_attribute(:TransactionStatus) { 'Cancelled By ILL Staff' }
+      add_attribute(:TransactionStatus) { Illiad::Request::CANCELLED }
     end
 
     # Factory for borrow direct loan that is marked as completed in Illiad
     trait :completed_borrow_direct_loan do
       loan
-      add_attribute(:TransactionStatus) { 'Request Finished' }
-      add_attribute(:SystemID) { 'Reshare:upennbd' }
+      add_attribute(:TransactionStatus) { Illiad::Request::FINISHED }
+      add_attribute(:SystemID) { Illiad::Request::BD_SYSTEM_ID }
       add_attribute(:ILLNumber) { 'PUBD-1234' }
     end
   end

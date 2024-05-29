@@ -18,10 +18,8 @@ describe Illiad::DisplayStatusSet do
     end
 
     context 'when display status is not present' do
-      let(:status) { 'Cancelled by ILL Staff' }
-
       it 'returns status given' do
-        expect(display_status_set.display_for(status)).to eql status
+        expect(display_status_set.display_for(Illiad::Request::CANCELLED)).to eql Illiad::Request::CANCELLED
       end
     end
   end

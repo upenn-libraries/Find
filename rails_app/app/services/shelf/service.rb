@@ -120,9 +120,9 @@ module Shelf
       #   - All requests that are checked out to customer.
       # rubocop:disable Layout/LineLength
       filter = [
-        "(TransactionStatus eq 'Cancelled by ILL Staff' and TransactionDate ge datetime'#{4.weeks.ago.utc.iso8601}')",
-        "(TransactionStatus eq 'Request Finished' and SystemID eq 'Reshare:upennbd' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
-        "(TransactionStatus ne 'Checked Out to Customer' and TransactionStatus ne 'Cancelled by ILL Staff' and TransactionStatus ne 'Request Finished')"
+        "(TransactionStatus eq '#{Illiad::Request::CANCELLED}' and TransactionDate ge datetime'#{4.weeks.ago.utc.iso8601}')",
+        "(TransactionStatus eq '#{Illiad::Request::FINISHED}' and SystemID eq '#{Illiad::Request::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
+        "(TransactionStatus ne '#{Illiad::Request::CHECKED_OUT}' and TransactionStatus ne '#{Illiad::Request::CANCELLED}' and TransactionStatus ne '#{Illiad::Request::FINISHED}')"
       ].join(' or ')
       # rubocop:enable Layout/LineLength
 

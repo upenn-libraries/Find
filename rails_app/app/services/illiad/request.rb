@@ -13,6 +13,12 @@ module Illiad
     BOOKS_BY_MAIL_REGEX = /^BBM /
     ARTICLE = 'Article'
     LOAN = 'Loan'
+    # Statues
+    FINISHED = 'Request Finished'
+    CANCELLED = 'Cancelled By ILL Staff'
+    CHECKED_OUT = 'Checked Out to Customer'
+    # BorrowDirect system id
+    BD_SYSTEM_ID = 'Reshare:upennbd'
 
     attr_reader :data
 

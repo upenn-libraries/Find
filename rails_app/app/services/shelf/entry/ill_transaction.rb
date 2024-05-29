@@ -32,7 +32,7 @@ module Shelf
         # BorrowDirect requests are marked as finished in Illiad as soon as the request is shipped by BorrowDirect
         # Partners. Therefore to provide a more accurate status to users we are overriding the status provided by
         # Illiad to be more descriptive.
-        if request.status == 'Request Finished' && request.data[:SystemID] == 'Reshare:upennbd'
+        if request.status == Illiad::Request::FINISHED && request.data[:SystemID] == Illiad::Request::BD_SYSTEM_ID
           'Shipped by BorrowDirect Partner'
         else
           display_statuses.display_for(request.status)
@@ -45,7 +45,8 @@ module Shelf
       end
 
       def borrow_direct_identifier
-        return unless request.status == 'Request Finished' && request.data[:SystemID] == 'Reshare:upennbd'
+        return unless request.status == Illiad::Request::FINISHED &&
+                      request.data[:SystemID] == Illiad::Request::BD_SYSTEM_ID
 
         request.data[:ILLNumber]
       end
