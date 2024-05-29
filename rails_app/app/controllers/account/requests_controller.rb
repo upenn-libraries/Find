@@ -57,7 +57,7 @@ module Account
       alert_text = t('account.shelf.renew_all.alerts',
                      alerts: responses.map { |r| t('account.shelf.renew_all.alert', alert: r.message) }.join)
 
-      flash_type = responses.all?(:renewed?) ? :notice : :alert
+      flash_type = responses.all?(&:renewed?) ? :notice : :alert
       flash[flash_type] = alert_text
 
       redirect_to requests_path
