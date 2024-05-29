@@ -13,10 +13,19 @@ class ApplicationController < ActionController::Base
   # lose the record page they were on after they sign on. However, there are some URLs that we don't want to
   # store and redirect back to.
   def store_action
-    store_location_for(:user, request.fullpath)
+    path = if coming_from_show?
+             "#{request.fullpath}#request_item"
+           else
+             request.fullpath
+           end
+    store_location_for(:user, path)
   end
 
   private
+
+  def coming_from_show?
+    params[:controller] == 'catalog' && params[:action] == 'show'
+  end
 
   # Its important that the location is NOT stored if the request:
   # - method is not GET (non idempotent)
