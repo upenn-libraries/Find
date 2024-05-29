@@ -13,11 +13,11 @@ module Account
     # Style classes to add based on the status being displayed
     def classes
       if entry.ils_hold? && entry.on_hold_shelf?
-        ['badge text-bg-success']
+        %w[badge text-bg-success]
       elsif entry.ils_loan? && (Time.current > entry.due_date)
-        ['badge text-bg-danger']
+        %w[badge text-bg-danger]
       elsif entry.ils_loan? && (Time.current >= entry.due_date.ago(5.days))
-        ['badge text-bg-info']
+        %w[badge text-bg-info]
       end
     end
 
