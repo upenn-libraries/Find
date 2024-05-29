@@ -6,6 +6,8 @@ FactoryBot.define do
     add_attribute(:Username) { 'testuser' }
     add_attribute(:ProcessType) { 'Borrowing' }
     add_attribute(:RequestType) { 'Article' }
+    add_attribute(:TransactionStatus) { 'Jim MW Processing' }
+    add_attribute(:TransactionDate) { '2024-03-24T10:06:14.653' }
 
     skip_create
     initialize_with { Illiad::Request.new(**attributes) }
@@ -13,6 +15,7 @@ FactoryBot.define do
     trait :loan do
       add_attribute(:RequestType) { 'Loan' }
       add_attribute(:LoanTitle) { 'Autobiography' }
+      add_attribute(:LoanAuthor) { 'Random, Author' }
     end
 
     trait :books_by_mail do
@@ -23,6 +26,19 @@ FactoryBot.define do
 
     trait :scan do
       add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+      add_attribute(:PhotoArticleAuthor) { 'Random, Author' }
+    end
+
+    trait :cancelled do
+      add_attribute(:TransactionStatus) { Illiad::Request::CANCELLED }
+    end
+
+    # Factory for borrow direct loan that is marked as completed in Illiad
+    trait :completed_borrow_direct_loan do
+      loan
+      add_attribute(:TransactionStatus) { Illiad::Request::FINISHED }
+      add_attribute(:SystemID) { Illiad::Request::BD_SYSTEM_ID }
+      add_attribute(:ILLNumber) { 'PUBD-1234' }
     end
   end
 end
