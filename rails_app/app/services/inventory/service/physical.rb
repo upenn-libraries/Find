@@ -26,7 +26,10 @@ module Inventory
       def self.items(mms_id:, holding_id:)
         raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
-        item_set = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: '100').items
+        # alma will limit us to 100 items, so we need to handle that. i'm thinking that we should call with a limit of 100
+        # and if we get 100 items back, we should set the offset to 100 and call again. we should keep doing this until we
+        # get less than 100 items back. we should then return the items we have.
+        item_set = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
         return item_set if item_set.present?
 
         holdings = Alma::BibHolding.find_all(mms_id: mms_id)
@@ -42,6 +45,19 @@ module Inventory
                                                             &.find { |holding| holding['holding_id'] == holding_id },
                                         'item_data' => {}
                                       })]
+      end
+
+      private
+
+      def self.fetch_all_items(mms_id:, holding_id:)
+        item_set = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: 100).items
+        offset = 100
+        while item_set.size == offset
+          items = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: 100, offset: offset).items
+          item_set += items
+          offset += 100
+        end
+        item_set
       end
     end
   end
