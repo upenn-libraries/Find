@@ -1,8 +1,10 @@
 <li class="list-group-item">
-  <%= radio_button_tag :option, 'pickup', checked?, data: { action: 'change->options-select#optionChanged' } %>
-  <%= label_tag :option_pickup, t('requests.form.options.pickup.label') %>
-  <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup], default_pickup_location), { class: 'form-select my-1' }) %>
-  <small class="text-muted">
-    <%= t('requests.form.options.pickup.info_html', url: t('urls.guides.pickup')) %>
-  </small>
+  <div class="form-check">
+    <%= radio_button_tag :delivery, :pickup, checked, class: 'form-check-input', **radio_options %>
+    <%= label_tag :delivery_pickup, t('requests.form.options.pickup.label'), class: 'form-check-label' %>
+    <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup], default_pickup_location), { class: 'form-select my-1' }) %>
+    <small class="text-muted">
+      <%= t('requests.form.options.pickup.info_html', url: t('urls.guides.pickup')) %>
+    </small>
+  </div>
 </li>

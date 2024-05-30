@@ -54,36 +54,15 @@
         <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
         <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
 
-        <% if current_user.faculty_express? %>
-          <div class="form-check mt-3">
-            <%= radio_button_tag :delivery, :office, nil, class: 'form-check-input' %>
-            <%= label_tag :delivery_office, t('account.ill.form.loan.delivery.options.office.label'), class: 'form-check-label' %>
-          </div>
-        <% end %>
+        <ul class="list-group">
+          <% if current_user.faculty_express? %>
+            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user)) %>
+          <% end %>
 
-        <div class="form-check mt-3">
-          <%= radio_button_tag :delivery, 'pickup', nil, class: 'form-check-input' %>
-          <%= label_tag :delivery_pickup, t('account.ill.form.loan.delivery.options.pickup.label'), class: 'form-check-label' %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user)) %>
 
-          <div class="input-group mb-2 mt-1">
-            <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup]),
-                            include_blank: t('account.ill.form.loan.delivery.options.pickup.placeholder'),
-                            id: 'pickup_location',
-                            label: 'Location',
-                            class: 'custom-select p-2 rounded',
-                            required: true) %>
-          </div>
-        </div>
-
-
-        <div class="form-check mt-3">
-          <%= radio_button_tag :delivery, :mail, nil, class: 'form-check-input' %>
-          <%= label_tag :delivery_mail, t('account.ill.form.loan.delivery.options.mail.label'), class: 'form-check-label' %>
-          <br>
-          <small id="delivery-mail-help" class="form-text text-muted">
-            <%=t('account.ill.form.loan.delivery.options.mail.help_text_html', bbm_form: t('urls.forms.bbm')) %>
-          </small>
-        </div>
+          <%= render(Account::Requests::Options::MailComponent.new) %>
+        </ul>
       </fieldset>
 
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>

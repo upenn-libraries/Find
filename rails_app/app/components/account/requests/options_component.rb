@@ -6,28 +6,16 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
-      DEFAULT_PICKUP = 'VanPeltLib'
-
       attr_accessor :item, :user, :options
 
       def initialize(user:, options:)
         @user = user
-        @options = options
+        @options = options.inquiry
       end
 
-      # @return [String]
-      def default_pickup_location
-        return DEFAULT_STUDENT_PICKUP if user.student?
-
-        DEFAULT_PICKUP
-      end
-
-      # @return [Array<String>, nil]
-      def user_address
-        return unless options.include? :office
-
-        user.illiad_record.bbm_delivery_address
+      # Returns true if at least one delivery option is available.
+      def deliverable?
+        options.any?(:scan, :pickup, :mail, :office)
       end
     end
   end
