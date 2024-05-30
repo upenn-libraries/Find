@@ -49,6 +49,9 @@ module Inventory
 
       private
 
+      # Fetch all items for a given mms_id and holding_id
+      # @params mms_id [String]
+      # @params holding_id [String]
       def self.fetch_all_items(mms_id:, holding_id:)
         item_set = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: 100).items
         offset = 100
