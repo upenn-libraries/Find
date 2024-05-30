@@ -26,7 +26,7 @@ module Inventory
       def self.items(mms_id:, holding_id:)
         raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
-        item_set = Alma::BibItem.find(mms_id, holding_id: holding_id).items
+        item_set = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: '100').items
         return item_set if item_set.present?
 
         holdings = Alma::BibHolding.find_all(mms_id: mms_id)

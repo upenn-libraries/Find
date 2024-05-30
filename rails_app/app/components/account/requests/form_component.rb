@@ -15,7 +15,7 @@ module Account
       end
 
       def item_labels
-        items.map(&:select_label)
+        items.map(&:select_label).sort
       end
     end
   end
