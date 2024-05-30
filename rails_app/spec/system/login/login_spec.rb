@@ -47,7 +47,7 @@ describe 'login page' do
 
     before do
       visit solr_document_path(print_monograph_bib)
-      visit login_path
+      click_on I18n.t('requests.form.log_in_to_request_item')
       click_on I18n.t('login.pennkey')
     end
 

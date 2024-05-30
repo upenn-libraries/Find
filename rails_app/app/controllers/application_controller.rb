@@ -13,12 +13,7 @@ class ApplicationController < ActionController::Base
   # lose the record page they were on after they sign on. However, there are some URLs that we don't want to
   # store and redirect back to.
   def store_action
-    path = if coming_from_show?
-             "#{request.fullpath}#request_item"
-           else
-             request.fullpath
-           end
-    store_location_for(:user, path)
+    store_location_for(:user, request.fullpath)
   end
 
   private
