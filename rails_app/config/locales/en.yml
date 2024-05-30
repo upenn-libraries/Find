@@ -134,6 +134,8 @@ en:
               mail:
                 label: 'Mail'
                 help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
+              office:
+                label: 'Office Delivery via FacultyEXPRESS'
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'
