@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def coming_from_show?
-    params[:controller] == 'catalog' && params[:action] == 'show'
-  end
-
   # Its important that the location is NOT stored if the request:
   # - method is not GET (non idempotent)
   # - is navigational
