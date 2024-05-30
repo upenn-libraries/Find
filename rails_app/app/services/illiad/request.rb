@@ -15,7 +15,7 @@ module Illiad
     LOAN = 'Loan'
     # Statues
     FINISHED = 'Request Finished'
-    CANCELLED = 'Cancelled By ILL Staff'
+    CANCELLED = 'Cancelled by ILL Staff'
     CHECKED_OUT = 'Checked Out to Customer'
     # BorrowDirect system id
     BD_SYSTEM_ID = 'Reshare:upennbd'
