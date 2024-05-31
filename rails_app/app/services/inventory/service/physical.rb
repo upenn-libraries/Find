@@ -47,6 +47,8 @@ module Inventory
                                       })]
       end
 
+      private
+
       # Fetch all items for a given mms_id and holding_id
       # @params mms_id [String]
       # @params holding_id [String]
