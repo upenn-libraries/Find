@@ -1,4 +1,4 @@
-solr_url: <%= ENV.fetch('SOLR_URL', 'http://admin:password@catalog-indexing-dev.library.upenn.int/solr/catalog-indexing-development') %>
+solr_url: <%= ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development') %>
 additional_results_sources:
   position: 1
   summon:
