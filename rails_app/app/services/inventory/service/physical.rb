@@ -26,9 +26,6 @@ module Inventory
       def self.items(mms_id:, holding_id:)
         raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
-        # alma will limit us to 100 items, so we need to handle that. i'm thinking that we should call with a limit of 100
-        # and if we get 100 items back, we should set the offset to 100 and call again. we should keep doing this until we
-        # get less than 100 items back. we should then return the items we have.
         item_set = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
         return item_set if item_set.present?
 
@@ -49,9 +46,12 @@ module Inventory
 
       private
 
-      # Fetch all items for a given mms_id and holding_id
+      # Recursively fetch all items for a given mms_id and holding_id
       # @params mms_id [String]
       # @params holding_id [String]
+      # @params limit [Integer]
+      # @params offset [Integer]
+      # @params accumulated_items [Array<PennItem>]
       def self.fetch_all_items(mms_id:, holding_id:, limit: 100, offset: 0, accumulated_items: [])
         items = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: limit, offset: offset).items
         accumulated_items += items
@@ -64,7 +64,6 @@ module Inventory
                         offset: offset + limit, accumulated_items: accumulated_items)
 
       rescue BibItemSet::ResponseError
-        # Return accumulated items if an error is encountered
         # If the total count of items is a multiple of 100, we'll get a ResponseError when calling for the next batch.
         # I don't love that this error is so non-specific, but this is a limitation of the Alma gem and the Alma API.
         accumulated_items
