@@ -16,7 +16,11 @@ module Shelf
       end
 
       def title
-        request.data[:LoanTitle] || request.data[:PhotoJournalTitle]
+        if request.loan?
+          request.data[:LoanTitle]
+        elsif request.scan?
+          [request.data[:PhotoJournalTitle], request.data[:PhotoArticleTitle]].compact.join(' | ')
+        end
       end
 
       def author
