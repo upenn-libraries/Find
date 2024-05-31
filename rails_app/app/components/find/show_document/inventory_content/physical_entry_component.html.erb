@@ -10,9 +10,9 @@
 
 <% if user.nil? %>
   <%#= link_to t('requests.form.log_in_to_request_item'), login_path(custom_redirect: "#{request.original_url}#request_item"), class: 'btn btn-success' %>
-  <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success', data: { controller: 'request-button',
+  <%= button_to t('requests.form.log_in_to_request_item'), login_path, method: :get, class: 'btn btn-success', data: { controller: 'request-button',
                                                                                                        request_button_target: 'loginRequestButton',
-                                                                                                       action: 'mouseover->request-button#addAnchorToUrl' }%>
+                                                                                                       action: 'click->request-button#addQueryToUrl' }%>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
     <summary id="request_item" class="btn btn-success fulfillment__summary" ><%= t('requests.form.request_item') %></summary>
