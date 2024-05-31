@@ -44,14 +44,12 @@ module Inventory
                                       })]
       end
 
-      private
-
       # Recursively fetch all items for a given mms_id and holding_id
-      # @params mms_id [String]
-      # @params holding_id [String]
-      # @params limit [Integer]
-      # @params offset [Integer]
-      # @params accumulated_items [Array<PennItem>]
+      # @param mms_id [String]
+      # @param holding_id [String]
+      # @param limit [Integer]
+      # @param offset [Integer]
+      # @param accumulated_items [Array<PennItem>]
       def self.fetch_all_items(mms_id:, holding_id:, limit: 100, offset: 0, accumulated_items: [])
         items = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: limit, offset: offset).items
         accumulated_items += items
@@ -62,12 +60,12 @@ module Inventory
         # Recursive case: fetch the next batch of items
         fetch_all_items(mms_id: mms_id, holding_id: holding_id, limit: limit,
                         offset: offset + limit, accumulated_items: accumulated_items)
-
       rescue BibItemSet::ResponseError
         # If the total count of items is a multiple of 100, we'll get a ResponseError when calling for the next batch.
         # I don't love that this error is so non-specific, but this is a limitation of the Alma gem and the Alma API.
         accumulated_items
       end
+      private_class_method :fetch_all_items
     end
   end
 end
