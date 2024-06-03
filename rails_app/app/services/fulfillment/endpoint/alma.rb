@@ -6,12 +6,12 @@ module Fulfillment
     class Alma < Endpoint
       class << self
         def submit(request:)
-          params = { user_id: request.user.uid, request_type: 'HOLD',
-                     comment: request.item_parameters[:comment],
+          params = { user_id: request.user.uid, request_type: 'HOLD', comment: request.item_parameters[:comment],
                      mms_id: request.item_parameters[:mms_id], holding_id: request.item_parameters[:holding_id],
-                     pickup_location_type: 'LIBRARY', pickup_location_library: request.fulfillment_options[:pickup_location] }
-          response = if request.item_parameters[:item_pid].present?
-                       ::Alma::ItemRequest.submit(params.merge({ item_pid: request.item_parameters[:item_pid] }))
+                     pickup_location_type: 'LIBRARY',
+                     pickup_location_library: request.fulfillment_options[:pickup_location] }
+          response = if request.item_parameters[:item_id].present?
+                       ::Alma::ItemRequest.submit(params.merge({ item_pid: request.item_parameters[:item_id] }))
                      else
                        ::Alma::BibRequest.submit(params)
                      end

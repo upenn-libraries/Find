@@ -5,7 +5,7 @@ module Fulfillment
   class Request
     class LogicFailure < StandardError; end
 
-    ITEM_PARAMETERS = %w[mms_id holding_id item_pid title author year edition publisher place isbn comments].freeze
+    ITEM_PARAMETERS = %w[mms_id holding_id item_id title author year edition publisher place isbn comments].freeze
     FULFILLMENT_PARAMETERS = %w[pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
     SCAN_DETAIL_PARAMETERS = %w[journal article rftdate volume issue pages comments].freeze
 

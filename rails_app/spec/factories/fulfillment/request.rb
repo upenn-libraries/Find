@@ -13,11 +13,11 @@ FactoryBot.define do
     end
 
     trait :with_item do
-      item_parameters { { bib_id: '1234', holding_id: '5678', item_id: '9999' } }
+      item_parameters { { mms_id: '1234', holding_id: '5678', item_id: '9999' } }
     end
 
     trait :with_holding do
-      item_parameters { { bib_id: '1234', holding_id: '5678' } }
+      item_parameters { { mms_id: '1234', holding_id: '5678' } }
     end
 
     trait :with_bib do
@@ -46,7 +46,7 @@ FactoryBot.define do
     # Pickup will come from Item Request form on show page OR ILL request form
     # Destination will be Alma if an Item ID or Holding ID is provided, otherwise Illiad
     trait :pickup do
-      fulfillment_options { { delivery: :pickup, location: 'van_pelt' } }
+      fulfillment_options { { delivery: :pickup, pickup_location: 'van_pelt' } }
     end
 
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad

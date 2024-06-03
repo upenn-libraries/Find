@@ -117,7 +117,7 @@ module Fulfillment
             PhotoJournalIssue: request.scan_details[:section_issue],
             PhotoJournalMonth: request.item_parameters[:pub_month],
             PhotoJournalYear: request.item_parameters[:pub_year],
-            PhotoJournalInclusivePages: request.scan_details['section_pages'],
+            PhotoJournalInclusivePages: request.scan_details[:section_pages],
             ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
             PhotoArticleAuthor: request.scan_details[:section_author],
             PhotoArticleTitle: request.scan_details[:section_title] }
