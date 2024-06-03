@@ -370,10 +370,10 @@ en:
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   sort:
+    added_date_asc: 'Date Added (old-new)'
+    added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
-    date_added_asc:  'Date Added (old-new)'
-    date_added_desc: 'Date Added (new-old)'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'

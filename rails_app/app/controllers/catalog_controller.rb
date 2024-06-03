@@ -263,8 +263,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'title_sort desc, score desc', label: I18n.t('sort.title_desc')
     config.add_sort_field 'publication_date_sort asc, title_sort asc', label: I18n.t('sort.publication_date_asc')
     config.add_sort_field 'publication_date_sort desc, title_sort asc', label: I18n.t('sort.publication_date_desc')
-    config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.date_added_asc')
-    config.add_sort_field 'added_date_sort desc, title_sort asc', label: I18n.t('sort.date_added_desc')
+    config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.added_date_asc')
+    config.add_sort_field 'added_date_sort desc, title_sort asc', label: I18n.t('sort.added_date_desc')
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
