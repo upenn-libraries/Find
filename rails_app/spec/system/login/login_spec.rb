@@ -52,11 +52,11 @@ describe 'login page' do
     end
 
     it 'redirects to record page after login' do
-      expect(page).to have_current_path(solr_document_path(print_monograph_bib))
+      expect(page).to have_current_path(/^#{solr_document_path(print_monograph_bib)}/)
     end
 
-    it 'anchors to request options' do
-      expect(current_url).to include('#request_item')
+    it 'adds request param to url' do
+      expect(current_url).to include('request=true')
     end
 
     it 'expands the request options' do
