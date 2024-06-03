@@ -30,7 +30,7 @@ describe Inventory::Service::Physical do
 
     it 'returns an array of PennItems when items are not present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [])
-      allow(bib_item_set_double).to receive(:total_record_count).and_return(1)
+      allow(bib_item_set_double).to receive(:total_record_count).and_return(0)
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
       allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
       expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
