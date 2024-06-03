@@ -36,11 +36,13 @@ describe Inventory::Service::Physical do
       expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
 
-    it 'returns all items when items exceed limit' do
-      # mock bibitemset before going to factory
-      # test that first request returns a total count of 4 (create a set)
-      # make sure that fetch_all_items is called twice (or that the alma api is called twice)
-      # make sure that count of pennitems is 4
+    it 'makes multiple calls to Alma when total_record_count exceeds limit' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: build_list(:item, 2))
+      allow(bib_item_set_double).to receive(:total_record_count).and_return(4)
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+
+      described_class.send(:fetch_all_items, mms_id: '1234', holding_id: '1234', limit: 2)
+      expect(Alma::BibItem).to have_received(:find).twice
     end
 
     it 'raises an ArgumentError if a parameter is missing' do
