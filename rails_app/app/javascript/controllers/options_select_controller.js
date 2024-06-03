@@ -61,7 +61,7 @@ export default class extends Controller {
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return this.optionsFrameTarget.querySelector('input[name="option"]:checked')
+    return this.optionsFrameTarget.querySelector('input[name="delivery"]:checked')
       .value;
   }
 

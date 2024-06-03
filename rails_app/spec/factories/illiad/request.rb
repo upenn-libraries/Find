@@ -18,7 +18,7 @@ FactoryBot.define do
     trait :books_by_mail do
       loan
       add_attribute(:LoanTitle) { 'BBM Autobiography' }
-      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
+      add_attribute(:ItemInfo1) { Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL }
     end
 
     trait :scan do

@@ -4,8 +4,13 @@ FactoryBot.define do
   factory :fulfillment_request, class: 'Fulfillment::Request' do
     skip_create
     initialize_with { Fulfillment::Request.new(**attributes) }
-
+    params { ActionController::Parameters.new(item_parameters.merge(fulfillment_options)) }
     user { build(:user) }
+
+    transient do
+      item_parameters { {} }
+      fulfillment_options { {} }
+    end
 
     trait :with_item do
       item_parameters { { bib_id: '1234', holding_id: '5678', item_id: '9999' } }
@@ -25,28 +30,28 @@ FactoryBot.define do
 
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
     trait :books_by_mail do
-      fulfillment_options { { method: :home_delivery } }
+      fulfillment_options { { delivery: :home_delivery } }
     end
 
     # Office delivery (FacultyExpress) will come via Item Request for or Illiad form and go into Illiad
     trait :office_delivery do
-      fulfillment_options { { method: :office_delivery } }
+      fulfillment_options { { delivery: :office_delivery } }
     end
 
     # Office delivery (FacultyExpress) will come via Item Request for or Illiad form and go into Illiad
     trait :aeon do
-      fulfillment_options { { method: :aeon } }
+      fulfillment_options { { delivery: :aeon } }
     end
 
     # Pickup will come from Item Request form on show page OR ILL request form
     # Destination will be Alma if an Item ID or Holding ID is provided, otherwise Illiad
     trait :pickup do
-      fulfillment_options { { method: :pickup, location: 'van_pelt' } }
+      fulfillment_options { { delivery: :pickup, location: 'van_pelt' } }
     end
 
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad
     trait :scan_deliver do
-      fulfillment_options { { method: :electronic } }
+      fulfillment_options { { delivery: :electronic } }
     end
   end
 end

@@ -16,114 +16,126 @@ module Fulfillment
     #      ii. FacultyExpress - To route a FacultyExpress request, we just add the 'Books by Mail' test to the
     #          `ItemInfo1` field.
     class Illiad < Endpoint
+      class UserError < StandardError; end
 
       OFFICE_DELIVERY = 'office'
       MAIL_DELIVERY = 'mail'
       ELECTRONIC_DELIVERY = 'electronic'
 
+      CITED_IN = 'info:sid/library.upenn.edu'
+
+      BASE_USER_ATTRIBUTES = { 'NVTGC' => 'VPL', 'Address' => '', 'DeliveryMethod' => 'Mail to Address',
+                               'Cleared' => 'Yes', 'Web' => true, 'ArticleBillingCategory' => 'Exempt',
+                               'LoanBillingCategory' => 'Exempt' }.freeze
+      BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing', CitedIn: CITED_IN }.freeze
+
+      # These constants can probably live on the class that prepares the data we send
+      # in our requests to Illiad
+      BOOKS_BY_MAIL = 'Books by Mail'
+      BOOKS_BY_MAIL_PREFIX = /^BBM /
+
       class << self
         def submit(request:)
+          find_or_create user: request.user
           body = submission_body_from request
-          find_or_create(user: request.user) # user is an app User, which may eventually respond to `illiad_record`
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction) # notes require confirmation (transaction) number
-          Outcome.new(request: request, confirmation_number: transaction.id) # could have submission errors?
+          add_notes(request, transaction)
+          Outcome.new(request: request, confirmation_number: transaction.id)
         end
 
+        # @param [Request] request
         def validate(request:)
-          # TODO: implement
+          errors = []
+          errors << 'No user identifier provided' if request.user&.uid.blank?
+          errors
         end
 
+        private
+
+        # @param [User] user
         def find_or_create(user:)
-          ::Illiad::User.find(id: user.id)
-        rescue ::Illiad::Client::Error => _e # exception used in normal flow :/
-          create_illiad_user_from(user)
+          return user.illiad_record if user.illiad_record
+
+          create_illiad_user(user)
         end
 
-        def create_illiad_user_from(user)
-          alma_user = user.alma_record
-          attributes = { 'Username' => user.id,
-                         'LastName' => alma_user.last_name,
-                         'FirstName' => alma_user.first_name,
-                         'EMailAddress' => alma_user.email,
-                         'SSN' => alma_user.id,
-                         'NVTGC' => 'VPL',
-                         'Status' => alma_user.user_group,
-                         'Department' => alma_user.affiliation,
-                         'PlainTextPassword' => ENV['ILLIAD_USER_PASSWORD'], # TODO: where to store this?
-                         'Address' => '',
-                         'DeliveryMethod' => 'Mail to Address',
-                         'Cleared' => 'Yes',
-                         'Web' => true,
-                         'ArticleBillingCategory' => 'Exempt',
-                         'LoanBillingCategory' => 'Exempt' }
-          ::Illiad::User.create(data: attributes) # This could raise...
+        # @param [User] user
+        def create_illiad_user(user)
+          attributes = BASE_USER_ATTRIBUTES.merge({ 'Username' => user.id,
+                                                    'LastName' => user.alma_record.last_name,
+                                                    'FirstName' => user.alma_record.first_name,
+                                                    'EMailAddress' => user.alma_record.email,
+                                                    'SSN' => user.alma_record.id,
+                                                    'Status' => user.alma_record.user_group,
+                                                    'Department' => user.alma_record.affiliation,
+                                                    'PlainTextPassword' => Settings.illiad.user_password })
+          ::Illiad::User.create(data: attributes)
+        rescue ::Illiad::Client::Error => e
+          raise UserError, "Problem creating Illiad user: #{e.message}"
         end
 
         def submission_body_from(request)
           if request.fulfillment_params[:delivery] == ELECTRONIC_DELIVERY
-            scandelivery_request_body(request.user.id) # TODO: how to ensure all data is provided here? Ideally it would all be in request.item_parameters
+            scandelivery_request_body(request.user.id)
           else
             body = book_request_body(request.user.id)
-            append_routing_info(body)
+            append_routing_info(body, request)
           end
         end
 
         def add_notes(request, transaction)
-          number = request[:TransactionNumber]
+          number = transaction[:TransactionNumber]
           note = request.fulfillment_parameters[:note]
           note += " - comment submitted by #{request.user.id}"
           ::Illiad::Request.add_note(id: number, note: note) # TODO: do we need to specify NOTE_TYPE in the POST body? See https://gitlab.library.upenn.edu/franklin/discovery-app/-/blob/master/lib/illiad/api_client.rb?ref_type=heads#L124
         end
 
-        def book_request_body(user_id, item, data)
-          body = {
-            Username: user_id,
-            RequestType: 'Loan',
-            ProcessType: 'Borrowing',
+        # @param [Request] request
+        # @return [Hash{Symbol->String (frozen)}]
+        def book_request_body(request)
+          { Username: request.user.id,
+            RequestType: ::Illiad::Request::LOAN,
             DocumentType: 'Book',
-            LoanAuthor: item&.bib('author'),
-            LoanTitle: item&.bib('title') || data[:bib_title],
-            LoanPublisher: item&.bib('publisher_const'),
-            LoanPlace: item&.bib('place_of_publication'),
-            LoanDate: item&.bib('date_of_publication'),
-            Location: item.temp_aware_location_display,
-            CallNumber: item.temp_aware_call_number,
-            ISSN: item&.bib('issn') || item&.bib('isbn') || data[:isxn],
-            CitedIn: cited_in_value,
-            ItemInfo3: item.barcode,
-          }
-          append_routing_info body
+            LoanAuthor: request.item_parameters[:author],
+            LoanTitle: request.item_parameters[:title],
+            LoanPublisher: request.item_parameters[:publisher],
+            LoanPlace: request.item_parameters[:place_published],
+            LoanDate: request.item_parameters[:date_published],
+            Location: request.item_parameters[:temp_aware_location_display],
+            CallNumber: request.item_parameters[:temp_aware_call_number],
+            ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
+            ItemInfo3: request.item_parameters[:barcode] }
         end
 
-        def scandelivery_request_body(user_id, item, data)
-          {
-            Username: user_id,
-            ProcessType: 'Borrowing',
-            DocumentType: 'Article',
-            PhotoJournalTitle: item&.bib('title') || data[:bib_title],
-            PhotoJournalVolume: data[:section_volume],
-            PhotoJournalIssue: data[:section_issue],
-            PhotoJournalMonth: item&.pub_month,
-            PhotoJournalYear: item.try(:pub_year),
-            PhotoJournalInclusivePages: data['section_pages'],
-            ISSN: item&.bib('issn') || item&.bib('isbn') || data[:isxn],
-            PhotoArticleAuthor: data[:section_author],
-            PhotoArticleTitle: data[:section_title],
-            CitedIn: 'info:sid/library.upenn.edu' # I made this up - it used to be 'info:sid/primo.exlibrisgroup.com'
-          }
+        # @param [Request] request
+        # @return [Hash{Symbol->String (frozen)}]
+        def scandelivery_request_body(request)
+          { Username: request.user.id,
+            DocumentType: ::Illiad::Request::ARTICLE,
+            PhotoJournalTitle: request.item_parameters[:title],
+            PhotoJournalVolume: request.scan_details[:section_volume],
+            PhotoJournalIssue: request.scan_details[:section_issue],
+            PhotoJournalMonth: request.item_parameters[:pub_month],
+            PhotoJournalYear: request.item_parameters[:pub_year],
+            PhotoJournalInclusivePages: request.scan_details['section_pages'],
+            ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
+            PhotoArticleAuthor: request.scan_details[:section_author],
+            PhotoArticleTitle: request.scan_details[:section_title] }
         end
 
-        # See class level docs above
-        def append_routing_info(body)
-          if @data[:delivery] == MAIL_DELIVERY
+        # @note See class level docs above
+        # @param [Hash] body
+        # @param [Request] request
+        # @return [Hash]
+        def append_routing_info(body, request)
+          if request.fulfillment_options[:delivery] == MAIL_DELIVERY
             # BBM attribute changes to trigger Illiad routing rules
-            body[:LoanTitle] = body[:LoanTitle].prepend('BBM ')
-            body[:ItemInfo1] = 'Books by Mail'
-          elsif @data[:delivery] == OFFICE_DELIVERY
+            body[:LoanTitle] = body[:LoanTitle].prepend(BOOKS_BY_MAIL_PREFIX)
+            body[:ItemInfo1] = ::Illiad::Request::BOOKS_BY_MAIL
+          elsif request.fulfillment_options[:delivery] == OFFICE_DELIVERY
             # Also set ItemInfo1 to BBM for Office delivery
             # It doesn't make sense, but this is what Lapis desires
-            body[:ItemInfo1] = 'Books by Mail'
+            body[:ItemInfo1] = ::Illiad::Request::BOOKS_BY_MAIL
           end
           body
         end

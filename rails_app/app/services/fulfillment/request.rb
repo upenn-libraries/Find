@@ -6,8 +6,8 @@ module Fulfillment
     class LogicFailure < StandardError; end
 
     ITEM_PARAMETERS = %w[mms_id holding_id item_pid title author year edition publisher place isbn comments].freeze
-    FULFILLMENT_PARAMETERS = %w[option pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
-    SCAN_DETAIL_PARAMETERS = %w[journal article author rftdate volume issue pages comments].freeze
+    FULFILLMENT_PARAMETERS = %w[pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
+    SCAN_DETAIL_PARAMETERS = %w[journal article rftdate volume issue pages comments].freeze
 
     module Options
       AEON = :aeon
@@ -61,28 +61,28 @@ module Fulfillment
     end
 
     def scan?
-      fulfillment_options[:method] == Options::ELECTRONIC
+      fulfillment_options[:delivery] == Options::ELECTRONIC
     end
 
     def books_by_mail?
-      fulfillment_options[:method] == Options::HOME_DELIVERY
+      fulfillment_options[:delivery] == Options::HOME_DELIVERY
     end
 
     def delivery?
-      fulfillment_options[:method] == Options::OFFICE_DELIVERY
+      fulfillment_options[:delivery] == Options::OFFICE_DELIVERY
     end
 
     def aeon?
-      fulfillment_options[:method] == Options::AEON
+      fulfillment_options[:delivery] == Options::AEON
     end
 
     def pickup?
-      fulfillment_options[:option].to_sym == Options::PICKUP &&
+      fulfillment_options[:delivery]&.to_sym == Options::PICKUP &&
         (item_parameters[:holding_id].present? || item_parameters[:item_id].present?)
     end
 
     def ill_pickup?
-      fulfillment_options[:method] == Options::PICKUP &&
+      fulfillment_options[:delivery] == Options::PICKUP &&
         (item_parameters[:holding_id].blank? && item_parameters[:item_id].blank?)
     end
   end
