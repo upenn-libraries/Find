@@ -372,6 +372,10 @@ en:
   sort:
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    date_added_asc:  'Date Added (old-new)'
+    date_added_desc: 'Date Added (new-old)'
+    publication_date_asc: 'Publication date (old-new)'
+    publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
