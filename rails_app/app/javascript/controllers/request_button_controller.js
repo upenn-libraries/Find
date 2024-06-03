@@ -6,32 +6,24 @@ export default class extends Controller {
     ];
 
     connect() {
-        // if the current url contains an anchor of 'request_item', open the options frame
+        // If the current url contains a 'request=true' query param, open the options frame
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('request') == 'true') {
             this.requestButtonTarget.setAttribute("open", true);
         }
     }
 
-    addQueryToUrl(event) {
+    // Add a 'request=true' query param to the current url and follow the link. This allows us to open the options
+    // frame on redirect after signing in.
+    addRequestQueryToUrl(event) {
         // Preventing browser from automatically following link before we can add to the history.
         event.preventDefault();
-
-        // Get window URL
         let url = new URL(window.location.href);
-
-        // Get the current query parameters
         let params = new URLSearchParams(url.search);
-
-        // Set the new or update the existing query parameter
         params.set('request', 'true');
-
-        // Update the URL with the new query parameters
         url.search = params.toString();
-
         // Use history.pushState to update the address bar without reloading the page
         history.pushState({}, '', url);
-
         // Follow link.
         window.location.href = event.target.href;
     }

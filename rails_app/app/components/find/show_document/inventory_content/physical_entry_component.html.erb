@@ -9,8 +9,8 @@
 </p>
 
 <% if user.nil? %>
-  <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success', data: { controller: 'request-button',
-                                                                                                       action: 'click->request-button#addQueryToUrl' } %>
+  <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success',
+              data: { controller: 'request-button', action: 'click->request-button#addRequestQueryToUrl' } %>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
     <summary id="request_item" class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>

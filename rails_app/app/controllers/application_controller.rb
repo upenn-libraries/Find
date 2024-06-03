@@ -12,13 +12,23 @@ class ApplicationController < ActionController::Base
   # To do this, we use some built in Devise helpers to save a load stored locations. For example, if a user has
   # clicked on a record and realizes they must sign in to use the email tool, we don't want them to
   # lose the record page they were on after they sign on. However, there are some URLs that we don't want to
-  # store and redirect back to.
+  # store and redirect back to. We prefer to use the request referer if it's present, but default to the fullpath in
+  # the event that it isn't.
+  #
+  # For more information on why request.referer can't be used by default, refer to the Devise wiki:
+  # https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D#why-not-use-requestreferer
+
+  # Always store the full path from the request, as this is present in every request.
+  # @return [String]
   def store_fullpath
     store_location_for(:user, request.fullpath)
   end
 
-  # Only storing referer if available.
-  # TODO: update comments
+  # Store the request referer if it's present. In our specific use case with the login page, we add query parameters
+  # to the URL to ensure that the user is redirected back to the correct holding and with the request options expanded.
+  # The request fullpath will not preserve these query parameters, so it's important that we prefer the request referer
+  # in this specific use case.
+  # @return [String, NilClass]
   def store_referer
     return unless referer_present?
 
@@ -27,10 +37,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Determine whether the current path is the login path
+  # @return [TrueClass, FalseClass]
   def login_path?
     request.path == login_path
   end
 
+  # Determine whether the request referer is present
+  # @return [TrueClass, FalseClass]
   def referer_present?
     request.referer.present?
   end
