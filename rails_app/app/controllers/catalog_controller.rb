@@ -119,6 +119,20 @@ class CatalogController < ApplicationController
     config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
     config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
     config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
+    config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), query: {
+      last_5_years: { label: I18n.t('facets.recently_published.5_years'),
+                      fq: 'publication_date_sort:[NOW-4YEARS TO *]' },
+      last_10_years: { label: I18n.t('facets.recently_published.10_years'),
+                       fq: 'publication_date_sort:[NOW-9YEARS TO *]' },
+      last_15_years: { label: I18n.t('facets.recently_published.15_years'),
+                       fq: 'publication_date_sort:[NOW-14YEARS TO *]' }
+    }
+    config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), query: {
+      within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW-15DAYS TO *]' },
+      within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW-30DAYS TO *]' },
+      within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW-60DAYS TO *]' },
+      within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW-90DAYS TO *]' }
+    }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
