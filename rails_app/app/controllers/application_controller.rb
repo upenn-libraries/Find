@@ -5,18 +5,35 @@ class ApplicationController < ActionController::Base
   # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
   layout :determine_layout if respond_to? :layout
-  after_action :store_action, unless: :should_not_store_action?
+  after_action :store_fullpath, unless: :should_not_store_action?
+  after_action :store_referer, if: :login_path?
 
   # In this application, it is important to redirect a user back to where they come from after they log in.
   # To do this, we use some built in Devise helpers to save a load stored locations. For example, if a user has
   # clicked on a record and realizes they must sign in to use the email tool, we don't want them to
   # lose the record page they were on after they sign on. However, there are some URLs that we don't want to
   # store and redirect back to.
-  def store_action
+  def store_fullpath
     store_location_for(:user, request.fullpath)
   end
 
+  # Only storing referer if available.
+  # TODO: update comments
+  def store_referer
+    return unless referer_present?
+
+    store_location_for(:user, request.referer)
+  end
+
   private
+
+  def login_path?
+    request.path == login_path
+  end
+
+  def referer_present?
+    request.referer.present?
+  end
 
   # Its important that the location is NOT stored if the request:
   # - method is not GET (non idempotent)

@@ -9,13 +9,11 @@
 </p>
 
 <% if user.nil? %>
-  <%#= link_to t('requests.form.log_in_to_request_item'), login_path(custom_redirect: "#{request.original_url}#request_item"), class: 'btn btn-success' %>
-  <%= button_to t('requests.form.log_in_to_request_item'), login_path, method: :get, class: 'btn btn-success', data: { controller: 'request-button',
-                                                                                                       request_button_target: 'loginRequestButton',
-                                                                                                       action: 'click->request-button#addQueryToUrl' }%>
+  <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success', data: { controller: 'request-button',
+                                                                                                       action: 'click->request-button#addQueryToUrl' } %>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
-    <summary id="request_item" class="btn btn-success fulfillment__summary" ><%= t('requests.form.request_item') %></summary>
+    <summary id="request_item" class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>
     <%= turbo_frame_tag 'form_frame', src: request_fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
       <div class="fulfillment__container">
         <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>

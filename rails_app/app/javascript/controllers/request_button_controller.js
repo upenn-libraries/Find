@@ -2,20 +2,22 @@ import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
     static targets = [
-        "requestButton",
-        "loginRequestButton",
+        "requestButton"
     ];
 
     connect() {
-        console.log(this.loginRequestButtonTarget);
         // if the current url contains an anchor of 'request_item', open the options frame
-        if (window.location.hash === "#request_item") {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('request') == 'true') {
             this.requestButtonTarget.setAttribute("open", true);
         }
     }
 
     addQueryToUrl(event) {
+        // Preventing browser from automatically following link before we can add to the history.
         event.preventDefault();
+
+        // Get window URL
         let url = new URL(window.location.href);
 
         // Get the current query parameters
@@ -29,6 +31,8 @@ export default class extends Controller {
 
         // Use history.pushState to update the address bar without reloading the page
         history.pushState({}, '', url);
-        window.location.href = '/login';
+
+        // Follow link.
+        window.location.href = event.target.href;
     }
 }
