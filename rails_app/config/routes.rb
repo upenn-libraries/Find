@@ -63,6 +63,7 @@ Rails.application.routes.draw do
                                constraints: { system: /(ill|ils)/, type: /(loan|hold|transaction)/ }
       patch 'ils/loan/renew_all', action: :renew_all, as: :ils_renew_all_request
       patch 'ils/loan/:id/renew', action: :renew, as: :ils_renew_request
+      get 'ill/transaction/:id/download', action: :scan, controller: :download, as: :ill_download_request
       delete 'ils/hold/:id', action: :delete, as: :ils_hold_request
 
       get 'options', action: 'options', as: 'request_options'

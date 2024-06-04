@@ -17,6 +17,7 @@ module Illiad
     FINISHED = 'Request Finished'
     CANCELLED = 'Cancelled by ILL Staff'
     CHECKED_OUT = 'Checked Out to Customer'
+    DELIVERED_TO_WEB = 'Delivered to Web'
     # BorrowDirect system id
     BD_SYSTEM_ID = 'Reshare:upennbd'
 

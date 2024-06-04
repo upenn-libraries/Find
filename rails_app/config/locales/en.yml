@@ -177,6 +177,8 @@ en:
           status: 'Due date / Status'
           barcode: 'Barcode'
           renewable: 'Renewable?'
+          expires: 'Expires On'
+          pickup: 'Pick up'
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
