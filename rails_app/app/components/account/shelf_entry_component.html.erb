@@ -9,10 +9,25 @@
           <th scope="row"><%= t('account.shelf.table.th.status') %></th>
           <td><%= render(Account::ShelfStatusComponent.new(entry)) %></td>
         </tr>
-        <tr>
-          <th scope="row"><%= t('account.shelf.table.th.identifier') %></th>
-          <td><%= t('account.shelf.identifier', system: entry.system.upcase, type: entry.type.capitalize, id: entry.id) %></td>
-        </tr>
+
+        <% if entry.ils_loan? %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.renewable') %></th>
+            <td><%= entry.renewable? ? 'Yes' : 'No' %></td>
+          </tr>
+        <% end %>
+
+        <% if entry.ill_transaction? %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.transaction_number') %></th>
+            <td><%= entry.id %></td>
+          </tr>
+        <% else %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.barcode') %></th>
+            <td><%= entry.barcode %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
