@@ -32,15 +32,15 @@ module Fulfillment
       # These constants can probably live on the class that prepares the data we send
       # in our requests to Illiad
       BOOKS_BY_MAIL = 'Books by Mail'
-      BOOKS_BY_MAIL_PREFIX = /^BBM /
+      BOOKS_BY_MAIL_PREFIX = 'BBM '
 
       class << self
         def submit(request:)
           find_or_create user: request.user
           body = submission_body_from request
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction)
-          Outcome.new(request: request, confirmation_number: transaction.id)
+          add_notes(request, transaction) if request.fulfillment_options[:note].present?
+          Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
         # @param [Request] request
@@ -61,7 +61,7 @@ module Fulfillment
 
         # @param [User] user
         def create_illiad_user(user)
-          attributes = BASE_USER_ATTRIBUTES.merge({ 'Username' => user.id,
+          attributes = BASE_USER_ATTRIBUTES.merge({ 'Username' => user.uid,
                                                     'LastName' => user.alma_record.last_name,
                                                     'FirstName' => user.alma_record.first_name,
                                                     'EMailAddress' => user.alma_record.email,
@@ -75,18 +75,18 @@ module Fulfillment
         end
 
         def submission_body_from(request)
-          if request.fulfillment_params[:delivery] == ELECTRONIC_DELIVERY
-            scandelivery_request_body(request.user.id)
+          if request.fulfillment_options[:delivery] == ELECTRONIC_DELIVERY
+            scandelivery_request_body(request)
           else
-            body = book_request_body(request.user.id)
+            body = book_request_body(request)
             append_routing_info(body, request)
           end
         end
 
         def add_notes(request, transaction)
-          number = transaction[:TransactionNumber]
-          note = request.fulfillment_parameters[:note]
-          note += " - comment submitted by #{request.user.id}"
+          number = transaction.id
+          note = request.fulfillment_options[:note]
+          note += " - comment submitted by #{request.user.uid}"
           ::Illiad::Request.add_note(id: number, note: note) # TODO: do we need to specify NOTE_TYPE in the POST body? See https://gitlab.library.upenn.edu/franklin/discovery-app/-/blob/master/lib/illiad/api_client.rb?ref_type=heads#L124
         end
 
