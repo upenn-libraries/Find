@@ -36,17 +36,19 @@ describe Inventory::Service::Physical do
       expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
     end
 
-    it 'makes multiple calls to Alma when total_record_count exceeds limit' do
+    it 'raises an ArgumentError if a parameter is missing' do
+      expect { described_class.items(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
+    end
+  end
+
+  describe '.fetch_all_items' do
+    it 'makes multiple calls to Alma when total record count exceeds limit' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: build_list(:item, 2))
       allow(bib_item_set_double).to receive(:total_record_count).and_return(4)
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
 
       described_class.send(:fetch_all_items, mms_id: '1234', holding_id: '1234', limit: 2)
       expect(Alma::BibItem).to have_received(:find).twice
-    end
-
-    it 'raises an ArgumentError if a parameter is missing' do
-      expect { described_class.items(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
     end
   end
 end

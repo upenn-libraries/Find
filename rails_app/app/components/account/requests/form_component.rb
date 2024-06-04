@@ -16,7 +16,7 @@ module Account
 
       def item_labels
         # This may need a more sophisticated sorting mechanism, but default sort works better than no sort at all.
-        items.map(&:select_label).sort
+        items.map(&:select_label)
       end
     end
   end

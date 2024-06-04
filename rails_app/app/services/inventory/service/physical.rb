@@ -51,7 +51,8 @@ module Inventory
         # @param offset [Integer]
         # @param accumulated_items [Array<PennItem>]
         def fetch_all_items(mms_id:, holding_id:, limit: 100, offset: 0, accumulated_items: [])
-          response = Alma::BibItem.find(mms_id, holding_id: holding_id, limit: limit, offset: offset)
+          query_options = { limit: limit, offset: offset, order_by: 'description', direction: 'asc' }
+          response = Alma::BibItem.find(mms_id, holding_id: holding_id, **query_options)
           accumulated_items += response.items
 
           # Base case: if the number of items returned is less than the limit, we've fetched all items
