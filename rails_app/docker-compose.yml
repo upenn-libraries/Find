@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   chrome:
     image: browserless/chrome:latest
