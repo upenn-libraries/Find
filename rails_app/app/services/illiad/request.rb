@@ -53,6 +53,16 @@ module Illiad
       response.body
     end
 
+    # Route a transaction to a specific status
+    # Wraps PUT 'Route Transaction' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @param status [String]
+    # @return [Illiad::Request]
+    def self.route(id:, status:)
+      response = Client.put("#{BASE_PATH}/#{id}/#{ROUTE_PATH}", { Status: status })
+      new(**response.body)
+    end
+
     # @param data [Hash]
     def initialize(**data)
       @data = data.symbolize_keys

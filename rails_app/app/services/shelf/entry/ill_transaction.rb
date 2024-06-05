@@ -21,7 +21,7 @@ module Shelf
         if loan?
           request.data[:LoanTitle]
         elsif scan?
-          [request.data[:PhotoJournalTitle], request.data[:PhotoArticleTitle]].compact.join(' | ')
+          [request.data[:PhotoJournalTitle], request.data[:PhotoArticleTitle]].compact_blank.join(' | ')
         end
       end
 

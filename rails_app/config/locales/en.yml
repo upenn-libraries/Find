@@ -187,8 +187,14 @@ en:
       bib_record_link: 'View title record page'
       renew:
         button: 'Renew this title'
+      download:
+        button: 'Download'
       cancel:
         button: 'Cancel'
+        success: 'Hold cancelled.'
+      delete:
+        button: 'Delete'
+        success: 'Scan request deleted.'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'

@@ -62,6 +62,28 @@ module Illiad
           .to_return_json(status: 400, body: response_body)
       end
 
+      # @param id [Integer, String] request TransactionNumber
+      # @param status [String] status to send in body
+      # @param response_body [Hash]
+      # @return [WebMock::RequestStub]
+      def stub_route_request_success(id:, status:, response_body:)
+        stub_request(:put,
+                     "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::ROUTE_PATH}")
+          .with(body: { Status: status }, headers: json_headers)
+          .to_return_json(status: 200, body: response_body)
+      end
+
+      # @param id [Integer, String] request TransactionNumber
+      # @param status [String] status to send in body
+      # @param response_body [Hash]
+      # @return [WebMock::RequestStub]
+      def stub_route_request_failure(id:, status:, response_body:)
+        stub_request(:put,
+                     "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}/#{Illiad::Request::ROUTE_PATH}")
+          .with(body: { Status: status }, headers: json_headers)
+          .to_return_json(status: 400, body: response_body)
+      end
+
       private
 
       def default_headers

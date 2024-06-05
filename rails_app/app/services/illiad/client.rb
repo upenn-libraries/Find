@@ -65,6 +65,17 @@ module Illiad
         raise Error, error_messages(error: e)
       end
 
+      # @overload put(url, body, headers)
+      #   positional arguments to pass to Faraday put request
+      #   @param url [String]
+      #   @param body [Hash]
+      #   @param headers [Hash]
+      def put(*args)
+        connection.put(*args)
+      rescue Faraday::Error => e
+        raise Error, error_messages(error: e)
+      end
+
       # Retrieve error messages from body of bad responses
       # @return [String]
       def error_messages(error:)

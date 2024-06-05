@@ -61,7 +61,11 @@
   <% end %>
 
   <% if entry.ill_transaction? && entry.pdf_available? %>
-    <%= link_to 'Download', ill_download_request_path(entry.id), class: 'btn btn-primary' %>
+    <%= form_with url: ill_transaction_request_path(entry.id), method: :delete do |form| %>
+      <%= form.submit t('account.shelf.delete.button'), class: "btn btn-danger mx-1" %>
+    <% end %>
+
+    <%= link_to t('account.shelf.download.button'), ill_download_request_path(entry.id), class: 'btn btn-primary mx-1' %>
   <% end %>
 
   <% if entry.mms_id %>
