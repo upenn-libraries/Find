@@ -42,17 +42,25 @@ describe 'login page' do
   end
 
   context 'when logging in from a record page' do
-    include_context 'with electronic journal record with 4 electronic entries'
+    include_context 'with print monograph record with 2 physical entries'
     include_context 'with mock alma_record on user having alma_user_group user group'
 
     before do
-      visit solr_document_path(electronic_journal_bib)
-      visit login_path
+      visit solr_document_path(print_monograph_bib)
+      click_on I18n.t('requests.form.log_in_to_request_item')
+      click_on I18n.t('login.pennkey')
     end
 
     it 'redirects to record page after login' do
-      click_on I18n.t('login.pennkey')
-      expect(page).to have_current_path(solr_document_path(electronic_journal_bib))
+      expect(page).to have_current_path(/^#{solr_document_path(print_monograph_bib)}/)
+    end
+
+    it 'adds request param to url' do
+      expect(current_url).to include('request=true')
+    end
+
+    it 'expands the request options' do
+      expect(page).to have_selector('details[open]')
     end
   end
 end
