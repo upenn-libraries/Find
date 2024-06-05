@@ -19,10 +19,9 @@ module Fulfillment
       class UserError < StandardError; end
 
       CITED_IN = 'info:sid/library.upenn.edu'
-      BASE_USER_ATTRIBUTES = { 'NVTGC' => 'VPL', 'Address' => '', 'DeliveryMethod' => 'Mail to Address',
-                               'Cleared' => 'Yes', 'Web' => true, 'ArticleBillingCategory' => 'Exempt',
-                               'LoanBillingCategory' => 'Exempt' }.freeze
-      BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing', CitedIn: CITED_IN }.freeze
+      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes', Web: true,
+                               ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
+      BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
 
       # These constants can probably live on the class that prepares the data we send
       # in our requests to Illiad
@@ -57,14 +56,14 @@ module Fulfillment
 
         # @param [User] user
         def create_illiad_user(user)
-          attributes = BASE_USER_ATTRIBUTES.merge({ 'Username' => user.uid,
-                                                    'LastName' => user.alma_record.last_name,
-                                                    'FirstName' => user.alma_record.first_name,
-                                                    'EMailAddress' => user.alma_record.email,
-                                                    'SSN' => user.alma_record.id,
-                                                    'Status' => user.alma_record.user_group,
-                                                    'Department' => user.alma_record.affiliation,
-                                                    'PlainTextPassword' => Settings.illiad.user_password })
+          attributes = BASE_USER_ATTRIBUTES.merge({ Username: user.uid,
+                                                    LastName: user.alma_record.last_name,
+                                                    FirstName: user.alma_record.first_name,
+                                                    EMailAddress: user.alma_record.email,
+                                                    SSN: user.alma_record.id,
+                                                    Status: user.alma_record.user_group,
+                                                    Department: user.alma_record.affiliation,
+                                                    PlainTextPassword: Settings.illiad.user_password })
           ::Illiad::User.create(data: attributes)
         rescue ::Illiad::Client::Error => e
           raise UserError, "Problem creating Illiad user: #{e.message}"
@@ -100,24 +99,26 @@ module Fulfillment
             Location: request.item_parameters[:temp_aware_location_display],
             CallNumber: request.item_parameters[:temp_aware_call_number],
             ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
+            CitedIn: request.item_parameters[:sid] || CITED_IN,
             ItemInfo3: request.item_parameters[:barcode] }
         end
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
-        # @todo add edition, publisher, publication place - see franklinforms submission body
         def scandelivery_request_body(request)
           { Username: request.user.id,
             DocumentType: ::Illiad::Request::ARTICLE,
             PhotoJournalTitle: request.item_parameters[:title],
-            PhotoJournalVolume: request.scan_details[:section_volume],
-            PhotoJournalIssue: request.scan_details[:section_issue],
+            PhotoJournalVolume: request.scan_details[:volume],
+            PhotoJournalIssue: request.scan_details[:issue],
             PhotoJournalMonth: request.item_parameters[:pub_month],
             PhotoJournalYear: request.item_parameters[:year],
             PhotoJournalInclusivePages: request.scan_details[:section_pages],
-            ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
+            ISSN: request.item_parameters[:issn],
+            ESPNumber: request.item_parameters[:pmid],
             PhotoArticleAuthor: request.scan_details[:section_author],
-            PhotoArticleTitle: request.scan_details[:section_title] }
+            PhotoArticleTitle: request.scan_details[:section_title],
+            CitedIn: request.item_parameters[:sid] || CITED_IN }
         end
 
         # @note See class level docs above
@@ -132,6 +133,9 @@ module Fulfillment
           elsif request.fulfillment_options[:delivery] == Request::Options::OFFICE_DELIVERY
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
+          else
+            # Otherwise, add pickup location to ItemInfo1
+            body[:ItemInfo1] = request.fulfillment_options[:pickup_location]
           end
           body
         end
