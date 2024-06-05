@@ -32,7 +32,8 @@ describe Shelf::Entry::IllTransaction do
       let(:illiad_transaction) { create(:illiad_request, :scan) }
 
       it 'returns expected title' do
-        expect(transaction.title).to eql illiad_transaction.data[:PhotoJournalTitle]
+        expect(transaction.title).to include illiad_transaction.data[:PhotoJournalTitle]
+        expect(transaction.title).to include illiad_transaction.data[:PhotoArticleTitle]
       end
     end
   end
@@ -102,6 +103,60 @@ describe Shelf::Entry::IllTransaction do
     context 'when not a completed borrow direct transaction' do
       it 'returns nil' do
         expect(transaction.borrow_direct_identifier).to be_nil
+      end
+    end
+  end
+
+  describe '#expiry_date' do
+    context 'when pdf scan available' do
+      let(:illiad_transaction) { create(:illiad_request, :scan_with_pdf_available) }
+
+      it 'returns expected date' do
+        expect(transaction.expiry_date).to eql '04/14/24'
+      end
+    end
+
+    context 'when pdf scan not available' do
+      let(:illiad_transaction) { create(:illiad_request, :scan) }
+
+      it 'returns nil' do
+        expect(transaction.expiry_date).to be nil
+      end
+    end
+  end
+
+  describe 'pdf_available?' do
+    context 'when pdf is available' do
+      let(:illiad_transaction) { create(:illiad_request, :scan_with_pdf_available) }
+
+      it 'returns true' do
+        expect(transaction.pdf_available?).to be true
+      end
+    end
+
+    context 'when status is not available' do
+      let(:illiad_transaction) { create(:illiad_request, :scan) }
+
+      it 'returns false' do
+        expect(transaction.pdf_available?).to be false
+      end
+    end
+  end
+
+  describe '#pdf' do
+    context 'when pdf is not available for download' do
+      it 'raises error' do
+        expect { transaction.pdf }.to raise_error 'PDF not available'
+      end
+    end
+
+    context 'when pdf is available' do
+      let(:illiad_transaction) { create(:illiad_request, :scan_with_pdf_available) }
+
+      it 'makes http request to Illiad server' do
+        stub = stub_request(:get, "#{Shelf::Entry::IllTransaction::PDF_SCAN_LOCATION}#{transaction.id}.pdf")
+        transaction.pdf
+        expect(stub).to have_been_requested
       end
     end
   end

@@ -216,7 +216,7 @@ describe Shelf::Service do
 
   describe '#ill_transaction' do
     let(:display_status_set) { build(:illiad_display_status_set) }
-    let(:ill_transaction) { create(:illiad_request, Username: user_id) }
+    let(:ill_transaction) { create(:illiad_request, :loan, Username: user_id) }
 
     context 'when successful' do
       before do
