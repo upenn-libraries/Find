@@ -44,6 +44,10 @@ describe 'Catalog Show Page' do
       end
     end
 
+    it 'updates the url with holding ID' do
+      expect(page).to have_current_path(solr_document_path(mms_id, params: { hld_id: entries.first.id }))
+    end
+
     context 'when holding_id is provided in params' do
       let(:params) { { hld_id: entries.second.id } }
 
@@ -93,11 +97,15 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'display data for second holding in tab pane' do
+      it 'displays data for second holding in tab pane' do
         within('#inventory-pills-tabContent') do
           expect(page).to have_content entries.second.description
           expect(page).to have_content entries.second.coverage_statement
         end
+      end
+
+      it 'updates the url with holding ID' do
+        expect(page).to have_current_path(solr_document_path(mms_id, params: { hld_id: entries.second.id }))
       end
     end
   end
@@ -286,11 +294,6 @@ describe 'Catalog Show Page' do
       expect(page).to have_button(class: 'inventory-item__availability--easy')
     end
 
-    it 'updates the url with holding ID on page load' do
-      expect(page).to have_current_path(solr_document_path(print_monograph_bib,
-                                                           params: { hld_id: print_monograph_entries.first.id }))
-    end
-
     context 'when holdings have an availability status other than "available"' do
       include_context 'with print monograph record with 2 physical entries' do
         let(:print_monograph_entries) do
@@ -313,15 +316,6 @@ describe 'Catalog Show Page' do
         within('#inventory-pills-tab') do
           expect(page).to have_button(class: 'inventory-item__availability')
         end
-      end
-    end
-
-    context 'when another holding is selected' do
-      before { click_button print_monograph_entries.second.description }
-
-      it 'updates the url with holding ID' do
-        expect(page).to have_current_path(solr_document_path(print_monograph_bib,
-                                                             params: { hld_id: print_monograph_entries.second.id }))
       end
     end
   end
