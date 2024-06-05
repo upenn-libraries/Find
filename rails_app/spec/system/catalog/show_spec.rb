@@ -286,6 +286,11 @@ describe 'Catalog Show Page' do
       expect(page).to have_button(class: 'inventory-item__availability--easy')
     end
 
+    it 'updates the url with holding ID on page load' do
+      expect(page).to have_current_path(solr_document_path(print_monograph_bib,
+                                                           params: { hld_id: print_monograph_entries.first.id }))
+    end
+
     context 'when holdings have an availability status other than "available"' do
       include_context 'with print monograph record with 2 physical entries' do
         let(:print_monograph_entries) do
@@ -308,6 +313,15 @@ describe 'Catalog Show Page' do
         within('#inventory-pills-tab') do
           expect(page).to have_button(class: 'inventory-item__availability')
         end
+      end
+    end
+
+    context 'when another holding is selected' do
+      before { click_button print_monograph_entries.second.description }
+
+      it 'updates the url with holding ID' do
+        expect(page).to have_current_path(solr_document_path(print_monograph_bib,
+                                                             params: { hld_id: print_monograph_entries.second.id }))
       end
     end
   end
