@@ -9,7 +9,7 @@ module Fulfillment
 
     def initialize(request:)
       @request = request
-      @endpoint = endpoint_class(request)
+      @endpoint = request.endpoint
     end
 
     # @return [Fulfillment::Outcome]
@@ -18,7 +18,7 @@ module Fulfillment
       return failed_outcome if errors.any?
 
       outcome = endpoint.submit(request: request) # this could return an error...rescue?
-      notify
+      notify outcome: outcome
       outcome
     rescue StandardError => e
       errors << 'An internal error occurred.' # TODO: Illiad submit could raise interesting exceptions, but we may not want to display to patron
@@ -26,22 +26,11 @@ module Fulfillment
       failed_outcome
     end
 
-    def notify
-      # TODO: send email
+    def notify(outcome:)
+      # TODO: send email using outcome (item_desc, fulfillment_desc)
     end
 
     private
-
-    # @return [<Fulfillment::Endpoint>]
-    def endpoint_class(request)
-      case request.destination
-      when :alma then Fulfillment::Endpoint::Alma
-      when :illiad then Fulfillment::Endpoint::Illiad
-      when :aeon then Fulfillment::Endpoint::Aeon
-      else
-        raise
-      end
-    end
 
     # @return [Fulfillment::Outcome]
     def failed_outcome

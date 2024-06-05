@@ -1,45 +1,51 @@
 # frozen_string_literal: true
 
 describe Fulfillment::Request do
-  describe '#destination' do
+  describe '#endpoint' do
     context 'with requests destined for Illiad' do
-      it 'properly returns the destination for Books by Mail requests' do
+      let(:destination) { Fulfillment::Endpoint::Illiad }
+
+      it 'properly returns the endpoint for Books by Mail requests' do
         request = build(:fulfillment_request, :books_by_mail)
-        expect(request.destination).to eq :illiad
+        expect(request.endpoint).to eq destination
       end
 
-      it 'properly returns the destination for scan requests' do
+      it 'properly returns the endpoint for scan requests' do
         request = build(:fulfillment_request, :scan_deliver)
-        expect(request.destination).to eq :illiad
+        expect(request.endpoint).to eq destination
       end
 
-      it 'properly returns the destination for office delivery requests' do
+      it 'properly returns the endpoint for office delivery requests' do
         request = build(:fulfillment_request, :office_delivery)
-        expect(request.destination).to eq :illiad
+        expect(request.endpoint).to eq destination
       end
 
-      it 'properly returns the destination for ILL item pickup requests' do
+      it 'properly returns the endpoint for ILL item pickup requests' do
         request = build(:fulfillment_request, :pickup, :with_bib)
-        expect(request.destination).to eq :illiad
+        expect(request.endpoint).to eq destination
       end
     end
 
     context 'with requests destined for Alma' do
-      it 'properly returns the destination for Alma item pickup requests' do
+      let(:destination) { Fulfillment::Endpoint::Alma }
+
+      it 'properly returns the endpoint for Alma item pickup requests' do
         request = build(:fulfillment_request, :pickup, :with_item)
-        expect(request.destination).to eq :alma
+        expect(request.endpoint).to eq destination
       end
 
-      it 'properly returns the destination for Alma holding pickup requests' do
+      it 'properly returns the endpoint for Alma holding pickup requests' do
         request = build(:fulfillment_request, :pickup, :with_holding)
-        expect(request.destination).to eq :alma
+        expect(request.endpoint).to eq destination
       end
     end
 
     context 'with requests destined for Aeon' do
-      it 'properly returns the destination for Aeon requests' do
+      let(:destination) { Fulfillment::Endpoint::Aeon }
+
+      it 'properly returns the endpoint for Aeon requests' do
         request = build(:fulfillment_request, :aeon)
-        expect(request.destination).to eq :aeon
+        expect(request.endpoint).to eq destination
       end
     end
   end

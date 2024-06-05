@@ -1,6 +1,6 @@
 <li class="list-group-item">
   <div class="form-check">
-    <%= radio_button_tag :delivery, :mail, false, class: 'form-check-input', **radio_options %>
+    <%= radio_button_tag :delivery, @name, false, class: 'form-check-input', **radio_options %>
     <%= label_tag :delivery_mail, t('requests.form.options.mail.label'), class: 'form-check-label' %>
     <div>
       <small class="text-muted">

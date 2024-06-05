@@ -26,9 +26,5 @@ describe Fulfillment::Outcome do
     it 'has a confirmation number' do
       expect(outcome.confirmation_number).to eq params[:confirmation_number]
     end
-
-    xit 'has a description' do
-      expect(outcome.description).to eq request.description
-    end
   end
 end

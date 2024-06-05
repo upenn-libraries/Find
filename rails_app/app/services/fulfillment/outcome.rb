@@ -3,23 +3,25 @@
 module Fulfillment
   # Response object for submission outcomes via any endpoint
   class Outcome
-    attr_reader :request, :confirmation_number, :errors, :description
+    attr_reader :request, :confirmation_number, :errors, :item_desc, :fulfillment_desc
 
     delegate :description, to: :request
 
-    def initialize(request:, confirmation_number: nil, errors: [])
+    def initialize(request:, item_desc: nil, fulfillment_desc: nil, confirmation_number: nil, errors: [])
       @request = request
       if errors.any?
         @state = :failed
         @errors = errors
       else
         @state = :success
+        @item_desc = item_desc
+        @fulfillment_desc = fulfillment_desc
         @confirmation_number = confirmation_number
       end
     end
 
     # @return [String (frozen), nil]
-    def message
+    def error_message
       @errors&.to_sentence
     end
 

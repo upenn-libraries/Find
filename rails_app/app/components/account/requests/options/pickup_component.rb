@@ -14,6 +14,7 @@ module Account
           @user = user
           @checked = checked
           @radio_options = radio_options
+          @name = Fulfillment::Request::Options::PICKUP
         end
 
         # @return [String]

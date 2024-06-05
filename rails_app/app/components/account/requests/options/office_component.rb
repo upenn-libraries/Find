@@ -11,6 +11,7 @@ module Account
           @user = user
           @checked = checked
           @radio_options = radio_options
+          @name = Fulfillment::Request::Options::OFFICE_DELIVERY
         end
 
         # @return [Array<String>, nil]

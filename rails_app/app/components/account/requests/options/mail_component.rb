@@ -10,6 +10,7 @@ module Account
         def initialize(checked: false, **radio_options)
           @checked = checked
           @radio_options = radio_options
+          @name = Fulfillment::Request::Options::HOME_DELIVERY
         end
       end
     end

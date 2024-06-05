@@ -18,12 +18,7 @@ module Fulfillment
     class Illiad < Endpoint
       class UserError < StandardError; end
 
-      OFFICE_DELIVERY = 'office'
-      MAIL_DELIVERY = 'mail'
-      ELECTRONIC_DELIVERY = 'electronic'
-
       CITED_IN = 'info:sid/library.upenn.edu'
-
       BASE_USER_ATTRIBUTES = { 'NVTGC' => 'VPL', 'Address' => '', 'DeliveryMethod' => 'Mail to Address',
                                'Cleared' => 'Yes', 'Web' => true, 'ArticleBillingCategory' => 'Exempt',
                                'LoanBillingCategory' => 'Exempt' }.freeze
@@ -32,7 +27,7 @@ module Fulfillment
       # These constants can probably live on the class that prepares the data we send
       # in our requests to Illiad
       BOOKS_BY_MAIL = 'Books by Mail'
-      BOOKS_BY_MAIL_PREFIX = 'BBM '
+      BOOKS_BY_MAIL_PREFIX = 'BBM'
 
       class << self
         def submit(request:)
@@ -40,7 +35,8 @@ module Fulfillment
           body = submission_body_from request
           transaction = ::Illiad::Request.submit data: body
           add_notes(request, transaction) if request.fulfillment_options[:note].present?
-          Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
+          Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}",
+                      item_desc: '', fulfillment_desc: '')
         end
 
         # @param [Request] request
@@ -75,7 +71,7 @@ module Fulfillment
         end
 
         def submission_body_from(request)
-          if request.fulfillment_options[:delivery] == ELECTRONIC_DELIVERY
+          if request.fulfillment_options[:delivery] == Request::Options::ELECTRONIC_DELIVERY
             scandelivery_request_body(request)
           else
             body = book_request_body(request)
@@ -109,6 +105,7 @@ module Fulfillment
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
+        # @todo add edition, publisher, publication place - see franklinforms submission body
         def scandelivery_request_body(request)
           { Username: request.user.id,
             DocumentType: ::Illiad::Request::ARTICLE,
@@ -116,7 +113,7 @@ module Fulfillment
             PhotoJournalVolume: request.scan_details[:section_volume],
             PhotoJournalIssue: request.scan_details[:section_issue],
             PhotoJournalMonth: request.item_parameters[:pub_month],
-            PhotoJournalYear: request.item_parameters[:pub_year],
+            PhotoJournalYear: request.item_parameters[:year],
             PhotoJournalInclusivePages: request.scan_details[:section_pages],
             ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
             PhotoArticleAuthor: request.scan_details[:section_author],
@@ -128,14 +125,13 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.fulfillment_options[:delivery] == MAIL_DELIVERY
-            # BBM attribute changes to trigger Illiad routing rules
-            body[:LoanTitle] = body[:LoanTitle].prepend(BOOKS_BY_MAIL_PREFIX)
-            body[:ItemInfo1] = ::Illiad::Request::BOOKS_BY_MAIL
-          elsif request.fulfillment_options[:delivery] == OFFICE_DELIVERY
-            # Also set ItemInfo1 to BBM for Office delivery
-            # It doesn't make sense, but this is what Lapis desires
-            body[:ItemInfo1] = ::Illiad::Request::BOOKS_BY_MAIL
+          if request.fulfillment_options[:delivery] == Request::Options::HOME_DELIVERY
+            # Set "BBM" title prefix so requests are routes to BBM staff
+            body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
+            body[:ItemInfo1] = BOOKS_BY_MAIL
+          elsif request.fulfillment_options[:delivery] == Request::Options::OFFICE_DELIVERY
+            # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
+            body[:ItemInfo1] = BOOKS_BY_MAIL
           end
           body
         end
