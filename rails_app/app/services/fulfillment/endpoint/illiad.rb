@@ -56,14 +56,7 @@ module Fulfillment
 
         # @param [User] user
         def create_illiad_user(user)
-          attributes = BASE_USER_ATTRIBUTES.merge({ Username: user.uid,
-                                                    LastName: user.alma_record.last_name,
-                                                    FirstName: user.alma_record.first_name,
-                                                    EMailAddress: user.alma_record.email,
-                                                    SSN: user.alma_record.id,
-                                                    Status: user.alma_record.user_group,
-                                                    Department: user.alma_record.affiliation,
-                                                    PlainTextPassword: Settings.illiad.user_password })
+          attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
           ::Illiad::User.create(data: attributes)
         rescue ::Illiad::Client::Error => e
           raise UserError, "Problem creating Illiad user: #{e.message}"
@@ -82,7 +75,8 @@ module Fulfillment
           number = transaction.id
           note = request.fulfillment_options[:note]
           note += " - comment submitted by #{request.user.uid}"
-          ::Illiad::Request.add_note(id: number, note: note) # TODO: do we need to specify NOTE_TYPE in the POST body? See https://gitlab.library.upenn.edu/franklin/discovery-app/-/blob/master/lib/illiad/api_client.rb?ref_type=heads#L124
+          # TODO: do we need to specify NOTE_TYPE in the POST body? We do in Franklin
+          ::Illiad::Request.add_note(id: number, note: note)
         end
 
         # @param [Request] request
@@ -138,6 +132,19 @@ module Fulfillment
             body[:ItemInfo1] = request.fulfillment_options[:pickup_location]
           end
           body
+        end
+
+        # @param [User] user
+        # @return [Hash{Symbol->Unknown}]
+        def user_request_body(user)
+          { Username: user.uid,
+            LastName: user.alma_record.last_name,
+            FirstName: user.alma_record.first_name,
+            EMailAddress: user.alma_record.email,
+            SSN: user.alma_record.id,
+            Status: user.alma_record.user_group,
+            Department: user.alma_record.affiliation,
+            PlainTextPassword: Settings.illiad.user_password }
         end
       end
     end

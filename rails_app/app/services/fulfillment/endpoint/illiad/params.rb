@@ -32,7 +32,7 @@ module Fulfillment
             type = search('genre', 'Type', 'requesttype', 'rft.genre') || 'Article'
             type = 'Article' if type == 'issue'
             type = type.sub(/^(journal|bookitem|book|conference|article|preprint|proceeding).*?$/i, '\1')
-            type = type.capitalize if ['article', 'book'].member?(type)
+            type = type.capitalize if %w[article book].member?(type)
             type
           end
         end
@@ -138,9 +138,7 @@ module Fulfillment
           spage = search('Spage', 'spage', 'rft.spage')
           epage = search('Epage', 'epage', 'rft.epage')
 
-          if open_params['Pages'].present? && spage.empty?
-            spage, epage = open_params['Pages'].split(/-/)
-          end
+          spage, epage = open_params['Pages'].split(/-/) if open_params['Pages'].present? && spage.empty?
 
           pages = open_params['pages'].presence
           pages = [spage, epage].join('-') if pages.blank?

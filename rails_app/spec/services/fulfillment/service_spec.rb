@@ -66,7 +66,6 @@ describe Fulfillment::Service do
           expect(result.errors).to match_array validation_errors
         end
       end
-
     end
   end
 end

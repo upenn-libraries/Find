@@ -21,7 +21,8 @@ module Fulfillment
       notify outcome: outcome
       outcome
     rescue StandardError => e
-      errors << 'An internal error occurred.' # TODO: Illiad submit could raise interesting exceptions, but we may not want to display to patron
+      # TODO: Illiad submit could raise interesting exceptions, but we may not want to display to patron
+      errors << 'An internal error occurred.'
       Honeybadger.notify(e)
       failed_outcome
     end

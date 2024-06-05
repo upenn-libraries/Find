@@ -21,11 +21,11 @@ FactoryBot.define do
     end
 
     trait :with_bib do
-      item_parameters { { title: 'Unowned Thing', author: 'Obscure Author', publisher: 'selfpublish.co' } } # TODO: check ILL form mockup for fields
+      item_parameters { { title: 'Unowned Thing', author: 'Obscure Author', publisher: 'selfpublish.co' } }
     end
 
     trait :with_section do
-      item_parameters { { pages: '1-999', section_author: 'Hubbard, L.R.' } } # TODO: check ILL form mockup for fields
+      item_parameters { { pages: '1-999', section_author: 'Hubbard, L.R.' } }
     end
 
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
