@@ -7,15 +7,13 @@ module Fulfillment
       class << self
         def submit(request:)
           params = submission_params(request: request)
-          response = if request.item_parameters[:item_id].present?
-                       ::Alma::ItemRequest.submit(params.merge({ item_pid: request.item_parameters[:item_id] }))
+          response = if request.raw_params[:item_id].present?
+                       ::Alma::ItemRequest.submit(params.merge({ item_pid: request.raw_params[:item_id] }))
                      else
                        ::Alma::BibRequest.submit(params)
                      end
           Outcome.new(
-            request: request, confirmation_number: "ALMA_#{response.raw_response['request_id']}",
-            item_desc: [request.item_parameters[:title], request.item_parameters[:author]].compact.join(' - '),
-            fulfillment_desc: "For pickup at #{request.fulfillment_options[:pickup_location]}"
+            request: request, confirmation_number: "ALMA_#{response.raw_response['request_id']}"
           )
         end
 
@@ -24,9 +22,9 @@ module Fulfillment
         # @return [Array<String (frozen)>]
         def validate(request:)
           errors = []
-          errors << 'No pickup location provided' if request.fulfillment_options[:pickup_location].blank?
-          errors << 'No record identifier provided' if request.item_parameters[:mms_id].blank?
-          errors << 'No holding identifier provided' if request.item_parameters[:holding_id].blank?
+          errors << 'No pickup location provided' if request.fulfillment_params[:pickup_location].blank?
+          errors << 'No record identifier provided' if request.raw_params[:mms_id].blank?
+          errors << 'No holding identifier provided' if request.raw_params[:holding_id].blank?
           errors << 'No user identifier provided' if request.user&.uid.blank?
           errors
         end
@@ -38,10 +36,10 @@ module Fulfillment
         def submission_params(request:)
           { user_id: request.user.uid,
             request_type: 'HOLD',
-            comment: request.item_parameters[:comment],
-            mms_id: request.item_parameters[:mms_id], holding_id: request.item_parameters[:holding_id],
+            comment: request.raw_params[:comment],
+            mms_id: request.raw_params[:mms_id], holding_id: request.raw_params[:holding_id],
             pickup_location_type: 'LIBRARY',
-            pickup_location_library: request.fulfillment_options[:pickup_location] }
+            pickup_location_library: request.fulfillment_params[:pickup_location] }
         end
       end
     end

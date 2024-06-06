@@ -9,13 +9,13 @@ module Account
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
-      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(params.except(:controller, :action).to_unsafe_h)
+      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(raw_params)
     end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      outcome = Fulfillment::Request.submit(user: current_user, params: params)
+      outcome = Fulfillment::Request.submit(user: current_user, params: raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
         redirect_to shelf_path
@@ -46,15 +46,15 @@ module Account
     # those options to determine what actions are available to the user.
     # GET /account/requests/options
     def options
-      item = if params[:item_pid] == 'no-item'
+      item = if params[:item_id] == 'no-item'
                Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
                Inventory::Service::Physical.item(mms_id: params[:mms_id],
                                                  holding_id: params[:holding_id],
-                                                 item_pid: params[:item_pid])
+                                                 item_id: params[:item_id])
              end
-      options = item.fulfillment_options(ils_group: current_user.ils_group)
-      render(Account::Requests::OptionsComponent.new(user: current_user, options: options), layout: false)
+      options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
+      render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
     end
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
@@ -81,6 +81,10 @@ module Account
     def set_items
       @items = Inventory::Service::Physical.items(mms_id: params[:mms_id],
                                                   holding_id: params[:holding_id])
+    end
+
+    def raw_params
+      params.except(:controller, :action).to_unsafe_h.with_indifferent_access
     end
   end
 end

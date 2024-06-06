@@ -48,7 +48,7 @@ module Inventory
         Mappings.aeon_locations.include? location
       end
 
-      # Is the item able to be Scan&Deliver'd?
+      # Is the item able to be scanned?
       # @return [Boolean]
       def scannable?
         return false if at_hsp?
@@ -98,6 +98,29 @@ module Inventory
         end
       end
 
+      def temp_aware_location_display
+        if in_temp_location?
+          return "(temp) #{holding_data.dig('temp_library', 'value')} - #{holding_data.dig('temp_location', 'value')}"
+        end
+
+        "#{holding_library_name} - #{holding_location_name}"
+      end
+
+      def temp_aware_call_number
+        temp_call_num = holding_data['temp_call_number']
+        return temp_call_num if temp_call_num.present?
+
+        holding_data['permanent_call_number']
+      end
+
+      def volume
+        item_data['enumeration_a']
+      end
+
+      def issue
+        item_data['enumeration_b']
+      end
+
       # Return an array of fulfillment options for a given item and ils_group
       # @param ils_group [String] the ILS group code
       # @return [Array<Symbol>]
@@ -110,9 +133,29 @@ module Inventory
           options << :pickup
           options << :office if ils_group == User::FACULTY_EXPRESS_GROUP
           options << :mail unless ils_group == User::COURTESY_BORROWER_GROUP
-          options << :scan if scannable?
+          options << :electronic if scannable?
         end
         options
+      end
+
+      # Submission parameters that can be passed to the ILL form as OpenParams or directly
+      # to the request submission endpoint.
+      #
+      # @return [Hash]
+      def fulfillment_submission_params
+        { title: bib_data['title'],
+          author: bib_data['author'],
+          call_number: temp_aware_call_number,
+          location: temp_aware_location_display,
+          barcode: item_data[:barcode],
+          mms_id: bib_data['mms_id'],
+          publisher: bib_data['publisher_const'],
+          date: bib_data['date_of_publication'],
+          edition: bib_data['complete_edition'],
+          volume: volume,
+          issue: issue,
+          isbn: bib_data[:isbn],
+          issn: bib_data[:issn] }
       end
     end
   end

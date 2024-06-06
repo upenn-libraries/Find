@@ -21,7 +21,7 @@ describe Fulfillment::Request do
       end
 
       it 'properly returns the endpoint for ILL item pickup requests' do
-        request = build(:fulfillment_request, :pickup, :with_bib)
+        request = build(:fulfillment_request, :ill_pickup)
         expect(request.endpoint).to eq destination
       end
     end

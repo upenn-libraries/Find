@@ -4,7 +4,7 @@ module Account
   module Requests
     module Options
       # Mail delivery component
-      class MailComponent < ViewComponent::Base
+      class ElectronicComponent < ViewComponent::Base
         attr_accessor :checked, :radio_options
 
         def initialize(checked: false, **radio_options)
@@ -13,7 +13,7 @@ module Account
         end
 
         def delivery_value
-          Fulfillment::Request::Options::MAIL
+          Fulfillment::Request::Options::ELECTRONIC
         end
       end
     end

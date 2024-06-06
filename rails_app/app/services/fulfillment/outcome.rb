@@ -7,15 +7,15 @@ module Fulfillment
 
     delegate :description, to: :request
 
-    def initialize(request:, item_desc: nil, fulfillment_desc: nil, confirmation_number: nil, errors: [])
+    def initialize(request:, confirmation_number: nil, errors: [])
       @request = request
       if errors.any?
         @state = :failed
         @errors = errors
       else
         @state = :success
-        @item_desc = item_desc
-        @fulfillment_desc = fulfillment_desc
+        # @item_desc = request.params.title # TODO: build these from request.params
+        # @fulfillment_desc = request.fulfillment_desc
         @confirmation_number = confirmation_number
       end
     end

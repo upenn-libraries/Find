@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = [
-    "scanButton",
+    "electronicButton",
     "officeButton",
     "pickupButton",
     "mailButton",
@@ -68,7 +68,7 @@ export default class extends Controller {
   // Return an array of all button targets
   buttonTargets() {
     return [
-      this.scanButtonTarget,
+      this.electronicButtonTarget,
       this.officeButtonTarget,
       this.pickupButtonTarget,
       this.mailButtonTarget,

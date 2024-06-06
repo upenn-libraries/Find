@@ -9,12 +9,12 @@ describe Inventory::Service::Physical do
     end
 
     it 'returns a Item' do
-      expect(described_class.item(mms_id: '123', holding_id: '456', item_pid: '789'))
+      expect(described_class.item(mms_id: '123', holding_id: '456', item_id: '789'))
         .to be_a Inventory::Service::Item
     end
 
     it 'raises an ArgumentError if a parameter is missing' do
-      expect { described_class.item(mms_id: '123', holding_id: '456', item_pid: nil) }.to raise_error ArgumentError
+      expect { described_class.item(mms_id: '123', holding_id: '456', item_id: nil) }.to raise_error ArgumentError
     end
   end
 

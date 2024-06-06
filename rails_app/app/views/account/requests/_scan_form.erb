@@ -1,5 +1,5 @@
 <%= form_with(url: requests_path, method: :post) do %>
-  <%= hidden_field_tag :requesttype, 'Article' if @ill_params.open_params.blank? %>
+  <%= hidden_field_tag :delivery, Fulfillment::Request::Options::ELECTRONIC %>
 
   <%= render 'hidden_fields' %>
 
@@ -26,10 +26,10 @@
         <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
-        <%= label_tag :rftdate do %>
+        <%= label_tag :date do %>
           <%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
-        <%= text_field_tag :rftdate, @ill_params.rftdate, class: 'form-control mt-1', required: true %>
+        <%= text_field_tag :date, @ill_params.date, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :volume, t('account.ill.form.scan.volume') %>

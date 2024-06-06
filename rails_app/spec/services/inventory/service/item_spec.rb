@@ -185,7 +185,7 @@ describe Inventory::Service::Item do
       it 'returns scan option if item is scannable' do
         item = build :item
         options = item.fulfillment_options(ils_group: 'group')
-        expect(options).to include :scan
+        expect(options).to include :electronic
       end
     end
   end

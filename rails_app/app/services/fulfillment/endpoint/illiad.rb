@@ -33,9 +33,8 @@ module Fulfillment
           find_or_create user: request.user
           body = submission_body_from request
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction) if request.fulfillment_options[:note].present?
-          Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}",
-                      item_desc: '', fulfillment_desc: '')
+          add_notes(request, transaction) if request.fulfillment_params[:note].present?
+          Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
         # @param [Request] request
@@ -43,6 +42,15 @@ module Fulfillment
           errors = []
           errors << 'No user identifier provided' if request.user&.uid.blank?
           errors
+        end
+
+        def submission_body_from(request)
+          if request.scan?
+            scandelivery_request_body(request)
+          else
+            body = book_request_body(request)
+            append_routing_info(body, request)
+          end
         end
 
         private
@@ -62,57 +70,53 @@ module Fulfillment
           raise UserError, "Problem creating Illiad user: #{e.message}"
         end
 
-        def submission_body_from(request)
-          if request.fulfillment_options[:delivery] == Request::Options::ELECTRONIC_DELIVERY
-            scandelivery_request_body(request)
-          else
-            body = book_request_body(request)
-            append_routing_info(body, request)
-          end
-        end
-
         def add_notes(request, transaction)
           number = transaction.id
-          note = request.fulfillment_options[:note]
+          note = request.fulfillment_params[:note]
           note += " - comment submitted by #{request.user.uid}"
           # TODO: do we need to specify NOTE_TYPE in the POST body? We do in Franklin
+          #   Carla: seems like something we should do (MK: in the service)
           ::Illiad::Request.add_note(id: number, note: note)
         end
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def book_request_body(request)
-          { Username: request.user.id,
+          { Username: request.user.uid,
             RequestType: ::Illiad::Request::LOAN,
             DocumentType: 'Book',
-            LoanAuthor: request.item_parameters[:author],
-            LoanTitle: request.item_parameters[:title],
-            LoanPublisher: request.item_parameters[:publisher],
-            LoanPlace: request.item_parameters[:place_published],
-            LoanDate: request.item_parameters[:date_published],
-            Location: request.item_parameters[:temp_aware_location_display],
-            CallNumber: request.item_parameters[:temp_aware_call_number],
-            ISSN: request.item_parameters[:issn] || request.item_parameters[:isbn] || request.item_parameters[:isxn],
-            CitedIn: request.item_parameters[:sid] || CITED_IN,
-            ItemInfo3: request.item_parameters[:barcode] }
+            LoanAuthor: request.params.author,
+            LoanTitle: request.params.book_title,
+            LoanPublisher: request.params.publisher,
+            LoanPlace: request.params.place,
+            LoanDate: request.params.date || request.params.year,
+            LoanEdition: request.params.edition,
+            Location: request.params.location,
+            CallNumber: request.params.call_number,
+            ISSN: request.params.isbn,
+            ESPNumber: request.params.pmid,
+            CitedIn: request.params.sid || CITED_IN,
+            ItemInfo3: request.params.barcode }
         end
+
+        # TODO: do we need special request body and/or type definition for "Book Chapter" and "Conference Paper"
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def scandelivery_request_body(request)
-          { Username: request.user.id,
+          { Username: request.user.uid,
             DocumentType: ::Illiad::Request::ARTICLE,
-            PhotoJournalTitle: request.item_parameters[:title],
-            PhotoJournalVolume: request.scan_details[:volume],
-            PhotoJournalIssue: request.scan_details[:issue],
-            PhotoJournalMonth: request.item_parameters[:pub_month],
-            PhotoJournalYear: request.item_parameters[:year],
-            PhotoJournalInclusivePages: request.scan_details[:section_pages],
-            ISSN: request.item_parameters[:issn],
-            ESPNumber: request.item_parameters[:pmid],
-            PhotoArticleAuthor: request.scan_details[:section_author],
-            PhotoArticleTitle: request.scan_details[:section_title],
-            CitedIn: request.item_parameters[:sid] || CITED_IN }
+            PhotoJournalTitle: request.params.book_title || request.params.journal,
+            PhotoJournalVolume: request.params.volume,
+            PhotoJournalIssue: request.params.issue,
+            PhotoJournalMonth: request.params.month,
+            PhotoJournalYear: request.params.date || request.params.year,
+            PhotoJournalInclusivePages: request.params.pages,
+            ISSN: request.params.issn || request.params.isbn,
+            ESPNumber: request.params.pmid,
+            PhotoArticleAuthor: request.params.author,
+            PhotoArticleTitle: request.params.chapter_title || request.params.article,
+            CitedIn: request.params.sid || CITED_IN }
         end
 
         # @note See class level docs above
@@ -120,16 +124,16 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.fulfillment_options[:delivery] == Request::Options::HOME_DELIVERY
+          if request.fulfillment_params[:delivery] == Request::Options::MAIL
             # Set "BBM" title prefix so requests are routes to BBM staff
             body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
             body[:ItemInfo1] = BOOKS_BY_MAIL
-          elsif request.fulfillment_options[:delivery] == Request::Options::OFFICE_DELIVERY
+          elsif request.fulfillment_params[:delivery] == Request::Options::OFFICE
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
           else
             # Otherwise, add pickup location to ItemInfo1
-            body[:ItemInfo1] = request.fulfillment_options[:pickup_location]
+            body[:ItemInfo1] = request.fulfillment_params[:pickup_location]
           end
           body
         end

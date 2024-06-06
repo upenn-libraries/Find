@@ -1,6 +1,4 @@
 <%= form_with(url: requests_path, method: :post) do %>
-  <%= hidden_field_tag :requesttype, 'Book' if @ill_params.open_params.blank? %>
-
   <%= render 'hidden_fields' %>
 
   <div class="row">
@@ -59,7 +57,7 @@
             <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user)) %>
           <% end %>
 
-          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user)) %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user, ill: true)) %>
 
           <%= render(Account::Requests::Options::MailComponent.new) %>
         </ul>

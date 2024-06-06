@@ -8,14 +8,15 @@ module Account
 
       attr_accessor :item, :user, :options
 
-      def initialize(user:, options:)
+      def initialize(user:, item:, options:)
         @user = user
+        @item = item
         @options = options.inquiry
       end
 
       # Returns true if at least one delivery option is available.
       def deliverable?
-        options.any?(:scan, :pickup, :mail, :office)
+        options.any?(:electronic, :pickup, :mail, :office)
       end
     end
   end

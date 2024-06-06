@@ -87,15 +87,14 @@ module Fulfillment
           search('pmonth', 'rft.month')
         end
 
-        # TODO: maybe convert to `date`
-        def rftdate
-          search('rftdate', 'rft.date')
+        def date
+          search('rftdate', 'rft.date', 'date')
         end
 
         def year
           # Relais/BD sends dates through as rft.date but it may be a book request
           if borrow_direct? && request_type == 'Book'
-            open_params['date'].presence || rftdate
+            date
           else
             search('Year', 'year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
           end
@@ -129,9 +128,9 @@ module Fulfillment
           search('UserId', 'comments')
         end
 
-        # Bib id for record in Alma. Used when submitting Illiad request.
-        def bibid
-          search('record_id', 'id', 'bibid')
+        # MMS id for record in Alma. Used when submitting Illiad request.
+        def mms_id
+          search('mms_id', 'record_id', 'id', 'bibid')
         end
 
         def pages
@@ -152,6 +151,21 @@ module Fulfillment
           return nil unless open_params['rft_id'].present? && open_paramsp['rft_id'].starts_with?('pmid')
 
           open_params['rft_id'].split(':')[1]
+        end
+
+        # Call number for item in our collection.
+        def call_number
+          search('call_number')
+        end
+
+        # Location where item is held. This only items to items in our collection.
+        def location
+          search('location')
+        end
+
+        # Barcode for item in our collection.
+        def barcode
+          search('barcode')
         end
 
         # Return true if this is a BorrowDirect request.

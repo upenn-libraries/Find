@@ -7,15 +7,15 @@ module Inventory
     class Physical
       class BoundwithError < StandardError; end
 
-      # Get a single Item for a given mms_id, holding_id, and item_pid
+      # Get a single Item for a given mms_id, holding_id, and item_id
       # @params mms_id [String] the Alma mms_id
       # @params holding_id [String] the Alma holding_id
-      # @params item_pid [String] the Alma item_pid
+      # @params item_id [String] the Alma item_pid
       # @return [PennItem]
-      def self.item(mms_id:, holding_id:, item_pid:)
-        raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id && item_pid
+      def self.item(mms_id:, holding_id:, item_id:)
+        raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id && item_id
 
-        item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_pid).item
+        item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_id).item
         Inventory::Service::Item.new(item)
       end
 

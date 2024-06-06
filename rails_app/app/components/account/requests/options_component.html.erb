@@ -3,29 +3,19 @@
     <fieldset>
       <legend class="h6"> <%= t('requests.form.options.label') %></legend>
       <ul class="list-group js_radio-options mb-3">
-        <% if options.scan? %>
-          <li class="list-group-item">
-            <div class="form-check">
-              <%= radio_button_tag :delivery, :scan, true, class: 'form-check-input', data: { action: 'change->options-select#optionChanged' } %>
-              <%= label_tag :delivery_scan, t('requests.form.options.scan.label'), class: 'form-check-label' %>
-              <div>
-                <small class="text-muted">
-                  <%= t('requests.form.options.scan.info_html', url: t('urls.guides.scan')) %>
-                </small>
-              </div>
-            </div>
-          </li>
+        <% if options.electronic? %>
+          <%= render(Account::Requests::Options::ElectronicComponent.new(checked: true, data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
 
         <% if options.office? %>
           <%= render(Account::Requests::Options::OfficeComponent.new(user: user,
-                                                                     checked: !options.scan?,
+                                                                     checked: !options.electronic?,
                                                                      data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
 
         <% if options.pickup? %>
           <%= render(Account::Requests::Options::PickupComponent.new(user: user,
-                                                                     checked: !options.any?(:scan, :office),
+                                                                     checked: !options.any?(:electronic, :office),
                                                                      data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
 
@@ -35,6 +25,10 @@
       </ul>
     </fieldset>
 
+    <%# Add hidden fields with values needed for form submission to the request endpoint. %>
+    <% item.fulfillment_submission_params.each do |k, v| %>
+      <%= hidden_field_tag k, v %>
+    <% end %>
   <% elsif options.aeon? %>
     <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.requesting_info.kislak_reading_room')) %></p>
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
@@ -46,9 +40,9 @@
   <div class="request-buttons">
     <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
     <%= link_to t('requests.form.buttons.scan'),
-                ill_new_request_path,
+                ill_new_request_path(**item.fulfillment_submission_params),
                 { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'scanButton', turbo_frame: '_top' } } %>
+                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } } %>
     <%= submit_tag t('requests.form.buttons.delivery'),
                    { class: 'd-none btn btn-success btn-lg',
                      data: { options_select_target: 'officeButton', turbo_frame: '_top' } } %>
@@ -58,6 +52,8 @@
     <%= submit_tag t('requests.form.buttons.mail'),
                    { class: 'd-none btn btn-success btn-lg',
                      data: { options_select_target: 'mailButton', turbo_frame: '_top' } } %>
+    <%# set additional bib data fields (title, location, call number, barcode %>
+
     <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
     <%= link_to t('requests.form.buttons.aeon'),
                 '',

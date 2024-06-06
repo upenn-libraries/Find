@@ -197,11 +197,11 @@ describe 'Catalog Show Page' do
       end
 
       it 'shows the item dropdown when there are more than one item' do
-        expect(page).to have_selector 'select#item_pid'
+        expect(page).to have_selector 'select#item_id'
       end
 
       it 'shows request options when an item is selected' do
-        find('select#item_pid').find(:option, items.first.description).select_option
+        find('select#item_id').find(:option, items.first.description).select_option
         expect(page).to have_selector '.js_radio-options'
       end
     end

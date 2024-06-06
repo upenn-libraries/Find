@@ -5,19 +5,20 @@ module Fulfillment
   class Request
     class LogicFailure < StandardError; end
 
-    ITEM_PARAMETERS = %w[mms_id holding_id item_id title author year edition publisher place isbn comments pmid].freeze
-    FULFILLMENT_PARAMETERS = %w[pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
-    SCAN_DETAIL_PARAMETERS = %w[journal article rftdate volume issue pages comments].freeze
+    ITEM_PARAMETERS = %i[mms_id holding_id item_id title author year edition publisher place isbn comments pmid].freeze
+    FULFILLMENT_PARAMETERS = %i[pickup_location delivery].freeze # TODO: proxy request parameters would go here, FacEx?
+    SCAN_DETAIL_PARAMETERS = %i[journal article rftdate volume issue pages comments].freeze
 
     module Options
       AEON = :aeon
-      ELECTRONIC_DELIVERY = :electronic
-      HOME_DELIVERY = :home_delivery
-      OFFICE_DELIVERY = :office_delivery
+      ELECTRONIC = :electronic
+      MAIL = :mail
+      OFFICE = :office
       PICKUP = :pickup
+      ILL_PICKUP = :ill_pickup
     end
 
-    attr_reader :user, :raw_params, :item_parameters, :fulfillment_options, :scan_details, :endpoint
+    attr_reader :user, :raw_params, :params, :fulfillment_params, :endpoint
 
     # Create a new Request to Broker
     #
@@ -34,10 +35,9 @@ module Fulfillment
     def initialize(user:, params:)
       @user = user
       @raw_params = params
-      @item_parameters = params.permit(ITEM_PARAMETERS)
-      @fulfillment_options = params.permit(FULFILLMENT_PARAMETERS)
-      @scan_details = params.permit(SCAN_DETAIL_PARAMETERS)
+      @fulfillment_params = params.extract!(*FULFILLMENT_PARAMETERS)
       set_endpoint # set endpoint upon initialization so errors can be caught prior to submission
+      set_params
     end
 
     # Convenience method for submitting directly
@@ -48,8 +48,12 @@ module Fulfillment
       Service.new(request: request).submit
     end
 
+    def set_params
+      @params = "#{endpoint}::Params".constantize.new(raw_params)
+    end
+
     def set_endpoint
-      @endpoint = if scan? || books_by_mail? || delivery? || ill_pickup?
+      @endpoint = if scan? || mail? || office? || ill_pickup?
                     Fulfillment::Endpoint::Illiad
                   elsif aeon?
                     Fulfillment::Endpoint::Aeon
@@ -61,29 +65,27 @@ module Fulfillment
     end
 
     def scan?
-      fulfillment_options[:delivery] == Options::ELECTRONIC_DELIVERY
+      fulfillment_params[:delivery] == Options::ELECTRONIC
     end
 
-    def books_by_mail?
-      fulfillment_options[:delivery] == Options::HOME_DELIVERY
+    def mail?
+      fulfillment_params[:delivery] == Options::MAIL
     end
 
-    def delivery?
-      fulfillment_options[:delivery] == Options::OFFICE_DELIVERY
+    def office?
+      fulfillment_params[:delivery] == Options::OFFICE
     end
 
     def aeon?
-      fulfillment_options[:delivery] == Options::AEON
+      fulfillment_params[:delivery] == Options::AEON
     end
 
     def pickup?
-      fulfillment_options[:delivery]&.to_sym == Options::PICKUP &&
-        (item_parameters[:holding_id].present? || item_parameters[:item_id].present?)
+      fulfillment_params[:delivery]&.to_sym == Options::PICKUP
     end
 
     def ill_pickup?
-      fulfillment_options[:delivery] == Options::PICKUP &&
-        (item_parameters[:holding_id].blank? && item_parameters[:item_id].blank?)
+      fulfillment_params[:delivery] == Options::ILL_PICKUP
     end
   end
 end
