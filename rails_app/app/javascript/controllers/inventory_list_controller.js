@@ -2,19 +2,19 @@ import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
     static targets = [
-        "holdingButton",
+        "entryButton",
     ];
 
     // Add holding ID to URL on page load (or controller connect)
     connect() {
-        let activeHoldingButton = this.holdingButtonTargets
+        let activeEntryButton = this.entryButtonTargets
             .find(button => button.classList.contains("active"));
-        let activeHoldingID = activeHoldingButton.dataset.entryId;
-        this.addIDToURL(activeHoldingID);
+        let activeEntryID = activeEntryButton.dataset.entryId;
+        this.addIDToURL(activeEntryID);
     }
 
     // Add holding ID to URL when a new holding is selected
-    holdingChanged(event) {
+    entryChanged(event) {
         this.addIDToURL(event.currentTarget.dataset.entryId);
     }
 
