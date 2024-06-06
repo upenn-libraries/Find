@@ -175,7 +175,9 @@ en:
           index: '#'
           title: 'Title'
           status: 'Due date / Status'
-          identifier: 'Identifier'
+          barcode: 'Barcode'
+          renewable: 'Renewable?'
+          transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
         alerts: '<ul>%{alerts}</ul>'
