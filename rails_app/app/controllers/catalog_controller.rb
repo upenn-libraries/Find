@@ -125,8 +125,7 @@ class CatalogController < ApplicationController
                                         last_10_years: { label: I18n.t('facets.recently_published.10_years'),
                                                          fq: 'publication_date_sort:[NOW/YEAR-9YEARS TO *]' },
                                         last_15_years: { label: I18n.t('facets.recently_published.15_years'),
-                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' }
-      }
+                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } }
     config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
       { 'facet.mincount': 1 }, query: {
         within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
