@@ -14,15 +14,14 @@ module Fulfillment
 
     # @return [Fulfillment::Outcome]
     def submit
-      @errors = endpoint.validate(request: request) # return early with Outcome if validation fails...
+      @errors = endpoint.validate(request: request) # return early with Outcome if validation fails
       return failed_outcome if errors.any?
 
-      outcome = endpoint.submit(request: request) # this could return an error...rescue?
+      outcome = endpoint.submit(request: request)
       notify outcome: outcome
       outcome
     rescue StandardError => e
-      # TODO: Illiad submit could raise interesting exceptions, but we may not want to display to patron
-      errors << 'An internal error occurred.'
+      @errors << 'An internal error occurred.'
       Honeybadger.notify(e)
       failed_outcome
     end

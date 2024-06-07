@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 describe Fulfillment::Service do
+  include Illiad::ApiMocks::User
+
   let(:result) { described_class.new(request: request).submit }
 
   describe '#submit' do
-    context 'with a submission destined for illiad' do
+    context 'with a submission destined for Illiad' do
       let(:backend) { Fulfillment::Endpoint::Illiad }
       let(:request) { build(:fulfillment_request, :with_item, :books_by_mail) }
 
@@ -32,6 +34,17 @@ describe Fulfillment::Service do
         it 'returns a failed outcome' do
           expect(result).to be_a Fulfillment::Outcome
           expect(result.errors).to eq validation_errors
+        end
+      end
+
+      context 'with an exception raised on submission' do
+        before do
+          allow(Illiad::Request).to receive(:submit).and_raise(Illiad::Client::Error)
+          stub_find_user_success(id: request.user.uid, response_body: build(:illiad_user_response))
+        end
+
+        it 'properly returns an outcome with error noted' do
+          expect(result.errors).to eq ['An internal error occurred.']
         end
       end
     end
