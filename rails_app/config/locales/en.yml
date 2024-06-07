@@ -233,7 +233,7 @@ en:
       item_placeholder: 'Choose an item...'
       buttons:
         scan: 'Continue to request a scan'
-        delivery: 'Place delivery request'
+        office: 'Place delivery request'
         pickup: 'Place pickup request'
         mail: 'Place mail request'
         aeon: 'Schedule visit'

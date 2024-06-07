@@ -9,31 +9,19 @@ module Fulfillment
       class Params
         attr_reader :open_params
 
-        # TODO: we should memoize all of these methods
-
         def initialize(open_params)
           @open_params = open_params
         end
 
-        # Skipping mapping the following values because it looks like they are unused in the form or submission request:
-        #   - 'AN'
-        #   - 'PY'
-        #   - 'PB'
-        #   - 'pid'
-        #   - 'source'
-
-        # TODO: this should be memoized
-
         # Request type. Used to be requesttype.
         def request_type
           if search('genre', 'rft.genre')&.downcase == 'unknown'
-            'Book'
+            'book'
           else
-            type = search('genre', 'Type', 'requesttype', 'rft.genre') || 'Article'
-            type = 'Article' if type == 'issue'
-            type = type.sub(/^(journal|bookitem|book|conference|article|preprint|proceeding).*?$/i, '\1')
-            type = type.capitalize if %w[article book].member?(type)
-            type
+            type = search('genre', 'Type', 'requesttype', 'rft.genre') || 'article'
+            type = type.downcase
+            type = 'article' if type == 'issue'
+            type.sub(/^(journal|bookitem|book|conference|article|preprint|proceeding).*?$/i, '\1')
           end
         end
 
@@ -42,7 +30,7 @@ module Fulfillment
                             [aulast, search('rft.aufirst')].join(',')
                           end
 
-          search('Author', 'author', 'aau', 'au', 'rft.au') || combined_name
+          search('author', 'Author', 'aau', 'au', 'rft.au') || combined_name
         end
 
         # Chapter title. Used to be chaptitle.
@@ -70,7 +58,7 @@ module Fulfillment
         def journal
           return open_params['bookTitle'] if open_params['bookTitle'].present? && request_type == 'bookitem'
 
-          search('Journal', 'journal', 'rft.btitle', 'rft.jtitle', 'rft.title', 'title')
+          search('journal', 'Journal', 'rft.btitle', 'rft.jtitle', 'rft.title', 'title')
         end
 
         # Instead of using this method we should be able to use params.book_title || params.journal
@@ -79,7 +67,7 @@ module Fulfillment
         # end
 
         def article
-          search('Article', 'article', 'atitle', 'rft.atitle')
+          search('article', 'Article', 'atitle', 'rft.atitle')
         end
 
         # Month of publication (usually used for Journals). Used when submitting Illiad request. Used to be pmonth.
@@ -88,7 +76,7 @@ module Fulfillment
         end
 
         def date
-          search('rftdate', 'rft.date', 'date')
+          search('date', 'rftdate', 'rft.date')
         end
 
         def year
@@ -96,16 +84,16 @@ module Fulfillment
           if borrow_direct? && request_type == 'Book'
             date
           else
-            search('Year', 'year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
+            search('year', 'Year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
           end
         end
 
         def volume
-          search('Volume', 'volume', 'rft.volume')
+          search('volume', 'Volume', 'rft.volume')
         end
 
         def issue
-          search('Issue', 'issue', 'rft.issue')
+          search('issue', 'Issue', 'rft.issue')
         end
 
         def issn
@@ -125,7 +113,7 @@ module Fulfillment
         end
 
         def comments
-          search('UserId', 'comments')
+          search('comments', 'UserId')
         end
 
         # MMS id for record in Alma. Used when submitting Illiad request.
@@ -177,14 +165,14 @@ module Fulfillment
         def loan?
           return false if open_params.blank?
 
-          request_type == 'Book'
+          request_type == 'book'
         end
 
-        # Request to scan an article or chapter.
+        # Request to scan an article or chapter. This handles all non-book cases.
         def scan?
           return false if open_params.blank?
 
-          request_type == 'Article'
+          !loan?
         end
 
         # Sequentially looks up each key provided and returns the first value that returns true to `present?`.

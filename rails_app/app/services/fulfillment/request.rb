@@ -10,7 +10,7 @@ module Fulfillment
     SCAN_DETAIL_PARAMETERS = %i[journal article rftdate volume issue pages comments].freeze
 
     module Options
-      AEON = :aeon
+      # AEON = :aeon
       ELECTRONIC = :electronic
       MAIL = :mail
       OFFICE = :office
@@ -55,8 +55,8 @@ module Fulfillment
     def set_endpoint
       @endpoint = if scan? || mail? || office? || ill_pickup?
                     Fulfillment::Endpoint::Illiad
-                  elsif aeon?
-                    Fulfillment::Endpoint::Aeon
+                  # elsif aeon?
+                  #   Fulfillment::Endpoint::Aeon
                   elsif pickup?
                     Fulfillment::Endpoint::Alma
                   else
@@ -65,27 +65,27 @@ module Fulfillment
     end
 
     def scan?
-      fulfillment_params[:delivery] == Options::ELECTRONIC
+      fulfillment_params[:delivery].to_sym == Options::ELECTRONIC
     end
 
     def mail?
-      fulfillment_params[:delivery] == Options::MAIL
+      fulfillment_params[:delivery].to_sym == Options::MAIL
     end
 
     def office?
-      fulfillment_params[:delivery] == Options::OFFICE
+      fulfillment_params[:delivery].to_sym == Options::OFFICE
     end
 
-    def aeon?
-      fulfillment_params[:delivery] == Options::AEON
-    end
+    # def aeon?
+    #   fulfillment_params[:delivery].to_sym == Options::AEON
+    # end
 
     def pickup?
       fulfillment_params[:delivery]&.to_sym == Options::PICKUP
     end
 
     def ill_pickup?
-      fulfillment_params[:delivery] == Options::ILL_PICKUP
+      fulfillment_params[:delivery].to_sym == Options::ILL_PICKUP
     end
   end
 end

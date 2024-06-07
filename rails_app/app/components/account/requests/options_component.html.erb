@@ -38,21 +38,10 @@
     </p>
   <% end %>
   <div class="request-buttons">
-    <%# TODO: pass all open params to the ill_new_request_path to pass params to ILL form %>
-    <%= link_to t('requests.form.buttons.scan'),
-                ill_new_request_path(**item.fulfillment_submission_params),
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } } %>
-    <%= submit_tag t('requests.form.buttons.delivery'),
-                   { class: 'd-none btn btn-success btn-lg',
-                     data: { options_select_target: 'officeButton', turbo_frame: '_top' } } %>
-    <%= submit_tag t('requests.form.buttons.pickup'),
-                   { class: 'd-none btn btn-success btn-lg',
-                     data: { options_select_target: 'pickupButton', turbo_frame: '_top' } } %>
-    <%= submit_tag t('requests.form.buttons.mail'),
-                   { class: 'd-none btn btn-success btn-lg',
-                     data: { options_select_target: 'mailButton', turbo_frame: '_top' } } %>
-    <%# set additional bib data fields (title, location, call number, barcode %>
+    <%= electronic_delivery_link %>
+    <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
+    <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
+    <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
 
     <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
     <%= link_to t('requests.form.buttons.aeon'),

@@ -40,13 +40,13 @@ describe Fulfillment::Request do
       end
     end
 
-    context 'with requests destined for Aeon' do
-      let(:destination) { Fulfillment::Endpoint::Aeon }
-
-      it 'properly returns the endpoint for Aeon requests' do
-        request = build(:fulfillment_request, :aeon)
-        expect(request.endpoint).to eq destination
-      end
-    end
+    # context 'with requests destined for Aeon' do
+    #   let(:destination) { Fulfillment::Endpoint::Aeon }
+    #
+    #   it 'properly returns the endpoint for Aeon requests' do
+    #     request = build(:fulfillment_request, :aeon)
+    #     expect(request.endpoint).to eq destination
+    #   end
+    # end
   end
 end

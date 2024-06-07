@@ -38,10 +38,9 @@ FactoryBot.define do
       fulfillment_params { { delivery: Fulfillment::Request::Options::OFFICE } }
     end
 
-    # Office delivery (FacultyExpress) will come via Item Request for or Illiad form and go into Illiad
-    trait :aeon do
-      fulfillment_params { { delivery: Fulfillment::Request::Options::AEON } }
-    end
+    # trait :aeon do
+    #   fulfillment_params { { delivery: Fulfillment::Request::Options::AEON } }
+    # end
 
     trait :pickup do
       fulfillment_params { { delivery: Fulfillment::Request::Options::PICKUP, pickup_location: 'van_pelt' } }
