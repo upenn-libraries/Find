@@ -31,6 +31,10 @@ module Fulfillment
         def title
           params[:title].presence
         end
+
+        def author
+          params[:author].presence
+        end
       end
     end
   end

@@ -5,7 +5,7 @@ describe Fulfillment::Endpoint::Illiad do
   include Illiad::ApiMocks::Request
 
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_bib, :pickup, user: nil) }
+    let(:bad_request) { build(:fulfillment_request, :with_bib_info, :pickup, user: nil) }
 
     it 'adds error messages to errors' do
       expect(described_class.validate(request: bad_request)).to match_array ['No user identifier provided']
@@ -14,7 +14,7 @@ describe Fulfillment::Endpoint::Illiad do
 
   describe '.submit' do
     context 'with a successful BBM delivery request' do
-      let(:bbm_request) { build(:fulfillment_request, :with_bib, :books_by_mail) }
+      let(:bbm_request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }
       let(:response_hash) { { 'a' => 'b' } }
       let(:note) { " - comment submitted by #{bbm_request.user.uid}" }
 

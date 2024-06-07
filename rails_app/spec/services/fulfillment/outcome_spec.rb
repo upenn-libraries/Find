@@ -26,5 +26,15 @@ describe Fulfillment::Outcome do
     it 'has a confirmation number' do
       expect(outcome.confirmation_number).to eq params[:confirmation_number]
     end
+
+    it 'has the proper item_desc' do
+      expect(outcome.item_desc).to eq("#{request.params.title} - #{request.params.author}")
+    end
+
+    it 'has the proper fulfillment_desc' do
+      expect(outcome.fulfillment_desc).to eq(
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: request.pickup_location)
+      )
+    end
   end
 end

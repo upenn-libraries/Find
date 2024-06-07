@@ -33,7 +33,7 @@ module Fulfillment
           find_or_create user: request.user
           body = submission_body_from request
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction) if request.fulfillment_params[:note].present?
+          add_notes(request, transaction) if request.params.comments.present?
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
@@ -72,7 +72,7 @@ module Fulfillment
 
         def add_notes(request, transaction)
           number = transaction.id
-          note = request.fulfillment_params[:note]
+          note = request.params.comments
           note += " - comment submitted by #{request.user.uid}"
           # TODO: do we need to specify NOTE_TYPE in the POST body? We do in Franklin
           #   Carla: seems like something we should do (MK: in the service)
@@ -106,7 +106,7 @@ module Fulfillment
         def scandelivery_request_body(request)
           { Username: request.user.uid,
             DocumentType: ::Illiad::Request::ARTICLE,
-            PhotoJournalTitle: request.params.book_title || request.params.journal,
+            PhotoJournalTitle: request.params.title,
             PhotoJournalVolume: request.params.volume,
             PhotoJournalIssue: request.params.issue,
             PhotoJournalMonth: request.params.month,
@@ -124,16 +124,16 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.fulfillment_params[:delivery] == Request::Options::MAIL
+          if request.delivery == Request::Options::MAIL
             # Set "BBM" title prefix so requests are routes to BBM staff
             body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
             body[:ItemInfo1] = BOOKS_BY_MAIL
-          elsif request.fulfillment_params[:delivery] == Request::Options::OFFICE
+          elsif request.delivery == Request::Options::OFFICE
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
           else
             # Otherwise, add pickup location to ItemInfo1
-            body[:ItemInfo1] = request.fulfillment_params[:pickup_location]
+            body[:ItemInfo1] = request.pickup_location
           end
           body
         end

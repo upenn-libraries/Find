@@ -61,10 +61,9 @@ module Fulfillment
           search('journal', 'Journal', 'rft.btitle', 'rft.jtitle', 'rft.title', 'title')
         end
 
-        # Instead of using this method we should be able to use params.book_title || params.journal
-        # def title
-        #   book_title || journal
-        # end
+        def title
+          book_title || journal
+        end
 
         def article
           search('article', 'Article', 'atitle', 'rft.atitle')

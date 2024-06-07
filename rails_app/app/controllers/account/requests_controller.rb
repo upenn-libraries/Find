@@ -21,7 +21,7 @@ module Account
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      outcome = Fulfillment::Request.submit(user: current_user, params: raw_params)
+      outcome = Fulfillment::Request.submit(user: current_user, **raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
         redirect_to shelf_path

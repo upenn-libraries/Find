@@ -283,6 +283,13 @@ en:
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+  fulfillment:
+    outcome:
+      email:
+        pickup: 'Will be available to pickup at %{pickup_location}.'
+        electronic: 'Will be made electronically available in your library account.'
+        mail: 'Will be delivered to your Books by Mail address.'
+        office: 'Will be delivered to your FacultyExpress office location.'
   search:
     all_fields: 'All Fields'
     button:

@@ -14,8 +14,8 @@ module Fulfillment
         @errors = errors
       else
         @state = :success
-        # @item_desc = request.params.title # TODO: build these from request.params
-        # @fulfillment_desc = request.fulfillment_desc
+        @item_desc = [request.params.title, request.params.author].compact.join(' - ')
+        @fulfillment_desc = fulfillment_description
         @confirmation_number = confirmation_number
       end
     end
@@ -33,6 +33,17 @@ module Fulfillment
     # @return [Boolean]
     def failed?
       @state == :failed
+    end
+
+    private
+
+    def fulfillment_description
+      case request.delivery
+      when Request::Options::PICKUP
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: request.pickup_location)
+      else
+        I18n.t(request.delivery, scope: 'fulfillment.outcome.email')
+      end
     end
   end
 end

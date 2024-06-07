@@ -22,7 +22,7 @@ module Fulfillment
         # @return [Array<String (frozen)>]
         def validate(request:)
           errors = []
-          errors << 'No pickup location provided' if request.fulfillment_params[:pickup_location].blank?
+          errors << 'No pickup location provided' if request.pickup_location.blank?
           errors << 'No record identifier provided' if request.params.mms_id.blank?
           errors << 'No holding identifier provided' if request.params.holding_id.blank?
           errors << 'No user identifier provided' if request.user&.uid.blank?
@@ -40,7 +40,7 @@ module Fulfillment
             mms_id: request.params.mms_id,
             holding_id: request.params.holding_id,
             pickup_location_type: 'LIBRARY',
-            pickup_location_library: request.fulfillment_params[:pickup_location] }
+            pickup_location_library: request.pickup_location }
         end
       end
     end
