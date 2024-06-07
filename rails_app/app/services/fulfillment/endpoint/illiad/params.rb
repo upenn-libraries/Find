@@ -80,7 +80,7 @@ module Fulfillment
 
         def year
           # Relais/BD sends dates through as rft.date but it may be a book request
-          if borrow_direct? && request_type == 'Book'
+          if borrow_direct? && request_type == 'book'
             date
           else
             search('year', 'Year', 'rft.year', 'rft.pubyear', 'rft.pubdate')
@@ -124,7 +124,7 @@ module Fulfillment
           spage = search('Spage', 'spage', 'rft.spage')
           epage = search('Epage', 'epage', 'rft.epage')
 
-          spage, epage = open_params['Pages'].split(/-/) if open_params['Pages'].present? && spage.empty?
+          spage, epage = open_params['Pages'].split(/-/) if open_params['Pages'].present? && spage.blank?
 
           pages = open_params['pages'].presence
           pages = [spage, epage].join('-') if pages.blank?
@@ -135,7 +135,7 @@ module Fulfillment
 
         # Pubmed identifier. Used when submitting Illiad request.
         def pmid
-          return nil unless open_params['rft_id'].present? && open_paramsp['rft_id'].starts_with?('pmid')
+          return nil unless open_params['rft_id'].present? && open_params['rft_id'].starts_with?('pmid')
 
           open_params['rft_id'].split(':')[1]
         end
