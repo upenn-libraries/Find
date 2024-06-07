@@ -24,14 +24,21 @@ describe Inventory::Service::Physical do
     it 'returns an array of PennItems when items are present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [item])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
+      expect(described_class.items(mms_id: '123', holding_id: '456').first).to be_a Inventory::Service::Item
     end
 
     it 'returns an array of PennItems when items are not present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [])
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
       allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
-      expect(described_class.items(mms_id: '123', holding_id: '456')).to all(be_a Inventory::Service::Item)
+      expect(described_class.items(mms_id: '123', holding_id: '456').first).to be_a Inventory::Service::Item
+    end
+
+    it 'returns an empty array when holding data is blank' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [])
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      allow(Alma::BibHolding).to receive(:find_all).and_return({})
+      expect(described_class.items(mms_id: '123', holding_id: '456')).to eq []
     end
 
     it 'raises an ArgumentError if a parameter is missing' do

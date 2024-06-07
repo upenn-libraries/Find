@@ -9,6 +9,12 @@ module Illiad
     ROUTE_PATH = 'route'
     ARTICLE = 'Article'
     LOAN = 'Loan'
+    # Statues
+    FINISHED = 'Request Finished'
+    CANCELLED = 'Cancelled by ILL Staff'
+    CHECKED_OUT = 'Checked Out to Customer'
+    # BorrowDirect system id
+    BD_SYSTEM_ID = 'Reshare:upennbd'
 
     attr_reader :data
 
@@ -67,14 +73,14 @@ module Illiad
       data[:TransactionStatus]
     end
 
-    # @return [DateTime, nil]
+    # @return [Time, nil]
     def date
-      DateTime.parse(data[:TransactionDate]) if data[:TransactionDate].present?
+      Time.zone.parse(data[:TransactionDate]) if data[:TransactionDate].present?
     end
 
-    # @return [DateTime, nil]
+    # @return [Time, nil]
     def due_date
-      DateTime.parse(data[:DueDate]) if data[:DueDate].present?
+      Time.zone.parse(data[:DueDate]) if data[:DueDate].present?
     end
 
     # @return [Boolean]

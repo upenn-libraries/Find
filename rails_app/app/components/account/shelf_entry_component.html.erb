@@ -1,0 +1,52 @@
+<h1 class="page__heading"><%= entry.title %></h1>
+<p class="page__lede"><%= entry.author %></p>
+
+<div class="col col-md-7">
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row"><%= t('account.shelf.table.th.status') %></th>
+          <td><%= render(Account::ShelfStatusComponent.new(entry)) %></td>
+        </tr>
+
+        <% if entry.ils_loan? %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.renewable') %></th>
+            <td><%= entry.renewable? ? 'Yes' : 'No' %></td>
+          </tr>
+        <% end %>
+
+        <% if entry.ill_transaction? %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.transaction_number') %></th>
+            <td><%= entry.id %></td>
+          </tr>
+        <% else %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.barcode') %></th>
+            <td><%= entry.barcode %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-flex flex-wrap">
+  <% if entry.ils_loan? && entry.renewable? %>
+    <%= form_with url: ils_renew_request_path(entry.id), method: :patch do |form| %>
+      <%= form.submit t('account.shelf.renew.button'), class: "btn btn-success" %>
+    <% end %>
+  <% end %>
+
+  <% if entry.ils_hold? && !entry.resource_sharing? %>
+    <%= form_with url: ils_hold_request_path(entry.id), method: :delete do |form| %>
+      <%= form.submit t('account.shelf.cancel.button'), class: "btn btn-danger" %>
+    <% end %>
+  <% end %>
+
+  <% if entry.mms_id %>
+    <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: "btn btn-link" %>
+  <% end %>
+</div>

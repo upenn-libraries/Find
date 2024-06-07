@@ -160,7 +160,28 @@ en:
       update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
     shelf:
       page_heading: 'Shelf'
+      page_lede: "View and renew items you've loaned or requested from the library."
+      no_items: 'You have no items on your shelf.'
+      identifier: '%{system} %{type} ID: %{id}'
+      table:
+        th:
+          index: '#'
+          title: 'Title'
+          status: 'Due date / Status'
+          barcode: 'Barcode'
+          renewable: 'Renewable?'
+          transaction_number: 'Transaction Number'
+      renew_all:
+        button: 'Renew all eligible'
+        alerts: '<ul>%{alerts}</ul>'
+        alert: '<li>%{alert}</li>'
+      bib_record_link: 'View title record page'
+      renew:
+        button: 'Renew this title'
+      cancel:
+        button: 'Cancel'
   header:
+    shelf: 'Shelf'
     bookmarks: 'Bookmarks'
     login: 'Login'
     service_lede: 'books, articles, and more'
