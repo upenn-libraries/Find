@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 describe Shelf::Service do
+  include Illiad::ApiMocks::Request
+
   let(:user_id) { 'test_user' }
   let(:shelf) { described_class.new(user_id) }
 
@@ -128,7 +130,46 @@ describe Shelf::Service do
     end
   end
 
-  describe '.ils_loans' do
+  describe '#delete_scan_transaction' do
+    let(:display_status_set) { build(:illiad_display_status_set) }
+
+    before do
+      allow(Illiad::DisplayStatus).to receive(:find_all).and_return(display_status_set)
+      allow(Illiad::Request).to receive(:find).with(id: ill_transaction.id).and_return(ill_transaction)
+    end
+
+    context 'when a loan transaction' do
+      let(:ill_transaction) { create(:illiad_request, :loan, Username: user_id) }
+
+      it 'raises error' do
+        expect {
+          shelf.delete_scan_transaction(ill_transaction.id)
+        }.to raise_error Shelf::Service::IlliadRequestError, 'Transaction cannot be deleted'
+      end
+    end
+
+    context 'when a scan transaction is not ready for download' do
+      let(:ill_transaction) { create(:illiad_request, :scan, Username: user_id) }
+
+      it 'raises error' do
+        expect {
+          shelf.delete_scan_transaction(ill_transaction.id)
+        }.to raise_error Shelf::Service::IlliadRequestError, 'Transaction cannot be deleted'
+      end
+    end
+
+    context 'when a scan transaction is ready for download' do
+      let(:ill_transaction) { create(:illiad_request, :scan_with_pdf_available, Username: user_id) }
+
+      it 'makes expected request to Illiad API' do
+        stub = stub_route_request_success(id: ill_transaction.id, status: 'Request Finished', response_body: '{}')
+        shelf.delete_scan_transaction(ill_transaction.id)
+        expect(stub).to have_been_requested
+      end
+    end
+  end
+
+  describe '#ils_loans' do
     context 'when successful' do
       include_context 'with mocked alma loans request'
 
@@ -154,7 +195,7 @@ describe Shelf::Service do
     end
   end
 
-  describe '.ils_holds' do
+  describe '#ils_holds' do
     include_context 'with mocked alma holds request'
 
     let(:holds) { create_list(:alma_hold, 1) }
@@ -216,7 +257,7 @@ describe Shelf::Service do
 
   describe '#ill_transaction' do
     let(:display_status_set) { build(:illiad_display_status_set) }
-    let(:ill_transaction) { create(:illiad_request, Username: user_id) }
+    let(:ill_transaction) { create(:illiad_request, :loan, Username: user_id) }
 
     context 'when successful' do
       before do

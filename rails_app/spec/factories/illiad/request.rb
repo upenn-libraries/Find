@@ -26,7 +26,13 @@ FactoryBot.define do
 
     trait :scan do
       add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+      add_attribute(:PhotoArticleTitle) { 'Chapter 1' }
       add_attribute(:PhotoArticleAuthor) { 'Random, Author' }
+    end
+
+    trait :scan_with_pdf_available do
+      scan
+      add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
     end
 
     trait :cancelled do

@@ -13,6 +13,7 @@ module Illiad
     FINISHED = 'Request Finished'
     CANCELLED = 'Cancelled by ILL Staff'
     CHECKED_OUT = 'Checked Out to Customer'
+    DELIVERED_TO_WEB = 'Delivered to Web'
     # BorrowDirect system id
     BD_SYSTEM_ID = 'Reshare:upennbd'
 
@@ -46,6 +47,16 @@ module Illiad
     def self.add_note(id:, note:)
       response = Client.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
       response.body
+    end
+
+    # Route a transaction to a specific status
+    # Wraps PUT 'Route Transaction' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @param status [String]
+    # @return [Illiad::Request]
+    def self.route(id:, status:)
+      response = Client.put("#{BASE_PATH}/#{id}/#{ROUTE_PATH}", { Status: status })
+      new(**response.body)
     end
 
     # @param data [Hash]

@@ -43,10 +43,10 @@ en:
           title:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
-          description: 'Borrow materials or request scans from partner libraries'
+          description: 'Borrow materials from partner libraries'
         scholarlycommons:
           title: 'ScholarlyCommons'
-          description: 'Penn dissertations, Penn faculty papers, and Penn Libraries publications'
+          description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
         search_center:
           title: 'Search Center'
           description: 'Biddle Law Library catalog'
@@ -66,7 +66,7 @@ en:
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
         finding_aids:
           title: 'Philadelphia Area Archives'
-          description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
+          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region.'
   account:
     breadcrumbs:
       root: 'Find'
@@ -170,6 +170,8 @@ en:
           status: 'Due date / Status'
           barcode: 'Barcode'
           renewable: 'Renewable?'
+          expires: 'Expires On'
+          pickup: 'Pick up'
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
@@ -178,8 +180,14 @@ en:
       bib_record_link: 'View title record page'
       renew:
         button: 'Renew this title'
+      download:
+        button: 'Download'
       cancel:
         button: 'Cancel'
+        success: 'Hold cancelled.'
+      delete:
+        button: 'Delete'
+        success: 'Scan request deleted.'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'
@@ -313,6 +321,7 @@ en:
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
+    harmful_language_statement_html: 'As you encounter harmful or offensive language and have questions or suggestions, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a>. More information at <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'

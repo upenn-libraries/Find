@@ -27,6 +27,10 @@
         <% partials.each do |partial| %>
           <%= partial %>
         <% end %>
+        <div class="mt-4">
+          <hr />
+          <p class="mb-0"><%= t('show.harmful_language_statement_html').html_safe %></p>
+        </div>
       </div>
       <%= thumbnail %>
     <% end %>
