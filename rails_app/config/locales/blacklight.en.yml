@@ -8,15 +8,13 @@ en:
     back_to_search: 'Back to Results'
     search:
       zero_results:
-        title: 'No results found'
-        modify_search: "If you still haven't found what you're looking for, try these options:"
-        options:
-          simplify: 'Remove some of your applied limits.'
-          articles: 'If you are searching for an article, try your search in Articles+.'
-          borrowdirect: 'Penn Libraries may not have what you are looking for. Try your search in BorrowDirect+ for access via a partner library.'
-          website: 'Try your search on the Penn Libraries homepage.'
-          scholar: 'Try your search in Google Scholar'
-          help: 'Ask us for help.'
+        title: "Your search found no results in the <strong>Catalog</strong>"
+        suggestions:
+          check_your_spelling: 'Please double check your spelling.'
+          try_general_keywords: 'Try more general keywords.'
+          try_different_keywords: 'Try different keywords that mean the same thing.'
+          try_advanced_html: 'Try <a href="/catalog/advanced">advanced search</a> to construct a targeted query.'
+          get_help_html: '<a href="%{url}">Get help from a librarian</a> to find what you are looking for.'
       pagination_info:
         single_item_found: '1 %{entry_name} found'
         pages:
