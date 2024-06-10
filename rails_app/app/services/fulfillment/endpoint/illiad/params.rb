@@ -124,11 +124,10 @@ module Fulfillment
           spage = search('Spage', 'spage', 'rft.spage')
           epage = search('Epage', 'epage', 'rft.epage')
 
-          spage, epage = open_params['Pages'].split(/-/) if open_params['Pages'].present? && spage.blank?
-
           pages = open_params['pages'].presence
-          pages = [spage, epage].join('-') if pages.blank?
-          pages = 'none specified' if pages.empty?
+          pages = "#{spage}-#{epage}" if pages.blank? && (spage || epage)
+          pages = open_params['Pages'].presence if pages.blank?
+          pages = 'none specified' if pages.blank?
 
           pages
         end
