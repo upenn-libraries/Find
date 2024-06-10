@@ -43,10 +43,10 @@ en:
           title:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
-          description: 'Borrow materials or request scans from partner libraries'
+          description: 'Borrow materials from partner libraries'
         scholarlycommons:
           title: 'ScholarlyCommons'
-          description: 'Penn dissertations, Penn faculty papers, and Penn Libraries publications'
+          description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
         search_center:
           title: 'Search Center'
           description: 'Biddle Law Library catalog'
@@ -66,7 +66,7 @@ en:
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
         finding_aids:
           title: 'Philadelphia Area Archives'
-          description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
+          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region.'
   account:
     breadcrumbs:
       root: 'Find'
