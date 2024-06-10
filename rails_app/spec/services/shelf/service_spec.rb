@@ -148,7 +148,7 @@ describe Shelf::Service do
       end
     end
 
-    context 'when a scan transaction that is not ready for download' do
+    context 'when a scan transaction is not ready for download' do
       let(:ill_transaction) { create(:illiad_request, :scan, Username: user_id) }
 
       it 'raises error' do
@@ -158,7 +158,7 @@ describe Shelf::Service do
       end
     end
 
-    context 'when a scan transaction that is ready for download' do
+    context 'when a scan transaction is ready for download' do
       let(:ill_transaction) { create(:illiad_request, :scan_with_pdf_available, Username: user_id) }
 
       it 'makes expected request to Illiad API' do

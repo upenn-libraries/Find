@@ -71,7 +71,7 @@ module Account
       redirect_to request_path(:ils, :hold, params[:id]), notice: t('account.shelf.cancel.success')
     end
 
-    # "Delete" scan transaction but moving completed scan requests to "Request Finished".
+    # Moves completed scan requests to "Request Finished" status - doesn't really delete.
     # DELETE /account/requests/ill/transaction/:id
     def delete_transaction
       shelf_service.delete_scan_transaction(params[:id])
