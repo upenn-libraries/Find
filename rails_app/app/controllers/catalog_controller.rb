@@ -106,8 +106,11 @@ class CatalogController < ApplicationController
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
-                                                  show: database_selected
-    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
+                                                  show: database_selected,
+                                                  limit: -1, sort: 'index'
+    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'),
+                                           show: database_selected,
+                                           limit: -1, sort: 'index'
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
