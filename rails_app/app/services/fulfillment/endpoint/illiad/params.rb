@@ -62,7 +62,7 @@ module Fulfillment
         end
 
         def title
-          book_title || journal
+          journal || book_title
         end
 
         def article

@@ -31,7 +31,7 @@ module Fulfillment
       class << self
         def submit(request:)
           find_or_create user: request.user
-          body = submission_body_from request
+          body = BASE_TRANSACTION_ATTRIBUTES.merge(submission_body_from(request))
           transaction = ::Illiad::Request.submit data: body
           add_notes(request, transaction) if request.params.comments.present?
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
@@ -74,8 +74,6 @@ module Fulfillment
           number = transaction.id
           note = request.params.comments
           note += " - comment submitted by #{request.user.uid}"
-          # TODO: do we need to specify NOTE_TYPE in the POST body? We do in Franklin
-          #   Carla: seems like something we should do (MK: in the service)
           ::Illiad::Request.add_note(id: number, note: note)
         end
 

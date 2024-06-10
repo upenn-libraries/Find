@@ -147,15 +147,15 @@ module Inventory
           author: bib_data['author'],
           call_number: temp_aware_call_number,
           location: temp_aware_location_display,
-          barcode: item_data[:barcode],
+          barcode: item_data['barcode'],
           mms_id: bib_data['mms_id'],
           publisher: bib_data['publisher_const'],
           date: bib_data['date_of_publication'],
           edition: bib_data['complete_edition'],
           volume: volume,
           issue: issue,
-          isbn: bib_data[:isbn],
-          issn: bib_data[:issn] }
+          isbn: bib_data['isbn'],
+          issn: bib_data['issn'] }
       end
     end
   end

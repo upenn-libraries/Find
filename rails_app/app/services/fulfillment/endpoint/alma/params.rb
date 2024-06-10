@@ -9,7 +9,7 @@ module Fulfillment
         attr_reader :params
 
         def initialize(params)
-          @params = params
+          @params = params.symbolize_keys
         end
 
         def item_id

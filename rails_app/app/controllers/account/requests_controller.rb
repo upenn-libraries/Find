@@ -26,7 +26,7 @@ module Account
         flash[:notice] = 'Your request has been successfully submitted.'
         redirect_to shelf_path
       else
-        flash[:alert] = "We could not submit your request due to the following: #{outcome.message}"
+        flash[:alert] = "We could not submit your request due to the following: #{outcome.error_message}"
         redirect_back_or_to root_path
       end
     end
@@ -130,7 +130,7 @@ module Account
     end
 
     def raw_params
-      params.except(:controller, :action).to_unsafe_h.with_indifferent_access
+      params.except(:controller, :action).to_unsafe_h
     end
   end
 end

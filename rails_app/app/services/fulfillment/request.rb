@@ -30,11 +30,11 @@ module Fulfillment
     # 2. Item Request form: form submission will include item identifiers and fulfillment options. No scan details.
     #    Aeon requests will come from here.
     # @param [User] user
-    # @param [ActionController::Params]
-    def initialize(user:, delivery:, pickup_location: nil, **params)
+    # @param [Hash]
+    def initialize(user:, **params)
       @user = user
-      @delivery = delivery.to_sym
-      @pickup_location = pickup_location
+      @delivery = params.delete('delivery')&.to_sym
+      @pickup_location = params.delete('pickup_location')
 
       determine_endpoint # set endpoint upon initialization so errors can be caught prior to submission
       build_params(params)
