@@ -6,6 +6,6 @@ module FixtureHelpers
   def json_fixture(filename, directory = nil)
     filename = "#{filename}.json" unless filename.ends_with?('.json')
     dirs = ['json', directory.to_s, filename].compact_blank
-    File.read(File.join(fixture_path, dirs))
+    File.read(File.join(fixture_paths, dirs))
   end
 end
