@@ -130,7 +130,7 @@ module Account
     end
 
     def raw_params
-      params.except(:controller, :action).to_unsafe_h
+      params.except(:controller, :action).to_unsafe_h.deep_symbolize_keys
     end
   end
 end

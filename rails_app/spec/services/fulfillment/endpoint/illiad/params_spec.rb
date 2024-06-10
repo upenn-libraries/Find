@@ -6,7 +6,7 @@ describe Fulfillment::Endpoint::Illiad::Params do
 
   describe '.new' do
     it 'sets open_params' do
-      expect(params.open_params).to eql open_params
+      expect(params.open_params).to eql open_params.stringify_keys
     end
   end
 

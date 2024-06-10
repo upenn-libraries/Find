@@ -33,8 +33,8 @@ module Fulfillment
     # @param [Hash]
     def initialize(user:, **params)
       @user = user
-      @delivery = params.delete('delivery')&.to_sym
-      @pickup_location = params.delete('pickup_location')
+      @delivery = params.delete(:delivery)&.to_sym
+      @pickup_location = params.delete(:pickup_location)
 
       determine_endpoint # set endpoint upon initialization so errors can be caught prior to submission
       build_params(params)

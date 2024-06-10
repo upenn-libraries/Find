@@ -10,7 +10,7 @@ module Fulfillment
         attr_reader :open_params
 
         def initialize(open_params)
-          @open_params = open_params
+          @open_params = open_params.stringify_keys
         end
 
         # Request type. Used to be requesttype.
