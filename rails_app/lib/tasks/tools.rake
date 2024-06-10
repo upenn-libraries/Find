@@ -3,13 +3,13 @@
 namespace :tools do
   desc 'Initialize project, including Solr collections and database'
   task start: :environment do
-    system('docker-compose up -d')
+    system('docker compose up -d')
     sleep 2 # give services some time to start up before proceeding
     if SolrTools.collection_exists? 'find-development'
       puts 'Development collection exists'
     else
       puts 'Setting up basic auth for Solr...'
-      system('docker-compose exec solrcloud solr auth enable -credentials catalog:catalog')
+      system('docker compose exec solrcloud solr auth enable -credentials catalog:catalog')
       begin
         latest_configset_file = Rails.root.join('solr').glob('configset_*.zip').max_by { |f| File.mtime(f) }
         raise StandardError, 'Configset file missing' unless latest_configset_file
@@ -25,7 +25,7 @@ namespace :tools do
       rescue StandardError => e
         puts "Problem configuring Solr: #{e.message}"
         puts 'Stopping services'
-        system('docker-compose stop')
+        system('docker compose stop')
         next # rake for early return
       end
     end
@@ -72,11 +72,11 @@ namespace :tools do
 
   desc 'Stop running containers'
   task stop: :environment do
-    system('docker-compose stop')
+    system('docker compose stop')
   end
 
   desc 'Removes containers and volumes'
   task clean: :environment do
-    system('docker-compose down --volumes')
+    system('docker compose down --volumes')
   end
 end
