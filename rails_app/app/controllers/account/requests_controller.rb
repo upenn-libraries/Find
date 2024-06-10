@@ -4,8 +4,6 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
-
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
       Rails.logger.error(e.message)
@@ -102,31 +100,16 @@ module Account
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     def fulfillment_form
-      render(Account::Requests::FormComponent.new(mms_id: @mms_id,
-                                                  holding_id: @holding_id,
-                                                  items: @items), layout: false)
+      items = Inventory::Service::Physical.items mms_id: params[:mms_id], holding_id: params[:holding_id]
+      render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
+                                                  holding_id: params[:mms_id],
+                                                  items: items), layout: false)
     end
 
     private
 
     def shelf_service
       @shelf_service ||= Shelf::Service.new(current_user.uid)
-    end
-
-    # @return [String]
-    def set_mms_id
-      @mms_id = params[:mms_id]
-    end
-
-    # @return [String]
-    def set_holding_id
-      @holding_id = params[:holding_id]
-    end
-
-    # @return [Alma::BibItemSet]
-    def set_items
-      @items = Inventory::Service::Physical.items(mms_id: params[:mms_id],
-                                                  holding_id: params[:holding_id])
     end
 
     def raw_params

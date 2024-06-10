@@ -7,11 +7,13 @@ module Fulfillment
   class Service
     attr_reader :request, :endpoint, :errors
 
+    # @param request [Request]
     def initialize(request:)
       @request = request
       @endpoint = request.endpoint
     end
 
+    # Submit Request using defined Endpoint class. Ensure any exception is rescued and return an Outcome in all cases.
     # @return [Fulfillment::Outcome]
     def submit
       @errors = endpoint.validate(request: request) # return early with Outcome if validation fails
@@ -21,11 +23,12 @@ module Fulfillment
       notify outcome: outcome
       outcome
     rescue StandardError => e
-      @errors << 'An internal error occurred.'
+      @errors << I18n.t('fulfillment.public_error_message')
       Honeybadger.notify(e)
       failed_outcome
     end
 
+    # @param [Outcome] outcome
     def notify(outcome:)
       # TODO: send email using outcome (item_desc, fulfillment_desc)
     end

@@ -5,6 +5,9 @@ module Fulfillment
     # Alma submission endpoint
     class Alma < Endpoint
       class << self
+        # Submit a Request to the Alma endpoint using either the BibRequest or ItemRequest API endpoints
+        # @param request [Request]
+        # @return [Outcome]
         def submit(request:)
           params = submission_params(request: request)
           response = if request.params.item_id
@@ -17,21 +20,22 @@ module Fulfillment
           )
         end
 
-        # @todo I18n-ize these messages
-        # @param [Fulfillment::Request] request
+        # Validate that the request has the required parameters set
+        # @param request [Fulfillment::Request]
         # @return [Array<String (frozen)>]
         def validate(request:)
+          scope = %i[fulfillment validation]
           errors = []
-          errors << 'No pickup location provided' if request.pickup_location.blank?
-          errors << 'No record identifier provided' if request.params.mms_id.blank?
-          errors << 'No holding identifier provided' if request.params.holding_id.blank?
-          errors << 'No user identifier provided' if request.user&.uid.blank?
+          errors << I18n.t(:no_pickup_location, scope: scope) unless request.pickup_location
+          errors << I18n.t(:no_mms_id, scope: scope) unless request.params.mms_id
+          errors << I18n.t(:no_holding_id, scope: scope) unless request.params.holding_id
+          errors << I18n.t(:no_user_id, scope: scope) if request.user&.uid.blank?
           errors
         end
 
         private
 
-        # @param [Request] request
+        # @param request [Request]
         # @return [Hash{Symbol->String (frozen)}]
         def submission_params(request:)
           { user_id: request.user.uid,

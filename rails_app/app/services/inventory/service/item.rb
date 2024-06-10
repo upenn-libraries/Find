@@ -6,12 +6,14 @@ module Inventory
     # Adds necessary functionality to determine item checkout status for rendering circulation options
     class Item < Alma::BibItem
       IN_HOUSE_POLICY_CODE = 'InHouseView'
+      NOT_LOANABLE_POLICY = 'Not loanable'
       UNSCANNABLE_MATERIAL_TYPES = %w[
         RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE
         AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
         LPTOP EQUIP OTHER AUDIOVM
       ].freeze
 
+      # Should the user be able to submit a request for this Item?
       # @return [Boolean]
       def checkoutable?
         in_place? &&
@@ -35,7 +37,7 @@ module Inventory
       # This is tailored to the user_id, if provided
       # @return [Boolean]
       def loanable?
-        !user_due_date_policy&.include? 'Not loanable'
+        !user_due_date_policy&.include? NOT_LOANABLE_POLICY
       end
 
       # @return [Boolean]

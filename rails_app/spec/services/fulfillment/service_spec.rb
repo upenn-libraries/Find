@@ -44,7 +44,7 @@ describe Fulfillment::Service do
         end
 
         it 'properly returns an outcome with error noted' do
-          expect(result.errors).to eq ['An internal error occurred.']
+          expect(result.errors).to eq [I18n.t('fulfillment.public_error_message')]
         end
       end
     end

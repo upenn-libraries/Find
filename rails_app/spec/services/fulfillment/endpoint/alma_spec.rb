@@ -5,7 +5,9 @@ describe Fulfillment::Endpoint::Alma do
     let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, user: nil) }
 
     it 'adds error messages to errors' do
-      expect(described_class.validate(request: bad_request)).to match_array ['No user identifier provided']
+      expect(described_class.validate(request: bad_request)).to(
+        match_array([I18n.t('fulfillment.validation.no_user_id')])
+      )
     end
   end
 

@@ -7,6 +7,9 @@ module Fulfillment
 
     delegate :description, to: :request
 
+    # @param request [Request] request as submitted
+    # @param confirmation_number [String, nil] confirmation number if request was successful
+    # @param errors [Array] error messages if the submission encountered problems
     def initialize(request:, confirmation_number: nil, errors: [])
       @request = request
       if errors.any?

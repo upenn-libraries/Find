@@ -5,9 +5,7 @@ module Fulfillment
   class Request
     class LogicFailure < StandardError; end
 
-    ITEM_PARAMETERS = %i[mms_id holding_id item_id title author year edition publisher place isbn comments pmid].freeze
-    SCAN_DETAIL_PARAMETERS = %i[journal article rftdate volume issue pages comments].freeze
-
+    # These symbols are the fulfillment options to be used throughout the app
     module Options
       # AEON = :aeon
       ELECTRONIC = :electronic
@@ -30,11 +28,12 @@ module Fulfillment
     # 2. Item Request form: form submission will include item identifiers and fulfillment options. No scan details.
     #    Aeon requests will come from here.
     # @param [User] user
-    # @param [Hash]
+    # @option delivery [String]
+    # @option pickup_location [String, nil]
     def initialize(user:, **params)
       @user = user
       @delivery = params.delete(:delivery)&.to_sym
-      @pickup_location = params.delete(:pickup_location)
+      @pickup_location = params.delete(:pickup_location).presence
 
       determine_endpoint # set endpoint upon initialization so errors can be caught prior to submission
       build_params(params)
@@ -47,6 +46,7 @@ module Fulfillment
       Service.new(request: request).submit
     end
 
+    # @param params [Hash]
     def build_params(params)
       @params = "#{endpoint}::Params".constantize.new(params)
     end
@@ -63,14 +63,17 @@ module Fulfillment
                   end
     end
 
+    # @return [Boolean]
     def scan?
       delivery == Options::ELECTRONIC
     end
 
+    # @return [Boolean]
     def mail?
       delivery == Options::MAIL
     end
 
+    # @return [Boolean]
     def office?
       delivery == Options::OFFICE
     end
@@ -79,10 +82,12 @@ module Fulfillment
     #   delivery == Options::AEON
     # end
 
+    # @return [Boolean]
     def pickup?
       delivery == Options::PICKUP
     end
 
+    # @return [Boolean]
     def ill_pickup?
       delivery == Options::ILL_PICKUP
     end

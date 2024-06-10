@@ -8,30 +8,37 @@ module Fulfillment
       class Params
         attr_reader :params
 
+        # @param params [Hash]
         def initialize(params)
           @params = params
         end
 
+        # @return [String, nil]
         def item_id
           params[:item_id].presence
         end
 
+        # @return [String, nil]
         def holding_id
           params[:holding_id].presence
         end
 
+        # @return [String, nil]
         def mms_id
           params[:mms_id].presence
         end
 
+        # @return [String, nil]
         def comment
           params[:comment].presence
         end
 
+        # @return [String, nil]
         def title
           params[:title].presence
         end
 
+        # @return [String, nil]
         def author
           params[:author].presence
         end

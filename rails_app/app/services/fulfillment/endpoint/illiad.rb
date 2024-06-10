@@ -22,13 +22,12 @@ module Fulfillment
       BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes', Web: true,
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
-
-      # These constants can probably live on the class that prepares the data we send
-      # in our requests to Illiad
       BOOKS_BY_MAIL = 'Books by Mail'
       BOOKS_BY_MAIL_PREFIX = 'BBM'
 
       class << self
+        # @param request [Request]
+        # @return [Fulfillment::Outcome]
         def submit(request:)
           find_or_create user: request.user
           body = BASE_TRANSACTION_ATTRIBUTES.merge(submission_body_from(request))
@@ -37,13 +36,16 @@ module Fulfillment
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
-        # @param [Request] request
+        # @param request [Request]
+        # @return [Array]
         def validate(request:)
           errors = []
-          errors << 'No user identifier provided' if request.user&.uid.blank?
+          errors << I18n.t('fulfillment.validation.no_user_id') if request.user&.uid.blank?
           errors
         end
 
+        # @param request [Request]
+        # @return [Hash]
         def submission_body_from(request)
           if request.scan?
             scandelivery_request_body(request)
@@ -56,13 +58,15 @@ module Fulfillment
         private
 
         # @param [User] user
+        # @return [Illiad::User, FalseClass]
         def find_or_create(user:)
           return user.illiad_record if user.illiad_record
 
           create_illiad_user(user)
         end
 
-        # @param [User] user
+        # @param user [User]
+        # @return [Illiad::User]
         def create_illiad_user(user)
           attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
           ::Illiad::User.create(data: attributes)
@@ -70,6 +74,9 @@ module Fulfillment
           raise UserError, "Problem creating Illiad user: #{e.message}"
         end
 
+        # @param request [Request]
+        # @param transaction [::Illiad::Request]
+        # @return [Hash]
         def add_notes(request, transaction)
           number = transaction.id
           note = request.params.comments
