@@ -57,6 +57,23 @@ module Shelf
       raise AlmaRequestError, e.message
     end
 
+    # Delete ILL scan request where the PDF is already available.
+    #
+    # We "delete" a scan request by moving the status to "Request Finished". This will
+    # remove the transaction from the displaying in the Shelf.
+    #
+    # @raise [Shelf::Service::IlliadRequestError] when unsuccessful
+    def delete_scan_transaction(id)
+      entry = ill_transaction(id)
+
+      # In order to "delete" a transaction, it must be a scan request where the status is "Delivered to Web".
+      raise IlliadRequestError, 'Transaction cannot be deleted' if entry.blank? || !entry.pdf_available?
+
+      Illiad::Request.route(id: entry.id, status: Illiad::Request::FINISHED)
+    rescue StandardError => e
+      raise IlliadRequestError, e.message
+    end
+
     private
 
     # Returns all Alma loans for the given user.

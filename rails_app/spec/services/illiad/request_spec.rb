@@ -77,6 +77,33 @@ describe Illiad::Request do
     end
   end
 
+  describe '.route' do
+    context 'with a successful api request' do
+      let(:status) { 'Request Finished' }
+      let(:response_body) { build(:illiad_api_route_request_response, TransactionStatus: status) }
+
+      before { stub_route_request_success(id: request.id, status: status, response_body: response_body) }
+
+      it 'returns an Illiad::Request instance with updated status' do
+        response = described_class.route(id: request.id, status: status)
+        expect(response).to be_a(described_class)
+        expect(response.status).to eq status
+      end
+    end
+
+    context 'with an unsuccessful api request' do
+      let(:status) { 'Request Finished' }
+      let(:response_body) { build(:illiad_api_error_response) }
+
+      before { stub_route_request_failure(id: request.id, status: status, response_body: response_body) }
+
+      it 'raises an error ' do
+        expect { described_class.route(id: request.id, status: status) }
+          .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
+      end
+    end
+  end
+
   describe '#request_type' do
     it 'returns expected request type' do
       expect(request.request_type).to eq Illiad::Request::LOAN

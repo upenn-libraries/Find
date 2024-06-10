@@ -177,6 +177,8 @@ en:
           status: 'Due date / Status'
           barcode: 'Barcode'
           renewable: 'Renewable?'
+          expires: 'Expires On'
+          pickup: 'Pick up'
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
@@ -185,8 +187,14 @@ en:
       bib_record_link: 'View title record page'
       renew:
         button: 'Renew this title'
+      download:
+        button: 'Download'
       cancel:
         button: 'Cancel'
+        success: 'Hold cancelled.'
+      delete:
+        button: 'Delete'
+        success: 'Scan request deleted.'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'

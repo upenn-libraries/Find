@@ -65,10 +65,18 @@ module Account
 
     # Cancel an Alma HOLD request.
     # DELETE /account/requests/ils/hold/:id
-    def delete
+    def delete_hold
       shelf_service.cancel_hold(params[:id])
 
-      redirect_to request_path(:ils, :hold, params[:id]), notice: 'Hold cancelled'
+      redirect_to request_path(:ils, :hold, params[:id]), notice: t('account.shelf.cancel.success')
+    end
+
+    # Moves completed scan requests to "Request Finished" status - doesn't really delete.
+    # DELETE /account/requests/ill/transaction/:id
+    def delete_transaction
+      shelf_service.delete_scan_transaction(params[:id])
+
+      redirect_to requests_path, notice: t('account.shelf.delete.success')
     end
 
     # Return fulfillment options based on mms id/holding id/item id. Options are dependent
