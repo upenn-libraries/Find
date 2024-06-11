@@ -44,6 +44,10 @@ describe 'Catalog Show Page' do
       end
     end
 
+    it 'updates the url with holding ID' do
+      expect(page).to have_current_path(solr_document_path(mms_id, params: { hld_id: entries.first.id }))
+    end
+
     context 'when holding_id is provided in params' do
       let(:params) { { hld_id: entries.second.id } }
 
@@ -93,11 +97,15 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'display data for second holding in tab pane' do
+      it 'displays data for second holding in tab pane' do
         within('#inventory-pills-tabContent') do
           expect(page).to have_content entries.second.description
           expect(page).to have_content entries.second.coverage_statement
         end
+      end
+
+      it 'updates the url with holding ID' do
+        expect(page).to have_current_path(solr_document_path(mms_id, params: { hld_id: entries.second.id }))
       end
     end
   end

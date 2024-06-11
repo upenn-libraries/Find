@@ -2,16 +2,19 @@
   <h2 class="h5 document__inventory-heading">
     <%= pluralize(@inventory.count, t('inventory.show.navigation.header')) %>
   </h2>
-  <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical">
+  <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical" data-controller="inventory-list">
     <% @inventory.each_with_index do |entry, i| %>
       <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
               id="inventory-pills-<%= i %>"
               data-bs-toggle="pill"
               data-bs-target="#inventory-<%= i %>"
+              data-inventory-list-target="entryButton"
+              data-action="click->inventory-list#entryChanged"
+              data-entry-id="<%= entry.id %>"
               type="button"
               role="tab"
               aria-controls="inventory-<%= i %>"
-              aria-selected="<% active?(entry) ? 'true' : 'false' %>">
+              aria-selected="<%= active?(entry) ? 'true' : 'false' %>">
         <span class="inventory-item__header"><%= entry.location %></span>
         <span class="inventory-item__main"><%= entry.description %></span>
         <% unless entry.resource_link? %>
