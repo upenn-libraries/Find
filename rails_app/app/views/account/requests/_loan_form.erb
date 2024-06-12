@@ -54,7 +54,7 @@
 
         <ul class="list-group">
           <% if current_user.faculty_express? %>
-            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user)) %>
+            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user, required: true)) %>
           <% end %>
 
           <%= render(Account::Requests::Options::PickupComponent.new(user: current_user, ill: true)) %>
