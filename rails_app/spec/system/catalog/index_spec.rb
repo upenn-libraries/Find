@@ -110,7 +110,7 @@ describe 'Catalog Index Page' do
       # the print monograph has a publication date of 1961
       # the electronic journal has a publication date of 1869
 
-      it ' does not show recently published facet' do
+      it 'does not show recently published facet' do
         within('#facets') do
           expect(page).not_to have_text I18n.t('facets.recently_published.label')
         end
@@ -150,7 +150,7 @@ describe 'Catalog Index Page' do
 
       let(:solr_time) { (Time.new(1970).to_f * 1000).to_i }
 
-      it ' does not show recently published facet for 5 year range' do
+      it 'does not show recently published facet for 5 year range' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
           expect(page).not_to have_text I18n.t('facets.recently_published.5_years')
@@ -178,7 +178,7 @@ describe 'Catalog Index Page' do
 
       let(:solr_time) { (Time.new(1975).to_f * 1000).to_i }
 
-      it ' does not show recently published facet for 5 and 10 year ranges' do
+      it 'does not show recently published facet for 5 and 10 year ranges' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
           expect(page).not_to have_text I18n.t('facets.recently_published.5_years')
