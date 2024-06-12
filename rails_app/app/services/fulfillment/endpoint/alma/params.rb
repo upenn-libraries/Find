@@ -29,7 +29,7 @@ module Fulfillment
         end
 
         # @return [String, nil]
-        def comment
+        def comments
           params[:comment].presence
         end
 
