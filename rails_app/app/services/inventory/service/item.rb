@@ -132,10 +132,10 @@ module Inventory
 
         options = []
         if checkoutable?
-          options << :pickup
-          options << :office if ils_group == User::FACULTY_EXPRESS_GROUP
-          options << :mail unless ils_group == User::COURTESY_BORROWER_GROUP
-          options << :electronic if scannable?
+          options << Fulfillment::Request::Options::PICKUP
+          options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+          options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
+          options << Fulfillment::Request::Options::ELECTRONIC if scannable?
         end
         options
       end
