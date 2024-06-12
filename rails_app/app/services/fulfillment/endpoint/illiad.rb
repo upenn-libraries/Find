@@ -9,11 +9,11 @@ module Fulfillment
     #    to create one, then submit the request.
     # 2. Special case processing (FacultyExpress, Books by Mail) - due to staff workflows and other mysterious reasons,
     #    physical fulfillment of Penn-held items is managed by staff through Illiad. Some of this doesn't much make
-    #    sense - but both BBM and FacEx are handles by special staff in Access Services, so the routing rules route to
+    #    sense - but both BBM and FacEx are handled by special staff in Access Services, so the routing rules route to
     #    these staff based on the value added in the `ItemInfo1` field.
     #      i. Books by Mail - In order for Illiad to route these requests properly, we append 'BBM ' to the title field
     #         and place 'Books by Mail' in the `ItemInfo1` field of the request.
-    #      ii. FacultyExpress - To route a FacultyExpress request, we just add the 'Books by Mail' test to the
+    #      ii. FacultyExpress - To route a FacultyExpress request, we just add the 'Books by Mail' text to the
     #          `ItemInfo1` field.
     class Illiad < Endpoint
       class UserError < StandardError; end
