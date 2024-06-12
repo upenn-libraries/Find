@@ -102,7 +102,7 @@ module Account
     def fulfillment_form
       items = Inventory::Service::Physical.items mms_id: params[:mms_id], holding_id: params[:holding_id]
       render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
-                                                  holding_id: params[:mms_id],
+                                                  holding_id: params[:holding_id],
                                                   items: items), layout: false)
     end
 
