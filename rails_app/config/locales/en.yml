@@ -237,6 +237,17 @@ en:
     language: 'Language'
     library: 'Library'
     location: 'Specific Location'
+    recently_added:
+      label: 'Recently Added'
+      15_days: 'Within 15 days'
+      30_days: 'Within 30 days'
+      60_days: 'Within 60 days'
+      90_days: 'Within 90 days'
+    recently_published:
+      label: 'Recently Published'
+      5_years: 'Within 5 years'
+      10_years: 'Within 10 years'
+      15_years: 'Within 15 years'
     subject: 'Subject'
   login:
     alma:
