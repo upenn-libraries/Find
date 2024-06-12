@@ -22,6 +22,9 @@ en:
           other: '%{start_num} - %{end_num} of %{total_num}'
       entry_pagination_info:
         other: '%{current} of %{total}'
+      facets:
+        group:
+          none: 'There is no Catalog results to filter. Change or start your search over for filtering options.'
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'

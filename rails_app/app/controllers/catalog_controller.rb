@@ -57,6 +57,7 @@ class CatalogController < ApplicationController
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
     config.index.constraints_component = Find::ConstraintsComponent
+    config.index.facet_group_component = Find::FacetGroupComponent
     config.index.document_component = Find::ResultsDocumentComponent
     config.show.document_component = Find::ShowDocumentComponent
     config.show.show_tools_component = Find::ShowToolsComponent
