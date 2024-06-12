@@ -167,7 +167,8 @@ class CatalogController < ApplicationController
                                          component: Find::FacetLinkComponent
     config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc,
                                                  component: Find::FacetLinkComponent
-    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
+    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc,
+                                               component: Find::FacetLinkComponent
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
