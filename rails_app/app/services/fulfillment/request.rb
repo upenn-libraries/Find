@@ -48,7 +48,7 @@ module Fulfillment
 
     # @param params [Hash]
     def build_params(params)
-      @params = "#{endpoint}::Params".constantize.new(params)
+      @params = "#{endpoint}::Params".safe_constantize.new(params)
     end
 
     def determine_endpoint
