@@ -11,7 +11,7 @@ en:
     feedback:
       title: 'We want your feedback!'
       description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are <a href="%{url}" target="_blank">requesting feedback</a> to ensure it meets your needs.'
-      release_notes: 'New features and improvements will be added throughout the summer and fall. Check the <a href="%{url}" target="_blank">release notes</a> for the latest updates.'
+      release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
     help:
       heading: Where can I get help?
       connect:
