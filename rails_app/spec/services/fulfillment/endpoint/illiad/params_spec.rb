@@ -44,6 +44,14 @@ describe Fulfillment::Endpoint::Illiad::Params do
         expect(params.request_type).to eql 'book'
       end
     end
+
+    context 'when type is bookchapter' do
+      let(:open_params) { { 'requesttype' => 'bookchapter' } }
+
+      it 'returns book' do
+        expect(params.request_type).to eql 'book'
+      end
+    end
   end
 
   describe '#author' do
