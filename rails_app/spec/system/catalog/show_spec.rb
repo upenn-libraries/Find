@@ -377,7 +377,7 @@ describe 'Catalog Show Page' do
 
       before { visit(solr_document_path(electronic_db_bib)) }
 
-      it 'links to a contributor facet search' do
+      it 'links to a creator facet search' do
         within('.col-md-9.blacklight-creator_contributor_show') do
           expect(page).to have_link('Geo Abstracts, Ltd.',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Geo Abstracts, Ltd' }))
