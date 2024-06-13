@@ -43,5 +43,9 @@ describe 'Account Request ILL form' do
       expect(page).to have_button 'Book or other item', class: '!active'
       expect(page).to have_button 'Article or chapter', class: 'active'
     end
+
+    it 'populates the title field' do
+      expect(page).to have_field 'title', with: 'Gone with the Wind'
+    end
   end
 end
