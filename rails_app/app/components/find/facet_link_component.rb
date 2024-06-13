@@ -50,7 +50,7 @@ module Find
 
     # @return [String (frozen)]
     def facet_field
-      @facet_field ||= "#{@field.key.split('_').first}_facet"
+      @facet_field ||= @field.field_config.facet_target || "#{@field.key.split('_').first}_facet"
     end
 
     # Show values sorted by length in ascending order. We use this sorted array when matching
