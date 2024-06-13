@@ -79,6 +79,16 @@ describe Fulfillment::Service do
           expect(result.errors).to match_array validation_errors
         end
       end
+
+      context 'with an exception raised on submission' do
+        before do
+          allow(::Alma::ItemRequest).to receive(:submit).and_raise(StandardError, 'Invalid response')
+        end
+
+        it 'properly returns an outcome with error noted' do
+          expect(result.errors).to eq [I18n.t('fulfillment.public_error_message')]
+        end
+      end
     end
   end
 end
