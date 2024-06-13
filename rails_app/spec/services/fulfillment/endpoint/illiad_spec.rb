@@ -28,7 +28,7 @@ describe Fulfillment::Endpoint::Illiad do
     context 'with a successful BBM delivery request' do
       let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }
 
-      it 'returns an outcome with with the confirmation number' do
+      it 'returns an outcome with the confirmation number' do
         expect(outcome).to be_success
         expect(outcome.confirmation_number).to eq 'ILLIAD_1234'
       end
@@ -37,7 +37,7 @@ describe Fulfillment::Endpoint::Illiad do
     context 'with a successful ScanDeliver request' do
       let(:request) { build(:fulfillment_request, :with_section, :scan_deliver) }
 
-      it 'returns an outcome with with the confirmation number' do
+      it 'returns an outcome with the confirmation number' do
         expect(outcome).to be_success
         expect(outcome.confirmation_number).to eq 'ILLIAD_1234'
       end
