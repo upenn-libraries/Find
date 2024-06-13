@@ -3,7 +3,8 @@
 require 'system_helper'
 
 describe 'Account Shelf show page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
+  let(:shelf_listing) { create(:shelf_listing) }
 
   before do
     sign_in user
@@ -12,6 +13,9 @@ describe 'Account Shelf show page' do
     shelf = instance_double(Shelf::Service)
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)
+    # Stub for cancel holding and redirect to requests
+    allow(shelf).to receive(:cancel_hold).and_return(nil)
+    allow(shelf).to receive(:find_all).and_return(shelf_listing)
 
     visit request_path(entry.system, entry.type, entry.id)
   end
@@ -49,6 +53,14 @@ describe 'Account Shelf show page' do
 
       it 'displays record link' do
         expect(page).to have_link I18n.t('account.shelf.bib_record_link')
+      end
+
+      it 'redirects to shelf index after canceling hold' do
+        click_button I18n.t('account.shelf.cancel.button')
+        within('.alert') do
+          expect(page).to have_text I18n.t('account.shelf.cancel.success')
+        end
+        expect(page).to have_current_path(requests_path)
       end
     end
 
