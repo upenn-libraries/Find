@@ -9,6 +9,12 @@ google_analytics:
   id: ~
 honeybadger:
   api_key: '12345'
+emails:
+  from_address: 'find-noreply@library.upenn.edu'
+  smtp:
+    url: 'mailrelay.library.upenn.int'
+    port: 25
+    domain: 'upenn.edu'
 locations:
   offsite:
     - lippb10
@@ -80,4 +86,3 @@ electronic_scoring:
     Elsevier ScienceDirect: 91
     Nature: 90
     Elsevier ClinicalKey: 89
-
