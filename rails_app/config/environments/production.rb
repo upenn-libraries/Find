@@ -71,7 +71,7 @@ Rails.application.configure do
 
   # set a default from address for emails
   config.action_mailer.default_options = {
-    from: Settings.email.from,
+    from: Settings.email.from
   }
 
   config.action_mailer.perform_caching = false
