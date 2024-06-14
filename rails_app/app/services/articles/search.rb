@@ -44,6 +44,7 @@ module Articles
       handle_error(e)
       nil
     end
+
     # rubocop:enable Metrics/MethodLength
 
     # @return [Array<Articles::Document>, nil] documents returned from the search

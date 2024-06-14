@@ -67,9 +67,10 @@ describe Articles::Search do
     before { stub_summon_search_success(query: query_term, fixture: fixture) }
 
     it 'returns actual query string from Summon response' do
-      expected_query_string = 's.normalized.subjects=f&s.secure=t&s.light=t'
-      expected_query_string += '&s.dailyCatalog=t&s.q=book&s.dym=f&s.ho=t&s.rapido=f'
-      expected_query_string += '&s.hl=f&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7'
+      expected_query_string = 's.normalized.subjects=f&s.secure=f&s.include.ft.matches=t'
+      expected_query_string += '&s.dailyCatalog=t&s.q=book&s.ho=t&s.rapido=f&s.hl=f'
+      expected_query_string += '&s.role=authenticated&s.ps=3&s.shortenurl=f'
+      expected_query_string += '&s.ff=ContentType%2Cor%2C1%2C7'
 
       expect(search.query_string).to eq(expected_query_string)
     end
