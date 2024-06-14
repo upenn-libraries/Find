@@ -8,6 +8,7 @@ describe 'Account Shelf show page' do
 
   before do
     sign_in user
+    # Stub creation of shelf instance, transaction find
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)
     visit request_path(entry.system, entry.type, entry.id)
@@ -43,6 +44,7 @@ describe 'Account Shelf show page' do
       let(:shelf_listing) { create(:shelf_listing) }
 
       before do
+        # Stub cancellation of hold, find all requests
         allow(shelf).to receive(:cancel_hold).and_return(nil)
         allow(shelf).to receive(:find_all).and_return(shelf_listing)
       end
