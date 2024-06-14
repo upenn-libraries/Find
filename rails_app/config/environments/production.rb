@@ -61,6 +61,19 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "find_production"
 
+  # Deliver emails via smtp
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: Settings.email.smtp.url,
+    port: Settings.email.smtp.port,
+    domain: Settings.email.smtp.domain
+  }
+
+  # set a default from address for emails
+  config.action_mailer.default_options = {
+    from: Settings.email.from
+  }
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
