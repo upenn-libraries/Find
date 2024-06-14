@@ -5,142 +5,20 @@
 
 <h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 
-<nav role="tablist" id="ill-tab" role="tablist" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
-  <button class="btn btn-outline-dark" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" id="ill-0-tab">
+<nav role="tablist" id="ill-tab" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
+  <button class="btn btn-outline-dark <%= @ill_params.scan? ? 'active' : '' %>" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="<%= @ill_params.scan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.scan') %>
   </button>
-  <button class="btn btn-outline-dark" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1">
+  <button class="btn btn-outline-dark <%= @ill_params.loan? ? 'active' : '' %>" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="<%= @ill_params.loan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.loan') %>
   </button>
 </nav>
 
 <div class="tab-content interlibary-loan__forms" id="ill-tabContent">
-  <div class="tab-pane fade show" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
-    <form>
-      <div class="row">
-        <div class="col-md-7">
-          <div class="form-group mt-2 form-group--error">
-            <label for="journal">
-              <%= t('account.ill.form.scan.journal_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
-              <p class="form-group__error-text"><%= t('account.ill.form.scan.journal_title.help_text') %></p>
-            </label>
-            <input type="text" class="form-control mt-1" id="journal" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="article"><%= t('account.ill.form.scan.article_title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="article" required>
-          </div>
-          <div class="form-group mt-3 form-group--error">
-            <label for="article-author">
-              <%= t('account.ill.form.scan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
-              <p class="form-group__error-text"><%= t('account.ill.form.scan.author.help_text') %></p>
-            </label>
-            <input type="text" class="form-control mt-1" id="article-author">
-          </div>
-          <div class="form-group mt-3">
-            <label for="rftdate"><%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="rftdate" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="volume"><%= t('account.ill.form.scan.volume') %></label>
-            <input type="text" class="form-control mt-1" id="volume">
-          </div>
-          <div class="form-group mt-3">
-            <label for="issue"><%= t('account.ill.form.scan.issue') %></label>
-            <input type="text" class="form-control mt-1" id="issue">
-          </div>
-          <div class="form-group mt-3">
-            <label for="pages"><%= t('account.ill.form.scan.pages') %></label>
-            <input type="text" class="form-control mt-1" id="pages">
-          </div>
-          <div class="form-group mt-3">
-            <label for="comments"><%= t('account.ill.form.scan.comments.label') %><br><small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.scan.comments.help_text') %></small></label>
-            <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
-          </div>
-
-          <p class="mt-4 mb-1"><%= t('account.ill.form.scan.delivery_msg') %></p>
-
-          <p><%= t('account.ill.form.email_notification_msg') %></p>
-
-          <button class="btn btn-success btn-lg"><%= t('account.ill.form.scan.submit') %></button>
-        </div>
-      </div>
-    </form>
+  <div class="tab-pane fade <%= @ill_params.scan? ? 'active show' : '' %>" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
+    <%= render 'scan_form' %>
   </div>
-  <div class="tab-pane fade" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
-    <form>
-      <div class="row">
-        <div class="col-md-7">
-          <div class="form-group mt-2">
-            <label for="title"><%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="title" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="author"><%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="author">
-          </div>
-          <div class="form-group mt-3">
-            <label for="year"><%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small></label>
-            <input type="text" class="form-control mt-1" id="year" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="edition"><%= t('account.ill.form.loan.edition') %></label>
-            <input type="text" class="form-control mt-1" id="edition">
-          </div>
-          <div class="form-group mt-3">
-            <label for="publisher"><%= t('account.ill.form.loan.publisher') %></label>
-            <input type="text" class="form-control mt-1" id="publisher">
-          </div>
-          <div class="form-group mt-3">
-            <label for="place"><%= t('account.ill.form.loan.place_of_publication') %></label>
-            <input type="text" class="form-control mt-1" id="place">
-          </div>
-          <div class="form-group mt-3">
-            <label for="isbn"><%= t('account.ill.form.loan.isbn') %></label>
-            <input type="text" class="form-control mt-1" id="isbn">
-          </div>
-          <div class="form-group mt-3">
-            <label for="comments"><%= t('account.ill.form.loan.comments.label') %>
-              <br>
-              <small id="comments-help" class="form-text text-muted">
-                <%= t('account.ill.form.loan.comments.help_text') %>
-              </small>
-            </label>
-            <textarea type="text" class="form-control mt-1" id="comments" aria-describedby="comments-help" rows="4"></textarea>
-          </div>
-
-          <fieldset>
-            <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
-            <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
-            <div class="form-check mt-3">
-              <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="delivery-pickup">
-              <label class="form-check-label" for="delivery-pickup">
-                <%= t('account.ill.form.loan.delivery.options.pickup.label') %>
-              </label>
-
-              <div class="input-group mb-2 mt-1">
-                <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup]), {
-                  include_blank: t('account.ill.form.loan.delivery.options.pickup.placeholder'),
-                  id: 'pickup_location',
-                  label: 'Location',
-                  class: 'custom-select p-2 rounded',
-                  required: 'required'
-                }) %>
-              </div>
-            </div>
-            <div class="form-check mt-3">
-              <input class="form-check-input" type="radio" name="delivery" id="delivery-mail" value="delivery-mail" checked>
-              <label class="form-check-label" for="delivery-mail">Mail <br>
-              <small id="delivery-mail-help" class="form-text text-muted"><%=t('account.ill.form.loan.delivery.options.mail.help_text_html', bbm_form: t('urls.forms.bbm')) %></small></label>
-            </div>
-          </fieldset>
-
-          <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
-          <p><%= t('account.ill.form.email_notification_msg') %></p>
-
-          <button class="btn btn-success btn-lg"><%= t('account.ill.form.loan.submit') %></button>
-        </div>
-      </div>
-    </form>
+  <div class="tab-pane fade <%= @ill_params.loan? ? 'active show' : '' %>" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
+    <%= render 'loan_form' %>
   </div>
 </div>

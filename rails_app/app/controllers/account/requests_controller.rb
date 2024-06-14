@@ -4,8 +4,6 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :set_mms_id, :set_holding_id, :set_items, only: :fulfillment_form
-
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
       Rails.logger.error(e.message)
@@ -14,17 +12,21 @@ module Account
 
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
-    def ill; end
+    def ill
+      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(raw_params)
+    end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      # have all the item details needed (mms_id, holding_id, pickup_location, comments)
-      # build our request POST body - Alma .submit method takes one big hash and creates the params/body automatically
-      # use our request broker service (coming soon) to send the request
-      # handle response, showing confirmation and/or error - maybe even send an email
-      flash[:notice] = 'Your request has not been submitted. Requesting submission is not yet functional in Find.'
-      redirect_to solr_document_path(id: params[:mms_id])
+      outcome = Fulfillment::Request.submit(user: current_user, **raw_params)
+      if outcome.success?
+        flash[:notice] = 'Your request has been successfully submitted.'
+        redirect_to shelf_path
+      else
+        flash[:alert] = "We could not submit your request due to the following: #{outcome.error_message}"
+        redirect_back_or_to root_path
+      end
     end
 
     # List all shelf entries. Supports sort & filter params.
@@ -84,23 +86,24 @@ module Account
     # those options to determine what actions are available to the user.
     # GET /account/requests/options
     def options
-      item = if params[:item_pid] == 'no-item'
+      item = if params[:item_id] == 'no-item'
                Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
                Inventory::Service::Physical.item(mms_id: params[:mms_id],
                                                  holding_id: params[:holding_id],
-                                                 item_pid: params[:item_pid])
+                                                 item_id: params[:item_id])
              end
-      options = item.fulfillment_options(ils_group: current_user.ils_group)
-      render(Account::Requests::OptionsComponent.new(user: current_user, options: options), layout: false)
+      options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
+      render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
     end
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     def fulfillment_form
-      render(Account::Requests::FormComponent.new(mms_id: @mms_id,
-                                                  holding_id: @holding_id,
-                                                  items: @items), layout: false)
+      items = Inventory::Service::Physical.items mms_id: params[:mms_id], holding_id: params[:holding_id]
+      render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
+                                                  holding_id: params[:holding_id],
+                                                  items: items), layout: false)
     end
 
     private
@@ -109,20 +112,8 @@ module Account
       @shelf_service ||= Shelf::Service.new(current_user.uid)
     end
 
-    # @return [String]
-    def set_mms_id
-      @mms_id = params[:mms_id]
-    end
-
-    # @return [String]
-    def set_holding_id
-      @holding_id = params[:holding_id]
-    end
-
-    # @return [Alma::BibItemSet]
-    def set_items
-      @items = Inventory::Service::Physical.items(mms_id: params[:mms_id],
-                                                  holding_id: params[:holding_id])
+    def raw_params
+      params.except(:controller, :action).to_unsafe_h.deep_symbolize_keys
     end
   end
 end

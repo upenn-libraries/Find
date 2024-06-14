@@ -5,14 +5,14 @@ export default class extends Controller {
     "select",
     "mmsIdField",
     "holdingIdField",
-    "itemPidField",
+    "itemIdField",
     "optionsFrame",
     "optionsLoadingTemplate",
   ];
 
   connect() {
     if (!this.hasSelectTarget) {
-      this.updateOptionsFrame(this.buildUrl(this.itemPidFieldTarget.value));
+      this.updateOptionsFrame(this.buildUrl(this.itemIdFieldTarget.value));
     }
   }
 
@@ -23,7 +23,7 @@ export default class extends Controller {
   }
 
   buildUrl(itemValue) {
-    return `/account/requests/options?mms_id=${this.mmsIdFieldTarget.value}&holding_id=${this.holdingIdFieldTarget.value}&item_pid=${itemValue}`;
+    return `/account/requests/options?mms_id=${this.mmsIdFieldTarget.value}&holding_id=${this.holdingIdFieldTarget.value}&item_id=${itemValue}`;
   }
 
   updateOptionsFrame(url) {

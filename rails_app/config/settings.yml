@@ -4,6 +4,7 @@ alma:
 illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
+  user_password: <%= DockerSecrets.lookup(:illiad_user_password, Rails.application.credentials.illiad_user_password) %>
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~

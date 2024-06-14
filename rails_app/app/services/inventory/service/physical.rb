@@ -9,12 +9,12 @@ module Inventory
         # Get a single Item for a given mms_id, holding_id, and item_pid
         # @param mms_id [String] the Alma mms_id
         # @param holding_id [String] the Alma holding_id
-        # @param item_pid [String] the Alma item_pid
+        # @param item_id [String] the Alma item_pid
         # @return [PennItem]
-        def item(mms_id:, holding_id:, item_pid:)
-          raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id && item_pid
+        def item(mms_id:, holding_id:, item_id:)
+          raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id && item_id
 
-          item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_pid).item
+          item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_id).item
           Inventory::Service::Item.new(item)
         end
 

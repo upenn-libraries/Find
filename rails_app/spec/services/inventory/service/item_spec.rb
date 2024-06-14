@@ -169,23 +169,23 @@ describe Inventory::Service::Item do
 
       it 'returns pickup option' do
         options = item.fulfillment_options(ils_group: 'undergrad')
-        expect(options).to include :pickup
+        expect(options).to include Fulfillment::Request::Options::PICKUP
       end
 
       it 'returns office option if ils_group is faculty express' do
         options = item.fulfillment_options(ils_group: 'FacEXP')
-        expect(options).to include :office
+        expect(options).to include Fulfillment::Request::Options::OFFICE
       end
 
       it 'returns mail option if ils_group is not courtesy borrower' do
         options = item.fulfillment_options(ils_group: 'not_courtesy')
-        expect(options).to include :mail
+        expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
       it 'returns scan option if item is scannable' do
         item = build :item
         options = item.fulfillment_options(ils_group: 'group')
-        expect(options).to include :scan
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
       end
     end
   end

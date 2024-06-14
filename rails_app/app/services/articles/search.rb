@@ -29,7 +29,7 @@ module Articles
     #   Documentation for the Search class (Summon gem)
     #
     # @return [Summon::Search, nil] successful search response from the Summon API,
-    #   or no respone if there was an error
+    #   or no response if there was an error
     def response
       @response ||= client.search({ 's.q' => @query_term, 's.dym' => 'f',
                                     's.light' => 't', 's.ho' => 't',

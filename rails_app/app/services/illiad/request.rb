@@ -7,10 +7,6 @@ module Illiad
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
-    # These constants can probably live on the class that prepares the data we send
-    # in our requests to Illiad
-    BOOKS_BY_MAIL = 'Books by Mail'
-    BOOKS_BY_MAIL_REGEX = /^BBM /
     ARTICLE = 'Article'
     LOAN = 'Loan'
     # Statues
@@ -105,7 +101,7 @@ module Illiad
 
     # @return [Boolean]
     def books_by_mail?
-      data[:ItemInfo1] == BOOKS_BY_MAIL
+      data[:ItemInfo1] == Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL
     end
 
     # @return [Boolean]

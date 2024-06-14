@@ -5,19 +5,25 @@ module Account
     module Options
       # office delivery component logic
       class OfficeComponent < ViewComponent::Base
-        attr_accessor :user_address, :options
+        attr_accessor :user, :checked, :radio_options
 
-        def initialize(user_address:, options:)
-          @user_address = user_address
-          @options = options
+        def initialize(user:, checked: false, **radio_options)
+          @user = user
+          @checked = checked
+          @radio_options = radio_options
         end
 
-        def user_address_set?
+        def delivery_value
+          Fulfillment::Request::Options::OFFICE
+        end
+
+        # @return [Array<String>, nil]
+        def user_address
+          @user_address ||= user.illiad_record.bbm_delivery_address
+        end
+
+        def user_address?
           user_address.compact_blank.present?
-        end
-
-        def checked?
-          options.include?(:scan) ? nil : { checked: true }
         end
       end
     end

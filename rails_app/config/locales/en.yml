@@ -127,13 +127,6 @@ en:
           delivery:
             label: 'How would you like this item delivered?'
             help_text_html: 'Books or other items are available for <a href="%{pickup_url}" target="_blank">pick up</a> or <a href="%{bbm_url}" target="_blank">mail delivery</a>.'
-            options:
-              pickup:
-                label: 'Pick up'
-                placeholder: 'Choose a pickup location...'
-              mail:
-                label: 'Mail'
-                help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'
@@ -280,7 +273,7 @@ en:
       item_placeholder: 'Choose an item...'
       buttons:
         scan: 'Continue to request a scan'
-        delivery: 'Place delivery request'
+        office: 'Place delivery request'
         pickup: 'Place pickup request'
         mail: 'Place mail request'
         aeon: 'Schedule visit'
@@ -309,6 +302,19 @@ en:
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+  fulfillment:
+    public_error_message: 'An internal error occurred.'
+    outcome:
+      email:
+        pickup: 'Will be available to pickup at %{pickup_location}.'
+        electronic: 'Will be made electronically available in your library account.'
+        mail: 'Will be delivered to your Books by Mail address.'
+        office: 'Will be delivered to your FacultyExpress office location.'
+    validation:
+      no_pickup_location: 'No pickup location provided'
+      no_mms_id: 'No record identifier provided'
+      no_holding_id: 'No holding identifier provided'
+      no_user_id: 'No user identifier provided'
   search:
     all_fields: 'All Fields'
     button:

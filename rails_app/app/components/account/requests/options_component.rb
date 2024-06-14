@@ -6,28 +6,33 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
-      DEFAULT_PICKUP = 'VanPeltLib'
-
       attr_accessor :item, :user, :options
 
-      def initialize(user:, options:)
+      def initialize(user:, item:, options:)
         @user = user
-        @options = options
+        @item = item
+        @options = options.inquiry
       end
 
-      # @return [String]
-      def default_pickup_location
-        return DEFAULT_STUDENT_PICKUP if user.student?
-
-        DEFAULT_PICKUP
+      # Returns true if at least one delivery option is available.
+      def deliverable?
+        options.any?(Fulfillment::Request::Options::ELECTRONIC,
+                     Fulfillment::Request::Options::PICKUP,
+                     Fulfillment::Request::Options::MAIL,
+                     Fulfillment::Request::Options::OFFICE)
       end
 
-      # @return [Array<String>, nil]
-      def user_address
-        return unless options.include? :office
+      def submit_button_for(delivery_type)
+        submit_tag t(delivery_type, scope: 'requests.form.buttons'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: "#{delivery_type}Button", turbo_frame: '_top' } }
+      end
 
-        user.illiad_record.bbm_delivery_address
+      def electronic_delivery_link
+        link_to t('requests.form.buttons.scan'),
+                ill_new_request_path(**item.fulfillment_submission_params),
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
       end
     end
   end

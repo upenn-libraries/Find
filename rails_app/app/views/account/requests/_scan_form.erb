@@ -1,0 +1,62 @@
+<%= form_with(url: requests_path, method: :post) do %>
+  <%= hidden_field_tag :delivery, Fulfillment::Request::Options::ELECTRONIC %>
+
+  <%= render 'hidden_fields' %>
+
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group mt-2">
+        <%= label_tag :journal do %>
+          <%= t('account.ill.form.scan.journal_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+          <p class="form-group__error-text d-none"><%= t('account.ill.form.scan.journal_title.help_text') %></p>
+        <% end %>
+        <%= text_field_tag :journal, @ill_params.book_title || @ill_params.journal, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :article do %>
+          <%= t('account.ill.form.scan.article_title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <%= text_field_tag :article, @ill_params.chapter_title || @ill_params.article, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :author do %>
+          <%= t('account.ill.form.scan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+          <p class="form-group__error-text d-none"><%= t('account.ill.form.scan.author.help_text') %></p>
+        <% end %>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :date do %>
+          <%= t('account.ill.form.scan.publication_date') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <%= text_field_tag :date, @ill_params.date, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :volume, t('account.ill.form.scan.volume') %>
+        <%= text_field_tag :volume, @ill_params.volume, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :issue, t('account.ill.form.scan.issue') %>
+        <%= text_field_tag :issue, @ill_params.issue, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :pages, t('account.ill.form.scan.pages') %>
+        <%= text_field_tag :pages, @ill_params.pages, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :comments do %>
+          <%= t('account.ill.form.scan.comments.label') %>
+          <br>
+          <small id="comments-help" class="form-text text-muted"><%= t('account.ill.form.scan.comments.help_text') %></small>
+        <% end %>
+        <%= text_area_tag :comments, @ill_params.comments, class: 'form-control mt-1', aria: { describedby: 'comments-help' }, rows: 4 %>
+      </div>
+
+      <p class="mt-4 mb-1"><%= t('account.ill.form.scan.delivery_msg') %></p>
+
+      <p><%= t('account.ill.form.email_notification_msg') %></p>
+
+      <button type="submit" class="btn btn-success btn-lg"><%= t('account.ill.form.scan.submit') %></button>
+    </div>
+  </div>
+<% end %>
