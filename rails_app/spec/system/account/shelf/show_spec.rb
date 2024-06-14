@@ -4,19 +4,12 @@ require 'system_helper'
 
 describe 'Account Shelf show page' do
   let(:user) { create(:user) }
-  let(:shelf_listing) { create(:shelf_listing) }
+  let(:shelf) { instance_double(Shelf::Service) }
 
   before do
     sign_in user
-
-    # Stub Shelf Listing
-    shelf = instance_double(Shelf::Service)
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)
-    # Stub for cancel holding and redirect to requests
-    allow(shelf).to receive(:cancel_hold).and_return(nil)
-    allow(shelf).to receive(:find_all).and_return(shelf_listing)
-
     visit request_path(entry.system, entry.type, entry.id)
   end
 
@@ -47,6 +40,13 @@ describe 'Account Shelf show page' do
     end
 
     context 'when not a resource sharing hold' do
+      let(:shelf_listing) { create(:shelf_listing) }
+
+      before do
+        allow(shelf).to receive(:cancel_hold).and_return(nil)
+        allow(shelf).to receive(:find_all).and_return(shelf_listing)
+      end
+
       it 'displays cancel button' do
         expect(page).to have_button I18n.t('account.shelf.cancel.button')
       end
