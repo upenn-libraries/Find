@@ -35,11 +35,16 @@ module Find
       facet
     end
 
-    # Returns a hash mapping each show value with its matching facet. We use the sorted show values array to match
-    # shorter show values first when creating our facet_mapping hash.
+    # Returns a hash mapping each show value with its corresponding facet. Some show fields are configured to use their
+    # own pennmarc facet map methods. Otherwise, we build the facet map using the sorted show values array to match
+    # shorter show values first to prevent false positives.
     # @return [Enumerator, Hash]
     def facet_mapping
-      @facet_mapping ||= sorted_show_values.index_with { |show_value| find_facet(show_value) }
+      @facet_mapping ||= if @field.field_config.facet_map
+                           @field.document.marc(@field.field_config.facet_map)
+                         else
+                           sorted_show_values.index_with { |show_value| find_facet(show_value) }
+                         end
     end
 
     # Facets sorted by length in descending order
@@ -48,6 +53,7 @@ module Find
       @sorted_facets ||= @field.document.marc(facet_field).sort_by { |facet| -facet.length }
     end
 
+    # Retrieve corresponding facet field from field config or by combining helper name + '_facet'.
     # @return [String (frozen)]
     def facet_field
       @facet_field ||= @field.field_config.facet_target || "#{@field.key.split('_').first}_facet"

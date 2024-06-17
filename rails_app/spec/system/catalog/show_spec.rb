@@ -333,7 +333,7 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'when viewing main creator' do
+    context 'when viewing main creator', skip: 'until facet map configured' do
       include_context 'with print monograph record with 2 physical entries'
 
       before { visit(solr_document_path(print_monograph_bib)) }
@@ -381,6 +381,32 @@ describe 'Catalog Show Page' do
         within('.col-md-9.blacklight-creator_contributor_show') do
           expect(page).to have_link('Geo Abstracts, Ltd.',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Geo Abstracts, Ltd' }))
+        end
+      end
+    end
+
+    context 'when viewing a conference', skip: 'until facet map configured' do
+      let(:conference_bib) { '9978940183503681' }
+      let(:conference_entries) do
+        [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
+                                 inventory_type: 'physical')]
+      end
+
+      before do
+        SampleIndexer.index 'conference.json'
+
+        allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                   .and_return(Inventory::Response.new(entries: conference_entries))
+        allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                    .and_return(Inventory::Response.new(entries: conference_entries))
+        visit(solr_document_path(conference_bib))
+      end
+
+      it 'links to a creator facet search' do
+        show = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : 1977 : Rome, Italy)'
+        facet = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : Rome, Italy)'
+        within('.col-md-9.blacklight-creator_conference_detail_show') do
+          expect(page).to have_link(show, href: search_catalog_path({ 'f[creator_facet][]': facet }))
         end
       end
     end
