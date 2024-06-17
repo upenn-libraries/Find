@@ -70,7 +70,7 @@ module Account
     def delete_hold
       shelf_service.cancel_hold(params[:id])
 
-      redirect_to request_path(:ils, :hold, params[:id]), notice: t('account.shelf.cancel.success')
+      redirect_to requests_path, notice: t('account.shelf.cancel.success')
     end
 
     # Moves completed scan requests to "Request Finished" status - doesn't really delete.
