@@ -115,16 +115,21 @@ describe Articles::Search do
   describe '.summon_url' do
     before { stub_summon_search_success(query: query_term, fixture: fixture) }
 
-    it 'starts with expected base url' do
-      expect(described_class.summon_url(query: search.query_string)).to start_with("https://#{Settings.additional_results_sources.summon.base_url}")
+    summon_url = I18n.t('urls.external_services.summon')
+
+    it 'starts with expected base url with proxy' do
+      expect(described_class.summon_url(query: search.query_string))
+        .to start_with(I18n.t('urls.external_services.proxy', url: summon_url).to_s)
     end
 
-    it 'contains search path' do
-      expect(described_class.summon_url(query: search.query_string)).to include('/search')
+    it 'starts with expected base url without proxy' do
+      expect(described_class.summon_url(query: search.query_string, proxy: false))
+        .to start_with(summon_url)
     end
 
     it 'contains query' do
-      expect(described_class.summon_url(query: search.query_string)).to include("s.q=#{query_term}")
+      expect(described_class.summon_url(query: search.query_string))
+        .to include("s.q=#{query_term}")
     end
   end
 end

@@ -27,6 +27,12 @@ describe Articles::Document do
     end
   end
 
+  describe "#proxy_link" do
+    it "returns the proxy link" do
+      expect(doc.proxy_link).to eq(I18n.t('urls.external_services.proxy', url: doc.link))
+    end
+  end
+
   describe '#fulltext_online' do
     context 'when document is fulltext' do
       it 'returns Full Text Online string' do
