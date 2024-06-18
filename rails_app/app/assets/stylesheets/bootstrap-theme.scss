@@ -13,13 +13,13 @@
   margin: 0 auto;
 }
 
-a:not(.btn, .page-link, .link-default-reset) {
+a:not(.btn, .page-link, .link-prevent-default) {
   color: var(--color-fg-accent);
   text-decoration: underline;
   text-underline-offset: var(--link-text-underline-offset);
   text-decoration-thickness: var(--link-text-decoration-thickness);
 }
 
-a:not(.btn, .page-link, .link-default-reset):hover {
+a:not(.btn, .page-link, .link-prevent-default):hover {
   text-decoration-thickness: var(--link-hover-text-decoration-thickness);
 }
