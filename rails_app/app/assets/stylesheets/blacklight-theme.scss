@@ -6,7 +6,7 @@
 
 .navbar-search > .container {
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
 
   @media (min-width: 620px) {
     flex-wrap: nowrap;
@@ -15,13 +15,11 @@
 
 .navbar-search a {
   color: var(--color-fg-default);
-  text-decoration: underline;
-  text-underline-offset: .15em;
-  text-decoration-color: var(--color-fg-subtle);
+  text-decoration: none;
 }
 
 .navbar-search a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration: underline;
 }
 
 .navbar-search .search-query-form {
@@ -31,8 +29,11 @@
   flex-grow: 1;
   width: auto;
 
+  margin-right: 1rem;
+
   @media (max-width: 620px) {
     width: 100%;
+    margin-right: 0;
   }
 }
 
