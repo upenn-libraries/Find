@@ -123,6 +123,14 @@ module Inventory
         item_data['enumeration_b']
       end
 
+      def sublocation
+        Settings.locations.aeon_sublocation_map[location]
+      end
+
+      def site
+        Settings.locations.aeon_location_map[library]
+      end
+
       # Return an array of fulfillment options for a given item and ils_group
       # @param ils_group [String] the ILS group code
       # @return [Array<Symbol>]
@@ -158,6 +166,46 @@ module Inventory
           issue: issue,
           isbn: bib_data['isbn'],
           issn: bib_data['issn'] }
+      end
+
+      # Open URL parameters to be passed to the Aeon request form
+      #
+      # @param document [SolrDocument]
+      # @return [Hash]
+      def aeon_open_params(document:)
+        { 'rft.format': item_data['physical_material_type']['desc'],
+          'rft.au': bib_data['author'],
+          # genre seems to be the only field that is not accessible from the bib/item data or the document
+          # can we pull from pennmarc off the document? how important is this field?
+          # 'rft.genre': document_field(document, :genre_ss),
+          'rft.creator': document_field(document, :creator_ss),
+          'rft.title': bib_data['title'],
+          'rft.edition': bib_data['complete_edition'],
+          'rft.place': bib_data['place_of_publication'],
+          'rft.pub': bib_data['publisher_const'],
+          'rft.date': bib_data['date_of_publication'],
+          'rft.isbn': bib_data['isbn'],
+          'rft.issn': bib_data['issn'] }
+      end
+
+      # Additional parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_additional_params
+        { Barcode: item_data['barcode'],
+          CallNumber: temp_aware_call_number,
+          ItemIssue: issue,
+          ItemISxN: item_data['inventory_number'],
+          Location: location,
+          ReferenceNumber: bib_data['mms_id'],
+          Site: site,
+          SubLocation: sublocation }
+      end
+
+      private
+
+      def document_field(document, field)
+        document.fetch(field, nil)&.join(', ')
       end
     end
   end
