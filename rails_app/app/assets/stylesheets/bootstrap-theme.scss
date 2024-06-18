@@ -12,3 +12,14 @@
   max-width: 1080px;
   margin: 0 auto;
 }
+
+a:not(.btn, .link-default-reset) {
+  color: var(--color-fg-accent);
+  text-decoration: underline;
+  text-underline-offset: var(--link-text-underline-offset);
+  text-decoration-thickness: var(--link-text-decoration-thickness);
+}
+
+a:not(.btn, .link-default-reset):hover {
+  text-decoration-thickness: var(--link-hover-text-decoration-thickness);
+}
