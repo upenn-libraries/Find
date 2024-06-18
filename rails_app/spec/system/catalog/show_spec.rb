@@ -333,7 +333,7 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'when viewing main creator', skip: 'until facet map configured' do
+    context 'when viewing main creator' do
       include_context 'with print monograph record with 2 physical entries'
 
       before { visit(solr_document_path(print_monograph_bib)) }
@@ -385,7 +385,7 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'when viewing a conference', skip: 'until facet map configured' do
+    context 'when viewing a conference' do
       let(:conference_bib) { '9978940183503681' }
       let(:conference_entries) do
         [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',

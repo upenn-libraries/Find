@@ -145,12 +145,14 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field :format_facet, label: I18n.t('results.format')
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
-                                         component: Find::FacetLinkComponent, facet_target: :creator_facet
+                                         component: Find::FacetLinkComponent, facet_target: :creator_facet,
+                                         facet_map: :creator_show_facet_map
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
                                                            accessor: :marc, component: Find::FacetLinkComponent,
-                                                           facet_target: :creator_facet
+                                                           facet_target: :creator_facet,
+                                                           facet_map: :creator_conference_detail_show_facet_map
     config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
