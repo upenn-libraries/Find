@@ -270,6 +270,17 @@ describe 'Catalog Show Page' do
         click_on I18n.t('blacklight.tools.title')
         expect(page).to have_link 'Email', href: email_solr_document_path(mms_id)
       end
+
+      # rubocop:disable RSpec/ExampleLength
+      it 'properly sends an email' do
+        expect {
+          click_on I18n.t('blacklight.tools.title')
+          click_on I18n.t('blacklight.tools.email')
+          fill_in :to, with: 'patron@upenn.edu'
+          click_on I18n.t('blacklight.email.form.submit')
+        }.to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+      # rubocop:enable RSpec/ExampleLength
     end
 
     context 'when a user is not signed in' do
@@ -315,6 +326,106 @@ describe 'Catalog Show Page' do
       it 'applies the correct class when availability status is "check holdings"' do
         within('#inventory-pills-tab') do
           expect(page).to have_button(class: 'inventory-item__availability')
+        end
+      end
+    end
+  end
+
+  context 'when linking to a facet search' do
+    context 'when no matching facet is found' do
+      include_context 'with print monograph record with 2 physical entries'
+
+      before do
+        CatalogController.configure_blacklight do |config|
+          config.add_show_field :subject_test_show, values: ->(_, _, _) { ['Dogs.'] },
+                                                    component: Find::FacetLinkComponent
+        end
+
+        visit(solr_document_path(print_monograph_bib))
+      end
+
+      it 'shows the display value without a link to facet search' do
+        within('.col-md-9.blacklight-subject_test_show') do
+          expect(page).to have_text('Dogs.')
+          expect(page).not_to have_link('Dogs.')
+        end
+      end
+    end
+
+    context 'when viewing main creator' do
+      include_context 'with print monograph record with 2 physical entries'
+
+      before { visit(solr_document_path(print_monograph_bib)) }
+
+      it 'links to creator facet search' do
+        within('.col-md-9.blacklight-creator_show') do
+          expect(page).to have_link('Bleier, Ruth, 1923-',
+                                    href: search_catalog_path({ 'f[creator_facet][]': 'Bleier, Ruth, 1923-' }))
+        end
+      end
+    end
+
+    context 'when viewing subjects' do
+      include_context 'with print monograph record with 2 physical entries'
+
+      before { visit(solr_document_path(print_monograph_bib)) }
+
+      it 'links to a subject facet search' do
+        within('.col-md-9.blacklight-subject_show') do
+          expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' })
+          expect(page).to have_link 'Hypothalamus.', href: search_catalog_path({ 'f[subject_facet][]': 'Hypothalamus' })
+        end
+      end
+    end
+
+    context 'when viewing medical subjects' do
+      include_context 'with print monograph record with 2 physical entries'
+
+      before { visit(solr_document_path(print_monograph_bib)) }
+
+      it 'links to a subject facet search' do
+        within('.col-md-9.blacklight-subject_medical_show') do
+          expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' })
+          expect(page).to have_link 'Hypothalamus.', href: search_catalog_path({ 'f[subject_facet][]': 'Hypothalamus' })
+        end
+      end
+    end
+
+    context 'when viewing contributors' do
+      include_context 'with electronic database record'
+
+      before { visit(solr_document_path(electronic_db_bib)) }
+
+      it 'links to a creator facet search' do
+        within('.col-md-9.blacklight-creator_contributor_show') do
+          expect(page).to have_link('Geo Abstracts, Ltd.',
+                                    href: search_catalog_path({ 'f[creator_facet][]': 'Geo Abstracts, Ltd' }))
+        end
+      end
+    end
+
+    context 'when viewing a conference' do
+      let(:conference_bib) { '9978940183503681' }
+      let(:conference_entries) do
+        [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
+                                 inventory_type: 'physical')]
+      end
+
+      before do
+        SampleIndexer.index 'conference.json'
+
+        allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                   .and_return(Inventory::Response.new(entries: conference_entries))
+        allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                    .and_return(Inventory::Response.new(entries: conference_entries))
+        visit(solr_document_path(conference_bib))
+      end
+
+      it 'links to a creator facet search' do
+        show = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : 1977 : Rome, Italy)'
+        facet = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : Rome, Italy)'
+        within('.col-md-9.blacklight-creator_conference_detail_show') do
+          expect(page).to have_link(show, href: search_catalog_path({ 'f[creator_facet][]': facet }))
         end
       end
     end

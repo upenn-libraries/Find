@@ -1,4 +1,4 @@
-pennlibs_web_version: '0.1.1'
+pennlibs_web_version: '0.1.2'
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
@@ -10,6 +10,12 @@ google_analytics:
   id: ~
 honeybadger:
   api_key: '12345'
+email:
+  from_address: 'find-noreply@library.upenn.edu'
+  smtp:
+    url: 'mailrelay.library.upenn.int'
+    port: 25
+    domain: 'upenn.edu'
 locations:
   offsite:
     - lippb10
@@ -81,4 +87,3 @@ electronic_scoring:
     Elsevier ScienceDirect: 91
     Nature: 90
     Elsevier ClinicalKey: 89
-

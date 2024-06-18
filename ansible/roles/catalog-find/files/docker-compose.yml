@@ -27,7 +27,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl -fsSL localhost:${APP_PORT} || exit 1",
+          "curl -fsSL localhost:${APP_PORT}/up || exit 1",
         ]
       interval: 10s
       retries: 6
