@@ -229,9 +229,12 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'shows the right button' do
+      it 'shows the schedule visit button with aeon params' do
         within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.aeon')
+          expect(page).to have_link I18n.t('requests.form.buttons.aeon'),
+                                    href: Settings.aeon.base_url + item.aeon_open_params
+                                                                       .merge(item.aeon_additional_params)
+                                                                       .to_query
         end
       end
     end
