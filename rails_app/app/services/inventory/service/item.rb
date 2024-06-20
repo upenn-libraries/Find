@@ -173,13 +173,15 @@ module Inventory
       # @return [Hash]
       def aeon_open_params
         { 'rft.au': bib_data['author'],
-          'rft.title': bib_data['title'],
+          'rft.date': bib_data['date_of_publication'],
           'rft.edition': bib_data['complete_edition'],
+          'rft.isbn': bib_data['isbn'],
+          'rft.issn': bib_data['issn'],
+          'rft.issue': issue,
           'rft.place': bib_data['place_of_publication'],
           'rft.pub': bib_data['publisher_const'],
-          'rft.date': bib_data['date_of_publication'],
-          'rft.isbn': bib_data['isbn'],
-          'rft.issn': bib_data['issn'] }
+          'rft.title': bib_data['title'],
+          'rft.volume': volume }
       end
 
       # Additional parameters to be passed to the Aeon request form
@@ -188,7 +190,6 @@ module Inventory
       def aeon_additional_params
         { Barcode: item_data['barcode'],
           CallNumber: temp_aware_call_number,
-          ItemIssue: issue,
           ItemISxN: item_data['inventory_number'],
           Location: location,
           ReferenceNumber: bib_data['mms_id'],
