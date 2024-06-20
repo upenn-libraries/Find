@@ -97,4 +97,15 @@ FactoryBot.define do
       item
     end
   end
+
+  trait :in_temp_location do
+    item do
+      item = attributes_for(:item)[:item]
+      item['holding_data'] = { 'in_temp_location' => true }
+      item['holding_data']['temp_library'] = { 'value' => 'templib' }
+      item['holding_data']['temp_location'] = { 'value' => 'temploc' }
+      item['holding_data']['temp_call_number'] = 'tempcall'
+      item
+    end
+  end
 end
