@@ -55,9 +55,9 @@ shared_context 'with electronic database record' do
   before do
     SampleIndexer.index 'electronic_database.json'
 
-    allow(Inventory::Service).to receive(:full).with(electronic_db_bib)
+    allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
                                                .and_return(Inventory::Response.new(entries: electronic_db_entries))
-    allow(Inventory::Service).to receive(:brief).with(electronic_db_bib)
+    allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
                                                 .and_return(Inventory::Response.new(entries: electronic_db_entries))
   end
 end

@@ -398,8 +398,12 @@ en:
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   sort:
+    added_date_asc: 'Date Added (old-new)'
+    added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    publication_date_asc: 'Publication date (old-new)'
+    publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'
