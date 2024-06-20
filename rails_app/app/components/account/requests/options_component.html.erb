@@ -38,10 +38,10 @@
     </p>
   <% end %>
   <div class="request-buttons">
-    <%= electronic_delivery_link %>
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
+    <%= electronic_delivery_link %>
     <%= aeon_link %>
   </div>
 <% end %>

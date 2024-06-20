@@ -4,8 +4,6 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    include Blacklight::Searchable
-
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
       Rails.logger.error(e.message)
@@ -88,7 +86,6 @@ module Account
     # those options to determine what actions are available to the user.
     # GET /account/requests/options
     def options
-      document = search_service.fetch(params[:mms_id])
       item = if params[:item_id] == 'no-item'
                Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
@@ -97,8 +94,7 @@ module Account
                                                  item_id: params[:item_id])
              end
       options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
-      render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options,
-                                                     document: document), layout: false)
+      render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
     end
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.

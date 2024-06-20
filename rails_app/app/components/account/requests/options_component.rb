@@ -8,11 +8,10 @@ module Account
 
       attr_accessor :item, :user, :options
 
-      def initialize(user:, item:, options:, document:)
+      def initialize(user:, item:, options:)
         @user = user
         @item = item
         @options = options.inquiry
-        @document = document
       end
 
       # Returns true if at least one delivery option is available.
@@ -38,7 +37,9 @@ module Account
 
       def aeon_link
         link_to t('requests.form.buttons.aeon'),
-                Settings.aeon.base_url + item.aeon_open_params(document: @document).merge(item.aeon_additional_params).to_query,
+                Settings.aeon.base_url + item.aeon_open_params
+                                             .merge(item.aeon_additional_params)
+                                             .to_query,
                 { class: 'd-none btn btn-success btn-lg',
                   data: { options_select_target: 'viewButton', turbo_frame: '_top' } }
       end

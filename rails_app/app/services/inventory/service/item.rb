@@ -170,15 +170,9 @@ module Inventory
 
       # Open URL parameters to be passed to the Aeon request form
       #
-      # @param document [SolrDocument]
       # @return [Hash]
-      def aeon_open_params(document:)
-        { 'rft.format': item_data['physical_material_type']['desc'],
-          'rft.au': bib_data['author'],
-          # genre seems to be the only field that is not accessible from the bib/item data or the document
-          # can we pull from pennmarc off the document? how important is this field?
-          # 'rft.genre': document_field(document, :genre_ss),
-          'rft.creator': document_field(document, :creator_ss),
+      def aeon_open_params
+        { 'rft.au': bib_data['author'],
           'rft.title': bib_data['title'],
           'rft.edition': bib_data['complete_edition'],
           'rft.place': bib_data['place_of_publication'],
@@ -200,12 +194,6 @@ module Inventory
           ReferenceNumber: bib_data['mms_id'],
           Site: site,
           SubLocation: sublocation }
-      end
-
-      private
-
-      def document_field(document, field)
-        document.fetch(field, nil)&.join(', ')
       end
     end
   end
