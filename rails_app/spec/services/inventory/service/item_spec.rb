@@ -188,5 +188,13 @@ describe Inventory::Service::Item do
         expect(options).to include Fulfillment::Request::Options::ELECTRONIC
       end
     end
+
+    context 'when the item is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+
+      it 'returns an empty array' do
+        expect(item.fulfillment_options(ils_group: 'group')).to eq []
+      end
+    end
   end
 end
