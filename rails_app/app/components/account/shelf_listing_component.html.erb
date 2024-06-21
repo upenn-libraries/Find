@@ -3,20 +3,88 @@
     <p class="mb-0"><%= t('account.shelf.no_items') %></p>
   </div>
 <% else %>
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col"><%= t('account.shelf.table.th.index') %></th>
-        <th scope="col"><%= t('account.shelf.table.th.title') %></th>
-        <th scope="col" nowrap="nowrap"><%= t('account.shelf.table.th.status') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @listing.each_with_index do |entry, index| %>
-        <%= render Account::ShelfListingEntryComponent.new(entry, index + 1) %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-12 col-md-3">
+    <form class="mb-4">
+      <h2 class="h5">Refine your shelf</h2>
+
+      <h3 class="h6 pt-2">Type</h3>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="checkbox" name="loans" value="electronic" class="form-check-input" checked="checked">
+          Loan
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="checkbox" name="requests" value="requests" class="form-check-input" checked="checked">
+          Request
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="checkbox" name="scans" value="scans" class="form-check-input" checked="checked">
+          Scan
+        </label>
+      </div>
+
+
+      <h3 class="h6 pt-3">Sort by</h3>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="radio" name="sort-by" value="updated-recent" class="form-check-input" checked="checked">
+          Updated recent to old
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="radio" name="sort-by" value="updated-old" class="form-check-input">
+          Updated old to recent
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="radio" name="sort-by" value="title-a" class="form-check-input">
+          Title A to Z
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="d-inline-block p-1">
+          <input type="radio" name="sort-by" value="title-z" class="form-check-input">
+          Title Z to A
+        </label>
+      </div>
+
+      <button class="btn btn-primary mt-3">Refine</button>
+    </form>
+  </div>
+  <div class="col-12 col-md-9">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <caption class="visually-hidden">
+          <h2>Titles on your shelf</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col"><%= t('account.shelf.table.th.index') %></th>
+            <th scope="col"><%= t('account.shelf.table.th.title') %></th>
+            <th scope="col" nowrap="nowrap"><%= t('account.shelf.table.th.status') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @listing.each_with_index do |entry, index| %>
+            <%= render Account::ShelfListingEntryComponent.new(entry, index + 1) %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <% end %>

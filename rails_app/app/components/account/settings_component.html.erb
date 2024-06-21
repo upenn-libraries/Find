@@ -41,7 +41,9 @@
     <% end %>
   </p>
 <% else %>
-  <p class="text-muted"><%= t('account.settings.bbm_empty') %></p>
+<div class="alert alert-light">
+  <p class="mb-0"><%= t('account.settings.bbm_empty') %></p>
+</div>
 <% end %>
 
 <p class="callout">
