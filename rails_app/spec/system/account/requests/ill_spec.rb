@@ -48,4 +48,21 @@ describe 'Account Request ILL form' do
       expect(page).to have_field 'title', with: 'Gone with the Wind'
     end
   end
+
+  context 'when form is submitting with missing required fields' do
+    before do
+      click_button 'Book or other item'
+      fill_in 'Author', with: 'John Doe'
+      click_button 'Place request'
+    end
+
+    it 'display error messages' do
+      expect(page).to have_content I18n.t('account.ill.form.loan.title.help_text')
+      expect(page).to have_content I18n.t('account.ill.form.loan.publication_year.help_text')
+    end
+
+    it 'does not display error message for author' do
+      expect(page).not_to have_content I18n.t('account.ill.form.loan.author.help_text')
+    end
+  end
 end
