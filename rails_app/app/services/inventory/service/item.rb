@@ -123,11 +123,11 @@ module Inventory
         item_data['enumeration_b']
       end
 
-      def sublocation
+      def aeon_sublocation
         Settings.locations.aeon_sublocation_map[location]
       end
 
-      def site
+      def aeon_site
         Settings.locations.aeon_location_map[library]
       end
 
@@ -188,13 +188,20 @@ module Inventory
       #
       # @return [Hash]
       def aeon_additional_params
-        { Barcode: item_data['barcode'],
-          CallNumber: temp_aware_call_number,
+        { CallNumber: temp_aware_call_number,
           ItemISxN: item_data['inventory_number'],
+          ItemNumber: item_data['barcode'],
           Location: location,
           ReferenceNumber: bib_data['mms_id'],
-          Site: site,
-          SubLocation: sublocation }
+          Site: aeon_site,
+          SubLocation: aeon_sublocation }
+      end
+
+      # All parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_params
+        aeon_open_params.merge(aeon_additional_params)
       end
     end
   end
