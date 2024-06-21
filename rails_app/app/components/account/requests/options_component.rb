@@ -37,9 +37,7 @@ module Account
 
       def aeon_link
         link_to t('requests.form.buttons.aeon'),
-                Settings.aeon.base_url + item.aeon_open_params
-                                             .merge(item.aeon_additional_params)
-                                             .to_query,
+                Settings.aeon.requesting_url + item.aeon_params.to_query,
                 { class: 'd-none btn btn-success btn-lg',
                   data: { options_select_target: 'viewButton', turbo_frame: '_top' } }
       end

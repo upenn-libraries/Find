@@ -6,7 +6,7 @@ illiad:
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
   user_password: <%= DockerSecrets.lookup(:illiad_user_password, Rails.application.credentials.illiad_user_password) %>
 aeon:
-  base_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
+  requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~
