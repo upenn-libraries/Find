@@ -4,6 +4,19 @@
 module MARCExport
   extend ActiveSupport::Concern
 
+  def self.extended(document)
+    document.will_export_as(:ris, 'application/x-research-info-systems')
+  end
+
+  def export_as_ris
+    ris_hash = to_ris_hash
+    lines = ris_hash.keys
+                    .select { |key| ris_hash[key].present? }
+                    .flat_map { |key| render_ris_key_value(key, ris_hash[key]) }
+    lines << 'ER  - '
+    lines.compact.join("\n")
+  end
+
   # Returns the MLA citation text of the current record
   # @return [String]
   def mla_citation_txt
@@ -140,13 +153,12 @@ module MARCExport
   # @param [Array<string>] authors: array of the author names
   # @return [String]
   def format_authors(authors)
-    text = ''
-    return text if authors.blank?
+    return '' if authors.blank?
 
     authors_final = []
 
     if authors.length >= 4
-      text += "#{authors.first}, et al. "
+      text = "#{authors.first}, et al. "
     else
       authors.each_with_index do |aut, idx|
         aut = aut.strip
@@ -161,8 +173,9 @@ module MARCExport
                       end
         authors_final.push(author_text)
       end
+      text = authors_final.join
     end
-    text += authors_final.join
+
     if text.present?
       text += text.last == '.' ? ' ' : '. '
     end
@@ -180,5 +193,24 @@ module MARCExport
     "#{parts[1].squish} #{parts[0].squish}"
   end
 
+  def render_ris_key_value(key, val)
+    if val.is_a?(Array)
+      val.map { |v| "#{key}  - #{v}" }
+    else
+      "#{key}  - #{val}"
+    end
+  end
+
+  def to_ris_hash
+    h = {}
+    self.class.ris_field_mappings.each do |key, val|
+      h[key] = if val.is_a?(Proc)
+                 instance_eval(&val)
+               else
+                 fetch(val, '')
+               end
+    end
+    h
+  end
 
 end

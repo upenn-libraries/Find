@@ -78,6 +78,7 @@ class CatalogController < ApplicationController
                                           validator: :validate_email_params)
     config.add_show_tools_partial(:login_for_email, unless: :user_signed_in?, modal: false, path: 'login_path')
     config.add_show_tools_partial(:citation)
+    config.add_show_tools_partial(:ris, label: 'Download in RIS format', modal: false, path: :ris_path)
     config.add_show_tools_partial(:staff_view, modal: false, unless: :bookmarks?)
 
     # TODO: Our override of the TopNavbarComponent means render_nav_actions is never called in any view. We need a new
