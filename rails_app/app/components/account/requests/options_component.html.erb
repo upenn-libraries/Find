@@ -34,7 +34,12 @@
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
   <% elsif options.archives? %>
     <p class="js_archives alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', url: t('urls.requesting_info.archives')) %>
+      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
+                                                        contact_url: t('urls.requesting_info.archives_contact')) %>
+    </p>
+  <% elsif options.empty? %>
+    <p class="js_unavailable mb-3">
+      <%= t('requests.form.options.unavailable.info_html', url: t('urls.guides.ill')) %>
     </p>
   <% end %>
   <div class="request-buttons">
@@ -42,6 +47,7 @@
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
+    <%= unavailable_link %>
 
     <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
     <%= link_to t('requests.form.buttons.aeon'),

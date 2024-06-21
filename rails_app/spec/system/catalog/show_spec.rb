@@ -251,6 +251,30 @@ describe 'Catalog Show Page' do
         end
       end
     end
+
+    context 'with an item that is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the unavailable message' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_unavailable'
+        end
+      end
+
+      it 'shows the unavailable button with open params' do
+        within('.request-buttons') do
+          button = find_link I18n.t('requests.form.buttons.unavailable')
+          expect(button[:href]).to include(ill_new_request_path)
+          expect(button[:href]).to include(CGI.escape(item.bib_data['title']))
+        end
+      end
+    end
   end
 
   context 'when interacting with show tools' do

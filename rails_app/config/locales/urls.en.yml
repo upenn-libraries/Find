@@ -7,6 +7,7 @@ en:
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
       scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office: "https://guides.library.upenn.edu/resourcesharing/facex"
+      ill: "https://guides.library.upenn.edu/resourcesharing/ill"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"
@@ -32,4 +33,5 @@ en:
       release_notes: "https://www.library.upenn.edu/release-notes/find"
     requesting_info:
       kislak_reading_room: "https://www.library.upenn.edu/kislak/kislak-center-reading-room"
-      archives: "https://archives.upenn.edu/research/visit"
+      archives_visit: "https://archives.upenn.edu/research/visit"
+      archives_contact: "https://archives.upenn.edu/archives-info/contact"

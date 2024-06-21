@@ -34,6 +34,13 @@ module Account
                 { class: 'd-none btn btn-success btn-lg',
                   data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
       end
+
+      def unavailable_link
+        link_to t('requests.form.buttons.unavailable'),
+                ill_new_request_path(**item.fulfillment_submission_params, requesttype: 'book'),
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'unavailableButton', turbo_frame: '_top' } }
+      end
     end
   end
 end
