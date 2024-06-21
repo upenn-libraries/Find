@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
     // Changes styling of inputs if its invalid.
     check(event) {
-        console.log(event);
         const input = event.target;
         const formGroup = input.parentElement;
         const errorMessage = formGroup.querySelector('.error-message');
