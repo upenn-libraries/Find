@@ -229,12 +229,11 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'shows the schedule visit button with aeon params' do
+      it 'shows the schedule visit button with aeon href' do
         within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.aeon'),
-                                    href: Settings.aeon.base_url + item.aeon_open_params
-                                                                       .merge(item.aeon_additional_params)
-                                                                       .to_query
+          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
+          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
+          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
         end
       end
     end
