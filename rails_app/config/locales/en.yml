@@ -100,11 +100,15 @@ en:
           journal_title:
             label: 'Journal or book title'
             help_text: 'Enter a journal or book title'
-          article_title: 'Article or chapter title'
+          article_title:
+            label: 'Article or chapter title'
+            help_text: 'Enter article or chapter title'
           author:
             label: 'Author'
             help_text: 'Enter an author'
-          publication_date: 'Publication date'
+          publication_date:
+            label: 'Publication date'
+            help_text: 'Enter publication date'
           volume: 'Volume'
           issue: 'Issue'
           pages: 'Pages'
@@ -114,9 +118,15 @@ en:
           submit: 'Place request'
           delivery_msg: 'Articles and chapters are delivered electronically as a PDF and are often ready in 2-3 business days.'
         loan:
-          title: 'Title'
-          author: 'Author'
-          publication_year: 'Year of publication'
+          title:
+            label: 'Title'
+            help_text: 'Enter a title'
+          author:
+            label: 'Author'
+            help_text: 'Enter an author'
+          publication_year:
+            label: 'Year of publication'
+            help_text: 'Enter a year'
           edition: 'Edition'
           publisher: 'Publisher'
           place_of_publication: 'Place of publication'

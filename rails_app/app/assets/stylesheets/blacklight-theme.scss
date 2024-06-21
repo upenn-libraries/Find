@@ -262,7 +262,7 @@ form {
   border-left: solid 0.25rem var(--color-fg-attention);
 }
 
-.form-group__error-text {
+.form-group--error .error-message {
   color: var(--color-fg-attention);
   font-weight: 600;
   margin-bottom: 0;
