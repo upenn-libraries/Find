@@ -17,9 +17,10 @@ en:
       finding_aids: "https://findingaids.library.upenn.edu"
       jstor: "https://www.jstor.org/site/upenn"
       openn: "https://openn.library.upenn.edu"
+      proxy: "https://proxy.library.upenn.edu/login?url=%{url}"
       scholarlycommons: "https://repository.upenn.edu/home"
       search_center: "https://www.law.upenn.edu/library/research.php"
-      summon: "https://upenn.summon.serialssolutions.com/"
+      summon: "https://upenn.summon.serialssolutions.com/search"
       worldcat: "http://hdl.library.upenn.edu/1017/7158"
     help:
       appointment: "https://libcal.library.upenn.edu/appointments"
