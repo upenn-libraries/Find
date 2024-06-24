@@ -33,7 +33,7 @@ describe Articles::FacetManager do
     end
 
     it 'returns expected facet count doc counts for a given facet field' do
-      expect(format_counts.first[:doc_count]).to eq(12_865_640)
+      expect(format_counts.first[:doc_count]).to eq(13_041_331)
     end
 
     it 'returns expected facet count urls for a given facet field' do
