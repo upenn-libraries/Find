@@ -7,21 +7,21 @@
           <%= t('account.ill.form.loan.title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.loan.title.help_text') %></p>
-        <%= text_field_tag :title, @ill_params.book_title, class: 'form-control mt-1', required: true, data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :title, @ill_params.book_title, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :author do %>
           <%= t('account.ill.form.loan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.loan.author.help_text') %></p>
-        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true, data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true%>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :year do %>
           <%= t('account.ill.form.loan.publication_year.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.loan.publication_year.help_text') %></p>
-        <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true, data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :edition, t('account.ill.form.loan.edition') %>
@@ -68,7 +68,7 @@
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
       <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-      <button type="submit" class="btn btn-success btn-lg"><%= t('account.ill.form.loan.submit') %></button>
+      <button type="submit" class="btn btn-success btn-lg" data-action="form-validation#displayErrors"><%= t('account.ill.form.loan.submit') %></button>
     </div>
   </div>
 <% end %>

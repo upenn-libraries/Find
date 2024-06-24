@@ -10,36 +10,28 @@
           <%= t('account.ill.form.scan.journal_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.scan.journal_title.help_text') %></p>
-        <%= text_field_tag :journal,
-                           @ill_params.book_title || @ill_params.journal,
-                           class: 'form-control mt-1',
-                           required: true,
-                           data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :journal, @ill_params.book_title || @ill_params.journal, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :article do %>
           <%= t('account.ill.form.scan.article_title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.scan.article_title.help_text') %></p>
-        <%= text_field_tag :article,
-                           @ill_params.chapter_title || @ill_params.article,
-                           class: 'form-control mt-1',
-                           required: true,
-                           data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :article, @ill_params.chapter_title || @ill_params.article, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :author do %>
           <%= t('account.ill.form.scan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.scan.author.help_text') %></p>
-        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true, data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :date do %>
           <%= t('account.ill.form.scan.publication_date.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.scan.publication_date.help_text') %></p>
-        <%= text_field_tag :date, @ill_params.date, class: 'form-control mt-1', required: true, data: { action: 'form-validation#check invalid->form-validation#check' } %>
+        <%= text_field_tag :date, @ill_params.date, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :volume, t('account.ill.form.scan.volume') %>
@@ -66,7 +58,7 @@
 
       <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-      <button type="submit" class="btn btn-success btn-lg"><%= t('account.ill.form.scan.submit') %></button>
+      <button type="submit" class="btn btn-success btn-lg" data-action="form-validation#displayErrors"><%= t('account.ill.form.scan.submit') %></button>
     </div>
   </div>
 <% end %>
