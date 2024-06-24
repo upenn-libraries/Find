@@ -123,6 +123,14 @@ module Inventory
         item_data['enumeration_b']
       end
 
+      def aeon_sublocation
+        Settings.locations.aeon_sublocation_map[location]
+      end
+
+      def aeon_site
+        Settings.locations.aeon_location_map[library]
+      end
+
       # Return an array of fulfillment options for a given item and ils_group
       # @param ils_group [String] the ILS group code
       # @return [Array<Symbol>]
@@ -158,6 +166,42 @@ module Inventory
           issue: issue,
           isbn: bib_data['isbn'],
           issn: bib_data['issn'] }
+      end
+
+      # Open URL parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_open_params
+        { 'rft.au': bib_data['author'],
+          'rft.date': bib_data['date_of_publication'],
+          'rft.edition': bib_data['complete_edition'],
+          'rft.isbn': bib_data['isbn'],
+          'rft.issn': bib_data['issn'],
+          'rft.issue': issue,
+          'rft.place': bib_data['place_of_publication'],
+          'rft.pub': bib_data['publisher_const'],
+          'rft.title': bib_data['title'],
+          'rft.volume': volume }
+      end
+
+      # Additional parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_additional_params
+        { CallNumber: temp_aware_call_number,
+          ItemISxN: item_data['inventory_number'],
+          ItemNumber: item_data['barcode'],
+          Location: location,
+          ReferenceNumber: bib_data['mms_id'],
+          Site: aeon_site,
+          SubLocation: aeon_sublocation }
+      end
+
+      # All parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_params
+        aeon_open_params.merge(aeon_additional_params)
       end
     end
   end

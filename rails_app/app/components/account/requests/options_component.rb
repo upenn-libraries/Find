@@ -34,6 +34,13 @@ module Account
                 { class: 'd-none btn btn-success btn-lg',
                   data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
       end
+
+      def aeon_link
+        link_to t('requests.form.buttons.aeon'),
+                Settings.aeon.requesting_url + item.aeon_params.to_query,
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } }
+      end
     end
   end
 end

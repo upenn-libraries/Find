@@ -142,6 +142,32 @@ describe Inventory::Service::Item do
     end
   end
 
+  describe 'temp_aware_location_display' do
+    it 'returns temp location display when item is in temp location' do
+      item = build :item, :in_temp_location
+      expect(item.temp_aware_location_display)
+        .to eq "(temp) #{item.holding_data['temp_library']['value']} - #{item.holding_data['temp_location']['value']}"
+    end
+
+    it 'returns normal location display when item is not in temp location' do
+      item = build :item
+      expect(item.temp_aware_location_display)
+        .to eq "#{item.holding_library_name} - #{item.holding_location_name}"
+    end
+  end
+
+  describe 'temp_aware_call_number' do
+    it 'returns the temp call number when it exists' do
+      item = build :item, :in_temp_location
+      expect(item.temp_aware_call_number).to eq item.holding_data['temp_call_number']
+    end
+
+    it 'returns the normal call number when item is not in temp location' do
+      item = build :item
+      expect(item.temp_aware_call_number).to eq item.holding_data['permanent_call_number']
+    end
+  end
+
   describe 'fulfillment_options' do
     it 'returns an array of options' do
       item = build :item, :checkoutable

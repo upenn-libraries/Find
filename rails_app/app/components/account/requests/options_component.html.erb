@@ -38,15 +38,10 @@
     </p>
   <% end %>
   <div class="request-buttons">
-    <%= electronic_delivery_link %>
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
-
-    <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
-    <%= link_to t('requests.form.buttons.aeon'),
-                '',
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } } %>
+    <%= electronic_delivery_link %>
+    <%= aeon_link %>
   </div>
 <% end %>
