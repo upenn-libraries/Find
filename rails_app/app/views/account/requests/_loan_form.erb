@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-7">
       <div class="form-group mt-2">
-        <%= label_tag :title, class: 'form-label' do %>
+        <%= label_tag :title do %>
           <%= t('account.ill.form.loan.title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
         <p class="error-message d-none"><%= t('account.ill.form.loan.title.help_text') %></p>
@@ -68,7 +68,9 @@
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
       <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-      <button type="submit" class="btn btn-success btn-lg" data-action="form-validation#displayErrors"><%= t('account.ill.form.loan.submit') %></button>
+      <%= button_tag t('account.ill.form.loan.submit'),
+                     class: 'btn btn-success btn-lg',
+                     data: { action: 'form-validation#displayErrors' } %>
     </div>
   </div>
 <% end %>
