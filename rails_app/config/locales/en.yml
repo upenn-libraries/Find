@@ -73,9 +73,12 @@ en:
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_heading: 'Account Overview'
+      page_heading: 'Account overview'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
+        request:
+          title: 'Request an item'
+          description: "Describe what you need and we'll get it to you."
         shelf:
           title: 'Shelf'
           description: "Renew items you've loaned and see when they're due."
@@ -86,7 +89,7 @@ en:
             title: 'Bookmarks'
             description: 'Create citations and email bookmarked items.'
         fines_and_fees:
-          title: 'Fines and Fees'
+          title: 'Fines and fees'
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
       page_heading: 'Request an item'
@@ -151,7 +154,8 @@ en:
       how_to_pay_html: '<a href="%{url}" target=_blank>How to pay fines and fees</a>'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your account details and item delivery address.'
+      page_lede: 'Your account information and item delivery address.'
+      details_heading: 'Account information'
       terms:
         user_group: 'Patron group'
         bbm_delivery_address: 'Delivery address for Books by Mail'
@@ -191,14 +195,15 @@ en:
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'
-    login: 'Login'
+    login: 'Log in'
     service_lede: 'books, articles, and more'
     service_name: 'Find'
-    sign_out: 'Sign Out'
+    sign_out: 'Sign out'
     account: 'Account'
   footer:
     account:
       heading: 'Account'
+      request: "Request an item"
       shelf: 'Shelf'
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
