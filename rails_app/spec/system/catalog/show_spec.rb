@@ -263,17 +263,21 @@ describe 'Catalog Show Page' do
         find('details.fulfillment > summary').click
       end
 
-      it 'shows the unavailable message' do
+      it 'shows request options' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_unavailable'
+          expect(page).to have_selector '.js_radio-options'
         end
       end
 
-      it 'shows the unavailable button with open params' do
+      it 'selects the first option' do
+        within('.js_radio-options') do
+          expect(first('input[type="radio"]')[:checked]).to be true
+        end
+      end
+
+      it 'shows the right button' do
         within('.request-buttons') do
-          button = find_link I18n.t('requests.form.buttons.unavailable')
-          expect(button[:href]).to include(ill_new_request_path)
-          expect(button[:href]).to include(CGI.escape(item.bib_data['title']))
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
       end
     end

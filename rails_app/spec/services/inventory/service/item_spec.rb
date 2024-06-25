@@ -220,7 +220,7 @@ describe Inventory::Service::Item do
         expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
-      it 'returns scan option if item is scannable' do
+      it 'returns electronic option if item is scannable' do
         item = build :item
         options = item.fulfillment_options(ils_group: 'group')
         expect(options).to include Fulfillment::Request::Options::ELECTRONIC
@@ -230,8 +230,17 @@ describe Inventory::Service::Item do
     context 'when the item is unavailable' do
       let(:item) { build :item, :not_checkoutable }
 
-      it 'returns an empty array' do
-        expect(item.fulfillment_options(ils_group: 'group')).to eq []
+      it 'returns electronic option' do
+        expect(item.fulfillment_options(ils_group: 'group')).to include Fulfillment::Request::Options::ELECTRONIC
+      end
+
+      it 'returns ill pickup option' do
+        expect(item.fulfillment_options(ils_group: 'group')).to include Fulfillment::Request::Options::ILL_PICKUP
+      end
+
+      it 'returns office option if ils_group is faculty express' do
+        expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
+          .to include Fulfillment::Request::Options::OFFICE
       end
     end
   end

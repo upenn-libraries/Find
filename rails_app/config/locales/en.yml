@@ -275,9 +275,9 @@ en:
         scan: 'Continue to request a scan'
         office: 'Place delivery request'
         pickup: 'Place pickup request'
+        ill_pickup: 'Place ILL pickup request'
         mail: 'Place mail request'
         aeon: 'Schedule visit'
-        unavailable: 'Continue to request item'
         placeholder: 'Request item'
       options:
         label: 'How would you like it delivered?'
@@ -300,7 +300,7 @@ en:
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         unavailable:
-          info_html: 'This item is currently unavailable. Please request it through <a href="%{url}" target="_blank">Interlibrary Loan</a>.'
+          info_html: 'This item is currently unavailable in print from the Penn Libraries. Use one of the options below to complete an <a href="%{url}">Interlibrary Loan</a> request.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

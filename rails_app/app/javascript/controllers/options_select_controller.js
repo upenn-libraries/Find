@@ -5,9 +5,9 @@ export default class extends Controller {
     "electronicButton",
     "officeButton",
     "pickupButton",
+    "ill_pickupButton",
     "mailButton",
     "viewButton",
-    "unavailableButton",
     "optionsFrame",
     "addComments",
   ];
@@ -22,9 +22,6 @@ export default class extends Controller {
       } else if (frameType === "aeon") {
         this.hideAllButtons();
         this.viewButtonTarget.classList.remove("d-none");
-      } else if (frameType === "unavailable") {
-        this.hideAllButtons();
-        this.unavailableButtonTarget.classList.remove("d-none");
       }
     });
   }
@@ -61,14 +58,13 @@ export default class extends Controller {
     if (this.optionsFrameTarget.querySelector(".js_aeon")) return "aeon";
     if (this.optionsFrameTarget.querySelector(".js_archives"))
       return "archives";
-    if (this.optionsFrameTarget.querySelector(".js_unavailable"))
-      return "unavailable";
   }
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return this.optionsFrameTarget.querySelector('input[name="delivery"]:checked')
-      .value;
+    return this.optionsFrameTarget.querySelector(
+      'input[name="delivery"]:checked',
+    ).value;
   }
 
   // Return an array of all button targets
@@ -79,7 +75,7 @@ export default class extends Controller {
       this.pickupButtonTarget,
       this.mailButtonTarget,
       this.viewButtonTarget,
-      this.unavailableButtonTarget
+      this.ill_pickupButtonTarget,
     ];
   }
 }

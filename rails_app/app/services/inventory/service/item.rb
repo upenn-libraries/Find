@@ -146,7 +146,7 @@ module Inventory
       def fulfillment_options(ils_group:)
         return [:aeon] if aeon_requestable?
         return [:archives] if at_archives?
-        return [] if unavailable?
+        return unavailable_options(ils_group: ils_group) if unavailable?
 
         options = []
         if checkoutable?
@@ -155,6 +155,14 @@ module Inventory
           options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
           options << Fulfillment::Request::Options::ELECTRONIC if scannable?
         end
+        options
+      end
+
+      def unavailable_options(ils_group:)
+        options = []
+        options << Fulfillment::Request::Options::ILL_PICKUP
+        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
         options
       end
 

@@ -1,5 +1,10 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
+    <% if options.ill_pickup? %>
+      <p class="mb-3">
+        <%= t('requests.form.options.unavailable.info_html', url: t('urls.guides.ill')) %>
+      </p>
+    <% end %>
     <fieldset>
       <legend class="h6"> <%= t('requests.form.options.label') %></legend>
       <ul class="list-group js_radio-options mb-3">
@@ -15,6 +20,12 @@
 
         <% if options.pickup? %>
           <%= render(Account::Requests::Options::PickupComponent.new(user: user,
+                                                                     checked: !options.any?(:electronic, :office),
+                                                                     data: { action: 'change->options-select#optionChanged' })) %>
+        <% end %>
+
+        <% if options.ill_pickup? %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: user, ill: true,
                                                                      checked: !options.any?(:electronic, :office),
                                                                      data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
@@ -35,16 +46,13 @@
   <% elsif options.archives? %>
     <p class="js_archives alert alert-info mb-3">
       <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
-                                                        contact_url: t('urls.requesting_info.archives_contact')) %>
-    </p>
-  <% elsif options.empty? %>
-    <p class="js_unavailable mb-3">
-      <%= t('requests.form.options.unavailable.info_html', url: t('urls.guides.ill')) %>
+            contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
   <% end %>
   <div class="request-buttons">
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
+    <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
     <%= electronic_delivery_link %>
     <%= aeon_link %>
