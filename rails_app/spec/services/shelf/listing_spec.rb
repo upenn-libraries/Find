@@ -8,7 +8,7 @@ describe Shelf::Listing do
      create(:ils_loan, :borrow_direct),
      create(:ill_transaction, :completed_borrow_direct_loan)]
   end
-  let(:listing) { described_class.new(entries) }
+  let(:listing) { create(:shelf_listing, entries: entries) }
 
   describe '.new' do
     it 'returns expected amount of entries' do

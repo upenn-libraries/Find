@@ -9,6 +9,13 @@ module Shelf
     # Catch all for errors raised when making requests to Illiad.
     class IlliadRequestError < StandardError; end
     ILS_REQUEST_LIMIT = 50
+    FILTERS = %i[loans scans requests].freeze
+    DESCENDING = :desc
+    ASCENDING = :asc
+    TITLE = :title
+    LAST_UPDATED_BY = :last_updated_at
+    SORT = [LAST_UPDATED_BY, TITLE].freeze
+    ORDER = [ASCENDING, DESCENDING].freeze
 
     attr_reader :user_id
 
@@ -16,9 +23,22 @@ module Shelf
       @user_id = user_id
     end
 
-    # TODO: Allow filtering and sorting.
-    def find_all
-      Listing.new(ils_loans + ils_holds + ill_transactions)
+    # Finds all entries. Entries can be sorted and filtered with the appropriate params.
+    #
+    # @param filters [Array] list of types of entries to include
+    # @param sort [Symbol] field we should sort on
+    # @param order [Symbol] direction of sorting
+    # @return [Shelf::Listing]
+    def find_all(filters: FILTERS, sort: LAST_UPDATED_BY, order: DESCENDING)
+      entries = if filters.eql?([:scans])
+                  ill_transactions
+                elsif filters.eql?([:loans])
+                  ils_loans
+                else
+                  ils_loans + ils_holds + ill_transactions
+                end
+
+      Listing.new(entries, filters: filters, sort: sort, order: order)
     end
 
     # Find specific transaction based on system, id, and type

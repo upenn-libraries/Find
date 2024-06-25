@@ -32,7 +32,7 @@ module Account
     # List all shelf entries. Supports sort & filter params.
     # GET /account/requests and GET /account/shelf
     def index
-      @listing = shelf_service.find_all
+      @listing = shelf_service.find_all(**filtering_and_sorting_params)
     end
 
     # GET /account/requests/:system/:type/:id
@@ -114,6 +114,16 @@ module Account
 
     def raw_params
       params.except(:controller, :action).to_unsafe_h.deep_symbolize_keys
+    end
+
+    def filtering_and_sorting_params
+      sort_parts = params[:sort]&.rpartition('_')
+
+      {
+        filters: params[:filters]&.map(&:to_sym),
+        sort: sort_parts&.first&.to_sym,
+        order: sort_parts&.last&.to_sym
+      }.compact_blank
     end
   end
 end
