@@ -2,7 +2,14 @@
   <h2 class="h5 document__inventory-heading">
     <%= pluralize(@inventory.count, t('inventory.show.navigation.header')) %>
   </h2>
-  <div class="document__inventory-list" id="inventory-pills-tab" role="tablist" aria-orientation="vertical" data-controller="search-list" data-search-list-target="container">
+  <div
+    class="document__inventory-list"
+    id="inventory-pills-tab"
+    role="tablist"
+    aria-orientation="vertical"
+    data-controller="search-list inventory-list"
+    data-search-list-target="container"
+  >
     <div class="search-list d-none" data-search-list-target="search">
       <input
         type="text"
