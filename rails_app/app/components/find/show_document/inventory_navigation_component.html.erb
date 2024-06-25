@@ -23,13 +23,15 @@
               id="inventory-pills-<%= i %>"
               data-bs-toggle="pill"
               data-bs-target="#inventory-<%= i %>"
-              data-inventory-list-target="entryButton"
               data-search-list-target="entry"
               type="button"
               role="tab"
               aria-controls="inventory-<%= i %>"
               aria-selected="<%= active?(entry) ? 'true' : 'false' %>"
-              data-search-list-item>
+              data-inventory-list-target="entryButton"
+              data-action="click->inventory-list#entryChanged"
+              data-entry-id="<%= entry.id %>"
+      >
         <span class="inventory-item__header"><%= entry.location %></span>
         <span class="inventory-item__main"><%= entry.description %></span>
         <% unless entry.resource_link? %>
