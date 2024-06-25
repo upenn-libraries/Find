@@ -3,7 +3,7 @@
 require 'system_helper'
 
 describe 'Account Settings show page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
   let(:alma_user_data) { { user_group: { 'desc' => 'undergraduate' }, full_name: 'First Last' } }
 
   include_context 'with mock alma_record on user'

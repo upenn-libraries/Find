@@ -40,7 +40,7 @@ describe 'alert display' do
     let(:fixture) { 'both_updated' }
 
     it 'displays both alerts' do
-      within('div.alert') do
+      within('.site-alerts__container') do
         expect(page).to have_selector('p', count: 2)
       end
     end

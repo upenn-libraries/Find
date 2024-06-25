@@ -37,7 +37,7 @@ module Illiad
     # @option options [String] :skip the number of results to skip before retrieving records
     # @option [Illiad::RequestSet]
     def self.requests(user_id:, **options)
-      response = Client.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options)
+      response = Client.get("#{USER_REQUESTS_BASE_PATH}/#{user_id}", options.transform_keys { |k| "$#{k}" })
       Illiad::RequestSet.new(requests: response.body)
     end
 

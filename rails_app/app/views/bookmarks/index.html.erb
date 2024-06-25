@@ -1,6 +1,6 @@
 <%# Copied template from Blacklight v8.1.0 to add breadcrumbs navigation %>
 
-<% @page_title = t('blacklight.bookmarks.page_title', :application_name => application_name) %>
+<%= page_title t('account.bookmarks.page_heading') %>
 
 <%= render BreadcrumbsComponent.new do |component|%>
   <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
@@ -10,7 +10,7 @@
 
 <div id="content" class="col-md-12">
   <h1 class='page__heading'><%= t('account.bookmarks.page_heading') %></h1>
-  <p class="page__lede mb-3"><%= t('account.bookmarks.page_lede') %></p>
+  <p class="page__lede mb-4"><%= t('account.bookmarks.page_lede') %></p>
 
   <%- if current_or_guest_user.blank? -%>
 

@@ -1,3 +1,5 @@
+<%= page_title t('account.show.page_heading') %>
+
 <%= render BreadcrumbsComponent.new do |component|%>
   <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>%>
   <% component.with_breadcrumb(active: true) { t('account.breadcrumbs.base') } %>
@@ -6,37 +8,49 @@
 <h1 class="page__heading"><%= t('account.show.page_heading') %></h1>
 <p class="page__lede mb-4"><%= t('account.show.page_lede') %></p>
 
-<div class="row cards-as-links">
-  <div class="col-lg-3 col-sm-6">
-    <a href="<%= shelf_path %>" class="card mb-3">
-      <div class="card-body">
-        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.shelf.title') %></h2><i class="bi bi-book h4 mb-0"></i></span>
-        <p class="card-text"><%= t('account.show.cards.shelf.description') %></p>
+<div class="row">
+  <div class="col-lg-9">
+    <div class="row cards-as-links">
+      <div class="col-lg-4 col-sm-6">
+        <a href="<%= shelf_path %>" class="card mb-4 link-prevent-default">
+          <div class="card-body">
+            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.shelf.title') %></h2><i class="bi bi-book h4 mb-0"></i></span>
+            <p class="card-text"><%= t('account.show.cards.shelf.description') %></p>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="col-lg-3 col-sm-6">
-    <a href="<%= bookmarks_path %>" class="card mb-3">
-      <div class="card-body">
-        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.bookmarks.title') %></h2><i class="bi bi-bookmark h4 mb-0"></i></span>
-        <p class="card-text"><%= t('account.show.cards.bookmarks.description') %></p>
+      <div class="col-lg-4 col-sm-6">
+        <a href="<%= ill_new_request_path %>" class="card mb-4 link-prevent-default">
+          <div class="card-body">
+            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.request.title') %></h2><i class="bi bi-person-raised-hand h4 mb-0"></i></span>
+            <p class="card-text"><%= t('account.show.cards.request.description') %></p>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="col-lg-3 col-sm-6">
-    <a href="<%= fines_and_fees_path %>" class="card mb-3">
-      <div class="card-body">
-        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.fines_and_fees.title') %></h2><i class="bi bi-currency-dollar h4 mb-0"></i></span>
-        <p class="card-text"><%= t('account.show.cards.fines_and_fees.description') %></p>
+      <div class="col-lg-4 col-sm-6">
+        <a href="<%= bookmarks_path %>" class="card mb-4 link-prevent-default">
+          <div class="card-body">
+            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.bookmarks.title') %></h2><i class="bi bi-bookmark h4 mb-0"></i></span>
+            <p class="card-text"><%= t('account.show.cards.bookmarks.description') %></p>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="col-lg-3 col-sm-6">
-    <a href="<%= settings_path %>" class="card mb-3">
-      <div class="card-body">
-        <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.settings.title') %></h2><i class="bi bi-gear h4 mb-0"></i></span>
-        <p class="card-text"><%= t('account.show.cards.settings.description') %></p>
+      <div class="col-lg-4 col-sm-6">
+        <a href="<%= fines_and_fees_path %>" class="card mb-4 link-prevent-default">
+          <div class="card-body">
+            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.fines_and_fees.title') %></h2><i class="bi bi-currency-dollar h4 mb-0"></i></span>
+            <p class="card-text"><%= t('account.show.cards.fines_and_fees.description') %></p>
+          </div>
+        </a>
       </div>
-    </a>
+      <div class="col-lg-4 col-sm-6">
+        <a href="<%= settings_path %>" class="card mb-4 link-prevent-default">
+          <div class="card-body">
+            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.settings.title') %></h2><i class="bi bi-gear h4 mb-0"></i></span>
+            <p class="card-text"><%= t('account.show.cards.settings.description') %></p>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 </div>

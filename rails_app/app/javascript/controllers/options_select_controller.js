@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = [
-    "scanButton",
+    "electronicButton",
     "officeButton",
     "pickupButton",
     "mailButton",
@@ -61,14 +61,14 @@ export default class extends Controller {
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return this.optionsFrameTarget.querySelector('input[name="option"]:checked')
+    return this.optionsFrameTarget.querySelector('input[name="delivery"]:checked')
       .value;
   }
 
   // Return an array of all button targets
   buttonTargets() {
     return [
-      this.scanButtonTarget,
+      this.electronicButtonTarget,
       this.officeButtonTarget,
       this.pickupButtonTarget,
       this.mailButtonTarget,

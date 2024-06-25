@@ -6,28 +6,34 @@
 
 .navbar-search > .container {
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
+
+  @media (min-width: 620px) {
+    flex-wrap: nowrap;
+  }
 }
 
 .navbar-search a {
   color: var(--color-fg-default);
-  text-decoration: underline;
-  text-underline-offset: .15em;
-  text-decoration-color: var(--color-fg-subtle);
+  text-decoration: none;
 }
 
 .navbar-search a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration: underline;
 }
 
 .navbar-search .search-query-form {
   display: flex;
-  width: 75%;
   font-size: 1.125rem;
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+  flex-grow: 1;
+  width: auto;
+
+  margin-right: 1rem;
 
   @media (max-width: 620px) {
     width: 100%;
+    margin-right: 0;
   }
 }
 
@@ -54,17 +60,6 @@
 
 .navbar-search *:focus {
   box-shadow: 0 0 0 2px var(--color-bg-attention),0 0 0 4px var(--color-fg-default);
-}
-
-.index_title > a {
-  color: var(--color-fg-accent);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .15em;
-}
-
-.index_title > a:hover {
-  text-decoration-thickness: 2px;
 }
 
 .facet-limit-active .card-header .btn,
@@ -158,27 +153,26 @@
 
 pennlibs-footer {
   display: block;
-  padding-top: 3rem;
+}
+
+.site-feedback {
+  background: var(--color-bg-subtle);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.site-feedback p {
+  max-width: 60ch;
+  margin-bottom: 0;
+}
+
+.site-feedback i {
+  font-size: 1.5rem;
+  color: var(--color-fg-subtle);
 }
 
 label.toggle-bookmark {
   min-width: auto;
-}
-
-.page__heading {
-  display: block;
-  font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 0;
-  margin-top: 1rem;
-}
-
-.page__lede {
-  font-size: 1.2rem;
-  max-width: 52ch;
-  margin-bottom: 1rem;
-  margin-top: 0.25rem;
 }
 
 form {
@@ -232,7 +226,7 @@ form {
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 0;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .page__lede {
@@ -240,7 +234,8 @@ form {
   margin-bottom: 0;
   max-width: 52ch;
   margin-bottom: 1rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 form {
@@ -252,7 +247,7 @@ form {
   border-left: solid 0.25rem var(--color-fg-attention);
 }
 
-.form-group__error-text {
+.form-group--error .error-message {
   color: var(--color-fg-attention);
   font-weight: 600;
   margin-bottom: 0;
@@ -261,7 +256,6 @@ form {
 .form-group--error input {
   border-color: var(--color-fg-attention);
   border-width: 2px;
-  font-weight: 700;
   line-height: 1.2;
   margin-top: 1rem;
   margin-bottom: 0.25rem;
@@ -273,11 +267,10 @@ form {
 }
 
 .cards-as-links a.card:hover {
-  background: var(--color-info-bg);
   --bs-card-border-color: var(--color-fg-default);
 }
 
 .cards-as-links a.card:hover .card-title  {
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-underline-offset: var(--link-text-underline-offset);
 }

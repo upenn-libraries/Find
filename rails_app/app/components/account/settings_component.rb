@@ -21,7 +21,7 @@ module Account
 
     # @return [String, nil]
     def alma_user_group
-      return unless user.alma_record
+      return unless user.alma_record?
 
       user.alma_record.user_group['desc']
     end

@@ -4,10 +4,11 @@
   # the close "X" in the upper right.
   # Also, the button was a weird element named button_tag
   # but we need it to be button to be accessible.
+  # Additionally, sanitizing message so that we can include html.
 %>
 
 <div class="alert alert-dismissible <%= @classes %>">
-  <%= message %>
+  <%= sanitize(message) %>
   <%= tag.button button_contents, type: "button", class: "btn-close",
                      data: { dismiss: "alert", bs_dismiss: "alert" },
                      aria: { label: "Close" } %>

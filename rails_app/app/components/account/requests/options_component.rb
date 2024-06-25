@@ -6,34 +6,40 @@ module Account
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      STUDENT_GROUP_CODES = %w[undergrad graduate GIC].freeze
-      DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
-      DEFAULT_PICKUP = 'VanPeltLib'
-
       attr_accessor :item, :user, :options
 
-      def initialize(user:, options:)
+      def initialize(user:, item:, options:)
         @user = user
-        @options = options
+        @item = item
+        @options = options.inquiry
       end
 
-      # @return [String]
-      def default_pickup_location
-        return DEFAULT_STUDENT_PICKUP if user_is_student?
-
-        DEFAULT_PICKUP
+      # Returns true if at least one delivery option is available.
+      def deliverable?
+        options.any?(Fulfillment::Request::Options::ELECTRONIC,
+                     Fulfillment::Request::Options::PICKUP,
+                     Fulfillment::Request::Options::MAIL,
+                     Fulfillment::Request::Options::OFFICE)
       end
 
-      # @return [Array<String>, nil]
-      def user_address
-        return unless options.include? :office
-
-        Illiad::User.find(id: user.uid).bbm_delivery_address
+      def submit_button_for(delivery_type)
+        submit_tag t(delivery_type, scope: 'requests.form.buttons'),
+                   { class: 'd-none btn btn-success btn-lg',
+                     data: { options_select_target: "#{delivery_type}Button", turbo_frame: '_top' } }
       end
 
-      # @return [TrueClass, FalseClass]
-      def user_is_student?
-        STUDENT_GROUP_CODES.include? user.ils_group
+      def electronic_delivery_link
+        link_to t('requests.form.buttons.scan'),
+                ill_new_request_path(**item.fulfillment_submission_params),
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
+      end
+
+      def aeon_link
+        link_to t('requests.form.buttons.aeon'),
+                Settings.aeon.requesting_url + item.aeon_params.to_query,
+                { class: 'd-none btn btn-success btn-lg',
+                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } }
       end
     end
   end

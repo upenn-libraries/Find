@@ -7,7 +7,7 @@ include:
       - ".rspec.yml"
       - ".rubocop.yml"
   - project: "devops/gitlab/ci-templates/docker"
-    ref: "build_test"
+    ref: "1.0.0"
     file:
       - ".amend_manifests.yml"
       - ".build_and_push_docker_images.yml"
@@ -63,6 +63,7 @@ build_and_push_dev_app_image:
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
+    DOCKER_ADDITIONAL_CACHE_TARGETS: "base"
     DOCKER_BUILD_ARGS: "--build-arg RAILS_ENV=development"
     DOCKER_BUILD_CONTEXT: "rails_app/"
     DOCKER_TARGET: "development"
@@ -215,6 +216,7 @@ build_and_push_prod_app_image:
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
+    DOCKER_ADDITIONAL_CACHE_TARGETS: "base development"
     DOCKER_BUILD_ARGS: "--build-arg RAILS_ENV=production"
     DOCKER_BUILD_CONTEXT: "rails_app/"
     DOCKER_TARGET: "production"

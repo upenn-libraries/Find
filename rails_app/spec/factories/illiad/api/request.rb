@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :illiad_api_request_response, class: Hash do
+  factory :illiad_api_request_response, aliases: [:illiad_api_route_request_response], class: Hash do
     # attributes for Illiad Api version 1
     # use `add_attribute` to alleviate some of the ugliness when defining PascalCase fields using the shorthand. This is
     # equivalent to the shorthand method to define attributes used in other factories.
@@ -140,7 +140,7 @@ FactoryBot.define do
     trait :books_by_mail do
       loan
       add_attribute(:LoanTitle) { 'BBM Autobiography' }
-      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
+      add_attribute(:ItemInfo1) { Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL }
     end
 
     trait :scan do

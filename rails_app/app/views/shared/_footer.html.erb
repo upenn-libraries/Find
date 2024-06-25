@@ -1,7 +1,25 @@
+<div class="site-feedback">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h2 class="h5 mb-2"><%= t('home.feedback.title') %></h2>
+        <p>
+          <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
+        </p>
+      </div>
+      <div>
+        <i class="bi bi-hand-thumbs-up"></i>
+        <i class="bi bi-hand-thumbs-down"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
 <pennlibs-footer>
   <section>
     <h2><%= t('footer.account.heading') %></h2>
     <%= link_to t('footer.account.shelf'), shelf_path %>
+    <%= link_to t('footer.account.request'), ill_new_request_path %>
     <%= link_to t('footer.account.bookmarks'), bookmarks_path %>
     <%= link_to t('footer.account.fines'), fines_and_fees_path %>
     <%= link_to t('footer.account.settings'), settings_path %>

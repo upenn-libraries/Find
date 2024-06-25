@@ -60,7 +60,7 @@ FactoryBot.define do
   trait :at_hsp do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['library'] = { 'value' => 'HSPLib' }
+      item['item_data']['library'] = { 'value' => Inventory::Constants::HSP_LIBRARY }
       item
     end
   end
@@ -85,7 +85,7 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'univarch' }
-      item['item_data']['library'] = { 'desc' => 'University Archives' }
+      item['item_data']['library'] = { 'value' => Inventory::Constants::ARCHIVES_LIBRARY }
       item
     end
   end
@@ -94,6 +94,17 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['policy'] = { 'value' => Inventory::Service::Item::IN_HOUSE_POLICY_CODE }
+      item
+    end
+  end
+
+  trait :in_temp_location do
+    item do
+      item = attributes_for(:item)[:item]
+      item['holding_data'] = { 'in_temp_location' => true }
+      item['holding_data']['temp_library'] = { 'value' => 'templib' }
+      item['holding_data']['temp_location'] = { 'value' => 'temploc' }
+      item['holding_data']['temp_call_number'] = 'tempcall'
       item
     end
   end

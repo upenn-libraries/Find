@@ -1,16 +1,18 @@
 <li class="list-group-item">
-  <%= radio_button_tag :option, 'office', checked?, data: { action: 'change->options-select#optionChanged'} %>
-  <%= label_tag :option_office, t('requests.form.options.office.label') %>
-  <% if user_address_set? %>
-    <p class="alert alert-info my-2">
-      <%= user_address.join('<br>').html_safe %>
-    </p>
-    <small class="text-muted">
-      <%= t('requests.form.options.office.info_html', url: t('urls.guides.office')) %>
-    </small>
-  <% else %>
-    <div class="alert alert-warning my-2">
-      <%= t('requests.form.options.office.warning_html', url: t('urls.guides.office')) %>
-    </div>
-  <% end %>
+  <div class="form-check">
+    <%= radio_button_tag :delivery, delivery_value, checked, **radio_options, class: 'form-check-input' %>
+    <%= label_tag :delivery_office, t('requests.form.options.office.label'), class: 'form-check-label' %>
+    <% if user_address? %>
+      <p class="alert alert-info my-2">
+        <%= user_address.join('<br>').html_safe %>
+      </p>
+      <small class="text-muted">
+        <%= t('requests.form.options.office.info_html', url: t('urls.guides.office')) %>
+      </small>
+    <% else %>
+      <div class="alert alert-warning my-2">
+        <%= t('requests.form.options.office.warning_html', url: t('urls.guides.office')) %>
+      </div>
+    <% end %>
+  </div>
 </li>

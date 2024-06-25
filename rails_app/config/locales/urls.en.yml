@@ -17,9 +17,10 @@ en:
       finding_aids: "https://findingaids.library.upenn.edu"
       jstor: "https://www.jstor.org/site/upenn"
       openn: "https://openn.library.upenn.edu"
+      proxy: "https://proxy.library.upenn.edu/login?url=%{url}"
       scholarlycommons: "https://repository.upenn.edu/home"
       search_center: "https://www.law.upenn.edu/library/research.php"
-      summon: "https://upenn.summon.serialssolutions.com/"
+      summon: "https://upenn.summon.serialssolutions.com/search"
       worldcat: "http://hdl.library.upenn.edu/1017/7158"
     help:
       appointment: "https://libcal.library.upenn.edu/appointments"
@@ -29,6 +30,7 @@ en:
       guides: "https://guides.library.upenn.edu"
       lib_hours: "https://www.library.upenn.edu/about/hours"
       libraries: "https://www.library.upenn.edu/libraries-locations"
+      release_notes: "https://www.library.upenn.edu/release-notes/find"
     requesting_info:
       kislak_reading_room: "https://www.library.upenn.edu/kislak/kislak-center-reading-room"
       archives: "https://archives.upenn.edu/research/visit"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable Style/HashSyntax
-module AlmaExtentions
+module AlmaExtensions
   # Additions for the Alma::Bib class that:
   #   - expose the "Get all holding data for a Bib" API endpoint
   module BibHolding
@@ -19,4 +19,4 @@ module AlmaExtentions
 end
 # rubocop:enable Style/HashSyntax
 
-Alma::BibHolding.extend(AlmaExtentions::BibHolding)
+Alma::BibHolding.extend(AlmaExtensions::BibHolding)
