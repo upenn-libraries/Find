@@ -76,8 +76,8 @@ module Inventory
 
     # Determine if an Entry is missing data required for proper, meaningful display
     # @return [Boolean]
-    def poorly_coded?
-      description.blank? || href.blank?
+    def displayable?
+      description.present? && href.present?
     end
   end
 end
