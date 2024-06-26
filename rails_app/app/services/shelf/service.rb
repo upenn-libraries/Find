@@ -30,6 +30,7 @@ module Shelf
     # @param order [Symbol] direction of sorting
     # @return [Shelf::Listing]
     def find_all(filters: FILTERS, sort: LAST_UPDATED_BY, order: DESCENDING)
+      # Doing some pre-filtering to avoid unnecessary API calls.
       entries = if filters.eql?([:scans])
                   ill_transactions
                 elsif filters.eql?([:loans])

@@ -27,7 +27,7 @@ module Shelf
 
     def filter_and_sort(entries)
       entries = remove_duplicate_entries(entries)
-      entries = filter(entries, filters)
+      entries = filter(entries)
       entries.sort_by! { |e| e.send(sort) } # Sort entries
       entries.reverse! if order == Shelf::Service::DESCENDING # Flip order if descending order requested
       entries
@@ -51,7 +51,7 @@ module Shelf
     end
 
     # valid filters :loans, :requests, :scans
-    def filter(entries, filters)
+    def filter(entries)
       entries.select do |entry|
         next true if filters.include?(:scans) && entry.ill_transaction? && entry.scan?
         next true if filters.include?(:loans) && entry.ils_loan?
