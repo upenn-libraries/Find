@@ -145,7 +145,7 @@ module Inventory
 
       # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
       #
-      # @param inventory_data [Array] inventory data from Availability API call
+      # @param inventory_data [Array] inventory data from API calls
       # @param mms_id [String]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
@@ -153,6 +153,7 @@ module Inventory
         sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
+                    .select { |entry| entry.description.present? && entry.href.present? }
       end
 
       # Return only available electronic holdings
