@@ -48,7 +48,7 @@ describe Inventory::Service do
       include_context 'with stubbed ecollections_data'
       include_context 'with stubbed ecollection_data'
 
-      it 'returns only a single electronic inventory entry' do
+      it 'returns only a single ecollection inventory entry' do
         expect(response.entries.length).to eq 1
         expect(response.first).to be_a Inventory::Entry::Ecollection
       end
