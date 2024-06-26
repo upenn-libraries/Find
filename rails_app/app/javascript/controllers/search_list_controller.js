@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = [
-    "container",
     "search",
     "input",
     "description",
@@ -31,9 +30,11 @@ export default class extends Controller {
       } else {
         node.setAttribute('hidden', true)
       }
-    })
 
-    this.containerTarget.querySelector('[aria-selected=true]').removeAttribute('hidden')
+      if (node.matches('[aria-selected=true]')) {
+        node.removeAttribute('hidden')
+      }
+    })
 
     if (results === 0) {
       this.descriptionTarget.textContent = `No results for "${query}"`;
