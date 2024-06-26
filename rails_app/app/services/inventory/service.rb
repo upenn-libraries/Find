@@ -153,7 +153,7 @@ module Inventory
         sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
-                    .select { |entry| entry.description.present? && entry.href.present? }
+                    .reject { |entry| entry.poorly_coded? }
       end
 
       # Return only available electronic holdings

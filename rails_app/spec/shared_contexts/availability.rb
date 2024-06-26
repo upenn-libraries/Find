@@ -26,7 +26,9 @@ shared_context 'with stubbed availability item_data' do
 end
 
 shared_context 'with stubbed ecollections_data' do
-  let(:ecollections_response) { { 'electronic_collection' => ecollections_data, 'total_record_count' => 1 } }
+  let(:ecollections_response) do
+    { 'electronic_collection' => ecollections_data, 'total_record_count' => ecollections_data.length }
+  end
   before do
     allow(Alma::Bib).to receive(:get_ecollections).and_return(ecollections_response)
   end

@@ -73,5 +73,11 @@ module Inventory
     def ecollection?
       false
     end
+
+    # Determine if an Entry is missing data required for proper, meaningful display
+    # @return [Boolean]
+    def poorly_coded?
+      description.blank? || href.blank?
+    end
   end
 end

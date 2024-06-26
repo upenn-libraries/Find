@@ -40,7 +40,7 @@ describe Inventory::Service do
       end
     end
 
-    context 'with a record having only Ecollection inventory' do
+    context 'with a record having only quality Ecollection inventory' do
       let(:availability_data) { { mms_id => { holdings: [] } } }
       let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
       let(:ecollection_data) { build(:ecollection_data) }
@@ -48,7 +48,8 @@ describe Inventory::Service do
       include_context 'with stubbed ecollections_data'
       include_context 'with stubbed ecollection_data'
 
-      it 'returns a single electronic inventory entry' do
+      it 'returns only a single electronic inventory entry' do
+        expect(response.entries.length).to eq 1
         expect(response.first).to be_a Inventory::Entry::Ecollection
       end
 
@@ -56,6 +57,19 @@ describe Inventory::Service do
         entry = response.first
         expect(entry.description).to eq ecollection_data['public_name_override']
         expect(entry.href).to eq ecollection_data['url_override']
+      end
+    end
+
+    context 'with a record having poorly coded Ecollection inventory' do
+      let(:availability_data) { { mms_id => { holdings: [] } } }
+      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
+      let(:ecollection_data) { build(:ecollection_data, url: '', url_override: '') }
+
+      include_context 'with stubbed ecollections_data'
+      include_context 'with stubbed ecollection_data'
+
+      it 'does not return any ecollection inventory' do
+        expect(response.entries.length).to eq 0
       end
     end
 
@@ -172,7 +186,7 @@ describe Inventory::Service do
     context 'with ecollection inventory type' do
       let(:data) { { inventory_type: Inventory::Entry::ECOLLECTION } }
 
-      it 'returns Inventory::Entry::Electronic object' do
+      it 'returns Inventory::Entry::Ecollection object' do
         expect(inventory_class).to be_a(Inventory::Entry::Ecollection)
       end
     end
