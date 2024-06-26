@@ -299,7 +299,7 @@ en:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
         office:
-          label: 'Office Delivery via FacultyEXPRESS'
+          label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
         pickup:
