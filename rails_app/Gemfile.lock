@@ -86,7 +86,7 @@ GEM
       execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    bigdecimal (3.1.6)
+    bigdecimal (3.1.8)
     bindex (0.8.1)
     blacklight (8.1.0)
       globalid
@@ -252,7 +252,7 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
-    minitest (5.23.1)
+    minitest (5.24.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
@@ -292,7 +292,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.24)
+    pennmarc (1.0.25)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
@@ -356,7 +356,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.0)
+    rexml (3.3.1)
       strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
