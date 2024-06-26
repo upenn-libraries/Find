@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Concern centralizing methods that export citations from MARC record
 module MARCExport
@@ -52,7 +53,7 @@ module MARCExport
 
     # Authors with first name initial
     authors = marc(:creator_authors_list, first_initial_only: true)
-    authors.each_with_index do |aut, idx |
+    authors.each_with_index do |aut, idx|
       aut = aut.strip
       aut = aut.chop if aut.ends_with?(',')
 
@@ -212,5 +213,4 @@ module MARCExport
     end
     h
   end
-
 end
