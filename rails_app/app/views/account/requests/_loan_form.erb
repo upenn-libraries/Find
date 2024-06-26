@@ -1,24 +1,26 @@
-<%= form_with(url: requests_path, method: :post) do %>
+<%= form_with(url: requests_path, method: :post,  data: { controller: 'form-validation' }) do %>
   <%= render 'hidden_fields' %>
-
   <div class="row">
     <div class="col-md-7">
       <div class="form-group mt-2">
         <%= label_tag :title do %>
-          <%= t('account.ill.form.loan.title') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+          <%= t('account.ill.form.loan.title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.title.help_text') %></p>
         <%= text_field_tag :title, @ill_params.book_title, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :author do %>
-          <%= t('account.ill.form.loan.author') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+          <%= t('account.ill.form.loan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
-        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.author.help_text') %></p>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true%>
       </div>
       <div class="form-group mt-3">
         <%= label_tag :year do %>
-          <%= t('account.ill.form.loan.publication_year') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+          <%= t('account.ill.form.loan.publication_year.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
         <% end %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.publication_year.help_text') %></p>
         <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true %>
       </div>
       <div class="form-group mt-3">
@@ -54,10 +56,10 @@
 
         <ul class="list-group">
           <% if current_user.faculty_express? %>
-            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user)) %>
+            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user, checked: true)) %>
           <% end %>
 
-          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user, ill: true, required: true)) %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user, ill: true, checked: !current_user.faculty_express?)) %>
 
           <%= render(Account::Requests::Options::MailComponent.new) %>
         </ul>
@@ -66,7 +68,9 @@
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
       <p><%= t('account.ill.form.email_notification_msg') %></p>
 
-      <button type="submit" class="btn btn-success btn-lg"><%= t('account.ill.form.loan.submit') %></button>
+      <%= button_tag t('account.ill.form.loan.submit'),
+                     class: 'btn btn-success btn-lg',
+                     data: { action: 'form-validation#displayErrors' } %>
     </div>
   </div>
 <% end %>

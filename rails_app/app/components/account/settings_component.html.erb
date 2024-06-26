@@ -1,4 +1,6 @@
-<div class="table-responsive mt-4">
+
+<h2 class="h4 mt-4 mb-3"><%= t('account.settings.details_heading') %></h2>
+<div class="table-responsive">
   <table class="table align-middle">
     <tbody>
       <tr>
@@ -29,11 +31,11 @@
   </table>
 </div>
 
-<p class="callout">
+<p class="callout mt-0">
   <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.update_details_html', url: t('urls.guides.account') ) %>
 </p>
 
-<h2 class="h5 mt-4"><%= t('account.settings.terms.bbm_delivery_address') %></h2>
+<h2 class="h4 mt-5 mb-3"><%= t('account.settings.terms.bbm_delivery_address') %></h2>
 <% if bbm_delivery_address.present? %>
   <p>
     <% bbm_delivery_address.each do |ele| %>
@@ -41,7 +43,9 @@
     <% end %>
   </p>
 <% else %>
-  <p class="text-muted"><%= t('account.settings.bbm_empty') %></p>
+  <div class="alert alert-light">
+    <p class="mb-0"><%= t('account.settings.bbm_empty') %></p>
+  </div>
 <% end %>
 
 <p class="callout">
