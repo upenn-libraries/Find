@@ -7,7 +7,6 @@ en:
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
       scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office: "https://guides.library.upenn.edu/resourcesharing/facex"
-      ill: "https://guides.library.upenn.edu/resourcesharing/ill"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"

@@ -146,24 +146,10 @@ module Inventory
       def fulfillment_options(ils_group:)
         return [:aeon] if aeon_requestable?
         return [:archives] if at_archives?
-        return unavailable_options(ils_group: ils_group) if unavailable?
+        return [*shared_options(ils_group: ils_group), Fulfillment::Request::Options::ILL_PICKUP] if unavailable?
+        return [*shared_options(ils_group: ils_group), Fulfillment::Request::Options::PICKUP] if checkoutable?
 
-        options = []
-        if checkoutable?
-          options << Fulfillment::Request::Options::PICKUP
-          options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
-          options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
-          options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-        end
-        options
-      end
-
-      def unavailable_options(ils_group:)
-        options = []
-        options << Fulfillment::Request::Options::ILL_PICKUP
-        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
-        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-        options
+        []
       end
 
       # Submission parameters that can be passed to the ILL form as OpenParams or directly
@@ -220,6 +206,21 @@ module Inventory
       # @return [Hash]
       def aeon_params
         aeon_open_params.merge(aeon_additional_params)
+      end
+
+      private
+
+      # Some options are shared between multiple states, checkoutable and unavailable. They differ when it comes to
+      # the pickup option how that is fulfilled.
+      #
+      # @param ils_group [String]
+      # @return [Array<Symbol>]
+      def shared_options(ils_group:)
+        options = []
+        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+        options << Fulfillment::Request::Options::MAIL if ils_group != User::COURTESY_BORROWER_GROUP
+        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
+        options
       end
     end
   end

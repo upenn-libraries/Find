@@ -238,6 +238,11 @@ describe Inventory::Service::Item do
         expect(item.fulfillment_options(ils_group: 'group')).to include Fulfillment::Request::Options::ILL_PICKUP
       end
 
+      it 'returns books by mail option if the user is not a courtesy borrower' do
+        expect(item.fulfillment_options(ils_group: 'not_courtesy'))
+          .to include Fulfillment::Request::Options::MAIL
+      end
+
       it 'returns office option if ils_group is faculty express' do
         expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
           .to include Fulfillment::Request::Options::OFFICE

@@ -315,7 +315,7 @@ en:
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         unavailable:
-          info_html: 'This item is currently unavailable in print from the Penn Libraries. Use one of the options below to complete an <a href="%{url}">Interlibrary Loan</a> request.'
+          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
