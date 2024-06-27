@@ -229,18 +229,18 @@ describe Inventory::Service::Item do
 
     context 'when the item is unavailable' do
       let(:item) { build :item, :not_checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: 'group') }
 
       it 'returns electronic option' do
-        expect(item.fulfillment_options(ils_group: 'group')).to include Fulfillment::Request::Options::ELECTRONIC
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
       end
 
       it 'returns ill pickup option' do
-        expect(item.fulfillment_options(ils_group: 'group')).to include Fulfillment::Request::Options::ILL_PICKUP
+        expect(options).to include Fulfillment::Request::Options::ILL_PICKUP
       end
 
       it 'returns books by mail option if the user is not a courtesy borrower' do
-        expect(item.fulfillment_options(ils_group: 'not_courtesy'))
-          .to include Fulfillment::Request::Options::MAIL
+        expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
       it 'returns office option if ils_group is faculty express' do
