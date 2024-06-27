@@ -1,0 +1,19 @@
+<%= form_tag requests_path, method: :get, class: 'mb-4' do %>
+  <h2 class="h5"><%= t('account.shelf.refine.title') %></h2>
+
+  <h3 class="h6 pt-2"><%= t('account.shelf.refine.filters') %></h3>
+
+  <% Shelf::Service::FILTERS.each do |filter| %>
+    <%= filter_checkbox(filter) %>
+  <% end %>
+
+  <h3 class="h6 pt-3"><%= t('account.shelf.refine.sort.title') %></h3>
+
+  <% Shelf::Service::SORTS.each do |sort| %>
+    <% Shelf::Service::ORDERS.each do |order| %>
+      <%= sort_radio(sort, order) %>
+    <% end %>
+  <% end %>
+
+  <%= button_tag t('account.shelf.refine.submit'), class: 'btn btn-primary mt-3' %>
+<% end %>
