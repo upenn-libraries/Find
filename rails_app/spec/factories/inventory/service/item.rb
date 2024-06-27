@@ -49,6 +49,14 @@ FactoryBot.define do
     end
   end
 
+  trait :not_aeon_requestable do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['location'] = { 'value' => 'notaeon' }
+      item
+    end
+  end
+
   trait :not_scannable do
     item do
       item = attributes_for(:item, :checkoutable)[:item]

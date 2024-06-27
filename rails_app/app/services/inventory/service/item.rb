@@ -147,11 +147,12 @@ module Inventory
         return [:aeon] if aeon_requestable?
         return [:archives] if at_archives?
 
-        shared_options = shared_options(ils_group: ils_group)
-        return [*shared_options, Fulfillment::Request::Options::ILL_PICKUP] if unavailable?
-        return [*shared_options, Fulfillment::Request::Options::PICKUP] if checkoutable?
-
-        []
+        options = []
+        options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
+        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+        options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
+        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
+        options
       end
 
       # Submission parameters that can be passed to the ILL form as OpenParams or directly

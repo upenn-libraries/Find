@@ -263,6 +263,12 @@ describe 'Catalog Show Page' do
         find('details.fulfillment > summary').click
       end
 
+      it 'shows a note about the unavailability status' do
+        within('.fulfillment__container') do
+          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
+        end
+      end
+
       it 'shows request options' do
         within('.fulfillment__container') do
           expect(page).to have_selector '.js_radio-options'
