@@ -21,4 +21,11 @@
   <% end %>
 </div>
 
-<%= render(Account::ShelfListingComponent.new(@listing)) %>
+<div class="row">
+  <div class="col-12 col-md-3">
+    <%= render(Account::ShelfListingFiltersComponent.new(@listing)) %>
+  </div>
+  <div class="col-12 col-md-9">
+    <%= render(Account::ShelfListingComponent.new(@listing)) %>
+  </div>
+</div>

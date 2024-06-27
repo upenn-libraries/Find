@@ -9,6 +9,13 @@ module Shelf
     # Catch all for errors raised when making requests to Illiad.
     class IlliadRequestError < StandardError; end
     ILS_REQUEST_LIMIT = 50
+    FILTERS = %i[loans scans requests].freeze
+    DESCENDING = :desc
+    ASCENDING = :asc
+    TITLE = :title
+    LAST_UPDATED_BY = :last_updated_at
+    SORTS = [LAST_UPDATED_BY, TITLE].freeze
+    ORDERS = [ASCENDING, DESCENDING].freeze
 
     attr_reader :user_id
 
@@ -16,9 +23,23 @@ module Shelf
       @user_id = user_id
     end
 
-    # TODO: Allow filtering and sorting.
-    def find_all
-      Listing.new(ils_loans + ils_holds + ill_transactions)
+    # Finds all entries. Entries can be sorted and filtered with the appropriate params.
+    #
+    # @param filters [Array] list of types of entries to include
+    # @param sort [Symbol] field we should sort on
+    # @param order [Symbol] direction of sorting
+    # @return [Shelf::Listing]
+    def find_all(filters: FILTERS, sort: LAST_UPDATED_BY, order: DESCENDING)
+      # Doing some pre-filtering to avoid unnecessary API calls.
+      entries = if filters.eql?([:scans])
+                  ill_transactions
+                elsif filters.eql?([:loans])
+                  ils_loans
+                else
+                  ils_loans + ils_holds + ill_transactions
+                end
+
+      Listing.new(entries, filters: filters, sort: sort, order: order)
     end
 
     # Find specific transaction based on system, id, and type
@@ -137,7 +158,7 @@ module Shelf
       #   - All requests that are checked out to customer.
       # rubocop:disable Layout/LineLength
       filter = [
-        "(TransactionStatus eq '#{Illiad::Request::CANCELLED}' and TransactionDate ge datetime'#{4.weeks.ago.utc.iso8601}')",
+        "(TransactionStatus eq '#{Illiad::Request::CANCELLED}' and TransactionDate ge datetime'#{2.weeks.ago.utc.iso8601}')",
         "(TransactionStatus eq '#{Illiad::Request::FINISHED}' and SystemID eq '#{Illiad::Request::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
         "(TransactionStatus ne '#{Illiad::Request::CHECKED_OUT}' and TransactionStatus ne '#{Illiad::Request::CANCELLED}' and TransactionStatus ne '#{Illiad::Request::FINISHED}')"
       ].join(' or ')

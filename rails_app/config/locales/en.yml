@@ -175,8 +175,21 @@ en:
     shelf:
       page_heading: 'Shelf'
       page_lede: "View and renew items you've loaned or requested from the library."
-      no_items: 'You have no items on your shelf.'
+      no_items: 'No items found.'
       identifier: '%{system} %{type} ID: %{id}'
+      refine:
+        title: 'Refine your shelf'
+        filters: 'Type'
+        sort:
+          title: 'Sort by'
+          options:
+            title:
+              desc: 'Title Z to A'
+              asc: 'Title A to Z'
+            last_updated_at:
+              desc: 'Most recently updated'
+              asc: 'Least recently updated'
+        submit: 'Refine'
       table:
         th:
           index: '#'
@@ -300,7 +313,7 @@ en:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
         office:
-          label: 'Office Delivery via FacultyEXPRESS'
+          label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
         pickup:

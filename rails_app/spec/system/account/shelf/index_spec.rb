@@ -3,16 +3,16 @@
 require 'system_helper'
 
 describe 'Account Shelf index page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
+  let(:shelf_service) { instance_double(Shelf::Service) }
   let(:shelf_listing) { create(:shelf_listing) }
 
   before do
     sign_in user
 
     # Stub Shelf Listing
-    shelf = instance_double(Shelf::Service)
-    allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
-    allow(shelf).to receive(:find_all).and_return(shelf_listing)
+    allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf_service)
+    allow(shelf_service).to receive(:find_all).with(no_args).and_return(shelf_listing)
 
     visit requests_path
   end
@@ -51,6 +51,27 @@ describe 'Account Shelf index page' do
     it 'shows all expected information' do
       expect(page).to have_text hold.author
       expect(page).to have_text hold.status
+    end
+  end
+
+  context 'when filtering results' do
+    let(:filtered_shelf_listing) { create(:shelf_listing, entries: [create(:ils_hold), create(:ill_transaction)]) }
+    let(:loan) { shelf_listing.find(&:ils_loan?) }
+
+    before do
+      # Stub Shelf Filtered Listing
+      allow(shelf_service).to receive(:find_all).with(filters: %i[scans requests], order: :desc, sort: :last_updated_at)
+                                                .and_return(filtered_shelf_listing)
+
+      uncheck 'Loans'
+      click_button 'Refine'
+    end
+
+    it 'applies the filter' do
+      filtered_shelf_listing.map(&:title).each do |title|
+        expect(page).to have_text(title)
+      end
+      expect(page).not_to have_text(loan.title)
     end
   end
 end
