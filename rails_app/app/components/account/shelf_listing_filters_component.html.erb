@@ -9,8 +9,8 @@
 
   <h3 class="h6 pt-3"><%= t('account.shelf.refine.sort.title') %></h3>
 
-  <% Shelf::Service::SORT.each do |sort| %>
-    <% Shelf::Service::ORDER.each do |order| %>
+  <% Shelf::Service::SORTS.each do |sort| %>
+    <% Shelf::Service::ORDERS.each do |order| %>
       <%= sort_radio(sort, order) %>
     <% end %>
   <% end %>

@@ -14,8 +14,8 @@ module Shelf
     ASCENDING = :asc
     TITLE = :title
     LAST_UPDATED_BY = :last_updated_at
-    SORT = [LAST_UPDATED_BY, TITLE].freeze
-    ORDER = [ASCENDING, DESCENDING].freeze
+    SORTS = [LAST_UPDATED_BY, TITLE].freeze
+    ORDERS = [ASCENDING, DESCENDING].freeze
 
     attr_reader :user_id
 
