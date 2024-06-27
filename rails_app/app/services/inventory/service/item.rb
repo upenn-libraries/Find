@@ -146,8 +146,10 @@ module Inventory
       def fulfillment_options(ils_group:)
         return [:aeon] if aeon_requestable?
         return [:archives] if at_archives?
-        return [*shared_options(ils_group: ils_group), Fulfillment::Request::Options::ILL_PICKUP] if unavailable?
-        return [*shared_options(ils_group: ils_group), Fulfillment::Request::Options::PICKUP] if checkoutable?
+
+        shared_options = shared_options(ils_group: ils_group)
+        return [*shared_options, Fulfillment::Request::Options::ILL_PICKUP] if unavailable?
+        return [*shared_options, Fulfillment::Request::Options::PICKUP] if checkoutable?
 
         []
       end
