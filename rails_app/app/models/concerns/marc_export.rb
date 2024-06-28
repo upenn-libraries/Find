@@ -36,7 +36,10 @@ module MARCExport
 
     # Edition
     edition = marc(:edition_show, with_alternate: false).join
-    text += "#{edition}. " if edition.present?
+    if edition.present?
+      edition += edition.ends_with?('.') ? ' ' : '. '
+      text += edition.to_s
+    end
 
     # Publication
     publication = marc(:production_publication_citation_show).join
@@ -84,7 +87,10 @@ module MARCExport
 
     # Edition
     edition = marc(:edition_show, with_alternate: false).join
-    text += "#{edition}. " if edition.present?
+    if edition.present?
+      edition += edition.ends_with?('.') ? ' ' : '. '
+      text += edition.to_s
+    end
 
     # Publisher info
     publisher = marc(:production_publication_citation_show, with_year: false).join
@@ -139,7 +145,10 @@ module MARCExport
 
     # Edition
     edition = marc(:edition_show, with_alternate: false).join
-    text += "#{edition}. " if edition.present?
+    if edition.present?
+      edition += edition.ends_with?('.') ? ' ' : '. '
+      text += edition.to_s
+    end
 
     # Publication
     publication = marc(:production_publication_citation_show).join
