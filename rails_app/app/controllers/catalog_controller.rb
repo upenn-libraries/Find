@@ -277,6 +277,14 @@ class CatalogController < ApplicationController
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: '${isxn_qf}', pf: '${isxn_pf}' } }
     end
+
+    config.add_search_field('publication_date_s', label: I18n.t('advanced.publication_date_search'),
+                                                  range: true, pattern: '^\\d{4}$') do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${publication_date_qf}', pf: '${publication_date_pf}' } }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
