@@ -47,7 +47,7 @@ shared_context 'with print monograph record with 9 physical entries' do
   let(:print_monograph_bib) { '9913203433503681' }
   let(:print_monograph_entries) do
     Array.new(9) do |i|
-      create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: "#{i}",
+      create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: i.to_s,
                               call_number: "Oversize QL937 B646 1961 copy #{i}", holding_info: "copy #{i}",
                               location_code: 'veteresov', inventory_type: 'physical')
     end
