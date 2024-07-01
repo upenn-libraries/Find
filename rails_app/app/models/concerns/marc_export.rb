@@ -28,18 +28,10 @@ module MARCExport
     text += format_authors(authors) if authors.present?
 
     # Title
-    title = marc(:title_show)
-    if title.present?
-      title += title.ends_with?('.') ? ' ' : '. '
-      text += "<i>#{title}</i>"
-    end
+    text += show_title
 
     # Edition
-    edition = marc(:edition_show, with_alternate: false).join
-    if edition.present?
-      edition += edition.ends_with?('.') ? ' ' : '. '
-      text += edition.to_s
-    end
+    text += show_edition
 
     # Publication
     publication = marc(:production_publication_citation_show).join
@@ -79,18 +71,10 @@ module MARCExport
     text += "(#{pub_year}). " if pub_year.present?
 
     # Title
-    title = marc(:title_show)
-    if title.present?
-      title += title.ends_with?('.') ? ' ' : '. '
-      text += "<i>#{title}</i>"
-    end
+    text += show_title
 
     # Edition
-    edition = marc(:edition_show, with_alternate: false).join
-    if edition.present?
-      edition += edition.ends_with?('.') ? ' ' : '. '
-      text += edition.to_s
-    end
+    text += show_edition
 
     # Publisher info
     publisher = marc(:production_publication_citation_show, with_year: false).join
@@ -118,11 +102,7 @@ module MARCExport
     text += format_authors(authors) if authors.present?
 
     # Title
-    title = marc(:title_show)
-    if title.present?
-      title += title.ends_with?('.') ? ' ' : '. '
-      text += "<i>#{title}</i>"
-    end
+    text += show_title
 
     additional_title = ''
     if translators.present?
@@ -144,11 +124,7 @@ module MARCExport
     text += additional_title if additional_title.present?
 
     # Edition
-    edition = marc(:edition_show, with_alternate: false).join
-    if edition.present?
-      edition += edition.ends_with?('.') ? ' ' : '. '
-      text += edition.to_s
-    end
+    text += show_edition
 
     # Publication
     publication = marc(:production_publication_citation_show).join
@@ -191,6 +167,29 @@ module MARCExport
     end
 
     text
+  end
+
+  # Formats the title display
+  # @return [String]: the title string
+  def show_title
+    title = marc(:title_show)
+    if title.present?
+      title += title.ends_with?('.') ? ' ' : '. '
+      "<i>#{title}</i>"
+    else
+      ''
+    end
+  end
+
+  # Formats the edition display
+  # @return [String]: the edition string
+  def show_edition
+    edition = marc(:edition_show, with_alternate: false).join
+    if edition.present?
+      edition + edition.ends_with?('.') ? ' ' : '. '
+    else
+      ''
+    end
   end
 
   # Convert "Lastname, First" to "First Lastname"
