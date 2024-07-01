@@ -210,21 +210,6 @@ module Inventory
       def aeon_params
         aeon_open_params.merge(aeon_additional_params)
       end
-
-      private
-
-      # Some options are shared between multiple states, checkoutable and unavailable. They differ when it comes to
-      # the pickup option how that is fulfilled.
-      #
-      # @param ils_group [String]
-      # @return [Array<Symbol>]
-      def shared_options(ils_group:)
-        options = []
-        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
-        options << Fulfillment::Request::Options::MAIL if ils_group != User::COURTESY_BORROWER_GROUP
-        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-        options
-      end
     end
   end
 end
