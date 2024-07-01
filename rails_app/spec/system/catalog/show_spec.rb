@@ -157,12 +157,16 @@ describe 'Catalog Show Page' do
     before { visit solr_document_path(mms_id) }
 
     it 'shows the search input' do
-      expect(page).to have_selector '.search-list__input'
+      within('.search-list') do
+        expect(page).to have_selector '.search-list__input'
+      end
     end
 
     it 'filters the holdings' do
-      fill_in 'Search this list', with: 'copy 0'
-      expect(page).to have_selector('.inventory-item', count: 1)
+      within('.document__inventory-list') do
+        fill_in 'Search this list', with: 'copy 0'
+        expect(page).to have_selector('.inventory-item', count: 1)
+      end
     end
   end
 
