@@ -253,6 +253,40 @@ describe 'Catalog Show Page' do
         end
       end
     end
+
+    context 'with an item that is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows a note about the unavailability status' do
+        within('.fulfillment__container') do
+          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
+        end
+      end
+
+      it 'shows request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_radio-options'
+        end
+      end
+
+      it 'selects the first option' do
+        within('.js_radio-options') do
+          expect(first('input[type="radio"]')[:checked]).to be true
+        end
+      end
+
+      it 'shows the right button' do
+        within('.request-buttons') do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+    end
   end
 
   context 'when interacting with show tools' do

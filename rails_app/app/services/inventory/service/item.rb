@@ -88,6 +88,11 @@ module Inventory
           holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
       end
 
+      # @return [Boolean]
+      def unavailable?
+        !checkoutable? && !aeon_requestable?
+      end
+
       # Array of arrays. In each sub-array, the first value is the display value and the
       # second value is the submitted value for backend processing.
       # @return [Array]
@@ -100,6 +105,7 @@ module Inventory
         end
       end
 
+      # @return [String]
       def temp_aware_location_display
         if in_temp_location?
           return "(temp) #{holding_data.dig('temp_library', 'value')} - #{holding_data.dig('temp_location', 'value')}"
@@ -108,6 +114,7 @@ module Inventory
         "#{holding_library_name} - #{holding_location_name}"
       end
 
+      # @return [String]
       def temp_aware_call_number
         temp_call_num = holding_data['temp_call_number']
         return temp_call_num if temp_call_num.present?
@@ -115,10 +122,12 @@ module Inventory
         holding_data['permanent_call_number']
       end
 
+      # @return [String]
       def volume
         item_data['enumeration_a']
       end
 
+      # @return [String]
       def issue
         item_data['enumeration_b']
       end
@@ -139,12 +148,10 @@ module Inventory
         return [:archives] if at_archives?
 
         options = []
-        if checkoutable?
-          options << Fulfillment::Request::Options::PICKUP
-          options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
-          options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
-          options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-        end
+        options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
+        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+        options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
+        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
         options
       end
 

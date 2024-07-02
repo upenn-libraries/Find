@@ -5,6 +5,7 @@ export default class extends Controller {
     "electronicButton",
     "officeButton",
     "pickupButton",
+    "ill_pickupButton",
     "mailButton",
     "viewButton",
     "optionsFrame",
@@ -61,8 +62,9 @@ export default class extends Controller {
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return this.optionsFrameTarget.querySelector('input[name="delivery"]:checked')
-      .value;
+    return this.optionsFrameTarget.querySelector(
+      'input[name="delivery"]:checked',
+    ).value;
   }
 
   // Return an array of all button targets
@@ -73,6 +75,7 @@ export default class extends Controller {
       this.pickupButtonTarget,
       this.mailButtonTarget,
       this.viewButtonTarget,
+      this.ill_pickupButtonTarget,
     ];
   }
 }

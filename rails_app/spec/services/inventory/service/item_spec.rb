@@ -133,6 +133,23 @@ describe Inventory::Service::Item do
     end
   end
 
+  describe 'unavailable?' do
+    it 'returns true if item is not checkoutable nor aeon requestable' do
+      item = build(:item, :not_aeon_requestable, :not_checkoutable)
+      expect(item.unavailable?).to be true
+    end
+
+    it 'returns false if item is not checkoutable but is aeon requestable' do
+      item = build(:item, :not_checkoutable, :aeon_requestable)
+      expect(item.unavailable?).to be false
+    end
+
+    it 'returns false if item is checkoutable' do
+      item = build(:item, :checkoutable)
+      expect(item.unavailable?).to be false
+    end
+  end
+
   describe 'select_label' do
     it 'returns the correct label for the item' do
       item = build :item
@@ -208,10 +225,32 @@ describe Inventory::Service::Item do
         expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
-      it 'returns scan option if item is scannable' do
+      it 'returns electronic option if item is scannable' do
         item = build :item
         options = item.fulfillment_options(ils_group: 'group')
         expect(options).to include Fulfillment::Request::Options::ELECTRONIC
+      end
+    end
+
+    context 'when the item is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: 'group') }
+
+      it 'returns electronic option' do
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
+      end
+
+      it 'returns ill pickup option' do
+        expect(options).to include Fulfillment::Request::Options::ILL_PICKUP
+      end
+
+      it 'returns books by mail option if the user is not a courtesy borrower' do
+        expect(options).to include Fulfillment::Request::Options::MAIL
+      end
+
+      it 'returns office option if ils_group is faculty express' do
+        expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
+          .to include Fulfillment::Request::Options::OFFICE
       end
     end
   end
