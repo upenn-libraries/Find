@@ -235,6 +235,10 @@ class CatalogController < ApplicationController
     # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
     # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
     # clause_params will build a request using the json_solr_path configuration.
+    # For ranged search fields, pass the following keyword arguments to add_search_field method call
+    # - "range: true"
+    # - optionally, pass "pattern" arg with an html based regex to attach to the range inputs for
+    #   some client-side validation
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true

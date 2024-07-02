@@ -10,7 +10,7 @@ describe 'Advanced Search Page' do
 
   before { visit '/catalog/advanced' }
 
-  context 'when using a range search field', skip: 'requires publication date search qf in solr' do
+  context 'when using a range search field' do
     context 'when submitting a ranged search with both endpoints' do
       before do
         from = find('label', text: I18n.t('advanced.publication_date_search'))
