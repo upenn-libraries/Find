@@ -45,13 +45,7 @@ end
 
 shared_context 'with print monograph record with 9 physical entries' do
   let(:print_monograph_bib) { '9913203433503681' }
-  let(:print_monograph_entries) do
-    Array.new(9) do |i|
-      create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: i.to_s,
-                              call_number: "Oversize QL937 B646 1961 copy #{i}", holding_info: "copy #{i}",
-                              location_code: 'veteresov', inventory_type: 'physical')
-    end
-  end
+  let(:print_monograph_entries) { create_list(:physical_entry, 9) }
 
   before do
     SampleIndexer.index 'print_monograph.json'
@@ -59,7 +53,8 @@ shared_context 'with print monograph record with 9 physical entries' do
     allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
                                                .and_return(Inventory::Response.new(entries: print_monograph_entries))
     allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
-                                                .and_return(Inventory::Response.new(entries: print_monograph_entries))
+                                                .and_return(Inventory::Response.new(entries: print_monograph_entries)
+                                                                               .first(3))
   end
 end
 
