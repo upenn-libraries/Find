@@ -43,6 +43,21 @@ shared_context 'with print monograph record with 2 physical entries' do
   end
 end
 
+shared_context 'with print monograph record with 9 physical entries' do
+  let(:print_monograph_bib) { '9913203433503681' }
+  let(:print_monograph_entries) { create_list(:physical_entry, 9) }
+
+  before do
+    SampleIndexer.index 'print_monograph.json'
+
+    allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                               .and_return(Inventory::Response.new(entries: print_monograph_entries))
+    allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                                .and_return(Inventory::Response.new(entries: print_monograph_entries)
+                                                                               .first(3))
+  end
+end
+
 # Index electronic database record in to Solr and return inventory when requested.
 shared_context 'with electronic database record' do
   let(:electronic_db_bib) { '9977577951303681' }

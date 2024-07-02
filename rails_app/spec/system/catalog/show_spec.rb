@@ -142,6 +142,32 @@ describe 'Catalog Show Page' do
     let(:entries) { print_monograph_entries }
 
     include_examples 'core show page features'
+
+    it 'does not display the search input' do
+      expect(page).not_to have_selector '.search-list__input'
+    end
+  end
+
+  # Record with 9 physical holdings
+  context 'when a record has many entries' do
+    include_context 'with print monograph record with 9 physical entries'
+
+    let(:mms_id) { print_monograph_bib }
+
+    before { visit solr_document_path(mms_id) }
+
+    it 'shows the search input' do
+      within('.search-list') do
+        expect(page).to have_selector '.search-list__input'
+      end
+    end
+
+    it 'filters the holdings' do
+      within('.document__inventory-list') do
+        fill_in 'Search this list', with: 'copy 0'
+        expect(page).to have_selector('.inventory-item', count: 1)
+      end
+    end
   end
 
   # Request options for a physical holding

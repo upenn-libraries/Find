@@ -18,10 +18,10 @@ FactoryBot.define do
   factory :physical_entry, class: 'Inventory::Entry::Physical' do
     mms_id { '1234567890' }
     availability { Inventory::Constants::AVAILABLE }
-    call_number { 'QD1 .C48' }
-    holding_info { '1965-1971' }
+    sequence(:call_number) { |n| "QD1 .C48 copy #{n}" }
+    sequence(:holding_info) { |n| "1965-1971 copy #{n}" }
     location_code { 'chemperi' }
-    holding_id { '67890' }
+    sequence(:holding_id) { |n| "67890#{n}" }
 
     skip_create
     initialize_with { new(**attributes) }
