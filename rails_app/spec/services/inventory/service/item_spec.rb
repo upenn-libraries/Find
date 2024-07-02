@@ -139,8 +139,13 @@ describe Inventory::Service::Item do
       expect(item.unavailable?).to be true
     end
 
-    it 'returns false if item is checkoutable or aeon requestable' do
-      item = build(:item, :aeon_requestable, :checkoutable)
+    it 'returns false if item is not checkoutable but is aeon requestable' do
+      item = build(:item, :not_checkoutable, :aeon_requestable)
+      expect(item.unavailable?).to be false
+    end
+
+    it 'returns false if item is checkoutable' do
+      item = build(:item, :checkoutable)
       expect(item.unavailable?).to be false
     end
   end
