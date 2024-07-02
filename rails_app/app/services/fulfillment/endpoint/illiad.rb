@@ -29,7 +29,7 @@ module Fulfillment
         # @param request [Request]
         # @return [Fulfillment::Outcome]
         def submit(request:)
-          find_or_create user: request.user
+          find_or_create user: request.patron
           body = BASE_TRANSACTION_ATTRIBUTES.merge(submission_body_from(request))
           transaction = ::Illiad::Request.submit data: body
           add_notes(request, transaction) if request.params.comments.present?
@@ -39,8 +39,12 @@ module Fulfillment
         # @param request [Request]
         # @return [Array]
         def validate(request:)
+          scope = %i[fulfillment validation] # TODO: maybe move this to Request?
           errors = []
-          errors << I18n.t('fulfillment.validation.no_user_id') if request.user&.uid.blank?
+          errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
+          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron.courtesy_borrower?
+          errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied? && !request.requester.library_staff?
+          errors << I18n.t(:proxy_invalid, scope: scope) if request.proxied? && !request.patron.alma_record?
           errors
         end
 
@@ -79,15 +83,16 @@ module Fulfillment
         # @return [Hash]
         def add_notes(request, transaction)
           number = transaction.id
+          # TODO: add proxy note
           note = request.params.comments
-          note += " - comment submitted by #{request.user.uid}"
+          note += " - comment submitted by #{request.requester.uid}"
           ::Illiad::Request.add_note(id: number, note: note)
         end
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def book_request_body(request)
-          { Username: request.user.uid,
+          { Username: request.patron.uid,
             RequestType: ::Illiad::Request::LOAN,
             DocumentType: 'Book',
             LoanAuthor: request.params.author,
@@ -109,7 +114,7 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def scandelivery_request_body(request)
-          { Username: request.user.uid,
+          { Username: request.patron.uid,
             DocumentType: ::Illiad::Request::ARTICLE,
             PhotoJournalTitle: request.params.title,
             PhotoJournalVolume: request.params.volume,
@@ -151,7 +156,7 @@ module Fulfillment
             FirstName: user.alma_record.first_name,
             EMailAddress: user.alma_record.email,
             SSN: user.alma_record.id,
-            Status: user.alma_record.user_group,
+            Status: user.alma_record.user_group, # TODO: I think this is a hash, is that ok?
             Department: user.alma_record.affiliation,
             PlainTextPassword: Settings.illiad.user_password }
         end

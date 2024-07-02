@@ -6,8 +6,16 @@
   <% component.with_breadcrumb(active: true) { t('account.ill.page_heading') } %>
 <% end %>
 
+<% if current_user.uid != @patron.uid %>
+  <p class="alert alert-info" aria-live="polite">
+    You are proxying a request for <strong><%= @patron.full_name %> (<%= @patron.ils_group_name %>)</strong>
+  </p>
+<% end %>
+
 <h1 class="page__heading"><%= t('account.ill.page_heading') %></h1>
 <p class="page__lede"><%= t('account.ill.page_lede') %></p>
+
+<%= render 'proxy_form' %>
 
 <h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 

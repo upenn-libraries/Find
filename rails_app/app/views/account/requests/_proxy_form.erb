@@ -1,0 +1,26 @@
+<% if current_user.library_staff? %>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card mb-3">
+        <div class="card-header">
+          Visible to staff only
+        </div>
+        <div class="card-body">
+          <h2 class="card-title h5">Is this request for a patron?</h2>
+
+          <%= form_with(url: ill_new_request_url, method: :get) do %>
+            <%= render 'hidden_fields' %>
+
+            <div class="d-flex align-items-end">
+              <div class="form-group flex-grow-1">
+                <%= label_tag :proxy_for, 'Their PennKey' %>
+                <%= text_field_tag :proxy_for, params[:proxy_for], class: 'form-control mt-1' %>
+              </div>
+              <%= button_tag 'Apply', name: nil, class: 'btn btn-primary mx-2 mt-2' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

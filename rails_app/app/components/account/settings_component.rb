@@ -5,25 +5,11 @@ module Account
   class SettingsComponent < ViewComponent::Base
     attr_reader :user
 
-    delegate :email, to: :user
+    delegate :email, :full_name, :ils_group_name, to: :user
 
     # @param user [User]
     def initialize(user:)
       @user = user
-    end
-
-    # @return [String, nil]
-    def full_name
-      return unless user.alma_record
-
-      user.alma_record.full_name
-    end
-
-    # @return [String, nil]
-    def alma_user_group
-      return unless user.alma_record?
-
-      user.alma_record.user_group['desc']
     end
 
     # books by mail delivery address in two parts

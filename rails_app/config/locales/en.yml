@@ -343,6 +343,9 @@ en:
       no_mms_id: 'No record identifier provided'
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
+      no_proxy_requests: 'Proxied request are not allowed'
+      no_courtesy_borrowers: 'Courtesy borrowers cannot submit this request' # This request cannot be placed for courtesy borrowers
+      proxy_invalid: 'Proxy PennKey is invalid'
   search:
     all_fields: 'All Fields'
     button:
