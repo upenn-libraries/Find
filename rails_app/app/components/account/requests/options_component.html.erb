@@ -37,7 +37,7 @@
     </fieldset>
 
     <%# Add hidden fields with values needed for form submission to the request endpoint. %>
-    <% item.fulfillment_submission_params.each do |k, v| %>
+    <% item.loan_params.each do |k, v| %>
       <%= hidden_field_tag k, v %>
     <% end %>
   <% elsif options.aeon? %>

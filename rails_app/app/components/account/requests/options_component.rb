@@ -30,7 +30,7 @@ module Account
 
       def electronic_delivery_link
         link_to t('requests.form.buttons.scan'),
-                ill_new_request_path(**item.fulfillment_submission_params),
+                ill_new_request_path(**item.scan_params),
                 { class: 'd-none btn btn-success btn-lg',
                   data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
       end

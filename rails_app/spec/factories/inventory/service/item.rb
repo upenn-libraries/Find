@@ -5,7 +5,8 @@ FactoryBot.define do
     item do
       {
         'bib_data' => {
-          'title' => Faker::Book.title
+          'title' => Faker::Book.title,
+          'author' => Faker::Book.author
         },
         'holding_data' => {},
         'item_data' => {
