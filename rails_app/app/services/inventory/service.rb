@@ -64,6 +64,15 @@ module Inventory
         )
       end
 
+      # Return an PhysicalDetail object with additional holding record information
+      #
+      # @param mms_id [String]
+      # @param holding_id [String]
+      # @return [Inventory::PhysicalDetail]
+      def physical_detail(mms_id, holding_id)
+        Inventory::PhysicalDetail.new(mms_id: mms_id, holding_id: holding_id)
+      end
+
       private
 
       # Returns inventory that cannot be extracted from the MARC document and has to be retrieved by making additional

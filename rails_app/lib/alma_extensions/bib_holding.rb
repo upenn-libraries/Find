@@ -6,7 +6,7 @@ module AlmaExtensions
   #   - expose the "Get all holding data for a Bib" API endpoint
   module BibHolding
     # The Alma API gem does not support the ability to get all holdings for a bib using the mms_id and the holding_id.
-    # This extentsion is a workaround for that limitation, used to fake an item when a holding has no items.
+    # This extension is a workaround for that limitation, used to fake an item when a holding has no items.
     #
     # @param mms_id [String] The MMS ID of the bib record
     # @param options [Hash] A hash of query parameters to pass to the API
@@ -14,6 +14,12 @@ module AlmaExtensions
       url = "#{bibs_base_path}/#{mms_id}/holdings"
       response = HTTParty.get(url, headers:, query: options, timeout:)
       JSON.parse(response.body)
+    end
+
+    # TODO: this would be better as an override of BibHolding.find
+    def find_one(...)
+      hld = Alma::BibHolding.find(...)
+      Inventory::Service::Holding.new(hld)
     end
   end
 end
