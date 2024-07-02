@@ -188,10 +188,16 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'shows the right button' do
+      it 'shows the scan button' do
         within('.request-buttons') do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
+      end
+
+      it 'has the expected data in scan link' do
+        scan_link = find_link(I18n.t('requests.form.buttons.scan'))[:href]
+        expect(scan_link).to include CGI.escape(item.bib_data['title'])
+        expect(scan_link).not_to include CGI.escape(item.bib_data['author'])
       end
     end
 

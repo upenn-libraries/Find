@@ -155,11 +155,11 @@ module Inventory
         options
       end
 
-      # Submission parameters that can be passed to the ILL form as OpenParams or directly
+      # Submission parameters for loans (of a whole work) that can be passed to the ILL form as OpenParams or directly
       # to the request submission endpoint.
       #
       # @return [Hash]
-      def fulfillment_submission_params
+      def loan_params
         { title: bib_data['title'],
           author: bib_data['author'],
           call_number: temp_aware_call_number,
@@ -173,6 +173,14 @@ module Inventory
           issue: issue,
           isbn: bib_data['isbn'],
           issn: bib_data['issn'] }
+      end
+
+      # Submission params for a scan (or electronic) request for a part of a work that can be passed to the ILL form as
+      # OpenParams or directly to the request submission endpoint.
+      #
+      # @return [Hash]
+      def scan_params
+        loan_params.except(:author, :date)
       end
 
       # Open URL parameters to be passed to the Aeon request form
