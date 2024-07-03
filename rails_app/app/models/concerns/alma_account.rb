@@ -59,10 +59,14 @@ module AlmaAccount
 
   # @return [Alma::User, FalseClass]
   def alma_record
-    @alma_record ||= begin
-                       Alma::User.find(uid)
-                     rescue Alma::User::ResponseError
-                       false
-                     end
+    @alma_record ||= fetch_alma_record
+  end
+
+  private
+
+  def fetch_alma_record
+    Alma::User.find(uid)
+  rescue Alma::User::ResponseError
+    false
   end
 end
