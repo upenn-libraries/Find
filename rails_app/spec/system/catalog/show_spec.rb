@@ -246,6 +246,30 @@ describe 'Catalog Show Page' do
       end
     end
 
+    context 'when adding comments to a request' do
+      let(:item) { build :item, :checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+        find('input#delivery_pickup').click
+      end
+
+      it 'shows a button to add comments when the option is changed from scan' do
+        within('.add-comments') do
+          expect(page).to have_link I18n.t('requests.form.add_comments')
+        end
+      end
+
+      it 'expands the comments area when the button is clicked' do
+        click_link I18n.t('requests.form.add_comments')
+        within('.add-comments') do
+          expect(page).to have_selector 'textarea#comments'
+        end
+      end
+    end
+
     context 'with an aeon requestable item' do
       let(:item) { build :item, :aeon_requestable }
 
@@ -377,11 +401,11 @@ describe 'Catalog Show Page' do
       include_context 'with print monograph record with 2 physical entries' do
         let(:print_monograph_entries) do
           [create(:physical_entry, mms_id: print_monograph_bib, availability: 'unavailable', holding_id: '1234',
-                                   call_number: 'Oversize QL937 B646 1961', holding_info: 'first copy',
-                                   location_code: 'veteresov', inventory_type: 'physical'),
+                  call_number: 'Oversize QL937 B646 1961', holding_info: 'first copy',
+                  location_code: 'veteresov', inventory_type: 'physical'),
            create(:physical_entry, mms_id: print_monograph_bib, availability: 'check holdings', holding_id: '5678',
-                                   call_number: 'Oversize QL937 B646 1961 copy 2', holding_info: 'second copy',
-                                   location_code: 'veteresov', inventory_type: 'physical')]
+                  call_number: 'Oversize QL937 B646 1961 copy 2', holding_info: 'second copy',
+                  location_code: 'veteresov', inventory_type: 'physical')]
         end
       end
 
@@ -406,7 +430,7 @@ describe 'Catalog Show Page' do
       before do
         CatalogController.configure_blacklight do |config|
           config.add_show_field :subject_test_show, values: ->(_, _, _) { ['Dogs.'] },
-                                                    component: Find::FacetLinkComponent
+                                component: Find::FacetLinkComponent
         end
 
         visit(solr_document_path(print_monograph_bib))
@@ -476,7 +500,7 @@ describe 'Catalog Show Page' do
       let(:conference_bib) { '9978940183503681' }
       let(:conference_entries) do
         [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
-                                 inventory_type: 'physical')]
+                inventory_type: 'physical')]
       end
 
       before do
