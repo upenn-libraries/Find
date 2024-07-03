@@ -7,7 +7,7 @@
     <% end %>
     <fieldset>
       <legend class="h6"> <%= t('requests.form.options.label') %></legend>
-      <ul class="list-group js_radio-options mb-3">
+      <ul class="list-group js_radio-options">
         <% if options.electronic? %>
           <%= render(Account::Requests::Options::ElectronicComponent.new(checked: true, data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
@@ -36,6 +36,17 @@
       </ul>
     </fieldset>
 
+    <%# toggleable comments box, for direct-from-form (no redirect) Alma and ILL requests only %>
+    <% if options.pickup? || options.ill_pickup? %>
+      <div class="add-comments mt-2" data-options-select-target="addComments">
+        <%= link_to t('requests.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
+        <div class="d-none" data-comments-target="commentsArea">
+          <%= label_tag :location, t('requests.form.comments_label'), { class: 'form-label' } %>
+          <%= text_area_tag :comments, '', { class: 'form-control mb-3' } %>
+        </div>
+      </div>
+    <% end %>
+
     <%# Add hidden fields with values needed for form submission to the request endpoint. %>
     <% item.loan_params.each do |k, v| %>
       <%= hidden_field_tag k, v %>
@@ -49,7 +60,7 @@
             contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
   <% end %>
-  <div class="request-buttons">
+  <div class="request-buttons mt-3">
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>

@@ -30,7 +30,7 @@ module Fulfillment
 
         # @return [String, nil]
         def comments
-          params[:comment].presence
+          params[:comments].presence
         end
 
         # @return [String, nil]

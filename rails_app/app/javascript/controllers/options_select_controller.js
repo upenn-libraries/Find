@@ -11,6 +11,7 @@ export default class extends Controller {
     "optionsFrame",
     "addComments",
   ];
+  COMMENT_OPTIONS = ["pickup", "ill_pickup", "mail", "office"];
 
   connect() {
     // Listen for the load of the frame containing the radio buttons
@@ -31,8 +32,7 @@ export default class extends Controller {
   optionChanged(event) {
     this.hideAllButtons();
     this[`${event.target.value}ButtonTarget`].classList.remove("d-none");
-    // TODO: reenable this when we have more information about comments
-    // this.toggleComments(event);
+    this.toggleComments(event);
   }
 
   // Hide all buttons
@@ -44,7 +44,7 @@ export default class extends Controller {
 
   // Show the comments field if the 'pickup' radio button is selected
   toggleComments(event) {
-    if (event.target.value == "pickup") {
+    if (this.COMMENT_OPTIONS.includes(event.target.value)) {
       this.addCommentsTarget.classList.remove("d-none");
     } else {
       this.addCommentsTarget.classList.add("d-none");

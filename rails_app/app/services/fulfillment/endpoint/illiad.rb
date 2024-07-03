@@ -80,7 +80,7 @@ module Fulfillment
         def add_notes(request, transaction)
           number = transaction.id
           note = request.params.comments
-          note += " - comment submitted by #{request.user.uid}"
+          note += I18n.t('fulfillment.illiad.comment_extension', user_id: request.user.uid)
           ::Illiad::Request.add_note(id: number, note: note)
         end
 
