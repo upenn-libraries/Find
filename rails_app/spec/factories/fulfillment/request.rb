@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :fulfillment_request, class: 'Fulfillment::Request' do
-    user { build(:user) }
+    requester { build(:user) }
 
     trait :with_bib_info do
       title { 'Unowned Thing' }

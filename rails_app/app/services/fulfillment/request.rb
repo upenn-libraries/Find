@@ -48,7 +48,7 @@ module Fulfillment
     end
 
     def proxied?
-      patron.uid != requester.uid
+      patron&.uid != requester&.uid
     end
 
     # @return [Boolean]
@@ -91,7 +91,6 @@ module Fulfillment
 
       Fulfillment::User.new(uid)
     end
-
 
     # @param params [Hash]
     def build_params(params)

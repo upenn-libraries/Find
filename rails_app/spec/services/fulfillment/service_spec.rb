@@ -40,7 +40,7 @@ describe Fulfillment::Service do
       context 'with an exception raised on submission' do
         before do
           allow(Illiad::Request).to receive(:submit).and_raise(Illiad::Client::Error)
-          stub_find_user_success(id: request.user.uid, response_body: build(:illiad_user_response))
+          stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response))
         end
 
         it 'properly returns an outcome with error noted' do

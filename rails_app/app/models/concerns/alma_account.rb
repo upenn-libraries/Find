@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Concern centralizing logic that retrieves an Alma user and adds helper methods to check again the data provided in
+# by Alma.
 module AlmaAccount
   extend ActiveSupport::Concern
 

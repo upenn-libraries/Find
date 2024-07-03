@@ -2,7 +2,7 @@
 
 describe Fulfillment::Endpoint::Alma do
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, user: nil) }
+    let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, requester: nil) }
 
     it 'adds error messages to errors' do
       expect(described_class.validate(request: bad_request)).to(

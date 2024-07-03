@@ -5,7 +5,7 @@ describe Fulfillment::Endpoint::Illiad do
   include Illiad::ApiMocks::Request
 
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_bib_info, :pickup, user: nil) }
+    let(:bad_request) { build(:fulfillment_request, :with_bib_info, :pickup, requester: nil) }
 
     it 'adds error messages to errors' do
       expect(described_class.validate(request: bad_request)).to match_array ['No user identifier provided']
@@ -13,11 +13,11 @@ describe Fulfillment::Endpoint::Illiad do
   end
 
   describe '.submit' do
-    let(:note) { " - comment submitted by #{request.user.uid}" }
+    let(:note) { " - comment submitted by #{request.requester.uid}" }
     let(:outcome) { described_class.submit(request: request) }
 
     before do
-      stub_find_user_success(id: request.user.uid, response_body: build(:illiad_user_response))
+      stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response))
       stub_add_note_success(id: '1234', note: note,
                             response_body: build(:illiad_api_note_response, Note: note))
       mock_request = instance_double(::Illiad::Request)

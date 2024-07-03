@@ -42,7 +42,7 @@ module Fulfillment
           scope = %i[fulfillment validation] # TODO: maybe move this to Request?
           errors = []
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
-          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron.courtesy_borrower?
+          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron&.courtesy_borrower?
           errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied? && !request.requester.library_staff?
           errors << I18n.t(:proxy_invalid, scope: scope) if request.proxied? && !request.patron.alma_record?
           errors
