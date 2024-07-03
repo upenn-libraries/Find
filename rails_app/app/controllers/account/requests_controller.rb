@@ -20,7 +20,7 @@ module Account
         proxy_user = Fulfillment::User.new(params[:proxy_for])
 
         if !proxy_user.alma_record?
-          flash.now[:alert] = 'Proxy user is invalid.'
+          flash.now[:alert] = 'Proxy user not found in Alma'
         elsif proxy_user.courtesy_borrower?
           flash.now[:alert] = 'Requests cannot be placed for courtesy borrowers.'
         else
