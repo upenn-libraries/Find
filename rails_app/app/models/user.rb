@@ -4,8 +4,8 @@
 class User < ApplicationRecord
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
-  include AlmaUser
-  include IlliadUser
+  include AlmaAccount
+  include IlliadAccount
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

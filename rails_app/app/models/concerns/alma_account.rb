@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AlmaUser
+module AlmaAccount
   extend ActiveSupport::Concern
 
   LIBRARY_STAFF_GROUP = 'libr-staff'

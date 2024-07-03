@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module IlliadUser
+module IlliadAccount
   extend ActiveSupport::Concern
 
   # @return [Illiad::User, FalseClass]

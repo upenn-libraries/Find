@@ -3,8 +3,8 @@
 module Fulfillment
   # Class that mimics a User object. Used when proxying requests for users that are not logged in.
   class User
-    include AlmaUser
-    include IlliadUser
+    include AlmaAccount
+    include IlliadAccount
 
     attr_reader :uid
 
