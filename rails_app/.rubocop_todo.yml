@@ -25,6 +25,9 @@ Metrics/AbcSize:
     - 'app/components/find/constraints_component.rb'
     - 'app/controllers/account/requests_controller.rb'
     - 'app/controllers/application_controller.rb'
+    - 'app/services/fulfillment/endpoint/illiad.rb'
+    - 'app/services/inventory/service/item.rb'
+    - 'app/services/shelf/listing.rb'
     - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 2
@@ -47,6 +50,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/components/find/constraints_component.rb'
     - 'app/controllers/application_controller.rb'
+    - 'app/services/shelf/listing.rb'
     - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 5
@@ -63,6 +67,7 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Exclude:
     - 'app/components/find/constraints_component.rb'
+    - 'app/services/shelf/listing.rb'
     - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 1
