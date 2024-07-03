@@ -80,7 +80,7 @@ describe 'Advanced Search Page' do
         expect(page).to have_selector 'article.document', count: 2
       end
 
-      it 'displays the query constraint' do
+      it 'does not display query constraint' do
         within('#appliedParams') do
           expect(page).not_to have_text(I18n.t('advanced.publication_date_search'))
         end
