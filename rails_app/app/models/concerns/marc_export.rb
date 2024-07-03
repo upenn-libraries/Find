@@ -5,10 +5,14 @@
 module MARCExport
   extend ActiveSupport::Concern
 
+  # Add extension for RIS
+  # @param [MARC::Document] document
   def self.extended(document)
     document.will_export_as(:ris, 'application/x-research-info-systems')
   end
 
+  # Export record to RIS format
+  # @return [String]
   def export_as_ris
     ris_hash = to_ris_hash
     lines = ris_hash.keys
@@ -28,10 +32,10 @@ module MARCExport
     text += format_authors(authors) if authors.present?
 
     # Title
-    text += show_title
+    text += format_title
 
     # Edition
-    text += show_edition
+    text += format_edition
 
     # Publication
     publication = marc(:production_publication_citation_show).join
@@ -44,47 +48,22 @@ module MARCExport
   # @return [String]
   def apa_citation_txt
     text = ''
-    authors_list_final = []
 
     # Authors with first name initial
-    authors = marc(:creator_authors_list, first_initial_only: true)
-    authors.each_with_index do |aut, idx|
-      aut = aut.strip
-      aut = aut.chop if aut.ends_with?(',')
-
-      author_text = if idx.zero? # first
-                      aut
-                    elsif idx == authors.length - 1 # last
-                      ", &amp; #{aut}"
-                    else # all others
-                      ", #{aut}"
-                    end
-      authors_list_final.push(author_text)
-    end
-    text += authors_list_final.join
-    if text.present?
-      text += text.last == '.' ? ' ' : '. '
-    end
+    text += format_apa_authors(marc(:creator_authors_list, first_initial_only: true))
 
     # Pub Date
-    pub_year = marc(:date_publication).year
-    text += "(#{pub_year}). " if pub_year.present?
+    pub_year = marc(:date_publication)
+    text += "(#{pub_year.year}). " if pub_year.present?
 
     # Title
-    text += show_title
+    text += format_title
 
     # Edition
-    text += show_edition
+    text += format_edition
 
     # Publisher info
-    publisher = marc(:production_publication_citation_show, with_year: false).join
-    if publisher.present?
-      # if ends with ',' or '.' remove it
-      publisher.chop! if publisher.ends_with?(',', '.')
-      text += "#{publisher}."
-    end
-
-    text
+    text + format_publisher
   end
 
   # Returns the Chicago citation text of the given record
@@ -92,86 +71,113 @@ module MARCExport
   def chicago_citation_txt
     text = ''
 
-    contributors = marc(:creator_contributors_list, include_authors: true)
-
-    authors = contributors['Author']
-    translators = contributors['Translator']
-    editors = contributors['Editor']
-    compilers = contributors['Compiler']
-
-    text += format_authors(authors) if authors.present?
+    # Authors
+    authors = marc(:creator_authors_list)
+    text += format_authors(authors, cite: :chicago) if authors.present?
 
     # Title
-    text += show_title
+    text += format_title
 
-    additional_title = ''
-    if translators.present?
-      additional_title += "Translated by #{translators.collect { |name|
-        convert_name_order(name)
-      }.join(' and ')}. "
-    end
-    if editors.present?
-      additional_title += "Edited by #{editors.collect { |name|
-        convert_name_order(name)
-      }.join(' and ')}. "
-    end
-    if compilers.present?
-      additional_title += "Compiled by #{compilers.collect { |name|
-        convert_name_order(name)
-      }.join(' and ')}. "
-    end
-
+    # Additional title
+    contributors = marc(:creator_contributors_list)
+    additional_title = format_additional_title(contributors['Translator'],
+                                               contributors['Editor'],
+                                               contributors['Compiler'])
     text += additional_title if additional_title.present?
 
     # Edition
-    text += show_edition
+    text += format_edition
 
     # Publication
     publication = marc(:production_publication_citation_show).join
     text += publication.to_s if publication.present?
-
     text
   end
 
   private
 
   # Format the author names text based on the total number of authors
+  # Its used for both MLA and Chicago citation
   # @param [Array<string>] authors: array of the author names
+  # @param [String] cite: either mla or chicago
   # @return [String]
-  def format_authors(authors)
+  def format_authors(authors, cite: :mla)
     return '' if authors.blank?
 
-    authors_final = []
+    # MLA if more than four authors, use first and et al
+    if authors.length >= 4 && cite == :mla
+      first = authors.first
+      return '' if first.blank?
 
-    if authors.length >= 4
-      text = "#{authors.first}, et al. "
-    else
-      authors.each_with_index do |aut, idx|
-        aut = aut.strip
-        aut = aut.chop if aut.ends_with?(',')
+      first.chop! if first.ends_with?(',')
+      return "#{first}, et al. "
+    end
 
-        author_text = if idx.zero? # first
-                        aut
-                      elsif idx == authors.length - 1 # last
-                        ", and #{convert_name_order(aut)}."
-                      else # all others
-                        ", #{convert_name_order(aut)}"
-                      end
-        authors_final.push(author_text)
+    authors_list = []
+    authors.each_with_index do |aut, idx|
+      authors_list.push(format_author_text(aut, idx, authors.length))
+      if cite == :chicago && authors.length >= 7 && idx >= 6
+        authors_list.push(', et al.')
+        break
       end
-      text = authors_final.join
     end
 
-    if text.present?
-      text += text.last == '.' ? ' ' : '. '
-    end
-
+    text = authors_list.join
+    text += (text.last == '.' ? ' ' : '. ') if text.present?
     text
+  end
+
+  # Formats the text of an author based on its position within list
+  # @param [String] aut: the author's name
+  # @param [Int] idx: index of the author within the list
+  def format_author_text(aut, idx, length)
+    return '' if aut.blank?
+
+    aut = aut.strip
+    aut = aut.chop if aut.ends_with?(',')
+
+    if idx.zero? # first
+      aut
+    elsif idx == length - 1 # last
+      ", and #{convert_name_order(aut)}."
+    else # all others
+      ", #{convert_name_order(aut)}"
+    end
+  end
+
+  # Formats the author list display for APA citation
+  # @param [Array<String>] authors
+  # @return [String]
+  def format_apa_authors(authors)
+    return '' if authors.blank?
+
+    authors_list = []
+    authors.each_with_index do |aut, idx|
+      authors_list.push(format_apa_author_text(aut, idx, authors.length))
+    end
+    text = authors_list.join
+    text + (text.last == '.' ? ' ' : '. ') if text.present?
+  end
+
+  # Formats one author in APA format based on its index within list
+  # @param [String] aut: author's name
+  # @param [Int] idx: index of this author within list
+  def format_apa_author_text(aut, idx, length)
+    aut = aut.strip
+    aut = aut.chop if aut.ends_with?(',')
+
+    if idx.zero? # first
+      aut
+    elsif idx == length - 1 # last
+      ", &amp; #{aut}"
+    else # all others
+      ", #{aut}"
+    end
   end
 
   # Formats the title display
   # @return [String]: the title string
-  def show_title
+  def format_title
     title = marc(:title_show)
     if title.present?
       title += title.ends_with?('.') ? ' ' : '. '
@@ -183,13 +189,47 @@ module MARCExport
 
   # Formats the edition display
   # @return [String]: the edition string
-  def show_edition
+  def format_edition
     edition = marc(:edition_show, with_alternate: false).join
     if edition.present?
-      edition + edition.ends_with?('.') ? ' ' : '. '
+      edition + (edition.ends_with?('.') ? ' ' : '. ')
     else
       ''
     end
+  end
+
+  # Formats the publisher information
+  # @return [String]: the publisher information
+  def format_publisher
+    publisher = marc(:production_publication_citation_show, with_year: false).join
+    if publisher.present?
+      # if ends with ',' or '.' remove it
+      publisher.chop! if publisher.ends_with?(',', '.')
+      "#{publisher}."
+    else
+      ''
+    end
+  end
+
+  # Formats the additional title for Chicago citation
+  # @param [Array<String>] translators
+  # @param [Array<String>] editors
+  # @param [Array<String>] compilers
+  # @return [String]
+  def format_additional_title(translators, editors, compilers)
+    additional_title = ''
+    additional_title += format_contributors(translators, 'Translated') if translators.present?
+    additional_title += format_contributors(editors, 'Edited') if editors.present?
+    additional_title += format_contributors(compilers, 'Compiled') if compilers.present?
+    additional_title
+  end
+
+  # Formats the title text of the list of contributors - used by method format_additional_title
+  # @param [Array<String>] contributors
+  # @param [String] role_text
+  # @return [String]
+  def format_contributors(contributors, role_text)
+    "#{role_text} by #{contributors.collect { |name| convert_name_order(name) }.join(' and ')}. " if role_text.present?
   end
 
   # Convert "Lastname, First" to "First Lastname"

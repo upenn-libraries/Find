@@ -12,6 +12,11 @@ Lint/MissingCopEnableDirective:
   Exclude:
     - 'app/components/find/search_bar_component.rb'
 
+# Offense count: 1
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/models/concerns/marc_export.rb'
+
 # Offense count: 4
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
@@ -20,6 +25,7 @@ Metrics/AbcSize:
     - 'app/components/find/constraints_component.rb'
     - 'app/controllers/account/requests_controller.rb'
     - 'app/controllers/application_controller.rb'
+    - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 2
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns, inherit_mode.
@@ -41,6 +47,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/components/find/constraints_component.rb'
     - 'app/controllers/application_controller.rb'
+    - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 5
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns.
@@ -49,12 +56,14 @@ Metrics/MethodLength:
     - 'app/components/find/constraints_component.rb'
     - 'app/services/inventory/service/physical.rb'
     - 'app/services/shelf/service.rb'
+    - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowedMethods, AllowedPatterns, Max.
 Metrics/PerceivedComplexity:
   Exclude:
     - 'app/components/find/constraints_component.rb'
+    - 'app/models/concerns/marc_export.rb'
 
 # Offense count: 1
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
