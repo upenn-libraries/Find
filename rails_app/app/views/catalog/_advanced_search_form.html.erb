@@ -1,10 +1,8 @@
 <%# Copied template from Blacklight v8.1.0 to use local component that supports range search fields %>
 
-<%= render(Find::AdvancedSearchFormComponent.new(url: search_action_url, classes: %w[advanced form-horizontal],
-  params: search_state.params_for_search.except(:qt), response: @response)) do |component| %>
-  <% blacklight_config.search_fields.select { |_k, v| v.include_in_advanced_search }.values.each.with_index do |field, i| %>
-    <% component.with_search_field_control do %>
-      <%= render(Find::AdvancedSearch::SearchFieldComponent.new(field: field, params: component.params, index: i)) %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= render(Find::AdvancedSearchFormComponent.new(
+  url: search_action_url,
+  classes: ['advanced', 'form-horizontal'],
+  params: search_state.params_for_search.except(:qt),
+  response: @response
+)) %>
