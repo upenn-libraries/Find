@@ -280,7 +280,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.22)
+    pennmarc (1.0.26)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
