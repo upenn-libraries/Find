@@ -3,6 +3,10 @@
 module Find
   module AdvancedSearch
     # Renders form controls for range search fields on advanced search page
+    # - the start and end inputs have not been provided an html "name" attribute to prevent their
+    #   submission on the advanced search page form
+    # - RangeControl Stimulus Controller converts the value of the start and end inputs into a solr friendly
+    #   range value upon form submission
     class RangeControlComponent < ViewComponent::Base
       # @param field [Blacklight::Configuration::SearchField] field
       # @param query [String] the field's query value from incoming clause parameters

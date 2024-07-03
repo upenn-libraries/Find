@@ -1,20 +1,23 @@
-<div class="col-sm-9" data-controller="range-control" data-action="advanced-search-form:submit@window->range-control#submit_range">
+<fieldset class="form-group advanced-search-field row mb-3">
+  <legend class="col-sm-3 col-form-label text-md-right"><%=  @field.display_label('search') %></legend>
+  <div class="col-sm-9" data-controller="range-control" data-action="advanced-search-form:submit@window->range-control#submit_range">
     <input value="<%= @field.key %>" autocomplete="off" type="hidden" name=<%= field_control_name %>
-           id=<%= control_id('field') %>>
+      id=<%= control_id('field') %>>
     <input value="<%= @query %>" autocomplete="off" type="hidden" name=<%= query_control_name %>
-           id=<%= control_id('query') %> data-range-control-target="query">
-  <div class="row">
-    <div class="col-6">
-      <label for="<%= control_id('start') %>"><%= t('advanced.range_labels.start') %></label>
-      <input value= "<%= start_point %>" class="form-control" placeholder="start (YYYY)" type="text"
-             id="<%= control_id('start') %>" data-range-control-target="start"
-             <%="pattern=#{@field.pattern}" unless @field.pattern.blank? %>>
-    </div>
-    <div class="col-6">
-      <label for="<%= control_id('end') %>"><%= t('advanced.range_labels.end') %></label>
-      <input value="<%= end_point %>" class="form-control" placeholder="end (YYYY)" type="text"
-             id="<%= control_id('end') %>" data-range-control-target="end"
-             <%="pattern=#{@field.pattern}" unless @field.pattern.blank? %>>
+      id=<%= control_id('query') %> data-range-control-target="query">
+    <div class="row">
+      <div class="col-6">
+        <label for="<%= control_id('start') %>"><%= t('advanced.range_labels.start') %></label>
+        <input value="<%= start_point %>" class="form-control" placeholder="start (YYYY)" type="text"
+               id="<%= control_id('start') %>" data-range-control-target="start"
+               <%= "pattern=#{@field.pattern}" unless @field.pattern.blank? %>>
+      </div>
+      <div class="col-6">
+        <label for="<%= control_id('end') %>"><%= t('advanced.range_labels.end') %></label>
+        <input value="<%= end_point %>" class="form-control" placeholder="end (YYYY)" type="text"
+               id="<%= control_id('end') %>" data-range-control-target="end"
+               <%= "pattern=#{@field.pattern}" unless @field.pattern.blank? %>>
+      </div>
     </div>
   </div>
-</div>
+</fieldset>
