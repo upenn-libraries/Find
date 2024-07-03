@@ -133,12 +133,55 @@ describe Inventory::Service::Item do
     end
   end
 
+  describe 'unavailable?' do
+    it 'returns true if item is not checkoutable nor aeon requestable' do
+      item = build(:item, :not_aeon_requestable, :not_checkoutable)
+      expect(item.unavailable?).to be true
+    end
+
+    it 'returns false if item is not checkoutable but is aeon requestable' do
+      item = build(:item, :not_checkoutable, :aeon_requestable)
+      expect(item.unavailable?).to be false
+    end
+
+    it 'returns false if item is checkoutable' do
+      item = build(:item, :checkoutable)
+      expect(item.unavailable?).to be false
+    end
+  end
+
   describe 'select_label' do
     it 'returns the correct label for the item' do
       item = build :item
       expect(item.select_label)
         .to contain_exactly "#{item.description} - #{item.physical_material_type['desc']} - #{item.library_name}",
                             item.item_data['pid']
+    end
+  end
+
+  describe 'temp_aware_location_display' do
+    it 'returns temp location display when item is in temp location' do
+      item = build :item, :in_temp_location
+      expect(item.temp_aware_location_display)
+        .to eq "(temp) #{item.holding_data['temp_library']['value']} - #{item.holding_data['temp_location']['value']}"
+    end
+
+    it 'returns normal location display when item is not in temp location' do
+      item = build :item
+      expect(item.temp_aware_location_display)
+        .to eq "#{item.holding_library_name} - #{item.holding_location_name}"
+    end
+  end
+
+  describe 'temp_aware_call_number' do
+    it 'returns the temp call number when it exists' do
+      item = build :item, :in_temp_location
+      expect(item.temp_aware_call_number).to eq item.holding_data['temp_call_number']
+    end
+
+    it 'returns the normal call number when item is not in temp location' do
+      item = build :item
+      expect(item.temp_aware_call_number).to eq item.holding_data['permanent_call_number']
     end
   end
 
@@ -169,23 +212,45 @@ describe Inventory::Service::Item do
 
       it 'returns pickup option' do
         options = item.fulfillment_options(ils_group: 'undergrad')
-        expect(options).to include :pickup
+        expect(options).to include Fulfillment::Request::Options::PICKUP
       end
 
       it 'returns office option if ils_group is faculty express' do
         options = item.fulfillment_options(ils_group: 'FacEXP')
-        expect(options).to include :office
+        expect(options).to include Fulfillment::Request::Options::OFFICE
       end
 
       it 'returns mail option if ils_group is not courtesy borrower' do
         options = item.fulfillment_options(ils_group: 'not_courtesy')
-        expect(options).to include :mail
+        expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
-      it 'returns scan option if item is scannable' do
+      it 'returns electronic option if item is scannable' do
         item = build :item
         options = item.fulfillment_options(ils_group: 'group')
-        expect(options).to include :scan
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
+      end
+    end
+
+    context 'when the item is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: 'group') }
+
+      it 'returns electronic option' do
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
+      end
+
+      it 'returns ill pickup option' do
+        expect(options).to include Fulfillment::Request::Options::ILL_PICKUP
+      end
+
+      it 'returns books by mail option if the user is not a courtesy borrower' do
+        expect(options).to include Fulfillment::Request::Options::MAIL
+      end
+
+      it 'returns office option if ils_group is faculty express' do
+        expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
+          .to include Fulfillment::Request::Options::OFFICE
       end
     end
   end

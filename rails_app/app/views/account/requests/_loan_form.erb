@@ -1,0 +1,76 @@
+<%= form_with(url: requests_path, method: :post,  data: { controller: 'form-validation' }) do %>
+  <%= render 'hidden_fields' %>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group mt-2">
+        <%= label_tag :title do %>
+          <%= t('account.ill.form.loan.title.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.title.help_text') %></p>
+        <%= text_field_tag :title, @ill_params.book_title, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :author do %>
+          <%= t('account.ill.form.loan.author.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.author.help_text') %></p>
+        <%= text_field_tag :author, @ill_params.author, class: 'form-control mt-1', required: true%>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :year do %>
+          <%= t('account.ill.form.loan.publication_year.label') %> <small class="text-muted"><%= t('account.ill.form.required') %></small>
+        <% end %>
+        <p class="error-message d-none"><%= t('account.ill.form.loan.publication_year.help_text') %></p>
+        <%= text_field_tag :year, @ill_params.year, class: 'form-control mt-1', required: true %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :edition, t('account.ill.form.loan.edition') %>
+        <%= text_field_tag :edition, @ill_params.edition, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :publisher, t('account.ill.form.loan.publisher') %>
+        <%= text_field_tag :publisher, @ill_params.publisher, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :place, t('account.ill.form.loan.place_of_publication') %>
+        <%= text_field_tag :place, @ill_params.place, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :isbn,  t('account.ill.form.loan.isbn') %>
+        <%= text_field_tag :isbn, @ill_params.isbn, class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
+        <%= label_tag :comments do %>
+          <%= t('account.ill.form.loan.comments.label') %>
+          <br>
+          <small id="comments-help" class="form-text text-muted">
+            <%= t('account.ill.form.loan.comments.help_text') %>
+          </small>
+        <% end %>
+        <%= text_area_tag :comments, @ill_params.comments, class: 'form-control mt-1', aria: { describedby: 'comments-help' }, rows: 4 %>
+      </div>
+
+      <fieldset>
+        <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
+        <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
+
+        <ul class="list-group">
+          <% if current_user.faculty_express? %>
+            <%= render(Account::Requests::Options::OfficeComponent.new(user: current_user, checked: true)) %>
+          <% end %>
+
+          <%= render(Account::Requests::Options::PickupComponent.new(user: current_user, ill: true, checked: !current_user.faculty_express?)) %>
+
+          <%= render(Account::Requests::Options::MailComponent.new) %>
+        </ul>
+      </fieldset>
+
+      <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
+      <p><%= t('account.ill.form.email_notification_msg') %></p>
+
+      <%= button_tag t('account.ill.form.loan.submit'),
+                     class: 'btn btn-success btn-lg',
+                     data: { action: 'form-validation#displayErrors' } %>
+    </div>
+  </div>
+<% end %>

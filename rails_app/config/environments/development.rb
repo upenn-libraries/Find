@@ -35,6 +35,10 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # Tell Action Mailer not to deliver emails to the real world.
+  # The :file delivery method saves the emails in tmp/mails
+  config.action_mailer.delivery_method = :file
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

@@ -127,10 +127,15 @@ Run the full application test suite with:
 bundle exec rspec
 ```
 
-### Rubocop
+## Rubocop
 
-This project is committed to the code style embodied in [`upennlib-rubocop`](https://gitlab.library.upenn.edu/dld/upennlib-rubocop). You can check for issues by running:
+This application uses Rubocop to enforce Ruby and Rails style guidelines. We centralize our UPenn specific configuration in
+[upennlib-rubocop](https://gitlab.library.upenn.edu/dld/upennlib-rubocop).
+
+If there are rubocop offenses that you are not able to fix please do not edit the rubocop configuration instead regenerate the `rubocop_todo.yml` using the following command:
 
 ```bash
-bundle exec rubocop
+rubocop --auto-gen-config  --auto-gen-only-exclude --exclude-limit 10000
 ```
+
+To change our default Rubocop config please open an MR in the `upennlib-rubocop` project.

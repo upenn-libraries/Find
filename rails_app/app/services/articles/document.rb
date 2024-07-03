@@ -23,6 +23,11 @@ module Articles
       doc.subtitle.present? ? "#{doc.title}: #{doc.subtitle}" : doc.title
     end
 
+    # @return [String] the document's link using the proxy URL
+    def proxy_link
+      I18n.t('urls.external_services.proxy', url: doc.link)
+    end
+
     # @return [String, nil] the document's full text online status
     def fulltext_online
       I18n.t('additional_results.summon.fields.fulltext') if doc.fulltext

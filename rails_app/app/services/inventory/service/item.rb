@@ -6,12 +6,14 @@ module Inventory
     # Adds necessary functionality to determine item checkout status for rendering circulation options
     class Item < Alma::BibItem
       IN_HOUSE_POLICY_CODE = 'InHouseView'
+      NOT_LOANABLE_POLICY = 'Not loanable'
       UNSCANNABLE_MATERIAL_TYPES = %w[
         RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE
         AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
         LPTOP EQUIP OTHER AUDIOVM
       ].freeze
 
+      # Should the user be able to submit a request for this Item?
       # @return [Boolean]
       def checkoutable?
         in_place? &&
@@ -35,7 +37,7 @@ module Inventory
       # This is tailored to the user_id, if provided
       # @return [Boolean]
       def loanable?
-        !user_due_date_policy&.include? 'Not loanable'
+        !user_due_date_policy&.include? NOT_LOANABLE_POLICY
       end
 
       # @return [Boolean]
@@ -48,7 +50,7 @@ module Inventory
         Mappings.aeon_locations.include? location
       end
 
-      # Is the item able to be Scan&Deliver'd?
+      # Is the item able to be scanned?
       # @return [Boolean]
       def scannable?
         return false if at_hsp?
@@ -86,6 +88,11 @@ module Inventory
           holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
       end
 
+      # @return [Boolean]
+      def unavailable?
+        !checkoutable? && !aeon_requestable?
+      end
+
       # Array of arrays. In each sub-array, the first value is the display value and the
       # second value is the submitted value for backend processing.
       # @return [Array]
@@ -98,6 +105,41 @@ module Inventory
         end
       end
 
+      # @return [String]
+      def temp_aware_location_display
+        if in_temp_location?
+          return "(temp) #{holding_data.dig('temp_library', 'value')} - #{holding_data.dig('temp_location', 'value')}"
+        end
+
+        "#{holding_library_name} - #{holding_location_name}"
+      end
+
+      # @return [String]
+      def temp_aware_call_number
+        temp_call_num = holding_data['temp_call_number']
+        return temp_call_num if temp_call_num.present?
+
+        holding_data['permanent_call_number']
+      end
+
+      # @return [String]
+      def volume
+        item_data['enumeration_a']
+      end
+
+      # @return [String]
+      def issue
+        item_data['enumeration_b']
+      end
+
+      def aeon_sublocation
+        Settings.locations.aeon_sublocation_map[location]
+      end
+
+      def aeon_site
+        Settings.locations.aeon_location_map[library]
+      end
+
       # Return an array of fulfillment options for a given item and ils_group
       # @param ils_group [String] the ILS group code
       # @return [Array<Symbol>]
@@ -106,13 +148,75 @@ module Inventory
         return [:archives] if at_archives?
 
         options = []
-        if checkoutable?
-          options << :pickup
-          options << :office if ils_group == User::FACULTY_EXPRESS_GROUP
-          options << :mail unless ils_group == User::COURTESY_BORROWER_GROUP
-          options << :scan if scannable?
-        end
+        options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
+        options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+        options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
+        options << Fulfillment::Request::Options::ELECTRONIC if scannable?
         options
+      end
+
+      # Submission parameters for loans (of a whole work) that can be passed to the ILL form as OpenParams or directly
+      # to the request submission endpoint.
+      #
+      # @return [Hash]
+      def loan_params
+        { title: bib_data['title'],
+          author: bib_data['author'],
+          call_number: temp_aware_call_number,
+          location: temp_aware_location_display,
+          barcode: item_data['barcode'],
+          mms_id: bib_data['mms_id'],
+          publisher: bib_data['publisher_const'],
+          date: bib_data['date_of_publication'],
+          edition: bib_data['complete_edition'],
+          volume: volume,
+          issue: issue,
+          isbn: bib_data['isbn'],
+          issn: bib_data['issn'] }
+      end
+
+      # Submission params for a scan (or electronic) request for a part of a work that can be passed to the ILL form as
+      # OpenParams or directly to the request submission endpoint.
+      #
+      # @return [Hash]
+      def scan_params
+        loan_params.except(:author, :date)
+      end
+
+      # Open URL parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_open_params
+        { 'rft.au': bib_data['author'],
+          'rft.date': bib_data['date_of_publication'],
+          'rft.edition': bib_data['complete_edition'],
+          'rft.isbn': bib_data['isbn'],
+          'rft.issn': bib_data['issn'],
+          'rft.issue': issue,
+          'rft.place': bib_data['place_of_publication'],
+          'rft.pub': bib_data['publisher_const'],
+          'rft.title': bib_data['title'],
+          'rft.volume': volume }
+      end
+
+      # Additional parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_additional_params
+        { CallNumber: temp_aware_call_number,
+          ItemISxN: item_data['inventory_number'],
+          ItemNumber: item_data['barcode'],
+          Location: location,
+          ReferenceNumber: bib_data['mms_id'],
+          Site: aeon_site,
+          SubLocation: aeon_sublocation }
+      end
+
+      # All parameters to be passed to the Aeon request form
+      #
+      # @return [Hash]
+      def aeon_params
+        aeon_open_params.merge(aeon_additional_params)
       end
     end
   end

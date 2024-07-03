@@ -17,6 +17,20 @@
           </tr>
         <% end %>
 
+        <% if entry.ill_transaction? && entry.expiry_date %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.expires') %></th>
+            <td><%= entry.expiry_date %></td>
+          </tr>
+        <% end %>
+
+        <% if entry.ils_hold? && entry.pickup_location %>
+          <tr>
+            <th scope="row"><%= t('account.shelf.table.th.pickup') %></th>
+            <td><%= entry.pickup_location %></td>
+          </tr>
+        <% end %>
+
         <% if entry.ill_transaction? %>
           <tr>
             <th scope="row"><%= t('account.shelf.table.th.transaction_number') %></th>
@@ -46,7 +60,15 @@
     <% end %>
   <% end %>
 
+  <% if entry.ill_transaction? && entry.pdf_available? %>
+    <%= form_with url: ill_transaction_request_path(entry.id), method: :delete do |form| %>
+      <%= form.submit t('account.shelf.delete.button'), class: "btn btn-danger mx-1" %>
+    <% end %>
+
+    <%= link_to t('account.shelf.download.button'), ill_download_request_path(entry.id), class: 'btn btn-primary mx-1' %>
+  <% end %>
+
   <% if entry.mms_id %>
-    <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: "btn btn-link" %>
+    <%= link_to t('account.shelf.bib_record_link'), solr_document_path(entry.mms_id), class: 'btn btn-link' %>
   <% end %>
 </div>

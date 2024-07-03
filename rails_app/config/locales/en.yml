@@ -11,7 +11,7 @@ en:
     feedback:
       title: 'We want your feedback!'
       description: 'We are currently in the process of revamping and redesigning the Franklin catalog and are <a href="%{url}" target="_blank">requesting feedback</a> to ensure it meets your needs.'
-      release_notes: 'New features and improvements will be added throughout the summer and fall. Check the <a href="%{url}" target="_blank">release notes</a> for the latest updates.'
+      release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
     help:
       heading: Where can I get help?
       connect:
@@ -43,10 +43,10 @@ en:
           title:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
-          description: 'Borrow materials or request scans from partner libraries'
+          description: 'Borrow materials from partner libraries'
         scholarlycommons:
           title: 'ScholarlyCommons'
-          description: 'Penn dissertations, Penn faculty papers, and Penn Libraries publications'
+          description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
         search_center:
           title: 'Search Center'
           description: 'Biddle Law Library catalog'
@@ -66,16 +66,19 @@ en:
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
         finding_aids:
           title: 'Philadelphia Area Archives'
-          description: 'Finding aids for archival materials at the Penn Libraries and repositories in the greater Philadelphia region'
+          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region.'
   account:
     breadcrumbs:
       root: 'Find'
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_heading: 'Account Overview'
+      page_heading: 'Account overview'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
+        request:
+          title: 'Request an item'
+          description: "Describe what you need and we'll get it to you."
         shelf:
           title: 'Shelf'
           description: "Renew items you've loaned and see when they're due."
@@ -86,7 +89,7 @@ en:
             title: 'Bookmarks'
             description: 'Create citations and email bookmarked items.'
         fines_and_fees:
-          title: 'Fines and Fees'
+          title: 'Fines and fees'
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
       page_heading: 'Request an item'
@@ -100,11 +103,15 @@ en:
           journal_title:
             label: 'Journal or book title'
             help_text: 'Enter a journal or book title'
-          article_title: 'Article or chapter title'
+          article_title:
+            label: 'Article or chapter title'
+            help_text: 'Enter article or chapter title'
           author:
             label: 'Author'
             help_text: 'Enter an author'
-          publication_date: 'Publication date'
+          publication_date:
+            label: 'Publication date'
+            help_text: 'Enter publication date'
           volume: 'Volume'
           issue: 'Issue'
           pages: 'Pages'
@@ -114,9 +121,15 @@ en:
           submit: 'Place request'
           delivery_msg: 'Articles and chapters are delivered electronically as a PDF and are often ready in 2-3 business days.'
         loan:
-          title: 'Title'
-          author: 'Author'
-          publication_year: 'Year of publication'
+          title:
+            label: 'Title'
+            help_text: 'Enter a title'
+          author:
+            label: 'Author'
+            help_text: 'Enter an author'
+          publication_year:
+            label: 'Year of publication'
+            help_text: 'Enter a year'
           edition: 'Edition'
           publisher: 'Publisher'
           place_of_publication: 'Place of publication'
@@ -127,13 +140,6 @@ en:
           delivery:
             label: 'How would you like this item delivered?'
             help_text_html: 'Books or other items are available for <a href="%{pickup_url}" target="_blank">pick up</a> or <a href="%{bbm_url}" target="_blank">mail delivery</a>.'
-            options:
-              pickup:
-                label: 'Pick up'
-                placeholder: 'Choose a pickup location...'
-              mail:
-                label: 'Mail'
-                help_text_html: 'For those registered with <a href="%{bbm_form}" target="_blank">Books by Mail</a> at no charge to you.'
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'
@@ -158,7 +164,8 @@ en:
       how_to_pay_html: '<a href="%{url}" target=_blank>How to pay fines and fees</a>'
     settings:
       page_heading: 'Settings'
-      page_lede: 'Your account details and item delivery address.'
+      page_lede: 'Your account information and item delivery address.'
+      details_heading: 'Account information'
       terms:
         user_group: 'Patron group'
         bbm_delivery_address: 'Delivery address for Books by Mail'
@@ -168,8 +175,21 @@ en:
     shelf:
       page_heading: 'Shelf'
       page_lede: "View and renew items you've loaned or requested from the library."
-      no_items: 'You have no items on your shelf.'
+      no_items: 'No items found.'
       identifier: '%{system} %{type} ID: %{id}'
+      refine:
+        title: 'Refine your shelf'
+        filters: 'Type'
+        sort:
+          title: 'Sort by'
+          options:
+            title:
+              desc: 'Title Z to A'
+              asc: 'Title A to Z'
+            last_updated_at:
+              desc: 'Most recently updated'
+              asc: 'Least recently updated'
+        submit: 'Refine'
       table:
         th:
           index: '#'
@@ -177,6 +197,8 @@ en:
           status: 'Due date / Status'
           barcode: 'Barcode'
           renewable: 'Renewable?'
+          expires: 'Expires On'
+          pickup: 'Pick up'
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
@@ -185,19 +207,26 @@ en:
       bib_record_link: 'View title record page'
       renew:
         button: 'Renew this title'
+      download:
+        button: 'Download'
       cancel:
         button: 'Cancel'
+        success: 'Hold cancelled.'
+      delete:
+        button: 'Delete'
+        success: 'Scan request deleted.'
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'
-    login: 'Login'
+    login: 'Log in'
     service_lede: 'books, articles, and more'
     service_name: 'Find'
-    sign_out: 'Sign Out'
+    sign_out: 'Sign out'
     account: 'Account'
   footer:
     account:
       heading: 'Account'
+      request: "Request an item"
       shelf: 'Shelf'
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
@@ -229,6 +258,17 @@ en:
     language: 'Language'
     library: 'Library'
     location: 'Specific Location'
+    recently_added:
+      label: 'Recently Added'
+      15_days: 'Within 15 days'
+      30_days: 'Within 30 days'
+      60_days: 'Within 60 days'
+      90_days: 'Within 90 days'
+    recently_published:
+      label: 'Recently Published'
+      5_years: 'Within 5 years'
+      10_years: 'Within 10 years'
+      15_years: 'Within 15 years'
     subject: 'Subject'
   login:
     alma:
@@ -261,8 +301,9 @@ en:
       item_placeholder: 'Choose an item...'
       buttons:
         scan: 'Continue to request a scan'
-        delivery: 'Place delivery request'
+        office: 'Place delivery request'
         pickup: 'Place pickup request'
+        ill_pickup: 'Place ILL pickup request'
         mail: 'Place mail request'
         aeon: 'Schedule visit'
         placeholder: 'Request item'
@@ -272,7 +313,7 @@ en:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
         office:
-          label: 'Office Delivery via FacultyEXPRESS'
+          label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
         pickup:
@@ -285,11 +326,26 @@ en:
           kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
           access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
         archives:
-          info_html: 'Accessing this item requires <a href="https://archives.upenn.edu/research/visit">visiting</a> the <a href="https://archives.upenn.edu/archives-info/contact">Penn University Archives & Records Center</a>.'
+          info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
+        unavailable:
+          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+  fulfillment:
+    public_error_message: 'An internal error occurred.'
+    outcome:
+      email:
+        pickup: 'Will be available to pickup at %{pickup_location}.'
+        electronic: 'Will be made electronically available in your library account.'
+        mail: 'Will be delivered to your Books by Mail address.'
+        office: 'Will be delivered to your FacultyExpress office location.'
+    validation:
+      no_pickup_location: 'No pickup location provided'
+      no_mms_id: 'No record identifier provided'
+      no_holding_id: 'No holding identifier provided'
+      no_user_id: 'No user identifier provided'
   search:
     all_fields: 'All Fields'
     button:
@@ -313,6 +369,7 @@ en:
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
+    harmful_language_statement_html: 'As you encounter harmful or offensive language and have questions or suggestions, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a>. More information at <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'
@@ -372,8 +429,12 @@ en:
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   sort:
+    added_date_asc: 'Date Added (old-new)'
+    added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    publication_date_asc: 'Publication date (old-new)'
+    publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'
     title_asc: 'Title (a-z)'
     title_desc: 'Title (z-a)'

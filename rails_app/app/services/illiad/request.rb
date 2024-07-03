@@ -7,16 +7,13 @@ module Illiad
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
-    # These constants can probably live on the class that prepares the data we send
-    # in our requests to Illiad
-    BOOKS_BY_MAIL = 'Books by Mail'
-    BOOKS_BY_MAIL_REGEX = /^BBM /
     ARTICLE = 'Article'
     LOAN = 'Loan'
     # Statues
     FINISHED = 'Request Finished'
     CANCELLED = 'Cancelled by ILL Staff'
     CHECKED_OUT = 'Checked Out to Customer'
+    DELIVERED_TO_WEB = 'Delivered to Web'
     # BorrowDirect system id
     BD_SYSTEM_ID = 'Reshare:upennbd'
 
@@ -50,6 +47,16 @@ module Illiad
     def self.add_note(id:, note:)
       response = Client.post("#{BASE_PATH}/#{id}/#{NOTES_PATH}", { Note: note })
       response.body
+    end
+
+    # Route a transaction to a specific status
+    # Wraps PUT 'Route Transaction' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @param status [String]
+    # @return [Illiad::Request]
+    def self.route(id:, status:)
+      response = Client.put("#{BASE_PATH}/#{id}/#{ROUTE_PATH}", { Status: status })
+      new(**response.body)
     end
 
     # @param data [Hash]
@@ -94,7 +101,7 @@ module Illiad
 
     # @return [Boolean]
     def books_by_mail?
-      data[:ItemInfo1] == BOOKS_BY_MAIL
+      data[:ItemInfo1] == Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL
     end
 
     # @return [Boolean]

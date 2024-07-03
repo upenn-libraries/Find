@@ -21,12 +21,18 @@ FactoryBot.define do
     trait :books_by_mail do
       loan
       add_attribute(:LoanTitle) { 'BBM Autobiography' }
-      add_attribute(:ItemInfo1) { Illiad::Request::BOOKS_BY_MAIL }
+      add_attribute(:ItemInfo1) { Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL }
     end
 
     trait :scan do
       add_attribute(:PhotoJournalTitle) { 'A Journal: With A Long Title' }
+      add_attribute(:PhotoArticleTitle) { 'Chapter 1' }
       add_attribute(:PhotoArticleAuthor) { 'Random, Author' }
+    end
+
+    trait :scan_with_pdf_available do
+      scan
+      add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
     end
 
     trait :cancelled do

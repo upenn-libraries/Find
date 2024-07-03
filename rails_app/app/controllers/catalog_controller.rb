@@ -57,6 +57,7 @@ class CatalogController < ApplicationController
     config.header_component = Find::HeaderComponent
     config.index.search_bar_component = Find::SearchBarComponent
     config.index.constraints_component = Find::ConstraintsComponent
+    config.index.facet_group_component = Find::FacetGroupComponent
     config.index.document_component = Find::ResultsDocumentComponent
     config.show.document_component = Find::ShowDocumentComponent
     config.show.show_tools_component = Find::ShowToolsComponent
@@ -107,8 +108,11 @@ class CatalogController < ApplicationController
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
-                                                  show: database_selected
-    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'), show: database_selected
+                                                  show: database_selected,
+                                                  limit: -1, sort: 'index'
+    config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'),
+                                           show: database_selected,
+                                           limit: -1, sort: 'index'
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
@@ -120,6 +124,20 @@ class CatalogController < ApplicationController
     config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
     config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
     config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
+    config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), solr_params:
+      { 'facet.mincount': 1 }, query: { last_5_years: { label: I18n.t('facets.recently_published.5_years'),
+                                                        fq: 'publication_date_sort:[NOW/YEAR-4YEARS TO *]' },
+                                        last_10_years: { label: I18n.t('facets.recently_published.10_years'),
+                                                         fq: 'publication_date_sort:[NOW/YEAR-9YEARS TO *]' },
+                                        last_15_years: { label: I18n.t('facets.recently_published.15_years'),
+                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } }
+    config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
+      { 'facet.mincount': 1 }, query: {
+        within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
+        within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW/DAY-30DAYS TO *]' },
+        within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW/DAY-60DAYS TO *]' },
+        within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW/DAY-90DAYS TO *]' }
+      }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -142,11 +160,15 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field :format_facet, label: I18n.t('results.format')
-    config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc
+    config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
+                                         component: Find::FacetLinkComponent, facet_target: :creator_facet,
+                                         facet_map: :creator_show_facet_map
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
-                                                           accessor: :marc
+                                                           accessor: :marc, component: Find::FacetLinkComponent,
+                                                           facet_target: :creator_facet,
+                                                           facet_map: :creator_conference_detail_show_facet_map
     config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
@@ -160,9 +182,12 @@ class CatalogController < ApplicationController
     config.add_show_field :title_former_show, label: I18n.t('show.title.former'), accessor: :marc
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
-    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc
-    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc
-    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc
+    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc,
+                                         component: Find::FacetLinkComponent, facet_target: :subject_facet
+    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc,
+                                                 component: Find::FacetLinkComponent, facet_target: :subject_facet
+    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc,
+                                               component: Find::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
@@ -184,7 +209,8 @@ class CatalogController < ApplicationController
     config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'),
                                                              accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
-    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc
+    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc,
+                                                     component: Find::FacetLinkComponent, facet_target: :creator_facet
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc
@@ -262,6 +288,10 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_sort desc, score desc', label: I18n.t('sort.creator_desc')
     config.add_sort_field 'title_sort asc, score desc', label: I18n.t('sort.title_asc')
     config.add_sort_field 'title_sort desc, score desc', label: I18n.t('sort.title_desc')
+    config.add_sort_field 'publication_date_sort asc, title_sort asc', label: I18n.t('sort.publication_date_asc')
+    config.add_sort_field 'publication_date_sort desc, title_sort asc', label: I18n.t('sort.publication_date_desc')
+    config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.added_date_asc')
+    config.add_sort_field 'added_date_sort desc, title_sort asc', label: I18n.t('sort.added_date_desc')
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

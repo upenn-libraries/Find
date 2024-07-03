@@ -1,0 +1,11 @@
+<li class="list-group-item">
+  <div class="form-check">
+    <%= radio_button_tag :delivery, delivery_value, true, class: 'form-check-input', **radio_options %>
+    <%= label_tag :delivery_electronic, t('requests.form.options.scan.label'), class: 'form-check-label' %>
+    <div>
+      <small class="text-muted">
+        <%= t('requests.form.options.scan.info_html', url: t('urls.guides.scan')) %>
+      </small>
+    </div>
+  </div>
+</li>

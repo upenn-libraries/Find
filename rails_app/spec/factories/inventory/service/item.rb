@@ -5,7 +5,8 @@ FactoryBot.define do
     item do
       {
         'bib_data' => {
-          'title' => Faker::Book.title
+          'title' => Faker::Book.title,
+          'author' => Faker::Book.author
         },
         'holding_data' => {},
         'item_data' => {
@@ -45,6 +46,14 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'scyarn' }
+      item
+    end
+  end
+
+  trait :not_aeon_requestable do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['location'] = { 'value' => 'notaeon' }
       item
     end
   end
@@ -94,6 +103,17 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['policy'] = { 'value' => Inventory::Service::Item::IN_HOUSE_POLICY_CODE }
+      item
+    end
+  end
+
+  trait :in_temp_location do
+    item do
+      item = attributes_for(:item)[:item]
+      item['holding_data'] = { 'in_temp_location' => true }
+      item['holding_data']['temp_library'] = { 'value' => 'templib' }
+      item['holding_data']['temp_location'] = { 'value' => 'temploc' }
+      item['holding_data']['temp_call_number'] = 'tempcall'
       item
     end
   end

@@ -73,5 +73,11 @@ module Inventory
     def ecollection?
       false
     end
+
+    # Determine if an Entry is missing data required for proper, meaningful display
+    # @return [Boolean]
+    def displayable?
+      description.present? && href.present?
+    end
   end
 end
