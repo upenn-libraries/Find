@@ -1,21 +1,25 @@
+# frozen_string_literal: true
+
 module Inventory
   class Service
+    # Make additional Holding info available
     class Holding
+      # @param [Alma::BibHolding] holding
       def initialize(holding)
-        @proto_holding = holding
-      end
-      def public_note
-        @marc.fields('852').filter_map { |field|
-          # TODO: get subfield z values from field
-        }.uniq.join(' ')
+        @holding_data = holding
       end
 
-      # TODO: not parsing the record properly
+      # Returns the "public note" values from MARC 852 subfield z
+      # @return [String]
+      def public_note
+        return if marc.blank?
+
+        marc.fields('852').filter_map { |field| field['z'] }.uniq.join(' ')
+      end
+
+      # @return [MARC::Record, nil]
       def marc
-        @marc ||= MARC::XMLReader.new(
-          StringIO.new(@proto_holding['anies'].first),
-          parser: :nokogiri, ignore_namespace: true
-        )
+        @marc ||= MARC::XMLReader.new(StringIO.new(@holding_data['anies'].first)).first
       end
     end
   end

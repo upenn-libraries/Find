@@ -8,6 +8,8 @@
   <span class="inventory-item__availability-footer"><%= entry.human_readable_status_description %></span>
 </p>
 
+<%# Render additional holding info here %>
+
 <% if user.nil? %>
   <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success',
               data: { controller: 'request-button', action: 'click->request-button#addRequestQueryToUrl' } %>

@@ -15,12 +15,6 @@ module AlmaExtensions
       response = HTTParty.get(url, headers:, query: options, timeout:)
       JSON.parse(response.body)
     end
-
-    # TODO: this would be better as an override of BibHolding.find
-    def find_one(...)
-      hld = Alma::BibHolding.find(...)
-      Inventory::Service::Holding.new(hld)
-    end
   end
 end
 # rubocop:enable Style/HashSyntax

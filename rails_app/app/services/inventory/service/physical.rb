@@ -3,9 +3,19 @@
 module Inventory
   # Extend the Inventory::Service to include physical item data
   class Service
-    # Retrieves Alma physical item data
+    # Retrieves Alma data
     class Physical
       class << self
+        # Get a single Holding for a given mms_id, holding_id
+        # @param mms_id [String] the Alma mms_id
+        # @param holding_id [String] the Alma holding_id
+        def holding(mms_id:, holding_id:)
+          raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
+
+          holding = Alma::BibHolding.find(mms_id: mms_id, holding_id: holding_id)
+          Inventory::Service::Holding.new(holding)
+        end
+
         # Get a single Item for a given mms_id, holding_id, and item_pid
         # @param mms_id [String] the Alma mms_id
         # @param holding_id [String] the Alma holding_id
