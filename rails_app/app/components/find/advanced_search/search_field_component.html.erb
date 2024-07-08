@@ -1,0 +1,18 @@
+<%# Search field control on advanced search form.
+Pulled from v8.1.0 Blacklight::AdvancedSearchFormComponent#initialize_search_field_controls %>
+
+<%= fields_for('clause[]', @index, include_id: false) do |f| %>
+  <% if @field.range %>
+    <%= render(Find::AdvancedSearch::RangeControlComponent.new(field: @field,
+                                                               query: @query,
+                                                               index: @index)) %>
+    <% else %>
+  <%= content_tag(:div, class: 'form-group advanced-search-field row mb-3') do %>
+    <%= f.label(:query, @field.display_label('search'), class: 'col-sm-3 col-form-label text-md-right') %>
+      <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.hidden_field(:field, value: @field.key) %>
+        <%= f.text_field(:query, value: @query, class: 'form-control') %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

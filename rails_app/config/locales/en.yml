@@ -239,6 +239,10 @@ en:
     title_search: 'Title'
     journal_title_search: 'Journal Title'
     isxn_search: 'ISBN/ISSN'
+    publication_date_search: 'Publication Date'
+    range_labels:
+      start: 'Start'
+      end: 'End'
   inventory:
     show:
       navigation:
@@ -303,6 +307,7 @@ en:
         scan: 'Continue to request a scan'
         office: 'Place delivery request'
         pickup: 'Place pickup request'
+        ill_pickup: 'Place ILL pickup request'
         mail: 'Place mail request'
         aeon: 'Schedule visit'
         placeholder: 'Request item'
@@ -325,7 +330,9 @@ en:
           kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
           access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
         archives:
-          info_html: 'Accessing this item requires <a href="https://archives.upenn.edu/research/visit">visiting</a> the <a href="https://archives.upenn.edu/archives-info/contact">Penn University Archives & Records Center</a>.'
+          info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
+        unavailable:
+          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

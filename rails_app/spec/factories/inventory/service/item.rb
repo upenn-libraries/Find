@@ -5,7 +5,8 @@ FactoryBot.define do
     item do
       {
         'bib_data' => {
-          'title' => Faker::Book.title
+          'title' => Faker::Book.title,
+          'author' => Faker::Book.author
         },
         'holding_data' => {},
         'item_data' => {
@@ -45,6 +46,14 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'scyarn' }
+      item
+    end
+  end
+
+  trait :not_aeon_requestable do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['location'] = { 'value' => 'notaeon' }
       item
     end
   end

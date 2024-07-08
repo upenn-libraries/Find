@@ -1,5 +1,10 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
+    <% if options.ill_pickup? %>
+      <p class="mb-3">
+        <%= t('requests.form.options.unavailable.info') %>
+      </p>
+    <% end %>
     <fieldset>
       <legend class="h6"> <%= t('requests.form.options.label') %></legend>
       <ul class="list-group js_radio-options mb-3">
@@ -19,6 +24,12 @@
                                                                      data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
 
+        <% if options.ill_pickup? %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: user, ill: true,
+                                                                     checked: !options.any?(:electronic, :office),
+                                                                     data: { action: 'change->options-select#optionChanged' })) %>
+        <% end %>
+
         <% if options.mail? %>
           <%= render(Account::Requests::Options::MailComponent.new(data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
@@ -26,7 +37,7 @@
     </fieldset>
 
     <%# Add hidden fields with values needed for form submission to the request endpoint. %>
-    <% item.fulfillment_submission_params.each do |k, v| %>
+    <% item.loan_params.each do |k, v| %>
       <%= hidden_field_tag k, v %>
     <% end %>
   <% elsif options.aeon? %>
@@ -34,12 +45,14 @@
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
   <% elsif options.archives? %>
     <p class="js_archives alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', url: t('urls.requesting_info.archives')) %>
+      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
+            contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
   <% end %>
   <div class="request-buttons">
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
+    <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
     <%= electronic_delivery_link %>
     <%= aeon_link %>

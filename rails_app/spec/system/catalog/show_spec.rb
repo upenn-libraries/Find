@@ -142,6 +142,32 @@ describe 'Catalog Show Page' do
     let(:entries) { print_monograph_entries }
 
     include_examples 'core show page features'
+
+    it 'does not display the search input' do
+      expect(page).not_to have_selector '.search-list__input'
+    end
+  end
+
+  # Record with 9 physical holdings
+  context 'when a record has many entries' do
+    include_context 'with print monograph record with 9 physical entries'
+
+    let(:mms_id) { print_monograph_bib }
+
+    before { visit solr_document_path(mms_id) }
+
+    it 'shows the search input' do
+      within('.search-list') do
+        expect(page).to have_selector '.search-list__input'
+      end
+    end
+
+    it 'filters the holdings' do
+      within('.document__inventory-list') do
+        fill_in 'Search this list', with: 'copy 0'
+        expect(page).to have_selector('.inventory-item', count: 1)
+      end
+    end
   end
 
   # Request options for a physical holding
@@ -188,10 +214,16 @@ describe 'Catalog Show Page' do
         end
       end
 
-      it 'shows the right button' do
+      it 'shows the scan button' do
         within('.request-buttons') do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
+      end
+
+      it 'has the expected data in scan link' do
+        scan_link = find_link(I18n.t('requests.form.buttons.scan'))[:href]
+        expect(scan_link).to include CGI.escape(item.bib_data['title'])
+        expect(scan_link).not_to include CGI.escape(item.bib_data['author'])
       end
     end
 
@@ -250,6 +282,40 @@ describe 'Catalog Show Page' do
       it 'shows the archives request options' do
         within('.fulfillment__container') do
           expect(page).to have_selector '.js_archives'
+        end
+      end
+    end
+
+    context 'with an item that is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows a note about the unavailability status' do
+        within('.fulfillment__container') do
+          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
+        end
+      end
+
+      it 'shows request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_radio-options'
+        end
+      end
+
+      it 'selects the first option' do
+        within('.js_radio-options') do
+          expect(first('input[type="radio"]')[:checked]).to be true
+        end
+      end
+
+      it 'shows the right button' do
+        within('.request-buttons') do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
       end
     end

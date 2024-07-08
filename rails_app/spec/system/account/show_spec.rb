@@ -3,7 +3,7 @@
 require 'system_helper'
 
 describe 'Account Show Page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
 
   before do
     sign_in user
