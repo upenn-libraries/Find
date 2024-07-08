@@ -25,7 +25,10 @@ module Account
       # Returns true if the request accepts a comment field.
       # @return [TrueClass, FalseClass]
       def commentable?
-        options.any?(Fulfillment::Request::Options::PICKUP, Fulfillment::Request::Options::ILL_PICKUP)
+        options.any?(Fulfillment::Request::Options::PICKUP,
+                     Fulfillment::Request::Options::ILL_PICKUP,
+                     Fulfillment::Request::Options::MAIL,
+                     Fulfillment::Request::Options::OFFICE)
       end
 
       # Generates the submit button for the given delivery type.
