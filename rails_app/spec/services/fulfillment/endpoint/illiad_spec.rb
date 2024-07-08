@@ -13,7 +13,7 @@ describe Fulfillment::Endpoint::Illiad do
   end
 
   describe '.submit' do
-    let(:note) { I18n.t('fulfillment.illiad.comment_extension', user_id: request.user.uid) }
+    let(:note) { I18n.t('fulfillment.illiad.comment', comment: 'test comment', user_id: request.user.uid) }
     let(:outcome) { described_class.submit(request: request) }
 
     before do

@@ -347,7 +347,7 @@ en:
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
     illiad:
-      comment_extension: ' - comments submitted by %{user_id}'
+      comment: '%{comment} - comments submitted by %{user_id}'
   search:
     all_fields: 'All Fields'
     button:
