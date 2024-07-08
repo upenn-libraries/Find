@@ -262,6 +262,13 @@ describe 'Catalog Show Page' do
         end
       end
 
+      it 'hides the comments area when the option is changed back to scan' do
+        find('input#delivery_electronic').click
+        within('form.fulfillment-form') do
+          expect(page).not_to have_selector '.add-comments'
+        end
+      end
+
       it 'expands the comments area when the button is clicked' do
         click_link I18n.t('requests.form.add_comments')
         within('.add-comments') do
