@@ -10,7 +10,7 @@ module Find
     class RangeControlComponent < ViewComponent::Base
       # @param field [Blacklight::Configuration::SearchField] field
       # @param query [String] the field's query value from incoming clause parameters
-      # @param  index [Integer] the position in the list of advanced search search fields
+      # @param index [Integer] the position in the list of advanced search search fields
       # @param options [Hash]
       def initialize(field:, query:, index:, **options)
         @field = field
@@ -40,6 +40,7 @@ module Find
 
       # id attribute for input controls given the provided name
       # @param name [String] the name of the clause params control field
+      # @return [String]
       def control_id(name)
         ['clause', @index, name].join('_')
       end
@@ -65,8 +66,7 @@ module Find
         "clause[#{@index}][#{name}]"
       end
 
-      # Get endpoints from incoming query clause params
-      # The input fields require
+      # Get endpoints from incoming query clause params for use when rendering input fields
       # @return [Array, nil]
       def endpoints_from_query_clause
         return if @query.blank?

@@ -6,7 +6,7 @@ module Find
     class SearchFieldComponent < ViewComponent::Base
       # @param field [Blacklight::Configuration::SearchField] field
       # @param query [String] query value from clause parameters
-      # @param  index [Integer] the position in the list of advanced search search fields
+      # @param index [Integer] the position in the list of advanced search search fields
       # @param options [Hash]
       def initialize(field:, query:, index:, **options)
         @field = field

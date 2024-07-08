@@ -3,12 +3,10 @@
 require 'system_helper'
 
 describe 'Advanced Search Page' do
-  include Articles::ApiMocks::Search
-
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with electronic journal record with 4 electronic entries'
 
-  before { visit '/catalog/advanced' }
+  before { visit advanced_search_catalog_path }
 
   context 'when using a range search field' do
     context 'when submitting a ranged search with both endpoints' do
@@ -89,7 +87,9 @@ describe 'Advanced Search Page' do
 
     context 'with incoming query parameters' do
       before do
-        visit '/catalog/advanced?op=must&clause[0][field]=publication_date_s&clause[0]query=[2000 TO 2020]'
+        visit(
+          "#{advanced_search_catalog_path}?op=must&clause[0][field]=publication_date_s&clause[0]query=[2000 TO 2020]"
+        )
       end
 
       it 'populates the range search inputs' do
