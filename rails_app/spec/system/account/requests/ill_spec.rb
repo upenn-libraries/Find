@@ -12,6 +12,10 @@ describe 'Account Request ILL form' do
     visit ill_new_request_path(**open_params)
   end
 
+  it 'does not display option to proxy' do
+    expect(page).not_to have_text I18n.t('account.ill.form.proxy.prompt')
+  end
+
   context 'when request has open params' do
     let(:open_params) { { 'requesttype' => 'book', 'booktitle' => 'Gone with the Wind', 'au' => 'Margaret Mitchell' } }
 
@@ -51,7 +55,7 @@ describe 'Account Request ILL form' do
 
   context 'when form is submitting with missing required fields' do
     before do
-      click_button 'Book or other item'
+      click_button 'Book or other item' # TODO: use internalizations
       fill_in 'Author', with: 'John Doe'
       click_button 'Place request'
     end
@@ -63,6 +67,40 @@ describe 'Account Request ILL form' do
 
     it 'does not display error message for author' do
       expect(page).not_to have_content I18n.t('account.ill.form.loan.author.help_text')
+    end
+  end
+
+  context 'when request is being made by library staff' do
+    let(:user) { create(:user, :library_staff) }
+
+    it 'displays option to proxy request' do
+      expect(page).to have_text I18n.t('account.ill.form.proxy.prompt')
+    end
+
+    context 'when library staff submits proxy form' do
+      let(:proxy_for) { 'jdoe' }
+
+      before do
+        proxy_alma_user = instance_double(Alma::User)
+        allow(Alma::User).to receive(:find).with(proxy_for).and_return(proxy_alma_user)
+        allow(proxy_alma_user).to receive(:method_missing).with(:user_group).and_return({ 'desc' => 'Undergraduate' })
+        allow(proxy_alma_user).to receive(:method_missing).with(:full_name).and_return('John Doe')
+
+        fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy_for
+        click_button I18n.t('account.ill.form.proxy.submit')
+      end
+
+      it 'displays proxied request alert' do
+        expect(page).to have_text 'You are proxying a request for John Doe (Undergraduate)'
+      end
+
+      it 'fills in proxied user id' do
+        expect(page).to have_field :proxy_for, with: proxy_for, type: :text
+      end
+
+      it 'adds hidden fields with proxied user id' do
+        expect(page).to have_field :proxy_for, with: proxy_for, type: :hidden, count: 2
+      end
     end
   end
 end

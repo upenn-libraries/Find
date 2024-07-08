@@ -32,7 +32,8 @@ module Fulfillment
           find_or_create user: request.patron
           body = BASE_TRANSACTION_ATTRIBUTES.merge(submission_body_from(request))
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction) if request.params.comments.present?
+          add_comment_note(request, transaction)
+          add_proxy_note(request, transaction)
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
@@ -48,6 +49,8 @@ module Fulfillment
           errors
         end
 
+        private
+
         # @param request [Request]
         # @return [Hash]
         def submission_body_from(request)
@@ -58,8 +61,6 @@ module Fulfillment
             append_routing_info(body, request)
           end
         end
-
-        private
 
         # @param [User] user
         # @return [Illiad::User, FalseClass]
@@ -78,15 +79,28 @@ module Fulfillment
           raise UserError, "Problem creating Illiad user: #{e.message}"
         end
 
+        # Add note with comment contents.
         # @param request [Request]
         # @param transaction [::Illiad::Request]
         # @return [Hash]
-        def add_notes(request, transaction)
-          number = transaction.id
-          # TODO: add proxy note
-          note = request.params.comments
-          note += " - comment submitted by #{request.requester.uid}"
-          ::Illiad::Request.add_note(id: number, note: note)
+        def add_comment_note(request, transaction)
+          return if request.params.comments.blank?
+
+          add_note(transaction, "#{request.params.comments} - comment submitted by #{request.requester.uid}")
+        end
+
+        # Add note informing staff who is proxing this request.
+        # @param request [Request]
+        # @param transaction [::Illiad::Request]
+        # @return [Hash]
+        def add_proxy_note(request, transaction)
+          return unless request.proxied?
+
+          add_note(transaction, "Proxied by #{request.requester.uid}")
+        end
+
+        def add_note(transaction, note)
+          ::Illiad::Request.add_note(id: transaction.id, note: note)
         end
 
         # @param [Request] request

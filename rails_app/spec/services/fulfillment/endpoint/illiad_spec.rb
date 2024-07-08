@@ -13,15 +13,11 @@ describe Fulfillment::Endpoint::Illiad do
   end
 
   describe '.submit' do
-    let(:note) { " - comment submitted by #{request.requester.uid}" }
     let(:outcome) { described_class.submit(request: request) }
 
     before do
       stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response))
-      stub_add_note_success(id: '1234', note: note,
-                            response_body: build(:illiad_api_note_response, Note: note))
-      mock_request = instance_double(::Illiad::Request)
-      allow(mock_request).to receive(:id).and_return '1234'
+      mock_request = instance_double(::Illiad::Request, id: '1234')
       allow(::Illiad::Request).to receive(:submit).and_return(mock_request)
     end
 
@@ -51,10 +47,48 @@ describe Fulfillment::Endpoint::Illiad do
         expect(outcome.confirmation_number).to eq 'ILLIAD_1234'
       end
     end
+
+    context 'with a successful proxied request' do
+      let(:request) { build(:fulfillment_request, :with_bib_info, :proxied, :ill_pickup) }
+      let(:note) { "Proxied by #{request.requester.uid}" }
+      let(:stub_note_request) do
+        stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
+      end
+
+      before do
+        stub_note_request
+        stub_find_user_success(id: request.patron.uid, response_body: build(:illiad_user_response))
+      end
+
+      it 'submits request as proxied user' do
+        outcome
+        expect(::Illiad::Request).to have_received(:submit).with(data: a_hash_including(Username: 'jdoe'))
+      end
+
+      it 'adds note to transaction' do
+        expect(outcome).to be_success
+        expect(stub_note_request).to have_been_requested
+      end
+    end
+
+    context 'with a request containing a comment' do
+      let(:request) { build(:fulfillment_request, :with_section, :with_comments, :scan_deliver) }
+      let(:note) { "#{request.params.comments} - comment submitted by #{request.requester.uid}" }
+      let(:stub_note_request) do
+        stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
+      end
+
+      before { stub_note_request }
+
+      it 'adds comment to transaction' do
+        expect(outcome).to be_success
+        expect(stub_note_request).to have_been_requested
+      end
+    end
   end
 
   describe '.submission_body_from' do
-    let(:submission_body) { described_class.submission_body_from(request) }
+    let(:submission_body) { described_class.send(:submission_body_from, request) }
 
     context 'with a books by mail request' do
       let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }

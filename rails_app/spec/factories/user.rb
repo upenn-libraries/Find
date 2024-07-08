@@ -20,4 +20,8 @@ FactoryBot.define do
     uid { identifier }
     email { identifier }
   end
+
+  trait :library_staff do
+    ils_group { User::LIBRARY_STAFF_GROUP }
+  end
 end

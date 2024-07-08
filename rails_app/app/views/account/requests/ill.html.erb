@@ -8,7 +8,7 @@
 
 <% if current_user.uid != @patron.uid %>
   <p class="alert alert-info" aria-live="polite">
-    You are proxying a request for <strong><%= @patron.full_name %> (<%= @patron.ils_group_name %>)</strong>
+    <%= t('account.ill.proxy_alert_html', name: @patron.full_name, group: @patron.ils_group_name) %>
   </p>
 <% end %>
 

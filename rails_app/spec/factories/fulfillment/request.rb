@@ -29,6 +29,14 @@ FactoryBot.define do
       author { 'Hubbard, L.R.' }
     end
 
+    trait :with_comments do
+      comments { 'A very important comment.' }
+    end
+
+    trait :proxied do
+      proxy_for { 'jdoe' }
+    end
+
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
     trait :books_by_mail do
       delivery { Fulfillment::Request::Options::MAIL }
