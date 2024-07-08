@@ -37,13 +37,15 @@
     </fieldset>
 
     <%# toggleable comments box, for direct-from-form (no redirect) Alma and ILL requests only %>
-    <div class="add-comments mt-2" data-options-select-target="addComments">
-      <%= link_to t('requests.form.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
-      <div class="d-none" data-comments-target="commentsArea">
-        <%= label_tag :location, t('requests.form.comments_label'), { class: 'form-label' } %>
-        <%= text_area_tag :comments, '', { class: 'form-control mb-3' } %>
+    <% if commentable? %>
+      <div class="add-comments mt-2" data-options-select-target="addComments">
+        <%= link_to t('requests.form.add_comments'), '', { data: { action: 'click->comments#showCommentsArea' } } %>
+        <div class="d-none" data-comments-target="commentsArea">
+          <%= label_tag :location, t('requests.form.comments_label'), { class: 'form-label' } %>
+          <%= text_area_tag :comments, '', { class: 'form-control mb-3' } %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <%# Add hidden fields with values needed for form submission to the request endpoint. %>
     <% item.loan_params.each do |k, v| %>

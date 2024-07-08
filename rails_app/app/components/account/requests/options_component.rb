@@ -2,7 +2,7 @@
 
 module Account
   module Requests
-    # renders the circulation options for physical holdings
+    # Renders the circulation options for physical holdings
     class OptionsComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
@@ -22,12 +22,23 @@ module Account
                      Fulfillment::Request::Options::OFFICE)
       end
 
+      # Returns true if the request accepts a comment field.
+      # @return [TrueClass, FalseClass]
+      def commentable?
+        options.any?(Fulfillment::Request::Options::PICKUP, Fulfillment::Request::Options::ILL_PICKUP)
+      end
+
+      # Generates the submit button for the given delivery type.
+      # @param delivery_type [Symbol]
+      # @return [ActiveSupport::SafeBuffer]
       def submit_button_for(delivery_type)
         submit_tag t(delivery_type, scope: 'requests.form.buttons'),
                    { class: 'd-none btn btn-success btn-lg',
                      data: { options_select_target: "#{delivery_type}Button", turbo_frame: '_top' } }
       end
 
+      # Generates the electronic delivery link (scan request)
+      # @return [ActiveSupport::SafeBuffer]
       def electronic_delivery_link
         link_to t('requests.form.buttons.scan'),
                 ill_new_request_path(**item.scan_params),
@@ -35,6 +46,8 @@ module Account
                   data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
       end
 
+      # Generates the Aeon request link with open parameters for form pre-population.
+      # @return [ActiveSupport::SafeBuffer]
       def aeon_link
         link_to t('requests.form.buttons.aeon'),
                 Settings.aeon.requesting_url + item.aeon_params.to_query,
