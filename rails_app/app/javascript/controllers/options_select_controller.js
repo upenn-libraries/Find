@@ -9,9 +9,7 @@ export default class extends Controller {
     "mailButton",
     "viewButton",
     "optionsFrame",
-    "addComments",
   ];
-  COMMENT_OPTIONS = ["pickup", "ill_pickup", "mail", "office"];
 
   connect() {
     // Listen for the load of the frame containing the radio buttons
@@ -32,7 +30,8 @@ export default class extends Controller {
   optionChanged(event) {
     this.hideAllButtons();
     this[`${event.target.value}ButtonTarget`].classList.remove("d-none");
-    this.toggleComments(event);
+    // dispatch an event to the comments controller to hide the comments box
+    this.dispatch("toggleComments", { detail: { option_value: event.target.value } });
   }
 
   // Hide all buttons
@@ -40,15 +39,6 @@ export default class extends Controller {
     this.buttonTargets().forEach((button) => {
       button.classList.add("d-none");
     });
-  }
-
-  // Show the comments field if the 'pickup' radio button is selected
-  toggleComments(event) {
-    if (this.COMMENT_OPTIONS.includes(event.target.value)) {
-      this.addCommentsTarget.classList.remove("d-none");
-    } else {
-      this.addCommentsTarget.classList.add("d-none");
-    }
   }
 
   // Determine whether the options frame contains an element with class 'js_radio-options', 'aeon', or 'archives'
