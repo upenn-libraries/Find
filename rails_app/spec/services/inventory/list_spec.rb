@@ -17,11 +17,11 @@ describe Inventory::List do
       let(:item_data) { build(:item_data) }
 
       it 'returns a Inventory::Response object' do
-        expect(response).to be_a Inventory::Response
+        expect(response).to be_a Inventory::List::Response
       end
 
       it 'iterates over returned entries' do
-        expect(response.first).to be_a Inventory::Entry
+        expect(response.first).to be_a Inventory::List::Entry::Base
       end
 
       it 'retrieves format data for an item' do
@@ -50,7 +50,7 @@ describe Inventory::List do
 
       it 'returns only a single ecollection inventory entry' do
         expect(response.entries.length).to eq 1
-        expect(response.first).to be_a Inventory::Entry::Ecollection
+        expect(response.first).to be_a Inventory::List::Entry::Ecollection
       end
 
       it 'has the expected attribute values' do
@@ -102,11 +102,11 @@ describe Inventory::List do
     end
 
     it 'returns a Inventory::Response object' do
-      expect(response).to be_a Inventory::Response
+      expect(response).to be_a Inventory::List::Response
     end
 
     it 'iterates over returned entries' do
-      expect(response.first).to be_a Inventory::Entry
+      expect(response.first).to be_a Inventory::List::Entry::Base
     end
 
     it 'returns only 5 entries' do
@@ -114,11 +114,11 @@ describe Inventory::List do
     end
 
     it 'returns only 3 api entries' do
-      expect(response.count(&:physical?)).to be Inventory::Service::DEFAULT_LIMIT
+      expect(response.count(&:physical?)).to be Inventory::List::DEFAULT_LIMIT
     end
 
     it 'returns only 2 resource links' do
-      expect(response.count(&:resource_link?)).to be Inventory::Service::RESOURCE_LINK_LIMIT
+      expect(response.count(&:resource_link?)).to be Inventory::List::RESOURCE_LINK_LIMIT
     end
   end
 
@@ -128,34 +128,34 @@ describe Inventory::List do
     end
 
     context 'with physical inventory type' do
-      let(:data) { { inventory_type: Inventory::Entry::PHYSICAL } }
+      let(:data) { { inventory_type: Inventory::List::PHYSICAL } }
 
       it 'returns Inventory::Entry::Physical object' do
-        expect(inventory_class).to be_a(Inventory::Entry::Physical)
+        expect(inventory_class).to be_a(Inventory::List::Entry::Physical)
       end
     end
 
     context 'with electronic inventory type' do
-      let(:data) { { inventory_type: Inventory::Entry::ELECTRONIC } }
+      let(:data) { { inventory_type: Inventory::List::ELECTRONIC } }
 
       it 'returns Inventory::Entry::Electronic object' do
-        expect(inventory_class).to be_a(Inventory::Entry::Electronic)
+        expect(inventory_class).to be_a(Inventory::List::Entry::Electronic)
       end
     end
 
     context 'with ecollection inventory type' do
-      let(:data) { { inventory_type: Inventory::Entry::ECOLLECTION } }
+      let(:data) { { inventory_type: Inventory::List::ECOLLECTION } }
 
       it 'returns Inventory::Entry::Ecollection object' do
-        expect(inventory_class).to be_a(Inventory::Entry::Ecollection)
+        expect(inventory_class).to be_a(Inventory::List::Entry::Ecollection)
       end
     end
 
     context 'with resource link inventory type' do
-      let(:data) { { inventory_type: Inventory::Entry::RESOURCE_LINK, href: '', description: '', id: 1 } }
+      let(:data) { { inventory_type: Inventory::List::RESOURCE_LINK, href: '', description: '', id: 1 } }
 
       it 'returns Inventory::Entry::ResourceLink object' do
-        expect(inventory_class).to be_a(Inventory::Entry::ResourceLink)
+        expect(inventory_class).to be_a(Inventory::List::Entry::ResourceLink)
       end
     end
 

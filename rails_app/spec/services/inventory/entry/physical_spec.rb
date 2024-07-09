@@ -19,7 +19,7 @@ describe Inventory::List::Entry::Physical do
       priority: '1',
       holding_info: 'v1',
       library: 'Van Pelt Library',
-      inventory_type: Inventory::Entry::PHYSICAL
+      inventory_type: Inventory::List::PHYSICAL
     )
   end
 

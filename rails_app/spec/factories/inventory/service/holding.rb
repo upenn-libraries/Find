@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :holding, class: 'Inventory::Service::Holding' do
+  factory :holding, class: 'Inventory::Holding' do
     holding do
       {
         'holding_id' => '678910',

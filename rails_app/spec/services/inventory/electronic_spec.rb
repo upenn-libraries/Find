@@ -6,8 +6,45 @@ describe Inventory::Electronic do
                         collection_id: '61468379530003681')
   end
 
+  # TODO: add more substance here as this method is more clearly defined
+  describe '.find' do
+    let(:mms_id) { '9977568423203681' }
+    let(:portfolio_id) { '53596869850003681' }
+    let(:collection_id) { '61468384380003681' }
+    let(:electronic) { described_class.find(mms_id: mms_id, portfolio_id: portfolio_id, collection_id: collection_id) }
+
+    it 'returns an ElectronicDetail object' do
+      expect(electronic).to be_an Inventory::Electronic
+    end
+
+    context 'when portfolio_id is nil' do
+      let(:portfolio_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        expect(electronic).to be_an Inventory::Electronic
+      end
+    end
+
+    context 'when collection_id is nil' do
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        expect(electronic).to be_an Inventory::Electronic
+      end
+    end
+
+    context 'when both electronic identifiers are nil' do
+      let(:portfolio_id) { nil }
+      let(:collection_id) { nil }
+
+      it 'returns an ElectronicDetail object' do
+        expect(electronic).to be_an Inventory::Electronic
+      end
+    end
+  end
+
   describe '#notes' do
-    let(:notes) { electronic_detail.notes }
+    let(:notes) { electronic.notes }
     let(:portfolio) do
       { 'public_note' => 'portfolio', 'authentication_note' => 'portfolio',
         'electronic_collection' => { 'service' => { 'value' => '62468379520003681' } } }
@@ -16,9 +53,9 @@ describe Inventory::Electronic do
     let(:collection) { { 'public_note' => 'collection', 'authentication_note' => 'collection' } }
 
     before do
-      allow(electronic_detail).to receive(:portfolio).and_return(portfolio)
-      allow(electronic_detail).to receive(:collection).and_return(collection)
-      allow(electronic_detail).to receive(:service).and_return(service)
+      allow(electronic).to receive(:portfolio).and_return(portfolio)
+      allow(electronic).to receive(:collection).and_return(collection)
+      allow(electronic).to receive(:service).and_return(service)
     end
 
     context 'when notes are found in portfolio' do
@@ -28,8 +65,8 @@ describe Inventory::Electronic do
 
       it 'does not make additional api requests' do
         notes
-        expect(electronic_detail).not_to have_received(:service)
-        expect(electronic_detail).not_to have_received(:collection)
+        expect(electronic).not_to have_received(:service)
+        expect(electronic).not_to have_received(:collection)
       end
     end
 
@@ -45,8 +82,8 @@ describe Inventory::Electronic do
 
       it 'only makes necessary api requests' do
         notes
-        expect(electronic_detail).to have_received(:service).once
-        expect(electronic_detail).not_to have_received(:collection)
+        expect(electronic).to have_received(:service).once
+        expect(electronic).not_to have_received(:collection)
       end
     end
 
@@ -63,13 +100,13 @@ describe Inventory::Electronic do
 
       it 'makes all api requests' do
         notes
-        expect(electronic_detail).to have_received(:portfolio).twice
-        expect(electronic_detail).to have_received(:service).once
+        expect(electronic).to have_received(:portfolio).twice
+        expect(electronic).to have_received(:service).once
       end
     end
 
     context 'when there is no collection id' do
-      let(:electronic_detail) do
+      let(:electronic) do
         described_class.new(mms_id: '9977568423203681', portfolio_id: '53671045450003681',
                             collection_id: '')
       end

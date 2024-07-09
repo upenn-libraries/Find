@@ -21,7 +21,9 @@ FactoryBot.define do
     end
 
     skip_create
-    initialize_with { new(item) }
+    initialize_with do
+      new(Alma::BibItem.new(item))
+    end
   end
 
   trait :checkoutable do
@@ -102,7 +104,7 @@ FactoryBot.define do
   trait :in_house_use_only do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['policy'] = { 'value' => Inventory::Service::Item::IN_HOUSE_POLICY_CODE }
+      item['item_data']['policy'] = { 'value' => Inventory::Item::IN_HOUSE_POLICY_CODE }
       item
     end
   end
