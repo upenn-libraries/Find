@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Response object for Inventory Service calls
   class List
+    # Response object for Inventory Service calls
     class Response
       include Enumerable
 

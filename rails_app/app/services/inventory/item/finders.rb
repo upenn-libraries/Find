@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Inventory
   class Item
     # Class methods for lookup and instantiation of Items. Wraps Alma gem finders and BibItem class.
@@ -33,7 +35,7 @@ module Inventory
         # Fake an item when a holding has no items, ugh
         [new({ 'bib_data' => holdings['bib_data'],
                'holding_data' => holdings['holding']&.find { |holding| holding['holding_id'] == holding_id },
-               'item_data' => {}})]
+               'item_data' => {} })]
       end
 
       private

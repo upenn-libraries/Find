@@ -13,23 +13,23 @@ describe Inventory::Electronic do
     let(:collection_id) { '61468384380003681' }
     let(:electronic) { described_class.find(mms_id: mms_id, portfolio_id: portfolio_id, collection_id: collection_id) }
 
-    it 'returns an ElectronicDetail object' do
-      expect(electronic).to be_an Inventory::Electronic
+    it 'returns an Electronic object' do
+      expect(electronic).to be_an described_class
     end
 
     context 'when portfolio_id is nil' do
       let(:portfolio_id) { nil }
 
-      it 'returns an ElectronicDetail object' do
-        expect(electronic).to be_an Inventory::Electronic
+      it 'returns an Electronic object' do
+        expect(electronic).to be_an described_class
       end
     end
 
     context 'when collection_id is nil' do
       let(:collection_id) { nil }
 
-      it 'returns an ElectronicDetail object' do
-        expect(electronic).to be_an Inventory::Electronic
+      it 'returns an Electronic object' do
+        expect(electronic).to be_an described_class
       end
     end
 
@@ -37,8 +37,8 @@ describe Inventory::Electronic do
       let(:portfolio_id) { nil }
       let(:collection_id) { nil }
 
-      it 'returns an ElectronicDetail object' do
-        expect(electronic).to be_an Inventory::Electronic
+      it 'returns an Electronic object' do
+        expect(electronic).to be_an described_class
       end
     end
   end

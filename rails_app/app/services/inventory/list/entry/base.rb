@@ -2,8 +2,8 @@
 
 module Inventory
   class List
-    # Abstract class that all Inventory entry classes inherit from. Establishes API that subclasses should adhere to.
     module Entry
+      # Abstract class that all Inventory entry classes inherit from. Establishes API that subclasses should adhere to.
       class Base
         attr_reader :data, :mms_id
 
@@ -80,4 +80,3 @@ module Inventory
     end
   end
 end
-

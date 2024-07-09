@@ -107,8 +107,8 @@ module Inventory
           resp.items.first
         end
 
-        # Inventory may have an overridden location that doesn't reflect the location values in the availability data. We
-        # utilize the PennMARC location overrides mapper to return such locations.
+        # Inventory may have an overridden location that doesn't reflect the location values in the availability data.
+        # We utilize the PennMARC location overrides mapper to return such locations.
         # @return [String, nil]
         def location_override
           location_code = data[:location_code]

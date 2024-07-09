@@ -8,7 +8,7 @@ describe Inventory::Item do
 
     it 'returns a Item' do
       expect(described_class.find(mms_id: '123', holding_id: '456', item_id: '789'))
-        .to be_a Inventory::Item
+        .to be_a described_class
     end
 
     it 'raises an ArgumentError if a parameter is missing' do
@@ -22,14 +22,14 @@ describe Inventory::Item do
     it 'returns an array of PennItems when items are present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [bib_item], total_record_count: 1)
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a Inventory::Item
+      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a described_class
     end
 
     it 'returns an array of PennItems when items are not present' do
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
       allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
-      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a Inventory::Item
+      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a described_class
     end
 
     it 'returns an empty array when holding data is blank' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Inventory
   class Item
     # Instance methods to return representations of an Item as hashes, typically for fulfillment contexts.

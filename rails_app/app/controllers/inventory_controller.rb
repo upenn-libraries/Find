@@ -23,7 +23,9 @@ class InventoryController < ApplicationController
       format.html do
         render(
           Inventory::ElectronicDetailComponent.new(
-            detail: Inventory::Service.electronic_detail(params[:id], params[:pid], params[:cid])
+            detail: Inventory::Electronic.find(
+              mms_id: params[:id], portfolio_id: params[:pid], collection_id: params[:cid]
+            )
           ), layout: false
         )
       end

@@ -197,8 +197,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -231,8 +231,8 @@ describe 'Catalog Show Page' do
       let(:items) { build_list :item, 2, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return(items)
-        allow(Inventory::Service::Physical).to receive(:item).and_return(items.first)
+        allow(Inventory::Item).to receive(:find_all).and_return(items)
+        allow(Inventory::Item).to receive(:find).and_return(items.first)
         find('details.fulfillment > summary').click
       end
 
@@ -250,8 +250,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :aeon_requestable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -274,8 +274,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :at_archives }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -290,8 +290,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :not_checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -482,10 +482,10 @@ describe 'Catalog Show Page' do
       before do
         SampleIndexer.index 'conference.json'
 
-        allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                   .and_return(Inventory::Response.new(entries: conference_entries))
-        allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                    .and_return(Inventory::Response.new(entries: conference_entries))
+        allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                .and_return(Inventory::List::Response.new(entries: conference_entries))
+        allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                                 .and_return(Inventory::List::Response.new(entries: conference_entries))
         visit(solr_document_path(conference_bib))
       end
 

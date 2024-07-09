@@ -15,8 +15,8 @@ module Inventory
           # @return [Integer]
           # First checks if the location is offsite or unavailable, and returns the corresponding low score.
           # If inventory is located in neither of these less desirable locations they receive the higher base score.
-          # We score unavailable locations the least, offsite locations the second least, and all other locations receive
-          # an equally high base score.
+          # We score unavailable locations the least, offsite locations the second least, and all other locations
+          # receive an equally high base score.
           def score(inventory)
             MAP.each do |locations|
               score = score_for_locations(inventory, locations[:locations], locations[:score])

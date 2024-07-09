@@ -5,9 +5,9 @@ module Inventory
     module Sort
       # Sorts physical inventory data retrieved from Alma Availability API call
       class Physical < Base
-        # Sorts physical inventory in descending order based on the following criteria: availability, priority, location,
-        # available items, and coverage statement. In the sort_by block we return an array comprising of values for each
-        # of these criteria. Inventory are sorted by comparing these arrays.
+        # Sorts physical inventory in descending order based on the following criteria: availability, priority,
+        # location, available items, and coverage statement. In the sort_by block we return an array comprising of
+        # values for each of these criteria. Inventory are sorted by comparing these arrays.
         # @return [Array]
         def sort
           inventory_data.sort_by do |data|
@@ -45,8 +45,8 @@ module Inventory
 
         # Provides a convenient interface to retrieve sorting criteria for unsorted data
         class UnsortedInventory
-          # default priority value to use for unprioritized items. This number must be large because lower priority values
-          # are ranked higher.
+          # default priority value to use for unprioritized items. This number must be large because lower
+          # priority values are ranked higher.
           DEFAULT_PRIORITY = 100
 
           attr_reader :data
@@ -111,4 +111,3 @@ module Inventory
     end
   end
 end
-

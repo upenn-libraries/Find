@@ -87,11 +87,11 @@ module Account
     # GET /account/requests/options
     def options
       item = if params[:item_id] == 'no-item'
-               Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
+               Inventory::Item.find_all(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
-               Inventory::Service::Physical.item(mms_id: params[:mms_id],
-                                                 holding_id: params[:holding_id],
-                                                 item_id: params[:item_id])
+               Inventory::Item.find(mms_id: params[:mms_id],
+                                    holding_id: params[:holding_id],
+                                    item_id: params[:item_id])
              end
       options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
       render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
@@ -100,7 +100,7 @@ module Account
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     def fulfillment_form
-      items = Inventory::Service::Physical.items mms_id: params[:mms_id], holding_id: params[:holding_id]
+      items = Inventory::Item.find_all mms_id: params[:mms_id], holding_id: params[:holding_id]
       render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
                                                   holding_id: params[:holding_id],
                                                   items: items), layout: false)

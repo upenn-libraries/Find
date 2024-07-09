@@ -16,9 +16,9 @@ shared_context 'with print journal record' do
     SampleIndexer.index 'print_journal.json'
 
     allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_journal_bib })
-                                               .and_return(Inventory::List::Response.new(entries: print_journal_entries))
+                                            .and_return(Inventory::List::Response.new(entries: print_journal_entries))
     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_journal_bib })
-                                                .and_return(Inventory::List::Response.new(entries: print_journal_entries))
+                                             .and_return(Inventory::List::Response.new(entries: print_journal_entries))
   end
 end
 
@@ -37,9 +37,11 @@ shared_context 'with print monograph record with 2 physical entries' do
     SampleIndexer.index 'print_monograph.json'
 
     allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
-                                               .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
+                                            .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
-                                                .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
+                                             .and_return(
+                                               Inventory::List::Response.new(entries: print_monograph_entries)
+                                             )
   end
 end
 
@@ -51,9 +53,9 @@ shared_context 'with print monograph record with 9 physical entries' do
     SampleIndexer.index 'print_monograph.json'
 
     allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
-                                               .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
+                                            .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
-                                                .and_return(Inventory::List::Response.new(entries: print_monograph_entries)
+                                             .and_return(Inventory::List::Response.new(entries: print_monograph_entries)
                                                                                .first(3))
   end
 end
@@ -62,7 +64,7 @@ end
 shared_context 'with electronic database record' do
   let(:electronic_db_bib) { '9977577951303681' }
   let(:electronic_db_entries) do
-    [create(:resource_link_entry, id: '1', inventory_type: Inventory::Entry::RESOURCE_LINK,
+    [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,
                                   href: 'http://hdl.library.upenn.edu/1017/126017',
                                   description: 'Connect to resource')]
   end
@@ -70,10 +72,10 @@ shared_context 'with electronic database record' do
   before do
     SampleIndexer.index 'electronic_database.json'
 
-    allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
-                                               .and_return(Inventory::Response.new(entries: electronic_db_entries))
-    allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
-                                                .and_return(Inventory::Response.new(entries: electronic_db_entries))
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
+                                            .and_return(Inventory::List::Response.new(entries: electronic_db_entries))
+    allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
+                                             .and_return(Inventory::List::Response.new(entries: electronic_db_entries))
   end
 end
 
@@ -99,12 +101,16 @@ shared_context 'with electronic journal record with 4 electronic entries' do
     SampleIndexer.index 'electronic_journal.json'
 
     # Mock request to render inventory in index and show pages.
-    allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
-                                               .and_return(Inventory::Response.new(entries: electronic_journal_entries))
-    allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
-                                                .and_return(
-                                                  Inventory::Response.new(entries: electronic_journal_entries.first(3))
-                                                )
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
+                                            .and_return(
+                                              Inventory::List::Response.new(entries: electronic_journal_entries)
+                                            )
+    allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == electronic_journal_bib })
+                                             .and_return(
+                                               Inventory::List::Response.new(
+                                                 entries: electronic_journal_entries.first(3)
+                                               )
+                                             )
     # Mock extra calls to retrieve notes.
     details_params = { mms_id: electronic_journal_bib, portfolio_id: '2', collection_id: '1234' }
     details = instance_double(

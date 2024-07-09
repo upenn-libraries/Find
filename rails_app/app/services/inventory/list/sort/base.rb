@@ -2,8 +2,8 @@
 
 module Inventory
   class List
-    # Base class to sort inventory data from Alma Availability API
     module Sort
+      # Base class to sort inventory data from Alma Availability API
       class Base
         attr_reader :inventory_data
 
@@ -12,9 +12,9 @@ module Inventory
           @inventory_data = inventory_data
         end
 
-        # Sorting method that subclasses override. We use the Put gem, which doesn't change how sort_by works, but provides
-        # readable methods to to use for each sorting criteria/value. These methods return Put::PutsThing objects that
-        # share a custom comparator to handle comparing booleans, deal with problematic nil values,
+        # Sorting method that subclasses override. We use the Put gem, which doesn't change how sort_by works, but
+        # provides readable methods to to use for each sorting criteria/value. These methods return Put::PutsThing
+        # objects that share a custom comparator to handle comparing booleans, deal with problematic nil values,
         # and determine sort order (ascending/descending). This default sort method randomizes the inventory.
         # @return [Array]
         def sort
