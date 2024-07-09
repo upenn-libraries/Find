@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Make additional Holding info available
+  # Make additional Holding info available that is only available by requesting a specific holding from the Alma API
   class Holding
+    attr_reader :bib_holding
+
+    # delegate to alma bib holding
+    delegate_missing_to :@bib_holding
+
     # Get a single Holding for a given mms_id, holding_id
     # @param mms_id [String] the Alma mms_id
     # @param holding_id [String] the Alma holding_id
@@ -15,15 +20,15 @@ module Inventory
 
     # @param [Alma::BibHolding] bib_holding
     def initialize(bib_holding)
-      @bib_holding = bib_holding.holding
+      @bib_holding = bib_holding
     end
 
     # Returns the "public note" values from MARC 852 subfield z
-    # @return [String]
+    # @return [String, nil]
     def public_note
       return if marc.blank?
 
-      marc&.fields('852')&.filter_map { |field| field['z'] }.uniq.join(' ')
+      marc&.fields('852')&.filter_map { |field| field['z'] }&.uniq&.join(' ')
     end
 
     # @return [MARC::Record, nil]

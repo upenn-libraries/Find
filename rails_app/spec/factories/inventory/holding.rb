@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :holding, class: 'Inventory::Holding' do
-    holding do
+    bib_holding do
       {
         'holding_id' => '678910',
         'created_by' => 'import',
@@ -31,7 +31,7 @@ FactoryBot.define do
                 <subfield code="c">chemperi</subfield>
                 <subfield code="h">QD1</subfield>
                 <subfield code="i">.C48</subfield>
-                <subfield code="z">Not currently received.</subfield>
+                <subfield code="z">Public note</subfield>
               </datafield>
               <datafield ind1="4" ind2="1" tag="866">
                 <subfield code="8">0</subfield>
@@ -44,6 +44,6 @@ FactoryBot.define do
     end
 
     skip_create
-    initialize_with { new(holding) }
+    initialize_with { new(bib_holding) }
   end
 end
