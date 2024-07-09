@@ -239,6 +239,10 @@ en:
     title_search: 'Title'
     journal_title_search: 'Journal Title'
     isxn_search: 'ISBN/ISSN'
+    publication_date_search: 'Publication Date'
+    range_labels:
+      start: 'Start'
+      end: 'End'
   inventory:
     show:
       navigation:
