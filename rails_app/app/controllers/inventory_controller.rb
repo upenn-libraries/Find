@@ -32,6 +32,22 @@ class InventoryController < ApplicationController
     end
   end
 
+  # GET /inventory/:id/physical/:holding_id/detail
+  # Returns details for an physical entry (holding).
+  def holding_detail
+    respond_to do |format|
+      format.html do
+        render(
+          Inventory::PhysicalDetailComponent.new(
+            holding: Inventory::Holding.find(
+              mms_id: params[:id], holding_id: params[:holding_id]
+            )
+          ), layout: false
+        )
+      end
+    end
+  end
+
   private
 
   # Default to no search state.

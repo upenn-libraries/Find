@@ -19,6 +19,8 @@ shared_context 'with print journal record' do
                                             .and_return(Inventory::List::Response.new(entries: print_journal_entries))
     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_journal_bib })
                                              .and_return(Inventory::List::Response.new(entries: print_journal_entries))
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding))
   end
 end
 
@@ -42,6 +44,8 @@ shared_context 'with print monograph record with 2 physical entries' do
                                              .and_return(
                                                Inventory::List::Response.new(entries: print_monograph_entries)
                                              )
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding))
   end
 end
 
@@ -57,6 +61,8 @@ shared_context 'with print monograph record with 9 physical entries' do
     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
                                              .and_return(Inventory::List::Response.new(entries: print_monograph_entries)
                                                                                .first(3))
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding))
   end
 end
 

@@ -14,9 +14,9 @@ describe Inventory::Holding do
     end
   end
 
-  describe '#public_note' do
+  describe '#notes' do
     it 'returns public note values from the parsed MARC' do
-      expect(holding.public_note).to eq 'Public note'
+      expect(holding.notes).to eq ['Public note']
     end
   end
 

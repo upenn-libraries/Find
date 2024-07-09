@@ -23,12 +23,17 @@ module Inventory
       @bib_holding = bib_holding
     end
 
+    # @return [String]
+    def id
+      bib_holding['holding_id']
+    end
+
     # Returns the "public note" values from MARC 852 subfield z
-    # @return [String, nil]
-    def public_note
+    # @return [Array, nil]
+    def notes
       return if marc.blank?
 
-      marc&.fields('852')&.filter_map { |field| field['z'] }&.uniq&.join(' ')
+      marc&.fields('852')&.filter_map { |field| field['z'] }
     end
 
     # @return [MARC::Record, nil]
