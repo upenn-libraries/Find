@@ -350,6 +350,8 @@ en:
       no_mms_id: 'No record identifier provided'
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
+    illiad:
+      comment: '%{comment} - comments submitted by %{user_id}'
   search:
     all_fields: 'All Fields'
     button:
