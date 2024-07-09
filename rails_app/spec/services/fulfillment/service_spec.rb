@@ -3,7 +3,6 @@
 describe Fulfillment::Service do
   include Illiad::ApiMocks::User
 
-
   describe '.submit' do
     let(:result) { described_class.submit }
     let(:validation_errors) { [] }
@@ -69,11 +68,6 @@ describe Fulfillment::Service do
 
       context 'with an invalid request' do
         let(:validation_errors) { ['Some required value not set!'] }
-        # let(:outcome) { Fulfillment::Outcome.new(request: request, errors: validation_errors) }
-        #
-        # before do
-        #   allow(backend).to receive(:validate).and_return(validation_errors)
-        # end
 
         it 'conveys the outcome from the backend' do
           expect(result.failed?).to be true
