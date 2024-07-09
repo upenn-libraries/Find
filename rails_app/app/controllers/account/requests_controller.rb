@@ -15,12 +15,12 @@ module Account
     def ill
       @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)
 
-      if current_user.library_staff? && @request.proxied?
-        if !@request.patron.alma_record?
-          flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
-        elsif @request.patron.courtesy_borrower?
-          flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
-        end
+      if @request.proxied? && !current_user.library_staff?
+        flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
+      elsif @request.proxied? && !@request.patron.alma_record?
+        flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
+      elsif @request.patron.courtesy_borrower?
+        flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
       end
     end
 

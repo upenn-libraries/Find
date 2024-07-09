@@ -6,7 +6,7 @@
   <% component.with_breadcrumb(active: true) { t('account.ill.page_heading') } %>
 <% end %>
 
-<% if @request.proxied? && @request.patron.alma_record? %>
+<% if @request.proxied? && current_user.library_staff? && @request.patron.alma_record? %>
   <p class="alert alert-info" aria-live="polite">
     <%= t('account.ill.proxy_alert_html', name: @request.patron.full_name, group: @request.patron.ils_group_name) %>
   </p>
