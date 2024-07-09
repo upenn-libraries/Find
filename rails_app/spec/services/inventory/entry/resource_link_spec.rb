@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Entry::ResourceLink do
+describe Inventory::List::Entry::ResourceLink do
   let(:entry) do
     create(:resource_link_entry, id: '1', href: 'http://example.com', description: 'Digital Edition')
   end
@@ -25,7 +25,7 @@ describe Inventory::Entry::ResourceLink do
 
   describe '#id' do
     it 'returns the expected id' do
-      expect(entry.id).to eq "#{Inventory::Entry::ResourceLink::ID_PREFIX}1"
+      expect(entry.id).to eq "#{Inventory::List::Entry::ResourceLink::ID_PREFIX}1"
     end
   end
 

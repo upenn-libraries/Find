@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Inventory::ElectronicDetail do
-  let(:electronic_detail) do
+describe Inventory::Electronic do
+  let(:electronic) do
     described_class.new(mms_id: '9977568423203681', portfolio_id: '53671045450003681',
                         collection_id: '61468379530003681')
   end

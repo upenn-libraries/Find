@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::ElectronicDetail::Notes do
+describe Inventory::Electronic::Notes do
   let(:data) { { 'public_note' => 'pub note', 'authentication_note' => 'auth note' } }
   let(:notes) { described_class.new(data) }
 

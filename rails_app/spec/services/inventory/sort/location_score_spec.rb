@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Sort::LocationScore do
+describe Inventory::List::Sort::LocationScore do
   let(:data) { build(:physical_availability_data) }
   let(:score) { described_class.score(data) }
 

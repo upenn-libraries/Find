@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Service do
+describe Inventory::List do
   describe '.full' do
     include_context 'with stubbed availability_data'
 
@@ -119,46 +119,6 @@ describe Inventory::Service do
 
     it 'returns only 2 resource links' do
       expect(response.count(&:resource_link?)).to be Inventory::Service::RESOURCE_LINK_LIMIT
-    end
-  end
-
-  # TODO: add more substance here as this method is more clearly defined
-  describe '.electronic_detail' do
-    let(:mms_id) { '9977568423203681' }
-    let(:portfolio_id) { '53596869850003681' }
-    let(:collection_id) { '61468384380003681' }
-
-    it 'returns an ElectronicDetail object' do
-      value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
-      expect(value).to be_an Inventory::ElectronicDetail
-    end
-
-    context 'when portfolio_id is nil' do
-      let(:portfolio_id) { nil }
-
-      it 'returns an ElectronicDetail object' do
-        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
-        expect(value).to be_an Inventory::ElectronicDetail
-      end
-    end
-
-    context 'when collection_id is nil' do
-      let(:collection_id) { nil }
-
-      it 'returns an ElectronicDetail object' do
-        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
-        expect(value).to be_an Inventory::ElectronicDetail
-      end
-    end
-
-    context 'when both electronic identifiers are nil' do
-      let(:portfolio_id) { nil }
-      let(:collection_id) { nil }
-
-      it 'returns an ElectronicDetail object' do
-        value = described_class.electronic_detail(mms_id, portfolio_id, collection_id)
-        expect(value).to be_an Inventory::ElectronicDetail
-      end
     end
   end
 

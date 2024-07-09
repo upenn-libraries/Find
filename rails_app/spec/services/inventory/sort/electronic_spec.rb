@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Sort::Electronic do
+describe Inventory::List::Sort::Electronic do
   describe '.sort' do
     let(:sorted_data) { described_class.new(data).sort }
     let(:data) do

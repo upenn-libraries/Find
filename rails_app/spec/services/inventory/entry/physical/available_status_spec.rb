@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Entry::Physical::AvailableStatus do
+describe Inventory::List::Entry::Physical::AvailableStatus do
   subject(:availability_status) { described_class.new(**location_opts) }
 
   let(:scope) { %i[alma availability available physical] << type }

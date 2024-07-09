@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Entry::Physical do
+describe Inventory::List::Entry::Physical do
   let(:mms_id) { '9979338417503681' }
   let(:entry) do
     create(

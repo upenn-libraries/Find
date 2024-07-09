@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Sort::Factory do
+describe Inventory::List::Sort::Factory do
   describe '.create' do
     let(:sorter) { described_class.create(data) }
 
@@ -8,7 +8,7 @@ describe Inventory::Sort::Factory do
       let(:data) { [build(:physical_availability_data)] }
 
       it 'returns an Inventory::Sort::Physical object' do
-        expect(sorter).to be_a Inventory::Sort::Physical
+        expect(sorter).to be_a Inventory::List::Sort::Physical
       end
     end
 
@@ -16,17 +16,17 @@ describe Inventory::Sort::Factory do
       let(:data) { [build(:electronic_availability_data)] }
 
       it 'returns an Inventory::Sort::Electronic object' do
-        expect(sorter).to be_a Inventory::Sort::Electronic
+        expect(sorter).to be_a Inventory::List::Sort::Electronic
       end
     end
 
     context 'with ecollection holdings' do
       let(:data) do
-        [build(:ecollection_data).merge({ 'inventory_type' => Inventory::Entry::ECOLLECTION })]
+        [build(:ecollection_data).merge({ 'inventory_type' => Inventory::List::ECOLLECTION })]
       end
 
       it 'returns an Inventory::Sort::Electronic object' do
-        expect(sorter).to be_a Inventory::Sort::Electronic
+        expect(sorter).to be_a Inventory::List::Sort::Electronic
       end
     end
 
@@ -34,7 +34,7 @@ describe Inventory::Sort::Factory do
       let(:data) { [{ 'inventory_type' => 'unknown' }] }
 
       it 'returns the base sorting class' do
-        expect(sorter).to be_a Inventory::Sort
+        expect(sorter).to be_a Inventory::List::Sort::Base
       end
     end
   end

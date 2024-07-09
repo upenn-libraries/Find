@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Inventory::Service::Holding do
+describe Inventory::Holding do
   let(:mms_id) { '123456' }
   let(:holding_id) { '78910' }
-  let(:service_holding) { Inventory::Service::Physical.holding(mms_id: mms_id, holding_id: holding_id) }
+  let(:service_holding) { Inventory::Holding.find(mms_id: mms_id, holding_id: holding_id) }
   let(:holding) { build :holding }
 
   before do

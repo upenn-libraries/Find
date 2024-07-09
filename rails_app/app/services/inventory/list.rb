@@ -3,7 +3,12 @@
 module Inventory
   # Retrieves real time inventory data from Alma Availability API, making additional API requests depending on the type
   # of inventory it's handling.
-  class Service
+  class List
+    PHYSICAL = 'physical'
+    ELECTRONIC = 'electronic'
+    ECOLLECTION = 'ecollection'
+    RESOURCE_LINK = 'resource_link'
+
     MAX_BIBS_GET = 100 # 100 is Alma API max
     DEFAULT_LIMIT = 3
     RESOURCE_LINK_LIMIT = 2
@@ -21,7 +26,7 @@ module Inventory
         marc = from_marc(document, nil)
         api = from_api(document.id, nil)
 
-        Inventory::Response.new(entries: marc + api)
+        Inventory::List::Response.new(entries: marc + api)
       end
 
       # Returns a brief inventory for a bib record.
@@ -38,7 +43,7 @@ module Inventory
         marc = from_marc(document, marc_limit)
         api = from_api(document.id, api_limit)
 
-        Inventory::Response.new(entries: marc + api)
+        Inventory::List::Response.new(entries: marc + api)
       end
 
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
@@ -49,28 +54,7 @@ module Inventory
       def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
 
-        Inventory::Response.new(entries: entries)
-      end
-
-      # Return an ElectronicDetail object with additional portfolio record information
-      #
-      # @param mms_id [String]
-      # @param portfolio_id [String]
-      # @param collection_id [String, nil]
-      # @return [Inventory::ElectronicDetail]
-      def electronic_detail(mms_id, portfolio_id, collection_id)
-        Inventory::ElectronicDetail.new(
-          mms_id: mms_id, portfolio_id: portfolio_id, collection_id: collection_id
-        )
-      end
-
-      # Return an PhysicalDetail object with additional holding record information
-      #
-      # @param mms_id [String]
-      # @param holding_id [String]
-      # @return [Inventory::PhysicalDetail]
-      def physical_detail(mms_id, holding_id)
-        Inventory::PhysicalDetail.new(mms_id: mms_id, holding_id: holding_id)
+        Inventory::List::Response.new(entries: entries)
       end
 
       private
@@ -103,10 +87,10 @@ module Inventory
       # @return [Inventory::Entry]
       def create_entry(mms_id, raw_data)
         case raw_data[:inventory_type]&.downcase
-        when Entry::PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
-        when Entry::ELECTRONIC then Entry::Electronic.new(mms_id: mms_id, **raw_data)
-        when Entry::ECOLLECTION then Entry::Ecollection.new(mms_id: mms_id, **raw_data)
-        when Entry::RESOURCE_LINK then Entry::ResourceLink.new(**raw_data)
+        when PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
+        when ELECTRONIC then Entry::Electronic.new(mms_id: mms_id, **raw_data)
+        when ECOLLECTION then Entry::Ecollection.new(mms_id: mms_id, **raw_data)
+        when RESOURCE_LINK then Entry::ResourceLink.new(**raw_data)
         else
           raise Error, "Type: '#{raw_data[:inventory_type]}' not found"
         end
@@ -130,7 +114,7 @@ module Inventory
       def from_marc(document, limit)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
-          create_entry(document.id, { inventory_type: Inventory::Entry::RESOURCE_LINK, id: i,
+          create_entry(document.id, { inventory_type: RESOURCE_LINK, id: i,
                                       href: link_data[:link_url], description: link_data[:link_text] })
         end
       end
@@ -148,7 +132,7 @@ module Inventory
           next unless ecollection
 
           hash = ecollection.data
-          hash.merge({ 'inventory_type' => Entry::ECOLLECTION })
+          hash.merge({ 'inventory_type' => ECOLLECTION })
         end || []
       end
 
@@ -159,7 +143,7 @@ module Inventory
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
       def api_entries(inventory_data, mms_id, limit: nil)
-        sorted_data = Inventory::Sort::Factory.create(inventory_data).sort
+        sorted_data = Inventory::List::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
         limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
                     .select(&:displayable?)

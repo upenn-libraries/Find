@@ -1,10 +1,24 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Grab additional data for electronic items
-  class ElectronicDetail
+  # Represent an abstraction of an Alma "Electronic" record. This could include data from a Portfolio, E-Collection or
+  # Service, as they are present.
+  class Electronic
     attr_accessor :mms_id, :portfolio_id, :collection_id
 
+    # Return an Electronic object with additional portfolio record information
+    #
+    # @param mms_id [String]
+    # @param portfolio_id [String]
+    # @param collection_id [String, nil]
+    # @return [Inventory::Electronic]
+    def self.find(...)
+      new(...)
+    end
+
+    # @param mms_id [String]
+    # @param portfolio_id [String]
+    # @param collection_id [String, nil]
     def initialize(mms_id:, portfolio_id:, collection_id:)
       @mms_id = mms_id
       @portfolio_id = portfolio_id

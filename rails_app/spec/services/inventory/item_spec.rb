@@ -1,6 +1,59 @@
 # frozen_string_literal: true
 
-describe Inventory::Service::Item do
+describe Inventory::Item do
+  describe '.find' do
+    before do
+      allow(Alma::BibItem).to receive(:find_one).and_return(Alma::BibItem.new({}))
+    end
+
+    it 'returns a Item' do
+      expect(described_class.find(mms_id: '123', holding_id: '456', item_id: '789'))
+        .to be_a Inventory::Item
+    end
+
+    it 'raises an ArgumentError if a parameter is missing' do
+      expect { described_class.find(mms_id: '123', holding_id: '456', item_id: nil) }.to raise_error ArgumentError
+    end
+  end
+
+  describe '.find_all' do
+    let(:bib_item) { build(:item).bib_item }
+
+    it 'returns an array of PennItems when items are present' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [bib_item], total_record_count: 1)
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a Inventory::Item
+    end
+
+    it 'returns an array of PennItems when items are not present' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
+      expect(described_class.find_all(mms_id: '123', holding_id: '456').first).to be_a Inventory::Item
+    end
+
+    it 'returns an empty array when holding data is blank' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      allow(Alma::BibHolding).to receive(:find_all).and_return({})
+      expect(described_class.find_all(mms_id: '123', holding_id: '456')).to eq []
+    end
+
+    it 'raises an ArgumentError if a parameter is missing' do
+      expect { described_class.find_all(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
+    end
+  end
+
+  describe '.fetch_all_items' do
+    it 'makes multiple calls to Alma when total record count exceeds limit' do
+      bib_item_set_double = instance_double(Alma::BibItemSet, items: build_list(:item, 2), total_record_count: 4)
+      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+
+      described_class.send(:fetch_all_items, mms_id: '1234', holding_id: '1234', limit: 2)
+      expect(Alma::BibItem).to have_received(:find).twice
+    end
+  end
+
   describe 'checkoutable?' do
     it 'returns true if item is checkoutable' do
       item = build :item, :checkoutable

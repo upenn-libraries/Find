@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :item, class: 'Inventory::Service::Item' do
+  factory :item, class: 'Inventory::Item' do
     item do
       {
         'bib_data' => {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Inventory::Entry::Electronic do
+describe Inventory::List::Entry::Electronic do
   let(:entry) do
     create(
       :electronic_entry,
