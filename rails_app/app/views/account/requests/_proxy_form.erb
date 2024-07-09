@@ -14,7 +14,7 @@
             <div class="d-flex align-items-end">
               <div class="form-group flex-grow-1">
                 <%= label_tag :proxy_for, t('account.ill.form.proxy.pennkey') %>
-                <%= text_field_tag :proxy_for, params[:proxy_for], class: 'form-control mt-1' %>
+                <%= text_field_tag :proxy_for, @request.proxied? ? @request.patron.uid : '', class: 'form-control mt-1' %>
               </div>
               <%= button_tag t('account.ill.form.proxy.submit'), name: nil, class: 'btn btn-primary mx-2 mt-2' %>
             </div>

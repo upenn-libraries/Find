@@ -1,3 +1,3 @@
-<% if current_user.uid != @patron.uid %>
-  <%= hidden_field_tag(:proxy_for, @patron.uid) %>
+<% if @request.proxied? %>
+  <%= hidden_field_tag(:proxy_for, @request.patron.uid) %>
 <% end %>

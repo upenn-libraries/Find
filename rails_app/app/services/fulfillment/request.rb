@@ -27,24 +27,32 @@ module Fulfillment
     #    Library staff will be able to proxy requests for other users. These submissions will go to the ILL backend.
     # 2. Item Request form: form submission will include item identifiers and fulfillment options. No scan details.
     #    Aeon requests will come from here.
-    # @param [User] requester
-    # @option delivery [String]
-    # @option pickup_location [String, nil]
-    def initialize(requester:, **params)
+    #
+    # @param requester [User] user making request
+    # @param params [Hash] additional parameters to create request
+    # @option params [String] delivery
+    # @option params [String, nil] pickup_location
+    # @option params [String, nil] proxy_for
+    # @options params [Symbol, nil] endpoint
+    def initialize(requester:, endpoint: nil, **params)
       @requester = requester
       @delivery = params.delete(:delivery)&.to_sym
       @pickup_location = params.delete(:pickup_location).presence
       @patron = proxy_user(params.delete(:proxy_for)) || requester
 
-      determine_endpoint # set endpoint upon initialization so errors can be caught prior to submission
+      # Set endpoint upon initialization so errors can be caught prior to submission.
+      @endpoint = endpoint_class(endpoint) || determine_endpoint
+
+      # Once the endpoint is set, build the params.
       build_params(params)
     end
 
-    # Convenience method for submitting directly
-    # @param params [Hash]
-    def self.submit(**params)
-      request = new(**params)
-      Service.new(request: request).submit
+    def validate
+      @endpoint.validate(request: self)
+    end
+
+    def submit
+      @endpoint.submit(request: self)
     end
 
     def proxied?
@@ -97,16 +105,26 @@ module Fulfillment
       @params = "#{endpoint}::Params".safe_constantize.new(params)
     end
 
+    # Create endpoint class based on type.
+    # @param type [Symbol] type of request, :illiad or :alma
+    # @return [Class, nil]
+    def endpoint_class(type)
+      return if type.blank?
+
+      "Fulfillment::Endpoint::#{type.to_s.camelcase}".safe_constantize
+    end
+
+    # Determine what endpoint should be used based on the delivery method.
     def determine_endpoint
-      @endpoint = if scan? || mail? || office? || ill_pickup?
-                    Fulfillment::Endpoint::Illiad
-                    # elsif aeon?
-                    #   Fulfillment::Endpoint::Aeon
-                  elsif pickup?
-                    Fulfillment::Endpoint::Alma
-                  else
-                    raise LogicFailure, "Could not determine a submission endpoint for request: #{inspect}"
-                  end
+      if scan? || mail? || office? || ill_pickup?
+        Fulfillment::Endpoint::Illiad
+        # elsif aeon?
+        #   Fulfillment::Endpoint::Aeon
+      elsif pickup?
+        Fulfillment::Endpoint::Alma
+      else
+        raise LogicFailure, "Could not determine a submission endpoint for request: #{inspect}"
+      end
     end
   end
 end

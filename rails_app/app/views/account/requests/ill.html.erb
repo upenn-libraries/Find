@@ -6,9 +6,9 @@
   <% component.with_breadcrumb(active: true) { t('account.ill.page_heading') } %>
 <% end %>
 
-<% if current_user.uid != @patron.uid %>
+<% if @request.proxied? && @request.patron.alma_record? %>
   <p class="alert alert-info" aria-live="polite">
-    <%= t('account.ill.proxy_alert_html', name: @patron.full_name, group: @patron.ils_group_name) %>
+    <%= t('account.ill.proxy_alert_html', name: @request.patron.full_name, group: @request.patron.ils_group_name) %>
   </p>
 <% end %>
 
@@ -20,19 +20,19 @@
 <h2 class="h4 mt-3"><%= t('account.ill.request_type.prompt') %></h2>
 
 <nav role="tablist" id="ill-tab" class="nav-pills mb-3 interlibrary-loan__scan-or-loanable">
-  <button class="btn btn-outline-dark <%= @ill_params.scan? ? 'active' : '' %>" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="<%= @ill_params.scan? ? 'true' : 'false' %>">
+  <button class="btn btn-outline-dark <%= @request.params.scan? ? 'active' : '' %>" id="ill-pills-0" role="tab" data-bs-toggle="pill" data-bs-target="#ill-0" aria-controls="ill-0" aria-selected="<%= @request.params.scan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.scan') %>
   </button>
-  <button class="btn btn-outline-dark <%= @ill_params.loan? ? 'active' : '' %>" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="<%= @ill_params.loan? ? 'true' : 'false' %>">
+  <button class="btn btn-outline-dark <%= @request.params.loan? ? 'active' : '' %>" id="ill-pills-1" role="tab" data-bs-toggle="pill" data-bs-target="#ill-1" aria-controls="ill-1" aria-selected="<%= @request.params.loan? ? 'true' : 'false' %>">
     <%= t('account.ill.request_type.loan') %>
   </button>
 </nav>
 
 <div class="tab-content interlibary-loan__forms" id="ill-tabContent">
-  <div class="tab-pane fade <%= @ill_params.scan? ? 'active show' : '' %>" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
+  <div class="tab-pane fade <%= @request.params.scan? ? 'active show' : '' %>" id="ill-0" role="tabpanel" aria-labelledby="ill-0-tab" tabindex="0">
     <%= render 'scan_form' %>
   </div>
-  <div class="tab-pane fade <%= @ill_params.loan? ? 'active show' : '' %>" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
+  <div class="tab-pane fade <%= @request.params.loan? ? 'active show' : '' %>" id="ill-1" role="tabpanel" aria-labelledby="ill-1-tab" tabindex="0">
     <%= render 'loan_form' %>
   </div>
 </div>
