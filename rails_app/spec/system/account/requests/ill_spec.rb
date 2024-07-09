@@ -78,15 +78,12 @@ describe 'Account Request ILL form' do
     end
 
     context 'when library staff submits proxy form' do
-      let(:proxy_for) { 'jdoe' }
+      include_context 'with mocked alma_record on proxy user'
+
+      let(:proxy) { Fulfillment::User.new('jdoe') }
 
       before do
-        proxy_alma_user = instance_double(Alma::User)
-        allow(Alma::User).to receive(:find).with(proxy_for).and_return(proxy_alma_user)
-        allow(proxy_alma_user).to receive(:method_missing).with(:user_group).and_return({ 'desc' => 'Undergraduate' })
-        allow(proxy_alma_user).to receive(:method_missing).with(:full_name).and_return('John Doe')
-
-        fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy_for
+        fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy.uid
         click_button I18n.t('account.ill.form.proxy.submit')
       end
 
@@ -95,11 +92,11 @@ describe 'Account Request ILL form' do
       end
 
       it 'fills in proxied user id' do
-        expect(page).to have_field :proxy_for, with: proxy_for, type: :text
+        expect(page).to have_field :proxy_for, with: proxy.uid, type: :text
       end
 
       it 'adds hidden fields with proxied user id' do
-        expect(page).to have_field :proxy_for, with: proxy_for, type: :hidden, count: 2
+        expect(page).to have_field :proxy_for, with: proxy.uid, type: :hidden, count: 2
       end
     end
   end

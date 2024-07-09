@@ -13,6 +13,8 @@ module Fulfillment
     end
 
     def ils_group
+      return unless alma_record?
+
       @ils_group ||= alma_record.user_group['value']
     end
   end

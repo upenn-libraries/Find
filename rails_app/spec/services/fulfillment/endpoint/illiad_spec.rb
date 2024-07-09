@@ -5,10 +5,47 @@ describe Fulfillment::Endpoint::Illiad do
   include Illiad::ApiMocks::Request
 
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_bib_info, :pickup, requester: nil) }
+    subject(:errors) { described_class.validate(request: bad_request) }
 
-    it 'adds error messages to errors' do
-      expect(described_class.validate(request: bad_request)).to match_array ['No user identifier provided']
+    context 'when missing patron' do
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_user_id')
+      end
+    end
+
+    context 'when patron is a courtesy borrowers' do
+      let(:requester) { create(:user, :courtesy_borrower) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_courtesy_borrowers')
+      end
+    end
+
+    context 'when proxied request is not submitted by a library staff member' do
+      include_context 'with mocked alma_record on proxy user'
+
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, proxy_for: proxy.uid) }
+      let(:proxy) { Fulfillment::User.new('jdoe') }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')
+      end
+    end
+
+    context 'when proxy user is not in Alma' do
+      let(:requester) { create(:user, :library_staff) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, :proxied, requester: requester) }
+
+      before do
+        allow(Alma::User).to receive(:find).with('jdoe').and_raise(Alma::User::ResponseError, 'Error retrieving record')
+      end
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.proxy_invalid')
+      end
     end
   end
 
