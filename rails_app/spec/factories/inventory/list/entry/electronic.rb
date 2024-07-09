@@ -14,25 +14,4 @@ FactoryBot.define do
     skip_create
     initialize_with { new(collection: collection, collection_id: collection_id, **attributes) }
   end
-
-  factory :physical_entry, class: 'Inventory::List::Entry::Physical' do
-    mms_id { '1234567890' }
-    availability { Inventory::Constants::AVAILABLE }
-    sequence(:call_number) { |n| "QD1 .C48 copy #{n}" }
-    sequence(:holding_info) { |n| "1965-1971 copy #{n}" }
-    location_code { 'chemperi' }
-    sequence(:holding_id) { |n| "67890#{n}" }
-
-    skip_create
-    initialize_with { new(**attributes) }
-  end
-
-  factory :resource_link_entry, class: 'Inventory::List::Entry::ResourceLink' do
-    id { 1 }
-    href { 'http://hdl.library.upenn.edu/1017/126017' }
-    description { 'Connect to resource' }
-
-    skip_create
-    initialize_with { new(**attributes) }
-  end
 end
