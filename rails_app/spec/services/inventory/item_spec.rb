@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 describe Inventory::Item do
+  context 'with delegated methods' do
+    let(:bib_item) { build :item }
+
+    before do
+      allow(Alma::BibItem).to receive(:find_one).and_return(Alma::BibItem.new(bib_item))
+    end
+
+    it 'delegates methods to the Alma::BibItem' do
+      item = described_class.find(mms_id: '123', holding_id: '456', item_id: '789')
+      expect(item.library).to eq bib_item.dig('item_data', 'library')
+    end
+  end
+
   describe '.find' do
     before do
       allow(Alma::BibItem).to receive(:find_one).and_return(Alma::BibItem.new({}))
