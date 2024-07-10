@@ -171,7 +171,7 @@ module Fulfillment
             FirstName: user.alma_record.first_name,
             EMailAddress: user.alma_record.email,
             SSN: user.alma_record.id,
-            Status: user.alma_record.user_group, # TODO: I think this is a hash, is that ok?
+            Status: user.ils_group_name,
             Department: user.alma_record.affiliation,
             PlainTextPassword: Settings.illiad.user_password }
         end
