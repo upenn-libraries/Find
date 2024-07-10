@@ -357,7 +357,7 @@ en:
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
       no_proxy_requests: 'Proxied request are not allowed'
-      no_courtesy_borrowers: 'Courtesy borrowers cannot submit this request' # This request cannot be placed for courtesy borrowers
+      no_courtesy_borrowers: 'Courtesy borrowers cannot submit this request'
       proxy_invalid: 'Proxy user not found in Alma'
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
