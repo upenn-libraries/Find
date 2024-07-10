@@ -27,18 +27,28 @@ module Inventory
         item_set = bib_items.map { |bib_item| new(bib_item) }
         return item_set if item_set.present?
 
-        holdings = Alma::BibHolding.find_all(mms_id: mms_id)
+        holdings_data = Alma::BibHolding.find_all(mms_id: mms_id)
 
         # TODO: implement boundwith support, see example mms_id: 9920306003503681
-        return [] if holdings['holding'].blank?
+        return [] if holdings_data['holding'].blank?
 
-        # Fake an item when a holding has no items, ugh
-        [new({ 'bib_data' => holdings['bib_data'],
-               'holding_data' => holdings['holding']&.find { |holding| holding['holding_id'] == holding_id },
-               'item_data' => {} })]
+        # Fake an item when a holding has no items
+        [holding_as_item(holdings_data, holding_id)]
       end
 
       private
+
+      # Some of our records have no Items. In order for consistent logic in requesting contexts, we need an Item object
+      # in all cases, so we build an Item object using data from the holding that will suffice for requesting purposes.
+      # @param [Hash] holdings_data
+      # @return [Inventory::Item]
+      def holding_as_item(holdings_data, holding_id)
+        new(Alma::BibItem.new(
+              { 'bib_data' => holdings_data['bib_data'],
+                'holding_data' => holdings_data['holding']&.find { |holding| holding['holding_id'] == holding_id },
+                'item_data' => {} }
+            ))
+      end
 
       # Recursively fetch all items for a given mms_id and holding_id
       # @param mms_id [String]
