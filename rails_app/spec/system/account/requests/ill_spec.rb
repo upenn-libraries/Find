@@ -20,8 +20,8 @@ describe 'Account Request ILL form' do
     let(:open_params) { { 'requesttype' => 'book', 'booktitle' => 'Gone with the Wind', 'au' => 'Margaret Mitchell' } }
 
     it 'opens appropriate form' do
-      expect(page).to have_button 'Book or other item', class: 'active'
-      expect(page).to have_button 'Article or chapter', class: '!active'
+      expect(page).to have_button I18n.t('account.ill.request_type.loan'), class: 'active'
+      expect(page).to have_button I18n.t('account.ill.request_type.scan'), class: '!active'
     end
 
     it 'populates title field' do
@@ -35,8 +35,8 @@ describe 'Account Request ILL form' do
 
   context 'when request does not have open params' do
     it 'does not open either form' do
-      expect(page).to have_button 'Book or other item', class: '!active'
-      expect(page).to have_button 'Article or chapter', class: '!active'
+      expect(page).to have_button I18n.t('account.ill.request_type.loan'), class: '!active'
+      expect(page).to have_button I18n.t('account.ill.request_type.scan'), class: '!active'
     end
   end
 
@@ -44,8 +44,8 @@ describe 'Account Request ILL form' do
     let(:open_params) { { 'requesttype' => 'invalid', 'title' => 'Gone with the Wind' } }
 
     it 'opens article form (the default)' do
-      expect(page).to have_button 'Book or other item', class: '!active'
-      expect(page).to have_button 'Article or chapter', class: 'active'
+      expect(page).to have_button I18n.t('account.ill.request_type.loan'), class: '!active'
+      expect(page).to have_button I18n.t('account.ill.request_type.scan'), class: 'active'
     end
 
     it 'populates the title field' do
@@ -55,9 +55,9 @@ describe 'Account Request ILL form' do
 
   context 'when form is submitting with missing required fields' do
     before do
-      click_button 'Book or other item' # TODO: use internalizations
-      fill_in 'Author', with: 'John Doe'
-      click_button 'Place request'
+      click_button I18n.t('account.ill.request_type.loan')
+      fill_in I18n.t('account.ill.form.loan.author.label'), with: 'John Doe'
+      click_button I18n.t('account.ill.form.loan.submit')
     end
 
     it 'display error messages' do
