@@ -473,19 +473,9 @@ describe 'Catalog Show Page' do
     end
 
     context 'when viewing a conference' do
-      let(:conference_bib) { '9978940183503681' }
-      let(:conference_entries) do
-        [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
-                                 inventory_type: 'physical')]
-      end
+      include_context 'with a conference proceedings record with 1 physical holding'
 
       before do
-        SampleIndexer.index 'conference.json'
-
-        allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                .and_return(Inventory::List::Response.new(entries: conference_entries))
-        allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                 .and_return(Inventory::List::Response.new(entries: conference_entries))
         visit(solr_document_path(conference_bib))
       end
 

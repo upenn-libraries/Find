@@ -2,9 +2,10 @@
 
 FactoryBot.define do
   factory :holding, class: 'Inventory::Holding' do
+    transient { id { '5678' } }
     bib_holding do
       {
-        'holding_id' => '678910',
+        'holding_id' => id,
         'created_by' => 'import',
         'created_date' => '2017-06-06Z',
         'originating_system' => 'ILS',

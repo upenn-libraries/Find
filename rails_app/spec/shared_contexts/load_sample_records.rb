@@ -126,3 +126,22 @@ shared_context 'with electronic journal record with 4 electronic entries' do
     allow(Inventory::Electronic).to receive(:find).with(**details_params).and_return(details)
   end
 end
+
+shared_context 'with a conference proceedings record with 1 physical holding' do
+  let(:conference_bib) { '9978940183503681' }
+  let(:conference_entries) do
+    [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
+                             inventory_type: 'physical')]
+  end
+
+  before do
+    SampleIndexer.index 'conference.json'
+
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                            .and_return(Inventory::List::Response.new(entries: conference_entries))
+    allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
+                                             .and_return(Inventory::List::Response.new(entries: conference_entries))
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding, id: conference_entries.first.id))
+  end
+end
