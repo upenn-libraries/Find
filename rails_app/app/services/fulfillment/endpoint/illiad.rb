@@ -86,7 +86,8 @@ module Fulfillment
         def add_comment_note(request, transaction)
           return if request.params.comments.blank?
 
-          add_note(transaction, "#{request.params.comments} - comment submitted by #{request.requester.uid}")
+          note = I18n.t('fulfillment.illiad.comment', comment: request.params.comments, user_id: request.requester.uid)
+          add_note(transaction, note)
         end
 
         # Add note informing staff who is proxing this request.

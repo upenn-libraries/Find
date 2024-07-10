@@ -41,7 +41,7 @@ module Fulfillment
         def submission_params(request:)
           { user_id: request.patron.uid,
             request_type: 'HOLD',
-            comment: request.params.comments,
+            comments: request.params.comments,
             mms_id: request.params.mms_id,
             holding_id: request.params.holding_id,
             pickup_location_type: 'LIBRARY',

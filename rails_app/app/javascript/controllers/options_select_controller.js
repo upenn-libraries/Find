@@ -5,10 +5,10 @@ export default class extends Controller {
     "electronicButton",
     "officeButton",
     "pickupButton",
+    "ill_pickupButton",
     "mailButton",
     "viewButton",
     "optionsFrame",
-    "addComments",
   ];
 
   connect() {
@@ -30,8 +30,8 @@ export default class extends Controller {
   optionChanged(event) {
     this.hideAllButtons();
     this[`${event.target.value}ButtonTarget`].classList.remove("d-none");
-    // TODO: reenable this when we have more information about comments
-    // this.toggleComments(event);
+    // dispatch an event to the comments controller to hide the comments box
+    this.dispatch("toggleComments", { detail: { option_value: event.target.value } });
   }
 
   // Hide all buttons
@@ -39,15 +39,6 @@ export default class extends Controller {
     this.buttonTargets().forEach((button) => {
       button.classList.add("d-none");
     });
-  }
-
-  // Show the comments field if the 'pickup' radio button is selected
-  toggleComments(event) {
-    if (event.target.value == "pickup") {
-      this.addCommentsTarget.classList.remove("d-none");
-    } else {
-      this.addCommentsTarget.classList.add("d-none");
-    }
   }
 
   // Determine whether the options frame contains an element with class 'js_radio-options', 'aeon', or 'archives'
@@ -61,8 +52,9 @@ export default class extends Controller {
 
   // Get the value of the selected radio button
   selectedOptionValue() {
-    return this.optionsFrameTarget.querySelector('input[name="delivery"]:checked')
-      .value;
+    return this.optionsFrameTarget.querySelector(
+      'input[name="delivery"]:checked',
+    ).value;
   }
 
   // Return an array of all button targets
@@ -73,6 +65,7 @@ export default class extends Controller {
       this.pickupButtonTarget,
       this.mailButtonTarget,
       this.viewButtonTarget,
+      this.ill_pickupButtonTarget,
     ];
   }
 }

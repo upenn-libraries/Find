@@ -110,7 +110,9 @@ describe Fulfillment::Endpoint::Illiad do
 
     context 'with a request containing a comment' do
       let(:request) { build(:fulfillment_request, :with_section, :with_comments, :scan_deliver) }
-      let(:note) { "#{request.params.comments} - comment submitted by #{request.requester.uid}" }
+      let(:note) do
+        I18n.t('fulfillment.illiad.comment', comment: request.params.comments, user_id: request.requester.uid)
+      end
       let(:stub_note_request) do
         stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
       end

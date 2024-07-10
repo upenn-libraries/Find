@@ -3,7 +3,7 @@
 require 'system_helper'
 
 describe 'Fines and Fees index page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
   let(:total_fines) { 100.00 }
   let(:alma_user) { instance_double(Alma::User) }
 
