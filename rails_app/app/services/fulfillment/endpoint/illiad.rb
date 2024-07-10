@@ -40,7 +40,7 @@ module Fulfillment
         # @param request [Request]
         # @return [Array]
         def validate(request:)
-          scope = %i[fulfillment validation] # TODO: maybe move this to Request?
+          scope = %i[fulfillment validation]
           errors = []
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
           errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron&.courtesy_borrower?
@@ -97,7 +97,8 @@ module Fulfillment
         def add_proxy_note(request, transaction)
           return unless request.proxied?
 
-          add_note(transaction, "Proxied by #{request.requester.uid}")
+          note = I18n.t('fulfillment.illiad.proxy_comment', requester_id: request.requester.uid)
+          add_note(transaction, note)
         end
 
         def add_note(transaction, note)

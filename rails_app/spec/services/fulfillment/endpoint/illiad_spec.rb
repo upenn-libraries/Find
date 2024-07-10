@@ -87,7 +87,7 @@ describe Fulfillment::Endpoint::Illiad do
 
     context 'with a successful proxied request' do
       let(:request) { build(:fulfillment_request, :with_bib_info, :proxied, :ill_pickup) }
-      let(:note) { "Proxied by #{request.requester.uid}" }
+      let(:note) { I18n.t('fulfillment.illiad.proxy_comment', user_id: request.requester.uid) }
       let(:stub_note_request) do
         stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
       end
