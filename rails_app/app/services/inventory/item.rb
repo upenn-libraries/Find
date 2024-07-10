@@ -8,11 +8,8 @@ module Inventory
 
     IN_HOUSE_POLICY_CODE = 'InHouseView'
     NOT_LOANABLE_POLICY = 'Not loanable'
-    UNSCANNABLE_MATERIAL_TYPES = %w[
-      RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE
-      AUDIOCASSETTE VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD
-      LPTOP EQUIP OTHER AUDIOVM
-    ].freeze
+    UNSCANNABLE_MATERIAL_TYPES = %w[RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE AUDIOCASSETTE
+                                    VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD LPTOP EQUIP OTHER AUDIOVM].freeze
 
     attr_reader :bib_item
 
@@ -32,12 +29,7 @@ module Inventory
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
     def checkoutable?
-      in_place? &&
-        loanable? &&
-        !aeon_requestable? &&
-        !on_reserve? &&
-        !at_reference? &&
-        !in_house_use_only?
+      in_place? && loanable? && !aeon_requestable? && !on_reserve? && !at_reference? && !in_house_use_only?
     end
 
     # @return [String]
@@ -77,20 +69,17 @@ module Inventory
 
     # @return [Boolean]
     def on_reserve?
-      item_data.dig('policy', 'value') == 'reserve' ||
-        holding_data.dig('temp_policy', 'value') == 'reserve'
+      (item_data.dig('policy', 'value') == 'reserve') || (holding_data.dig('temp_policy', 'value') == 'reserve')
     end
 
     # @return [Boolean]
     def at_reference?
-      item_data.dig('policy', 'value') == 'reference' ||
-        holding_data.dig('temp_policy', 'value') == 'reference'
+      (item_data.dig('policy', 'value') == 'reference') || (holding_data.dig('temp_policy', 'value') == 'reference')
     end
 
     # @return [Boolean]
     def at_archives?
-      library == Constants::ARCHIVES_LIBRARY ||
-        holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY
+      (library == Constants::ARCHIVES_LIBRARY) || (holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY)
     end
 
     # @return [Boolean]

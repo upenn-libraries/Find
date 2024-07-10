@@ -42,7 +42,6 @@ describe Inventory::List do
 
     context 'with a record having only quality Ecollection inventory' do
       let(:availability_data) { { mms_id => { holdings: [] } } }
-      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
       let(:ecollection_data) { build(:ecollection_data) }
 
       include_context 'with stubbed ecollections_data'
@@ -62,7 +61,6 @@ describe Inventory::List do
 
     context 'with a record having poorly coded Ecollection inventory' do
       let(:availability_data) { { mms_id => { holdings: [] } } }
-      let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
       let(:ecollection_data) { build(:ecollection_data, url: '', url_override: '') }
 
       include_context 'with stubbed ecollections_data'

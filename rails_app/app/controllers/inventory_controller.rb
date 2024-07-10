@@ -21,13 +21,11 @@ class InventoryController < ApplicationController
   def electronic_detail
     respond_to do |format|
       format.html do
-        render(
-          Inventory::ElectronicDetailComponent.new(
-            detail: Inventory::Electronic.find(
-              mms_id: params[:id], portfolio_id: params[:pid], collection_id: params[:cid]
-            )
-          ), layout: false
-        )
+        render(Inventory::ElectronicDetailComponent.new(
+                 detail: Inventory::Electronic.find(
+                   mms_id: params[:id], portfolio_id: params[:pid], collection_id: params[:cid]
+                 )
+               ), layout: false)
       end
     end
   end
@@ -37,13 +35,11 @@ class InventoryController < ApplicationController
   def holding_detail
     respond_to do |format|
       format.html do
-        render(
-          Inventory::PhysicalDetailComponent.new(
-            holding: Inventory::Holding.find(
-              mms_id: params[:id], holding_id: params[:holding_id]
-            )
-          ), layout: false
-        )
+        render(Inventory::PhysicalDetailComponent.new(
+                 holding: Inventory::Holding.find(
+                   mms_id: params[:id], holding_id: params[:holding_id]
+                 )
+               ), layout: false)
       end
     end
   end
