@@ -32,7 +32,7 @@ class InventoryController < ApplicationController
 
   # GET /inventory/:id/physical/:holding_id/detail
   # Returns details for an physical entry (holding).
-  def holding_detail
+  def physical_detail
     respond_to do |format|
       format.html do
         render(Inventory::PhysicalDetailComponent.new(
