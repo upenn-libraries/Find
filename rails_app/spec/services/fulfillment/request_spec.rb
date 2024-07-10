@@ -23,6 +23,14 @@ describe Fulfillment::Request do
         expect(request.requester.uid).not_to eql 'jdoe'
       end
     end
+
+    context 'when an endpoint is provided' do
+      let(:request) { create(:fulfillment_request, :ill_pickup, :illiad) }
+
+      it 'sets the correct endpoint' do
+        expect(request.endpoint).to be Fulfillment::Endpoint::Illiad
+      end
+    end
   end
 
   describe '#proxied?' do

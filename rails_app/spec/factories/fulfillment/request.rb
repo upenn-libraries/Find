@@ -66,6 +66,10 @@ FactoryBot.define do
       delivery { Fulfillment::Request::Options::ELECTRONIC }
     end
 
+    trait :illiad do
+      endpoint { :illiad }
+    end
+
     skip_create
     initialize_with { Fulfillment::Request.new(**attributes) }
   end

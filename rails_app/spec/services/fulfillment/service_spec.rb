@@ -3,6 +3,14 @@
 describe Fulfillment::Service do
   include Illiad::ApiMocks::User
 
+  describe '.request' do
+    let(:params) { { requester: create(:user), endpoint: :illiad, title: 'Gone with the Wind' } }
+
+    it 'returns Fulfillment::Response' do
+      expect(described_class.request(**params)).to be_a Fulfillment::Request
+    end
+  end
+
   describe '.submit' do
     let(:result) { described_class.submit }
     let(:validation_errors) { [] }
