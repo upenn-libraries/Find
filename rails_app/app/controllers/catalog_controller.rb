@@ -314,14 +314,14 @@ class CatalogController < ApplicationController
                             label: I18n.t('advanced.place_of_publication_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${place_of_publication_search_qf}',
-                                         pf: '${place_of_publication_search_pf}' } }
+      field.clause_params = { edismax: { qf: '${place_of_publication_qf}',
+                                         pf: '${place_of_publication_pf}' } }
     end
 
     config.add_search_field('creator_conference_search', label: I18n.t('advanced.creator_conference_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${creator_conference_qf}', pf: '${creator_conference_pf}' } }
+      field.clause_params = { edismax: { qf: '${conference_author_qf}', pf: '${conference_author_pf}' } }
     end
 
     config.add_search_field('corporate_author_search', label: I18n.t('advanced.corporate_author_search')) do |field|
@@ -334,8 +334,8 @@ class CatalogController < ApplicationController
                             label: I18n.t('advanced.identifier_publisher_number_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${identifier_publisher_number_qf}',
-                                         pf: '${identifier_publisher_number_pf}' } }
+      field.clause_params = { edismax: { qf: '${publisher_number_qf}',
+                                         pf: '${publisher_number_pf}' } }
     end
 
     config.add_search_field('contents_note_search', label: I18n.t('advanced.contents_note_search')) do |field|
