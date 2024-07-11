@@ -51,7 +51,7 @@ end
 
 shared_context 'with print monograph record with 9 physical entries' do
   let(:print_monograph_bib) { '9913203433503681' }
-  let(:print_monograph_entries) { create_list(:physical_entry, 9) }
+  let(:print_monograph_entries) { create_list(:physical_entry, 9, mms_id: print_monograph_bib) }
 
   before do
     SampleIndexer.index 'print_monograph.json'

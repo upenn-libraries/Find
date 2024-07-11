@@ -146,6 +146,15 @@ describe 'Catalog Show Page' do
     it 'does not display the search input' do
       expect(page).not_to have_selector '.search-list__input'
     end
+
+    context 'when additional holding details can be retrieved from Alma' do
+      it 'displays additional details/notes' do
+        within('#inventory-0') do
+          expect(page).to have_selector '.inventory-item__notes',
+                                        text: 'Public note'
+        end
+      end
+    end
   end
 
   # Record with 9 physical holdings

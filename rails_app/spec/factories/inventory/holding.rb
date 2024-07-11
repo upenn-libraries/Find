@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :holding, class: 'Inventory::Holding' do
-    transient { id { '5678' } }
+    transient { id { '1234' } }
     bib_holding do
       {
         'holding_id' => id,
