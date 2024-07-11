@@ -5,8 +5,8 @@ module Account
     module Options
       # Pickup component logic
       class PickupComponent < ViewComponent::Base
-        DEFAULT_STUDENT_PICKUP = 'VPLOCKER'
-        DEFAULT_PICKUP = 'VanPeltLib'
+        DEFAULT_STUDENT_PICKUP = 'Lockers at Van Pelt Library'
+        DEFAULT_PICKUP = 'Van Pelt Library'
 
         attr_accessor :user, :checked, :radio_options
 
@@ -19,9 +19,9 @@ module Account
 
         # @return [String]
         def default_pickup_location
-          return DEFAULT_STUDENT_PICKUP if user.student?
+          return pickup_locations[DEFAULT_STUDENT_PICKUP] if user.student?
 
-          DEFAULT_PICKUP
+          pickup_locations[DEFAULT_PICKUP]
         end
 
         def delivery_value
@@ -33,6 +33,19 @@ module Account
         # @return [Hash, NilClass]
         def checked?
           %i[scan office].any? { |option| options.include?(option) } ? nil : { checked: true }
+        end
+
+        def pickup_locations
+          @pickup_locations ||= generate_pickup_locations
+        end
+
+        private
+
+        def generate_pickup_locations
+          locations = Settings.locations.pickup.to_h
+          locations.transform_keys(&:to_s) # Transform keys to strings
+                   .transform_values { |v| @ill ? v[:ill] : v[:ils] } # Retrieve code based on type of pickup request
+                   .reject { |_, v| v.blank? } # Remove any locations that don't have codes
         end
       end
     end
