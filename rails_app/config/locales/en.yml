@@ -243,7 +243,7 @@ en:
     series_search: 'Series'
     publisher_search: 'Publisher'
     place_of_publication_search: 'Place of Publication'
-    creator_conference_search: 'Conference'
+    conference_search: 'Conference'
     corporate_author_search: 'Corporate Author'
     identifier_publisher_number_search: 'Publisher Number'
     contents_note_search: 'Contents Note'

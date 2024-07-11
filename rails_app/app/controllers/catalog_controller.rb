@@ -318,10 +318,10 @@ class CatalogController < ApplicationController
                                          pf: '${place_of_publication_pf}' } }
     end
 
-    config.add_search_field('creator_conference_search', label: I18n.t('advanced.creator_conference_search')) do |field|
+    config.add_search_field('conference_search', label: I18n.t('advanced.conference_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${conference_author_qf}', pf: '${conference_author_pf}' } }
+      field.clause_params = { edismax: { qf: '${conference_qf}', pf: '${conference_pf}' } }
     end
 
     config.add_search_field('corporate_author_search', label: I18n.t('advanced.corporate_author_search')) do |field|
