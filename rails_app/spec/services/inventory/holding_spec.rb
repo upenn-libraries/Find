@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 describe Inventory::Holding do
-  let(:bib_holding) { described_class.find(mms_id: '123', holding_id: '456') }
-  let(:holding) { build :holding }
+  let(:holding) { described_class.find(mms_id: '123', holding_id: '456') }
 
   before do
-    allow(Alma::BibHolding).to receive(:find).and_return(holding)
+    allow(Alma::BibHolding).to receive(:find).and_return(build(:holding).bib_holding)
   end
 
   describe '.find' do
     it 'returns a Holding' do
-      expect(bib_holding).to be_a described_class
+      expect(holding).to be_a described_class
     end
   end
 
