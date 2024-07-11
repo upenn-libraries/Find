@@ -45,6 +45,6 @@ FactoryBot.define do
     end
 
     skip_create
-    initialize_with { new(bib_holding) }
+    initialize_with { new(Alma::BibHolding.new(bib_holding)) }
   end
 end
