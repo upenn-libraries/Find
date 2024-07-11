@@ -60,6 +60,7 @@ describe 'alert display' do
   context 'when alerts are dismissed' do
     let(:scopes) { %w[alert find_only_alert] }
     let(:fixture) { 'both_updated' }
+    let(:alert) { Alert.first }
 
     before do
       within('.site-alerts__container') do
@@ -76,13 +77,16 @@ describe 'alert display' do
     end
 
     context 'when the alert is updated' do
-      before { allow(Alert).to receive(:maximum).and_return(Time.current + 1.day) }
+      before do
+        alert.updated_at = Time.current + 1.day
+        alert.save
+      end
 
       it 're-enables the alert' do
         within('.site-alerts__container') do
-          expect(page).not_to have_text 'General Alert'
+          expect(page).not_to have_selector('div.alert')
           refresh
-          expect(page).to have_text 'General Alert'
+          expect(page).to have_selector('div.alert')
         end
       end
     end

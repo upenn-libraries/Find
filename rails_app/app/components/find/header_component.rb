@@ -42,7 +42,7 @@ module Find
     def alerts_dismissed?
       return false if session[:alert_dismissed_at].blank?
 
-      Alert.maximum(:updated_at) < session[:alert_dismissed_at]
+      alerts.max_by(&:updated_at).updated_at < session[:alert_dismissed_at]
     end
   end
 end
