@@ -32,7 +32,7 @@
 
     <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
-    <div class="row">
+    <div class="row" data-controller="missing-frame">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
   </main>
