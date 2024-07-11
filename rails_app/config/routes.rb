@@ -81,4 +81,5 @@ Rails.application.routes.draw do
 
   get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
+  post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
 end
