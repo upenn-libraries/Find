@@ -310,6 +310,7 @@ en:
     manufacture: 'Manufacture'
     contained_within: 'Contained in'
     format: 'Format'
+    score: 'Score'
   requests:
     boundwith:
       in_progress: 'This item is bound with others. We are still working on requesting for these types of items.'
