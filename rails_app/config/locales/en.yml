@@ -361,7 +361,7 @@ en:
       proxy_invalid: 'Proxy user not found in Alma'
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
-      proxy_comment: 'Proxied by #{requester_id}'
+      proxy_comment: 'Proxied by %{requester_id}'
   search:
     all_fields: 'All Fields'
     button:
