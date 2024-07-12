@@ -120,10 +120,12 @@ module Inventory
       item_data['enumeration_b']
     end
 
+    # @return [String]
     def aeon_sublocation
       Settings.locations.aeon_sublocation_map[location]
     end
 
+    # @return [String]
     def aeon_site
       Settings.locations.aeon_location_map[library]
     end

@@ -4,8 +4,8 @@ module Inventory
   class List
     module Entry
       class Physical
-        # Class for clarifying what "available" means as an inventory status. Material at ome Penn locations can only be
-        # accesses by request even though Alma reports it as "Available". This class adjusts the terminology used when
+        # Class for clarifying what "available" means as an inventory status. Material at one Penn location can only be
+        # accessed by request even though Alma reports it as "Available". This class adjusts the terminology used when
         # labeling availability so that it displays appropriate guidance for the holding's location
         class AvailableStatus
           attr_accessor :library, :location
@@ -17,7 +17,7 @@ module Inventory
             @location = location_code
           end
 
-          # Return a refines available status, because some things Alma reports as available are available only under
+          # Return a refined available status, because some things Alma reports as available are available only under
           # some restrictions we want to make explicit in our status display. Order of the logic here matters, so that
           # items at LIBRA that require an Aeon Request are properly handled, for example.
           # @return [Symbol]
@@ -45,6 +45,7 @@ module Inventory
 
           private
 
+          # @param [Symbol, String]
           # @return [String]
           def i18n_data(key)
             scope = %i[alma availability available physical]

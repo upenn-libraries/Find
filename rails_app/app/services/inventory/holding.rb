@@ -11,6 +11,7 @@ module Inventory
     # Get a single Holding for a given mms_id, holding_id
     # @param mms_id [String] the Alma mms_id
     # @param holding_id [String] the Alma holding_id
+    # @return [Inventory::Holding]
     def self.find(mms_id:, holding_id:)
       raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
 
