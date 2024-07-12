@@ -8,7 +8,7 @@ describe 'login page' do
 
   include_context 'with User.new returning user'
 
-  context 'when logging in ' do
+  context 'when logging in' do
     before { visit login_path }
 
     context 'when user exists in Alma' do
@@ -61,6 +61,23 @@ describe 'login page' do
 
     it 'expands the request options' do
       expect(page).to have_selector('details[open]')
+    end
+  end
+
+  context 'when visiting a page that requires authentication' do
+    include_context 'with mock alma_record on user having alma_user_group user group'
+
+    let(:url_requested) { ill_new_request_path }
+
+    before { visit url_requested }
+
+    it 'redirects to the login page' do
+      expect(page).to have_current_path(login_path)
+    end
+
+    it 'after logging in redirects to url requested' do
+      click_on I18n.t('login.pennkey')
+      expect(page).to have_current_path(url_requested)
     end
   end
 end
