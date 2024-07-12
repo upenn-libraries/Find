@@ -32,38 +32,52 @@ locations:
     - vpunavail
     - vanpNocirc
   pickup:
-    - - Van Pelt Library
-      - VanPeltLib
-    - - Lockers at Van Pelt Library
-      - VPLOCKER
-    - - Annenberg Library
-      - AnnenLib
-    - - Athenaeum Library
-      - AthLib
-    - - Holman Biotech Commons
-      - BiomLib
-    - - Chemistry Library
-      - ChemLib
-    - - Dental Medicine Library
-      - DentalLib
-    - - Lockers at Dental Medicine Library
-      - DENTLOCKER
-    - - Fisher Fine Arts Library
-      - FisherFAL
-    - - Library at the Katz Center
-      - KatzLib
-    - - Math/Physics/Astronomy Library
-      - MPALib
-    - - Museum Library
-      - MuseumLib
-    - - Ormandy Music and Media Center
-      - MusicLib
-    - - Pennsylvania Hospital Library - 800 Spruce St.
-      - PAHospLib
-    - - Veterinary Library - New Bolton Center
-      - VetNBLib
-    - - Veterinary Library - Penn Campus
-      - VetPennLib
+    Van Pelt Library:
+      ils: VanPeltLib
+      ill: Van Pelt Library
+    Lockers at Van Pelt Library:
+      ils: VPLOCKER
+      ill: Lockers at Van Pelt
+    Annenberg Library:
+      ils: AnnenLib
+      ill: Annenberg Library
+    Athenaeum Library:
+      ils: AthLib
+    Holman Biotech Commons:
+      ils: BiomLib
+      ill: Biotech Commons
+    Chemistry Library:
+      ils: ChemLib
+      ill: Chemistry Library
+    Dental Medicine Library:
+      ils: DentalLib
+      ill: Dental Library
+    Lockers at Dental Medicine Library:
+      ils: DENTLOCKER
+      ill: Lockers at Dental
+    Fisher Fine Arts Library:
+      ils: FisherFAL
+      ill: Fine Arts Library
+    Library at the Katz Center:
+      ils: KatzLib
+      ill: Katz Library
+    Math/Physics/Astronomy Library:
+      ils: MPALib
+      ill: Math/Physics/Astronomy Library
+    Museum Library:
+      ils: MuseumLib
+      ill: Museum Library
+    Ormandy Music and Media Center:
+      ils: MusicLib
+    Pennsylvania Hospital Library - 800 Spruce St.:
+      ils: PAHospLib
+      ill: PA Hospital Library
+    Veterinary Library - New Bolton Center:
+      ils: VetNBLib
+      ill: New Bolton Center
+    Veterinary Library - Penn Campus:
+      ils: VetPennLib
+      ill: Veterinary Library
   aeon_location_map:
     KislakCntr: KISLAK
     KatzLib: KATZ
