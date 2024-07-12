@@ -259,8 +259,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
