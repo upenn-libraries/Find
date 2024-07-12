@@ -255,6 +255,37 @@ describe 'Catalog Show Page' do
       end
     end
 
+    context 'when adding comments to a request' do
+      let(:item) { build :item, :checkoutable }
+
+      before do
+        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
+        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        find('details.fulfillment > summary').click
+        find('input#delivery_pickup').click
+      end
+
+      it 'shows a button to add comments when the option is changed from scan' do
+        within('.add-comments') do
+          expect(page).to have_link I18n.t('requests.form.add_comments')
+        end
+      end
+
+      it 'hides the comments area when the option is changed back to scan' do
+        find('input#delivery_electronic').click
+        within('form.fulfillment-form') do
+          expect(page).not_to have_selector '.add-comments'
+        end
+      end
+
+      it 'expands the comments area when the button is clicked' do
+        click_link I18n.t('requests.form.add_comments')
+        within('.add-comments') do
+          expect(page).to have_selector 'textarea#comments'
+        end
+      end
+    end
+
     context 'with an aeon requestable item' do
       let(:item) { build :item, :aeon_requestable }
 

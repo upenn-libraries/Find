@@ -35,5 +35,14 @@ module Find
     def joined_alert_values
       alerts.filter_map { |alert| alert.text if alert.on }.join
     end
+
+    # Check if the alert has been dismissed. Since there are two alerts that are joined into one, we just look for
+    # the most recently updated alert and compare it to the session variable.
+    # @return [TrueClass, FalseClass]
+    def alerts_dismissed?
+      return false if session[:alert_dismissed_at].blank?
+
+      alerts.max_by(&:updated_at).updated_at < session[:alert_dismissed_at]
+    end
   end
 end

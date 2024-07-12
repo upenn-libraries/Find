@@ -75,6 +75,11 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Devise::Test::IntegrationHelpers, type: :request
 
+  # View component helpers
+  config.include ViewComponent::TestHelpers, type: :components
+  config.include ViewComponent::SystemTestHelpers, type: :components
+  config.include Capybara::RSpecMatchers, type: :components
+
   # Clean out Solr core before each test.
   config.before do
     SampleIndexer.clear!
