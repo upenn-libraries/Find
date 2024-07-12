@@ -1,6 +1,56 @@
 # frozen_string_literal: true
 
 describe Fulfillment::Request do
+  describe '#new' do
+    context 'when request is not proxied' do
+      let(:request) { create(:fulfillment_request, :ill_pickup) }
+
+      it 'sets the same user as the requester and patron' do
+        expect(request.requester).to eql request.patron
+      end
+    end
+
+    context 'when it\'s a proxied request' do
+      let(:request) { create(:fulfillment_request, :ill_pickup, :proxied) }
+
+      it 'creates a new user for proxied patron' do
+        expect(request.patron).to be_a Fulfillment::User
+        expect(request.patron.uid).to be 'jdoe'
+      end
+
+      it 'sets the correct user as the requester' do
+        expect(request.requester).to be_a User
+        expect(request.requester.uid).not_to eql 'jdoe'
+      end
+    end
+
+    context 'when an endpoint is provided' do
+      let(:request) { create(:fulfillment_request, :ill_pickup, :illiad) }
+
+      it 'sets the correct endpoint' do
+        expect(request.endpoint).to be Fulfillment::Endpoint::Illiad
+      end
+    end
+  end
+
+  describe '#proxied?' do
+    context 'when request is proxied' do
+      let(:request) { create(:fulfillment_request, :ill_pickup, :proxied) }
+
+      it 'returns true' do
+        expect(request.proxied?).to be true
+      end
+    end
+
+    context 'when request is not proxied' do
+      let(:request) { create(:fulfillment_request, :ill_pickup) }
+
+      it 'returns false' do
+        expect(request.proxied?).to be false
+      end
+    end
+  end
+
   describe '#endpoint' do
     context 'with requests destined for Illiad' do
       let(:destination) { Fulfillment::Endpoint::Illiad }

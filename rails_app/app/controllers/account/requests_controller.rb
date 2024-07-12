@@ -13,13 +13,21 @@ module Account
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
-      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(raw_params)
+      @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)
+
+      if @request.proxied? && !current_user.library_staff?
+        flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
+      elsif @request.proxied? && !@request.patron.alma_record?
+        flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
+      elsif @request.patron.courtesy_borrower?
+        flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
+      end
     end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      outcome = Fulfillment::Request.submit(user: current_user, **raw_params)
+      outcome = Fulfillment::Service.submit(requester: current_user, **raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
         redirect_to shelf_path

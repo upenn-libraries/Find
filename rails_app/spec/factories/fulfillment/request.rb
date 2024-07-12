@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :fulfillment_request, class: 'Fulfillment::Request' do
-    user { build(:user) }
+    requester { build(:user) }
 
     trait :with_bib_info do
       title { 'Unowned Thing' }
@@ -27,6 +27,14 @@ FactoryBot.define do
       with_bib_info
       pages { '1-999' }
       author { 'Hubbard, L.R.' }
+    end
+
+    trait :with_comments do
+      comments { 'A very important comment.' }
+    end
+
+    trait :proxied do
+      proxy_for { 'jdoe' }
     end
 
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
@@ -56,6 +64,10 @@ FactoryBot.define do
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad
     trait :scan_deliver do
       delivery { Fulfillment::Request::Options::ELECTRONIC }
+    end
+
+    trait :illiad do
+      endpoint { :illiad }
     end
 
     skip_create

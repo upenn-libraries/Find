@@ -5,23 +5,56 @@ describe Fulfillment::Endpoint::Illiad do
   include Illiad::ApiMocks::Request
 
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_bib_info, :pickup, user: nil) }
+    subject(:errors) { described_class.validate(request: bad_request) }
 
-    it 'adds error messages to errors' do
-      expect(described_class.validate(request: bad_request)).to match_array ['No user identifier provided']
+    context 'when missing patron' do
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_user_id')
+      end
+    end
+
+    context 'when patron is a courtesy borrowers' do
+      let(:requester) { create(:user, :courtesy_borrower) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_courtesy_borrowers')
+      end
+    end
+
+    context 'when proxied request is not submitted by a library staff member' do
+      include_context 'with mocked alma_record on proxy user'
+
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, proxy_for: proxy.uid) }
+      let(:proxy) { Fulfillment::User.new('jdoe') }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')
+      end
+    end
+
+    context 'when proxy user is not in Alma' do
+      let(:requester) { create(:user, :library_staff) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, :proxied, requester: requester) }
+
+      before do
+        allow(Alma::User).to receive(:find).with('jdoe').and_raise(Alma::User::ResponseError, 'Error retrieving record')
+      end
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.proxy_invalid')
+      end
     end
   end
 
   describe '.submit' do
-    let(:note) { I18n.t('fulfillment.illiad.comment', comment: 'test comment', user_id: request.user.uid) }
     let(:outcome) { described_class.submit(request: request) }
 
     before do
-      stub_find_user_success(id: request.user.uid, response_body: build(:illiad_user_response))
-      stub_add_note_success(id: '1234', note: note,
-                            response_body: build(:illiad_api_note_response, Note: note))
-      mock_request = instance_double(::Illiad::Request)
-      allow(mock_request).to receive(:id).and_return '1234'
+      stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response))
+      mock_request = instance_double(::Illiad::Request, id: '1234')
       allow(::Illiad::Request).to receive(:submit).and_return(mock_request)
     end
 
@@ -51,10 +84,50 @@ describe Fulfillment::Endpoint::Illiad do
         expect(outcome.confirmation_number).to eq 'ILLIAD_1234'
       end
     end
+
+    context 'with a successful proxied request' do
+      let(:request) { build(:fulfillment_request, :with_bib_info, :proxied, :ill_pickup) }
+      let(:note) { I18n.t('fulfillment.illiad.proxy_comment', requester_id: request.requester.uid) }
+      let(:stub_note_request) do
+        stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
+      end
+
+      before do
+        stub_note_request
+        stub_find_user_success(id: request.patron.uid, response_body: build(:illiad_user_response))
+      end
+
+      it 'submits request as proxied user' do
+        outcome
+        expect(::Illiad::Request).to have_received(:submit).with(data: a_hash_including(Username: 'jdoe'))
+      end
+
+      it 'adds note to transaction' do
+        expect(outcome).to be_success
+        expect(stub_note_request).to have_been_requested
+      end
+    end
+
+    context 'with a request containing a comment' do
+      let(:request) { build(:fulfillment_request, :with_section, :with_comments, :scan_deliver) }
+      let(:note) do
+        I18n.t('fulfillment.illiad.comment', comment: request.params.comments, user_id: request.requester.uid)
+      end
+      let(:stub_note_request) do
+        stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
+      end
+
+      before { stub_note_request }
+
+      it 'adds comment to transaction' do
+        expect(outcome).to be_success
+        expect(stub_note_request).to have_been_requested
+      end
+    end
   end
 
   describe '.submission_body_from' do
-    let(:submission_body) { described_class.submission_body_from(request) }
+    let(:submission_body) { described_class.send(:submission_body_from, request) }
 
     context 'with a books by mail request' do
       let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }

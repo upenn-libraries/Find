@@ -94,11 +94,17 @@ en:
     ill:
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
+      staff_only: 'Visible to staff only'
+      proxy_alert_html: 'You are proxying a request for <strong>%{name} (%{group})</strong>'
       request_type:
         prompt: "What's the item you are requesting?"
         scan: 'Article or chapter'
         loan: 'Book or other item'
       form:
+        proxy:
+          prompt: 'Is this request for a patron?'
+          pennkey: 'Their PennKey'
+          submit: 'Apply'
         scan:
           journal_title:
             label: 'Journal or book title'
@@ -358,8 +364,12 @@ en:
       no_mms_id: 'No record identifier provided'
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
+      no_proxy_requests: 'Proxied request are not allowed'
+      no_courtesy_borrowers: 'Courtesy borrowers cannot submit this request'
+      proxy_invalid: 'Proxy user not found in Alma'
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
+      proxy_comment: 'Proxied by %{requester_id}'
   search:
     all_fields: 'All Fields'
     button:
