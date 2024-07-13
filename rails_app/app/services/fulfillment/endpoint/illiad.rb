@@ -19,7 +19,7 @@ module Fulfillment
       class UserError < StandardError; end
 
       CITED_IN = 'info:sid/library.upenn.edu'
-      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes', Web: true,
+      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
       BOOKS_BY_MAIL = 'Books by Mail'
@@ -74,7 +74,6 @@ module Fulfillment
         # @return [Illiad::User]
         def create_illiad_user(user)
           attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
-          puts attributes
           ::Illiad::User.create(data: attributes)
         rescue ::Illiad::Client::Error => e
           raise UserError, "Problem creating Illiad user: #{e.message}"
@@ -168,14 +167,15 @@ module Fulfillment
         # @param [User] user
         # @return [Hash{Symbol->Unknown}]
         def user_request_body(user)
-          { Username: user.uid,
+          {
+            Username: user.uid,
             LastName: user.alma_record.last_name,
             FirstName: user.alma_record.first_name,
             EMailAddress: user.email,
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
-            # Department: user.alma_record.affiliation, # TODO: set off user hash attributes
-            PlainTextPassword: Settings.illiad.user_password }
+            Department: user.alma_record.affiliation
+          }
         end
       end
     end

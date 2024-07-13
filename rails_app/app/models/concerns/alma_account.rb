@@ -41,6 +41,17 @@ module AlmaAccount
     alma_record.full_name
   end
 
+  # @return [String, nil]
+  def affiliation
+    return unless alma_record?
+
+    affiliation_stat = alma_record.user_statistic&.find do |stat|
+      stat.dig('category_type', 'value') == 'AFFILIATION'
+    end
+    affiliation_stat&.dig 'statistic_category', 'desc'
+
+  end
+
   # Display name for ILS group.
   # FIXME: If we are using a cached value for `ils_group`, there's a chance this value will not match the
   #        cached value (ie. if the user's group is changed after they login).
