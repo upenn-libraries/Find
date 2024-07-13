@@ -7,6 +7,6 @@ module CatalogHelper
   # @param document [SolrDocument]
   # @return [ActiveSupport::SafeBuffer]
   def as_badge(document)
-    tag.span(document[:value].first, class: %w[badge bg-secondary]).html_safe
+    tag.span(document[:value].first, class: %w[badge bg-secondary])
   end
 end
