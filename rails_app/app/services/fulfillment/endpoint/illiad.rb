@@ -74,6 +74,7 @@ module Fulfillment
         # @return [Illiad::User]
         def create_illiad_user(user)
           attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
+          puts attributes
           ::Illiad::User.create(data: attributes)
         rescue ::Illiad::Client::Error => e
           raise UserError, "Problem creating Illiad user: #{e.message}"
@@ -90,7 +91,7 @@ module Fulfillment
           add_note(transaction, note)
         end
 
-        # Add note informing staff who is proxing this request.
+        # Add note informing staff who is proxying this request.
         # @param request [Request]
         # @param transaction [::Illiad::Request]
         # @return [Hash]
@@ -170,10 +171,10 @@ module Fulfillment
           { Username: user.uid,
             LastName: user.alma_record.last_name,
             FirstName: user.alma_record.first_name,
-            EMailAddress: user.alma_record.email,
+            EMailAddress: user.email,
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
-            Department: user.alma_record.affiliation,
+            # Department: user.alma_record.affiliation, # TODO: set off user hash attributes
             PlainTextPassword: Settings.illiad.user_password }
         end
       end
