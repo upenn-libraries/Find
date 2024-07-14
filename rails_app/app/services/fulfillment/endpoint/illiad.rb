@@ -174,7 +174,7 @@ module Fulfillment
             EMailAddress: user.email,
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
-            Department: user.alma_record.affiliation
+            Department: user.alma_affiliation
           }
         end
       end

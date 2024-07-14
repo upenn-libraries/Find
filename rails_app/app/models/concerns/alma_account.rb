@@ -42,7 +42,7 @@ module AlmaAccount
   end
 
   # @return [String, nil]
-  def affiliation
+  def alma_affiliation
     return unless alma_record?
 
     affiliation_stat = alma_record.user_statistic&.find do |stat|
