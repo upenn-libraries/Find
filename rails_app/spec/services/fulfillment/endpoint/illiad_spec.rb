@@ -59,7 +59,7 @@ describe Fulfillment::Endpoint::Illiad do
     end
 
     context 'with a user that already has an Illiad account' do
-      before { stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response, )) }
+      before { stub_find_user_success(id: request.requester.uid, response_body: build(:illiad_user_response)) }
 
       context 'with a successful BBM delivery request' do
         let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }
@@ -147,7 +147,8 @@ describe Fulfillment::Endpoint::Illiad do
       before do
         stub_find_user_failure(id: username, response_body: build(:illiad_api_error_response))
         stub_alma_user_find_success(id: username, response_body: build(:alma_user_response, primary_id: username))
-        stub_create_user_success(request_body: new_user_attributes, response_body: build(:illiad_user_response, new_user_attributes))
+        stub_create_user_success(request_body: new_user_attributes,
+                                 response_body: build(:illiad_user_response, new_user_attributes))
       end
 
       it 'succeeds after creating a new Illiad user via the API' do
