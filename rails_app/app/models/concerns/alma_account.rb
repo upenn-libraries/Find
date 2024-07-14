@@ -49,7 +49,6 @@ module AlmaAccount
       stat.dig('category_type', 'value') == 'AFFILIATION'
     end
     affiliation_stat&.dig 'statistic_category', 'desc'
-
   end
 
   # Display name for ILS group.
