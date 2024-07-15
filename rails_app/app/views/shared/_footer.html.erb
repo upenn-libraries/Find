@@ -19,7 +19,7 @@
   <section>
     <h2><%= t('footer.account.heading') %></h2>
     <%= link_to t('footer.account.shelf'), shelf_path %>
-    <%= link_to t('footer.account.request'), ill_new_request_path %>
+    <%= link_to t('footer.account.request'), ill_new_request_path if current_user && !current_user.courtesy_borrower? %>
     <%= link_to t('footer.account.bookmarks'), bookmarks_path %>
     <%= link_to t('footer.account.fines'), fines_and_fees_path %>
     <%= link_to t('footer.account.settings'), settings_path %>
