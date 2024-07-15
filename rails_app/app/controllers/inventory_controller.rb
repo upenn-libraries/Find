@@ -21,11 +21,25 @@ class InventoryController < ApplicationController
   def electronic_detail
     respond_to do |format|
       format.html do
-        render(
-          Inventory::ElectronicDetailComponent.new(
-            detail: Inventory::Service.electronic_detail(params[:id], params[:pid], params[:cid])
-          ), layout: false
-        )
+        render(Inventory::ElectronicDetailComponent.new(
+                 detail: Inventory::Electronic.find(
+                   mms_id: params[:id], portfolio_id: params[:pid], collection_id: params[:cid]
+                 )
+               ), layout: false)
+      end
+    end
+  end
+
+  # GET /inventory/:id/physical/:holding_id/detail
+  # Returns details for an physical entry (holding).
+  def physical_detail
+    respond_to do |format|
+      format.html do
+        render(Inventory::PhysicalDetailComponent.new(
+                 holding: Inventory::Holding.find(
+                   mms_id: params[:id], holding_id: params[:holding_id]
+                 )
+               ), layout: false)
       end
     end
   end
