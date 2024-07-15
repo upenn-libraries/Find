@@ -155,6 +155,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
+    config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
     config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss, label: I18n.t('results.creator')
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
@@ -387,8 +388,13 @@ class CatalogController < ApplicationController
     @document = search_service.fetch(params[:id])
   end
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def bookmarks?
     controller_name == 'bookmarks'
+  end
+
+  # @return [Boolean]
+  def show_score?
+    !Rails.env.production? || params[:score].present?
   end
 end
