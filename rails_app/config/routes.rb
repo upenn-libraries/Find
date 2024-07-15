@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     member do
       get 'brief'
       get 'portfolio/:pid/collection/:cid/detail', to: 'inventory#electronic_detail', as: :electronic_detail
+      get 'holding/:holding_id/detail', to: 'inventory#physical_detail', as: :physical_detail
     end
   end
 
