@@ -4,6 +4,8 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
+    before_action :block_courtesy_borrowers, only: :ill
+
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
       Rails.logger.error(e.message)
@@ -132,6 +134,12 @@ module Account
         sort: sort_parts&.first&.to_sym,
         order: sort_parts&.last&.to_sym
       }.compact_blank
+    end
+
+    def block_courtesy_borrowers
+      return unless current_user.courtesy_borrower?
+
+      redirect_back_or_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
     end
   end
 end
