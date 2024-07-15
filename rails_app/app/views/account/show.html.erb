@@ -19,14 +19,16 @@
           </div>
         </a>
       </div>
-      <div class="col-lg-4 col-sm-6">
-        <a href="<%= ill_new_request_path %>" class="card mb-4 link-prevent-default">
-          <div class="card-body">
-            <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.request.title') %></h2><i class="bi bi-person-raised-hand h4 mb-0"></i></span>
-            <p class="card-text"><%= t('account.show.cards.request.description') %></p>
-          </div>
-        </a>
-      </div>
+      <% unless current_user.courtesy_borrower? %>
+        <div class="col-lg-4 col-sm-6">
+          <a href="<%= ill_new_request_path %>" class="card mb-4 link-prevent-default">
+            <div class="card-body">
+              <span class="d-flex justify-content-between"><h2 class="card-title h5"><%= t('account.show.cards.request.title') %></h2><i class="bi bi-person-raised-hand h4 mb-0"></i></span>
+              <p class="card-text"><%= t('account.show.cards.request.description') %></p>
+            </div>
+          </a>
+        </div>
+      <% end %>
       <div class="col-lg-4 col-sm-6">
         <a href="<%= bookmarks_path %>" class="card mb-4 link-prevent-default">
           <div class="card-body">
