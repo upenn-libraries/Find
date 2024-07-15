@@ -182,11 +182,8 @@ describe 'Catalog Show Page' do
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
-    include_context 'with mock alma_record on user'
 
     let(:user) { create(:user) }
-    let(:alma_user_data) { { user_group: { 'value' => 'undergrad', 'desc' => 'undergraduate' } } }
-
     let(:mms_id) { print_monograph_bib }
     let(:entries) { print_monograph_entries }
 
@@ -337,7 +334,7 @@ describe 'Catalog Show Page' do
 
       it 'shows a note about the unavailability status' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
+          expect(page).to have_content I18n.t('requests.form.options.only_ill_requestable')
         end
       end
 
@@ -356,6 +353,14 @@ describe 'Catalog Show Page' do
       it 'shows the right button' do
         within('.request-buttons') do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+
+      context 'when user a courtesy borrower' do
+        let(:user) { create(:user, :courtesy_borrower) }
+
+        it 'shows message saying the item is unavailable' do
+          expect(page).to have_content I18n.t('requests.form.options.none.info')
         end
       end
     end

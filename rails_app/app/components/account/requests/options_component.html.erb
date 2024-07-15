@@ -2,7 +2,7 @@
   <% if deliverable? %>
     <% if options.ill_pickup? %>
       <p class="mb-3">
-        <%= t('requests.form.options.unavailable.info') %>
+        <%= t('requests.form.options.only_ill_requestable') %>
       </p>
     <% end %>
     <fieldset>
@@ -65,7 +65,12 @@
       <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
             contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
+  <% else %>
+    <p class="alert alert-info mb-3">
+      <%= t('requests.form.options.none.info') %>
+    </p>
   <% end %>
+
   <div class="request-buttons mt-3">
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>

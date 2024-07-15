@@ -328,6 +328,7 @@ en:
         placeholder: 'Request item'
       options:
         label: 'How would you like it delivered?'
+        only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
@@ -346,8 +347,8 @@ en:
           access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
-        unavailable:
-          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
+        none:
+          info: 'This item is unavailable from the Penn libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

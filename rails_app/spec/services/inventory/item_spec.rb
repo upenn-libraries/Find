@@ -287,6 +287,15 @@ describe Inventory::Item do
       end
     end
 
+    context 'when the item is checkoutable and the requester is a courtesy borrower' do
+      let(:item) { build :item, :checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+
+      it 'returns only pickup option' do
+        expect(options).to contain_exactly(Fulfillment::Request::Options::PICKUP)
+      end
+    end
+
     context 'when the item is unavailable' do
       let(:item) { build :item, :not_checkoutable }
       let(:options) { item.fulfillment_options(ils_group: 'group') }
@@ -306,6 +315,15 @@ describe Inventory::Item do
       it 'returns office option if ils_group is faculty express' do
         expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
           .to include Fulfillment::Request::Options::OFFICE
+      end
+    end
+
+    context 'when the item is unavailable and the requester is a courtesy borrower' do
+      let(:item) { build :item, :not_checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+
+      it 'returns no options' do
+        expect(options).to be_empty
       end
     end
   end
