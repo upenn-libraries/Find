@@ -13,6 +13,12 @@
       </div>
     </li>
     <% end %>
+    <%# Display something clearer if we error out when fetching availability info. %>
+    <template data-missing-frame-target="template">
+      <div class="alert alert-warning">
+        <%= t('inventory.missing_frame') %>
+      </div>
+    </template>
   </turbo-frame>
   <% if remainder_count.positive? %>
   <li>

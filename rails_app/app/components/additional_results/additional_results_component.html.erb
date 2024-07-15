@@ -9,6 +9,13 @@
             <h2 class="h5 mb-0">
               <%= t('additional_results.header_text.loading_html', source: display_name(source)) %>
             </h2>
+            <%# Display something clearer if we error out when fetching additional results. %>
+            <template data-missing-frame-target="template">
+              <div class="alert alert-warning">
+                <%= t('additional_results.missing_frame') %>
+              </div>
+            </template>
+            </turbo-frame>
           <% end %>
         </div>
       <% end %>

@@ -1,18 +1,26 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+  static targets = ["template"];
+
   connect() {
-    document.addEventListener("turbo:frame-missing", event => {
-      event.preventDefault();
-      const message = this.message(event.target.id);
-      event.target.innerHTML = `<div class="alert alert-warning">${message}. Please try again.</div>`;
-    });
+    document.addEventListener(
+      "turbo:frame-missing",
+      this.showTemplate.bind(this),
+    );
+    document.addEventListener(
+      "turbo:fetch-request-error",
+      this.showTemplate.bind(this),
+    );
   }
 
-  message(frameId) {
-    if (frameId.includes("options")) return "We're having trouble getting the requesting options for this item";
-    if (frameId.includes("inventory")) return "We're having trouble getting the availability for this item";
-    if (frameId.includes("summon")) return "We're having trouble getting additional results";
-    return "Something went wrong";
+  showTemplate(event) {
+    if (this.hasTemplateTarget === true) {
+      event.preventDefault();
+      event.target.innerHTML = "";
+
+      const clone = this.templateTarget.content.cloneNode(true);
+      event.target.appendChild(clone);
+    }
   }
 }
