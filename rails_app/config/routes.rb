@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookmarks, except: :show do
+  resources :bookmarks, except: %i[show new edit] do
     concerns :exportable
 
     collection do
