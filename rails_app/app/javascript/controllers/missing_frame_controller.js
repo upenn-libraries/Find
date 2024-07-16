@@ -4,7 +4,6 @@ export default class extends Controller {
   static values = { error: String };
 
   connect() {
-    console.log(this.errorValue)
     document.addEventListener(
       "turbo:frame-missing",
       this.showError.bind(this),
