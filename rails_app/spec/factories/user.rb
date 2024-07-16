@@ -9,6 +9,7 @@ FactoryBot.define do
     provider { 'test' }
     uid { identifier }
     email { "#{identifier}@upenn.edu" }
+    ils_group { 'undergrad' }
   end
 
   trait :alma_authenticated do
