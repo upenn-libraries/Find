@@ -1,25 +1,18 @@
 <div class="documents-list <%= @classes %>">
   <div class='card col-12 mb-3'>
-
     <% results_sources.each_with_index do |component, i| %>
       <% source = component.source %>
       <% if valid?(source) %>
         <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
-          <%= turbo_frame_tag turbo_id(source), src: results_path(source: source, query: @query) do %>
+          <%= turbo_frame_tag turbo_id(source), src: results_path(source: source, query: @query),
+                              data: { controller: 'missing-frame',
+                                      missing_frame_error_value: t('additional_results.missing_frame') } do %>
             <h2 class="h5 mb-0">
               <%= t('additional_results.header_text.loading_html', source: display_name(source)) %>
             </h2>
-            <%# Display something clearer if we error out when fetching additional results. %>
-            <template data-missing-frame-target="template">
-              <div class="alert alert-warning">
-                <%= t('additional_results.missing_frame') %>
-              </div>
-            </template>
-            </turbo-frame>
           <% end %>
         </div>
       <% end %>
     <% end %>
-
   </div>
 </div>

@@ -36,17 +36,10 @@
               <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
             </template>
 
-            <%# Frame missing template has to go outside the frame here because we %>
-            <%# replace the innerHTML in the item_select_controller.js %>
-            <template data-missing-frame-target="template">
-              <div class="alert alert-warning">
-                <%= t('requests.form.missing_frame') %>
-              </div>
-            </template>
-
-            <%= turbo_frame_tag 'options_frame', data: { controller: 'options-select',
+            <%= turbo_frame_tag 'options_frame', data: { controller: 'options-select missing-frame',
                                                          item_select_target: 'optionsFrame',
-                                                         options_select_target: 'optionsFrame' } %>
+                                                         options_select_target: 'optionsFrame',
+                                                         missing_frame_error_value: t('requests.form.missing_frame') } %>
 
             <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
             <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>

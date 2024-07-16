@@ -1,26 +1,22 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["template"];
+  static values = { error: String };
 
   connect() {
+    console.log(this.errorValue)
     document.addEventListener(
       "turbo:frame-missing",
-      this.showTemplate.bind(this),
+      this.showError.bind(this),
     );
     document.addEventListener(
       "turbo:fetch-request-error",
-      this.showTemplate.bind(this),
+      this.showError.bind(this),
     );
   }
 
-  showTemplate(event) {
-    if (this.hasTemplateTarget === true) {
+  showError(event) {
       event.preventDefault();
-      event.target.innerHTML = "";
-
-      const clone = this.templateTarget.content.cloneNode(true);
-      event.target.appendChild(clone);
-    }
+      event.target.innerHTML = `<div class="alert alert-warning">${this.errorValue}</div>`;
   }
 }
