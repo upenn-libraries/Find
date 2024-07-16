@@ -12,7 +12,7 @@ Lint/MissingCopEnableDirective:
   Exclude:
     - 'app/components/find/search_bar_component.rb'
 
-# Offense count: 12
+# Offense count: 12Delta Heavy Tour, Miami Arena
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
   Exclude:
@@ -81,10 +81,11 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/services/shelf/service_spec.rb'
 
-# Offense count: 9
+# Offense count: 13
 # Configuration parameters: Max, AllowedGroups.
 RSpec/NestedGroups:
   Exclude:
     - 'spec/services/fulfillment/endpoint/illiad/params_spec.rb'
+    - 'spec/services/fulfillment/endpoint/illiad_spec.rb'
     - 'spec/services/fulfillment/service_spec.rb'
     - 'spec/system/catalog/show_spec.rb'
