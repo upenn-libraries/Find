@@ -33,16 +33,18 @@ class ApplicationController < ActionController::Base
   def store_referer
     return unless referer_present?
 
-    # Need to cached stored location, otherwise it's deleted.
+    # Need to cache stored location, otherwise it's deleted.
     current_stored_location = stored_location_for(:user)
 
     return if current_stored_location.nil?
 
-    # Check to see if the path of the referer url is the same, if so use the referer url because it may contain
-    # additional query parameters.
     if URI.parse(current_stored_location).path == URI.parse(request.referer).path
+      # Stored location and referrer have the same path. Prefer referer because it may contain query
+      # params (like those added on show page interactions).
       store_location_for(:user, request.referer)
     else
+      # Retain Devise's stored location, so the user is redirected to their expected destination after
+      # logging in.
       store_location_for(:user, current_stored_location)
     end
   end
