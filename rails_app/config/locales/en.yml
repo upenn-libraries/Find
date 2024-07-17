@@ -265,7 +265,7 @@ en:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
-    electronic_details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
+    details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
   facets:
     access: 'Access'
     classification: 'Classification'
