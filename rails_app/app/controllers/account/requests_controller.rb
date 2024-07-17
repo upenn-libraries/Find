@@ -139,7 +139,7 @@ module Account
     def block_courtesy_borrowers
       return unless current_user.courtesy_borrower?
 
-      redirect_back_or_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
+      redirect_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
     end
   end
 end
