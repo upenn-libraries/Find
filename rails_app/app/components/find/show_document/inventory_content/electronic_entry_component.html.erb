@@ -9,7 +9,7 @@
 <%# Lazy loading additional details %>
 <% if additional_details? %>
   <turbo-frame id="electronic_detail_<%= entry.id %>"
-               src="<%= electronic_detail_inventory_path(params[:id], entry.id, entry.collection_id) %>"
+               src="<%= electronic_detail_inventory_path(entry.mms_id, entry.id, entry.collection_id) %>"
                loading="lazy"
                target="_top"
                data-controller="missing-frame"

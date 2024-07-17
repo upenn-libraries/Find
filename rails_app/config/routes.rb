@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
+    get 'login', to: 'login#index', as: :new_user_session
     post 'sign_out', to: 'devise/sessions#destroy'
   end
 
@@ -43,10 +44,11 @@ Rails.application.routes.draw do
     member do
       get 'brief'
       get 'portfolio/:pid/collection/:cid/detail', to: 'inventory#electronic_detail', as: :electronic_detail
+      get 'holding/:holding_id/detail', to: 'inventory#physical_detail', as: :physical_detail
     end
   end
 
-  resources :bookmarks do
+  resources :bookmarks, except: %i[show new edit] do
     concerns :exportable
 
     collection do
@@ -81,4 +83,5 @@ Rails.application.routes.draw do
 
   get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
+  post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
 end

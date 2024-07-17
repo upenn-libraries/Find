@@ -56,4 +56,39 @@ describe 'alert display' do
       end
     end
   end
+
+  context 'when alerts are dismissed' do
+    let(:scopes) { %w[alert find_only_alert] }
+    let(:fixture) { 'both_updated' }
+    let(:alert) { Alert.first }
+
+    before do
+      within('.site-alerts__container') do
+        find('button.btn-close').click
+      end
+    end
+
+    it 'dismisses the alert and persists on refresh' do
+      within('.site-alerts__container') do
+        expect(page).not_to have_selector('div.alert')
+        refresh
+        expect(page).not_to have_selector('div.alert')
+      end
+    end
+
+    context 'when the alert is updated' do
+      before do
+        alert.updated_at = Time.current + 1.day
+        alert.save
+      end
+
+      it 're-enables the alert' do
+        within('.site-alerts__container') do
+          expect(page).not_to have_selector('div.alert')
+          refresh
+          expect(page).to have_selector('div.alert')
+        end
+      end
+    end
+  end
 end

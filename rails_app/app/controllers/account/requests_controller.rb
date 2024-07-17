@@ -4,6 +4,8 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
+    before_action :block_courtesy_borrowers, only: :ill
+
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
       Rails.logger.error(e.message)
@@ -13,13 +15,21 @@ module Account
     # Form for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
-      @ill_params = Fulfillment::Endpoint::Illiad::Params.new(raw_params)
+      @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)
+
+      if @request.proxied? && !current_user.library_staff?
+        flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
+      elsif @request.proxied? && !@request.patron.alma_record?
+        flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
+      elsif @request.patron.courtesy_borrower?
+        flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
+      end
     end
 
     # Submission logic using form params and request broker service
     # POST /account/request/submit
     def create
-      outcome = Fulfillment::Request.submit(user: current_user, **raw_params)
+      outcome = Fulfillment::Service.submit(requester: current_user, **raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
         redirect_to shelf_path
@@ -87,11 +97,11 @@ module Account
     # GET /account/requests/options
     def options
       item = if params[:item_id] == 'no-item'
-               Inventory::Service::Physical.items(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
+               Inventory::Item.find_all(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
              else
-               Inventory::Service::Physical.item(mms_id: params[:mms_id],
-                                                 holding_id: params[:holding_id],
-                                                 item_id: params[:item_id])
+               Inventory::Item.find(mms_id: params[:mms_id],
+                                    holding_id: params[:holding_id],
+                                    item_id: params[:item_id])
              end
       options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
       render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
@@ -100,7 +110,7 @@ module Account
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     def fulfillment_form
-      items = Inventory::Service::Physical.items mms_id: params[:mms_id], holding_id: params[:holding_id]
+      items = Inventory::Item.find_all mms_id: params[:mms_id], holding_id: params[:holding_id]
       render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
                                                   holding_id: params[:holding_id],
                                                   items: items), layout: false)
@@ -124,6 +134,12 @@ module Account
         sort: sort_parts&.first&.to_sym,
         order: sort_parts&.last&.to_sym
       }.compact_blank
+    end
+
+    def block_courtesy_borrowers
+      return unless current_user.courtesy_borrower?
+
+      redirect_back_or_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
     end
   end
 end

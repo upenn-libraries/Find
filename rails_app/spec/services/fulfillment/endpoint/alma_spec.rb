@@ -2,12 +2,46 @@
 
 describe Fulfillment::Endpoint::Alma do
   describe '.validate' do
-    let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, user: nil) }
+    subject(:errors) { described_class.validate(request: bad_request) }
 
-    it 'adds error messages to errors' do
-      expect(described_class.validate(request: bad_request)).to(
-        match_array([I18n.t('fulfillment.validation.no_user_id')])
-      )
+    context 'when pickup location missing' do
+      let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, pickup_location: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_pickup_location')
+      end
+    end
+
+    context 'when mms_id missing' do
+      let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, mms_id: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_mms_id')
+      end
+    end
+
+    context 'when holding_id missing' do
+      let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, holding_id: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_holding_id')
+      end
+    end
+
+    context 'when missing patron' do
+      let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, requester: nil) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_user_id')
+      end
+    end
+
+    context 'when request proxied' do
+      let(:bad_request) { build(:fulfillment_request, :with_item, :pickup, :proxied) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')
+      end
     end
   end
 

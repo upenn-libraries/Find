@@ -4,12 +4,11 @@
 class User < ApplicationRecord
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
+  include AlmaAccount
+  include IlliadAccount
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
-  FACULTY_EXPRESS_GROUP = 'FacEXP'
-  COURTESY_BORROWER_GROUP = 'courtesy'
-  STUDENT_GROUPS = %w[undergrad graduate GIC].freeze
 
   if Rails.env.development?
     devise :omniauthable, omniauth_providers: %i[developer alma saml]
@@ -60,42 +59,6 @@ class User < ApplicationRecord
     Alma::User.authenticate(credentials)
   rescue StandardError
     false
-  end
-
-  # Returns true of a user's group is considered a "student" group
-  # @return [Boolean]
-  def student?
-    STUDENT_GROUPS.include? ils_group
-  end
-
-  # Returns true if a user is in the Alma FaxEx group
-  # @return [Boolean]
-  def faculty_express?
-    ils_group == FACULTY_EXPRESS_GROUP
-  end
-
-  # Returns true if an alma record is present for user.
-  # @return [Boolean]
-  def alma_record?
-    alma_record.present?
-  end
-
-  # @return [Alma::User, FalseClass]
-  def alma_record
-    @alma_record ||= begin
-      Alma::User.find(uid)
-    rescue Alma::User::ResponseError
-      false
-    end
-  end
-
-  # @return [Illiad::User, FalseClass]
-  def illiad_record
-    @illiad_record ||= begin
-      Illiad::User.find(id: uid)
-    rescue Illiad::Client::Error
-      false
-    end
   end
 
   private

@@ -205,10 +205,10 @@ describe 'Catalog Index Page' do
       # added date of "2024-04-11"
       SampleIndexer.index 'record_with_added_date.json'
 
-      allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
-                                                 .and_return(Inventory::Response.new(entries: entries))
-      allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
-                                                  .and_return(Inventory::Response.new(entries: entries))
+      allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
+                                              .and_return(Inventory::List::Response.new(entries: entries))
+      allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
+                                               .and_return(Inventory::List::Response.new(entries: entries))
 
       CatalogController.blacklight_config.default_solr_params = { qt: 'search', NOW: solr_time }
 

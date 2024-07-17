@@ -19,7 +19,7 @@ module Fulfillment
       class UserError < StandardError; end
 
       CITED_IN = 'info:sid/library.upenn.edu'
-      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes', Web: true,
+      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
       BOOKS_BY_MAIL = 'Books by Mail'
@@ -29,20 +29,27 @@ module Fulfillment
         # @param request [Request]
         # @return [Fulfillment::Outcome]
         def submit(request:)
-          find_or_create user: request.user
+          find_or_create user: request.patron
           body = BASE_TRANSACTION_ATTRIBUTES.merge(submission_body_from(request))
           transaction = ::Illiad::Request.submit data: body
-          add_notes(request, transaction) if request.params.comments.present?
+          add_comment_note(request, transaction)
+          add_proxy_note(request, transaction)
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
         # @param request [Request]
         # @return [Array]
         def validate(request:)
+          scope = %i[fulfillment validation]
           errors = []
-          errors << I18n.t('fulfillment.validation.no_user_id') if request.user&.uid.blank?
+          errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
+          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron&.courtesy_borrower?
+          errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied? && !request.requester.library_staff?
+          errors << I18n.t(:proxy_invalid, scope: scope) if request.proxied? && !request.patron.alma_record?
           errors
         end
+
+        private
 
         # @param request [Request]
         # @return [Hash]
@@ -54,8 +61,6 @@ module Fulfillment
             append_routing_info(body, request)
           end
         end
-
-        private
 
         # @param [User] user
         # @return [Illiad::User, FalseClass]
@@ -74,19 +79,36 @@ module Fulfillment
           raise UserError, "Problem creating Illiad user: #{e.message}"
         end
 
+        # Add note with comment contents.
         # @param request [Request]
         # @param transaction [::Illiad::Request]
         # @return [Hash]
-        def add_notes(request, transaction)
-          number = transaction.id
-          note = I18n.t('fulfillment.illiad.comment', comment: request.params.comments, user_id: request.user.uid)
-          ::Illiad::Request.add_note(id: number, note: note)
+        def add_comment_note(request, transaction)
+          return if request.params.comments.blank?
+
+          note = I18n.t('fulfillment.illiad.comment', comment: request.params.comments, user_id: request.requester.uid)
+          add_note(transaction, note)
+        end
+
+        # Add note informing staff who is proxying this request.
+        # @param request [Request]
+        # @param transaction [::Illiad::Request]
+        # @return [Hash]
+        def add_proxy_note(request, transaction)
+          return unless request.proxied?
+
+          note = I18n.t('fulfillment.illiad.proxy_comment', requester_id: request.requester.uid)
+          add_note(transaction, note)
+        end
+
+        def add_note(transaction, note)
+          ::Illiad::Request.add_note(id: transaction.id, note: note)
         end
 
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def book_request_body(request)
-          { Username: request.user.uid,
+          { Username: request.patron.uid,
             RequestType: ::Illiad::Request::LOAN,
             DocumentType: 'Book',
             LoanAuthor: request.params.author,
@@ -108,7 +130,7 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash{Symbol->String (frozen)}]
         def scandelivery_request_body(request)
-          { Username: request.user.uid,
+          { Username: request.patron.uid,
             DocumentType: ::Illiad::Request::ARTICLE,
             PhotoJournalTitle: request.params.title,
             PhotoJournalVolume: request.params.volume,
@@ -145,14 +167,15 @@ module Fulfillment
         # @param [User] user
         # @return [Hash{Symbol->Unknown}]
         def user_request_body(user)
-          { Username: user.uid,
+          {
+            Username: user.uid,
             LastName: user.alma_record.last_name,
             FirstName: user.alma_record.first_name,
-            EMailAddress: user.alma_record.email,
+            EMailAddress: user.email,
             SSN: user.alma_record.id,
-            Status: user.alma_record.user_group,
-            Department: user.alma_record.affiliation,
-            PlainTextPassword: Settings.illiad.user_password }
+            Status: user.ils_group_name,
+            Department: user.alma_affiliation
+          }
         end
       end
     end

@@ -146,6 +146,15 @@ describe 'Catalog Show Page' do
     it 'does not display the search input' do
       expect(page).not_to have_selector '.search-list__input'
     end
+
+    context 'when additional holding details can be retrieved from Alma' do
+      it 'displays additional details/notes' do
+        within('#inventory-0') do
+          expect(page).to have_selector '.inventory-item__notes',
+                                        text: 'Public note'
+        end
+      end
+    end
   end
 
   # Record with 9 physical holdings
@@ -173,11 +182,8 @@ describe 'Catalog Show Page' do
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
-    include_context 'with mock alma_record on user'
 
     let(:user) { create(:user) }
-    let(:alma_user_data) { { user_group: { 'value' => 'undergrad', 'desc' => 'undergraduate' } } }
-
     let(:mms_id) { print_monograph_bib }
     let(:entries) { print_monograph_entries }
 
@@ -197,8 +203,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -231,8 +237,8 @@ describe 'Catalog Show Page' do
       let(:items) { build_list :item, 2, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return(items)
-        allow(Inventory::Service::Physical).to receive(:item).and_return(items.first)
+        allow(Inventory::Item).to receive(:find_all).and_return(items)
+        allow(Inventory::Item).to receive(:find).and_return(items.first)
         find('details.fulfillment > summary').click
       end
 
@@ -250,8 +256,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
@@ -281,8 +287,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :aeon_requestable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -305,8 +311,8 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :at_archives }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -321,14 +327,14 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :not_checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'shows a note about the unavailability status' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
+          expect(page).to have_content I18n.t('requests.form.options.only_ill_requestable')
         end
       end
 
@@ -347,6 +353,14 @@ describe 'Catalog Show Page' do
       it 'shows the right button' do
         within('.request-buttons') do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+
+      context 'when user a courtesy borrower' do
+        let(:user) { create(:user, :courtesy_borrower) }
+
+        it 'shows message saying the item is unavailable' do
+          expect(page).to have_content I18n.t('requests.form.options.none.info')
         end
       end
     end
@@ -504,19 +518,9 @@ describe 'Catalog Show Page' do
     end
 
     context 'when viewing a conference' do
-      let(:conference_bib) { '9978940183503681' }
-      let(:conference_entries) do
-        [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
-                                 inventory_type: 'physical')]
-      end
+      include_context 'with a conference proceedings record with 1 physical holding'
 
       before do
-        SampleIndexer.index 'conference.json'
-
-        allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                   .and_return(Inventory::Response.new(entries: conference_entries))
-        allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                    .and_return(Inventory::Response.new(entries: conference_entries))
         visit(solr_document_path(conference_bib))
       end
 

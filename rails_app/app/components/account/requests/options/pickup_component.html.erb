@@ -2,7 +2,7 @@
   <div class="form-check">
     <%= radio_button_tag :delivery, delivery_value, checked, class: 'form-check-input', **radio_options %>
     <%= label_tag :delivery_pickup, t('requests.form.options.pickup.label'), class: 'form-check-label' %>
-    <%= select_tag(:pickup_location, options_for_select(Settings.locations[:pickup], default_pickup_location), { class: 'form-select my-1' }) %>
+    <%= select_tag(:pickup_location, options_for_select(pickup_locations, default_pickup_location), { class: 'form-select my-1' }) %>
     <small class="text-muted">
       <%= t('requests.form.options.pickup.info_html', url: t('urls.guides.pickup')) %>
     </small>

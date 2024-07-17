@@ -12,7 +12,7 @@ FactoryBot.define do
     public_note { 'Test Public Note' }
     coverage_statement { 'A coverage statement' }
     interface_name { "Bogus Portfolio #{num}" }
-    inventory_type { Inventory::Entry::ELECTRONIC }
+    inventory_type { Inventory::List::ELECTRONIC }
 
     trait :unavailable do
       activation_status { Inventory::Constants::ELEC_UNAVAILABLE }
@@ -37,7 +37,7 @@ FactoryBot.define do
     call_number_type { '0' }
     priority { '1' }
     library { 'Van Pelt Library' }
-    inventory_type { Inventory::Entry::PHYSICAL }
+    inventory_type { Inventory::List::PHYSICAL }
 
     skip_create
     initialize_with { attributes.stringify_keys }

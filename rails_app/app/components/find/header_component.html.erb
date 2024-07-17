@@ -5,12 +5,12 @@
 %>
 
 <div class="site-alerts__container container">
-  <% if alerts.any?(&:on) %>
-  <div class="alert alert-primary alert-dismissible" role="alert">
-    <%= joined_alert_values.html_safe %>
+  <% if !alerts_dismissed? && alerts.any?(&:on) %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" data-controller="alert" data-alert-target="alert">
+      <%= joined_alert_values.html_safe %>
 
-    <button type="button" class="btn btn-link btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+      <button type="button" class="btn btn-link btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
 </div>
 
