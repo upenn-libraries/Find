@@ -19,7 +19,7 @@ module Fulfillment
       class UserError < StandardError; end
 
       CITED_IN = 'info:sid/library.upenn.edu'
-      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes', Web: true,
+      BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
       BOOKS_BY_MAIL = 'Books by Mail'
@@ -90,7 +90,7 @@ module Fulfillment
           add_note(transaction, note)
         end
 
-        # Add note informing staff who is proxing this request.
+        # Add note informing staff who is proxying this request.
         # @param request [Request]
         # @param transaction [::Illiad::Request]
         # @return [Hash]
@@ -167,14 +167,15 @@ module Fulfillment
         # @param [User] user
         # @return [Hash{Symbol->Unknown}]
         def user_request_body(user)
-          { Username: user.uid,
+          {
+            Username: user.uid,
             LastName: user.alma_record.last_name,
             FirstName: user.alma_record.first_name,
-            EMailAddress: user.alma_record.email,
+            EMailAddress: user.email,
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
-            Department: user.alma_record.affiliation,
-            PlainTextPassword: Settings.illiad.user_password }
+            Department: user.alma_affiliation
+          }
         end
       end
     end
