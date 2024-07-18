@@ -4,7 +4,7 @@
 class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
-  include MARCExport
+  include CitationExport
 
   # @return [Inventory::Response]
   def full_inventory
@@ -31,17 +31,5 @@ class SolrDocument
                              else
                                JSON.parse(links_data.first, symbolize_names: true)
                              end
-  end
-
-  def export_as_mla_citation_txt
-    mla_citation_txt
-  end
-
-  def export_as_apa_citation_txt
-    apa_citation_txt
-  end
-
-  def export_as_chicago_citation_txt
-    chicago_citation_txt
   end
 end
