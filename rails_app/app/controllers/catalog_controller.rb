@@ -3,6 +3,7 @@
 # Blacklight controller that handles searches and document requests
 class CatalogController < ApplicationController
   include Blacklight::Catalog
+  include Blacklight::Ris::Catalog
 
   before_action :load_document, only: %i[staff_view]
 
@@ -205,7 +206,7 @@ class CatalogController < ApplicationController
     config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
     config.add_show_field :note_summary_show, label: I18n.t('show.notes.summary'), accessor: :marc
-    config.add_show_field :note_contents_show, label: I18n.t('show.notes.contents'), accessor: :marc
+    config.add_show_field :note_contents_values, label: I18n.t('show.notes.contents'), accessor: :marc
     config.add_show_field :note_participant_show, label: I18n.t('show.notes.participant'), accessor: :marc
     config.add_show_field :note_credits_show, label: I18n.t('show.notes.credits'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
