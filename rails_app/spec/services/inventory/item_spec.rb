@@ -34,7 +34,9 @@ describe Inventory::Item do
       expect(item.holding_data['holding_id']).to eq '456'
     end
 
-    it 'returns an empty array when holding data is blank' do
+    it 'returns a specialized Inventory::Item when holding_record_id is present'
+
+    it 'returns an empty array when holding data is blank' do # TODO: raises an error
       bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
       allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
       allow(Alma::BibHolding).to receive(:find_all).and_return({})

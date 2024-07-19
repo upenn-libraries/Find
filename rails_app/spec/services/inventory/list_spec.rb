@@ -122,7 +122,7 @@ describe Inventory::List do
 
   describe '.create_entry' do
     let(:inventory_class) do
-      described_class.send(:create_entry, '9999999999', data)
+      described_class.send(:create_entry, '9999999999', **data)
     end
 
     context 'with physical inventory type' do

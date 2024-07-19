@@ -26,6 +26,11 @@ module Inventory
       @bib_item.item.fetch('bib_data', {})
     end
 
+    # Return item identifier
+    def id
+      item_data['pid']
+    end
+
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
     def checkoutable?

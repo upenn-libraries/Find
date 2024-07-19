@@ -8,10 +8,11 @@ module Account
 
       attr_accessor :items
 
-      def initialize(mms_id:, holding_id:, items:)
+      def initialize(mms_id:, holding_id:, items:, user:)
         @mms_id = mms_id
         @holding_id = holding_id
         @items = items
+        @user = user
       end
 
       def item_labels

@@ -24,7 +24,7 @@ module Inventory
       # @return [Inventory::Response]
       def full(document)
         marc = from_marc(document, nil)
-        api = from_api(document.id, nil)
+        api = from_api(document, nil)
 
         Inventory::List::Response.new(entries: marc + api)
       end
@@ -41,7 +41,7 @@ module Inventory
       # @return [Inventory::Response]
       def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
         marc = from_marc(document, marc_limit)
-        api = from_api(document.id, api_limit)
+        api = from_api(document, api_limit)
 
         Inventory::List::Response.new(entries: marc + api)
       end
@@ -62,13 +62,13 @@ module Inventory
       # Returns inventory that cannot be extracted from the MARC document and has to be retrieved by making additional
       # Alma API calls.
       #
-      # @param mms_id [String]
+      # @param document [SolrDocument]
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
-      def from_api(mms_id, limit)
-        inventory_data = from_availability(mms_id)
-        inventory_data += from_ecollections(mms_id) if should_check_for_ecollections?(inventory_data)
-        api_entries(inventory_data, mms_id, limit: limit)
+      def from_api(document, limit)
+        inventory_data = from_availability(document.id)
+        inventory_data += from_ecollections(document.id) if should_check_for_ecollections?(inventory_data)
+        api_entries(inventory_data, document, limit: limit)
       end
 
       # Determine if we should check for Ecollections based on given inventory data - this may change.
@@ -85,7 +85,7 @@ module Inventory
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
       # @return [Inventory::Entry]
-      def create_entry(mms_id, raw_data)
+      def create_entry(mms_id, **raw_data)
         case raw_data[:inventory_type]&.downcase
         when PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
         when ELECTRONIC then Entry::Electronic.new(mms_id: mms_id, **raw_data)
@@ -114,8 +114,8 @@ module Inventory
       def from_marc(document, limit)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
-          create_entry(document.id, { inventory_type: RESOURCE_LINK, id: i,
-                                      href: link_data[:link_url], description: link_data[:link_text] })
+          create_entry(document.id, inventory_type: RESOURCE_LINK, id: i, href: link_data[:link_url],
+                                    description: link_data[:link_text])
         end
       end
 
@@ -136,16 +136,17 @@ module Inventory
         end || []
       end
 
-      # Sorts, limits and converts inventory information retrieved from Alma into Inventory::Entry objects.
+      # Sorts, limits and converts inventory information retrieved from SolrDocument and Alma into
+      # Inventory::Entry objects.
       #
       # @param inventory_data [Array] inventory data from API calls
-      # @param mms_id [String]
+      # @param document [SolrDocument]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def api_entries(inventory_data, mms_id, limit: nil)
+      def api_entries(inventory_data, document, limit: nil)
         sorted_data = Inventory::List::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
-        limited_data.map { |data| create_entry(mms_id, data.symbolize_keys) }
+        limited_data.map { |data| create_entry(document.id, host_record_id: document.host_record_id, **data.symbolize_keys) }
                     .select(&:displayable?)
       end
 
