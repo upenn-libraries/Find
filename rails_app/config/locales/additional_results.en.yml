@@ -13,4 +13,4 @@ en:
         info: 'Document Information'
         availability: 'Format and Availability'
         fulltext: 'Full text online'
-    missing_frame: "We're having trouble getting additional results. Please try again."
+    missing_frame: "We're having trouble getting additional results from %{source}. Please try again."

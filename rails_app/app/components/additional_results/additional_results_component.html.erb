@@ -4,9 +4,11 @@
       <% source = component.source %>
       <% if valid?(source) %>
         <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
-          <%= turbo_frame_tag turbo_id(source), src: results_path(source: source, query: @query),
+          <%= turbo_frame_tag turbo_id(source),
+                              src: results_path(source: source, query: @query),
                               data: { controller: 'missing-frame',
-                                      missing_frame_error_value: t('additional_results.missing_frame') } do %>
+                                      missing_frame_error_value: t('additional_results.missing_frame',
+                                                                   source: source) } do %>
             <h2 class="h5 mb-0">
               <%= t('additional_results.header_text.loading_html', source: display_name(source)) %>
             </h2>
