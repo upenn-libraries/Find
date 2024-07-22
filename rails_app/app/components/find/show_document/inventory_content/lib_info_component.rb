@@ -7,7 +7,7 @@ module Find
       class LibInfoComponent < ViewComponent::Base
         attr_reader :info
 
-        delegate *%i[address1 address2 city state_code zip hours hours_url maps_url phone email library_url], to: :info, allow_nil: true
+        delegate(*%i[address1 address2 city state_code zip hours hours_url maps_url phone email library_url], to: :info)
 
         # @param entry [Inventory::Entry]
         # @info [LibInfo::Request]
