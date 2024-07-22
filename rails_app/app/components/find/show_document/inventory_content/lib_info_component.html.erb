@@ -1,0 +1,55 @@
+<% if info? %>
+  <div class="location-details__content">
+    <ul>
+      <% if hours_content.present? %>
+        <li>
+          <i class="bi bi-clock-fill"></i>
+          <div>
+            <% hours_content.each do |line| %>
+              <%= content_tag(:p, line) %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+
+      <% if address_content.present? %>
+        <li>
+          <i class="bi bi-geo-alt-fill"></i>
+          <div>
+            <% if maps_url.present? %>
+              <%= link_to safe_join(address_content), maps_url %>
+            <% else %>>
+              <%= safe_join address_content %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+
+      <% if phone.present? %>
+        <li>
+          <i class="bi bi-telephone-fill"></i>
+          <div>
+            <%= link_to phone, "tel:#{phone}" %>
+          </div>
+        </li>
+      <% end %>
+
+      <% if email.present? %>
+        <li>
+          <i class="bi bi-envelope-fill"></i>
+          <div>
+            <%= email %>
+          </div>
+        </li>
+      <% end %>
+
+      <% if library_url.present? %>
+        <li>
+          <div>
+            <%= link_to t('library_info.about'), library_url %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

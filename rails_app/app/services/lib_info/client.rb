@@ -12,23 +12,27 @@ module LibInfo
         Faraday.new(url: base_url) do |config|
           # Sets the required credentials in the Authorization header
           config.headers[authorization_header] = "Bearer #{credential}"
+
           # Sets the Content-Type header to application/json on each request
           config.request :json
+
           # Adds retry logic
           config.request :retry, exceptions: exceptions_to_retry, methods: 'get', interval: 1, max: 3
+
           # Raises an error on 4xx and 5xx responses
           config.response :raise_error
+
           # Logs errors to the Rails logger, filtering out sensitive information
           config.response :logger, Rails.logger, headers: true, bodies: false, log_level: :info do |fmt|
             fmt.filter(/^(Authorization: ).*$/i, '\1[REDACTED]')
           end
+
           # Parses JSON response bodies, passing Faraday::ParsingError if invalid
           config.response :json
         end
       end
 
       # @overload get(url, params, headers)
-      #   positional arguments to pass to Faraday get request
       #   @param url [String]
       #   @param params [Hash]
       #   @param headers [Hash]
@@ -55,22 +59,11 @@ module LibInfo
         Settings.lib_info.api_key
       end
 
-      # Retrieves error messages from body of bad responses
       # @return [String]
       def error_messages(error)
         return ERROR_MESSAGE if error.blank?
 
-        status = error.response_status
-
-        message = if status == 401
-                    'Authorization failed'
-                  elsif status == 404
-                    'Provided API endpoint URL not found'
-                  else
-                    error.message
-                  end
-
-        "#{ERROR_MESSAGE} (#{status}):  #{message}".strip
+        "#{ERROR_MESSAGE} (#{error.response_status}):  #{error.message}".strip
       end
 
       # @return [Array]

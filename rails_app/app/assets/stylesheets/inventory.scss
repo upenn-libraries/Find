@@ -198,8 +198,14 @@
   margin-bottom: 0.5rem;
 }
 
-.location-details summary .inventory-item__container {
-  display: inline-grid;
+.location-details summary {
+  cursor:pointer;
+
+  .inventory-item__container {
+    display: inline-grid;
+    /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
+    max-width: calc(100% - 1rem);
+  }
 }
 
 .location-details summary:hover .inventory-item__container span {
@@ -227,6 +233,10 @@
 .location-details__content li {
   display: flex;
   gap: 0.5rem;
+}
+
+.location-details__content p {
+  margin-bottom: 0;
 }
 
 @media (min-width: 992px) {

@@ -288,6 +288,10 @@ en:
       10_years: 'Within 10 years'
       15_years: 'Within 15 years'
     subject: 'Subject'
+  library_info:
+    about: 'About location'
+    todays_hours: "Today's hours: %{hours}"
+    view_more_hours: 'View more hours'
   login:
     alma:
       credentials:

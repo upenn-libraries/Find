@@ -39,12 +39,18 @@ module LibInfo
       data[:hours_url]
     end
 
-    # @return [Array<String>]
-    def street_address
-      [
-        data[:address1],
-        data[:address2]
-      ]
+    # Parent library name if relevant, or street address
+    #
+    # @return [String]
+    def address1
+      data[:address1]
+    end
+
+    # Street address if first address line was parent library name
+    #
+    # @return [String]
+    def address2
+      data[:address2]
     end
 
     # @return [String]
@@ -52,8 +58,10 @@ module LibInfo
       data[:city]
     end
 
+    # State abbreviation (ex: PA, rather than Pennsylvania)
+    #
     # @return [String]
-    def state
+    def state_code
       data[:state_code]
     end
 
@@ -70,13 +78,13 @@ module LibInfo
     end
 
     # @return [String]
-    def phone
-      data[:phone]
+    def email
+      data[:email]
     end
 
     # @return [String]
-    def email
-      data[:email]
+    def phone
+      data[:phone]
     end
 
     # URL for library's homepage

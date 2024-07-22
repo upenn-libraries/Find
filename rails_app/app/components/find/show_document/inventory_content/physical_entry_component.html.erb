@@ -7,48 +7,7 @@
         <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
       </span>
     </summary>
-    <div class="location-details__content">
-      <ul>
-        <li>
-          <i class="bi bi-clock-fill"></i>
-          <div>
-            <span>Today's hours: <%= entry.location_info.hours %></span><br>
-            <a href="<%= entry.location_info.hours_url %>">View more hours</a>
-          </div>
-        </li>
-        <li>
-          <i class="bi bi-geo-alt-fill"></i>
-          <div>
-            <a href="<%= entry.location_info.maps_url %>">
-              <%= entry.location_info.street_address[0] %><br>
-              <% if entry.location_info.street_address[1] != '' %>
-                <%= entry.location_info.street_address[1] %><br>
-              <% end %>
-              <%= entry.location_info.city %>, <%= entry.location_info.state %> <%= entry.location_info.zip %>
-            </a>
-          </div>
-        </li>
-        <li>
-          <i class="bi bi-telephone-fill"></i>
-          <div>
-            <a href="tel: <%= entry.location_info.phone %>">
-              <%= entry.location_info.phone %>
-            </a>
-          </div>
-        </li>
-        <li>
-          <i class="bi bi-envelope-fill"></i>
-          <div>
-            <%= entry.location_info.email %>
-          </div>
-        </li>
-        <li>
-          <div>
-            <a href="<%= entry.location_info.library_url %>">About location</a>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <%= render Find::ShowDocument::InventoryContent::LibInfoComponent.new(entry: entry) %>
   </details>
 </div>
 <p class="<%= availability_class %> inventory-item__availability-summary">
