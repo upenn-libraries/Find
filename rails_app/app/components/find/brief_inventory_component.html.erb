@@ -1,5 +1,6 @@
 <ol class="holdings">
-  <turbo-frame id="inventory_<%= id %>" src="<%= brief_inventory_path(id) %>" target="_top">
+  <turbo-frame id="inventory_<%= id %>" src="<%= brief_inventory_path(id) %>" target="_top"
+               data-controller="missing-frame" data-missing-frame-error-value="<%= t('inventory.physical_missing_frame') %>">
     <%= resource_link_entries %>
     <% skeleton_entry_count.times do %>
     <li class="holding__item holding__item--loading placeholder-glow" role="status">
