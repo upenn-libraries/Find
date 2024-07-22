@@ -292,7 +292,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.24)
+    pennmarc (1.0.25)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
@@ -353,10 +353,12 @@ GEM
     regexp_parser (2.9.0)
     reline (0.5.9)
       io-console (~> 0.5)
+    requestjs-rails (0.0.11)
+      railties (>= 6.1.0)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.0)
+    rexml (3.3.1)
       strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
@@ -520,6 +522,7 @@ DEPENDENCIES
   puma (~> 6.0)
   put
   rails (~> 7.1)
+  requestjs-rails
   rsolr
   rspec-rails (~> 6.0.0)
   sassc-rails

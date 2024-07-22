@@ -108,20 +108,30 @@ class CatalogController < ApplicationController
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
                                                   show: database_selected,
-                                                  limit: -1, sort: 'index'
+                                                  limit: -1, sort: 'index' do |field|
+      field.include_in_advanced_search = false
+    end
     config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'),
                                            show: database_selected,
-                                           limit: -1, sort: 'index'
+                                           limit: -1, sort: 'index' do |field|
+      field.include_in_advanced_search = false
+    end
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
     config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
-    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true
-    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true
+    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
+      field.include_in_advanced_search = false
+    end
+    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true do |field|
+      field.include_in_advanced_search = false
+    end
     config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true
     config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
     config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
-    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true
+    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true do |field|
+      field.include_in_advanced_search = false
+    end
     config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
     config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), solr_params:
       { 'facet.mincount': 1 }, query: { last_5_years: { label: I18n.t('facets.recently_published.5_years'),
@@ -145,6 +155,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
+    config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
     config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss, label: I18n.t('results.creator')
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
@@ -235,6 +246,10 @@ class CatalogController < ApplicationController
     # Advanced search relies on solr's json query dsl. In order to make a valid json query, we have to include our
     # search parameters in a clause_params hash. The default blacklight processor chain ensures that the presence of
     # clause_params will build a request using the json_solr_path configuration.
+    # For ranged search fields, pass the following keyword arguments to add_search_field method call
+    # - "range: true"
+    # - optionally, pass "pattern" arg with an html based regex to attach to the range inputs for
+    #   some client-side validation
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true
@@ -272,11 +287,71 @@ class CatalogController < ApplicationController
       field.clause_params = { edismax: { qf: '${genre_qf}', pf: '${genre_pf}' } }
     end
 
+    config.add_search_field('language_search', label: I18n.t('advanced.language_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${language_qf}', pf: '${language_pf}' } }
+    end
+
     config.add_search_field('isxn_search', label: I18n.t('advanced.isxn_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: '${isxn_qf}', pf: '${isxn_pf}' } }
     end
+
+    config.add_search_field('series_search', label: I18n.t('advanced.series_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${series_qf}', pf: '${series_pf}' } }
+    end
+
+    config.add_search_field('publisher_search', label: I18n.t('advanced.publisher_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${publisher_qf}', pf: '${publisher_pf}' } }
+    end
+
+    config.add_search_field('place_of_publication_search',
+                            label: I18n.t('advanced.place_of_publication_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${place_of_publication_qf}',
+                                         pf: '${place_of_publication_pf}' } }
+    end
+
+    config.add_search_field('conference_search', label: I18n.t('advanced.conference_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${conference_qf}', pf: '${conference_pf}' } }
+    end
+
+    config.add_search_field('corporate_author_search', label: I18n.t('advanced.corporate_author_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${corporate_author_qf}', pf: '${corporate_author_pf}' } }
+    end
+
+    config.add_search_field('identifier_publisher_number_search',
+                            label: I18n.t('advanced.identifier_publisher_number_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${publisher_number_qf}',
+                                         pf: '${publisher_number_pf}' } }
+    end
+
+    config.add_search_field('contents_note_search', label: I18n.t('advanced.contents_note_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${contents_note_qf}', pf: '${contents_note_pf}' } }
+    end
+
+    config.add_search_field('publication_date_s', label: I18n.t('advanced.publication_date_search'),
+                                                  range: true, pattern: '^\\d{4}$') do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${publication_date_qf}', pf: '${publication_date_pf}' } }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
@@ -313,8 +388,13 @@ class CatalogController < ApplicationController
     @document = search_service.fetch(params[:id])
   end
 
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def bookmarks?
     controller_name == 'bookmarks'
+  end
+
+  # @return [Boolean]
+  def show_score?
+    !Rails.env.production? || params[:score].present?
   end
 end

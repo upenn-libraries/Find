@@ -7,12 +7,12 @@ class SolrDocument
 
   # @return [Inventory::Response]
   def full_inventory
-    Inventory::Service.full self
+    Inventory::List.full self
   end
 
   # @return [Inventory::Response]
   def brief_inventory
-    Inventory::Service.brief self
+    Inventory::List.brief self
   end
 
   # Return the sum of physical and electronic inventory entries from stored fields

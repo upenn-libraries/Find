@@ -3,7 +3,7 @@
 require 'system_helper'
 
 describe 'Account Show Page' do
-  let(:user) { build(:user) }
+  let(:user) { create(:user) }
 
   before do
     sign_in user
@@ -13,6 +13,12 @@ describe 'Account Show Page' do
   it 'links to shelf' do
     within('.cards-as-links') do
       expect(page).to have_link(I18n.t('account.show.cards.shelf.title'), href: shelf_path)
+    end
+  end
+
+  it 'links to ILL form' do
+    within('.cards-as-links') do
+      expect(page).to have_link(I18n.t('account.show.cards.request.title'), href: ill_new_request_path)
     end
   end
 
@@ -31,6 +37,16 @@ describe 'Account Show Page' do
   it 'links to account fines and fees' do
     within('.cards-as-links') do
       expect(page).to have_link(I18n.t('account.show.cards.fines_and_fees.title'), href: fines_and_fees_path)
+    end
+  end
+
+  context 'when user is courtesy borrower' do
+    let(:user) { create(:user, :courtesy_borrower) }
+
+    it 'does not link to ILL form' do
+      within('.cards-as-links') do
+        expect(page).not_to have_link(I18n.t('account.show.cards.request.title'), href: ill_new_request_path)
+      end
     end
   end
 end

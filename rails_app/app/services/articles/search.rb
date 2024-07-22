@@ -30,16 +30,22 @@ module Articles
     #
     # @return [Summon::Search, nil] successful search response from the Summon API,
     #   or no response if there was an error
+    # rubocop:disable Metrics/MethodLength
     def response
-      @response ||= client.search({ 's.q' => @query_term, 's.dym' => 'f',
-                                    's.light' => 't', 's.ho' => 't',
-                                    's.ps' => 3, 's.secure' => 't',
-                                    's.hl' => 'f', 's.ff' => 'ContentType,or,1,6' })
+      @response ||= client.search({ 's.q' => @query_term,
+                                    's.include.ft.matches' => 't',
+                                    's.ho' => 't',
+                                    's.role' => 'authenticated',
+                                    's.ps' => 3,
+                                    's.hl' => 'f',
+                                    's.ff' => 'ContentType,or,1,6' })
     rescue Summon::Transport::TransportError => e
       Honeybadger.notify(e)
       handle_error(e)
       nil
     end
+
+    # rubocop:enable Metrics/MethodLength
 
     # @return [Array<Articles::Document>, nil] documents returned from the search
     def documents
@@ -76,10 +82,14 @@ module Articles
     class << self
       # @param query [String] the search query string from which to generate the URL
       # @return [String] URL linking to the results of the search on Articles+
-      def summon_url(query: query_string)
-        URI::HTTPS.build(host: Settings.additional_results_sources.summon.base_url,
-                         path: '/search',
-                         query: query).to_s
+      def summon_url(query: query_string, proxy: true)
+        summon_url = "#{I18n.t('urls.external_services.summon')}?#{query}"
+
+        if proxy
+          I18n.t('urls.external_services.proxy', url: summon_url).to_s
+        else
+          summon_url
+        end
       end
     end
 

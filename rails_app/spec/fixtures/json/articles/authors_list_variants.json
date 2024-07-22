@@ -1,18 +1,17 @@
 {
   "version": "2.0.0",
-  "sessionId": "SUMMON-SESSION-MACN7QPNW9-69257-1",
-  "elapsedQueryTime": 4,
-  "queryTime": 135,
-  "internalSolrQueryTime": 139,
-  "totalRequestTime": 77,
-  "pageCount": 781872,
-  "recordCount": 2345614,
+  "sessionId": "SUMMON-SESSION-MACN7QPNW9-25201-1",
+  "elapsedQueryTime": 213,
+  "queryTime": 194,
+  "internalSolrQueryTime": 200,
+  "totalRequestTime": 308,
+  "pageCount": 806430,
+  "recordCount": 2419290,
   "query": {
-    "queryString": "s.normalized.subjects=f\u0026s.secure=t\u0026s.light=t\u0026s.dailyCatalog=t\u0026s.q=bernstein\u0026s.dym=f\u0026s.ho=t\u0026s.rapido=f\u0026s.hl=f\u0026s.ps=3\u0026s.shortenurl=f\u0026s.ff=ContentType%2Cor%2C1%2C7",
+    "queryString": "s.normalized.subjects=f&s.secure=f&s.include.ft.matches=t&s.dailyCatalog=t&s.q=bernstein&s.ho=t&s.rapido=f&s.hl=f&s.role=authenticated&s.ps=3&s.shortenurl=f&s.ff=ContentType%2Cor%2C1%2C7",
     "pageNumber": 1,
     "pageSize": 3,
     "isHighlightingEnabled": false,
-    "isDidYouMeanEnabled": false,
     "isHoldingsOnlyEnabled": true,
     "textQueries": [
       {
@@ -20,6 +19,12 @@
         "removeCommand": "removeTextQuery(bernstein)"
       }
     ],
+    "searchTerms": [],
+    "textFilters": [],
+    "rangeFilters": [],
+    "facetValueFilters": [],
+    "inclusiveFacetValueFilters": [],
+    "facetValueGroupFilters": [],
     "facetFields": [
       {
         "fieldName": "ContentType",
@@ -28,7 +33,9 @@
         "pageSize": 6,
         "removeCommand": "removeFacetField(ContentType)"
       }
-    ]
+    ],
+    "rangeFacetFields": [],
+    "sort": []
   },
   "facetFields": [
     {
@@ -46,7 +53,7 @@
       "counts": [
         {
           "value": "Newspaper Article",
-          "count": 1198135,
+          "count": 1204882,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
@@ -55,7 +62,7 @@
         },
         {
           "value": "Journal Article",
-          "count": 733430,
+          "count": 778538,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
@@ -64,7 +71,7 @@
         },
         {
           "value": "Magazine Article",
-          "count": 98203,
+          "count": 99905,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
@@ -73,7 +80,7 @@
         },
         {
           "value": "Dissertation",
-          "count": 63882,
+          "count": 63348,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
@@ -82,7 +89,7 @@
         },
         {
           "value": "Newsletter",
-          "count": 55203,
+          "count": 55341,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
@@ -90,32 +97,34 @@
           "applyNegatedCommand": "addFacetValueFilters(ContentType,Newsletter:t)"
         },
         {
-          "value": "Book Review",
-          "count": 45272,
+          "value": "Book Chapter",
+          "count": 48980,
           "isApplied": false,
           "isNegated": false,
           "isFurtherLimiting": true,
-          "applyCommand": "addFacetValueFilters(ContentType,Book Review)",
-          "applyNegatedCommand": "addFacetValueFilters(ContentType,Book Review:t)"
+          "applyCommand": "addFacetValueFilters(ContentType,Book Chapter)",
+          "applyNegatedCommand": "addFacetValueFilters(ContentType,Book Chapter:t)"
         }
       ]
     }
   ],
+  "rangeFacetFields": [],
+  "didYouMeanSuggestions": [],
   "recommendationLists": {
     "customBlock": [
       {
         "title": "Accessing Electronic Resources",
-        "content": "\u003cp\u003eFollow the following guide for help accessing resources on and off-campus:\u003c/p\u003e\r\n\u003cp\u003e\u003ca href=\"https://guides.library.upenn.edu/usingeresources/ezproxy\"\u003eAccessing Electronic Resources\u003c/a\u003e\u003c/p\u003e\r\n\u003cp\u003eNote that\u0026nbsp;use of Penn Libraries licensed resources is generally restricted to current students, faculty, and staff.\u0026nbsp;\u0026nbsp;\u003c/p\u003e\r\n\u003cp\u003e\u0026nbsp;\u003c/p\u003e\r\n\u003cp\u003e\u003cspan style=\"box-sizing: border-box; font-size: 14px;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/p\u003e",
+        "content": "<p>Follow the following guide for help accessing resources on and off-campus:</p>\r\n<p><a href=\"https://guides.library.upenn.edu/usingeresources/ezproxy\">Accessing Electronic Resources</a></p>\r\n<p>Note that&nbsp;use of Penn Libraries licensed resources is generally restricted to current students, faculty, and staff.&nbsp;&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"box-sizing: border-box; font-size: 14px;\">&nbsp;</span></p>",
         "priority_i": "100003862"
       },
       {
         "title": "Using Franklin Articles+",
-        "content": "\u003cp\u003eFranklin Articles+, a large multidisciplinary database offering access to many resources, provides paths to full-text differently. More help on searching article databases is available in the guide: \u003ca href=\"https://guides.library.upenn.edu/articlesplus/toc\"\u003eUsing Franklin Articles+\u003c/a\u003e\u003c/p\u003e",
+        "content": "<p>Franklin Articles+, a large multidisciplinary database offering access to many resources, provides paths to full-text differently. More help on searching article databases is available in the guide: <a href=\"https://guides.library.upenn.edu/articlesplus/toc\">Using Franklin Articles+</a></p>",
         "priority_i": "100003863"
       },
       {
         "title": "Searching for Books?",
-        "content": "\u003cp\u003eIf you would like to find a print book in the library please follow the guide here:\u003c/p\u003e\r\n\u003cp\u003e\u003ca href=\"https://guides.library.upenn.edu/franklincatalog\"\u003eUsing Franklin Catalog\u003c/a\u003e\u003c/p\u003e\r\n\u003cp\u003ealternatively link back to the main \u003ca href=\"https://franklin.library.upenn.edu/\"\u003eFranklin search page\u003c/a\u003e\u003c/p\u003e",
+        "content": "<p>If you would like to find a print book in the library please follow the guide here:</p>\r\n<p><a href=\"https://guides.library.upenn.edu/franklincatalog\">Using Franklin Catalog</a></p>\r\n<p>alternatively link back to the main <a href=\"https://franklin.library.upenn.edu/\">Franklin search page</a></p>",
         "priority_i": "100003864"
       }
     ]
@@ -126,15 +135,15 @@
       "isFullTextHit": false,
       "isPrint": false,
       "inHoldings": true,
-      "openUrl": "institution=01UPENN_INST\u0026vid=01UPENN_INST%3AServices\u0026%3Fctx_ver=Z39.88-2004\u0026ctx_enc=info%3Aofi%2Fenc%3AUTF-8\u0026rfr_id=info%3Asid%2Fsummon.serialssolutions.com\u0026rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook\u0026rft.genre=book\u0026rft.title=Integrating+Project+Delivery\u0026rft.au=Fischer%2C+Martin\u0026rft.au=Ashcraft%2C+Howard+W\u0026rft.au=Reed%2C+Dean\u0026rft.au=Khanzode%2C+Atul\u0026rft.date=2017-01-01\u0026rft.pub=John+Wiley+%26+Sons%2C+Incorporated\u0026rft.isbn=9780470587355\u0026rft_id=info:doi/10.1002%2F9781119179009\u0026rft.externalDocID=EBC4816364",
-      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV1ZS8NAEB60BbFPXuBNFeyLRDfpJps8Sa0poliqtvQxbI6lYq1gD_DfO5vdJLUWRHzZttvSZDOTOb7MfAtwsmAPHhrNNnvstPue4XioIUbaK2b3m57_bF3f6S0cZSPMFDP40QUfvvElvQ2yS1VWNX5m-0pdvejH6RJVImav47fbAaa83doMBTo_gcLO7rzaWb31Xz3BOdQU2Xf7B13J_xQn8D1qDI6oMzguhNP5x6KUXdJGSOSgo9AZtEVDWbWRg-4tvDZaxIp9INeW8SD64Mqeqzrc8xy6eUoUnHqTFHp4P8CI9F0R_jYmujRRQw8mW4AeltT2aMOmSZjz9iyVrRLKiO2yuuLl_WG7FRes5OCSpHPMI8QrnFReOuhfN6mLQaRDV2EVjUsJyujA_RyiobZFnYwjLgXa5G6PNk3ZCPTxSca8lJ2PJl_FM7j8dvwKVPj4Fb0NeqLJ-Ie7TmOQ7gaUE9mYsgkryWgL1rKOhS2ozHFKbsPhnCSrWpLVTJI70Gv53eatobfAMDgm9pQarghDYgmTC8E85gl8sepxRDj6WBzD2KYYooa4iphFQu6OEHInpFGcEIHZaX0XqozGkckjwbgZUspx3ZElHEncL1zLc8M9OJ1bZDAbpo_px4G6Ei6VPtHag2q29iD9XtcOB4U89n__yQGsF3p0CKXJxzQ5gnJ63x9rQX4BJLVH5Q",
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.title=Integrating+Project+Delivery&rft.au=Fischer%2C+Martin&rft.au=Ashcraft%2C+Howard+W&rft.au=Reed%2C+Dean&rft.au=Khanzode%2C+Atul&rft.date=2017-01-01&rft.pub=John+Wiley+%26+Sons%2C+Incorporated&rft.isbn=9780470587355&rft_id=info:doi/10.1002%2F9781119179009&rft.externalDocID=EBC4816364",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV1ZS8NAEB7Uglh88MSbKuiLRNPNHsmTaE0RxVK16mPYNFsUa4Uegv_e2ewmqVUQEUpoN6VJdqZzfDvzLcDuhD24Pq01xE2z8Rg4hKG_cdJeMfZYC8I7cnZpt3DUjTAjzOB7R7L7Kn_obdBdqrqq8SPbV-rk2S6na1TJrd43w0YjwpS3dfCOAh0fQGFn_7yDfa_-Xz3BMdQU3Xf7B13JfxQH8D1qDB5RZ_A4EU7nH4tSdk0boZGDpkFn0BZ1ddVGDrrXcW6siA37QK4tg6d2Xxp7bupwD3Po5lYZOPVcFXp49YQR6Zsh_D0d2tJECz1UxQT08ENtjzVsloQ5b88y2apLhct84Rle3m-223DBag4uTTonAtcNCieVlw6GZzXqYxDJ6TRMo3GZgRI68DCHaCgjlGcccSnQpnd7ZDRlI7DXdzPmpex-LPkq3sHxl-uXoSwHL-ht0BMNB9_cdRqDtBagpHRjyiJMqd4SzGYdC0tQHuOUXIatMUlWrCQrmSRX4KEetmoXjt0Cw5GYaTPqeD5VhCq9WMo5psoCw0-WSMVJG4N3yTsUXx6XIiEy4W0ifRK7JMYwu5OwOHC9VZiXuleiN0x7KpM1qGBMS1nCY0Uw-qSCxjFNAlVlPpfVQHT4OuyNPXX03k3X7QeRmRqfaidJ1qGSTUaUnrfFxFEhoI3fv7IJc4VibcHMsD9S21BKDcGOlewnOxVLOg",
       "ExternalDocumentID": [
         "9781118415382",
         "EBC4816364"
       ],
       "IngestDate": [
         "Wed Oct 04 09:25:53 EDT 2023",
-        "Tue Apr 23 00:11:33 EDT 2024"
+        "Tue Jun 04 06:06:46 EDT 2024"
       ],
       "PublicationDate_xml": [
         {
@@ -143,14 +152,14 @@
         }
       ],
       "Score": [
-        "17.35331"
+        "16.74535"
       ],
       "DatabaseTitleList": [
         ""
       ],
       "URI": [
         "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=4816364",
-        "https://www.vlebooks.com/vleweb/product/openreader?id=none\u0026isbn=9781118415382"
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9781118415382"
       ],
       "PublicationPlace_xml": [
         {
@@ -162,17 +171,17 @@
       ],
       "Publisher_xml": [
         {
-          "name": "John Wiley \u0026 Sons, Incorporated"
+          "name": "John Wiley & Sons, Incorporated"
         },
         {
           "name": "Wiley-Blackwell"
         }
       ],
       "ID": [
-        "FETCH-LOGICAL-a40244-8fbb02f1aff7979fff723dc0aeb1c0abd54125b873d7cf0084ba6b4cde0f0963"
+        "FETCH-LOGICAL-a40754-384e24e84256624971595dae62c013a6f46f436a7d2ad6c2a82b02b416fd5b903"
       ],
       "Publisher": [
-        "John Wiley \u0026 Sons, Incorporated",
+        "John Wiley & Sons, Incorporated",
         "Wiley-Blackwell"
       ],
       "DOI": [
@@ -296,6 +305,12 @@
         "ssib045246654",
         "ssj0001769354"
       ],
+      "TableOfContents": [
+        "Intro -- Title Page -- Copyright -- Table of Contents -- Foreword -- Foreword -- Preface -- What This Book Is About -- Harder without a Map -- How This Book Is Organized -- Getting the Most Out of This Book -- References -- Acknowledgments -- Chapter 1: What Would Make Us Proud? -- 1.1 Current State of Facility Performance -- 1.2 What If? -- 1.3 A Way Forward -- Notes -- References -- Chapter 2: Transitioning to Integrated Project Delivery: The Owner's Experience -- 2.1 The Road to IPD -- 2.2 The Owner's Role -- 2.3 Organizing the Owner -- 2.4 Resistance from Within -- 2.5 Resistance from the AEC Community -- 2.6 Education and Training -- 2.7 The IPD Contract -- 2.8 The Right Level of Challenge -- 2.9 Frustrations -- 2.10 Target Value Design -- 2.11 Reliability -- 2.12 Value -- 2.13 Would You Do It Again? -- 2.14 Advice to Other Owners -- 2.15 Humanity and Morale -- 2.16 Summary -- Note -- References -- Chapter 3: A Simple Framework -- 3.1 A Roadmap for Integrating Project Delivery -- 3.2 High-Performance Buildings -- 3.3 Integrated Systems -- 3.4 Process Integration -- 3.5 Integrated Organization -- 3.6 Integrated Information -- 3.7 Connecting the Dots -- 3.8 Applying the Simple Framework -- 3.9 Reflections -- 3.10 Summary -- Notes -- References -- Chapter 4: Defining High-Performing Buildings -- 4.1 What Is a High-Performing Building? -- 4.2 What Does Success Look Like? -- 4.3 How Can This Be Done? -- 4.4 Interconnections -- 4.5 Reflections -- 4.6 Summary -- Reference -- Chapter 5: Achieving Highly Valuable Buildings -- 5.1 What Is a Highly Valuable Building? -- 5.2 What Does Success Look Like? -- 5.3 How Can This Be Done? -- 5.4 Real-Life Examples -- 5.5 Interconnections -- 5.6 Reflections -- 5.7 Summary -- Note -- References -- Chapter 6: Integrating the Building's Systems -- 6.1 What Are Integrated Systems?",
+        "12.5 Interconnections -- 12.6 Reflections -- 12.7 Summary -- Notes -- References -- Chapter 13: Collaborating in an Integrated Project -- 13.1 So What's the Problem? -- 13.2 What Is Collaboration, Really? -- 13.3 What Does Success Look Like? -- 13.4 How Can This Be Done? -- 13.5 Real-Life Examples -- 13.6 Interconnections -- 13.7 Reflections -- 13.8 Summary -- Notes -- References -- Chapter 14: Co-locating to Improve Performance -- 14.1 Aspirin for Integration -- 14.2 What Is Co-location, Exactly? -- 14.3 What Does Success Look Like? -- 14.4 How Can This Be Done? -- 14.5 Real-Life Example -- 14.6 Interconnections -- 14.7 Reflections -- 14.8 Summary -- References -- Chapter 15: Managing Production as an Integrated Team -- 15.1 What Is Integrated Production Management? -- 15.2 What Does Success Look Like? -- 15.3 How Can This Be Done? -- 15.4 Real-Life Example -- 15.5 Interconnections -- 15.6 Reflection -- 15.7 Summary -- References -- Chapter 16: Avoiding the Pitfalls of Traditional Contracts -- 16.1 Traditional Contracts Create an Inherently Antagonistic Environment -- 16.2 Traditional Contracts Are Based on a Piecework Business Model -- 16.3 Traditional Contracts Rigidly Divide Work Based on Traditional Roles -- 16.4 Traditional Contracts Constrain Communication to Specific and Inefficient Paths -- 16.5 Traditional Contracts Reward Individual, Not Group, Performance -- 16.6 Collaboration without an IPD Agreement Can Increase Risk -- 16.7 And if Traditional Contracting Is So Successful, How Do We Explain the Outcomes? -- 16.8 Summary -- Notes -- References -- Chapter 17: Contracting for Project Integration -- 17.1 Introduction -- 17.2 Is the IPD Contract Really Necessary? -- 17.3 Deal First, Contract Second -- 17.4 The IPD Contracting Mindset -- 17.5 A New Business Model -- 17.6 A New Contract Structure -- 17.7 Negotiating the IPD Contract",
+        "17.8 IPD Contract Forms -- 17.9 A Parallel Path: The U.K. Experience -- 17.10 Interconnections -- 17.11 Reflections -- 17.12 Summary -- Notes -- References -- Chapter 18: Delivering the High-Performing Building as a Product -- 18.1 What Is the High-Performing Building as a Product? -- 18.2 What Does Success Look Like? -- 18.3 How Can This Be Done? -- 18.4 Real-Life Examples -- 18.5 Summary -- Notes -- References -- Afterword -- Creating a \"Best for Project\" Culture -- Afterword -- Where to Next? -- Index -- End User License Agreement",
+        "6.2 What Does Success Look Like? -- 6.3 How Can This Be Done? -- 6.4 Real-Life Examples -- 6.5 Interconnections -- 6.6 Reflections -- 6.7 Summary -- Notes -- Reference -- Chapter 7: Integrating Process Knowledge -- 7.1 What Is Integrating Process Knowledge? -- 7.2 What Does Success Look Like? -- 7.3 How Can This Be Done? -- 7.4 Real-Life Examples -- 7.5 Interconnections -- 7.6 Reflections -- 7.7 Summary -- Note -- References -- Chapter 8: Integrating the Project Organization -- 8.1 Introduction -- 8.2 What Is Integrated Organization? -- 8.3 What Does Success Look Like? -- 8.4 How Can This Be Done? -- 8.5 Real-Life Examples -- 8.6 A Case Study: Integrating the UCSF Medical Center Mission Bay Hospitals Project -- 8.7 Interconnections -- 8.8 Reflections -- 8.9 Summary -- Notes -- References -- Chapter 9: Leading Integrated Project Teams -- 9.1 Introduction -- 9.2 What Are IPD Teams? -- 9.3 What Does Success Look Like? -- 9.4 How Can This Be Done? -- 9.5 Interconnections -- 9.6 Reflections -- 9.7 Summary -- Notes -- References -- Chapter 10: Integrating Project Information -- 10.1 Why Bother? -- 10.2 What Is Integrated Information? -- 10.3 What Does Success Look Like? -- 10.4 How Can This Be Done? -- 10.5 Examples and Benefits of Integrated Information Systems -- 10.6 Interconnections -- 10.7 Reflections -- 10.8 Summary -- Notes -- References -- Chapter 11: Managing with Metrics -- 11.1 What Are Measurable Value and Control? How Do They Relate? -- 11.2 What Does Success Look Like? -- 11.3 How Does a Project Team Measure and Control the Delivery of Value? -- 11.4 Interconnections -- 11.5 Reflections -- 11.6 Summary -- Note -- References -- Chapter 12: Visualizing and Simulating Building Performance -- 12.1 What Are Simulation and Visualization? -- 12.2 What Does Success Look Like? -- 12.3 How Can This Be Done? -- 12.4 Real-Life Examples"
+      ],
       "Title": [
         "Integrating Project Delivery"
       ],
@@ -313,7 +328,7 @@
         "658.404"
       ],
       "MergedId": [
-        "FETCHMERGED-LOGICAL-a40244-8fbb02f1aff7979fff723dc0aeb1c0abd54125b873d7cf0084ba6b4cde0f0963"
+        "FETCHMERGED-LOGICAL-a40754-384e24e84256624971595dae62c013a6f46f436a7d2ad6c2a82b02b416fd5b903"
       ],
       "PQID": [
         "EBC4816364"
@@ -324,17 +339,20 @@
       "thumbnail_m": [
         "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F5382%2F9781118415382.jpg"
       ],
-      "link.rule.ids": [
-        "307,787,791,793,27993"
-      ],
       "linkProvider": [
         "ProQuest Ebooks"
       ],
       "LinkModel": [
         "OpenURL"
       ],
+      "link.rule.ids": [
+        "307,787,791,793,27984"
+      ],
       "BookMark": [
-        "eNpVjz1PwzAYhI34EKVkZGPohhgCr53XXyMNBSpVggHmyE7sEholYLtF_HsiOrHc6aRHpztCLijcUAB2q6WilGoqNYA-INk-K6S8UOyQnAFK4EoWHE7IREvOGHJgpySLsbWAnKEQHCfkctkntw4mtf169hKGD1en2b3r2p0LP-fk2JsuuowcpbB1U_L2sHgtn_LV8-OyvFvlBoEh5spbC8xT473UUvvRWNHUYJylo9qGI2XcjmsaWXsAhdYIi3XjwIMWxZRc73tN3Ljv-D50KVa7ztlh2MTq37ORvdqzn2H42rqYqj-sdn0KpqsW8xIVFYXA4hcNG1Ct"
+        "eNpVkL1LA0EUxFdEMYlX2lmkE4vo27dvv0pNogYCWojtsXf3kpw5cnq7ifjfG4yNMDAM_BiY6YssbNOKN6kuQ-JKiAsJNxIAb711UkovrQfwRyI7ZEdSK4fHog9kQTurNJyKnrcakTTgmchirAsgjWSMpp64nG0SL7uQ6s1y-NK171ym4YSbesfd97k4WYQmcvbnA_H2MH0dP43mz4-z8d18FAisppFyxEjsCLUxSN5K7XUV2GAJUgWzoL2UCbbCUJkSg8MCsCBpFpUuPKiBuD4Uh7jmr7hqmxTzXcNF265j_m_bnr06sB9d-7nlmPJfrNy_1IUmn96PyUmjDKkfT3FU1A"
+      ],
+      "DeliveryMethod": [
+        "fulltext_linktorsrc"
       ],
       "ParticipantIDs": [
         "askewsholts_vlebooks_9781118415382",
@@ -346,8 +364,8 @@
       "isFullTextHit": false,
       "isPrint": false,
       "inHoldings": true,
-      "openUrl": "institution=01UPENN_INST\u0026vid=01UPENN_INST%3AServices\u0026%3Fctx_ver=Z39.88-2004\u0026ctx_enc=info%3Aofi%2Fenc%3AUTF-8\u0026rfr_id=info%3Asid%2Fsummon.serialssolutions.com\u0026rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook\u0026rft.genre=book\u0026rft.title=Bernstein+Functions\u0026rft.au=Schilling%2C+Ren%C3%A9+L\u0026rft.au=Song%2C+Renming\u0026rft.au=Vondracek%2C+Zoran\u0026rft.date=2012-01-01\u0026rft.pub=Walter+de+Gruyter+GmbH+Co.KG\u0026rft.isbn=9783110252293\u0026rft_id=info:doi/10.1515%2F9783110215311\u0026rft.externalDBID=08O\u0026rft.externalDocID=ciando374764",
-      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV1Lb9NAEF7R9kJObUFqKJSCRC9Riu31Y31CaeokQOMWkhKJy2r9kqo2DoqbSv33fLt-xC5QhLhYznrl7GM8883Mzgwhbx7wg3Gv7ztfLvyZ27VdUEhXxYpZs77rTYyTT0V1cRkIs4IGnx6Lm7n4TWyDjFKVpxrvy7pSH64Kd7q0Kmn65YXn-xwq7_ToDhtab8Bml1_e0Ts6-F86QRsoRcbd_gOtVC9FA-5BMbiCZnB9AKern2UkyxLzjK_SzgCSbm3FUz4a5THImcJXsCnlW-9UVuPJono0LwWhLOG1SKOlCGPFbr-D0tK6hUEd1ahbGGbKb9-JQLXL1b28Hc6DEfjV8edhQxulgBIG8Fxe8vAX3mypNBZlP3Dagss2cmBr7LzZqEStNPBECwrVxzY3yAZ4yibZ652Ne_zS74HKhr53ykfnZ6cf_eGkMrEB_AK-yUoe1cisPOfSeqRF2lWM7X1jZC3SEtk15Axk0G0mQYvIhIxVBVLJR9MU3kaBSKbbZCuWYSo75Emc7pLWuMq-mz0ju9VmHlab-Zx8G3jT_qhbFL_oCheMFVKIBoJZWhLZLAQoZqETJ5TFiS4khAYKpzLRjxPoboB5aqHQTJvJvPMiSvTECugeOXTMKNRFmDhCD0xTOEwLjcSWOfsTZrgsaJO3tVnyuxvloc94Yyn-1sl2KWVtsl-uEMc3kadbz7gl8-BblnyqFo3_yHOo8PqOtsnrciW5endxLpl7J32pAGvaYz0AuKluvHj0H_bJ0zVhvySbt8tV_IpsKX5z8GdK-gm-qHMb",
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.title=Bernstein+Functions%3A+Theory+and+Applications&rft.au=Schilling%2C+Rene+L&rft.au=Song%2C+Renming&rft.au=Vondracek%2C+Zoran&rft.series=De+Gruyter+Studies+in+Mathematics&rft.date=2010-01-01&rft.pub=De+Gruyter&rft.isbn=9783110215304&rft.volume=37&rft_id=info:doi/10.1515%2F9783110215311&rft.externalDocID=9783110215311",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwpV3dT9swELcGvKzaw9iH6GCQTRovrKOJYyeZNKHQprCJZmwtQ9qL5SSuhIB0alok_vvdOR9N2Lf2EiVO4ti-y9357N8dIS_uyIOh3wudT6fhudexGOibjsaKsfOeF4ysww_FnmYEwixgBp--kVfX8ifYBkSp4q7G2zKv1MFFsZyOXqWueXYahKGAKe949wYIWi8AYpd_3u4rOvhfPoEy4BTE3f4Dr1SVQgGcA8fAEXgGjnfM6eqyRLLMoJ_qIt0bgKbTHyg2ZOAiPHrX_dpS93L5Ri8m5PLiM4jNvcqXPJpWpdelesTEXtM0mclYaSH8Ffgv5wrsnMre9YFnZ4tbDNxYbHBEf8ywCi3bcFLovW51J8Xy7cb0lZqYWJzRPAFxKY_zIDA_iHamo2DU3iqEdDNaduP-ClkB8bNKNvyToS_OQh8Y8igM-uL440n_fXg0qrxxGHWMuwzBP2WbeB6eadnGIkIrtGO_8ZUWacnsElQSqKt5hvaNzCTCWsGoQc9UMm3qeaswXsYPyZpCRMs6uafSR6RVG83H5HVFd6Oi-1sjp7oBlRp1qj8hXwbBuHfcKRJodKTraUidVNRkMVduMjGdSZR0J65KLAnTBGUq04kxQWNke65NYxTPrquiOHZ4rKgtJY_pU_JAItIinWtEZrJBDLCIbZbwSFlgu9qOHUV24imTuVyanjPhbfKyNhzi5kqv-meiMWZ_eoh7lLptslkOpYD_LA_hngmGsfUZw7t6dMW3PC6LyC8pTJC53SY75ZALXXex11kEhz2cVHe7v3sCjHhqWs_-pieb5P6S4bfI6ny2UM_JmhZl27_mvO_nqpTh",
       "ExternalDocumentID": [
         "9783110269338",
         "9783110215311",
@@ -363,8 +381,8 @@
       "IngestDate": [
         "Wed Oct 04 03:47:47 EDT 2023",
         "Wed Oct 04 03:53:16 EDT 2023",
-        "Mon Apr 22 23:59:05 EDT 2024",
-        "Tue Apr 23 00:51:40 EDT 2024",
+        "Tue Jun 04 05:49:49 EDT 2024",
+        "Tue Jun 04 06:11:57 EDT 2024",
         "Wed May 31 13:52:46 EDT 2023",
         "Tue Nov 14 22:20:13 EST 2023"
       ],
@@ -378,7 +396,7 @@
         "De Gruyter Studies in Mathematics"
       ],
       "Score": [
-        "14.382232"
+        "14.363257"
       ],
       "DatabaseTitleList": [
         "",
@@ -387,13 +405,16 @@
         "",
         ""
       ],
+      "PublicationPlace": [
+        "Berlin/Boston"
+      ],
       "URI": [
-        "http://digital.casalini.it/9783110269338",
-        "http://ebooks.ciando.com/book/index.cfm/bok_id/374764",
+        "https://digital.casalini.it/9783110269338",
+        "https://ebooks.ciando.com/book/index.cfm/bok_id/374764",
         "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=511800",
         "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=893312",
-        "https://www.vlebooks.com/vleweb/product/openreader?id=none\u0026isbn=9783110215311\u0026uid=none",
-        "https://www.vlebooks.com/vleweb/product/openreader?id=none\u0026isbn=9783110269338\u0026uid=none"
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9783110215311&uid=none",
+        "https://www.vlebooks.com/vleweb/product/openreader?id=none&isbn=9783110269338&uid=none"
       ],
       "PublicationPlace_xml": [
         {
@@ -402,9 +423,6 @@
         {
           "name": "Berlin/Boston"
         }
-      ],
-      "PublicationPlace": [
-        "Berlin/Boston"
       ],
       "Publisher_xml": [
         {
@@ -418,7 +436,7 @@
         }
       ],
       "ID": [
-        "FETCH-LOGICAL-a90408-93ba850fd68c1128c7ef38ef1a1638566381567b19b9910ca04682145adf1f5b3"
+        "FETCH-LOGICAL-a89468-5ae315c6e8df17fbd0f8ed2a080e1e17c7135b49843c005188ebcc76ce34aa6c3"
       ],
       "Publisher": [
         "De Gruyter",
@@ -430,9 +448,9 @@
       ],
       "AbstractList": [
         "The series is devoted to the publication of monographs and high-level textbooks in mathematics, mathematical methods and their applications. Apart from covering important areas of current interest, a major aim is to make topics of an interdisciplinary nature accessible to the non-specialist. The works in this series are addressed to advanced students and researchers in mathematics and theoretical physics. In addition, it can serve as a guide for lectures and seminars on a graduate level. The series de Gruyter Studies in Mathematics was founded ca. 30 years ago by the late Professor Heinz Bauer and Professor Peter Gabriel with the aim to establish a series of monographs and textbooks of high standard, written by scholars with an international reputation presenting current fields of research in pure and applied mathematics. While the editorial board of the Studies has changed with the years, the aspirations of the Studies are unchanged. In times of rapid growth of mathematical knowledge carefully written monographs and textbooks written by experts are needed more than ever, not least to pave the way for the next generation of mathematicians. In this sense the editorial board and the publisher of the Studies are devoted to continue the Studies as a service to the mathematical community. Please submit any book proposals to Niels Jacob.",
+        "This secondrevised andextendededition of the self-contained and unified approach to Bernstein functions and their subclassesbrings together old and establishs new connections. Applications of Bernstein functions in different fields of mathematics (such as probability theory, potential theory, operator theory, integral equations, functional calculi, and complex analysis) are given, with special attention to interpretations in probability theory. An extensive list of complete Bernstein functions with their representations is provided.",
         "This secondrevised andextendededition of the self-contained and unified approach to Bernstein functions and their subclassesbrings together old and establishs new connections. Applications of Bernstein functions in different fields of mathematics (such as probability theory, potential theory, operator theory, integral equations, functional calculi, and complex analysis) are given, with special attention to interpretations in probability theory. An extensive list of complete Bernstein functions with their representations is provided. René L. Schilling, Dresden University of Technology, Germany; Renming Song, University of Illinois, Urbana, USA; Zoran Vondra?ek, University of Zagreb, Croatia.",
-        "This text is a self-contained and unified approach to Bernstein functions and their subclasses, bringing together old and establishing new connections. Applications of Bernstein functions in different fields of mathematics are given, with special attention to interpretations in probability theory. An extensive list of complete Bernstein functions with their representations is provided.",
-        "This secondrevised andextendededition of the self-contained and unified approach to Bernstein functions and their subclassesbrings together old and establishs new connections. Applications of Bernstein functions in different fields of mathematics (such as probability theory, potential theory, operator theory, integral equations, functional calculi, and complex analysis) are given, with special attention to interpretations in probability theory. An extensive list of complete Bernstein functions with their representations is provided."
+        "This text is a self-contained and unified approach to Bernstein functions and their subclasses, bringing together old and establishing new connections. Applications of Bernstein functions in different fields of mathematics are given, with special attention to interpretations in probability theory. An extensive list of complete Bernstein functions with their representations is provided."
       ],
       "Editor": [
         "Song, Renming",
@@ -449,11 +467,11 @@
       "PublicationCentury": [
         "2000"
       ],
-      "PublicationDecade": [
-        "2010"
-      ],
       "IsScholarly": [
         "false"
+      ],
+      "PublicationDecade": [
+        "2010"
       ],
       "LCCallNum_Ident": [
         "QA"
@@ -608,6 +626,10 @@
         "ssj0000991253",
         "ssj0000412685"
       ],
+      "TableOfContents": [
+        "Frontmatter -- Contents -- 1 Completely monotone functions -- 2 Stieltjes functions -- 3 Bernstein functions -- 4 Positive and negative definite functions -- 5 A probabilistic intermezzo -- 6 Complete Bernstein functions: representation -- 7 Complete Bernstein functions: properties -- 8 Thorin-Bernstein functions -- 9 A second probabilistic intermezzo -- 10 Special Bernstein functions and potentials -- 11 The spectral theorem and operator monotonicity -- 12 Subordination and Bochner's functional calculus -- 13 Potential theory of subordinate killed Brownian motion -- 14 Applications to generalized diffusions -- 15 Examples of complete Bernstein functions -- Backmatter",
+        "Intro -- Preface to the second edition -- Preface -- Index of notation -- 1 Completely monotone functions -- 2 Stieltjes functions -- 3 Bernstein functions -- 4 Positive and negative definite functions -- 5 A probabilistic intermezzo -- 6 Complete Bernstein functions -- 6.1 Representation of complete Bernstein functions -- 6.2 Extended complete Bernstein functions -- 7 Properties of complete Bernstein functions -- 8 Thorin-Bernstein functions -- 9 A second probabilistic intermezzo -- 10 Transformations of Bernstein functions -- 11 Special Bernstein functions and potentials -- 11.1 Special Bernstein functions -- 11.2 Hirsch's class -- 12 The spectral theorem and operator monotonicity -- 12.1 The spectral theorem -- 12.2 Operator monotone functions -- 13 Subordination and Bochner's functional calculus -- 13.1 Semigroups and subordination in the sense of Bochner -- 13.2 A functional calculus for generators of semigroups -- 13.3 Subordination and functional inequalities -- 13.4 Eigenvalue estimates for subordinate processes -- 14 Potential theory of subordinate killed Brownian motion -- 15 Applications to generalized diffusions -- 15.1 Inverse local time at zero -- 15.2 First passage times -- 16 Examples of complete Bernstein functions -- 16.1 Special functions used in the tables -- 16.2 Algebraic functions -- 16.3 Exponential functions -- 16.4 Logarithmic functions -- 16.5 Inverse trigonometric functions -- 16.6 Hyperbolic functions -- 16.7 Inverse hyperbolic functions -- 16.8 Gamma and related special functions -- 16.9 Bessel functions -- 16.10 Miscellaneous functions -- 16.11 CBFs given by exponential representations -- 16.12 Additional comments -- Appendix -- A.1 Vague and weak convergence of measures -- A.2 Hunt processes and Dirichlet forms -- Bibliography -- Index"
+      ],
       "Title": [
         "Bernstein Functions"
       ],
@@ -615,14 +637,14 @@
         "Wissen Mathematik",
         "Technik"
       ],
+      "PageCount": [
+        "327"
+      ],
       "PublicationDate": [
         "2012",
         "2010",
         "2010-01-01",
         "2012-06-30"
-      ],
-      "PageCount": [
-        "327"
       ],
       "OCLC": [
         "651047685",
@@ -635,7 +657,7 @@
         "515/.8"
       ],
       "MergedId": [
-        "FETCHMERGED-LOGICAL-a90408-93ba850fd68c1128c7ef38ef1a1638566381567b19b9910ca04682145adf1f5b3"
+        "FETCHMERGED-LOGICAL-a89468-5ae315c6e8df17fbd0f8ed2a080e1e17c7135b49843c005188ebcc76ce34aa6c3"
       ],
       "PQID": [
         "EBC511800"
@@ -647,21 +669,24 @@
         "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F5311%2F9783110215311.jpg",
         "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fwww.askewsandholts.com%2Fuploads%2Fproduct%2Fimages%2Ffull%2F9338%2F9783110269338.jpg"
       ],
-      "link.rule.ids": [
-        "307,787,791,793,27993"
-      ],
       "linkProvider": [
         "Library Catalog"
       ],
       "LinkModel": [
         "OpenURL"
       ],
+      "link.rule.ids": [
+        "307,787,791,793,27984"
+      ],
       "BookMark": [
-        "eNqNkM1LAzEQxSN-YKl7Eu_iQfBQzWw22eRoS6tCwYt4DbO7Wbt2m9RkW_G_N3QR1FPnMMODH294j5ALoLfAgd-pXDIAmgKP54AkP1ooxuThP31CBoIDzXIh-SlJQnincZSClLMBOR8bb0NnGns529iya5wNZ-S4xjaYhBx1fmOG5HU2fZk8jubPD0-T-_kIFc2oHClWoOS0roQsAVJZ5qZm0tSAIJjkIi7gIi9AFfEbLZFmQqaQcaxqqHnBhuSmN8awNJ9h4dou6G1rCueWQf8JsSe7KySy1z279u5jY0Knd1hpbOex1dPxREZPSPcAOYCkNIJXPVg2aCun175Zof_SvWR5LDf7BWHAtrGNXjnr3jyuF0HzmDsO-wb8PX4S"
+        "eNqN0EFLw0AQBeAVUaw1J_EuHgQP1Z1sNtkcbWlVKHgRr8tkM7Gx6W7Npor_3qVRUE-dy_DgY2DeMYtw0y3IdrXBjkrGzoBfgwR5k2dKAPAYZFh7LPrJaS6E2v-XD9kglcCTLFXyiEXev_IweQ6xFAN2OqbW-o5qez7bWNPVzvoTdlBh4yn63kP2PJs-Te5H88e7h8ntfIQqT1I1kkgCpElJlRVkVVHySlEZI1ecgCAzGQhZJLlKhOFcglJUGJOlhkSCmBoxZFf9YfRL-vAL13RevzdUOLf0-s8XO9ptI8Fe9nbdurcN-U5vmQldttjo6Xiiwk2Id4ASQHEe4EUPTY22dHrd1itsP3UfRRbaTX4h9NjUttYrZ91Li-uF1xISGUZ8AcjVhSQ"
       ],
       "DatabaseName": [
         "Torrossa Single Purchase Catalogue",
         "ciando eBooks"
+      ],
+      "DeliveryMethod": [
+        "fulltext_linktorsrc"
       ],
       "ParticipantIDs": [
         "askewsholts_vlebooks_9783110269338",
@@ -677,20 +702,24 @@
       "isFullTextHit": false,
       "isPrint": false,
       "inHoldings": true,
-      "openUrl": "institution=01UPENN_INST\u0026vid=01UPENN_INST%3AServices\u0026%3Fctx_ver=Z39.88-2004\u0026ctx_enc=info%3Aofi%2Fenc%3AUTF-8\u0026rfr_id=info%3Asid%2Fsummon.serialssolutions.com\u0026rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook\u0026rft.genre=book\u0026rft.title=Weill%2C+Blitzstein%2C+and+Bernstein\u0026rft.au=Rebecca+Schmid\u0026rft.date=2023-06-20\u0026rft.pub=Boydell+%26+Brewer+Ltd\u0026rft.isbn=9781800109315\u0026rft.externalDocID=j.ctv319wpsk",
-      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwjV1NS8NAEB3EXDz5Ca1VSe-NJptNNns0oUUFi6LSY9jd7IJaSmmqggd_uzvbpH6A4HEPgexkMnmbefMeQP9XPbg-L8bs9mY84UHKbYYEblYsmRR8eEfyq0Ypum44lY4U6Fr4Fh3JqT57OlXLV5sob_P6GcelLcCwaftxma5_pdhTA0saVL1ao-Sec3kRtcABw5Zs-LPgxs1XZLQNrV3rijuybijPbbH7xqxuJRr_da874GmcV9iFDT3bA8_5Nu-DP9GP0-nAzy3Kfq_R0XLgi1nl53oxc8sDeBgN74uLoDFDCCRnMQu4UFRVFPXvhCFZRmmoKSNaCsNlksbGUF2FkdZMxDSRyqCFWCQzKRAEEhV3wGe0UpFQholIUipYFipiUpRwNxnhmexCr41YaV-ClWZ2XaJomwVCXei4DZcI_2t7avjaaxf6bVxL1-RtmKXlMC9iC0ixN3f49-U92EIXd2RgkfAINpeLF30Mngv_iXvWn84_rr0",
+      "openUrl": "institution=01UPENN_INST&vid=01UPENN_INST%3AServices&%3Fctx_ver=Z39.88-2004&ctx_enc=info%3Aofi%2Fenc%3AUTF-8&rfr_id=info%3Asid%2Fsummon.serialssolutions.com&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.title=Weill%2C+Blitzstein%2C+and+Bernstein&rft.au=Schmid%2C+Rebecca&rft.date=2023-06-20&rft.isbn=9781800109315&rft_id=info:doi/10.1017%2F9781800109315&rft.externalDocID=10_1017_9781800109315",
+      "link": "https://upenn.summon.serialssolutions.com/2.0.0/link/0/eLvHCXMwjV1bS8MwFD6IexEE72xOpXsUVl0vSZpHWzZUcCgO9hjSNgXnKGOdCj74281J291A8DG0JPScXL70fOc7AJ2t_eDpLhqyl-fhmNsu0eeNbXLFyDji_Vc3fKyUoouKU2lIgSaEr9FRPFW3k5tk8aknyteseMd06R7BQgU_D3T5K0XfGhipUHXZRsk9p1LURIFoFHYKTBTIw_q3KxUFPI1kITEJsSYkbv4E2dyivercGRxAXeC1ZJssQ9AzvT2ucbFrUcd_fd0hNBRmOBzBjsqPoWEqPZ-ANVZv02nXCjUu_y6wBmbXknlqhWqem-YpjAb9UXRvV-UT7JgHnNmZdJKMOYlPJJeBQ2WaeBmLU-YmGsbQLPEoD3wnY8zjKVN-5lLmx3pFokCUIt4Z7Etk2ecLk42XNsHSaMgnKY2Vq3GLr9-O_ZQrhwRUOpxltAXXS9MKlOHEm0IhSiYZExtuaEG7Nr3QK64U6C4EKsRp1NWCprGVKHuYiJWZWmCtOUhUY2z13am9Vj6vmK6iH0aeBsgYKzz_e4Q27GFVeWSEub0L2F3MP9QlNIxzr8zc-wX3qNdy",
       "ExternalDocumentID": [
         "EBC30205828",
+        "9781800109315",
         "j.ctv319wpsk",
-        "5518612"
+        "5518612",
+        "10_1017_9781800109315"
       ],
       "DBID": [
         "I4C"
       ],
       "IngestDate": [
-        "Tue Mar 26 01:04:17 EDT 2024",
+        "Wed May 22 07:19:41 EDT 2024",
+        "Tue May 07 20:22:37 EDT 2024",
         "Fri Sep 29 00:07:02 EDT 2023",
-        "Tue Nov 14 23:03:39 EST 2023"
+        "Tue Nov 14 23:03:39 EST 2023",
+        "Thu May 02 09:24:33 EDT 2024"
       ],
       "PublicationDate_xml": [
         {
@@ -699,15 +728,19 @@
         }
       ],
       "Score": [
-        "14.32197"
+        "14.287375"
       ],
       "DatabaseTitleList": [
+        "",
+        "",
         "",
         ""
       ],
       "URI": [
-        "http://digital.casalini.it/9781800109315",
+        "https://dx.doi.org/10.1017/9781800109315",
+        "https://digital.casalini.it/9781800109315",
         "https://www.jstor.org/stable/j.ctv319wpsk",
+        "https://muse.jhu.edu/book/111031",
         "https://ebookcentral.proquest.com/lib/[SITE_ID]/detail.action?docID=30205828"
       ],
       "PublicationPlace_xml": [
@@ -723,26 +756,30 @@
       ],
       "Publisher_xml": [
         {
-          "name": "Boydell \u0026 Brewer"
+          "name": "Boydell & Brewer"
         },
         {
-          "name": "Boydell \u0026 Brewer Ltd"
+          "name": "Boydell & Brewer Ltd"
         },
         {
           "name": "University of Rochester Press"
         }
       ],
       "ID": [
-        "FETCH-LOGICAL-b9737-9ac4cd41032af288440e472ebaf9b563ff4ed01ee7a345bcf08311b8ba00992c3"
+        "FETCH-LOGICAL-b9897-fa1cf71c45a9a816adc3f7bd72c6156fc369841f7739d7e4f2674b1962818e53"
+      ],
+      "DOI": [
+        "10.1017/9781800109315"
       ],
       "Publisher": [
-        "Boydell \u0026 Brewer",
-        "Boydell \u0026 Brewer Ltd",
+        "Boydell & Brewer",
+        "Boydell & Brewer Ltd",
         "University of Rochester Press"
       ],
       "AbstractList": [
         "The first study to explore the crucial influence of Kurt\nWeill on operas and musicals by Marc Blitzstein and Leonard\nBernstein. Theodor Adorno famously proclaimed that the\nmodel of Kurt Weill could not be repeated. Yet Weill's stage works\nset an inescapable precedent for composers on both sides of the\nAtlantic. Rebecca Schmid explores how Weill's formal innovations in\nparticular laid the groundwork for operas and musicals by Marc\nBlitzstein and Leonard Bernstein, although both composers resisted\nor downplayed his aesthetic contribution to American tradition.\nComparative analysis based on Harold Bloom's Anxiety of Influence\nand other modes of intertextuality reveals that the principles of\nWeill's opera reform would catalyze an indigenous movement in\nsophisticated, socially engaged music theatre. Weill,\nBlitzstein, and Bernstein: A Study of Influence focuses on\nworks that represent different phases of Weill's mission to renew\nthe genre of opera, evolving from Die Dreigroschenoper to\nthe musical play Lady in the Dark and the Broadway Opera\nStreet Scene . Blitzstein and Bernstein in turn defied\nformal boundaries with The Cradle Will Rock ,\nRegina , Trouble in Tahiti , Candide, and\nWest Side Story - part of a short-lived movement in\nmid-twentieth century America that coincided with a renaissance for\nWeill's German-period works following the premiere of Blitzstein's\ntranslation, The Threepenny Opera , under Bernstein's\nbaton. The unpublished A Pray by Blecht , for which\nBernstein rejoined Stephen Sondheim and Jerome Robbins, his\ncollaborators on West Side Story , deepens the connection\nof Bernstein's aesthetic to Weill.",
-        "The first study to explore the crucial influence of Kurt Weill on operas and musicals by Marc Blitzstein and Leonard Bernstein."
+        "The first study to explore the crucial influence of Kurt Weill on operas and musicals by Marc Blitzstein and Leonard Bernstein.",
+        "The first study to explore the crucial influence of Kurt Weill on operas and musicals by Marc Blitzstein and Leonard Bernstein.\nTheodor Adorno famously proclaimed that the model of Kurt Weill could not be repeated. Yet Weill's stage works set an inescapable precedent for composers on both sides of the Atlantic. Rebecca Schmid explores how Weill's formal innovations in particular laid the groundwork for operas and musicals by Marc Blitzstein and Leonard Bernstein, although both composers resisted or downplayed his aesthetic contribution to American tradition. Comparative analysis based on Harold Bloom's Anxiety of Influence and other modes of intertextuality reveals that the principles of Weill's opera reform would catalyze an indigenous movement in sophisticated, socially engaged music theatre.\nWeill, Blitzstein, and Bernstein: A Study of Influence focuses on works that represent different phases of Weill's mission to renew the genre of opera, evolving from Die Dreigroschenoper to the musical play Lady in the Dark and the Broadway Opera Street Scene . Blitzstein and Bernstein in turn defied formal boundaries with The Cradle Will Rock , Regina , Trouble in Tahiti , Candide, and West Side Story - part of a short-lived movement in mid-twentieth century America that coincided with a renaissance for Weill's German-period works following the premiere of Blitzstein's translation, The Threepenny Opera , under Bernstein's baton. The unpublished A Pray by Blecht , for which Bernstein rejoined Stephen Sondheim and Jerome Robbins, his collaborators on West Side Story , deepens the connection of Bernstein's aesthetic to Weill."
       ],
       "Language": [
         "English"
@@ -765,7 +802,8 @@
       ],
       "GroupedDBID": [
         "AABBV",
-        "ABCYY",
+        "AAYCG",
+        "AAZEP",
         "ABDBP",
         "ACKJY",
         "ACTGC",
@@ -774,10 +812,10 @@
         "BBABE",
         "FILVX",
         "I4C",
+        "JLPMJ",
         "~I6",
-        "AAYCG",
-        "AAZEP",
-        "JLPMJ"
+        "ABCYY",
+        "HELXT"
       ],
       "LCCallNum": [
         "ML410.W395 S38 2023"
@@ -785,14 +823,20 @@
       "SubjectTerms": [
         "20th century",
         "Bernstein, Leonard, 1918–1990",
+        "BIOGRAPHY & AUTOBIOGRAPHY",
         "Blitzstein, Marc",
+        "Broadway & Musical Revue",
+        "Composers & Musicians",
         "Criticism and interpretation",
+        "History & Criticism",
         "History and criticism",
+        "Individual Composer & Musician",
         "Influence",
-        "Music",
+        "MUSIC",
         "Musical theater",
         "Opera",
-        "Performing Arts",
+        "PERFORMING ARTS",
+        "Theater",
         "Weill, Kurt, 1900–1950"
       ],
       "Discipline": [
@@ -822,25 +866,31 @@
       ],
       "ISBN": [
         "1800109318",
-        "9781800109315"
+        "9781800109315",
+        "9781648250606",
+        "1648250602"
       ],
       "EISBN": [
         "1800109318",
         "9781800109315"
       ],
       "Abstract": [
-        "The first study to explore the crucial influence of Kurt\nWeill on operas and musicals by Marc Blitzstein and Leonard\nBernstein. Theodor Adorno famously proclaimed that the\nmodel of Kurt Weill could not be repeated. Yet Weill's stage works\nset an inescapable precedent for composers on both sides of the\nAtlantic. Rebecca Schmid explores how Weill's formal innovations in\nparticular laid the groundwork for operas and musicals by Marc\nBlitzstein and Leonard Bernstein, although both composers resisted\nor downplayed his aesthetic contribution to American tradition.\nComparative analysis based on Harold Bloom's Anxiety of Influence\nand other modes of intertextuality reveals that the principles of\nWeill's opera reform would catalyze an indigenous movement in\nsophisticated, socially engaged music theatre. Weill,\nBlitzstein, and Bernstein: A Study of Influence focuses on\nworks that represent different phases of Weill's mission to renew\nthe genre of opera, evolving from Die Dreigroschenoper to\nthe musical play Lady in the Dark and the Broadway Opera\nStreet Scene . Blitzstein and Bernstein in turn defied\nformal boundaries with The Cradle Will Rock ,\nRegina , Trouble in Tahiti , Candide, and\nWest Side Story - part of a short-lived movement in\nmid-twentieth century America that coincided with a renaissance for\nWeill's German-period works following the premiere of Blitzstein's\ntranslation, The Threepenny Opera , under Bernstein's\nbaton. The unpublished A Pray by Blecht , for which\nBernstein rejoined Stephen Sondheim and Jerome Robbins, his\ncollaborators on West Side Story , deepens the connection\nof Bernstein's aesthetic to Weill."
+        "The first study to explore the crucial influence of Kurt Weill on operas and musicals by Marc Blitzstein and Leonard Bernstein."
       ],
       "PublicationYear": [
-        "2023",
-        "2022"
+        "2023"
       ],
       "SourceID": [
         "proquest",
+        "projectmuse",
         "jstor",
-        "casalini"
+        "casalini",
+        "cambridge"
       ],
       "Copyright_xml": [
+        {
+          "notice": "Copyright © 2023 Rebecca Schmid"
+        },
         {
           "notice": "2023 Rebecca Schmid"
         }
@@ -849,13 +899,17 @@
         "ssj0002834921",
         "ssj0002827599"
       ],
+      "TableOfContents": [
+        "Front Matter\nTable of Contents\nAcknowledgments\nIntroduction\nChapter One: Why Influence?\nChapter Two: “Have You Seen My New Opera?”\nChapter Three: “Something Like Opera”:\nChapter Four: “Make Our Garden Grow”:\nChapter Five: “This Isn’t Worth Drei Groschen!”:\nChapter Six: A Pray by Blecht:\nChapter Seven: “The Saga of Lenny”:\nEpilogue\nBibliography\nIndex",
+        "Acknowledgments\nIntroduction\nTitle Page, Copyright, Dedication\nContents\nWhy Influence? Anxiety and Other Modes of Intertextuality\nHave You Seen My New Opera? The Cradle Will Rock, Johnny Johnson, and Die Dreigroschenoper\nSomething Like Opera: Regina, Aufstieg und Fall der Stadt Mahagonny, and Street Scene\nMake Our Garden Grow: Candide and Die Dreigroschenoper\nThis Isn&#39;t Worth Drei Groschen! West Side Story and Street Scene\nA Pray by Blecht: Revisiting the Lehrstück\nThe Saga of Lenny: Trouble in Tahiti and Lady in the Dark\nEpilogue\nBibliography\nIndex\nCover",
+        "Weill, Blitzstein, and Bernstein: A Study of Influence -- Contents -- Acknowledgments -- Introduction -- 1 Why Influence? Anxiety and Other Modes of Intertextuality -- 2 \"Have You Seen My New Opera?\" The Cradle Will Rock, Johnny Johnson, and Die Dreigroschenoper -- 3 \"Something Like Opera\": Regina, Aufstieg und Fall der Stadt Mahagonny, and Street Scene -- 4 \"Make Our Garden Grow\": Candide and Die Dreigroschenoper -- 5 \"This Isn't Worth Drei Groschen!\" West Side Story and Street Scene -- 6 A Pray by Blecht: Revisiting the Lehrstück -- 7 \"The Saga of Lenny\": Trouble in Tahiti and Lady in the Dark -- Epilogue -- Bibliography -- Index"
+      ],
       "Title": [
         "Weill, Blitzstein, and Bernstein"
       ],
       "PublicationDate": [
-        "2023",
         "20230620",
-        "2022"
+        "2023"
       ],
       "PageCount": [
         "226"
@@ -870,28 +924,21 @@
         "780"
       ],
       "MergedId": [
-        "FETCHMERGED-LOGICAL-b9737-9ac4cd41032af288440e472ebaf9b563ff4ed01ee7a345bcf08311b8ba00992c3"
+        "FETCHMERGED-LOGICAL-b9897-fa1cf71c45a9a816adc3f7bd72c6156fc369841f7739d7e4f2674b1962818e53"
       ],
       "PQID": [
         "EBC30205828"
       ],
       "Copyright": [
+        "Copyright © 2023 Rebecca Schmid",
         "2023 Rebecca Schmid"
       ],
       "IsPeerReviewed": [
         "false"
       ],
-      "thumbnail_s": [
-        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=9781800109315/sc.gif\u0026client=summon\u0026freeimage=true"
-      ],
       "thumbnail_m": [
-        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=9781800109315/mc.gif\u0026client=summon\u0026freeimage=true"
-      ],
-      "thumbnail_l": [
-        "https://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=9781800109315/lc.gif\u0026client=summon\u0026freeimage=true"
-      ],
-      "link.rule.ids": [
-        "307,787,791,793,5057,24831"
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fassets.cambridge.org%2F97818001%2F09315%2Fcover%2F9781800109315.jpg",
+        "https://upenn.summon.serialssolutions.com/2.0.0/image/custom?url=https%3A%2F%2Fmuse.jhu.edu%2Fbook%2F111031%2Fimage%2Ffront_cover.jpg%3Fformat%3D180"
       ],
       "linkProvider": [
         "JSTOR"
@@ -902,18 +949,31 @@
       "IEDL.DBID": [
         "~I6"
       ],
+      "link.rule.ids": [
+        "307,787,791,793,5052,24822,27984"
+      ],
       "BookMark": [
-        "eNpNzktPhDAYheEaL1FxfoPElYsh-XoB2qWQ8ZJM4kbjsmnLh8IgIO1o4q8XZePyTZ6cnANyTiUABcWpPPwfJ3PwPJc0SxU7JSvvWwBgkgvF6BmJX7DpunVcdE349gGbfh2bvooLnPq_vCDHtek8rshRmPYYkefbzVN5n2wf7x7Km21iVc7zRBknXCUocGZqJqUQgCJnaE2tbJrxuhZYAUXMDRepdTVITqmV1gAoxRyPyPWyO07Dxx590GiHYeewD5Pp9KYoOTBI5Xw8IpcLbX0YJv3LvG61C5-cqq_R72ZxtQhnvOmavtHvQz-8TmZ88zpNqcwo4z8b0FWv"
+        "eNpd0c1PwyAYBnCM0ejmjp5tvOhhU14oBY5umR_JEi9LPBJK6daua2dhmvjXi3Yu6ok8yS88vC89NNBbv7S1L4z2NkPoHPANYOC3kgsQGAOWFNgB6u2DOPwdjkOgPNiESXKCBs6VGGMiaCwJnKLoxRZVNYzGVeE_nLdFPYx0nUVj29bf8Qwd5bpydrA7-2h-P51PHkez54enyd1slEoh-SjXYHIOJmZa6lCmM0NznmacmARYkhuaSBFDzjmVGbdxThIepyATEqawjPbRdXftpm1et9Z5ZdOmWZkweasrNR1PKCaYifDwPrra09Iav94622mn_iwlyItOls43repIqYx_oyDfN24VxGUnjHa6KupCrZu6WbR6s3SKMRAJkIDwD1qnbZEtrDJNu2sErL6-41_zJ9uuekA"
       ],
       "DatabaseName": [
         "Torrossa Single Purchase Catalogue"
       ],
+      "DeliveryMethod": [
+        "fulltext_linktorsrc"
+      ],
       "ParticipantIDs": [
         "proquest_ebookcentral_EBC30205828",
+        "projectmuse_ebooks_9781800109315",
         "jstor_books_j_ctv319wpsk",
-        "casalini_monographs_5518612"
+        "casalini_monographs_5518612",
+        "cambridge_corebooks_10_1017_9781800109315"
       ]
     }
   ],
-  "clientId": "S5WC9ES2BJ"
+  "clientId": "S5WC9ES2BJ",
+  "rollups": {
+    "image": {},
+    "reference": {},
+    "newspaper": {}
+  }
 }

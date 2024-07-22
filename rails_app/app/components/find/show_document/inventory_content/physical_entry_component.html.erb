@@ -8,13 +8,24 @@
   <span class="inventory-item__availability-footer"><%= entry.human_readable_status_description %></span>
 </p>
 
+<turbo-frame id="physical_detail_<%= entry.id %>"
+             src="<%= physical_detail_inventory_path(entry.mms_id, entry.id) %>"
+             loading="lazy"
+             target="_top"
+             data-controller="missing-frame"
+             data-missing-frame-error-value="<%= t('inventory.details_missing_frame') %>">
+</turbo-frame>
+
 <% if user.nil? %>
   <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success',
               data: { controller: 'request-button', action: 'click->request-button#addRequestQueryToUrl' } %>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
     <summary id="request_item" class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>
-    <%= turbo_frame_tag 'form_frame', src: request_fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id), loading: 'lazy' do %>
+    <%= turbo_frame_tag 'form_frame',
+                        src: request_fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id),
+                        loading: 'lazy',
+                        data: { controller: 'missing-frame', missing_frame_error_value: t('requests.form.missing_frame') } do %>
       <div class="fulfillment__container">
         <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>
         <div class="row">

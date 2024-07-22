@@ -3,7 +3,7 @@
     <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>
     <div class="row">
       <div class="col-md-7">
-        <div data-controller="item-select comments">
+        <div data-controller="item-select">
           <%= form_with(url: requests_path, method: :post, html: { class: 'fulfillment-form' }) do |form| %>
             <% if items.empty? %> <%# TODO: This won't be needed when we solve bound-with requesting! %>
               <p><%= t('requests.boundwith.in_progress') %></p>
@@ -36,9 +36,10 @@
               <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
             </template>
 
-            <%= turbo_frame_tag 'options_frame', data: { controller: 'options-select',
+            <%= turbo_frame_tag 'options_frame', data: { controller: 'options-select missing-frame',
                                                          item_select_target: 'optionsFrame',
-                                                         options_select_target: 'optionsFrame' } %>
+                                                         options_select_target: 'optionsFrame',
+                                                         missing_frame_error_value: t('requests.form.missing_frame') } %>
 
             <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
             <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>

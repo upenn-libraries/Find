@@ -142,16 +142,48 @@ describe 'Catalog Show Page' do
     let(:entries) { print_monograph_entries }
 
     include_examples 'core show page features'
+
+    it 'does not display the search input' do
+      expect(page).not_to have_selector '.search-list__input'
+    end
+
+    context 'when additional holding details can be retrieved from Alma' do
+      it 'displays additional details/notes' do
+        within('#inventory-0') do
+          expect(page).to have_selector '.inventory-item__notes',
+                                        text: 'Public note'
+        end
+      end
+    end
+  end
+
+  # Record with 9 physical holdings
+  context 'when a record has many entries' do
+    include_context 'with print monograph record with 9 physical entries'
+
+    let(:mms_id) { print_monograph_bib }
+
+    before { visit solr_document_path(mms_id) }
+
+    it 'shows the search input' do
+      within('.search-list') do
+        expect(page).to have_selector '.search-list__input'
+      end
+    end
+
+    it 'filters the holdings' do
+      within('.document__inventory-list') do
+        fill_in 'Search this list', with: 'copy 0'
+        expect(page).to have_selector('.inventory-item', count: 1)
+      end
+    end
   end
 
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
-    include_context 'with mock alma_record on user'
 
     let(:user) { create(:user) }
-    let(:alma_user_data) { { user_group: { 'value' => 'undergrad', 'desc' => 'undergraduate' } } }
-
     let(:mms_id) { print_monograph_bib }
     let(:entries) { print_monograph_entries }
 
@@ -171,12 +203,142 @@ describe 'Catalog Show Page' do
       let(:item) { build :item, :checkoutable }
 
       before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'automatically shows request options when there is a single item' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_radio-options'
+        end
+      end
+
+      it 'selects the first option' do
+        within('.js_radio-options') do
+          expect(first('input[type="radio"]')[:checked]).to be true
+        end
+      end
+
+      it 'shows the scan button' do
+        within('.request-buttons') do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+
+      it 'has the expected data in scan link' do
+        scan_link = find_link(I18n.t('requests.form.buttons.scan'))[:href]
+        expect(scan_link).to include CGI.escape(item.bib_data['title'])
+        expect(scan_link).not_to include CGI.escape(item.bib_data['author'])
+      end
+    end
+
+    context 'with a holding that has multiple checkoutable items' do
+      let(:items) { build_list :item, 2, :checkoutable }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return(items)
+        allow(Inventory::Item).to receive(:find).and_return(items.first)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the item dropdown when there are more than one item' do
+        expect(page).to have_selector 'select#item_id'
+      end
+
+      it 'shows request options when an item is selected' do
+        find('select#item_id').find(:option, items.first.description).select_option
+        expect(page).to have_selector '.js_radio-options'
+      end
+    end
+
+    context 'when adding comments to a request' do
+      let(:item) { build :item, :checkoutable }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
+        find('details.fulfillment > summary').click
+        find('input#delivery_pickup').click
+      end
+
+      it 'shows a button to add comments when the option is changed from scan' do
+        within('.add-comments') do
+          expect(page).to have_link I18n.t('requests.form.add_comments')
+        end
+      end
+
+      it 'hides the comments area when the option is changed back to scan' do
+        find('input#delivery_electronic').click
+        within('form.fulfillment-form') do
+          expect(page).not_to have_selector '.add-comments'
+        end
+      end
+
+      it 'expands the comments area when the button is clicked' do
+        click_link I18n.t('requests.form.add_comments')
+        within('.add-comments') do
+          expect(page).to have_selector 'textarea#comments'
+        end
+      end
+    end
+
+    context 'with an aeon requestable item' do
+      let(:item) { build :item, :aeon_requestable }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the aeon request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_aeon'
+        end
+      end
+
+      it 'shows the schedule visit button with aeon href' do
+        within('.request-buttons') do
+          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
+          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
+          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
+        end
+      end
+    end
+
+    context 'with an item at the archives' do
+      let(:item) { build :item, :at_archives }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '.js_archives'
+        end
+      end
+    end
+
+    context 'with an item that is unavailable' do
+      let(:item) { build :item, :not_checkoutable }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows a note about the unavailability status' do
+        within('.fulfillment__container') do
+          expect(page).to have_content I18n.t('requests.form.options.only_ill_requestable')
+        end
+      end
+
+      it 'shows request options' do
         within('.fulfillment__container') do
           expect(page).to have_selector '.js_radio-options'
         end
@@ -193,61 +355,12 @@ describe 'Catalog Show Page' do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
       end
-    end
 
-    context 'with a holding that has multiple checkoutable items' do
-      let(:items) { build_list :item, 2, :checkoutable }
+      context 'when user a courtesy borrower' do
+        let(:user) { create(:user, :courtesy_borrower) }
 
-      before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return(items)
-        allow(Inventory::Service::Physical).to receive(:item).and_return(items.first)
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the item dropdown when there are more than one item' do
-        expect(page).to have_selector 'select#item_id'
-      end
-
-      it 'shows request options when an item is selected' do
-        find('select#item_id').find(:option, items.first.description).select_option
-        expect(page).to have_selector '.js_radio-options'
-      end
-    end
-
-    context 'with an aeon requestable item' do
-      let(:item) { build :item, :aeon_requestable }
-
-      before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the aeon request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '.js_aeon'
-        end
-      end
-
-      it 'shows the right button' do
-        within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.aeon')
-        end
-      end
-    end
-
-    context 'with an item at the archives' do
-      let(:item) { build :item, :at_archives }
-
-      before do
-        allow(Inventory::Service::Physical).to receive(:items).and_return([item])
-        allow(Inventory::Service::Physical).to receive(:item).and_return(item)
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the archives request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '.js_archives'
+        it 'shows message saying the item is unavailable' do
+          expect(page).to have_content I18n.t('requests.form.options.none.info')
         end
       end
     end
@@ -405,19 +518,9 @@ describe 'Catalog Show Page' do
     end
 
     context 'when viewing a conference' do
-      let(:conference_bib) { '9978940183503681' }
-      let(:conference_entries) do
-        [create(:physical_entry, mms_id: conference_bib, availability: 'available', call_number: 'U6 .A313',
-                                 inventory_type: 'physical')]
-      end
+      include_context 'with a conference proceedings record with 1 physical holding'
 
       before do
-        SampleIndexer.index 'conference.json'
-
-        allow(Inventory::Service).to receive(:full).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                   .and_return(Inventory::Response.new(entries: conference_entries))
-        allow(Inventory::Service).to receive(:brief).with(satisfy { |d| d.fetch(:id) == conference_bib })
-                                                    .and_return(Inventory::Response.new(entries: conference_entries))
         visit(solr_document_path(conference_bib))
       end
 

@@ -1,8 +1,13 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
+    <% if options.ill_pickup? %>
+      <p class="mb-3">
+        <%= t('requests.form.options.only_ill_requestable') %>
+      </p>
+    <% end %>
     <fieldset>
       <legend class="h6"> <%= t('requests.form.options.label') %></legend>
-      <ul class="list-group js_radio-options mb-3">
+      <ul class="list-group js_radio-options">
         <% if options.electronic? %>
           <%= render(Account::Requests::Options::ElectronicComponent.new(checked: true, data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
@@ -19,14 +24,37 @@
                                                                      data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
 
+        <% if options.ill_pickup? %>
+          <%= render(Account::Requests::Options::PickupComponent.new(user: user, ill: true,
+                                                                     checked: !options.any?(:electronic, :office),
+                                                                     data: { action: 'change->options-select#optionChanged' })) %>
+        <% end %>
+
         <% if options.mail? %>
           <%= render(Account::Requests::Options::MailComponent.new(data: { action: 'change->options-select#optionChanged' })) %>
         <% end %>
       </ul>
     </fieldset>
 
+    <%# toggleable comments box, for direct-from-form (no redirect) Alma and ILL requests only %>
+    <% if commentable? %>
+      <div class="add-comments mt-2" data-controller="comments" data-comments-target="addComments"
+           data-action="options-select:toggleComments@window->comments#toggleComments">
+        <%= link_to t('requests.form.add_comments'), '', { data: { comments_target: 'addCommentsButton', action: 'click->comments#showCommentsArea' } } %>
+        <div class="d-none" data-comments-target="commentsArea">
+          <div class="d-flex justify-content-between">
+            <%= label_tag :comments, t('requests.form.comments_label'), class: 'form-label' %>
+            <a href="#">
+              <i class="bi bi-x" data-comments-target="hideCommentsButton" data-action="click->comments#hideCommentsArea"></i>
+            </a>
+          </div>
+          <%= text_area_tag :comments, nil, class: 'form-control mb-3' %>
+        </div>
+      </div>
+    <% end %>
+
     <%# Add hidden fields with values needed for form submission to the request endpoint. %>
-    <% item.fulfillment_submission_params.each do |k, v| %>
+    <% item.loan_params.each do |k, v| %>
       <%= hidden_field_tag k, v %>
     <% end %>
   <% elsif options.aeon? %>
@@ -34,19 +62,21 @@
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
   <% elsif options.archives? %>
     <p class="js_archives alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', url: t('urls.requesting_info.archives')) %>
+      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
+            contact_url: t('urls.requesting_info.archives_contact')) %>
+    </p>
+  <% else %>
+    <p class="alert alert-info mb-3">
+      <%= t('requests.form.options.none.info') %>
     </p>
   <% end %>
-  <div class="request-buttons">
-    <%= electronic_delivery_link %>
+
+  <div class="request-buttons mt-3">
     <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
     <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
+    <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>
     <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
-
-    <%# TODO: add the aeon link (where is it?), use item.bib_data['mms_id'] and item.holding_data['holding_id'] %>
-    <%= link_to t('requests.form.buttons.aeon'),
-                '',
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } } %>
+    <%= electronic_delivery_link %>
+    <%= aeon_link %>
   </div>
 <% end %>
