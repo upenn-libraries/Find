@@ -16,7 +16,8 @@ module Find
           @info = entry.location_info
         end
 
-        def info?
+        # @return [Boolean]
+        def render?
           info.present?
         end
 
