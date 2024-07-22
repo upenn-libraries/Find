@@ -39,8 +39,22 @@ class CatalogController < ApplicationController
     config.document_solr_path = 'get'
     config.json_solr_path = 'advanced'
 
-    # Display link to advanced search form
-    config.advanced_search.enabled = true
+    # Remove facet limits on the advanced search form; if we limit these, we see the modal that does not allow for
+    # multiple selection, which is essential to the advanced search facet functionality.
+    config.advanced_search = Blacklight::OpenStructWithHashAccess.new(
+      enabled: true,
+      form_solr_parameters: {
+        'facet.field': %w[access_facet format_facet language_facet library_facet
+                          location_facet classification_facet recently_published_facet],
+        'f.access_facet.facet.limit': '-1',
+        'f.format_facet.facet.limit': '-1',
+        'f.language_facet.facet.limit': '-1',
+        'f.library_facet.facet.limit': '-1',
+        'f.location_facet.facet.limit': '-1',
+        'f.classification_facet.facet.limit': '-1',
+        'f.recently_published_facet.facet.limit': '-1'
+      }
+    )
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
