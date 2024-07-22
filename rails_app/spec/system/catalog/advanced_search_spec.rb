@@ -8,6 +8,15 @@ describe 'Advanced Search Page' do
 
   before { visit advanced_search_catalog_path }
 
+  context 'when filtering with facets' do
+    it 'does not limit values' do
+      within('div.blacklight-library_facet') do
+        click_on I18n.t('facets.library')
+        expect(page).to have_selector 'ul.facet-values li', count: 11
+      end
+    end
+  end
+
   context 'when using a range search field' do
     context 'when submitting a ranged search with both endpoints' do
       before do
