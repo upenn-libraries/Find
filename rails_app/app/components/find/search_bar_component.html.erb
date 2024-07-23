@@ -1,6 +1,6 @@
 <%
   # Copied from Blacklight version 8.1.0
-  
+
   # Adapted for the search box to be customized.
   # - "Find it" button label
   # - Center search box
@@ -44,7 +44,7 @@
 <% end %>
 
 <% if advanced_search_enabled? %>
-  <%= link_to t('search.advanced.label'), @advanced_search_url %>
+  <%= link_to t('search.advanced.label'), advanced_search_catalog_path(@params) %>
 <% end %>
 
 <%= link_to t('search.databases'), databases_catalog_path %>

@@ -6,9 +6,42 @@ describe 'Advanced Search Page' do
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with electronic journal record with 4 electronic entries'
 
-  before { visit advanced_search_catalog_path }
+  context 'with incoming parameters' do
+    let(:params) do
+      { 'sort' => 'creator_sort asc, score desc', 'op' => 'must',
+        'clause' => { '4' => { 'field' => 'subject_search', 'query' => 'Cats' },
+                      '10' => { 'field' => 'place_of_publication_search', 'query' => 'Baltimore' } },
+        'f' => { 'access_facet' => ['At the library'] } }
+    end
+
+    before do
+      visit search_catalog_path(params)
+      click_on 'Advanced'
+    end
+
+    it 'populates the search fields' do
+      within('form.advanced') do
+        expect(page).to have_field(I18n.t('advanced.subject_search'), with: 'Cats')
+        expect(page).to have_field(I18n.t('advanced.place_of_publication_search'), with: 'Baltimore')
+      end
+    end
+
+    it 'selects the facets' do
+      within('form.advanced') do
+        expect(page).to have_field('At the library', checked: true)
+      end
+    end
+
+    it 'selects the sort order' do
+      within('form.advanced') do
+        expect(page).to have_select('sort', selected: I18n.t('sort.creator_asc'))
+      end
+    end
+  end
 
   context 'when using a range search field' do
+    before { visit advanced_search_catalog_path }
+
     context 'when submitting a ranged search with both endpoints' do
       before do
         from = find('legend', text: I18n.t('advanced.publication_date_search'))
