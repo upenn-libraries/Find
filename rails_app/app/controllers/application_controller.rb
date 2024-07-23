@@ -24,15 +24,29 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
-  # Store the request referer if it's present. In our specific use case with the login page, we add query parameters
-  # to the URL to ensure that the user is redirected back to the correct holding and with the request options expanded.
-  # The request fullpath will not preserve these query parameters, so it's important that we prefer the request referer
-  # in this specific use case.
+  # Store the request referer if it's present and if its pointing at the same path of current stored location. We need
+  # this functionality because we use javascript to add query parameters to the URL to add certain features like,
+  # ensuring that the user is redirected back to the correct holding. The stored location will not preserve these query
+  # parameters because they are added on the client side, so it's important that we prefer the request referer in
+  # this specific use case.
   # @return [String, NilClass]
   def store_referer
     return unless referer_present?
 
-    store_location_for(:user, request.referer)
+    # Need to cache stored location, otherwise it's deleted.
+    current_stored_location = stored_location_for(:user)
+
+    return if current_stored_location.nil?
+
+    if URI.parse(current_stored_location).path == URI.parse(request.referer).path
+      # Stored location and referrer have the same path. Prefer referer because it may contain query
+      # params (like those added on show page interactions).
+      store_location_for(:user, request.referer)
+    else
+      # Retain Devise's stored location, so the user is redirected to their expected destination after
+      # logging in.
+      store_location_for(:user, current_stored_location)
+    end
   end
 
   private
