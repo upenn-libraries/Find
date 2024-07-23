@@ -7,7 +7,16 @@
         <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
       </span>
     </summary>
-    <%= render Find::ShowDocument::InventoryContent::LibInfoComponent.new(entry: entry) %>
+    <div class="location-details__content">
+      <turbo-frame id="library_info_<%= entry.library_code %>"
+                   src="<%= library_info_path(code: entry.library_code) %>"
+                   loading="lazy"
+                   target="_top"
+                   data-controller="missing-frame"
+                   data-missing-frame-error-value="<%= t('library.info.missing_frame') %>">
+        <%= t('library.info.loading') %>
+      </turbo-frame>
+    </div>
   </details>
 </div>
 <p class="<%= availability_class %> inventory-item__availability-summary">

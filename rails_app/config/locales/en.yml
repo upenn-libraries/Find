@@ -290,10 +290,13 @@ en:
       10_years: 'Within 10 years'
       15_years: 'Within 15 years'
     subject: 'Subject'
-  library_info:
-    about: 'About location'
-    todays_hours: "Today's hours: %{hours}"
-    view_more_hours: 'View more hours'
+  library:
+    info:
+      about: 'About location'
+      todays_hours: "Today's hours: %{hours}"
+      view_more_hours: 'View more hours'
+      loading: 'Loading location information...'
+      missing_frame: "We're having trouble getting additional information for this library location. Please try again."
   login:
     alma:
       credentials:

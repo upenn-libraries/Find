@@ -66,7 +66,7 @@ Rails.application.routes.draw do
       get 'ill/new', action: :ill, as: 'ill_new_request'
 
       get ':system/:type/:id', action: :show, as: 'request',
-                               constraints: { system: /(ill|ils)/, type: /(loan|hold|transaction)/ }
+          constraints: { system: /(ill|ils)/, type: /(loan|hold|transaction)/ }
       patch 'ils/loan/renew_all', action: :renew_all, as: :ils_renew_all_request
       patch 'ils/loan/:id/renew', action: :renew, as: :ils_renew_request
       get 'ill/transaction/:id/download', action: :scan, controller: :download, as: :ill_download_request
@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     get 'fines-and-fees', to: 'fines#index'
   end
 
+  get 'library/:code', to: 'library#info', controller: 'library', as: :library_info
   get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'

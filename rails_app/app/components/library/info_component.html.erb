@@ -1,4 +1,4 @@
-<div class="location-details__content">
+<turbo-frame id="library_info_<%= code %>">
   <ul>
     <% if hours_content.present? %>
       <li>
@@ -45,9 +45,9 @@
     <% if library_url.present? %>
       <li>
         <div>
-          <%= link_to t('library_info.about'), library_url %>
+          <%= link_to t('library.info.about'), library_url %>
         </div>
       </li>
     <% end %>
   </ul>
-</div>
+</turbo-frame>

@@ -70,18 +70,16 @@ module Inventory
         end
 
         # @return [String, nil]
+        def library_code
+          data[:library_code]
+        end
+
+        # @return [String, nil]
         def location
           location_code = data[:location_code]
           return unless location_code
 
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
-        end
-
-        def location_info
-          library_code = data[:library_code]
-          return unless library_code
-
-          LibInfo::Request.find(library_code: library_code)
         end
 
         # Number of items for this physical holding.
