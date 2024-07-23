@@ -54,13 +54,13 @@ module Inventory
         item = Alma::BibItem.find(host_record_id, holding_id: holding_id).first
 
         # Extract bibliographic data from child record (record displayed in Find).
-        keys = %w[mms_id title author issn isbn complete_edition network_numbers place_of_publication
+        keys = %w[title author issn isbn complete_edition network_numbers place_of_publication
                   date_of_publication publisher_const]
         bib_data = Alma::Bib.find([mms_id], {}).response['bib'].first.slice(*keys)
 
         # Combine information to create a frankenstein'd Item record that combines host record's holding and item
         # information with displayable record's bib data.
-        new(Alma::BibItem.new({ 'bib_data' => bib_data,
+        new(Alma::BibItem.new({ 'bib_data' => bib_data.merge({ 'mms_id' => host_record_id }),
                                 'holding_data' => item.holding_data,
                                 'item_data' => item.item_data }))
       end
