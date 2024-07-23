@@ -99,7 +99,7 @@ module Inventory
       # Grabs inventory data from Alma Bib Availability API. Returns only active entries if entries are electronic.
       #
       # @param mms_id [String]
-      # @return [Array]
+      # @return [Array, NilClass]
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
