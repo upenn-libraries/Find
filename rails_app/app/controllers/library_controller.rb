@@ -7,8 +7,7 @@ class LibraryController < ApplicationController
   def info
     respond_to do |format|
       format.html do
-        @code = code
-        render(Library::InfoComponent.new(library_code: code), layout: false)
+        render(Library::InfoComponent.new(library_code: params[:code]), layout: false)
       end
     end
   end
