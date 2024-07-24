@@ -1,4 +1,4 @@
-<%# Copied template from Blacklight v8.1.0 to add stimulus controller that supports range search fields %>
+<%# Copied template from Blacklight v8.3.0 to add stimulus controller that supports range search fields %>
 
 <% if constraints? %>
   <div class="constraints well search_history">
@@ -44,8 +44,8 @@
 
   <% if sort_fields_select %>
     <div class="form-group row mb-4">
-      <%= content_tag :h2, t('blacklight.advanced_search.form.sort_label'), id: 'advanced-search-sort-label', class: 'col-md-3 col-form-label text-md-right' %>
-      <div class="col">
+      <%= content_tag :h2, t('blacklight.advanced_search.form.sort_label'), id: 'advanced-search-sort-label', class: 'col-md-3 text-md-right' %>
+      <div class="col-md-9">
         <%= sort_fields_select %>
       </div>
     </div>
@@ -54,7 +54,7 @@
   <div class="form-group row">
     <div class="submit-buttons col-md-9 offset-md-3">
       <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
-      <%= button_tag t('blacklight.advanced_search.form.start_over_html'), type: 'reset', class: 'btn btn-link advanced-search-start-over' %>
+      <%= link_to t('blacklight.advanced_search.form.start_over_html'), request.path, :class =>"btn btn-link advanced-search-start-over" %>
     </div>
   </div>
 <% end %>
