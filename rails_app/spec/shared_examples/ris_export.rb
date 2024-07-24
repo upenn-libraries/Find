@@ -16,7 +16,7 @@ shared_examples_for 'RisExport' do
       it 'returns RIS text' do
         values = object.export_as_ris
         expect(values).to include 'TY  - CONFERENCE/EVENT', 'TY  - GOVERNMENT DOCUMENT', 'TY  - BOOK',
-                                  'TI  - Report of the Conference of FAO : nineteenth session, Rome, ' /
+                                  'TI  - Report of the Conference of FAO : nineteenth session, Rome, ',
                                   '12 November - 1 December 1977.',
                                   'PY  - 1979', 'CY  - Rome :', 'PB  - The Organization,', 'ER  - '
       end
