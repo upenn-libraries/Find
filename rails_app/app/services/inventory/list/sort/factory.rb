@@ -5,7 +5,7 @@ module Inventory
     module Sort
       # creates objects to sort Alma Availability API inventory data
       class Factory
-        # @param inventory_data [Array]
+        # @param inventory_data [Array, NilClass]
         # returns appropriate Inventory::Sort instance
         def self.create(inventory_data)
           type = inventory_data&.first&.dig('inventory_type')
