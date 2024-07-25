@@ -67,6 +67,10 @@ describe Inventory::Item do
         expect(items.first.bib_data).to include bib_set.response['bib'].first
         expect(items.first.item_data).to eql bib_item.item_data
       end
+
+      it 'returns an item marked as boundwith' do
+        expect(items.first.boundwith?).to be true
+      end
     end
 
     context 'when holding data is blank' do

@@ -183,6 +183,7 @@ en:
       page_lede: "View and renew items you've loaned or requested from the library."
       no_items: 'No items found.'
       identifier: '%{system} %{type} ID: %{id}'
+      boundwith_notice: 'This title is not representative of the title requested because it is bound together with other works.'
       refine:
         title: 'Refine your shelf'
         filters: 'Type'

@@ -33,6 +33,10 @@ FactoryBot.define do
       comments { 'A very important comment.' }
     end
 
+    trait :with_boundwith do
+      boundwith { 'true' }
+    end
+
     trait :proxied do
       proxy_for { 'jdoe' }
     end

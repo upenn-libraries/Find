@@ -54,6 +54,10 @@ FactoryBot.define do
       item_barcode { 'PUBD-1234' }
     end
 
+    trait :boundwith do
+      title { "#{PennMARC::Title::HOST_BIB_TITLE} item barcode 1234568" }
+    end
+
     skip_create
     initialize_with { Alma::Loan.new(attributes.deep_stringify_keys) }
   end

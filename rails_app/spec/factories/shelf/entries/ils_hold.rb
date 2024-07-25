@@ -12,6 +12,10 @@ FactoryBot.define do
       data { attributes_for(:alma_hold, :borrow_direct) }
     end
 
+    trait :boundwith do
+      data { attributes_for(:alma_hold, :boundwith) }
+    end
+
     skip_create
     initialize_with { Shelf::Entry::IlsHold.new(data.deep_stringify_keys) }
   end

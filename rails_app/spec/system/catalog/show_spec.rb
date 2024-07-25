@@ -232,6 +232,19 @@ describe 'Catalog Show Page' do
       end
     end
 
+    context 'when holding is a boundwith' do
+      let(:item) { build :item, :boundwith }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows boundwith notice' do
+        expect(page).to have_text I18n.t('requests.form.options.boundwith')
+      end
+    end
+
     context 'with a holding that has multiple checkoutable items' do
       let(:items) { build_list :item, 2, :checkoutable }
 
