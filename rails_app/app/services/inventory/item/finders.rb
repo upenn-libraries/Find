@@ -41,7 +41,7 @@ module Inventory
 
       private
 
-      # Bound-with records contain the relevant bibliographic information, but their host records contain the holding
+      # Boundwith records contain the relevant bibliographic information, but their host records contain the holding
       # and item information. In order to facilitate the fulfillment process we create an item that combines the
       # information from the host and child record.
       #
@@ -62,7 +62,8 @@ module Inventory
         # information with displayable record's bib data.
         new(Alma::BibItem.new({ 'bib_data' => bib_data.merge({ 'mms_id' => host_record_id }),
                                 'holding_data' => item.holding_data,
-                                'item_data' => item.item_data }))
+                                'item_data' => item.item_data,
+                                'boundwith' => true }))
       end
 
       # Some of our records have no Items. In order for consistent logic in requesting contexts, we need an Item object

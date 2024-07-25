@@ -77,7 +77,7 @@ module Inventory
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
         end
 
-        # Returns host record mms id, if physical holding is a bound-with.
+        # Returns host record mms id, if physical holding is a boundwith.
         def host_record_id
           data[:host_record_id]
         end

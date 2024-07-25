@@ -10,6 +10,10 @@
 
             <% if items.length == 1 %>
               <%= form.hidden_field :item_id, value: items.first.id %>
+              <% if items.first.boundwith? %>
+                <%= form.hidden_field :boundwith, value: 'true' %>
+                <p class="alert alert-info"><%= t('requests.form.options.boundwith') %></p>
+              <% end %>
 
               <%# Displaying options inline, instead loading via turbo-frame when there is only one item. %>
               <%= render(Account::Requests::OptionsComponent.new(user: @user, item: items.first)) %>
@@ -24,7 +28,7 @@
               <template id="options_loading_template" data-item-select-target="optionsLoadingTemplate">
                 <div class="placeholder-glow">
                   <p class="mb-2"><span class="placeholder w-75"></span></p>
-                  <ul class="list-group js_radio-options">
+                  <ul class="list-group">
                     <li class="list-group-item placeholder-glow">
                       <span class="placeholder w-75"></span>
                       <span class="placeholder w-50"></span>

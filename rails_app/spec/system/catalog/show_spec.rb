@@ -204,18 +204,17 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'automatically shows request options when there is a single item' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_radio-options'
+          expect(page).to have_selector '#delivery-options'
         end
       end
 
       it 'selects the first option' do
-        within('.js_radio-options') do
+        within('#delivery-options') do
           expect(first('input[type="radio"]')[:checked]).to be true
         end
       end
@@ -248,7 +247,7 @@ describe 'Catalog Show Page' do
 
       it 'shows request options when an item is selected' do
         find('select#item_id').find(:option, items.first.description).select_option
-        expect(page).to have_selector '.js_radio-options'
+        expect(page).to have_selector '#delivery-options'
       end
     end
 
@@ -257,13 +256,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
 
       it 'shows a button to add comments when the option is changed from scan' do
-        within('.add-comments') do
+        within('#add-comments') do
           expect(page).to have_link I18n.t('requests.form.add_comments')
         end
       end
@@ -271,13 +269,13 @@ describe 'Catalog Show Page' do
       it 'hides the comments area when the option is changed back to scan' do
         find('input#delivery_electronic').click
         within('form.fulfillment-form') do
-          expect(page).not_to have_selector '.add-comments'
+          expect(page).not_to have_selector '#add-comments'
         end
       end
 
       it 'expands the comments area when the button is clicked' do
         click_link I18n.t('requests.form.add_comments')
-        within('.add-comments') do
+        within('#add-comments') do
           expect(page).to have_selector 'textarea#comments'
         end
       end
@@ -288,13 +286,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'shows the aeon request options' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_aeon'
+          expect(page).to have_selector '#aeon-option'
         end
       end
 
@@ -312,13 +309,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
-      it 'shows the archives request options' do
+      it 'shows the archives text' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_archives'
+          expect(page).to have_selector '#archives-option'
         end
       end
     end
@@ -328,7 +324,6 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -340,12 +335,12 @@ describe 'Catalog Show Page' do
 
       it 'shows request options' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_radio-options'
+          expect(page).to have_selector '#delivery-options'
         end
       end
 
       it 'selects the first option' do
-        within('.js_radio-options') do
+        within('#delivery-options') do
           expect(first('input[type="radio"]')[:checked]).to be true
         end
       end

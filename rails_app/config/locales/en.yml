@@ -329,6 +329,7 @@ en:
       options:
         label: 'How would you like it delivered?'
         only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
+        boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
@@ -373,6 +374,7 @@ en:
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
       proxy_comment: 'Proxied by %{requester_id}'
+      boundwith_comment: 'This request is for a boundwith record.'
   search:
     all_fields: 'All Fields'
     button:

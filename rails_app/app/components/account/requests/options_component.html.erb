@@ -2,13 +2,13 @@
   <% if deliverable? %>
     <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
       <% if options.ill_pickup? %>
-        <p class="mb-3">
+        <p class="alert alert-info mb-3">
           <%= t('requests.form.options.only_ill_requestable') %>
         </p>
       <% end %>
       <fieldset>
         <legend class="h6"> <%= t('requests.form.options.label') %></legend>
-        <ul class="list-group js_radio-options">
+        <ul class="list-group">
           <% if options.electronic? %>
             <%= render(Account::Requests::Options::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
@@ -67,13 +67,13 @@
       </div>
     </div>
   <% elsif options.aeon? %>
-    <p class="js_aeon"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.requesting_info.kislak_reading_room')) %></p>
+    <p id="aeon-option"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.requesting_info.kislak_reading_room')) %></p>
     <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
     <div class="request-buttons mt-3">
       <%= aeon_link %>
     </div>
   <% elsif options.archives? %>
-    <p class="js_archives alert alert-info mb-3">
+    <p id="archives-option" class="alert alert-info mb-3">
       <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
             contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
