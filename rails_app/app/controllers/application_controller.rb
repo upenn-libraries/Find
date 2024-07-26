@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   # Always store the full path from the request, as this is present in every request.
   # @return [String]
   def store_fullpath
-    store_location_for(:user, request.fullpath)
+    uri = URI.parse(request.path)
+    uri.query = search_params.to_query
+    store_location_for(:user, uri.to_s)
   end
 
   # Store the request referer if it's present and if its pointing at the same path of current stored location. We need
@@ -88,5 +90,13 @@ class ApplicationController < ActionController::Base
       request.path == login_path ||
       request.path == alma_login_path ||
       request.path.ends_with?('inventory')
+  end
+
+  # Remove blank search parameters
+  # @return [ActionController::Parameters]
+  def search_params
+    search_params = params.permit(blacklight_config.search_state_fields.excluding(:action, :controller))
+    search_params['clause'] = search_params['clause']&.reject { |_k, v| v['query'].blank? }
+    search_params.compact_blank
   end
 end
