@@ -45,8 +45,8 @@ module Account
       def electronic_delivery_link
         link_to t('requests.form.buttons.scan'),
                 ill_new_request_path(**item.scan_params),
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
+                class: 'd-none btn btn-success btn-lg', target: '_blank',
+                data: { options_select_target: 'electronicButton', turbo_frame: '_top' }
       end
 
       # Generates the Aeon request link with open parameters for form pre-population.
