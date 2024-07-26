@@ -57,12 +57,12 @@ FactoryBot.define do
 
     trait :pickup do
       delivery { Fulfillment::Request::Options::PICKUP }
-      pickup_location { 'van_pelt' }
+      pickup_location { 'VanPeltLib' }
     end
 
     trait :ill_pickup do
       delivery { Fulfillment::Request::Options::ILL_PICKUP }
-      pickup_location { 'van_pelt' }
+      pickup_location { 'VanPeltLib' }
     end
 
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad
