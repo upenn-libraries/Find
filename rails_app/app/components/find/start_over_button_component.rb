@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Find
-  # Local component copied from Blacklight version 8.1.0
+  # Local component copied from Blacklight version 8.3.0
   class StartOverButtonComponent < Blacklight::Component
     def call
       link_to t('blacklight.search.start_over'), start_over_path, class: 'catalog_startOverLink btn btn-light'

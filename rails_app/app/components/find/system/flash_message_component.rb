@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copied from Blacklight version 8.1.0
+# Copied from Blacklight version 8.3.0
 
 module Find
   module System
