@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Find Request Confirmation</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  </head>
+  <body>
+    <h1>Your Find request has been submitted</h1>
+    <p>
+      You have successfully submitted a request for: <%= @outcome.item_desc %>
+    </p>
+    <p>
+      <%= @outcome.fulfillment_desc %>
+    </p>
+    <p>
+      Your confirmation number is <strong><%= @outcome.confirmation_number %></strong>. Please reference it when inquiring
+      about your request status or about any other issues.
+    </p>
+    <p>
+      For questions regarding your request, <a href="<%= t('urls.guides.circulation') %>">see our guides</a>.
+    </p>
+  </body>
+</html>
