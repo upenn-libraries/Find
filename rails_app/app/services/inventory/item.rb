@@ -26,6 +26,16 @@ module Inventory
       @bib_item.item.fetch('bib_data', {})
     end
 
+    # Return item identifier
+    def id
+      item_data['pid']
+    end
+
+    # Returns true if record is marked as a boundwith.
+    def boundwith?
+      @bib_item.item.fetch('boundwith', false)
+    end
+
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
     def checkoutable?

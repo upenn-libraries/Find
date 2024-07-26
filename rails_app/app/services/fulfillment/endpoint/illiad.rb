@@ -34,6 +34,7 @@ module Fulfillment
           transaction = ::Illiad::Request.submit data: body
           add_comment_note(request, transaction)
           add_proxy_note(request, transaction)
+          add_boundwith_note(request, transaction)
           Outcome.new(request: request, confirmation_number: "ILLIAD_#{transaction.id}")
         end
 
@@ -99,6 +100,16 @@ module Fulfillment
 
           note = I18n.t('fulfillment.illiad.proxy_comment', requester_id: request.requester.uid)
           add_note(transaction, note)
+        end
+
+        # Add note informing staff if requested record is a boundwith
+        # @param request [Request]
+        # @param transaction [::Illiad::Request]
+        # @return [Hash]
+        def add_boundwith_note(request, transaction)
+          return unless request.params.boundwith?
+
+          add_note(transaction, I18n.t('fulfillment.illiad.boundwith_comment'))
         end
 
         def add_note(transaction, note)

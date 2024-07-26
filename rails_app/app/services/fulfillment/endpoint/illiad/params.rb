@@ -185,6 +185,11 @@ module Fulfillment
           sid == 'BD' || open_params['bd'] == 'true'
         end
 
+        # Returns true if the item being requested is a known boundwith.
+        def boundwith?
+          open_params['boundwith'] == 'true'
+        end
+
         # Request to checkout a book or other physical item.
         # @return [Boolean]
         def loan?

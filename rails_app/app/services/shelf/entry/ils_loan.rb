@@ -16,8 +16,9 @@ module Shelf
         raw_data['author']
       end
 
+      # Returning mms_id for loans that are represented in the application.
       def mms_id
-        return nil if resource_sharing?
+        return nil if resource_sharing? || boundwith?
 
         raw_data['mms_id']
       end

@@ -1,6 +1,12 @@
 <h1 class="page__heading"><%= entry.title %></h1>
 <p class="page__lede"><%= entry.author %></p>
 
+<% if entry.boundwith? %>
+  <p class="alert alert-info">
+    <%= t('account.shelf.boundwith_notice') %>
+  </p>
+<% end %>
+
 <div class="col col-md-7">
   <div class="table-responsive">
     <table class="table">

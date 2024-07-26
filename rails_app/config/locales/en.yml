@@ -183,6 +183,7 @@ en:
       page_lede: "View and renew items you've loaned or requested from the library."
       no_items: 'No items found.'
       identifier: '%{system} %{type} ID: %{id}'
+      boundwith_notice: 'This title is not representative of the title requested because it is bound together with other works.'
       refine:
         title: 'Refine your shelf'
         filters: 'Type'
@@ -314,8 +315,6 @@ en:
     format: 'Format'
     score: 'Score'
   requests:
-    boundwith:
-      in_progress: 'This item is bound with others. We are still working on requesting for these types of items.'
     form:
       heading: 'Request an item'
       item_label: 'What item are you requesting?'
@@ -331,6 +330,7 @@ en:
       options:
         label: 'How would you like it delivered?'
         only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
+        boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
@@ -376,6 +376,7 @@ en:
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
       proxy_comment: 'Proxied by %{requester_id}'
+      boundwith_comment: 'This request is for a boundwith record.'
   search:
     all_fields: 'All Fields'
     button:
