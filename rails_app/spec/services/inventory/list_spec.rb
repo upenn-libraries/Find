@@ -80,6 +80,14 @@ describe Inventory::List do
         expect(response.count).to be 4
       end
     end
+
+    context 'when inventory data is nil' do
+      let(:availability_data) { { mms_id => { holdings: nil } } }
+
+      it 'returns no entries' do
+        expect(response.entries).to be_empty
+      end
+    end
   end
 
   describe '.brief' do
