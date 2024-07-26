@@ -5,44 +5,47 @@
       <div class="col-md-7">
         <div data-controller="item-select">
           <%= form_with(url: requests_path, method: :post, html: { class: 'fulfillment-form' }) do |form| %>
-            <% if items.empty? %> <%# TODO: This won't be needed when we solve bound-with requesting! %>
-              <p><%= t('requests.boundwith.in_progress') %></p>
+            <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
+            <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>
+
+            <% if items.length == 1 %>
+              <%= form.hidden_field :item_id, value: items.first.id %>
+              <% if items.first.boundwith? %>
+                <%= form.hidden_field :boundwith, value: 'true' %>
+                <p class="alert alert-info"><%= t('requests.form.options.boundwith') %></p>
+              <% end %>
+
+              <%# Displaying options inline, instead loading via turbo-frame when there is only one item. %>
+              <%= render(Account::Requests::OptionsComponent.new(user: @user, item: items.first)) %>
             <% elsif items.length > 1 %>
               <div class="mb-3">
                 <%= form.label :item_id, t('requests.form.item_label'), { class: 'form-label h6' } %>
                 <%= form.select(:item_id, item_labels, { include_blank: t('requests.form.item_placeholder') },
                                 { class: 'form-select',
-                                  data: { item_select_target: 'select',
-                                          action: 'change->item-select#selectChanged' } }) %>
+                                  data: { action: 'change->item-select#selectChanged' } }) %>
               </div>
-            <% else %>
-              <%= form.hidden_field :item_id, value: items.first.item_data['pid'] || 'no-item', data: { item_select_target: 'itemIdField' } %>
+
+              <template id="options_loading_template" data-item-select-target="optionsLoadingTemplate">
+                <div class="placeholder-glow">
+                  <p class="mb-2"><span class="placeholder w-75"></span></p>
+                  <ul class="list-group">
+                    <li class="list-group-item placeholder-glow">
+                      <span class="placeholder w-75"></span>
+                      <span class="placeholder w-50"></span>
+                    </li>
+                    <li class="list-group-item placeholder-glow">
+                      <span class="placeholder w-75"></span>
+                      <span class="placeholder w-50"></span>
+                    </li>
+                  </ul>
+                </div>
+                <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
+              </template>
+
+              <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame',
+                                                           controller: 'missing-frame',
+                                                           missing_frame_error_value: t('requests.form.missing_frame') } %>
             <% end %>
-
-            <template id="options_loading_template" data-item-select-target="optionsLoadingTemplate">
-              <div class="placeholder-glow">
-                <p class="mb-2"><span class="placeholder w-75"></span></p>
-                <ul class="list-group js_radio-options">
-                  <li class="list-group-item placeholder-glow">
-                    <span class="placeholder w-75"></span>
-                    <span class="placeholder w-50"></span>
-                  </li>
-                  <li class="list-group-item placeholder-glow">
-                    <span class="placeholder w-75"></span>
-                    <span class="placeholder w-50"></span>
-                  </li>
-                </ul>
-              </div>
-              <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
-            </template>
-
-            <%= turbo_frame_tag 'options_frame', data: { controller: 'options-select missing-frame',
-                                                         item_select_target: 'optionsFrame',
-                                                         options_select_target: 'optionsFrame',
-                                                         missing_frame_error_value: t('requests.form.missing_frame') } %>
-
-            <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
-            <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>
           <% end %>
         </div>
       </div>

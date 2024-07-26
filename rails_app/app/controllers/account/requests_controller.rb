@@ -96,24 +96,22 @@ module Account
     # those options to determine what actions are available to the user.
     # GET /account/requests/options
     def options
-      item = if params[:item_id] == 'no-item'
-               Inventory::Item.find_all(mms_id: params[:mms_id], holding_id: params[:holding_id]).first
-             else
-               Inventory::Item.find(mms_id: params[:mms_id],
-                                    holding_id: params[:holding_id],
-                                    item_id: params[:item_id])
-             end
-      options = item.fulfillment_options(ils_group: current_user.ils_group) # TODO: could do this in OptionsComponent
-      render(Account::Requests::OptionsComponent.new(user: current_user, item: item, options: options), layout: false)
+      item = Inventory::Item.find(mms_id: params[:mms_id], holding_id: params[:holding_id], item_id: params[:item_id])
+
+      render(Account::Requests::OptionsComponent.new(user: current_user, item: item), layout: false)
     end
 
     # Returns form with item select dropdown and sets up turbo frame for displaying options.
     # GET /account/requests/form?mms_id=XXXX&holding_id=XXXX
     def fulfillment_form
-      items = Inventory::Item.find_all mms_id: params[:mms_id], holding_id: params[:holding_id]
+      items = Inventory::Item.find_all(mms_id: params[:mms_id],
+                                       holding_id: params[:holding_id],
+                                       host_record_id: params[:host_record_id])
+
       render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
                                                   holding_id: params[:holding_id],
-                                                  items: items), layout: false)
+                                                  items: items,
+                                                  user: current_user), layout: false)
     end
 
     private
@@ -139,7 +137,7 @@ module Account
     def block_courtesy_borrowers
       return unless current_user.courtesy_borrower?
 
-      redirect_back_or_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
+      redirect_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
     end
   end
 end

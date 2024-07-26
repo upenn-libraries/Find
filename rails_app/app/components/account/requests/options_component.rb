@@ -8,10 +8,10 @@ module Account
 
       attr_accessor :item, :user, :options
 
-      def initialize(user:, item:, options:)
+      def initialize(user:, item:)
         @user = user
         @item = item
-        @options = options.inquiry
+        @options = item.fulfillment_options(ils_group: user.ils_group).inquiry
       end
 
       # Returns true if at least one delivery option is available.
@@ -36,8 +36,8 @@ module Account
       # @return [ActiveSupport::SafeBuffer]
       def submit_button_for(delivery_type)
         submit_tag t(delivery_type, scope: 'requests.form.buttons'),
-                   { class: 'd-none btn btn-success btn-lg',
-                     data: { options_select_target: "#{delivery_type}Button", turbo_frame: '_top' } }
+                   class: 'd-none btn btn-success btn-lg',
+                   data: { request_options_target: "#{delivery_type}Button", turbo_frame: '_top' }
       end
 
       # Generates the electronic delivery link (scan request)
@@ -45,8 +45,8 @@ module Account
       def electronic_delivery_link
         link_to t('requests.form.buttons.scan'),
                 ill_new_request_path(**item.scan_params),
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'electronicButton', turbo_frame: '_top' } }
+                class: 'd-none btn btn-success btn-lg', target: '_blank', rel: 'noopener',
+                data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
       end
 
       # Generates the Aeon request link with open parameters for form pre-population.
@@ -54,8 +54,8 @@ module Account
       def aeon_link
         link_to t('requests.form.buttons.aeon'),
                 Settings.aeon.requesting_url + item.aeon_params.to_query,
-                { class: 'd-none btn btn-success btn-lg',
-                  data: { options_select_target: 'viewButton', turbo_frame: '_top' } }
+                class: 'btn btn-success btn-lg',
+                data: { turbo_frame: '_top' }
       end
     end
   end
