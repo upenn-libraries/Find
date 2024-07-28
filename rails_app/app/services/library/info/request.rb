@@ -19,9 +19,11 @@ module Library
         new(**response.body)
       end
 
+      # Converts data keys to symbols and empty string values to nil
+      #
       # @param data [Hash]
       def initialize(**data)
-        @data = data.symbolize_keys
+        @data = data.symbolize_keys.transform_values(&:presence)
       end
 
       # Library's hours for the current day
@@ -47,7 +49,7 @@ module Library
 
       # Street address if first address line was parent library name
       #
-      # @return [String]
+      # @return [String, nil]
       def address2
         data[:address2]
       end

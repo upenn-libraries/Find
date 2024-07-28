@@ -294,6 +294,7 @@ en:
     info:
       about: 'About location'
       todays_hours: "Today's hours: %{hours}"
+      view_hours: 'View hours'
       view_more_hours: 'View more hours'
       loading: 'Loading location information...'
       missing_frame: "We're having trouble getting additional information for this library location. Please try again."

@@ -11,20 +11,20 @@
       </li>
     <% end %>
 
-    <% if address_content.present? %>
+    <% if address_display.present? %>
       <li>
         <i class="bi bi-geo-alt-fill"></i>
         <div>
-          <% if maps_url.present? %>
-            <%= link_to safe_join(address_content), maps_url %>
+          <% if maps_url %>
+            <%= link_to safe_join(address_display), maps_url %>
           <% else %>>
-            <%= safe_join address_content %>
+            <%= safe_join address_display %>
           <% end %>
         </div>
       </li>
     <% end %>
 
-    <% if phone.present? %>
+    <% if phone %>
       <li>
         <i class="bi bi-telephone-fill"></i>
         <div>
@@ -33,7 +33,7 @@
       </li>
     <% end %>
 
-    <% if email.present? %>
+    <% if email %>
       <li>
         <i class="bi bi-envelope-fill"></i>
         <div>
@@ -42,7 +42,7 @@
       </li>
     <% end %>
 
-    <% if library_url.present? %>
+    <% if library_url %>
       <li>
         <div>
           <%= link_to t('library.info.about'), library_url %>

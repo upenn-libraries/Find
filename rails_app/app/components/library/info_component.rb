@@ -24,11 +24,9 @@ module Library
     end
 
     # @return [Array<String>]
-    def address_content
-      address_raw = [address1, address2, city_state_zip].compact
-
-      address_raw.map do |line|
-        content_tag(:p, line)
+    def address_display
+      address_content.map do |line|
+        content_tag :p, line
       end
     end
 
@@ -41,14 +39,25 @@ module Library
 
     # @return [String, nil]
     def hours_link
-      link_to(t('library.info.view_more_hours'), hours_url) if hours_url.present?
+      return if hours_url.blank?
+
+      link_text = hours_text.present? ? t('library.info.view_more_hours') : t('library.info.view_hours')
+
+      link_to link_text, hours_url
     end
 
     # @return [String]
     def city_state_zip
-      city_state = [city, state_code].compact.join(', ')
+      # Don't render the city, state, zip line if one is missing
+      return unless [city, state_code, zip].compact.length == 3
 
-      [city_state, zip].compact.join(' ')
+      "#{city}, #{state_code} #{zip}"
+    end
+
+    def address_content
+      return if address1.blank?
+
+      [address1, address2, city_state_zip].compact
     end
   end
 end
