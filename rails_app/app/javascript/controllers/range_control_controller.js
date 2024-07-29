@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-/** attaches to Find::AdvancedSearch::RangeControl component to support ranged searches
+/** attaches to Catalog::AdvancedSearch::RangeControl component to support ranged searches
  on advanced search form
  */
 export default class extends Controller {

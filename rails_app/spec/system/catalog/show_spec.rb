@@ -459,7 +459,7 @@ describe 'Catalog Show Page' do
       before do
         CatalogController.configure_blacklight do |config|
           config.add_show_field :subject_test_show, values: ->(_, _, _) { ['Dogs.'] },
-                                                    component: Find::FacetLinkComponent
+                                                    component: Catalog::FacetLinkComponent
         end
 
         visit(solr_document_path(print_monograph_bib))

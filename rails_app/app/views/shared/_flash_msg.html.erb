@@ -5,6 +5,6 @@
 
 <div class="flash_messages">
   <% [:success, :notice, :error, :alert].each do |type| %>
-    <%= render(Find::System::FlashMessageComponent.with_collection(Array.wrap(flash[type]), type: type)) if flash[type] %>
+    <%= render(Catalog::FlashMessageComponent.with_collection(Array.wrap(flash[type]), type: type)) if flash[type] %>
   <% end %>
 </div>

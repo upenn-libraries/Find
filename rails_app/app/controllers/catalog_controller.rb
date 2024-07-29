@@ -54,17 +54,17 @@ class CatalogController < ApplicationController
     # config.index.document_presenter_class = MyApp::IndexPresenter
 
     # Some components can be configured
-    config.header_component = Find::HeaderComponent
-    config.index.search_bar_component = Find::SearchBarComponent
-    config.index.constraints_component = Find::ConstraintsComponent
-    config.index.facet_group_component = Find::FacetGroupComponent
-    config.index.document_component = Find::ResultsDocumentComponent
-    config.show.document_component = Find::ShowDocumentComponent
-    config.show.show_tools_component = Find::ShowToolsComponent
+    config.header_component = Catalog::HeaderComponent
+    config.index.search_bar_component = Catalog::SearchBarComponent
+    config.index.constraints_component = Catalog::ConstraintsComponent
+    config.index.facet_group_component = Catalog::FacetGroupComponent
+    config.index.document_component = Catalog::ResultsDocumentComponent
+    config.show.document_component = Catalog::ShowDocumentComponent
+    config.show.show_tools_component = Catalog::ShowToolsComponent
 
     # Configure local components for search session components that make the show page toolbar possible
-    config.track_search_session.item_pagination_component = Find::ServerItemPaginationComponent
-    config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
+    config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent
+    config.track_search_session.applied_params_component = Catalog::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -73,7 +73,7 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.add_show_tools_partial(:bookmark, component: Find::BookmarkComponent,
+    config.add_show_tools_partial(:bookmark, component: Catalog::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
                                           validator: :validate_email_params)
@@ -171,12 +171,12 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field :format_facet, label: I18n.t('results.format')
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
-                                         component: Find::FacetLinkComponent, facet_target: :creator_facet,
+                                         component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                                          facet_map: :creator_show_facet_map
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
-                                                           accessor: :marc, component: Find::FacetLinkComponent,
+                                                           accessor: :marc, component: Catalog::FacetLinkComponent,
                                                            facet_target: :creator_facet,
                                                            facet_map: :creator_conference_detail_show_facet_map
     config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
@@ -193,11 +193,11 @@ class CatalogController < ApplicationController
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
     config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc,
-                                         component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                         component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc,
-                                                 component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                                 component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc,
-                                               component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                               component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
@@ -220,7 +220,7 @@ class CatalogController < ApplicationController
                                                              accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
     config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc,
-                                                     component: Find::FacetLinkComponent, facet_target: :creator_facet
+                                                     component: Catalog::FacetLinkComponent, facet_target: :creator_facet
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc
