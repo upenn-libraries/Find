@@ -220,7 +220,8 @@ class CatalogController < ApplicationController
                                                              accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
     config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc,
-                                                     component: Catalog::FacetLinkComponent, facet_target: :creator_facet
+                                                     component: Catalog::FacetLinkComponent,
+                                                     facet_target: :creator_facet
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc

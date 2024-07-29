@@ -8,8 +8,7 @@ module Catalog
     renders_one :search_button
     renders_many :before_input_groups
 
-    # rubocop:disable Metrics/ParameterLists
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/ParameterLists Metrics/MethodLength
     def initialize(
       url:, params:,
       advanced_search_url: nil,
@@ -33,7 +32,7 @@ module Catalog
       @i18n = i18n
       @form_options = form_options
     end
-    # rubocop:enable Metrics/ParameterLists
+    # rubocop:enable Metrics/ParameterLists Metrics/MethodLength
 
     def autocomplete_path
       return nil unless blacklight_config.autocomplete_enabled
