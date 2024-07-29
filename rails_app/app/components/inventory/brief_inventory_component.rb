@@ -3,9 +3,11 @@
 module Inventory
   # Component that renders a set of InventoryEntries for use in in filling-in a Turbo Frame.
   class BriefInventoryComponent < ViewComponent::Base
+    attr_reader :document, :entries
+
     # @param document[SolrDocument]
     def initialize(document:)
-      @id = document.id
+      @document = document
       @entries = document.brief_inventory
     end
   end

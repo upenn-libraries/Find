@@ -1,6 +1,6 @@
-<ol class="holdings">
-  <turbo-frame id="inventory_<%= id %>" src="<%= brief_inventory_path(id) %>" target="_top"
-               data-controller="missing-frame" data-missing-frame-error-value="<%= t('inventory.physical_missing_frame') %>">
+<turbo-frame id="inventory_<%= id %>" src="<%= brief_inventory_path(id) %>" target="_top"
+             data-controller="missing-frame" data-missing-frame-error-value="<%= t('inventory.physical_missing_frame') %>">
+  <ol class="holdings">
     <%= resource_link_entries %>
     <% skeleton_entry_count.times do %>
     <li class="holding__item holding__item--loading placeholder-glow" role="status">
@@ -14,12 +14,7 @@
       </div>
     </li>
     <% end %>
-  </turbo-frame>
-  <% if remainder_count.positive? %>
-  <li>
-    <a href="<%= solr_document_path(@id) %>" class="holdings__other-link">
-      <%= t('inventory.see_all', count: remainder_count, options: 'option'.pluralize(remainder_count)) %>
-    </a>
-  </li>
-  <% end %>
-</ol>
+    <%= render(Inventory::Brief::RemainderComponent.new(document)) %>
+  </ol>
+</turbo-frame>
+
