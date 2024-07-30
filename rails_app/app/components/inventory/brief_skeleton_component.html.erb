@@ -1,0 +1,20 @@
+<turbo-frame id="inventory_<%= id %>" src="<%= brief_inventory_path(id) %>" target="_top"
+             data-controller="missing-frame" data-missing-frame-error-value="<%= t('inventory.physical_missing_frame') %>">
+  <ol class="holdings">
+    <%= resource_link_entries %>
+    <% skeleton_entry_count.times do %>
+    <li class="holding__item holding__item--loading placeholder-glow" role="status">
+      <div class="placeholder-glow">
+        <span class="visually-hidden"><%= t('inventory.entries.loading') %></span>
+        <span class="placeholder col-3"></span>
+      </div>
+      <div class="placeholder-glow">
+        <span class="placeholder col-1"></span>
+        <span class="placeholder col-3"></span>
+      </div>
+    </li>
+    <% end %>
+    <%= render(Inventory::Brief::RemainderComponent.new(document)) %>
+  </ol>
+</turbo-frame>
+

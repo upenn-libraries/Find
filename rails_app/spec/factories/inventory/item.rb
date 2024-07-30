@@ -119,4 +119,12 @@ FactoryBot.define do
       item
     end
   end
+
+  trait :boundwith do
+    item do
+      item = attributes_for(:item)[:item]
+      item['boundwith'] = 'true'
+      item
+    end
+  end
 end
