@@ -137,7 +137,7 @@ module CitationExport
   # @param [String] role_text
   # @return [String]
   def format_contributors(contributors, role_text)
-    return if contributors.blank? || role_text.blank?
+    return '' if contributors.blank? || role_text.blank?
 
     "#{role_text} by #{contributors.collect { |name| convert_name_order(name) }.join(' and ')}. "
   end
@@ -147,8 +147,9 @@ module CitationExport
   # @return [String]
   def convert_name_order(name)
     return name unless name.include? ','
+    return name.chop if name.last == ','
 
     parts = name.split(',')
-    "#{parts[1].squish if parts[1].present?} #{parts[0].squish if parts[0].present?}"
+    [parts[1].squish, parts[0].squish].join(' ')
   end
 end
