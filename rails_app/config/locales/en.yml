@@ -298,6 +298,7 @@ en:
       view_more_hours: 'View more hours'
       loading: 'Loading location information...'
       missing_frame: "We're having trouble getting additional information for this library location. Please try again."
+      no_info: 'No additional information is available for this location.'
   login:
     alma:
       credentials:

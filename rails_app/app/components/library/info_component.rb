@@ -13,19 +13,14 @@ module Library
       @info = Library::Info::Request.find(library_code: code)
     end
 
-    # @return [Boolean]
-    def render?
-      info.present?
-    end
-
     # @return [Array<String>]
     def hours_content
       [hours_text, hours_link].compact
     end
 
-    # @return [Array<String>]
+    # @return [Array<String>, nil]
     def address_display
-      address_content.map do |line|
+      address_content&.map do |line|
         content_tag :p, line
       end
     end
@@ -46,7 +41,7 @@ module Library
       link_to link_text, hours_url
     end
 
-    # @return [String]
+    # @return [String, nil]
     def city_state_zip
       # Don't render the city, state, zip line if one is missing
       return unless [city, state_code, zip].compact.length == 3
@@ -54,6 +49,7 @@ module Library
       "#{city}, #{state_code} #{zip}"
     end
 
+    # @return [Array<String>, nil]
     def address_content
       return if address1.blank?
 

@@ -2,55 +2,59 @@
              target="_top"
              data-controller='missing-frame'
              missing_frame_error_value="<%= t("library.info.missing_frame") %>">
-  <ul>
-    <% if hours_content.present? %>
-      <li>
-        <i class="bi bi-clock-fill"></i>
-        <div>
-          <% hours_content.each do |line| %>
-            <%= content_tag(:p, line) %>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
+  <% if info.present? %>
+    <ul>
+      <% if hours_content.present? %>
+        <li class="library-hours">
+          <i class="bi bi-clock-fill"></i>
+          <div>
+            <% hours_content.each do |line| %>
+              <%= content_tag(:p, line) %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
 
-    <% if address_display.present? %>
-      <li>
-        <i class="bi bi-geo-alt-fill"></i>
-        <div>
-          <% if maps_url %>
-            <%= link_to safe_join(address_display), maps_url %>
-          <% else %>>
-            <%= safe_join address_display %>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
+      <% if address_display.present? %>
+        <li class="library-address">
+          <i class="bi bi-geo-alt-fill"></i>
+          <div>
+            <% if maps_url %>
+              <%= link_to safe_join(address_display), maps_url, class: 'maps-link' %>
+            <% else %>>
+              <%= safe_join address_display %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
 
-    <% if phone %>
-      <li>
-        <i class="bi bi-telephone-fill"></i>
-        <div>
-          <%= link_to phone, "tel:#{phone}" %>
-        </div>
-      </li>
-    <% end %>
+      <% if phone %>
+        <li class="library-phone">
+          <i class="bi bi-telephone-fill"></i>
+          <div>
+            <%= link_to phone, "tel:#{phone}" %>
+          </div>
+        </li>
+      <% end %>
 
-    <% if email %>
-      <li>
-        <i class="bi bi-envelope-fill"></i>
-        <div>
-          <%= email %>
-        </div>
-      </li>
-    <% end %>
+      <% if email %>
+        <li class="library-email">
+          <i class="bi bi-envelope-fill"></i>
+          <div>
+            <%= email %>
+          </div>
+        </li>
+      <% end %>
 
-    <% if library_url %>
-      <li>
-        <div>
-          <%= link_to t('library.info.about'), library_url %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+      <% if library_url %>
+        <li class="library-url">
+          <div>
+            <%= link_to t('library.info.about'), library_url %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><%= t('library.info.no_info') %></p>
+  <% end %>
 </turbo-frame>

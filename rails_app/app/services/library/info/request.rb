@@ -32,12 +32,11 @@ module Library
         def error_message(error)
           response = error.response_body
 
-          return ERROR_MESSAGE if response.blank?
+          return ERROR_MESSAGE if response.nil?
 
-          status = error.response_status
           message = response.is_a?(Hash) ? response['message'] : error.to_s
 
-          "#{ERROR_MESSAGE} (#{status}): #{message}".strip
+          "#{ERROR_MESSAGE} (#{error.response_status}): #{message}".strip
         end
       end
 
