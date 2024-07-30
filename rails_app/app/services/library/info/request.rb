@@ -10,13 +10,35 @@ module Library
     class Request
       attr_reader :data
 
-      # Fetches the information for a specific library based on library code
-      #
-      # @param library_code [String]
-      # @return [Library::Info::Request]
-      def self.find(library_code:)
-        response = Client.get(library_code.to_s)
-        new(**response.body)
+      class << self
+        ERROR_MESSAGE = 'Libraries API Connection Error'
+
+        # Fetches the information for a specific library based on library code
+        #
+        # @param library_code [String]
+        # @return [Library::Info::Request, nil]
+        def find(library_code:)
+          response = Client.get(library_code.to_s)
+          new(**response.body) if response.success?
+        rescue Faraday::Error => e
+          Honeybadger.notify(e)
+          Rails.logger.error error_message(e)
+          nil
+        end
+
+        private
+
+        # @return [String]
+        def error_message(error)
+          response = error.response_body
+
+          return ERROR_MESSAGE if response.blank?
+
+          status = error.response_status
+          message = response.is_a?(Hash) ? response['message'] : error.to_s
+
+          "#{ERROR_MESSAGE} (#{status}): #{message}".strip
+        end
       end
 
       # Converts data keys to symbols and empty string values to nil

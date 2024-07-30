@@ -40,19 +40,7 @@ module Library
         def get(*args)
           connection.get(*args)
         rescue Faraday::Error => e
-          raise Error, error_message(e)
-        end
-
-        # @return [String]
-        def error_message(error)
-          response = error.response_body
-
-          return ERROR_MESSAGE if response.blank?
-
-          status = error.response_status
-          message = response.is_a?(Hash) ? response['message'] : error.to_s
-
-          "#{ERROR_MESSAGE} (#{status}): #{message}".strip
+          raise e
         end
 
         private
