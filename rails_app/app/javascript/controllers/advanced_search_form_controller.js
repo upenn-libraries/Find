@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-// attaches to Find::AdvancedSearchForm component
+// attaches to Catalog::AdvancedSearchForm component
 export default class extends Controller {
     static targets = ["form"];
 
