@@ -171,8 +171,7 @@ shared_examples_for 'CitationExport' do
 
     context('with export_as_apa_citation_txt') do
       it 'returns APA citation text' do
-        value = object.export_as_apa_citation_txt
-        expect(value).to eq 'Uther, H., Folklore Fellows., F. Fellows. &amp; ' \
+        expect(object.export_as_apa_citation_txt).to eq 'Uther, H., Folklore Fellows., F. Fellows. &amp; ' \
               'Alumni and Friends Memorial Book Fund., A. and Friends Memorial Book Fund. (2004). ' \
               '<i>The types of international folktales : a classification and bibliography, based ' \
               'on the system of Antti Aarne and Stith Thompson. </i>' \
