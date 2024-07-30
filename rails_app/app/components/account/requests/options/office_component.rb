@@ -18,14 +18,8 @@ module Account
         end
 
         # @return [Array<String>, nil]
-        def user_address
-          return unless user.illiad_record
-
-          @user_address ||= user.illiad_record.bbm_delivery_address
-        end
-
-        def user_address?
-          user_address&.compact_blank.present?
+        def office_address
+          @office_address ||= user.office_delivery_address
         end
       end
     end
