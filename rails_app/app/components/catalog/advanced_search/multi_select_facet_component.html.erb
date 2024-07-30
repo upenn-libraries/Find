@@ -1,0 +1,9 @@
+<div class="facet-limit blacklight-format_facet">
+  <select <%= tag.attributes(select_attributes) %>>
+    <% presenters.each_with_index do |presenter, i| %>
+      <option value="<%= presenter.value %>">
+        <%= presenter.label %>
+      </option>
+    <% end %>
+  </select>
+</div>
