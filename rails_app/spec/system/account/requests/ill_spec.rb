@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Account Request ILL form' do
+  include_context 'with mocked illiad_record on user'
+
   let(:user) { create(:user) }
   let(:open_params) { {} }
 
@@ -94,6 +96,8 @@ describe 'Account Request ILL form' do
       let(:proxy) { Fulfillment::User.new('jdoe') }
 
       before do
+        allow(Illiad::User).to receive(:find).with(id: proxy.uid).and_return(create(:illiad_user))
+
         fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy.uid
         click_button I18n.t('account.ill.form.proxy.submit')
       end

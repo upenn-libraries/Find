@@ -32,7 +32,7 @@
           <% end %>
 
           <% if options.mail? %>
-            <%= render(Account::Requests::Options::MailComponent.new(data: { action: 'change->request-options#optionChanged' })) %>
+            <%= render(Account::Requests::Options::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
         </ul>
       </fieldset>
