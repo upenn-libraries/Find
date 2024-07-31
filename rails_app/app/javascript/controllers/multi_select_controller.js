@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import "tom-select";
+import TomSelect from "tom-select";
 
 export default class extends Controller {
   static values = {
