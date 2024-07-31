@@ -39,10 +39,6 @@ module Inventory
           raise NotImplementedError
         end
 
-        def location_info
-          raise NotImplementedError
-        end
-
         def policy
           raise NotImplementedError
         end
