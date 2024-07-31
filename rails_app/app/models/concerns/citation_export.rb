@@ -55,7 +55,7 @@ module CitationExport
   # @param [String] text
   # @return [String]
   def add_final_period(text)
-    return if text.blank?
+    return '' if text.blank?
 
     text + (text.last == '.' ? ' ' : '. ')
   end
@@ -94,7 +94,7 @@ module CitationExport
   # @return [String]: the title string
   def format_title
     title = marc(:title_show)
-    return if title.blank?
+    return '' if title.blank?
 
     "<i>#{add_final_period(title)}</i>"
   end
@@ -103,7 +103,7 @@ module CitationExport
   # @return [String]: the edition string
   def format_edition
     edition = marc(:edition_show, with_alternate: false).join
-    return if edition.blank?
+    return '' if edition.blank?
 
     add_final_period(edition)
   end
@@ -112,7 +112,7 @@ module CitationExport
   # @return [String]: the publisher information
   def format_apa_publisher
     publisher = marc(:production_publication_citation_show, with_year: false).join
-    return if publisher.blank?
+    return '' if publisher.blank?
 
     # if ends with ',' or '.' remove it
     publisher.chop! if publisher.ends_with?(',', '.')
