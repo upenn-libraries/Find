@@ -43,10 +43,15 @@ module Fulfillment
     def fulfillment_description
       case request.delivery
       when Request::Options::PICKUP
-        I18n.t('fulfillment.outcome.email.pickup', pickup_location: request.pickup_location)
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: human_readable_pickup_location)
       else
         I18n.t(request.delivery, scope: 'fulfillment.outcome.email')
       end
+    end
+
+    def human_readable_pickup_location
+      Settings.locations.pickup.to_h.find { |_k, v| v[:ils] == request.pickup_location }
+              &.first.to_s || request.pickup_location
     end
   end
 end

@@ -127,6 +127,21 @@ describe Fulfillment::Endpoint::Illiad do
           expect(stub_note_request).to have_been_requested
         end
       end
+
+      context 'when requesting a boundwith item' do
+        let(:request) { build(:fulfillment_request, :with_section, :with_boundwith, :scan_deliver) }
+        let(:note) { I18n.t('fulfillment.illiad.boundwith_comment') }
+        let(:stub_note_request) do
+          stub_add_note_success(id: '1234', note: note, response_body: build(:illiad_api_note_response, Note: note))
+        end
+
+        before { stub_note_request }
+
+        it 'adds comment to transaction' do
+          expect(outcome).to be_success
+          expect(stub_note_request).to have_been_requested
+        end
+      end
     end
 
     context 'with a user that does not yet have an Illiad account' do

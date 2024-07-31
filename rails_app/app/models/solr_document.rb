@@ -31,4 +31,11 @@ class SolrDocument
                                JSON.parse(links_data.first, symbolize_names: true)
                              end
   end
+
+  # Return mms_id of host record if document is representing a boundwith.
+  #
+  # @return [String, nil]
+  def host_record_id
+    fetch(:host_record_id_ss, []).first
+  end
 end

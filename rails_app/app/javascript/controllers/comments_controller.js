@@ -1,14 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["addComments", "commentsArea", "addCommentsButton", "hideCommentsButton"];
-  COMMENT_OPTIONS = ["pickup", "ill_pickup", "mail", "office"];
+  static targets = ["commentsArea", "addCommentsButton", "hideCommentsButton"];
 
-  toggleComments({ detail: { option_value } }) {
-    if (this.COMMENT_OPTIONS.includes(option_value)) {
-      this.addCommentsTarget.classList.remove("d-none");
+  // Display or remove comment box.
+  displayComments(value) {
+    if (value) {
+      this.element.classList.remove("d-none");
     } else {
-      this.addCommentsTarget.classList.add("d-none");
+      this.element.classList.add("d-none");
     }
   }
 

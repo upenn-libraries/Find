@@ -171,18 +171,26 @@ en:
     settings:
       page_heading: 'Settings'
       page_lede: 'Your account information and item delivery address.'
-      details_heading: 'Account information'
-      terms:
+      information:
+        heading: 'Account information'
+        name: 'Name'
+        email: 'Email'
         user_group: 'Patron group'
-        bbm_delivery_address: 'Delivery address for Books by Mail'
-      bbm_empty: "You don't have a delivery address set."
-      set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
-      update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
+        update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
+      bbm:
+        heading: 'Delivery address for Books by Mail'
+        empty_address: "You don't have a delivery address set."
+        set_your_address_html: '<a href="%{url}" target=_blank>Set your address with Books by Mail</a>'
+      faculty_express:
+        heading: 'Delivery address for FacultyExpress'
+        empty_address: "You don't have a delivery address set."
+        set_your_address_html: '<a href="%{url}" target=_blank>Set your address with FacultyExpress</a>'
     shelf:
       page_heading: 'Shelf'
       page_lede: "View and renew items you've loaned or requested from the library."
       no_items: 'No items found.'
       identifier: '%{system} %{type} ID: %{id}'
+      boundwith_notice: 'This title is not representative of the title requested because it is bound together with other works.'
       refine:
         title: 'Refine your shelf'
         filters: 'Type'
@@ -323,8 +331,6 @@ en:
     format: 'Format'
     score: 'Score'
   requests:
-    boundwith:
-      in_progress: 'This item is bound with others. We are still working on requesting for these types of items.'
     form:
       heading: 'Request an item'
       item_label: 'What item are you requesting?'
@@ -340,6 +346,7 @@ en:
       options:
         label: 'How would you like it delivered?'
         only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
+        boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
           label: 'Email me a chapter or section'
@@ -352,7 +359,8 @@ en:
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
           label: 'Mail it via Books by Mail'
-          info_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
+          info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
+          warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
         aeon:
           kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
           access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
@@ -369,10 +377,11 @@ en:
     public_error_message: 'An internal error occurred.'
     outcome:
       email:
-        pickup: 'Will be available to pickup at %{pickup_location}.'
-        electronic: 'Will be made electronically available in your library account.'
-        mail: 'Will be delivered to your Books by Mail address.'
-        office: 'Will be delivered to your FacultyExpress office location.'
+        confirmation_subject: 'Find Request Confirmation'
+        pickup: 'This request will be available to pickup at %{pickup_location}.'
+        electronic: 'This request will be made electronically available in your library account.'
+        mail: 'This request will be delivered to your Books by Mail address.'
+        office: 'This request will be delivered to your FacultyExpress office location.'
     validation:
       no_pickup_location: 'No pickup location provided'
       no_mms_id: 'No record identifier provided'
@@ -384,6 +393,7 @@ en:
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
       proxy_comment: 'Proxied by %{requester_id}'
+      boundwith_comment: 'This request is for a boundwith record.'
   search:
     all_fields: 'All Fields'
     button:

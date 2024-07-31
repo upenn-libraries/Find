@@ -35,7 +35,7 @@ module Fulfillment
 
       # @param [Outcome] outcome
       def notify(outcome:)
-        # TODO: send email using outcome (item_desc, fulfillment_desc)
+        RequestMailer.confirmation_email(outcome: outcome).deliver_now
       end
 
       private

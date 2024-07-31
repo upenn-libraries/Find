@@ -77,6 +77,18 @@ describe 'Account Shelf show page' do
         expect(page).not_to have_link I18n.t('account.shelf.bib_record_link')
       end
     end
+
+    context 'when a boundwith hold' do
+      let(:entry) { create(:ils_hold, :boundwith) }
+
+      it 'display boundwith notice' do
+        expect(page).to have_text I18n.t('account.shelf.boundwith_notice')
+      end
+
+      it 'does not display record link' do
+        expect(page).not_to have_link I18n.t('account.shelf.bib_record_link')
+      end
+    end
   end
 
   context 'when displaying ils loan' do
@@ -108,6 +120,18 @@ describe 'Account Shelf show page' do
 
       it 'does not display renew button' do
         expect(page).not_to have_button I18n.t('account.shelf.renew.button')
+      end
+
+      it 'does not display record link' do
+        expect(page).not_to have_link I18n.t('account.shelf.bib_record_link')
+      end
+    end
+
+    context 'when a boundwith loan' do
+      let(:entry) { create(:ils_loan, :boundwith) }
+
+      it 'display boundwith notice' do
+        expect(page).to have_text I18n.t('account.shelf.boundwith_notice')
       end
 
       it 'does not display record link' do
