@@ -16,12 +16,15 @@ describe Library::Info::Request do
     end
 
     context 'with an unsuccessful api request' do
-      before { stub_library_info_api_request_failure(library_code: code, response_body: response_body) }
+      before do
+        stub_library_info_api_request_failure(library_code: code, response_body: response_body)
+        allow(Honeybadger).to receive(:notify)
+      end
 
       it 'notifies Honeybadger' do
-        expect(Honeybadger).to receive(:notify).with(Faraday::Error)
-
         described_class.find(library_code: code)
+
+        expect(Honeybadger).to have_received(:notify).with(Faraday::Error)
       end
 
       it 'returns nil' do

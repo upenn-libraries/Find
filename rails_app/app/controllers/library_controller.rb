@@ -5,9 +5,11 @@ class LibraryController < ApplicationController
   # GET /library/:code
   # Returns a library's location information
   def info
+    return if params[:code].blank?
+
     respond_to do |format|
       format.html do
-        render(Library::InfoComponent.new(library_code: params[:code]), layout: false)
+        render(Library::InfoComponent.new(library_code: params[:code].to_s), layout: false)
       end
     end
   end
