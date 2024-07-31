@@ -6,99 +6,69 @@ shared_examples_for 'RisExport' do
 
   # Test the three RIS on the six fixtures: conference, electronic_database, electronic_journal,
   # print_journal, print_monograph, and record_with_added_date
-  # 1. conference
-  describe 'RIS on conference fixture' do
-    let(:marcxml) { JSON.parse(json_fixture('conference'))['marcxml_marcxml'].first }
+  describe '#export_as_ris' do
     let(:source) { { marcxml_marcxml: marcxml } }
     let(:object) { described_class.new(source) }
 
-    describe '.export_as_ris' do
+    context 'with a conference record' do
+      let(:marcxml) { JSON.parse(json_fixture('conference'))['marcxml_marcxml'].first }
+
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - CONFERENCE/EVENT', 'TY  - GOVERNMENT DOCUMENT', 'TY  - BOOK',
-                                  'TI  - Report of the Conference of FAO : nineteenth session, Rome, ',
-                                  '12 November - 1 December 1977.',
-                                  'PY  - 1979', 'CY  - Rome :', 'PB  - The Organization,', 'ER  - '
+        expect(object.export_as_ris).to eq "TY  - CONFERENCE/EVENT\nTY  - GOVERNMENT DOCUMENT\nTY  - BOOK\n" \
+                                             'TI  - Report of the Conference of FAO : nineteenth session, Rome, ' \
+                                             "12 November - 1 December 1977.\n" \
+                                             "PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - "
       end
     end
-  end
 
-  # 2. electronic database
-  describe 'RIS on electronic database' do
-    let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
-    let(:source) { { marcxml_marcxml: marcxml } }
-    let(:object) { described_class.new(source) }
+    context 'with an electronic database record' do
+      let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
-    describe '.export_as_ris' do
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - WEBSITE/DATABASE', 'TY  - DATABASE & ARTICLE INDEX',
-                                  'TI  - GEOBASE', 'PY  - 1900', 'CY  - New York :',
-                                  'PB  - Elsevier Science.', 'ER  - '
+        expect(object.export_as_ris).to eq "TY  - WEBSITE/DATABASE\nTY  - DATABASE & ARTICLE INDEX\n" \
+                                  "TI  - GEOBASE\nPY  - 1900\nCY  - New York :\n" \
+                                  "PB  - Elsevier Science.\nER  - "
       end
     end
-  end
 
-  # 3. electronic journal
-  describe 'RIS on electronic journal' do
-    let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
-    let(:source) { { marcxml_marcxml: marcxml } }
-    let(:object) { described_class.new(source) }
+    context 'with an electronic journal' do
+      let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
-    describe '.export_as_ris' do
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - JOURNAL/PERIODICAL', 'TI  - Nature.', 'PY  - 1869', 'CY  - [London] :',
-                                  'PB  - Nature Pub. Group', 'ER  - '
+        expect(object.export_as_ris).to eq "TY  - JOURNAL/PERIODICAL\nTI  - Nature.\nPY  - 1869\n" \
+                                             "CY  - [London] :\nPB  - Nature Pub. Group\nER  - "
       end
     end
-  end
 
-  # 4. print journal
-  describe 'RIS on print journal' do
-    let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
-    let(:source) { { marcxml_marcxml: marcxml } }
-    let(:object) { described_class.new(source) }
+    context 'with a print journal record' do
+      let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
 
-    describe '.export_as_ris' do
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - JOURNAL/PERIODICAL', 'TI  - Chemical communications.',
-                                  'PY  - 1965', 'CY  - London :', 'PB  - Chemical Society.', 'ER  - '
+        expect(object.export_as_ris).to eq "TY  - JOURNAL/PERIODICAL\nTI  - Chemical communications.\n" \
+                                  "PY  - 1965\nCY  - London :\nPB  - Chemical Society.\nER  - "
       end
     end
-  end
 
-  # 5. print monograph
-  describe 'RIS on print monograph' do
-    let(:marcxml) { JSON.parse(json_fixture('print_monograph'))['marcxml_marcxml'].first }
-    let(:source) { { marcxml_marcxml: marcxml } }
-    let(:object) { described_class.new(source) }
+    context 'with a print monograph record' do
+      let(:marcxml) { JSON.parse(json_fixture('print_monograph'))['marcxml_marcxml'].first }
 
-    describe '.export_as_ris' do
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - BOOK',
-                                  'TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke',
-                                  'AU  - Bleier, Ruth', 'PY  - 1961', 'CY  - Baltimore :',
-                                  'PB  - John Hopkins Press,', 'ER  - '
+        expect(object.export_as_ris).to eq "TY  - BOOK\n" \
+          "TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.\n" \
+          "AU  - Bleier, Ruth,\nPY  - 1961\nCY  - Baltimore :\n" \
+          "PB  - John Hopkins Press,\nER  - "
       end
     end
-  end
 
-  # 6. record with added date
-  describe 'RIS on record with added date' do
-    let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
-    let(:source) { { marcxml_marcxml: marcxml } }
-    let(:object) { described_class.new(source) }
+    context 'with a record with added date' do
+      let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
 
-    describe '.export_as_ris' do
       it 'returns RIS text' do
-        values = object.export_as_ris
-        expect(values).to include 'TY  - BOOK', 'TI  - The types of international folktales : a classification and ',
-                                  'PY  - 2004', 'CY  - Helsinki :', 'SN  - 9514109627', 'SN  - 9514109635',
-                                  'PB  - Suomalainen Tiedeakatemia, Academia Scientiarum Fennica,',
-                                  'SN  - 9514109554', 'SN  - 9514109562', 'SN  - 9514109619'
+        expect(object.export_as_ris).to eq "TY  - BOOK\nTI  - The types of international folktales : " \
+           "a classification and bibliography, based on the system of Antti Aarne and Stith Thompson\n" \
+           "AU  - Uther, Hans-Jörg.\nPY  - 2004\nCY  - Helsinki :\nPB  - Suomalainen Tiedeakatemia, Academia " \
+           "Scientiarum Fennica,\nSN  - 9514109554\nSN  - 9514109562\nSN  - 9514109619\nSN  - 9514109627\n" \
+           "SN  - 9514109635\nSN  - 9514109643\nER  - "
       end
     end
   end
