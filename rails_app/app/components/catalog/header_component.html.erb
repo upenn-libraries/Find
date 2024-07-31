@@ -1,0 +1,28 @@
+<%
+  # Copied from Blacklight version 8.3.0
+
+  # Uses the custom pennlibs-header design system component.
+%>
+
+<div class="site-alerts__container container">
+  <% if !alerts_dismissed? && alerts.any?(&:on) %>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" data-controller="alert" data-alert-target="alert">
+      <%= joined_alert_values.html_safe %>
+
+      <button type="button" class="btn btn-link btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+</div>
+
+<pennlibs-header href="/"
+                 service-name="<%= t('header.service_name') %>"
+                 service-lede="<%= t('header.service_lede') %>">
+  <% if user %>
+    <%= link_to t('header.account'), account_path %>
+    <%= button_to t('header.sign_out'), sign_out_path %>
+  <% else %>
+    <%= link_to t('header.login'), login_path %>
+  <% end %>
+</pennlibs-header>
+
+<%= search_bar %>

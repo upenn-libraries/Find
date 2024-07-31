@@ -12,7 +12,7 @@ class InventoryController < ApplicationController
   # Returns brief inventory information for a record.
   def brief
     respond_to do |format|
-      format.html { render(Inventory::BriefInventoryComponent.new(document: @document), layout: false) }
+      format.html { render(Inventory::BriefComponent.new(document: @document), layout: false) }
     end
   end
 

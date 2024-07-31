@@ -18,31 +18,71 @@ describe Inventory::Item do
 
   describe '.find_all' do
     let(:bib_item) { build(:item).bib_item }
-    let(:item) { described_class.find_all(mms_id: '123', holding_id: '456').first }
-
-    it 'returns an array of Inventory::Item when items are present' do
-      bib_item_set_double = instance_double(Alma::BibItemSet, items: [bib_item], total_record_count: 1)
-      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      expect(item).to be_a described_class
-    end
-
-    it 'returns an array of Inventory::Item when items are not present' do
-      bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
-      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
-      expect(item).to be_a described_class
-      expect(item.holding_data['holding_id']).to eq '456'
-    end
-
-    it 'returns an empty array when holding data is blank' do
-      bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
-      allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
-      allow(Alma::BibHolding).to receive(:find_all).and_return({})
-      expect(described_class.find_all(mms_id: '123', holding_id: '456')).to eq []
-    end
+    let(:items) { described_class.find_all(mms_id: '123', holding_id: '456') }
 
     it 'raises an ArgumentError if a parameter is missing' do
       expect { described_class.find_all(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
+    end
+
+    context 'when items are present' do
+      before do
+        bib_item_set_double = instance_double(Alma::BibItemSet, items: [bib_item], total_record_count: 1)
+        allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      end
+
+      it 'returns an array of items' do
+        expect(items.first).to be_a described_class
+      end
+    end
+
+    context 'when items are not present' do
+      before do
+        bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
+        allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+        allow(Alma::BibHolding).to receive(:find_all).and_return('holding' => [{ 'holding_id' => '456' }])
+      end
+
+      it 'returns an item generated from the holding' do
+        expect(items.first).to be_a described_class
+        expect(items.first.holding_data['holding_id']).to eq '456'
+      end
+    end
+
+    context 'when record is a boundwith and a holding_record_id is present' do
+      let(:bib_set) { create(:alma_bib_set) }
+      let(:items) { described_class.find_all(mms_id: '123', holding_id: '456', host_record_id: '789') }
+
+      before do
+        bib_item_set_double = instance_double(Alma::BibItemSet,
+                                              items: [bib_item], total_record_count: 1, first: bib_item)
+        allow(Alma::BibItem).to receive(:find).with('789', holding_id: '456').and_return(bib_item_set_double)
+        allow(Alma::Bib).to receive(:find).and_return(bib_set)
+      end
+
+      it 'returns an array of Inventory::Item' do
+        expect(items.first).to be_a described_class
+      end
+
+      it 'returns an item composed from the holding and child record' do
+        expect(items.first.bib_data).to include bib_set.response['bib'].first
+        expect(items.first.item_data).to eql bib_item.item_data
+      end
+
+      it 'returns an item marked as boundwith' do
+        expect(items.first.boundwith?).to be true
+      end
+    end
+
+    context 'when holding data is blank' do
+      before do
+        bib_item_set_double = instance_double(Alma::BibItemSet, items: [], total_record_count: 0)
+        allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+        allow(Alma::BibHolding).to receive(:find_all).and_return({})
+      end
+
+      it 'raises an error' do
+        expect { described_class.find_all(mms_id: '123', holding_id: '456') }.to raise_error('Record has no holding.')
+      end
     end
   end
 
@@ -287,6 +327,15 @@ describe Inventory::Item do
       end
     end
 
+    context 'when the item is checkoutable and the requester is a courtesy borrower' do
+      let(:item) { build :item, :checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+
+      it 'returns only pickup option' do
+        expect(options).to contain_exactly(Fulfillment::Request::Options::PICKUP)
+      end
+    end
+
     context 'when the item is unavailable' do
       let(:item) { build :item, :not_checkoutable }
       let(:options) { item.fulfillment_options(ils_group: 'group') }
@@ -306,6 +355,15 @@ describe Inventory::Item do
       it 'returns office option if ils_group is faculty express' do
         expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
           .to include Fulfillment::Request::Options::OFFICE
+      end
+    end
+
+    context 'when the item is unavailable and the requester is a courtesy borrower' do
+      let(:item) { build :item, :not_checkoutable }
+      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+
+      it 'returns no options' do
+        expect(options).to be_empty
       end
     end
   end

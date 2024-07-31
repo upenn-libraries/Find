@@ -1,0 +1,27 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-2"><%= t('blacklight.search.zero_results.title').html_safe %></h2>
+
+    <ul class="pt-2 mb-0">
+      <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.check_your_spelling') %>
+      </li>
+      <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.try_general_keywords') %>
+      </li>
+      <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.try_different_keywords') %>
+      </li>
+      <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.try_advanced_html').html_safe %>
+      </li>
+      <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.get_help_html', url: t('urls.help.ask')).html_safe %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= render AdditionalResults::AdditionalResultsComponent.new(query: params[:q]) do |component| %>
+  <% component.with_results_source('summon') %>
+<% end %>

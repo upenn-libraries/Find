@@ -33,7 +33,7 @@ describe Fulfillment::Outcome do
 
     it 'has the proper fulfillment_desc' do
       expect(outcome.fulfillment_desc).to eq(
-        I18n.t('fulfillment.outcome.email.pickup', pickup_location: request.pickup_location)
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: outcome.send(:human_readable_pickup_location))
       )
     end
   end

@@ -37,5 +37,17 @@ describe Inventory::List::Sort::Factory do
         expect(sorter).to be_a Inventory::List::Sort::Base
       end
     end
+
+    context 'when inventory data is nil' do
+      let(:data) { nil }
+
+      it 'returns the base sorting class' do
+        expect(sorter).to be_a Inventory::List::Sort::Base
+      end
+
+      it 'initializes base sorting class with empty array' do
+        expect(sorter.inventory_data).to eq []
+      end
+    end
   end
 end

@@ -16,6 +16,10 @@ FactoryBot.define do
       data { attributes_for(:alma_loan, :not_renewable, :borrow_direct) }
     end
 
+    trait :boundwith do
+      data { attributes_for(:alma_loan, :renewable, :boundwith) }
+    end
+
     skip_create
     initialize_with { Shelf::Entry::IlsLoan.new(data.deep_stringify_keys) }
   end

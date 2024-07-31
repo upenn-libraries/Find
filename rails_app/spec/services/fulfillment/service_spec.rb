@@ -34,6 +34,10 @@ describe Fulfillment::Service do
         it 'conveys the outcome from the backend' do
           expect(result).to eq outcome
         end
+
+        it 'sends a confirmation email' do
+          expect { result }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end
       end
 
       context 'with an invalid request' do
@@ -71,6 +75,10 @@ describe Fulfillment::Service do
 
         it 'conveys the outcome from the backend' do
           expect(result).to eq outcome
+        end
+
+        it 'sends a confirmation email' do
+          expect { result }.to change { ActionMailer::Base.deliveries.count }.by(1)
         end
       end
 
