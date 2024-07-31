@@ -10,9 +10,9 @@ describe 'Advanced Search Page' do
 
   context 'when filtering with facets' do
     it 'does not limit values' do
-      within('div.blacklight-library_facet') do
-        click_on I18n.t('facets.library')
-        expect(page).to have_selector 'ul.facet-values li', count: 11
+      find('div.library_facet-select').click
+      within('div.ts-dropdown-content') do
+        expect(page).to have_selector 'div', count: 11
       end
     end
   end

@@ -24,6 +24,7 @@ module Catalog
       # @return [Hash] HTML attributes for the select element
       def select_attributes
         {
+          class: "#{@facet_field.key}-select",
           name: "f_inclusive[#{@facet_field.key}][]",
           placeholder: @facet_field.label,
           multiple: true,
@@ -36,7 +37,7 @@ module Catalog
 
       # @return [Array<String>] array of TomSelect plugins
       def select_plugins
-        %w[checkbox_options caret_position input_autogrow clear_button remove_button]
+        %w[checkbox_options caret_position input_autogrow clear_button]
       end
     end
   end

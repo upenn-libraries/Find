@@ -165,7 +165,8 @@ class CatalogController < ApplicationController
                                         last_10_years: { label: I18n.t('facets.recently_published.10_years'),
                                                          fq: 'publication_date_sort:[NOW/YEAR-9YEARS TO *]' },
                                         last_15_years: { label: I18n.t('facets.recently_published.15_years'),
-                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } } do |field|
+                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } } do
+    |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
     config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
