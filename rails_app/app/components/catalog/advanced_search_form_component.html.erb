@@ -11,7 +11,8 @@
 
 <%= form_tag @url, method: @method, class: @classes.join(' '),
              role: 'search', 'aria-label' => t('blacklight.search.form.submit'),
-             data: { controller: 'advanced-search-form', 'action': 'submit->advanced-search-form#submit' } do %>
+             data: { controller: 'advanced-search-form',
+                     action: 'submit->advanced-search-form#submit formdata->advanced-search-form#removeBlank' } do %>
   <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
 
   <div class="input-criteria">
