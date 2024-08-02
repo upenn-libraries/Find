@@ -10,6 +10,7 @@ describe 'Advanced Search Page' do
 
   context 'when filtering with facets' do
     it 'does not limit values' do
+      click_on 'Library'
       find('div.library_facet-select').click
       within('div.ts-dropdown-content') do
         expect(page).to have_selector 'div', count: 11

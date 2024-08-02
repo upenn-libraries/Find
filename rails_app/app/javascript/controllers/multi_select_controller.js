@@ -7,20 +7,17 @@ export default class extends Controller {
   };
 
   connect() {
-    this.initTomSelect();
+    this.select = new TomSelect(this.element, {
+      plugins: this.pluginsValue,
+      render: {
+        item: function (data, escape) {
+          return `<div>${escape(data.value)}</div>`;
+        },
+      },
+    });
   }
 
   disconnect() {
-    if (this.select) {
-      this.select.destroy();
-    }
-  }
-
-  initTomSelect() {
-    if (this.element) {
-      this.select = new TomSelect(this.element, {
-        plugins: this.pluginsValue,
-      });
-    }
+    this.select?.destroy();
   }
 }
