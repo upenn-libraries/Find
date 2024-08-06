@@ -204,7 +204,7 @@
   .inventory-item__container {
     display: inline-grid;
     /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
-    max-width: calc(100% - 1rem);
+    max-width: calc(100% - 2rem);
   }
 }
 
