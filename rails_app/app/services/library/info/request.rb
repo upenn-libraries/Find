@@ -44,7 +44,7 @@ module Library
       #
       # @param data [Hash]
       def initialize(**data)
-        @data = data.symbolize_keys.transform_values(&:presence)
+        @data = data.symbolize_keys.compact_blank
       end
 
       # Library's hours for the current day
