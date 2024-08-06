@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   layout :determine_layout if respond_to? :layout
   after_action :store_fullpath, unless: :should_not_store_action?
-  after_action :store_referer, if: :login_path?
+  after_action :store_referer, unless: :should_not_store_referer?
+
+  MAX_PATH_SIZE_TO_STORE = ActionDispatch::Cookies::MAX_COOKIE_SIZE / 2
 
   # In this application, it is important to redirect a user back to where they come from after they log in.
   # To do this, we use some built in Devise helpers to save a load stored locations. For example, if a user has
@@ -75,6 +77,25 @@ class ApplicationController < ActionController::Base
     request.referer.present?
   end
 
+  # Determine whether fullpath exceeds max cookie size
+  # @return [TrueClass, FalseClass]
+  def path_too_large?(path)
+    return false unless path
+
+    path.size >= MAX_PATH_SIZE_TO_STORE
+  end
+
+  # Do not store the referer if:
+  # - not the login path
+  # - referer is not present
+  # - referer path is too large
+  # @return [TrueClass, FalseClass]
+  def should_not_store_referer?
+    !login_path? ||
+      !referer_present? ||
+      path_too_large?(URI.parse(request.referer).path)
+  end
+
   # Its important that the location is NOT stored if the request:
   # - method is not GET (non idempotent)
   # - is navigational
@@ -87,6 +108,7 @@ class ApplicationController < ActionController::Base
   # - is the alma login path - same as above
   # - is to the inventory system - we make a lot of requests to our inventory system to display availability info.
   #   Without this exclusion, we could end up getting redirected to one of those inventory URLs.
+  # - is too large
   #
   # In some cases we may find it necessary to add to this list of exclusions. For example, if another login strategy
   # is added with a new login path, we'd want to stick that here. If we develop another service that makes a lot of
@@ -99,7 +121,8 @@ class ApplicationController < ActionController::Base
       turbo_frame_request? ||
       request.path == login_path ||
       request.path == alma_login_path ||
-      request.path.ends_with?('inventory')
+      request.path.ends_with?('inventory') ||
+      path_too_large?(request.fullpath)
   end
 
   # Remove blank catalog parameters to reduce request URL length before saving to session
