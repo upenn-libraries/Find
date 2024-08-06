@@ -1,24 +1,42 @@
 # frozen_string_literal: true
 
-describe 'Catalog Controller Requests' do
-  context 'when storing the request url in the session' do
+describe 'Application Controller Requests' do
+  context 'when storing current location in the session' do
     let(:params) { {} }
     let(:stored_path) { session['user_return_to'] }
 
-    before { get search_catalog_path(params) }
+    context 'with a non catalog path' do
+      let(:user) { create(:user) }
+      let(:params) do
+        { requesttype: '', booktitle: '', au: 'Margaret Mitchell' }
+      end
 
-    context 'with a basic search parameters' do
+      include_context 'with mocked illiad_record on user'
+
+      before do
+        sign_in user
+        get ill_new_request_path(params)
+      end
+
+      it 'stores the fullpath without removing blank parameters' do
+        expect(stored_path).to eq ill_new_request_path(params)
+      end
+    end
+
+    context 'with a catalog path with basic search parameters' do
       let(:params) do
         { search_field: 'all_fields', q: '', f: { access_facet: ['At the library'] },
-          sort: 'creator_sort asc, score desc', rows: '', per_page: '' }
+          hld_id: 'holding id', request: true, sort: 'creator_sort asc, score desc', rows: '', per_page: '' }
       end
+
+      before { get search_catalog_path(params) }
 
       it 'removes blank parameters from the path stored in session' do
         expect(stored_path).to eq search_catalog_path(params.compact_blank)
       end
     end
 
-    context 'with advanced search parameters' do
+    context 'with a catalog path with advanced search parameters' do
       let(:params) do
         { sort: 'creator_sort asc, score desc', op: 'must', f_inclusive: { access_facet: ['At the library'] },
           clause: {
@@ -28,6 +46,8 @@ describe 'Catalog Controller Requests' do
             '15' => { field: 'publication_date_s', query: '' }
           } }
       end
+
+      before { get search_catalog_path(params) }
 
       it "does not remove the 'all_fields_advanced' clause parameter from the path stored in the session" do
         expect(stored_path).to include 'all_fields_advanced'
@@ -42,6 +62,16 @@ describe 'Catalog Controller Requests' do
                                     '&clause%5B6%5D%5Bfield%5D=language_search&clause%5B6%5D%5Bquery%5D=Swahili'\
                                     '&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&op=must'\
                                     '&sort=creator_sort+asc%2C+score+desc'
+      end
+    end
+
+    context 'when the path is too large' do
+      let(:params) { { q: ('a' * ApplicationController::MAX_PATH_SIZE_TO_STORE) } }
+
+      before { get search_catalog_path(params) }
+
+      it 'does not store it in the session' do
+        expect(stored_path).to be_nil
       end
     end
   end
