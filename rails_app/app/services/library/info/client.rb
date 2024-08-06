@@ -39,8 +39,6 @@ module Library
         #   @param headers [Hash]
         def get(*args)
           connection.get(*args)
-        rescue Faraday::Error => e
-          raise e
         end
 
         private
