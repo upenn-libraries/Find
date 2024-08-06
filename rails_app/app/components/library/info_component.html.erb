@@ -20,7 +20,7 @@
           <i class="bi bi-geo-alt-fill"></i>
           <div>
             <% if maps_url %>
-              <%= link_to safe_join(address_display), maps_url, class: 'maps-link' %>
+              <%= link_to safe_join(address_display), maps_url, class: 'maps-link', target: :blank %>
             <% else %>>
               <%= safe_join address_display %>
             <% end %>
