@@ -18,13 +18,15 @@ class ApplicationController < ActionController::Base
   # For more information on why request.referer can't be used by default, refer to the Devise wiki:
   # https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D#why-not-use-requestreferer
 
-  # Always store the full path from the request, as this is present in every request. We remove blank parameters to
-  # mitigate storing very long values.
+  # Always store the full path from the request, as this is present in every request. For catalog requests, we remove
+  # blank parameters to mitigate storing very long values.
   # @return [String]
   def store_fullpath
+    return store_location_for(:user, request.fullpath) unless catalog_path?
+
     uri = URI.parse(request.path)
 
-    uri.query = query_params.to_query
+    uri.query = catalog_params.to_query
     store_location_for(:user, uri.to_s)
   end
 
@@ -61,6 +63,12 @@ class ApplicationController < ActionController::Base
     request.path == login_path
   end
 
+  # Determine whether the current path is a potential catalog path
+  # @return [TrueClass, FalseClass]
+  def catalog_path?
+    request.path == root_path || request.path.starts_with?(search_catalog_path)
+  end
+
   # Determine whether the request referer is present
   # @return [TrueClass, FalseClass]
   def referer_present?
@@ -94,20 +102,20 @@ class ApplicationController < ActionController::Base
       request.path.ends_with?('inventory')
   end
 
-  # Remove blank query parameters to reduce request URL length before saving to session
+  # Remove blank catalog parameters to reduce request URL length before saving to session
   # - allow blank 'all_fields_advanced' advanced search clause parameter to ensure we always store a url that has the
   # necessary parameters to make a solr request
   # @return [ActionController::Parameters]
-  def query_params
-    query_params = params.permit(blacklight_config.search_state_fields, f: {}, f_inclusive: {})
-                         .except(:action, :controller).compact_blank
+  def catalog_params
+    catalog_params = params.permit(blacklight_config.search_state_fields, :hld_id, :request, f: {}, f_inclusive: {})
+                           .except(:action, :controller).compact_blank
 
-    clause_params = query_params['clause']
+    clause_params = catalog_params['clause']
 
-    return query_params if clause_params.blank?
+    return catalog_params if clause_params.blank?
 
-    query_params['clause'] = clause_params.reject { |_, v| v['query'].blank? && v['field'] != 'all_fields_advanced' }
+    catalog_params['clause'] = clause_params.reject { |_, v| v['query'].blank? && v['field'] != 'all_fields_advanced' }
 
-    query_params
+    catalog_params
   end
 end
