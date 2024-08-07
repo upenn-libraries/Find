@@ -2,13 +2,7 @@
   <h2 class="h5 document__inventory-heading">
     <%= pluralize(@inventory.count, t('inventory.show.navigation.header')) %>
   </h2>
-  <div
-    class="document__inventory-list"
-    id="inventory-pills-tab"
-    role="tablist"
-    aria-orientation="vertical"
-    data-controller="search-list inventory-list"
-  >
+  <div data-controller="search-list">
     <div class="search-list d-none" data-search-list-target="search">
       <input
         type="text"
@@ -24,6 +18,13 @@
         aria-live="polite">
       </small>
     </div>
+    <div
+      class="document__inventory-list"
+      id="inventory-pills-tab"
+      role="tablist"
+      aria-orientation="vertical"
+      data-controller="inventory-list"
+    >
     <% @inventory.each_with_index do |entry, i| %>
       <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
               id="inventory-pills-<%= i %>"
@@ -46,5 +47,6 @@
         <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
       </button>
     <% end %>
+    </div>
   </div>
 </div>

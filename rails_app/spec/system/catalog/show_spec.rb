@@ -172,7 +172,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'filters the holdings' do
-      within('.document__inventory-list') do
+      within('[data-controller="search-list"]') do
         fill_in 'Search this list', with: 'copy 0'
         expect(page).to have_selector('.inventory-item', count: 1)
       end
