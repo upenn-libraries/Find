@@ -132,9 +132,7 @@ class CatalogController < ApplicationController
     end
 
     # Configure general facets
-    config.add_facet_field :access_facet, label: I18n.t('facets.access') do |field|
-      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
-    end
+    config.add_facet_field :access_facet, label: I18n.t('facets.access')
     config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
@@ -165,19 +163,14 @@ class CatalogController < ApplicationController
                                         last_10_years: { label: I18n.t('facets.recently_published.10_years'),
                                                          fq: 'publication_date_sort:[NOW/YEAR-9YEARS TO *]' },
                                         last_15_years: { label: I18n.t('facets.recently_published.15_years'),
-                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } } do
-    |field|
-      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
-    end
+                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } }
     config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
       { 'facet.mincount': 1 }, query: {
         within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
         within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW/DAY-30DAYS TO *]' },
         within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW/DAY-60DAYS TO *]' },
         within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW/DAY-90DAYS TO *]' }
-      } do |field|
-      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
-    end
+      }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

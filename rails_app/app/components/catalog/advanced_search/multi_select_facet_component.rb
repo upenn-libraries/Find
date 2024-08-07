@@ -32,7 +32,7 @@ module Catalog
         {
           class: "#{@facet_field.key}-select",
           name: "f_inclusive[#{@facet_field.key}][]",
-          placeholder: 'Select facets...',
+          placeholder: I18n.t('facets.advanced_search.placeholder'),
           multiple: true,
           data: {
             controller: 'multi-select',
