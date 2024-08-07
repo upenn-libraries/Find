@@ -1,4 +1,4 @@
-pennlibs_web_version: '0.1.2'
+pennlibs_web_version: '0.1.3'
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
@@ -68,7 +68,7 @@ locations:
       ill: Museum Library
     Ormandy Music and Media Center:
       ils: MusicLib
-    Pennsylvania Hospital Library - 800 Spruce St.:
+    Pennsylvania Hospital Library - PAH Staff Only:
       ils: PAHospLib
       ill: PA Hospital Library
     Veterinary Library - New Bolton Center:

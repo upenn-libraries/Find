@@ -198,6 +198,19 @@ class CatalogController < ApplicationController
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
 
+    # fields to show in email
+    config.add_email_field :title_ss, label: I18n.t('show.title.main')
+    config.add_email_field :format_facet, label: I18n.t('results.format')
+    config.add_email_field :creator_ss, label: I18n.t('results.creator')
+    config.add_email_field :edition_ss, label: I18n.t('results.edition')
+    config.add_email_field :conference_ss, label: I18n.t('results.conference')
+    config.add_email_field :series_ss, label: I18n.t('results.series')
+    config.add_email_field :publication_ss, label: I18n.t('results.publication')
+    config.add_email_field :production_ss, label: I18n.t('results.production')
+    config.add_email_field :distribution_ss, label: I18n.t('results.distribution')
+    config.add_email_field :manufacture_ss, label: I18n.t('results.manufacture')
+    config.add_email_field :contained_within_ss, label: I18n.t('results.contained_within')
+
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field :format_facet, label: I18n.t('results.format')
@@ -236,7 +249,7 @@ class CatalogController < ApplicationController
     config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
     config.add_show_field :note_summary_show, label: I18n.t('show.notes.summary'), accessor: :marc
-    config.add_show_field :note_contents_show, label: I18n.t('show.notes.contents'), accessor: :marc
+    config.add_show_field :note_contents_values, label: I18n.t('show.notes.contents'), accessor: :marc
     config.add_show_field :note_participant_show, label: I18n.t('show.notes.participant'), accessor: :marc
     config.add_show_field :note_credits_show, label: I18n.t('show.notes.credits'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc

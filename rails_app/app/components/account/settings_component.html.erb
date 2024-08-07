@@ -1,11 +1,11 @@
 
-<h2 class="h4 mt-4 mb-3"><%= t('account.settings.details_heading') %></h2>
+<h2 class="h4 mt-4 mb-3"><%= t('account.settings.information.heading') %></h2>
 <div class="table-responsive">
   <table class="table align-middle">
     <tbody>
       <tr>
         <th scope="row">
-          Name
+          <%= t('account.settings.information.name') %>
         </th>
         <td>
           <%= full_name %>
@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <th scope="row">
-          Email
+          <%= t('account.settings.information.email') %>
         </th>
         <td>
           <%= email %>
@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <th scope="row">
-          <%= t('account.settings.terms.user_group') %>
+          <%= t('account.settings.information.user_group') %>
         </th>
         <td>
           <%= ils_group_name %>
@@ -32,23 +32,33 @@
 </div>
 
 <p class="callout mt-0">
-  <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.update_details_html', url: t('urls.guides.account') ) %>
+  <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.information.update_details_html', url: t('urls.guides.account') ) %>
 </p>
 
-<h2 class="h4 mt-5 mb-3"><%= t('account.settings.terms.bbm_delivery_address') %></h2>
+<h2 class="h4 mt-5 mb-3"><%= t('account.settings.bbm.heading') %></h2>
 <% if bbm_delivery_address.present? %>
-  <p>
-    <% bbm_delivery_address.each do |ele| %>
-      <%= ele %><br/>
-    <% end %>
-  </p>
+  <p><%= bbm_delivery_address.join('<br />').html_safe %></p>
 <% else %>
   <div class="alert alert-light">
-    <p class="mb-0"><%= t('account.settings.bbm_empty') %></p>
+    <p class="mb-0"><%= t('account.settings.bbm.empty_address') %></p>
   </div>
 <% end %>
 
 <p class="callout">
-  <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.set_your_address_html', url: t('urls.guides.bbm') ) %>
+  <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.bbm.set_your_address_html', url: t('urls.guides.bbm') ) %>
 </p>
 
+<% if user.faculty_express? %>
+<h2 class="h4 mt-5 mb-3"><%= t('account.settings.faculty_express.heading') %></h2>
+<% if office_delivery_address.present? %>
+  <p><%= office_delivery_address %></p>
+<% else %>
+  <div class="alert alert-light">
+    <p class="mb-0"><%= t('account.settings.faculty_express.empty_address') %></p>
+  </div>
+<% end %>
+
+<p class="callout">
+  <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.faculty_express.set_your_address_html', url: t('urls.guides.office') ) %>
+</p>
+<% end %>

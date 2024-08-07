@@ -172,7 +172,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'filters the holdings' do
-      within('.document__inventory-list') do
+      within('[data-controller="search-list"]') do
         fill_in 'Search this list', with: 'copy 0'
         expect(page).to have_selector('.inventory-item', count: 1)
       end
@@ -182,6 +182,7 @@ describe 'Catalog Show Page' do
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
+    include_context 'with mocked illiad_record on user'
 
     let(:user) { create(:user) }
     let(:mms_id) { print_monograph_bib }
