@@ -62,7 +62,7 @@ module Account
     end
 
     # Renew all eligible Alma loans. Displaying the messages returned by the Alma gem.
-    # POST /account/requests/ils/loan/renew_all
+    # PATCH /account/requests/ils/loan/renew_all
     def renew_all
       responses = shelf_service.renew_all_loans
 

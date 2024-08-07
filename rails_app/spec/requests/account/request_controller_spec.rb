@@ -22,4 +22,23 @@ describe 'Account Requests requests' do
       end
     end
   end
+
+  context 'when renewing all loans' do
+    before do
+      shelf_service = instance_double Shelf::Service
+      renewal_response = instance_double Alma::RenewalResponse
+      allow(renewal_response).to receive(:message).and_return('This item is now due later.')
+      allow(renewal_response).to receive(:renewed?).and_return(true)
+      allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf_service)
+      allow(shelf_service).to receive(:renew_all_loans).and_return(Array.new(50) { renewal_response })
+      patch ils_renew_all_request_url
+    end
+
+    context 'when the content is too big for flash storage' do
+      it 'displays a short message' do
+        follow_redirect!
+        expect(response.body).to include 'See below for the new due dates for your loans.'
+      end
+    end
+  end
 end
