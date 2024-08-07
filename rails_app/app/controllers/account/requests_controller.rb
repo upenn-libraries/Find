@@ -70,7 +70,7 @@ module Account
                      alerts: responses.map { |r| t('account.shelf.renew_all.alert', alert: r.message) }.join)
 
       flash_type = responses.all?(&:renewed?) ? :notice : :alert
-      flash[flash_type] = alert_text
+      safe_flash(content: alert_text, key: flash_type.to_s, alt: t('account.shelf.renew_all.oversize_flash_message'))
 
       redirect_to requests_path
     end

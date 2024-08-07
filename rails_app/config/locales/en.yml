@@ -218,6 +218,7 @@ en:
         button: 'Renew all eligible'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
+        oversize_flash_message: 'See below for the new due dates for your loans.'
       bib_record_link: 'View title record page'
       renew:
         button: 'Renew this title'

@@ -77,12 +77,13 @@ class ApplicationController < ActionController::Base
     request.referer.present?
   end
 
-  # Determine whether fullpath exceeds max cookie size
+  # Determine whether value exceeds our prudent amount for session cookie storage
+  # @param [String, Hash, Array, nil] value
   # @return [TrueClass, FalseClass]
-  def path_too_large?(path)
-    return false unless path
+  def too_large_for_session?(value)
+    return false unless value
 
-    path.size >= MAX_PATH_SIZE_TO_STORE
+    value.to_json.bytesize >= MAX_PATH_SIZE_TO_STORE
   end
 
   # Do not store the referer if:
@@ -93,7 +94,7 @@ class ApplicationController < ActionController::Base
   def should_not_store_referer?
     !login_path? ||
       !referer_present? ||
-      path_too_large?(URI.parse(request.referer).path)
+      too_large_for_session?(URI.parse(request.referer).path)
   end
 
   # Its important that the location is NOT stored if the request:
@@ -122,7 +123,7 @@ class ApplicationController < ActionController::Base
       request.path == login_path ||
       request.path == alma_login_path ||
       request.path.ends_with?('inventory') ||
-      path_too_large?(request.fullpath)
+      too_large_for_session?(request.fullpath)
   end
 
   # Remove blank catalog parameters to reduce request URL length before saving to session
@@ -140,5 +141,14 @@ class ApplicationController < ActionController::Base
     catalog_params['clause'] = clause_params.reject { |_, v| v['query'].blank? && v['field'] != 'all_fields_advanced' }
 
     catalog_params
+  end
+
+  # Attempt to set a flash value in key, but use an alternate value if the flash content exceeds our prudent threshold.
+  # This prevents us from exceeding the maximum session cookie store size and causing ugly exceptions.
+  # @param content [String]
+  # @param key [String, Symbol]
+  # @param alt [String]
+  def safe_flash(content:, key:, alt:)
+    flash[key.to_sym] = too_large_for_session?({ key => content }) ? alt : content
   end
 end
