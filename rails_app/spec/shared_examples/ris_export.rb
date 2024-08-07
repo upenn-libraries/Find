@@ -14,7 +14,7 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('conference'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - CONFERENCE/EVENT\nTY  - GOVERNMENT DOCUMENT\nTY  - BOOK\n" \
+        expect(object.export_as_ris).to eq "TY  - BOOK\n" \
                                              'TI  - Report of the Conference of FAO : nineteenth session, Rome, ' \
                                              "12 November - 1 December 1977.\n" \
                                              "PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - "
@@ -25,7 +25,7 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - WEBSITE/DATABASE\nTY  - DATABASE & ARTICLE INDEX\n" \
+        expect(object.export_as_ris).to eq "TY  - GEN\n" \
                                   "TI  - GEOBASE\nPY  - 1900\nCY  - New York :\n" \
                                   "PB  - Elsevier Science.\nER  - "
       end
@@ -35,7 +35,7 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - JOURNAL/PERIODICAL\nTI  - Nature.\nPY  - 1869\n" \
+        expect(object.export_as_ris).to eq "TY  - JOUR\nTI  - Nature.\nPY  - 1869\n" \
                                              "CY  - [London] :\nPB  - Nature Pub. Group\nER  - "
       end
     end
@@ -44,7 +44,7 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - JOURNAL/PERIODICAL\nTI  - Chemical communications.\n" \
+        expect(object.export_as_ris).to eq "TY  - JOUR\nTI  - Chemical communications.\n" \
                                   "PY  - 1965\nCY  - London :\nPB  - Chemical Society.\nER  - "
       end
     end
@@ -55,7 +55,7 @@ shared_examples_for 'RisExport' do
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq "TY  - BOOK\n" \
           "TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.\n" \
-          "AU  - Bleier, Ruth,\nPY  - 1961\nCY  - Baltimore :\n" \
+          "AU  - Bleier, Ruth\nPY  - 1961\nCY  - Baltimore :\n" \
           "PB  - John Hopkins Press,\nER  - "
       end
     end

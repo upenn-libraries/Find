@@ -4,7 +4,7 @@
 class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
-  include Blacklight::Ris::DocumentFields
+  include RisExport
   use_extension(Blacklight::Ris::DocumentExport)
 
   # @return [Inventory::Response]
@@ -34,15 +34,6 @@ class SolrDocument
                              end
   end
 
-  # define the RIS fields
-  ris_field_mappings.merge!(
-    TY: proc { marc(:format_facet).map(&:upcase) }, # format
-    TI: proc { marc(:title_show) }, # title
-    AU: proc { marc(:creator_authors_list, main_tags_only: true) }, # author
-    PY: proc { marc(:date_publication).year }, # publication year
-    CY: proc { marc(:production_publication_ris_place_of_pub) }, # place of publication
-    PB: proc { marc(:production_publication_ris_publisher) }, # publisher
-    ET: proc { marc(:edition_show, with_alternate: false) }, # edition
-    SN: proc { marc(:identifier_isbn_show) } # ISBN
-  )
+  # populate the RIS fields
+  ris_field_mappings.merge!(ris_fields)
 end
