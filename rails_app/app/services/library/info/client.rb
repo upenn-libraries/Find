@@ -4,9 +4,6 @@ module Library
   module Info
     # Provides a Faraday::Connection to perform requests
     class Client
-      class Error < StandardError; end
-
-      ERROR_MESSAGE = 'Libraries API Connection Error'
 
       class << self
         def connection

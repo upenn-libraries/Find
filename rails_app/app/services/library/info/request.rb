@@ -22,6 +22,7 @@ module Library
           new(**response.body) if response.success? && response.body.any?
         rescue Faraday::Error => e
           Honeybadger.notify(e)
+          Rails.logger.debug error_message(e)
           nil
         end
 
