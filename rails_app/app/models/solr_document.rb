@@ -33,7 +33,4 @@ class SolrDocument
                                JSON.parse(links_data.first, symbolize_names: true)
                              end
   end
-
-  # populate the RIS fields
-  ris_field_mappings.merge!(ris_fields)
 end
