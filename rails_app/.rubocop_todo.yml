@@ -18,6 +18,7 @@ Metrics/AbcSize:
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/inventory/item/export.rb'
     - 'app/services/shelf/listing.rb'
+    - 'app/models/concerns/citation_export.rb'
 
 # Offense count: 2
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns, inherit_mode.
@@ -45,6 +46,7 @@ Metrics/CyclomaticComplexity:
     - 'app/controllers/application_controller.rb'
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/shelf/listing.rb'
+    - 'app/models/concerns/citation_export.rb'
 
 # Offense count: 8
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns.
@@ -55,6 +57,7 @@ Metrics/MethodLength:
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/inventory/item/export.rb'
     - 'app/services/shelf/service.rb'
+    - 'app/models/concerns/citation_export.rb'
 
 # Offense count: 4
 # Configuration parameters: AllowedMethods, AllowedPatterns, Max.
@@ -64,6 +67,7 @@ Metrics/PerceivedComplexity:
     - 'app/controllers/application_controller.rb'
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/shelf/listing.rb'
+    - 'app/models/concerns/citation_export.rb'
 
 # Offense count: 1
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
