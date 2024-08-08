@@ -24,6 +24,7 @@ Metrics/AbcSize:
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/inventory/item/export.rb'
     - 'app/services/shelf/listing.rb'
+    - 'app/models/concerns/ris_export.rb'
 
 # Offense count: 2
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns, inherit_mode.
