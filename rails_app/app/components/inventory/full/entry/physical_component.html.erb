@@ -9,7 +9,7 @@
     </summary>
     <div class="location-details__content">
       <turbo-frame id="library_info_<%= entry.library_code %>"
-                   src="<%= library_info_path(code: entry.library_code) %>"
+                   src="<%= library_info_path(library_code: entry.library_code) %>"
                    loading="lazy"
                    target="_top"
                    data-controller="missing-frame"
