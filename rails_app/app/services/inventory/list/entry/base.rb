@@ -31,10 +31,6 @@ module Inventory
           raise NotImplementedError
         end
 
-        def library_code
-          raise NotImplementedError
-        end
-
         def location
           raise NotImplementedError
         end
