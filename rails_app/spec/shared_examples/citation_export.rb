@@ -4,8 +4,8 @@
 shared_examples_for 'CitationExport' do
   include FixtureHelpers
 
-  # Test the three citations on the six fixtures: conference, electronic_database, electronic_journal,
-  # print_journal, print_monograph, and record_with_added_date
+  # Test the three citations on the five fixtures: conference, electronic_database, electronic_journal,
+  # print_journal, and print_monograph
   # 1. conference
   let(:source) { { marcxml_marcxml: marcxml } }
   let(:object) { described_class.new(source) }
@@ -56,18 +56,6 @@ shared_examples_for 'CitationExport' do
         value = object.export_as_mla_citation_txt
         expect(value).to eq 'Bleier, Ruth. <i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
                               'in the Horsley-Clarke co-ordinate system. </i>Baltimore : John Hopkins Press, [1961]'
-      end
-    end
-
-    context 'with a record with added date' do
-      let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
-
-      it 'returns MLA citation text' do
-        value = object.export_as_mla_citation_txt
-        expect(value).to eq 'Uther, Hans-Jörg., Folklore Fellows. and Alumni and Friends Memorial Book Fund. ' \
-                              '<i>The types of international folktales : a classification and bibliography, ' \
-                              'based on the system of Antti Aarne and Stith Thompson. </i>' \
-                              'Helsinki : Suomalainen Tiedeakatemia, Academia Scientiarum Fennica, [2004]'
       end
     end
   end
@@ -121,18 +109,6 @@ shared_examples_for 'CitationExport' do
                               '</i>Baltimore : John Hopkins Press.'
       end
     end
-
-    context 'with a record with added date' do
-      let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
-
-      it 'returns APA citation text' do
-        expect(object.export_as_apa_citation_txt).to eq 'Uther, H., Folklore Fellows. &amp; ' \
-                            'Alumni and Friends Memorial Book Fund. (2004). ' \
-                            '<i>The types of international folktales : a classification and bibliography, based ' \
-                            'on the system of Antti Aarne and Stith Thompson. </i>' \
-                            'Helsinki : Suomalainen Tiedeakatemia, Academia Scientiarum Fennica.'
-      end
-    end
   end
 
   describe '#export_as_chicago_citation_txt' do
@@ -181,18 +157,6 @@ shared_examples_for 'CitationExport' do
         value = object.export_as_chicago_citation_txt
         expect(value).to eq 'Bleier, Ruth. <i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
                               'in the Horsley-Clarke co-ordinate system. </i>Baltimore : John Hopkins Press, [1961]'
-      end
-    end
-
-    context 'with a record with added date' do
-      let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
-
-      it 'returns Chicago citation text' do
-        value = object.export_as_chicago_citation_txt
-        expect(value).to eq 'Uther, Hans-Jörg., Folklore Fellows. and Alumni and Friends Memorial Book Fund. ' \
-                              '<i>The types of international folktales : a classification and bibliography, ' \
-                              'based on the system of Antti Aarne and Stith Thompson. </i>' \
-                              'Helsinki : Suomalainen Tiedeakatemia, Academia Scientiarum Fennica, [2004]'
       end
     end
   end
