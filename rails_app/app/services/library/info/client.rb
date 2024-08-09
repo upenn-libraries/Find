@@ -4,7 +4,6 @@ module Library
   module Info
     # Provides a Faraday::Connection to perform requests
     class Client
-
       class << self
         def connection
           Faraday.new(url: base_url) do |config|

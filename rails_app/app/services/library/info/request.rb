@@ -11,8 +11,6 @@ module Library
       attr_reader :data
 
       class << self
-        ERROR_MESSAGE = 'Libraries API Connection Error'
-
         # Fetches the information for a specific library based on library code
         #
         # @param library_code [String]
@@ -22,21 +20,7 @@ module Library
           new(**response.body) if response.success? && response.body.any?
         rescue Faraday::Error => e
           Honeybadger.notify(e)
-          Rails.logger.debug error_message(e)
           nil
-        end
-
-        private
-
-        # @return [String]
-        def error_message(error)
-          response = error.response_body
-
-          return ERROR_MESSAGE if response.nil?
-
-          message = response.is_a?(Hash) ? response['message'] : error.to_s
-
-          "#{ERROR_MESSAGE} (#{error.response_status}): #{message}".strip
         end
       end
 
