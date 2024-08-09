@@ -8,6 +8,23 @@ describe 'Advanced Search Page' do
 
   before { visit advanced_search_catalog_path }
 
+  context 'when filtering with facets' do
+    before do
+      click_on 'Library'
+      find('div.library_facet-select').click
+    end
+
+    it 'does not limit values' do
+      within('div.ts-dropdown-content') { expect(page).to have_selector 'div', count: 11 }
+    end
+
+    it 'applies selected facets' do
+      within('div.ts-dropdown-content') { find('div', text: /LIBRA/).click }
+      click_on 'Search'
+      within('#appliedParams') { expect(page).to have_text('LIBRA') }
+    end
+  end
+
   context 'when submitting blank search fields' do
     context 'with all search fields blank' do
       it 'makes the request to the expected path' do

@@ -39,8 +39,22 @@ class CatalogController < ApplicationController
     config.document_solr_path = 'get'
     config.json_solr_path = 'advanced'
 
-    # Display link to advanced search form
-    config.advanced_search.enabled = true
+    # Remove facet limits on the advanced search form; if we limit these, we see the modal that does not allow for
+    # multiple selection, which is essential to the advanced search facet functionality.
+    config.advanced_search = Blacklight::OpenStructWithHashAccess.new(
+      enabled: true,
+      form_solr_parameters: {
+        'facet.field': %w[access_facet format_facet language_facet library_facet
+                          location_facet classification_facet recently_published_facet],
+        'f.access_facet.facet.limit': '-1',
+        'f.format_facet.facet.limit': '-1',
+        'f.language_facet.facet.limit': '-1',
+        'f.library_facet.facet.limit': '-1',
+        'f.location_facet.facet.limit': '-1',
+        'f.classification_facet.facet.limit': '-1',
+        'f.recently_published_facet.facet.limit': '-1'
+      }
+    )
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
@@ -119,20 +133,30 @@ class CatalogController < ApplicationController
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
-    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
       field.include_in_advanced_search = false
     end
     config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true
-    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
-    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
+    config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5 do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), solr_params:
       { 'facet.mincount': 1 }, query: { last_5_years: { label: I18n.t('facets.recently_published.5_years'),
                                                         fq: 'publication_date_sort:[NOW/YEAR-4YEARS TO *]' },

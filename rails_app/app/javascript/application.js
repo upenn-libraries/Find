@@ -4,4 +4,5 @@ import "@rails/request.js"
 import "controllers";
 import "popper";
 import "bootstrap";
+import "tom-select";
 import Blacklight from "blacklight";
