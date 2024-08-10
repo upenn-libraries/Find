@@ -298,6 +298,8 @@ en:
       10_years: 'Within 10 years'
       15_years: 'Within 15 years'
     subject: 'Subject'
+    advanced_search:
+      placeholder: 'Select facets...'
   library:
     info:
       about: 'About location'
