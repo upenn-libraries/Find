@@ -23,3 +23,8 @@ development_environments:
 
 # Enable verbose debug logging (useful for troubleshooting).
 debug: false
+
+# Ignoring exceptions that aren't actionable.
+exceptions:
+  ignore:
+    - 'Blacklight::Exceptions::RecordNotFound'
