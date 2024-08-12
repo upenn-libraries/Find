@@ -1,8 +1,24 @@
-<p class="document-inventory">
-  <span class="inventory-item__header"><%= entry.location %></span>
-  <span class="inventory-item__main"><%= entry.description %></span>
-  <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
-</p>
+<div class="document-inventory">
+  <details class="location-details">
+    <summary>
+      <span class="inventory-item__container">
+        <span class="inventory-item__header"><%= entry.location %></span>
+        <span class="inventory-item__main"><%= entry.description %></span>
+        <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
+      </span>
+    </summary>
+    <div class="location-details__content">
+      <turbo-frame id="library_info_<%= entry.library_code %>"
+                   src="<%= library_info_path(library_code: entry.library_code) %>"
+                   loading="lazy"
+                   target="_top"
+                   data-controller="missing-frame"
+                   data-missing-frame-error-value="<%= t('library.info.missing_frame') %>">
+        <%= t('library.info.loading') %>
+      </turbo-frame>
+    </div>
+  </details>
+</div>
 <p class="<%= availability_class %> inventory-item__availability-summary">
   <span class="inventory-item__availability-main"><%= entry.human_readable_status %></span>
   <span class="inventory-item__availability-footer"><%= entry.human_readable_status_description %></span>

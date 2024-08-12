@@ -70,6 +70,11 @@ module Inventory
         end
 
         # @return [String, nil]
+        def library_code
+          data[:library_code]
+        end
+
+        # @return [String, nil]
         def location
           location_code = data[:location_code]
           return unless location_code
