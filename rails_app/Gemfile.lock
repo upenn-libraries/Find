@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/tulibraries/blacklight-ris.git
-  revision: 627fb269a72bb305fe05311981de5bfd5fe060ab
-  ref: update-for-rails-7-blacklight-7
+  remote: https://github.com/upenn-libraries/blacklight-ris.git
+  revision: 92216a14944460e41ce208b9997cedc64b0a56dd
+  ref: rails7
   specs:
     blacklight-ris (0.2.0)
       blacklight
@@ -301,7 +301,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.26)
+    pennmarc (1.0.33)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
@@ -314,7 +314,7 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     put (0.1.0)
-    racc (1.8.0)
+    racc (1.8.1)
     rack (2.2.9)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
