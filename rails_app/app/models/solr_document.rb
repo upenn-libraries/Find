@@ -4,6 +4,7 @@
 class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
+  include CitationExport
   include RisExport
   use_extension(Blacklight::Ris::DocumentExport)
 
