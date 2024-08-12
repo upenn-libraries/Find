@@ -24,7 +24,7 @@ module Inventory
 
         # @return [String]
         def human_readable_status
-          I18n.t('alma.availability.available.electronic.status')
+          I18n.t('alma.availability.electronic.available.label')
         end
 
         # @return [nil]
