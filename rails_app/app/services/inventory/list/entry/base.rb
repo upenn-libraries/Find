@@ -70,6 +70,13 @@ module Inventory
         def ecollection?
           false
         end
+
+        # Determine if an Entry is missing data required for proper, meaningful display. Implementations that would
+        # restrict display should be implemented in subclasses.
+        # @return [Boolean]
+        def displayable?
+          true
+        end
       end
     end
   end

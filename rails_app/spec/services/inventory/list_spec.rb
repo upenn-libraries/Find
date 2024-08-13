@@ -59,6 +59,18 @@ describe Inventory::List do
       end
     end
 
+    context 'with a record having poorly coded Ecollection inventory' do
+      let(:availability_data) { { mms_id => { holdings: [] } } }
+      let(:ecollection_data) { build(:ecollection_data, url: '', url_override: '') }
+
+      include_context 'with stubbed ecollections_data'
+      include_context 'with stubbed ecollection_data'
+
+      it 'does not return any ecollection inventory' do
+        expect(response.entries.length).to eq 0
+      end
+    end
+
     context 'with a record having 4 electronic inventory entries' do
       let(:availability_data) do
         { mms_id => { holdings: build_list(:electronic_availability_data, 4) } }

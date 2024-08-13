@@ -61,6 +61,12 @@ module Inventory
         def ecollection?
           true
         end
+
+        # Only show well-coded e-collection records
+        # @return [Boolean]
+        def displayable?
+          description.present? && href.present?
+        end
       end
     end
   end
