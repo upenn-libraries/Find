@@ -1,3 +1,26 @@
+GIT
+  remote: https://github.com/projectblacklight/blacklight.git
+  revision: 7f3f38f05e5fa25edb3aeb63b4394b4acc541e63
+  ref: 7f3f38f05e5fa25edb3aeb63b4394b4acc541e63
+  specs:
+    blacklight (8.3.0)
+      globalid
+      i18n (>= 1.7.0)
+      jbuilder (~> 2.7)
+      kaminari (>= 0.15)
+      ostruct (>= 0.3.2)
+      rails (>= 6.1, < 8)
+      view_component (>= 2.66, < 4)
+
+GIT
+  remote: https://github.com/upenn-libraries/blacklight-ris.git
+  revision: db90097bddcdb39c2486c57925b63fdeb90404c3
+  ref: rails7
+  specs:
+    blacklight-ris (0.2.0)
+      blacklight (>= 7)
+      rails (>= 7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,14 +111,6 @@ GEM
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
-    blacklight (8.1.0)
-      globalid
-      i18n (>= 1.7.0)
-      jbuilder (~> 2.7)
-      kaminari (>= 0.15)
-      ostruct (>= 0.3.2)
-      rails (>= 6.1, < 8)
-      view_component (>= 2.66, < 4)
     bootsnap (1.17.1)
       msgpack (~> 1.2)
     bootstrap (5.3.2)
@@ -292,7 +307,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.0.25)
+    pennmarc (1.0.33)
       activesupport (~> 7)
       library_stdnums (~> 1.6)
       marc (~> 1.2)
@@ -496,7 +511,8 @@ PLATFORMS
 
 DEPENDENCIES
   alma
-  blacklight (~> 8.0)
+  blacklight!
+  blacklight-ris!
   bootsnap
   bootstrap (~> 5.1)
   byebug
