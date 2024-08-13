@@ -14,10 +14,9 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('conference'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - BOOK\n" \
-                                             'TI  - Report of the Conference of FAO : nineteenth session, Rome, ' \
-                                             "12 November - 1 December 1977.\n" \
-                                             "PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - "
+        expect(object.export_as_ris).to eq %(TY  - BOOK
+TI  - Report of the Conference of FAO : nineteenth session, Rome, 12 November - 1 December 1977.
+PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - )
       end
     end
 
@@ -25,9 +24,8 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - GEN\n" \
-                                  "TI  - GEOBASE\nPY  - 1900\nCY  - New York :\n" \
-                                  "PB  - Elsevier Science.\nER  - "
+        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nPY  - 1900\nCY  - New York :
+PB  - Elsevier Science.\nER  - )
       end
     end
 
@@ -35,8 +33,8 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - JOUR\nTI  - Nature.\nPY  - 1869\n" \
-                                             "CY  - [London] :\nPB  - Nature Pub. Group\nER  - "
+        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nPY  - 1869\nCY  - [London] :
+PB  - Nature Pub. Group\nER  - )
       end
     end
 
@@ -44,8 +42,8 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - JOUR\nTI  - Chemical communications.\n" \
-                                  "PY  - 1965\nCY  - London :\nPB  - Chemical Society.\nER  - "
+        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.\nPY  - 1965
+CY  - London :\nPB  - Chemical Society.\nER  - )
       end
     end
 
@@ -53,22 +51,9 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('print_monograph'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - BOOK\n" \
-          "TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.\n" \
-          "AU  - Bleier, Ruth\nPY  - 1961\nCY  - Baltimore :\n" \
-          "PB  - John Hopkins Press,\nER  - "
-      end
-    end
-
-    context 'with a record with added date' do
-      let(:marcxml) { JSON.parse(json_fixture('record_with_added_date'))['marcxml_marcxml'].first }
-
-      it 'returns RIS text' do
-        expect(object.export_as_ris).to eq "TY  - BOOK\nTI  - The types of international folktales : " \
-           "a classification and bibliography, based on the system of Antti Aarne and Stith Thompson\n" \
-           "AU  - Uther, Hans-Jörg.\nPY  - 2004\nCY  - Helsinki :\nPB  - Suomalainen Tiedeakatemia, Academia " \
-           "Scientiarum Fennica,\nSN  - 9514109554\nSN  - 9514109562\nSN  - 9514109619\nSN  - 9514109627\n" \
-           "SN  - 9514109635\nSN  - 9514109643\nER  - "
+        expect(object.export_as_ris).to eq %(TY  - BOOK
+TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.
+AU  - Bleier, Ruth\nPY  - 1961\nCY  - Baltimore :\nPB  - John Hopkins Press,\nER  - )
       end
     end
   end

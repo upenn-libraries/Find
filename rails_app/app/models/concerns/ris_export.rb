@@ -6,6 +6,8 @@ module RisExport
   include Blacklight::Ris::DocumentFields
 
   included do
+    use_extension(Blacklight::Ris::DocumentExport)
+
     # populate the RIS fields
     ris_field_mappings.merge!(
       TY: proc { to_ris(marc(:format_facet)) }, # format

@@ -6,7 +6,6 @@ class SolrDocument
   include MARCParsing
   include CitationExport
   include RisExport
-  use_extension(Blacklight::Ris::DocumentExport)
 
   # @return [Inventory::Response]
   def full_inventory

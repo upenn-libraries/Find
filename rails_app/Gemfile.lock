@@ -12,15 +12,6 @@ GIT
       rails (>= 6.1, < 8)
       view_component (>= 2.66, < 4)
 
-GIT
-  remote: https://github.com/upenn-libraries/blacklight-ris.git
-  revision: db90097bddcdb39c2486c57925b63fdeb90404c3
-  ref: rails7
-  specs:
-    blacklight-ris (0.2.0)
-      blacklight (>= 7)
-      rails (>= 7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -111,6 +102,9 @@ GEM
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
+    blacklight-ris (0.2.0)
+      blacklight (>= 7)
+      rails (>= 7)
     bootsnap (1.17.1)
       msgpack (~> 1.2)
     bootstrap (5.3.2)
@@ -499,7 +493,7 @@ GEM
       rexml
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.17)
 
 PLATFORMS
   aarch64-linux
@@ -512,7 +506,7 @@ PLATFORMS
 DEPENDENCIES
   alma
   blacklight!
-  blacklight-ris!
+  blacklight-ris
   bootsnap
   bootstrap (~> 5.1)
   byebug
