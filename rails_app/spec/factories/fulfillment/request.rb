@@ -33,6 +33,10 @@ FactoryBot.define do
       comments { 'A very important comment.' }
     end
 
+    trait :with_boundwith do
+      boundwith { 'true' }
+    end
+
     trait :proxied do
       proxy_for { 'jdoe' }
     end
@@ -53,12 +57,12 @@ FactoryBot.define do
 
     trait :pickup do
       delivery { Fulfillment::Request::Options::PICKUP }
-      pickup_location { 'van_pelt' }
+      pickup_location { 'VanPeltLib' }
     end
 
     trait :ill_pickup do
       delivery { Fulfillment::Request::Options::ILL_PICKUP }
-      pickup_location { 'van_pelt' }
+      pickup_location { 'VanPeltLib' }
     end
 
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad

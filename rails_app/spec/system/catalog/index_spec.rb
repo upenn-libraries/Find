@@ -49,6 +49,13 @@ describe 'Catalog Index Page' do
       end
     end
 
+    it 'limits facets to 10' do
+      within('div.blacklight-library_facet') do
+        click_on I18n.t('facets.library')
+        expect(page).to have_selector 'ul.facet-values li', count: 10
+      end
+    end
+
     it 'searches and returns all results' do
       expect(page).to have_selector 'article.document', count: 2
     end

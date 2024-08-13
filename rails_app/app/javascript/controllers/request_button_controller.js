@@ -23,7 +23,7 @@ export default class extends Controller {
         params.set('request', 'true');
         url.search = params.toString();
         // Use history.pushState to update the address bar without reloading the page
-        history.pushState({}, '', url);
+        history.pushState(history.state, '', url);
         // Follow link.
         window.location.href = event.target.href;
     }

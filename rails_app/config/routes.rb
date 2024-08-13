@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookmarks do
+  resources :bookmarks, except: %i[show new edit] do
     concerns :exportable
 
     collection do
@@ -81,7 +81,8 @@ Rails.application.routes.draw do
     get 'fines-and-fees', to: 'fines#index'
   end
 
-  get 'additional_results(/:source)', to: 'additional_results#results', as: 'additional_results'
+  get ':library_code/info', to: 'library#info', controller: 'library', as: :library_info
+  get 'additional_results/:source', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
 end

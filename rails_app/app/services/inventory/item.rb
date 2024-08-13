@@ -26,6 +26,16 @@ module Inventory
       @bib_item.item.fetch('bib_data', {})
     end
 
+    # Return item identifier
+    def id
+      item_data['pid']
+    end
+
+    # Returns true if record is marked as a boundwith.
+    def boundwith?
+      @bib_item.item.fetch('boundwith', false)
+    end
+
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
     def checkoutable?
@@ -137,12 +147,24 @@ module Inventory
       return [:aeon] if aeon_requestable?
       return [:archives] if at_archives?
 
-      options = []
-      options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
+      options = pickup_options(ils_group: ils_group)
+
+      return options if ils_group == User::COURTESY_BORROWER_GROUP
+
       options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
-      options << Fulfillment::Request::Options::MAIL unless ils_group == User::COURTESY_BORROWER_GROUP
+      options << Fulfillment::Request::Options::MAIL
       options << Fulfillment::Request::Options::ELECTRONIC if scannable?
       options
+    end
+
+    # Return pickup options available for this item based on the group
+    # @param ils_group [String] the ILS group code
+    # @return [Array<Symbol>]
+    def pickup_options(ils_group:)
+      return [Fulfillment::Request::Options::PICKUP] if checkoutable?
+      return [Fulfillment::Request::Options::ILL_PICKUP] if ils_group != User::COURTESY_BORROWER_GROUP
+
+      []
     end
 
     # Array of arrays. In each sub-array, the first value is the display value and the

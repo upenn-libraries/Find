@@ -1,10 +1,9 @@
-pennlibs_web_version: '0.1.2'
+pennlibs_web_version: '0.1.3'
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
-  user_password: <%= DockerSecrets.lookup(:illiad_user_password, Rails.application.credentials.illiad_user_password) %>
 aeon:
   requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
@@ -18,6 +17,10 @@ email:
     url: 'mailrelay.library.upenn.int'
     port: 25
     domain: 'upenn.edu'
+library:
+  info:
+    base_url: 'https://www.library.upenn.edu/api/v1/libraries'
+    api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
 locations:
   offsite:
     - lippb10
@@ -69,7 +72,7 @@ locations:
       ill: Museum Library
     Ormandy Music and Media Center:
       ils: MusicLib
-    Pennsylvania Hospital Library - 800 Spruce St.:
+    Pennsylvania Hospital Library - PAH Staff Only:
       ils: PAHospLib
       ill: PA Hospital Library
     Veterinary Library - New Bolton Center:

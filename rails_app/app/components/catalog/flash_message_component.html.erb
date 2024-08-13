@@ -1,0 +1,13 @@
+<%
+  # Copied from Blacklight version 8.3.0
+  # Added alert-dismissable os that the layout puts
+  # the close "X" in the upper right.
+  # Additionally, sanitizing message so that we can include html.
+%>
+
+<div class="alert alert-dismissible <%= @classes %>">
+  <%= sanitize(message) %>
+  <%= tag.button button_contents, type: "button", class: "btn-close",
+                     data: { dismiss: "alert", bs_dismiss: "alert" },
+                     aria: { label: "Close" } %>
+</div>

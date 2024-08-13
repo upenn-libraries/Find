@@ -2,9 +2,9 @@
   <div class="form-check">
     <%= radio_button_tag :delivery, delivery_value, checked, **radio_options, class: 'form-check-input' %>
     <%= label_tag :delivery_office, t('requests.form.options.office.label_html'), class: 'form-check-label' %>
-    <% if user_address? %>
+    <% if office_address.present? %>
       <p class="alert alert-info my-2">
-        <%= user_address.join('<br>').html_safe %>
+        <%= office_address %>
       </p>
       <small class="text-muted">
         <%= t('requests.form.options.office.info_html', url: t('urls.guides.office')) %>

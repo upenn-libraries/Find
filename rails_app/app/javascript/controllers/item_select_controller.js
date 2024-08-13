@@ -1,20 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
+// Swaps out the source url in the options turbo frame when a user selects a new item.sa
 export default class extends Controller {
   static targets = [
-    "select",
     "mmsIdField",
     "holdingIdField",
-    "itemIdField",
     "optionsFrame",
     "optionsLoadingTemplate",
   ];
-
-  connect() {
-    if (!this.hasSelectTarget) {
-      this.updateOptionsFrame(this.buildUrl(this.itemIdFieldTarget.value));
-    }
-  }
 
   selectChanged(event) {
     if (event.target.value.length > 0) {

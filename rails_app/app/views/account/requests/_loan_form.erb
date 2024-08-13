@@ -63,7 +63,7 @@
 
           <%= render(Account::Requests::Options::PickupComponent.new(user: @request.patron, ill: true, checked: !@request.patron.faculty_express?)) %>
 
-          <%= render(Account::Requests::Options::MailComponent.new) %>
+          <%= render(Account::Requests::Options::MailComponent.new(user: @request.patron)) %>
         </ul>
       </fieldset>
 

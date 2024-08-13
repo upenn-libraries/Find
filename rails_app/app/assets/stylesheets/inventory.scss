@@ -162,7 +162,7 @@
   padding-bottom: 0.95rem;
   z-index: 2;
   margin: -0.2rem;
-  
+
   @media (min-width: 992px) {
     clip-path: inset(-0.5rem 1px -0.5rem -0.5rem);
     margin-right: 0;
@@ -196,6 +196,47 @@
   margin-top: 0.5rem;
   color: var(--color-fg-subtle);
   margin-bottom: 0.5rem;
+}
+
+.location-details summary {
+  cursor:pointer;
+
+  .inventory-item__container {
+    display: inline-grid;
+    /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
+    max-width: calc(100% - 2rem);
+  }
+}
+
+.location-details summary:hover .inventory-item__container span {
+  text-decoration: underline;
+  text-underline-offset: var(--link-text-underline-offset);
+  text-decoration-thickness: var(--link-text-decoration-thickness);
+}
+
+.location-details__content {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: var(--color-bg-subtle)
+}
+
+.location-details__content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.location-details__content li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location-details__content p {
+  margin-bottom: 0;
 }
 
 @media (min-width: 992px) {

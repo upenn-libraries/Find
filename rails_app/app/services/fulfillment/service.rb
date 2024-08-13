@@ -28,13 +28,14 @@ module Fulfillment
         notify outcome: outcome
         outcome
       rescue StandardError => e
+        Rails.logger.error e.message
         Honeybadger.notify(e)
         failed_outcome(request, [I18n.t('fulfillment.public_error_message')])
       end
 
       # @param [Outcome] outcome
       def notify(outcome:)
-        # TODO: send email using outcome (item_desc, fulfillment_desc)
+        RequestMailer.confirmation_email(outcome: outcome).deliver_now
       end
 
       private

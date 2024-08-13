@@ -70,11 +70,21 @@ module Inventory
         end
 
         # @return [String, nil]
+        def library_code
+          data[:library_code]
+        end
+
+        # @return [String, nil]
         def location
           location_code = data[:location_code]
           return unless location_code
 
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
+        end
+
+        # Returns host record mms id, if physical holding is a boundwith.
+        def host_record_id
+          data[:host_record_id]
         end
 
         # Number of items for this physical holding.

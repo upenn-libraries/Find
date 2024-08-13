@@ -28,3 +28,6 @@ en:
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
+    advanced_search:
+      form:
+        limit_criteria_heading_html: 'Limit your search'

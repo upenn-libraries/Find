@@ -8,6 +8,49 @@ describe 'Advanced Search Page' do
 
   before { visit advanced_search_catalog_path }
 
+  context 'when filtering with facets' do
+    before do
+      click_on 'Library'
+      find('div.library_facet-select').click
+    end
+
+    it 'does not limit values' do
+      within('div.ts-dropdown-content') { expect(page).to have_selector 'div', count: 11 }
+    end
+
+    it 'applies selected facets' do
+      within('div.ts-dropdown-content') { find('div', text: /LIBRA/).click }
+      click_on 'Search'
+      within('#appliedParams') { expect(page).to have_text('LIBRA') }
+    end
+  end
+
+  context 'when submitting blank search fields' do
+    context 'with all search fields blank' do
+      it 'makes the request to the expected path' do
+        click_on 'Search'
+        expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
+                                            '&clause%5B0%5D%5Bquery%5D=&sort=score+desc&commit=Search'
+      end
+    end
+
+    context 'with some search fields blank' do
+      before do
+        fill_in 'Subject', with: 'Cats'
+        fill_in 'Title', with: 'Hypothalamus'
+        click_on 'Search'
+      end
+
+      it 'makes the request to the expected path' do
+        expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
+                                            '&clause%5B0%5D%5Bquery%5D=&clause%5B2%5D%5Bfield%5D=title_search'\
+                                            '&clause%5B2%5D%5Bquery%5D=Hypothalamus'\
+                                            '&clause%5B4%5D%5Bfield%5D=subject_search&clause%5B4%5D%5Bquery%5D=Cats'\
+                                            '&sort=score+desc&commit=Search'
+      end
+    end
+  end
+
   context 'when using a range search field' do
     context 'when submitting a ranged search with both endpoints' do
       before do

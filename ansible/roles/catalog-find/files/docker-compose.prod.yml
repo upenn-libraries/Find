@@ -21,6 +21,7 @@ services:
       - alert_webhooks_token
       - alma_api_key
       - illiad_api_key
+      - library_info_api_key
       - summon_api_key
     volumes:
       - app_storage:/home/app/storage
@@ -41,6 +42,9 @@ secrets:
   illiad_api_key:
     external: true
     name: ${ILLIAD_API_KEY}
+  library_info_api_key:
+    external: true
+    name: ${LIBRARY_INFO_API_KEY}
   summon_api_key:
     external: true
     name: ${SUMMON_API_KEY}
