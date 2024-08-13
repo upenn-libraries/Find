@@ -5,6 +5,7 @@ class SolrDocument
   include Blacklight::Solr::Document
   include MARCParsing
   include CitationExport
+  include RisExport
 
   # @return [Inventory::Response]
   def full_inventory

@@ -3,6 +3,7 @@
 # Blacklight controller that handles searches and document requests
 class CatalogController < ApplicationController
   include Blacklight::Catalog
+  include Blacklight::Ris::Catalog
 
   before_action :load_document, only: %i[staff_view]
 
