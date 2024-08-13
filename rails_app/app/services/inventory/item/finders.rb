@@ -22,7 +22,7 @@ module Inventory
       # @param host_record_id [String, nil] the host_record_id if record is boundwith
       # @return [Array<Inventory::Item>]
       def find_all(mms_id:, holding_id:, host_record_id: nil)
-        raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
+        raise ArgumentError, 'Insufficient identifiers set' unless mms_id
 
         # Create item to represent boundwith record.
         return [boundwith_item(mms_id, holding_id, host_record_id)] if host_record_id.present?

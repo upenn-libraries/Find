@@ -10,7 +10,7 @@ module Fulfillment
         # @return [Outcome]
         def submit(request:)
           params = submission_params(request: request)
-          response = if request.params.item_id
+          response = if request.params.holding_id && request.params.item_id
                        ::Alma::ItemRequest.submit(params.merge({ item_pid: request.params.item_id }))
                      else
                        ::Alma::BibRequest.submit(params)
@@ -28,7 +28,7 @@ module Fulfillment
           errors = []
           errors << I18n.t(:no_pickup_location, scope: scope) unless request.pickup_location
           errors << I18n.t(:no_mms_id, scope: scope) unless request.params.mms_id
-          errors << I18n.t(:no_holding_id, scope: scope) unless request.params.holding_id
+          # errors << I18n.t(:no_holding_id, scope: scope) unless request.params.holding_id
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
           errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied?
           errors
