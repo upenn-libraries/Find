@@ -146,10 +146,9 @@ module Inventory
       def api_entries(inventory_data, document, limit: nil)
         sorted_data = Inventory::List::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
-        entries = limited_data.map do |data|
+        limited_data.map do |data|
           create_entry(document.id, host_record_id: document.host_record_id, **data.symbolize_keys)
         end
-        entries.select(&:displayable?)
       end
 
       # Return only available electronic holdings
