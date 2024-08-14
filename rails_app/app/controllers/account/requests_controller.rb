@@ -106,10 +106,11 @@ module Account
     def fulfillment_form
       items = Inventory::Item.find_all(mms_id: params[:mms_id],
                                        holding_id: params[:holding_id],
-                                       host_record_id: params[:host_record_id])
+                                       host_record_id: params[:host_record_id],
+                                       location_code: params[:location_code])
 
       render(Account::Requests::FormComponent.new(mms_id: params[:mms_id],
-                                                  holding_id: params[:holding_id],
+                                                  holding_id: params[:holding_id] || items.first.holding_id,
                                                   items: items,
                                                   user: current_user), layout: false)
     end

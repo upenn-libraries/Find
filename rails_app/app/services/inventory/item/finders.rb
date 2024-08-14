@@ -20,26 +20,49 @@ module Inventory
       # @param mms_id [String] the Alma mms_id
       # @param holding_id [String] the Alma holding_id
       # @param host_record_id [String, nil] the host_record_id if record is boundwith
+      # @param location_code [String, nil] if the item is in a temp location, this is the location code so we can
+      #                                    attempt to filter out the relevant items from the list of all items
       # @return [Array<Inventory::Item>]
-      def find_all(mms_id:, holding_id:, host_record_id: nil)
-        raise ArgumentError, 'Insufficient identifiers set' unless mms_id
+      def find_all(mms_id:, holding_id:, host_record_id: nil, location_code: nil)
+        raise ArgumentError, 'No MMS ID provided' unless mms_id
 
-        # Create item to represent boundwith record.
+        # Create and return an item to represent boundwith record.
         return [boundwith_item(mms_id, holding_id, host_record_id)] if host_record_id.present?
 
-        bib_items = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
-        item_set = bib_items.map { |bib_item| new(bib_item) }
-        return item_set if item_set.present?
+        # in most cases, we return the holding's items here
+        item_set = build_item_set mms_id: mms_id, holding_id: holding_id, location_code: location_code
+        return item_set if item_set.any?
 
+        # if we have no items at this point, then Alma has no items in this holding. this is an unfortunate reality so
+        # we fake an items based on this bib and holding details.
         holdings_data = Alma::BibHolding.find_all(mms_id: mms_id)
 
         raise 'Record has no holding.' if holdings_data['holding'].blank?
 
-        # Fake an item when a holding has no items
         [holding_as_item(holdings_data, holding_id)]
       end
 
       private
+
+      # Build out Inventory::Item objects from Item API request data, filtering if needed.
+      # @param mms_id [String]
+      # @param holding_id [String, nil]
+      # @param location_code [String]
+      # @return [Array<Inventory::Item>]
+      def build_item_set(mms_id:, holding_id:, location_code:)
+        bib_items = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
+        item_set = bib_items.map { |bib_item| new(bib_item) }
+
+        # if a holding id is not provided, we get _ALL_ items for the MMS ID. typically this occurs when a holding is in
+        # a "temporary location". We attempt to filter the list of ALL items returned by the above lookup to include
+        # only the items in the temporary location based on the location code value. Also, the Items API returns items
+        # that might be in a temp location and are shown as distinct holdings in our view.
+        if holding_id.blank? && location_code
+          item_set.select { |i| i.in_temp_location? && (i.location == location_code) }
+        else
+          item_set.reject(&:in_temp_location?)
+        end
+      end
 
       # Boundwith records contain the relevant bibliographic information, but their host records contain the holding
       # and item information. In order to facilitate the fulfillment process we create an item that combines the

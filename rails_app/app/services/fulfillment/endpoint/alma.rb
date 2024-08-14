@@ -28,7 +28,7 @@ module Fulfillment
           errors = []
           errors << I18n.t(:no_pickup_location, scope: scope) unless request.pickup_location
           errors << I18n.t(:no_mms_id, scope: scope) unless request.params.mms_id
-          # errors << I18n.t(:no_holding_id, scope: scope) unless request.params.holding_id
+          errors << I18n.t(:no_holding_id, scope: scope) unless request.params.holding_id
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
           errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied?
           errors

@@ -21,7 +21,11 @@ export default class extends Controller {
     // Set holding ID in URL and replace current history state
     addIDToURL(id) {
         let url = new URL(window.location.href);
-        url.searchParams.set('hld_id', id);
+        if(id.length > 0) {
+            url.searchParams.set('hld_id', id);
+        } else {
+            url.searchParams.delete('hld_id');
+        }
         history.replaceState(history.state, '', url);
     }
 }

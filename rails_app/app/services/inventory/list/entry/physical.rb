@@ -76,8 +76,12 @@ module Inventory
         end
 
         # @return [String, nil]
+        def location_code
+          data[:location_code]
+        end
+
+        # @return [String, nil]
         def location
-          location_code = data[:location_code]
           return unless location_code
 
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]

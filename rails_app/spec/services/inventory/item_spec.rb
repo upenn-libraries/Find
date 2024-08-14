@@ -21,7 +21,7 @@ describe Inventory::Item do
     let(:items) { described_class.find_all(mms_id: '123', holding_id: '456') }
 
     it 'raises an ArgumentError if a parameter is missing' do
-      expect { described_class.find_all(mms_id: '123', holding_id: nil) }.to raise_error ArgumentError
+      expect { described_class.find_all(mms_id: nil, holding_id: nil) }.to raise_error ArgumentError
     end
 
     context 'when items are present' do
@@ -82,6 +82,38 @@ describe Inventory::Item do
 
       it 'raises an error' do
         expect { described_class.find_all(mms_id: '123', holding_id: '456') }.to raise_error('Record has no holding.')
+      end
+    end
+
+    context 'when record has a item in a temp location' do
+      let(:temp_loc_bib_item) { build(:item, :in_temp_location).bib_item }
+      let(:items) do
+        described_class.find_all(mms_id: '123', holding_id: holding_id,
+                                 location_code: temp_loc_bib_item.location)
+      end
+
+      before do
+        bib_item_set_double = instance_double(Alma::BibItemSet,
+                                              items: [temp_loc_bib_item, bib_item], total_record_count: 2)
+        allow(Alma::BibItem).to receive(:find).and_return(bib_item_set_double)
+      end
+
+      context 'when the holding_id is nil (temp location case)' do
+        let(:holding_id) { nil }
+
+        it 'returns a single item in a temp location' do
+          expect(items.count).to eq 1
+          expect(items.first.in_temp_location?).to be true
+        end
+      end
+
+      context 'when the holding_id is set' do
+        let(:holding_id) { bib_item.holding_data['holding_id'] }
+
+        it 'returns a single item not in a temp location' do
+          expect(items.count).to eq 1
+          expect(items.first.in_temp_location?).to be false
+        end
       end
     end
   end
