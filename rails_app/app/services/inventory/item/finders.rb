@@ -44,7 +44,8 @@ module Inventory
 
       private
 
-      # Build out Inventory::Item objects from Item API request data, filtering if needed.
+      # Build out Inventory::Item objects from Item API request data, filtering out items in cases where ALL items are
+      # returned, and temp location items from their permanent holdings as they are rendered with their temp holding.
       # @param mms_id [String]
       # @param holding_id [String, nil]
       # @param location_code [String]
