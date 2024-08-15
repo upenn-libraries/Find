@@ -49,6 +49,31 @@ shared_context 'with print monograph record with 2 physical entries' do
   end
 end
 
+shared_context 'with print monograph record with an entry in a temp location' do
+  let(:print_monograph_bib) { '9913203433503681' }
+  let(:print_monograph_entries) do
+    [create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: nil,
+                             call_number: 'AB123 1996', location_code: 'vpnewbook',
+                             inventory_type: 'physical'),
+     create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: '1234',
+                             call_number: 'AB123 1999', location_code: 'veteresov',
+                             inventory_type: 'physical')]
+  end
+
+  before do
+    SampleIndexer.index 'print_monograph.json'
+
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                            .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
+    allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                             .and_return(
+                                               Inventory::List::Response.new(entries: print_monograph_entries)
+                                             )
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding))
+  end
+end
+
 shared_context 'with print monograph record with 9 physical entries' do
   let(:print_monograph_bib) { '9913203433503681' }
   let(:print_monograph_entries) { create_list(:physical_entry, 9, mms_id: print_monograph_bib) }

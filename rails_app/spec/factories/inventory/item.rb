@@ -8,7 +8,7 @@ FactoryBot.define do
           'title' => Faker::Book.title,
           'author' => Faker::Book.author
         },
-        'holding_data' => {},
+        'holding_data' => { 'holding_id' => '456' },
         'item_data' => {
           'base_status' => { 'value' => '1' },
           'description' => "MS #{Faker::Number.number(digits: 4)}",

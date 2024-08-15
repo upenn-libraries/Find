@@ -81,6 +81,17 @@ describe Inventory::List do
       end
     end
 
+    context 'with a record having physical inventory in a temporary location' do
+      let(:availability_data) do
+        { mms_id => { holdings: [build(:physical_availability_data, :in_temp_location)] } }
+      end
+
+      it 'returns an entry for the temporary location holding with no holding id set' do
+        expect(response.count).to be 1
+        expect(response.first.id).to be_nil
+      end
+    end
+
     context 'when inventory data is nil' do
       let(:availability_data) { { mms_id => { holdings: nil } } }
 

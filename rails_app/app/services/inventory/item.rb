@@ -31,6 +31,10 @@ module Inventory
       item_data['pid']
     end
 
+    def holding_id
+      holding_data['holding_id']
+    end
+
     # Returns true if record is marked as a boundwith.
     def boundwith?
       @bib_item.item.fetch('boundwith', false)

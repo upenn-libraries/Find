@@ -41,6 +41,12 @@ FactoryBot.define do
 
     skip_create
     initialize_with { attributes.stringify_keys }
+
+    trait :in_temp_location do
+      location_code { 'vanpnewbook' }
+      location { 'New Book Shelf' }
+      holding_id { nil }
+    end
   end
 
   factory(:item_data, class: Hash) do

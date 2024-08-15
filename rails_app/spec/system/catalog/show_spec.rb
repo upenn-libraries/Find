@@ -179,6 +179,37 @@ describe 'Catalog Show Page' do
     end
   end
 
+  context 'when a record has entries in a temporary location' do
+    include_context 'with print monograph record with an entry in a temp location'
+
+    let(:mms_id) { print_monograph_bib }
+    let(:entries) { print_monograph_entries }
+
+    before { visit solr_document_path(mms_id) }
+
+    it 'shows two inventory entries' do
+      within('#inventory-pills-tab') do
+        expect(page).to have_selector('button.inventory-item', count: entries.count)
+        expect(page).to have_selector('button.inventory-item.active', count: 1)
+      end
+    end
+
+    it 'shows the first entry on page load' do
+      within('#inventory-pills-tabContent') do
+        expect(page).to have_content entries.first.description
+        expect(page).to have_content entries.first.coverage_statement
+      end
+    end
+
+    it 'loads the second entry if clicked' do
+      click_button entries.second.description
+      within('#inventory-pills-tabContent') do
+        expect(page).to have_content entries.second.description
+        expect(page).to have_content entries.second.coverage_statement
+      end
+    end
+  end
+
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
