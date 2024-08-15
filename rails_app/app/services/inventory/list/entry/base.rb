@@ -71,10 +71,11 @@ module Inventory
           false
         end
 
-        # Determine if an Entry is missing data required for proper, meaningful display
+        # Determine if an Entry is missing data required for proper, meaningful display. Implementations that would
+        # restrict display should be implemented in subclasses.
         # @return [Boolean]
         def displayable?
-          description.present? && href.present?
+          true
         end
       end
     end

@@ -54,7 +54,8 @@ module Inventory
 
         # @return [String, nil]
         def href
-          return nil if id.blank?
+          # Items in a temporary location don't return a holding ID in the availability response.
+          return Rails.application.routes.url_helpers.solr_document_path(mms_id) if id.blank?
 
           Rails.application.routes.url_helpers.solr_document_path(mms_id, hld_id: id)
         end
@@ -65,8 +66,12 @@ module Inventory
         end
 
         # @return [String, nil]
+        def location_code
+          data[:location_code]
+        end
+
+        # @return [String, nil]
         def location
-          location_code = data[:location_code]
           return unless location_code
 
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
