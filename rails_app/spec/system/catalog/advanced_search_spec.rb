@@ -168,7 +168,7 @@ describe 'Advanced Search Page' do
     end
   end
 
-  context 'with incoming parameters', pending: 'not yet implemented' do
+  context 'with incoming parameters' do
     let(:params) do
       { 'sort' => 'creator_sort asc, score desc', 'op' => 'must',
         'clause' => { '4' => { 'field' => 'subject_search', 'query' => 'Cats' },
@@ -188,7 +188,7 @@ describe 'Advanced Search Page' do
       end
     end
 
-    it 'selects the facets' do
+    it 'selects the facets', pending: 'not yet implemented' do
       within('form.advanced') do
         expect(page).to have_field('At the library', checked: true)
       end
