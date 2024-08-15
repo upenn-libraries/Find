@@ -34,9 +34,9 @@ module Inventory
         # @return [String, nil] status
         def human_readable_status
           case status
-          when Constants::ELEC_AVAILABLE then I18n.t('alma.availability.available.electronic.status')
-          when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.electronic.status')
-          when Constants::ELEC_UNAVAILABLE then I18n.t('alma.availability.unavailable.electronic.status')
+          when Constants::ELEC_AVAILABLE then I18n.t('alma.availability.electronic.available.label')
+          when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.electronic.check_holdings.label')
+          when Constants::ELEC_UNAVAILABLE then I18n.t('alma.availability.electronic.unavailable.label')
           else
             status&.capitalize
           end

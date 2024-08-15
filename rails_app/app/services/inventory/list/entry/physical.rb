@@ -13,24 +13,14 @@ module Inventory
         # User-friendly display value for inventory entry status
         # @return [String, nil]
         def human_readable_status
-          case status
-          when Constants::AVAILABLE then available_status.label
-          when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.label')
-          when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.label')
-          else
-            status&.capitalize
-          end
+          refined_status.label
         end
 
         # User-friendly display value for inventory entry status description - a more detailed description of
         # what the status indicates
         # @return [String, nil]
         def human_readable_status_description
-          case status
-          when Constants::AVAILABLE then available_status.description
-          when Constants::CHECK_HOLDINGS then I18n.t('alma.availability.check_holdings.physical.description')
-          when Constants::UNAVAILABLE then I18n.t('alma.availability.unavailable.physical.description')
-          end
+          refined_status.description
         end
 
         # @return [String, nil]
@@ -100,10 +90,12 @@ module Inventory
 
         private
 
-        # @return [Inventory::Entry::AvailableStatus]
-        def available_status
-          @available_status ||= AvailableStatus.new(
-            library_code: data[:library_code], location_code: data[:location_code]
+        # User-friendly availability status.
+        #
+        # @return [Inventory::List::Entry::Physical::Status]
+        def refined_status
+          @refined_status ||= Status.new(
+            status: status, library_code: data[:library_code], location_code: data[:location_code]
           )
         end
 
