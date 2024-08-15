@@ -172,7 +172,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'filters the holdings' do
-      within('.document__inventory-list') do
+      within('[data-controller="search-list"]') do
         fill_in 'Search this list', with: 'copy 0'
         expect(page).to have_selector('.inventory-item', count: 1)
       end
@@ -182,6 +182,7 @@ describe 'Catalog Show Page' do
   # Request options for a physical holding
   context 'when requesting a physical holding' do
     include_context 'with print monograph record with 2 physical entries'
+    include_context 'with mocked illiad_record on user'
 
     let(:user) { create(:user) }
     let(:mms_id) { print_monograph_bib }
@@ -204,18 +205,17 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'automatically shows request options when there is a single item' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_radio-options'
+          expect(page).to have_selector '#delivery-options'
         end
       end
 
       it 'selects the first option' do
-        within('.js_radio-options') do
+        within('#delivery-options') do
           expect(first('input[type="radio"]')[:checked]).to be true
         end
       end
@@ -230,6 +230,19 @@ describe 'Catalog Show Page' do
         scan_link = find_link(I18n.t('requests.form.buttons.scan'))[:href]
         expect(scan_link).to include CGI.escape(item.bib_data['title'])
         expect(scan_link).not_to include CGI.escape(item.bib_data['author'])
+      end
+    end
+
+    context 'when holding is a boundwith' do
+      let(:item) { build :item, :boundwith }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows boundwith notice' do
+        expect(page).to have_text I18n.t('requests.form.options.boundwith')
       end
     end
 
@@ -248,7 +261,7 @@ describe 'Catalog Show Page' do
 
       it 'shows request options when an item is selected' do
         find('select#item_id').find(:option, items.first.description).select_option
-        expect(page).to have_selector '.js_radio-options'
+        expect(page).to have_selector '#delivery-options'
       end
     end
 
@@ -257,13 +270,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
 
       it 'shows a button to add comments when the option is changed from scan' do
-        within('.add-comments') do
+        within('#add-comments') do
           expect(page).to have_link I18n.t('requests.form.add_comments')
         end
       end
@@ -271,13 +283,13 @@ describe 'Catalog Show Page' do
       it 'hides the comments area when the option is changed back to scan' do
         find('input#delivery_electronic').click
         within('form.fulfillment-form') do
-          expect(page).not_to have_selector '.add-comments'
+          expect(page).not_to have_selector '#add-comments'
         end
       end
 
       it 'expands the comments area when the button is clicked' do
         click_link I18n.t('requests.form.add_comments')
-        within('.add-comments') do
+        within('#add-comments') do
           expect(page).to have_selector 'textarea#comments'
         end
       end
@@ -288,13 +300,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
       it 'shows the aeon request options' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_aeon'
+          expect(page).to have_selector '#aeon-option'
         end
       end
 
@@ -312,13 +323,12 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
-      it 'shows the archives request options' do
+      it 'shows the archives text' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_archives'
+          expect(page).to have_selector '#archives-option'
         end
       end
     end
@@ -328,7 +338,6 @@ describe 'Catalog Show Page' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
         find('details.fulfillment > summary').click
       end
 
@@ -340,12 +349,12 @@ describe 'Catalog Show Page' do
 
       it 'shows request options' do
         within('.fulfillment__container') do
-          expect(page).to have_selector '.js_radio-options'
+          expect(page).to have_selector '#delivery-options'
         end
       end
 
       it 'selects the first option' do
-        within('.js_radio-options') do
+        within('#delivery-options') do
           expect(first('input[type="radio"]')[:checked]).to be true
         end
       end
@@ -451,7 +460,7 @@ describe 'Catalog Show Page' do
       before do
         CatalogController.configure_blacklight do |config|
           config.add_show_field :subject_test_show, values: ->(_, _, _) { ['Dogs.'] },
-                                                    component: Find::FacetLinkComponent
+                                                    component: Catalog::FacetLinkComponent
         end
 
         visit(solr_document_path(print_monograph_bib))

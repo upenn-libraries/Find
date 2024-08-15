@@ -21,7 +21,8 @@ module Inventory
           volume: volume,
           issue: issue,
           isbn: bib_data['isbn'],
-          issn: bib_data['issn'] }
+          issn: bib_data['issn'],
+          boundwith: boundwith? }
       end
 
       # Submission params for a scan (or electronic) request for a part of a work that can be passed to the ILL form as

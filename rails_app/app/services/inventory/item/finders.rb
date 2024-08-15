@@ -19,9 +19,13 @@ module Inventory
       # Return an array of items for a given mms_id and holding_id, fake an item if a holding has no items
       # @param mms_id [String] the Alma mms_id
       # @param holding_id [String] the Alma holding_id
+      # @param host_record_id [String, nil] the host_record_id if record is boundwith
       # @return [Array<Inventory::Item>]
-      def find_all(mms_id:, holding_id:)
+      def find_all(mms_id:, holding_id:, host_record_id: nil)
         raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id
+
+        # Create item to represent boundwith record.
+        return [boundwith_item(mms_id, holding_id, host_record_id)] if host_record_id.present?
 
         bib_items = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
         item_set = bib_items.map { |bib_item| new(bib_item) }
@@ -29,14 +33,38 @@ module Inventory
 
         holdings_data = Alma::BibHolding.find_all(mms_id: mms_id)
 
-        # TODO: implement boundwith support, see example mms_id: 9920306003503681
-        return [] if holdings_data['holding'].blank?
+        raise 'Record has no holding.' if holdings_data['holding'].blank?
 
         # Fake an item when a holding has no items
         [holding_as_item(holdings_data, holding_id)]
       end
 
       private
+
+      # Boundwith records contain the relevant bibliographic information, but their host records contain the holding
+      # and item information. In order to facilitate the fulfillment process we create an item that combines the
+      # information from the host and child record.
+      #
+      # @param mms_id [String] the Alma mms_id
+      # @param holding_id [String] the Alma holding_id
+      # @param host_record_id [String] the host_record_id
+      #  @return [Inventory::Item]
+      def boundwith_item(mms_id, holding_id, host_record_id)
+        # Fetch item for host record.
+        item = Alma::BibItem.find(host_record_id, holding_id: holding_id).first
+
+        # Extract bibliographic data from child record (record displayed in Find).
+        keys = %w[title author issn isbn complete_edition network_numbers place_of_publication
+                  date_of_publication publisher_const]
+        bib_data = Alma::Bib.find([mms_id], {}).response['bib'].first.slice(*keys)
+
+        # Combine information to create a frankenstein'd Item record that combines host record's holding and item
+        # information with displayable record's bib data.
+        new(Alma::BibItem.new({ 'bib_data' => bib_data.merge({ 'mms_id' => host_record_id }),
+                                'holding_data' => item.holding_data,
+                                'item_data' => item.item_data,
+                                'boundwith' => true }))
+      end
 
       # Some of our records have no Items. In order for consistent logic in requesting contexts, we need an Item object
       # in all cases, so we build an Item object using data from the holding that will suffice for requesting purposes.

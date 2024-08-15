@@ -2,11 +2,22 @@
   <div class="form-check">
     <%= radio_button_tag :delivery, delivery_value, false, class: 'form-check-input', **radio_options %>
     <%= label_tag :delivery_mail, t('requests.form.options.mail.label'), class: 'form-check-label' %>
-    <div>
+
+    <% if bbm_address.present? %>
+      <p class="alert alert-info my-2">
+        <%= bbm_address.join('<br />').html_safe %>
+      </p>
       <small class="text-muted">
-        <%= t('requests.form.options.mail.info_html', url: t('urls.forms.bbm')) %>
+        <%= t('requests.form.options.mail.info_html', url: t('urls.guides.bbm')) %>
       </small>
-    </div>
+    <% else %>
+      <div>
+        <small class="text-muted">
+          <%= t('requests.form.options.mail.warning_html', url: t('urls.forms.bbm')) %>
+        </small>
+      </div>
+    <% end %>
+
     <%# TODO: bbm validation? popup? %>
   </div>
 </li>

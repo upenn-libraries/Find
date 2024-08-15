@@ -63,6 +63,15 @@ module Shelf
         date.in_time_zone.strftime('%m/%d/%y')
       end
 
+      # Based on the title, determines if work is a boundwith.
+      # Note: This will identify most, but not all boundwiths records because some boundwith records represent
+      #       the first bound item as the host record.
+      #
+      # @return [Boolean]
+      def boundwith?
+        title.starts_with?(PennMARC::Title::HOST_BIB_TITLE)
+      end
+
       def ils_loan?
         false
       end

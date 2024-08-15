@@ -6,6 +6,7 @@ FactoryBot.define do
     availability { Inventory::Constants::AVAILABLE }
     sequence(:call_number) { |n| "QD1 .C48 copy #{n}" }
     sequence(:holding_info) { |n| "1965-1971 copy #{n}" }
+    library_code { 'TheLib' }
     location_code { 'chemperi' }
     sequence(:holding_id) { |n| "67890#{n}" }
 

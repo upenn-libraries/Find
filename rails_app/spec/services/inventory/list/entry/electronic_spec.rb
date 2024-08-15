@@ -24,7 +24,7 @@ describe Inventory::List::Entry::Electronic do
 
   describe '#human_readable_status' do
     it 'returns expected human_readable_status' do
-      expect(entry.human_readable_status).to eq I18n.t('alma.availability.available.electronic.status')
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.electronic.available.label')
     end
   end
 

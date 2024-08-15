@@ -3,6 +3,7 @@
 # Blacklight controller that handles searches and document requests
 class CatalogController < ApplicationController
   include Blacklight::Catalog
+  include Blacklight::Ris::Catalog
 
   before_action :load_document, only: %i[staff_view]
 
@@ -39,8 +40,22 @@ class CatalogController < ApplicationController
     config.document_solr_path = 'get'
     config.json_solr_path = 'advanced'
 
-    # Display link to advanced search form
-    config.advanced_search.enabled = true
+    # Remove facet limits on the advanced search form; if we limit these, we see the modal that does not allow for
+    # multiple selection, which is essential to the advanced search facet functionality.
+    config.advanced_search = Blacklight::OpenStructWithHashAccess.new(
+      enabled: true,
+      form_solr_parameters: {
+        'facet.field': %w[access_facet format_facet language_facet library_facet
+                          location_facet classification_facet recently_published_facet],
+        'f.access_facet.facet.limit': '-1',
+        'f.format_facet.facet.limit': '-1',
+        'f.language_facet.facet.limit': '-1',
+        'f.library_facet.facet.limit': '-1',
+        'f.location_facet.facet.limit': '-1',
+        'f.classification_facet.facet.limit': '-1',
+        'f.recently_published_facet.facet.limit': '-1'
+      }
+    )
 
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
@@ -54,17 +69,17 @@ class CatalogController < ApplicationController
     # config.index.document_presenter_class = MyApp::IndexPresenter
 
     # Some components can be configured
-    config.header_component = Find::HeaderComponent
-    config.index.search_bar_component = Find::SearchBarComponent
-    config.index.constraints_component = Find::ConstraintsComponent
-    config.index.facet_group_component = Find::FacetGroupComponent
-    config.index.document_component = Find::ResultsDocumentComponent
-    config.show.document_component = Find::ShowDocumentComponent
-    config.show.show_tools_component = Find::ShowToolsComponent
+    config.header_component = Catalog::HeaderComponent
+    config.index.search_bar_component = Catalog::SearchBarComponent
+    config.index.constraints_component = Catalog::ConstraintsComponent
+    config.index.facet_group_component = Catalog::FacetGroupComponent
+    config.index.document_component = Catalog::ResultsDocumentComponent
+    config.show.document_component = Catalog::ShowDocumentComponent
+    config.show.show_tools_component = Catalog::ShowToolsComponent
 
     # Configure local components for search session components that make the show page toolbar possible
-    config.track_search_session.item_pagination_component = Find::ServerItemPaginationComponent
-    config.track_search_session.applied_params_component = Find::ServerAppliedParamsComponent
+    config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent
+    config.track_search_session.applied_params_component = Catalog::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
@@ -73,7 +88,7 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
-    config.add_show_tools_partial(:bookmark, component: Find::BookmarkComponent,
+    config.add_show_tools_partial(:bookmark, component: Catalog::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
                                           validator: :validate_email_params)
@@ -119,20 +134,30 @@ class CatalogController < ApplicationController
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access')
-    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
       field.include_in_advanced_search = false
     end
     config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true
-    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true
-    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5
+    config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5 do |field|
+      field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
+    end
     config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), solr_params:
       { 'facet.mincount': 1 }, query: { last_5_years: { label: I18n.t('facets.recently_published.5_years'),
                                                         fq: 'publication_date_sort:[NOW/YEAR-4YEARS TO *]' },
@@ -167,16 +192,29 @@ class CatalogController < ApplicationController
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
 
+    # fields to show in email
+    config.add_email_field :title_ss, label: I18n.t('show.title.main')
+    config.add_email_field :format_facet, label: I18n.t('results.format')
+    config.add_email_field :creator_ss, label: I18n.t('results.creator')
+    config.add_email_field :edition_ss, label: I18n.t('results.edition')
+    config.add_email_field :conference_ss, label: I18n.t('results.conference')
+    config.add_email_field :series_ss, label: I18n.t('results.series')
+    config.add_email_field :publication_ss, label: I18n.t('results.publication')
+    config.add_email_field :production_ss, label: I18n.t('results.production')
+    config.add_email_field :distribution_ss, label: I18n.t('results.distribution')
+    config.add_email_field :manufacture_ss, label: I18n.t('results.manufacture')
+    config.add_email_field :contained_within_ss, label: I18n.t('results.contained_within')
+
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field :format_facet, label: I18n.t('results.format')
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
-                                         component: Find::FacetLinkComponent, facet_target: :creator_facet,
+                                         component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                                          facet_map: :creator_show_facet_map
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
-                                                           accessor: :marc, component: Find::FacetLinkComponent,
+                                                           accessor: :marc, component: Catalog::FacetLinkComponent,
                                                            facet_target: :creator_facet,
                                                            facet_map: :creator_conference_detail_show_facet_map
     config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
@@ -193,11 +231,11 @@ class CatalogController < ApplicationController
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
     config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc,
-                                         component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                         component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc,
-                                                 component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                                 component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc,
-                                               component: Find::FacetLinkComponent, facet_target: :subject_facet
+                                               component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
@@ -205,7 +243,7 @@ class CatalogController < ApplicationController
     config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
     config.add_show_field :note_summary_show, label: I18n.t('show.notes.summary'), accessor: :marc
-    config.add_show_field :note_contents_show, label: I18n.t('show.notes.contents'), accessor: :marc
+    config.add_show_field :note_contents_values, label: I18n.t('show.notes.contents'), accessor: :marc
     config.add_show_field :note_participant_show, label: I18n.t('show.notes.participant'), accessor: :marc
     config.add_show_field :note_credits_show, label: I18n.t('show.notes.credits'), accessor: :marc
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
@@ -220,7 +258,8 @@ class CatalogController < ApplicationController
                                                              accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
     config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc,
-                                                     component: Find::FacetLinkComponent, facet_target: :creator_facet
+                                                     component: Catalog::FacetLinkComponent,
+                                                     facet_target: :creator_facet
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc

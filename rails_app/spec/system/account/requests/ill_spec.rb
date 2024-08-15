@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Account Request ILL form' do
+  include_context 'with mocked illiad_record on user'
+
   let(:user) { create(:user) }
   let(:open_params) { {} }
 
@@ -70,6 +72,17 @@ describe 'Account Request ILL form' do
     end
   end
 
+  context 'when pages input has more than 30 characters' do
+    before do
+      click_button I18n.t('account.ill.request_type.scan')
+    end
+
+    it 'limits the input to 30 characters' do
+      fill_in I18n.t('account.ill.form.scan.pages'), with: 'x' * 31
+      expect(page).to have_field I18n.t('account.ill.form.scan.pages'), with: 'x' * 30
+    end
+  end
+
   context 'when request is being made by library staff' do
     let(:user) { create(:user, :library_staff) }
 
@@ -83,6 +96,8 @@ describe 'Account Request ILL form' do
       let(:proxy) { Fulfillment::User.new('jdoe') }
 
       before do
+        allow(Illiad::User).to receive(:find).with(id: proxy.uid).and_return(create(:illiad_user))
+
         fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy.uid
         click_button I18n.t('account.ill.form.proxy.submit')
       end

@@ -22,6 +22,6 @@ export default class extends Controller {
     addIDToURL(id) {
         let url = new URL(window.location.href);
         url.searchParams.set('hld_id', id);
-        history.replaceState({}, '', url);
+        history.replaceState(history.state, '', url);
     }
 }

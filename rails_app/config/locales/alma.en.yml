@@ -1,34 +1,37 @@
 en:
   alma:
     availability:
+      physical:
         available:
-          physical:
-            offsite:
-              label: 'Available from offsite location'
-              description: 'This item is stored in our repository but can be checked out.'
-            circulates:
-              label: 'Available for checkout'
-              description: 'This item can be checked out by visiting the library.'
-            unrequestable:
-              label: 'Available in person'
-              description: 'This item cannot be requested but can be accessed at the library.'
-            appointment:
-              label: 'Available by appointment'
-              description: 'Access to this material can be arranged with an appointment.'
-          electronic:
-            status: 'Available online'
-            description: 'Online access to this resource is provided by Penn Libraries'
+          offsite:
+            label: 'Available from offsite location'
+            description: 'This item is stored in our repository but can be checked out.'
+          circulates:
+            label: 'Available for checkout'
+            description: 'This item can be checked out by visiting the library.'
+          unrequestable:
+            label: 'Available in person'
+            description: 'This item cannot be requested but can be accessed at the library.'
+          appointment:
+            label: 'Available by appointment'
+            description: 'Access to this material can be arranged with an appointment.'
         unavailable:
-          physical:
-            label: 'By Request'
-            description: 'Item cannot be checked out at the library but can be requested.'
-          electronic:
-            label: 'By Request'
-            description: 'This resource is unavailable.'
+          label: 'By Request'
+          description: 'Item cannot be checked out at the library but can be requested.'
         check_holdings:
-          physical:
+          mixed_availability:
             label: 'Mixed Availability'
             description: 'Some items are available, others may be requested.'
-          electronic:
-            label: 'Mixed Availability'
-            description: 'This resource may be unavailable.'
+          appointment:
+            label: 'Available by appointment'
+            description: 'Access to this material can be arranged with an appointment.'
+      electronic:
+        available:
+          label: 'Available online'
+          description: 'Online access to this resource is provided by Penn Libraries'
+        unavailable:
+          label: 'By Request'
+          description: 'This resource is unavailable.'
+        check_holdings:
+          label: 'Mixed Availability'
+          description: 'This resource may be unavailable.'
