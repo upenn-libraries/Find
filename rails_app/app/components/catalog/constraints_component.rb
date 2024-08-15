@@ -11,8 +11,8 @@ module Catalog
       new(tag: :span,
           render_headers: false,
           id: nil,
-          query_constraint_component: Blacklight::SearchHistoryConstraintLayoutComponent,
-          facet_constraint_component_options: { layout: Blacklight::SearchHistoryConstraintLayoutComponent },
+          query_constraint_component: Catalog::SearchHistoryConstraintLayoutComponent,
+          facet_constraint_component_options: { layout: Catalog::SearchHistoryConstraintLayoutComponent },
           start_over_component: nil,
           **kwargs)
     end
