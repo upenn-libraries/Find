@@ -25,7 +25,7 @@ module Catalog
     end
 
     # Memoize alerts to prevent doubling database queries
-    # @return [Array]
+    # @return [ActiveRecord::Relation<Alert>]
     def alerts
       @alerts ||= Alert.all
     end

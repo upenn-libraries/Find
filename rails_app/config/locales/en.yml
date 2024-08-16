@@ -236,7 +236,7 @@ en:
     service_lede: 'books, articles, and more'
     service_name: 'Find'
     sign_out: 'Sign out'
-    account: 'Account'
+    account: 'My Account'
   footer:
     account:
       heading: 'Account'
