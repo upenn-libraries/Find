@@ -13,8 +13,8 @@ en:
             label: 'Available in person'
             description: 'This item cannot be requested but can be accessed at the library.'
           appointment:
-            label: 'Available by appointment'
-            description: 'Access to this material can be arranged with an appointment.'
+            label: 'Available in person'
+            description: 'This item can be accessed at the library reading room.'
         unavailable:
           label: 'By Request'
           description: 'Item cannot be checked out at the library but can be requested.'
@@ -23,8 +23,8 @@ en:
             label: 'Mixed Availability'
             description: 'Some items are available, others may be requested.'
           appointment:
-            label: 'Available by appointment'
-            description: 'Access to this material can be arranged with an appointment.'
+            label: 'Available in person'
+            description: 'This item can be accessed at the library reading room.'
       electronic:
         available:
           label: 'Available online'
