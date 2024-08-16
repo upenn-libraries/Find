@@ -29,4 +29,8 @@ FactoryBot.define do
   trait :courtesy_borrower do
     ils_group { User::COURTESY_BORROWER_GROUP }
   end
+
+  trait :faculty_express do
+    ils_group { User::FACULTY_EXPRESS_GROUP }
+  end
 end

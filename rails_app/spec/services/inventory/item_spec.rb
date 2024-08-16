@@ -313,24 +313,47 @@ describe Inventory::Item do
   end
 
   describe 'fulfillment_options' do
+    let(:user) { create(:user) }
+    let(:options) { item.fulfillment_options(user: user) }
+    let(:item) { build :item, :checkoutable }
+
     it 'returns an array of options' do
-      item = build :item, :checkoutable
-      expect(item.fulfillment_options(ils_group: 'group')).to be_an Array
+      expect(options).to be_an Array
     end
 
     context 'when the item is aeon requestable' do
       let(:item) { build :item, :aeon_requestable }
 
-      it 'returns only aeon option' do
-        expect(item.fulfillment_options(ils_group: 'group')).to eq [:aeon]
+      context 'with user' do
+        it 'returns only aeon option' do
+          expect(options).to eq [:aeon]
+        end
+      end
+
+      context 'without user' do
+        let(:user) { nil }
+
+        it 'returns only aeon option' do
+          expect(options).to eq [:aeon]
+        end
       end
     end
 
     context 'when the item is at archives' do
       let(:item) { build :item, :at_archives }
 
-      it 'returns only archives option' do
-        expect(item.fulfillment_options(ils_group: 'group')).to eq [:archives]
+      context 'with user' do
+        it 'returns only archives option' do
+          expect(options).to eq [:archives]
+        end
+      end
+
+      context 'without user' do
+        let(:user) { nil }
+
+        it 'returns only archives option' do
+          expect(options).to eq [:archives]
+        end
       end
     end
 
@@ -338,39 +361,36 @@ describe Inventory::Item do
       let(:item) { build :item, :checkoutable }
 
       it 'returns pickup option' do
-        options = item.fulfillment_options(ils_group: 'undergrad')
         expect(options).to include Fulfillment::Request::Options::PICKUP
       end
 
-      it 'returns office option if ils_group is faculty express' do
-        options = item.fulfillment_options(ils_group: 'FacEXP')
-        expect(options).to include Fulfillment::Request::Options::OFFICE
+      it 'returns electronic option if item is scannable' do
+        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
       end
 
-      it 'returns mail option if ils_group is not courtesy borrower' do
-        options = item.fulfillment_options(ils_group: 'not_courtesy')
+      it 'returns mail option if user is not courtesy borrower' do
         expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
-      it 'returns electronic option if item is scannable' do
-        item = build :item
-        options = item.fulfillment_options(ils_group: 'group')
-        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
+      context 'with faculty express user' do
+        let(:user) { create(:user, :faculty_express) }
+
+        it 'returns office option' do
+          expect(options).to include Fulfillment::Request::Options::OFFICE
+        end
       end
-    end
 
-    context 'when the item is checkoutable and the requester is a courtesy borrower' do
-      let(:item) { build :item, :checkoutable }
-      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+      context 'with courtesy borrower' do
+        let(:user) { create(:user, :courtesy_borrower) }
 
-      it 'returns only pickup option' do
-        expect(options).to contain_exactly(Fulfillment::Request::Options::PICKUP)
+        it 'returns only pickup option' do
+          expect(options).to contain_exactly(Fulfillment::Request::Options::PICKUP)
+        end
       end
     end
 
     context 'when the item is unavailable' do
       let(:item) { build :item, :not_checkoutable }
-      let(:options) { item.fulfillment_options(ils_group: 'group') }
 
       it 'returns electronic option' do
         expect(options).to include Fulfillment::Request::Options::ELECTRONIC
@@ -380,22 +400,24 @@ describe Inventory::Item do
         expect(options).to include Fulfillment::Request::Options::ILL_PICKUP
       end
 
-      it 'returns books by mail option if the user is not a courtesy borrower' do
+      it 'returns books by mail option' do
         expect(options).to include Fulfillment::Request::Options::MAIL
       end
 
-      it 'returns office option if ils_group is faculty express' do
-        expect(item.fulfillment_options(ils_group: User::FACULTY_EXPRESS_GROUP))
-          .to include Fulfillment::Request::Options::OFFICE
+      context 'with faculty express user' do
+        let(:user) { create(:user, :faculty_express) }
+
+        it 'returns office option' do
+          expect(options).to include Fulfillment::Request::Options::OFFICE
+        end
       end
-    end
 
-    context 'when the item is unavailable and the requester is a courtesy borrower' do
-      let(:item) { build :item, :not_checkoutable }
-      let(:options) { item.fulfillment_options(ils_group: User::COURTESY_BORROWER_GROUP) }
+      context 'with courtesy borrower' do
+        let(:user) { create(:user, :courtesy_borrower) }
 
-      it 'returns no options' do
-        expect(options).to be_empty
+        it 'returns no options' do
+          expect(options).to be_empty
+        end
       end
     end
   end
