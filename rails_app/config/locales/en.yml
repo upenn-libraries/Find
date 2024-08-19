@@ -239,7 +239,7 @@ en:
     account: 'My Account'
   footer:
     account:
-      heading: 'Account'
+      heading: 'My Account'
       request: "Request an item"
       shelf: 'Shelf'
       bookmarks: 'Bookmarks'
