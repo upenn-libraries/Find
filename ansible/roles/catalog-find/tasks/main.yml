@@ -89,6 +89,8 @@
       - "{{ project_root ~ '/catalog-find/docker-compose.prod.yml' }}"
     state: present
   environment:
+    ALERT_WEBHOOKS_TOKEN: "{{ 'catalog_find_alert_webhooks_token_v' ~ catalog_find_versioned_secrets.alert_webhooks_token.version }}"
+    ALMA_API_KEY: "{{ 'catalog_find_alma_api_key_v' ~ catalog_find_versioned_secrets.alma_api_key.version }}"
     APP_IMAGE_NAME: "{{ catalog_find_image_name }}"
     APP_IMAGE_TAG: "{{ catalog_find_image_tag }}"
     APP_PORT: "{{ catalog_find_port }}"
@@ -98,14 +100,13 @@
     DATABASE_PASSWORD: "{{ postgres_database_versioned_secrets.database_password.secret_name_prefix + postgres_database_versioned_secrets.database_password.version }}"
     DATABASE_USER: "{{ postgres_database_user }}"
     HONEYBADGER_API_KEY: "{{ 'catalog_find_honeybadger_api_key_v' ~ catalog_find_versioned_secrets.honeybadger_api_key.version }}"
+    ILLIAD_API_KEY: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
+    ILLIAD_LEGACY_USER_PASSWORD: "{{ catalog_find_illiad_legacy_user_password_v' ~ catalog_find_versioned_secrets.illiad_legacy_user_password.version }}"
+    LIBRARY_INFO_API_KEY: "{{ 'catalog_find_library_info_api_key_v' ~ catalog_find_versioned_secrets.library_info_api_key.version }}"
     RAILS_ENV: "{{ catalog_find_rails_env }}"
     RAILS_MASTER_KEY: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
     SOLR_URL: "{{ 'catalog_find_solr_url_v' ~ catalog_find_versioned_secrets.solr_url.version }}"
-    ALERT_WEBHOOKS_TOKEN: "{{ 'catalog_find_alert_webhooks_token_v' ~ catalog_find_versioned_secrets.alert_webhooks_token.version }}"
-    ALMA_API_KEY: "{{ 'catalog_find_alma_api_key_v' ~ catalog_find_versioned_secrets.alma_api_key.version }}"
-    ILLIAD_API_KEY: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
-    LIBRARY_INFO_API_KEY: "{{ 'catalog_find_library_info_api_key_v' ~ catalog_find_versioned_secrets.library_info_api_key.version }}"
     SUMMON_API_KEY: "{{ 'catalog_find_summon_api_key_v' ~ catalog_find_versioned_secrets.summon_api_key.version }}"
   changed_when: false
   no_log: true

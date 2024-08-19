@@ -17,6 +17,7 @@ services:
       timeout: 120s
     secrets:
       - honeybadger_api_key
+      - illiad_legacy_user_password
       - solr_url
       - alert_webhooks_token
       - alma_api_key
@@ -30,6 +31,9 @@ secrets:
   honeybadger_api_key:
     external: true
     name: ${HONEYBADGER_API_KEY}
+  illiad_legacy_user_password:
+    external: true
+    name: ${ILLIAD_LEGACY_USER_PASSWORD}
   solr_url:
     external: true
     name: ${SOLR_URL}
