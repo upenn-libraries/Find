@@ -154,7 +154,8 @@ describe Fulfillment::Endpoint::Illiad do
             LastName: request.requester.alma_record.last_name,
             EMailAddress: request.requester.email,
             Status: request.requester.ils_group_name,
-            Department: request.requester.alma_affiliation }
+            Department: request.requester.alma_affiliation,
+            PlainTextPassword: Settings.illiad.legacy_user_password }
         )
       end
       let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }
