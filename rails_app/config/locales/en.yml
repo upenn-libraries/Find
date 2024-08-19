@@ -13,7 +13,7 @@ en:
       description: 'Thanks for using the Penn Libraries new search tool. We encourage you to <a href="%{url}" target="_blank">submit feedback</a> as we continue to improve the site.'
       release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
     help:
-      heading: Where can I get help?
+      heading: 'Where can I get help?'
       connect:
         title: 'Connect with us'
         chat:
