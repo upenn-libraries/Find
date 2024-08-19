@@ -101,7 +101,7 @@
     DATABASE_USER: "{{ postgres_database_user }}"
     HONEYBADGER_API_KEY: "{{ 'catalog_find_honeybadger_api_key_v' ~ catalog_find_versioned_secrets.honeybadger_api_key.version }}"
     ILLIAD_API_KEY: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
-    ILLIAD_LEGACY_USER_PASSWORD: "{{ catalog_find_illiad_legacy_user_password_v' ~ catalog_find_versioned_secrets.illiad_legacy_user_password.version }}"
+    ILLIAD_LEGACY_USER_PASSWORD: "{{ 'catalog_find_illiad_legacy_user_password_v' ~ catalog_find_versioned_secrets.illiad_legacy_user_password.version }}"
     LIBRARY_INFO_API_KEY: "{{ 'catalog_find_library_info_api_key_v' ~ catalog_find_versioned_secrets.library_info_api_key.version }}"
     RAILS_ENV: "{{ catalog_find_rails_env }}"
     RAILS_MASTER_KEY: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"
