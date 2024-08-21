@@ -26,6 +26,14 @@ describe Inventory::Location do
         expect(location.location_name).to eq 'alma_location'
       end
     end
+
+    context 'when call number is nil' do
+      let(:location) { create(:location, location_code: 'invalid', location_name: 'alma_location', call_number: nil) }
+
+      it 'defaults to alma location value' do
+        expect(location.location_name).to eq 'alma_location'
+      end
+    end
   end
 
   describe '#aeon?' do

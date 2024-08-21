@@ -79,6 +79,8 @@ module Inventory
     # We utilize the PennMARC location overrides mapper to return such locations.
     # @return [String, nil]
     def location_name_override
+      return if call_number.blank? || location_code.blank?
+
       override = Mappings.location_overrides.find do |_key, value|
         value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
       end
