@@ -77,6 +77,18 @@ module Inventory
           location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
         end
 
+        # Returns true if entry is in an Aeon location.
+        #
+        # @return [TrueClass, FalseClass]
+        def in_aeon_location?
+          Mappings.aeon_locations.include? location_code
+        end
+
+        # @return [Boolean]
+        def at_archives?
+          library_code == Constants::ARCHIVES_LIBRARY
+        end
+
         # Returns host record mms id, if physical holding is a boundwith.
         def host_record_id
           data[:host_record_id]

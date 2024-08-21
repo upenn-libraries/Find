@@ -364,8 +364,7 @@ en:
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
         aeon:
-          kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
-          access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
+          info: 'Special collections materials are available to anyone who wishes to consult them in the reading room.'
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         none:

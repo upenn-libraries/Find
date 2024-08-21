@@ -16,7 +16,7 @@ export default class extends Controller {
   }
 
   buildUrl(itemValue) {
-    return `/account/requests/options?mms_id=${this.mmsIdFieldTarget.value}&holding_id=${this.holdingIdFieldTarget.value}&item_id=${itemValue}`;
+    return `/fulfillment/options?mms_id=${this.mmsIdFieldTarget.value}&holding_id=${this.holdingIdFieldTarget.value}&item_id=${itemValue}`;
   }
 
   updateOptionsFrame(url) {

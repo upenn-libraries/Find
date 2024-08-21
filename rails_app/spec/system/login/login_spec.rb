@@ -46,6 +46,8 @@ describe 'login page' do
     include_context 'with mock alma_record on user having alma_user_group user group'
 
     before do
+      allow(Inventory::Item).to receive(:find_all).and_return([create(:item)])
+
       visit solr_document_path(print_monograph_bib)
       click_on I18n.t('requests.form.log_in_to_request_item')
       click_on I18n.t('login.pennkey')

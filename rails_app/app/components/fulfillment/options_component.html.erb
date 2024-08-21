@@ -10,29 +10,29 @@
         <legend class="h6"> <%= t('requests.form.options.label') %></legend>
         <ul class="list-group">
           <% if options.electronic? %>
-            <%= render(Account::Requests::Options::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
+            <%= render(Fulfillment::Options::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.office? %>
-            <%= render(Account::Requests::Options::OfficeComponent.new(user: user,
+            <%= render(Fulfillment::Options::OfficeComponent.new(user: user,
                                                                        checked: !options.electronic?,
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.pickup? %>
-            <%= render(Account::Requests::Options::PickupComponent.new(user: user,
+            <%= render(Fulfillment::Options::PickupComponent.new(user: user,
                                                                        checked: !options.any?(:electronic, :office),
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.ill_pickup? %>
-            <%= render(Account::Requests::Options::PickupComponent.new(user: user, ill: true,
+            <%= render(Fulfillment::Options::PickupComponent.new(user: user, ill: true,
                                                                        checked: !options.any?(:electronic, :office),
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.mail? %>
-            <%= render(Account::Requests::Options::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
+            <%= render(Fulfillment::Options::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
         </ul>
       </fieldset>
@@ -67,8 +67,7 @@
       </div>
     </div>
   <% elsif options.aeon? %>
-    <p id="aeon-option"><%= t('requests.form.options.aeon.kislak_info_html', url: t('urls.requesting_info.kislak_reading_room')) %></p>
-    <p class="mb-3"><%= t('requests.form.options.aeon.access_info_html') %></p>
+    <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">
       <%= aeon_link %>
     </div>

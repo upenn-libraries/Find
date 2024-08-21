@@ -56,6 +56,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :fulfillment do
+    get 'options'
+    get 'form'
+  end
+
   resource 'account', only: %i[show], controller: 'account'
   namespace :account, as: nil do
     resource :settings, only: %i[show edit update], controller: 'settings'
@@ -72,9 +77,6 @@ Rails.application.routes.draw do
       get 'ill/transaction/:id/download', action: :scan, controller: :download, as: :ill_download_request
       delete 'ils/hold/:id', action: :delete_hold, as: :ils_hold_request
       delete 'ill/transaction/:id', action: :delete_transaction, as: :ill_transaction_request
-
-      get 'options', action: 'options', as: 'request_options'
-      get 'fulfillment_form', action: 'fulfillment_form', as: 'request_fulfillment_form'
     end
 
     get 'shelf', to: 'requests#index' # Vanity route for viewing all "requests".
