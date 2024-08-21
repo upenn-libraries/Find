@@ -27,6 +27,11 @@ module Inventory
             'inventory-item__availability'
           end
         end
+
+        # Return true if request options are only available after login
+        def require_authentication_for_requesting?
+          user.nil? && !entry.in_aeon_location? && !entry.at_archives?
+        end
       end
     end
   end

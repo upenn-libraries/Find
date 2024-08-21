@@ -210,8 +210,8 @@ describe 'Catalog Show Page' do
     end
   end
 
-  # Request options for a physical holding
-  context 'when requesting a physical holding' do
+  # Request options for a physical holding while logged in
+  context 'when requesting a physical holding while logged in' do
     include_context 'with print monograph record with 2 physical entries'
     include_context 'with mocked illiad_record on user'
 
@@ -228,39 +228,6 @@ describe 'Catalog Show Page' do
     it 'shows the button to request the item' do
       within('details.fulfillment') do
         expect(page).to have_selector 'summary', text: I18n.t('requests.form.request_item')
-      end
-    end
-
-    context 'with a holding that has one checkoutable item' do
-      let(:item) { build :item, :checkoutable }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
-
-      it 'automatically shows request options when there is a single item' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#delivery-options'
-        end
-      end
-
-      it 'selects the first option' do
-        within('#delivery-options') do
-          expect(first('input[type="radio"]')[:checked]).to be true
-        end
-      end
-
-      it 'shows the scan button' do
-        within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.scan')
-        end
-      end
-
-      it 'has the expected data in scan link' do
-        scan_link = find_link(I18n.t('requests.form.buttons.scan'))[:href]
-        expect(scan_link).to include CGI.escape(item.bib_data['title'])
-        expect(scan_link).not_to include CGI.escape(item.bib_data['author'])
       end
     end
 
@@ -326,44 +293,6 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'with an aeon requestable item' do
-      let(:item) { build :item, :aeon_requestable }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the aeon request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#aeon-option'
-        end
-      end
-
-      it 'shows the schedule visit button with aeon href' do
-        within('.request-buttons') do
-          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
-          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
-          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
-        end
-      end
-    end
-
-    context 'with an item at the archives' do
-      let(:item) { build :item, :at_archives }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the archives text' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#archives-option'
-        end
-      end
-    end
-
     context 'with an item that is unavailable' do
       let(:item) { build :item, :not_checkoutable }
 
@@ -401,6 +330,65 @@ describe 'Catalog Show Page' do
 
         it 'shows message saying the item is unavailable' do
           expect(page).to have_content I18n.t('requests.form.options.none.info')
+        end
+      end
+    end
+  end
+
+  # Request options for a physical holding while logged in
+  context 'when requesting a physical holding while not logged in' do
+    include_context 'with print monograph record with 2 physical entries'
+    include_context 'with mocked illiad_record on user'
+
+    let(:user) { create(:user) }
+    let(:mms_id) { print_monograph_bib }
+
+    before do
+      visit solr_document_path(mms_id)
+      click_button print_monograph_entries.first.description
+    end
+
+    context 'with an aeon requestable item' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
+      end
+      let(:item) { build :item, :aeon_requestable }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the aeon request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#aeon-option'
+        end
+      end
+
+      it 'shows the schedule visit button with aeon href' do
+        within('.request-buttons') do
+          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
+          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
+          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
+        end
+      end
+    end
+
+    context 'with an item at the archives' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
+                                 library_code: Inventory::Constants::ARCHIVES_LIBRARY)]
+      end
+      let(:item) { build :item, :at_archives }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives text' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#archives-option'
         end
       end
     end

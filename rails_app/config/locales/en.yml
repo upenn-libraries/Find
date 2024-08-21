@@ -13,7 +13,7 @@ en:
       description: 'Thanks for using the Penn Libraries new search tool. We encourage you to <a href="%{url}" target="_blank">submit feedback</a> as we continue to improve the site.'
       release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
     help:
-      heading: Where can I get help?
+      heading: 'Where can I get help?'
       connect:
         title: 'Connect with us'
         chat:
@@ -236,10 +236,10 @@ en:
     service_lede: 'books, articles, and more'
     service_name: 'Find'
     sign_out: 'Sign out'
-    account: 'Account'
+    account: 'My Account'
   footer:
     account:
-      heading: 'Account'
+      heading: 'My Account'
       request: "Request an item"
       shelf: 'Shelf'
       bookmarks: 'Bookmarks'
@@ -364,8 +364,7 @@ en:
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
         aeon:
-          kislak_info_html: 'Materials kept by the <a href="%{url}">Kislak Center for Special Collections, Rare Books, and Manuscripts</a> are available to anyone who wishes to consult them.'
-          access_info_html: 'Researchers can <strong>access materials by appointment</strong> in the Charles K. MacDonald Reading Room.'
+          info: 'Special collections materials are available to anyone who wishes to consult them in the reading room.'
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         none:

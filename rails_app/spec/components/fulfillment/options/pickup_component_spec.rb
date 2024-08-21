@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Account::Requests::Options::PickupComponent, type: :components do
+describe Fulfillment::Options::PickupComponent, type: :components do
   let(:user) { create :user }
 
   context 'when rendering alma pickup option' do

@@ -144,29 +144,32 @@ module Inventory
       Settings.locations.aeon_location_map[library]
     end
 
-    # Return an array of fulfillment options for a given item and ils_group
-    # @param ils_group [String] the ILS group code
+    # Return an array of fulfillment options for a given item and user. Certain requesting options (ie Aeon) are
+    # available to non-logged in users.
+    #
+    # @param user [User, nil] the user object
     # @return [Array<Symbol>]
-    def fulfillment_options(ils_group:)
+    def fulfillment_options(user: nil)
       return [:aeon] if aeon_requestable?
       return [:archives] if at_archives?
+      return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
 
-      options = pickup_options(ils_group: ils_group)
+      options = pickup_options(user: user)
 
-      return options if ils_group == User::COURTESY_BORROWER_GROUP
+      return options if user.courtesy_borrower? # No more requesting options available for courtesy borrowers.
 
-      options << Fulfillment::Request::Options::OFFICE if ils_group == User::FACULTY_EXPRESS_GROUP
+      options << Fulfillment::Request::Options::OFFICE if user.faculty_express?
       options << Fulfillment::Request::Options::MAIL
       options << Fulfillment::Request::Options::ELECTRONIC if scannable?
       options
     end
 
-    # Return pickup options available for this item based on the group
-    # @param ils_group [String] the ILS group code
+    # Return pickup options available for this item based on the user
+    # @param user [User]
     # @return [Array<Symbol>]
-    def pickup_options(ils_group:)
+    def pickup_options(user:)
       return [Fulfillment::Request::Options::PICKUP] if checkoutable?
-      return [Fulfillment::Request::Options::ILL_PICKUP] if ils_group != User::COURTESY_BORROWER_GROUP
+      return [Fulfillment::Request::Options::ILL_PICKUP] unless user.courtesy_borrower?
 
       []
     end
