@@ -338,6 +338,12 @@ class CatalogController < ApplicationController
       field.clause_params = { edismax: { qf: '${isxn_qf}', pf: '${isxn_pf}' } }
     end
 
+    config.add_search_field('callnum_search', label: I18n.t('advanced.callnum_search')) do |field|
+      field.include_in_advanced_search = true
+      field.include_in_simple_select = false
+      field.clause_params = { edismax: { qf: '${call_number_qf}', pf: '${call_number_pf}' } }
+    end
+
     config.add_search_field('series_search', label: I18n.t('advanced.series_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false

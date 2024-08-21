@@ -254,6 +254,7 @@ en:
     genre_search: 'Genre'
     language_search: 'Language'
     isxn_search: 'ISBN/ISSN'
+    callnum_search: 'Call Number'
     series_search: 'Series'
     publisher_search: 'Publisher'
     place_of_publication_search: 'Place of Publication'
