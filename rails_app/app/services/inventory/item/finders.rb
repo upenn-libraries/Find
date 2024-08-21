@@ -59,7 +59,7 @@ module Inventory
         # only the items in the temporary location based on the location code value. Also, the Items API returns items
         # that might be in a temp location and are shown as distinct holdings in our view.
         if holding_id.blank? && location_code
-          item_set.select { |i| i.in_temp_location? && (i.location == location_code) }
+          item_set.select { |i| i.in_temp_location? && (i.location.code == location_code) }
         else
           item_set.reject(&:in_temp_location?)
         end

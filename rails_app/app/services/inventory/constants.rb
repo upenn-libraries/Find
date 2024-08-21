@@ -15,9 +15,5 @@ module Inventory
     ERESOURCE_LINK_RFR_ID = 'info:sid/primo.exlibrisgroup.com'
 
     ELECTRONIC_TYPES = [List::ELECTRONIC, List::ECOLLECTION].freeze
-
-    ARCHIVES_LIBRARY = 'UnivArcLib'
-    HSP_LIBRARY = 'HSPLib'
-    LIBRA_LIBRARY = 'Libra'
   end
 end

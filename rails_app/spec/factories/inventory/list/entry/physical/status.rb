@@ -3,8 +3,7 @@
 FactoryBot.define do
   factory :physical_entry_status, class: 'Inventory::List::Entry::Physical::Status' do
     status { Inventory::Constants::AVAILABLE }
-    library_code { 'vanpelt' }
-    location_code { 'vanp' }
+    location { create :location }
 
     trait :check_holdings do
       status { Inventory::Constants::CHECK_HOLDINGS }
@@ -15,23 +14,19 @@ FactoryBot.define do
     end
 
     trait :aeon_onsite do
-      library_code { 'KatzLib' }
-      location_code { 'cjsambx' }
+      location { create :location, :aeon_onsite }
     end
 
     trait :aeon_offsite do
-      library_code { Inventory::Constants::LIBRA_LIBRARY }
-      location_code { 'athstor' }
+      location { create :location, :aeon_offsite }
     end
 
     trait :offsite do
-      library_code { Inventory::Constants::LIBRA_LIBRARY }
-      location_code { 'stor' }
+      location { create :location, :libra }
     end
 
     trait :unrequestable do
-      library_code { Inventory::Constants::HSP_LIBRARY }
-      location_code { 'hspclosed' }
+      location { create :location, :hsp }
     end
 
     skip_create

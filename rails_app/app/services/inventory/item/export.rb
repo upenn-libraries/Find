@@ -11,7 +11,7 @@ module Inventory
       def loan_params
         { title: bib_data['title'],
           author: bib_data['author'],
-          call_number: temp_aware_call_number,
+          call_number: call_number,
           location: temp_aware_location_display,
           barcode: item_data['barcode'],
           mms_id: bib_data['mms_id'],
@@ -53,13 +53,13 @@ module Inventory
       #
       # @return [Hash]
       def aeon_additional_params
-        { CallNumber: temp_aware_call_number,
+        { CallNumber: call_number,
           ItemISxN: item_data['inventory_number'],
           ItemNumber: item_data['barcode'],
-          Location: location,
+          Location: location.code,
           ReferenceNumber: bib_data['mms_id'],
-          Site: aeon_site,
-          SubLocation: aeon_sublocation }
+          Site: location.aeon_site,
+          SubLocation: location.aeon_sublocation }
       end
 
       # All parameters to be passed to the Aeon request form
@@ -67,6 +67,13 @@ module Inventory
       # @return [Hash]
       def aeon_params
         aeon_open_params.merge(aeon_additional_params)
+      end
+
+      # @return [String]
+      def temp_aware_location_display
+        display = "#{location.raw_library_name} - #{location.raw_location_name}"
+        display.prepend('(temp) ') if in_temp_location?
+        display
       end
     end
   end

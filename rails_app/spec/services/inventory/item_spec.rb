@@ -148,7 +148,7 @@ describe Inventory::Item do
     end
 
     it 'returns the bib data' do
-      expect(item.bib_data).to eq(item.item['bib_data'])
+      expect(item.bib_data).to eq(item.bib_item['bib_data'])
     end
   end
 
@@ -176,18 +176,6 @@ describe Inventory::Item do
     end
   end
 
-  describe 'aeon_requestable?' do
-    it 'returns true if item is aeon requestable' do
-      item = build :item, :aeon_requestable
-      expect(item.aeon_requestable?).to be true
-    end
-
-    it 'returns false if item is not aeon requestable' do
-      item = build :item, :checkoutable
-      expect(item.aeon_requestable?).to be false
-    end
-  end
-
   describe 'scannable?' do
     it 'returns true if item is scannable' do
       item = build :item
@@ -197,18 +185,6 @@ describe Inventory::Item do
     it 'returns false if item is not scannable' do
       item = build :item, :not_scannable
       expect(item.scannable?).to be false
-    end
-  end
-
-  describe 'at_hsp?' do
-    it 'returns true if item is at HSP' do
-      item = build :item, :at_hsp
-      expect(item.at_hsp?).to be true
-    end
-
-    it 'returns false if item is not at HSP' do
-      item = build :item, :checkoutable
-      expect(item.at_hsp?).to be false
     end
   end
 
@@ -233,18 +209,6 @@ describe Inventory::Item do
     it 'returns false if item is not at reference' do
       item = build :item, :checkoutable
       expect(item.at_reference?).to be false
-    end
-  end
-
-  describe 'at_archives?' do
-    it 'returns true if item is at archives' do
-      item = build :item, :at_archives
-      expect(item.at_archives?).to be true
-    end
-
-    it 'returns false if item is not at archives' do
-      item = build :item, :checkoutable
-      expect(item.at_archives?).to be false
     end
   end
 
@@ -280,9 +244,10 @@ describe Inventory::Item do
   describe 'select_label' do
     it 'returns the correct label for the item' do
       item = build :item
-      expect(item.select_label)
-        .to contain_exactly "#{item.description} - #{item.physical_material_type['desc']} - #{item.library_name}",
-                            item.item_data['pid']
+      expect(item.select_label).to contain_exactly(
+        "#{item.description} - #{item.physical_material_type['desc']} - #{item.location.library_name}",
+        item.item_data['pid']
+      )
     end
   end
 
@@ -290,25 +255,13 @@ describe Inventory::Item do
     it 'returns temp location display when item is in temp location' do
       item = build :item, :in_temp_location
       expect(item.temp_aware_location_display)
-        .to eq "(temp) #{item.holding_data['temp_library']['value']} - #{item.holding_data['temp_location']['value']}"
+        .to eq "(temp) #{item.holding_data['temp_library']['desc']} - #{item.holding_data['temp_location']['desc']}"
     end
 
     it 'returns normal location display when item is not in temp location' do
       item = build :item
       expect(item.temp_aware_location_display)
-        .to eq "#{item.holding_library_name} - #{item.holding_location_name}"
-    end
-  end
-
-  describe 'temp_aware_call_number' do
-    it 'returns the temp call number when it exists' do
-      item = build :item, :in_temp_location
-      expect(item.temp_aware_call_number).to eq item.holding_data['temp_call_number']
-    end
-
-    it 'returns the normal call number when item is not in temp location' do
-      item = build :item
-      expect(item.temp_aware_call_number).to eq item.holding_data['permanent_call_number']
+        .to eq "#{item.bib_item.holding_library_name} - #{item.bib_item.holding_location_name}"
     end
   end
 

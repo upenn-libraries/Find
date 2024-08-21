@@ -7,7 +7,9 @@ FactoryBot.define do
     sequence(:call_number) { |n| "QD1 .C48 copy #{n}" }
     sequence(:holding_info) { |n| "1965-1971 copy #{n}" }
     library_code { 'TheLib' }
+    library { 'The Library' }
     location_code { 'chemperi' }
+    location { 'ChemLib' }
     sequence(:holding_id) { |n| "67890#{n}" }
 
     skip_create

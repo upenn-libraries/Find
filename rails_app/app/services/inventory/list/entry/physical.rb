@@ -71,22 +71,16 @@ module Inventory
         end
 
         # @return [String, nil]
+        def human_readable_location
+          location.name
+        end
+
+        # @return [Inventory::Location]
         def location
-          return unless location_code
-
-          location_override || Mappings.locations.dig(location_code.to_sym, :display) || data[:location]
-        end
-
-        # Returns true if entry is in an Aeon location.
-        #
-        # @return [TrueClass, FalseClass]
-        def in_aeon_location?
-          Mappings.aeon_locations.include? location_code
-        end
-
-        # @return [Boolean]
-        def at_archives?
-          library_code == Constants::ARCHIVES_LIBRARY
+          Inventory::Location.new(
+            location_code: data[:location_code], location_name: data[:location],
+            library_code: data[:library_code], library_name: data[:library], call_number: data[:call_number]
+          )
         end
 
         # Returns host record mms id, if physical holding is a boundwith.
@@ -111,9 +105,7 @@ module Inventory
         #
         # @return [Inventory::List::Entry::Physical::Status]
         def refined_status
-          @refined_status ||= Status.new(
-            status: status, library_code: data[:library_code], location_code: data[:location_code]
-          )
+          @refined_status ||= Status.new(status: status, location: location)
         end
 
         def first_item
@@ -124,22 +116,6 @@ module Inventory
           default_options = { holding_id: id, expand: 'due_date,due_date_policy', limit: 1 }
           resp = Alma::BibItem.find(mms_id, default_options.merge(options))
           resp.items.first
-        end
-
-        # Inventory may have an overridden location that doesn't reflect the location values in the availability data.
-        # We utilize the PennMARC location overrides mapper to return such locations.
-        # @return [String, nil]
-        def location_override
-          location_code = data[:location_code]
-          call_number = data[:call_number]
-
-          return unless location_code && call_number
-
-          override = Mappings.location_overrides.find do |_key, value|
-            value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
-          end
-
-          override&.last&.dig(:specific_location)
         end
       end
     end

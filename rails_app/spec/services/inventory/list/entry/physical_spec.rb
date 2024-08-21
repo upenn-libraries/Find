@@ -90,30 +90,10 @@ describe Inventory::List::Entry::Physical do
     end
   end
 
-  describe '#location' do
-    context 'without a location override' do
-      let(:entry) { create(:physical_entry, location_code: 'vanp') }
-
-      it 'returns expected value' do
-        location_code = entry.data[:location_code].to_sym
-        expect(entry.location).to eq Mappings.locations[location_code][:display]
-      end
-    end
-
-    context 'with a location override' do
-      let(:entry) { create(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984') }
-
-      it 'returns expected value' do
-        expect(entry.location).to eq Mappings.location_overrides[:albrecht][:specific_location]
-      end
-    end
-
-    context 'when location code is not found in mappings' do
-      let(:entry) { create(:physical_entry, location_code: 'invalid', location: 'alma_location') }
-
-      it 'defaults to alma location value' do
-        expect(entry.location).to eq 'alma_location'
-      end
+  describe '#human_readable_location' do
+    it 'returns expected value' do
+      location_code = entry.data[:location_code].to_sym
+      expect(entry.human_readable_location).to eq Mappings.locations[location_code][:display]
     end
   end
 
