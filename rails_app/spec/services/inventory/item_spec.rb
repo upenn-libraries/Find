@@ -128,7 +128,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'checkoutable?' do
+  describe '#checkoutable?' do
     it 'returns true if item is checkoutable' do
       item = build :item, :checkoutable
       expect(item.checkoutable?).to be true
@@ -140,7 +140,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'bib_data' do
+  describe '#bib_data' do
     let(:item) { build :item }
 
     it 'returns a Hash' do
@@ -152,7 +152,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'user_due_date_policy' do
+  describe '#user_due_date_policy' do
     let(:item) { build :item, :not_checkoutable }
 
     it 'returns a String' do
@@ -164,7 +164,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'loanable?' do
+  describe '#loanable?' do
     it 'returns true if item is loanable' do
       item = build :item, :checkoutable
       expect(item.loanable?).to be true
@@ -176,7 +176,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'scannable?' do
+  describe '#scannable?' do
     it 'returns true if item is scannable' do
       item = build :item
       expect(item.scannable?).to be true
@@ -188,7 +188,36 @@ describe Inventory::Item do
     end
   end
 
-  describe 'on_reserve?' do
+  describe '#location' do
+    context 'when in permanent location' do
+      let(:item) { build :item }
+
+      it 'return Inventory::Location with permanent location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.location
+      end
+    end
+
+    context 'when in temporary location' do
+      let(:item) { build :item, :in_temp_location }
+
+      it 'returns Inventory::Location with temporary location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.temp_location
+      end
+    end
+
+    context 'when location information not in item_data' do
+      let(:item) { build :item, :without_item }
+
+      it 'return Inventory::Location with holding location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.holding_data['location']['value']
+      end
+    end
+  end
+
+  describe '#on_reserve?' do
     it 'returns true if item is on reserve' do
       item = build :item, :on_reserve
       expect(item.on_reserve?).to be true
@@ -200,7 +229,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'at_reference?' do
+  describe '#at_reference?' do
     it 'returns true if item is at reference' do
       item = build :item, :at_reference
       expect(item.at_reference?).to be true
@@ -212,7 +241,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'in_house_use_only?' do
+  describe '#in_house_use_only?' do
     it 'returns true if item is in house use only' do
       item = build :item, :in_house_use_only
       expect(item.in_house_use_only?).to be true
@@ -224,7 +253,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'unavailable?' do
+  describe '#unavailable?' do
     it 'returns true if item is not checkoutable nor aeon requestable' do
       item = build(:item, :not_aeon_requestable, :not_checkoutable)
       expect(item.unavailable?).to be true
@@ -241,7 +270,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'select_label' do
+  describe '#select_label' do
     it 'returns the correct label for the item' do
       item = build :item
       expect(item.select_label).to contain_exactly(
@@ -251,7 +280,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'temp_aware_location_display' do
+  describe '#temp_aware_location_display' do
     it 'returns temp location display when item is in temp location' do
       item = build :item, :in_temp_location
       expect(item.temp_aware_location_display)
@@ -265,7 +294,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'fulfillment_options' do
+  describe '#fulfillment_options' do
     let(:user) { create(:user) }
     let(:options) { item.fulfillment_options(user: user) }
     let(:item) { build :item, :checkoutable }

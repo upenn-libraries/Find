@@ -97,6 +97,13 @@ describe Inventory::List::Entry::Physical do
     end
   end
 
+  describe '#location' do
+    it 'returns Inventory::Location' do
+      expect(entry.location).to be_a Inventory::Location
+      expect(entry.location.code).to eql entry.data[:location_code]
+    end
+  end
+
   describe '#electronic?' do
     it 'returns false' do
       expect(entry.electronic?).to be false

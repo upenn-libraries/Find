@@ -61,16 +61,6 @@ module Inventory
         end
 
         # @return [String, nil]
-        def library_code
-          data[:library_code]
-        end
-
-        # @return [String, nil]
-        def location_code
-          data[:location_code]
-        end
-
-        # @return [String, nil]
         def human_readable_location
           location.name
         end
