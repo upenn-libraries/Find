@@ -19,7 +19,7 @@ module Inventory
         end
 
         # @return [String]
-        def location
+        def human_readable_location
           'Online'
         end
 

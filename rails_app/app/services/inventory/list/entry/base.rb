@@ -31,7 +31,7 @@ module Inventory
           raise NotImplementedError
         end
 
-        def location
+        def human_readable_location
           raise NotImplementedError
         end
 

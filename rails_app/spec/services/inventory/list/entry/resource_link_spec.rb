@@ -53,9 +53,9 @@ describe Inventory::List::Entry::ResourceLink do
     end
   end
 
-  describe '#location' do
+  describe '#human_readable_location' do
     it 'returns expected location' do
-      expect(entry.location).to eq 'Online'
+      expect(entry.human_readable_location).to eq 'Online'
     end
   end
 

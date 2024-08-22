@@ -43,7 +43,7 @@ module Inventory
         end
 
         # No location available for electronic entries.
-        def location
+        def human_readable_location
           nil
         end
 

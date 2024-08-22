@@ -32,7 +32,7 @@ module Inventory
 
       # @return [String]
       def footer_content
-        fields = [entry.location]
+        fields = [entry.human_readable_location]
         fields << entry.coverage_statement if entry.electronic?
         join_fields(*fields)
       end

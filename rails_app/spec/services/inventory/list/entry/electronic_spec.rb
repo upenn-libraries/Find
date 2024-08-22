@@ -56,9 +56,9 @@ describe Inventory::List::Entry::Electronic do
     end
   end
 
-  describe '#location' do
+  describe '#human_readable_location' do
     it 'returns nil' do
-      expect(entry.location).to be_nil
+      expect(entry.human_readable_location).to be_nil
     end
   end
 

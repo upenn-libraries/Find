@@ -128,7 +128,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'checkoutable?' do
+  describe '#checkoutable?' do
     it 'returns true if item is checkoutable' do
       item = build :item, :checkoutable
       expect(item.checkoutable?).to be true
@@ -140,7 +140,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'bib_data' do
+  describe '#bib_data' do
     let(:item) { build :item }
 
     it 'returns a Hash' do
@@ -148,11 +148,11 @@ describe Inventory::Item do
     end
 
     it 'returns the bib data' do
-      expect(item.bib_data).to eq(item.item['bib_data'])
+      expect(item.bib_data).to eq(item.bib_item['bib_data'])
     end
   end
 
-  describe 'user_due_date_policy' do
+  describe '#user_due_date_policy' do
     let(:item) { build :item, :not_checkoutable }
 
     it 'returns a String' do
@@ -164,7 +164,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'loanable?' do
+  describe '#loanable?' do
     it 'returns true if item is loanable' do
       item = build :item, :checkoutable
       expect(item.loanable?).to be true
@@ -176,19 +176,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'aeon_requestable?' do
-    it 'returns true if item is aeon requestable' do
-      item = build :item, :aeon_requestable
-      expect(item.aeon_requestable?).to be true
-    end
-
-    it 'returns false if item is not aeon requestable' do
-      item = build :item, :checkoutable
-      expect(item.aeon_requestable?).to be false
-    end
-  end
-
-  describe 'scannable?' do
+  describe '#scannable?' do
     it 'returns true if item is scannable' do
       item = build :item
       expect(item.scannable?).to be true
@@ -200,19 +188,36 @@ describe Inventory::Item do
     end
   end
 
-  describe 'at_hsp?' do
-    it 'returns true if item is at HSP' do
-      item = build :item, :at_hsp
-      expect(item.at_hsp?).to be true
+  describe '#location' do
+    context 'when in permanent location' do
+      let(:item) { build :item }
+
+      it 'return Inventory::Location with permanent location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.location
+      end
     end
 
-    it 'returns false if item is not at HSP' do
-      item = build :item, :checkoutable
-      expect(item.at_hsp?).to be false
+    context 'when in temporary location' do
+      let(:item) { build :item, :in_temp_location }
+
+      it 'returns Inventory::Location with temporary location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.temp_location
+      end
+    end
+
+    context 'when location information not in item_data' do
+      let(:item) { build :item, :without_item }
+
+      it 'return Inventory::Location with holding location code' do
+        expect(item.location).to be_a Inventory::Location
+        expect(item.location.code).to eql item.bib_item.holding_data['location']['value']
+      end
     end
   end
 
-  describe 'on_reserve?' do
+  describe '#on_reserve?' do
     it 'returns true if item is on reserve' do
       item = build :item, :on_reserve
       expect(item.on_reserve?).to be true
@@ -224,7 +229,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'at_reference?' do
+  describe '#at_reference?' do
     it 'returns true if item is at reference' do
       item = build :item, :at_reference
       expect(item.at_reference?).to be true
@@ -236,19 +241,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'at_archives?' do
-    it 'returns true if item is at archives' do
-      item = build :item, :at_archives
-      expect(item.at_archives?).to be true
-    end
-
-    it 'returns false if item is not at archives' do
-      item = build :item, :checkoutable
-      expect(item.at_archives?).to be false
-    end
-  end
-
-  describe 'in_house_use_only?' do
+  describe '#in_house_use_only?' do
     it 'returns true if item is in house use only' do
       item = build :item, :in_house_use_only
       expect(item.in_house_use_only?).to be true
@@ -260,7 +253,7 @@ describe Inventory::Item do
     end
   end
 
-  describe 'unavailable?' do
+  describe '#unavailable?' do
     it 'returns true if item is not checkoutable nor aeon requestable' do
       item = build(:item, :not_aeon_requestable, :not_checkoutable)
       expect(item.unavailable?).to be true
@@ -277,42 +270,31 @@ describe Inventory::Item do
     end
   end
 
-  describe 'select_label' do
+  describe '#select_label' do
     it 'returns the correct label for the item' do
       item = build :item
-      expect(item.select_label)
-        .to contain_exactly "#{item.description} - #{item.physical_material_type['desc']} - #{item.library_name}",
-                            item.item_data['pid']
+      expect(item.select_label).to contain_exactly(
+        "#{item.description} - #{item.physical_material_type['desc']} - #{item.location.library_name}",
+        item.item_data['pid']
+      )
     end
   end
 
-  describe 'temp_aware_location_display' do
+  describe '#temp_aware_location_display' do
     it 'returns temp location display when item is in temp location' do
       item = build :item, :in_temp_location
       expect(item.temp_aware_location_display)
-        .to eq "(temp) #{item.holding_data['temp_library']['value']} - #{item.holding_data['temp_location']['value']}"
+        .to eq "(temp) #{item.holding_data['temp_library']['desc']} - #{item.holding_data['temp_location']['desc']}"
     end
 
     it 'returns normal location display when item is not in temp location' do
       item = build :item
       expect(item.temp_aware_location_display)
-        .to eq "#{item.holding_library_name} - #{item.holding_location_name}"
+        .to eq "#{item.bib_item.holding_library_name} - #{item.bib_item.holding_location_name}"
     end
   end
 
-  describe 'temp_aware_call_number' do
-    it 'returns the temp call number when it exists' do
-      item = build :item, :in_temp_location
-      expect(item.temp_aware_call_number).to eq item.holding_data['temp_call_number']
-    end
-
-    it 'returns the normal call number when item is not in temp location' do
-      item = build :item
-      expect(item.temp_aware_call_number).to eq item.holding_data['permanent_call_number']
-    end
-  end
-
-  describe 'fulfillment_options' do
+  describe '#fulfillment_options' do
     let(:user) { create(:user) }
     let(:options) { item.fulfillment_options(user: user) }
     let(:item) { build :item, :checkoutable }
