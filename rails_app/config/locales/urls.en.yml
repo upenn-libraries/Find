@@ -35,3 +35,5 @@ en:
     requesting_info:
       archives_visit: "https://archives.upenn.edu/research/visit"
       archives_contact: "https://archives.upenn.edu/archives-info/contact"
+      hsp: 'https://www.portal.hsp.org/'
+      hsp_appointment: 'https://www.portal.hsp.org/researchappointments'

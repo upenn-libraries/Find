@@ -76,6 +76,9 @@
       <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
             contact_url: t('urls.requesting_info.archives_contact')) %>
     </p>
+  <% elsif options.hsp? %>
+    <p id="hsp-option" class="mb-3"><%= t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp')) %></p>
+    <%= link_to t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank' %>
   <% else %>
     <p class="alert alert-info mb-3">
       <%= t('requests.form.options.none.info') %>
