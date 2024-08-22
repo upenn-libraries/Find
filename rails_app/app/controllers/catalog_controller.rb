@@ -182,7 +182,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
     config.add_index_field :format_facet, label: I18n.t('results.format')
-    config.add_index_field :creator_ss, label: I18n.t('results.creator')
+    config.add_index_field :creator_ss, label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
+                                        facet_target: :creator_facet, facet_map: :creator_show_facet_map
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
     config.add_index_field :conference_ss, label: I18n.t('results.conference')
     config.add_index_field :series_ss, label: I18n.t('results.series')
