@@ -61,6 +61,7 @@ module Inventory
     # Location object containing location details and helper methods. If item in a temp location, returns
     # that as the location. If a location is not available in the item_data pulls location information from
     # holding_data.
+    # @return [Inventory::Location]
     def location
       library = in_temp_location? ? holding_data['temp_library'] : item_data['library'] || holding_data['library']
       location = in_temp_location? ? holding_data['temp_location'] : item_data['location'] || holding_data['location']

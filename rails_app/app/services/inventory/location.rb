@@ -24,11 +24,13 @@ module Inventory
     # these cases the call number is need to provide a more specific location name.
     #
     # @param [String] call_number
+    # @return [String]
     def location_name(call_number: nil)
       location_name_override(call_number) || Mappings.locations.dig(location_code.to_sym, :display) || raw_location_name
     end
     alias name location_name
 
+    # @return [String]
     def library_name
       raw_library_name
     end
@@ -45,7 +47,7 @@ module Inventory
     #
     # @return [TrueClass, FalseClass]
     def aeon?
-      Mappings.aeon_locations.include?(code) # TODO: code
+      Mappings.aeon_locations.include?(code)
     end
 
     # Return true if material is at the Archives. Archives material cannot be requested and require an in-person visit.
