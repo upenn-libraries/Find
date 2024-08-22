@@ -6,7 +6,6 @@ FactoryBot.define do
     location_name { 'Van Pelt Library' }
     library_code  { 'VanPeltLib' }
     library_name  { 'Van Pelt Library' }
-    call_number   { 'LD4547 .P64' }
 
     trait :aeon do
       library_code  { 'KatzLib' }

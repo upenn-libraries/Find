@@ -66,7 +66,7 @@ module Inventory
       location = in_temp_location? ? holding_data['temp_location'] : item_data['location'] || holding_data['location']
 
       Location.new(library_code: library['value'], library_name: library['desc'],
-                   location_code: location['value'], location_name: location['desc'], call_number: call_number)
+                   location_code: location['value'], location_name: location['desc'])
     end
 
     # Is the item able to be scanned?

@@ -62,14 +62,15 @@ module Inventory
 
         # @return [String, nil]
         def human_readable_location
-          location.name
+          # Passing call number to get any location overrides that might be present.
+          location.name(call_number: data[:call_number])
         end
 
         # @return [Inventory::Location]
         def location
           Inventory::Location.new(
             location_code: data[:location_code], location_name: data[:location],
-            library_code: data[:library_code], library_name: data[:library], call_number: data[:call_number]
+            library_code: data[:library_code], library_name: data[:library]
           )
         end
 

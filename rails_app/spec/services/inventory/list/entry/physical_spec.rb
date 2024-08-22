@@ -95,6 +95,14 @@ describe Inventory::List::Entry::Physical do
       location_code = entry.data[:location_code].to_sym
       expect(entry.human_readable_location).to eq Mappings.locations[location_code][:display]
     end
+
+    context 'with a location override' do
+      let(:entry) { build(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984') }
+
+      it 'returns expected name' do
+        expect(entry.human_readable_location).to eq(Mappings.location_overrides[:albrecht][:specific_location])
+      end
+    end
   end
 
   describe '#location' do
