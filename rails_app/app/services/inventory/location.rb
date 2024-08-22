@@ -38,21 +38,21 @@ module Inventory
     # Return true if material is at the Historical Society of Pennsylvania (HSP). HSP items cannot be requested and
     # require an in-person visit to their facilities.
     #
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def hsp?
       library_code == HSP
     end
 
     # Return true if material is requestable via Aeon.
     #
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def aeon?
       Mappings.aeon_locations.include?(code)
     end
 
     # Return true if material is at the Archives. Archives material cannot be requested and require an in-person visit.
     #
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def archives?
       library_code == ARCHIVES
     end
