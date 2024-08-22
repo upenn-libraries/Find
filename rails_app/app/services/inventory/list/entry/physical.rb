@@ -68,7 +68,7 @@ module Inventory
 
         # @return [Inventory::Location]
         def location
-          Inventory::Location.new(
+          @location ||= Inventory::Location.new(
             location_code: data[:location_code], location_name: data[:location],
             library_code: data[:library_code], library_name: data[:library]
           )

@@ -58,16 +58,11 @@ module Inventory
       !user_due_date_policy&.include? NOT_LOANABLE_POLICY
     end
 
-    # Location object containing location details and helper methods. If item in a temp location, returns
-    # that as the location. If a location is not available in the item_data pulls location information from
-    # holding_data.
+    # Location object containing location details and helper methods.
+    # @see #create_location
     # @return [Inventory::Location]
     def location
-      library = in_temp_location? ? holding_data['temp_library'] : item_data['library'] || holding_data['library']
-      location = in_temp_location? ? holding_data['temp_location'] : item_data['location'] || holding_data['location']
-
-      Location.new(library_code: library['value'], library_name: library['desc'],
-                   location_code: location['value'], location_name: location['desc'])
+      @location ||= create_location
     end
 
     # Is the item able to be scanned?
@@ -150,6 +145,19 @@ module Inventory
       else
         [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
       end
+    end
+
+    private
+
+    # Returns location object. If item in a temp location, returns that as the location. If a location is not
+    # available in the item_data pulls location information from holding_data.
+    # @return [Inventory::Location]
+    def create_location
+      library = in_temp_location? ? holding_data['temp_library'] : item_data['library'] || holding_data['library']
+      location = in_temp_location? ? holding_data['temp_location'] : item_data['location'] || holding_data['location']
+
+      Location.new(library_code: library['value'], library_name: library['desc'],
+                   location_code: location['value'], location_name: location['desc'])
     end
   end
 end
