@@ -16,8 +16,16 @@ describe Inventory::Location do
 
       it 'returns expected name' do
         expect(
-          location.location_name(call_number: 'ML3534 .D85 1984')
+          location.location_name(call_number: 'ML3534 .D85 1984',
+                                 call_number_type: PennMARC::Classification::LOC_CALL_NUMBER_TYPE)
         ).to eq Mappings.location_overrides[:albrecht][:specific_location]
+      end
+
+      it 'returns display name when non-LC call number matches the pattern' do
+        expect(
+          location.location_name(call_number: 'Microfilm 1234',
+                                 call_number_type: '8')
+        ).to eq Mappings.locations[location.code.to_sym][:display]
       end
     end
 
