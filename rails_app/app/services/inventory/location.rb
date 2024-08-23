@@ -23,7 +23,8 @@ module Inventory
     # rare cases the preferred location name has been overwritten for a subset of the materials in that location. In
     # these cases the call number is need to provide a more specific location name.
     #
-    # @param [String] call_number
+    # @param [String, nil] call_number
+    # @param [String, nil] call_number_type
     # @return [String]
     def location_name(call_number: nil, call_number_type: nil)
       location_name_override(call_number, call_number_type) ||
