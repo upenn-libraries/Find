@@ -43,7 +43,7 @@ en:
           title:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
-          description: 'Borrow materials from partner libraries'
+          description: 'Find and borrow materials from partner libraries'
         scholarlycommons:
           title: 'ScholarlyCommons'
           description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
