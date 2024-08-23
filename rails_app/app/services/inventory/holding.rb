@@ -37,8 +37,9 @@ module Inventory
       marc&.fields('852')&.map do |field|
         field.filter_map do |sf|
           next unless sf.code == 'z'
+
           sf.value&.strip
-        end
+        end.join(' ')
       end
     end
 
