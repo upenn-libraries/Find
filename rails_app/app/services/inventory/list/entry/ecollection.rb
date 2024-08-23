@@ -28,7 +28,7 @@ module Inventory
         end
 
         # @return [nil]
-        def location
+        def human_readable_location
           nil
         end
 

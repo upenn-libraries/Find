@@ -92,6 +92,13 @@ describe 'Catalog Index Page' do
         end
       end
     end
+
+    it 'links to a creator facet search' do
+      within("article.document[data-document-id=\"#{print_monograph_bib}\"]") do
+        expect(page).to have_link('Bleier, Ruth, 1923-',
+                                  href: search_catalog_path({ 'f[creator_facet][]': 'Bleier, Ruth, 1923-' }))
+      end
+    end
   end
 
   context 'with search term' do

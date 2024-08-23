@@ -13,8 +13,9 @@ module Inventory
 
     attr_reader :bib_item
 
-    # delegate to alma bib item
-    delegate_missing_to :@bib_item
+    # Delegate specific methods to Alma::BibItem because we override some of the methods provided.
+    delegate :item_data, :holding_data, :in_place?, :in_temp_location?, :description, :physical_material_type,
+             :public_note, :call_number, to: :bib_item
 
     # @param [Alma::BibItem] bib_item
     def initialize(bib_item)
@@ -43,7 +44,7 @@ module Inventory
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
     def checkoutable?
-      in_place? && loanable? && !aeon_requestable? && !on_reserve? && !at_reference? && !in_house_use_only?
+      in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
     end
 
     # @return [String]
@@ -57,28 +58,19 @@ module Inventory
       !user_due_date_policy&.include? NOT_LOANABLE_POLICY
     end
 
-    # @return [Boolean]
-    def aeon_requestable?
-      location = if item_data.dig('location', 'value')
-                   item_data['location']['value']
-                 else
-                   holding_data['location']['value']
-                 end
-      Mappings.aeon_locations.include? location
+    # Location object containing location details and helper methods.
+    # @see #create_location
+    # @return [Inventory::Location]
+    def location
+      @location ||= create_location
     end
 
     # Is the item able to be scanned?
     # @return [Boolean]
     def scannable?
-      return false if at_hsp?
+      return false if location.hsp?
 
-      aeon_requestable? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
-    end
-
-    # Is the item a Historical Society of Pennsylvania record? If so, it cannot be requested.
-    # @return [Boolean]
-    def at_hsp?
-      library == Constants::HSP_LIBRARY
+      location.aeon? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
     end
 
     # @return [Boolean]
@@ -92,11 +84,6 @@ module Inventory
     end
 
     # @return [Boolean]
-    def at_archives?
-      (library == Constants::ARCHIVES_LIBRARY) || (holding_data.dig('library', 'value') == Constants::ARCHIVES_LIBRARY)
-    end
-
-    # @return [Boolean]
     def in_house_use_only?
       item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||
         holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
@@ -104,24 +91,7 @@ module Inventory
 
     # @return [Boolean]
     def unavailable?
-      !checkoutable? && !aeon_requestable?
-    end
-
-    # @return [String]
-    def temp_aware_location_display
-      if in_temp_location?
-        return "(temp) #{holding_data.dig('temp_library', 'value')} - #{holding_data.dig('temp_location', 'value')}"
-      end
-
-      "#{holding_library_name} - #{holding_location_name}"
-    end
-
-    # @return [String]
-    def temp_aware_call_number
-      temp_call_num = holding_data['temp_call_number']
-      return temp_call_num if temp_call_num.present?
-
-      holding_data['permanent_call_number']
+      !checkoutable? && !location.aeon?
     end
 
     # @return [String]
@@ -134,24 +104,14 @@ module Inventory
       item_data['enumeration_b']
     end
 
-    # @return [String]
-    def aeon_sublocation
-      Settings.locations.aeon_sublocation_map[location]
-    end
-
-    # @return [String]
-    def aeon_site
-      Settings.locations.aeon_location_map[library]
-    end
-
     # Return an array of fulfillment options for a given item and user. Certain requesting options (ie Aeon) are
     # available to non-logged in users.
     #
     # @param user [User, nil] the user object
     # @return [Array<Symbol>]
     def fulfillment_options(user: nil)
-      return [:aeon] if aeon_requestable?
-      return [:archives] if at_archives?
+      return [:aeon] if location.aeon?
+      return [:archives] if location.archives?
       return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
 
       options = pickup_options(user: user)
@@ -180,11 +140,24 @@ module Inventory
     # @return [Array]
     def select_label
       if item_data.present?
-        [[description, physical_material_type['desc'], public_note, library_name]
+        [[description, physical_material_type['desc'], public_note, location.library_name]
           .compact_blank.join(' - '), item_data['pid']]
       else
-        [[holding_data['call_number'], 'Restricted Access'].compact_blank.join(' - '), 'no-item']
+        [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
       end
+    end
+
+    private
+
+    # Returns location object. If item in a temp location, returns that as the location. If a location is not
+    # available in the item_data pulls location information from holding_data.
+    # @return [Inventory::Location]
+    def create_location
+      library = in_temp_location? ? holding_data['temp_library'] : item_data['library'] || holding_data['library']
+      location = in_temp_location? ? holding_data['temp_location'] : item_data['location'] || holding_data['location']
+
+      Location.new(library_code: library['value'], library_name: library['desc'],
+                   location_code: location['value'], location_name: location['desc'])
     end
   end
 end

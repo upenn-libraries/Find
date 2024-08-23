@@ -2,14 +2,14 @@
   <details class="location-details">
     <summary>
       <span class="inventory-item__container">
-        <span class="inventory-item__header"><%= entry.location %></span>
+        <span class="inventory-item__header"><%= entry.human_readable_location %></span>
         <span class="inventory-item__main"><%= entry.description %></span>
         <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
       </span>
     </summary>
     <div class="location-details__content">
-      <turbo-frame id="library_info_<%= entry.library_code %>"
-                   src="<%= library_info_path(library_code: entry.library_code) %>"
+      <turbo-frame id="library_info_<%= entry.location.library_code %>"
+                   src="<%= library_info_path(library_code: entry.location.library_code) %>"
                    loading="lazy"
                    target="_top"
                    data-controller="missing-frame"
@@ -41,7 +41,7 @@
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
     <summary id="request_item" class="btn btn-success fulfillment__summary"><%= t('requests.form.request_item') %></summary>
     <%= turbo_frame_tag 'form_frame',
-                        src: fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id, host_record_id: entry.host_record_id, location_code: entry.location_code),
+                        src: fulfillment_form_path(mms_id: entry.mms_id, holding_id: entry.id, host_record_id: entry.host_record_id, location_code: entry.location.code),
                         loading: 'lazy',
                         data: { controller: 'missing-frame', missing_frame_error_value: t('requests.form.missing_frame') } do %>
       <div class="fulfillment__container">

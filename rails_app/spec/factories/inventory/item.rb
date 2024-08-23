@@ -12,8 +12,8 @@ FactoryBot.define do
         'item_data' => {
           'base_status' => { 'value' => '1' },
           'description' => "MS #{Faker::Number.number(digits: 4)}",
-          'location' => { 'value' => 'library' },
-          'library' => { 'desc' => 'The Library' },
+          'location' => { 'value' => 'thelocation', 'desc' => 'The Location' },
+          'library' => { 'value' => 'thelibrary', 'desc' => 'The Library' },
           'pid' => Faker::Number.number(digits: 10),
           'physical_material_type' => { 'desc' => 'Book' }
         }
@@ -71,7 +71,7 @@ FactoryBot.define do
   trait :at_hsp do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['library'] = { 'value' => Inventory::Constants::HSP_LIBRARY }
+      item['item_data']['library'] = { 'value' => Inventory::Location::HSP }
       item
     end
   end
@@ -96,7 +96,7 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'univarch' }
-      item['item_data']['library'] = { 'value' => Inventory::Constants::ARCHIVES_LIBRARY }
+      item['item_data']['library'] = { 'value' => Inventory::Location::ARCHIVES }
       item
     end
   end
@@ -124,6 +124,16 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['boundwith'] = 'true'
+      item
+    end
+  end
+
+  trait :without_item do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data'] = {}
+      item['holding_data']['location'] = { 'value' => 'vanp', 'desc' => 'Van Pelt Library' }
+      item['holding_data']['library'] = { 'value' => 'ValPeltLib', 'desc' => 'Van Pelt Library' }
       item
     end
   end

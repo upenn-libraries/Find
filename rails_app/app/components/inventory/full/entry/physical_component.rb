@@ -30,7 +30,7 @@ module Inventory
 
         # Return true if request options are only available after login
         def require_authentication_for_requesting?
-          user.nil? && !entry.in_aeon_location? && !entry.at_archives?
+          user.nil? && !entry.location.aeon? && !entry.location.archives?
         end
       end
     end

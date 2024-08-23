@@ -377,7 +377,7 @@ describe 'Catalog Show Page' do
     context 'with an item at the archives' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
-                                 library_code: Inventory::Constants::ARCHIVES_LIBRARY)]
+                                 library_code: Inventory::Location::ARCHIVES)]
       end
       let(:item) { build :item, :at_archives }
 
