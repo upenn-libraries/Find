@@ -392,6 +392,25 @@ describe 'Catalog Show Page' do
         end
       end
     end
+
+    context 'with an item at HSP' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
+                                 library_code: Inventory::Location::HSP)]
+      end
+      let(:item) { build :item, :at_hsp }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives text' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#hsp-option'
+        end
+      end
+    end
   end
 
   context 'when interacting with show tools' do
