@@ -369,7 +369,7 @@ en:
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
-          info_html: 'Material kept by the <a href=%{url} target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
+          info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
         none:
           info: 'This item is unavailable from the Penn libraries.'
       request_item: 'Request an item'
