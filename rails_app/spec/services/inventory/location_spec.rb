@@ -21,7 +21,7 @@ describe Inventory::Location do
         ).to eq Mappings.location_overrides[:albrecht][:specific_location]
       end
 
-      it 'returns display name when non-LC call number matches the pattern' do
+      it 'returns regular display name when non-LC type call number happens to matches the pattern' do
         expect(
           location.location_name(call_number: 'Microfilm 1234',
                                  call_number_type: '8')
