@@ -473,6 +473,7 @@ en:
       former: 'Former Title'
       main: 'Title'
       standardized: 'Standardized Title'
+      statement_of_responsibility: 'Statement of Responsibility'
       other: 'Other Title'
     web_links:
       main: 'Online'
