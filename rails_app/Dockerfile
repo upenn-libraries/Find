@@ -3,7 +3,7 @@
 ARG BUNDLE_HOME=vendor/bundle
 
 # Image tag
-ARG IMAGE_TAG=3.2.2-slim-bullseye
+ARG IMAGE_TAG=3.2.5-slim-bookworm
 
 # The root of our app
 ARG PROJECT_ROOT=/home/app
