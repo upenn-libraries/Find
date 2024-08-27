@@ -32,7 +32,18 @@ FactoryBot.define do
                 <subfield code="c">chemperi</subfield>
                 <subfield code="h">QD1</subfield>
                 <subfield code="i">.C48</subfield>
-                <subfield code="z">Public note</subfield>
+                <subfield code="z">First note</subfield>
+                <subfield code="z">Second note</subfield>
+                <subfield code="z">Third note</subfield>
+              </datafield>
+              <datafield ind1="0" ind2="2" tag="852">
+                <subfield code="b">ChemLib</subfield>
+                <subfield code="c">chemperi-2</subfield>
+                <subfield code="h">QD1</subfield>
+                <subfield code="i">.C48</subfield>
+                <subfield code="z">2-First note</subfield>
+                <subfield code="z">2-Second note</subfield>
+                <subfield code="z">2-Third note</subfield>
               </datafield>
               <datafield ind1="4" ind2="1" tag="866">
                 <subfield code="8">0</subfield>
