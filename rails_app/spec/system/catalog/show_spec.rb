@@ -151,7 +151,7 @@ describe 'Catalog Show Page' do
       it 'displays additional details/notes' do
         within('#inventory-0') do
           expect(page).to have_selector '.inventory-item__notes',
-                                        text: 'Public note'
+                                        text: 'First note Second note Third note2-First note 2-Second note 2-Third note'
         end
       end
     end
