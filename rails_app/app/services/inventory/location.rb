@@ -23,10 +23,13 @@ module Inventory
     # rare cases the preferred location name has been overwritten for a subset of the materials in that location. In
     # these cases the call number is need to provide a more specific location name.
     #
-    # @param [String] call_number
+    # @param [String, nil] call_number
+    # @param [String, nil] call_number_type
     # @return [String]
-    def location_name(call_number: nil)
-      location_name_override(call_number) || Mappings.locations.dig(location_code.to_sym, :display) || raw_location_name
+    def location_name(call_number: nil, call_number_type: nil)
+      location_name_override(call_number, call_number_type) ||
+        Mappings.locations.dig(location_code.to_sym, :display) ||
+        raw_location_name
     end
     alias name location_name
 
@@ -81,16 +84,30 @@ module Inventory
 
     # Location may have an overridden location name that doesn't reflect the location values in the availability data.
     # We utilize the PennMARC location overrides mapper to return such locations.
-    # @param [String] call_number
+    # @param call_number [String, nil]
+    # @param call_number_type [String, nil]
     # @return [String, nil]
-    def location_name_override(call_number)
-      return if call_number.blank? || location_code.blank?
+    def location_name_override(call_number, call_number_type)
+      return if call_number.blank? || call_number_type.blank? || location_code.blank?
 
-      override = Mappings.location_overrides.find do |_key, value|
-        value[:location_code] == location_code && call_number.match?(value[:call_num_pattern])
+      override = Mappings.location_overrides.find do |_key, override_data|
+        override_matching?(override_data: override_data, location_code: location_code, call_number: call_number,
+                           call_num_type: call_number_type)
       end
 
       override&.last&.dig(:specific_location)
+    end
+
+    # Check override_data hash for a matching location name override
+    # @param override_data [String]
+    # @param location_code [String]
+    # @param call_number [String]
+    # @param call_num_type [String]
+    # @return [Boolean]
+    def override_matching?(override_data:, location_code:, call_number:, call_num_type:)
+      override_data[:location_code] == location_code &&
+        override_data[:call_num_type] == call_num_type &&
+        call_number.match?(override_data[:call_num_pattern])
     end
   end
 end

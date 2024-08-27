@@ -112,26 +112,27 @@ module Inventory
     def fulfillment_options(user: nil)
       return [:aeon] if location.aeon?
       return [:archives] if location.archives?
+      return [:hsp] if location.hsp?
       return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
 
-      options = pickup_options(user: user)
+      user.courtesy_borrower? ? courtesy_borrower_options : penn_borrower_options(user)
+    end
 
-      return options if user.courtesy_borrower? # No more requesting options available for courtesy borrowers.
-
+    # Fulfillment options available for Penn users.
+    # @param user [User]
+    # @return [Array<Symbol>]
+    def penn_borrower_options(user)
+      options = [Fulfillment::Request::Options::MAIL]
+      options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
       options << Fulfillment::Request::Options::OFFICE if user.faculty_express?
-      options << Fulfillment::Request::Options::MAIL
       options << Fulfillment::Request::Options::ELECTRONIC if scannable?
       options
     end
 
-    # Return pickup options available for this item based on the user
-    # @param user [User]
+    # Fulfillment options available for courtesy borrowers. Courtesy borrowers can't make inter-library loan requests.
     # @return [Array<Symbol>]
-    def pickup_options(user:)
-      return [Fulfillment::Request::Options::PICKUP] if checkoutable?
-      return [Fulfillment::Request::Options::ILL_PICKUP] unless user.courtesy_borrower?
-
-      []
+    def courtesy_borrower_options
+      checkoutable? ? [Fulfillment::Request::Options::PICKUP] : []
     end
 
     # Array of arrays. In each sub-array, the first value is the display value and the
