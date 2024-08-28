@@ -580,4 +580,48 @@ describe 'Catalog Show Page' do
       end
     end
   end
+
+  context 'when linking to a fielded search', pending: 'requires show field config and updated pennmarc' do
+    context 'with a standardized title' do
+      include_context 'with electronic journal record with 4 electronic entries'
+
+      before do
+        visit(solr_document_path(electronic_journal_bib))
+      end
+
+      it 'links to a title fielded search' do
+        within('.col-md-9.blacklight-title_standardized_show') do
+          expect(page).to have_link('Nature (Online)', href: search_catalog_path(
+            { clause: { '2': { field: 'title_search', query: '"Nature (Online)"' } } }
+          ))
+        end
+      end
+    end
+
+    context 'with a series title', pending: 'requires show field config and updated pennmarc' do
+      let(:show_value) do
+        'Report (Expanded Program of Technical Assistance (Food and Agriculture Organization of the United ' \
+          'Nations)) ; C77.'
+      end
+
+      let(:query_value) do
+        '"Report (Expanded Program of Technical Assistance (Food and Agriculture Organization of the United ' \
+          'Nations))"'
+      end
+
+      include_context 'with a conference proceedings record with 1 physical holding'
+
+      before do
+        visit(solr_document_path(conference_bib))
+      end
+
+      it 'links to a title fielded search' do
+        within('.col-md-9.blacklight-series_show') do
+          expect(page).to have_link(show_value, href: search_catalog_path(
+            { clause: { '2': { field: 'title_search', query: query_value } } }
+          ))
+        end
+      end
+    end
+  end
 end
