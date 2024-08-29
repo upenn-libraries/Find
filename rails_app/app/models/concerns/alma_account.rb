@@ -34,11 +34,19 @@ module AlmaAccount
   end
 
   # Returns User's full name in Alma
-  # @return [String]
+  # @return [String, nil]
   def full_name
     return unless alma_record?
 
     alma_record.full_name
+  end
+
+  # Return user's preferred email from Alma
+  # @return [String, nil]
+  def alma_preferred_email
+    return unless alma_record?
+
+    alma_record.preferred_email
   end
 
   # @return [String, nil]

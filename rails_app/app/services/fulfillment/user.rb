@@ -8,10 +8,17 @@ module Fulfillment
 
     attr_reader :uid
 
+    # @param [String] uid
     def initialize(uid)
       @uid = uid
     end
 
+    # @return [String, nil]
+    def email
+      alma_record.alma_preferred_email
+    end
+
+    # @return [String, nil]
     def ils_group
       return unless alma_record?
 
