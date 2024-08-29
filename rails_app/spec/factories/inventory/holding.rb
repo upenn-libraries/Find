@@ -43,7 +43,6 @@ FactoryBot.define do
                 <subfield code="i">.C48</subfield>
                 <subfield code="z">2-First note</subfield>
                 <subfield code="z">2-Second note</subfield>
-                <subfield code="z">2-Third note</subfield>
               </datafield>
               <datafield ind1="4" ind2="1" tag="866">
                 <subfield code="8">0</subfield>
