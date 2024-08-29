@@ -97,7 +97,10 @@ describe Inventory::List::Entry::Physical do
     end
 
     context 'with a location override' do
-      let(:entry) { build(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984') }
+      let(:entry) do
+        build(:physical_entry, location_code: 'vanp', call_number: 'ML3534 .D85 1984',
+                               call_number_type: PennMARC::Classification::LOC_CALL_NUMBER_TYPE)
+      end
 
       it 'returns expected name' do
         expect(entry.human_readable_location).to eq(Mappings.location_overrides[:albrecht][:specific_location])
