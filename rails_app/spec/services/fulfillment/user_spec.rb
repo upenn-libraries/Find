@@ -4,10 +4,9 @@ describe Fulfillment::User do
   include Alma::ApiMocks::User
 
   let(:uid) { 'test' }
+  let(:object) { described_class.new(uid) }
 
-  it_behaves_like 'Illiad Account' do
-    let(:object) { described_class.new(uid) }
-  end
+  it_behaves_like 'Illiad Account'
 
   describe '#email' do
     let(:email) { "#{uid}@upenn.edu" }
@@ -19,8 +18,8 @@ describe Fulfillment::User do
                                   })
     end
 
-    it 'has an email' do
-      expect(described_class.new(uid).email).to eq email
+    it 'returns the expected value' do
+      expect(object.email).to eq email
     end
   end
 end
