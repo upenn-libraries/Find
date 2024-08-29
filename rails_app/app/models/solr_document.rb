@@ -40,4 +40,16 @@ class SolrDocument
   def host_record_id
     fetch(:host_record_id_ss, []).first
   end
+
+  # Get alternate title (field is not indexed yet - should it be?)
+  # @return [String, nil]
+  def alternate_title
+    marc(:title_alternate_show)
+  end
+
+  # Get detailed title with inclusive dates (field is not indexed yet - should it be?)
+  # @return [String, nil]
+  def detailed_title
+    marc(:title_detailed_show)
+  end
 end
