@@ -28,7 +28,7 @@ module Fulfillment
     # 2. Item Request form: form submission will include item identifiers and fulfillment options. No scan details.
     #    Aeon requests will come from here.
     #
-    # @param requester [User, Fulfillment::User] user making request
+    # @param requester [::User, Fulfillment::User] user making request
     # @param params [Hash] additional parameters to create request
     # @option params [String] delivery
     # @option params [String, nil] pickup_location

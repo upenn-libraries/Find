@@ -71,7 +71,7 @@ module Fulfillment
           create_illiad_user(user)
         end
 
-        # @param user [User, Fulfillment::User]
+        # @param user [::User, Fulfillment::User]
         # @return [Illiad::User]
         def create_illiad_user(user)
           attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
