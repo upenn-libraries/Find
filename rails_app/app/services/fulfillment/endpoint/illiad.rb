@@ -63,7 +63,7 @@ module Fulfillment
           end
         end
 
-        # @param [User] user
+        # @param [::User, Fulfillment::User] user
         # @return [Illiad::User, FalseClass]
         def find_or_create(user:)
           return user.illiad_record if user.illiad_record
@@ -71,7 +71,7 @@ module Fulfillment
           create_illiad_user(user)
         end
 
-        # @param user [User]
+        # @param user [::User, Fulfillment::User]
         # @return [Illiad::User]
         def create_illiad_user(user)
           attributes = BASE_USER_ATTRIBUTES.merge(user_request_body(user))
@@ -112,6 +112,10 @@ module Fulfillment
           add_note(transaction, I18n.t('fulfillment.illiad.boundwith_comment'))
         end
 
+        # Add a note for a Transaction
+        # @param [::Illiad::Request] transaction
+        # @param [String] note
+        # @return [Hash]
         def add_note(transaction, note)
           ::Illiad::Request.add_note(id: transaction.id, note: note)
         end
@@ -175,7 +179,7 @@ module Fulfillment
           body
         end
 
-        # @param [User] user
+        # @param [::User, Fulfillment::User] user
         # @return [Hash{Symbol->Unknown}]
         def user_request_body(user)
           {
