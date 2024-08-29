@@ -15,7 +15,7 @@ module Fulfillment
 
     # @return [String, nil]
     def email
-      alma_record.alma_preferred_email
+      alma_preferred_email
     end
 
     # @return [String, nil]
