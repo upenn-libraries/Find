@@ -218,12 +218,16 @@ class CatalogController < ApplicationController
                                                            accessor: :marc, component: Catalog::FacetLinkComponent,
                                                            facet_target: :creator_facet,
                                                            facet_map: :creator_conference_detail_show_facet_map
-    config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc
+    config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc,
+                                        component: Catalog::QueryLinkComponent, search_target: :title_search,
+                                        query_map: :series_show_query_map
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
     config.add_show_field :production_manufacture_show, label: I18n.t('show.production.manufacture'), accessor: :marc
     config.add_show_field :relation_contained_in_show, label: I18n.t('show.relation.contained_in'), accessor: :marc
-    config.add_show_field :title_standardized_show, label: I18n.t('show.title.standardized'), accessor: :marc
+    config.add_show_field :title_standardized_show, label: I18n.t('show.title.standardized'), accessor: :marc,
+                                                    component: Catalog::QueryLinkComponent, search_target: :title_search
+
     config.add_show_field :title_other_show, label: I18n.t('show.title.other'), accessor: :marc
     config.add_show_field :format_cartographic_show, label: I18n.t('show.format.cartographic'), accessor: :marc
     config.add_show_field :identifier_fingerprint_show, label: I18n.t('show.identifier.fingerprint'), accessor: :marc

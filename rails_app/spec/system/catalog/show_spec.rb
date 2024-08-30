@@ -581,7 +581,7 @@ describe 'Catalog Show Page' do
     end
   end
 
-  context 'when linking to a fielded search', pending: 'requires show field config and updated pennmarc' do
+  context 'when linking to a fielded search' do
     context 'with a standardized title' do
       include_context 'with electronic journal record with 4 electronic entries'
 
@@ -598,7 +598,7 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'with a series title', pending: 'requires show field config and updated pennmarc' do
+    context 'with a series title' do
       let(:show_value) do
         'Report (Expanded Program of Technical Assistance (Food and Agriculture Organization of the United ' \
           'Nations)) ; C77.'
