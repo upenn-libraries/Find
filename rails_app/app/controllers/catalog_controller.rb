@@ -76,6 +76,7 @@ class CatalogController < ApplicationController
     config.index.document_component = Catalog::ResultsDocumentComponent
     config.show.document_component = Catalog::ShowDocumentComponent
     config.show.show_tools_component = Catalog::ShowToolsComponent
+    config.show.title_component = Catalog::DocumentTitleComponent
 
     # Configure local components for search session components that make the show page toolbar possible
     config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent

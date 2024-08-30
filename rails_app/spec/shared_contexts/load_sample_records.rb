@@ -49,6 +49,28 @@ shared_context 'with print monograph record with 2 physical entries' do
   end
 end
 
+shared_context 'with print monograph with an entry with an alternate title' do
+  let(:print_monograph_bib) { '998308333503681' }
+  let(:print_monograph_entries) do
+    [create(:physical_entry, mms_id: print_monograph_bib, availability: 'available', holding_id: '1234',
+                             call_number: 'VP1234', holding_info: 'some holding information',
+                             location_code: 'veteresov', inventory_type: 'physical')]
+  end
+
+  before do
+    SampleIndexer.index 'print_monograph_with_alternate_title.json'
+
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                            .and_return(Inventory::List::Response.new(entries: print_monograph_entries))
+    allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == print_monograph_bib })
+                                             .and_return(
+                                               Inventory::List::Response.new(entries: print_monograph_entries)
+                                             )
+    # Mock extra call to retrieve notes for any holding
+    allow(Inventory::Holding).to receive(:find).and_return(create(:holding))
+  end
+end
+
 shared_context 'with print monograph record with an entry in a temp location' do
   let(:print_monograph_bib) { '9913203433503681' }
   let(:print_monograph_entries) do
