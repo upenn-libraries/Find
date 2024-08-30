@@ -213,9 +213,6 @@ class CatalogController < ApplicationController
     config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
                                          component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                                          facet_map: :creator_show_facet_map
-    config.add_show_field :title_statement_of_responsibility_show,
-                          label: I18n.t('show.title.statement_of_responsibility'),
-                          accessor: :marc
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
