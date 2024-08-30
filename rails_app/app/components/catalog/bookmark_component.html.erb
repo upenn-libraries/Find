@@ -1,4 +1,4 @@
-<%# Copied template from Blacklight v8.3.0 to add class names that support integration into a Bootstrap button group %>
+<%# Copied template from Blacklight v8.3.0@69373f202 to add class names that support integration into a Bootstrap button group %>
 
 <%- # we don't use the per-form csrf token -%>
 <%= form_tag(bookmark_path,
@@ -12,7 +12,8 @@
              }) do %>
   <div class="checkbox toggle-bookmark btn btn-light">
     <label class="toggle-bookmark" data-checkboxsubmit-target="label">
-      <input type="checkbox" class="toggle-bookmark" data-checkboxsubmit-target="checkbox" <%= 'checked="checked"' if bookmarked? %>>
+      <input type="checkbox" class="toggle-bookmark <%= bookmark_icon ? 'd-none' : '' %>" data-checkboxsubmit-target="checkbox" <%= 'checked="checked"' if bookmarked? %>>
+      <%= bookmark_icon %>
       <span data-checkboxsubmit-target="span"><%= bookmarked? ? t('blacklight.search.bookmarks.present') : t('blacklight.search.bookmarks.absent') %></span>
     </label>
   </div>

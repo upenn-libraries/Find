@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copied from Blacklight version 8.3.0
+# Copied from Blacklight v8.3.0@69373f202
 
 module Catalog
   # For rendering "Find it" rather than Blacklight's icon with a hidden label

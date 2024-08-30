@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Catalog
-  # copied from Blacklight ref 7f3f38f to ensure adv search constraints match style of constraints in catalog views
+  # Inherits from Blacklight::ConstraintLayoutComponent v8.3.0@69373f202 to ensure adv search constraints match style of
+  # constraints in catalog views
   class SearchHistoryConstraintLayoutComponent < Blacklight::ConstraintLayoutComponent
     def call
       label = tag.span(@label, class: 'filter-name')
