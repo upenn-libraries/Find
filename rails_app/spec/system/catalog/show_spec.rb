@@ -157,6 +157,30 @@ describe 'Catalog Show Page' do
     end
   end
 
+  context 'when viewing a print monograph record with an alternate title' do
+    include_context 'with print monograph with an entry with an alternate title'
+
+    let(:mms_id) { print_monograph_bib }
+    let(:entries) { print_monograph_entries }
+
+    before do
+      visit solr_document_path(mms_id)
+      click_button entries.first.description
+    end
+
+    it 'displays the title' do
+      within('.document-main-section') do
+        expect(page).to have_selector '.record-title'
+      end
+    end
+
+    it 'displays the alternate title' do
+      within('.document-main-section') do
+        expect(page).to have_selector '.record-alternate-title'
+      end
+    end
+  end
+
   # Record with 9 physical holdings
   context 'when a record has many entries' do
     include_context 'with print monograph record with 9 physical entries'
