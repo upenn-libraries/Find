@@ -14,6 +14,7 @@ module Catalog
           query_constraint_component: Catalog::SearchHistoryConstraintLayoutComponent,
           facet_constraint_component_options: { layout: Catalog::SearchHistoryConstraintLayoutComponent },
           start_over_component: nil,
+          edit_search: false,
           **kwargs)
     end
 
@@ -26,7 +27,8 @@ module Catalog
                    query_constraint_component_options: {},
                    facet_constraint_component: Blacklight::ConstraintComponent,
                    facet_constraint_component_options: {},
-                   start_over_component: Catalog::StartOverButtonComponent)
+                   start_over_component: Catalog::StartOverButtonComponent,
+                   edit_search: true)
       @search_state = search_state
       @query_constraint_component = query_constraint_component
       @query_constraint_component_options = query_constraint_component_options
@@ -37,6 +39,7 @@ module Catalog
       @tag = tag
       @id = id
       @classes = classes
+      @edit_search = edit_search
     end
     # rubocop:enable Metrics/ParameterLists
 

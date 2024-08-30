@@ -31,5 +31,15 @@ module Catalog
         constraints_text
       end
     end
+
+    def query_for_search_clause(key)
+      field = (@params[:clause] || {}).values.find { |value| value['field'].to_s == key.to_s }
+
+      query = field&.dig('query')
+
+      return query.presence || @q if key == 'all_fields_advanced'
+
+      query
+    end
   end
 end
