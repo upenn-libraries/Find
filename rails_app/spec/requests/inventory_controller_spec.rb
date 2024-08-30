@@ -31,7 +31,7 @@ describe 'Inventory requests' do
       before { get physical_detail_inventory_path(print_monograph_bib, print_monograph_entries.second.id) }
 
       it 'returns expected note' do
-        expect(response.body).to include 'Public note'
+        expect(response.body).to include 'First note Second note Third note 2-First note 2-Second note'
       end
     end
   end

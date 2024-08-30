@@ -12,7 +12,7 @@ module Inventory
     end
 
     def formatted_notes
-      sanitize(notes.join)
+      sanitize(notes.join(' '))
     end
   end
 end

@@ -48,6 +48,7 @@ Metrics/CyclomaticComplexity:
     - 'app/models/concerns/citation_export.rb'
     - 'app/services/fulfillment/endpoint/illiad.rb'
     - 'app/services/shelf/listing.rb'
+    - 'app/services/inventory/holding.rb'
 
 # Offense count: 9
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns.

@@ -34,7 +34,11 @@ module Inventory
     def notes
       return if marc.blank?
 
-      marc&.fields('852')&.filter_map { |field| field['z'] }
+      marc&.fields('852')&.map do |field|
+        field.filter_map { |sf|
+          sf.value&.strip if sf.code == 'z'
+        }.join(' ')
+      end
     end
 
     # @return [MARC::Record, nil]
