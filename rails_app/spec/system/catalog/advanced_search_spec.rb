@@ -234,12 +234,12 @@ describe 'Advanced Search Page' do
       let(:params) { { f: { 'format_facet': ['Book'] } } }
 
       it 'does not select inclusive facet in multi select' do
-        within('div.format_facet-select') do
+        within('div.format_facet-select', visible: false) do
           expect(page).not_to have_text(params[:f][:format_facet].first)
         end
       end
 
-      it 'does not activate the facet field component', pending: 'not yet implemented' do
+      it 'does not activate the facet field component' do
         within('#advanced_search_facets') do
           expect(page).not_to have_css('div.blacklight-format_facet.facet-limit-active')
         end
