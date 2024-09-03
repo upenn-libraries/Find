@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight version 8.3.0
+  # Local component copied from Blacklight v8.3.0@5a779c5a9
   class ConstraintsComponent < Blacklight::Component
     renders_many :query_constraints_area
     renders_many :facet_constraints_area
@@ -11,9 +11,10 @@ module Catalog
       new(tag: :span,
           render_headers: false,
           id: nil,
-          query_constraint_component: Blacklight::SearchHistoryConstraintLayoutComponent,
-          facet_constraint_component_options: { layout: Blacklight::SearchHistoryConstraintLayoutComponent },
+          query_constraint_component: Catalog::SearchHistoryConstraintLayoutComponent,
+          facet_constraint_component_options: { layout: Catalog::SearchHistoryConstraintLayoutComponent },
           start_over_component: nil,
+          edit_search: false,
           **kwargs)
     end
 
@@ -26,7 +27,8 @@ module Catalog
                    query_constraint_component_options: {},
                    facet_constraint_component: Blacklight::ConstraintComponent,
                    facet_constraint_component_options: {},
-                   start_over_component: Catalog::StartOverButtonComponent)
+                   start_over_component: Catalog::StartOverButtonComponent,
+                   edit_search: true)
       @search_state = search_state
       @query_constraint_component = query_constraint_component
       @query_constraint_component_options = query_constraint_component_options
@@ -37,12 +39,13 @@ module Catalog
       @tag = tag
       @id = id
       @classes = classes
+      @edit_search = edit_search
     end
     # rubocop:enable Metrics/ParameterLists
 
     def query_constraints
       if @search_state.query_param.present?
-        helpers.render(
+        render(
           @query_constraint_component.new(
             search_state: @search_state,
             value: @search_state.query_param,
@@ -54,8 +57,8 @@ module Catalog
         )
       else
         ''.html_safe
-      end + helpers.render(@facet_constraint_component.with_collection(clause_presenters.to_a,
-                                                                       **@facet_constraint_component_options))
+      end + render(@facet_constraint_component.with_collection(clause_presenters.to_a,
+                                                               **@facet_constraint_component_options))
     end
 
     def remove_path
@@ -63,8 +66,8 @@ module Catalog
     end
 
     def facet_constraints
-      helpers.render(@facet_constraint_component.with_collection(facet_item_presenters.to_a,
-                                                                 **@facet_constraint_component_options))
+      render(@facet_constraint_component.with_collection(facet_item_presenters.to_a,
+                                                         **@facet_constraint_component_options))
     end
 
     def render?

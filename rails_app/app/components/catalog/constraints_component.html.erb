@@ -1,4 +1,4 @@
-<% # Copied from Blacklight version 8.3.0 %>
+<% # Copied from Blacklight v8.3.0@5a779c5a9 %>
 
 <%= content_tag @tag || :div, id: @id, class: @classes do %>
   <% if @render_headers %>
@@ -6,6 +6,9 @@
   <% end %>
 
   <%= render @start_over_component.new if @start_over_component %>
+
+  <%= link_to(t('search.edit.label'), advanced_search_catalog_path(@search_state.params),  class: 'btn btn-light') if @edit_search %>
+
 
   <% if @render_headers %>
     <span class="constraints-label sr-only visually-hidden"><%= t('blacklight.search.filters.title') %></span>

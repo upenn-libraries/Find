@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 gem 'alma'
-gem 'blacklight', github: 'projectblacklight/blacklight', ref: '7f3f38f05e5fa25edb3aeb63b4394b4acc541e63'
+gem 'blacklight', github: 'projectblacklight/blacklight', ref: '5a779c5a96a835152df5bee9f2e7b6088aaee5a9'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1'

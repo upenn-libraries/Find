@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v8.1.0 to accommodate range search fields
-  # - AdvancedSearchForm Stimulus controller attached
+  # Local component copied from Blacklight v8.3.0@5a779c5a9 to:
+  # - accommodate range search fields
+  # - attach AdvancedSearchForm Stimulus controller
+  # - match "q" parameter to keyword search clause
   class AdvancedSearchFormComponent < Blacklight::AdvancedSearchFormComponent
     private
 
@@ -14,6 +16,30 @@ module Catalog
                                                                    index: i))
         end
       end
+    end
+
+    def initialize_constraints
+      params = helpers.search_state.params_for_search.except :page, :f_inclusive, :q, :search_field, :op, :index, :sort
+
+      adv_search_context = helpers.search_state.reset(params)
+
+      constraints_text = render(Catalog::ConstraintsComponent.for_search_history(search_state: adv_search_context))
+
+      return if constraints_text.blank?
+
+      with_constraint do
+        constraints_text
+      end
+    end
+
+    def query_for_search_clause(key)
+      field = (@params[:clause] || {}).values.find { |value| value['field'].to_s == key.to_s }
+
+      query = field&.dig('query')
+
+      return query.presence || @q if key == 'all_fields_advanced'
+
+      query
     end
   end
 end

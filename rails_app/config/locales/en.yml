@@ -406,6 +406,8 @@ en:
     advanced:
       label: "Advanced"
     databases: "Databases"
+    edit:
+      label: 'Edit Search'
   show:
     citation:
       cited_as: 'Cited as'

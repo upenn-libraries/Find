@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Advanced Search Page' do
+  include Articles::ApiMocks::Search
+
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with electronic journal record with 4 electronic entries'
 
@@ -165,6 +167,89 @@ describe 'Advanced Search Page' do
         from.fill_in with: 'abcd'
         click_on 'Search'
         expect(page).to have_text('Advanced search')
+      end
+    end
+  end
+
+  context 'with incoming parameters' do
+    let(:params) { {} }
+
+    before do
+      stub_summon_search_success(query: params[:q], fixture: 'book.json')
+      visit search_catalog_path(params)
+      click_on I18n.t('search.edit.label')
+    end
+
+    context 'with parameters included in the form' do
+      let(:params) do
+        { sort: 'creator_sort asc, score desc', op: 'must',
+          clause: { '4': { field: 'subject_search', query: 'Cats' },
+                    '10': { field: 'place_of_publication_search', query: 'Baltimore' } },
+          f_inclusive: { access_facet: ['At the library'] } }
+      end
+
+      it 'populates the search fields' do
+        within('form.advanced') do
+          expect(page).to have_field(I18n.t('advanced.subject_search'), with: 'Cats')
+          expect(page).to have_field(I18n.t('advanced.place_of_publication_search'), with: 'Baltimore')
+        end
+      end
+
+      it 'selects the facets' do
+        within('form.advanced') do
+          expect(page).to have_field('At the library', checked: true)
+        end
+      end
+
+      it 'selects the sort order' do
+        within('form.advanced') do
+          expect(page).to have_select('sort', selected: I18n.t('sort.creator_asc'))
+        end
+      end
+    end
+
+    context 'with "q" parameter' do
+      let(:params) { { q: 'keyword' } }
+
+      it 'populates the keyword search field' do
+        within('form.advanced') do
+          expect(page).to have_field(I18n.t('advanced.all_fields'), with: params[:q])
+        end
+      end
+    end
+
+    context 'with "q" and keyword "clause" parameter' do
+      let(:params) do
+        { q: 'ignore',
+          clause: { '0': { field: 'all_fields_advanced', query: 'prefer' } } }
+      end
+
+      it 'populates the keyword search field with the clause query parameter' do
+        within('form.advanced') do
+          expect(page).to have_field(I18n.t('advanced.all_fields'), with: params[:clause][:'0'][:query])
+        end
+      end
+    end
+
+    context 'with exclusive "f" facet parameter' do
+      let(:params) { { f: { 'format_facet': ['Book'] } } }
+
+      it 'does not select inclusive facet in multi select' do
+        within('div.format_facet-select', visible: false) do
+          expect(page).not_to have_text(params[:f][:format_facet].first)
+        end
+      end
+
+      it 'does not activate the facet field component' do
+        within('#advanced_search_facets') do
+          expect(page).not_to have_css('div.blacklight-format_facet.facet-limit-active')
+        end
+      end
+
+      it 'is displayed as a constraint' do
+        within('.constraints') do
+          expect(page).to have_text(params[:f][:format_facet].first)
+        end
       end
     end
   end

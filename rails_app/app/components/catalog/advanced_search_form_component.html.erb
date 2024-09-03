@@ -1,4 +1,4 @@
-<%# Copied template from Blacklight v8.3.0 to add stimulus controller that supports range search fields %>
+<%# Copied template from Blacklight ref v8.3.0@5a779c5a9 to add stimulus controller that supports range search fields %>
 
 <% if constraints? %>
   <div class="constraints well search_history">
@@ -13,7 +13,7 @@
              role: 'search', 'aria-label' => t('blacklight.search.form.submit'),
              data: { controller: 'advanced-search-form',
                      action: 'submit->advanced-search-form#submit formdata->advanced-search-form#removeBlank' } do %>
-  <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
+  <%= render Blacklight::HiddenSearchStateComponent.new(params: hidden_search_state_params) %>
 
   <div class="input-criteria">
     <div class="query-criteria mb-4">
