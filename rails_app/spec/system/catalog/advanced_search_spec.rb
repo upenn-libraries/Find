@@ -30,13 +30,14 @@ describe 'Advanced Search Page' do
       it 'makes the request to the expected path' do
         click_on 'Search'
         expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
-                                            '&clause%5B0%5D%5Bquery%5D=&sort=score+desc&commit=Search'
+                                            '&clause%5B0%5D%5Bquery%5D=&'\
+                                            'sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc'\
+                                            '&commit=Search'
       end
     end
 
     context 'with some search fields blank' do
       before do
-        fill_in 'Subject', with: 'Cats'
         fill_in 'Title', with: 'Hypothalamus'
         click_on 'Search'
       end
@@ -45,8 +46,8 @@ describe 'Advanced Search Page' do
         expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
                                             '&clause%5B0%5D%5Bquery%5D=&clause%5B2%5D%5Bfield%5D=title_search'\
                                             '&clause%5B2%5D%5Bquery%5D=Hypothalamus'\
-                                            '&clause%5B4%5D%5Bfield%5D=subject_search&clause%5B4%5D%5Bquery%5D=Cats'\
-                                            '&sort=score+desc&commit=Search'
+                                            '&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc'\
+                                            '&commit=Search'
       end
     end
   end
