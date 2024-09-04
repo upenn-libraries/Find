@@ -1,1 +1,27 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+User-agent: *
+Crawl-delay: 5
+
+Disallow: /*?*
+Disallow: /bookmarks
+Disallow: /catalog/advanced
+Disallow: /catalog/facet
+Disallow: /catalog
+Disallow: /catalog.atom
+Disallow: /catalog.rss
+Disallow: /catalog/email
+Disallow: /catalog/sms
+Disallow: /catalog/*/email
+Disallow: /catalog/*/sms
+Disallow: /catalog/*/staff_view
+Disallow: /catalog/citation
+Disallow: /catalog/*.xml
+Disallow: /catalog/*.dc_xml
+Disallow: /catalog/*.json
+Disallow: /catalog/*.ris
+Disallow: /catalog/*.marc
+Disallow: /catalog/*.marcxml
+Disallow: /catalog/*.endnote
+Disallow: /fulfillment
+Disallow: /inventory
