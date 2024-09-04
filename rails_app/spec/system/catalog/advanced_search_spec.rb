@@ -182,7 +182,7 @@ describe 'Advanced Search Page' do
 
     context 'with parameters included in the form' do
       let(:params) do
-        { sort: 'creator_sort asc, score desc', op: 'must',
+        { sort: 'creator_sort asc, title_sort asc', op: 'must',
           clause: { '4': { field: 'subject_search', query: 'Cats' },
                     '10': { field: 'place_of_publication_search', query: 'Baltimore' } },
           f_inclusive: { access_facet: ['At the library'] } }
