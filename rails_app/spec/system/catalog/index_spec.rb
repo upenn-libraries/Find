@@ -240,7 +240,7 @@ describe 'Catalog Index Page' do
     end
 
     context 'with a record added in the last 15 days' do
-      let(:solr_time) { (Time.new('2024-04-18').to_f * 1000).to_i }
+      let(:solr_time) { (Time.new(2024, 4, 18).to_f * 1000).to_i }
 
       it 'shows the recently added facet for 15 and 30 day range' do
         within('div.blacklight-recently_added_facet') do
@@ -267,9 +267,9 @@ describe 'Catalog Index Page' do
     end
 
     context 'with a record added in the last 90 days' do
-      let(:solr_time) { (Time.new('2024-07-10').to_f * 1000).to_i }
+      let(:solr_time) { (Time.new(2024, 7, 10).to_f * 1000).to_i }
 
-      it ' does not show the recently added facet for smaller date ranges' do
+      it 'does not show the recently added facet for smaller date ranges' do
         within('div.blacklight-recently_added_facet') do
           click_on I18n.t('facets.recently_added.label')
           expect(page).not_to have_text(/ Within 15|30|60 days/)
