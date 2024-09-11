@@ -12,9 +12,9 @@
     <p>
       <%= @outcome.fulfillment_desc %>
     </p>
-    <%= if @outcome.request.proxied? %>
+    <% if @outcome.request.proxied? %>
     <p>
-      This request was submitted on behalf of <%= @outcome.request.patron %>. This user will receive subsequent notifications about this request.
+      This request was submitted on behalf of <strong><%= @outcome.request.patron.email %></strong>. This user will receive subsequent notifications about this request.
     </p>
     <% end %>
     <p>
