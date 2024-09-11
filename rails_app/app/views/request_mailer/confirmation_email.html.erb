@@ -12,6 +12,11 @@
     <p>
       <%= @outcome.fulfillment_desc %>
     </p>
+    <%= if @outcome.request.proxied? %>
+    <p>
+      This request was submitted on behalf of <%= @outcome.request.patron %>. This user will receive subsequent notifications about this request.
+    </p>
+    <% end %>
     <p>
       Your confirmation number is <strong><%= @outcome.confirmation_number %></strong>. Please reference it when inquiring
       about your request status or about any other issues.

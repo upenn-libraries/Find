@@ -1,6 +1,10 @@
 You have successfully submitted a request for: <%= @outcome.item_desc %>
 
 <%= @outcome.fulfillment_desc %>
+<%= if @outcome.request.proxied? %>
+
+This request was submitted on behalf of <%= @outcome.request.patron %>. This user will receive subsequent notifications about this request.
+<% end %>
 
 Your confirmation number is <%= @outcome.confirmation_number %>. Please reference it when inquiring about your request
 status or about any other issues.
