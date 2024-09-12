@@ -21,7 +21,7 @@ module Inventory
 
           # Return user-friendly status.
           #
-          # @return [String]
+          # @return [String, nil]
           def label
             if i18n_namespace.blank?
               status&.capitalize

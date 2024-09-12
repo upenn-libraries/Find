@@ -349,6 +349,7 @@ en:
         hsp: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
+        restricted_access: 'Restricted Access'
         only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
@@ -371,8 +372,18 @@ en:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
+        reserves:
+          info: "This item cannot be requested because it is being held in reserves at %{location}."
+          label: 'On Reserve'
+        reference:
+          info: "This item can be retrieved for a limited time by visiting the reference desk at %{location}"
+          label: 'At Reference'
+        in_house:
+          info: "This item can be consulted only for a limited time and by visiting %{location}."
+          label: 'On Site Use Only'
         none:
           info: 'This item is unavailable from the Penn libraries.'
+          label: 'Currently Unavailable'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

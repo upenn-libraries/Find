@@ -97,11 +97,6 @@ module Inventory
         holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
     end
 
-    # @return [Boolean]
-    def unavailable?
-      !checkoutable? && !location.aeon?
-    end
-
     # @return [String]
     def volume
       item_data['enumeration_a']
@@ -118,15 +113,26 @@ module Inventory
     # @param user [User, nil] the user object
     # @return [Array<Symbol>]
     def fulfillment_options(user: nil)
-      # TODO: move to non_circulating_reason method or somesuch
-      return [:aeon] if location.aeon?
-      return [:archives] if location.archives?
-      return [:hsp] if location.hsp?
-      return [:reserves] if on_reserve?
-      return [:reference] if at_reference?
+      option = restricted_circ_type
+      return Array.wrap(option) if option.present?
+
       return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
 
-      user.courtesy_borrower? ? courtesy_borrower_options : penn_borrower_options(user)
+      return courtesy_borrower_options if user.courtesy_borrower?
+
+      penn_borrower_options(user)
+    end
+
+    # @return [Symbol, nil]
+    def restricted_circ_type
+      if location.aeon?
+        :aeon
+      elsif location.archives? then :archives
+      elsif location.hsp? then :hsp
+      elsif on_reserve? then :reserves
+      elsif at_reference? then :reference
+      elsif in_house_use_only? then :in_house
+      end
     end
 
     # Fulfillment options available for Penn users.
@@ -146,17 +152,42 @@ module Inventory
       checkoutable? ? [Fulfillment::Request::Options::PICKUP] : []
     end
 
+    # Prepare a "due date policy" value for display
+    # @param raw_policy [String]
+    # @return [String]
+    def user_policy_display(raw_policy)
+      if (raw_policy == NOT_LOANABLE_POLICY) && restricted_circ_type.blank?
+        I18n.t('requests.form.options.restricted_access')
+      elsif on_reserve?
+        I18n.t('requests.form.options.reserves.label')
+      elsif at_reference?
+        I18n.t('requests.form.options.reference.label')
+      elsif in_house_use_only?
+        I18n.t('requests.form.options.in_house.label')
+      elsif !checkoutable?
+        I18n.t('requests.form.options.none.label')
+      else
+        case raw_policy
+        when 'End of Year'
+          'Return by End of Year'
+        when 'End of Term'
+          'Return by End of Term'
+        else
+          raw_policy
+        end
+      end
+    end
+
     # Array of arrays. In each sub-array, the first value is the display value and the
     # second value is the submitted value for backend processing. Intended for use with Rails select form element
     # helpers.
-    # TODO: add in policy here
     # @return [Array]
     def select_label
       if item_data.present?
-        [[description, physical_material_type['desc'], public_note, location.library_name]
-          .compact_blank.join(' - '), item_data['pid']]
+        [[description, user_policy_display(user_due_date_policy), physical_material_type['desc'], public_note,
+          location.library_name].compact_blank.join(' - '), item_data['pid']]
       else
-        [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
+        [[call_number, I18n.t('requests.form.options.restricted_access')].compact_blank.join(' - '), 'no-item']
       end
     end
 

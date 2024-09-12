@@ -67,9 +67,11 @@
       </div>
     </div>
   <% elsif options.reserves? %>
-    <%# TODO: add an OnReservesComponent? needs location %>
+    <p id="reserves-option"><%= t('requests.form.options.reserves.info', location: item.location.location_name) %></p>
   <% elsif options.reference? %>
-    <%# TODO: add an AtReferenceComponent? needs location %>
+    <p id="reference-option"><%= t('requests.form.options.reference.info', location: item.location.location_name) %></p>
+  <% elsif options.in_house? %>
+    <p id="in-house-option"><%= t('requests.form.options.in_house.info', location: item.location.location_name) %></p>
   <% elsif options.aeon? %>
     <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">
