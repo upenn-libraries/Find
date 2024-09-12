@@ -66,6 +66,10 @@
         <%= electronic_delivery_link %>
       </div>
     </div>
+  <% elsif options.reserves? %>
+    <%# TODO: add an OnReservesComponent? needs location %>
+  <% elsif options.reference? %>
+    <%# TODO: add an AtReferenceComponent? needs location %>
   <% elsif options.aeon? %>
     <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">

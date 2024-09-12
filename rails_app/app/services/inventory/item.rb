@@ -6,6 +6,7 @@ module Inventory
     extend Item::Finders
     include Item::Export
 
+    NON_CIRC_POLICY_CODE = 'Non-circ'
     IN_HOUSE_POLICY_CODE = 'InHouseView'
     NOT_LOANABLE_POLICY = 'Not loanable'
     UNSCANNABLE_MATERIAL_TYPES = %w[RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE AUDIOCASSETTE
@@ -15,7 +16,7 @@ module Inventory
 
     # Delegate specific methods to Alma::BibItem because we override some of the methods provided.
     delegate :item_data, :holding_data, :in_place?, :in_temp_location?, :description, :physical_material_type,
-             :public_note, :call_number, to: :bib_item
+             :public_note, :call_number, :circulation_policy, to: :bib_item
 
     # @param [Alma::BibItem] bib_item
     def initialize(bib_item)
@@ -43,6 +44,7 @@ module Inventory
 
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
+    # TODO: check for Non-circ policy AND user_due_date_policy
     def checkoutable?
       in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
     end
@@ -71,6 +73,12 @@ module Inventory
       return false if location.hsp?
 
       location.aeon? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
+    end
+
+    # Penn uses "Non-circ" in Alma
+    # @return [Boolean]
+    def non_circulating?
+      circulation_policy.include?(NON_CIRC_POLICY_CODE)
     end
 
     # @return [Boolean]
@@ -110,9 +118,12 @@ module Inventory
     # @param user [User, nil] the user object
     # @return [Array<Symbol>]
     def fulfillment_options(user: nil)
+      # TODO: move to non_circulating_reason method or somesuch
       return [:aeon] if location.aeon?
       return [:archives] if location.archives?
       return [:hsp] if location.hsp?
+      return [:reserves] if on_reserve?
+      return [:reference] if at_reference?
       return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
 
       user.courtesy_borrower? ? courtesy_borrower_options : penn_borrower_options(user)
@@ -138,6 +149,7 @@ module Inventory
     # Array of arrays. In each sub-array, the first value is the display value and the
     # second value is the submitted value for backend processing. Intended for use with Rails select form element
     # helpers.
+    # TODO: add in policy here
     # @return [Array]
     def select_label
       if item_data.present?
