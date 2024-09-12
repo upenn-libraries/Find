@@ -67,11 +67,11 @@
       </div>
     </div>
   <% elsif options.reserves? %>
-    <p id="reserves-option"><%= t('requests.form.options.reserves.info', location: item.location.location_name) %></p>
+    <p id="reserves-option" class="alert alert-info mb-3"><%= t('requests.form.options.reserves.info', location: item.location.library_name) %></p>
   <% elsif options.reference? %>
-    <p id="reference-option"><%= t('requests.form.options.reference.info', location: item.location.location_name) %></p>
+    <p id="reference-option" class="alert alert-info mb-3"><%= t('requests.form.options.reference.info', location: item.location.library_name) %></p>
   <% elsif options.in_house? %>
-    <p id="in-house-option"><%= t('requests.form.options.in_house.info', location: item.location.location_name) %></p>
+    <p id="in-house-option" class="alert alert-info mb-3"><%= t('requests.form.options.in_house.info', location: item.location.library_name) %></p>
   <% elsif options.aeon? %>
     <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">
