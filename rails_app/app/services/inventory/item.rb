@@ -44,7 +44,6 @@ module Inventory
 
     # Should the user be able to submit a request for this Item?
     # @return [Boolean]
-    # TODO: check for Non-circ policy AND user_due_date_policy
     def checkoutable?
       in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
     end
