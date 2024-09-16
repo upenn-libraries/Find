@@ -67,27 +67,20 @@
       </div>
     </div>
   <% elsif options.reserves? %>
-    <p id="reserves-option" class="alert alert-info mb-3"><%= t('requests.form.options.reserves.info', location: item.location.library_name) %></p>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :reserves, library: item.location.library_name) %>
   <% elsif options.reference? %>
-    <p id="reference-option" class="alert alert-info mb-3"><%= t('requests.form.options.reference.info', location: item.location.library_name) %></p>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :reference, library: item.location.library_name) %>
   <% elsif options.in_house? %>
-    <p id="in-house-option" class="alert alert-info mb-3"><%= t('requests.form.options.in_house.info', location: item.location.library_name) %></p>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :in_house, library: item.location.library_name) %>
   <% elsif options.aeon? %>
-    <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
-    <div class="request-buttons mt-3">
-      <%= aeon_link %>
-    </div>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :aeon, action_link: aeon_link) %>
   <% elsif options.archives? %>
-    <p id="archives-option" class="alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
-            contact_url: t('urls.requesting_info.archives_contact')) %>
-    </p>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :archives) %>
   <% elsif options.hsp? %>
-    <p id="hsp-option" class="mb-3"><%= t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp')) %></p>
-    <%= link_to t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank' %>
+    <%= render Fulfillment::Options::NonCircComponent.new(
+      type: :hsp, action_link: link_to(t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank')
+    ) %>
   <% else %>
-    <p class="alert alert-info mb-3">
-      <%= t('requests.form.options.none.info') %>
-    </p>
+    <%= render Fulfillment::Options::NonCircComponent.new(type: :unavailable) %>
   <% end %>
 <% end %>
