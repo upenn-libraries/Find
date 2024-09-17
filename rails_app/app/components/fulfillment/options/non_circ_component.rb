@@ -4,12 +4,11 @@ module Fulfillment
   module Options
     # Component to render information about how to access a non-circulating item
     class NonCircComponent < ViewComponent::Base
-      attr_accessor :message, :action, :type, :library
+      attr_accessor :action, :type, :library
 
       def initialize(type:, action_link: nil, library: nil)
         @type = type
         @library = library
-        @message = message_for(type: type)
         @action = action_link
       end
 
@@ -19,6 +18,12 @@ module Fulfillment
         "#{type}-option"
       end
 
+      # Message to display in the alert
+      # @return [String]
+      def message
+        message_for(type: type)
+      end
+
       private
 
       # @param [Symbol, nil] type
@@ -26,6 +31,13 @@ module Fulfillment
       def message_for(type:)
         t('requests.form.options.none.info') unless type
 
+        non_circ_type_message type: type
+      end
+
+      # If we have a specific type of non-circ policy, show a more detailed message
+      # @param [Symbol] type
+      # @return [String]
+      def non_circ_type_message(type:)
         case type
         when :hsp then t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp'))
         when :archives

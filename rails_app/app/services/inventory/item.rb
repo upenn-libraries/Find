@@ -5,12 +5,7 @@ module Inventory
   class Item
     extend Item::Finders
     include Item::Export
-
-    NON_CIRC_POLICY_CODE = 'Non-circ'
-    IN_HOUSE_POLICY_CODE = 'InHouseView'
-    NOT_LOANABLE_POLICY = 'Not loanable'
-    UNSCANNABLE_MATERIAL_TYPES = %w[RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE AUDIOCASSETTE
-                                    VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD LPTOP EQUIP OTHER AUDIOVM].freeze
+    include Item::Status
 
     attr_reader :bib_item
 
@@ -23,11 +18,15 @@ module Inventory
       @bib_item = bib_item
     end
 
-    # Get available requesting options
-    # @param user [User, nil]
-    # @return [Array<Symbol>]
-    def request_options(user: nil)
-      Item::RequestOptions.new(item: self, user: user).all
+    # Return item identifier (pid in Alma parlance)
+    # @return [String]
+    def id
+      item_data['pid']
+    end
+
+    # @return [String]
+    def holding_id
+      holding_data['holding_id']
     end
 
     # Location object containing location details and helper methods.
@@ -37,70 +36,14 @@ module Inventory
       @location ||= create_location
     end
 
-    # @return [Hash]
-    def bib_data
-      @bib_item.item.fetch('bib_data', {})
-    end
-
-    # Return item identifier
-    def id
-      item_data['pid']
-    end
-
-    def holding_id
-      holding_data['holding_id']
-    end
-
-    # Returns true if record is marked as a boundwith.
-    def boundwith?
-      @bib_item.item.fetch('boundwith', false)
-    end
-
-    # Should the user be able to submit a request for this Item?
-    # @return [Boolean]
-    def checkoutable?
-      in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
-    end
-
     # @return [String]
     def user_due_date_policy
       item_data['due_date_policy']
     end
 
-    # This is tailored to the user_id, if provided
-    # @return [Boolean]
-    def loanable?
-      !user_due_date_policy&.include? NOT_LOANABLE_POLICY
-    end
-
-    # Is the item able to be scanned?
-    # @return [Boolean]
-    def scannable?
-      return false if location.hsp?
-
-      location.aeon? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
-    end
-
-    # Penn uses "Non-circ" in Alma
-    # @return [Boolean]
-    def non_circulating?
-      circulation_policy.include?(NON_CIRC_POLICY_CODE)
-    end
-
-    # @return [Boolean]
-    def on_reserve?
-      (item_data.dig('policy', 'value') == 'reserve') || (holding_data.dig('temp_policy', 'value') == 'reserve')
-    end
-
-    # @return [Boolean]
-    def at_reference?
-      (item_data.dig('policy', 'value') == 'reference') || (holding_data.dig('temp_policy', 'value') == 'reference')
-    end
-
-    # @return [Boolean]
-    def in_house_use_only?
-      item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||
-        holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
+    # @return [Hash]
+    def bib_data
+      bib_item.item.fetch('bib_data', {})
     end
 
     # @return [String]
@@ -113,6 +56,7 @@ module Inventory
       item_data['enumeration_b']
     end
 
+    # Determine the reason why this item is non-circulating based on item policy and location attributes
     # @return [Symbol, nil]
     def restricted_circ_type
       if location.aeon?
@@ -129,25 +73,14 @@ module Inventory
     # @param raw_policy [String]
     # @return [String]
     def user_policy_display(raw_policy)
-      if (raw_policy == NOT_LOANABLE_POLICY) && restricted_circ_type.blank?
+      if (raw_policy == NOT_LOANABLE_POLICY_CODE) && restricted_circ_type.blank?
         I18n.t('requests.form.options.restricted_access')
-      elsif on_reserve?
-        I18n.t('requests.form.options.reserves.label')
-      elsif at_reference?
-        I18n.t('requests.form.options.reference.label')
-      elsif in_house_use_only?
-        I18n.t('requests.form.options.in_house.label')
-      elsif !checkoutable?
-        I18n.t('requests.form.options.none.label')
+      elsif on_reserve? then I18n.t('requests.form.options.reserves.label')
+      elsif at_reference? then I18n.t('requests.form.options.reference.label')
+      elsif in_house_use_only? then I18n.t('requests.form.options.in_house.label')
+      elsif !checkoutable? then I18n.t('requests.form.options.none.label')
       else
-        case raw_policy
-        when 'End of Year'
-          'Return by End of Year'
-        when 'End of Term'
-          'Return by End of Term'
-        else
-          raw_policy
-        end
+        raw_policy_for_display raw_policy: raw_policy
       end
     end
 
@@ -160,6 +93,7 @@ module Inventory
         [[description, user_policy_display(user_due_date_policy), physical_material_type['desc'], public_note,
           location.library_name].compact_blank.join(' - '), item_data['pid']]
       else
+        # Fake items have no item data, are special collections and therefore can be safely labeled as restricted circ
         [[call_number, I18n.t('requests.form.options.restricted_access')].compact_blank.join(' - '), 'no-item']
       end
     end
@@ -175,6 +109,16 @@ module Inventory
 
       Location.new(library_code: library['value'], library_name: library['desc'],
                    location_code: location['value'], location_name: location['desc'])
+    end
+
+    # Turn "End of Term" and "End of Year" into "Return by End of Year" so this due date policy makes sense in
+    # our select option display context.
+    # @param [String, nil] raw_policy
+    # @return [String]
+    def raw_policy_for_display(raw_policy:)
+      return nil if raw_policy.blank?
+
+      raw_policy.starts_with?('End of') ? "Return by #{raw_policy}" : raw_policy
     end
   end
 end
