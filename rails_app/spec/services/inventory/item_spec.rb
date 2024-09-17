@@ -279,7 +279,7 @@ describe Inventory::Item do
 
   describe '#fulfillment_options' do
     let(:user) { create(:user) }
-    let(:options) { item.fulfillment_options(user: user) }
+    let(:options) { item.request_options(user: user) }
     let(:item) { build :item, :checkoutable }
 
     it 'returns an array of options' do

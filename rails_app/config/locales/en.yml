@@ -381,7 +381,7 @@ en:
         in_house:
           info: "This item can be consulted only for a limited time and by visiting %{library}."
           label: 'On Site Use Only'
-        none:
+        unavailable:
           info: 'This item is unavailable from the Penn libraries.'
           label: 'Currently Unavailable'
       request_item: 'Request an item'

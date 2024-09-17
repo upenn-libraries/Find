@@ -353,7 +353,7 @@ describe 'Catalog Show Page' do
         let(:user) { create(:user, :courtesy_borrower) }
 
         it 'shows message saying the item is unavailable' do
-          expect(page).to have_content I18n.t('requests.form.options.none.info')
+          expect(page).to have_content I18n.t('requests.form.options.unavailable.info')
         end
       end
     end

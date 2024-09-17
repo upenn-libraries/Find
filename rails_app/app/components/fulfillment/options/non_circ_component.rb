@@ -29,7 +29,7 @@ module Fulfillment
       # @param [Symbol, nil] type
       # @return [String]
       def message_for(type:)
-        t('requests.form.options.none.info') unless type
+        t('requests.form.options.unavailable.info') unless type
 
         non_circ_type_message type: type
       end

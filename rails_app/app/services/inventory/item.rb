@@ -36,6 +36,13 @@ module Inventory
       @location ||= create_location
     end
 
+    # Get available requesting options
+    # @param user [User, nil]
+    # @return [Array<Symbol>]
+    def request_options(user: nil)
+      RequestOptions.new(item: self, user: user).all
+    end
+
     # @return [String]
     def user_due_date_policy
       item_data['due_date_policy']
@@ -78,7 +85,7 @@ module Inventory
       elsif on_reserve? then I18n.t('requests.form.options.reserves.label')
       elsif at_reference? then I18n.t('requests.form.options.reference.label')
       elsif in_house_use_only? then I18n.t('requests.form.options.in_house.label')
-      elsif !checkoutable? then I18n.t('requests.form.options.none.label')
+      elsif !checkoutable? then I18n.t('requests.form.options.unavailable.label')
       else
         raw_policy_for_display raw_policy: raw_policy
       end
