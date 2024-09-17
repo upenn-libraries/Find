@@ -373,13 +373,13 @@ en:
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
         reserves:
-          info: "This item cannot be requested because it is being held in reserves at %{location}."
+          info: "This item can be retrieved for a limited time by visiting the reserves desk at %{library}."
           label: 'On Reserve'
         reference:
-          info: "This item can be retrieved for a limited time by visiting the reference desk at %{location}"
+          info: "This item can be retrieved for a limited time by visiting the reference desk at %{library}"
           label: 'At Reference'
         in_house:
-          info: "This item can be consulted only for a limited time and by visiting %{location}."
+          info: "This item can be consulted only for a limited time and by visiting %{library}."
           label: 'On Site Use Only'
         none:
           info: 'This item is unavailable from the Penn libraries.'

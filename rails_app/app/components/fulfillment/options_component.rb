@@ -10,7 +10,7 @@ module Fulfillment
     def initialize(user:, item:)
       @user = user
       @item = item
-      @options = item.fulfillment_options(user: user).inquiry
+      @options = item.request_options(user: user).inquiry
     end
 
     # Returns true if at least one delivery option is available.

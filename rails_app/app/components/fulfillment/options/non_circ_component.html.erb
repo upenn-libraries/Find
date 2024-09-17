@@ -1,0 +1,8 @@
+<p id="<%= id %>" class="alert alert-info mb-3">
+  <%= message %>
+  <%- if action.present? %>
+    <div class="request-buttons mt-3">
+      <%= action %>
+    </div>
+  <% end %>
+</p>

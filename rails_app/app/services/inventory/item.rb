@@ -23,6 +23,20 @@ module Inventory
       @bib_item = bib_item
     end
 
+    # Get available requesting options
+    # @param user [User, nil]
+    # @return [Array<Symbol>]
+    def request_options(user: nil)
+      Item::RequestOptions.new(item: self, user: user).all
+    end
+
+    # Location object containing location details and helper methods.
+    # @see #create_location
+    # @return [Inventory::Location]
+    def location
+      @location ||= create_location
+    end
+
     # @return [Hash]
     def bib_data
       @bib_item.item.fetch('bib_data', {})
@@ -57,13 +71,6 @@ module Inventory
     # @return [Boolean]
     def loanable?
       !user_due_date_policy&.include? NOT_LOANABLE_POLICY
-    end
-
-    # Location object containing location details and helper methods.
-    # @see #create_location
-    # @return [Inventory::Location]
-    def location
-      @location ||= create_location
     end
 
     # Is the item able to be scanned?
@@ -106,22 +113,6 @@ module Inventory
       item_data['enumeration_b']
     end
 
-    # Return an array of fulfillment options for a given item and user. Certain requesting options (ie Aeon) are
-    # available to non-logged in users.
-    #
-    # @param user [User, nil] the user object
-    # @return [Array<Symbol>]
-    def fulfillment_options(user: nil)
-      option = restricted_circ_type
-      return Array.wrap(option) if option.present?
-
-      return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
-
-      return courtesy_borrower_options if user.courtesy_borrower?
-
-      penn_borrower_options(user)
-    end
-
     # @return [Symbol, nil]
     def restricted_circ_type
       if location.aeon?
@@ -132,23 +123,6 @@ module Inventory
       elsif at_reference? then :reference
       elsif in_house_use_only? then :in_house
       end
-    end
-
-    # Fulfillment options available for Penn users.
-    # @param user [User]
-    # @return [Array<Symbol>]
-    def penn_borrower_options(user)
-      options = [Fulfillment::Request::Options::MAIL]
-      options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
-      options << Fulfillment::Request::Options::OFFICE if user.faculty_express?
-      options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-      options
-    end
-
-    # Fulfillment options available for courtesy borrowers. Courtesy borrowers can't make inter-library loan requests.
-    # @return [Array<Symbol>]
-    def courtesy_borrower_options
-      checkoutable? ? [Fulfillment::Request::Options::PICKUP] : []
     end
 
     # Prepare a "due date policy" value for display
