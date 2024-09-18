@@ -42,7 +42,7 @@ module Fulfillment
 
     def fulfillment_description
       case request.delivery
-      when Request::Options::PICKUP
+      when Request::Options::PICKUP, Request::Options::ILL_PICKUP
         I18n.t('fulfillment.outcome.email.pickup', pickup_location: human_readable_pickup_location)
       else
         I18n.t(request.delivery, scope: 'fulfillment.outcome.email')
