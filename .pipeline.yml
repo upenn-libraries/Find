@@ -30,6 +30,10 @@ stages:
   - remove_tmp_registry
   - deploy
 
+workflow:
+  rules:
+  - when: always 
+
 # -- Start - build and push base image
 build_and_push_base_app_image:
   stage: build_and_push:tmp_base_image
