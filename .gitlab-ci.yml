@@ -15,7 +15,8 @@ secret_detection:
     expire_in: 1 day
   tags:
     - build
-  when: always
+  rules:
+  - when: always
 
 main:
   stage: main_pipeline
