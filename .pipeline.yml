@@ -17,7 +17,6 @@ include:
     ref: "master"
     file:
       - ".trivy_container_scanning.yml"
-  - template: "Workflows/MergeRequest-Pipelines.gitlab-ci.yml"
 
 stages:
   - build_and_push:tmp_base_image
