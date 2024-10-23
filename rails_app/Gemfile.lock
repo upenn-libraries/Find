@@ -504,7 +504,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  alma (~> 0.6.1)
+  alma
   blacklight!
   blacklight-ris
   bootsnap
