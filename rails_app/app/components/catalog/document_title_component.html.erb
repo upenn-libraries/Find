@@ -1,8 +1,8 @@
 <%# Copied template from Blacklight v8.3.0 to add display of vernacular title field %>
 
-<h1 class="record-title">
+<h2 class="record-title">
   <span itemprop="name"><%= @document.detailed_title %></span>
-</h1>
-<% if @document.alternate_title.present? %>
-  <p class="record-alternate-title"><%= @document.alternate_title %></p>
-<% end %>
+  <% if @document.alternate_title.present? %>
+    <p class="record-alternate-title"><%= @document.alternate_title %></p>
+  <% end %>
+</h2>
