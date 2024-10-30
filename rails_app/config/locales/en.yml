@@ -55,18 +55,21 @@ en:
           description: 'Union catalog listing 540 million records held by member institutions'
       archival:
         title: 'Additional archival materials'
-        jstor:
-          title: 'JSTOR'
-          description: 'Image collections from Penn and other institutions'
         colenda:
           title: 'Colenda Digital Repository'
           description: 'Digitized and born-digital material'
+        finding_aids:
+          title: 'Finding Aids | Philadelphia Area Archives'
+          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region'
+        hathi:
+          title: 'HathiTrust'
+          description: 'A partnership of academic and research institutions offering millions of digitized titles from libraries around the world'
+        jstor:
+          title: 'JSTOR Images'
+          description: 'Image collections from Penn and other institutions'
         openn:
           title: 'OPenn'
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
-        finding_aids:
-          title: 'Philadelphia Area Archives'
-          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region.'
   account:
     breadcrumbs:
       root: 'Find'
