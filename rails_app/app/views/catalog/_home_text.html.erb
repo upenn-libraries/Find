@@ -10,7 +10,9 @@
             <span class="fw-bolder"><%= t('home.info.discover.title') %></span> <%= t('home.info.discover.description') %>
           </p>
           <p class="card-text">
-            <span class="fw-bolder"><%= t('home.info.manage.title') %></span> <%= t('home.info.manage.description') %>
+            <span class="fw-bolder">
+              <%= link_to t('home.info.manage.title'), account_path %>
+            </span> <%= t('home.info.manage.description') %>
           </p>
         </div>
       </div>
