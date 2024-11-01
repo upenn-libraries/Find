@@ -181,29 +181,36 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field :creator_ss, label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
+    config.add_index_field :creator_ss,
+                           label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
                            facet_target: :creator_facet, facet_map: :creator_show_facet_map
-    config.add_show_field :creator_show, label: I18n.t('show.creator.main'), accessor: :marc,
+    config.add_show_field :creator_show,
+                          label: I18n.t('show.creator.main'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                           facet_map: :creator_show_facet_map
-    config.add_show_field :creator_conference_detail_show, label: I18n.t('show.creator.conference_detail'),
-                          accessor: :marc, component: Catalog::FacetLinkComponent,
-                          facet_target: :creator_facet,
+    config.add_show_field :creator_conference_detail_show,
+                          label: I18n.t('show.creator.conference_detail'),
+                          accessor: :marc, component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                           facet_map: :creator_conference_detail_show_facet_map
-    config.add_show_field :series_show, label: I18n.t('show.series.main'), accessor: :marc,
+    config.add_show_field :series_show,
+                          label: I18n.t('show.series.main'), accessor: :marc,
                           component: Catalog::QueryLinkComponent, search_target: :title_search,
                           query_map: :series_show_query_map
-    config.add_show_field :title_standardized_show, label: I18n.t('show.title.standardized'), accessor: :marc,
+    config.add_show_field :title_standardized_show,
+                          label: I18n.t('show.title.standardized'), accessor: :marc,
                           component: Catalog::QueryLinkComponent, search_target: :title_search
-    config.add_show_field :subject_show, label: I18n.t('show.subject.all'), accessor: :marc,
+    config.add_show_field :subject_show,
+                          label: I18n.t('show.subject.all'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
-    config.add_show_field :subject_medical_show, label: I18n.t('show.subject.medical'), accessor: :marc,
+    config.add_show_field :subject_medical_show,
+                          label: I18n.t('show.subject.medical'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
-    config.add_show_field :subject_local_show, label: I18n.t('show.subject.local'), accessor: :marc,
+    config.add_show_field :subject_local_show,
+                          label: I18n.t('show.subject.local'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
-    config.add_show_field :creator_contributor_show, label: I18n.t('show.creator.contributor'), accessor: :marc,
-                          component: Catalog::FacetLinkComponent,
-                          facet_target: :creator_facet
+    config.add_show_field :creator_contributor_show,
+                          label: I18n.t('show.creator.contributor'), accessor: :marc,
+                          component: Catalog::FacetLinkComponent, facet_target: :creator_facet
 
     config.add_index_field :title_alternate_show, accessor: :marc
     config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
