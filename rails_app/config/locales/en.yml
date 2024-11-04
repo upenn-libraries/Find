@@ -427,7 +427,7 @@ en:
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
-    harmful_language_statement_html: 'As you encounter harmful or offensive language and have questions or suggestions, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a>. More information at <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>.'
+    harmful_language_statement_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'
