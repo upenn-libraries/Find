@@ -66,11 +66,11 @@ module Inventory
       library_code == LIBRA
     end
 
-    # Return location's Aeon sublocation code.
+    # Return location's Aeon sublocation code from PennMARC locations config file
     #
     # @return [String]
     def aeon_sublocation
-      Settings.locations.aeon_sublocation_map[code]
+      PennMARC::Mappers.location[code][:aeon]
     end
 
     # Return location's Aeon site code.

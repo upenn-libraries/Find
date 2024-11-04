@@ -16,7 +16,7 @@ class Mappings
     # Return all locations marked as aeon in the locations file
     # @return [Array<String>]
     def aeon_locations
-      @aeon_locations = locations.filter_map { |code, details| details[:aeon] ? code.to_s : nil }
+      @aeon_locations = locations.filter_map { |code, details| details[:aeon].present? ? code.to_s : nil }
     end
 
     # @return [Array]
