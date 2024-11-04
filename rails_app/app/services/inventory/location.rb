@@ -70,7 +70,7 @@ module Inventory
     #
     # @return [String]
     def aeon_sublocation
-      PennMARC::Mappers.location[code][:aeon]
+      PennMARC::Mappers.location.dig code, :aeon
     end
 
     # Return location's Aeon site code.
