@@ -5,12 +5,15 @@ namespace :tools do
   task start: :environment do
     system('docker compose up -d')
     sleep 2 # give services some time to start up before proceeding
-    if SolrTools.collection_exists? 'find-development'
-      puts 'Development collection exists'
-    else
-      puts 'Setting up basic auth for Solr...'
-      system('docker compose exec solrcloud solr auth enable -credentials catalog:catalog')
-      begin
+    begin
+      if Settings.solr_url.include?('catalog-manager')
+        puts 'Our sensors detect that you are using a solr_url setting for a deployed Solr instance.'
+        puts 'Skipping Solr service setup (though a Solr Docker container will run)'
+      elsif SolrTools.collection_exists? 'find-development'
+        puts 'Development collection exists'
+      else
+        puts 'Setting up basic auth for Solr...'
+        system('docker compose exec solrcloud solr auth enable -credentials catalog:catalog')
         latest_configset_file = Rails.root.join('solr').glob('configset_*.zip').max_by { |f| File.mtime(f) }
         raise StandardError, 'Configset file missing' unless latest_configset_file
 
@@ -22,12 +25,12 @@ namespace :tools do
         SolrTools.create_collection 'find-development', configset_name
         SolrTools.create_collection 'find-test', configset_name
         Rake::Task['tools:index_sample_file'].execute
-      rescue StandardError => e
-        puts "Problem configuring Solr: #{e.message}"
-        puts 'Stopping services'
-        system('docker compose stop')
-        next # rake for early return
       end
+    rescue StandardError => e
+      puts "Problem configuring Solr: #{e.message}"
+      puts 'Stopping services'
+      system('docker compose stop')
+      next # rake for early return
     end
     begin
       ActiveRecord::Base.connection

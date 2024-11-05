@@ -175,7 +175,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'displays the alternate title' do
-      within('.document-main-section') do
+      within('.record-title') do
         expect(page).to have_selector '.record-alternate-title'
       end
     end

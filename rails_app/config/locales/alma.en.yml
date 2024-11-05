@@ -8,7 +8,7 @@ en:
             description: 'This item is stored in our repository but can be checked out.'
           circulates:
             label: 'Available'
-            description: 'This item can be checked out or accessed by visiting the library.'
+            description: 'This item is available for access.'
           unrequestable:
             label: 'Available in person'
             description: 'This item cannot be requested but can be accessed at the library.'
