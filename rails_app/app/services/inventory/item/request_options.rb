@@ -28,16 +28,14 @@ module Inventory
         penn_borrower_options(user)
       end
 
+      private
+
       # Fulfillment options available for Penn users.
       # @param user [User]
       # @return [Array<Symbol>]
       def penn_borrower_options(user)
         options = [Fulfillment::Request::Options::MAIL]
-        options << if item.checkoutable?
-                     Fulfillment::Request::Options::PICKUP
-                   else
-                     Fulfillment::Request::Options::ILL_PICKUP
-                   end
+        options << Fulfillment::Request::Options::PICKUP if item.checkoutable?
         options << Fulfillment::Request::Options::OFFICE if user.faculty_express?
         options << Fulfillment::Request::Options::ELECTRONIC if item.scannable?
         options

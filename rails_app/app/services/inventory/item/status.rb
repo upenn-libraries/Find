@@ -22,7 +22,8 @@ module Inventory
       # to provide means for users to check them out.
       # @return [Boolean]
       def checkoutable?
-        in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
+        in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only? &&
+          !non_circulating?
       end
 
       # This is tailored to the user_id, if provided. Without a user_id sent in the API request for the item,

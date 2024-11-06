@@ -72,7 +72,7 @@ module Inventory
       elsif location.hsp? then :hsp
       elsif on_reserve? then :reserves
       elsif at_reference? then :reference
-      elsif in_house_use_only? then :in_house
+      elsif non_circulating? || in_house_use_only? || !loanable? then :noncirc
       end
     end
 
@@ -80,12 +80,10 @@ module Inventory
     # @param raw_policy [String]
     # @return [String]
     def user_policy_display(raw_policy)
-      if (raw_policy == NOT_LOANABLE_POLICY_CODE) && restricted_circ_type.blank?
-        I18n.t('requests.form.options.restricted_access')
-      elsif on_reserve? then I18n.t('requests.form.options.reserves.label')
-      elsif at_reference? then I18n.t('requests.form.options.reference.label')
-      elsif in_house_use_only? then I18n.t('requests.form.options.in_house.label')
-      elsif !checkoutable? then I18n.t('requests.form.options.unavailable.label')
+      case restricted_circ_type
+      when :reserves then I18n.t('requests.form.options.reserves.label')
+      when :reference then I18n.t('requests.form.options.reference.label')
+      when :noncirc then I18n.t('requests.form.options.in_house.label')
       else
         raw_policy_for_display raw_policy: raw_policy
       end
@@ -120,11 +118,9 @@ module Inventory
 
     # Turn "End of Term" and "End of Year" into "Return by End of Year" so this due date policy makes sense in
     # our select option display context.
-    # @param [String, nil] raw_policy
+    # @param [String] raw_policy
     # @return [String]
     def raw_policy_for_display(raw_policy:)
-      return nil if raw_policy.blank?
-
       raw_policy.starts_with?('End of') ? "Return by #{raw_policy}" : raw_policy
     end
   end
