@@ -35,7 +35,6 @@ class SolrDocument
   end
 
   # Return mms_id of host record if document is representing a boundwith.
-  #
   # @return [String, nil]
   def host_record_id
     fetch(:host_record_id_ss, []).first
@@ -51,5 +50,11 @@ class SolrDocument
   # @return [String, nil]
   def detailed_title
     marc(:title_detailed_show)
+  end
+
+  # String date and time that the record was last indexed
+  # @return [String, nil]
+  def last_indexed
+    fetch(:indexed_date_s, []).first
   end
 end
