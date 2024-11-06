@@ -55,6 +55,6 @@ class SolrDocument
   # String date and time that the record was last indexed
   # @return [String, nil]
   def last_indexed
-    fetch(:indexed_date_s, []).first
+    fetch(:indexed_date_s, nil)
   end
 end
