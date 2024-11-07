@@ -96,7 +96,7 @@ module Illiad
 
     # @return [Boolean]
     def loan?
-      request_type == LOAN && (status != DELIVERED_TO_WEB)
+      !scan?
     end
 
     # @return [Boolean]
@@ -104,6 +104,7 @@ module Illiad
       data[:ItemInfo1] == Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL
     end
 
+    # Some scan requests never get toggled to "Article" status but do get the published to web status
     # @return [Boolean]
     def scan?
       (request_type == ARTICLE) || (request_type == LOAN && status == DELIVERED_TO_WEB)

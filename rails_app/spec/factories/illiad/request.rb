@@ -5,7 +5,7 @@ FactoryBot.define do
     sequence(:TransactionNumber) { |n| n }
     add_attribute(:Username) { 'testuser' }
     add_attribute(:ProcessType) { 'Borrowing' }
-    add_attribute(:RequestType) { 'Article' }
+    add_attribute(:RequestType) { Illiad::Request::ARTICLE }
     add_attribute(:TransactionStatus) { 'Jim MW Processing' }
     add_attribute(:TransactionDate) { '2024-03-24T10:06:14.653' }
 
@@ -13,7 +13,7 @@ FactoryBot.define do
     initialize_with { Illiad::Request.new(**attributes) }
 
     trait :loan do
-      add_attribute(:RequestType) { 'Loan' }
+      add_attribute(:RequestType) { Illiad::Request::LOAN }
       add_attribute(:LoanTitle) { 'Autobiography' }
       add_attribute(:LoanAuthor) { 'Random, Author' }
     end
@@ -36,7 +36,7 @@ FactoryBot.define do
     end
 
     trait :article_with_pdf_available do
-      add_attribute(:RequestType) { 'Article' }
+      add_attribute(:RequestType) { Illiad::Request::ARTICLE }
       add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
     end
 
