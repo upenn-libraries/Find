@@ -1,11 +1,6 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
     <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
-      <% if options.ill_pickup? %>
-        <p class="alert alert-info mb-3">
-          <%= t('requests.form.options.only_ill_requestable') %>
-        </p>
-      <% end %>
       <fieldset>
         <legend class="h6"> <%= t('requests.form.options.label') %></legend>
         <ul class="list-group">
@@ -67,20 +62,21 @@
       </div>
     </div>
   <% elsif options.reserves? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :reserves, library: item.location.library_name) %>
+    <%= render Fulfillment::Options::OnSiteComponent.new(type: :reserves, library: item.location.library_name) %>
   <% elsif options.reference? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :reference, library: item.location.library_name) %>
-  <% elsif options.in_house? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :in_house, library: item.location.library_name) %>
+    <%= render Fulfillment::Options::OnSiteComponent.new(type: :reference, library: item.location.library_name,
+                                                         action_link: link_to('Plan your Visit')) %>
+  <% elsif options.noncirc? %>
+    <%= render Fulfillment::Options::OnSiteComponent.new(type: :in_house, library: item.location.library_name) %>
   <% elsif options.aeon? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :aeon, action_link: aeon_link) %>
+    <%= render Fulfillment::Options::OnSiteComponent.new(type: :aeon, action_link: aeon_link) %>
   <% elsif options.archives? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :archives) %>
+    <%= render Fulfillment::Options::OnSiteComponent.new(type: :archives) %>
   <% elsif options.hsp? %>
-    <%= render Fulfillment::Options::NonCircComponent.new(
+    <%= render Fulfillment::Options::OnSiteComponent.new(
       type: :hsp, action_link: link_to(t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank')
     ) %>
   <% else %>
-    <%= render Fulfillment::Options::NonCircComponent.new(type: :unavailable) %>
+    <%= render Fulfillment::Options::UnavailableComponent.new(item: item) %>
   <% end %>
 <% end %>

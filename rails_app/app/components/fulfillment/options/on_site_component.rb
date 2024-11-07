@@ -3,7 +3,7 @@
 module Fulfillment
   module Options
     # Component to render information about how to access a non-circulating item
-    class NonCircComponent < ViewComponent::Base
+    class OnSiteComponent < ViewComponent::Base
       attr_accessor :action, :type, :library
 
       def initialize(type:, action_link: nil, library: nil)

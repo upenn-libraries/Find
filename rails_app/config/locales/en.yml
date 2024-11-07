@@ -379,7 +379,7 @@ en:
           info: "This item can be retrieved for a limited time by visiting the reserves desk at %{library}."
           label: 'On Reserve'
         reference:
-          info: "This item can be retrieved for a limited time by visiting the reference desk at %{library}"
+          info: "This item can be retrieved for a limited time by visiting the reference desk at %{library}."
           label: 'At Reference'
         in_house:
           info: "This item can be consulted only for a limited time and by visiting %{library}."
@@ -387,7 +387,7 @@ en:
         unavailable:
           info: 'This item is unavailable from the Penn libraries.'
           label: 'Currently Unavailable'
-      request_item: 'Request an item'
+      request_item: 'See Options'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'

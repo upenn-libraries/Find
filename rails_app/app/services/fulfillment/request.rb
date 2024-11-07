@@ -13,6 +13,7 @@ module Fulfillment
       OFFICE = :office
       PICKUP = :pickup
       ILL_PICKUP = :ill_pickup
+      NONCIRC = :noncirc
     end
 
     attr_reader :patron, :requester, :params, :delivery, :pickup_location, :endpoint
