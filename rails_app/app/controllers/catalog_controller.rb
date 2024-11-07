@@ -269,7 +269,9 @@ class CatalogController < ApplicationController
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
     config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
-    config.add_show_field :note_provenance_show, label: I18n.t('show.notes.provenance'), accessor: :marc
+    config.add_show_field :note_provenance_show,
+                          label: I18n.t('show.notes.provenance'), accessor: :marc,
+                          component: Catalog::QueryLinkComponent, search_target: :subject_search
     config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'),
                                                               accessor: :marc
