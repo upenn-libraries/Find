@@ -35,6 +35,11 @@ FactoryBot.define do
       add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
     end
 
+    trait :article_with_pdf_available do
+      add_attribute(:RequestType) { 'Article' }
+      add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
+    end
+
     trait :cancelled do
       add_attribute(:TransactionStatus) { Illiad::Request::CANCELLED }
     end

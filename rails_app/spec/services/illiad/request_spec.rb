@@ -144,8 +144,16 @@ describe Illiad::Request do
       end
     end
 
-    context 'with a request to scan' do
+    context 'with a request to scan and no web delivery status' do
       let(:request) { build(:illiad_request, :scan) }
+
+      it 'returns false' do
+        expect(request.loan?).to be false
+      end
+    end
+
+    context 'with a request to scan but with web delivery status' do
+      let(:request) { build(:illiad_request, :article_with_pdf_available) }
 
       it 'returns false' do
         expect(request.loan?).to be false
@@ -173,6 +181,14 @@ describe Illiad::Request do
     context 'with a request to loan' do
       it 'returns false' do
         expect(request.scan?).to be false
+      end
+    end
+
+    context 'with a request to loan and web delivery status' do
+      let(:request) { build(:illiad_request, :article_with_pdf_available) }
+
+      it 'returns true' do
+        expect(request.scan?).to be true
       end
     end
 

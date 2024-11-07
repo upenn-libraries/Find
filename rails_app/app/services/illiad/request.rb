@@ -96,7 +96,7 @@ module Illiad
 
     # @return [Boolean]
     def loan?
-      request_type == LOAN
+      request_type == LOAN && (status != DELIVERED_TO_WEB)
     end
 
     # @return [Boolean]
@@ -106,7 +106,7 @@ module Illiad
 
     # @return [Boolean]
     def scan?
-      request_type == ARTICLE
+      (request_type == ARTICLE) || (request_type == LOAN && status == DELIVERED_TO_WEB)
     end
   end
 end
