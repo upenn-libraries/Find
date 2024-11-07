@@ -79,7 +79,7 @@ describe Shelf::Entry::IllTransaction do
       let(:illiad_transaction) { create(:illiad_request, :cancelled) }
 
       it 'returns expected status' do
-        expect(transaction.status).to eql Illiad::Request::CANCELLED
+        expect(transaction.status).to eql Shelf::Entry::IllTransaction::Status::CANCELLED
       end
     end
   end
@@ -188,6 +188,70 @@ describe Shelf::Entry::IllTransaction do
   describe '#ill_transaction?' do
     it 'returns true' do
       expect(transaction.ill_transaction?).to be true
+    end
+  end
+
+  describe '#loan?' do
+    context 'with request to loan' do
+      it 'returns true' do
+        expect(transaction.loan?).to be true
+      end
+    end
+
+    context 'with a request to scan and no web delivery status' do
+      let(:illiad_transaction) { build(:illiad_request, :scan) }
+
+      it 'returns false' do
+        expect(transaction.loan?).to be false
+      end
+    end
+
+    context 'with a request to scan but with web delivery status' do
+      let(:illiad_transaction) { build(:illiad_request, :article_with_pdf_available) }
+
+      it 'returns false' do
+        expect(transaction.loan?).to be false
+      end
+    end
+  end
+
+  describe '#books_by_mail?' do
+    context 'with a books by mail request' do
+      let(:illiad_transaction) { build(:illiad_request, :books_by_mail) }
+
+      it 'returns true for a books by mail request' do
+        expect(transaction.books_by_mail?).to be true
+      end
+    end
+
+    context 'with a non books by mail request' do
+      it 'returns true for a books by mail request' do
+        expect(transaction.books_by_mail?).to be false
+      end
+    end
+  end
+
+  describe '#scan?' do
+    context 'with a request to loan' do
+      it 'returns false' do
+        expect(transaction.scan?).to be false
+      end
+    end
+
+    context 'with a request to loan and web delivery status' do
+      let(:illiad_transaction) { build(:illiad_request, :article_with_pdf_available) }
+
+      it 'returns true' do
+        expect(transaction.scan?).to be true
+      end
+    end
+
+    context 'with a request to scan' do
+      let(:illiad_transaction) { build(:illiad_request, :scan) }
+
+      it 'returns false' do
+        expect(transaction.scan?).to be true
+      end
     end
   end
 end
