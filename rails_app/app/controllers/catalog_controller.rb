@@ -183,7 +183,9 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
 
     # this field above all the clickable fields
-    config.add_show_field :format_facet, label: I18n.t('results.format')
+    config.add_show_field :format_facet,
+                          label: I18n.t('results.format'), accessor: :marc,
+                          component: Catalog::FacetLinkComponent, facet_target: :format_facet
     config.add_show_field :creator_show,
                           label: I18n.t('show.creator.main'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
