@@ -184,7 +184,7 @@ class CatalogController < ApplicationController
 
     # this field above all the clickable fields
     config.add_show_field :format_facet,
-                          label: I18n.t('results.format'), accessor: :marc,
+                          label: I18n.t('results.format'),
                           component: Catalog::FacetLinkComponent, facet_target: :format_facet
     config.add_show_field :creator_show,
                           label: I18n.t('show.creator.main'), accessor: :marc,
