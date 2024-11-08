@@ -59,8 +59,10 @@ en:
           title: 'Colenda Digital Repository'
           description: 'Digitized and born-digital material'
         finding_aids:
-          title: 'Finding Aids | Philadelphia Area Archives'
-          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region'
+          title: 'Finding Aids'
+          description: 'Penn special collections and archival material as well as collections at repositories in the greater Philadelphia region'
+        philly_archives:
+          title: 'Philadelphia Area Archives'
         hathi:
           title: 'HathiTrust'
           description: 'A partnership of academic and research institutions offering millions of digitized titles from libraries around the world'
