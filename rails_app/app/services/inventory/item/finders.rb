@@ -9,28 +9,30 @@ module Inventory
       # @param holding_id [String] the Alma holding_id
       # @param item_id [String] the Alma item_pid
       # @return [Inventory::Item]
-      def find(mms_id:, holding_id:, item_id:)
+      def find(mms_id:, holding_id:, item_id:, alma_user: nil)
         raise ArgumentError, 'Insufficient identifiers set' unless mms_id && holding_id && item_id
 
-        item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_id)
+        item = Alma::BibItem.find_one(mms_id: mms_id, holding_id: holding_id, item_pid: item_id,
+                                      options: { expand: 'due_date_policy', user_id: alma_user }.compact_blank)
         new(item)
       end
 
       # Return an array of items for a given mms_id and holding_id, fake an item if a holding has no items
-      # @param mms_id [String] the Alma mms_id
+      # @param mms_id [ActionController::Parameter, String] the Alma mms_id
       # @param holding_id [String] the Alma holding_id
       # @param host_record_id [String, nil] the host_record_id if record is boundwith
       # @param location_code [String, nil] if the item is in a temp location, this is the location code so we can
       #                                    attempt to filter out the relevant items from the list of all items
       # @return [Array<Inventory::Item>]
-      def find_all(mms_id:, holding_id:, host_record_id: nil, location_code: nil)
+      def find_all(mms_id:, holding_id:, host_record_id: nil, alma_user: nil, location_code: nil)
         raise ArgumentError, 'No MMS ID provided' unless mms_id
 
         # Create and return an item to represent boundwith record.
         return [boundwith_item(mms_id, holding_id, host_record_id)] if host_record_id.present?
 
         # in most cases, we return the holding's items here
-        item_set = build_item_set mms_id: mms_id, holding_id: holding_id, location_code: location_code
+        item_set = build_item_set mms_id: mms_id, holding_id: holding_id, location_code: location_code,
+                                  alma_user: alma_user
         return item_set if item_set.any?
 
         # if we have no items at this point, then Alma has no items in this holding. this is an unfortunate reality so
@@ -49,9 +51,10 @@ module Inventory
       # @param mms_id [String]
       # @param holding_id [String, nil]
       # @param location_code [String]
+      # @param alma_user [String, nil]
       # @return [Array<Inventory::Item>]
-      def build_item_set(mms_id:, holding_id:, location_code:)
-        bib_items = fetch_all_items(mms_id: mms_id, holding_id: holding_id)
+      def build_item_set(mms_id:, holding_id:, location_code:, alma_user:)
+        bib_items = fetch_all_items(mms_id: mms_id, holding_id: holding_id, alma_user: alma_user)
         item_set = bib_items.map { |bib_item| new(bib_item) }
 
         # if a holding id is not provided, we get _ALL_ items for the MMS ID. typically this occurs when a holding is in
@@ -102,24 +105,21 @@ module Inventory
             ))
       end
 
-      # Recursively fetch all items for a given mms_id and holding_id
+      # Fetch all items for a given mms_id and holding_id, optionally with a user_id specified
       # @param mms_id [String]
       # @param holding_id [String]
       # @param limit [Integer]
-      # @param offset [Integer]
-      # @param accumulated_items [Array<Alma::BibItem>]
+      # @param alma_user [String, nil]
       # @return [Array<Alma::BibItem>]
-      def fetch_all_items(mms_id:, holding_id:, limit: 100, offset: 0, accumulated_items: [])
-        query_options = { limit: limit, offset: offset, order_by: 'description', direction: 'asc' }
-        response = Alma::BibItem.find(mms_id, holding_id: holding_id, **query_options)
-        accumulated_items += response.items
-
-        # Base case: if the number of items returned is less than the limit, we've fetched all items
-        return accumulated_items if response.total_record_count == accumulated_items.count
-
-        # Recursive case: fetch the next batch of items
-        fetch_all_items(mms_id: mms_id, holding_id: holding_id, limit: limit,
-                        offset: offset + limit, accumulated_items: accumulated_items)
+      def fetch_all_items(mms_id:, holding_id:, limit: 100, alma_user: nil)
+        query_options = { limit: limit, order_by: 'description', direction: 'asc', expand: 'due_date_policy' }
+        query_options[:user_id] = alma_user if alma_user.present?
+        (1..).each_with_object([]) do |_, items|
+          response = Alma::BibItem.find(mms_id, holding_id: holding_id, **query_options)
+          items.push(*response.items)
+          query_options[:offset] = (query_options[:offset].to_i || 0) + limit
+          return items.flatten if response.total_record_count == items.length
+        end
       end
     end
   end
