@@ -179,6 +179,34 @@ class CatalogController < ApplicationController
     # handler defaults, or have no facets.
     config.add_facet_fields_to_solr_request!
 
+    config.add_index_field :title_alternate_show, accessor: :marc
+    config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
+    config.add_index_field :format_facet, label: I18n.t('results.format')
+    config.add_index_field :creator_ss,
+                           label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
+                           facet_target: :creator_facet, facet_map: :creator_show_facet_map
+    config.add_index_field :edition_ss, label: I18n.t('results.edition')
+    config.add_index_field :conference_ss, label: I18n.t('results.conference')
+    config.add_index_field :series_ss, label: I18n.t('results.series')
+    config.add_index_field :publication_ss, label: I18n.t('results.publication')
+    config.add_index_field :production_ss, label: I18n.t('results.production')
+    config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
+    config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
+    config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
+
+    # fields to show in email
+    config.add_email_field :title_ss, label: I18n.t('show.title.main')
+    config.add_email_field :format_facet, label: I18n.t('results.format')
+    config.add_email_field :creator_ss, label: I18n.t('results.creator')
+    config.add_email_field :edition_ss, label: I18n.t('results.edition')
+    config.add_email_field :conference_ss, label: I18n.t('results.conference')
+    config.add_email_field :series_ss, label: I18n.t('results.series')
+    config.add_email_field :publication_ss, label: I18n.t('results.publication')
+    config.add_email_field :production_ss, label: I18n.t('results.production')
+    config.add_email_field :distribution_ss, label: I18n.t('results.distribution')
+    config.add_email_field :manufacture_ss, label: I18n.t('results.manufacture')
+    config.add_email_field :contained_within_ss, label: I18n.t('results.contained_within')
+
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
 
@@ -211,37 +239,9 @@ class CatalogController < ApplicationController
     config.add_show_field :subject_local_show,
                           label: I18n.t('show.subject.local'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
-
-    config.add_index_field :title_alternate_show, accessor: :marc
-    config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
-    config.add_index_field :format_facet, label: I18n.t('results.format')
-    config.add_index_field :creator_ss,
-                           label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
-                           facet_target: :creator_facet, facet_map: :creator_show_facet_map
-    config.add_index_field :edition_ss, label: I18n.t('results.edition')
-    config.add_index_field :conference_ss, label: I18n.t('results.conference')
-    config.add_index_field :series_ss, label: I18n.t('results.series')
-    config.add_index_field :publication_ss, label: I18n.t('results.publication')
-    config.add_index_field :production_ss, label: I18n.t('results.production')
-    config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
-    config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
-    config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
-
-    # fields to show in email
-    config.add_email_field :title_ss, label: I18n.t('show.title.main')
-    config.add_email_field :format_facet, label: I18n.t('results.format')
-    config.add_email_field :creator_ss, label: I18n.t('results.creator')
-    config.add_email_field :edition_ss, label: I18n.t('results.edition')
-    config.add_email_field :conference_ss, label: I18n.t('results.conference')
-    config.add_email_field :series_ss, label: I18n.t('results.series')
-    config.add_email_field :publication_ss, label: I18n.t('results.publication')
-    config.add_email_field :production_ss, label: I18n.t('results.production')
-    config.add_email_field :distribution_ss, label: I18n.t('results.distribution')
-    config.add_email_field :manufacture_ss, label: I18n.t('results.manufacture')
-    config.add_email_field :contained_within_ss, label: I18n.t('results.contained_within')
-
-    # solr fields to be displayed in the show (single result) view
-    #   The ordering of the field names is the order of the display
+    config.add_show_field :note_provenance_show,
+                          label: I18n.t('show.notes.provenance'), accessor: :marc,
+                          component: Catalog::FacetLinkComponent, facet_target: :subject_search
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
@@ -269,9 +269,6 @@ class CatalogController < ApplicationController
     config.add_show_field :note_notes_show, label: I18n.t('show.notes.main'), accessor: :marc
     config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
-    config.add_show_field :note_provenance_show,
-                          label: I18n.t('show.notes.provenance'), accessor: :marc,
-                          component: Catalog::QueryLinkComponent, search_target: :subject_search
     config.add_show_field :relation_chronology_show, label: I18n.t('show.relation.chronology'), accessor: :marc
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'),
                                                               accessor: :marc
