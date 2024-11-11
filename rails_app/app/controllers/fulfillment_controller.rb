@@ -8,6 +8,7 @@ class FulfillmentController < ApplicationController
     items = Inventory::Item.find_all(mms_id: params[:mms_id],
                                      holding_id: params[:holding_id],
                                      host_record_id: params[:host_record_id],
+                                     alma_user: current_user&.uid,
                                      location_code: params[:location_code])
 
     # Ensuring we send holding identifier to the fulfillment form in cases where a holding identifier is not already
@@ -23,7 +24,8 @@ class FulfillmentController < ApplicationController
   # those options to determine what actions are available to the user.
   # GET /fulfillment/options
   def options
-    item = Inventory::Item.find(mms_id: params[:mms_id], holding_id: params[:holding_id], item_id: params[:item_id])
+    item = Inventory::Item.find(mms_id: params[:mms_id], holding_id: params[:holding_id], item_id: params[:item_id],
+                                alma_user: current_user&.uid)
 
     render(Fulfillment::OptionsComponent.new(user: current_user, item: item), layout: false)
   end
