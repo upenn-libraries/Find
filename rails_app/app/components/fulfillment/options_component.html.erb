@@ -1,38 +1,33 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
     <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
-      <% if options.ill_pickup? %>
-        <p class="alert alert-info mb-3">
-          <%= t('requests.form.options.only_ill_requestable') %>
-        </p>
-      <% end %>
       <fieldset>
         <legend class="h6"> <%= t('requests.form.options.label') %></legend>
         <ul class="list-group">
           <% if options.electronic? %>
-            <%= render(Fulfillment::Options::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
+            <%= render(Fulfillment::Choices::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.office? %>
-            <%= render(Fulfillment::Options::OfficeComponent.new(user: user,
+            <%= render(Fulfillment::Choices::OfficeComponent.new(user: user,
                                                                        checked: !options.electronic?,
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.pickup? %>
-            <%= render(Fulfillment::Options::PickupComponent.new(user: user,
+            <%= render(Fulfillment::Choices::PickupComponent.new(user: user,
                                                                        checked: !options.any?(:electronic, :office),
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.ill_pickup? %>
-            <%= render(Fulfillment::Options::PickupComponent.new(user: user, ill: true,
+            <%= render(Fulfillment::Choices::PickupComponent.new(user: user, ill: true,
                                                                        checked: !options.any?(:electronic, :office),
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <% if options.mail? %>
-            <%= render(Fulfillment::Options::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
+            <%= render(Fulfillment::Choices::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
         </ul>
       </fieldset>
@@ -59,29 +54,14 @@
       <% end %>
 
       <div class="request-buttons mt-3">
-        <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
-        <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
-        <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>
-        <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
+        <%= submit_button_for(Fulfillment::Options::Deliverable::OFFICE) %>
+        <%= submit_button_for(Fulfillment::Options::Deliverable::PICKUP) %>
+        <%= submit_button_for(Fulfillment::Options::Deliverable::ILL_PICKUP) %>
+        <%= submit_button_for(Fulfillment::Options::Deliverable::MAIL) %>
         <%= electronic_delivery_link %>
       </div>
     </div>
-  <% elsif options.aeon? %>
-    <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
-    <div class="request-buttons mt-3">
-      <%= aeon_link %>
-    </div>
-  <% elsif options.archives? %>
-    <p id="archives-option" class="alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
-            contact_url: t('urls.requesting_info.archives_contact')) %>
-    </p>
-  <% elsif options.hsp? %>
-    <p id="hsp-option" class="mb-3"><%= t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp')) %></p>
-    <%= link_to t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank' %>
   <% else %>
-    <p class="alert alert-info mb-3">
-      <%= t('requests.form.options.none.info') %>
-    </p>
+    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options_set) %>
   <% end %>
 <% end %>

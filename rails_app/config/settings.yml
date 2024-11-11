@@ -194,3 +194,40 @@ electronic_scoring:
     Elsevier ScienceDirect: 91
     Nature: 90
     Elsevier ClinicalKey: 89
+fulfillment:
+  policies:
+    non_circ: 'non-circ'
+    reserves: 'reserves'
+    reference: 'reference'
+    in_house: 'InHouseView'
+  due_date_policy:
+    not_loanable: 'Not loanable'
+  scan:
+    excluded_material_types:
+      - RECORD
+      - DVD
+      - CDROM
+      - BLURAY
+      - BLURAYDVD
+      - LP
+      - FLOPPY_DISK
+      - DAT
+      - GLOBE
+      - AUDIOCASSETTE
+      - VIDEOCASSETTE
+      - HEAD
+      - LRDSC
+      - CALC
+      - KEYS
+      - RECORD
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - AUDIOVM
+  ill:
+    excluded_material_types:
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - KEYS
+      - GLOBE

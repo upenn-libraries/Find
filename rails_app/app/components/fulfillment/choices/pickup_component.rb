@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  module Options
+  module Choices
     # Pickup component logic
     class PickupComponent < ViewComponent::Base
       DEFAULT_STUDENT_PICKUP = 'Lockers at Van Pelt Library'
@@ -23,8 +23,9 @@ module Fulfillment
         pickup_locations[DEFAULT_PICKUP]
       end
 
+      # @todo what to do about @ill here? I think we want to get rid of it
       def delivery_value
-        @ill ? Fulfillment::Request::Options::ILL_PICKUP : Fulfillment::Request::Options::PICKUP
+        @ill ? Fulfillment::Options::Deliverable::ILL_PICKUP : Fulfillment::Options::Deliverable::PICKUP
       end
 
       # If the options for the item include a scan or office option, don't check the pickup option

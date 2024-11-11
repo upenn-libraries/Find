@@ -5,16 +5,6 @@ module Fulfillment
   class Request
     class LogicFailure < StandardError; end
 
-    # These symbols are the fulfillment options to be used throughout the app
-    module Options
-      # AEON = :aeon
-      ELECTRONIC = :electronic
-      MAIL = :mail
-      OFFICE = :office
-      PICKUP = :pickup
-      ILL_PICKUP = :ill_pickup
-    end
-
     attr_reader :patron, :requester, :params, :delivery, :pickup_location, :endpoint
 
     # Create a new Request to Broker
@@ -61,17 +51,17 @@ module Fulfillment
 
     # @return [Boolean]
     def scan?
-      delivery == Options::ELECTRONIC
+      delivery == Options::Deliverable::ELECTRONIC
     end
 
     # @return [Boolean]
     def mail?
-      delivery == Options::MAIL
+      delivery == Options::Deliverable::MAIL
     end
 
     # @return [Boolean]
     def office?
-      delivery == Options::OFFICE
+      delivery == Options::Deliverable::OFFICE
     end
 
     # def aeon?
@@ -80,12 +70,12 @@ module Fulfillment
 
     # @return [Boolean]
     def pickup?
-      delivery == Options::PICKUP
+      delivery == Options::Deliverable::PICKUP
     end
 
     # @return [Boolean]
     def ill_pickup?
-      delivery == Options::ILL_PICKUP
+      delivery == Options::Deliverable::ILL_PICKUP
     end
 
     private

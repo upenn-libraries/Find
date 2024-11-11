@@ -1,0 +1,36 @@
+<% if restricted? %>
+<div id="restricted-circ-option">
+  <% if options.aeon? %>
+    <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
+    <div class="request-buttons mt-3">
+      <%= aeon_link %>
+    </div>
+  <% elsif options.archives? %>
+    <p id="archives-option" class="mb-3">
+      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
+            contact_url: t('urls.requesting_info.archives_contact')) %>
+    </p>
+  <% elsif options.hsp? %>
+    <p id="hsp-option" class="mb-3"><%= t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp')) %></p>
+    <%= link_to t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank' %>
+  <% elsif options.reference? %>
+    <p id="reference-option" class="mb-3">
+      <%= t('requests.form.options.reference.info', library: item.location.library_name) %>
+    </p>
+  <% elsif options.reserves? %>
+    <p id="reserves-option" class="mb-3">
+      <%= t('requests.form.options.reserves.info', library: item.location.library_name) %>
+    </p>
+  <% elsif options.onsite? %>
+    <p id="onsite-option" class="mb-3">
+      <%= t('requests.form.options.onsite.info', library: item.location.library_name) %>
+    </p>
+  <% end %>
+</div>
+<% elsif unavailable? %>
+<div id="unavailable-option">
+  <%= t('requests.form.options.none.info') %>
+</div>
+<% end %>
+
+

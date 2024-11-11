@@ -43,31 +43,27 @@ FactoryBot.define do
 
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
     trait :books_by_mail do
-      delivery { Fulfillment::Request::Options::MAIL }
+      delivery { Fulfillment::Options::Deliverable::MAIL }
     end
 
     # Office delivery (FacultyExpress) will come via Item Request for or Illiad form and go into Illiad
     trait :office_delivery do
-      delivery { Fulfillment::Request::Options::OFFICE }
+      delivery { Fulfillment::Options::Deliverable::OFFICE }
     end
 
-    # trait :aeon do
-    #   fulfillment_params { { delivery: Fulfillment::Request::Options::AEON } }
-    # end
-
     trait :pickup do
-      delivery { Fulfillment::Request::Options::PICKUP }
+      delivery { Fulfillment::Options::Deliverable::PICKUP }
       pickup_location { 'VanPeltLib' }
     end
 
     trait :ill_pickup do
-      delivery { Fulfillment::Request::Options::ILL_PICKUP }
+      delivery { Fulfillment::Options::Deliverable::ILL_PICKUP }
       pickup_location { 'VanPeltLib' }
     end
 
     # ScanDeliver will come from ILL for or Item Request form and go into Illiad
     trait :scan_deliver do
-      delivery { Fulfillment::Request::Options::ELECTRONIC }
+      delivery { Fulfillment::Options::Deliverable::ELECTRONIC }
     end
 
     trait :illiad do

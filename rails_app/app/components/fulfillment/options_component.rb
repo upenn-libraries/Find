@@ -5,29 +5,23 @@ module Fulfillment
   class OptionsComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
-    attr_accessor :item, :user, :options
+    attr_accessor :options, :options_set
 
-    def initialize(user:, item:)
-      @user = user
-      @item = item
-      @options = item.fulfillment_options(user: user).inquiry
-    end
+    delegate :user, :item, :deliverable?, :unavailable?, :restricted?, to: :options_set
 
-    # Returns true if at least one delivery option is available.
-    def deliverable?
-      options.any?(Fulfillment::Request::Options::ELECTRONIC,
-                   Fulfillment::Request::Options::PICKUP,
-                   Fulfillment::Request::Options::MAIL,
-                   Fulfillment::Request::Options::OFFICE)
+    # @param options_set [Fulfillment::OptionsSet]
+    def initialize(options_set:)
+      @options_set = options_set
+      @options = options_set.to_a.inquiry
     end
 
     # Returns true if the request accepts a comment field.
     # @return [TrueClass, FalseClass]
     def commentable?
-      options.any?(Fulfillment::Request::Options::PICKUP,
-                   Fulfillment::Request::Options::ILL_PICKUP,
-                   Fulfillment::Request::Options::MAIL,
-                   Fulfillment::Request::Options::OFFICE)
+      options.any?(Fulfillment::Options::Deliverable::PICKUP,
+                   Fulfillment::Options::Deliverable::ILL_PICKUP,
+                   Fulfillment::Options::Deliverable::MAIL,
+                   Fulfillment::Options::Deliverable::OFFICE)
     end
 
     # Generates the submit button for the given delivery type.

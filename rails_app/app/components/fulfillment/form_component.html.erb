@@ -16,7 +16,7 @@
               <% end %>
 
               <%# Displaying options inline, instead loading via turbo-frame when there is only one item. %>
-              <%= render(Fulfillment::OptionsComponent.new(user: @user, item: items.first)) %>
+              <%= render(Fulfillment::OptionsComponent.new(options_set: Fulfillment::Service.options(item: items.first, user: @user))) %>
             <% elsif items.length > 1 %>
               <div class="mb-3">
                 <%= form.label :item_id, t('requests.form.item_label'), { class: 'form-label h6' } %>

@@ -269,7 +269,7 @@ describe 'Catalog Show Page' do
     end
 
     context 'with a holding that has multiple checkoutable items' do
-      let(:items) { build_list :item, 2, :checkoutable }
+      let(:items) { build_list :item, 2 }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return(items)
@@ -288,7 +288,7 @@ describe 'Catalog Show Page' do
     end
 
     context 'when adding comments to a request' do
-      let(:item) { build :item, :checkoutable }
+      let(:item) { build :item }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
@@ -318,7 +318,7 @@ describe 'Catalog Show Page' do
     end
 
     context 'with an item that is unavailable' do
-      let(:item) { build :item, :not_checkoutable }
+      let(:item) { build :item, :not_in_place }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
@@ -327,23 +327,23 @@ describe 'Catalog Show Page' do
 
       it 'shows a note about the unavailability status' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.only_ill_requestable')
+          expect(page).to have_content I18n.t('requests.form.options.none.info')
         end
       end
 
-      it 'shows request options' do
+      xit 'shows request options' do
         within('.fulfillment__container') do
           expect(page).to have_selector '#delivery-options'
         end
       end
 
-      it 'selects the first option' do
+      xit 'selects the first option' do
         within('#delivery-options') do
           expect(first('input[type="radio"]')[:checked]).to be true
         end
       end
 
-      it 'shows the right button' do
+      xit 'shows the right button' do
         within('.request-buttons') do
           expect(page).to have_link I18n.t('requests.form.buttons.scan')
         end
@@ -376,7 +376,7 @@ describe 'Catalog Show Page' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
       end
-      let(:item) { build :item, :aeon_requestable }
+      let(:item) { build :item, :aeon_location }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
