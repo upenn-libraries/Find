@@ -36,6 +36,14 @@ describe Shelf::Entry::IllTransaction do
         expect(transaction.title).to include illiad_transaction.data[:PhotoArticleTitle]
       end
     end
+
+    context 'when loan with download' do
+      let(:illiad_transaction) { create(:illiad_request, :loan_with_pdf_available) }
+
+      it 'returns expected title' do
+        expect(transaction.title).to include illiad_transaction.data[:LoanTitle]
+      end
+    end
   end
 
   describe '#author' do

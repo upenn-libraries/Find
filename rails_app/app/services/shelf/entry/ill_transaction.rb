@@ -36,7 +36,7 @@ module Shelf
         if loan?
           data[:LoanTitle]
         elsif scan?
-          [data[:PhotoJournalTitle], data[:PhotoArticleTitle]].compact_blank.join(' | ')
+          [data[:PhotoJournalTitle], data[:PhotoArticleTitle]].compact_blank.join(' | ').presence || data[:LoanTitle]
         end
       end
 
@@ -44,7 +44,7 @@ module Shelf
         data[:LoanAuthor] || data[:PhotoArticleAuthor]
       end
 
-      # Illiad transaction don't have the MMS ID of an item because in most cases we do no own it.
+      # Illiad transaction don't have the MMS ID of an item because in most cases we do not own it.
       def mms_id
         nil
       end

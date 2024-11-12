@@ -35,9 +35,11 @@ FactoryBot.define do
       add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::DELIVERED_TO_WEB }
     end
 
-    trait :article_with_pdf_available do
+    trait :loan_with_pdf_available do
       add_attribute(:RequestType) { Shelf::Entry::IllTransaction::Type::ARTICLE }
       add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::DELIVERED_TO_WEB }
+      add_attribute(:LoanTitle) { 'Problems with RAPID delivery' }
+      add_attribute(:LoanAuthor) { 'Cohen, Lapis' }
     end
 
     trait :cancelled do
