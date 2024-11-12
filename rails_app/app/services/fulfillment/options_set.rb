@@ -42,6 +42,7 @@ module Fulfillment
 
     # @return [Array, Symbol]
     def build_options
+      # Non-logged-in users should still see restricted access options
       return restricted_option unless user
 
       if item.in_place?
