@@ -20,6 +20,7 @@
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
+          <%# This is currently never going to be rendered, but we may choose to return the inline ILL requesting in the future. %>
           <% if options.ill_pickup? %>
             <%= render(Fulfillment::Choices::PickupComponent.new(user: user, ill: true,
                                                                        checked: !options.any?(:electronic, :office),
@@ -56,12 +57,12 @@
       <div class="request-buttons mt-3">
         <%= submit_button_for(Fulfillment::Options::Deliverable::OFFICE) %>
         <%= submit_button_for(Fulfillment::Options::Deliverable::PICKUP) %>
-        <%= submit_button_for(Fulfillment::Options::Deliverable::ILL_PICKUP) %>
+        <%# submit_button_for(Fulfillment::Options::Deliverable::ILL_PICKUP) %> <%# See note on rendered Choice above %>
         <%= submit_button_for(Fulfillment::Options::Deliverable::MAIL) %>
         <%= electronic_delivery_link %>
       </div>
     </div>
   <% else %>
-    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options_set) %>
+    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options) %>
   <% end %>
 <% end %>
