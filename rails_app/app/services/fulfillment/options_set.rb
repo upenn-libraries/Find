@@ -53,8 +53,10 @@ module Fulfillment
 
     # @return [Symbol, nil]
     def restricted_option
+      return Options::Restricted::AEON if item.location.aeon?
+      return Options::Restricted::ARCHIVES if item.location.archives?
+      return Options::Restricted::HSP if item.location.hsp?
       return Options::Restricted::REFERENCE if item.item_policy == Settings.fulfillment.policies.reference
-
       return Options::Restricted::RESERVES if item.item_policy == Settings.fulfillment.policies.reserves
 
       Options::Restricted::ONSITE if non_circulating_item?

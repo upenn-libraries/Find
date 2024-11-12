@@ -195,6 +195,10 @@ electronic_scoring:
     Nature: 90
     Elsevier ClinicalKey: 89
 fulfillment:
+  restricted_libraries:
+    archives: 'UnivArcLib'
+    hsp: 'HSPLib'
+    libra: 'Libra'
   policies:
     non_circ: 'non-circ'
     reserves: 'reserves'

@@ -3,7 +3,10 @@
   <% if options.aeon? %>
     <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">
-      <%= aeon_link %>
+      <%= link_to t('requests.form.buttons.aeon'),
+                  Settings.aeon.requesting_url + item.aeon_params.to_query,
+                  class: 'btn btn-success btn-lg',
+                  data: { turbo_frame: '_top' } %>
     </div>
   <% elsif options.archives? %>
     <p id="archives-option" class="mb-3">
@@ -29,8 +32,9 @@
 </div>
 <% elsif unavailable? %>
 <div id="unavailable-option">
-  <%= t('requests.form.options.none.info') %>
+  <%= t('requests.form.options.only_ill_requestable') %>
+  <div class="request-buttons mt-3">
+    <%= ill_request_link %>
+  </div>
 </div>
 <% end %>
-
-

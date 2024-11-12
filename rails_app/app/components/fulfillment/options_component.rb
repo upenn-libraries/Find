@@ -41,14 +41,5 @@ module Fulfillment
               class: 'd-none btn btn-success btn-lg', target: '_blank', rel: 'noopener',
               data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
     end
-
-    # Generates the Aeon request link with open parameters for form pre-population.
-    # @return [ActiveSupport::SafeBuffer]
-    def aeon_link
-      link_to t('requests.form.buttons.aeon'),
-              Settings.aeon.requesting_url + item.aeon_params.to_query,
-              class: 'btn btn-success btn-lg',
-              data: { turbo_frame: '_top' }
-    end
   end
 end

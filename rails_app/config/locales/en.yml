@@ -340,7 +340,7 @@ en:
     score: 'Score'
   requests:
     form:
-      heading: 'Request an item'
+      heading: 'Access options'
       item_label: 'What item are you requesting?'
       item_placeholder: 'Choose an item...'
       buttons:
