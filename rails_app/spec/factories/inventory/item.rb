@@ -115,7 +115,7 @@ FactoryBot.define do
   trait :at_hsp do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['library'] = { 'value' => Inventory::Location::HSP }
+      item['item_data']['library'] = { 'value' => Settings.fulfillment.restricted_libraries.hsp }
       item
     end
   end
@@ -140,7 +140,7 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['location'] = { 'value' => 'univarch' }
-      item['item_data']['library'] = { 'value' => Inventory::Location::ARCHIVES }
+      item['item_data']['library'] = { 'value' => Settings.fulfillment.restricted_libraries.archives }
       item
     end
   end

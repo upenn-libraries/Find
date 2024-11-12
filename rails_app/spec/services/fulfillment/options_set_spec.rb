@@ -85,4 +85,40 @@ describe Fulfillment::OptionsSet do
       expect(options.to_a).to eq [Fulfillment::Options::Restricted::ONSITE]
     end
   end
+
+  context 'with an item in an Aeon location' do
+    let(:item) { build :item, :aeon_location }
+
+    it { is_expected.to be_restricted }
+    it { is_expected.not_to be_unavailable }
+    it { is_expected.not_to be_deliverable }
+
+    it 'includes only the Aeon option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Restricted::AEON]
+    end
+  end
+
+  context 'with an item located at HSP' do
+    let(:item) { build :item, :at_hsp }
+
+    it { is_expected.to be_restricted }
+    it { is_expected.not_to be_unavailable }
+    it { is_expected.not_to be_deliverable }
+
+    it 'includes only the HSP option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Restricted::HSP]
+    end
+  end
+
+  context 'with an item located at the Archives' do
+    let(:item) { build :item, :at_archives }
+
+    it { is_expected.to be_restricted }
+    it { is_expected.not_to be_unavailable }
+    it { is_expected.not_to be_deliverable }
+
+    it 'includes only the Archives option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Restricted::ARCHIVES]
+    end
+  end
 end
