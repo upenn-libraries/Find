@@ -5,7 +5,7 @@ FactoryBot.define do
     sequence(:TransactionNumber) { |n| n }
     add_attribute(:Username) { 'testuser' }
     add_attribute(:ProcessType) { 'Borrowing' }
-    add_attribute(:RequestType) { 'Article' }
+    add_attribute(:RequestType) { Shelf::Entry::IllTransaction::Type::ARTICLE }
     add_attribute(:TransactionStatus) { 'Jim MW Processing' }
     add_attribute(:TransactionDate) { '2024-03-24T10:06:14.653' }
 
@@ -13,7 +13,7 @@ FactoryBot.define do
     initialize_with { Illiad::Request.new(**attributes) }
 
     trait :loan do
-      add_attribute(:RequestType) { 'Loan' }
+      add_attribute(:RequestType) { Shelf::Entry::IllTransaction::Type::LOAN }
       add_attribute(:LoanTitle) { 'Autobiography' }
       add_attribute(:LoanAuthor) { 'Random, Author' }
     end
@@ -32,18 +32,25 @@ FactoryBot.define do
 
     trait :scan_with_pdf_available do
       scan
-      add_attribute(:TransactionStatus) { Illiad::Request::DELIVERED_TO_WEB }
+      add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::DELIVERED_TO_WEB }
+    end
+
+    trait :loan_with_pdf_available do
+      add_attribute(:RequestType) { Shelf::Entry::IllTransaction::Type::ARTICLE }
+      add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::DELIVERED_TO_WEB }
+      add_attribute(:LoanTitle) { 'Problems with RAPID delivery' }
+      add_attribute(:LoanAuthor) { 'Cohen, Lapis' }
     end
 
     trait :cancelled do
-      add_attribute(:TransactionStatus) { Illiad::Request::CANCELLED }
+      add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::CANCELLED }
     end
 
     # Factory for borrow direct loan that is marked as completed in Illiad
     trait :completed_borrow_direct_loan do
       loan
-      add_attribute(:TransactionStatus) { Illiad::Request::FINISHED }
-      add_attribute(:SystemID) { Illiad::Request::BD_SYSTEM_ID }
+      add_attribute(:TransactionStatus) { Shelf::Entry::IllTransaction::Status::FINISHED }
+      add_attribute(:SystemID) { Shelf::Entry::IllTransaction::BD_SYSTEM_ID }
       add_attribute(:ILLNumber) { 'PUBD-1234' }
     end
   end

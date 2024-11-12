@@ -106,7 +106,7 @@ describe Illiad::Request do
 
   describe '#request_type' do
     it 'returns expected request type' do
-      expect(request.request_type).to eq Illiad::Request::LOAN
+      expect(request.request_type).to eq Shelf::Entry::IllTransaction::Type::LOAN
     end
   end
 
@@ -134,54 +134,6 @@ describe Illiad::Request do
 
     it 'returns due date' do
       expect(request.due_date).to eq DateTime.parse(due_date)
-    end
-  end
-
-  describe '#loan?' do
-    context 'with request to loan' do
-      it 'returns true' do
-        expect(request.loan?).to be true
-      end
-    end
-
-    context 'with a request to scan' do
-      let(:request) { build(:illiad_request, :scan) }
-
-      it 'returns false' do
-        expect(request.loan?).to be false
-      end
-    end
-  end
-
-  describe '#books_by_mail?' do
-    context 'with a books by mail request' do
-      let(:request) { build(:illiad_request, :books_by_mail) }
-
-      it 'returns true for a books by mail request' do
-        expect(request.books_by_mail?).to be true
-      end
-    end
-
-    context 'with a non books by mail request' do
-      it 'returns true for a books by mail request' do
-        expect(request.books_by_mail?).to be false
-      end
-    end
-  end
-
-  describe '#scan?' do
-    context 'with a request to loan' do
-      it 'returns false' do
-        expect(request.scan?).to be false
-      end
-    end
-
-    context 'with a request to scan' do
-      let(:request) { build(:illiad_request, :scan) }
-
-      it 'returns false' do
-        expect(request.scan?).to be true
-      end
     end
   end
 end
