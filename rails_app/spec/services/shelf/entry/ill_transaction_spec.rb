@@ -215,7 +215,7 @@ describe Shelf::Entry::IllTransaction do
     end
 
     context 'with a request to scan but with web delivery status' do
-      let(:illiad_transaction) { build(:illiad_request, :article_with_pdf_available) }
+      let(:illiad_transaction) { build(:illiad_request, :loan_with_pdf_available) }
 
       it 'returns false' do
         expect(transaction.loan?).to be false
@@ -247,7 +247,7 @@ describe Shelf::Entry::IllTransaction do
     end
 
     context 'with a request to loan and web delivery status' do
-      let(:illiad_transaction) { build(:illiad_request, :article_with_pdf_available) }
+      let(:illiad_transaction) { build(:illiad_request, :loan_with_pdf_available) }
 
       it 'returns true' do
         expect(transaction.scan?).to be true
