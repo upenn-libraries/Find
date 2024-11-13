@@ -1,6 +1,6 @@
 <% if restricted? %>
 <div id="restricted-circ-option">
-  <% if options_set.aeon? %>
+  <% if options.inquiry.aeon? %>
     <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
     <div class="request-buttons mt-3">
       <%= link_to t('requests.form.buttons.aeon'),
