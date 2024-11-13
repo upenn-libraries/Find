@@ -12,6 +12,7 @@
                   itemtype: @document.itemtype,
                   class: classes.flatten.join(' ') do %>
     <%= header %>
+    <%= hathi_link %>
     <% if body.present? %>
       <%= body %>
     <% else %>
