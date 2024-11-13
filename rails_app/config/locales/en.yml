@@ -354,7 +354,6 @@ en:
         hsp: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
-        only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.' # TODO: remove? see options.none below
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
@@ -383,7 +382,7 @@ en:
         onsite:
           info: 'This item can be consulted only for a limited time and by visiting %{library}.'
         none:
-          info: 'This item is currently unavailable from the Penn libraries.'
+          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

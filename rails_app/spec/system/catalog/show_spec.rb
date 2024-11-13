@@ -401,7 +401,7 @@ describe 'Catalog Show Page' do
     context 'with an item at the archives' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
-                                 library_code: Settings.fulfillment.restriced_locations.archives)]
+                                 library_code: Settings.fulfillment.restricted_libraries.archives)]
       end
       let(:item) { build :item, :at_archives }
 
@@ -420,7 +420,7 @@ describe 'Catalog Show Page' do
     context 'with an item at HSP' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
-                                 library_code: Settings.fulfillment.restriced_locations.hsp)]
+                                 library_code: Settings.fulfillment.restricted_libraries.hsp)]
       end
       let(:item) { build :item, :at_hsp }
 
