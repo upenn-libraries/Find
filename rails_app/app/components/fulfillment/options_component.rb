@@ -5,23 +5,22 @@ module Fulfillment
   class OptionsComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
-    attr_accessor :options, :options_set
+    attr_accessor :options
 
-    delegate :user, :item, :deliverable?, :unavailable?, :restricted?, to: :options_set
+    delegate :user, :item, :any?, :deliverable?, :unavailable?, :restricted?, to: :options
 
     # @param options_set [Fulfillment::OptionsSet]
     def initialize(options_set:)
-      @options_set = options_set
-      @options = options_set.to_a.inquiry
+      @options = options_set
     end
 
     # Returns true if the request accepts a comment field.
     # @return [TrueClass, FalseClass]
     def commentable?
-      options.any?(Fulfillment::Options::Deliverable::PICKUP,
-                   Fulfillment::Options::Deliverable::ILL_PICKUP,
-                   Fulfillment::Options::Deliverable::MAIL,
-                   Fulfillment::Options::Deliverable::OFFICE)
+      options.inquiry.any?(Fulfillment::Options::Deliverable::PICKUP,
+                           # Fulfillment::Options::Deliverable::ILL_PICKUP,
+                           Fulfillment::Options::Deliverable::MAIL,
+                           Fulfillment::Options::Deliverable::OFFICE)
     end
 
     # Generates the submit button for the given delivery type.
@@ -40,6 +39,12 @@ module Fulfillment
               ill_new_request_path(**item.scan_params),
               class: 'd-none btn btn-success btn-lg', target: '_blank', rel: 'noopener',
               data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
+    end
+
+    # Determine if the pickup options should default to being checked
+    # @return [Boolean]
+    def pickup_checked?
+      options.inquiry.any? Options::Deliverable::ELECTRONIC, Options::Deliverable::OFFICE
     end
   end
 end

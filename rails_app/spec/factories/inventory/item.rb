@@ -35,30 +35,6 @@ FactoryBot.define do
     end
   end
 
-  trait :on_reserve do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reserves }
-      item
-    end
-  end
-
-  trait :non_circ do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.non_circ }
-      item
-    end
-  end
-
-  trait :laptop_material_type do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['physical_material_type'] = 'LPTOP'
-      item
-    end
-  end
-
   trait :in_temp_location do
     item do
       item = attributes_for(:item)[:item]
@@ -88,6 +64,52 @@ FactoryBot.define do
     end
   end
 
+  # Policy Traits
+
+  trait :not_loanable do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['due_date_policy'] = Settings.fulfillment.due_date_policy.not_loanable
+      item
+    end
+  end
+
+  trait :on_reserve do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reserves }
+      item
+    end
+  end
+
+  trait :non_circ do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.non_circ }
+      item
+    end
+  end
+
+  trait :at_reference do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reference }
+      item
+    end
+  end
+
+  # Material type traits
+
+  trait :laptop_material_type do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['physical_material_type'] = 'LPTOP'
+      item
+    end
+  end
+
+  # Location traits
+
   trait :aeon_location do
     item do
       item = attributes_for(:item)[:item]
@@ -104,34 +126,10 @@ FactoryBot.define do
     end
   end
 
-  trait :not_scannable do
-    item do
-      item = attributes_for(:item, :checkoutable)[:item]
-      item['item_data']['physical_material_type'] = { 'value' => 'RECORD' }
-      item
-    end
-  end
-
   trait :at_hsp do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['library'] = { 'value' => Settings.fulfillment.restricted_libraries.hsp }
-      item
-    end
-  end
-
-  trait :at_reference do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reference }
-      item
-    end
-  end
-
-  trait :not_loanable do
-    item do
-      item = attributes_for(:item)[:item]
-      item['item_data']['due_date_policy'] = Settings.fulfillment.due_date_policy.not_loanable
       item
     end
   end

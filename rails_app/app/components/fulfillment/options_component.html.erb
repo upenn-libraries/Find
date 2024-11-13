@@ -4,30 +4,30 @@
       <fieldset>
         <legend class="h6"> <%= t('requests.form.options.label') %></legend>
         <ul class="list-group">
-          <% if options.electronic? %>
+          <% if options.inquiry.electronic? %>
             <%= render(Fulfillment::Choices::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
-          <% if options.office? %>
+          <% if options.inquiry.office? %>
             <%= render(Fulfillment::Choices::OfficeComponent.new(user: user,
-                                                                       checked: !options.electronic?,
+                                                                       checked: !options_set.electronic?,
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
-          <% if options.pickup? %>
+          <% if options.inquiry.pickup? %>
             <%= render(Fulfillment::Choices::PickupComponent.new(user: user,
-                                                                       checked: !options.any?(:electronic, :office),
+                                                                       checked: pickup_checked?,
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
           <%# This is currently never going to be rendered, but we may choose to return the inline ILL requesting in the future. %>
-          <% if options.ill_pickup? %>
+          <% if options.inquiry.ill_pickup? %>
             <%= render(Fulfillment::Choices::PickupComponent.new(user: user, ill: true,
-                                                                       checked: !options.any?(:electronic, :office),
+                                                                       checked: pickup_checked?,
                                                                        data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
 
-          <% if options.mail? %>
+          <% if options.inquiry.mail? %>
             <%= render(Fulfillment::Choices::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
           <% end %>
         </ul>
@@ -63,6 +63,6 @@
       </div>
     </div>
   <% else %>
-    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options_set) %>
+    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options) %>
   <% end %>
 <% end %>

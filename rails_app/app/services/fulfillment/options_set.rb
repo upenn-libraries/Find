@@ -10,7 +10,7 @@ module Fulfillment
     # @param item [Inventory::Item]
     # @param user [User]
     def initialize(item:, user:)
-      raise StandardError unless item
+      raise StandardError('OptionSet called without an Item') unless item
 
       @item = item
       @user = user
@@ -19,6 +19,11 @@ module Fulfillment
 
     def each(&)
       options.each(&)
+    end
+
+    # @return [ActiveSupport::ArrayInquirer]
+    def inquiry
+      @inquiry = options.inquiry
     end
 
     # @return [Boolean]

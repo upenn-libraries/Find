@@ -387,6 +387,7 @@ en:
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+      ill_request_link: 'Request this Item via InterLibrary Loan'
       missing_frame: "We're having trouble getting the requesting options for this item. Please try again."
   fulfillment:
     public_error_message: 'An internal error occurred.'
