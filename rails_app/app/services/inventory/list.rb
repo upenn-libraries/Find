@@ -18,15 +18,20 @@ module Inventory
     class << self
       # Returns full inventory for a bib record.
       #
-      # This method extracts all resources links for the MARC record and fetches additional inventory data from Alma.
+      # This method extracts all resource links for the MARC record and fetches additional inventory data from Alma.
       #
       # @param document [SolrDocument]
       # @return [Inventory::Response]
       def full(document)
-        marc = from_marc(document, nil)
-        api = from_api(document, nil)
+        begin
+          marc = from_marc(document, nil)
+          api = from_api(document, nil)
+        rescue StandardError => e
+          Honeybadger.notify(e)
+          complete = false
+        end
 
-        Inventory::List::Response.new(entries: marc + api)
+        Inventory::List::Response.new(entries: marc + api, complete: complete || true)
       end
 
       # Returns a brief inventory for a bib record.
@@ -40,10 +45,15 @@ module Inventory
       # @param marc_limit [Integer]
       # @return [Inventory::Response]
       def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
-        marc = from_marc(document, marc_limit)
-        api = from_api(document, api_limit)
+        begin
+          marc = from_marc(document, marc_limit)
+          api = from_api(document, api_limit)
+        rescue StandardError => e
+          Honeybadger.notify(e)
+          complete = false
+        end
 
-        Inventory::List::Response.new(entries: marc + api)
+        Inventory::List::Response.new(entries: marc + api, complete: complete || true)
       end
 
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
@@ -54,7 +64,7 @@ module Inventory
       def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
 
-        Inventory::List::Response.new(entries: entries)
+        Inventory::List::Response.new(entries: entries, complete: true)
       end
 
       private
@@ -103,6 +113,9 @@ module Inventory
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
+      rescue StandardError => _e
+        # Alma API downtime!
+        []
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,

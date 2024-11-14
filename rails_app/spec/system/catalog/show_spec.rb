@@ -110,6 +110,30 @@ describe 'Catalog Show Page' do
     end
   end
 
+  # context 'when the Alma API is not responding' do
+  #   let(:mms_id) { '123' }
+  #   let(:entries) do
+  #     [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,
+  #                                   href: 'http://hdl.library.upenn.edu/1017/126017',
+  #                                   description: 'Connect to resource')]
+  #   end
+  #
+  #   before do
+  #     allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == mms_id })
+  #                                             .and_return(Inventory::List::Response.new(entries: entries))
+  #     allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == mms_id })
+  #                                              .and_return(Inventory::List::Response.new(entries: entries))
+  #   end
+  #
+  #   it 'renders the page with appropriate message' do
+  #     expect(page).to have_text 'We are having trouble retrieving some holdings at the moment. Refresh to try again.'
+  #   end
+  #
+  #   it 'still shows any resource link holdings' do
+  #     expect(page).to have_link 'Connect to resource', href: 'http://hdl.library.upenn.edu/1017/126017'
+  #   end
+  # end
+  
   # Record with 4 electronic holdings
   context 'when viewing a electronic journal record' do
     include_context 'with electronic journal record with 4 electronic entries'
