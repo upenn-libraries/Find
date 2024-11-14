@@ -12,6 +12,7 @@ module Catalog
       Inventory::Full::ContentComponent.new(inventory: @inventory, selected_id: @selected_id, user: @user)
     }
 
+    # rename to hathi_holdings or something else (not just link, maybe hathi_record)
     renders_one :hathi_link, lambda {
       Hathi::HathiComponent.new(document: @document)
     }

@@ -7,6 +7,12 @@ module Hathi
 
     def initialize(document:)
       @identifiers = document.identifiers
+      # service should return the full hathi record instead of just the URL
+      @service = Hathi::Service.new(identifiers: identifiers)
+    end
+
+    def render?
+      # is the record present?
     end
 
     def call

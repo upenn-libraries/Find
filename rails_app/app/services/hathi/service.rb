@@ -1,51 +1,95 @@
 # frozen_string_literal: true
 
 module Hathi
-  # Service class to make requests to Hathi API, return URL from API if present
+  # Service class to retrieve Hathi link for a given record (if it exists)
   class Service
-    attr_accessor :identifiers
+    attr_reader :identifiers
 
-    HATHI_URL_PREFIX = 'https://catalog.hathitrust.org/api/volumes/brief/json'
+    URL_PREFIX = 'https://catalog.hathitrust.org/api/volumes/brief/json'
+
+    class HathiRequestError < StandardError; end
 
     def initialize(identifiers:)
       @identifiers = identifiers
     end
 
-    # @return [String, nil]
-    def url
+    # maybe one class method instead of instance method, not really necessary since we're making one call
+
+    # @return [String, nil] URL from Hathi record if found
+    def link
       return if identifiers.blank?
 
-      "#{HATHI_URL_PREFIX}/#{hathi_params}"
+      response_data = fetch_hathi_data
+      return unless response_data
+
+      record_url(response_data)
     end
 
-    # @return [Hash, nil]
-    def response
-      return unless url
-
-      response = Faraday.get(url)
-      JSON.parse(response.body)
-    end
-
-    # @return [String, nil]
-    def link
-      return unless present_in_hathi?
-
-      # hathi_id = response['items']&.first&.[]('fromrecord')
-      # response['records'][hathi_id]['recordurl']
-      #
+    def record
+      # returns the hash of the whole hathi record, maybe some helper methods that access values in there
     end
 
     private
 
-    def hathi_params
-      identifiers.filter_map { |k, v|
-        "#{k}:#{v}"
-      }.join(';')
+    def client
+      @client ||= Faraday.new(url: request_url) do |config|
+        config.request :json
+        config.request :retry,
+                       exceptions: retry_exceptions,
+                       methods: ['get'],
+                       interval: 1,
+                       max: 3
+        config.response :json
+      end
     end
 
-    # @return [TrueClass, FalseClass]
-    def present_in_hathi?
-      response['records'].present?
+    # @return [Hash, nil] the Hathi response
+    def fetch_hathi_data
+      client.get.body
+    rescue Faraday::Error => e
+      Rails.logger.error("Hathi API request failed: #{e.message}")
+      raise HathiRequestError, "Failed to fetch data from Hathi API: #{e.message}"
+    end
+
+    # @param [Hash] response_data
+    # @return [String, nil] the record URL
+    def record_url(response_data)
+      identifier = matched_identifier(response_data)
+      return unless identifier
+
+      extract_record_url(response_data[identifier])
+    end
+
+    # @param [Hash] response_data
+    # @return [String, nil] the first present matching ID
+    def matched_identifier(response_data)
+      formatted_identifiers.detect { |id| response_data.key?(id) }
+    end
+
+    # @param [Hash] data
+    # @return [String, nil] the record URL
+    def extract_record_url(data)
+      records = data['records']
+      return if records.blank?
+
+      record = records.values&.first
+      record&.fetch('recordURL', nil)
+    end
+
+    # @return [String] the URL to make a request to
+    def request_url
+      "#{URL_PREFIX}/#{formatted_identifiers.join(';')}"
+    end
+
+    # @return [Array] formatted IDs for the request URL
+    # ["oclc:12345", "isbn:12345"]
+    def formatted_identifiers
+      @formatted_identifiers ||= identifiers.filter_map { |type, value| "#{type}:#{value}" }
+    end
+
+    # @return [Array] Faraday errors to retry on
+    def retry_exceptions
+      Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS + [Faraday::ConnectionFailed]
     end
   end
 end
