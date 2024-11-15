@@ -7,6 +7,8 @@ illiad:
   legacy_user_password: <%= DockerSecrets.lookup(:illiad_legacy_user_password, Rails.application.credentials.illiad_legacy_user_password) %>
 aeon:
   requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
+hathi:
+  base_url: 'https://catalog.hathitrust.org/api/volumes/brief/json'
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~

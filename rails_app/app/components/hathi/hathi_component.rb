@@ -3,21 +3,31 @@
 module Hathi
   # Hathi link component
   class HathiComponent < ViewComponent::Base
-    attr_accessor :identifiers
+    attr_accessor :identifiers, :hathi_record
 
     def initialize(document:)
       @identifiers = document.identifiers
-      # service should return the full hathi record instead of just the URL
-      @service = Hathi::Service.new(identifiers: identifiers)
+      @hathi_record = Hathi::Service.record(identifiers: identifiers)
     end
 
+    # Helper method that extracts the link from the Hathi response
+    def link
+      records = hathi_record['records']
+      return if records.blank?
+
+      record = records.values&.first
+      record&.fetch('recordURL', nil)
+    end
+
+    # Don't render until we figure out how to display it and can mock it in the system specs
     def render?
-      # is the record present?
+      false
     end
 
+    # Placeholder view logic to test that the link is extracting and displaying
     def call
       content_tag(:p) do
-        Hathi::Service.new(identifiers: identifiers).link
+        link
       end
     end
   end
