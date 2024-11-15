@@ -192,3 +192,22 @@ shared_context 'with a conference proceedings record with 1 physical holding' do
     allow(Inventory::Holding).to receive(:find).and_return(create(:holding, id: conference_entries.first.id))
   end
 end
+
+# Index electronic database record in to Solr and return incomplete inventory.
+shared_context 'with electronic database record having a resource link entry but the Alma API times out' do
+  let(:electronic_db_bib) { '9977577951303681' }
+  let(:electronic_db_entries) do
+    [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,
+                                  href: 'http://hdl.library.upenn.edu/1017/126017',
+                                  description: 'Connect to resource')]
+  end
+
+  before do
+    SampleIndexer.index 'electronic_database.json'
+    allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == electronic_db_bib })
+                                            .and_return(
+                                              Inventory::List::Response.new(entries: electronic_db_entries,
+                                                                            complete: false)
+                                            )
+  end
+end

@@ -1,12 +1,26 @@
 # frozen_string_literal: true
 
 describe Inventory::List do
+  let(:document) { SolrDocument.new({ id: mms_id }) }
+
+  context 'when the API call times out' do
+    let(:mms_id) { '123456789' }
+
+    before do
+      stub_request(:any, /#{Alma.configuration.region}/).to_timeout
+    end
+
+    it 'returns a response object marked as not complete' do
+      expect(described_class.full(document).complete?).to be false
+      expect(described_class.brief(document).complete?).to be false
+    end
+  end
+
   describe '.full' do
     include_context 'with stubbed availability_data'
 
     let(:response) { described_class.full(document) }
     let(:mms_id) { '9979338417503681' }
-    let(:document) { SolrDocument.new({ id: mms_id }) }
 
     context 'with a record having Physical inventory' do
       include_context 'with stubbed availability item_data'
@@ -106,7 +120,6 @@ describe Inventory::List do
     include_context 'with stubbed availability item_data'
 
     let(:mms_id) { '9979338417503681' }
-    let(:document) { SolrDocument.new({ id: mms_id }) }
     let(:response) { described_class.brief(document) }
     let(:availability_data) do
       { mms_id => { holdings: build_list(:physical_availability_data, 4) } }

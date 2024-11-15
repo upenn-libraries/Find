@@ -278,6 +278,7 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    incomplete_inventory_html: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
     details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
   facets:

@@ -28,10 +28,11 @@ module Inventory
           api = from_api(document, nil)
         rescue StandardError => e
           Honeybadger.notify(e)
+          api ||= []
           complete = false
         end
 
-        Inventory::List::Response.new(entries: marc + api, complete: complete || true)
+        Inventory::List::Response.new(entries: marc + api, complete: complete)
       end
 
       # Returns a brief inventory for a bib record.
@@ -50,10 +51,11 @@ module Inventory
           api = from_api(document, api_limit)
         rescue StandardError => e
           Honeybadger.notify(e)
+          api ||= []
           complete = false
         end
 
-        Inventory::List::Response.new(entries: marc + api, complete: complete || true)
+        Inventory::List::Response.new(entries: marc + api, complete: complete)
       end
 
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
@@ -113,9 +115,6 @@ module Inventory
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
-      rescue StandardError => _e
-        # Alma API downtime!
-        []
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
