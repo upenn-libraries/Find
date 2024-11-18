@@ -201,7 +201,7 @@ fulfillment:
     libra: 'Libra'
   policies:
     non_circ: 'non-circ'
-    reserves: 'reserves'
+    reserves: 'reserve'
     reference: 'reference'
     in_house: 'InHouseView'
   due_date_policy:
