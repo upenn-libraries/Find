@@ -8,13 +8,13 @@ module Fulfillment
     attr_reader :item, :user, :options
 
     # @param item [Inventory::Item]
-    # @param user [User]
+    # @param user [User, nil]
     def initialize(item:, user:)
       raise StandardError('OptionSet called without an Item') unless item
 
       @item = item
       @user = user
-      @options = Array.wrap build_options
+      @options = build_options
     end
 
     def each(&)
@@ -26,34 +26,38 @@ module Fulfillment
       @inquiry = options.inquiry
     end
 
+    # Does this options set represent a deliverable item? If no user is provided, delivery is impossible.
     # @return [Boolean]
     def deliverable?
       return false unless user
 
-      (options & Options::Deliverable.constants(false).map { |c| Options::Deliverable.const_get(c) }).any?
+      (options & Options::Deliverable.all).any?
     end
 
+    # Does this options set represent an unavailable item?
     # @return [Boolean]
     def unavailable?
       options == [Options::UNAVAILABLE]
     end
 
+    # Does this options set represent a restricted access item? So far there is only one restricted option per item,
+    # but this logic matches the deliverable? method above for future extensibility.
     # @return [Boolean]
     def restricted?
-      restricted_option.in? options
+      (options & Options::Restricted.all).any?
     end
 
     private
 
-    # @return [Array, Symbol]
+    # @return [Array<Symbol>]
     def build_options
       # Non-logged-in users should still see restricted access options
-      return restricted_option unless user
+      return [restricted_option] unless user
 
       if item.in_place?
-        restricted_option || delivery_options
+        Array.wrap(restricted_option || delivery_options)
       else
-        Options::UNAVAILABLE
+        [Options::UNAVAILABLE]
       end
     end
 
@@ -70,7 +74,7 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def delivery_options
-      return courtesy_borrower_options if user.courtesy_borrower?
+      return [courtesy_borrower_option] if user.courtesy_borrower?
 
       options = [Options::Deliverable::PICKUP]
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
@@ -79,9 +83,9 @@ module Fulfillment
       options
     end
 
-    # @return [Array<Symbol>]
-    def courtesy_borrower_options
-      [Options::Deliverable::PICKUP]
+    # @return [Symbol]
+    def courtesy_borrower_option
+      Options::Deliverable::PICKUP
     end
 
     # @return [Boolean]
