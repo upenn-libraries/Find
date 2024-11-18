@@ -51,14 +51,12 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def build_options
-      # Non-logged-in users should still see restricted access options
-      return [restricted_option] unless user
+      restricted_options = [restricted_option]
 
-      if item.in_place?
-        Array.wrap(restricted_option || delivery_options)
-      else
-        [Options::UNAVAILABLE]
-      end
+      # Non-logged-in users should still see restricted access options
+      return restricted_options if !user || restricted_options.any?
+
+      item.in_place? ? delivery_options : [Options::UNAVAILABLE]
     end
 
     # @return [Symbol, nil]
