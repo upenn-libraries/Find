@@ -18,7 +18,6 @@ module Fulfillment
     # @return [TrueClass, FalseClass]
     def commentable?
       options.inquiry.any?(Fulfillment::Options::Deliverable::PICKUP,
-                           # Fulfillment::Options::Deliverable::ILL_PICKUP,
                            Fulfillment::Options::Deliverable::MAIL,
                            Fulfillment::Options::Deliverable::OFFICE)
     end

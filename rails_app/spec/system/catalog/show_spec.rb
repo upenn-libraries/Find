@@ -331,24 +331,6 @@ describe 'Catalog Show Page' do
         end
       end
 
-      xit 'shows request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#delivery-options'
-        end
-      end
-
-      xit 'selects the first option' do
-        within('#delivery-options') do
-          expect(first('input[type="radio"]')[:checked]).to be true
-        end
-      end
-
-      xit 'shows the right button' do
-        within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.scan')
-        end
-      end
-
       context 'when user a courtesy borrower' do
         let(:user) { create(:user, :courtesy_borrower) }
 
