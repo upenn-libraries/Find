@@ -13,11 +13,7 @@ module Catalog
     # @param [String] show_value
     # @return [String]
     def link_to_facet(show_value)
-      facet = if @field.document.key?(@field.field_config.field) # skip mapping if show and facet fields are the same
-                show_value
-              else
-                facet_mapping[show_value]
-              end
+      facet = facet_mapping[show_value]
 
       return show_value if facet.blank?
 

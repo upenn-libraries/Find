@@ -233,8 +233,7 @@ class CatalogController < ApplicationController
                           label: I18n.t('show.title.standardized'), accessor: :marc,
                           component: Catalog::QueryLinkComponent, search_target: :title_search
     config.add_show_field :language_facet,
-                          label: I18n.t('show.language.facet'),
-                          component: Catalog::FacetLinkComponent, facet_target: :language_facet
+                          label: I18n.t('show.language.facet'), link_to_facet: true
     config.add_show_field :subject_show,
                           label: I18n.t('show.subject.all'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
