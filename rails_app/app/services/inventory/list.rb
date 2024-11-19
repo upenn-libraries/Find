@@ -21,18 +21,16 @@ module Inventory
       # This method extracts all resource links for the MARC record and fetches additional inventory data from Alma.
       #
       # @param document [SolrDocument]
-      # @return [Inventory::Response]
+      # @return [Inventory::List::Response]
       def full(document)
-        begin
-          marc = from_marc document
-          api = from_api document
-        rescue StandardError => e
-          Honeybadger.notify(e)
-          api ||= []
-          complete = false
-        end
-
-        Inventory::List::Response.new(entries: marc + api, complete: complete)
+        marc = from_marc document
+        api = from_api document
+        Response.new(entries: marc + api,
+                     complete: true)
+      rescue StandardError => e
+        Honeybadger.notify(e)
+        Response.new(entries: Array.wrap(marc) + Array.wrap(api),
+                     complete: false)
       end
 
       # Returns a brief inventory for a bib record.
@@ -44,29 +42,27 @@ module Inventory
       # @param document [SolrDocument]
       # @param api_limit [Integer]
       # @param marc_limit [Integer]
-      # @return [Inventory::Response]
+      # @return [Inventory::List::Response]
       def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
-        begin
-          marc = from_marc(document, marc_limit)
-          api = from_api(document, api_limit)
-        rescue StandardError => e
-          Honeybadger.notify(e)
-          api ||= []
-          complete = false
-        end
-
-        Inventory::List::Response.new(entries: marc + api, complete: complete)
+        marc = from_marc document, marc_limit
+        api = from_api document, api_limit
+        Response.new(entries: marc + api,
+                     complete: true)
+      rescue StandardError => e
+        Honeybadger.notify(e)
+        Response.new(entries: Array.wrap(marc) + Array.wrap(api),
+                     complete: false)
       end
 
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
       #
       # @param document [SolrDocument]
-      # @param limit [Integer, nil]
-      # @return [Inventory::Response]
+      # @param limit [Integer]
+      # @return [Inventory::List::Response]
       def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
 
-        Inventory::List::Response.new(entries: entries, complete: true)
+        Response.new(entries: entries, complete: true)
       end
 
       private
@@ -87,7 +83,7 @@ module Inventory
       #
       # @note Can we know if a MMS ID is physical and skip this step? Physical items cannot have ecollections.
       # @param inventory_data [Array]
-      # @return [Boolean, NilClass]
+      # @return [Boolean, nil]
       def should_check_for_ecollections?(inventory_data)
         inventory_data&.none?
       end
@@ -96,7 +92,7 @@ module Inventory
       #
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
-      # @return [Inventory::Entry]
+      # @return [Inventory::List::Entry::Base]
       def create_entry(mms_id, **raw_data)
         case raw_data[:inventory_type]&.downcase
         when PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
@@ -111,7 +107,7 @@ module Inventory
       # Grabs inventory data from Alma Bib Availability API. Returns only active entries if entries are electronic.
       #
       # @param mms_id [String]
-      # @return [Array, NilClass]
+      # @return [Array, nil]
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
@@ -122,7 +118,7 @@ module Inventory
       #
       # @param document [SolrDocument] document containing MARC with resource links
       # @param limit [Integer, nil] limit number of returned objects
-      # @return [Array<Inventory::Entry>]
+      # @return [Array<Inventory::List::Entry::Base>]
       def from_marc(document, limit = nil)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
@@ -151,10 +147,10 @@ module Inventory
       # Sorts, limits and converts inventory information retrieved from SolrDocument and Alma into
       # Inventory::Entry objects.
       #
-      # @param inventory_data [Array, NilClass] inventory data from API calls
+      # @param inventory_data [Array, nil] inventory data from API calls
       # @param document [SolrDocument]
       # @param limit [Integer, nil] limit number of returned objects
-      # @return [Array<Inventory::Entry>]
+      # @return [Array<Inventory::List::Entry::Base>]
       def api_entries(inventory_data, document, limit: nil)
         sorted_data = Inventory::List::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
@@ -174,7 +170,7 @@ module Inventory
 
       # Check if inventory data is present and for electronic inventory
       #
-      # @param inventory_data [Array<Hash>, NilClass]
+      # @param inventory_data [Array<Hash>, nil]
       # @return [Boolean]
       def electronic_inventory?(inventory_data)
         return false unless inventory_data

@@ -9,6 +9,7 @@ module Inventory
       attr_reader :entries
 
       # @param [Array] entries
+      # @param [Boolean] complete
       def initialize(entries:, complete: true)
         @entries = entries
         @complete = complete
