@@ -91,7 +91,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    alma (0.6.1)
+    alma (0.6.0)
       activesupport
       httparty
       xml-simple
@@ -504,7 +504,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  alma
+  alma (= 0.6.0)
   blacklight!
   blacklight-ris
   bootsnap

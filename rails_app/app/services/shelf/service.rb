@@ -90,7 +90,7 @@ module Shelf
       # In order to "delete" a transaction, it must be a scan request where the status is "Delivered to Web".
       raise IlliadRequestError, 'Transaction cannot be deleted' if entry.blank? || !entry.pdf_available?
 
-      Illiad::Request.route(id: entry.id, status: Illiad::Request::FINISHED)
+      Illiad::Request.route(id: entry.id, status: Entry::IllTransaction::Status::FINISHED)
     rescue StandardError => e
       raise IlliadRequestError, e.message
     end
@@ -158,9 +158,9 @@ module Shelf
       #   - All requests that are checked out to customer.
       # rubocop:disable Layout/LineLength
       filter = [
-        "(TransactionStatus eq '#{Illiad::Request::CANCELLED}' and TransactionDate ge datetime'#{2.weeks.ago.utc.iso8601}')",
-        "(TransactionStatus eq '#{Illiad::Request::FINISHED}' and SystemID eq '#{Illiad::Request::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
-        "(TransactionStatus ne '#{Illiad::Request::CHECKED_OUT}' and TransactionStatus ne '#{Illiad::Request::CANCELLED}' and TransactionStatus ne '#{Illiad::Request::FINISHED}')"
+        "(TransactionStatus eq '#{Entry::IllTransaction::Status::CANCELLED}' and TransactionDate ge datetime'#{2.weeks.ago.utc.iso8601}')",
+        "(TransactionStatus eq '#{Entry::IllTransaction::Status::FINISHED}' and SystemID eq '#{Entry::IllTransaction::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
+        "(TransactionStatus ne '#{Entry::IllTransaction::Status::CHECKED_OUT}' and TransactionStatus ne '#{Entry::IllTransaction::Status::CANCELLED}' and TransactionStatus ne '#{Entry::IllTransaction::Status::FINISHED}')"
       ].join(' or ')
       # rubocop:enable Layout/LineLength
 
