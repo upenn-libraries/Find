@@ -1,10 +1,8 @@
 <div id="unavailable-option">
-  <% if user&.courtesy_borrower? %>
-    <%= t('requests.form.options.none.info') %>
-  <% else %>
-    <%= t('requests.form.options.ill.info') %>
+    <%= message %>
+    <% unless user_is_courtesy_borrower? %>
     <div class="request-buttons mt-3">
       <%= ill_request_link %>
     </div>
-  <% end %>
+    <% end %>
 </div>

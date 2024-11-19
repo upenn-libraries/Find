@@ -7,8 +7,19 @@ module Fulfillment
 
     delegate :item, :user, to: :options
 
+    # @param [Fulfillment::OptionsSet] options_set
     def initialize(options_set:)
       @options = options_set
+    end
+
+    # @return [Boolean, nil]
+    def user_is_courtesy_borrower?
+      user&.courtesy_borrower?
+    end
+
+    # @return [String]
+    def message
+      user_is_courtesy_borrower? ? t('requests.form.options.none.info') : t('requests.form.options.ill.info')
     end
 
     # @return [ActiveSupport::SafeBuffer]

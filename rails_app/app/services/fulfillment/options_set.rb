@@ -51,7 +51,7 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def build_options
-      restricted_options = [restricted_option]
+      restricted_options = [restricted_option].compact_blank
 
       # Non-logged-in users should still see restricted access options
       return restricted_options if !user || restricted_options.any?

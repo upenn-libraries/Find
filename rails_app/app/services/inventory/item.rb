@@ -51,13 +51,20 @@ module Inventory
       item_data['due_date_policy']
     end
 
+    # Turn "End of Term" and "End of Year" into "Return by End of Year" so this due date policy makes sense in
+    # our select option display context.
+    # @return [String]
+    def humanized_user_policy
+      user_due_date_policy.starts_with?('End of') ? "Return by #{user_due_date_policy}" : user_due_date_policy
+    end
+
     # Array of arrays. In each sub-array, the first value is the display value and the
     # second value is the submitted value for backend processing. Intended for use with Rails select form element
     # helpers.
     # @return [Array]
     def select_label
       if item_data.present?
-        [[description, physical_material_type['desc'], public_note, location.library_name]
+        [[description, physical_material_type['desc'], public_note, location.library_name, humanized_user_policy]
           .compact_blank.join(' - '), item_data['pid']]
       else
         [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
