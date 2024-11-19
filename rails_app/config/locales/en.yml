@@ -425,11 +425,11 @@ en:
       main: 'Edition'
       other: 'Other Edition'
     format:
+      facet: 'Format'
       cartographic: 'Cartographic Data'
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
-    harmful_language_statement_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'
@@ -437,7 +437,8 @@ en:
       oclc_id: 'OCLC'
       publisher_number: 'Publisher Number'
     language:
-      main: 'Language'
+      facet: 'Language'
+      main: 'Language Note'
     link:
       full_text: 'Online'
       web: 'Web Link'
@@ -488,6 +489,8 @@ en:
     title: 'Staff View'
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
+  statements:
+    harmful_language_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
   sort:
     added_date_asc: 'Date Added (old-new)'
     added_date_desc: 'Date Added (new-old)'
