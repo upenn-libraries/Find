@@ -1,60 +1,9 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
-    <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
-      <fieldset>
-        <legend class="h6"> <%= t('requests.form.options.label') %></legend>
-        <ul class="list-group">
-          <% if options.inquiry.electronic? %>
-            <%= render(Fulfillment::Choices::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.inquiry.office? %>
-            <%= render(Fulfillment::Choices::OfficeComponent.new(user: user,
-                                                                       checked: !options_set.electronic?,
-                                                                       data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.inquiry.pickup? %>
-            <%= render(Fulfillment::Choices::PickupComponent.new(user: user,
-                                                                       checked: pickup_checked?,
-                                                                       data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.inquiry.mail? %>
-            <%= render(Fulfillment::Choices::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-        </ul>
-      </fieldset>
-
-      <%# toggleable comments box, for direct-from-form (no redirect) Alma and ILL requests only %>
-      <% if commentable? %>
-        <div id="add-comments" class="mt-2" data-controller="comments">
-          <%= link_to t('requests.form.add_comments'), '', { data: { comments_target: 'addCommentsButton', action: 'click->comments#showCommentsArea' } } %>
-          <div class="d-none" data-comments-target="commentsArea">
-            <div class="d-flex justify-content-between">
-              <%= label_tag :comments, t('requests.form.comments_label'), class: 'form-label' %>
-              <a href="#">
-                <i class="bi bi-x" data-comments-target="hideCommentsButton" data-action="click->comments#hideCommentsArea"></i>
-              </a>
-            </div>
-            <%= text_area_tag :comments, nil, class: 'form-control mb-3' %>
-          </div>
-        </div>
-      <% end %>
-
-      <%# Add hidden fields with values needed for form submission to the request endpoint. %>
-      <% item.loan_params.each do |k, v| %>
-        <%= hidden_field_tag k, v %>
-      <% end %>
-
-      <div class="request-buttons mt-3">
-        <%= submit_button_for(Fulfillment::Options::Deliverable::OFFICE) %>
-        <%= submit_button_for(Fulfillment::Options::Deliverable::PICKUP) %>
-        <%= submit_button_for(Fulfillment::Options::Deliverable::MAIL) %>
-        <%= electronic_delivery_link %>
-      </div>
-    </div>
+    <%= render Fulfillment::DeliverableComponent.new(options_set: options) %>
+  <% elsif restricted? %>
+    <%= render Fulfillment::UndeliverableComponent.new(options_set: options) %>
   <% else %>
-    <%= render Fulfillment::Choices::UndeliverableComponent.new(options_set: options) %>
+    <%= render Fulfillment::UnavailableComponent.new(options_set: options) %>
   <% end %>
 <% end %>

@@ -5,13 +5,11 @@ export default class extends Controller {
     "electronicButton",
     "officeButton",
     "pickupButton",
-    // "ill_pickupButton",
     "mailButton",
   ];
   static outlets = ["comments"];
   COMMENTABLE = [
     "pickup",
-    // "ill_pickup",
     "mail",
     "office"
   ];
@@ -62,7 +60,6 @@ export default class extends Controller {
       this.officeButtonTarget,
       this.pickupButtonTarget,
       this.mailButtonTarget,
-      // this.ill_pickupButtonTarget,
     ];
   }
 }

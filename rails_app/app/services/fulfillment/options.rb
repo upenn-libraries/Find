@@ -30,8 +30,5 @@ module Fulfillment
       REFERENCE = :reference
       RESERVES = :reserves
     end
-
-    # The fulfillment anti-option
-    UNAVAILABLE = :unavailable
   end
 end

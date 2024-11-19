@@ -37,7 +37,7 @@ module Fulfillment
     # Does this options set represent an unavailable item?
     # @return [Boolean]
     def unavailable?
-      options == [Options::UNAVAILABLE]
+      options.none?
     end
 
     # Does this options set represent a restricted access item? So far there is only one restricted option per item,
@@ -56,7 +56,9 @@ module Fulfillment
       # Non-logged-in users should still see restricted access options
       return restricted_options if !user || restricted_options.any?
 
-      item.in_place? ? delivery_options : [Options::UNAVAILABLE]
+      return delivery_options if item.in_place?
+
+      []
     end
 
     # @return [Symbol, nil]

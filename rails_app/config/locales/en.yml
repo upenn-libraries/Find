@@ -381,8 +381,10 @@ en:
           info: 'This item can be retrieved for a limited time by visiting the reference desk at %{library}'
         onsite:
           info: 'This item can be consulted only for a limited time and by visiting %{library}.'
+        ill:
+          info: 'This item is unavailable from the Penn Libraries and will be sourced from another lending institution.'
         none:
-          info: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
+          info: 'This item is unavailable from the Penn Libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'

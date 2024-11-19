@@ -327,15 +327,16 @@ describe 'Catalog Show Page' do
 
       it 'shows a note about the unavailability status' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.none.info')
+          expect(page).to have_content I18n.t('requests.form.options.ill.info')
         end
       end
 
       context 'when user a courtesy borrower' do
         let(:user) { create(:user, :courtesy_borrower) }
 
-        it 'shows message saying the item is unavailable' do
+        it 'shows message saying the item is unavailable without an ILL request link' do
           expect(page).to have_content I18n.t('requests.form.options.none.info')
+          expect(page).not_to have_link I18n.t('requests.form.ill_request_link')
         end
       end
     end
