@@ -28,7 +28,7 @@ module Fulfillment
       HSP = :hsp
       ONSITE = :onsite
       REFERENCE = :reference
-      RESERVES = :reserves
+      RESERVE = :reserve
     end
   end
 end

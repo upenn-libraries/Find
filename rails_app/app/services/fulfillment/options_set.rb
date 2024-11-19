@@ -67,7 +67,7 @@ module Fulfillment
       return Options::Restricted::ARCHIVES if item.location.archives?
       return Options::Restricted::HSP if item.location.hsp?
       return Options::Restricted::REFERENCE if item.item_policy == Settings.fulfillment.policies.reference
-      return Options::Restricted::RESERVES if item.item_policy == Settings.fulfillment.policies.reserves
+      return Options::Restricted::RESERVE if item.item_policy == Settings.fulfillment.policies.reserve
 
       Options::Restricted::ONSITE if non_circulating_item?
     end

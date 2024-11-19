@@ -39,7 +39,7 @@ describe 'Catalog show page requesting behaviors' do
     end
 
     context 'with a holding that has multiple checkoutable items' do
-      let(:items) { build_list :item, 2, :checkoutable }
+      let(:items) { build_list :item, 2 }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return(items)
@@ -58,7 +58,7 @@ describe 'Catalog show page requesting behaviors' do
     end
 
     context 'when adding comments to a request' do
-      let(:item) { build :item, :checkoutable }
+      let(:item) { build :item }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
@@ -88,7 +88,7 @@ describe 'Catalog show page requesting behaviors' do
     end
 
     context 'with an item that is unavailable' do
-      let(:item) { build :item, :not_checkoutable }
+      let(:item) { build :item, :not_in_place }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
@@ -97,36 +97,20 @@ describe 'Catalog show page requesting behaviors' do
 
       it 'shows a note about the unavailability status' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.only_ill_requestable')
-        end
-      end
-
-      it 'shows request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#delivery-options'
-        end
-      end
-
-      it 'selects the first option' do
-        within('#delivery-options') do
-          expect(first('input[type="radio"]')[:checked]).to be true
-        end
-      end
-
-      it 'shows the right button' do
-        within('.request-buttons') do
-          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+          expect(page).to have_content I18n.t('requests.form.options.ill.info')
         end
       end
 
       context 'when user a courtesy borrower' do
         let(:user) { create(:user, :courtesy_borrower) }
 
-        it 'shows message saying the item is unavailable' do
+        it 'shows message saying the item is unavailable without an ILL request link' do
           expect(page).to have_content I18n.t('requests.form.options.none.info')
+          expect(page).not_to have_link I18n.t('requests.form.ill_request_link')
         end
       end
     end
+
   end
 
   context 'when not logged in' do
@@ -139,7 +123,7 @@ describe 'Catalog show page requesting behaviors' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
       end
-      let(:item) { build :item, :aeon_requestable }
+      let(:item) { build :item, :aeon_location }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
@@ -164,7 +148,7 @@ describe 'Catalog show page requesting behaviors' do
     context 'with an item at the archives' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
-                                 library_code: Inventory::Location::ARCHIVES)]
+                                 library_code: Settings.fulfillment.restricted_libraries.archives)]
       end
       let(:item) { build :item, :at_archives }
 
@@ -183,7 +167,7 @@ describe 'Catalog show page requesting behaviors' do
     context 'with an item at HSP' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
-                                 library_code: Inventory::Location::HSP)]
+                                 library_code: Settings.fulfillment.restricted_libraries.hsp)]
       end
       let(:item) { build :item, :at_hsp }
 

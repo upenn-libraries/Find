@@ -16,9 +16,10 @@
   <p id="reference-option" class="mb-3">
     <%= t('requests.form.options.reference.info', library: item.location.library_name) %>
   </p>
-<% elsif options.inquiry.reserves? %>
-  <p id="reserves-option" class="mb-3">
-    <%= t('requests.form.options.reserves.info', library: item.location.library_name) %>
+<% elsif options.inquiry.reserve? %>
+  <p id="reserve-option" class="mb-3">
+    <%= t('requests.form.options.reserve.info_html', library: item.location.library_name,
+          reserves_url: t('urls.help.reserves')) %>
   </p>
 <% elsif options.inquiry.onsite? %>
   <p id="onsite-option" class="mb-3">

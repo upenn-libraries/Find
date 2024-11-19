@@ -65,7 +65,6 @@ FactoryBot.define do
   end
 
   # Policy Traits
-
   trait :not_loanable do
     item do
       item = attributes_for(:item)[:item]
@@ -99,7 +98,6 @@ FactoryBot.define do
   end
 
   # Material type traits
-
   trait :laptop_material_type do
     item do
       item = attributes_for(:item)[:item]
@@ -109,7 +107,6 @@ FactoryBot.define do
   end
 
   # Location traits
-
   trait :aeon_location do
     item do
       item = attributes_for(:item)[:item]

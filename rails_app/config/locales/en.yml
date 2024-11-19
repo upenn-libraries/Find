@@ -376,8 +376,8 @@ en:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
-        reserves:
-          info: 'This item cannot be requested because it is being held in reserves at the %{library}.'
+        reserve:
+          info_html: 'This item cannot be requested because it is being held in <a href="%{reserves_url}" target="_blank">reserves</a> at the %{library}.'
         reference:
           info: 'This item can be consulted for a limited time by visiting the reference desk at the %{library}'
         onsite:

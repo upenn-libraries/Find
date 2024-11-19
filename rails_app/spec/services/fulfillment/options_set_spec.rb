@@ -62,15 +62,15 @@ describe Fulfillment::OptionsSet do
     it { is_expected.not_to be_deliverable }
   end
 
-  context 'with an item on reserves' do
+  context 'with an item on reserve' do
     let(:item) { build :item, :on_reserve }
 
     it { is_expected.to be_restricted }
     it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
-    it 'includes only the reserves option' do
-      expect(options.to_a).to eq [Fulfillment::Options::Restricted::RESERVES]
+    it 'includes only the reserve option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Restricted::RESERVE]
     end
   end
 
