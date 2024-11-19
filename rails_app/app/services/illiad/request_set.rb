@@ -15,20 +15,5 @@ module Illiad
     def each(&)
       requests.each(&)
     end
-
-    # @return [Array<Illiad::Request>]
-    def loans
-      @loans ||= select(&:loan?)
-    end
-
-    # @return [Array<Illiad::Request>]
-    def books_by_mail
-      @books_by_mail ||= select(&:books_by_mail?)
-    end
-
-    # @return [Array<Illiad::Request>]
-    def scans
-      @scans ||= select(&:scan?)
-    end
   end
 end

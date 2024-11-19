@@ -212,7 +212,7 @@ class CatalogController < ApplicationController
 
     # this field above all the clickable fields
     config.add_show_field :format_facet,
-                          label: I18n.t('results.format'),
+                          label: I18n.t('show.format.facet'),
                           component: Catalog::FacetLinkComponent, facet_target: :format_facet
     config.add_show_field :creator_show,
                           label: I18n.t('show.creator.main'), accessor: :marc,
@@ -232,6 +232,8 @@ class CatalogController < ApplicationController
     config.add_show_field :title_standardized_show,
                           label: I18n.t('show.title.standardized'), accessor: :marc,
                           component: Catalog::QueryLinkComponent, search_target: :title_search
+    config.add_show_field :language_facet,
+                          label: I18n.t('show.language.facet'), link_to_facet: true
     config.add_show_field :subject_show,
                           label: I18n.t('show.subject.all'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
@@ -250,7 +252,6 @@ class CatalogController < ApplicationController
     config.add_show_field :production_distribution_show, label: I18n.t('show.production.distribution'), accessor: :marc
     config.add_show_field :production_manufacture_show, label: I18n.t('show.production.manufacture'), accessor: :marc
     config.add_show_field :relation_contained_in_show, label: I18n.t('show.relation.contained_in'), accessor: :marc
-
     config.add_show_field :title_other_show, label: I18n.t('show.title.other'), accessor: :marc
     config.add_show_field :format_cartographic_show, label: I18n.t('show.format.cartographic'), accessor: :marc
     config.add_show_field :identifier_fingerprint_show, label: I18n.t('show.identifier.fingerprint'), accessor: :marc

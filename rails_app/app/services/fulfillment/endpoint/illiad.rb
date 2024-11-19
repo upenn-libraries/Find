@@ -124,7 +124,7 @@ module Fulfillment
         # @return [Hash{Symbol->String (frozen)}]
         def book_request_body(request)
           { Username: request.patron.uid,
-            RequestType: ::Illiad::Request::LOAN,
+            RequestType: Shelf::Entry::IllTransaction::Type::LOAN,
             DocumentType: 'Book',
             LoanAuthor: request.params.author,
             LoanTitle: request.params.book_title,
@@ -146,7 +146,7 @@ module Fulfillment
         # @return [Hash{Symbol->String (frozen)}]
         def scandelivery_request_body(request)
           { Username: request.patron.uid,
-            DocumentType: ::Illiad::Request::ARTICLE,
+            DocumentType: Shelf::Entry::IllTransaction::Type::ARTICLE,
             PhotoJournalTitle: request.params.title,
             PhotoJournalVolume: request.params.volume,
             PhotoJournalIssue: request.params.issue,
