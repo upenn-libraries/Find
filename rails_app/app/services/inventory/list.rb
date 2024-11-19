@@ -24,8 +24,8 @@ module Inventory
       # @return [Inventory::Response]
       def full(document)
         begin
-          marc = from_marc(document, nil)
-          api = from_api(document, nil)
+          marc = from_marc document
+          api = from_api document
         rescue StandardError => e
           Honeybadger.notify(e)
           api ||= []
@@ -77,7 +77,7 @@ module Inventory
       # @param document [SolrDocument]
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
-      def from_api(document, limit)
+      def from_api(document, limit = nil)
         inventory_data = from_availability(document.id)
         inventory_data += from_ecollections(document.id) if should_check_for_ecollections?(inventory_data)
         api_entries(inventory_data, document, limit: limit)
@@ -123,7 +123,7 @@ module Inventory
       # @param document [SolrDocument] document containing MARC with resource links
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::Entry>]
-      def from_marc(document, limit)
+      def from_marc(document, limit = nil)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
           create_entry(document.id, inventory_type: RESOURCE_LINK, id: i, href: link_data[:link_url],
