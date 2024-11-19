@@ -11,7 +11,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'renders the page with appropriate message' do
-      expect(page).to have_text I18n.t('inventory.incomplete_inventory_html')
+      expect(page).to have_text I18n.t('inventory.incomplete_inventory')
     end
 
     it 'still shows any resource link holdings' do
