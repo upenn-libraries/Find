@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 ActiveSupport::Reloader.to_prepare do
-  Blacklight::Rendering::Pipeline.operations = [Blacklight::Rendering::HelperMethod,
-                                                Blacklight::Rendering::LinkToFacet,
-                                                Blacklight::Rendering::Microdata,
-                                                Find::LinkToProcessor,
-                                                Find::JoinProcessor]
+  # TODO: this is throwing Uncaught exception: uninitialized constant Blacklight::Rendering
+  # Blacklight::Rendering::Pipeline.operations = [Blacklight::Rendering::HelperMethod,
+  #                                               Blacklight::Rendering::LinkToFacet,
+  #                                               Blacklight::Rendering::Microdata,
+  #                                               Find::LinkToProcessor,
+  #                                               Find::JoinProcessor]
 end

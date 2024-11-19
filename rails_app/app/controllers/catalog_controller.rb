@@ -141,19 +141,19 @@ class CatalogController < ApplicationController
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true do |field|
+    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), suggest: true, limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true do |field|
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true do |field|
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true do |field|
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true do |field|
+    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), suggest: true, limit: true do |field|
       field.include_in_advanced_search = false
     end
     config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5 do |field|
