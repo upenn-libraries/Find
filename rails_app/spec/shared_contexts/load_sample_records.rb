@@ -194,7 +194,7 @@ shared_context 'with a conference proceedings record with 1 physical holding' do
 end
 
 # Index electronic database record in to Solr and return incomplete inventory.
-shared_context 'with electronic database record having a resource link entry but the Alma API times out' do
+shared_context 'with electronic database record having a resource link entry but fails to retrieve Alma holdings' do
   let(:electronic_db_bib) { '9977577951303681' }
   let(:electronic_db_entries) do
     [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,

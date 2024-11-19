@@ -4,7 +4,7 @@ require 'system_helper'
 
 describe 'Catalog Show Page' do
   context 'when the Alma API calls time out' do
-    include_context 'with electronic database record having a resource link entry but the Alma API times out'
+    include_context 'with electronic database record having a resource link entry but fails to retrieve Alma holdings'
 
     before do
       visit solr_document_path(electronic_db_bib)
