@@ -53,9 +53,9 @@ module Inventory
 
     # Turn "End of Term" and "End of Year" into "Return by End of Year" so this due date policy makes sense in
     # our select option display context.
-    # @return [String]
+    # @return [String, nil]
     def humanized_user_policy
-      user_due_date_policy.starts_with?('End of') ? "Return by #{user_due_date_policy}" : user_due_date_policy
+      user_due_date_policy&.starts_with?('End of') ? "Return by #{user_due_date_policy}" : user_due_date_policy
     end
 
     # Array of arrays. In each sub-array, the first value is the display value and the
