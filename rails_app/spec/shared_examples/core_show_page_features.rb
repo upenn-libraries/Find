@@ -21,6 +21,10 @@ shared_examples 'core show page features' do
     end
   end
 
+  it 'does not show the incomplete holdings message' do
+    expect(page).not_to have_text I18n.t('inventory.incomplete_inventory')
+  end
+
   it 'defaults to the first holding in navigation' do
     within('#inventory-pills-tab') do
       expect(page).to have_selector('button.inventory-item.active', text: entries.first.description)

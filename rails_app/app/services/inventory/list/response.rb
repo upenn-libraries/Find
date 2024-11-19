@@ -6,9 +6,10 @@ module Inventory
     class Response
       include Enumerable
 
-      attr_reader :entries
+      attr_reader :entries, :complete
 
       # @param [Array] entries
+      # @param [Boolean] complete
       def initialize(entries:, complete: true)
         @entries = entries
         @complete = complete

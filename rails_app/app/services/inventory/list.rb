@@ -21,18 +21,16 @@ module Inventory
       # This method extracts all resource links for the MARC record and fetches additional inventory data from Alma.
       #
       # @param document [SolrDocument]
-      # @return [Inventory::Response]
+      # @return [Inventory::List::Response]
       def full(document)
-        begin
-          marc = from_marc document
-          api = from_api document
-        rescue StandardError => e
-          Honeybadger.notify(e)
-          api ||= []
-          complete = false
-        end
-
-        Inventory::List::Response.new(entries: marc + api, complete: complete)
+        marc = from_marc document
+        api = from_api document
+        Response.new(entries: marc + api,
+                     complete: true)
+      rescue StandardError => e
+        Honeybadger.notify(e)
+        Response.new(entries: Array.wrap(marc) + Array.wrap(api),
+                     complete: false)
       end
 
       # Returns a brief inventory for a bib record.
@@ -42,20 +40,18 @@ module Inventory
       # results is desired.
       #
       # @param document [SolrDocument]
-      # @param api_limit [Integer]
-      # @param marc_limit [Integer]
-      # @return [Inventory::Response]
+      # @param api_limit [Integer, nil]
+      # @param marc_limit [Integer, nil]
+      # @return [Inventory::List::Response]
       def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
-        begin
-          marc = from_marc(document, marc_limit)
-          api = from_api(document, api_limit)
-        rescue StandardError => e
-          Honeybadger.notify(e)
-          api ||= []
-          complete = false
-        end
-
-        Inventory::List::Response.new(entries: marc + api, complete: complete)
+        marc = from_marc document, marc_limit
+        api = from_api document, api_limit
+        Response.new(entries: marc + api,
+                     complete: true)
+      rescue StandardError => e
+        Honeybadger.notify(e)
+        Response.new(entries: Array.wrap(marc) + Array.wrap(api),
+                     complete: false)
       end
 
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
