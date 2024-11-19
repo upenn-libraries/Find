@@ -40,8 +40,8 @@ module Inventory
       # results is desired.
       #
       # @param document [SolrDocument]
-      # @param api_limit [Integer, nil]
-      # @param marc_limit [Integer, nil]
+      # @param api_limit [Integer]
+      # @param marc_limit [Integer]
       # @return [Inventory::List::Response]
       def brief(document, api_limit: DEFAULT_LIMIT, marc_limit: RESOURCE_LINK_LIMIT)
         marc = from_marc document, marc_limit
@@ -57,7 +57,7 @@ module Inventory
       # Get inventory entries stored in the document's MARC fields. By default limits the number of entries returned.
       #
       # @param document [SolrDocument]
-      # @param limit [Integer, nil]
+      # @param limit [Integer]
       # @return [Inventory::List::Response]
       def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
@@ -83,7 +83,7 @@ module Inventory
       #
       # @note Can we know if a MMS ID is physical and skip this step? Physical items cannot have ecollections.
       # @param inventory_data [Array]
-      # @return [Boolean, NilClass]
+      # @return [Boolean, nil]
       def should_check_for_ecollections?(inventory_data)
         inventory_data&.none?
       end
@@ -107,7 +107,7 @@ module Inventory
       # Grabs inventory data from Alma Bib Availability API. Returns only active entries if entries are electronic.
       #
       # @param mms_id [String]
-      # @return [Array, NilClass]
+      # @return [Array, nil]
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
@@ -147,7 +147,7 @@ module Inventory
       # Sorts, limits and converts inventory information retrieved from SolrDocument and Alma into
       # Inventory::Entry objects.
       #
-      # @param inventory_data [Array, NilClass] inventory data from API calls
+      # @param inventory_data [Array, nil] inventory data from API calls
       # @param document [SolrDocument]
       # @param limit [Integer, nil] limit number of returned objects
       # @return [Array<Inventory::List::Entry::Base>]
@@ -170,7 +170,7 @@ module Inventory
 
       # Check if inventory data is present and for electronic inventory
       #
-      # @param inventory_data [Array<Hash>, NilClass]
+      # @param inventory_data [Array<Hash>, nil]
       # @return [Boolean]
       def electronic_inventory?(inventory_data)
         return false unless inventory_data
