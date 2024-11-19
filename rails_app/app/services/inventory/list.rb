@@ -58,11 +58,11 @@ module Inventory
       #
       # @param document [SolrDocument]
       # @param limit [Integer, nil]
-      # @return [Inventory::Response]
+      # @return [Inventory::List::Response]
       def resource_links(document, limit: RESOURCE_LINK_LIMIT)
         entries = from_marc(document, limit)
 
-        Inventory::List::Response.new(entries: entries, complete: true)
+        Response.new(entries: entries, complete: true)
       end
 
       private
@@ -92,7 +92,7 @@ module Inventory
       #
       # @param mms_id [String]
       # @param raw_data [Hash] single hash from array of inventory data
-      # @return [Inventory::Entry]
+      # @return [Inventory::List::Entry::Base]
       def create_entry(mms_id, **raw_data)
         case raw_data[:inventory_type]&.downcase
         when PHYSICAL then Entry::Physical.new(mms_id: mms_id, **raw_data)
@@ -118,7 +118,7 @@ module Inventory
       #
       # @param document [SolrDocument] document containing MARC with resource links
       # @param limit [Integer, nil] limit number of returned objects
-      # @return [Array<Inventory::Entry>]
+      # @return [Array<Inventory::List::Entry::Base>]
       def from_marc(document, limit = nil)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
@@ -150,7 +150,7 @@ module Inventory
       # @param inventory_data [Array, NilClass] inventory data from API calls
       # @param document [SolrDocument]
       # @param limit [Integer, nil] limit number of returned objects
-      # @return [Array<Inventory::Entry>]
+      # @return [Array<Inventory::List::Entry::Base>]
       def api_entries(inventory_data, document, limit: nil)
         sorted_data = Inventory::List::Sort::Factory.create(inventory_data).sort
         limited_data = sorted_data[0...limit] # limit entries prior to turning them into objects
