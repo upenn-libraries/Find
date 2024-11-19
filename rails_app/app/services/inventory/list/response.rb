@@ -6,7 +6,7 @@ module Inventory
     class Response
       include Enumerable
 
-      attr_reader :entries, :complete
+      attr_reader :entries
 
       # @param [Array] entries
       # @param [Boolean] complete
