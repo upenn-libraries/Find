@@ -18,21 +18,21 @@ FactoryBot.define do
     end
 
     trait :aeon_offsite do
-      library_code { Inventory::Location::LIBRA }
+      library_code { Settings.fulfillment.restricted_libraries.libra }
       location_code { 'athstor' }
     end
 
     trait :archives do
-      library_code { Inventory::Location::ARCHIVES }
+      library_code { Settings.fulfillment.restricted_libraries.archives }
       location_code { 'univarch' }
     end
 
     trait :hsp do
-      library_code { Inventory::Location::HSP }
+      library_code { Settings.fulfillment.restricted_libraries.hsp }
     end
 
     trait :libra do
-      library_code { Inventory::Location::LIBRA }
+      library_code { Settings.fulfillment.restricted_libraries.libra }
       location_code { 'stor' }
     end
 
