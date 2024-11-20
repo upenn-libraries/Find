@@ -19,16 +19,13 @@ module Hathi
       record&.fetch('recordURL', nil)
     end
 
-    # Don't render until we figure out how to display it and can mock it in the system specs
-    def render?
-      false
+    def exists_in_hathi?
+      records = hathi_record['records']
+      records.present?
     end
 
-    # Placeholder view logic to test that the link is extracting and displaying
-    def call
-      content_tag(:p) do
-        link
-      end
+    def render?
+      exists_in_hathi?
     end
   end
 end

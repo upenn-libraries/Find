@@ -5,11 +5,16 @@ module Inventory
     # Renders vertical navigation pane for record show page inventory entries. Uses tab pill nav functionality
     # provided by Bootstrap.
     class NavigationComponent < ViewComponent::Base
+      renders_one :hathi_link, lambda {
+        Hathi::HathiComponent.new(document: @document)
+      }
+
       # @param inventory [Inventory::Response] inventory response object
       # @param selected_id [String] entry id for selected entry
-      def initialize(inventory:, selected_id:)
+      def initialize(inventory:, selected_id:, document:)
         @inventory = inventory
         @selected_id = selected_id
+        @document = document
       end
 
       # Is a passed-in entry currently selected? Used to add 'active' class
@@ -30,6 +35,11 @@ module Inventory
                    else
                      'inventory-item__availability'
                    end
+      end
+
+      def before_render
+        super
+        set_slot(:hathi_link, nil) unless hathi_link
       end
     end
   end
