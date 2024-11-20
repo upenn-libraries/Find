@@ -23,7 +23,9 @@ module Fulfillment
         pickup_locations[DEFAULT_PICKUP]
       end
 
-      # @todo what to do about @ill here? I think we want to get rid of it
+      # Since this component is used both on the record page and the ILL form, we need to know the right pickup value
+      # to include so the right fulfillment endpoint is used.
+      # @return [Symbol]
       def delivery_value
         @ill ? Fulfillment::Options::Deliverable::ILL_PICKUP : Fulfillment::Options::Deliverable::PICKUP
       end
