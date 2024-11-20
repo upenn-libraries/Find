@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  # Undeliverable component logic
+  # Renders options available to users when an item is "available", but located at an external library or only available by visiting the library in-person.
   class UndeliverableComponent < ViewComponent::Base
     attr_accessor :options
 
