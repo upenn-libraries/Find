@@ -110,7 +110,6 @@ describe 'Catalog show page requesting behaviors' do
         end
       end
     end
-
   end
 
   context 'when not logged in' do

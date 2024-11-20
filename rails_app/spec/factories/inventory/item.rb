@@ -76,7 +76,7 @@ FactoryBot.define do
   trait :on_reserve do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reserves }
+      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.reserve }
       item
     end
   end
