@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  # Renders options available to user when a item is unavailable. When an item is unavailable Penn users can submit ILL requests, while courtesy borrowers cannot. 
+  # Renders options available to user when a item is unavailable. When an item is unavailable Penn users can submit ILL
+  # requests, while courtesy borrowers cannot.
   class UnavailableComponent < ViewComponent::Base
     attr_accessor :options
 
