@@ -165,11 +165,11 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.delivery == Request::Options::MAIL
+          if request.delivery == Options::Deliverable::MAIL
             # Set "BBM" title prefix so requests are routes to BBM staff
             body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
             body[:ItemInfo1] = BOOKS_BY_MAIL
-          elsif request.delivery == Request::Options::OFFICE
+          elsif request.delivery == Options::Deliverable::OFFICE
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
           else

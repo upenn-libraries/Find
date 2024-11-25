@@ -1,87 +1,9 @@
 <%= turbo_frame_tag 'options_frame' do %>
   <% if deliverable? %>
-    <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
-      <% if options.ill_pickup? %>
-        <p class="alert alert-info mb-3">
-          <%= t('requests.form.options.only_ill_requestable') %>
-        </p>
-      <% end %>
-      <fieldset>
-        <legend class="h6"> <%= t('requests.form.options.label') %></legend>
-        <ul class="list-group">
-          <% if options.electronic? %>
-            <%= render(Fulfillment::Options::ElectronicComponent.new(checked: true, data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.office? %>
-            <%= render(Fulfillment::Options::OfficeComponent.new(user: user,
-                                                                       checked: !options.electronic?,
-                                                                       data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.pickup? %>
-            <%= render(Fulfillment::Options::PickupComponent.new(user: user,
-                                                                       checked: !options.any?(:electronic, :office),
-                                                                       data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.ill_pickup? %>
-            <%= render(Fulfillment::Options::PickupComponent.new(user: user, ill: true,
-                                                                       checked: !options.any?(:electronic, :office),
-                                                                       data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-
-          <% if options.mail? %>
-            <%= render(Fulfillment::Options::MailComponent.new(user: user, data: { action: 'change->request-options#optionChanged' })) %>
-          <% end %>
-        </ul>
-      </fieldset>
-
-      <%# toggleable comments box, for direct-from-form (no redirect) Alma and ILL requests only %>
-      <% if commentable? %>
-        <div id="add-comments" class="mt-2" data-controller="comments">
-          <%= link_to t('requests.form.add_comments'), '', { data: { comments_target: 'addCommentsButton', action: 'click->comments#showCommentsArea' } } %>
-          <div class="d-none" data-comments-target="commentsArea">
-            <div class="d-flex justify-content-between">
-              <%= label_tag :comments, t('requests.form.comments_label'), class: 'form-label' %>
-              <a href="#">
-                <i class="bi bi-x" data-comments-target="hideCommentsButton" data-action="click->comments#hideCommentsArea"></i>
-              </a>
-            </div>
-            <%= text_area_tag :comments, nil, class: 'form-control mb-3' %>
-          </div>
-        </div>
-      <% end %>
-
-      <%# Add hidden fields with values needed for form submission to the request endpoint. %>
-      <% item.loan_params.each do |k, v| %>
-        <%= hidden_field_tag k, v %>
-      <% end %>
-
-      <div class="request-buttons mt-3">
-        <%= submit_button_for(Fulfillment::Request::Options::OFFICE) %>
-        <%= submit_button_for(Fulfillment::Request::Options::PICKUP) %>
-        <%= submit_button_for(Fulfillment::Request::Options::ILL_PICKUP) %>
-        <%= submit_button_for(Fulfillment::Request::Options::MAIL) %>
-        <%= electronic_delivery_link %>
-      </div>
-    </div>
-  <% elsif options.aeon? %>
-    <p id="aeon-option" class="mb-3"><%= t('requests.form.options.aeon.info') %></p>
-    <div class="request-buttons mt-3">
-      <%= aeon_link %>
-    </div>
-  <% elsif options.archives? %>
-    <p id="archives-option" class="alert alert-info mb-3">
-      <%= t('requests.form.options.archives.info_html', visit_url: t('urls.requesting_info.archives_visit'),
-            contact_url: t('urls.requesting_info.archives_contact')) %>
-    </p>
-  <% elsif options.hsp? %>
-    <p id="hsp-option" class="mb-3"><%= t('requests.form.options.hsp.info_html', url: t('urls.requesting_info.hsp')) %></p>
-    <%= link_to t('requests.form.buttons.hsp'), t('urls.requesting_info.hsp_appointment'), class: 'btn btn-success btn-lg', target: '_blank' %>
+    <%= render Fulfillment::DeliverableComponent.new(options_set: options) %>
+  <% elsif restricted? %>
+    <%= render Fulfillment::UndeliverableComponent.new(options_set: options) %>
   <% else %>
-    <p class="alert alert-info mb-3">
-      <%= t('requests.form.options.none.info') %>
-    </p>
+    <%= render Fulfillment::UnavailableComponent.new(options_set: options) %>
   <% end %>
 <% end %>
