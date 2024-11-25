@@ -11,6 +11,7 @@ module Hathi
     end
 
     # Helper method that extracts the link from the Hathi response
+    # @return [String]
     def link
       records = hathi_record['records']
       return if records.blank?
@@ -19,11 +20,13 @@ module Hathi
       record&.fetch('recordURL', nil)
     end
 
+    # @return [TrueClass, FalseClass]
     def exists_in_hathi?
       records = hathi_record['records']
       records.present?
     end
 
+    # @return [TrueClass, FalseClass]
     def render?
       exists_in_hathi?
     end
