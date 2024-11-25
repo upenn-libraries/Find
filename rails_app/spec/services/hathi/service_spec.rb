@@ -3,14 +3,14 @@
 describe Hathi::Service do
   include FixtureHelpers
 
-  let(:record) { described_class.record(identifiers: identifiers) }
+  let(:record) { described_class.record(identifier_map: identifier_map) }
 
   before do
-    allow(described_class).to receive(:hathi_response).with(identifiers).and_return(response)
+    allow(described_class).to receive(:hathi_response).with(identifier_map).and_return(response)
   end
 
   context 'with a single identifier' do
-    let(:identifiers) { { oclc: '3644448' } }
+    let(:identifier_map) { { oclc: '3644448' } }
 
     context 'when a Hathi record is present' do
       let(:response) do
@@ -34,7 +34,7 @@ describe Hathi::Service do
   end
 
   context 'with multiple identifiers' do
-    let(:identifiers) { { oclc: '1259467', lccn: '10022969' } }
+    let(:identifier_map) { { oclc: '1259467', lccn: '10022969' } }
 
     context 'when a Hathi record is present' do
       let(:response) do

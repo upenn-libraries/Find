@@ -60,7 +60,7 @@ class SolrDocument
 
   # Identifier to be used by Hathi API service to get Hathi link
   # @return [Hash]
-  def identifiers
+  def identifier_map
     types = %w[oclc_id isbn issn]
     types.each_with_object({}) do |type, ids|
       value = fetch(:"#{type}_ss", []).first

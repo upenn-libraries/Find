@@ -3,11 +3,11 @@
 module Hathi
   # Hathi link component
   class HathiComponent < ViewComponent::Base
-    attr_accessor :identifiers, :hathi_record
+    attr_accessor :identifier_map, :hathi_record
 
     def initialize(document:)
-      @identifiers = document.identifiers
-      @hathi_record = Hathi::Service.record(identifiers: identifiers)
+      @identifier_map = document.identifier_map
+      @hathi_record = Hathi::Service.record(identifier_map: identifier_map)
     end
 
     # Helper method that extracts the link from the Hathi response

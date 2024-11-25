@@ -6,21 +6,21 @@ module Hathi
     class << self
       # Returns the full record from the Hathi response. There are two primary keys, `records` and `items`.
       # @return [Hash]
-      def record(identifiers:)
-        return if identifiers.blank?
+      def record(identifier_map:)
+        return if identifier_map.blank?
 
-        response_data = hathi_response(identifiers)
+        response_data = hathi_response(identifier_map)
         return unless response_data
 
-        extract_record(response_data, identifiers)
+        extract_record(response_data, identifier_map)
       end
 
       private
 
-      # @param [Array] identifiers
+      # @param [Array] identifier_map
       # @return [Faraday::Connection]
-      def client(identifiers)
-        Faraday.new(url: request_url(identifiers)) do |config|
+      def client(identifier_map)
+        Faraday.new(url: request_url(identifier_map)) do |config|
           config.request :json
           config.request :retry,
                          exceptions: retry_exceptions,
@@ -31,34 +31,34 @@ module Hathi
         end
       end
 
-      # @param [Hash] identifiers
+      # @param [Hash] identifier_map
       # @return [Hash, nil]
-      def hathi_response(identifiers)
-        client(identifiers).get.body
+      def hathi_response(identifier_map)
+        client(identifier_map).get.body
       rescue Faraday::Error => e
         Honeybadger.notify(e)
       end
 
       # @param [Hash] response_data
-      # @param [Hash] identifiers
+      # @param [Hash] identifier_map
       # @return [String, nil]
-      def extract_record(response_data, identifiers)
-        joined_ids = format_identifiers(identifiers)
+      def extract_record(response_data, identifier_map)
+        joined_ids = format_identifiers(identifier_map)
         return unless joined_ids
 
         response_data[joined_ids]
       end
 
-      # @param [Hash] identifiers
+      # @param [Hash] identifier_map
       # @return [String]
-      def request_url(identifiers)
-        "#{Settings.hathi.base_url}/#{format_identifiers(identifiers)}"
+      def request_url(identifier_map)
+        "#{Settings.hathi.base_url}/#{format_identifiers(identifier_map)}"
       end
 
-      # @param [Hash] identifiers
+      # @param [Hash] identifier_map
       # @return [Array]
-      def format_identifiers(identifiers)
-        identifiers.filter_map { |type, value| "#{type}:#{value}" }.join(';')
+      def format_identifiers(identifier_map)
+        identifier_map.filter_map { |type, value| "#{type}:#{value}" }.join(';')
       end
 
       # @return [Array]
