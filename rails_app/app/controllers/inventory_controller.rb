@@ -44,6 +44,16 @@ class InventoryController < ApplicationController
     end
   end
 
+  # GET /inventory/:id/hathi_link
+  # Returns Hathi link component
+  def hathi_link
+    respond_to do |format|
+      format.html do
+        render(Hathi::HathiComponent.new(document: @document), layout: false)
+      end
+    end
+  end
+
   private
 
   # Default to no search state.

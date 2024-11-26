@@ -5,9 +5,7 @@ module Inventory
     # Renders vertical navigation pane for record show page inventory entries. Uses tab pill nav functionality
     # provided by Bootstrap.
     class NavigationComponent < ViewComponent::Base
-      renders_one :hathi_link, lambda {
-        Hathi::HathiComponent.new(document: @document)
-      }
+      include Turbo::FramesHelper
 
       # @param inventory [Inventory::Response] inventory response object
       # @param selected_id [String] entry id for selected entry
@@ -35,11 +33,6 @@ module Inventory
                    else
                      'inventory-item__availability'
                    end
-      end
-
-      def before_render
-        super
-        set_slot(:hathi_link, nil) unless hathi_link
       end
     end
   end

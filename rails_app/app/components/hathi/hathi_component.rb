@@ -3,6 +3,8 @@
 module Hathi
   # Hathi link component
   class HathiComponent < ViewComponent::Base
+    include Turbo::FramesHelper
+
     attr_accessor :identifier_map, :hathi_record
 
     def initialize(document:)

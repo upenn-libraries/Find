@@ -209,6 +209,7 @@
 }
 
 a.inventory-item--hathitrust {
+  display: block;
   text-decoration: none;
   color: #c35400;
   margin-top: 1.5rem;
@@ -264,10 +265,6 @@ a.inventory-item--hathitrust {
 
 .location-details__content p {
   margin-bottom: 0;
-}
-
-.hathitrust__link {
-  margin-top: 0.5rem;
 }
 
 @media (min-width: 992px) {

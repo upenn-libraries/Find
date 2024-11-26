@@ -47,7 +47,7 @@
           <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
         </button>
       <% end %>
-      <%= hathi_link %>
+      <%= turbo_frame_tag 'hathi_frame', src: hathi_link_inventory_path, loading: 'lazy' %>
     </div>
   </div>
   <% unless @inventory.complete? %>
