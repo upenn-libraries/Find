@@ -9,10 +9,9 @@ module Inventory
 
       # @param inventory [Inventory::Response] inventory response object
       # @param selected_id [String] entry id for selected entry
-      def initialize(inventory:, selected_id:, document:)
+      def initialize(inventory:, selected_id:)
         @inventory = inventory
         @selected_id = selected_id
-        @document = document
       end
 
       # Is a passed-in entry currently selected? Used to add 'active' class

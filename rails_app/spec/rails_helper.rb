@@ -80,9 +80,13 @@ RSpec.configure do |config|
   config.include ViewComponent::SystemTestHelpers, type: :components
   config.include Capybara::RSpecMatchers, type: :components
 
+  # Global Hathi request mock
+  config.include Hathi::ApiMocks::Request
+
   # Clean out Solr core before each test.
   config.before do
     SampleIndexer.clear!
+    stub_empty_hathi_request
   end
 
   # Clean out Solr core after the last test completes.

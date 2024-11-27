@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Catalog Show Page' do
+  include FixtureHelpers
+
   context 'when the Alma API calls time out' do
     include_context 'with electronic database record having a resource link entry but fails to retrieve Alma holdings'
 
@@ -228,6 +230,19 @@ describe 'Catalog Show Page' do
           ))
         end
       end
+    end
+  end
+
+  context 'with an existing hathi record' do
+    include_context 'with print monograph record with 2 physical entries'
+
+    before do
+      stub_present_hathi_request(response: JSON.parse(json_fixture('single_id_record', :hathi)))
+      visit(solr_document_path(print_monograph_bib))
+    end
+
+    it 'displays link to hathi' do
+      expect(page).to have_selector('.inventory-item--hathitrust')
     end
   end
 end

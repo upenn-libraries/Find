@@ -5,7 +5,7 @@ module Catalog
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
-      Inventory::Full::NavigationComponent.new(inventory: @inventory, selected_id: @selected_id, document: @document)
+      Inventory::Full::NavigationComponent.new(inventory: @inventory, selected_id: @selected_id)
     }
 
     renders_one :inventory_content, lambda {
