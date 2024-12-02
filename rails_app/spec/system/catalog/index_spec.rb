@@ -39,6 +39,8 @@ describe 'Catalog Index Page' do
   end
 
   context 'with an empty search' do
+    include_context 'with empty hathi response'
+
     before { visit search_catalog_path(params: { q: '', search_field: 'all_fields' }) }
 
     it 'displays facets' do

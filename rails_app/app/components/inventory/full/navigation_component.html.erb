@@ -25,33 +25,37 @@
       aria-orientation="vertical"
       data-controller="inventory-list"
     >
-    <% @inventory.each_with_index do |entry, i| %>
-      <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
-              id="inventory-pills-<%= i %>"
-              data-bs-toggle="pill"
-              data-bs-target="#inventory-<%= i %>"
-              data-search-list-target="entry"
-              type="button"
-              role="tab"
-              aria-controls="inventory-<%= i %>"
-              aria-selected="<%= active?(entry) ? 'true' : 'false' %>"
-              data-inventory-list-target="entryButton"
-              data-action="click->inventory-list#entryChanged"
-              data-entry-id="<%= entry.id %>"
-      >
-        <span class="inventory-item__header"><%= entry.human_readable_location %></span>
-        <span class="inventory-item__main"><%= entry.description %></span>
-        <% unless entry.resource_link? %>
-          <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
-        <% end %>
-        <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
-      </button>
-    <% end %>
+      <% @inventory.each_with_index do |entry, i| %>
+        <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
+                id="inventory-pills-<%= i %>"
+                data-bs-toggle="pill"
+                data-bs-target="#inventory-<%= i %>"
+                data-search-list-target="entry"
+                type="button"
+                role="tab"
+                aria-controls="inventory-<%= i %>"
+                aria-selected="<%= active?(entry) ? 'true' : 'false' %>"
+                data-inventory-list-target="entryButton"
+                data-action="click->inventory-list#entryChanged"
+                data-entry-id="<%= entry.id %>"
+        >
+          <span class="inventory-item__header"><%= entry.human_readable_location %></span>
+          <span class="inventory-item__main"><%= entry.description %></span>
+          <% unless entry.resource_link? %>
+            <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
+          <% end %>
+          <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
+        </button>
+      <% end %>
+      <%= turbo_frame_tag 'hathi_frame', src: hathi_link_inventory_path,
+                          loading: 'lazy',
+                          data: { controller: 'missing_frame',
+                                  missing_frame_error_value: I18n.t('inventory.hathi.missing_frame') } %>
     </div>
   </div>
   <% unless @inventory.complete? %>
-  <p class="mt-3">
-    <%= t('inventory.incomplete_inventory') %>
-  </p>
+    <p class="mt-3">
+      <%= t('inventory.incomplete_inventory') %>
+    </p>
   <% end %>
 </div>

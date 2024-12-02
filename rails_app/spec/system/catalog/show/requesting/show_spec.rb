@@ -4,6 +4,7 @@ require 'system_helper'
 
 describe 'Catalog show page requesting behaviors' do
   include_context 'with print monograph record with 2 physical entries'
+  include_context 'with empty hathi response'
 
   let(:user) { create(:user) }
   let(:mms_id) { print_monograph_bib }

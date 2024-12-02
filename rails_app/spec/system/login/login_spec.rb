@@ -44,6 +44,7 @@ describe 'login page' do
   context 'when logging in from a record page' do
     include_context 'with print monograph record with 2 physical entries'
     include_context 'with mock alma_record on user having alma_user_group user group'
+    include_context 'with empty hathi response'
 
     before do
       allow(Inventory::Item).to receive(:find_all).and_return([create(:item)])
