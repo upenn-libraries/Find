@@ -25,7 +25,7 @@ module Hathi
     # Render the component only if the record exists in HathiTrust, as indicated by the presence of the 'records' hash
     # @return [TrueClass, FalseClass]
     def render?
-      return false unless hathi_record.present?
+      return false if hathi_record.blank?
 
       hathi_record['records'].present?
     end
