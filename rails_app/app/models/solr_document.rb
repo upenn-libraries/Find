@@ -64,7 +64,7 @@ class SolrDocument
     types = %w[oclc_id isbn issn]
     types.each_with_object({}) do |type, ids|
       value = fetch(:"#{type}_ss", []).first
-      ids[:"#{type.sub('_id', '')}"] = value if value
+      ids[:"#{type.sub('_id', '')}"] = value.gsub(/[^0-9-]/, '') if value
     end
   end
 end
