@@ -49,7 +49,7 @@ class InventoryController < ApplicationController
   def hathi_link
     respond_to do |format|
       format.html do
-        render(Hathi::HathiComponent.new(document: @document), layout: false)
+        render(Hathi::HathiComponent.new(identifier_map: @document.identifier_map), layout: false)
       end
     end
   end

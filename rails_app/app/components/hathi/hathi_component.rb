@@ -5,10 +5,10 @@ module Hathi
   class HathiComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
-    attr_accessor :identifier_map, :hathi_record
+    attr_accessor :hathi_record
 
-    def initialize(document:)
-      @identifier_map = document.identifier_map
+    def initialize(identifier_map:)
+      @identifier_map = identifier_map
       @hathi_record = Hathi::Service.record(identifier_map: identifier_map)
     end
 
@@ -22,15 +22,11 @@ module Hathi
       record&.fetch('recordURL', nil)
     end
 
-    # @return [TrueClass, FalseClass]
-    def exists_in_hathi?
-      records = hathi_record['records']
-      records.present?
-    end
-
+    # Render the component only if the record exists in HathiTrust, as indicated by the presence of the 'records' hash
     # @return [TrueClass, FalseClass]
     def render?
-      exists_in_hathi?
+      records = hathi_record['records']
+      records.present?
     end
   end
 end

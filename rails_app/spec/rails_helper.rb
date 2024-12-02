@@ -86,7 +86,6 @@ RSpec.configure do |config|
   # Clean out Solr core before each test.
   config.before do
     SampleIndexer.clear!
-    stub_empty_hathi_request
   end
 
   # Clean out Solr core after the last test completes.

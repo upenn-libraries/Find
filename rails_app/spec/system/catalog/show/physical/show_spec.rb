@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Catalog show page with a Physical record' do
+  include_context 'with empty hathi response'
+
   context 'when viewing a print monograph record' do
     include_context 'with print monograph record with 2 physical entries'
 

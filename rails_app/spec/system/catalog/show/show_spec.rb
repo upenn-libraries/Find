@@ -4,6 +4,7 @@ require 'system_helper'
 
 describe 'Catalog Show Page' do
   include FixtureHelpers
+  include_context 'with empty hathi response'
 
   context 'when the Alma API calls time out' do
     include_context 'with electronic database record having a resource link entry but fails to retrieve Alma holdings'
@@ -235,9 +236,9 @@ describe 'Catalog Show Page' do
 
   context 'with an existing hathi record' do
     include_context 'with print monograph record with 2 physical entries'
+    include_context 'with present hathi response'
 
     before do
-      stub_present_hathi_request(response: JSON.parse(json_fixture('single_id_record', :hathi)))
       visit(solr_document_path(print_monograph_bib))
     end
 

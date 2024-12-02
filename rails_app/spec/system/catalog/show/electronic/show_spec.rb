@@ -4,6 +4,7 @@ require 'system_helper'
 
 describe 'Catalog show page with an Electronic record' do
   include_context 'with electronic journal record with 4 electronic entries'
+  include_context 'with empty hathi response'
 
   let(:mms_id) { electronic_journal_bib }
   let(:entries) { electronic_journal_entries }
