@@ -13,7 +13,7 @@ module Hathi
     end
 
     # Helper method that extracts the link from the Hathi response
-    # @return [String]
+    # @return [String, nil]
     def link
       records = hathi_record['records']
       return if records.blank?
@@ -23,7 +23,7 @@ module Hathi
     end
 
     # Render the component only if the record exists in HathiTrust, as indicated by the presence of the 'records' hash
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def render?
       return false if hathi_record.blank?
 

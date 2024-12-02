@@ -50,7 +50,7 @@
       <%= turbo_frame_tag 'hathi_frame', src: hathi_link_inventory_path,
                           loading: 'lazy',
                           data: { controller: 'missing_frame',
-                                  missing_frame_error_value: I18n.t('inventory.hathi_missing_frame') } %>
+                                  missing_frame_error_value: I18n.t('inventory.hathi.missing_frame') } %>
     </div>
   </div>
   <% unless @inventory.complete? %>

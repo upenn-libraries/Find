@@ -6,7 +6,7 @@ module Hathi
     class << self
       # Returns the full record from the Hathi response. There are two primary keys, `records` and `items`.
       # @param [Hash] identifier_map
-      # @return [Hash]
+      # @return [Hash, nil]
       def record(identifier_map:)
         return if identifier_map.blank?
 
