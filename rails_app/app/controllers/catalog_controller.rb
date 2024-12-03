@@ -210,7 +210,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
 
-    # this field above all the clickable fields
+    # clickable fields
     config.add_show_field :format_facet,
                           label: I18n.t('show.format.facet'),
                           component: Catalog::FacetLinkComponent, facet_target: :format_facet
@@ -232,8 +232,7 @@ class CatalogController < ApplicationController
     config.add_show_field :title_standardized_show,
                           label: I18n.t('show.title.standardized'), accessor: :marc,
                           component: Catalog::QueryLinkComponent, search_target: :title_search
-    config.add_show_field :language_facet,
-                          label: I18n.t('show.language.facet'), link_to_facet: true
+    config.add_show_field :language_facet, label: I18n.t('show.language.facet'), link_to_facet: true
     config.add_show_field :subject_show,
                           label: I18n.t('show.subject.all'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
@@ -243,9 +242,12 @@ class CatalogController < ApplicationController
     config.add_show_field :subject_local_show,
                           label: I18n.t('show.subject.local'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
+    config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc,
+                                       component: Catalog::FacetLinkComponent, facet_target: :genre_facet
     config.add_show_field :note_provenance_show,
                           label: I18n.t('show.notes.provenance'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_search
+    # non-clickable fields
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
     config.add_show_field :production_show, label: I18n.t('show.production.main'), accessor: :marc
@@ -259,7 +261,6 @@ class CatalogController < ApplicationController
     config.add_show_field :title_former_show, label: I18n.t('show.title.former'), accessor: :marc
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
-    config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language.main'), accessor: :marc
