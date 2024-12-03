@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/dbwwei/alma_rb.git
+  revision: 72eef98413632ab7a8430c7932689c220dfd4c9f
+  ref: 72eef98413632ab7a8430c7932689c220dfd4c9f
+  specs:
+    alma (0.6.1)
+      activesupport
+      httparty
+      xml-simple
+
+GIT
   remote: https://github.com/projectblacklight/blacklight.git
   revision: 5a779c5a96a835152df5bee9f2e7b6088aaee5a9
   ref: 5a779c5a96a835152df5bee9f2e7b6088aaee5a9
@@ -91,10 +101,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    alma (0.6.0)
-      activesupport
-      httparty
-      xml-simple
     ast (2.4.2)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
@@ -264,11 +270,11 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
-    minitest (5.25.1)
+    minitest (5.25.2)
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     net-http (0.4.1)
       uri
     net-imap (0.4.12)
@@ -371,7 +377,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.7)
+    rexml (3.3.9)
     rsolr (2.6.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
@@ -504,7 +510,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  alma (= 0.6.0)
+  alma!
   blacklight!
   blacklight-ris
   bootsnap
