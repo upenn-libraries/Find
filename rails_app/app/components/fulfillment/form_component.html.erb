@@ -5,6 +5,7 @@
       <div class="col-md-7">
         <div data-controller="item-select">
           <%= form_with(url: requests_path, method: :post, html: { class: 'fulfillment-form' }) do |form| %>
+            <%= form.hidden_field :source, value: Fulfillment::Endpoint::Illiad::RECORD_PAGE_SOURCE_SID %>
             <%= form.hidden_field :mms_id, value: @mms_id, data: { item_select_target: 'mmsIdField' } %>
             <%= form.hidden_field :holding_id, value: @holding_id, data: { item_select_target: 'holdingIdField' } %>
 

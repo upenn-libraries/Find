@@ -18,7 +18,8 @@ module Fulfillment
     class Illiad < Endpoint
       class UserError < StandardError; end
 
-      CITED_IN = 'info:sid/library.upenn.edu'
+      ILL_FORM_SOURCE_SID = 'info:sid/find.library.upenn.edu/request'
+      RECORD_PAGE_SOURCE_SID = 'info:sid/find.library.upenn.edu/record'
       BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
@@ -136,7 +137,7 @@ module Fulfillment
             CallNumber: request.params.call_number,
             ISSN: request.params.isbn,
             ESPNumber: request.params.pmid,
-            CitedIn: request.params.sid || CITED_IN,
+            CitedIn: request.params.sid,
             ItemInfo3: request.params.barcode }
         end
 
@@ -157,7 +158,7 @@ module Fulfillment
             ESPNumber: request.params.pmid,
             PhotoArticleAuthor: request.params.author,
             PhotoArticleTitle: request.params.chapter_title || request.params.article,
-            CitedIn: request.params.sid || CITED_IN }
+            CitedIn: request.params.sid }
         end
 
         # @note See class level docs above
