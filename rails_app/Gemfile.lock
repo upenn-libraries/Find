@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/dbwwei/alma_rb.git
-  revision: 72eef98413632ab7a8430c7932689c220dfd4c9f
-  ref: 72eef98413632ab7a8430c7932689c220dfd4c9f
-  specs:
-    alma (0.6.1)
-      activesupport
-      httparty
-      xml-simple
-
-GIT
   remote: https://github.com/projectblacklight/blacklight.git
   revision: 5a779c5a96a835152df5bee9f2e7b6088aaee5a9
   ref: 5a779c5a96a835152df5bee9f2e7b6088aaee5a9
@@ -21,6 +11,16 @@ GIT
       ostruct (>= 0.3.2)
       rails (>= 6.1, < 8)
       view_component (>= 2.66, < 4)
+
+GIT
+  remote: https://github.com/tulibraries/alma_rb.git
+  revision: 72eef98413632ab7a8430c7932689c220dfd4c9f
+  ref: 72eef98413632ab7a8430c7932689c220dfd4c9f
+  specs:
+    alma (0.6.1)
+      activesupport
+      httparty
+      xml-simple
 
 GEM
   remote: https://rubygems.org/
