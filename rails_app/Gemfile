@@ -24,7 +24,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-saml'
 gem 'pennmarc', '~> 1'
 gem 'pg', '~> 1.1'
-gem 'puma', github: 'puma/puma', branch: 'master' # see https://github.com/rack/rackup/issues/19
+gem 'puma'
 gem 'put'
 gem 'rails', '~> 7.1'
 gem 'requestjs-rails'
