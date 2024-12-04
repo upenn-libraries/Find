@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.5'
 
-gem 'alma', '= 0.6.0'
+gem 'alma', github: 'tulibraries/alma_rb', ref: '72eef98413632ab7a8430c7932689c220dfd4c9f'
 gem 'blacklight', '~> 8.4'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false

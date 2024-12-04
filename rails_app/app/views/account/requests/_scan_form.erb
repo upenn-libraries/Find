@@ -1,5 +1,5 @@
 <%= form_with(url: requests_path, method: :post, data: { controller: 'form-validation' }) do %>
-  <%= hidden_field_tag :delivery, Fulfillment::Request::Options::ELECTRONIC %>
+  <%= hidden_field_tag :delivery, Fulfillment::Options::Deliverable::ELECTRONIC %>
 
   <%= render 'hidden_fields' %>
   <%= render 'proxy_fields' %>

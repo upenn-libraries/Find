@@ -26,7 +26,8 @@ class FulfillmentController < ApplicationController
   def options
     item = Inventory::Item.find(mms_id: params[:mms_id], holding_id: params[:holding_id], item_id: params[:item_id],
                                 alma_user: current_user&.uid)
+    options_set = Fulfillment::Service.options(item: item, user: current_user)
 
-    render(Fulfillment::OptionsComponent.new(user: current_user, item: item), layout: false)
+    render(Fulfillment::OptionsComponent.new(options_set: options_set), layout: false)
   end
 end

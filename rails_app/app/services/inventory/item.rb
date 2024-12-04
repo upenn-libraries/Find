@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Adds necessary functionality to determine item checkout status for rendering circulation options
+  # Supplement Alma::BibItem with additional functionality
   class Item
     extend Item::Finders
     include Item::Export
-
-    IN_HOUSE_POLICY_CODE = 'InHouseView'
-    NOT_LOANABLE_POLICY = 'Not loanable'
-    UNSCANNABLE_MATERIAL_TYPES = %w[RECORD DVD CDROM BLURAY BLURAYDVD LP FLOPPY_DISK DAT GLOBE AUDIOCASSETTE
-                                    VIDEOCASSETTE HEAD LRDSC CALC KEYS RECORD LPTOP EQUIP OTHER AUDIOVM].freeze
 
     attr_reader :bib_item
 
@@ -22,42 +17,6 @@ module Inventory
       @bib_item = bib_item
     end
 
-    # @return [Hash]
-    def bib_data
-      @bib_item.item.fetch('bib_data', {})
-    end
-
-    # Return item identifier
-    def id
-      item_data['pid']
-    end
-
-    def holding_id
-      holding_data['holding_id']
-    end
-
-    # Returns true if record is marked as a boundwith.
-    def boundwith?
-      @bib_item.item.fetch('boundwith', false)
-    end
-
-    # Should the user be able to submit a request for this Item?
-    # @return [Boolean]
-    def checkoutable?
-      in_place? && loanable? && !location.aeon? && !on_reserve? && !at_reference? && !in_house_use_only?
-    end
-
-    # @return [String]
-    def user_due_date_policy
-      item_data['due_date_policy']
-    end
-
-    # This is tailored to the user_id, if provided
-    # @return [Boolean]
-    def loanable?
-      !user_due_date_policy&.include? NOT_LOANABLE_POLICY
-    end
-
     # Location object containing location details and helper methods.
     # @see #create_location
     # @return [Inventory::Location]
@@ -65,33 +24,56 @@ module Inventory
       @location ||= create_location
     end
 
-    # Is the item able to be scanned?
-    # @return [Boolean]
-    def scannable?
-      return false if location.hsp?
-
-      location.aeon? || !item_data.dig('physical_material_type', 'value').in?(UNSCANNABLE_MATERIAL_TYPES)
+    # @return [Hash]
+    def bib_data
+      @bib_item.item.fetch('bib_data', {})
     end
 
-    # @return [Boolean]
-    def on_reserve?
-      (item_data.dig('policy', 'value') == 'reserve') || (holding_data.dig('temp_policy', 'value') == 'reserve')
+    # Return item identifier
+    # @return [String]
+    def id
+      item_data['pid']
     end
 
-    # @return [Boolean]
-    def at_reference?
-      (item_data.dig('policy', 'value') == 'reference') || (holding_data.dig('temp_policy', 'value') == 'reference')
+    # @return [String]
+    def holding_id
+      holding_data['holding_id']
     end
 
+    # Returns true if record is marked as a boundwith.
     # @return [Boolean]
-    def in_house_use_only?
-      item_data.dig('policy', 'value') == IN_HOUSE_POLICY_CODE ||
-        holding_data.dig('temp_policy', 'value') == IN_HOUSE_POLICY_CODE
+    def boundwith?
+      @bib_item.item.fetch('boundwith', false)
     end
 
-    # @return [Boolean]
-    def unavailable?
-      !checkoutable? && !location.aeon?
+    # @return [String]
+    def user_due_date_policy
+      item_data['due_date_policy']
+    end
+
+    # Turn "End of Term" and "End of Year" into "Return by End of Year" so this due date policy makes sense in
+    # our select option display context.
+    # @return [String, nil]
+    def humanized_user_policy
+      user_due_date_policy&.starts_with?('End of') ? "Return by #{user_due_date_policy}" : user_due_date_policy
+    end
+
+    # Array of arrays. In each sub-array, the first value is the display value and the
+    # second value is the submitted value for backend processing. Intended for use with Rails select form element
+    # helpers.
+    # @return [Array]
+    def select_label
+      if item_data.present?
+        [[description, physical_material_type['desc'], public_note, location.library_name, humanized_user_policy]
+          .compact_blank.join(' - '), item_data['pid']]
+      else
+        [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
+      end
+    end
+
+    # @return [String]
+    def item_policy
+      item_data.dig('policy', 'value') || item_data.dig('temp_policy', 'value')
     end
 
     # @return [String]
@@ -102,50 +84,6 @@ module Inventory
     # @return [String]
     def issue
       item_data['enumeration_b']
-    end
-
-    # Return an array of fulfillment options for a given item and user. Certain requesting options (ie Aeon) are
-    # available to non-logged in users.
-    #
-    # @param user [User, nil] the user object
-    # @return [Array<Symbol>]
-    def fulfillment_options(user: nil)
-      return [:aeon] if location.aeon?
-      return [:archives] if location.archives?
-      return [:hsp] if location.hsp?
-      return [] if user.nil? # If user is not logged in, no more requesting options can be exposed.
-
-      user.courtesy_borrower? ? courtesy_borrower_options : penn_borrower_options(user)
-    end
-
-    # Fulfillment options available for Penn users.
-    # @param user [User]
-    # @return [Array<Symbol>]
-    def penn_borrower_options(user)
-      options = [Fulfillment::Request::Options::MAIL]
-      options << (checkoutable? ? Fulfillment::Request::Options::PICKUP : Fulfillment::Request::Options::ILL_PICKUP)
-      options << Fulfillment::Request::Options::OFFICE if user.faculty_express?
-      options << Fulfillment::Request::Options::ELECTRONIC if scannable?
-      options
-    end
-
-    # Fulfillment options available for courtesy borrowers. Courtesy borrowers can't make inter-library loan requests.
-    # @return [Array<Symbol>]
-    def courtesy_borrower_options
-      checkoutable? ? [Fulfillment::Request::Options::PICKUP] : []
-    end
-
-    # Array of arrays. In each sub-array, the first value is the display value and the
-    # second value is the submitted value for backend processing. Intended for use with Rails select form element
-    # helpers.
-    # @return [Array]
-    def select_label
-      if item_data.present?
-        [[description, physical_material_type['desc'], public_note, location.library_name]
-          .compact_blank.join(' - '), item_data['pid']]
-      else
-        [[call_number, 'Restricted Access'].compact_blank.join(' - '), 'no-item']
-      end
     end
 
     private

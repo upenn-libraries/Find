@@ -1,0 +1,31 @@
+{
+  "records": {
+    "000366221": {
+      "recordURL": "https://catalog.hathitrust.org/Record/000366221",
+      "titles": [
+        "Archeological investigations in Cochiti Reservoir, New Mexico"
+      ],
+      "isbns": [],
+      "issns": [],
+      "oclcs": [
+        "3644448"
+      ],
+      "lccns": [],
+      "publishDates": [
+        "1977"
+      ]
+    }
+  },
+  "items": [
+    {
+      "orig": "University of Wisconsin - Madison",
+      "fromRecord": "000366221",
+      "htid": "wu.89058392937",
+      "itemURL": "https://babel.hathitrust.org/cgi/pt?id=wu.89058392937",
+      "rightsCode": "pd",
+      "lastUpdate": "20231120",
+      "enumcron": "v.1-v.2",
+      "usRightsString": "Full view"
+    }
+  ]
+}

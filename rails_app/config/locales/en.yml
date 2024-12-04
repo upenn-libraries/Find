@@ -278,8 +278,13 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
     details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
+    hathi:
+      header: 'More viewability at'
+      main: 'HathiTrust Digital Library'
+      missing_frame: "We're having trouble getting the HathiTrust link for this record. Please try again."
   facets:
     access: 'Access'
     classification: 'Classification'
@@ -340,7 +345,7 @@ en:
     score: 'Score'
   requests:
     form:
-      heading: 'Request an item'
+      heading: 'Access options'
       item_label: 'What item are you requesting?'
       item_placeholder: 'Choose an item...'
       buttons:
@@ -354,7 +359,6 @@ en:
         hsp: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
-        only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
@@ -376,12 +380,21 @@ en:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
+        reserve:
+          info_html: 'This item cannot be requested because it is being held in <a href="%{reserves_url}" target="_blank">reserves</a> at the %{library}.'
+        reference:
+          info: 'This item can be consulted for a limited time by visiting the reference desk at the %{library}'
+        onsite:
+          info: 'This item can be consulted by visiting the %{library}.'
+        ill:
+          info: 'This item is currently unavailable from the Penn Libraries. It can be requested from another lending institution by submitting an InterLibrary loan request.'
         none:
-          info: 'This item is unavailable from the Penn libraries.'
+          info: 'This item is unavailable from the Penn Libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+      ill_request_link: 'Request this Item via InterLibrary Loan'
       missing_frame: "We're having trouble getting the requesting options for this item. Please try again."
   fulfillment:
     public_error_message: 'An internal error occurred.'

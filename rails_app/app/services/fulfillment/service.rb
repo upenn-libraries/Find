@@ -6,6 +6,14 @@ module Fulfillment
   #        Will return a successful or failed Fulfillment::Outcome
   class Service
     class << self
+      # Determine the eligible fulfillment options for an item & user combo
+      # @param item [Inventory::Item] item for use in determining fulfillment options
+      # @param user [User] user for use in determining fulfillment options
+      # @return [OptionsSet]
+      def options(item:, user:)
+        OptionsSet.new(item: item, user: user)
+      end
+
       # Creates a request with the parameters provided.
       #
       # @param (see Fulfillment::Request#initialize)
