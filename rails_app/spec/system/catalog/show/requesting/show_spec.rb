@@ -96,9 +96,9 @@ describe 'Catalog show page requesting behaviors' do
         find('details.fulfillment > summary').click
       end
 
-      it 'shows a note about the unavailability status' do
+      it 'shows a note about about ILL fulfillment' do
         within('.fulfillment__container') do
-          expect(page).to have_content I18n.t('requests.form.options.ill.info')
+          expect(page).to have_content I18n.t('requests.form.only_ill_requestable')
         end
       end
 
@@ -107,7 +107,29 @@ describe 'Catalog show page requesting behaviors' do
 
         it 'shows message saying the item is unavailable without an ILL request link' do
           expect(page).to have_content I18n.t('requests.form.options.none.info')
-          expect(page).not_to have_link I18n.t('requests.form.ill_request_link')
+        end
+
+        it 'does not show any pickup options' do
+          within('.fulfillment__container') do
+            expect(page).not_to have_selector 'input'
+            expect(page).to have_text I18n.t('requests.form.options.none.info')
+          end
+        end
+      end
+    end
+
+    context 'with an item that is unavailable an not able to be handled by ILL' do
+      let(:item) { build :item, :laptop_material_type_not_in_place }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'does not show any pickup options' do
+        within('.fulfillment__container') do
+          expect(page).not_to have_selector 'input'
+          expect(page).to have_text I18n.t('requests.form.options.none.info')
         end
       end
     end

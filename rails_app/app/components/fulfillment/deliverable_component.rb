@@ -14,7 +14,8 @@ module Fulfillment
     # Returns true if the request accepts a comment field.
     # @return [TrueClass, FalseClass]
     def commentable?
-      options.inquiry.any?(Fulfillment::Options::Deliverable::PICKUP,
+      options.inquiry.any?(Fulfillment::Options::Deliverable::ILL_PICKUP,
+                           Fulfillment::Options::Deliverable::PICKUP,
                            Fulfillment::Options::Deliverable::MAIL,
                            Fulfillment::Options::Deliverable::OFFICE)
     end
@@ -40,7 +41,7 @@ module Fulfillment
     # Determine if the pickup options should default to being checked
     # @return [Boolean]
     def pickup_checked?
-      options.inquiry.any? Options::Deliverable::ELECTRONIC, Options::Deliverable::OFFICE
+      (options.to_a & [Options::Deliverable::ELECTRONIC, Options::Deliverable::OFFICE]).empty?
     end
   end
 end

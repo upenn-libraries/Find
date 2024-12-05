@@ -1,4 +1,9 @@
 <div id="delivery-options" data-controller="request-options" data-request-options-comments-outlet="#add-comments">
+  <% if options.inquiry.ill_pickup? %>
+    <p class="alert alert-info mb-3">
+      <%= t('requests.form.only_ill_requestable') %>
+    </p>
+  <% end %>
   <fieldset>
     <legend class="h6"> <%= t('requests.form.options.label') %></legend>
     <ul class="list-group">
@@ -8,12 +13,18 @@
 
       <% if options.inquiry.office? %>
         <%= render(Fulfillment::Choices::OfficeComponent.new(user: user,
-                                                             checked: !options_set.electronic?,
+                                                             checked: pickup_checked?,
                                                              data: { action: 'change->request-options#optionChanged' })) %>
       <% end %>
 
       <% if options.inquiry.pickup? %>
         <%= render(Fulfillment::Choices::PickupComponent.new(user: user,
+                                                             checked: pickup_checked?,
+                                                             data: { action: 'change->request-options#optionChanged' })) %>
+      <% end %>
+
+      <% if options.inquiry.ill_pickup? %>
+        <%= render(Fulfillment::Choices::PickupComponent.new(user: user, ill: true,
                                                              checked: pickup_checked?,
                                                              data: { action: 'change->request-options#optionChanged' })) %>
       <% end %>

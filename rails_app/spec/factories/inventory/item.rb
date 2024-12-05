@@ -139,4 +139,16 @@ FactoryBot.define do
       item
     end
   end
+
+  # Combined traits
+  # @todo it would be nice to make all these traits 'stackable'/able to be combined. as of now the attributes_for() call
+  #       means the last included trait overrides previously applied traits.
+  trait :laptop_material_type_not_in_place do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['base_status'] = { 'value' => '0' }
+      item['item_data']['physical_material_type'] = 'LPTOP'
+      item
+    end
+  end
 end

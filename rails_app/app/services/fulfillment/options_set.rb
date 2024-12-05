@@ -34,12 +34,6 @@ module Fulfillment
       (options & Options::Deliverable.all).any?
     end
 
-    # Does this options set represent an unavailable item?
-    # @return [Boolean]
-    def unavailable?
-      options.none?
-    end
-
     # Does this options set represent a restricted access item? So far there is only one restricted option per item,
     # but this logic matches the deliverable? method above for future extensibility.
     # @return [Boolean]
@@ -56,9 +50,7 @@ module Fulfillment
       # Non-logged-in users should still see restricted access options
       return restricted_options if !user || restricted_options.any?
 
-      return delivery_options if item.in_place?
-
-      []
+      delivery_options
     end
 
     # @return [Symbol, nil]
@@ -76,16 +68,30 @@ module Fulfillment
     def delivery_options
       return [courtesy_borrower_option] if user.courtesy_borrower?
 
-      options = [Options::Deliverable::PICKUP]
+      options = pickup_option
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
       options << Options::Deliverable::OFFICE if user.faculty_express?
       options << Options::Deliverable::ELECTRONIC unless item_material_type_excluded_from_scanning?
       options
     end
 
+    # Determine the "pickup" option to use - ILL pickup means the pickup request should go to the ILL department. In
+    # that case, we need to be sure the item is also one that can be expected to be fulfilled via ILL (not an odd
+    # material type)
+    # @return [Array]
+    def pickup_option
+      if item.in_place?
+        [Options::Deliverable::PICKUP]
+      elsif item_material_type_excluded_from_ill?
+        []
+      else
+        [Options::Deliverable::ILL_PICKUP]
+      end
+    end
+
     # @return [Symbol]
     def courtesy_borrower_option
-      Options::Deliverable::PICKUP
+      Options::Deliverable::PICKUP if item.in_place?
     end
 
     # @return [Boolean]
