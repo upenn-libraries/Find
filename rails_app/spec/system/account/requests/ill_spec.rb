@@ -10,7 +10,6 @@ describe 'Account Request ILL form' do
 
   before do
     sign_in user
-
     visit ill_new_request_path(**open_params)
   end
 

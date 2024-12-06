@@ -158,6 +158,17 @@ describe Fulfillment::Endpoint::Illiad::Params do
     end
   end
 
+  describe '#sid' do
+    let(:sid) { 'SomeExternal:SystemIdentifier' }
+    let(:open_params) do
+      { 'sid' => sid, 'source' => Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID }
+    end
+
+    it 'returns the preferred sid value even when a source is set' do
+      expect(params.sid).to eql sid
+    end
+  end
+
   describe '#borrow_direct?' do
     context 'when "bd" value is set' do
       let(:open_params) { { 'bd' => 'true' } }
