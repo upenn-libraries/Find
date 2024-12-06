@@ -18,8 +18,8 @@ module Fulfillment
     class Illiad < Endpoint
       class UserError < StandardError; end
 
-      ILL_FORM_SOURCE_SID = 'info:sid/find.library.upenn.edu/request'
-      RECORD_PAGE_SOURCE_SID = 'info:sid/find.library.upenn.edu/record'
+      ILL_FORM_SOURCE_SID = 'info:sid/find.library.upenn.edu/account/requests/ill/new'
+      RECORD_PAGE_SOURCE_SID = 'info:sid/find.library.upenn.edu/catalog/record'
       BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
