@@ -31,7 +31,7 @@ module Fulfillment
       end
 
       # If the options for the item include a scan or office option, don't check the pickup option
-      # Otherwise, check the pickup option
+      # Otherwise, check the pickup option. See DeliverableComponent#pickup_checked? for similar logic.
       # @return [Hash, NilClass]
       def checked?
         %i[scan office].any? { |option| options.include?(option) } ? nil : { checked: true }

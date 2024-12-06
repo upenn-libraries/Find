@@ -38,7 +38,8 @@ module Fulfillment
               data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
     end
 
-    # Determine if the pickup options should default to being checked
+    # Determine if the pickup options should default to being checked. The pickup option should be checked only if no
+    # electronic or office delivery option is shown. See PickupComponent#checked? for similar logic.
     # @return [Boolean]
     def pickup_checked?
       (options.to_a & [Options::Deliverable::ELECTRONIC, Options::Deliverable::OFFICE]).empty?
