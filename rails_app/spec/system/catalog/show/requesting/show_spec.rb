@@ -56,6 +56,13 @@ describe 'Catalog show page requesting behaviors' do
         find('select#item_id').find(:option, items.first.description).select_option
         expect(page).to have_selector '#delivery-options'
       end
+
+      it 'shows preselected option as scan & deliver' do
+        find('select#item_id').find(:option, items.first.description).select_option
+        within '.request-buttons' do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
     end
 
     context 'when adding comments to a request' do
@@ -102,6 +109,12 @@ describe 'Catalog show page requesting behaviors' do
         end
       end
 
+      it 'shows preselected option as scan & deliver' do
+        within '.request-buttons' do
+          expect(page).to have_link I18n.t('requests.form.buttons.scan')
+        end
+      end
+
       context 'when user a courtesy borrower' do
         let(:user) { create(:user, :courtesy_borrower) }
 
@@ -118,7 +131,7 @@ describe 'Catalog show page requesting behaviors' do
       end
     end
 
-    context 'with an item that is unavailable an not able to be handled by ILL' do
+    context 'with an item that is unavailable and not able to be handled by ILL' do
       let(:item) { build :item, :laptop_material_type_not_in_place }
 
       before do
