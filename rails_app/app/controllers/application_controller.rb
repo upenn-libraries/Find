@@ -71,6 +71,10 @@ class ApplicationController < ActionController::Base
     request.path == root_path || request.path.starts_with?(search_catalog_path)
   end
 
+  def sitemap_path?
+    request.path.include? 'sitemap'
+  end
+
   # Determine whether the request referer is present
   # @return [TrueClass, FalseClass]
   def referer_present?
@@ -91,7 +95,8 @@ class ApplicationController < ActionController::Base
   # - referer path is too large
   # @return [TrueClass, FalseClass]
   def should_not_store_referer?
-    !login_path? ||
+    sitemap_path? ||
+      !login_path? ||
       !referer_present? ||
       path_too_large?(URI.parse(request.referer).path)
   end

@@ -111,6 +111,9 @@ GEM
     blacklight-ris (0.2.0)
       blacklight (>= 7)
       rails (>= 7)
+    blacklight_dynamic_sitemap (1.0.0)
+      blacklight (> 7.0)
+      rails
     bootsnap (1.17.1)
       msgpack (~> 1.2)
     bootstrap (5.3.2)
@@ -513,6 +516,7 @@ DEPENDENCIES
   alma!
   blacklight!
   blacklight-ris
+  blacklight_dynamic_sitemap
   bootsnap
   bootstrap (~> 5.1)
   byebug
