@@ -27,6 +27,7 @@ en:
           description: 'Consult a subject specialist'
       self_service:
         title: 'Self-service'
+        use_catalog: 'Using the Library Catalog'
         faq: 'Check our FAQ'
         guides: 'View our research guides'
         libraries: 'Visit a library location'

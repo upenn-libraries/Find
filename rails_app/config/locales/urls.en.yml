@@ -1,6 +1,7 @@
 en:
   urls:
     guides:
+      use_catalog: "https://guides.library.upenn.edu/find-catalog"
       circulation: "https://guides.library.upenn.edu/circulation/CirculationWelcome"
       finesfees: "https://guides.library.upenn.edu/circulation/vpfinesfees"
       bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
