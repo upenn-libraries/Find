@@ -10,7 +10,6 @@ describe Fulfillment::OptionsSet do
     let(:traits) { [] }
 
     it { is_expected.to be_deliverable }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_restricted }
 
     context 'with a standard user' do
@@ -55,18 +54,34 @@ describe Fulfillment::OptionsSet do
   end
 
   context 'with an unavailable item' do
-    let(:item) { build :item, :not_in_place }
+    context 'with a standard item' do
+      let(:item) { build :item, :not_in_place }
 
-    it { is_expected.to be_unavailable }
-    it { is_expected.not_to be_restricted }
-    it { is_expected.not_to be_deliverable }
+      it { is_expected.not_to be_restricted }
+      it { is_expected.to be_deliverable }
+
+      it 'includes the ILL_PICKUP option' do
+        expect(options.to_a).to include Fulfillment::Options::Deliverable::ILL_PICKUP
+        expect(options.to_a).not_to include Fulfillment::Options::Deliverable::PICKUP
+      end
+    end
+
+    context 'with an excluded material type item' do
+      let(:item) { build :item, :laptop_material_type_not_in_place }
+
+      it { is_expected.not_to be_restricted }
+      it { is_expected.not_to be_deliverable }
+
+      it 'does not include any options if the item cannot be processed via ILL' do
+        expect(options.to_a).to be_empty
+      end
+    end
   end
 
   context 'with an item on reserve' do
     let(:item) { build :item, :on_reserve }
 
     it { is_expected.to be_restricted }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the reserve option' do
@@ -78,7 +93,6 @@ describe Fulfillment::OptionsSet do
     let(:item) { build :item, :non_circ }
 
     it { is_expected.to be_restricted }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the on site option' do
@@ -90,7 +104,6 @@ describe Fulfillment::OptionsSet do
     let(:item) { build :item, :aeon_location }
 
     it { is_expected.to be_restricted }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the Aeon option' do
@@ -102,7 +115,6 @@ describe Fulfillment::OptionsSet do
     let(:item) { build :item, :at_hsp }
 
     it { is_expected.to be_restricted }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the HSP option' do
@@ -114,7 +126,6 @@ describe Fulfillment::OptionsSet do
     let(:item) { build :item, :at_archives }
 
     it { is_expected.to be_restricted }
-    it { is_expected.not_to be_unavailable }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the Archives option' do

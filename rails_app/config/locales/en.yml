@@ -386,15 +386,13 @@ en:
           info: 'This item can be consulted for a limited time by visiting the reference desk at the %{library}'
         onsite:
           info: 'This item can be consulted by visiting the %{library}.'
-        ill:
-          info: 'This item is currently unavailable from the Penn Libraries. It can be requested from another lending institution by submitting an InterLibrary loan request.'
         none:
-          info: 'This item is unavailable from the Penn Libraries.'
+          info: 'This item is currently unavailable from the Penn Libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
-      ill_request_link: 'Request this Item via InterLibrary Loan'
+      only_ill_requestable: 'This item is currently unavailable from the Penn Libraries. If you request this item, we will attempt to get it from another lending institution by submitting an InterLibrary loan request.'
       missing_frame: "We're having trouble getting the requesting options for this item. Please try again."
   fulfillment:
     public_error_message: 'An internal error occurred.'
