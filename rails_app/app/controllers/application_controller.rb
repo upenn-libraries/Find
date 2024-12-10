@@ -60,29 +60,31 @@ class ApplicationController < ActionController::Base
   private
 
   # Determine whether the current path is the login path
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def login_path?
     request.path == login_path
   end
 
   # Determine whether the current path is a potential catalog path
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def catalog_path?
     request.path == root_path || request.path.starts_with?(search_catalog_path)
   end
 
+  # Determine whether the current path is a sitemap path
+  # @return [Boolean]
   def sitemap_path?
     request.path.include? 'sitemap'
   end
 
   # Determine whether the request referer is present
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def referer_present?
     request.referer.present?
   end
 
   # Determine whether fullpath exceeds max cookie size
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def path_too_large?(path)
     return false unless path
 
@@ -93,7 +95,7 @@ class ApplicationController < ActionController::Base
   # - not the login path
   # - referer is not present
   # - referer path is too large
-  # @return [TrueClass, FalseClass]
+  # @return [Boolean]
   def should_not_store_referer?
     sitemap_path? ||
       !login_path? ||
@@ -118,6 +120,7 @@ class ApplicationController < ActionController::Base
   # In some cases we may find it necessary to add to this list of exclusions. For example, if another login strategy
   # is added with a new login path, we'd want to stick that here. If we develop another service that makes a lot of
   # requests to another internal endpoint, that might be necessary to add.
+  # @return [Boolean]
   def should_not_store_action?
     !request.get? ||
       !is_navigational_format? ||
