@@ -5,10 +5,11 @@ en:
       circulation: "https://guides.library.upenn.edu/circulation/CirculationWelcome"
       finesfees: "https://guides.library.upenn.edu/circulation/vpfinesfees"
       bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
-      account: "https://guides.library.upenn.edu/circulation/Yourlibraryaccount"
+      account: "https://guides.library.upenn.edu/find-account"
       pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
       scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
       office: "https://guides.library.upenn.edu/resourcesharing/facex"
+      articles: "https://guides.library.upenn.edu/find-articlesplus"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"

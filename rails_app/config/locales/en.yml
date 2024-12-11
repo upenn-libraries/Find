@@ -32,6 +32,8 @@ en:
         guides: 'View our research guides'
         libraries: 'Visit a library location'
         lib_hours: '(see hours)'
+        articles+: 'Using Articles+'
+        library_account: 'Library Account'
     resources:
       title: 'More resources for your research'
       lede: 'Expand your search using one of the following specialized tools.'
@@ -251,6 +253,8 @@ en:
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
       settings: 'Settings'
+    guides:
+      heading: 'Guides'
   advanced:
     all_fields: 'Keyword'
     creator_search: 'Author/Creator'
