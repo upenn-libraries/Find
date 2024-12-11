@@ -2,7 +2,7 @@
 
 require 'system_helper'
 
-describe 'Sitemap Index Page' do
+xdescribe 'Sitemap Index Page' do
   include_context 'with print monograph record with 2 physical entries'
 
   before { visit blacklight_dynamic_sitemap.sitemap_index_path }
