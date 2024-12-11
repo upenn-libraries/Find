@@ -208,6 +208,34 @@
   }
 }
 
+a.inventory-item--hathitrust {
+  display: block;
+  text-decoration: none;
+  color: #c35400;
+  margin-top: 1.5rem;
+  border-top: solid 1px var(--bs-border-color);
+}
+
+.inventory-item--hathitrust {
+  background: var(--color-bg-default);
+  border-left-color: #f3b688;
+
+  .inventory-item__header {
+    color: var(--color-fg-default);
+  }
+
+  .inventory-item__main {
+    color: #c35400;
+    text-decoration-color: #c35400;
+  }
+}
+
+.inventory-item--hathitrust:hover {
+  cursor: pointer;
+  color: #c35400;
+  border-left-color: #c35400;
+}
+
 .location-details summary:hover .inventory-item__container span {
   text-decoration: underline;
   text-underline-offset: var(--link-text-underline-offset);

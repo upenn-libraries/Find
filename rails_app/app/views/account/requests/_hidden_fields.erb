@@ -1,3 +1,4 @@
 <% @request.params.open_params.reject { |k, _| k == 'utf8' }.each do |k, v| %>
   <%= hidden_field_tag(k, v) %>
 <% end %>
+<%= hidden_field_tag :source, Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID %>

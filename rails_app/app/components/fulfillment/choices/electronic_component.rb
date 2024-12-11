@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  module Options
+  module Choices
     # Mail delivery component
     class ElectronicComponent < ViewComponent::Base
       attr_accessor :checked, :radio_options
@@ -12,7 +12,7 @@ module Fulfillment
       end
 
       def delivery_value
-        Fulfillment::Request::Options::ELECTRONIC
+        Fulfillment::Options::Deliverable::ELECTRONIC
       end
     end
   end

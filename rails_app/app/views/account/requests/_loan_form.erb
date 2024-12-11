@@ -58,12 +58,12 @@
 
         <ul class="list-group">
           <% if @request.patron.faculty_express? %>
-            <%= render(Fulfillment::Options::OfficeComponent.new(user: @request.patron, checked: true)) %>
+            <%= render(Fulfillment::Choices::OfficeComponent.new(user: @request.patron, checked: true)) %>
           <% end %>
 
-          <%= render(Fulfillment::Options::PickupComponent.new(user: @request.patron, ill: true, checked: !@request.patron.faculty_express?)) %>
+          <%= render(Fulfillment::Choices::PickupComponent.new(user: @request.patron, ill: true, checked: !@request.patron.faculty_express?)) %>
 
-          <%= render(Fulfillment::Options::MailComponent.new(user: @request.patron)) %>
+          <%= render(Fulfillment::Choices::MailComponent.new(user: @request.patron)) %>
         </ul>
       </fieldset>
 
