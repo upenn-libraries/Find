@@ -18,7 +18,8 @@ module Fulfillment
     class Illiad < Endpoint
       class UserError < StandardError; end
 
-      CITED_IN = 'info:sid/library.upenn.edu'
+      ILL_FORM_SOURCE_SID = 'info:sid/find.library.upenn.edu/account/requests/ill/new'
+      RECORD_PAGE_SOURCE_SID = 'info:sid/find.library.upenn.edu/catalog/record'
       BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
@@ -136,7 +137,7 @@ module Fulfillment
             CallNumber: request.params.call_number,
             ISSN: request.params.isbn,
             ESPNumber: request.params.pmid,
-            CitedIn: request.params.sid || CITED_IN,
+            CitedIn: request.params.sid,
             ItemInfo3: request.params.barcode }
         end
 
@@ -157,7 +158,7 @@ module Fulfillment
             ESPNumber: request.params.pmid,
             PhotoArticleAuthor: request.params.author,
             PhotoArticleTitle: request.params.chapter_title || request.params.article,
-            CitedIn: request.params.sid || CITED_IN }
+            CitedIn: request.params.sid }
         end
 
         # @note See class level docs above
@@ -165,11 +166,11 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.delivery == Request::Options::MAIL
+          if request.delivery == Options::Deliverable::MAIL
             # Set "BBM" title prefix so requests are routes to BBM staff
             body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
             body[:ItemInfo1] = BOOKS_BY_MAIL
-          elsif request.delivery == Request::Options::OFFICE
+          elsif request.delivery == Options::Deliverable::OFFICE
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
           else

@@ -3,6 +3,15 @@
 describe Fulfillment::Service do
   include Illiad::ApiMocks::User
 
+  describe '.options' do
+    let(:item) { build :item }
+    let(:user) { build :user }
+
+    it 'returns an OptionsSet' do
+      expect(described_class.options(item: item, user: user)).to be_a Fulfillment::OptionsSet
+    end
+  end
+
   describe '.request' do
     let(:params) { { requester: create(:user), endpoint: :illiad, title: 'Gone with the Wind' } }
 

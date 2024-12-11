@@ -204,5 +204,16 @@ describe Fulfillment::Endpoint::Illiad do
         expect(submission_body[:LoanTitle]).to eql request.params.title
       end
     end
+
+    context 'with a source param set' do
+      let(:source) { Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID }
+      let(:request) do
+        build(:fulfillment_request, :with_bib_info, :ill_pickup, source: source)
+      end
+
+      it 'sets the CitedIn value properly' do
+        expect(submission_body[:CitedIn]).to eq source
+      end
+    end
   end
 end

@@ -97,7 +97,7 @@ Vagrant.configure("2") do |config|
           ansible.extra_vars = {
             ansible_hashi_vault_token: Token.new,
             ansible_hashi_vault_url: "https://vault.library.upenn.edu",
-            ansible_python_interpreter: "/usr/bin/env python3"
+            ansible_python_interpreter: "/usr/bin/python3"
           }
           ansible.install_mode = "pip3"
           ansible.inventory_path = "/catalog-find/ansible/inventories/vagrant"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  module Options
+  module Choices
     # office delivery component logic
     class OfficeComponent < ViewComponent::Base
       attr_accessor :user, :checked, :radio_options
@@ -13,7 +13,7 @@ module Fulfillment
       end
 
       def delivery_value
-        Fulfillment::Request::Options::OFFICE
+        Fulfillment::Options::Deliverable::OFFICE
       end
 
       # @return [Array<String>, nil]

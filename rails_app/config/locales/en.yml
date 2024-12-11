@@ -27,10 +27,13 @@ en:
           description: 'Consult a subject specialist'
       self_service:
         title: 'Self-service'
+        use_catalog: 'Using the Library Catalog'
         faq: 'Check our FAQ'
         guides: 'View our research guides'
         libraries: 'Visit a library location'
         lib_hours: '(see hours)'
+        articles+: 'Using Articles+'
+        library_account: 'Library Account'
     resources:
       title: 'More resources for your research'
       lede: 'Expand your search using one of the following specialized tools.'
@@ -250,6 +253,8 @@ en:
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
       settings: 'Settings'
+    guides:
+      heading: 'Guides'
   advanced:
     all_fields: 'Keyword'
     creator_search: 'Author/Creator'
@@ -278,8 +283,13 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
     details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
+    hathi:
+      header: 'More viewability at'
+      main: 'HathiTrust Digital Library'
+      missing_frame: "We're having trouble getting the HathiTrust link for this record. Please try again."
   facets:
     access: 'Access'
     classification: 'Classification'
@@ -340,7 +350,7 @@ en:
     score: 'Score'
   requests:
     form:
-      heading: 'Request an item'
+      heading: 'Access options'
       item_label: 'What item are you requesting?'
       item_placeholder: 'Choose an item...'
       buttons:
@@ -354,7 +364,6 @@ en:
         hsp: 'Schedule visit'
       options:
         label: 'How would you like it delivered?'
-        only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
           info_html: '<a href="%{url}" target=_blank>About request scan</a>'
@@ -376,12 +385,19 @@ en:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
+        reserve:
+          info_html: 'This item cannot be requested because it is being held in <a href="%{reserves_url}" target="_blank">reserves</a> at the %{library}.'
+        reference:
+          info: 'This item can be consulted for a limited time by visiting the reference desk at the %{library}'
+        onsite:
+          info: 'This item can be consulted by visiting the %{library}.'
         none:
-          info: 'This item is unavailable from the Penn libraries.'
+          info: 'This item is currently unavailable from the Penn Libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+      only_ill_requestable: 'This item is currently unavailable from the Penn Libraries. If you request this item, we will attempt to get it from another lending institution by submitting an InterLibrary loan request.'
       missing_frame: "We're having trouble getting the requesting options for this item. Please try again."
   fulfillment:
     public_error_message: 'An internal error occurred.'
@@ -425,11 +441,11 @@ en:
       main: 'Edition'
       other: 'Other Edition'
     format:
+      facet: 'Format'
       cartographic: 'Cartographic Data'
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
-    harmful_language_statement_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'
@@ -437,7 +453,8 @@ en:
       oclc_id: 'OCLC'
       publisher_number: 'Publisher Number'
     language:
-      main: 'Language'
+      facet: 'Language'
+      main: 'Language Note'
     link:
       full_text: 'Online'
       web: 'Web Link'
@@ -488,6 +505,8 @@ en:
     title: 'Staff View'
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
+  statements:
+    harmful_language_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
   sort:
     added_date_asc: 'Date Added (old-new)'
     added_date_desc: 'Date Added (new-old)'
