@@ -30,6 +30,8 @@ describe 'Fines and Fees index page' do
   end
 
   context 'with a user having a fine' do
+    include_context 'with mock alma fine_set'
+
     let(:single_fine) do
       { 'type' => { 'value' => 'OVERDUEFINE', 'desc' => 'Overdue fine' },
         'balance' => 0.0,
@@ -40,15 +42,7 @@ describe 'Fines and Fees index page' do
                             'amount' => 7.0, 'transaction_time' => '2018-09-10T19:41:00.325Z' }] }
     end
 
-    before do
-      # Stub Alma::FineSet
-      fine_set = instance_double(Alma::FineSet)
-      fine = Alma::AlmaRecord.new(single_fine)
-      allow(alma_user).to receive(:fines).and_return(fine_set)
-      allow(fine_set).to receive(:each).and_yield(fine)
-
-      visit fines_and_fees_path
-    end
+    before { visit fines_and_fees_path }
 
     it 'shows total fines' do
       expect(page).to have_text "$#{total_fines}"
@@ -91,8 +85,10 @@ describe 'Fines and Fees index page' do
     end
   end
 
-  context 'when a fee has no transaction data' do
-    let(:single_fee) do
+  context 'when a fine has no transaction data' do
+    include_context 'with mock alma fine_set'
+
+    let(:single_fine) do
       { 'type' => { 'value' => 'LOSTITEMREPLACEMENTFEE', 'desc' => 'Lost item replacement fee' },
         'balance' => 125.0,
         'original_amount' => 125.0,
@@ -100,19 +96,31 @@ describe 'Fines and Fees index page' do
         'title' => 'THIRD WORLD MODERNISM - ARCHITECTURE, DEVELOPMENT AND IDENTITY' }
     end
 
-    before do
-      # Stub Alma::FineSet
-      fine_set = instance_double(Alma::FineSet)
-      fine = Alma::AlmaRecord.new(single_fee)
-      allow(alma_user).to receive(:fines).and_return(fine_set)
-      allow(fine_set).to receive(:each).and_yield(fine)
-
-      visit fines_and_fees_path
-    end
+    before { visit fines_and_fees_path }
 
     it 'properly renders available information' do
       within('.table') do
-        expect(page).to have_text(single_fee.dig('type', 'desc'))
+        expect(page).to have_text(single_fine.dig('type', 'desc'))
+      end
+    end
+  end
+
+  context 'when a fine has no title' do
+    include_context 'with mock alma fine_set'
+
+    let(:single_fine) do
+      { 'type' => { 'value' => 'CUSTOMER_DEFINED_01', 'desc' => 'WIC Equipment Fine' },
+        'balance' => 25.0,
+        'remaining_vat_amount' => 0.0,
+        'original_amount' => 25.0,
+        'creation_time' => '2023-04-07T14:51:52.457Z' }
+    end
+
+    before { visit fines_and_fees_path }
+
+    it 'properly renders available information' do
+      within('.table') do
+        expect(page).to have_text(single_fine.dig('type', 'desc'))
       end
     end
   end
