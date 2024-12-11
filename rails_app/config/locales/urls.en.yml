@@ -2,14 +2,13 @@ en:
   urls:
     guides:
       use_catalog: "https://guides.library.upenn.edu/find-catalog"
-      circulation: "https://guides.library.upenn.edu/circulation/CirculationWelcome"
+      circulation: "https://www.library.upenn.edu/borrowing"
       finesfees: "https://guides.library.upenn.edu/circulation/vpfinesfees"
-      bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
+      bbm: "https://www.library.upenn.edu/services/books-mail"
       account: "https://guides.library.upenn.edu/find-account"
-      pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
-      scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
-      office: "https://guides.library.upenn.edu/resourcesharing/facex"
-      articles: "https://guides.library.upenn.edu/find-articlesplus"
+      pickup: "https://www.library.upenn.edu/services/pickuppenn"
+      scan: "https://www.library.upenn.edu/services/request-scan"
+      office: "https://www.library.upenn.edu/services/facultyexpress"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"

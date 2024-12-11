@@ -15,5 +15,5 @@
       <%= submit_tag(t('login.alma.login'), { class: 'btn btn-primary' }) %>
     <% end %>
   </div>
-  <a href="https://guides.library.upenn.edu/franklinaccount" class="login__help-link"><%= t('login.help') %></a>
+  <%= link_to t('login.help'), t('urls.guides.account'), class: 'login__help-link' %>
 </div>
