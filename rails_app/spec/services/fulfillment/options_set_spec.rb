@@ -66,6 +66,18 @@ describe Fulfillment::OptionsSet do
       end
     end
 
+    context 'with a Not Loanable due date policy and Not In Place' do
+      let(:item) { build :item, :not_loanable_not_in_place }
+
+      it { is_expected.not_to be_restricted }
+      it { is_expected.to be_deliverable }
+
+      it 'includes the ILL_PICKUP option' do
+        expect(options.to_a).to include Fulfillment::Options::Deliverable::ILL_PICKUP
+        expect(options.to_a).not_to include Fulfillment::Options::Deliverable::PICKUP
+      end
+    end
+
     context 'with an excluded material type item' do
       let(:item) { build :item, :laptop_material_type_not_in_place }
 

@@ -95,9 +95,13 @@ module Fulfillment
     end
 
     # @return [Boolean]
+    def not_loanable?
+      item.user_due_date_policy == Settings.fulfillment.due_date_policy.not_loanable
+    end
+
+    # @return [Boolean]
     def non_circulating_item?
-      item.user_due_date_policy == Settings.fulfillment.due_date_policy.not_loanable ||
-        item.item_policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house])
+      item.item_policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house])
     end
 
     # @return [Boolean]
