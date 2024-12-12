@@ -59,6 +59,7 @@ build_and_push_base_app_image:
     DOCKER_BUILD_SECRETS: "--secret id=sidekiq_pro_credentials,env=SIDEKIQ_PRO_CREDENTIALS"
     DOCKER_TARGET: "base"
     DOCKERFILE_PATH: "rails_app/"
+    JWT_AUTH_ROLE: "jwt_v2"
     JWT_ROLE: "sidekiq_pro_ro"
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
   tags:
