@@ -51,6 +51,17 @@ describe Fulfillment::OptionsSet do
         expect(options.to_a).not_to include Fulfillment::Options::Deliverable::ELECTRONIC
       end
     end
+
+    context 'with a Not Loanable due date policy' do
+      let(:traits) { [:not_loanable] }
+
+      it { is_expected.not_to be_deliverable }
+      it { is_expected.to be_restricted }
+
+      it 'includes only the on site option' do
+        expect(options.to_a).to eq [Fulfillment::Options::Restricted::ONSITE]
+      end
+    end
   end
 
   context 'with an unavailable item' do
