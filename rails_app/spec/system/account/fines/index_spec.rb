@@ -85,10 +85,10 @@ describe 'Fines and Fees index page' do
     end
   end
 
-  context 'when a fine has no transaction data' do
+  context 'when a fee has no transaction data' do
     include_context 'with mock alma fine_set'
 
-    let(:single_fine) do
+    let(:single_fee) do
       { 'type' => { 'value' => 'LOSTITEMREPLACEMENTFEE', 'desc' => 'Lost item replacement fee' },
         'balance' => 125.0,
         'original_amount' => 125.0,
@@ -100,7 +100,7 @@ describe 'Fines and Fees index page' do
 
     it 'properly renders available information' do
       within('.table') do
-        expect(page).to have_text(single_fine.dig('type', 'desc'))
+        expect(page).to have_text(single_fee.dig('type', 'desc'))
       end
     end
   end
