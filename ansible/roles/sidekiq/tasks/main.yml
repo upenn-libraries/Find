@@ -1,6 +1,6 @@
 ---
 - name: Deploy Sidekiq environment
-  docker_stack:
+  community.docker.docker_stack:
     name: "catalog-find"
     compose:
       - "{{ lookup('template', 'docker-compose.yml.j2', template_vars={'item': item} ) | from_yaml }}"

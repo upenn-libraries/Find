@@ -32,5 +32,12 @@ services:
     healthcheck:
       retries: 8
       start_period: 20s
+    secrets:
+      - sidekiq_pro_credentials
     volumes:
       - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app
+
+secrets:
+  sidekiq_pro_credentials:
+    external: true
+    name: ${SIDEKIQ_PRO_CREDENTIALS}
