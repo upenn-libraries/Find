@@ -13,6 +13,10 @@ include:
       - ".build_and_push_docker_images.yml"
       - ".copy_docker_images.yml"
       - ".remove_tmp_registry.yml"
+  - project: "devops/gitlab/ci-templates/general"
+    file:
+      - ".install_hashicorp_vault.yml"
+      - ".vault_jwt_auth.yml"
   - project: "devops/gitlab/ci-templates/sast"
     ref: "master"
     file:
