@@ -31,6 +31,11 @@ module Inventory
       end
 
       # @return [String]
+      def public_note_content
+        entry.data[:public_note] if entry.electronic?
+      end
+
+      # @return [String]
       def footer_content
         fields = [entry.human_readable_location]
         fields << entry.coverage_statement if entry.electronic?

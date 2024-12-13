@@ -8,6 +8,11 @@
   <span class="holding__main">
     <%= main_content %>
   </span>
+  <% if public_note_content.present? %>
+  <span class="holding__public_note">
+    <%= public_note_content %>
+  </span>
+  <% end %>
   <% if footer_content.present? %>
   <span class="holding__footer">
     <%= footer_content %>
