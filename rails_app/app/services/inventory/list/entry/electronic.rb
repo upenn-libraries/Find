@@ -5,14 +5,17 @@ module Inventory
     module Entry
       # Electronic holding class
       class Electronic < Base
-        # Base host, path, and params to electronic resource (portfolio)
+        # Base host, path, and params to electronic resource (portfolio) links via Alma "uresolver"
+        # See: https://developers.exlibrisgroup.com/alma/integrations/discovery/fulfillment_services/
         HOST = Inventory::Constants::ERESOURCE_LINK_HOST
         PATH = Inventory::Constants::ERESOURCE_LINK_PATH
-        PARAMS = { Force_direct: true, # link directly to the resource, not the Alma link resovler page
-                   test_access: true, # TODO: figure out and document what this parameter does
-                   portfolio_pid: nil,
-                   rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
-                   'u.ignore_date_coverage': true }.freeze
+        PARAMS = {
+          Force_direct: true, # link directly to the resource, not the Alma link resolver page
+          test_access: true, # according to ExL, this must be used when a pid is specified and force_direct is true
+          portfolio_pid: nil, # this will be set when generated
+          rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
+          'u.ignore_date_coverage': true # get all services from specified portfolio regardless of date coverage
+        }.freeze
 
         # @return [String, nil]
         def id
