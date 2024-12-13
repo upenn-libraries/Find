@@ -32,7 +32,7 @@ describe 'Fines and Fees index page' do
   context 'with a user having a fine' do
     include_context 'with mock alma fine_set'
 
-    let(:single_fine) do
+    let(:penalty_data) do
       { 'type' => { 'value' => 'OVERDUEFINE', 'desc' => 'Overdue fine' },
         'balance' => 0.0,
         'original_amount' => 7.0,
@@ -50,13 +50,13 @@ describe 'Fines and Fees index page' do
 
     it 'shows type of fine' do
       within('.table') do
-        expect(page).to have_text(single_fine.dig('type', 'desc'))
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
       end
     end
 
     it 'shows the title of the loan' do
       within('.table') do
-        expect(page).to have_text(single_fine['title'].titleize.squish)
+        expect(page).to have_text(penalty_data['title'].titleize.squish)
       end
     end
 
@@ -74,13 +74,13 @@ describe 'Fines and Fees index page' do
 
     it 'shows the original amount of the fine' do
       within('.table') do
-        expect(page).to have_text("$#{single_fine['original_amount']}")
+        expect(page).to have_text("$#{penalty_data['original_amount']}")
       end
     end
 
     it 'shows the remaining balance of the fine' do
       within('.table') do
-        expect(page).to have_text("$#{single_fine['balance']}")
+        expect(page).to have_text("$#{penalty_data['balance']}")
       end
     end
   end
@@ -88,7 +88,7 @@ describe 'Fines and Fees index page' do
   context 'when a fee has no transaction data' do
     include_context 'with mock alma fine_set'
 
-    let(:single_fee) do
+    let(:penalty_data) do
       { 'type' => { 'value' => 'LOSTITEMREPLACEMENTFEE', 'desc' => 'Lost item replacement fee' },
         'balance' => 125.0,
         'original_amount' => 125.0,
@@ -100,7 +100,7 @@ describe 'Fines and Fees index page' do
 
     it 'properly renders available information' do
       within('.table') do
-        expect(page).to have_text(single_fee.dig('type', 'desc'))
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
       end
     end
   end
@@ -108,7 +108,7 @@ describe 'Fines and Fees index page' do
   context 'when a fine has no title' do
     include_context 'with mock alma fine_set'
 
-    let(:single_fine) do
+    let(:penalty_data) do
       { 'type' => { 'value' => 'CUSTOMER_DEFINED_01', 'desc' => 'WIC Equipment Fine' },
         'balance' => 25.0,
         'remaining_vat_amount' => 0.0,
@@ -120,7 +120,7 @@ describe 'Fines and Fees index page' do
 
     it 'properly renders available information' do
       within('.table') do
-        expect(page).to have_text(single_fine.dig('type', 'desc'))
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
       end
     end
   end
