@@ -50,7 +50,7 @@ describe Inventory::List::Entry::Electronic do
     it 'returns the expected URI' do
       expect(entry.href).to eq(
         "https://#{Inventory::Constants::ERESOURCE_LINK_HOST}#{Inventory::Constants::ERESOURCE_LINK_PATH}?" \
-        "Force_direct=true&portfolio_pid=#{entry.id}&" \
+        "Force_direct=true&test_access=true&portfolio_pid=#{entry.id}&" \
         "rfr_id=#{CGI.escape(Inventory::Constants::ERESOURCE_LINK_RFR_ID)}&u.ignore_date_coverage=true"
       )
     end

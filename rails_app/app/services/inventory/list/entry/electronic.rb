@@ -8,8 +8,8 @@ module Inventory
         # Base host, path, and params to electronic resource (portfolio)
         HOST = Inventory::Constants::ERESOURCE_LINK_HOST
         PATH = Inventory::Constants::ERESOURCE_LINK_PATH
-        PARAMS = { Force_direct: true,
-                   test_access: true,
+        PARAMS = { Force_direct: true, # link directly to the resource, not the Alma link resovler page
+                   test_access: true, # TODO: figure out and document what this parameter does
                    portfolio_pid: nil,
                    rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
                    'u.ignore_date_coverage': true }.freeze
