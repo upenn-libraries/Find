@@ -297,6 +297,7 @@ en:
     databases:
       subject: 'Database Subject'
       type: 'Database Type'
+      category: 'Database Subject Group'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
