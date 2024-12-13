@@ -151,4 +151,13 @@ FactoryBot.define do
       item
     end
   end
+
+  trait :not_loanable_not_in_place do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['due_date_policy'] = Settings.fulfillment.due_date_policy.not_loanable
+      item['item_data']['base_status'] = { 'value' => '0' }
+      item
+    end
+  end
 end
