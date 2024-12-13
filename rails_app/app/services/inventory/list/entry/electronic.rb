@@ -9,6 +9,7 @@ module Inventory
         HOST = Inventory::Constants::ERESOURCE_LINK_HOST
         PATH = Inventory::Constants::ERESOURCE_LINK_PATH
         PARAMS = { Force_direct: true,
+                   test_access: true,
                    portfolio_pid: nil,
                    rfr_id: Inventory::Constants::ERESOURCE_LINK_RFR_ID,
                    'u.ignore_date_coverage': true }.freeze
