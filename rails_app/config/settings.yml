@@ -15,7 +15,7 @@ google_analytics:
 honeybadger:
   api_key: '12345'
 email:
-  from_address: 'find-noreply@library.upenn.edu'
+  from_address: 'find-noreply@upenn.edu'
   smtp:
     url: 'mailrelay.library.upenn.int'
     port: 25
