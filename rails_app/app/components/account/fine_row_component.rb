@@ -17,6 +17,8 @@ module Account
 
     # @return [String]
     def title
+      return '' unless fine.respond_to?(:title)
+
       fine.title.titleize.squish
     end
 

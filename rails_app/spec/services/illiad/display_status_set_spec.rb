@@ -19,7 +19,9 @@ describe Illiad::DisplayStatusSet do
 
     context 'when display status is not present' do
       it 'returns status given' do
-        expect(display_status_set.display_for(Illiad::Request::CANCELLED)).to eql Illiad::Request::CANCELLED
+        expect(
+          display_status_set.display_for(Shelf::Entry::IllTransaction::Status::CANCELLED)
+        ).to eql Shelf::Entry::IllTransaction::Status::CANCELLED
       end
     end
   end

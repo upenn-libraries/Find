@@ -12,7 +12,7 @@ module Account
       redirect_back_or_to requests_path, alert: 'There was an unexpected issue with your request.'
     end
 
-    # Form for initializing an ILL form.
+    # Action for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
       @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)

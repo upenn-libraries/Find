@@ -7,15 +7,6 @@ module Illiad
     BASE_PATH = 'transaction'
     NOTES_PATH = 'notes'
     ROUTE_PATH = 'route'
-    ARTICLE = 'Article'
-    LOAN = 'Loan'
-    # Statues
-    FINISHED = 'Request Finished'
-    CANCELLED = 'Cancelled by ILL Staff'
-    CHECKED_OUT = 'Checked Out to Customer'
-    DELIVERED_TO_WEB = 'Delivered to Web'
-    # BorrowDirect system id
-    BD_SYSTEM_ID = 'Reshare:upennbd'
 
     attr_reader :data
 
@@ -92,21 +83,6 @@ module Illiad
     # @return [Time, nil]
     def due_date
       Time.zone.parse(data[:DueDate]) if data[:DueDate].present?
-    end
-
-    # @return [Boolean]
-    def loan?
-      request_type == LOAN
-    end
-
-    # @return [Boolean]
-    def books_by_mail?
-      data[:ItemInfo1] == Fulfillment::Endpoint::Illiad::BOOKS_BY_MAIL
-    end
-
-    # @return [Boolean]
-    def scan?
-      request_type == ARTICLE
     end
   end
 end

@@ -10,4 +10,4 @@ google_analytics:
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
 email:
-  from_address: 'find-staging-noreply@library.upenn.edu'
+  from_address: 'find-staging-noreply@upenn.edu'

@@ -30,7 +30,9 @@ describe 'Fines and Fees index page' do
   end
 
   context 'with a user having a fine' do
-    let(:single_fine) do
+    include_context 'with mock alma fine_set'
+
+    let(:penalty_data) do
       { 'type' => { 'value' => 'OVERDUEFINE', 'desc' => 'Overdue fine' },
         'balance' => 0.0,
         'original_amount' => 7.0,
@@ -40,15 +42,7 @@ describe 'Fines and Fees index page' do
                             'amount' => 7.0, 'transaction_time' => '2018-09-10T19:41:00.325Z' }] }
     end
 
-    before do
-      # Stub Alma::FineSet
-      fine_set = instance_double(Alma::FineSet)
-      fine = Alma::AlmaRecord.new(single_fine)
-      allow(alma_user).to receive(:fines).and_return(fine_set)
-      allow(fine_set).to receive(:each).and_yield(fine)
-
-      visit fines_and_fees_path
-    end
+    before { visit fines_and_fees_path }
 
     it 'shows total fines' do
       expect(page).to have_text "$#{total_fines}"
@@ -56,13 +50,13 @@ describe 'Fines and Fees index page' do
 
     it 'shows type of fine' do
       within('.table') do
-        expect(page).to have_text(single_fine.dig('type', 'desc'))
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
       end
     end
 
     it 'shows the title of the loan' do
       within('.table') do
-        expect(page).to have_text(single_fine['title'].titleize.squish)
+        expect(page).to have_text(penalty_data['title'].titleize.squish)
       end
     end
 
@@ -80,19 +74,21 @@ describe 'Fines and Fees index page' do
 
     it 'shows the original amount of the fine' do
       within('.table') do
-        expect(page).to have_text("$#{single_fine['original_amount']}")
+        expect(page).to have_text("$#{penalty_data['original_amount']}")
       end
     end
 
     it 'shows the remaining balance of the fine' do
       within('.table') do
-        expect(page).to have_text("$#{single_fine['balance']}")
+        expect(page).to have_text("$#{penalty_data['balance']}")
       end
     end
   end
 
   context 'when a fee has no transaction data' do
-    let(:single_fee) do
+    include_context 'with mock alma fine_set'
+
+    let(:penalty_data) do
       { 'type' => { 'value' => 'LOSTITEMREPLACEMENTFEE', 'desc' => 'Lost item replacement fee' },
         'balance' => 125.0,
         'original_amount' => 125.0,
@@ -100,19 +96,31 @@ describe 'Fines and Fees index page' do
         'title' => 'THIRD WORLD MODERNISM - ARCHITECTURE, DEVELOPMENT AND IDENTITY' }
     end
 
-    before do
-      # Stub Alma::FineSet
-      fine_set = instance_double(Alma::FineSet)
-      fine = Alma::AlmaRecord.new(single_fee)
-      allow(alma_user).to receive(:fines).and_return(fine_set)
-      allow(fine_set).to receive(:each).and_yield(fine)
-
-      visit fines_and_fees_path
-    end
+    before { visit fines_and_fees_path }
 
     it 'properly renders available information' do
       within('.table') do
-        expect(page).to have_text(single_fee.dig('type', 'desc'))
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
+      end
+    end
+  end
+
+  context 'when a fine has no title' do
+    include_context 'with mock alma fine_set'
+
+    let(:penalty_data) do
+      { 'type' => { 'value' => 'CUSTOMER_DEFINED_01', 'desc' => 'WIC Equipment Fine' },
+        'balance' => 25.0,
+        'remaining_vat_amount' => 0.0,
+        'original_amount' => 25.0,
+        'creation_time' => '2023-04-07T14:51:52.457Z' }
+    end
+
+    before { visit fines_and_fees_path }
+
+    it 'properly renders available information' do
+      within('.table') do
+        expect(page).to have_text(penalty_data.dig('type', 'desc'))
       end
     end
   end

@@ -1,4 +1,4 @@
-pennlibs_web_version: '0.1.4'
+pennlibs_web_version: '0.2.1'
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
@@ -7,13 +7,15 @@ illiad:
   legacy_user_password: <%= DockerSecrets.lookup(:illiad_legacy_user_password, Rails.application.credentials.illiad_legacy_user_password) %>
 aeon:
   requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
+hathi:
+  base_url: 'https://catalog.hathitrust.org/api/volumes/brief/json'
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~
 honeybadger:
   api_key: '12345'
 email:
-  from_address: 'find-noreply@library.upenn.edu'
+  from_address: 'find-noreply@upenn.edu'
   smtp:
     url: 'mailrelay.library.upenn.int'
     port: 25
@@ -194,3 +196,44 @@ electronic_scoring:
     Elsevier ScienceDirect: 91
     Nature: 90
     Elsevier ClinicalKey: 89
+fulfillment:
+  restricted_libraries:
+    archives: 'UnivArcLib'
+    hsp: 'HSPLib'
+    libra: 'Libra'
+  policies:
+    non_circ: 'non-circ'
+    reserve: 'reserve'
+    reference: 'reference'
+    in_house: 'InHouseView'
+  due_date_policy:
+    not_loanable: 'Not loanable'
+  scan:
+    excluded_material_types:
+      - RECORD
+      - DVD
+      - CDROM
+      - BLURAY
+      - BLURAYDVD
+      - LP
+      - FLOPPY_DISK
+      - DAT
+      - GLOBE
+      - AUDIOCASSETTE
+      - VIDEOCASSETTE
+      - HEAD
+      - LRDSC
+      - CALC
+      - KEYS
+      - RECORD
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - AUDIOVM
+  ill:
+    excluded_material_types:
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - KEYS
+      - GLOBE

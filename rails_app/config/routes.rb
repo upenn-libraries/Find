@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   end
 
   mount Blacklight::Engine => '/'
+  # mount BlacklightDynamicSitemap::Engine => '/'
+
   root to: 'catalog#index'
   concern :searchable, Blacklight::Routes::Searchable.new
 
@@ -45,6 +47,7 @@ Rails.application.routes.draw do
       get 'brief'
       get 'portfolio/:pid/collection/:cid/detail', to: 'inventory#electronic_detail', as: :electronic_detail
       get 'holding/:holding_id/detail', to: 'inventory#physical_detail', as: :physical_detail
+      get 'hathi_link', to: 'inventory#hathi_link', as: :hathi_link
     end
   end
 

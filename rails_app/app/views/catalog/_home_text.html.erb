@@ -54,6 +54,9 @@
           <h3 class="h5"><%= t('home.help.self_service.title') %></h3>
           <ul class="list-unstyled card-text mb-1">
             <li class="mb-2">
+              <%= link_to(t('home.help.self_service.use_catalog'), t('urls.guides.use_catalog'), target: '_blank') %>
+            </li>
+            <li class="mb-2">
               <%= link_to(t('home.help.self_service.faq'), t('urls.help.faq'), target: '_blank') %>
             </li>
             <li class="mb-2">
@@ -134,6 +137,8 @@
 
                   <dt>
                     <%= link_to(t('home.resources.archival.finding_aids.title'), t('urls.external_services.finding_aids'), target: '_blank') %>
+                    |
+                    <%= link_to(t('home.resources.archival.philly_archives.title'), t('urls.external_services.philly_archives'), target: '_blank') %>
                   </dt>
                   <dd>
                     <%= t('home.resources.archival.finding_aids.description') %>

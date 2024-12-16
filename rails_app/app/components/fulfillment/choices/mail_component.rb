@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  module Options
+  module Choices
     # Mail delivery component
     class MailComponent < ViewComponent::Base
       attr_accessor :user, :checked, :radio_options
@@ -13,7 +13,7 @@ module Fulfillment
       end
 
       def delivery_value
-        Fulfillment::Request::Options::MAIL
+        Fulfillment::Options::Deliverable::MAIL
       end
 
       # @return [Array<String>, nil]

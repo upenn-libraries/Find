@@ -1,13 +1,14 @@
 en:
   urls:
     guides:
-      circulation: "https://guides.library.upenn.edu/circulation/CirculationWelcome"
+      use_catalog: "https://guides.library.upenn.edu/find-catalog"
+      circulation: "https://www.library.upenn.edu/borrowing"
       finesfees: "https://guides.library.upenn.edu/circulation/vpfinesfees"
-      bbm: "https://guides.library.upenn.edu/circulation/vpbooksbymail"
-      account: "https://guides.library.upenn.edu/circulation/Yourlibraryaccount"
-      pickup: "https://guides.library.upenn.edu/circulation/PickUpatPenn"
-      scan: "https://guides.library.upenn.edu/resourcesharing/requestscan"
-      office: "https://guides.library.upenn.edu/resourcesharing/facex"
+      bbm: "https://www.library.upenn.edu/services/books-mail"
+      account: "https://guides.library.upenn.edu/find-account"
+      pickup: "https://www.library.upenn.edu/services/pickuppenn"
+      scan: "https://www.library.upenn.edu/services/request-scan"
+      office: "https://www.library.upenn.edu/services/facultyexpress"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"
@@ -16,6 +17,7 @@ en:
       colenda: "https://colenda.library.upenn.edu"
       easyborrow: "https://ezborrow.reshare.indexdata.com"
       finding_aids: "https://findingaids.library.upenn.edu/upenn"
+      philly_archives: "https://findingaids.library.upenn.edu/"
       hathi: "https://hdl.library.upenn.edu/1017/93469"
       jstor: "https://www.jstor.org/site/upenn"
       openn: "https://openn.library.upenn.edu"
@@ -33,6 +35,7 @@ en:
       lib_hours: "https://www.library.upenn.edu/about/hours"
       libraries: "https://www.library.upenn.edu/libraries-locations"
       release_notes: "https://www.library.upenn.edu/release-notes/find"
+      reserves: "https://www.library.upenn.edu/instruction-and-course-support/course-reserves"
     requesting_info:
       archives_visit: "https://archives.upenn.edu/research/visit"
       archives_contact: "https://archives.upenn.edu/archives-info/contact"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fulfillment
-  module Options
+  module Choices
     # Pickup component logic
     class PickupComponent < ViewComponent::Base
       DEFAULT_STUDENT_PICKUP = 'Lockers at Van Pelt Library'
@@ -23,12 +23,15 @@ module Fulfillment
         pickup_locations[DEFAULT_PICKUP]
       end
 
+      # Since this component is used both on the record page and the ILL form, we need to know the right pickup value
+      # to include so the right fulfillment endpoint is used.
+      # @return [Symbol]
       def delivery_value
-        @ill ? Fulfillment::Request::Options::ILL_PICKUP : Fulfillment::Request::Options::PICKUP
+        @ill ? Fulfillment::Options::Deliverable::ILL_PICKUP : Fulfillment::Options::Deliverable::PICKUP
       end
 
       # If the options for the item include a scan or office option, don't check the pickup option
-      # Otherwise, check the pickup option
+      # Otherwise, check the pickup option. See DeliverableComponent#pickup_checked? for similar logic.
       # @return [Hash, NilClass]
       def checked?
         %i[scan office].any? { |option| options.include?(option) } ? nil : { checked: true }

@@ -128,18 +128,6 @@ describe Inventory::Item do
     end
   end
 
-  describe '#checkoutable?' do
-    it 'returns true if item is checkoutable' do
-      item = build :item, :checkoutable
-      expect(item.checkoutable?).to be true
-    end
-
-    it 'returns false if item is not checkoutable' do
-      item = build :item, :aeon_requestable
-      expect(item.checkoutable?).to be false
-    end
-  end
-
   describe '#bib_data' do
     let(:item) { build :item }
 
@@ -153,38 +141,14 @@ describe Inventory::Item do
   end
 
   describe '#user_due_date_policy' do
-    let(:item) { build :item, :not_checkoutable }
+    let(:item) { build :item, :not_loanable }
 
     it 'returns a String' do
       expect(item.user_due_date_policy).to be_a String
     end
 
     it 'returns the due date policy' do
-      expect(item.user_due_date_policy).to eq 'Not loanable'
-    end
-  end
-
-  describe '#loanable?' do
-    it 'returns true if item is loanable' do
-      item = build :item, :checkoutable
-      expect(item.loanable?).to be true
-    end
-
-    it 'returns false if item is not loanable' do
-      item = build :item, :not_checkoutable
-      expect(item.loanable?).to be false
-    end
-  end
-
-  describe '#scannable?' do
-    it 'returns true if item is scannable' do
-      item = build :item
-      expect(item.scannable?).to be true
-    end
-
-    it 'returns false if item is not scannable' do
-      item = build :item, :not_scannable
-      expect(item.scannable?).to be false
+      expect(item.user_due_date_policy).to eq Settings.fulfillment.due_date_policy.not_loanable
     end
   end
 
@@ -217,59 +181,6 @@ describe Inventory::Item do
     end
   end
 
-  describe '#on_reserve?' do
-    it 'returns true if item is on reserve' do
-      item = build :item, :on_reserve
-      expect(item.on_reserve?).to be true
-    end
-
-    it 'returns false if item is not on reserve' do
-      item = build :item, :checkoutable
-      expect(item.on_reserve?).to be false
-    end
-  end
-
-  describe '#at_reference?' do
-    it 'returns true if item is at reference' do
-      item = build :item, :at_reference
-      expect(item.at_reference?).to be true
-    end
-
-    it 'returns false if item is not at reference' do
-      item = build :item, :checkoutable
-      expect(item.at_reference?).to be false
-    end
-  end
-
-  describe '#in_house_use_only?' do
-    it 'returns true if item is in house use only' do
-      item = build :item, :in_house_use_only
-      expect(item.in_house_use_only?).to be true
-    end
-
-    it 'returns false if item is not in house use only' do
-      item = build :item, :checkoutable
-      expect(item.in_house_use_only?).to be false
-    end
-  end
-
-  describe '#unavailable?' do
-    it 'returns true if item is not checkoutable nor aeon requestable' do
-      item = build(:item, :not_aeon_requestable, :not_checkoutable)
-      expect(item.unavailable?).to be true
-    end
-
-    it 'returns false if item is not checkoutable but is aeon requestable' do
-      item = build(:item, :not_checkoutable, :aeon_requestable)
-      expect(item.unavailable?).to be false
-    end
-
-    it 'returns false if item is checkoutable' do
-      item = build(:item, :checkoutable)
-      expect(item.unavailable?).to be false
-    end
-  end
-
   describe '#select_label' do
     it 'returns the correct label for the item' do
       item = build :item
@@ -291,116 +202,6 @@ describe Inventory::Item do
       item = build :item
       expect(item.temp_aware_location_display)
         .to eq "#{item.bib_item.holding_library_name} - #{item.bib_item.holding_location_name}"
-    end
-  end
-
-  describe '#fulfillment_options' do
-    let(:user) { create(:user) }
-    let(:options) { item.fulfillment_options(user: user) }
-    let(:item) { build :item, :checkoutable }
-
-    it 'returns an array of options' do
-      expect(options).to be_an Array
-    end
-
-    context 'when the item is aeon requestable' do
-      let(:item) { build :item, :aeon_requestable }
-
-      context 'with user' do
-        it 'returns only aeon option' do
-          expect(options).to eq [:aeon]
-        end
-      end
-
-      context 'without user' do
-        let(:user) { nil }
-
-        it 'returns only aeon option' do
-          expect(options).to eq [:aeon]
-        end
-      end
-    end
-
-    context 'when the item is at archives' do
-      let(:item) { build :item, :at_archives }
-
-      context 'with user' do
-        it 'returns only archives option' do
-          expect(options).to eq [:archives]
-        end
-      end
-
-      context 'without user' do
-        let(:user) { nil }
-
-        it 'returns only archives option' do
-          expect(options).to eq [:archives]
-        end
-      end
-    end
-
-    context 'when the item is checkoutable' do
-      let(:item) { build :item, :checkoutable }
-
-      it 'returns pickup option' do
-        expect(options).to include Fulfillment::Request::Options::PICKUP
-      end
-
-      it 'returns electronic option if item is scannable' do
-        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
-      end
-
-      it 'returns mail option if user is not courtesy borrower' do
-        expect(options).to include Fulfillment::Request::Options::MAIL
-      end
-
-      context 'with faculty express user' do
-        let(:user) { create(:user, :faculty_express) }
-
-        it 'returns office option' do
-          expect(options).to include Fulfillment::Request::Options::OFFICE
-        end
-      end
-
-      context 'with courtesy borrower' do
-        let(:user) { create(:user, :courtesy_borrower) }
-
-        it 'returns only pickup option' do
-          expect(options).to contain_exactly(Fulfillment::Request::Options::PICKUP)
-        end
-      end
-    end
-
-    context 'when the item is unavailable' do
-      let(:item) { build :item, :not_checkoutable }
-
-      it 'returns electronic option' do
-        expect(options).to include Fulfillment::Request::Options::ELECTRONIC
-      end
-
-      it 'returns ill pickup option' do
-        expect(options).to include Fulfillment::Request::Options::ILL_PICKUP
-      end
-
-      it 'returns books by mail option' do
-        expect(options).to include Fulfillment::Request::Options::MAIL
-      end
-
-      context 'with faculty express user' do
-        let(:user) { create(:user, :faculty_express) }
-
-        it 'returns office option' do
-          expect(options).to include Fulfillment::Request::Options::OFFICE
-        end
-      end
-
-      context 'with courtesy borrower' do
-        let(:user) { create(:user, :courtesy_borrower) }
-
-        it 'returns no options' do
-          expect(options).to be_empty
-        end
-      end
     end
   end
 end

@@ -1,0 +1,6 @@
+<%= turbo_frame_tag 'hathi_frame' do %>
+  <a href="<%= link %>" class="inventory-item inventory-item--hathitrust link-prevent-default" target="_blank">
+    <span class="inventory-item__header"><%= I18n.t('inventory.hathi.header') %></span>
+    <span class="inventory-item__main"><%= I18n.t('inventory.hathi.main') %></span>
+  </a>
+<% end %>

@@ -8,6 +8,10 @@
 
 <h3><%= t('staff_view.title') %></h3>
 
+<% if @document.last_indexed.present? %>
+<p>Last indexed on <%= @document.last_indexed %></p>
+<% end %>
+
 <div id="marc_view" class="marc_view">
   <div class="field"><%= t('staff_view.leader', leader: @document.marc_record.leader) %></div>
   <%- @document.marc_record.each do |field| -%>
