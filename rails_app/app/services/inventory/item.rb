@@ -88,7 +88,7 @@ module Inventory
 
     # @return [String, nil]
     def material_type_value
-      item.physical_material_type['value']
+      physical_material_type['value']
     end
 
     private
