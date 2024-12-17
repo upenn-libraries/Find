@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     root to: 'catalog#index', as: 'authenticated_root'
   end
 
+  # Override BL engine route for JSON API
+  get 'catalog.json', to: 'legacy_api#index', as: 'legacy_api'
+
   mount Blacklight::Engine => '/'
   # mount BlacklightDynamicSitemap::Engine => '/'
 
