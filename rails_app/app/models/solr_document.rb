@@ -52,6 +52,10 @@ class SolrDocument
     marc(:title_detailed_show)
   end
 
+  def contained_in_related_parts
+    marc(:relation_contained_in_related_parts_show).join(' ')
+  end
+
   # String date and time that the record was last indexed
   # @return [String, nil]
   def last_indexed

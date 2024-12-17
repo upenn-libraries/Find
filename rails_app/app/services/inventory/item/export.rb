@@ -2,6 +2,10 @@
 
 module Inventory
   class Item
+    include Blacklight::Searchable
+
+    delegate :blacklight_config, to: CatalogController
+
     # Instance methods to return representations of an Item as hashes, typically for fulfillment contexts.
     module Export
       # Submission parameters for loans (of a whole work) that can be passed to the ILL form as OpenParams or directly
@@ -56,6 +60,7 @@ module Inventory
         { CallNumber: call_number,
           ItemISxN: item_data['inventory_number'],
           ItemNumber: item_data['barcode'],
+          ItemIssue: item_issue,
           Location: location.code,
           ReferenceNumber: bib_data['mms_id'],
           Site: location.aeon_site,
@@ -74,6 +79,19 @@ module Inventory
         display = "#{location.raw_library_name} - #{location.raw_location_name}"
         display.prepend('(temp) ') if in_temp_location?
         display
+      end
+
+
+      private
+
+      def item_issue
+        document = search_service.fetch(bib_data['mms_id'])
+        document.contained_in_related_parts
+      end
+
+      # Default to no search state.
+      def search_state
+        nil
       end
     end
   end
