@@ -84,6 +84,8 @@ module Inventory
 
       private
 
+      # Get the issue from the contained in related parts field - sometimes, the issue information is stored in
+      # 773$g - none of this information comes from the bib record, so we have to get it from the marc record.
       def item_issue
         document = search_service.fetch(bib_data['mms_id'])
         document.contained_in_related_parts
