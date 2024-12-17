@@ -47,6 +47,10 @@ module Inventory
           data[:holding_info]
         end
 
+        def public_note
+          nil
+        end
+
         # @return [String, nil]
         def id
           data[:holding_id]

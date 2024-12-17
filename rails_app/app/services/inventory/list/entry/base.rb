@@ -47,6 +47,10 @@ module Inventory
           raise NotImplementedError
         end
 
+        def public_note
+          raise NotImplementedError
+        end
+
         def href
           raise NotImplementedError
         end

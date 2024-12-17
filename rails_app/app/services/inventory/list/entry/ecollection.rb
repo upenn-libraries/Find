@@ -48,6 +48,11 @@ module Inventory
         end
 
         # @return [String, nil]
+        def public_note
+          data[:public_note]
+        end
+
+        # @return [String, nil]
         def href
           data[:url_override].presence || data[:url]
         end

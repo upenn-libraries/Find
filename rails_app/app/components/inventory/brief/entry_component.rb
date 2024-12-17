@@ -30,7 +30,7 @@ module Inventory
         join_fields entry.description
       end
 
-      # @return [String]
+      # @return [String, nil]
       def public_note_content
         entry.data[:public_note] if entry.electronic?
       end

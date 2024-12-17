@@ -5,6 +5,7 @@ FactoryBot.define do
     mms_id { '1234567890' }
     activation_status { Inventory::Constants::ELEC_AVAILABLE }
     coverage_statement { 'Available from 01/06/2000 until 12/23/2021.' }
+    public_note { 'Note: Use this link for Penn-sponsored access.' }
     portfolio_pid { '12345' }
     collection { 'Gale Academic OneFile' }
     collection_id { nil }

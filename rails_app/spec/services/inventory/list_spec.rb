@@ -71,6 +71,11 @@ describe Inventory::List do
         expect(entry.description).to eq ecollection_data['public_name_override']
         expect(entry.href).to eq ecollection_data['url_override']
       end
+
+      it 'entry includes public note' do
+        entry = response.first
+        expect(entry.public_note).to eq ecollection_data['public_note']
+      end
     end
 
     context 'with a record having poorly coded Ecollection inventory' do
