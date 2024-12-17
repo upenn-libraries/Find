@@ -16,7 +16,7 @@ FactoryBot.define do
           'location' => { 'value' => 'thelocation', 'desc' => 'The Location' },
           'library' => { 'value' => 'thelibrary', 'desc' => 'The Library' },
           'pid' => Faker::Number.number(digits: 10),
-          'physical_material_type' => { 'desc' => 'Book' }
+          'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' }
         }
       }
     end
@@ -101,7 +101,7 @@ FactoryBot.define do
   trait :laptop_material_type do
     item do
       item = attributes_for(:item)[:item]
-      item['item_data']['physical_material_type'] = 'LPTOP'
+      item['item_data']['physical_material_type'] = { 'value' => 'LPTOP', 'desc' => 'Laptop' }
       item
     end
   end
@@ -147,7 +147,7 @@ FactoryBot.define do
     item do
       item = attributes_for(:item)[:item]
       item['item_data']['base_status'] = { 'value' => '0' }
-      item['item_data']['physical_material_type'] = 'LPTOP'
+      item['item_data']['physical_material_type'] = { 'value' => 'LPTOP', 'desc' => 'Laptop' }
       item
     end
   end
