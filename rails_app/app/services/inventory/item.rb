@@ -86,6 +86,11 @@ module Inventory
       item_data['enumeration_b']
     end
 
+    # @return [String, nil]
+    def material_type_value
+      physical_material_type['value']
+    end
+
     private
 
     # Returns location object. If item in a temp location, returns that as the location. If a location is not

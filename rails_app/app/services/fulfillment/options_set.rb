@@ -108,14 +108,16 @@ module Fulfillment
         (item.in_place? && not_loanable?)
     end
 
+    # Some item types don't make sense in an ILL requesting context (laptops, for example)
     # @return [Boolean]
     def item_material_type_excluded_from_ill?
-      item.physical_material_type.in?(Settings.fulfillment.ill.excluded_material_types)
+      item.material_type_value.in?(Settings.fulfillment.ill.excluded_material_types)
     end
 
+    # Some item types can't be "Scanned and Delivered" by ILL
     # @return [Boolean]
     def item_material_type_excluded_from_scanning?
-      item.physical_material_type.in?(Settings.fulfillment.scan.excluded_material_types)
+      item.material_type_value.in?(Settings.fulfillment.scan.excluded_material_types)
     end
   end
 end
