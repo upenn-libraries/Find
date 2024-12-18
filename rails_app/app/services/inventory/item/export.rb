@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Inventory
+  # Supplement Alma::BibItem with additional functionality
   class Item
     include Blacklight::Searchable
 
@@ -46,7 +47,6 @@ module Inventory
           'rft.edition': bib_data['complete_edition'],
           'rft.isbn': bib_data['isbn'],
           'rft.issn': bib_data['issn'],
-          'rft.issue': issue,
           'rft.place': bib_data['place_of_publication'],
           'rft.pub': bib_data['publisher_const'],
           'rft.title': bib_data['title'],
@@ -81,13 +81,14 @@ module Inventory
         display
       end
 
-
       private
 
       # Get the issue from the contained in related parts field - sometimes, the issue information is stored in
       # 773$g - none of this information comes from the bib record, so we have to get it from the marc record.
       def item_issue
         document = search_service.fetch(bib_data['mms_id'])
+        return if document.blank?
+
         document.contained_in_related_parts
       end
 
