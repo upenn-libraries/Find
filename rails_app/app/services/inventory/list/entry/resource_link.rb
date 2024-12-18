@@ -49,6 +49,7 @@ module Inventory
           nil
         end
 
+        # @return [nil]
         def public_note
           nil
         end

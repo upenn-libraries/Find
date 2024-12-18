@@ -32,7 +32,7 @@ module Inventory
 
       # @return [String, nil]
       def public_note_content
-        entry.data[:public_note] if entry.electronic?
+        entry.public_note if entry.electronic?
       end
 
       # @return [String]
