@@ -158,7 +158,6 @@ describe 'Catalog show page requesting behaviors' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
       end
-
       let(:item) do
         build :item, :aeon_location do |item|
           item.bib_data['mms_id'] = print_monograph_bib
