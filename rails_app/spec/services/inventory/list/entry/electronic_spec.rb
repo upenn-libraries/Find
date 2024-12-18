@@ -11,6 +11,7 @@ describe Inventory::List::Entry::Electronic do
       library_code: 'VanPeltLib',
       collection: 'Nature Publishing Journals',
       coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
+      public_note: 'Note: Use this link for Penn-sponsored access to Nature.',
       interface_name: 'Nature',
       inventory_type: Inventory::List::ELECTRONIC
     )
@@ -43,6 +44,12 @@ describe Inventory::List::Entry::Electronic do
   describe '#coverage_statement' do
     it 'returns expected coverage_statement' do
       expect(entry.coverage_statement).to eql 'Available from 1869 volume: 1 issue: 1.'
+    end
+  end
+
+  describe '#public_note' do
+    it 'returns expected public_note' do
+      expect(entry.public_note).to eql 'Note: Use this link for Penn-sponsored access to Nature.'
     end
   end
 

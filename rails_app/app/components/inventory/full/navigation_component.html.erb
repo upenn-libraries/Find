@@ -44,6 +44,9 @@
           <% unless entry.resource_link? %>
             <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
           <% end %>
+          <% if entry.public_note %>
+            <span class="inventory-item__sub-main"><%= entry.public_note %></span>
+          <% end %>
           <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
         </button>
       <% end %>

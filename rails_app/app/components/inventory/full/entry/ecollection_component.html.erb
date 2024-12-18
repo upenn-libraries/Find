@@ -4,3 +4,7 @@
 </p>
 
 <a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
+
+<% if entry.public_note %>
+  <p class="inventory-item__notes"><%= entry.public_note %></p>
+<% end %>
