@@ -36,5 +36,9 @@ module Find
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Raise errors for missing translations in all environments. We use translations for important URLs as well as
+    # strings so it is important that any omissions or errors be caught quickly.
+    config.i18n.raise_on_missing_translations = true
   end
 end
