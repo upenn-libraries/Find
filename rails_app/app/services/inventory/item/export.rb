@@ -87,15 +87,18 @@ module Inventory
         pennmarc.public_send(:relation_contained_in_related_parts_show, marc_record).join(' ')
       end
 
-      # @return [Alma::BibSet]
+      # Get the Alma record for the bib_data mms_id. Making an additional call to Alma is the most convenient way to
+      # retrieve the full MarcXML for the record.
+      # @return [Alma::BibSet, nil]
       def alma_record
-        alma_response = Alma::Bib.find([bib_data['mms_id']], {})
+        alma_response = Alma::Bib.find([bib_data['mms_id']], {})&.response || {}
         return if alma_response.blank?
 
-        @alma_record ||= alma_response.response['bib']&.first
+        @alma_record ||= alma_response['bib']&.first
       end
 
-      # @return [MARC::Record]
+      # Extract the MarcXML from the Alma record and parse it into a MARC::Record
+      # @return [MARC::Record, nil]
       def marc_record
         raw_xml = alma_record['anies']&.first
         return if raw_xml.blank?
