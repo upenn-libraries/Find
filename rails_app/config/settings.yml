@@ -70,9 +70,9 @@ locations:
     Math/Physics/Astronomy Library:
       ils: MPALib
       ill: Math/Physics/Astronomy Library
-    Museum Library:
-      ils: MuseumLib
-      ill: Museum Library
+#    Museum Library:
+#      ils: MuseumLib
+#      ill: Museum Library
     Ormandy Music and Media Center:
       ils: MusicLib
     Pennsylvania Hospital Library - PAH Staff Only:
