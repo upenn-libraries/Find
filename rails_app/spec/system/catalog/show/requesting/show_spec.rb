@@ -158,15 +158,16 @@ describe 'Catalog show page requesting behaviors' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
       end
-      let(:item) do
-        build :item, :aeon_location do |item|
-          item.bib_data['mms_id'] = print_monograph_bib
-          item
+      let(:item) { build :item, :aeon_location }
+      let(:bib_set) do
+        build :alma_bib_set do |set|
+          set['bib'].first['anies'] = [File.read(Rails.root.join('spec/fixtures/marc_xml/print_monograph.xml'))]
         end
       end
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Alma::Bib).to receive(:find).and_return(bib_set)
         find('details.fulfillment > summary').click
       end
 

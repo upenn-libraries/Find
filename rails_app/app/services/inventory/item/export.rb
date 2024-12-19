@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 module Inventory
-  # Supplement Alma::BibItem with additional functionality
   class Item
-    include Blacklight::Searchable
-
-    delegate :blacklight_config, to: CatalogController
-
     # Instance methods to return representations of an Item as hashes, typically for fulfillment contexts.
     module Export
       # Submission parameters for loans (of a whole work) that can be passed to the ILL form as OpenParams or directly
@@ -85,16 +80,32 @@ module Inventory
 
       # Get the issue from the contained in related parts field - sometimes, the issue information is stored in
       # 773$g - this doesn't come in the Alma response bib_data, so we have to get it from the marc record.
+      # @return [String, nil]
       def item_issue
-        document = search_service.fetch(bib_data['mms_id'])
-        return if document.blank?
+        return unless marc_record
 
-        document.contained_in_related_parts
+        pennmarc.public_send(:relation_contained_in_related_parts_show, marc_record).join(' ')
       end
 
-      # Default to no search state.
-      def search_state
-        nil
+      # @return [Alma::BibSet]
+      def alma_record
+        alma_response = Alma::Bib.find([bib_data['mms_id']], {})
+        return if alma_response.blank?
+
+        @alma_record ||= alma_response.response['bib']&.first
+      end
+
+      # @return [MARC::Record]
+      def marc_record
+        raw_xml = alma_record['anies']&.first
+        return if raw_xml.blank?
+
+        @marc_record ||= MARC::XMLReader.new(StringIO.new(raw_xml)).first
+      end
+
+      # @return [PennMARC::Parser]
+      def pennmarc
+        @pennmarc ||= PennMARC::Parser.new
       end
     end
   end
