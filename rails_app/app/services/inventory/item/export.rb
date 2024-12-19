@@ -80,6 +80,7 @@ module Inventory
 
       # Get the issue from the contained in related parts field - sometimes, the issue information is stored in
       # 773$g - this doesn't come in the Alma response bib_data, so we have to get it from the marc record.
+      #
       # @return [String, nil]
       def item_issue
         return unless marc_record
@@ -89,6 +90,7 @@ module Inventory
 
       # Get the Alma record for the bib_data mms_id. Making an additional call to Alma is the most convenient way to
       # retrieve the full MarcXML for the record.
+      #
       # @return [Alma::BibSet, nil]
       def alma_record
         alma_response = Alma::Bib.find([bib_data['mms_id']], {})&.response || {}
@@ -98,6 +100,7 @@ module Inventory
       end
 
       # Extract the MarcXML from the Alma record and parse it into a MARC::Record
+      #
       # @return [MARC::Record, nil]
       def marc_record
         raw_xml = alma_record['anies']&.first

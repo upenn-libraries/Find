@@ -189,7 +189,8 @@ describe 'Catalog show page requesting behaviors' do
       it 'includes ItemIssue in the Aeon params' do
         within('.request-buttons') do
           aeon_link = find_link I18n.t('requests.form.buttons.aeon')
-          expect(aeon_link[:href]).to include(CGI.escape('Item 65'))
+          uri = URI.parse(aeon_link[:href])
+          expect(CGI.parse(uri.query)['ItemIssue'].first).to be_present
         end
       end
     end
