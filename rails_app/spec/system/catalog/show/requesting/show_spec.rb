@@ -161,7 +161,8 @@ describe 'Catalog show page requesting behaviors' do
       let(:item) { build :item, :aeon_location }
       let(:bib_set) do
         build :alma_bib_set do |set|
-          set['bib'].first['anies'] = [File.read(Rails.root.join('spec/fixtures/marc_xml/print_monograph.xml'))]
+          set['bib'].first['anies'] =
+            [File.read(Rails.root.join('spec/fixtures/marc_xml/special_collections_manuscript.xml'))]
         end
       end
 
@@ -182,6 +183,13 @@ describe 'Catalog show page requesting behaviors' do
           aeon_link = find_link I18n.t('requests.form.buttons.aeon')
           expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
           expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
+        end
+      end
+
+      it 'includes ItemIssue in the Aeon params' do
+        within('.request-buttons') do
+          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
+          expect(aeon_link[:href]).to include(CGI.escape('Item 65'))
         end
       end
     end
