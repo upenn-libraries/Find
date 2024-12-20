@@ -67,7 +67,7 @@ services:
 {% if is_development == true %}
       - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app
 {% else %}
-      - app_storage:/home/app/storage
+      - catalog_find_app_storage:/home/app/storage
 {% endif %}
 
 networks:
@@ -100,7 +100,7 @@ secrets:
 
 {% if is_development == false %}
 volumes:
-  app_storage:
+  catalog_find_app_storage:
     external: true
-    name: app_storage
+    name: catalog_find_app_storage
 {% endif %}
