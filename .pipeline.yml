@@ -13,6 +13,10 @@ include:
       - ".build_and_push_docker_images.yml"
       - ".copy_docker_images.yml"
       - ".remove_tmp_registry.yml"
+  - project: "devops/gitlab/ci-templates/general"
+    file:
+      - ".install_hashicorp_vault.yml"
+      - ".vault_jwt_auth.yml"
   - project: "devops/gitlab/ci-templates/sast"
     ref: "master"
     file:
@@ -39,6 +43,11 @@ build_and_push_base_app_image:
   stage: build_and_push:tmp_base_image
   extends:
     - .build_and_push_docker_images
+  before_script:
+    - !reference [.install_hashicorp_vault, before_script]
+    - !reference [.vault_jwt_auth, before_script]
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - export SIDEKIQ_PRO_CREDENTIALS="$(vault kv get -field=credentials ${VAULT_SIDEKIQ_ENDPOINT})"
   parallel:
     matrix:
       - RUNNER: build-arm
@@ -47,8 +56,10 @@ build_and_push_base_app_image:
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
     DOCKER_BUILD_CONTEXT: "rails_app/"
+    DOCKER_BUILD_SECRETS: "--secret id=sidekiq_pro_credentials,env=SIDEKIQ_PRO_CREDENTIALS"
     DOCKER_TARGET: "base"
     DOCKERFILE_PATH: "rails_app/"
+    JWT_ROLE: "sidekiq_pro_ro"
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
   tags:
     - ${RUNNER}
@@ -218,12 +229,19 @@ build_and_push_prod_app_image:
         DOCKER_BUILD_PLATFORM: "linux/arm64"
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
+  before_script:
+    - !reference [.install_hashicorp_vault, before_script]
+    - !reference [.vault_jwt_auth, before_script]
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - export SIDEKIQ_PRO_CREDENTIALS="$(vault kv get -field=credentials ${VAULT_SIDEKIQ_ENDPOINT})"
   variables:
     DOCKER_ADDITIONAL_CACHE_TARGETS: "base development"
     DOCKER_BUILD_ARGS: "--build-arg RAILS_ENV=production"
     DOCKER_BUILD_CONTEXT: "rails_app/"
+    DOCKER_BUILD_SECRETS: "--secret id=sidekiq_pro_credentials,env=SIDEKIQ_PRO_CREDENTIALS"
     DOCKER_TARGET: "production"
     DOCKERFILE_PATH: "rails_app/"
+    JWT_ROLE: "sidekiq_pro_ro"
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
   needs:
     - rspec_app_test

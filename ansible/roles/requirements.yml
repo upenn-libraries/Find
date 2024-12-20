@@ -11,6 +11,11 @@ roles:
     scm: git
     version: main
 
+  - name: redis
+    src: https://gitlab.library.upenn.edu/devops/ansible/roles/redis.git
+    scm: git
+    version: 1.1.0
+
   - name: solr
     src: https://gitlab.library.upenn.edu/devops/ansible/roles/solr.git
     scm: git

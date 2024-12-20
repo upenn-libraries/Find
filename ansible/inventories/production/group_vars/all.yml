@@ -1,3 +1,4 @@
 ---
 catalog_find_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/find/production', engine_mount_point='kv-applications') }}"
 catalog_solr_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/solr/production', engine_mount_point='kv-applications') }}"
+dld_sidekiq_pro_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'sidekiq_pro', engine_mount_point='dld') }}"
