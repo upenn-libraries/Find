@@ -19,18 +19,19 @@ services:
       APP_GID: ${GID:-1000}
       SOLR_TEST_URL: "{{ catalog_find_solr_test_url }}"
 {% endif %}
+      APP_URL: "{{ catalog_find_url }}"
+      APP_IMAGE_TAG: "{{ catalog_find_image_name }}"
       DATABASE_HOST: "postgres"
       DATABASE_NAME: "{{ postgres_database_name }}"
-      DATABASE_PASSWORD: /run/secrets/database_password
+      DATABASE_PASSWORD: "/run/secrets/database_password"
       DATABASE_USER: "{{ postgres_database_user }}"
-      DB_POOL: "{{ item.concurrency }}"
-      APP_URL: "{{ catalog_find_url }}"
-      APP_IMAGE_TAG: ${APP_IMAGE_TAG}
       RAILS_ENV: "{{ catalog_find_rails_env }}"
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      SHIB_SP_ENTITY_ID: "https://{{ catalog_find_url }}/shibboleth"
+      DB_POOL: "{{ item.concurrency }}"
       REDIS_SIDEKIQ_USER: "sidekiq"
       REDIS_URL: "redis://redis:{{ redis_port }}/0"
-      SOLR_INSTANCES: "{{ solr_instances }}"
-      SOLR_URL: "{{ catalog_find_solr_url }}"
     healthcheck:
       test:
         [
@@ -59,7 +60,14 @@ services:
         mode: 0440
       - {{ redis_docker_stack_name ~ "_redis_sidekiq_password" }}
 {% if is_development == false %}
+      - alert_webhooks_token
+      - alma_api_key
       - honeybadger_api_key
+      - illiad_api_key
+      - illiad_legacy_user_password
+      - library_info_api_key
+      - solr_url
+      - summon_api_key
 {% elif is_development == true %}
       - sidekiq_pro_credentials
 {% endif %}
@@ -89,9 +97,30 @@ secrets:
     external: true
     name: "{{ redis_docker_stack_name ~ '_redis_sidekiq_password_v' ~ redis_users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
 {% if is_development == false %}
+  alert_webhooks_token:
+    external: true
+    name: "{{ 'catalog_find_alert_webhooks_token_v' ~ catalog_find_versioned_secrets.alert_webhooks_token.version }}"
+  alma_api_key:
+    external: true
+    name: "{{ 'catalog_find_alma_api_key_v' ~ catalog_find_versioned_secrets.alma_api_key.version }}"
   honeybadger_api_key:
     external: true
     name: "{{ 'catalog_find_honeybadger_api_key_v' ~ catalog_find_versioned_secrets.honeybadger_api_key.version }}"
+  illiad_api_key:
+    external: true
+    name: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
+  illiad_legacy_user_password:
+    external: true
+    name: "{{ 'catalog_find_illiad_legacy_user_password_v' ~ catalog_find_versioned_secrets.illiad_legacy_user_password.version }}"
+  library_info_api_key:
+    external: true
+    name: "{{ 'catalog_find_library_info_api_key_v' ~ catalog_find_versioned_secrets.library_info_api_key.version }}"
+  solr_url:
+    external: true
+    name: "{{ 'catalog_find_solr_url_v' ~ catalog_find_versioned_secrets.solr_url.version }}"
+  summon_api_key:
+    external: true
+    name: "{{ 'catalog_find_summon_api_key_v' ~ catalog_find_versioned_secrets.summon_api_key.version }}"
 {% elif is_development == true %}
   sidekiq_pro_credentials:
     external: true
