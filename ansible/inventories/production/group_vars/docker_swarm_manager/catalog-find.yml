@@ -31,9 +31,6 @@ catalog_find_versioned_secrets:
   library_info_api_key:
     value: "{{ catalog_find_vault_values.secret.library_info_api_key }}"
     version: "{{ catalog_find_vault_values.metadata.version }}"
-  sidekiq_pro_credentials:
-    value: "{{ dld_sidekiq_pro_vault_values.secret.credentials }}"
-    version: "{{ dld_sidekiq_pro_vault_values.metadata.version }}"
   summon_api_key:
     value: "{{ catalog_find_vault_values.secret.summon_api_key }}"
     version: "{{ catalog_find_vault_values.metadata.version }}"
