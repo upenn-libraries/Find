@@ -57,7 +57,7 @@ services:
         uid: "1000"
         gid: "1000"
         mode: 0440
-      - redis_sidekiq_password
+      - {{ redis_docker_stack_name ~ "_redis_sidekiq_password" }}
 {% if is_development == false %}
       - honeybadger_api_key
 {% elif is_development == true %}
@@ -85,9 +85,9 @@ secrets:
   rails_master_key:
     external: true
     name: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"
-  redis_sidekiq_password:
+  {{ redis_docker_stack_name ~ "_redis_sidekiq_password" }}:
     external: true
-    name: "{{ 'redis_sidekiq_password_v' ~ redis_users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
+    name: "{{ redis_docker_stack_name ~ '_redis_sidekiq_password_v' ~ redis_users | selectattr('name', 'equalto', 'sidekiq') | map(attribute='version')  | join('') }}"
 {% if is_development == false %}
   honeybadger_api_key:
     external: true
