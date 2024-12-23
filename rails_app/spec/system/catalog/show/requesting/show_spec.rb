@@ -3,6 +3,8 @@
 require 'system_helper'
 
 describe 'Catalog show page requesting behaviors' do
+  include FixtureHelpers
+
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with empty hathi response'
 
@@ -161,8 +163,7 @@ describe 'Catalog show page requesting behaviors' do
       let(:item) { build :item, :aeon_location }
       let(:bib_set) do
         build :alma_bib_set do |set|
-          set['bib'].first['anies'] =
-            [File.read(Rails.root.join('spec/fixtures/marc_xml/special_collections_manuscript.xml'))]
+          set['bib'].first['anies'] = [marc_xml_fixture('special_collections_manuscript')]
         end
       end
 

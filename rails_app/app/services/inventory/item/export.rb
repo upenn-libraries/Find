@@ -91,7 +91,7 @@ module Inventory
       # Get the Alma record for the bib_data mms_id. Making an additional call to Alma is the most convenient way to
       # retrieve the full MarcXML for the record.
       #
-      # @return [Alma::BibSet, nil]
+      # @return [Hash, nil]
       def alma_record
         alma_response = Alma::Bib.find([bib_data['mms_id']], {})&.response || {}
         return if alma_response.blank?
