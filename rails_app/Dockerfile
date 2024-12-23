@@ -32,7 +32,7 @@ ENV BUNDLE_APP_CONFIG="${PROJECT_ROOT}/.bundle"
 WORKDIR ${PROJECT_ROOT}
 
 # Install build packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
       build-essential \
       git \
       libpq-dev \
@@ -48,8 +48,12 @@ RUN bundle config path ${PROJECT_ROOT}/${BUNDLE_HOME} && \
     bundle config set with "development:test:assets"; \
     else \
     bundle config set without "development:test:assets"; \
-    fi && \
-    MAKE="make -j $(nproc)" bundle install && \
+    fi
+
+RUN --mount=type=secret,id=sidekiq_pro_credentials \
+  bundle config set --local gems.contribsys.com $(cat /run/secrets/sidekiq_pro_credentials)
+
+RUN bundle install -j$(nproc) --retry 3 && \
     rm -rf ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/cache/*.gem && \
     find ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/gems/ \( -name "*.c" -o -name "*.o" \) -delete
 
@@ -80,7 +84,7 @@ ENV PATH="${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin:${PATH}"
 
 WORKDIR ${PROJECT_ROOT}
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
       build-essential \
       curl \
       git \
@@ -93,15 +97,15 @@ RUN apt-get update && apt-get install -y \
     mkdir -p ${PROJECT_ROOT}/tmp/pids && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --chown=app:app --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
-
-COPY --chown=app:app --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
+COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
+COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
-  SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
-  find . -type d -exec chmod 755 {} + && \
-  chmod 744 -R ./bin && \
-  chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/
+    SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+    find . -type d -exec chmod 755 {} + && \
+    chmod 744 -R ./bin && \
+    chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/ && \
+    chown -R app:app .
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
@@ -137,7 +141,7 @@ ENV RAILS_SERVE_STATIC_FILES=true
 
 WORKDIR ${PROJECT_ROOT}
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
       build-essential \
       curl \
       git \
@@ -150,15 +154,15 @@ RUN apt-get update && apt-get install -y \
     mkdir -p ${PROJECT_ROOT}/tmp/pids && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --chown=app:app --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
-
-COPY --chown=app:app --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
+COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
+COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
     SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
     find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
-    chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/
+    chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/ && \
+    chown -R app:app .
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

@@ -62,6 +62,7 @@
     DATABASE_USER: "{{ postgres_database_user }}"
     RAILS_ENV: "{{ catalog_find_rails_env }}"
     RAILS_MASTER_KEY: "{{ 'catalog_find_rails_master_key_v' ~ catalog_find_versioned_secrets.rails_master_key.version }}"
+    SIDEKIQ_PRO_CREDENTIALS: "{{ 'catalog_find_sidekiq_pro_credentials_v' ~ catalog_find_versioned_secrets.sidekiq_pro_credentials.version }}"
     SOLR_INSTANCES: "{{ solr_instances }}"
     SOLR_TEST_URL: "{{ catalog_find_solr_test_url }}"
     SOLR_URL: "{{ catalog_find_solr_url }}"

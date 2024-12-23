@@ -2,6 +2,7 @@
 roles/catalog-find/files/src/*
 roles/atosatto.docker-swarm
 roles/postgres
+roles/redis
 roles/solr
 roles/traefik
 roles/zookeeper
