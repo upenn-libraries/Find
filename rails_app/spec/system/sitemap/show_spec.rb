@@ -2,7 +2,7 @@
 
 require 'system_helper'
 
-xdescribe 'Sitemap Show Page' do
+describe 'Sitemap Show Page' do
   include_context 'with print monograph record with 2 physical entries'
 
   before { visit blacklight_dynamic_sitemap.sitemap_path('0') }

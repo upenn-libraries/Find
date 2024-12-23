@@ -3,6 +3,8 @@
 User-agent: *
 Crawl-delay: 5
 
+Sitemap: https://find.library.upenn.edu/sitemap
+
 Disallow: /*?*
 Disallow: /bookmarks
 Disallow: /catalog/advanced
