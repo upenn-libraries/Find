@@ -8,4 +8,12 @@ module FixtureHelpers
     dirs = ['json', directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
+
+  # @param [String] filename
+  # @return [String]
+  def marc_xml_fixture(filename, directory = nil)
+    filename = "#{filename}.xml" unless filename.ends_with?('.xml')
+    dirs = ['marc_xml', directory.to_s, filename].compact_blank
+    File.read(File.join(fixture_paths, dirs))
+  end
 end
