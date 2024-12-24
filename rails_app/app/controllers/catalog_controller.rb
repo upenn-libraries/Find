@@ -432,6 +432,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_sort desc, title_sort asc', label: I18n.t('sort.creator_desc')
     config.add_sort_field 'title_sort asc, publication_date_sort desc', label: I18n.t('sort.title_asc')
     config.add_sort_field 'title_sort desc, publication_date_sort desc', label: I18n.t('sort.title_desc')
+    config.add_sort_field 'call_number_sort asc, title_sort asc', label: I18n.t('sort.call_num_asc')
+    config.add_sort_field 'call_number_sort desc, title_sort asc', label: I18n.t('sort.call_num_desc')
     config.add_sort_field 'publication_date_sort asc, title_sort asc', label: I18n.t('sort.publication_date_asc')
     config.add_sort_field 'publication_date_sort desc, title_sort asc', label: I18n.t('sort.publication_date_desc')
     config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.added_date_asc')

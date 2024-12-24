@@ -514,6 +514,8 @@ en:
     added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    call_num_asc: 'Call Number (a-z)'
+    call_num_desc: 'Call Number (z-a)'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'
