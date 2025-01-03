@@ -349,6 +349,9 @@ en:
     contained_within: 'Contained in'
     format: 'Format'
     score: 'Score'
+    json:
+      marcxml: 'MARC XML'
+      mmsid: 'MMS ID'
   requests:
     form:
       heading: 'Access options'
