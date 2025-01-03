@@ -200,6 +200,11 @@ class CatalogController < ApplicationController
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
 
+    # To support our Leganto integration, include these additional fields in the JSON API responses
+    # See: https://knowledge.exlibrisgroup.com/Leganto/Product_Documentation/Leganto_Online_Help_(English)/Leganto_Administration_Guide/yy_Appendix_D%3A_Integration_with_Blacklight
+    config.add_index_field :marcxml_marcxml, label: I18n.t('results.json.marcxml'), if: :json_request?
+    config.add_index_field :id, label: I18n.t('results.json.mmsid'), if: :json_request?
+
     # fields to show in email
     config.add_email_field :title_ss, label: I18n.t('show.title.main')
     config.add_email_field :format_facet, label: I18n.t('results.format')
@@ -468,5 +473,10 @@ class CatalogController < ApplicationController
   # @return [Boolean]
   def show_score?
     !Rails.env.production? || params[:score].present?
+  end
+
+  # @return [Boolean]
+  def json_request?
+    request.format.json?
   end
 end
