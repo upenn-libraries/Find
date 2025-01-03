@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # Remove entries from the Searches table that are:
-# - too old
-# - old-ish and attached to a guest user
+# - without a linked user_id
+# - older than a certain number of days
 class CleanupSearchesJob
   include Sidekiq::Job
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-# Remove entries from the Users table for guest users of a certain age
+# Remove entries from the Users where:
+# - user is a guest user
+# - user hasn't been updated in a certain number of days
 class CleanupGuestUsersJob
   include Sidekiq::Job
 
