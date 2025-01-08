@@ -104,7 +104,7 @@ class CatalogController < ApplicationController
 
     # solr field configuration for document/show views
     config.show.title_field = :title_ss
-    # config.show.display_type_field = 'format'
+    config.show.display_type_field = :format_facet
     # config.show.thumbnail_field = 'thumbnail_path_ss'
     #
     # The presenter is a view-model class for the page
