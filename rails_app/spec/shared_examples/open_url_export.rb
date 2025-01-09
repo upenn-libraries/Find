@@ -12,7 +12,7 @@ shared_examples_for 'OpenUrlExport' do
       let(:expected_title) { { 'rft.title' => 'The hypothalamus of the cat' } }
 
       it 'returns a query string containing the book title' do
-        expect(object.export_as_openurl_ctx_kev('book')).to include expected_title.to_query
+        expect(object.export_as_openurl_ctx_kev('book')).to include expected_title.to_openurl
       end
     end
 
@@ -21,7 +21,7 @@ shared_examples_for 'OpenUrlExport' do
       let(:expected_title) { { 'rft.title' => 'Chemical communications.' } }
 
       it 'returns a query string containing the journal title' do
-        expect(object.export_as_openurl_ctx_kev('journal')).to include expected_title.to_query
+        expect(object.export_as_openurl_ctx_kev('journal')).to include expected_title.to_openurl
       end
     end
 
@@ -32,7 +32,7 @@ shared_examples_for 'OpenUrlExport' do
       end
 
       it 'returns a query string containing the journal title' do
-        expect(object.export_as_openurl_ctx_kev('manuscript')).to include expected_title.to_query
+        expect(object.export_as_openurl_ctx_kev('manuscript')).to include expected_title.to_openurl
       end
     end
   end
