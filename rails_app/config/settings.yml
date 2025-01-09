@@ -1,4 +1,10 @@
 pennlibs_web_version: '0.2.1'
+cleanup:
+  searches:
+    days_old: 7
+  guest_users:
+    days_old: 7
+    batch_size: 1000
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
 illiad:
@@ -14,6 +20,10 @@ google_analytics:
   id: ~
 honeybadger:
   api_key: '12345'
+redis:
+  url: <%= ENV['REDIS_URL'] %>
+  username: <%= ENV['REDIS_SIDEKIQ_USER'] %>
+  password: <%= DockerSecrets.lookup(:redis_sidekiq_password) %>
 email:
   from_address: 'find-noreply@upenn.edu'
   smtp:

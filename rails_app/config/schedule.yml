@@ -1,0 +1,8 @@
+# scheduled job configuration - see Fugit gem docs for supported cron syntax
+
+cleanup_guest_users:
+  cron: 'every day at 4AM'
+  class: 'CleanupGuestUsersJob'
+cleanup_searches:
+  cron: 'every day at 5AM'
+  class: 'CleanupSearchesJob'
