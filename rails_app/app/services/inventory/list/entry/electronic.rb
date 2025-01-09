@@ -22,9 +22,9 @@ module Inventory
           data[:portfolio_pid]
         end
 
-        # @return [String, nil]
+        # @return [String]
         def description
-          data[:collection]
+          data[:collection].presence || I18n.t('inventory.fallback_electronic_access_button_label')
         end
 
         # @return [String, nil]

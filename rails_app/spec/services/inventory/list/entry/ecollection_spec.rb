@@ -16,6 +16,28 @@ describe Inventory::List::Entry::Ecollection do
     end
   end
 
+  describe '#description' do
+    it 'returns expected value' do
+      expect(entry.description).to eq 'Barclays Capital Live'
+    end
+
+    context 'when public_name_override is set' do
+      let(:entry) { create(:ecollection_entry, public_name: 'Not This', public_name_override: 'Use This') }
+
+      it 'uses the override value' do
+        expect(entry.description).to eq 'Use This'
+      end
+    end
+
+    context 'when no expected values are present' do
+      let(:entry) { create(:ecollection_entry, public_name: '', public_name_override: '') }
+
+      it 'uses a default value' do
+        expect(entry.description).to eq I18n.t('inventory.fallback_electronic_access_button_label')
+      end
+    end
+  end
+
   describe '#public_note' do
     it 'returns expected public_note' do
       expect(entry.public_note).to eql 'Lippincott Library On-site Database'
