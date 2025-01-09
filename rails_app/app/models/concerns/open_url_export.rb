@@ -10,9 +10,10 @@ module OpenUrlExport
   # @param [Array<String>, String, nil] format
   # @return [String]
   def export_as_openurl_ctx_kev(format = nil)
-    values = marc_values(format)
+    normalized_format = normalize_format(format)
+    values = marc_values(normalized_format)
 
-    case normalize_format(format)
+    case normalized_format
     when 'book'
       book_export_kev(values).to_openurl
     when /journal/i
@@ -37,7 +38,7 @@ module OpenUrlExport
       publisher_info: marc(:production_publication_citation_show),
       edition: marc(:edition_show, with_alternate: false),
       isbn: marc(:identifier_isbn_show), issn: marc(:identifier_issn_show),
-      format: normalize_format(format) }
+      format: format }
   end
 
   # Assemble OpenURL KEV hash for book format
