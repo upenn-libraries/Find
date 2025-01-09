@@ -41,7 +41,7 @@ describe Inventory::List::Entry::Electronic do
     end
 
     context 'when no collection value is present' do
-      let(:entry) { create(:electronic_entry, collection: '') }
+      let(:entry) { create(:electronic_entry, :without_collection) }
 
       it 'returns the default value' do
         expect(entry.description).to eq I18n.t('inventory.fallback_electronic_access_button_label')

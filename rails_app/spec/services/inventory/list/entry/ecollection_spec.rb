@@ -22,15 +22,15 @@ describe Inventory::List::Entry::Ecollection do
     end
 
     context 'when public_name_override is set' do
-      let(:entry) { create(:ecollection_entry, public_name: 'Not This', public_name_override: 'Use This') }
+      let(:entry) { create(:ecollection_entry, :with_public_name_override) }
 
       it 'uses the override value' do
-        expect(entry.description).to eq 'Use This'
+        expect(entry.description).to eq 'Penn Public Name'
       end
     end
 
     context 'when no expected values are present' do
-      let(:entry) { create(:ecollection_entry, public_name: '', public_name_override: '') }
+      let(:entry) { create(:ecollection_entry, :with_no_name_provided) }
 
       it 'uses a default value' do
         expect(entry.description).to eq I18n.t('inventory.fallback_electronic_access_button_label')
