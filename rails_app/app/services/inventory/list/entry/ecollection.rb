@@ -12,7 +12,7 @@ module Inventory
           data[:id]
         end
 
-        # @return [String, nil]
+        # @return [String]
         def description
           data[:public_name_override].presence || data[:public_name].presence ||
             I18n.t('inventory.fallback_electronic_access_button_label')
