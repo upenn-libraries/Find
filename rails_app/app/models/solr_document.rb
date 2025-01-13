@@ -6,6 +6,7 @@ class SolrDocument
   include MARCParsing
   include CitationExport
   include RisExport
+  include OpenUrlExport
 
   # @return [Inventory::Response]
   def full_inventory
