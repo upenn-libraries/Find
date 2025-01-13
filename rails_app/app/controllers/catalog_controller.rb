@@ -141,7 +141,7 @@ class CatalogController < ApplicationController
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access'), collapse: false
-    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: false do |field|
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: -1 do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
