@@ -14,7 +14,6 @@ describe 'Catalog Index Page' do
     it 'displays facets' do
       within('div.blacklight-access_facet') do
         expect(page).to have_text I18n.t('facets.access')
-        click_on I18n.t('facets.access')
         expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
       end
     end
@@ -46,7 +45,6 @@ describe 'Catalog Index Page' do
     it 'displays facets' do
       within('div.blacklight-access_facet') do
         expect(page).to have_text I18n.t('facets.access')
-        click_on I18n.t('facets.access')
         expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
       end
     end
