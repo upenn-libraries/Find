@@ -7,10 +7,8 @@ module CoreExtensions
       filter_map { |key, value|
         next if value.blank?
 
-        if value.is_a?(Array)
-          value.filter_map { |v| "#{CGI.escape(key.to_s)}=#{CGI.escape(v.to_s)}" }
-        else
-          "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}"
+        Array.wrap(value).filter_map do |v|
+          "#{CGI.escape(key.to_s)}=#{CGI.escape(v.to_s)}"
         end
       }.flatten.join('&')
     end

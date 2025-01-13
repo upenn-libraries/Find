@@ -99,7 +99,6 @@ module OpenUrlExport
   def normalize_format(format)
     return '' if format.blank?
 
-    single_format = format.is_a?(Array) ? format.first : format
-    single_format.downcase.strip
+    Array.wrap(format).first.downcase.strip
   end
 end
