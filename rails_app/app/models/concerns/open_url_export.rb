@@ -6,6 +6,9 @@
 module OpenUrlExport
   extend ActiveSupport::Concern
 
+  CTX_VER = 'Z39.88-2004'
+  RFR_ID = 'info:sid/find.library.upenn.edu:generator'
+
   # Export the current record as an OpenURL query string
   # @param [Array<String>, String, nil] format
   # @return [String]
@@ -41,46 +44,53 @@ module OpenUrlExport
       format: format }
   end
 
+  # Shared attributes for OpenURL KEV hash
+  # @return [Hash]
+  def shared_attributes
+    { 'ctx_ver' => CTX_VER,
+      'rfr_id' => RFR_ID }
+  end
+
   # Assemble OpenURL KEV hash for book format
   # @param [Hash] marc_values
   # @return [Hash]
   def book_export_kev(marc_values)
-    { 'ctx_ver' => 'Z39.88-2004', 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:book',
-      'rfr_id' => 'info:sid/find.library.upenn.edu:generator',
-      'rft.btitle' => marc_values[:title], 'rft.title' => marc_values[:title],
-      'rft.au' => marc_values[:author], 'rft.aucorp' => marc_values[:corp_author],
-      'rft.date' => marc_values[:publication_date],
-      'rft.place' => marc_values[:publication_place],
-      'rft.pub' => marc_values[:publisher_name],
-      'rft.edition' => marc_values[:edition],
-      'rft.isbn' => marc_values[:isbn] }
+    shared_attributes.merge({ 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:book',
+                              'rft.btitle' => marc_values[:title],
+                              'rft.title' => marc_values[:title],
+                              'rft.au' => marc_values[:author],
+                              'rft.aucorp' => marc_values[:corp_author],
+                              'rft.date' => marc_values[:publication_date],
+                              'rft.place' => marc_values[:publication_place],
+                              'rft.pub' => marc_values[:publisher_name],
+                              'rft.edition' => marc_values[:edition],
+                              'rft.isbn' => marc_values[:isbn] })
   end
 
   # Assemble OpenURL KEV hash for journal format
   # @param [Hash] marc_values
   # @return [Hash]
   def journal_export_kev(marc_values)
-    { 'ctx_ver' => 'Z39.88-2004', 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:journal',
-      'rfr_id' => 'info:sid/find.library.upenn.edu:generator',
-      'rft.title' => marc_values[:title], 'rft.atitle' => marc_values[:title],
-      'rft.aucorp' => marc_values[:corp_author],
-      'rft.date' => marc_values[:publication_date],
-      'rft.issn' => marc_values[:issn] }
+    shared_attributes.merge({ 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:journal',
+                              'rft.title' => marc_values[:title],
+                              'rft.atitle' => marc_values[:title],
+                              'rft.aucorp' => marc_values[:corp_author],
+                              'rft.date' => marc_values[:publication_date],
+                              'rft.issn' => marc_values[:issn] })
   end
 
   # Assemble OpenURL KEV hash for default format
   # @param [Hash] marc_values
   # @return [Hash]
   def default_export_kev(marc_values)
-    { 'ctx_ver' => 'Z39.88-2004', 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:dc',
-      'rfr_id' => 'info:sid/find.library.upenn.edu:generator',
-      'rft.title' => marc_values[:title],
-      'rft.creator' => marc_values[:author],
-      'rft.aucorp' => marc_values[:corp_author],
-      'rft.date' => marc_values[:publication_date],
-      'rft.place' => marc_values[:publication_place],
-      'rft.pub' => marc_values[:publisher_name],
-      'rft.format' => marc_values[:format] }
+    shared_attributes.merge({ 'rft_val_fmt' => 'info:ofi/fmt:kev:mtx:dc',
+                              'rft.title' => marc_values[:title],
+                              'rft.creator' => marc_values[:author],
+                              'rft.aucorp' => marc_values[:corp_author],
+                              'rft.date' => marc_values[:publication_date],
+                              'rft.place' => marc_values[:publication_place],
+                              'rft.pub' => marc_values[:publisher_name],
+                              'rft.format' => marc_values[:format] })
   end
 
   # Normalize format value
