@@ -14,5 +14,9 @@ FactoryBot.define do
     # and ignores them. https://github.com/thoughtbot/factory_bot/issues/1142
     skip_create
     initialize_with { new(collection: collection, collection_id: collection_id, **attributes) }
+
+    trait :without_collection do
+      collection { '' }
+    end
   end
 end
