@@ -1,4 +1,4 @@
-pennlibs_web_version: '0.2.1'
+pennlibs_web_version: '0.2.4'
 cleanup:
   searches:
     days_old: 7
