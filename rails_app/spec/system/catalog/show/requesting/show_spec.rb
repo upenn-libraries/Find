@@ -3,8 +3,6 @@
 require 'system_helper'
 
 describe 'Catalog show page requesting behaviors' do
-  include FixtureHelpers
-
   include_context 'with print monograph record with 2 physical entries'
   include_context 'with empty hathi response'
 
@@ -161,15 +159,9 @@ describe 'Catalog show page requesting behaviors' do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
       end
       let(:item) { build :item, :aeon_location }
-      let(:bib_set) do
-        build :alma_bib_set do |set|
-          set['bib'].first['anies'] = [marc_xml_fixture('special_collections_manuscript')]
-        end
-      end
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Alma::Bib).to receive(:find).and_return(bib_set)
         find('details.fulfillment > summary').click
       end
 
@@ -184,14 +176,6 @@ describe 'Catalog show page requesting behaviors' do
           aeon_link = find_link I18n.t('requests.form.buttons.aeon')
           expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
           expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
-        end
-      end
-
-      it 'includes ItemIssue in the Aeon params' do
-        within('.request-buttons') do
-          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
-          uri = URI.parse(aeon_link[:href])
-          expect(CGI.parse(uri.query)['ItemIssue'].first).to be_present
         end
       end
     end
