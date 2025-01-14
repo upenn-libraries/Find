@@ -104,7 +104,7 @@ class CatalogController < ApplicationController
 
     # solr field configuration for document/show views
     config.show.title_field = :title_ss
-    # config.show.display_type_field = 'format'
+    config.show.display_type_field = :format_facet
     # config.show.thumbnail_field = 'thumbnail_path_ss'
     #
     # The presenter is a view-model class for the page
@@ -199,6 +199,11 @@ class CatalogController < ApplicationController
     config.add_index_field :distribution_ss, label: I18n.t('results.distribution')
     config.add_index_field :manufacture_ss, label: I18n.t('results.manufacture')
     config.add_index_field :contained_within_ss, label: I18n.t('results.contained_within')
+
+    # To support our Leganto integration, include these additional fields in the JSON API responses
+    # See: https://knowledge.exlibrisgroup.com/Leganto/Product_Documentation/Leganto_Online_Help_(English)/Leganto_Administration_Guide/yy_Appendix_D%3A_Integration_with_Blacklight
+    config.add_index_field :marcxml_marcxml, label: I18n.t('results.json.marcxml'), if: :json_request?
+    config.add_index_field :id, label: I18n.t('results.json.mmsid'), if: :json_request?
 
     # fields to show in email
     config.add_email_field :title_ss, label: I18n.t('show.title.main')
@@ -299,8 +304,7 @@ class CatalogController < ApplicationController
     config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'),
                                                              accessor: :marc
     config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
-    # TODO: populate this field
-    # config.add_show_field :bound_with_show, label: I18n.t('show.bound_with'), accessor: :marc
+    config.add_show_field :note_bound_with_show, label: I18n.t('show.notes.bound_with'), accessor: :marc
     config.add_show_field :link_web_links, label: I18n.t('show.web_links.main'), accessor: :marc
 
     config.add_search_field 'all_fields', label: I18n.t('search.all_fields') do |field|
@@ -433,6 +437,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'creator_sort desc, title_sort asc', label: I18n.t('sort.creator_desc')
     config.add_sort_field 'title_sort asc, publication_date_sort desc', label: I18n.t('sort.title_asc')
     config.add_sort_field 'title_sort desc, publication_date_sort desc', label: I18n.t('sort.title_desc')
+    config.add_sort_field 'call_number_sort asc, title_sort asc', label: I18n.t('sort.call_num_asc')
+    config.add_sort_field 'call_number_sort desc, title_sort asc', label: I18n.t('sort.call_num_desc')
     config.add_sort_field 'publication_date_sort asc, title_sort asc', label: I18n.t('sort.publication_date_asc')
     config.add_sort_field 'publication_date_sort desc, title_sort asc', label: I18n.t('sort.publication_date_desc')
     config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.added_date_asc')
@@ -467,5 +473,10 @@ class CatalogController < ApplicationController
   # @return [Boolean]
   def show_score?
     !Rails.env.production? || params[:score].present?
+  end
+
+  # @return [Boolean]
+  def json_request?
+    request.format.json?
   end
 end

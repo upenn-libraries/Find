@@ -25,7 +25,7 @@ services:
       - library_info_api_key
       - summon_api_key
     volumes:
-      - app_storage:/home/app/storage
+      - catalog_find_app_storage:/home/app/storage
 
 secrets:
   honeybadger_api_key:
@@ -54,5 +54,5 @@ secrets:
     name: ${SUMMON_API_KEY}
 
 volumes:
-  app_storage:
-    name: app_storage
+  catalog_find_app_storage:
+    name: catalog_find_app_storage

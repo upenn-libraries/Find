@@ -283,6 +283,7 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    fallback_electronic_access_button_label: 'Online'
     incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
     details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
@@ -349,6 +350,9 @@ en:
     contained_within: 'Contained in'
     format: 'Format'
     score: 'Score'
+    json:
+      marcxml: 'MARC XML'
+      mmsid: 'MMS ID'
   requests:
     form:
       heading: 'Access options'
@@ -463,6 +467,7 @@ en:
       access_restriction: 'Access Restriction'
       arrangement: 'Arrangement'
       biography: 'Biography/History'
+      bound_with: 'Bound With'
       contents: 'Contents'
       credits: 'Credits'
       finding_aid: 'Finding Aid/Index'
@@ -513,6 +518,8 @@ en:
     added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    call_num_asc: 'Call Number (a-z)'
+    call_num_desc: 'Call Number (z-a)'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'

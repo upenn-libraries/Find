@@ -13,5 +13,14 @@ FactoryBot.define do
 
     skip_create
     initialize_with { new(**attributes) }
+
+    trait :with_public_name_override do
+      public_name_override { 'Penn Public Name' }
+    end
+
+    trait :with_no_name_provided do
+      public_name { '' }
+      public_name_override { '' }
+    end
   end
 end
