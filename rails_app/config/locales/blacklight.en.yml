@@ -15,6 +15,7 @@ en:
           try_different_keywords: 'Try different keywords that mean the same thing.'
           try_advanced_html: 'Try <a href="/catalog/advanced">advanced search</a> to construct a targeted query.'
           get_help_html: '<a href="%{url}">Get help from a librarian</a> to find what you are looking for.'
+          ill_request_html: 'Request the item through <a href="%{url}">Interlibrary Loan</a>.'
       pagination_info:
         single_item_found: '1 %{entry_name} found'
         pages:
