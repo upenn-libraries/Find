@@ -19,7 +19,9 @@
         <%= t('blacklight.search.zero_results.suggestions.get_help_html', url: t('urls.help.ask')).html_safe %>
       </li>
       <li class="pb-1">
-        <%= t('blacklight.search.zero_results.suggestions.ill_request_html', url: ill_new_request_path).html_safe %>
+        <%= t('blacklight.search.zero_results.suggestions.external_request_html', ezborrow_url: t('urls.external_services.easyborrow'), 
+                                                                                  borrowdirect_url: t('urls.external_services.borrowdirect'), 
+                                                                                  ill_url: ill_new_request_path).html_safe %>
       </li>
     </ul>
   </div>
