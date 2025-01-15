@@ -58,8 +58,8 @@ module Fulfillment
       return Options::Restricted::AEON if item.location.aeon?
       return Options::Restricted::ARCHIVES if item.location.archives?
       return Options::Restricted::HSP if item.location.hsp?
-      return Options::Restricted::REFERENCE if item.item_policy == Settings.fulfillment.policies.reference
-      return Options::Restricted::RESERVE if item.item_policy == Settings.fulfillment.policies.reserve
+      return Options::Restricted::REFERENCE if item.policy == Settings.fulfillment.policies.reference
+      return Options::Restricted::RESERVE if item.policy == Settings.fulfillment.policies.reserve
 
       Options::Restricted::ONSITE if non_circulating_item?
     end
@@ -104,7 +104,7 @@ module Fulfillment
     # This latter criteria is intended to catch other, less common policies that also limit circulation.
     # @return [Boolean]
     def non_circulating_item?
-      item.item_policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
+      item.policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
         (item.in_place? && not_loanable?)
     end
 

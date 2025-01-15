@@ -41,6 +41,7 @@ FactoryBot.define do
       item['holding_data'] = { 'in_temp_location' => true }
       item['holding_data']['temp_library'] = { 'value' => 'templib' }
       item['holding_data']['temp_location'] = { 'value' => 'temploc' }
+      item['holding_data']['temp_policy'] = { 'value' => 'reserves' }
       item['holding_data']['temp_call_number'] = 'tempcall'
       item
     end
