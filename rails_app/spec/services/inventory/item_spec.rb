@@ -140,6 +140,24 @@ describe Inventory::Item do
     end
   end
 
+  describe '#policy' do
+    context 'with a record in a temporary location' do
+      let(:item) { build :item, :in_temp_location }
+
+      it 'returns the temp_policy value from the holding data' do
+        expect(item.policy).to eq 'reserves'
+      end
+    end
+
+    context 'with a record not in a temporary location' do
+      let(:item) { build :item }
+
+      it 'returns the policy vale from the item data' do
+        expect(item.policy).to eq 'book/seria'
+      end
+    end
+  end
+
   describe '#user_due_date_policy' do
     let(:item) { build :item, :not_loanable }
 

@@ -73,7 +73,13 @@ module Inventory
 
     # @return [String]
     def item_policy
-      item_data.dig('policy', 'value') || item_data.dig('temp_policy', 'value')
+      item_data.dig('policy', 'value')
+    end
+
+    # Policy value that takes into account the holding being in a temp location
+    # @return [String]
+    def policy
+      in_temp_location? ? holding_data.dig('temp_policy', 'value') : item_data.dig('policy', 'value')
     end
 
     # @return [String]
