@@ -93,7 +93,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       libpq-dev \
       nodejs \
       postgresql \
-      postgresql-contrib && \
+      postgresql-contrib \
+      procps && \
     addgroup app && useradd -m -d ${PROJECT_ROOT} -s /bin/bash -g app app && \
     mkdir -p ${PROJECT_ROOT}/tmp/pids && \
     rm -rf /var/lib/apt/lists/*
@@ -150,7 +151,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       libpq-dev \
       nodejs \
       postgresql \
-      postgresql-contrib && \
+      postgresql-contrib 
+      procps && \
     addgroup app && useradd -m -d ${PROJECT_ROOT} -s /bin/bash -g app app && \
     mkdir -p ${PROJECT_ROOT}/tmp/pids && \
     rm -rf /var/lib/apt/lists/*
