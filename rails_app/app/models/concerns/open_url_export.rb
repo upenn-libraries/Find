@@ -35,7 +35,7 @@ module OpenUrlExport
     { title: marc(:title_show),
       author: marc(:creator_authors_list, main_tags_only: true),
       corp_author: marc(:creator_corporate_search),
-      publication_date: marc(:date_publication).year,
+      publication_date: marc(:date_publication)&.year,
       publication_place: marc(:production_publication_ris_place_of_pub),
       publisher_name: marc(:production_publication_ris_publisher),
       publisher_info: marc(:production_publication_citation_show),
