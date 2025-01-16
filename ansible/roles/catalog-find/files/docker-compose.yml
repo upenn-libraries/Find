@@ -24,7 +24,6 @@ services:
       RAILS_SERVE_STATIC_FILES: "true"
       REDIS_URL: "redis://redis:${REDIS_PORT}/0"
       REDIS_SIDEKIQ_USER: "${REDIS_SIDEKIQ_USER}"
-      REDIS_SIDEKIQ_PASSWORD: "${REDIS_SIDEKIQ_PASSWORD}"
       SHIB_SP_ENTITY_ID: "https://${APP_URL}/shibboleth"
     healthcheck:
       test:
