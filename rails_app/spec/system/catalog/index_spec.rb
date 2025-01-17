@@ -133,7 +133,6 @@ describe 'Catalog Index Page' do
 
     context 'with a record published within the last 5 years' do
       # we calculate the last 5 years as the beginning of the year, 4 years ago.
-
       let(:solr_time) { (Time.new(1965).to_f * 1000).to_i }
 
       it 'shows recently published for 5 year range' do
@@ -161,7 +160,6 @@ describe 'Catalog Index Page' do
 
     context 'with a record published within the last 10 years' do
       # we calculate the last 10 years as the beginning of the year, 9 years ago.
-
       let(:solr_time) { (Time.new(1970).to_f * 1000).to_i }
 
       it 'does not show recently published facet for 5 year range' do
@@ -189,7 +187,6 @@ describe 'Catalog Index Page' do
 
     context 'with a record published within the last 15 years' do
       # we calculate the last 10 years as the beginning of the year, 14 years ago.
-
       let(:solr_time) { (Time.new(1975).to_f * 1000).to_i }
 
       it 'does not show recently published facet for 5 and 10 year ranges' do
@@ -281,6 +278,34 @@ describe 'Catalog Index Page' do
           click_on I18n.t('facets.recently_added.label')
           expect(page).to have_text I18n.t('facets.recently_added.90_days')
           expect(page).to have_text('1', count: 1)
+        end
+      end
+    end
+  end
+
+  context 'when selecting the Database format facet' do
+    include_context 'with electronic database record'
+
+    before { visit search_catalog_path(params: params) }
+
+    context 'when using the regular facet' do
+      let(:params) { { f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+
+      it 'shows the database-specific facets' do
+        within '#facets' do
+          expect(page).to have_text I18n.t('facets.databases.category')
+          expect(page).to have_text I18n.t('facets.databases.subject')
+        end
+      end
+    end
+
+    context 'when using the advanced search facet' do
+      let(:params) { { f_inclusive: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+
+      it 'shows the database-specific facets' do
+        within '#facets' do
+          expect(page).to have_text I18n.t('facets.databases.category')
+          expect(page).to have_text I18n.t('facets.databases.subject')
         end
       end
     end
