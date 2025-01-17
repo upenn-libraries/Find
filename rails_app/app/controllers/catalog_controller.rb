@@ -119,7 +119,8 @@ class CatalogController < ApplicationController
 
     # lambda to control database facets display
     database_selected = lambda { |controller, _config, _field|
-      controller.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
+      controller.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE) ||
+        controller.params.dig(:f_inclusive, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
