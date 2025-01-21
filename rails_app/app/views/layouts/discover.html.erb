@@ -1,0 +1,51 @@
+<%
+  # Up to date with Blacklight v8.3.0@5a779c5a9.
+  # This layout is configured for "Discover Penn" pages but should eventually be combined into a single application
+  # layout
+%>
+<!DOCTYPE html>
+<%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
+  <head>
+    <%= render('shared/google_analytics/tags', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Discover Penn</title>
+    <%= favicon_link_tag %>
+    <link rel="stylesheet" href="https://use.typekit.net/gbh8cmg.css">
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.css" %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.esm.js" %>
+    <script>
+        document.querySelector('html').classList.remove('no-js');
+    </script>
+    <%= csrf_meta_tags %>
+    <%= content_for(:head) %>
+  </head>
+  <body>
+    <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+
+    <%# Alerts elements not included here - see HeaderComponent %>
+
+    <%# Header web component - header elements can be alter/removed here, like name and lede %>
+    <pennlibs-header href="/"
+                     service-name="<%= t('header.service_name') %>"
+                     service-lede="<%= t('header.service_lede') %>">
+
+      <%# Login/Account links removed  %>
+    </pennlibs-header>
+
+    <main id='main-container' role="main" class="container">
+      <%# Any Discover-specific search bar element should probably be rendered here  %>
+
+      <%# Content from child view templates is included via this 'yield' %>
+      <div class="row">
+        <%= yield %>
+      </div>
+    </main>
+
+  <%= render partial: 'shared/footer' %>
+  <%= render partial: 'shared/modal' %>
+  </body>
+<% end %>
