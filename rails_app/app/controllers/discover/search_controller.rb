@@ -3,17 +3,11 @@
 module Discover
   # Controller for API actions that search over the data sources included in the Discover bento
   class SearchController < ApplicationController
-    SOURCES = [].freeze
     def results
       source = params[:source]
-      head(:bad_request) && return unless source.in?(SOURCES)
+      head(:bad_request) && return unless source.to_sym.in?(Discover::Configuration::SOURCES) # TODO: legit syntax
 
-      results = case source
-                when :libraries then libraries_search_results(search_params)
-                when :archives then archives_search_results(search_params)
-                when :museums then museums_search_results(search_params)
-                when :art_collections then art_collections_search_results(search_params)
-                end
+      results = results_for source: source
       render json: results
     end
 
@@ -21,6 +15,16 @@ module Discover
 
     def search_params
       params.permit(:q)
+    end
+
+    # Dynamically instantiate the proper Source object and get the results from that source
+    # @param source [Symbol]
+    # @return [Discover::Results]
+    def results_for(source:)
+      source = Discover::Source.type(source: source)&.new(params: search_params)
+      raise unless source
+
+      source.results
     end
   end
 end
