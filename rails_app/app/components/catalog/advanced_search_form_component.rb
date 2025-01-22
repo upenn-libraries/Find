@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v8.3.0@5a779c5a9 to:
+  # Local component copied from Blacklight v8.8.0 to:
   # - accommodate range search fields
   # - attach AdvancedSearchForm Stimulus controller
   # - match "q" parameter to keyword search clause

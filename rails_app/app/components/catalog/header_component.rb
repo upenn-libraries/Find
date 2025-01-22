@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copied from Blacklight v8.3.0@5a779c5a9
+# Copied from Blacklight v8.8.0
 
 module Catalog
   # Our HeaderComponent that displays the Web Component header and the search bar component
