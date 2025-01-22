@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v8.3.0@5a779c5a9
+  # Local component copied from Blacklight v8.8.0
   class ConstraintsComponent < Blacklight::Component
     renders_many :query_constraints_area
     renders_many :facet_constraints_area
