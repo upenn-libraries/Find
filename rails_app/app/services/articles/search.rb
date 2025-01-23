@@ -10,6 +10,8 @@ module Articles
 
     delegate :record_count, to: :response
 
+    MAX_TOKENS = 75
+
     # Initializes the Summon service and facet manager
     #
     # @param query_term [String] the search query term
@@ -32,7 +34,7 @@ module Articles
     #   or no response if there was an error
     # rubocop:disable Metrics/MethodLength
     def response
-      @response ||= client.search({ 's.q' => @query_term,
+      @response ||= client.search({ 's.q' => truncate_query(@query_term),
                                     's.include.ft.matches' => 't',
                                     's.ho' => 't',
                                     's.role' => 'authenticated',
@@ -94,6 +96,15 @@ module Articles
     end
 
     private
+
+    # Summon API raises RequestError when the search query is over 75 tokens (words), so we must truncate.
+    #
+    # @param query_term [String] the search query term
+    # @return [String] the search query term, truncated to 75 tokens
+    def truncate_query(query_term)
+      tokens = query_term.split
+      tokens.length > MAX_TOKENS ? tokens.first(MAX_TOKENS).join(' ') : query_term
+    end
 
     # Prints any Summon connection errors to the rails logger instead of raising
     # an exception. This allows the Additional Results component's Turbo frame
