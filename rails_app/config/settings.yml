@@ -23,7 +23,7 @@ honeybadger:
 redis:
   url: <%= ENV['REDIS_URL'] %>
   username: <%= ENV['REDIS_SIDEKIQ_USER'] %>
-  password: <%= DockerSecrets.lookup(:redis_sidekiq_password) %>
+  password: <%= DockerSecrets.lookup(:catalog_find_redis_sidekiq_password) %>
 email:
   from_address: 'find-noreply@upenn.edu'
   smtp:
