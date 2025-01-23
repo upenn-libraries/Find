@@ -24,32 +24,37 @@
     <%= content_for(:head) %>
   </head>
   <body>
-    <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+  <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
 
-    <%# Alerts elements not included here - see HeaderComponent %>
+  <%# Alerts elements not included here - see HeaderComponent %>
 
-    <%# Header web component - header elements can be alter/removed here, like name and lede %>
-    <pennlibs-header href="/"
-                     service-name="<%= t('header.service_name') %>"
-                     service-lede="<%= t('header.service_lede') %>">
+  <%# Header web component - header elements can be alter/removed here, like name and lede %>
+  <pennlibs-header href="/"
+                   service-name="<%= t('header.service_name') %>"
+                   service-lede="<%= t('header.service_lede') %>">
 
-      <%# Login/Account links removed  %>
-    </pennlibs-header>
+    <%# Login/Account links removed  %>
+  </pennlibs-header>
 
-    <div class="navbar-search navbar navbar-light bg-light" role="navigation" aria-label="Search">
+  <div class="discover-penn">
+
+    <header class="page-header mt-3 pt-4 pb-2">
       <div class="container">
-        <%= render (Catalog::SearchBarComponent.new(url: discover_discover_search_results_path, params: params)) %>
+        <h1>Discover Penn</h1>
+
+        <p class="page__lede">Here are four card components with titles, and within the cards, up to three result elements with optional thumbnails, title links and other metadata. In the top right of each card is a link to see the full set of results. This button may not function the same for Museum and Art cards, as it is not clear how we could link to a 'full' set of results.</p>
+
+        <%= render(partial: 'discover/search_bar') %>
       </div>
-    </div>
+    </header>
 
-    <main id='main-container' role="main" class="container">
-      <%# Any Discover-specific search bar element should probably be rendered here  %>
-
+    <main id='main-container' role="main">
       <%# Content from child view templates is included via this 'yield' %>
-      <div class="row">
+      <div class="container mt-5">
         <%= yield %>
       </div>
     </main>
+  </div>
 
   <%= render partial: 'shared/footer' %>
   <%= render partial: 'shared/modal' %>

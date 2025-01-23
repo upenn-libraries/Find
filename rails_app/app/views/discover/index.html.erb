@@ -1,255 +1,333 @@
-<div class="discover-penn">
-  <h1 class="page-header">Discover Penn</h1>
+<div class="row gx-5">
+  <div class="col-12 col-lg-6">
+    <div class="card">
 
-  <p>Here are four card components with titles, and within the cards, up to three result elements with optional thumbnails, title links and other metadata. In the top right of each card is a link to see the full set of results. This button may not function the same for Museum and Art cards, as it is not clear how we could link to a 'full' set of results.</p>
-
-  <%= link_to 'About', discover_about_path %>
-
-  <div class="row mt-5 g-5">
-
-    <div class="col-12 col-lg-6 mt-0">
-
-      <div class="card mb-5">
-        <div class="card-body">
-
-          <div class="d-flex flex-wrap align-items-start justify-content-between mb-2">
-            <div class="d-flex align-items-center">
-              <i class="card-icon bi bi-book h3 me-2"></i>
-              <h2 class="card-title h4">Libraries</h2>
-            </div>
-            <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 22,194 results</a>
-          </div>
-
-          <ul class="list-group list-group-flush documents-list">
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Military equitation, or, A method of breaking horses, and teaching soldiers to ride : designed for the use of the army</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt>Format:</dt>
-                  <dd>Book</dd>
-
-                  <dt>Author/Creator:</dt>
-                  <dd>Pembroke, Henry Herbert, Earl of, 1734-1794.</dd>
-
-                  <dt>Publication:</dt>
-                  <dd>Sarum : printed and sold by E. Easton: sold also by J. Dodsley, Pall-Mall, and J. Wilkie, St. Paul's Church-Yard, London, M.DCC.LXXVIII. [1778]</dd>
-
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
-                </dl>
-
-                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-4 object-fit-cover"/>
-              </div>
-            </li>
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Haney's horse shoers' manual : a practical guide to horse shoeing in its different varieties : including preparation of the foot, choice and preparation of shoes, fitting, filing, nailing, etc. : derived from"Mills' Treatise on horse shoeing" : to which is added Youatt's Treatise on the diseases of the horse's foot.</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt>Format:</dt>
-                  <dd>Book</dd>
-
-                  <dt>Author/Creator:</dt>
-                  <dd>Jesse Haney & Co.</dd>
-
-                  <dt>Publication:</dt>
-                  <dd>New York : Jesse Haney & Co., [1869]</dd>
-
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
-                </dl>
-
-                <img src="https://iiif-images.library.upenn.edu/iiif/2/6e8c019e-9b75-4997-8ce0-78d51d698187%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-4 object-fit-cover"/>
-              </div>
-            </li>
-            <li class="list-group-item px-2 pt-3">
-              <h3 class="item-heading h5">
-                <a href="#">Le nouveau Newkastle, ou, Nouveau traité de cavalerie.</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt>Format:</dt>
-                  <dd>Book</dd>
-
-                  <dt>Author/Creator:</dt>
-                  <dd>Bourgelat, Claude, 1712-1779.</dd>
-
-                  <dt>Publication:</dt>
-                  <dd>A Lyon : Chez Joseph-Sulpice Grabit, libraire ..., 1771.</dd>
-
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
-                </dl>
-
-                <img src="https://iiif-images.library.upenn.edu/iiif/2/66dae086-ae27-4f62-891a-55e394c7f9d7%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-4 object-fit-cover"/>
-              </div>
-            </li>
-          </ul>
+      <div class="card-header d-flex flex-wrap align-items-start justify-content-between">
+        <div class="d-flex align-items-center">
+          <i class="card-icon bi bi-book h3 me-2"></i>
+          <h2 class="card-title h4">Libraries</h2>
         </div>
+        <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 22,194 results</a>
       </div>
 
-      <div class="card mb-5 mb-md-0">
-        <div class="card-body">
-          <div class="d-flex align-items-start justify-content-between mb-2">
-            <div class="d-flex align-items-center">
-              <i class="card-icon bi bi-archive h3 me-2"></i>
-              <h2 class="card-title h4">Archives</h2>
+      <div class="card-body">
+        <ul class="list-group list-group-flush documents-list">
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Military equitation, or, A method of breaking horses, and teaching soldiers to ride : designed for the use of the army</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Format:</dt>
+                <dd>Book</dd>
+
+                <dt>Author/Creator:</dt>
+                <dd>Pembroke, Henry Herbert, Earl of, 1734-1794.</dd>
+
+                <dt>Publication:</dt>
+                <dd>Sarum : printed and sold by E. Easton: sold also by J. Dodsley, Pall-Mall, and J. Wilkie, St. Paul's Church-Yard, London, M.DCC.LXXVIII. [1778]</dd>
+
+                <dt>Repository:</dt>
+                <dd class="item-location">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
+              </dl>
+
+              <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-auto object-fit-cover"/>
             </div>
-            <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 455 results</a>
-          </div>
-          <ul class="list-group list-group-flush documents-list">
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Edward S. Curtis collection of interpositive glass plates and papers</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt>Extent:</dt>
-                  <dd>22 linear feet (44 boxes (2 boxes currently available to researchers))</dd>
+          </li>
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Haney's horse shoers' manual : a practical guide to horse shoeing in its different varieties : including preparation of the foot, choice and preparation of shoes, fitting, filing, nailing, etc. : derived from"Mills' Treatise on horse shoeing" : to which is added Youatt's Treatise on the diseases of the horse's foot.</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Format:</dt>
+                <dd>Book</dd>
 
-                  <dt>Summary:</dt>
-                  <dd class="item-description">Edward S. Curtis (1868-1952) was a photographer, best known for documenting more than eighty tribes of Native Americans west of the Mississippi from the Mexican border to northern Alaska. In addition to taking more than 40,000 pictures over 30 years, Curtis produced The North American Indian, a set of twenty volumes containing text, photogravures, and a corresponding portfolio with additional photogravures. This collection consists of two gifts of glass plate interpositives with extensive artistic modifications by Edward Curtis for his The North American Indian as well as a small number of proof sheets of photogravures, largely from portfolios, bearing editorial markings and corrections; correspondence and material relating to the funding and publishing of the The North American Indian; and brochures and pamphlets advertising Curtis's studio and his photography.</dd>
+                <dt>Author/Creator:</dt>
+                <dd>Jesse Haney & Co.</dd>
 
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
-                </dl>
-              </div>
-            </li>
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Stables: High Design for Horse and Home</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt><Author></Author>:</dt>
-                  <dd>Oscar Riera Ojeda and Victor Deupi</dd>
+                <dt>Publication:</dt>
+                <dd>New York : Jesse Haney & Co., [1869]</dd>
 
-                  <dt>Publication:</dt>
-                  <dd>New York: Rizzoli, 2021</dd>
+                <dt>Repository:</dt>
+                <dd class="item-location">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
+              </dl>
 
-                  <dt>Summary:</dt>
-                  <dd class="item-description">Stables is a celebration of horses and their extraordinary “lodgings.” International in scope, ranging from traditional to contemporary in flavor, twenty-five featured stables—built in wood, metal, and stone—are exemplars of the finest taste in design. There is a beauty here that reflects the majesty of these animals, the distinctive landscapes in which they are set, and the creative visions of the owners, architects, and designers who have all brought them into being. The allure of housing horses is a story of architecture, design, landscape, and a unique way of living in magnificent places—and spaces—that are made exclusively for horses and for those who love them.</dd>
+              <img src="https://iiif-images.library.upenn.edu/iiif/2/6e8c019e-9b75-4997-8ce0-78d51d698187%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-auto object-fit-cover"/>
+            </div>
+          </li>
+          <li class="list-group-item px-2 pt-3">
+            <h3 class="item-heading h5">
+              <a href="#">Le nouveau Newkastle, ou, Nouveau traité de cavalerie.</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Format:</dt>
+                <dd>Book</dd>
 
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">Architectural Archives</dd>
-                </dl>
-              </div>
-            </li>
-            <li class="list-group-item px-2 pt-3">
-              <h3 class="item-heading h5">
-                <a href="#">Eadweard Muybridge Collection, 1870-1981 (inclusive)</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <dl class="document-metadata col d-flex flex-column row-gap-2">
-                  <dt>Extent:</dt>
-                  <dd>20 cubic feet</dd>
+                <dt>Author/Creator:</dt>
+                <dd>Bourgelat, Claude, 1712-1779.</dd>
 
-                  <dt>Summary:</dt>
-                  <dd class="item-description">Eadweard Muybridge is a noted photographer who began his studies of animal locomotion in 1872 while trying to settle a bet for railroad tycoon Leland Stanford. In 1883 several important Philadelphians attended a meeting in the office of the provost of the University of Pennsylvania, and decided to provide Muybridge with the grounds of the Veterinary Hospital and a $5,000 advance to begin work on the landmark study, Animal Locomotion. This study, completed in 1887 and published under the sponsorship of the University, would prove to be of great use to artists, anatomists, physiologists, and athletes. The Eadweard Muybridge Collection documents his photographic career and the contributions he made to motion pictures. Documentation relating Muybridge's Animal Locomotion study, done under the auspices of the University of Pennsylvania, represents the bulk of this collection.</dd>
+                <dt>Publication:</dt>
+                <dd>A Lyon : Chez Joseph-Sulpice Grabit, libraire ..., 1771.</dd>
 
-                  <dt>Repository:</dt>
-                  <dd class="item-repo">University Archives & Records Center</dd>
-                </dl>
+                <dt>Repository:</dt>
+                <dd class="item-location">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
+              </dl>
 
-                <!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-          </ul>
-        </div>
+              <img src="https://iiif-images.library.upenn.edu/iiif/2/66dae086-ae27-4f62-891a-55e394c7f9d7%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-auto object-fit-cover"/>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="col-12 col-lg-6 mt-0">
-      <div class="card mb-5">
-        <div class="card-body">
-          <div class="d-flex align-items-start justify-content-between mb-2">
-            <div class="d-flex align-items-center">
-              <i class="card-icon find-icon find-icon--h3 find-icon-museum mb-2 me-2"></i>
-              <h2 class="card-title h4">Penn Museum</h2>
-            </div>
-            <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 1,600 results</a>
-          </div>
-          <ul class="list-group list-group-flush documents-list">
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 1</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
-
-                <!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 2</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
-
-                <!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-            <li class="list-group-item px-2 pt-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 3</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
-
-                <!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-          </ul>
+    <div class="card">
+      <div class="card-header d-flex align-items-start justify-content-between mb-2">
+        <div class="d-flex align-items-center">
+          <i class="card-icon bi bi-archive h3 me-2"></i>
+          <h2 class="card-title h4">Archives</h2>
         </div>
+        <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 455 results</a>
       </div>
 
-      <div class="card mb-5 mb-md-0">
-        <div class="card-body">
-          <div class="d-flex align-items-start justify-content-between mb-2">
-            <div class="d-flex align-items-center">
-              <i class="card-icon bi bi-brush h4 me-2"></i>
-              <h2 class="card-title h4">Penn Art Collection</h2>
+      <div class="card-body">
+        <ul class="list-group list-group-flush documents-list">
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Edward S. Curtis collection of interpositive glass plates and papers</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Extent:</dt>
+                <dd>22 linear feet (44 boxes (2 boxes currently available to researchers))</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">Edward S. Curtis (1868-1952) was a photographer, best known for documenting more than eighty tribes of Native Americans west of the Mississippi from the Mexican border to northern Alaska. In addition to taking more than 40,000 pictures over 30 years, Curtis produced The North American Indian, a set of twenty volumes containing text, photogravures, and a corresponding portfolio with additional photogravures. This collection consists of two gifts of glass plate interpositives with extensive artistic modifications by Edward Curtis for his The North American Indian as well as a small number of proof sheets of photogravures, largely from portfolios, bearing editorial markings and corrections; correspondence and material relating to the funding and publishing of the The North American Indian; and brochures and pamphlets advertising Curtis's studio and his photography.</dd>
+
+                <dt>Repository:</dt>
+                <dd class="item-location">Kislak Center for Special Collections, Rare Books and Manuscripts</dd>
+              </dl>
             </div>
-            <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 25 results</a>
-          </div>
-          <ul class="list-group list-group-flush documents-list">
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 1</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
+          </li>
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Stables: High Design for Horse and Home</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>
+                  <Author></Author>
+                  :
+                </dt>
+                <dd>Oscar Riera Ojeda and Victor Deupi</dd>
 
-<!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-            <li class="list-group-item px-2 py-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 2</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
+                <dt>Publication:</dt>
+                <dd>New York: Rizzoli, 2021</dd>
 
-<!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-            <li class="list-group-item px-2 pt-3">
-              <h3 class="item-heading h5">
-                <a href="#">Item 3</a>
-              </h3>
-              <div class="item-content row mt-3">
-                <p class="col">Item content</p>
+                <dt>Summary:</dt>
+                <dd class="item-description">Stables is a celebration of horses and their extraordinary “lodgings.” International in scope, ranging from traditional to contemporary in flavor, twenty-five featured stables—built in wood, metal, and stone—are exemplars of the finest taste in design. There is a beauty here that reflects the majesty of these animals, the distinctive landscapes in which they are set, and the creative visions of the owners, architects, and designers who have all brought them into being. The allure of housing horses is a story of architecture, design, landscape, and a unique way of living in magnificent places—and spaces—that are made exclusively for horses and for those who love them.</dd>
 
-<!--                <img src="https://iiif-images.library.upenn.edu/iiif/2/fbc57f73-99c6-4ef5-b958-8986b774bfea%2Faccess/full/!200,200/0/default.jpg" class="item-thumbnail col-3 object-fit-cover"/>-->
-              </div>
-            </li>
-          </ul>
-        </div>
+                <dt>Repository:</dt>
+                <dd class="item-location">Architectural Archives</dd>
+              </dl>
+            </div>
+          </li>
+          <li class="list-group-item px-2 pt-3">
+            <h3 class="item-heading h5">
+              <a href="#">Eadweard Muybridge Collection, 1870-1981 (inclusive)</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Extent:</dt>
+                <dd>20 cubic feet</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">Eadweard Muybridge is a noted photographer who began his studies of animal locomotion in 1872 while trying to settle a bet for railroad tycoon Leland Stanford. In 1883 several important Philadelphians attended a meeting in the office of the provost of the University of Pennsylvania, and decided to provide Muybridge with the grounds of the Veterinary Hospital and a $5,000 advance to begin work on the landmark study, Animal Locomotion. This study, completed in 1887 and published under the sponsorship of the University, would prove to be of great use to artists, anatomists, physiologists, and athletes. The Eadweard Muybridge Collection documents his photographic career and the contributions he made to motion pictures. Documentation relating Muybridge's Animal Locomotion study, done under the auspices of the University of Pennsylvania, represents the bulk of this collection.</dd>
+
+                <dt>Repository:</dt>
+                <dd class="item-location">University Archives & Records Center</dd>
+              </dl>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-  </div> <!-- row -->
-</div> <!-- container -->
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex align-items-start justify-content-between">
+        <div class="d-flex align-items-center">
+          <i class="card-icon find-icon find-icon--h3 find-icon-museum mb-2 me-2"></i>
+          <h2 class="card-title h4">Penn Museum</h2>
+        </div>
+        <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 1,600 results</a>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush documents-list">
+          <li class="list-group-item item--museum px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Relief</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+                <dt>Materials:</dt>
+                <dd>Limestone | Stone</dd>
+
+                <dt>Proveniance:</dt>
+                <dd>China | Shaanxi | Xi'an | Zhaoling</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">After consolidating the Tang Empire, Emperor Taizong ordered six large stone panels to be carved with the portraits of his favorite horses. These were the horses he had ridden in overcoming his rivals and securing the territory of the empire. From the laudatory poem he composed for each horse, the names and attributes of the horses can be matched to the stone reliefs. The relief shown here depicts the horse called Saluzi, ridden by Taizong at the battle for the city of Luoyang, the Eastern Capital, in 621 CE. When the horse was stuck with an arrow, the emperor was forced to dismount and switch horses with his general, Qiu Xinggong. The general is shown in the relief pulling the arrow out of the horse's chest while it stoically bears the pain.</dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">C395 | Asia Galleries - On Display</dd>
+              </dl>
+
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ1FHZhBYaGggAKjRvZ-8g4ce9OyiwvTuBogHEyZnmkN2RZ_2adx8Ur6s&s" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+          <li class="list-group-item item--museum px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Horse Gear, Bit</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+
+                <dt>Materials:</dt>
+                <dd>Bronze</dd>
+
+                <dt>Proveniance:</dt>
+                <dd>Iran | Luristan Province</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">
+                  <p>Rectangular cheek pieces. Open work. Six spikes each. Bit is rounded piece.</p>
+                  <p></p>
+                  <p>Legrain publication: "Bronze horse-bit. The cheek pieces are open-work rectangles with six spikes each. Bit 165 x 9 mm. Cheek piece 103 x 28 mm."</p>
+                </dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">30-38-14 | Collections Storage</dd>
+              </dl>
+
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjgXq6fC93KS0XqvAeUBEBbgzIMWYTiOAj35p5sntJXwrAyST2U1-f4K_R&s" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+          <li class="list-group-item px-2 pt-3">
+            <h3 class="item-heading h5">
+              <a href="#">Zoomorphic Vessel, Rhyton</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+
+                <dt>Materials:</dt>
+                <dd>Ceramic</dd>
+
+                <dt>Proveniance:</dt>
+                <dd>Iran | Amlash</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">
+                  <p>Ceramic, black. Rhyton in the shape of a saddled and bridled horse. Applied and incised ecoration. Small hole in center of chest. Spout in center of back on saddle. Broken and reapired. All fragments present.</p>
+                  <p>"This rhyton or drinking vessel is thought to come from the Ardebil area of northwestern Iran. It is in the form of a stylized horse equipped with trappings. These include a bridle with a strap down the center of the face and a saddle cloth held in place with straps around the chest and under the tail. These straps are deocated with pendants. Saddlecloths were used for riding as saddles were unkonwn at this time in the Near East. 150BC-AD250"</p>
+                </dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">63-15-1 | Middle East Galleries - On Display</dd>
+              </dl>
+
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfxSgE2C_MGIZXegO-Qk4OJlZoeQrktZgjY6gEMi1m8UpNH7l14Gp1XTA&s" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header d-flex align-items-start justify-content-between">
+        <div class="d-flex align-items-center">
+          <i class="card-icon bi bi-brush h4 me-2"></i>
+          <h2 class="card-title h4">Penn Art Collection</h2>
+        </div>
+        <a class="btn btn-sm btn-primary text-nowrap" href="#">View all 25 results</a>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush documents-list">
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">A Wooded Landscape with Figures, Horse, and Shed</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+
+                <dt>Artist:</dt>
+                <dd>Thomas Gainsborough (British, 1727 – 1788)</dd>
+
+                <dt>Materials:</dt>
+                <dd>Watercolor and Chalk</dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">2012.0008.0001</dd>
+              </dl>
+
+              <img src="https://pennartcollection.com/wp-content/themes/collection2015/images/objects/43.jpg" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+          <li class="list-group-item px-2 py-3">
+            <h3 class="item-heading h5">
+              <a href="#">Station for Detaining and Blinding Horses</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+
+                <dt>Artist:</dt>
+                <dd>Dennis Oppenheim (American, 1938 – 2011)</dd>
+
+                <dt>Materials:</dt>
+                <dd>Serigraph</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">
+                  <p>Dennis Oppenheim was an American conceptual artist whose work bridged the territories of sculpture, performance and&nbsp;earthworks.&nbsp;<em>Station for Detaining and Blinding Horses</em> outlines a scaled plan for a conceptual earthwork of the same name.&nbsp;
+                  </p>
+                </dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">1981.0001.0069</dd>
+              </dl>
+
+              <img src="https://pennartcollection.com/wp-content/themes/collection2015/images/objects/1289.thumb.jpg" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+          <li class="list-group-item px-2 pt-3">
+            <h3 class="item-heading h5">
+              <a href="#">Le Tin au Etoile</a>
+            </h3>
+            <div class="item-content row mt-3">
+              <dl class="document-metadata col d-flex flex-column row-gap-2">
+
+                <dt>Artist:</dt>
+                <dd>Jean Couy (French, 1910 - 1983)</dd>
+
+                <dt>Materials:</dt>
+                <dd>Etching</dd>
+
+                <dt>Summary:</dt>
+                <dd class="item-description">
+                  <p>Jean Couy was a French painter and printmaker who was best known for tapestry design and book illustration. In Art and the Modern World, Volume 2  (Huyghe and Rudel, 1970), Couy is counted among artists on the side of a “pure synthesis” where the concern of the artist “is no longer to represent a nature imitated, copied, but to fix a perception of the world in the center of the elements.”</p>
+                </dd>
+
+                <dt>Location:</dt>
+                <dd class="item-location">2013.0001.0448</dd>
+              </dl>
+
+              <img src="https://pennartcollection.com/wp-content/themes/collection2015/images/objects/1238.thumb.jpg" class="item-thumbnail col-4 object-fit-cover"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
