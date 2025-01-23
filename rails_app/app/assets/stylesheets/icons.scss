@@ -1,0 +1,19 @@
+@mixin icon-size($size) {
+  display: block;
+  height: $size;
+  width: $size;
+}
+
+.find-icon {
+  &--h3::before {
+    @include icon-size($h3-font-size + 0.25rem);
+  }
+
+  &-museum::before {
+    content: url('/assets/icons/museum.svg');
+  }
+
+  &-museum-fill::before {
+    content: url('/assets/icons/museum-fill.svg');
+  }
+}

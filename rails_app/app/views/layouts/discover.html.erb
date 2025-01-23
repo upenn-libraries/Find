@@ -36,6 +36,12 @@
       <%# Login/Account links removed  %>
     </pennlibs-header>
 
+    <div class="navbar-search navbar navbar-light bg-light" role="navigation" aria-label="Search">
+      <div class="container">
+        <%= render (Catalog::SearchBarComponent.new(url: discover_discover_search_results_path, params: params)) %>
+      </div>
+    </div>
+
     <main id='main-container' role="main" class="container">
       <%# Any Discover-specific search bar element should probably be rendered here  %>
 
