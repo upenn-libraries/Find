@@ -35,7 +35,7 @@ describe Articles::Search do
     context 'with a long query term' do
       let(:query_term) { Array.new(100, 'test').join(' ') }
 
-      it 'truncates' do
+      it 'truncates they query to an acceptable length' do
         client = instance_spy('Summon::Service')
         allow(search).to receive(:client).and_return(client)
         search.response
