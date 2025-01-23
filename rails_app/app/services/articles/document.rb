@@ -25,7 +25,8 @@ module Articles
 
     # @return [String] the document's link using the proxy URL
     def proxy_link
-      I18n.t('urls.external_services.proxy', url: doc.link)
+      https_link = doc.link.sub(%r{^http://}, 'https://')
+      I18n.t('urls.external_services.proxy', url: https_link)
     end
 
     # @return [String, nil] the document's full text online status
