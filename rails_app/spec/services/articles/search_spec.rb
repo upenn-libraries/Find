@@ -31,6 +31,18 @@ describe Articles::Search do
       allow(client).to receive(:search).and_raise(Summon::Transport::TransportError)
       expect(search.response).to be_nil
     end
+
+    context 'with a long query term' do
+      let(:query_term) { Array.new(100, 'test').join(' ') }
+
+      it 'truncates' do
+        client = instance_spy('Summon::Service')
+        allow(search).to receive(:client).and_return(client)
+        search.response
+        expect(client).to have_received(:search)
+          .with(a_hash_including('s.q' => Array.new(Articles::Search::MAX_TOKENS, 'test').join(' ')))
+      end
+    end
   end
 
   describe '#documents' do
