@@ -6,6 +6,8 @@
 class CleanupGuestUsersJob
   include Sidekiq::Job
 
+  sidekiq_options queue: 'low'
+
   def perform
     age_in_days = Settings.cleanup.guest_users.days_old || 7
     batch_size = Settings.cleanup.guest_users.batch_size || 1000
