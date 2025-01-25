@@ -1,0 +1,13 @@
+<search>
+  <%# discover_discover_search_results_path %>
+  <%= form_with url: '#', method: 'get', role: 'search', class: 'search-query-form' do |f| %>
+    <div class="input-group">
+      <%= f.search_field :q || params[:q],
+                         value: params[:q],
+                         class: "search-q q form-control rounded-left",
+                         aria: { label: 'search for' } %>
+
+      <%= f.submit 'Search', class: 'btn btn-primary search-btn' %>
+    </div>
+  <% end %>
+</search>

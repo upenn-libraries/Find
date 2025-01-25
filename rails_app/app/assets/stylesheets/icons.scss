@@ -5,8 +5,12 @@
 }
 
 .find-icon {
-  &--h3::before {
-    @include icon-size($h3-font-size + 0.25rem);
+  .h4 &:before {
+    @include icon-size(calc(1.275rem + 0.3vw));
+
+    @media (min-width: 1200px) {
+      @include icon-size(1.5rem);
+    }
   }
 
   &-museum::before {

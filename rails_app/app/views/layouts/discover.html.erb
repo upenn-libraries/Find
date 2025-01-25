@@ -38,21 +38,19 @@
 
   <div class="discover-penn">
 
-    <header class="page-header pt-4 pb-2">
+    <header class="page-header">
       <div class="container">
         <h1>Discover Penn</h1>
 
         <p class="page__lede">Here are four card components with titles, and within the cards, up to three result elements with optional thumbnails, title links and other metadata. In the top right of each card is a link to see the full set of results. This button may not function the same for Museum and Art cards, as it is not clear how we could link to a 'full' set of results.</p>
 
-        <%= render(partial: 'discover/search_bar') %>
+        <%= render(partial: 'discover/search_form') %>
       </div>
     </header>
 
-    <main id='main-container' role="main">
+    <main id='main-container' class="container" role="main">
       <%# Content from child view templates is included via this 'yield' %>
-      <div class="container mt-5">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </main>
   </div>
 
