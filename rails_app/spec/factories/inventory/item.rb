@@ -161,4 +161,13 @@ FactoryBot.define do
       item
     end
   end
+
+  trait :not_in_place_non_circulating do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['base_status'] = { 'value' => '0' }
+      item['item_data']['policy'] = { 'value' => Settings.fulfillment.policies.non_circ }
+      item
+    end
+  end
 end
