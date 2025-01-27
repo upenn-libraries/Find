@@ -74,6 +74,17 @@ module Illiad
       end
 
       # @param id [Integer, String] request TransactionNumber
+      # @param entry [String] entry to send in body
+      # @param response_body [Hash]
+      # @return [WebMock::RequestStub]
+      def stub_history_request_success(id:, entry:, response_body:)
+        stub_request(:post,
+                     "#{Settings.illiad.base_url}/#{Illiad::Request::BASE_PATH}/#{id}/histories")
+          .with(body: { Entry: entry }, headers: json_headers)
+          .to_return_json(status: 200, body: response_body)
+      end
+
+      # @param id [Integer, String] request TransactionNumber
       # @param status [String] status to send in body
       # @param response_body [Hash]
       # @return [WebMock::RequestStub]

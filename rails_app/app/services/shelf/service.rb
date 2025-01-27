@@ -95,6 +95,20 @@ module Shelf
       raise IlliadRequestError, e.message
     end
 
+    # Adding history entry to ILL transaction to mark that the user has viewed the PDF.
+    #
+    # @raise [Shelf::Service::IlliadRequestError] when unsuccessful
+    def mark_pdf_viewed(id)
+      entry = ill_transaction(id)
+
+      # In order to mark a PDF as viewed, it must be a scan request where the status is "Delivered to Web".
+      raise IlliadRequestError, 'Transaction does not have a PDF' unless entry.pdf_available?
+
+      Illiad::Request.history(id: entry.id, entry: 'PDF Viewed')
+    rescue StandardError => e
+      raise IlliadRequestError, e.message
+    end
+
     private
 
     # Returns all Alma loans for the given user.
