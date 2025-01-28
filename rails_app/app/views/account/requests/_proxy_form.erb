@@ -1,4 +1,4 @@
-<% if current_user.work_order_operator? %>
+<% if current_user.library_staff? || current_user.work_order_operator? %>
   <div class="row">
     <div class="col-md-7">
       <div class="card mb-3">
