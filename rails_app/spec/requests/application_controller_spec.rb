@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 describe 'Application Controller Requests' do
+  include Alma::ApiMocks::User
+
   context 'when storing current location in the session' do
     let(:params) { {} }
     let(:stored_path) { session['user_return_to'] }
 
     context 'with a non catalog path' do
+
       let(:user) { create(:user) }
       let(:params) do
         { requesttype: '', booktitle: '', au: 'Margaret Mitchell' }
@@ -14,6 +17,7 @@ describe 'Application Controller Requests' do
       include_context 'with mocked illiad_record on user'
 
       before do
+        stub_alma_user_find_success(id: user.uid, response_body: create(:alma_user_response))
         sign_in user
         get ill_new_request_path(params)
       end
