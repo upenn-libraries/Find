@@ -28,9 +28,21 @@ module AlmaAccount
     ils_group == LIBRARY_STAFF_GROUP
   end
 
-  # Return true if the user is a courtesy_borrower
+  # @return [Boolean]
   def courtesy_borrower?
     ils_group == COURTESY_BORROWER_GROUP
+  end
+
+  # Does the user have an Active Work Order Operator role?
+  # @return [Boolean]
+  def work_order_operator?
+    roles = alma_record&.user_role
+    return false if roles.blank?
+
+    roles.find { |role|
+      (role.dig('role_type', 'value') == Settings.alma.work_order_role_value) &&
+        (role.dig('status', 'value') == 'ACTIVE')
+    }.present?
   end
 
   # Returns User's full name in Alma
