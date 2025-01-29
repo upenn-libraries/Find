@@ -7,6 +7,7 @@ cleanup:
     batch_size: 1000
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
+  work_order_role_value: '214'
 illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>

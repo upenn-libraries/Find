@@ -3,12 +3,15 @@
 require 'system_helper'
 
 describe 'Account Request ILL form' do
+  include Alma::ApiMocks::User
+
   include_context 'with mocked illiad_record on user'
 
   let(:user) { create(:user) }
   let(:open_params) { {} }
 
   before do
+    stub_alma_user_find_success(id: user.uid, response_body: create(:alma_user_response))
     sign_in user
     visit ill_new_request_path(**open_params)
   end
