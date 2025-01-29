@@ -34,19 +34,23 @@ module Articles
     #   or no response if there was an error
     # rubocop:disable Metrics/MethodLength
     def response
-      @response ||= client.search({ 's.q' => truncate_query(@query_term),
-                                    's.include.ft.matches' => 't',
-                                    's.ho' => 't',
-                                    's.role' => 'authenticated',
-                                    's.ps' => 3,
-                                    's.hl' => 'f',
-                                    's.ff' => 'ContentType,or,1,6' })
+      @response ||= client.search(
+        {
+          's.q' => truncate_query(@query_term),
+          's.include.ft.matches' => 't', # include "full text" matches
+          's.light' => 't', # excludes some data we don't use from the response for speed
+          's.ho' => 't', # enable "holdings only" mode
+          's.role' => 'authenticated', # assume users are authenticated
+          's.ps' => 3, # page size (number of results to return)
+          's.hl' => 'f', # disable highlighting of matches
+          's.ff' => 'ContentType,or,1,6' # facet fields - include only certain content types
+        }
+      )
     rescue Summon::Transport::TransportError => e
       Honeybadger.notify(e)
       handle_error(e)
       nil
     end
-
     # rubocop:enable Metrics/MethodLength
 
     # @return [Array<Articles::Document>, nil] documents returned from the search
@@ -85,12 +89,10 @@ module Articles
       # @param query [String] the search query string from which to generate the URL
       # @return [String] URL linking to the results of the search on Articles+
       def summon_url(query: query_string, proxy: true)
-        summon_url = "#{I18n.t('urls.external_services.summon')}?#{query}"
-
         if proxy
-          I18n.t('urls.external_services.proxy', url: summon_url).to_s
+          I18n.t('urls.external_services.proxy', url: "#{I18n.t('urls.external_services.summon')}?#{query}").to_s
         else
-          summon_url
+          "#{I18n.t('urls.external_services.summon')}?#{query}"
         end
       end
     end
