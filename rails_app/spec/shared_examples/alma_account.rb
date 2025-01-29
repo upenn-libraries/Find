@@ -4,8 +4,7 @@ shared_examples_for 'Alma Account' do
   include Alma::ApiMocks::User
 
   before do
-    stub_alma_user_find_success(id: alma_record[:primary_id],
-                                response_body: build(:alma_user_response, primary_id: alma_record[:primary_id]))
+    stub_alma_user_find_success(id: alma_record[:primary_id], response_body: alma_record)
   end
 
   describe '#work_order_operator?' do
@@ -13,12 +12,12 @@ shared_examples_for 'Alma Account' do
       let(:alma_record) { create(:alma_user_response, :work_order_operator_active) }
 
       it 'returns true' do
-        expect(object.work_order_operator?).to be false
+        expect(object.work_order_operator?).to be true
       end
     end
 
     context 'when the role is present but inactive' do
-      let(:alma_record) { create(:alma_user_response, :work_order_operator_inactive) }
+      let(:alma_record) { build(:alma_user_response, :work_order_operator_inactive) }
 
       it 'returns false' do
         expect(object.work_order_operator?).to be false
@@ -26,7 +25,7 @@ shared_examples_for 'Alma Account' do
     end
 
     context 'when the role is not present' do
-      let(:alma_record) { create(:alma_user_response) }
+      let(:alma_record) { build(:alma_user_response) }
 
       it 'returns false' do
         expect(object.work_order_operator?).to be false

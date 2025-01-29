@@ -39,10 +39,7 @@ module AlmaAccount
     roles = alma_record&.user_role
     return false if roles.blank?
 
-    roles.find { |role|
-      (role.dig('role_type', 'value') == Settings.alma.work_order_role_value) &&
-        (role.dig('status', 'value') == 'ACTIVE')
-    }.present?
+    roles.find { |role| active_work_order_role?(role) }.present?
   end
 
   # Returns User's full name in Alma
@@ -98,5 +95,11 @@ module AlmaAccount
     Alma::User.find(uid)
   rescue Alma::User::ResponseError
     false
+  end
+
+  # @param [Hash] role
+  # @return [Boolean]
+  def active_work_order_role?(role)
+    (role.dig('role_type', 'value') == Settings.alma.work_order_role_value) && (role.dig('status', 'value') == 'ACTIVE')
   end
 end
