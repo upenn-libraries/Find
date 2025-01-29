@@ -28,7 +28,7 @@ module Fulfillment
       @requester = requester
       @delivery = params.delete(:delivery)&.to_sym
       @pickup_location = params.delete(:pickup_location).presence
-      @patron = proxy_user(params.delete(:proxy_for)) || requester
+      @patron = proxy_user(params.delete(:proxy_for)&.downcase) || requester
 
       # Set endpoint upon initialization so errors can be caught prior to submission.
       @endpoint = endpoint_class(endpoint) || determine_endpoint
