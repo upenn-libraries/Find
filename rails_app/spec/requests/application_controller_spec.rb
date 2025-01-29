@@ -8,7 +8,6 @@ describe 'Application Controller Requests' do
     let(:stored_path) { session['user_return_to'] }
 
     context 'with a non catalog path' do
-
       let(:user) { create(:user) }
       let(:params) do
         { requesttype: '', booktitle: '', au: 'Margaret Mitchell' }
