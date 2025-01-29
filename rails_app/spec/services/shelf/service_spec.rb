@@ -181,7 +181,9 @@ describe Shelf::Service do
       let(:ill_transaction) { create(:illiad_request, :scan_with_pdf_available, Username: user_id) }
 
       it 'makes expected request to Illiad API' do
-        stub = stub_history_request_success(id: ill_transaction.id, entry: 'PDF Viewed', response_body: '{}')
+        stub = stub_history_request_success(id: ill_transaction.id,
+                                            entry: I18n.t('fulfillment.illiad.pdf_viewed'),
+                                            response_body: '{}')
         shelf.mark_pdf_viewed(ill_transaction.id)
         expect(stub).to have_been_requested
       end

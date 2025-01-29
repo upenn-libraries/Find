@@ -425,6 +425,7 @@ en:
       comment: '%{comment} - comments submitted by %{user_id}'
       proxy_comment: 'Proxied by %{requester_id}'
       boundwith_comment: 'This request is for a boundwith record.'
+      pdf_viewed: 'PDF viewed'
   search:
     all_fields: 'All Fields'
     button:

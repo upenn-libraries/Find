@@ -104,7 +104,7 @@ module Shelf
       # In order to mark a PDF as viewed, it must be a scan request where the status is "Delivered to Web".
       raise IlliadRequestError, 'Transaction does not have a PDF' unless entry.pdf_available?
 
-      Illiad::Request.history(id: entry.id, entry: 'PDF Viewed')
+      Illiad::Request.history(id: entry.id, entry: I18n.t('fulfillment.illiad.pdf_viewed'))
     rescue StandardError => e
       raise IlliadRequestError, e.message
     end
