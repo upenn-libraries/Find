@@ -50,6 +50,16 @@ module Illiad
       new(**response.body)
     end
 
+    # Update the history of a transaction
+    # Wraps POST 'Transaction History' endpoint
+    # @param id [Integer] Illiad transaction number
+    # @param entry [String]
+    # @return [Illiad::Request]
+    def self.history(id:, entry:)
+      response = Client.post("#{BASE_PATH}/#{id}/histories", { Entry: entry })
+      new(**response.body)
+    end
+
     # @param data [Hash]
     def initialize(**data)
       @data = data.symbolize_keys

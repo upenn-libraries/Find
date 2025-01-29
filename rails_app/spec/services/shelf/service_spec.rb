@@ -169,6 +169,27 @@ describe Shelf::Service do
     end
   end
 
+  describe '#mark_pdf_viewed' do
+    let(:display_status_set) { build(:illiad_display_status_set) }
+
+    before do
+      allow(Illiad::DisplayStatus).to receive(:find_all).and_return(display_status_set)
+      allow(Illiad::Request).to receive(:find).with(id: ill_transaction.id).and_return(ill_transaction)
+    end
+
+    context 'when pdf is viewed' do
+      let(:ill_transaction) { create(:illiad_request, :scan_with_pdf_available, Username: user_id) }
+
+      it 'makes expected request to Illiad API' do
+        stub = stub_history_request_success(id: ill_transaction.id,
+                                            entry: I18n.t('fulfillment.illiad.pdf_viewed'),
+                                            response_body: '{}')
+        shelf.mark_pdf_viewed(ill_transaction.id)
+        expect(stub).to have_been_requested
+      end
+    end
+  end
+
   describe '#ils_loans' do
     context 'when successful' do
       include_context 'with mocked alma loans request'
