@@ -12,7 +12,7 @@ module RisExport
     ris_field_mappings.merge!(
       TY: proc { to_ris(marc(:format_facet)) }, # format
       TI: proc { marc(:title_show) }, # title
-      AU: proc { marc(:creator_authors_list, main_tags_only: true) }, # author
+      AU: proc { marc(:creator_authors_list) }, # author
       PY: proc { marc(:date_publication)&.year }, # publication year
       CY: proc { marc(:production_publication_ris_place_of_pub) }, # place of publication
       PB: proc { marc(:production_publication_ris_publisher) }, # publisher
