@@ -24,8 +24,8 @@ PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nPY  - 1900\nCY  - New York :
-PB  - Elsevier Science.\nER  - )
+        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nAU  - Elsevier Science (Firm)
+AU  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.\nER  - )
       end
     end
 
@@ -33,8 +33,8 @@ PB  - Elsevier Science.\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nPY  - 1869\nCY  - [London] :
-PB  - Nature Pub. Group\nER  - )
+        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nAU  - Nature Publishing Group.
+PY  - 1869\nCY  - [London] :\nPB  - Nature Pub. Group\nER  - )
       end
     end
 
@@ -42,7 +42,8 @@ PB  - Nature Pub. Group\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.\nPY  - 1965
+        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.
+AU  - Chemical Society (Great Britain)\nAU  - Chemical Society (Great Britain).\nPY  - 1965
 CY  - London :\nPB  - Chemical Society.\nER  - )
       end
     end
