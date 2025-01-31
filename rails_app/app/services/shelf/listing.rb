@@ -28,7 +28,13 @@ module Shelf
     def filter_and_sort(entries)
       entries = remove_duplicate_entries(entries)
       entries = filter(entries)
-      entries.sort_by! { |e| e.send(sort) } # Sort entries
+      entries.sort_by! do |e|
+        if sort == Shelf::Service::DUE_DATE
+          e.ils_loan? ? e.due_date : Time.zone.now + 100.years
+        else
+          e.send(sort)
+        end
+      end
       entries.reverse! if order == Shelf::Service::DESCENDING # Flip order if descending order requested
       entries
     end
