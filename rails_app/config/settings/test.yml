@@ -5,3 +5,5 @@ additional_results_sources:
     access_id: 'upenn'
     base_url: 'upenn.summon.serialssolutions.com'
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
+discover:
+  enabled: true

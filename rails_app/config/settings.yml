@@ -249,6 +249,7 @@ fulfillment:
       - KEYS
       - GLOBE
 discover:
+  enabled: false
   source:
     google_pse_api_key: <%= DockerSecrets.lookup(:google_pse_api_key, Rails.application.credentials.google_pse_api_key) %>
     art_collection:
