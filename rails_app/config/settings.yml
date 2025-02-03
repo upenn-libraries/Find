@@ -248,3 +248,10 @@ fulfillment:
       - OTHER
       - KEYS
       - GLOBE
+discover:
+  source:
+    google_pse_api_key: <%= DockerSecrets.lookup(:google_pse_api_key, Rails.application.credentials.google_pse_api_key) %>
+    art_collection:
+      pse_cx: '76cf445db4aa14589'
+    penn_museum:
+      pse_cx: '8591e2ac8a6254ba9'
