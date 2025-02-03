@@ -68,7 +68,7 @@ main {
       box-shadow: rgba(140, 149, 159, 0.2) 0 3px 6px 0;
       flex-grow: 1;
 
-      @media (min-width: 768px) {
+      @media (min-width: $breakpoint-md) {
         max-width: 80%;
       }
 
@@ -79,7 +79,7 @@ main {
 
       input {
 
-        @media (min-width: 1200px) {
+        @media (min-width: $breakpoint-xl) {
           font-size: 1.125rem;
         }
       }
@@ -141,17 +141,19 @@ main {
         background: transparent;
         border-bottom: 0;
         flex-wrap: wrap;
-        gap: 0.5rem 1rem;
+        gap: 1rem;
         justify-content: space-between;
         padding: 1rem 1rem 0 1rem;
 
         .card-title {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
+          gap: 1rem;
+          margin-bottom: 0;
 
           i {
             display: inline-flex;
-            padding-right: 1rem;
+            padding-top: 0.2rem;
           }
         }
 
@@ -177,12 +179,14 @@ main {
 
           .results-list-item__content {
             display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
 
             .results-list-item__metadata {
               color: $secondary;
               flex: 1;
               margin-bottom: 0;
-              padding-right: 1rem;
 
               dt {
                 clip: rect(0 0 0 0);
@@ -218,10 +222,15 @@ main {
           }
 
           .results-list-item__thumbnail {
-            height: 9rem;
-            width: 9rem;
+            height: 7rem;
+            width: 7rem;
             margin-top: 0.25rem;
             object-fit: cover;
+
+            @media (min-width: $breakpoint-sm) {
+              height: 9rem;
+              width: 9rem;
+            }
           }
         }
       }

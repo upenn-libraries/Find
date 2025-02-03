@@ -15,7 +15,7 @@ $orange-medium: #BD4718;
 $orange-light: #FEEDDD;
 $bg-gradient: linear-gradient(45deg, #dbe9f5, #feefdf);
 
-// Bootstrap
+// Bootstrap colors
 $primary: $blue-medium !default;
 $secondary: $gray-medium !default;
 $success: $green-medium !default;
@@ -35,6 +35,13 @@ $theme-colors: (
   "light": $light,
   "dark": $dark
 );
+
+// Bootstrap breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
 
 // Fonts
 $font-sans-serif: proxima-nova, system-ui, sans-serif;
