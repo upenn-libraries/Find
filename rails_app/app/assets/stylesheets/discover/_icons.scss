@@ -1,23 +1,20 @@
-@mixin icon-size($size) {
-  display: block;
-  height: $size;
-  width: $size;
-}
-
-.find-icon {
-  .h4 &:before {
+.discover-icon {
+  .h4 &::before {
     @include icon-size(calc(1.275rem + 0.3vw));
 
     @media (min-width: 1200px) {
       @include icon-size(1.5rem);
     }
   }
+}
 
-  &-museum::before {
+// Penn Museum
+.discover-icon-museum {
+  &::before {
     content: url('/assets/icons/museum.svg');
   }
 
-  &-museum-fill::before {
+  &-fill::before {
     content: url('/assets/icons/museum-fill.svg');
   }
 }

@@ -1,0 +1,61 @@
+// Colors
+$penn-blue: #011F5B;
+$penn-red: #990000;
+
+$blue-medium: #0E5696;
+$blue-light: #D4E4F2;
+$gray-dark: #2D3545;
+$gray-medium: #595F6A;
+$gray-light: #F5F5F6;
+$green-medium: #267434;
+$green-light: #F1F7E1;
+$purple-medium: #80317F;
+$purple-light: #F2DFED;
+$orange-medium: #BD4718;
+$orange-light: #FEEDDD;
+$bg-gradient: linear-gradient(45deg, #dbe9f5, #feefdf);
+
+// Bootstrap
+$primary: $blue-medium !default;
+$secondary: $gray-medium !default;
+$success: $green-medium !default;
+$warning: $orange-medium !default;
+$info: $purple-medium !default;
+$danger: $orange-medium !default;
+$light: $gray-light !default;
+$dark: $gray-dark !default;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+// Fonts
+$font-sans-serif: proxima-nova, system-ui, sans-serif;
+$font-serif: cormorant-garamond, serif;
+$font-size: 16px;
+$font-size-sm: .875rem;
+$font-size-lg: 1.25rem;
+
+$line-height: 1.4;
+
+// Links
+$link-color: $primary;
+$header-link-color: $dark;
+$link-underline-offset: 0.2em;
+$link-text-decoration-thickness: 1px;
+$link-heavy-text-decoration-thickness: 2px;
+
+// Spacing
+$max-width: calc(1080px - 1.5rem);
+$main-grid-spacing: 3rem;
+
+.results.row {
+  --bs-gutter-x: #{$main-grid-spacing};
+}

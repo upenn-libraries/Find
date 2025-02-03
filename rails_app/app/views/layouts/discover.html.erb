@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Discover Penn</title> <%# TODO: Helper for dynamic title needed  %>
-    <%# TODO: favicon  %>
-    <link rel="stylesheet" href="https://use.typekit.net/gbh8cmg.css">
+    <title>Discover Penn</title> <%# TODO: Helper for dynamic title needed %>
+    <%# TODO: favicon %>
 
-    <%# TODO: import our own stylesheets for discover penn? this si still needed for proper styling of the mockup.  %>
-    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.css" %>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%# Fonts %>
+    <link rel="stylesheet" href="https://use.typekit.net/gbh8cmg.css">
+    <%# Discover Penn styles %>
+    <%= stylesheet_link_tag "discover/application", media: "all", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
     <script>
@@ -21,27 +21,17 @@
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
-  <body>
-  <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
 
-    <%# Alerts elements not included here - see HeaderComponent %>
+  <body class="discover-penn">
+    <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
 
-    <div class="discover-penn">
+    <%= render 'discover/header' %>
 
-      <header class="page-header">
-        <div class="container">
-          <h1>Discover Penn</h1>
+    <main id='main-container' class="container-fluid" role="main">
+      <%# Content from child view templates is included via this 'yield' %>
+      <%= yield %>
+    </main>
 
-          <p class="page__lede">Here are four card components with titles, and within the cards, up to three result elements with optional thumbnails, title links and other metadata. In the top right of each card is a link to see the full set of results. This button may not function the same for Museum and Art cards, as it is not clear how we could link to a 'full' set of results.</p>
-
-          <%= render(partial: 'discover/search_form') %>
-        </div>
-      </header>
-
-      <main id='main-container' class="container" role="main">
-        <%# Content from child view templates is included via this 'yield' %>
-        <%= yield %>
-      </main>
-    </div>
+    <%= render 'discover/footer' %>
   </body>
 </html>
