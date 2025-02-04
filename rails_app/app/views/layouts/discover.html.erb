@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html class="no-js">
   <head>
+    <%# TODO: Copy over so not using Find's template? %>
     <%= render('shared/google_analytics/tags', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -23,15 +24,18 @@
   </head>
 
   <body class="discover-penn">
+    <%# TODO: Copy over so not using Find's template? %>
     <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
 
-    <%= render 'discover/header' %>
+    <%= render partial: 'discover/header' %>
+
+    <%= render partial: 'discover/search_form' %>
 
     <main id='main-container' class="container-fluid" role="main">
       <%# Content from child view templates is included via this 'yield' %>
       <%= yield %>
     </main>
 
-    <%= render 'discover/footer' %>
+    <%= render partial: 'discover/footer' %>
   </body>
 </html>

@@ -1,25 +1,26 @@
-<h1 class="visually-hidden">Search Results</h1>
+<h1 class="visually-hidden"><%= t('discover.results.title') %></h1>
 
 <div class="results-content container">
   <div class="results-nav row">
     <div class="col-12">
-      <h2 class="h5 nav-header">Results for: <span class="search-term">horse</span></h2>
+<!--      <h2 class="h5 nav-header">Results for: <span class="search-term">horse</span></h2>-->
+      <h2 class="h5 nav-header"><%= t('discover.results.source.libraries.label') %>: <span class="search-term">horse</span></h2>
       <ul class="nav">
         <li class="nav-item">
-          <a href="#libraries" class="nav-link">Libraries</a>
-          <span class="results-count">22,194</span>
+          <a href="#libraries" class="nav-link"><%= t('discover.results.source.libraries.label') %></a>
+          <span class="results-count">(22,194)</span>
         </li>
         <li class="nav-item">
-          <a href="#archives" class="nav-link">Archives</a>
-          <span class="results-count">455</span>
+          <a href="#archives" class="nav-link"><%= t('discover.results.source.archives.label') %></a>
+          <span class="results-count">(455)</span>
         </li>
         <li class="nav-item">
-          <a href="#penn-museum" class="nav-link">Penn Museum</a>
-          <span class="results-count">1,600</span>
+          <a href="#penn-museum" class="nav-link"><%= t('discover.results.source.penn_museum.label') %></a>
+          <span class="results-count">(1,600)</span>
         </li>
         <li class="nav-item">
-          <a href="#penn-art-collection" class="nav-link">Penn Art Collection</a>
-          <span class="results-count">25</span>
+          <a href="#penn-art-collection" class="nav-link"><%= t('discover.results.source.penn_art_collection.label') %></a>
+          <span class="results-count">(25)</span>
         </li>
       </ul>
     </div>
@@ -31,9 +32,9 @@
         <div class="card-header">
           <h3 class="card-title h4">
             <i class="bi bi-book"></i>
-            Libraries
+            <%= t('discover.results.source.libraries.label') %>
           </h3>
-          <a class="btn btn-sm btn-primary" href="#">View all 22,194 results</a>
+          <a class="btn btn-sm btn-primary" href="#"><%= t('discover.results.view_all_button.label', count: '22,194') %></a>
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush results-list results-list">
@@ -114,9 +115,9 @@
         <div class="card-header">
           <h3 class="card-title h4">
             <i class="bi bi-archive"></i>
-            Archives
+            <%= t('discover.results.source.archives.label') %>
           </h3>
-          <a class="btn btn-sm btn-primary" href="#">View all 455 results</a>
+          <a class="btn btn-sm btn-primary" href="#"><%= t('discover.results.view_all_button.label', count: '455') %></a>
         </div>
 
         <div class="card-body">
@@ -187,9 +188,9 @@
         <div class="card-header">
           <h3 class="card-title h4">
             <i class="card-icon discover-icon discover-icon-museum"></i>
-            Penn Museum
+            <%= t('discover.results.source.penn_museum.label') %>
           </h3>
-          <a class="btn btn-sm btn-primary" href="#">View all 1,600 results</a>
+          <a class="btn btn-sm btn-primary" href="#"><%= t('discover.results.view_all_button.label', count: '1,600') %></a>
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush results-list">
@@ -274,9 +275,9 @@
         <div class="card-header">
           <h3 class="card-title h4">
             <i class="bi bi-brush"></i>
-            Penn Art Collection
+            <%= t('discover.results.source.penn_art_collection.label') %>
           </h3>
-          <a class="btn btn-sm btn-primary" href="#">View all 25 results</a>
+          <a class="btn btn-sm btn-primary" href="#"><%= t('discover.results.view_all_button.label', count: '25') %></a>
         </div>
 
         <div class="card-body">

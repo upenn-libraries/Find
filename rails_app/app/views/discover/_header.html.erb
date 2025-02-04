@@ -1,10 +1,10 @@
 <nav id="skip-links" class="visually-hidden-focusable sr-only sr-only-focusable" aria-label="Skip links">
   <div class="container-xl">
-    <%= link_to 'Skip to search', '#search-form' %>
-    <%= link_to 'Skip to main content', '#main-container' %>
+    <%= link_to t('discover.links.skip_to_search.text'), t('discover.links.skip_to_search.url') %>
+    <%= link_to t('discover.links.skip_to_main.text'), t('discover.links.skip_to_main.url') %>
     <%# TODO: Make conditional on presence of search params %>
-    <%= link_to 'Skip to results', '#results' %>
-    <%= link_to 'Skip to footer', '#footer' %>
+    <%= link_to t('discover.links.skip_to_results.text'), t('discover.links.skip_to_results.url') %>
+    <%= link_to t('discover.links.skip_to_footer.text'), t('discover.links.skip_to_footer.url') %>
   </div>
 </nav>
 
@@ -16,7 +16,7 @@
         xmlns="http://www.w3.org/2000/svg"
         class="site-header__logo"
         role="img"
-        aria-label="Discover Penn logo"
+        aria-label="<%= t('discover.logo.aria_label') %>"
         viewBox="0 0 387.11 77.738">
         <defs>
           <style>
@@ -110,5 +110,3 @@
     </div>
   </div>
 </header>
-
-<%= render partial: 'discover/search_form' %>

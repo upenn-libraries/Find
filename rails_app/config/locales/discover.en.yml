@@ -1,0 +1,60 @@
+en:
+  discover:
+    logo:
+      aria_label: 'Discover Penn logo'
+
+    search:
+      button:
+        label: 'Search'
+        aria_label: 'Search for'
+
+    home:
+      title: 'About Discover Penn'
+
+    results:
+      title: 'Search Results'
+      nav:
+        label: 'Results for'
+      source:
+        libraries:
+          label: 'Libraries'
+        archives:
+          label: 'Archives'
+        penn_museum:
+          label: 'Penn Museum'
+        penn_art_collection:
+          label: 'Penn Art Collection'
+      view_all_button:
+        label: 'View all %{count} results'
+
+    links:
+      skip_to_main:
+        text: 'Skip to main content'
+        url: '#main-container'
+      skip_to_search:
+        text: 'Skip to search'
+        url: '#search'
+      skip_to_results:
+        text: 'Skip to results'
+        url: '#results'
+      skip_to_footer:
+        text: 'Skip to footer'
+        url: '#footer'
+      upenn:
+        text: 'UPenn'
+        url: 'https://www.upenn.edu/'
+      privacy_policy:
+        text: 'Privacy Policy'
+        url: 'https://www.upenn.edu/about/privacy-policy'
+      accessibility:
+        text: 'Report Accessibility Issues and Get Help'
+        url: 'https://accessibility.web-resources.upenn.edu/get-help'
+      disclaimer:
+        text: 'Disclaimer'
+        url: 'https://www.upenn.edu/about/disclaimer'
+      emergency_services:
+        text: 'Emergency Services'
+        url: 'https://www.publicsafety.upenn.edu/contact'
+      copyright_infringement:
+        text: 'Copyright Infringement'
+        url: 'https://www.upenn.edu/about/report-copyright-infringement'

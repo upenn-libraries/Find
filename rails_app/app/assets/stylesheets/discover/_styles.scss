@@ -136,18 +136,8 @@ main {
         padding: 0 0.4rem 0 0;
       }
 
-      .results-count,
-      .results-count::before,
-      .results-count::after {
+      .results-count {
         color: $secondary;
-      }
-
-      .results-count::before {
-        content: " (";
-      }
-
-      .results-count::after {
-        content: ")";
       }
     }
 

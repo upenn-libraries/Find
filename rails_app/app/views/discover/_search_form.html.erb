@@ -9,9 +9,9 @@
         <%= f.search_field :q || params[:q],
                            value: params[:q],
                            class: "search-form__input form-control rounded-left",
-                           aria: { label: 'Search for' } %>
+                           aria: { label: t('discover.search.button.aria_label') } %>
 
-        <%= f.submit 'Search', class: 'btn btn-primary search-btn' %>
+        <%= f.submit t('discover.search.button.label'), class: 'btn btn-primary search-btn' %>
       </div>
     <% end %>
   </search>
