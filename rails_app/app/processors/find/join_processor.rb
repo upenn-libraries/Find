@@ -25,9 +25,9 @@ module Find
     end
     # rubocop:enable Rails/OutputSafety
 
-    # @return [Boolean]
+    # @return [Boolean, nil]
     def json_request?
-      context.search_state.params[:format] == 'json'
+      context&.search_state&.params&.dig(:format) == 'json'
     end
   end
 end
