@@ -61,7 +61,7 @@ module Fulfillment
       return Options::Restricted::REFERENCE if item.policy == Settings.fulfillment.policies.reference
       return Options::Restricted::RESERVE if item.policy == Settings.fulfillment.policies.reserve
 
-      Options::Restricted::ONSITE if non_circulating_item?
+      Options::Restricted::ONSITE if accessible_onsite?
     end
 
     # @return [Array<Symbol>]
@@ -106,6 +106,12 @@ module Fulfillment
     def non_circulating_item?
       item.policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
         (item.in_place? && not_loanable?)
+    end
+
+    # An item is accessible on-site if it is In Place ("Available") and otherwise non-circulating
+    # @return [Boolean]
+    def accessible_onsite?
+      non_circulating_item? && item.in_place?
     end
 
     # Some item types don't make sense in an ILL requesting context (laptops, for example)

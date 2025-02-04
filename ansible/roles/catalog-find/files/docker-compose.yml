@@ -22,6 +22,8 @@ services:
       RAILS_ENV: "${RAILS_ENV}"
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
+      REDIS_URL: "redis://redis:${REDIS_PORT}/0"
+      REDIS_SIDEKIQ_USER: "${REDIS_SIDEKIQ_USER}"
       SHIB_SP_ENTITY_ID: "https://${APP_URL}/shibboleth"
     healthcheck:
       test:
@@ -29,10 +31,10 @@ services:
           "CMD-SHELL",
           "curl -fsSL localhost:${APP_PORT}/up || exit 1",
         ]
-      interval: 10s
+      interval: 15s
       retries: 6
-      start_period: 10s
-      timeout: 10s
+      start_period: 15s
+      timeout: 15s
     networks:
       - catalog_find_postgres
       - traefik
@@ -43,6 +45,7 @@ services:
         uid: "1000"
         gid: "1000"
         mode: 0440
+      - redis_sidekiq_password
 
 networks:
   catalog_find_postgres:
@@ -57,3 +60,6 @@ secrets:
   rails_master_key:
     external: true
     name: ${RAILS_MASTER_KEY}
+  redis_sidekiq_password:
+    external: true
+    name: ${REDIS_SIDEKIQ_PASSWORD}

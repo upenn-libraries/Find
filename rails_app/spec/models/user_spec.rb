@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 describe User do
-  it_behaves_like 'Illiad Account' do
-    let(:object) { described_class.new }
-  end
+  it_behaves_like('Illiad Account') { let(:object) { described_class.new } }
+  it_behaves_like('Alma Account') { let(:object) { described_class.new(uid: alma_record[:primary_id]) } }
 
   describe '.from-omniauth-saml' do
     let(:auth_info) do

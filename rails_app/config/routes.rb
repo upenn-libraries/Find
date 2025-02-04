@@ -98,4 +98,11 @@ Rails.application.routes.draw do
   get 'additional_results/:source', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
+
+  if Settings.discover.enabled
+    namespace :discover do
+      get '/', to: 'discover#index'
+      get ':source/results', to: 'search#results', as: 'search_results'
+    end
+  end
 end

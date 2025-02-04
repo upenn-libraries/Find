@@ -7,6 +7,7 @@ cleanup:
     batch_size: 1000
 alma:
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
+  work_order_role_value: '214'
 illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
@@ -23,7 +24,7 @@ honeybadger:
 redis:
   url: <%= ENV['REDIS_URL'] %>
   username: <%= ENV['REDIS_SIDEKIQ_USER'] %>
-  password: <%= DockerSecrets.lookup(:redis_sidekiq_password) %>
+  password: <%= DockerSecrets.lookup(:catalog_find_redis_sidekiq_password) %>
 email:
   from_address: 'find-noreply@upenn.edu'
   smtp:
@@ -247,3 +248,11 @@ fulfillment:
       - OTHER
       - KEYS
       - GLOBE
+discover:
+  enabled: false
+  source:
+    google_pse_api_key: <%= DockerSecrets.lookup(:google_pse_api_key, Rails.application.credentials.google_pse_api_key) %>
+    art_collection:
+      pse_cx: '76cf445db4aa14589'
+    penn_museum:
+      pse_cx: '8591e2ac8a6254ba9'

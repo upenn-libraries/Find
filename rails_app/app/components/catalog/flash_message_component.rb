@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copied from Blacklight v8.3.0@5a779c5a9
+# Copied from Blacklight v8.8.0
 
 module Catalog
   # Copied over so that we can adjust the html.erb to use
