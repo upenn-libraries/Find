@@ -27,7 +27,10 @@ module Find
 
     # @return [Boolean, nil]
     def json_request?
-      context&.search_state&.params&.dig(:format) == 'json'
+      # `context` in some cases (e.g. mailing a record) does not have a search_state defined
+      return false unless context.respond_to?(:search_state)
+
+      context.search_state&.params&.dig(:format) == 'json'
     end
   end
 end
