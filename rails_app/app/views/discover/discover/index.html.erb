@@ -1,3 +1,5 @@
-<!-- Some stuff here for when there is no query term -->
-
-<!-- magical View Components here to render results, if present -->
+<%# if has_search_params %>
+  <%= render partial: 'discover/discover/search_results' %>
+<%# else %>
+  <%#= render partial: 'discover/discover/home' %>
+<%# end %>

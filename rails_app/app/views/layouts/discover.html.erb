@@ -27,15 +27,15 @@
     <%# TODO: Copy over so not using Find's template? %>
     <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
 
-    <%= render partial: 'discover/header' %>
+    <%= render partial: 'discover/discover/header' %>
 
-    <%= render partial: 'discover/search_form' %>
+    <%= render partial: 'discover/discover/search_form' %>
 
     <main id='main-container' class="container-fluid" role="main">
       <%# Content from child view templates is included via this 'yield' %>
       <%= yield %>
     </main>
 
-    <%= render partial: 'discover/footer' %>
+    <%= render partial: 'discover/discover/footer' %>
   </body>
 </html>
