@@ -1,4 +1,4 @@
-<div class="search-form__wrapper">
+<div class="search">
   <search class="container">
     <%# discover_discover_search_results_path %>
     <%= form_with url: '#',
@@ -9,7 +9,7 @@
         <%= f.search_field :q || params[:q],
                            value: params[:q],
                            class: "search-form__input form-control rounded-left",
-                           aria: { label: 'search for' } %>
+                           aria: { label: 'Search for' } %>
 
         <%= f.submit 'Search', class: 'btn btn-primary search-btn' %>
       </div>

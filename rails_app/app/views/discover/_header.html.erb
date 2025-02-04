@@ -1,3 +1,13 @@
+<nav id="skip-links" class="visually-hidden-focusable sr-only sr-only-focusable" aria-label="Skip links">
+  <div class="container-xl">
+    <%= link_to 'Skip to search', '#search-form' %>
+    <%= link_to 'Skip to main content', '#main-container' %>
+    <%# TODO: Make conditional on presence of search params %>
+    <%= link_to 'Skip to results', '#results' %>
+    <%= link_to 'Skip to footer', '#footer' %>
+  </div>
+</nav>
+
 <header class="site-header container">
   <div class="site-header__inner-container">
     <div class="site-header__branding">
@@ -5,6 +15,8 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="site-header__logo"
+        role="img"
+        aria-label="Discover Penn logo"
         viewBox="0 0 387.11 77.738">
         <defs>
           <style>
@@ -96,8 +108,7 @@
         </g>
       </svg>
     </div>
-    <div class="site-header__navigation">
-      <a href="#" class="about-link">About Discover Penn</a>
-    </div>
   </div>
 </header>
+
+<%= render partial: 'discover/search_form' %>
