@@ -259,15 +259,31 @@ main {
   padding: 0.5rem 1rem;
 
   .site-footer__inner-container {
-    display: grid;
+    display: flex;
     gap: 1rem 4rem;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    flex-direction: column;
     padding-bottom: 1rem;
     padding-top: 1rem;
 
-    @media (min-width: 1080px) {
-      gap: 4rem 2rem;
-      display: flex;
+    a {
+      color: $light;
+      text-decoration: 0;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: $link-underline-offset;
+        text-decoration-thickness: $link-text-decoration-thickness;
+      }
+    }
+
+    @media (min-width: $breakpoint-sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      a {
+        // Don't need text to wrap if row is wrapping
+        white-space: nowrap;
+      }
     }
   }
 
