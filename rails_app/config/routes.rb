@@ -86,14 +86,6 @@ Rails.application.routes.draw do
     get 'fines-and-fees', to: 'fines#index'
   end
 
-  namespace :discover do
-    get '/', to: 'discover#index'
-    get 'about', to: 'discover#about', as: 'about'
-    scope :search do
-      get 'results', to: 'search#results', as: 'discover_search_results'
-    end
-  end
-
   get ':library_code/info', to: 'library#info', controller: 'library', as: :library_info
   get 'additional_results/:source', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
