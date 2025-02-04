@@ -1,5 +1,5 @@
-<%# if has_search_params %>
+<% if search_params? %>
   <%= render partial: 'discover/discover/search_results' %>
-<%# else %>
-  <%#= render partial: 'discover/discover/home' %>
-<%# end %>
+<% else %>
+  <%= render partial: 'discover/discover/home' %>
+<% end %>
