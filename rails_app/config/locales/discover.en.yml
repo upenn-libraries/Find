@@ -43,7 +43,7 @@ en:
       upenn:
         text: 'UPenn'
         url: 'https://www.upenn.edu/'
-      privacy_policy:
+      privacy:
         text: 'Privacy Policy'
         url: 'https://www.upenn.edu/about/privacy-policy'
       accessibility:
@@ -52,9 +52,9 @@ en:
       disclaimer:
         text: 'Disclaimer'
         url: 'https://www.upenn.edu/about/disclaimer'
-      emergency_services:
+      emergency:
         text: 'Emergency Services'
         url: 'https://www.publicsafety.upenn.edu/contact'
-      copyright_infringement:
+      copyright:
         text: 'Copyright Infringement'
         url: 'https://www.upenn.edu/about/report-copyright-infringement'
