@@ -14,7 +14,7 @@ module Discover
 
     # Subclasses must implement #results, returning an iterable Discovery::Results object
     # @return [Discover::Results]
-    def results
+    def results(query:)
       raise NotImplementedError
     end
 
