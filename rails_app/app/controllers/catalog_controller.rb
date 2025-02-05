@@ -206,6 +206,12 @@ class CatalogController < ApplicationController
     config.add_index_field :marcxml_marcxml, label: I18n.t('results.json.marcxml'), if: :json_request?
     config.add_index_field :id, label: I18n.t('results.json.mmsid'), if: :json_request?
 
+    # These additional JSON API fields support the "Discover Penn" integration
+    config.add_index_field :isbn_ss, label: I18n.t('results.json.isbn'), if: :json_request?
+    config.add_index_field :issn_ss, label: I18n.t('results.json.issn'), if: :json_request?
+    config.add_index_field :oclc_id_ss, label: I18n.t('results.json.oclc_id'), if: :json_request?
+    config.add_index_field :library_facet, label: I18n.t('results.json.library'), if: :json_request?
+
     # fields to show in email
     config.add_email_field :title_ss, label: I18n.t('show.title.main')
     config.add_email_field :format_facet, label: I18n.t('results.format')
