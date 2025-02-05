@@ -3,7 +3,17 @@
 module Discover
   class Source
     # Class representing the "libraries" as a data source - aka Find JSON API
-    class Libraries < Source
+    class Blacklight < Source
+      attr_accessor :type
+
+      def initialize(type:)
+        unless type.to_sym.in?(Configuration::Blacklight::SOURCES)
+          raise ArgumentError, "Blacklight type #{type} not supported"
+        end
+
+        @type = type
+      end
+
       # @param query [String]
       def results(query:)
         request_url = query_uri query: query
@@ -18,16 +28,20 @@ module Discover
       private
 
       # TODO: need to add "collection"(?) & location to CatalogController JSON response
+      # @param [Hash] record
+      # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { author: record.dig('attributes', 'creator_ss', 'attributes', 'value'),
-          format: record.dig('attributes', 'format_facet', 'attributes', 'value') }
+        { author: record.dig('attributes', config_class::AUTHOR_FIELD, 'attributes', 'value'),
+          format: record.dig('attributes', config_class::FORMAT_FIELD, 'attributes', 'value') }
       end
 
       # Perhaps this is best done in a ViewComponent? The mapping from response data to Entry is Source-specific, so
       # it seems to belong here - otherwise we need "Entry" components per-Source
+      # @param [Hash] data
+      # @return [Array]
       def entries_from(data:)
         data.filter_map do |record|
-          Entry.new(title: record.dig('attributes', 'title'),
+          Entry.new(title: record.dig('attributes', config_class::TITLE_FIELD),
                     subtitle: nil, # could use depending on design TODO: do we need subtitle? extract it?
                     body: body_from(record: record), # author, collection, format, location w/ call num?
                     link_url: record.dig('links', 'self'),
@@ -49,14 +63,17 @@ module Discover
       # @param query [String]
       # @return [URI::Generic]
       def query_uri(query:)
-        # TODO: do these need to be inclusive? if we do exclusive, the first facet will limit the following facets
         # (specifically for the library facet, do we want to be able to include two library facets and get all results?)
-        query_params = { 'f[access_facet][]': Configuration::Libraries::ACCESS_VALUES,
-                         'f[library_facet][]': Configuration::Libraries::LIBRARY_VALUES,
-                         search_field: 'all_fields', q: query }
-        URI::HTTPS.build(host: Configuration::Libraries::HOST,
-                         path: Configuration::Libraries::PATH,
+        query_config = config_class::QUERY_PARAMS
+        query_params = query_config.merge({ q: query })
+        URI::HTTPS.build(host: config_class::HOST,
+                         path: config_class::PATH,
                          query: URI.encode_www_form(query_params))
+      end
+
+      # @return [Object]
+      def config_class
+        @config_class ||= "Discover::Configuration::Blacklight::#{type.camelize}".constantize
       end
     end
   end
