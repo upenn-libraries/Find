@@ -1,0 +1,41 @@
+<%# This layout is intended for "Discover Penn" pages only %>
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <%# TODO: Copy over so not using Find's template? %>
+    <%= render('shared/google_analytics/tags', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= render_discover_html_title %></title>
+    <%= favicon_link_tag %>
+
+    <%# Fonts %>
+    <%= stylesheet_link_tag "https://use.typekit.net/gbh8cmg.css", media: "all", "data-turbo-track": "reload" %>
+    <%# Discover Penn styles %>
+    <%= stylesheet_link_tag "discover/application", media: "all", "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
+    <script>
+        document.querySelector('html').classList.remove('no-js');
+    </script>
+    <%= csrf_meta_tags %>
+    <%= content_for(:head) %>
+  </head>
+
+  <body class="discover-penn">
+    <%# TODO: Copy over so not using Find's template? %>
+    <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+
+    <%= render partial: 'discover/discover/header' %>
+
+    <%= render partial: 'discover/discover/search_form' %>
+
+    <main id='main-container' class="container-fluid" role="main">
+      <%# Content from child view templates is included via this 'yield' %>
+      <%= yield %>
+    </main>
+
+    <%= render partial: 'discover/discover/footer' %>
+  </body>
+</html>
