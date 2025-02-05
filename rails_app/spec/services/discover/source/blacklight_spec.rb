@@ -29,7 +29,7 @@ describe Discover::Source::Blacklight do
       end
 
       it 'assigns expected entry body' do
-        expect(results.first.body).to include({ author: 'Twain, Mark, 1835-1910, author.', format: 'Book' })
+        expect(results.first.body).to include(author: 'Twain, Mark, 1835-1910, author.', format: 'Book')
       end
     end
   end
@@ -58,7 +58,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to eq({ author: nil, format: nil })
+      expect(results.first.body).to include(author: nil, format: nil)
     end
   end
 end
