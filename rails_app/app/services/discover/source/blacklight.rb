@@ -4,7 +4,7 @@ module Discover
   class Source
     # Class representing the "libraries" as a data source - aka Find JSON API
     class Blacklight < Source
-      attr_accessor :type
+      attr_accessor :source
 
       def initialize(source:)
         unless source.to_sym.in?(Configuration::Blacklight::SOURCES)
@@ -73,7 +73,7 @@ module Discover
 
       # @return [Object]
       def config_class
-        @config_class ||= "Discover::Configuration::Blacklight::#{type.camelize}".constantize
+        @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".constantize
       end
     end
   end
