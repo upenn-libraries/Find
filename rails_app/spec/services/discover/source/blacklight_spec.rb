@@ -4,8 +4,8 @@ describe Discover::Source::Blacklight do
   include Discover::ApiMocks::Request
   include FixtureHelpers
 
-  context 'with Find source type' do
-    let(:source) { described_class.new(type: 'find') }
+  context 'with Find source' do
+    let(:source) { described_class.new(source: 'find') }
     let(:query) { { q: 'billiards' } }
     let(:results) { source.results(query: query[:q]) }
 
@@ -34,8 +34,8 @@ describe Discover::Source::Blacklight do
     end
   end
 
-  context 'with Finding Aids source type' do
-    let(:source) { described_class.new(type: 'finding_aids') }
+  context 'with Finding Aids source' do
+    let(:source) { described_class.new(source: 'finding_aids') }
     let(:query) { { q: 'ballads' } }
     let(:results) { source.results(query: query[:q]) }
 

@@ -6,12 +6,12 @@ module Discover
     class Blacklight < Source
       attr_accessor :type
 
-      def initialize(type:)
-        unless type.to_sym.in?(Configuration::Blacklight::SOURCES)
-          raise ArgumentError, "Blacklight type #{type} not supported"
+      def initialize(source:)
+        unless source.to_sym.in?(Configuration::Blacklight::SOURCES)
+          raise ArgumentError, "Blacklight source #{source} not supported"
         end
 
-        @type = type
+        @source = source
       end
 
       # @param query [String]
