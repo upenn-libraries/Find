@@ -353,6 +353,10 @@ en:
     json:
       marcxml: 'MARC XML'
       mmsid: 'MMS ID'
+      isbn: 'ISBN'
+      issn: 'ISSN'
+      oclc_id: 'OCLC ID'
+      library: 'Library'
   requests:
     form:
       heading: 'Access options'
