@@ -2,7 +2,7 @@
   <div class="container-xl">
     <%= link_to t('discover.links.skip_to_search.text'), t('discover.links.skip_to_search.url') %>
     <%= link_to t('discover.links.skip_to_main.text'), t('discover.links.skip_to_main.url') %>
-    <%= link_to t('discover.links.skip_to_results.text'), t('discover.links.skip_to_results.url') if search_params? %>
+    <%= link_to t('discover.links.skip_to_results.text'), t('discover.links.skip_to_results.url') if discover_query_params? %>
     <%= link_to t('discover.links.skip_to_footer.text'), t('discover.links.skip_to_footer.url') %>
   </div>
 </nav>

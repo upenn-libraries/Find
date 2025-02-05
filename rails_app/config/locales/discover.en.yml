@@ -1,5 +1,7 @@
 en:
   discover:
+    site_name: 'Discover Penn'
+
     logo:
       aria_label: 'Discover Penn logo'
 
