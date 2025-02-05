@@ -3,7 +3,8 @@
 module Discover
   class Configuration
     USER_AGENT = 'DiscoverPennFrontend'
-    SOURCES = %i[libraries archives museum art_collection].freeze
+    SOURCES = %i[find finding_aids archives museum art_collection].freeze
+    # SOURCES = Blacklight::SOURCES + PSE::SOURCES
 
     module Blacklight
       SOURCES = %i[find finding_aids].freeze
@@ -44,19 +45,23 @@ module Discover
       end
     end
 
-    module Archives
-      BASE_URL = ''
-      LINK_TO_SOURCE = true
-    end
+    module PSE
+      SOURCES = %i[archives museum art_collection].freeze
 
-    module Museum
-      BASE_URL = ''
-      LINK_TO_SOURCE = true
-    end
+      module Archives
+        BASE_URL = ''
+        LINK_TO_SOURCE = true
+      end
 
-    module ArtCollection
-      BASE_URL = ''
-      LINK_TO_SOURCE = false
+      module Museum
+        BASE_URL = ''
+        LINK_TO_SOURCE = true
+      end
+
+      module ArtCollection
+        BASE_URL = ''
+        LINK_TO_SOURCE = false
+      end
     end
   end
 end
