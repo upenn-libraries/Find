@@ -2,6 +2,9 @@ en:
   discover:
     site_name: 'Discover Penn'
 
+    logo:
+      label: 'Discover Penn logo'
+
     search:
       button:
         label: 'Search'
