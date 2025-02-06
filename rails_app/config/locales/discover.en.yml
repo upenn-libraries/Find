@@ -2,8 +2,11 @@ en:
   discover:
     site_name: 'Discover Penn'
 
-    logo:
-      label: 'Discover Penn logo'
+    images:
+      site_logo:
+        label: 'Discover Penn logo'
+      libraries_logo:
+        label: 'Penn Libraries logo'
 
     search:
       button:
