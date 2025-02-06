@@ -11,10 +11,10 @@
 // Penn Museum
 .discover-icon-museum {
   &::before {
-    content: image-url('/assets/discover/icons/museum.svg');
+    content: image-url('discover/icons/museum.svg');
   }
 
   &-fill::before {
-    content: image-url('/assets/discover/icons/museum-fill.svg');
+    content: image-url('discover/icons/museum-fill.svg');
   }
 }
