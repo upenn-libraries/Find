@@ -20,12 +20,22 @@ module Discover
         connection = connection(base_url: request_url.host)
         response = connection.get(request_url).body
         data = records_from(response: response)
-        Results.new(entries: entries_from(data: data), source: self)
+        Results.new(entries: entries_from(data: data), source: self,
+                    total_count: total_count(response: response),
+                    results_url: results_url(response: response))
       rescue Faraday::Error => _e
         # TODO: something nice
       end
 
       private
+
+      def total_count(response:)
+        response.dig('meta', 'pages', 'total_count').to_i
+      end
+
+      def results_url(response:)
+        response.dig('links', 'self').gsub(/catalog.json/, '')
+      end
 
       # TODO: need to add "collection"(?) & location to CatalogController JSON response
       # @param [Hash] record
@@ -42,7 +52,6 @@ module Discover
       def entries_from(data:)
         data.filter_map do |record|
           Entry.new(title: record.dig('attributes', config_class::TITLE_FIELD),
-                    subtitle: nil, # could use depending on design TODO: do we need subtitle? extract it?
                     body: body_from(record: record), # author, collection, format, location w/ call num?
                     link_url: record.dig('links', 'self'),
                     thumbnail_url: 'https://some.books.google.url/') # TODO: get URL from data
@@ -73,7 +82,7 @@ module Discover
 
       # @return [Object]
       def config_class
-        @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".constantize
+        @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".safe_constantize
       end
     end
   end

@@ -10,7 +10,7 @@ module Discover
       head(:bad_request) unless source.to_sym.in?(Discover::Configuration::SOURCES)
 
       results = results_for(source: source)
-      render json: results
+      render json: { data: results.entries, total_count: results.total_count, results_url: results.results_url }
     end
 
     private

@@ -42,3 +42,8 @@ en:
       archives_contact: "https://archives.upenn.edu/archives-info/contact"
       hsp: 'https://www.portal.hsp.org/'
       hsp_appointment: 'https://www.portal.hsp.org/researchappointments'
+    discover:
+      all_results:
+        archives: "https://archives.upenn.edu/search/?q=%{query}"
+        museum: "https://www.penn.museum/collections/search.php?term=%{query}"
+        art_collection: "https://pennartcollection.com/?s=%{query}"

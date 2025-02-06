@@ -7,7 +7,7 @@ module Discover
     def self.klass(source:)
       raise unless source.to_sym.in?(Configuration::SOURCES)
 
-      "Discover::Source::#{source.camelize}".constantize
+      "Discover::Source::#{source.camelize}".safe_constantize
     end
 
     def initialize; end

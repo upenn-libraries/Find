@@ -7,7 +7,6 @@ module Discover
 
     def initialize(**attributes)
       @title = attributes.fetch(:title)
-      @subtitle = attributes.fetch(:subtitle)
       @body = attributes.fetch(:body)
       @link_url = attributes.fetch(:link_url)
       @thumbnail_url = attributes.fetch(:thumbnail_url)

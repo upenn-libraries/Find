@@ -48,18 +48,21 @@ module Discover
     module PSE
       SOURCES = %i[archives museum art_collection].freeze
 
+      HOST = 'customsearch.googleapis.com'
+      PATH = '/customsearch/v1'
+      KEY = Rails.application.credentials.google_pse_api_key
       module Archives
-        BASE_URL = ''
+        CX = ''
         LINK_TO_SOURCE = true
       end
 
       module Museum
-        BASE_URL = ''
+        CX = '8591e2ac8a6254ba9'
         LINK_TO_SOURCE = true
       end
 
       module ArtCollection
-        BASE_URL = ''
+        CX = '76cf445db4aa14589'
         LINK_TO_SOURCE = false
       end
     end
