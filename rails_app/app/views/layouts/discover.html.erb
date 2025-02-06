@@ -36,6 +36,15 @@
       <%= yield %>
     </main>
 
-    <%= render partial: 'discover/discover/footer' %>
+    <%= render Discover::FooterComponent.new do |footer| %>
+      <% footer.with_logo('discover/libraries-logo-white.svg', class: 'site-footer__logo', alt: t('discover.images.libraries_logo.label'), role: 'img') %>
+
+      <% footer.with_link(t('discover.links.upenn.text'), t('discover.links.upenn.url')) %>
+      <% footer.with_link(t('discover.links.privacy.text'), t('discover.links.privacy.url')) %>
+      <% footer.with_link(t('discover.links.disclaimer.text'), t('discover.links.disclaimer.url')) %>
+      <% footer.with_link(t('discover.links.emergency.text'), t('discover.links.emergency.url')) %>
+      <% footer.with_link(t('discover.links.copyright.text'), t('discover.links.copyright.url')) %>
+      <% footer.with_link(t('discover.links.accessibility.text'), t('discover.links.accessibility.url')) %>
+    <% end %>
   </body>
 </html>

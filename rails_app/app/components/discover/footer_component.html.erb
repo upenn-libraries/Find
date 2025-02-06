@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <div class="site-footer__inner-container container">
+
+    <% if logo? %>
+      <div class="site-footer__logo">
+        <%= logo %>
+      </div>
+    <% end %>
+
+    <% if links? %>
+      <div class="site-footer__links">
+        <% links.each do |link| %>
+          <%= link %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</footer>
