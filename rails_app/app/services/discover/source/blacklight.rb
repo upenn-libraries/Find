@@ -40,7 +40,9 @@ module Discover
       # @param [Hash] response
       # @return [String]
       def results_url(response:)
-        response.dig('links', 'self').gsub(/catalog.json/, '')
+        uri = URI(response.dig('links', 'self'))
+        uri.path = '/'
+        uri.to_s
       end
 
       # TODO: need to add "collection"(?)
