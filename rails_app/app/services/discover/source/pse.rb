@@ -19,6 +19,10 @@ module Discover
         Results.new(entries: entries_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(query: query))
+      rescue Faraday::Error => _e
+        # TODO: send redacted honeybadger notification
+        # return results with no entries
+        Results.new(entries: [], source: self, total_count: 0, results_url: '')
       end
 
       private
