@@ -4,10 +4,19 @@ module Discover
   # Base class providing a common interface for a Discover Penn "source"
   class Source
     # Used to get class for a source value as a symbol
+    # @return [Discover::Source]
     def self.klass(source:)
       raise unless source.to_sym.in?(Configuration::SOURCES)
 
-      "Discover::Source::#{source.camelize}".safe_constantize
+      return Discover::Source::Blacklight if source.to_sym.in?(Discover::Configuration::Blacklight::SOURCES)
+
+      Discover::Source::PSE if source.to_sym.in?(Discover::Configuration::PSE::SOURCES)
+    end
+
+    # @param [String] source
+    # @return [Discover::Source]
+    def self.create_source(source:)
+      klass(source: source).new(source: source)
     end
 
     def initialize; end

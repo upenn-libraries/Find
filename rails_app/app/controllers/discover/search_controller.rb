@@ -7,10 +7,11 @@ module Discover
     # render json from Results object
     def results
       source = params[:source]
-      head(:bad_request) unless source.to_sym.in?(Discover::Configuration::SOURCES)
+      return head(:bad_request) unless source.to_sym.in?(Discover::Configuration::SOURCES)
 
       results = results_for(source: source)
-      render json: { data: results.entries, total_count: results.total_count, results_url: results.results_url }
+      render json: { data: results.entries, total_count: results.total_count,
+                     results_url: results.results_url, source: results.source }
     end
 
     private
@@ -19,15 +20,15 @@ module Discover
       params.permit :q
     end
 
+    # @param [String] source
+    # @return [Discover::Results]
     def results_for(source:)
-      source_klass.new(source: source).results(query: search_params[:q])
+      source_klass(source: source).results(query: search_params[:q])
     end
 
-    def source_klass
-      source = params[:source].to_sym
-      return Discover::Source::Blacklight if source.in?(Discover::Configuration::Blacklight::SOURCES)
-
-      Discover::Source::PSE if source.in?(Discover::Configuration::PSE::SOURCES)
+    # @return [Discover::Source]
+    def source_klass(source:)
+      Discover::Source.create_source(source: source)
     end
   end
 end
