@@ -23,26 +23,39 @@ module Discover
         Results.new(entries: entries_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(response: response))
-      rescue Faraday::Error => _e
-        # TODO: something nice
+      rescue Faraday::Error => e
+        Honeybadger.notify(e)
+        # return results with no entries
+        Results.new(entries: [], source: self, total_count: 0, results_url: '')
       end
 
       private
 
+      # @param [Hash] response
+      # @return [Integer]
       def total_count(response:)
         response.dig('meta', 'pages', 'total_count').to_i
       end
 
+      # @param [Hash] response
+      # @return [String]
       def results_url(response:)
         response.dig('links', 'self').gsub(/catalog.json/, '')
       end
 
-      # TODO: need to add "collection"(?) & location to CatalogController JSON response
+      # TODO: need to add "collection"(?)
       # @param [Hash] record
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
         { author: record.dig('attributes', config_class::AUTHOR_FIELD, 'attributes', 'value'),
-          format: record.dig('attributes', config_class::FORMAT_FIELD, 'attributes', 'value') }
+          format: record.dig('attributes', config_class::FORMAT_FIELD, 'attributes', 'value'),
+          location: record.dig('attributes', config_class::LOCATION_FIELD, 'attributes', 'value') }
+      end
+
+      # @param [Hash] record
+      # @return [Hash]
+      def identifiers(record:)
+        config_class::IDENTIFIERS.transform_values { |field| record.dig('attributes', field, 'attributes', 'value') }
       end
 
       # Perhaps this is best done in a ViewComponent? The mapping from response data to Entry is Source-specific, so
@@ -53,6 +66,7 @@ module Discover
         data.filter_map do |record|
           Entry.new(title: record.dig('attributes', config_class::TITLE_FIELD),
                     body: body_from(record: record), # author, collection, format, location w/ call num?
+                    identifiers: identifiers(record: record),
                     link_url: record.dig('links', 'self'),
                     thumbnail_url: 'https://some.books.google.url/') # TODO: get URL from data
         rescue StandardError => _e

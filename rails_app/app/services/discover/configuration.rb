@@ -17,6 +17,8 @@ module Discover
         TITLE_FIELD = 'title'
         AUTHOR_FIELD = 'creator_ss'
         FORMAT_FIELD = 'format_facet'
+        IDENTIFIERS = { isbn: 'isbn_ss', issn: 'issn_ss', oclc_id: 'oclc_id_ss' }.freeze
+        LOCATION_FIELD = 'library_facet'
 
         # TODO: all special collections?, like 'Kislak Center for Special Collections' as well
         LIBRARY_VALUES = ['Special Collections'].freeze
@@ -38,7 +40,8 @@ module Discover
         TITLE_FIELD = 'title'
         AUTHOR_FIELD = 'creator_ssim'
         FORMAT_FIELD = 'genre_form_ssim'
-
+        IDENTIFIERS = {}.freeze
+        LOCATION_FIELD = 'repository_ssi'
         RECORD_SOURCE_VALUES = ['upenn'].freeze
 
         QUERY_PARAMS = { 'f[record_source][]': RECORD_SOURCE_VALUES }.freeze
