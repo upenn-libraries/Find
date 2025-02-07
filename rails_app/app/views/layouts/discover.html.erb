@@ -37,7 +37,11 @@
     </main>
 
     <%= render Discover::FooterComponent.new do |footer| %>
-      <% footer.with_logo('discover/libraries-logo-white.svg', class: 'site-footer__logo', alt: t('discover.images.libraries_logo.label'), role: 'img') %>
+      <% footer.with_logo(href: t('discover.links.libraries.url')) do |logo| %>
+        <% logo.with_image('discover/libraries-logo-white.svg',
+                           class: 'site-footer__logo-image',
+                           alt: t('discover.images.libraries_logo.label')) %>
+      <% end %>
 
       <% footer.with_link(t('discover.links.upenn.text'), t('discover.links.upenn.url')) %>
       <% footer.with_link(t('discover.links.privacy.text'), t('discover.links.privacy.url')) %>

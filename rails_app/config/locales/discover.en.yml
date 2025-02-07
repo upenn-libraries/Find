@@ -45,6 +45,9 @@ en:
       skip_to_footer:
         text: 'Skip to footer'
         url: '#footer'
+      libraries:
+        text: 'Penn Libraries homepage'
+        url: 'https://www.library.upenn.edu/'
       upenn:
         text: 'UPenn'
         url: 'https://www.upenn.edu/'
