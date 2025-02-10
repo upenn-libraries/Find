@@ -41,13 +41,13 @@ describe Discover::Source::Blacklight do
       it 'assigns expected entry body' do
         expect(results.first.body).to include(author: ['Piano, Renzo.'],
                                               format: ['Book'],
-                                              location: ["Fisher Fine Arts Library", "Special Collections"])
+                                              location: ['Fisher Fine Arts Library', 'Special Collections'])
       end
 
       it 'assigns expected entry identifiers' do
-        expect(results.first.identifiers).to include(isbn: ["9788862640008", "8862640005"],
+        expect(results.first.identifiers).to include(isbn: %w[9788862640008 8862640005],
                                                      issn: nil,
-                                                     oclc_id: ["229431838"])
+                                                     oclc_id: ['229431838'])
       end
     end
   end
@@ -75,7 +75,8 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(author: 'Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives',
+      expect(results.first.body)
+        .to include(author: 'Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives',
                                             format: 'Legal files',
                                             location: nil)
     end
