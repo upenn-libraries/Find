@@ -13,12 +13,18 @@ module Discover
         HOST = 'find.library.upenn.edu'
         PATH = '/catalog.json'
         LINK_TO_SOURCE = true
+        RECORDS = ['data'].freeze
+        TOTAL_COUNT = %w[meta pages total_count].freeze
+        RESULTS_URL = %w[links self].freeze
 
-        TITLE_FIELD = 'title'
-        AUTHOR_FIELD = 'creator_ss'
-        FORMAT_FIELD = 'format_facet'
-        IDENTIFIERS = { isbn: 'isbn_ss', issn: 'issn_ss', oclc_id: 'oclc_id_ss' }.freeze
-        LOCATION_FIELD = 'library_facet'
+        TITLE = %w[attributes title].freeze
+        AUTHOR = %w[attributes creator_ss attributes value].freeze
+        FORMAT = %w[attributes format_facet attributes value].freeze
+        LOCATION = %w[attributes library_facet attributes value].freeze
+        RECORD_URL = %w[links self].freeze
+        IDENTIFIERS = { isbn: %w[attributes isbn_ss attributes value],
+                        issn: %w[attributes issn_ss attributes value],
+                        oclc_id: %w[attributes oclc_id_ss attributes value] }.freeze
 
         # TODO: all special collections?, like 'Kislak Center for Special Collections' as well
         LIBRARY_VALUES = ['Special Collections'].freeze
@@ -32,16 +38,19 @@ module Discover
 
       # Configuration for Finding Aids
       module FindingAids
-        # TODO: add finding aids specific config here
-
         HOST = 'findingaids.library.upenn.edu'
         PATH = '/records.json'
         LINK_TO_SOURCE = true
-        TITLE_FIELD = 'title'
-        AUTHOR_FIELD = 'creators_ssim'
-        FORMAT_FIELD = 'genre_form_ssim'
+        RECORDS = ['data'].freeze
+        TOTAL_COUNT = %w[meta pages total_count].freeze
+        RESULTS_URL = %w[links self].freeze
+
+        TITLE = %w[attributes title].freeze
+        AUTHOR = %w[attributes creators_ssim attributes value].freeze
+        FORMAT = %w[attributes genre_form_ssim attributes value].freeze
+        LOCATION = %w[attributes repository_ssi attributes value].freeze
+        RECORD_URL = %w[links self].freeze
         IDENTIFIERS = {}.freeze
-        LOCATION_FIELD = 'repository_ssi'
         RECORD_SOURCE_VALUES = ['upenn'].freeze
 
         QUERY_PARAMS = { 'f[record_source][]': RECORD_SOURCE_VALUES }.freeze

@@ -3,10 +3,12 @@
 module Discover
   # Base class providing a common interface for a Discover Penn "source"
   class Source
+    class Error < StandardError; end
+
     # Used to get class for a source value as a symbol
     # @return [Discover::Source]
     def self.klass(source:)
-      raise unless source.to_sym.in?(Configuration::SOURCES)
+      raise Error, "source #{source} has not been configured" unless source.to_sym.in?(Configuration::SOURCES)
 
       return Discover::Source::Blacklight if source.to_sym.in?(Discover::Configuration::Blacklight::SOURCES)
 
