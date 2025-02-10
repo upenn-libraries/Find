@@ -77,8 +77,8 @@ describe Discover::Source::Blacklight do
     it 'assigns expected entry body' do
       expect(results.first.body)
         .to include(author: 'Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives',
-                                            format: 'Legal files',
-                                            location: nil)
+                    format: 'Legal files',
+                    location: nil)
     end
   end
 end
