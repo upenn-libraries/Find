@@ -23,7 +23,7 @@ module Discover
         Results.new(entries: entries_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(response: response))
-      rescue Faraday::Error => e
+      rescue StandardError => e
         Honeybadger.notify(e)
         # return results with no entries
         Results.new(entries: [], source: self, total_count: 0, results_url: '')
@@ -82,9 +82,13 @@ module Discover
       # Logic for getting at result data from response
       # @param response [Faraday::Response]
       def records_from(response:)
-        raise if response.dig(*config_class::RECORDS).nil?
+        records = response.dig(*config_class::RECORDS)
 
-        response.dig(*config_class::RECORDS)
+        unless records.is_a?(Array)
+          raise Error, "Malformed Blacklight source #{source} json response. Expected an array but got #{records.class}"
+        end
+
+        records
       end
 
       # @param query [String]
