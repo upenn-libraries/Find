@@ -4,62 +4,18 @@ describe Discover::Source::Blacklight do
   include Discover::ApiMocks::Request
   include FixtureHelpers
 
-  context 'with Find source' do
-    let(:source) { described_class.new(source: 'find') }
-    let(:query) { { q: 'billiards' } }
-    let(:results) { source.results(query: query[:q]) }
-
-    describe '#results' do
-      before do
-        stub_find_request(query: Discover::Configuration::Blacklight::Find::QUERY_PARAMS.merge(query),
-                          response: json_fixture('find_response', :discover))
-      end
-
-      it 'returns a Results object' do
-        expect(results).to be_a(Discover::Results)
-      end
-
-      it 'assigns a total count' do
-        expect(results.total_count).to eq(1)
-      end
-
-      it 'assigns a results url' do
-        expect(results.results_url).to eq('https://find.library.upenn.edu/?f%5Baccess_facet%5D%5B%5D=' \
-                                            'At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&' \
-                                            'q=%22Menil+%3A+the+Menil+collection%22&search_field=all_fields')
-      end
-
-      it 'creates entries' do
-        expect(results.first).to be_a(Discover::Entry)
-      end
-
-      it 'assigns expected entry title' do
-        expect(results.first.title)
-          .to contain_exactly 'Menil : the Menil collection'
-      end
-
-      it 'assigns expected entry body' do
-        expect(results.first.body).to include(author: ['Piano, Renzo.'],
-                                              format: ['Book'],
-                                              location: ['Fisher Fine Arts Library', 'Special Collections'])
-      end
-
-      it 'assigns expected entry identifiers' do
-        expect(results.first.identifiers).to include(isbn: %w[9788862640008 8862640005],
-                                                     issn: nil,
-                                                     oclc_id: ['229431838'])
-      end
-    end
-  end
-
-  context 'with Finding Aids source' do
-    let(:source) { described_class.new(source: 'finding_aids') }
-    let(:query) { { q: 'ballads' } }
+  shared_examples 'a blacklight source' do |source_name|
+    let(:source) { described_class.new(source: source_name) }
+    let(:query) { { q: search_term } }
     let(:results) { source.results(query: query[:q]) }
 
     before do
-      stub_finding_aids_request(query: Discover::Configuration::Blacklight::FindingAids::QUERY_PARAMS.merge(query),
-                                response: json_fixture('finding_aids_response', :discover))
+      stub_blacklight_response(
+        source: source_name,
+        query: "Discover::Configuration::Blacklight::#{source_name.camelize}::QUERY_PARAMS"
+                 .safe_constantize.merge(query),
+        response: json_fixture("#{source_name}_response", :discover)
+      )
     end
 
     it 'returns a Results object' do
@@ -69,9 +25,58 @@ describe Discover::Source::Blacklight do
     it 'creates entries' do
       expect(results.first).to be_a(Discover::Entry)
     end
+  end
+
+  context 'with Find source' do
+    let(:search_term) { 'billiards' }
+
+    include_examples 'a blacklight source', 'find'
+
+    it 'assigns a total count' do
+      expect(results.total_count).to eq(1)
+    end
+
+    it 'assigns a results url' do
+      expect(results.results_url).to eq('https://find.library.upenn.edu/?f%5Baccess_facet%5D%5B%5D=' \
+                                          'At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&' \
+                                          'q=%22Menil+%3A+the+Menil+collection%22&search_field=all_fields')
+    end
 
     it 'assigns expected entry title' do
-      expect(results.first.title).to eq 'Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files'
+      expect(results.first.title)
+        .to contain_exactly 'Menil : the Menil collection'
+    end
+
+    it 'assigns expected entry body' do
+      expect(results.first.body).to include(author: ['Piano, Renzo.'],
+                                            format: ['Book'],
+                                            location: ['Fisher Fine Arts Library', 'Special Collections'])
+    end
+
+    it 'assigns expected entry identifiers' do
+      expect(results.first.identifiers).to include(isbn: %w[9788862640008 8862640005],
+                                                   issn: nil,
+                                                   oclc_id: ['229431838'])
+    end
+  end
+
+  context 'with Finding Aids source' do
+    let(:search_term) { 'shainswit' }
+
+    include_examples 'a blacklight source', 'finding_aids'
+
+    it 'assigns a total count' do
+      expect(results.total_count).to eq(1)
+    end
+
+    it 'assigns a results url' do
+      expect(results.results_url).to eq('https://findingaids.library.upenn.edu/' \
+                                          '?f%5Brecord_source%5D%5B%5D=upenn&q=shainswit')
+    end
+
+    it 'assigns expected entry title' do
+      expect(results.first.title)
+        .to contain_exactly 'Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files'
     end
 
     it 'assigns expected entry body' do

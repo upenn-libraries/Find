@@ -3,18 +3,25 @@
 module Discover
   module ApiMocks
     module Request
-      def stub_find_request(query:, response:)
-        stub_request(:get, URI::HTTPS.build(host: Discover::Configuration::Blacklight::Find::HOST,
-                                            path: Discover::Configuration::Blacklight::Find::PATH,
-                                            query: URI.encode_www_form(query)))
+      # Can take either 'find' or 'finding_aids' as the 'source' argument
+      # @param source [String] either 'find' or 'finding_aids'
+      # @param query [String] the user query
+      # @param response [string] the simulated json response, read in from a fixture
+      def stub_blacklight_response(source:, query:, response:)
+        host = "Discover::Configuration::Blacklight::#{source.camelize}::HOST".safe_constantize
+        path = "Discover::Configuration::Blacklight::#{source.camelize}::PATH".safe_constantize
+        stub_request(:get, URI::HTTPS.build(host: host, path: path, query: URI.encode_www_form(query)))
           .to_return_json(status: 200, body: response)
       end
 
-      def stub_finding_aids_request(query:, response:)
-        stub_request(:get, URI::HTTPS.build(host: Discover::Configuration::Blacklight::FindingAids::HOST,
-                                            path: Discover::Configuration::Blacklight::FindingAids::PATH,
-                                            query: URI.encode_www_form(query)))
-          .to_return_json(status: 200, body: response)
+      def stub_pse_response(source:, query:, repsonse:)
+        host = Discover::Configuration::PSE::HOST
+        path = Discover::Configuration::PSE::PATH
+        key = Discover::Configuration::PSE::KEY
+        cx = "Discover::Configuration::PSE::#{source.camelize}::CX".safe_constantize
+        # do something with the CX here to stub properly
+        # stub_request(:get, URI::HTTPS.build(host: host, path: path, query: URI.encode_www_form(query)))
+        #   .to_return_json(status: 200, body: response)
       end
     end
   end
