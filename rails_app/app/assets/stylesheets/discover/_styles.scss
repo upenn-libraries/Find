@@ -256,34 +256,38 @@ main {
   background: $penn-blue;
   color: $light;
   font-size: $font-size-sm;
-  padding: 0.5rem 1rem;
+  padding: 2rem 1rem;
 
-  .site-footer__inner-container {
+  &__inner-container {
     display: flex;
-    gap: 1rem 4rem;
     flex-direction: column;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    gap: 2rem;
+    text-align: center;
 
-    a {
-      color: $light;
-      text-decoration: 0;
-
-      &:hover {
-        text-decoration: underline;
-        text-underline-offset: $link-underline-offset;
-        text-decoration-thickness: $link-text-decoration-thickness;
-      }
-    }
-
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: $breakpoint-md) {
       flex-direction: row;
-      flex-wrap: wrap;
+      gap: 6rem;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
 
-      a {
-        // Don't need text to wrap if row is wrapping
-        white-space: nowrap;
-      }
+  &__logo-image {
+    height: 52px;
+
+    @media (min-width: $breakpoint-md) {
+      height: 48px;
+    }
+  }
+
+  &__links {
+    flex: 1;
+    display: grid;
+    gap: 1rem 4rem;
+    grid-template-columns: 1fr;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
     }
   }
 

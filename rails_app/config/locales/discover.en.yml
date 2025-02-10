@@ -2,8 +2,11 @@ en:
   discover:
     site_name: 'Discover Penn'
 
-    logo:
-      label: 'Discover Penn logo'
+    images:
+      site_logo:
+        label: 'Discover Penn logo'
+      libraries_logo:
+        label: 'Penn Libraries logo'
 
     search:
       button:
@@ -42,6 +45,9 @@ en:
       skip_to_footer:
         text: 'Skip to footer'
         url: '#footer'
+      libraries:
+        text: 'Penn Libraries homepage'
+        url: 'https://www.library.upenn.edu/'
       upenn:
         text: 'UPenn'
         url: 'https://www.upenn.edu/'
