@@ -29,7 +29,7 @@
 
     <%= render partial: 'discover/discover/header' %>
 
-    <%= render partial: 'discover/discover/search_form' %>
+    <%= render Discover::SearchBarComponent.new(params: params) %>
 
     <main id='main-container' class="container-fluid" role="main">
       <%# Content from child view templates is included via this 'yield' %>
