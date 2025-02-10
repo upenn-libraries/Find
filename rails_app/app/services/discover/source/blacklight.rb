@@ -34,13 +34,15 @@ module Discover
       # @param [Hash] response
       # @return [Integer]
       def total_count(response:)
-        response.dig('meta', 'pages', 'total_count').to_i
+        response.dig(*config_class::TOTAL_COUNT).to_i
       end
 
       # @param [Hash] response
       # @return [String]
       def results_url(response:)
-        uri = URI(response.dig('links', 'self'))
+        return unless config_class::LINK_TO_SOURCE
+
+        uri = URI response.dig(*config_class::RESULTS_URL)
         uri.path = '/'
         uri.to_s
       end
@@ -49,30 +51,30 @@ module Discover
       # @param [Hash] record
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { author: record.dig('attributes', config_class::AUTHOR_FIELD, 'attributes', 'value'),
-          format: record.dig('attributes', config_class::FORMAT_FIELD, 'attributes', 'value'),
-          location: record.dig('attributes', config_class::LOCATION_FIELD, 'attributes', 'value') }
+        { author: record.dig(*config_class::AUTHOR),
+          format: record.dig(*config_class::FORMAT),
+          location: record.dig(*config_class::LOCATION) }
       end
 
       # @param [Hash] record
       # @return [Hash]
       def identifiers(record:)
-        config_class::IDENTIFIERS.transform_values { |field| record.dig('attributes', field, 'attributes', 'value') }
+        config_class::IDENTIFIERS.transform_values { |value| record.dig(*value) }
       end
 
       # Perhaps this is best done in a ViewComponent? The mapping from response data to Entry is Source-specific, so
       # it seems to belong here - otherwise we need "Entry" components per-Source
-      # @param [Hash] data
+      # @param [Array] data
       # @return [Array]
       def entries_from(data:)
         data.filter_map do |record|
-          Entry.new(title: record.dig('attributes', config_class::TITLE_FIELD),
+          Entry.new(title: record.dig(*config_class::TITLE),
                     body: body_from(record: record), # author, collection, format, location w/ call num?
                     identifiers: identifiers(record: record),
-                    link_url: record.dig('links', 'self'),
+                    link_url: record.dig(*config_class::RECORD_URL),
                     thumbnail_url: 'https://some.books.google.url/') # TODO: get URL from data
-        rescue StandardError => _e
-          # TODO: log an issue parsing a record
+        rescue StandardError => e
+          Honeybadger.notify(e)
           next
         end
       end
@@ -80,9 +82,9 @@ module Discover
       # Logic for getting at result data from response
       # @param response [Faraday::Response]
       def records_from(response:)
-        raise unless response&.key? 'data'
+        raise if response.dig(*config_class::RECORDS).nil?
 
-        response['data']
+        response.dig(*config_class::RECORDS)
       end
 
       # @param query [String]
