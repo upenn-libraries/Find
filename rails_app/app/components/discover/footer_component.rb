@@ -6,7 +6,6 @@ module Discover
     renders_one :logo, 'Discover::LogoComponent'
 
     renders_many :links, lambda { |text, href, **options|
-      options[:class] = Array.wrap(options[:class])
       link_to text, href, **options
     }
 

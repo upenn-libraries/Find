@@ -4,13 +4,10 @@ module Discover
   # Render a logo for Discover Penn
   class LogoComponent < ViewComponent::Base
     renders_one :image, lambda { |src, **options|
-      options[:class] = Array.wrap(options[:class])
       image_tag(src, **options)
     }
 
     def initialize(**logo_options)
-      logo_options[:class] = Array.wrap(logo_options[:class])
-
       @href = logo_options.delete(:href)
       @logo_options = logo_options
     end
