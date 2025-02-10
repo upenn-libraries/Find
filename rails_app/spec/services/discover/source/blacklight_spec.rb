@@ -19,17 +19,35 @@ describe Discover::Source::Blacklight do
         expect(results).to be_a(Discover::Results)
       end
 
+      it 'assigns a total count' do
+        expect(results.total_count).to eq(1)
+      end
+
+      it 'assigns a results url' do
+        expect(results.results_url).to eq('https://find.library.upenn.edu/?f%5Baccess_facet%5D%5B%5D=' \
+                                            'At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&' \
+                                            'q=%22Menil+%3A+the+Menil+collection%22&search_field=all_fields')
+      end
+
       it 'creates entries' do
         expect(results.first).to be_a(Discover::Entry)
-        expect(results.count).to eq 10
       end
 
       it 'assigns expected entry title' do
-        expect(results.first.title).to eq 'Mark Twain on bowling & billiards : a chapter from the autobiography.'
+        expect(results.first.title)
+          .to contain_exactly 'Menil : the Menil collection'
       end
 
       it 'assigns expected entry body' do
-        expect(results.first.body).to include(author: 'Twain, Mark, 1835-1910, author.', format: 'Book')
+        expect(results.first.body).to include(author: ['Piano, Renzo.'],
+                                              format: ['Book'],
+                                              location: ["Fisher Fine Arts Library", "Special Collections"])
+      end
+
+      it 'assigns expected entry identifiers' do
+        expect(results.first.identifiers).to include(isbn: ["9788862640008", "8862640005"],
+                                                     issn: nil,
+                                                     oclc_id: ["229431838"])
       end
     end
   end
@@ -50,15 +68,16 @@ describe Discover::Source::Blacklight do
 
     it 'creates entries' do
       expect(results.first).to be_a(Discover::Entry)
-      expect(results.count).to eq 10
     end
 
     it 'assigns expected entry title' do
-      expect(results.first.title).to eq 'American and British ballads'
+      expect(results.first.title).to eq 'Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files'
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(author: nil, format: nil)
+      expect(results.first.body).to include(author: 'Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives',
+                                            format: 'Legal files',
+                                            location: nil)
     end
   end
 end

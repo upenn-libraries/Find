@@ -1,521 +1,114 @@
 {
   "links": {
-    "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards",
-    "next": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&page=2&q=billiards",
-    "last": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&page=2&q=billiards"
+    "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields",
+    "last": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026page=1\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
   },
   "meta": {
     "pages": {
       "current_page": 1,
-      "next_page": 2,
+      "next_page": null,
       "prev_page": null,
-      "total_pages": 2,
+      "total_pages": 1,
       "limit_value": 10,
       "offset_value": 0,
-      "total_count": 18,
+      "total_count": 1,
       "first_page?": true,
-      "last_page?": false
+      "last_page?": true
     }
   },
   "data": [
     {
-      "id": "9978072018303681",
+      "id": "9960586893503681",
       "type": "Book",
       "attributes": {
-        "title": "Mark Twain on bowling & billiards : a chapter from the autobiography.",
+        "title": [
+          "Menil : the Menil collection"
+        ],
         "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9978072018303681#format_facet",
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#format_facet",
           "type": "document_value",
           "attributes": {
-            "value": "Book",
+            "value": [
+              "Book"
+            ],
             "label": "Format"
           }
         },
         "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9978072018303681#creator_ss",
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#creator_ss",
           "type": "document_value",
           "attributes": {
-            "value": "Twain, Mark, 1835-1910, author.",
+            "value": [
+              "Piano, Renzo."
+            ],
             "label": "Author/Creator"
           }
         },
         "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9978072018303681#publication_ss",
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#publication_ss",
           "type": "document_value",
           "attributes": {
-            "value": "Louisville, Ky. : Contre Coup Press, 2009.",
+            "value": [
+              "[Genova] : Fondazione Renzo Piano ; [Place of publication not identified] : SOFP, Società operativa Fondazione Piano srl, [2007]"
+            ],
             "label": "Publication"
           }
         },
         "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9978072018303681#marcxml_marcxml",
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#marcxml_marcxml",
           "type": "document_value",
           "attributes": {
-            "value": "<record><leader>02114cam a2200421 i 4500</leader><controlfield tag=\"005\">20230316152807.0</controlfield><controlfield tag=\"008\">100819s2009    kyuo          000 0aeng d</controlfield><controlfield tag=\"001\">9978072018303681</controlfield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)656882831</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn656882831</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">KLG</subfield><subfield code=\"b\">eng</subfield><subfield code=\"e\">rda</subfield><subfield code=\"e\">dcrmb</subfield><subfield code=\"c\">KLG</subfield><subfield code=\"d\">KLG</subfield><subfield code=\"d\">VWM</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCA</subfield><subfield code=\"d\">PAU</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Twain, Mark,</subfield><subfield code=\"d\">1835-1910,</subfield><subfield code=\"e\">author.</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Mark Twain on bowling &amp; billiards :</subfield><subfield code=\"b\">a chapter from the autobiography.</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\"0\"><subfield code=\"a\">Bowling &amp; billiards</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\"0\"><subfield code=\"a\">On bowling and billiards</subfield></datafield><datafield tag=\"246\" ind1=\"1\" ind2=\"8\"><subfield code=\"a\">On bowling &amp; billiards</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">Louisville, Ky. :</subfield><subfield code=\"b\">Contre Coup Press,</subfield><subfield code=\"c\">2009.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">[2], 15, [3] pages :</subfield><subfield code=\"b\">photograph ;</subfield><subfield code=\"c\">29 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"Set by hand in the Cochin typeface and printed on Twinrocker handmade paper ... The paper for the binding  was possibly decorated by the irrepressible Carol J. Blinn. The book was bound at the Campbell-Logan Bindery .... edition of twelve copies, or maybe ten -- or along there somewhere\"--Colophon.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Kislak Center Vilain-Wieck Collection of Private Presses copy presented to the Penn Libraries in 2018 by Jean-François Vilain and Roger Wieck.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Vilain-Wieck Collection has invoice laid in.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Bowling.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Billiards.</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Private press books (Printing)</subfield><subfield code=\"2\">rbmscv</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Typefaces (Type evidence)</subfield><subfield code=\"x\">Cochin.</subfield><subfield code=\"2\">rbmscv</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 2009</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Vilain, Jean-François, 1942- (donor) (Vilain-Wieck Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Wieck, Roger S. (donor) (Vilain-Wieck Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Blinn, Carol J.,</subfield><subfield code=\"e\">binding designer.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Contre Coup Press,</subfield><subfield code=\"e\">publisher,</subfield><subfield code=\"e\">printer.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Campbell-Logan Bindery,</subfield><subfield code=\"e\">binder.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Twinrocker Handmade Paper,</subfield><subfield code=\"e\">papermaker.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Jean-François Vilain and Roger S. Wieck Collection of Private Presses, Ephemera, &amp; Related References (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">United States</subfield><subfield code=\"b\">Kentucky</subfield><subfield code=\"d\">Louisville.</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Z0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
+            "value": [
+              "\u003crecord\u003e\u003cleader\u003e03127cam a2200661Ia 4500\u003c/leader\u003e\u003ccontrolfield tag=\"005\"\u003e20220610092103.0\u003c/controlfield\u003e\u003ccontrolfield tag=\"008\"\u003e131120s2007    it ae         000 0 ita d\u003c/controlfield\u003e\u003ccontrolfield tag=\"001\"\u003e9960586893503681\u003c/controlfield\u003e\u003cdatafield tag=\"010\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e  2008398756\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"020\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e9788862640008\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"020\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e8862640005\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"024\" ind1=\"8\" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e99955957567\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"035\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e(OCoLC)ocn229431838\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"035\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e(OCoLC)229431838\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"035\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e(PU)6058689-penndb-Voyager\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"040\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eFLL\u003c/subfield\u003e\u003csubfield code=\"b\"\u003eeng\u003c/subfield\u003e\u003csubfield code=\"c\"\u003eFLL\u003c/subfield\u003e\u003csubfield code=\"d\"\u003eDLC\u003c/subfield\u003e\u003csubfield code=\"d\"\u003eWAU\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"041\" ind1=\"0\" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eita\u003c/subfield\u003e\u003csubfield code=\"a\"\u003eeng\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"043\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003ee-it---\u003c/subfield\u003e\u003csubfield code=\"a\"\u003en-us-tx\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"045\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003ex4x-\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"049\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003ePAUU\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"050\" ind1=\"0\" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eN576.H68\u003c/subfield\u003e\u003csubfield code=\"b\"\u003eP53 2007\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"082\" ind1=\"1\" ind2=\"4\"\u003e\u003csubfield code=\"a\"\u003e720\u003c/subfield\u003e\u003csubfield code=\"2\"\u003e21\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"100\" ind1=\"1\" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003ePiano, Renzo.\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/names/n81086234\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"245\" ind1=\"1\" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eMenil :\u003c/subfield\u003e\u003csubfield code=\"b\"\u003ethe Menil collection /\u003c/subfield\u003e\u003csubfield code=\"c\"\u003eRenzo Piano ; [volume a cura di/ book edited by Lia Piano].\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"264\" ind1=\" \" ind2=\"1\"\u003e\u003csubfield code=\"a\"\u003e[Genova] :\u003c/subfield\u003e\u003csubfield code=\"b\"\u003eFondazione Renzo Piano ;\u003c/subfield\u003e\u003csubfield code=\"a\"\u003e[Place of publication not identified] :\u003c/subfield\u003e\u003csubfield code=\"b\"\u003eSOFP, Società operativa Fondazione Piano srl,\u003c/subfield\u003e\u003csubfield code=\"c\"\u003e[2007]\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"300\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e1 volume :\u003c/subfield\u003e\u003csubfield code=\"b\"\u003echiefly color illustrations, plans ;\u003c/subfield\u003e\u003csubfield code=\"c\"\u003e28 x 28 cm\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"336\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003etext\u003c/subfield\u003e\u003csubfield code=\"b\"\u003etxt\u003c/subfield\u003e\u003csubfield code=\"2\"\u003erdacontent\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"337\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eunmediated\u003c/subfield\u003e\u003csubfield code=\"b\"\u003en\u003c/subfield\u003e\u003csubfield code=\"2\"\u003erdamedia\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"338\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003evolume\u003c/subfield\u003e\u003csubfield code=\"b\"\u003enc\u003c/subfield\u003e\u003csubfield code=\"2\"\u003erdacarrier\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"500\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e\"This book has been made by using unpublished material found through the work of cataloguing and classifying which belongs to the Renzo Piano Foundation\"--Back cover flap.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"500\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eCover title.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"546\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eParallel text in Italian and English.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"600\" ind1=\"1\" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003ePiano, Renzo.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/76859\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"610\" ind1=\"2\" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eMenil Collection (Houston, Tex.)\u003c/subfield\u003e\u003csubfield code=\"v\"\u003eDesigns and plans.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"600\" ind1=\"1\" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003ePiano, Renzo.\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/names/n81086234\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"600\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003ePiano, Renzo.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/76859\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"600\" ind1=\"1\" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003ePiano, Renzo\u003c/subfield\u003e\u003csubfield code=\"v\"\u003eInterviews.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"610\" ind1=\"2\" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eMenil Collection (Houston, Tex.)\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/618184\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eArt museum architecture\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eTexas\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eHouston.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eArt museums\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eTexas\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eHouston.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eArchitects\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eItaly.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"0\"\u003e\u003csubfield code=\"a\"\u003eBuildings\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eTexas\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eHouston.\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eBuildings.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/840962\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eArchitects.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/813114\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eArt museums.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/815631\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"650\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eArt museum architecture.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/815614\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"651\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eTexas\u003c/subfield\u003e\u003csubfield code=\"z\"\u003eHouston.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/1205077\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"651\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eItaly.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/1204565\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"655\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eInterviews.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/1423832\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"655\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eArchitectural drawings.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003efast\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.worldcat.org/fast/1986246\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"655\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eArchitectural drawings.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003elcgft\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/genreForms/gf2017027217\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"655\" ind1=\" \" ind2=\"7\"\u003e\u003csubfield code=\"a\"\u003eInterviews.\u003c/subfield\u003e\u003csubfield code=\"2\"\u003elcgft\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/genreForms/gf2014026115\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"700\" ind1=\"1\" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003ePiano, Lia.\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/names/n2008046137\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"710\" ind1=\"2\" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eFondazione Renzo Piano.\u003c/subfield\u003e\u003csubfield code=\"0\"\u003ehttp://id.loc.gov/authorities/names/no2009068865\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"902\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eMARCIVE 2022\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"983\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003e99955957567\u003c/subfield\u003e\u003csubfield code=\"b\"\u003e308009\u003c/subfield\u003e\u003csubfield code=\"c\"\u003e99955957567\u003c/subfield\u003e\u003csubfield code=\"d\"\u003ePaper\u003c/subfield\u003e\u003csubfield code=\"e\"\u003eED\u003c/subfield\u003e\u003csubfield code=\"g\"\u003e1\u003c/subfield\u003e\u003csubfield code=\"h\"\u003efinf\u003c/subfield\u003e\u003csubfield code=\"j\"\u003eoofine\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"984\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"b\"\u003e80.00\u003c/subfield\u003e\u003csubfield code=\"h\"\u003eUSD\u003c/subfield\u003e\u003csubfield code=\"s\"\u003e20131119\u003c/subfield\u003e\u003csubfield code=\"z\"\u003ecat 3: No 050/090: No subj, non-literary\u003c/subfield\u003e\u003c/datafield\u003e\u003cdatafield tag=\"994\" ind1=\" \" ind2=\" \"\u003e\u003csubfield code=\"a\"\u003eC0\u003c/subfield\u003e\u003csubfield code=\"b\"\u003ePAU\u003c/subfield\u003e\u003c/datafield\u003e\u003c/record\u003e"
+            ],
             "label": "MARC XML"
           }
         },
         "id": {
-          "id": "https://find.library.upenn.edu/catalog/9978072018303681#id",
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#id",
           "type": "document_value",
           "attributes": {
-            "value": "9978072018303681",
+            "value": [
+              "9960586893503681"
+            ],
             "label": "MMS ID"
+          }
+        },
+        "isbn_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#isbn_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "9788862640008",
+              "8862640005"
+            ],
+            "label": "ISBN"
+          }
+        },
+        "oclc_id_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#oclc_id_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "229431838"
+            ],
+            "label": "OCLC ID"
+          }
+        },
+        "library_facet": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#library_facet",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "Fisher Fine Arts Library",
+              "Special Collections"
+            ],
+            "label": "Library"
           }
         }
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/9978072018303681"
-      }
-    },
-    {
-      "id": "9947467473503681",
-      "type": "Book",
-      "attributes": {
-        "title": "The billiard table murders : a Gladys Babbington Morton mystery",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9947467473503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9947467473503681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Baxter, Glen.",
-            "label": "Author/Creator"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9947467473503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Bloomsbury, 1990.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9947467473503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>01569cam a2200397 a 4500</leader><controlfield tag=\"005\">20220609024745.0</controlfield><controlfield tag=\"008\">920314s1990    enka          000 1 eng  </controlfield><controlfield tag=\"001\">9947467473503681</controlfield><datafield tag=\"010\" ind1=\" \" ind2=\" \"><subfield code=\"a\">   92131303 </subfield></datafield><datafield tag=\"020\" ind1=\" \" ind2=\" \"><subfield code=\"a\">074750749X :</subfield><subfield code=\"c\">£13.99</subfield></datafield><datafield tag=\"020\" ind1=\" \" ind2=\" \"><subfield code=\"a\">9780747507499</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocm22785787</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)22785787</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">4746747</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)4746747-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">DLC</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">DLC</subfield><subfield code=\"d\">OCL</subfield><subfield code=\"d\">BTCTA</subfield><subfield code=\"d\">UKTTE</subfield></datafield><datafield tag=\"050\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">PR6052.A8475</subfield><subfield code=\"b\">B55 1990</subfield></datafield><datafield tag=\"082\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">823/.914</subfield><subfield code=\"2\">20</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Baxter, Glen.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n81143878</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"4\"><subfield code=\"a\">The billiard table murders :</subfield><subfield code=\"b\">a Gladys Babbington Morton mystery /</subfield><subfield code=\"c\">Glen Baxter.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Bloomsbury,</subfield><subfield code=\"c\">1990.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">246 pages :</subfield><subfield code=\"b\">illustrations ;</subfield><subfield code=\"c\">26 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">English wit and humor, Pictorial.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85043985</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">English wit and humor, Pictorial.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/912418</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1990</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Rothman, Steven D. (donor)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014026339</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1423787</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Steven Rothman Collection of Comics, Cartoons, and Graphic Novels (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Comics Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">England</subfield><subfield code=\"d\">London.</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9947467473503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9947467473503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9947467473503681"
-      }
-    },
-    {
-      "id": "9947467483503681",
-      "type": "Book",
-      "attributes": {
-        "title": "The billiard table murders : a Gladys Babbington Morton mystery",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Baxter, Glen.",
-            "label": "Author/Creator"
-          }
-        },
-        "edition_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#edition_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Paperback edition.",
-            "label": "Edition"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Bloomsbury, 1995.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>01870cam a2200445 a 4500</leader><controlfield tag=\"005\">20220609225533.0</controlfield><controlfield tag=\"008\">970826s1995    enka          000 1 eng d</controlfield><controlfield tag=\"001\">9947467483503681</controlfield><datafield tag=\"020\" ind1=\" \" ind2=\" \"><subfield code=\"a\">0747523762</subfield></datafield><datafield tag=\"020\" ind1=\" \" ind2=\" \"><subfield code=\"a\">9780747523765</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocm37533290</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)37533290</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">4746748</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)4746748-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">WAU</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">WAU</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PR5052.A8475</subfield><subfield code=\"b\">B55 1995</subfield></datafield><datafield tag=\"082\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">741.5942</subfield><subfield code=\"2\">20</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Baxter, Glen.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n81143878</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"4\"><subfield code=\"a\">The billiard table murders :</subfield><subfield code=\"b\">a Gladys Babbington Morton mystery /</subfield><subfield code=\"c\">Glen Baxter.</subfield></datafield><datafield tag=\"250\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Paperback edition.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Bloomsbury,</subfield><subfield code=\"c\">1995.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">246 pages :</subfield><subfield code=\"b\">: illustrations ;</subfield><subfield code=\"c\">20 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Gotham Book Mart Collection copy signed by the author.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">English wit and humor, Pictorial.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85043985</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">English wit and humor, Pictorial.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/912418</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1995</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Rothman, Steven D. (donor)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Gotham Book Mart (former owner) (Gotham Book Mart Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Baxter, Glen (autograph) (Gotham Book Mart Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014026339</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1423787</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Steven Rothman Collection of Comics, Cartoons, and Graphic Novels (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Comics Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Gotham Book Mart Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">England</subfield><subfield code=\"d\">London.</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9947467483503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9947467483503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9947467483503681"
-      }
-    },
-    {
-      "id": "9959193943503681",
-      "type": "Book",
-      "attributes": {
-        "title": "Circulare : Von der k.k.n.ö. Landesregierung im Erzherzogthume Oesterreich unter der Enns : Das Spiel, Billiard-Regelspiel genannt, wird als ein Hazardspiel verbothen.",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9959193943503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "<ul><li>Book</li><li>Government document</li></ul>",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9959193943503681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Lower Austria (Austria)",
-            "label": "Author/Creator"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9959193943503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "[Austria?] : [publisher not identified], [1804]",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9959193943503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>02245cam a2200445Ia 4500</leader><controlfield tag=\"005\">20230316131248.0</controlfield><controlfield tag=\"008\">130315s1804    au           o000 0 ger d</controlfield><controlfield tag=\"001\">9959193943503681</controlfield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn830039510</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)830039510</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)5919394-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">PAU</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">PAU</subfield></datafield><datafield tag=\"043\" ind1=\" \" ind2=\" \"><subfield code=\"a\">e-au---</subfield></datafield><datafield tag=\"049\" ind1=\" \" ind2=\" \"><subfield code=\"a\">PAUU</subfield></datafield><datafield tag=\"090\" ind1=\" \" ind2=\" \"><subfield code=\"a\">GB</subfield><subfield code=\"b\">Au792L no. 54</subfield></datafield><datafield tag=\"110\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Lower Austria (Austria)</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n79079223</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Circulare :</subfield><subfield code=\"b\">Von der k.k.n.ö. Landesregierung im Erzherzogthume Oesterreich unter der Enns : Das Spiel, Billiard-Regelspiel genannt, wird als ein Hazardspiel verbothen.</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\"0\"><subfield code=\"a\">Spiel, Billiard-Regelspiel genannt, wird als ein Hazardspiel verbothen</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">[Austria?] :</subfield><subfield code=\"b\">[publisher not identified],</subfield><subfield code=\"c\">[1804]</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">1 sheet (1 unnumbered page) ;</subfield><subfield code=\"c\">32 x 19 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">sheet</subfield><subfield code=\"b\">nb</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Broadside.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Text dated and signed at end: Wien am 18. May 1804. Joseph Freyherr v. Summeraw N. Oe. Regierungs-Präsident. Anton Friedrich Graf v. Mittrovsky Vice-Präsident.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Culture Class Collection copy is no. 54 in a collection of at least 200 Austrian pamphlets and broadsides containing decrees, notices and treaties issued largely during the 18th and the first half of the 19th centuries.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Culture Class Collection copy has modern ms. inscriptions in pencil on recto of leaf.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Law</subfield><subfield code=\"z\">Austria</subfield><subfield code=\"z\">Lower Austria.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Law.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/993678</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Lower Austria (Austria)</subfield><subfield code=\"x\">History</subfield><subfield code=\"y\">19th century</subfield><subfield code=\"v\">Sources.</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Austria</subfield><subfield code=\"z\">Lower Austria.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1205790</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1804</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Broadsides</subfield><subfield code=\"z\">Austria</subfield><subfield code=\"z\">Lower Austria</subfield><subfield code=\"y\">19th century.</subfield><subfield code=\"2\">rbmscv</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Sumerau, Joseph Thaddäus von,</subfield><subfield code=\"d\">1714-1817.</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Mittrowsky, Anton Friedrich,</subfield><subfield code=\"d\">1770-1842.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Culture Class Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">German Culture Class Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Austria.</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9959193943503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9959193943503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9959193943503681"
-      }
-    },
-    {
-      "id": "9977249934603681",
-      "type": "Book",
-      "attributes": {
-        "title": "Hoyle's improved edition of the rules for playing fashionable games: : containing copious directions for whist, quadrille, piquet, quinze, vingt-un, lansquenet, pharo, rouge et noir, cribbage, matrimony, cassino, reversis, put, connexions, all fours, speculation, lottery, Pope Joan, commerce, pam-loo, brag, domino, back-gammon, draughts, hazard, chess, goff, or golf, cricket, billiards. Tennis, horse-racing, and cocking : together with an analysis of the game of chess, and an engraved plate for the instruction of beginners",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9977249934603681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9977249934603681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Hoyle, Edmond, 1672-1769.",
-            "label": "Author/Creator"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9977249934603681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Philadelphia : Thomas, Cowperthwait & Co. 253 Market Street, 1838.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9977249934603681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>02196cam a2200433 a 4500</leader><controlfield tag=\"005\">20181107102525.0</controlfield><controlfield tag=\"008\">990113s1838    pau           000 0 eng d</controlfield><controlfield tag=\"001\">9977249934603681</controlfield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)191243583</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn191243583</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">AQM</subfield><subfield code=\"b\">eng</subfield><subfield code=\"e\">dcrb</subfield><subfield code=\"c\">AQM</subfield><subfield code=\"d\">OCLCG</subfield><subfield code=\"d\">OCLCF</subfield><subfield code=\"d\">OCLCO</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCO</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCO</subfield></datafield><datafield tag=\"049\" ind1=\" \" ind2=\" \"><subfield code=\"a\">PAUU</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">GV1243</subfield><subfield code=\"b\">.H87 1838</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Hoyle, Edmond,</subfield><subfield code=\"d\">1672-1769.</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Hoyle's improved edition of the rules for playing fashionable games: :</subfield><subfield code=\"b\">containing copious directions for whist, quadrille, piquet, quinze, vingt-un, lansquenet, pharo, rouge et noir, cribbage, matrimony, cassino, reversis, put, connexions, all fours, speculation, lottery, Pope Joan, commerce, pam-loo, brag, domino, back-gammon, draughts, hazard, chess, goff, or golf, cricket, billiards. Tennis, horse-racing, and cocking : together with an analysis of the game of chess, and an engraved plate for the instruction of beginners /</subfield><subfield code=\"c\">carefully revised from the last London edition with several additions.</subfield></datafield><datafield tag=\"246\" ind1=\"1\" ind2=\"4\"><subfield code=\"a\">Hoyle's games</subfield></datafield><datafield tag=\"260\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Philadelphia :</subfield><subfield code=\"b\">Thomas, Cowperthwait &amp; Co. 253 Market Street,</subfield><subfield code=\"c\">1838.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">288 p. ;</subfield><subfield code=\"c\">14 cm.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Copyright June 2, 1830 by William C. Borradaile in the Southern District of New York. Cf. t.p. verso.</subfield></datafield><datafield tag=\"510\" ind1=\"4\" ind2=\" \"><subfield code=\"a\">Checklist Amer. imprints</subfield><subfield code=\"c\">50903</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">RBC copy presented to the Penn Libraries in 2017 by Julia B. Leisenring.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">RBC copy has bookseller's label (\"CARLITZ BOOKS - PRINTS CUSTOM FRAMING Philadelphia\") on front pastedown.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Games.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Board games.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Card games.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Chess.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Cricket.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Tennis.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Golf.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Horse racing.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Cockfighting.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1838</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Leisenring, Julia B. (donor) (RBC copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Bernard Conwell Carlitz, Old &amp; Rare Books (label) (RBC copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Borradaile, William C.,</subfield><subfield code=\"e\">copyright holder.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Thomas, Cowperthwait &amp; Co.,</subfield><subfield code=\"e\">publisher.</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">United States</subfield><subfield code=\"b\">Pennsylvania</subfield><subfield code=\"d\">Philadelphia.</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">United States</subfield><subfield code=\"b\">New York</subfield><subfield code=\"d\">New York.</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9977249934603681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9977249934603681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9977249934603681"
-      }
-    },
-    {
-      "id": "9917673773503681",
-      "type": "Book",
-      "attributes": {
-        "title": "The compleat gamester, or, Instructions how to play at all manner of usual and most gentile games, either on cards, dice, billiards, trucks, bowls or chess : also the arts and misteries of riding, racing, archery and cock-fighting : to which is added, The game at basset, with a discourse of gaming in general, the description of a gaming ordinary, and the character of a gamester : with a song on the game at piquet : all regulated by the most experienc'd masters.",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9917673773503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9917673773503681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Cotton, Charles, 1630-1687, author.",
-            "label": "Author/Creator"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9917673773503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Printed for Charles Brome, at the Gun, the West End of St. Paul's-Church, 1710.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9917673773503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>02690cam a2200433 i 4500</leader><controlfield tag=\"005\">20231219120220.0</controlfield><controlfield tag=\"008\">790322s1710    enk           000 0 eng d</controlfield><controlfield tag=\"001\">9917673773503681</controlfield><datafield tag=\"026\" ind1=\" \" ind2=\" \"><subfield code=\"e\">ayle 0201 esve IsAl (3) 1710 (A)</subfield><subfield code=\"2\">fei</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)4767927</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocm04767927 </subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)1767377-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">CLE</subfield><subfield code=\"b\">eng</subfield><subfield code=\"e\">rda</subfield><subfield code=\"e\">dcrmb</subfield><subfield code=\"c\">CLE</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCG</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCO</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">OCLCL</subfield><subfield code=\"d\">PAU</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">GV1201.42</subfield><subfield code=\"b\">.C68 1710</subfield></datafield><datafield tag=\"082\" ind1=\"0\" ind2=\"4\"><subfield code=\"a\">789.87</subfield><subfield code=\"b\">F10c</subfield></datafield><datafield tag=\"099\" ind1=\" \" ind2=\"9\"><subfield code=\"a\">EAU2384</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Cotton, Charles,</subfield><subfield code=\"d\">1630-1687,</subfield><subfield code=\"e\">author.</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"4\"><subfield code=\"a\">The compleat gamester, or, Instructions how to play at all manner of usual and most gentile games, either on cards, dice, billiards, trucks, bowls or chess :</subfield><subfield code=\"b\">also the arts and misteries of riding, racing, archery and cock-fighting : to which is added, The game at basset, with a discourse of gaming in general, the description of a gaming ordinary, and the character of a gamester : with a song on the game at piquet : all regulated by the most experienc'd masters.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Printed for Charles Brome, at the Gun, the West End of St. Paul's-Church,</subfield><subfield code=\"c\">1710.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">[16], 184 pages :</subfield><subfield code=\"b\">1 illustration ;</subfield><subfield code=\"c\">17 cm (8vo)</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"Anonymous. By Charles Cotton.\"--ESTC.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">In the title, the words \"cards, dice, billiards\" are bracketed with \"trucks, bowls, or chess.\" and the words \"riding, racing\" with \"archery and cock-fighting.\"</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Signatures: A-M⁸ N⁴ (leaf H1 signed G).</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Engraved frontispiece illustration, preceded by a leaf headed on the verso: \"The explanation of the frontispiece\".</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Title within border of double rules.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"Price 1 s. 6 d.\"--Title leaf.</subfield></datafield><datafield tag=\"510\" ind1=\"4\" ind2=\" \"><subfield code=\"a\">ESTC</subfield><subfield code=\"c\">T190403</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">LIBRA Rare copy has partially illegible early manuscript note (\"Ballad p. 15 [...]\") on front pastedown; partially illegible early manuscript note (\"[...] At Conduit [...]\") at head of title leaf; price struck through in ink on title leaf; largely illegible early manuscript leaf on verso of back free endpaper.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">LIBRA Rare copy presented to the Penn Libraries by an anonymous donor.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">LIBRA Rare copy has dated 18th-century autograph (\"Thomas Blunt 1747\") on leaf A1r.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">LIBRA Rare copy: boards detached; backstrip wanting.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Games</subfield><subfield code=\"v\">Early works to 1800.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1710</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Blunt, Thomas (autograph) (LIBRA Rare copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Brome, Charles,</subfield><subfield code=\"d\">active 1687-1700,</subfield><subfield code=\"e\">bookseller.</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">England</subfield><subfield code=\"d\">London.</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9917673773503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9917673773503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9917673773503681"
-      }
-    },
-    {
-      "id": "9971285633503681",
-      "type": "Book",
-      "attributes": {
-        "title": "The second 'IF' reader",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9971285633503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "series_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9971285633503681#series_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "<ul><li>Sphere science fiction ; 69221.</li><li>Sphere science fiction ; 69221</li></ul>",
-            "label": "Series"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9971285633503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Sphere Books Ltd., 1971.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9971285633503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>02073cam a2200397Ia 4500</leader><controlfield tag=\"005\">20220606192831.0</controlfield><controlfield tag=\"008\">810428t19711968enk           000 j eng d</controlfield><controlfield tag=\"001\">9971285633503681</controlfield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn758785335</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)758785335</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)7128563-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">PAU</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">PAU</subfield></datafield><datafield tag=\"245\" ind1=\"0\" ind2=\"4\"><subfield code=\"a\">The second 'IF' reader /</subfield><subfield code=\"c\">[edited by] Frederik Pohl.</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\" \"><subfield code=\"a\">Second IF reader</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Sphere Books Ltd.,</subfield><subfield code=\"c\">1971.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"4\"><subfield code=\"c\">©1968</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">256 pages ;</subfield><subfield code=\"c\">18 cm.</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"490\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Sphere science fiction ;</subfield><subfield code=\"v\">69221</subfield></datafield><datafield tag=\"505\" ind1=\"0\" ind2=\"0\"><subfield code=\"t\">Introduction /</subfield><subfield code=\"r\">by Frederik Pohl --</subfield><subfield code=\"t\">In the arena /</subfield><subfield code=\"r\">by Brian W. Aldiss --</subfield><subfield code=\"t\">The billiard ball /</subfield><subfield code=\"r\">by Isaac Asimov --</subfield><subfield code=\"t\">The time-tombs /</subfield><subfield code=\"r\">by J.G. Ballard --</subfield><subfield code=\"t\">Die, Shadow! /</subfield><subfield code=\"r\">by Algis Budrys --</subfield><subfield code=\"t\">The foundling stars /</subfield><subfield code=\"r\">by Hal Clement --</subfield><subfield code=\"t\">Toys for Debbie /</subfield><subfield code=\"r\">by David A. Kyle --</subfield><subfield code=\"t\">Forest in the sky /</subfield><subfield code=\"r\">by Keith Laumer --</subfield><subfield code=\"t\">At the core /</subfield><subfield code=\"r\">by Larry Niven --</subfield><subfield code=\"t\">Under two moons /</subfield><subfield code=\"r\">by Frederik Pohl --</subfield><subfield code=\"t\">Masque of the red shift /</subfield><subfield code=\"r\">by Fred Saberhagen.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Adams Collection copy presented to the Penn Libraries in 2015 by Dr. Mark B. Adams.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Science fiction, American.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85118637</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Science fiction, American.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1108635</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1971</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Adams, Mark B.  (donor) (Adams Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Science fiction.</subfield><subfield code=\"2\">gsafd</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Short stories.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014026542</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Short stories.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1726740</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Pohl, Frederik,</subfield><subfield code=\"e\">editor.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n79029809</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Mark B. Adams Science Fiction Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">United States</subfield><subfield code=\"b\">England</subfield><subfield code=\"d\">London.</subfield></datafield><datafield tag=\"830\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Sphere science fiction ;</subfield><subfield code=\"v\">69221.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/no99085266</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9971285633503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9971285633503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9971285633503681"
-      }
-    },
-    {
-      "id": "9935724723503681",
-      "type": "Book",
-      "attributes": {
-        "title": "Thumbprint",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9935724723503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "creator_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9935724723503681#creator_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "Glauser, Friedrich, 1896-1938.",
-            "label": "Author/Creator"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9935724723503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Bitter Lemon, 2004.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9935724723503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>03608cam a2200529 a 4500</leader><controlfield tag=\"005\">20220608121243.0</controlfield><controlfield tag=\"008\">040216s2004    enk           000 1 eng  </controlfield><controlfield tag=\"001\">9935724723503681</controlfield><datafield tag=\"010\" ind1=\" \" ind2=\" \"><subfield code=\"a\">  2004426453</subfield></datafield><datafield tag=\"015\" ind1=\" \" ind2=\" \"><subfield code=\"a\">GBA3-U0221</subfield></datafield><datafield tag=\"020\" ind1=\" \" ind2=\" \"><subfield code=\"a\">1904738001</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocm53242324</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)53242324</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(CStRLIN)DCLC2004426453-B</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">3572472</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)3572472-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">UKM</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">DLC</subfield><subfield code=\"d\">UKM</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">DLC</subfield><subfield code=\"d\">CStRLIN</subfield></datafield><datafield tag=\"041\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">eng</subfield><subfield code=\"h\">ger</subfield></datafield><datafield tag=\"043\" ind1=\" \" ind2=\" \"><subfield code=\"a\">e-sz---</subfield></datafield><datafield tag=\"050\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">PT2613.L39</subfield><subfield code=\"b\">W313 2004</subfield></datafield><datafield tag=\"082\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">833/.912</subfield><subfield code=\"2\">22</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Glauser, Friedrich,</subfield><subfield code=\"d\">1896-1938.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n81149125</subfield></datafield><datafield tag=\"240\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Wachtmeister Studer.</subfield><subfield code=\"l\">English</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n2004031089</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Thumbprint /</subfield><subfield code=\"c\">Friedrich Glauser ; translated from the German by Mike Mitchell.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Bitter Lemon,</subfield><subfield code=\"c\">2004.</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">vi, 199 pages ;</subfield><subfield code=\"c\">20 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"520\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"It's a fine example of the craft of detective writing in a period which some regard as the golden age of crime fiction.\"-The Sunday Telegraph</subfield></datafield><datafield tag=\"520\" ind1=\"8\" ind2=\" \"><subfield code=\"a\">The death of a traveling salesman appears to be an open and shut case. Studer is confronted with an obvious suspect and a confession to the murder. But nothing is what it seems. Envy, hatred, and the corrosive power of money lie just beneath the surface. Studer's investigation soon splinters the glassy faC'ade of Switzerland's tidy villages and manicured forests.</subfield></datafield><datafield tag=\"520\" ind1=\"8\" ind2=\" \"><subfield code=\"a\">Diagnosed a schizophrenic, addicted to morphine and opium, Friedrich Glauser spent the greater part of his life in psychiatric wards, insane asylums and prison. His acute observations conjure up a world of those at the margins of society.</subfield></datafield><datafield tag=\"505\" ind1=\"0\" ind2=\"0\"><subfield code=\"t\">A man has decided to call it a day</subfield><subfield code=\"g\">1 --</subfield><subfield code=\"t\">A silk shirt, a signet ring and gold-tipped cigarettes</subfield><subfield code=\"g\">15 --</subfield><subfield code=\"t\">Billiards and chronic alcoholism</subfield><subfield code=\"g\">27 --</subfield><subfield code=\"t\">Felicitas Rose and a Parker Duofold</subfield><subfield code=\"g\">37 --</subfield><subfield code=\"t\">Shops, wireless sets and a village policeman</subfield><subfield code=\"g\">44 --</subfield><subfield code=\"t\">Another man who wants to call it a day</subfield><subfield code=\"g\">50 --</subfield><subfield code=\"t\">Room to let</subfield><subfield code=\"g\">59 --</subfield><subfield code=\"t\">At the Witschis'</subfield><subfield code=\"g\">66 --</subfield><subfield code=\"t\">The village policeman reports</subfield><subfield code=\"g\">74 --</subfield><subfield code=\"t\">The thumbprint</subfield><subfield code=\"g\">86 --</subfield><subfield code=\"t\">The Convict Band</subfield><subfield code=\"g\">95 --</subfield><subfield code=\"t\">Wendelin Witschi's shooting range</subfield><subfield code=\"g\">108 --</subfield><subfield code=\"t\">Anastasia Witschi, nee Mischler</subfield><subfield code=\"g\">114 --</subfield><subfield code=\"t\">Schwomm</subfield><subfield code=\"g\">120 --</subfield><subfield code=\"t\">Love in the dock</subfield><subfield code=\"g\">128 --</subfield><subfield code=\"t\">Investments, IOUs and insurance</subfield><subfield code=\"g\">144 --</subfield><subfield code=\"t\">The car thief</subfield><subfield code=\"g\">156 --</subfield><subfield code=\"t\">Visits</subfield><subfield code=\"g\">162 --</subfield><subfield code=\"t\">The use of a microscope</subfield><subfield code=\"g\">170 --</subfield><subfield code=\"t\">A hot toddy with the mayor</subfield><subfield code=\"g\">176 --</subfield><subfield code=\"t\">Out for a spin</subfield><subfield code=\"g\">192 --</subfield><subfield code=\"t\">Glauser on Glauser</subfield><subfield code=\"g\">199.</subfield></datafield><datafield tag=\"546\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"First published in German as Schlumpf Erwin Mord (Wachtmeister Studer) by Limmat Verlag, Zurich, 1995\"--T.p. verso.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Police</subfield><subfield code=\"z\">Switzerland</subfield><subfield code=\"v\">Fiction.</subfield></datafield><datafield tag=\"600\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Studer,</subfield><subfield code=\"c\">Wachtmeister</subfield><subfield code=\"v\">Fiction.</subfield></datafield><datafield tag=\"600\" ind1=\"1\" ind2=\"7\"><subfield code=\"a\">Studer,</subfield><subfield code=\"c\">Wachtmeister</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1746175</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Police.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1068398</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Switzerland.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1205401</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1423787</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 2004</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Gotham Book Mart (former owner) (Gotham Book Mart Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Fiction.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014026339</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Mitchell, Mike</subfield><subfield code=\"c\">(Translator)</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/nb2015008714</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Glauser, Friedrich,</subfield><subfield code=\"d\">1896-1938.</subfield><subfield code=\"t\">Schlumpf Erwin Mord.</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Gotham Book Mart Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9935724723503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9935724723503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9935724723503681"
-      }
-    },
-    {
-      "id": "9970987953503681",
-      "type": "Book",
-      "attributes": {
-        "title": "World's best science fiction. Fourth series",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9970987953503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "series_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9970987953503681#series_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "<ul><li>Ace Books ; 91356.</li><li>Ace Books ; 91356</li></ul>",
-            "label": "Series"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9970987953503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "New York : Ace Books, 1970.",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9970987953503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>03097cam a2200517Ia 4500</leader><controlfield tag=\"005\">20220610171139.0</controlfield><controlfield tag=\"008\">960708t19701968nyua          000 j eng d</controlfield><controlfield tag=\"001\">9970987953503681</controlfield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocm35038148</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)35038148</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)7098795-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">TXA</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">TXA</subfield><subfield code=\"d\">OCL</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">CWR</subfield><subfield code=\"d\">OCLCO</subfield><subfield code=\"d\">OCLCF</subfield><subfield code=\"d\">IPU</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PN6071.S33</subfield><subfield code=\"b\">W92 1968</subfield></datafield><datafield tag=\"050\" ind1=\"1\" ind2=\"4\"><subfield code=\"a\">PS648.S3</subfield><subfield code=\"b\">W65526</subfield></datafield><datafield tag=\"245\" ind1=\"0\" ind2=\"0\"><subfield code=\"a\">World's best science fiction.</subfield><subfield code=\"n\">Fourth series /</subfield><subfield code=\"c\">edited by Donald A. Wollheim and Terry Carr.</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\" \"><subfield code=\"a\">World's best science fiction.</subfield><subfield code=\"n\">4th series</subfield></datafield><datafield tag=\"246\" ind1=\"3\" ind2=\" \"><subfield code=\"a\">World's best science fiction 1968</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">New York :</subfield><subfield code=\"b\">Ace Books,</subfield><subfield code=\"c\">1970.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"4\"><subfield code=\"c\">©1968</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">319 pages :</subfield><subfield code=\"b\">illustrations ;</subfield><subfield code=\"c\">18 cm.</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"490\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Ace Books ;</subfield><subfield code=\"v\">91356</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Imprint date and cover artist from Internet speculative fiction database.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Interior artwork (and cover) by Jack Gaughan.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"Originally titled: World's Best Science Fiction: 1968.\"</subfield></datafield><datafield tag=\"505\" ind1=\"0\" ind2=\"0\"><subfield code=\"g\">Introduction /</subfield><subfield code=\"r\">the Editors --</subfield><subfield code=\"t\">See me not /</subfield><subfield code=\"r\">Richard Wilson --</subfield><subfield code=\"t\">Driftglass /</subfield><subfield code=\"r\">Samuel R. Delany --</subfield><subfield code=\"t\">Ambassador to Verdammt /</subfield><subfield code=\"r\">Colin Kapp --</subfield><subfield code=\"t\">The man who never was /</subfield><subfield code=\"r\">R. A. Lafferty --</subfield><subfield code=\"t\">The billiard ball /</subfield><subfield code=\"r\">Isaac Asimov --</subfield><subfield code=\"t\">Hawksbill station /</subfield><subfield code=\"r\">Robert Silverberg --</subfield><subfield code=\"t\">The number you have reached /</subfield><subfield code=\"r\">Thomas M. Disch --</subfield><subfield code=\"t\">The man who loved the Faioli /</subfield><subfield code=\"r\">Roger Zelazny --</subfield><subfield code=\"t\">Population implosion /</subfield><subfield code=\"r\">Andrew J. Offutt --</subfield><subfield code=\"t\">I have no mouth, and I must scream /</subfield><subfield code=\"r\">Harlan Ellison --</subfield><subfield code=\"t\">The sword swallower /</subfield><subfield code=\"r\">Ron Goulart --</subfield><subfield code=\"t\">Coranda /</subfield><subfield code=\"r\">Keith Roberts --</subfield><subfield code=\"t\">Thus we frustrate Charlemagne /</subfield><subfield code=\"r\">R. A. Lafferty --</subfield><subfield code=\"t\">Handicap /</subfield><subfield code=\"r\">Larry Niven --</subfield><subfield code=\"t\">Full sun /</subfield><subfield code=\"r\">Brian W. Aldiss --</subfield><subfield code=\"t\">It's smart to have an English address /</subfield><subfield code=\"r\">D. G. Compton.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Adams Collection copy presented to the Penn Libraries in 2015 by Dr. Mark B. Adams.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Science fiction, American.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85118637</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Science fiction, American.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1108635</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Science fiction, English.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85118644</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Science fiction, English.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1108670</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1968</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Adams, Mark B. (autograph, 10/17/70) (donor) (Adams Collection copy)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Science fiction.</subfield><subfield code=\"2\">gsafd</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Short stories.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014026542</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Short stories.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1726740</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Wollheim, Donald A.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n82091909</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Carr, Terry.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n79049239</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Gaughan, Jack,</subfield><subfield code=\"e\">illustrator.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/n50016020</subfield></datafield><datafield tag=\"710\" ind1=\"2\" ind2=\" \"><subfield code=\"a\">Mark B. Adams Science Fiction Collection (University of Pennsylvania)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">United States</subfield><subfield code=\"b\">New York (State)</subfield><subfield code=\"d\">New York.</subfield></datafield><datafield tag=\"830\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Ace Books ;</subfield><subfield code=\"v\">91356.</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9970987953503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9970987953503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9970987953503681"
-      }
-    },
-    {
-      "id": "9954237903503681",
-      "type": "Book",
-      "attributes": {
-        "title": "A journey from London to Scarborough, in several letters from a gentleman there, to his friend in London : Letter I. The Passage to Scarborough by Sea : An Account of what is most remarkable in the Way thither by Land, and a Description of the several Towns, Villages, Gentlemen's Seats, &c. on the Road, particularly Edmonton, Cheshunt, Ware, the New-River Head, Puckeridge, Gogmagog-Hills and Cambridge : Letter II. St. Ives, Godmanchester, Huntingdon, Stilton, Burleigh-House and Park, Stamford, Lord Gainsborough's Seat, the Roman Fosseway, Grantham, Lord Tyrconnel's Seat and Park, Ancaster, Lincoln, the Cathedral and Castle : Letter III. Lincoln-Heath, Spittle, the Wolds of Lincolnshire, Redbourn, Hibberstow, Barton on the Humber, Hull, the Garrison, &c. : Letter IV. Beverley, the Minster; Driffield, Foxhole and Seymore, thence to Scarborough : Letter V. Scarborough, the Description of it towards the Sea, and its lofty Situation; the Harbour and Piers; the Shipping; great Plenty and Variety of Fish, the beautiful Parterre on the Sands, Sports and Exercises there : of the Spaw, the Resort thither of late Years : a humorous Description and Character of Dicky Dickinson, Keeper of the Wells : the manner of Gentlemen and Ladies bathing in the Sea, Verses on a Lady bathing in the Sea : The Town and Buildings described, Ledgings, and Provisions, number of Inhabitants, Hackney-Chairs. Long-Room, its pleasant and lofty Situation, Balls and Assemblies, the Pharò Bank, Billiard-Tables, &c. : The Ordinaries, and the Custom of them; the Play-House, Booksellers Shop, the Coffee-House, with an Account of the various Diversions and agreeable Amusements of the Place : With a list of the nobility, quality, and gentry at Scarborough, during the spaw season, in the year 1733 : Taken from the Subscription-Books at The Spaw, and The Long-Room, The Booksellers Shop, and The Coffee-House : To which is annex'd an account of the nature and use of the Scarborough spaw-water, interspers'd with some Observations and Remarks.",
-        "format_facet": {
-          "id": "https://find.library.upenn.edu/catalog/9954237903503681#format_facet",
-          "type": "document_value",
-          "attributes": {
-            "value": "Book",
-            "label": "Format"
-          }
-        },
-        "publication_ss": {
-          "id": "https://find.library.upenn.edu/catalog/9954237903503681#publication_ss",
-          "type": "document_value",
-          "attributes": {
-            "value": "London : Printed for Caesar Ward and Richard Chandler, at the Ship between the Temple-Gates in Fleet-Street: and sold at their shop in Scarborough, M. DCC. XXXIV. [1734]",
-            "label": "Publication"
-          }
-        },
-        "marcxml_marcxml": {
-          "id": "https://find.library.upenn.edu/catalog/9954237903503681#marcxml_marcxml",
-          "type": "document_value",
-          "attributes": {
-            "value": "<record><leader>04285cam a2200469 i 4500</leader><controlfield tag=\"005\">20220608194313.0</controlfield><controlfield tag=\"008\">030425s1734    enkf          000 0 eng d</controlfield><controlfield tag=\"001\">9954237903503681</controlfield><datafield tag=\"026\" ind1=\" \" ind2=\" \"><subfield code=\"e\">s-o- c.h. y.as tite (3) 1734 (R)</subfield><subfield code=\"2\">fei</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn775860540</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)775860540</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">5423790</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)5423790-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">CUD</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">CUD</subfield><subfield code=\"d\">OCLCQ</subfield><subfield code=\"d\">NLE</subfield><subfield code=\"d\">PAU</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">RA850.S33</subfield><subfield code=\"b\">J6 1734</subfield></datafield><datafield tag=\"245\" ind1=\"0\" ind2=\"2\"><subfield code=\"a\">A journey from London to Scarborough, in several letters from a gentleman there, to his friend in London :</subfield><subfield code=\"b\">Letter I. The Passage to Scarborough by Sea : An Account of what is most remarkable in the Way thither by Land, and a Description of the several Towns, Villages, Gentlemen's Seats, &amp;c. on the Road, particularly Edmonton, Cheshunt, Ware, the New-River Head, Puckeridge, Gogmagog-Hills and Cambridge : Letter II. St. Ives, Godmanchester, Huntingdon, Stilton, Burleigh-House and Park, Stamford, Lord Gainsborough's Seat, the Roman Fosseway, Grantham, Lord Tyrconnel's Seat and Park, Ancaster, Lincoln, the Cathedral and Castle : Letter III. Lincoln-Heath, Spittle, the Wolds of Lincolnshire, Redbourn, Hibberstow, Barton on the Humber, Hull, the Garrison, &amp;c. : Letter IV. Beverley, the Minster; Driffield, Foxhole and Seymore, thence to Scarborough : Letter V. Scarborough, the Description of it towards the Sea, and its lofty Situation; the Harbour and Piers; the Shipping; great Plenty and Variety of Fish, the beautiful Parterre on the Sands, Sports and Exercises there : of the Spaw, the Resort thither of late Years : a humorous Description and Character of Dicky Dickinson, Keeper of the Wells : the manner of Gentlemen and Ladies bathing in the Sea, Verses on a Lady bathing in the Sea : The Town and Buildings described, Ledgings, and Provisions, number of Inhabitants, Hackney-Chairs. Long-Room, its pleasant and lofty Situation, Balls and Assemblies, the Pharò Bank, Billiard-Tables, &amp;c. : The Ordinaries, and the Custom of them; the Play-House, Booksellers Shop, the Coffee-House, with an Account of the various Diversions and agreeable Amusements of the Place : With a list of the nobility, quality, and gentry at Scarborough, during the spaw season, in the year 1733 : Taken from the Subscription-Books at The Spaw, and The Long-Room, The Booksellers Shop, and The Coffee-House : To which is annex'd an account of the nature and use of the Scarborough spaw-water, interspers'd with some Observations and Remarks.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">London :</subfield><subfield code=\"b\">Printed for Caesar Ward and Richard Chandler, at the Ship between the Temple-Gates in Fleet-Street: and sold at their shop in Scarborough,</subfield><subfield code=\"c\">M. DCC. XXXIV. [1734]</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">iv, 68, x pages, 8 unnumbered pages, 1 unnumbered leaf of plates :</subfield><subfield code=\"b\">illustrations ;</subfield><subfield code=\"c\">21 cm (8vo)</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">text</subfield><subfield code=\"b\">txt</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">\"A list of the nobility\", has a separate titlepage; \"An account of ... the Scarborough spaw-water\" has a separate titlepage and pagination; signatures are continuous. With four final advertisement leaves.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Braces in imprint.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Price from imprint: price One Shilling and Sixpence.</subfield></datafield><datafield tag=\"510\" ind1=\"4\" ind2=\" \"><subfield code=\"a\">ESTC</subfield><subfield code=\"c\">T066783</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Penn Libraries Rare Books copy has only one final advertisement leaf.</subfield></datafield><datafield tag=\"648\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Early works to 1800.</subfield><subfield code=\"2\">fast</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Health resorts</subfield><subfield code=\"z\">England</subfield><subfield code=\"z\">Scarborough</subfield><subfield code=\"v\">Early works to 1800.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Health resorts.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/953227</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Scarborough (England)</subfield><subfield code=\"x\">Description and travel</subfield><subfield code=\"v\">Early works to 1800.</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Scarborough (England)</subfield><subfield code=\"x\">Social life and customs</subfield><subfield code=\"y\">18th century</subfield><subfield code=\"v\">Early works to 1800.</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">England</subfield><subfield code=\"x\">Description and travel</subfield><subfield code=\"v\">Early works to 1800.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85043289</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">England.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1219920</subfield></datafield><datafield tag=\"651\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">England</subfield><subfield code=\"z\">Scarborough.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1218465</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR 1734</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Elias, Archibald C. (donor)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Watson, Thomas Edward (bookplate)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Maddison, R.E.W. (bookplate)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">England</subfield><subfield code=\"d\">London.</subfield></datafield><datafield tag=\"752\" ind1=\" \" ind2=\" \"><subfield code=\"a\">England</subfield><subfield code=\"d\">Scarborough.</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield><datafield tag=\"994\" ind1=\" \" ind2=\" \"><subfield code=\"a\">C0</subfield><subfield code=\"b\">PAU</subfield></datafield></record>",
-            "label": "MARC XML"
-          }
-        },
-        "id": {
-          "id": "https://find.library.upenn.edu/catalog/9954237903503681#id",
-          "type": "document_value",
-          "attributes": {
-            "value": "9954237903503681",
-            "label": "MMS ID"
-          }
-        }
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/9954237903503681"
+        "self": "https://find.library.upenn.edu/catalog/9960586893503681"
       }
     }
   ],
@@ -530,16 +123,16 @@
             "attributes": {
               "label": "At the library",
               "value": "At the library",
-              "hits": 18
+              "hits": 1
             },
             "links": {
-              "remove": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "remove": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/access_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/access_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -552,46 +145,16 @@
             "attributes": {
               "label": "Book",
               "value": "Book",
-              "hits": 17
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bformat_facet%5D%5B%5D=Book&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Government document",
-              "value": "Government document",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bformat_facet%5D%5B%5D=Government+document&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Manuscript",
-              "value": "Manuscript",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bformat_facet%5D%5B%5D=Manuscript&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Other",
-              "value": "Other",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bformat_facet%5D%5B%5D=Other&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bformat_facet%5D%5B%5D=Book\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/format_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/format_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -602,118 +165,38 @@
         "items": [
           {
             "attributes": {
-              "label": "Gotham Book Mart Collection (University of Pennsylvania)",
-              "value": "Gotham Book Mart Collection (University of Pennsylvania)",
-              "hits": 4
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Gotham+Book+Mart+Collection+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Culture Class Collection (University of Pennsylvania)",
-              "value": "Culture Class Collection (University of Pennsylvania)",
-              "hits": 3
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Culture+Class+Collection+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "American Culture Class Collection (University of Pennsylvania)",
-              "value": "American Culture Class Collection (University of Pennsylvania)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=American+Culture+Class+Collection+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Baxter, Glen",
-              "value": "Baxter, Glen",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Baxter%2C+Glen&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Comics Collection (University of Pennsylvania)",
-              "value": "Comics Collection (University of Pennsylvania)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Comics+Collection+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Mark B. Adams Science Fiction Collection (University of Pennsylvania)",
-              "value": "Mark B. Adams Science Fiction Collection (University of Pennsylvania)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Mark+B.+Adams+Science+Fiction+Collection+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Steven Rothman Collection of Comics, Cartoons, and Graphic Novels (University of Pennsylvania)",
-              "value": "Steven Rothman Collection of Comics, Cartoons, and Graphic Novels (University of Pennsylvania)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Steven+Rothman+Collection+of+Comics%2C+Cartoons%2C+and+Graphic+Novels+%28University+of+Pennsylvania%29&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Anne and Joseph Trachtman Memorial Book Fund",
-              "value": "Anne and Joseph Trachtman Memorial Book Fund",
+              "label": "Fondazione Renzo Piano",
+              "value": "Fondazione Renzo Piano",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Anne+and+Joseph+Trachtman+Memorial+Book+Fund&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Fondazione+Renzo+Piano\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Batchelder, Eugene, 1822-1878",
-              "value": "Batchelder, Eugene, 1822-1878",
+              "label": "Piano, Lia",
+              "value": "Piano, Lia",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Batchelder%2C+Eugene%2C+1822-1878&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Lia\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Blinn, Carol J.",
-              "value": "Blinn, Carol J.",
+              "label": "Piano, Renzo",
+              "value": "Piano, Renzo",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Blinn%2C+Carol+J.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Borradaile, William C.",
-              "value": "Borradaile, William C.",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bcreator_facet%5D%5B%5D=Borradaile%2C+William+C.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Renzo\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/creator_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/creator_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -724,118 +207,118 @@
         "items": [
           {
             "attributes": {
-              "label": "English wit and humor, Pictorial",
-              "value": "English wit and humor, Pictorial",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=English+wit+and+humor%2C+Pictorial&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Science fiction, American",
-              "value": "Science fiction, American",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Science+fiction%2C+American&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Agra (India)--20th century--Pictorial works",
-              "value": "Agra (India)--20th century--Pictorial works",
+              "label": "Architects",
+              "value": "Architects",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Agra+%28India%29--20th+century--Pictorial+works&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "American diaries",
-              "value": "American diaries",
+              "label": "Architects--Italy",
+              "value": "Architects--Italy",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=American+diaries&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects--Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "American diaries--19th century--Specimens",
-              "value": "American diaries--19th century--Specimens",
+              "label": "Art museum architecture",
+              "value": "Art museum architecture",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=American+diaries--19th+century--Specimens&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "American diaries--Women authors",
-              "value": "American diaries--Women authors",
+              "label": "Art museum architecture--Texas--Houston",
+              "value": "Art museum architecture--Texas--Houston",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=American+diaries--Women+authors&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "American diaries--Women authors--19th century",
-              "value": "American diaries--Women authors--19th century",
+              "label": "Art museums",
+              "value": "Art museums",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=American+diaries--Women+authors--19th+century&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Amusements",
-              "value": "Amusements",
+              "label": "Art museums--Texas--Houston",
+              "value": "Art museums--Texas--Houston",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Amusements&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Amusements--France--Paris--Early works to 1800",
-              "value": "Amusements--France--Paris--Early works to 1800",
+              "label": "Buildings",
+              "value": "Buildings",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Amusements--France--Paris--Early+works+to+1800&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Austria--Lower Austria",
-              "value": "Austria--Lower Austria",
+              "label": "Buildings--Texas--Houston",
+              "value": "Buildings--Texas--Houston",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Austria--Lower+Austria&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           },
           {
             "attributes": {
-              "label": "Billiards",
-              "value": "Billiards",
+              "label": "Italy",
+              "value": "Italy",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Bsubject_facet%5D%5B%5D=Billiards&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Menil Collection (Houston, Tex.)",
+              "value": "Menil Collection (Houston, Tex.)",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Menil Collection (Houston, Tex.)--Designs and plans",
+              "value": "Menil Collection (Houston, Tex.)--Designs and plans",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29--Designs+and+plans\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/subject_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/subject_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -848,36 +331,26 @@
             "attributes": {
               "label": "English",
               "value": "English",
-              "hits": 16
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blanguage_facet%5D%5B%5D=English&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "German",
-              "value": "German",
-              "hits": 3
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blanguage_facet%5D%5B%5D=German&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "French",
-              "value": "French",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blanguage_facet%5D%5B%5D=French&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=English\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Italian",
+              "value": "Italian",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=Italian\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/language_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/language_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -888,48 +361,28 @@
         "items": [
           {
             "attributes": {
+              "label": "Fisher Fine Arts Library",
+              "value": "Fisher Fine Arts Library",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
               "label": "Special Collections",
               "value": "Special Collections",
-              "hits": 18
+              "hits": 1
             },
             "links": {
-              "remove": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Van Pelt-Dietrich Library Center",
-              "value": "Van Pelt-Dietrich Library Center",
-              "hits": 14
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blibrary_facet%5D%5B%5D=Van+Pelt-Dietrich+Library+Center&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections",
-              "value": "Kislak Center for Special Collections",
-              "hits": 13
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blibrary_facet%5D%5B%5D=Kislak+Center+for+Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "LIBRA",
-              "value": "LIBRA",
-              "hits": 6
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blibrary_facet%5D%5B%5D=LIBRA&q=billiards"
+              "remove": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/library_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/library_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -940,160 +393,18 @@
         "items": [
           {
             "attributes": {
-              "label": "Kislak Center for Special Collections - Rare Book Collection",
-              "value": "Kislak Center for Special Collections - Rare Book Collection",
-              "hits": 5
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Rare+Book+Collection&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "LIBRA Special",
-              "value": "LIBRA Special",
-              "hits": 4
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=LIBRA+Special&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "LIBRA",
-              "value": "LIBRA",
-              "hits": 3
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=LIBRA&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections - Adams Collection",
-              "value": "Kislak Center for Special Collections - Adams Collection",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Adams+Collection&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections - Comics Collection",
-              "value": "Kislak Center for Special Collections - Comics Collection",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Comics+Collection&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections - Manuscripts",
-              "value": "Kislak Center for Special Collections - Manuscripts",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Manuscripts&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "LIBRA Rare",
-              "value": "LIBRA Rare",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=LIBRA+Rare&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections - Blank Collection",
-              "value": "Kislak Center for Special Collections - Blank Collection",
+              "label": "Fisher Fine Arts Library - Locked Case",
+              "value": "Fisher Fine Arts Library - Locked Case",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Blank+Collection&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Kislak Center for Special Collections - Vilain-Wieck Collection",
-              "value": "Kislak Center for Special Collections - Vilain-Wieck Collection",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Kislak+Center+for+Special+Collections+-+Vilain-Wieck+Collection&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Van Pelt - Stacks",
-              "value": "Van Pelt - Stacks",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&f%5Blocation_facet%5D%5B%5D=Van+Pelt+-+Stacks&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library+-+Locked+Case\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/location_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-      }
-    },
-    {
-      "type": "facet",
-      "id": "genre_facet",
-      "attributes": {
-        "label": "Genre",
-        "items": [
-          {
-            "attributes": {
-              "label": "Diaries.",
-              "value": "Diaries.",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bgenre_facet%5D%5B%5D=Diaries.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Manuscripts, American.",
-              "value": "Manuscripts, American.",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bgenre_facet%5D%5B%5D=Manuscripts%2C+American.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Poems.",
-              "value": "Poems.",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bgenre_facet%5D%5B%5D=Poems.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Specimens.",
-              "value": "Specimens.",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bgenre_facet%5D%5B%5D=Specimens.&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          }
-        ]
-      },
-      "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/genre_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/location_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -1104,48 +415,18 @@
         "items": [
           {
             "attributes": {
-              "label": "P - Literature & Languages",
-              "value": "P - Literature & Languages",
-              "hits": 5
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bclassification_facet%5D%5B%5D=P+-+Literature+%26+Languages&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "G - Geography, Anthropology, Recreation",
-              "value": "G - Geography, Anthropology, Recreation",
-              "hits": 3
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bclassification_facet%5D%5B%5D=G+-+Geography%2C+Anthropology%2C+Recreation&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "800 - Literature",
-              "value": "800 - Literature",
+              "label": "N - Fine Arts",
+              "value": "N - Fine Arts",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bclassification_facet%5D%5B%5D=800+-+Literature&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
-            }
-          },
-          {
-            "attributes": {
-              "label": "T - Technology",
-              "value": "T - Technology",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Bclassification_facet%5D%5B%5D=T+-+Technology&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bclassification_facet%5D%5B%5D=N+-+Fine+Arts\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/classification_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards"
+        "self": "https://find.library.upenn.edu/catalog/facet/classification_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -1155,7 +436,7 @@
         "label": "All Fields"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
       }
     },
     {
@@ -1165,7 +446,7 @@
         "label": "Relevance"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -1175,7 +456,7 @@
         "label": "Author/Creator (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=creator_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -1185,7 +466,7 @@
         "label": "Author/Creator (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=creator_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -1195,7 +476,7 @@
         "label": "Title (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=title_sort+asc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+asc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -1205,7 +486,7 @@
         "label": "Title (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=title_sort+desc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+desc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -1215,7 +496,7 @@
         "label": "Call Number (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=call_number_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -1225,7 +506,7 @@
         "label": "Call Number (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=call_number_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -1235,7 +516,7 @@
         "label": "Publication date (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=publication_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -1245,7 +526,7 @@
         "label": "Publication date (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -1255,7 +536,7 @@
         "label": "Date Added (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=added_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -1265,7 +546,7 @@
         "label": "Date Added (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&q=billiards&sort=added_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+desc%2C+title_sort+asc"
       }
     }
   ]

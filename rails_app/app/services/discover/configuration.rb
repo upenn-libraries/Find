@@ -38,7 +38,7 @@ module Discover
         PATH = '/records.json'
         LINK_TO_SOURCE = true
         TITLE_FIELD = 'title'
-        AUTHOR_FIELD = 'creator_ssim'
+        AUTHOR_FIELD = 'creators_ssim'
         FORMAT_FIELD = 'genre_form_ssim'
         IDENTIFIERS = {}.freeze
         LOCATION_FIELD = 'repository_ssi'

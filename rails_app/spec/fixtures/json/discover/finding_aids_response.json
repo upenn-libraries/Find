@@ -1,521 +1,86 @@
 {
   "links": {
-    "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields",
-    "next": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026page=2\u0026q=ballads\u0026search_field=all_fields",
-    "last": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026page=2\u0026q=ballads\u0026search_field=all_fields"
+    "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22",
+    "last": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026page=1\u0026q=%22shainswit%22"
   },
   "meta": {
     "pages": {
       "current_page": 1,
-      "next_page": 2,
+      "next_page": null,
       "prev_page": null,
-      "total_pages": 2,
+      "total_pages": 1,
       "limit_value": 10,
       "offset_value": 0,
-      "total_count": 16,
+      "total_count": 1,
       "first_page?": true,
-      "last_page?": false
+      "last_page?": true
     }
   },
   "data": [
     {
-      "id": "UPENN_RBML_PUSP.PRINTCOLLECTION4",
+      "id": "UPENN_BIDDLE_PU-L.NBA.027",
       "type": null,
       "attributes": {
-        "title": "American and British ballads",
+        "title": "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files",
         "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4#title_tsi",
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#title_tsi",
           "type": "document_value",
           "attributes": {
-            "value": "American and British ballads",
+            "value": "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files",
             "label": "Title"
           }
         },
         "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4#extent_ssim",
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#extent_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "1.1 linear feet (3 boxes)",
+            "value": "4.5 linear feet (about 930 items.)",
             "label": "Extent"
           }
         },
         "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4#display_date_ssim",
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#display_date_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "circa 18th-19th centuries (inclusive)",
+            "value": "1984-1994 (inclusive)",
             "label": "Date"
           }
         },
         "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4#subjects_ssim",
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#subjects_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "Music",
+            "value": "Bankruptcy, Employees -- Dismissal of, Trials, litigation, etc, Cases, and Law Firms",
             "label": "Subject"
           }
         },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4#abstract_scope_contents_tsi",
+        "genre_form_ssim": {
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#genre_form_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "Broadside ballads are single sheets of paper printed on one side with song lyrics. These ballads were about love, religion, legends, current events, etc. and were printed and circulated in large quantities. They were popular from the 16th through the 19th centuries in England, Ireland, and North America.",
+            "value": "Legal files",
+            "label": "Form"
+          }
+        },
+        "creators_ssim": {
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#creators_ssim",
+          "type": "document_value",
+          "attributes": {
+            "value": "Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives",
+            "label": "Creator"
+          }
+        },
+        "abstract_scope_contents_tsi": {
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#abstract_scope_contents_tsi",
+          "type": "document_value",
+          "attributes": {
+            "value": "On July 11, 1984, William Foley, Legislative Affairs Officer of the Administrative Office of the United States Courts (\u0026quot;Administrative Office\u0026quot;), issued a memorandum stating that the Administrative Office would not pay bankruptcy judges because, in its opinion, Congress had acted unlawfully by awarding retroactive terms of office to the normally presidentially-appointed bankruptcy judges. In response, on July 13, 1984, four bankruptcy judges sued Foley and the Administrative Office for abuse of power. The case became commonly known as Lundin v. Foley. The law firm of Kronish, Lieb, Shainswit, Weiner and Hellman (later, Kronish, Lieb, Weiner and Hellman) represented the bankruptcy judges. Richard Lieb served as the primary attorney on the case. In 1988 the court issued a summary judgment on the grounds that the explicit reason for the suit (i.e. the refusal of Foley to pay the judges) had been resolved. However, when Foley issued his original memorandum, parties with an interest in...\u003ca href=\"/records/UPENN_BIDDLE_PU-L.NBA.027\"\u003e(see more)\u003c/a\u003e",
             "label": "Abstract"
           }
         }
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.PRINTCOLLECTION4"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.EB8.B2102.830C",
-      "type": null,
-      "attributes": {
-        "title": "Nineteenth-century English broadside ballads",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Nineteenth-century English broadside ballads",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "49 item(s)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "circa 1800s (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Music",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Nineteenth-century London printers of broadside ballad sheets supplied both traditional and original songs to \u0026quot;hawkers and the trade,\u0026quot; as well as selling to customers in their own shops. Most compositions are anonymous (though their authors are sometimes named or identifiable) and they enjoyed a wide audience. This collection contains 49 publications from a variety of printers, including the heirs of John Pitts and James Catnach (Elizabeth Hodges and Anne Ryle, respectively) and Henry P. Such. Researchers interested in nineteenth-century popular song or the London printing trade will find this collection of use.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.EB8.B2102.830C"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.982",
-      "type": null,
-      "attributes": {
-        "title": "Mes vers by Herminie Delavault",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Mes vers by Herminie Delavault",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "2 volume(s)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1840-1879 (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Music and French poetry",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "This collection contains two volumes of poems and ballads titled Mes vers by Herminie Delavault spanning the years 1840 to 1879. Written in French, the works also include verse created for the musical compositions by Delavault\u0026#39;s husband Germain-Eugène Delavault (1814-1892). In addition, volume two contains a French translation of John Gay\u0026#39;s libretto for Handel\u0026#39;s Acis and Galatea.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.982"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.705",
-      "type": null,
-      "attributes": {
-        "title": "Marion Dexter Learned papers",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Marion Dexter Learned papers",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "3 box(es)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "circa 1885-1913 (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Music, Education, College teachers, and Tell, William -- Legends",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Miscellaneous papers of Marion Dexter Learned related to his scholarly work and academic career. Most of the items, including manuscript fragments, notes, and research materials, pertain to an unfinished scholarly project in which Learned sought to illuminate the literary evolution of the Wilhelm Tell legend and ballad, from its beginnings to the publication of a version of the ballad in Philadelphia in 1768 by the German-born printer Heinrich Miller. Other items in the collection include miscellaneous correspondence; two personal documents of Learned from graduate study in Leipzig, Germany; print copies of two speeches by him; and miscellaneous research materials and publications collected by him.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.705"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.964",
-      "type": null,
-      "attributes": {
-        "title": "Sheldon Hackney research notes on African American history, civil rights, and folk songs",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Sheldon Hackney research notes on African American history, civil rights, and folk songs",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1 linear feet (2 boxes)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1943-2006 (inclusive) and 1970-1997 (bulk)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "African Americans -- History, Folk songs, and Civil rights movements -- United States",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Sheldon Hackney (1933-2013) was a historian of the American south, an academic administrator, and the chairman of the National Endowment for the Humanities during the Clinton administration. This collection consists of a very small number of papers created by Sheldon Hackney and includes research notes and audio recordings relating to his research on African American history, the Civil Rights Movement and folk life and folk song.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.964"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.1070",
-      "type": null,
-      "attributes": {
-        "title": "Charles Godfrey Leland letters to George Henry Boker",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Charles Godfrey Leland letters to George Henry Boker",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "0.2 linear feet (1 box)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1861-1937 (inclusive) and 1869-1870 (bulk)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Friendship and Voyages and travels",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Charles Godfrey Leland (1824-1903) was a humorist and folklorist from Philadelphia. The collection consists of fourteen illustrated letters written to George Henry Boker which document one year of Leland\u0026#39;s trip to Europe from 1869 to 1870; transcriptions of the letters; and an article by donor and scholar Sculley Bradley about the collection.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1070"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.CODEX1979",
-      "type": null,
-      "attributes": {
-        "title": "Commonplace book",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Commonplace book",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1 volume(s)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "circa 1805-1820 (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Shorthand",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "A volume containing excerpts and quotations of various authors compiled anonomously in England between the years 1805 to 1820.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1979"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.CODEX1889",
-      "type": null,
-      "attributes": {
-        "title": "The effusions, collection of volumes",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "The effusions, collection of volumes",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1 volume(s) (+ 2 photographs, 2 leaves)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1905-1914 (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Literature, Clubs, History -- Societies, etc, Jews, and Literature -- Societies, etc",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "The effusions, a collection of volumes consists of several issues of a handmade magazine bound in one volume.  The magazine was created by the Philadelphia club named Ell Kube and was founded by a group of young Jewish men in 1904.  There are seven volumes spanning the years from 1905-1914.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.CODEX1889"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.1192",
-      "type": null,
-      "attributes": {
-        "title": "Miscellaneous music manuscripts",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Miscellaneous music manuscripts",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "0.33 linear feet (1 box)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1818-1950 (inclusive) and 1847-1950 (bulk)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Music",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "This is a collection of miscellaneous music material, including manuscript scores, printed scores, and printed sheet music.  In addition to the music material, there is a letter and a photograph which were sent to Benedict Nenninger.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1192"
-      }
-    },
-    {
-      "id": "UPENN_RBML_PUSP.MS.COLL.1426",
-      "type": null,
-      "attributes": {
-        "title": "Arthur Scouten papers",
-        "title_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426#title_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Arthur Scouten papers",
-            "label": "Title"
-          }
-        },
-        "extent_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426#extent_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1.4 linear feet (4 boxes)",
-            "label": "Extent"
-          }
-        },
-        "display_date_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426#display_date_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "1918-2002 (inclusive)",
-            "label": "Date"
-          }
-        },
-        "subjects_ssim": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426#subjects_ssim",
-          "type": "document_value",
-          "attributes": {
-            "value": "Education, College teachers, Literature, and Drama -- History and criticism",
-            "label": "Subject"
-          }
-        },
-        "abstract_scope_contents_tsi": {
-          "id": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426#abstract_scope_contents_tsi",
-          "type": "document_value",
-          "attributes": {
-            "value": "Arthur Hawley \u0026quot;Joe\u0026quot; Scouten was a scholar of British literature and theater and a University of Pennsylvania professor. This collection contains a small amount of his research materials and correspondence, as well as some biographical and memorial materials and a number of his school and work records.",
-            "label": "Abstract"
-          }
-        }
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/UPENN_RBML_PUSP.MS.COLL.1426"
+        "self": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027"
       }
     }
   ],
@@ -528,38 +93,18 @@
         "items": [
           {
             "attributes": {
-              "label": "University of Pennsylvania: Kislak Center for Special Collections, Rare Books and Manuscripts",
-              "value": "University of Pennsylvania: Kislak Center for Special Collections, Rare Books and Manuscripts",
-              "hits": 14
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+Kislak+Center+for+Special+Collections%2C+Rare+Books+and+Manuscripts\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "University of Pennsylvania: Penn Museum Archives",
-              "value": "University of Pennsylvania: Penn Museum Archives",
+              "label": "University of Pennsylvania: Biddle Law Library",
+              "value": "University of Pennsylvania: Biddle Law Library",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+Penn+Museum+Archives\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "University of Pennsylvania: University Archives and Records Center",
-              "value": "University of Pennsylvania: University Archives and Records Center",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+University+Archives+and+Records+Center\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+Biddle+Law+Library\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/repository_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/repository_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -572,16 +117,16 @@
             "attributes": {
               "label": "University of Pennsylvania",
               "value": "upenn",
-              "hits": 16
+              "hits": 1
             },
             "links": {
-              "remove": "https://findingaids.library.upenn.edu/records.json?q=ballads\u0026search_field=all_fields"
+              "remove": "https://findingaids.library.upenn.edu/records.json?q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/record_source.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/record_source.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -594,16 +139,16 @@
             "attributes": {
               "label": "Not Available",
               "value": "no",
-              "hits": 16
+              "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bonline_content%5D%5B%5D=no\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bonline_content%5D%5B%5D=no\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/online_content.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/online_content.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -614,118 +159,58 @@
         "items": [
           {
             "attributes": {
-              "label": "Music",
-              "value": "Music",
-              "hits": 6
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Music\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "College teachers",
-              "value": "College teachers",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=College+teachers\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Education",
-              "value": "Education",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Education\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Literature",
-              "value": "Literature",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Literature\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "African Americans -- History",
-              "value": "African Americans -- History",
+              "label": "Bankruptcy",
+              "value": "Bankruptcy",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=African+Americans+--+History\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Bankruptcy\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Auctions",
-              "value": "Auctions",
+              "label": "Cases",
+              "value": "Cases",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Auctions\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Cases\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Book industries and trade",
-              "value": "Book industries and trade",
+              "label": "Employees -- Dismissal of",
+              "value": "Employees -- Dismissal of",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Book+industries+and+trade\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Employees+--+Dismissal+of\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Civil rights movements -- United States",
-              "value": "Civil rights movements -- United States",
+              "label": "Law Firms",
+              "value": "Law Firms",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Civil+rights+movements+--+United+States\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Law+Firms\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Clubs",
-              "value": "Clubs",
+              "label": "Trials, litigation, etc",
+              "value": "Trials, litigation, etc",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Clubs\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Drama -- History and criticism",
-              "value": "Drama -- History and criticism",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Drama+--+History+and+criticism\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Ethnology",
-              "value": "Ethnology",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Ethnology\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Trials%2C+litigation%2C+etc\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/subjects_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/subjects_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -736,28 +221,18 @@
         "items": [
           {
             "attributes": {
-              "label": "Maggs Bros.",
-              "value": "Maggs Bros.",
+              "label": "United States. Administrative Office of the United States Courts",
+              "value": "United States. Administrative Office of the United States Courts",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcorpnames_ssim%5D%5B%5D=Maggs+Bros.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "University of Pennsylvania",
-              "value": "University of Pennsylvania",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcorpnames_ssim%5D%5B%5D=University+of+Pennsylvania\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcorpnames_ssim%5D%5B%5D=United+States.+Administrative+Office+of+the+United+States+Courts\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/corpnames_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/corpnames_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -768,220 +243,38 @@
         "items": [
           {
             "attributes": {
-              "label": "Abrahams, Roger D., b. 1933",
-              "value": "Abrahams, Roger D., b. 1933",
+              "label": "Lundin, Keith M.",
+              "value": "Lundin, Keith M.",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Abrahams%2C+Roger+D.%2C+b.+1933\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Lundin%2C+Keith+M.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Agree, Peter",
-              "value": "Agree, Peter",
+              "label": "Norton, William L.",
+              "value": "Norton, William L.",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Agree%2C+Peter\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Norton%2C+William+L.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Boker, George H. (George Henry)",
-              "value": "Boker, George H. (George Henry)",
+              "label": "Paine, George C., II",
+              "value": "Paine, George C., II",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Boker%2C+George+H.+%28George+Henry%29\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Clarke, Hugh Archibald",
-              "value": "Clarke, Hugh Archibald",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Clarke%2C+Hugh+Archibald\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Cray, Ed, b. 1933",
-              "value": "Cray, Ed, b. 1933",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Cray%2C+Ed%2C+b.+1933\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Germain-Eugène, Delavault",
-              "value": "Germain-Eugène, Delavault",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Germain-Eug%C3%A8ne%2C+Delavault\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Handel, George Frideric",
-              "value": "Handel, George Frideric",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Handel%2C+George+Frideric\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Hoffmann von Fallersleben, August Heinrich",
-              "value": "Hoffmann von Fallersleben, August Heinrich",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Hoffmann+von+Fallersleben%2C+August+Heinrich\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Krummeich, Paul",
-              "value": "Krummeich, Paul",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Krummeich%2C+Paul\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Osterud, Nancy Grey, b. 1948",
-              "value": "Osterud, Nancy Grey, b. 1948",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Osterud%2C+Nancy+Grey%2C+b.+1948\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Shakespeare, William",
-              "value": "Shakespeare, William",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Shakespeare%2C+William\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Paine%2C+George+C.%2C+II\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/people_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-      }
-    },
-    {
-      "type": "facet",
-      "id": "places_ssim",
-      "attributes": {
-        "label": "Place",
-        "items": [
-          {
-            "attributes": {
-              "label": "Belgium -- Foreign relations",
-              "value": "Belgium -- Foreign relations",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=Belgium+--+Foreign+relations\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Europe -- Description and travel",
-              "value": "Europe -- Description and travel",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=Europe+--+Description+and+travel\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Philadelphia (Pa.) -- Social life and customs",
-              "value": "Philadelphia (Pa.) -- Social life and customs",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=Philadelphia+%28Pa.%29+--+Social+life+and+customs\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Trinidad and Tobago",
-              "value": "Trinidad and Tobago",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=Trinidad+and+Tobago\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "United States -- History -- 1783-1865",
-              "value": "United States -- History -- 1783-1865",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=United+States+--+History+--+1783-1865\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "United States -- History -- 1865-1921",
-              "value": "United States -- History -- 1865-1921",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=United+States+--+History+--+1865-1921\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "United States -- History -- 20th century",
-              "value": "United States -- History -- 20th century",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=United+States+--+History+--+20th+century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "United States -- History -- Colonial period, ca. 1600-1775",
-              "value": "United States -- History -- Colonial period, ca. 1600-1775",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=United+States+--+History+--+Colonial+period%2C+ca.+1600-1775\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "United States -- History -- Revolution, 1775-1783",
-              "value": "United States -- History -- Revolution, 1775-1783",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bplaces_ssim%5D%5B%5D=United+States+--+History+--+Revolution%2C+1775-1783\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          }
-        ]
-      },
-      "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/places_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/people_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -992,118 +285,18 @@
         "items": [
           {
             "attributes": {
-              "label": "Correspondence",
-              "value": "Correspondence",
-              "hits": 6
+              "label": "Legal files",
+              "value": "Legal files",
+              "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Correspondence\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Poetry",
-              "value": "Poetry",
-              "hits": 5
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Poetry\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Ballads",
-              "value": "Ballads",
-              "hits": 3
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Ballads\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Audiovisual materials",
-              "value": "Audiovisual materials",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Audiovisual+materials\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Broadsides (notices)",
-              "value": "Broadsides (notices)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Broadsides+%28notices%29\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Codices (bound manuscripts)",
-              "value": "Codices (bound manuscripts)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Codices+%28bound+manuscripts%29\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Photographs",
-              "value": "Photographs",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Photographs\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Poems",
-              "value": "Poems",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Poems\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Research notes",
-              "value": "Research notes",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Research+notes\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Sheet music",
-              "value": "Sheet music",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Sheet+music\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Translations (documents)",
-              "value": "Translations (documents)",
-              "hits": 2
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Translations+%28documents%29\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Legal+files\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/genre_form_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/genre_form_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -1114,118 +307,28 @@
         "items": [
           {
             "attributes": {
-              "label": "Abrahams, Roger D., b. 1933",
-              "value": "Abrahams, Roger D., b. 1933",
+              "label": "Kronish, Lieb, Weiner, and Hellman LLP",
+              "value": "Kronish, Lieb, Weiner, and Hellman LLP",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Abrahams%2C+Roger+D.%2C+b.+1933\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Kronish%2C+Lieb%2C+Weiner%2C+and+Hellman+LLP\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           },
           {
             "attributes": {
-              "label": "Balfe, M. W. (Michael William)",
-              "value": "Balfe, M. W. (Michael William)",
+              "label": "National Bankruptcy Archives",
+              "value": "National Bankruptcy Archives",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Balfe%2C+M.+W.+%28Michael+William%29\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Bunn, Alfred",
-              "value": "Bunn, Alfred",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Bunn%2C+Alfred\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Delavault, Herminie",
-              "value": "Delavault, Herminie",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Delavault%2C+Herminie\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Delepierre, Octave",
-              "value": "Delepierre, Octave",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Delepierre%2C+Octave\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Dibdin, Charles",
-              "value": "Dibdin, Charles",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Dibdin%2C+Charles\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Ell Kube",
-              "value": "Ell Kube",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Ell+Kube\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Evans, Ray",
-              "value": "Evans, Ray",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Evans%2C+Ray\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Fitzball, Edward, 1792-1873",
-              "value": "Fitzball, Edward, 1792-1873",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Fitzball%2C+Edward%2C+1792-1873\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Fleisher, Horace T. (Horace Teller), 1887-1964",
-              "value": "Fleisher, Horace T. (Horace Teller), 1887-1964",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Fleisher%2C+Horace+T.+%28Horace+Teller%29%2C+1887-1964\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Fleisher, Maurice T. (Maurice Tracy), 1885-1938",
-              "value": "Fleisher, Maurice T. (Maurice Tracy), 1885-1938",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Fleisher%2C+Maurice+T.+%28Maurice+Tracy%29%2C+1885-1938\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=National+Bankruptcy+Archives\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/creators_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/creators_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -1238,16 +341,16 @@
             "attributes": {
               "label": "English",
               "value": "English",
-              "hits": 12
+              "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Blanguages_ssim%5D%5B%5D=English\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Blanguages_ssim%5D%5B%5D=English\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/languages_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/languages_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -1258,38 +361,18 @@
         "items": [
           {
             "attributes": {
-              "label": "19th Century",
-              "value": "nineteenth_century",
-              "hits": 4
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=nineteenth_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
               "label": "20th Century",
               "value": "twentieth_century",
-              "hits": 8
+              "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=twentieth_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "21st Century",
-              "value": "twenty_first_century",
-              "hits": 4
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=twenty_first_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=twentieth_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/era_facet.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/era_facet.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -1300,38 +383,18 @@
         "items": [
           {
             "attributes": {
-              "label": "UPENN_RBML",
-              "value": "UPENN_RBML",
-              "hits": 14
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_RBML\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "UPENN_ARCHIVES",
-              "value": "UPENN_ARCHIVES",
+              "label": "UPENN_BIDDLE",
+              "value": "UPENN_BIDDLE",
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_ARCHIVES\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "UPENN_MUSEUM",
-              "value": "UPENN_MUSEUM",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_MUSEUM\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_BIDDLE\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/endpoint_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records/facet/endpoint_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
       }
     },
     {
@@ -1341,7 +404,7 @@
         "label": "All Fields"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026search_field=all_fields"
       }
     },
     {
@@ -1351,7 +414,7 @@
         "label": "Relevance"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields\u0026sort=relevance"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=relevance"
       }
     },
     {
@@ -1361,7 +424,7 @@
         "label": "Year (descending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields\u0026sort=year-desc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=year-desc"
       }
     },
     {
@@ -1371,7 +434,7 @@
         "label": "Year (ascending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields\u0026sort=year-asc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=year-asc"
       }
     },
     {
@@ -1381,7 +444,7 @@
         "label": "Title (descending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields\u0026sort=title-desc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=title-desc"
       }
     },
     {
@@ -1391,7 +454,7 @@
         "label": "Title (ascending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=ballads\u0026search_field=all_fields\u0026sort=title-asc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=title-asc"
       }
     }
   ]
