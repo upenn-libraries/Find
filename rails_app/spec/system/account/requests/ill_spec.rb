@@ -92,7 +92,7 @@ describe 'Account Request ILL form' do
       expect(page).to have_text I18n.t('account.ill.form.proxy.prompt')
     end
 
-    context 'when library staff submits proxy form' do
+    context 'with proxy fields' do
       include_context 'with mocked alma_record on proxy user'
 
       let(:proxy) { Fulfillment::User.new('jdoe') }

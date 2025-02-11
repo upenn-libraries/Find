@@ -17,7 +17,7 @@ module Account
     def ill
       @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)
 
-      if @request.proxied? && !current_user.library_staff?
+      if @request.proxied? && !current_user.proxy_submit_eligible?
         flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
       elsif @request.proxied? && !@request.patron.alma_record?
         flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
