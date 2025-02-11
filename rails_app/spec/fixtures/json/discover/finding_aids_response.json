@@ -1,7 +1,7 @@
 {
   "links": {
-    "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22",
-    "last": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026page=1\u0026q=%22shainswit%22"
+    "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit",
+    "last": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026page=1\u0026q=shainswit"
   },
   "meta": {
     "pages": {
@@ -21,12 +21,16 @@
       "id": "UPENN_BIDDLE_PU-L.NBA.027",
       "type": null,
       "attributes": {
-        "title": "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files",
+        "title": [
+          "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files"
+        ],
         "title_tsi": {
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#title_tsi",
           "type": "document_value",
           "attributes": {
-            "value": "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files",
+            "value": [
+              "Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files"
+            ],
             "label": "Title"
           }
         },
@@ -34,7 +38,9 @@
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#extent_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "4.5 linear feet (about 930 items.)",
+            "value": [
+              "4.5 linear feet (about 930 items.)"
+            ],
             "label": "Extent"
           }
         },
@@ -42,7 +48,9 @@
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#display_date_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "1984-1994 (inclusive)",
+            "value": [
+              "1984-1994 (inclusive)"
+            ],
             "label": "Date"
           }
         },
@@ -50,7 +58,13 @@
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#subjects_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "Bankruptcy, Employees -- Dismissal of, Trials, litigation, etc, Cases, and Law Firms",
+            "value": [
+              "Bankruptcy",
+              "Employees -- Dismissal of",
+              "Trials, litigation, etc",
+              "Cases",
+              "Law Firms"
+            ],
             "label": "Subject"
           }
         },
@@ -58,7 +72,9 @@
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#genre_form_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "Legal files",
+            "value": [
+              "Legal files"
+            ],
             "label": "Form"
           }
         },
@@ -66,8 +82,21 @@
           "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#creators_ssim",
           "type": "document_value",
           "attributes": {
-            "value": "Kronish, Lieb, Weiner, and Hellman LLP and National Bankruptcy Archives",
+            "value": [
+              "Kronish, Lieb, Weiner, and Hellman LLP",
+              "National Bankruptcy Archives"
+            ],
             "label": "Creator"
+          }
+        },
+        "repository_ssi": {
+          "id": "https://findingaids.library.upenn.edu/records/UPENN_BIDDLE_PU-L.NBA.027#repository_ssi",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "University of Pennsylvania: Biddle Law Library"
+            ],
+            "label": "Repository"
           }
         },
         "abstract_scope_contents_tsi": {
@@ -98,13 +127,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+Biddle+Law+Library\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Brepository_ssi%5D%5B%5D=University+of+Pennsylvania%3A+Biddle+Law+Library\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/repository_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/repository_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -120,13 +149,13 @@
               "hits": 1
             },
             "links": {
-              "remove": "https://findingaids.library.upenn.edu/records.json?q=%22shainswit%22"
+              "remove": "https://findingaids.library.upenn.edu/records.json?q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/record_source.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/record_source.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -142,13 +171,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bonline_content%5D%5B%5D=no\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bonline_content%5D%5B%5D=no\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/online_content.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/online_content.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -164,7 +193,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Bankruptcy\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Bankruptcy\u0026q=shainswit"
             }
           },
           {
@@ -174,7 +203,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Cases\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Cases\u0026q=shainswit"
             }
           },
           {
@@ -184,7 +213,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Employees+--+Dismissal+of\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Employees+--+Dismissal+of\u0026q=shainswit"
             }
           },
           {
@@ -194,7 +223,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Law+Firms\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Law+Firms\u0026q=shainswit"
             }
           },
           {
@@ -204,13 +233,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Trials%2C+litigation%2C+etc\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026f%5Bsubjects_ssim%5D%5B%5D=Trials%2C+litigation%2C+etc\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/subjects_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/subjects_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -226,13 +255,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcorpnames_ssim%5D%5B%5D=United+States.+Administrative+Office+of+the+United+States+Courts\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcorpnames_ssim%5D%5B%5D=United+States.+Administrative+Office+of+the+United+States+Courts\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/corpnames_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/corpnames_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -248,7 +277,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Lundin%2C+Keith+M.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Lundin%2C+Keith+M.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           },
           {
@@ -258,7 +287,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Norton%2C+William+L.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Norton%2C+William+L.\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           },
           {
@@ -268,13 +297,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Paine%2C+George+C.%2C+II\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bpeople_ssim%5D%5B%5D=Paine%2C+George+C.%2C+II\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/people_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/people_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -290,13 +319,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Legal+files\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bgenre_form_ssim%5D%5B%5D=Legal+files\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/genre_form_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/genre_form_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -312,7 +341,7 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Kronish%2C+Lieb%2C+Weiner%2C+and+Hellman+LLP\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=Kronish%2C+Lieb%2C+Weiner%2C+and+Hellman+LLP\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           },
           {
@@ -322,13 +351,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=National+Bankruptcy+Archives\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bcreators_ssim%5D%5B%5D=National+Bankruptcy+Archives\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/creators_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/creators_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -344,13 +373,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Blanguages_ssim%5D%5B%5D=English\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Blanguages_ssim%5D%5B%5D=English\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/languages_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/languages_ssim.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -366,13 +395,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=twentieth_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bera_facet%5D%5B%5D=twentieth_century\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/era_facet.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/era_facet.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -388,13 +417,13 @@
               "hits": 1
             },
             "links": {
-              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_BIDDLE\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+              "self": "https://findingaids.library.upenn.edu/records.json?f%5Bendpoint_ssi%5D%5B%5D=UPENN_BIDDLE\u0026f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
             }
           }
         ]
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records/facet/endpoint_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22"
+        "self": "https://findingaids.library.upenn.edu/records/facet/endpoint_ssi.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit"
       }
     },
     {
@@ -404,7 +433,7 @@
         "label": "All Fields"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026search_field=all_fields"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026search_field=all_fields"
       }
     },
     {
@@ -414,7 +443,7 @@
         "label": "Relevance"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=relevance"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026sort=relevance"
       }
     },
     {
@@ -424,7 +453,7 @@
         "label": "Year (descending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=year-desc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026sort=year-desc"
       }
     },
     {
@@ -434,7 +463,7 @@
         "label": "Year (ascending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=year-asc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026sort=year-asc"
       }
     },
     {
@@ -444,7 +473,7 @@
         "label": "Title (descending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=title-desc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026sort=title-desc"
       }
     },
     {
@@ -454,7 +483,7 @@
         "label": "Title (ascending)"
       },
       "links": {
-        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=%22shainswit%22\u0026sort=title-asc"
+        "self": "https://findingaids.library.upenn.edu/records.json?f%5Brecord_source%5D%5B%5D=upenn\u0026q=shainswit\u0026sort=title-asc"
       }
     }
   ]
