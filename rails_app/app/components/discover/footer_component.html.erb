@@ -1,17 +1,11 @@
 <footer class="site-footer">
   <div class="site-footer__inner-container container">
 
-    <% if logo? %>
-      <div class="site-footer__logo">
-        <%= logo %>
-      </div>
-    <% end %>
+    <%= logo %>
 
     <% if links? %>
       <div class="site-footer__links">
-        <% links.each do |link| %>
-          <%= link %>
-        <% end %>
+        <%= safe_join links %>
       </div>
     <% end %>
 

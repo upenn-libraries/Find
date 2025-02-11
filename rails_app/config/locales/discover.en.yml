@@ -1,10 +1,10 @@
 en:
   discover:
-    site_name: 'Discover Penn'
+    site_name: 'Penn Collects'
 
     images:
       site_logo:
-        label: 'Discover Penn logo'
+        label: 'Penn Collects logo'
       libraries_logo:
         label: 'Penn Libraries logo'
 
@@ -14,7 +14,7 @@ en:
         aria_label: 'Search for'
 
     home:
-      title: 'About Discover Penn'
+      title: 'About Penn Collects'
 
     results:
       title: 'Search Results'
@@ -36,15 +36,6 @@ en:
       skip_to_main:
         text: 'Skip to main content'
         url: '#main-container'
-      skip_to_search:
-        text: 'Skip to search'
-        url: '#search'
-      skip_to_results:
-        text: 'Skip to results'
-        url: '#results'
-      skip_to_footer:
-        text: 'Skip to footer'
-        url: '#footer'
       libraries:
         text: 'Penn Libraries homepage'
         url: 'https://www.library.upenn.edu/'
