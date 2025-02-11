@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Discover
-  # Render a logo for Discover Penn
+  # Render a logo for the collection bento
   class LogoComponent < ViewComponent::Base
     renders_one :image, lambda { |src, **options|
       image_tag(src, **options)

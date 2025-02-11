@@ -1,0 +1,13 @@
+<header class="site-header container">
+  <div class="site-header__inner-container">
+
+    <%= logo %>
+
+    <% if links? %>
+      <nav class="site-header__nav">
+        <%= safe_join links %>
+      </nav>
+    <% end %>
+
+  </div>
+</header>

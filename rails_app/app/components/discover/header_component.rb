@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Discover
-  # Render the collection bento site footer
-  class FooterComponent < ViewComponent::Base
+  # Render the collection bento site header
+  class HeaderComponent < ViewComponent::Base
     renders_one :logo, 'Discover::LogoComponent'
 
     renders_many :links, lambda { |text, href, **options|
