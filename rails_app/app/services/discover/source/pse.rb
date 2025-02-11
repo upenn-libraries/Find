@@ -7,9 +7,7 @@ module Discover
       attr_reader :source
 
       def initialize(source:)
-        unless source.to_sym.in?(Configuration::PSE::SOURCES)
-          raise ArgumentError, "PSE source #{source} not supported"
-        end
+        raise ArgumentError, "PSE source #{source} not supported" unless source.to_sym.in?(Configuration::PSE::SOURCES)
 
         @source = source
       end
