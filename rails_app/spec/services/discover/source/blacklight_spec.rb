@@ -86,4 +86,16 @@ describe Discover::Source::Blacklight do
                     location: nil)
     end
   end
+
+  describe '#blacklight?' do
+    it 'returns true' do
+      expect(described_class.new(source: 'find').blacklight?).to be true
+    end
+  end
+
+  describe '#pse?' do
+    it 'returns false' do
+      expect(described_class.new(source: 'find').pse?).to be false
+    end
+  end
 end

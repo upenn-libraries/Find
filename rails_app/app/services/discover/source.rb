@@ -29,6 +29,16 @@ module Discover
       raise NotImplementedError
     end
 
+    # @return [Boolean]
+    def blacklight?
+      false
+    end
+
+    # @return [Boolean]
+    def pse?
+      false
+    end
+
     # Defining connection logic here ensures consistent header values
     def connection(base_url:)
       Faraday.new(url: base_url, headers: { 'Content-Type': 'application/json',

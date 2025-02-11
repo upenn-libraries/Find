@@ -25,6 +25,16 @@ module Discover
         Results.new(entries: [], source: self, total_count: 0, results_url: '')
       end
 
+      # @return [Boolean]
+      def blacklight?
+        false
+      end
+
+      # @return [Boolean]
+      def pse?
+        true
+      end
+
       private
 
       # @param [String] query

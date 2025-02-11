@@ -29,6 +29,16 @@ module Discover
         Results.new(entries: [], source: self, total_count: 0, results_url: '')
       end
 
+      # @return [Boolean]
+      def blacklight?
+        true
+      end
+
+      # @return [Boolean]
+      def pse?
+        false
+      end
+
       private
 
       # @param [Hash] response
