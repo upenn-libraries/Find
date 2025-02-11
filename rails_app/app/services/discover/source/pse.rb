@@ -7,6 +7,10 @@ module Discover
       attr_reader :source
 
       def initialize(source:)
+        unless source.to_sym.in?(Configuration::PSE::SOURCES)
+          raise ArgumentError, "PSE source #{source} not supported"
+        end
+
         @source = source
       end
 
@@ -19,7 +23,7 @@ module Discover
         Results.new(entries: entries_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(query: query))
-      rescue Faraday::Error => _e
+      rescue StandardError => _e
         # TODO: send redacted honeybadger notification
         # return results with no entries
         Results.new(entries: [], source: self, total_count: 0, results_url: '')
@@ -52,17 +56,17 @@ module Discover
       # @param [Hash] record
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { snippet: record.fetch('snippet') }
+        { snippet: Array.wrap(record.fetch('snippet')) }
       end
 
       def entries_from(data:)
         Array.wrap(data).filter_map do |item|
-          Entry.new(title: item.fetch('title').split('|').first,
+          Entry.new(title: Array.wrap(item.fetch('title')),
                     body: body_from(record: item), # author, collection, format, location w/ call num?
                     link_url: item.fetch('link'),
                     thumbnail_url: item.dig('pagemap', 'cse_thumbnail')&.first&.fetch('src'))
-        rescue StandardError => _e
-          # TODO: log an issue parsing a record
+        rescue StandardError => e
+          Honeybadger.notify(e)
 
           next
         end
@@ -71,7 +75,13 @@ module Discover
       # Logic for getting at result data from response
       # @param response [Faraday::Response]
       def records_from(response:)
-        response['items']
+        records = response.dig(*config_class::RECORDS)
+
+        unless records.is_a?(Array)
+          raise Error, "Malformed Blacklight source #{source} json response. Expected an array but got #{records.class}"
+        end
+
+        records
       end
 
       def query_uri(query:)

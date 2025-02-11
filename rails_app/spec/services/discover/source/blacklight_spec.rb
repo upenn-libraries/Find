@@ -43,8 +43,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry title' do
-      expect(results.first.title)
-        .to contain_exactly 'Menil : the Menil collection'
+      expect(results.first.title).to contain_exactly 'Menil : the Menil collection'
     end
 
     it 'assigns expected entry body' do

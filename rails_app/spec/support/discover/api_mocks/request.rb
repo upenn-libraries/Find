@@ -14,14 +14,11 @@ module Discover
           .to_return_json(status: 200, body: response)
       end
 
-      def stub_pse_response(source:, query:, repsonse:)
+      def stub_pse_response(query:, response:)
         host = Discover::Configuration::PSE::HOST
         path = Discover::Configuration::PSE::PATH
-        key = Discover::Configuration::PSE::KEY
-        cx = "Discover::Configuration::PSE::#{source.camelize}::CX".safe_constantize
-        # do something with the CX here to stub properly
-        # stub_request(:get, URI::HTTPS.build(host: host, path: path, query: URI.encode_www_form(query)))
-        #   .to_return_json(status: 200, body: response)
+        stub_request(:get, URI::HTTPS.build(host: host, path: path, query: URI.encode_www_form(query)))
+          .to_return_json(status: 200, body: response)
       end
     end
   end

@@ -65,17 +65,23 @@ module Discover
       KEY = Rails.application.credentials.google_pse_api_key
       module Archives
         CX = ''
+        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = true
+        RECORDS = ['items'].freeze
       end
 
       module Museum
         CX = '8591e2ac8a6254ba9'
+        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = true
+        RECORDS = ['items'].freeze
       end
 
       module ArtCollection
         CX = '76cf445db4aa14589'
+        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = false
+        RECORDS = ['items'].freeze
       end
     end
   end
