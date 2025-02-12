@@ -1,0 +1,63 @@
+{
+  "kind": "customsearch#search",
+  "url": {
+    "type": "application/json",
+    "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+  },
+  "queries": {
+    "request": [
+      {
+        "title": "Google Custom Search - Photorealist",
+        "totalResults": "1",
+        "searchTerms": "Photorealist",
+        "count": 1,
+        "startIndex": 1,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "76cf445db4aa14589"
+      }
+    ]
+  },
+  "context": {
+    "title": "Art Collection TEST"
+  },
+  "searchInformation": {
+    "searchTime": 0.207918,
+    "formattedSearchTime": "0.21",
+    "totalResults": "1",
+    "formattedTotalResults": "1"
+  },
+  "items": [
+    {
+      "kind": "customsearch#result",
+      "title": "Leonardo's Lady — The Collection — The Penn Art Collection",
+      "htmlTitle": "Leonardo&#39;s Lady — The Collection — The Penn Art Collection",
+      "link": "https://pennartcollection.com/collection/art/194/leonardos-lady/",
+      "displayLink": "pennartcollection.com",
+      "snippet": "... Photorealism, becoming one of the pioneering artists in the genre. Flack has the distinction of being the only Photorealist artist whose work is represented ...",
+      "htmlSnippet": "... \u003cb\u003ePhotorealism\u003c/b\u003e, becoming one of the pioneering artists in the genre. Flack has the distinction of being the only \u003cb\u003ePhotorealist\u003c/b\u003e artist whose work is represented&nbsp;...",
+      "formattedUrl": "https://pennartcollection.com/collection/art/194/leonardos-lady/",
+      "htmlFormattedUrl": "https://pennartcollection.com/collection/art/194/leonardos-lady/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCUpKWXMJZ1VIqw7H1RcnzcTFt44CGMyR_kRVMlrkz5MdtMhW7UyBCG-g&s",
+            "width": "219",
+            "height": "230"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=540"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://pennartcollection.com/wp-content/themes/collection2015/images/objects/194.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}
