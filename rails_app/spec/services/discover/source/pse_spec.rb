@@ -69,13 +69,6 @@ describe Discover::Source::PSE do
     end
   end
 
-  context 'with Archives source' do
-    it 'assigns a total count'
-    it 'assigns a results url'
-    it 'assigns exptected entry title'
-    it 'assigns expected entry body'
-  end
-
   describe '#blacklight?' do
     it 'returns false' do
       expect(described_class.new(source: 'museum').blacklight?).to be false

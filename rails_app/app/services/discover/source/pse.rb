@@ -42,13 +42,13 @@ module Discover
       # @param [String] query
       # @return [String]
       def results_url(query:)
-        I18n.t("urls.discover.all_results.#{source}", query: query)
+        I18n.t("discover.links.all_results.#{source}", query: query)
       end
 
       # @param [Hash] response
       # @return [Integer]
       def total_count(response:)
-        response['searchInformation']['totalResults']&.to_i || 0
+        response.dig(*Discover::Configuration::PSE::TOTAL_COUNT).to_i
       end
 
       # @param [Hash] record
@@ -61,6 +61,7 @@ module Discover
         Array.wrap(data).filter_map do |item|
           Entry.new(title: Array.wrap(item.fetch('title')),
                     body: body_from(record: item), # author, collection, format, location w/ call num?
+                    identifiers: config_class::IDENTIFIERS,
                     link_url: item.fetch('link'),
                     thumbnail_url: item.dig('pagemap', 'cse_thumbnail')&.first&.fetch('src'))
         rescue StandardError => e

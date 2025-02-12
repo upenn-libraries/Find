@@ -63,25 +63,22 @@ module Discover
       HOST = 'customsearch.googleapis.com'
       PATH = '/customsearch/v1'
       KEY = Settings.discover.source.google_pse_api_key
-      module Archives
-        CX = ''
-        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
-        LINK_TO_SOURCE = true
-        RECORDS = ['items'].freeze
-      end
+      TOTAL_COUNT = %w[searchInformation totalResults].freeze
 
       module Museum
-        CX = '8591e2ac8a6254ba9'
+        CX = Settings.discover.source.penn_museum.pse_cx
         QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = true
         RECORDS = ['items'].freeze
+        IDENTIFIERS = {}.freeze
       end
 
       module ArtCollection
-        CX = '76cf445db4aa14589'
+        CX = Settings.discover.source.art_collection.pse_cx
         QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = false
         RECORDS = ['items'].freeze
+        IDENTIFIERS = {}.freeze
       end
     end
   end
