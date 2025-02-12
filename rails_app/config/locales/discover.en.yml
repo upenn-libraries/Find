@@ -58,6 +58,5 @@ en:
         text: 'Copyright Infringement'
         url: 'https://www.upenn.edu/about/report-copyright-infringement'
       all_results:
-        archives: "https://archives.upenn.edu/search/?q=%{query}"
         museum: "https://www.penn.museum/collections/search.php?term=%{query}"
         art_collection: "https://pennartcollection.com/?s=%{query}"
