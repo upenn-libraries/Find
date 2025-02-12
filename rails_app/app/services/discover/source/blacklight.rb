@@ -72,8 +72,7 @@ module Discover
         config_class::IDENTIFIERS.transform_values { |value| record.dig(*value) }
       end
 
-      # Perhaps this is best done in a ViewComponent? The mapping from response data to Entry is Source-specific, so
-      # it seems to belong here - otherwise we need "Entry" components per-Source
+      # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param [Array] data
       # @return [Array]
       def entries_from(data:)
@@ -82,7 +81,7 @@ module Discover
                     body: body_from(record: record), # author, collection, format, location w/ call num?
                     identifiers: identifiers(record: record),
                     link_url: record.dig(*config_class::RECORD_URL),
-                    thumbnail_url: 'https://some.books.google.url/') # TODO: get URL from data
+                    thumbnail_url: nil) # TODO: get thumbnail from Colenda, if available
         rescue StandardError => e
           Honeybadger.notify(e)
           next

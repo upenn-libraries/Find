@@ -48,7 +48,7 @@ module Discover
       # @param [Hash] response
       # @return [Integer]
       def total_count(response:)
-        response['searchInformation']['totalResults']&.to_i
+        response['searchInformation']['totalResults']&.to_i || 0
       end
 
       # @param [Hash] record
@@ -76,7 +76,7 @@ module Discover
         records = response.dig(*config_class::RECORDS)
 
         unless records.is_a?(Array)
-          raise Error, "Malformed Blacklight source #{source} json response. Expected an array but got #{records.class}"
+          raise Error, "Malformed PSE source #{source} json response. Expected an array but got #{records.class}"
         end
 
         records
