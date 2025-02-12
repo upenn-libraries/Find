@@ -1,0 +1,65 @@
+<%# This layout is intended for "Discover Penn" pages only %>
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <%# TODO: Copy over so not using Find's template? %>
+    <%= render('shared/google_analytics/tags', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= render_discover_html_title %></title>
+    <%= favicon_link_tag %>
+
+    <%# Fonts %>
+    <%= stylesheet_link_tag "https://use.typekit.net/gbh8cmg.css", media: "all", "data-turbo-track": "reload" %>
+    <%# Discover Penn styles %>
+    <%= stylesheet_link_tag "discover/application", media: "all", "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
+    <script>
+        document.querySelector('html').classList.remove('no-js');
+    </script>
+    <%= csrf_meta_tags %>
+    <%= content_for(:head) %>
+  </head>
+
+  <body class="discover-penn">
+    <%# TODO: Copy over so not using Find's template? %>
+    <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
+
+    <%# Skip link %>
+    <%= link_to t('discover.links.skip_to_main.text'), t('discover.links.skip_to_main.url'), class: "visually-hidden-focusable" %>
+
+    <%= render Discover::HeaderComponent.new do |header| %>
+      <% header.with_logo(href: discover_path) do |logo| %>
+        <% logo.with_image('discover/penn-collects-logo.svg',
+                           class: 'site-header__logo',
+                           alt: t('discover.images.site_logo.label')) %>
+      <% end %>
+      <%# header.with_link('Example Nav Link', '#') %>
+      <%# header.with_link('Example Nav Link', '#') %>
+    <% end %>
+
+    <main id='main-container' class="container-fluid" role="main">
+      <%= render Discover::SearchBarComponent.new(params: params) %>
+
+      <%# Content from child view templates is included via this 'yield' %>
+      <%= yield %>
+    </main>
+
+    <%= render Discover::FooterComponent.new do |footer| %>
+      <% footer.with_logo(href: t('discover.links.libraries.url')) do |logo| %>
+        <% logo.with_image('discover/libraries-logo-white.svg',
+                           class: 'site-footer__logo',
+                           alt: t('discover.images.libraries_logo.label')) %>
+      <% end %>
+
+      <% footer.with_link(t('discover.links.upenn.text'), t('discover.links.upenn.url')) %>
+      <% footer.with_link(t('discover.links.privacy.text'), t('discover.links.privacy.url')) %>
+      <% footer.with_link(t('discover.links.disclaimer.text'), t('discover.links.disclaimer.url')) %>
+      <% footer.with_link(t('discover.links.emergency.text'), t('discover.links.emergency.url')) %>
+      <% footer.with_link(t('discover.links.copyright.text'), t('discover.links.copyright.url')) %>
+      <% footer.with_link(t('discover.links.accessibility.text'), t('discover.links.accessibility.url')) %>
+    <% end %>
+  </body>
+</html>

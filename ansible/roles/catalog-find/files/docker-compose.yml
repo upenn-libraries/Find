@@ -35,6 +35,11 @@ services:
       retries: 6
       start_period: 15s
       timeout: 15s
+    logging:
+      driver: json-file
+      options:
+        max-file: "6"
+        max-size: "10m"
     networks:
       - catalog_find_postgres
       - traefik

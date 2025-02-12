@@ -1,0 +1,13 @@
+@mixin icon-size($size) {
+  display: block;
+  height: $size;
+  width: $size;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+  padding-bottom: .1rem;
+}
