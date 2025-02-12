@@ -62,7 +62,7 @@ module Discover
 
       HOST = 'customsearch.googleapis.com'
       PATH = '/customsearch/v1'
-      KEY = Rails.application.credentials.google_pse_api_key
+      KEY = Settings.discover.source.google_pse_api_key
       module Archives
         CX = ''
         QUERY_PARAMS = { cx: CX, key: KEY }.freeze
