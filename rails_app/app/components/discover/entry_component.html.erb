@@ -1,0 +1,43 @@
+<li class="list-group-item results-list-item">
+  <h3 class="results-list-item__heading h5">
+    <%= link_to title, link_url %>
+  </h3>
+  <div class="results-list-item__content">
+    <dl class="results-list-item__metadata">
+
+      <% if creator %>
+        <dt>Author/Creator:</dt>
+        <dd><%= creator %></dd>
+      <% end %>
+
+      <% if formats %>
+        <dt>Format:</dt>
+        <dd><%= formats %></dd>
+      <% end %>
+
+      <% if publication %>
+        <dt>Publication:</dt>
+        <dd><%= publication %></dd>
+      <% end %>
+
+      <% if abstract %>
+        <dt>Abstract:</dt>
+        <dd><%= abstract %></dd>
+      <% end %>
+
+      <% if snippet %>
+        <dt>Snippet:</dt>
+        <dd><%= snippet %></dd>
+      <% end %>
+
+      <% if location %>
+        <dt>Location:</dt>
+        <dd class="results-list-item__location"><%= location %></dd>
+      <% end %>
+    </dl>
+
+    <% if thumbnail_url %>
+      <img src=<%= thumbnail_url %> class="results-list-item__thumbnail" alt=""/>
+    <% end %>
+  </div>
+</li>

@@ -63,7 +63,9 @@ module Discover
       def body_from(record:)
         { author: record.dig(*config_class::AUTHOR),
           format: record.dig(*config_class::FORMAT),
-          location: record.dig(*config_class::LOCATION) }
+          location: record.dig(*config_class::LOCATION),
+          publication: Array.wrap(record.dig(*config_class::PUBLICATION)),
+          abstract: Array.wrap(record.dig(*config_class::ABSTRACT)) }
       end
 
       # @param [Hash] record

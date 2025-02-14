@@ -1,0 +1,20 @@
+<turbo-frame id="<%= "#{source}-results" %>" class="card"
+             src="<%= discover_search_results_path(source: source, q: query) %>"
+             <%= "disabled" if disabled %>>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title h4">
+        <i class="bi bi-book"></i>
+        <%= t("discover.results.source.#{source}.label") %>
+      </h3>
+    </div>
+    <ul class="list-group list-group-flush results-list results-list">
+
+      <li class="list-group-item results-list-item">
+        <h3 class="results-list-item__heading h5">
+          <%= message %>
+        </h3>
+      </li>
+    </ul>
+  </div>
+</turbo-frame>

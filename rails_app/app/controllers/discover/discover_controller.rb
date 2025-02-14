@@ -6,6 +6,8 @@ module Discover
     layout 'discover'
 
     # /discover
-    def index; end
+    def index
+      @search_params = params[:q]
+    end
   end
 end
