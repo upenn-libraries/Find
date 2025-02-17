@@ -28,7 +28,7 @@ describe Discover::Source::Blacklight do
   end
 
   context 'with Find source' do
-    let(:search_term) { 'billiards' }
+    let(:search_term) { '"Menil : the Menil collection"' }
 
     include_examples 'a blacklight source', 'find'
 
@@ -49,7 +49,10 @@ describe Discover::Source::Blacklight do
     it 'assigns expected entry body' do
       expect(results.first.body).to include(author: ['Piano, Renzo.'],
                                             format: ['Book'],
-                                            location: ['Fisher Fine Arts Library', 'Special Collections'])
+                                            location: ['Fisher Fine Arts Library', 'Special Collections'],
+                                            publication: ["[Genova] : Fondazione Renzo Piano ; [Place of publication \
+                                not identified] : SOFP, Società operativa Fondazione Piano srl, [2007]".squish],
+                                            abstract: [])
     end
 
     it 'assigns expected entry identifiers' do
@@ -79,10 +82,28 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body)
-        .to include(author: ['Kronish, Lieb, Weiner, and Hellman LLP', 'National Bankruptcy Archives'],
-                    format: ['Legal files'],
-                    location: ['University of Pennsylvania: Biddle Law Library'])
+      expect(results.first.body).to include(:author, :format, :location, :publication, :abstract)
+    end
+
+    it 'assigns expected author' do
+      expect(results.first.body[:author]).to eq ['Kronish, Lieb, Weiner, and Hellman LLP',
+                                                 'National Bankruptcy Archives']
+    end
+
+    it 'assigns expected format' do
+      expect(results.first.body[:format]).to eq ['Legal files']
+    end
+
+    it 'assigns expected location' do
+      expect(results.first.body[:location]).to eq ['University of Pennsylvania: Biddle Law Library']
+    end
+
+    it 'assigns expected publication' do
+      expect(results.first.body[:publication]).to eq []
+    end
+
+    it 'assigns expected abstract' do
+      expect(results.first.body[:abstract].first).to start_with('On July 11, 1984, William Foley')
     end
   end
 

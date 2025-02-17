@@ -1,0 +1,142 @@
+{
+  "links": {
+    "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric",
+    "last": "https://find.library.upenn.edu/catalog.json?page=0&q=somethingreallyesoteric"
+  },
+  "meta": {
+    "pages": {
+      "current_page": 1,
+      "next_page": null,
+      "prev_page": null,
+      "total_pages": 0,
+      "limit_value": 10,
+      "offset_value": 0,
+      "total_count": 0,
+      "first_page?": true,
+      "last_page?": false
+    }
+  },
+  "data": [],
+  "included": [
+    {
+      "type": "search_field",
+      "id": "all_fields",
+      "attributes": {
+        "label": "All Fields"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&search_field=all_fields"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "score desc, publication_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Relevance"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "creator_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Author/Creator (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=creator_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "creator_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Author/Creator (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=creator_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "title_sort asc, publication_date_sort desc",
+      "attributes": {
+        "label": "Title (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=title_sort+asc%2C+publication_date_sort+desc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "title_sort desc, publication_date_sort desc",
+      "attributes": {
+        "label": "Title (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=title_sort+desc%2C+publication_date_sort+desc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "call_number_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Call Number (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=call_number_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "call_number_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Call Number (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=call_number_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "publication_date_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Publication date (old-new)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=publication_date_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "publication_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Publication date (new-old)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=publication_date_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "added_date_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Date Added (old-new)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=added_date_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "added_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Date Added (new-old)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=added_date_sort+desc%2C+title_sort+asc"
+      }
+    }
+  ]
+}
