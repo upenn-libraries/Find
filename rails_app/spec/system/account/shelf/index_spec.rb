@@ -74,4 +74,27 @@ describe 'Account Shelf index page' do
       expect(page).not_to have_text(loan.title)
     end
   end
+
+  context 'when sorting results' do
+    let(:shelf_listing) { create(:shelf_listing, entries: [first_entry, second_entry]) }
+
+    before do
+      allow(shelf_service).to receive(:find_all).with(filters: %i[scans requests], order: :desc, sort: sort)
+                                                .and_return(filtered_shelf_listing)
+    end
+
+    context 'with recently updated' do
+      # define first entry and second entry, filtered_shelf_listing
+      # exptect first element to have content from sorted outcome
+      it 'applies the sort'
+    end
+
+    context 'with title' do
+      it 'applies the sort'
+    end
+
+    context 'with due date' do
+      it 'applies the sort'
+    end
+  end
 end
