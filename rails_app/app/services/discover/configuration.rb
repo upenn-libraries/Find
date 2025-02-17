@@ -5,6 +5,7 @@ module Discover
   class Configuration
     USER_AGENT = 'DiscoverPennFrontend'
     SOURCES = %i[find finding_aids archives museum art_collection].freeze
+    RESULT_MAX_COUNT = 3
 
     module Blacklight
       SOURCES = %i[find finding_aids].freeze
@@ -32,7 +33,6 @@ module Discover
         # TODO: all special collections?, like 'Kislak Center for Special Collections' as well
         LIBRARY_VALUES = ['Special Collections'].freeze
         ACCESS_VALUES = [PennMARC::Access::AT_THE_LIBRARY].freeze
-        # FORMAT_VALUES = [''].freeze
         # TODO: do these need to be inclusive? if we do exclusive, the first facet will limit the following facets
         QUERY_PARAMS = { 'f[access_facet][]': ACCESS_VALUES,
                          'f[library_facet][]': LIBRARY_VALUES,
