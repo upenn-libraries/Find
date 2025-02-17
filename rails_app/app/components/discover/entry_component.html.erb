@@ -6,38 +6,36 @@
     <dl class="results-list-item__metadata">
 
       <% if creator %>
-        <dt>Author/Creator:</dt>
+        <dt><%= t('discover.entry.fields.creator') %></dt>
         <dd><%= creator %></dd>
       <% end %>
 
       <% if formats %>
-        <dt>Format:</dt>
+        <dt><%= t('discover.entry.fields.formats') %></dt>
         <dd><%= formats %></dd>
       <% end %>
 
       <% if publication %>
-        <dt>Publication:</dt>
+        <dt><%= t('discover.entry.fields.publication') %></dt>
         <dd><%= publication %></dd>
       <% end %>
 
       <% if abstract %>
-        <dt>Abstract:</dt>
+        <dt><%= t('discover.entry.fields.abstract') %></dt>
         <dd><%= abstract %></dd>
       <% end %>
 
       <% if snippet %>
-        <dt>Snippet:</dt>
+        <dt><%= t('discover.entry.fields.snippet') %></dt>
         <dd><%= snippet %></dd>
       <% end %>
 
       <% if location %>
-        <dt>Location:</dt>
+        <dt><%= t('discover.entry.fields.location') %></dt>
         <dd class="results-list-item__location"><%= location %></dd>
       <% end %>
     </dl>
 
-    <% if thumbnail_url %>
-      <img src=<%= thumbnail_url %> class="results-list-item__thumbnail" alt=""/>
-    <% end %>
+    <%= image_tag(thumbnail_url, class: 'results-list-item__thumbnail') if thumbnail_url %>
   </div>
 </li>

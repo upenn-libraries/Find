@@ -35,6 +35,15 @@ en:
       view_all_button:
         label: 'View all %{count} results'
 
+    entry:
+      fields:
+        creator: 'Author/Creator:'
+        formats: 'Format:'
+        publication: 'Publication:'
+        abstract: 'Abstract:'
+        snippet: 'Snippet:'
+        location: 'Location:'
+
     links:
       skip_to_main:
         text: 'Skip to main content'

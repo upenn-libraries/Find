@@ -7,7 +7,7 @@ module Discover
 
     # @param [Discover::Results] results
     # @param [Integer] count
-    def initialize(results:, count: 3)
+    def initialize(results:, count: Configuration::RESULT_MAX_COUNT)
       @results = results
       @count = count
       @source = @results.source.source

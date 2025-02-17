@@ -7,20 +7,20 @@ module Discover
 
     delegate(*Discover::Entry::BasePresenter::DISPLAY_TERMS, to: :presenter)
 
-    # @param [Discover::Entry] entry
-    # @param [string] source
+    # @param entry [Discover::Entry]
+    # @param source [string]
     def initialize(entry:, source:)
       @presenter = create_presenter(entry: entry, source: source)
     end
 
-    # @param [Hash] args
-    # @option args [Discover::Entry] :entry
+    # @param args [Hash]
     # @option args [String] :source
+    # @return [Discover::Entry::BasePresenter]
     def create_presenter(**args)
-      case args[:source]
-      when 'museum'
+      case args[:source]&.to_sym
+      when Configuration::PSE::Museum::SOURCE
         Discover::Entry::MuseumPresenter.new(**args)
-      when 'art_collection'
+      when Configuration::PSE::ArtCollection::SOURCE
         Discover::Entry::ArtCollectionPresenter.new(**args)
       else
         Discover::Entry::BasePresenter.new(**args)

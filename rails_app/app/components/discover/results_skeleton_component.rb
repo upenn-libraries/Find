@@ -12,17 +12,17 @@ module Discover
 
     attr_reader :source, :query, :disabled, :results
 
-    # @param [String] source
-    # @param [String] query
-    # @param [Boolean] disabled
+    # @param source [String, Symbol]
+    # @param query [String]
+    # @param disabled [Boolean]
     def initialize(source:, results: [], query: '', disabled: false)
-      @source = source
+      @source = source.to_s
       @query = query
       @results = results
       @disabled = disabled
     end
 
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def results?
       results.any?
     end
