@@ -14,7 +14,7 @@ module Discover
     end
 
     def results?
-      results.entries.present?
+      results.any?
     end
   end
 end

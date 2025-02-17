@@ -21,17 +21,29 @@ module Discover
           .to_return_json(status: 200, body: response)
       end
 
+      # @param [Hash] query
       def stub_all_responses(query:)
-        stub_blacklight_response(source: 'find',
-                                 query: Discover::Configuration::Blacklight::Find::QUERY_PARAMS.merge(query),
-                                 response: json_fixture('find_response', :discover))
-        stub_blacklight_response(source: 'finding_aids',
-                                 query: Discover::Configuration::Blacklight::FindingAids::QUERY_PARAMS.merge(query),
-                                 response: json_fixture('finding_aids_response', :discover))
-        stub_pse_response(query: Discover::Configuration::PSE::Museum::QUERY_PARAMS.merge(query),
-                          response: json_fixture('museum_response', :discover))
-        stub_pse_response(query: Discover::Configuration::PSE::ArtCollection::QUERY_PARAMS.merge(query),
-                          response: json_fixture('art_collection_response', :discover))
+        stub_all_blacklight_response(query: query)
+        stub_all_pse_response(query: query)
+      end
+
+      # @param [Hash] query
+      def stub_all_blacklight_response(query:)
+        Discover::Configuration::Blacklight::SOURCES.each do |source|
+          config = Discover::Configuration.config_for(source: source)
+          stub_blacklight_response(source: source.to_s,
+                                   query: config::QUERY_PARAMS.merge(query),
+                                   response: json_fixture("#{source}_response", :discover))
+        end
+      end
+
+      # @param [Hash] query
+      def stub_all_pse_response(query:)
+        Discover::Configuration::PSE::SOURCES.each do |source|
+          config = Discover::Configuration.config_for(source: source)
+          stub_pse_response(query: config::QUERY_PARAMS.merge(query),
+                            response: json_fixture("#{source}_response", :discover))
+        end
       end
     end
   end

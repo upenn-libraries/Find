@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 module Discover
+  # Defines configuration values needed to make requests to sources
   class Configuration
     USER_AGENT = 'DiscoverPennFrontend'
     SOURCES = %i[find finding_aids archives museum art_collection].freeze
-    # SOURCES = Blacklight::SOURCES + PSE::SOURCES
 
     module Blacklight
       SOURCES = %i[find finding_aids].freeze
       # Configuration for Find
       module Find
+        SOURCE = :find
         HOST = 'find.library.upenn.edu'
         PATH = '/catalog.json'
         LINK_TO_SOURCE = true
@@ -40,6 +41,7 @@ module Discover
 
       # Configuration for Finding Aids
       module FindingAids
+        SOURCE = :finding_aids
         HOST = 'findingaids.library.upenn.edu'
         PATH = '/records.json'
         LINK_TO_SOURCE = true
@@ -62,7 +64,7 @@ module Discover
     end
 
     module PSE
-      SOURCES = %i[archives museum art_collection].freeze
+      SOURCES = %i[museum art_collection].freeze
 
       HOST = 'customsearch.googleapis.com'
       PATH = '/customsearch/v1'
@@ -70,6 +72,7 @@ module Discover
       TOTAL_COUNT = %w[searchInformation totalResults].freeze
 
       module Museum
+        SOURCE = :museum
         CX = Settings.discover.source.penn_museum.pse_cx
         QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = true
@@ -78,11 +81,23 @@ module Discover
       end
 
       module ArtCollection
+        SOURCE = :art_collection
         CX = Settings.discover.source.art_collection.pse_cx
         QUERY_PARAMS = { cx: CX, key: KEY }.freeze
         LINK_TO_SOURCE = false
         RECORDS = ['items'].freeze
         IDENTIFIERS = {}.freeze
+      end
+    end
+
+    # @param [String, Symbol] source
+    def self.config_for(source:)
+      if source.to_sym.in?(Blacklight::SOURCES)
+        "Discover::Configuration::Blacklight::#{source.to_s.camelize}".safe_constantize
+      elsif source.to_sym.in?(PSE::SOURCES)
+        "Discover::Configuration::PSE::#{source.to_s.camelize}".safe_constantize
+      else
+        raise Discover::Source::Error, "source #{source} has not been configured"
       end
     end
   end

@@ -28,12 +28,20 @@
 
   <div id="results" class="results row">
     <div class="col-12 col-lg-6">
-      <%= render(Discover::ResultsSkeletonComponent.new(source: 'find', query: @search_params, message: I18n.t('discover.results.messages.loading'))) %>
-      <%= render(Discover::ResultsSkeletonComponent.new(source: 'finding_aids', query: @search_params, message: I18n.t('discover.results.messages.loading'))) %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: 'find', query: @search_params)) do %>
+        <span class="text-center"><%= I18n.t('discover.results.messages.loading') %> </span>
+      <% end %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: 'finding_aids', query: @search_params)) do %>
+        <span class="text-center"><%= I18n.t('discover.results.messages.loading') %> </span>
+      <% end %>
     </div>
     <div class="col-12 col-lg-6">
-      <%= render(Discover::ResultsSkeletonComponent.new(source: 'museum', query: @search_params, message: I18n.t('discover.results.messages.loading'))) %>
-      <%= render(Discover::ResultsSkeletonComponent.new(source: 'art_collection', query: @search_params, message: I18n.t('discover.results.messages.loading'))) %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: 'museum', query: @search_params)) do %>
+        <span class="text-center"><%= I18n.t('discover.results.messages.loading') %> </span>
+      <% end %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: 'art_collection', query: @search_params)) do %>
+        <span class="text-center"><%= I18n.t('discover.results.messages.loading') %> </span>
+      <% end %>
     </div>
   </div>
 </div>

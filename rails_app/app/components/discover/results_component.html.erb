@@ -1,23 +1,9 @@
-<% if results? %>
-  <turbo-frame id="<%= "#{source}-results" %>">
-
-    <div id="<%= source %>" class="card">
-      <div class="card-header">
-        <h3 class="card-title h4">
-          <i class="bi bi-book"></i>
-          <%= t("discover.results.source.#{source}.label") %>
-        </h3>
-        <a class="btn btn-sm btn-primary" href="<%= results.results_url %>"><%= t('discover.results.view_all_button.label', count: results.total_count) %></a>
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush results-list results-list">
-          <% results.take(count).each do |entry| %>
-            <%= render Discover::EntryComponent.new(entry: entry, source: source) %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </turbo-frame>
-<% else %>
-  <%= render Discover::ResultsSkeletonComponent.new(source: source, message: I18n.t('discover.results.messages.no_results'), disabled: true) %>
+<%= render Discover::ResultsSkeletonComponent.new(source: source, results: results, disabled: true) do %>
+  <% if results? %>
+    <% results.take(count).each do |entry| %>
+      <%= render Discover::EntryComponent.new(entry: entry, source: source) %>
+    <% end %>
+  <% else %>
+    <span class="text-center"><%= t('discover.results.messages.no_results') %></span>
+  <% end %>
 <% end %>
