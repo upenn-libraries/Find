@@ -6,14 +6,7 @@ describe 'Discover Penn page' do
   include Discover::ApiMocks::Request
   include FixtureHelpers
 
-  before do
-    visit discover_path
-  end
-
-  # TODO: replace this spec with more substantive ones and meaningful content is added
-  it 'includes the site title' do
-    expect(page).to have_text I18n.t('discover.site_name')
-  end
+  before { visit discover_path }
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
@@ -21,7 +14,7 @@ describe 'Discover Penn page' do
     before do
       stub_all_responses(query: query)
       fill_in 'q', with: query[:q]
-      click_on 'Search'
+      click_on I18n.t('discover.search.button.label')
     end
 
     context 'with libraries results' do
@@ -202,14 +195,15 @@ describe 'Discover Penn page' do
     end
   end
 
-  context 'when submitting a query with no results from a source', pending: true do
+  context 'when submitting a query with no results from a source' do
     context 'with no results from a source' do
       let(:query) { { q: 'test' } }
 
       before do
-        # stub somehow
+        stub_all_responses(query: query, except: :find)
+        stub_empty_find_response query: query
         fill_in 'q', with: query[:q]
-        click_on 'Search'
+        click_on I18n.t('discover.search.button.label')
       end
 
       it 'displays expected message' do

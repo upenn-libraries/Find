@@ -14,6 +14,8 @@ module Discover
           .to_return_json(status: 200, body: response)
       end
 
+      # @param query [String, Hash] the user query
+      # @param response [string] the simulated json response, read in from a fixture
       def stub_pse_response(query:, response:)
         host = Discover::Configuration::PSE::HOST
         path = Discover::Configuration::PSE::PATH
@@ -22,14 +24,19 @@ module Discover
       end
 
       # @param [Hash] query
-      def stub_all_responses(query:)
-        stub_all_blacklight_response(query: query)
-        stub_all_pse_response(query: query)
+      # @param [Symbol, Array<Symbol, String>, nil] except
+      def stub_all_responses(query:, except: nil)
+        except_sources = Array.wrap(except).map(&:to_sym)
+        stub_all_blacklight_response(query: query, except: except_sources)
+        stub_all_pse_response(query: query, except: except_sources)
       end
 
       # @param [Hash] query
-      def stub_all_blacklight_response(query:)
+      # @param [Array<Symbol>] except
+      def stub_all_blacklight_response(query:, except:)
         Discover::Configuration::Blacklight::SOURCES.each do |source|
+          next if source.in? except
+
           config = Discover::Configuration.config_for(source: source)
           stub_blacklight_response(source: source.to_s,
                                    query: config::QUERY_PARAMS.merge(query),
@@ -38,12 +45,24 @@ module Discover
       end
 
       # @param [Hash] query
-      def stub_all_pse_response(query:)
+      # @param [Array<Symbol>] except
+      def stub_all_pse_response(query:, except:)
         Discover::Configuration::PSE::SOURCES.each do |source|
+          next if source.in? except
+
           config = Discover::Configuration.config_for(source: source)
           stub_pse_response(query: config::QUERY_PARAMS.merge(query),
                             response: json_fixture("#{source}_response", :discover))
         end
+      end
+
+      # @param [Hash] query
+      def stub_empty_find_response(query:)
+        source = 'find'
+        config = Discover::Configuration.config_for(source: source)
+        stub_blacklight_response(source: source,
+                                 query: config::QUERY_PARAMS.merge(query),
+                                 response: json_fixture('find_empty_response', :discover))
       end
     end
   end
