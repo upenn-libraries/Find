@@ -60,6 +60,10 @@ describe Discover::Source::Blacklight do
                                                    issn: nil,
                                                    oclc_id: ['229431838'])
     end
+
+    it 'assigns expected thumbnail_url' do
+      expect(results.first.thumbnail_url).to eq 'https://colenda.library.upenn.edu/items/ark:/81431-p3th8cb15/thumbnail'
+    end
   end
 
   context 'with Finding Aids source' do
@@ -104,6 +108,10 @@ describe Discover::Source::Blacklight do
 
     it 'assigns expected abstract' do
       expect(results.first.body[:abstract].first).to start_with('On July 11, 1984, William Foley')
+    end
+
+    it 'assigns expected thumbnail_url' do
+      expect(results.first.thumbnail_url).to be nil
     end
   end
 
