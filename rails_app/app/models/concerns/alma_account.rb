@@ -42,6 +42,12 @@ module AlmaAccount
     roles.find { |role| active_work_order_role?(role) }.present?
   end
 
+  # Should the user be eligible to make "proxy" ILL request submissions?
+  # @return [Boolean]
+  def proxy_submit_eligible?
+    library_staff? || work_order_operator?
+  end
+
   # Returns User's full name in Alma
   # @return [String, nil]
   def full_name
