@@ -8,7 +8,7 @@
       <%= label %>
     </h3>
     <% if results? %>
-      <a class="btn btn-sm btn-primary" href="<%= results.results_url %>"><%= t('discover.results.view_all_button.label', count: results.total_count) %></a>
+      <a class="btn btn-sm btn-primary" href="<%= results.results_url %>"><%= t('discover.results.view_all_button.label', count: number_with_delimiter(results.total_count)) %></a>
     <% end %>
   </div>
   <div class="card-body">

@@ -1,4 +1,5 @@
 <%= render Discover::ResultsSkeletonComponent.new(source: source, results: results, disabled: true) do %>
+  <%= turbo_stream_action_tag :replace, target: results_dom_id, template: total_count_content %>
   <% if results? %>
     <% results.take(count).each do |entry| %>
       <%= render Discover::EntryComponent.new(entry: entry, source: source) %>

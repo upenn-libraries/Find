@@ -14,8 +14,9 @@ module Discover
 
     # @param source [String, Symbol]
     # @param query [String]
+    # @param results [Array]
     # @param disabled [Boolean]
-    def initialize(source:, results: [], query: '', disabled: false)
+    def initialize(source:, query: '', results: [], disabled: false)
       @source = source.to_s
       @query = query
       @results = results
