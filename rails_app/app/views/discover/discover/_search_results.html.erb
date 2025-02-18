@@ -1,30 +1,7 @@
 <h1 class="visually-hidden"><%= t('discover.results.title') %></h1>
 
 <div class="results-content container">
-  <div class="results-nav row">
-    <div class="col-12">
-      <h2 class="h5 nav-header"><%= t('discover.results.nav.label') %>:
-        <span class="search-term"><%= discover_query %></span></h2>
-      <ul class="nav">
-        <li class="nav-item">
-          <a href="#libraries" class="nav-link"><%= t('discover.results.source.find.label') %></a>
-          <span class="results-count">(22,194)</span>
-        </li>
-        <li class="nav-item">
-          <a href="#archives" class="nav-link"><%= t('discover.results.source.finding_aids.label') %></a>
-          <span class="results-count">(455)</span>
-        </li>
-        <li class="nav-item">
-          <a href="#penn-museum" class="nav-link"><%= t('discover.results.source.museum.label') %></a>
-          <span class="results-count">(1,600)</span>
-        </li>
-        <li class="nav-item">
-          <a href="#penn-art-collection" class="nav-link"><%= t('discover.results.source.art_collection.label') %></a>
-          <span class="results-count">(25)</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <%= render(Discover::ResultsOverviewComponent.new(query: @search_params)) %>
 
   <div id="results" class="results row">
     <div class="col-12 col-lg-6">

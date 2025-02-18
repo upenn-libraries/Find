@@ -67,6 +67,12 @@ describe 'Discover Penn page' do
           expect(page).to have_text('Fisher Fine Arts Library, Special Collections')
         end
       end
+
+      it 'displays the total count in the overview area' do
+        within '#find-results-count' do
+          expect(page).to have_text '(1)'
+        end
+      end
     end
 
     context 'with archives results' do
@@ -114,6 +120,12 @@ describe 'Discover Penn page' do
           expect(page).to have_text('University of Pennsylvania: Biddle Law Library')
         end
       end
+
+      it 'displays the total count in the overview area' do
+        within '#finding_aids-results-count' do
+          expect(page).to have_text '(1)'
+        end
+      end
     end
 
     context 'with museum results' do
@@ -156,6 +168,12 @@ describe 'Discover Penn page' do
                                            'q=tbn:ANd9GcTJ0lINTS91fxglgMk3xdtNon48uYwyecwIDr7yrB6MNeKV8DaaJDvbTa0Z&s')
         end
       end
+
+      it 'displays the total count in the overview area' do
+        within '#museum-results-count' do
+          expect(page).to have_text '(1)'
+        end
+      end
     end
 
     context 'with art collection results' do
@@ -190,6 +208,12 @@ describe 'Discover Penn page' do
           image = find('img.results-list-item__thumbnail')
           expect(image[:src]).to include('https://encrypted-tbn0.gstatic.com/images?q=' \
                                          'tbn:ANd9GcRCUpKWXMJZ1VIqw7H1RcnzcTFt44CGMyR_kRVMlrkz5MdtMhW7UyBCG-g&s')
+        end
+      end
+
+      it 'displays the total count in the overview area' do
+        within '#art_collection-results-count' do
+          expect(page).to have_text '(1)'
         end
       end
     end

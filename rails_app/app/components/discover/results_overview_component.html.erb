@@ -1,0 +1,24 @@
+<div class="results-nav row">
+  <div class="col-12">
+    <h2 class="h5 nav-header"><%= t('discover.results.nav.label') %>:
+      <span class="search-term"><%= query %></span></h2>
+    <ul class="nav">
+      <li class="nav-item">
+        <a href="#libraries" class="nav-link"><%= t('discover.results.source.find.label') %></a>
+        <span id="find-results-count" class="result-count"></span>
+      </li>
+      <li class="nav-item">
+        <a href="#archives" class="nav-link"><%= t('discover.results.source.finding_aids.label') %></a>
+        <span id="finding_aids-results-count" class="result-count"></span>
+      </li>
+      <li class="nav-item">
+        <a href="#penn-museum" class="nav-link"><%= t('discover.results.source.museum.label') %></a>
+        <span id="museum-results-count" class="result-count"></span>
+      </li>
+      <li class="nav-item">
+        <a href="#penn-art-collection" class="nav-link"><%= t('discover.results.source.art_collection.label') %></a>
+        <span id="art_collection-results-count" class="result-count"></span>
+      </li>
+    </ul>
+  </div>
+</div>
