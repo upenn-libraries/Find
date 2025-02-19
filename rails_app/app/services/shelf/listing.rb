@@ -7,6 +7,10 @@ module Shelf
 
     attr_reader :entries, :filters, :sort, :order
 
+    # @param entries [Shelf::Listing]
+    # @param filters [Array<Symbol>]
+    # @param sort [Symbol]
+    # @param order [Symbol]
     def initialize(entries, filters:, sort:, order:)
       @filters = filters
       @sort = sort
@@ -28,8 +32,8 @@ module Shelf
     def filter_and_sort(entries)
       entries = remove_duplicate_entries(entries)
       entries = filter(entries)
-      entries.sort_by! { |e| e.send(sort) }
-      entries.reverse! if order == Shelf::Service::DESCENDING # Flip order if descending order requested
+      entries.sort_by! { |e| sorting_value(e) }
+      entries.reverse! if descending_order? # Flip order if descending order requested
       entries
     end
 
@@ -58,6 +62,19 @@ module Shelf
         next true if filters.include?(:requests) && entry.ils_hold?
         next true if filters.include?(:requests) && entry.ill_transaction? && entry.loan?
       end
+    end
+
+    # When sorting by due date, some List Entry types don't have a due date, so we need to ensure they sort to the
+    # bottom regardless of direction.
+    # @param [Object] element
+    def sorting_value(element)
+      return element.send(sort) unless sort == Shelf::Service::DUE_DATE
+
+      element.send(sort) || (descending_order? ? -DateTime::Infinity.new : DateTime::Infinity.new)
+    end
+
+    def descending_order?
+      order == Shelf::Service::DESCENDING
     end
   end
 end

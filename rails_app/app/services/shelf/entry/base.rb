@@ -55,10 +55,10 @@ module Shelf
         raise NotImplementedError
       end
 
-      # We must establish a Time far into the future for records without a due date if we want to sort on that.
-      # @return [Time]
+      # Not all types will have a due date - to support sorting use nil by default
+      # @return [nil]
       def due_date
-        Time.zone.now + 100.years
+        nil
       end
 
       # Method to format date to user-friendly string. Does not include time.
