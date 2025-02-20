@@ -211,6 +211,9 @@ en:
             last_updated_at:
               desc: 'Most recently updated'
               asc: 'Least recently updated'
+            due_date:
+              desc: 'Due Date (Latest)'
+              asc: 'Due Date (Soonest)'
         submit: 'Refine'
       table:
         th:
