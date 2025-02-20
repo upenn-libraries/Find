@@ -70,7 +70,7 @@ module Shelf
     def sorting_value(element)
       return element.send(sort) unless sort == Shelf::Service::DUE_DATE
 
-      element.send(sort) || (descending_order? ? -DateTime::Infinity.new : DateTime::Infinity.new)
+      element.send(sort) || (descending_order? ? -Date::Infinity.new : Date::Infinity.new)
     end
 
     def descending_order?
