@@ -62,7 +62,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected thumbnail_url' do
-      expect(results.first.thumbnail_url).to eq 'https://colenda.library.upenn.edu/items/ark:/81431-p3th8cb15/thumbnail'
+      expect(results.first.thumbnail_url).to eq 'https://colenda.library.upenn.edu/items/ark:/81431/p3th8cb15/thumbnail'
     end
   end
 

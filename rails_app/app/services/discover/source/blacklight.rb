@@ -89,7 +89,7 @@ module Discover
         arks = colenda_arks(record: record)
         return nil if arks.blank?
 
-        "https://colenda.library.upenn.edu/items/ark:/#{arks.first}/thumbnail"
+        "https://colenda.library.upenn.edu/items/ark:/#{arks.first.gsub('-', '/')}/thumbnail"
       end
 
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
