@@ -16,11 +16,11 @@
     </div>
     <div class="col-12 col-lg-6">
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::Museum::SOURCE,
-                                                        query: @search_params)) do %>
+                                                        query: @search_params, disabled: no_pse?)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::ArtCollection::SOURCE,
-                                                        query: @search_params)) do %>
+                                                        query: @search_params, disabled: no_pse?)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
     </div>

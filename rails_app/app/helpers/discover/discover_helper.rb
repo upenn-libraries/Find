@@ -46,5 +46,9 @@ module Discover
     def discover_query_params?
       discover_query.present?
     end
+
+    def no_pse?
+      params[:no_pse] == 'true'
+    end
   end
 end
