@@ -7,5 +7,10 @@ module Discover
     def initialize(params:)
       @params = params
     end
+
+    # @return [Boolean]
+    def no_pse?
+      @params[:no_pse] == 'true'
+    end
   end
 end
