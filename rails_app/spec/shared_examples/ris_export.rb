@@ -24,8 +24,8 @@ PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nAU  - Elsevier Science (Firm)
-AU  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.\nER  - )
+        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nA2  - Elsevier Science (Firm)
+A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.\nER  - )
       end
     end
 
@@ -33,7 +33,7 @@ AU  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.
       let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nAU  - Nature Publishing Group.
+        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nA2  - Nature Publishing Group.
 PY  - 1869\nCY  - [London] :\nPB  - Nature Pub. Group\nER  - )
       end
     end
@@ -43,8 +43,7 @@ PY  - 1869\nCY  - [London] :\nPB  - Nature Pub. Group\nER  - )
 
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.
-AU  - Chemical Society (Great Britain)\nAU  - Chemical Society (Great Britain).\nPY  - 1965
-CY  - London :\nPB  - Chemical Society.\nER  - )
+A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London :\nPB  - Chemical Society.\nER  - )
       end
     end
 
@@ -54,7 +53,8 @@ CY  - London :\nPB  - Chemical Society.\nER  - )
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - BOOK
 TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.
-AU  - Bleier, Ruth\nPY  - 1961\nCY  - Baltimore :\nPB  - John Hopkins Press,\nER  - )
+AU  - Bleier, Ruth\nA2  - Secondary Author A\nA2  - Secondary Author B\nA2  - Secondary Author C
+PY  - 1961\nCY  - Baltimore :\nPB  - John Hopkins Press,\nER  - )
       end
     end
   end

@@ -54,7 +54,7 @@ shared_examples_for 'CitationExport' do
 
       it 'returns MLA citation text' do
         value = object.export_as_mla_citation_txt
-        expect(value).to eq 'Bleier, Ruth. <i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
+        expect(value).to eq 'Bleier, Ruth, et al. <i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
                               'in the Horsley-Clarke co-ordinate system. </i>Baltimore : John Hopkins Press, [1961]'
       end
     end
@@ -104,9 +104,9 @@ shared_examples_for 'CitationExport' do
 
       it 'returns APA citation text' do
         value = object.export_as_apa_citation_txt
-        expect(value).to eq 'Bleier, R. (1961). <i>The hypothalamus of the cat; ' \
-                              'a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system. ' \
-                              '</i>Baltimore : John Hopkins Press.'
+        expect(value).to eq 'Bleier, R., Secondary Author A, Secondary Author B &amp; Secondary Author C. (1961). ' \
+              '<i>The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system. ' \
+        '</i>Baltimore : John Hopkins Press.'
       end
     end
   end
@@ -155,7 +155,8 @@ shared_examples_for 'CitationExport' do
 
       it 'returns Chicago citation text' do
         value = object.export_as_chicago_citation_txt
-        expect(value).to eq 'Bleier, Ruth. <i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
+        expect(value).to eq 'Bleier, Ruth, Secondary Author A, Secondary Author B and Secondary Author C. '\
+                              '<i>The hypothalamus of the cat; a cytoarchitectonic atlas ' \
                               'in the Horsley-Clarke co-ordinate system. </i>Baltimore : John Hopkins Press, [1961]'
       end
     end
