@@ -70,7 +70,7 @@ module Shelf
     def sorting_value(element)
       return element.send(sort) unless sort.in?([Shelf::Service::DUE_DATE, Shelf::Service::LAST_UPDATED_AT])
 
-      element.send(sort) || (descending_order? ? Time.zone.now - 400.years : Time.zone.now + 400.years)
+      element.send(sort) || (descending_order? ? 400.years.ago : 400.years.since)
     end
 
     # @return [Boolean]
