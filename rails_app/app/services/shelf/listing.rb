@@ -68,9 +68,9 @@ module Shelf
     # bottom regardless of direction.
     # @param [ActiveSupport::TimeWithZone, Date::Infinity, String] element
     def sorting_value(element)
-      return element.send(sort) unless sort == Shelf::Service::DUE_DATE
+      return element.send(sort) unless sort.in?([Shelf::Service::DUE_DATE, Shelf::Service::LAST_UPDATED_AT])
 
-      element.send(sort) || (descending_order? ? -Date::Infinity.new : Date::Infinity.new)
+      element.send(sort) || (descending_order? ? Time.zone.now - 400.years : Time.zone.now + 400.years)
     end
 
     # @return [Boolean]
