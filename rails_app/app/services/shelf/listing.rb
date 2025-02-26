@@ -66,11 +66,11 @@ module Shelf
 
     # When sorting by due date, some List Entry types don't have a due date, so we need to ensure they sort to the
     # bottom regardless of direction.
-    # @param [ActiveSupport::TimeWithZone, Date::Infinity, String] element
+    # @param [ActiveSupport::TimeWithZone, String] element
     def sorting_value(element)
-      return element.send(sort) unless sort == Shelf::Service::DUE_DATE
+      return element.send(sort) unless sort.in?([Shelf::Service::DUE_DATE, Shelf::Service::LAST_UPDATED_AT])
 
-      element.send(sort) || (descending_order? ? -Date::Infinity.new : Date::Infinity.new)
+      element.send(sort) || (descending_order? ? 400.years.ago : 400.years.since)
     end
 
     # @return [Boolean]
