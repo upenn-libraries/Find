@@ -23,10 +23,9 @@ module Articles
       doc.subtitle.present? ? "#{doc.title}: #{doc.subtitle}" : doc.title
     end
 
-    # @return [String] the document's link using the proxy URL
-    def proxy_link
-      https_link = doc.link.sub(%r{^http://}, 'https://')
-      I18n.t('urls.external_services.proxy', url: https_link)
+    # @return [String] the document link with an https protocol guaranteed
+    def https_link
+      doc.link.sub(%r{^http://}, 'https://')
     end
 
     # @return [String, nil] the document's full text online status
