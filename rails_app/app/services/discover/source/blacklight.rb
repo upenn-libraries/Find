@@ -41,13 +41,13 @@ module Discover
 
       private
 
-      # @param [Hash] response
+      # @param response [Hash]
       # @return [Integer]
       def total_count(response:)
         response.dig(*config_class::TOTAL_COUNT).to_i
       end
 
-      # @param [Hash] response
+      # @param response [Hash]
       # @return [String]
       def results_url(response:)
         return unless config_class::LINK_TO_SOURCE
@@ -58,7 +58,7 @@ module Discover
       end
 
       # TODO: need to add "collection"(?)
-      # @param [Hash] record
+      # @param record [Hash]
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
         { author: record.dig(*config_class::AUTHOR),
@@ -68,22 +68,40 @@ module Discover
           abstract: Array.wrap(record.dig(*config_class::ABSTRACT)) }
       end
 
-      # @param [Hash] record
+      # @param record [Hash]
       # @return [Hash]
       def identifiers(record:)
         config_class::IDENTIFIERS.transform_values { |value| record.dig(*value) }
       end
 
+      # Extract ARK values from any Colenda record links to be found in an XML source available for the record
+      # @param record [Hash]
+      # @return [Array]
+      def colenda_arks(record:)
+        xml = record.dig(*config_class::XML)&.first
+        Array.wrap xml&.match(config_class::COLENDA_LINK_ARK_REGEX)&.captures
+      end
+
+      # Generate a thumbnail URL using the Bulwark (Colenda) thumbnail-by-ARK route
+      # @param record [Hash]
+      # @return [nil, String]
+      def colenda_thumbnail_url(record:)
+        arks = colenda_arks(record: record)
+        return nil if arks.blank?
+
+        "https://colenda.library.upenn.edu/items/ark:/#{arks.first.tr('-', '/')}/thumbnail"
+      end
+
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
-      # @param [Array] data
+      # @param data [Array]
       # @return [Array]
       def entries_from(data:)
         data.filter_map do |record|
           Entry.new(title: record.dig(*config_class::TITLE),
-                    body: body_from(record: record), # author, collection, format, location w/ call num?
+                    body: body_from(record: record),
                     identifiers: identifiers(record: record),
                     link_url: record.dig(*config_class::RECORD_URL),
-                    thumbnail_url: nil) # TODO: get thumbnail from Colenda, if available
+                    thumbnail_url: colenda_thumbnail_url(record: record))
         rescue StandardError => e
           Honeybadger.notify(e)
           next

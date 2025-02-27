@@ -24,8 +24,10 @@ module Discover
         FORMAT = %w[attributes format_facet attributes value].freeze
         LOCATION = %w[attributes library_facet attributes value].freeze
         PUBLICATION = %w[attributes publication_ss attributes value].freeze
+        XML = %w[attributes marcxml_marcxml attributes value].freeze
         ABSTRACT = [nil].freeze
         RECORD_URL = %w[links self].freeze
+        COLENDA_LINK_ARK_REGEX = %r{https://colenda.library.upenn.edu/catalog/(.{15})}
         IDENTIFIERS = { isbn: %w[attributes isbn_ss attributes value],
                         issn: %w[attributes issn_ss attributes value],
                         oclc_id: %w[attributes oclc_id_ss attributes value] }.freeze
@@ -54,8 +56,10 @@ module Discover
         FORMAT = %w[attributes genre_form_ssim attributes value].freeze
         LOCATION = %w[attributes repository_ssi attributes value].freeze
         PUBLICATION = [nil].freeze
+        XML = [nil].freeze
         ABSTRACT = %w[attributes abstract_scope_contents_tsi attributes value].freeze
         RECORD_URL = %w[links self].freeze
+        COLENDA_LINK_ARK_REGEX = %r{https://colenda.library.upenn.edu/catalog/(.{15})}
         IDENTIFIERS = {}.freeze
         RECORD_SOURCE_VALUES = ['upenn'].freeze
 
