@@ -4,7 +4,7 @@ catalog_find_image_name: "gitlab.library.upenn.edu/dld/catalog/find"
 catalog_find_image_tag: "{{ image_tag }}"
 catalog_find_port: 3000
 catalog_find_rails_env: "production"
-catalog_find_replicas: 2
+catalog_find_replicas: 3
 catalog_find_url: "find.library.upenn.edu"
 catalog_find_versioned_secrets:
   honeybadger_api_key:
