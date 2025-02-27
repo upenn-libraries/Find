@@ -13,8 +13,9 @@ module Shelf
     DESCENDING = :desc
     ASCENDING = :asc
     TITLE = :title
-    LAST_UPDATED_BY = :last_updated_at
-    SORTS = [LAST_UPDATED_BY, TITLE].freeze
+    LAST_UPDATED_AT = :last_updated_at
+    DUE_DATE = :due_date
+    SORTS = [LAST_UPDATED_AT, TITLE, DUE_DATE].freeze
     ORDERS = [ASCENDING, DESCENDING].freeze
 
     attr_reader :user_id
@@ -29,7 +30,7 @@ module Shelf
     # @param sort [Symbol] field we should sort on
     # @param order [Symbol] direction of sorting
     # @return [Shelf::Listing]
-    def find_all(filters: FILTERS, sort: LAST_UPDATED_BY, order: DESCENDING)
+    def find_all(filters: FILTERS, sort: LAST_UPDATED_AT, order: DESCENDING)
       # Doing some pre-filtering to avoid unnecessary API calls.
       entries = if filters.eql?([:scans])
                   ill_transactions

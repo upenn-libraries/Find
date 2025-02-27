@@ -1,0 +1,5 @@
+<% if discover_query_params? %>
+  <%= render partial: 'discover/discover/search_results' %>
+<% else %>
+  <%= render partial: 'discover/discover/home' %>
+<% end %>

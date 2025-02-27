@@ -145,22 +145,22 @@ class CatalogController < ApplicationController
     config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: -1 do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), limit: true do |field|
+    config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), suggest: true, limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), limit: true do |field|
+    config.add_facet_field :subject_facet, label: I18n.t('facets.subject'), suggest: true, limit: true do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :language_facet, label: I18n.t('facets.language'), limit: true do |field|
+    config.add_facet_field :language_facet, label: I18n.t('facets.language'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :library_facet, label: I18n.t('facets.library'), limit: true do |field|
+    config.add_facet_field :library_facet, label: I18n.t('facets.library'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :location_facet, label: I18n.t('facets.location'), limit: true do |field|
+    config.add_facet_field :location_facet, label: I18n.t('facets.location'), suggest: true, limit: true do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
-    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), limit: true do |field|
+    config.add_facet_field :genre_facet, label: I18n.t('facets.genre'), suggest: true, limit: true do |field|
       field.include_in_advanced_search = false
     end
     config.add_facet_field :classification_facet, label: I18n.t('facets.classification'), limit: 5 do |field|
@@ -205,6 +205,12 @@ class CatalogController < ApplicationController
     # See: https://knowledge.exlibrisgroup.com/Leganto/Product_Documentation/Leganto_Online_Help_(English)/Leganto_Administration_Guide/yy_Appendix_D%3A_Integration_with_Blacklight
     config.add_index_field :marcxml_marcxml, label: I18n.t('results.json.marcxml'), if: :json_request?
     config.add_index_field :id, label: I18n.t('results.json.mmsid'), if: :json_request?
+
+    # These additional JSON API fields support the "Discover Penn" integration
+    config.add_index_field :isbn_ss, label: I18n.t('results.json.isbn'), if: :json_request?
+    config.add_index_field :issn_ss, label: I18n.t('results.json.issn'), if: :json_request?
+    config.add_index_field :oclc_id_ss, label: I18n.t('results.json.oclc_id'), if: :json_request?
+    config.add_index_field :library_facet, label: I18n.t('results.json.library'), if: :json_request?
 
     # fields to show in email
     config.add_email_field :title_ss, label: I18n.t('show.title.main')

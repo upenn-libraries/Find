@@ -1,0 +1,74 @@
+en:
+  discover:
+    site_name: 'Penn Collects'
+
+    images:
+      site_logo:
+        label: 'Penn Collects logo'
+      libraries_logo:
+        label: 'Penn Libraries logo'
+
+    search:
+      button:
+        label: 'Search'
+        aria_label: 'Search for'
+
+    home:
+      title: 'About Penn Collects'
+
+    results:
+      title: 'Search Results'
+      nav:
+        label: 'Results for'
+      source:
+        find:
+          label: 'Libraries'
+        finding_aids:
+          label: 'Archives'
+        museum:
+          label: 'Penn Museum'
+        art_collection:
+          label: 'Penn Art Collection'
+      messages:
+        loading: 'Loading Results..'
+        no_results: 'We did not find any matches.'
+      view_all_button:
+        label: 'View all %{count} results'
+
+    entry:
+      fields:
+        creator: 'Author/Creator:'
+        formats: 'Format:'
+        publication: 'Publication:'
+        abstract: 'Abstract:'
+        snippet: 'Snippet:'
+        location: 'Location:'
+
+    links:
+      skip_to_main:
+        text: 'Skip to main content'
+        url: '#main-container'
+      libraries:
+        text: 'Penn Libraries homepage'
+        url: 'https://www.library.upenn.edu/'
+      upenn:
+        text: 'UPenn'
+        url: 'https://www.upenn.edu/'
+      privacy:
+        text: 'Privacy Policy'
+        url: 'https://www.upenn.edu/about/privacy-policy'
+      accessibility:
+        text: 'Report Accessibility Issues and Get Help'
+        url: 'https://accessibility.web-resources.upenn.edu/get-help'
+      disclaimer:
+        text: 'Disclaimer'
+        url: 'https://www.upenn.edu/about/disclaimer'
+      emergency:
+        text: 'Emergency Services'
+        url: 'https://www.publicsafety.upenn.edu/contact'
+      copyright:
+        text: 'Copyright Infringement'
+        url: 'https://www.upenn.edu/about/report-copyright-infringement'
+      all_results:
+        museum: "https://www.penn.museum/collections/search.php?term=%{query}"
+        art_collection: "https://pennartcollection.com/?s=%{query}"

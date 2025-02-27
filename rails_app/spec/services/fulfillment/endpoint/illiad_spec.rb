@@ -25,11 +25,13 @@ describe Fulfillment::Endpoint::Illiad do
       end
     end
 
-    context 'when proxied request is not submitted by a library staff member' do
-      include_context 'with mocked alma_record on proxy user'
-
+    context 'when proxied request is not submitted by a proxy eligible user' do
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, proxy_for: proxy.uid) }
       let(:proxy) { Fulfillment::User.new('jdoe') }
+
+      include_context 'with mocked alma_record on proxy user'
+
+      before { allow(bad_request.requester).to receive(:work_order_operator?).and_return false }
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')

@@ -4,7 +4,6 @@ module Fulfillment
   module Choices
     # Pickup component logic
     class PickupComponent < ViewComponent::Base
-      DEFAULT_STUDENT_PICKUP = 'Lockers at Van Pelt Library'
       DEFAULT_PICKUP = 'Van Pelt Library'
 
       attr_accessor :user, :checked, :radio_options
@@ -18,8 +17,6 @@ module Fulfillment
 
       # @return [String]
       def default_pickup_location
-        return pickup_locations[DEFAULT_STUDENT_PICKUP] if user.student?
-
         pickup_locations[DEFAULT_PICKUP]
       end
 

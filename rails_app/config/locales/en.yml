@@ -211,6 +211,9 @@ en:
             last_updated_at:
               desc: 'Most recently updated'
               asc: 'Least recently updated'
+            due_date:
+              desc: 'Due Date (Latest)'
+              asc: 'Due Date (Soonest)'
         submit: 'Refine'
       table:
         th:
@@ -353,6 +356,10 @@ en:
     json:
       marcxml: 'MARC XML'
       mmsid: 'MMS ID'
+      isbn: 'ISBN'
+      issn: 'ISSN'
+      oclc_id: 'OCLC ID'
+      library: 'Library'
   requests:
     form:
       heading: 'Access options'
@@ -513,7 +520,7 @@ en:
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   statements:
-    harmful_language_html: 'The Penn Libraries is committed to describing library materials using accurate, inclusive, and non-derogatory language. For more information, see our <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
+    harmful_language_html: 'The Penn Libraries is committed to describing library materials using accurate language. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
   sort:
     added_date_asc: 'Date Added (old-new)'
     added_date_desc: 'Date Added (new-old)'

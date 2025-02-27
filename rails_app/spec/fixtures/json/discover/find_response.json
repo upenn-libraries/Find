@@ -1,0 +1,553 @@
+{
+  "links": {
+    "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields",
+    "last": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026page=1\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+  },
+  "meta": {
+    "pages": {
+      "current_page": 1,
+      "next_page": null,
+      "prev_page": null,
+      "total_pages": 1,
+      "limit_value": 10,
+      "offset_value": 0,
+      "total_count": 1,
+      "first_page?": true,
+      "last_page?": true
+    }
+  },
+  "data": [
+    {
+      "id": "9960586893503681",
+      "type": "Book",
+      "attributes": {
+        "title": [
+          "Menil : the Menil collection"
+        ],
+        "format_facet": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#format_facet",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "Book"
+            ],
+            "label": "Format"
+          }
+        },
+        "creator_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#creator_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "Piano, Renzo."
+            ],
+            "label": "Author/Creator"
+          }
+        },
+        "publication_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#publication_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "[Genova] : Fondazione Renzo Piano ; [Place of publication not identified] : SOFP, Società operativa Fondazione Piano srl, [2007]"
+            ],
+            "label": "Publication"
+          }
+        },
+        "marcxml_marcxml": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#marcxml_marcxml",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "<record><leader>02251ccm a2200517 a 4500</leader><controlfield tag=\"005\">20240318143606.0</controlfield><controlfield tag=\"008\">100513t19191919mausga              eng c</controlfield><controlfield tag=\"001\">9947793273503681</controlfield><datafield tag=\"028\" ind1=\"2\" ind2=\"2\"><subfield code=\"a\">73169</subfield><subfield code=\"b\">O. Ditson</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)ocn614867452</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(OCoLC)614867452</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">4779327</subfield></datafield><datafield tag=\"035\" ind1=\" \" ind2=\" \"><subfield code=\"a\">(PU)4779327-penndb-Voyager</subfield></datafield><datafield tag=\"040\" ind1=\" \" ind2=\" \"><subfield code=\"a\">PU</subfield><subfield code=\"b\">eng</subfield><subfield code=\"c\">PU</subfield></datafield><datafield tag=\"042\" ind1=\" \" ind2=\" \"><subfield code=\"a\">pcc</subfield></datafield><datafield tag=\"050\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">M1621</subfield><subfield code=\"b\">.S</subfield></datafield><datafield tag=\"100\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Salter, Mary Turner.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/nr89002822</subfield></datafield><datafield tag=\"245\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Vox invicta /</subfield><subfield code=\"c\">[words by] Nina Salaman ; [music by] Mary Turner Salter.</subfield></datafield><datafield tag=\"246\" ind1=\"1\" ind2=\" \"><subfield code=\"i\">First line:</subfield><subfield code=\"a\">Let my voice cry out</subfield></datafield><datafield tag=\"250\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Medium A.</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"1\"><subfield code=\"a\">Boston :</subfield><subfield code=\"b\">O. Ditson,</subfield><subfield code=\"c\">[1919]</subfield></datafield><datafield tag=\"264\" ind1=\" \" ind2=\"4\"><subfield code=\"c\">©1919</subfield></datafield><datafield tag=\"300\" ind1=\" \" ind2=\" \"><subfield code=\"a\">1 score (7 pages) ;</subfield><subfield code=\"c\">31 cm</subfield></datafield><datafield tag=\"336\" ind1=\" \" ind2=\" \"><subfield code=\"a\">notated music</subfield><subfield code=\"b\">ntm</subfield><subfield code=\"2\">rdacontent</subfield></datafield><datafield tag=\"337\" ind1=\" \" ind2=\" \"><subfield code=\"a\">unmediated</subfield><subfield code=\"b\">n</subfield><subfield code=\"2\">rdamedia</subfield></datafield><datafield tag=\"338\" ind1=\" \" ind2=\" \"><subfield code=\"a\">volume</subfield><subfield code=\"b\">nc</subfield><subfield code=\"2\">rdacarrier</subfield></datafield><datafield tag=\"348\" ind1=\" \" ind2=\" \"><subfield code=\"a\">score</subfield><subfield code=\"2\">rdafnm</subfield><subfield code=\"0\">http://rdaregistry.info/termList/formatNoteMus/1007</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Song for medium voice with piano.</subfield></datafield><datafield tag=\"500\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Caption title.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Includes ms. emmendations.</subfield></datafield><datafield tag=\"590\" ind1=\" \" ind2=\" \"><subfield code=\"a\">Signed by Sumner Salter.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"0\"><subfield code=\"a\">Songs (Medium voice) with piano.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/subjects/sh85125188</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Songs (Medium voice) with piano.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1126193</subfield></datafield><datafield tag=\"600\" ind1=\"1\" ind2=\"0\"><subfield code=\"a\">Salaman, Nina,</subfield><subfield code=\"d\">1876-1925</subfield><subfield code=\"v\">Musical settings.</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">CHR c1919</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"650\" ind1=\" \" ind2=\"4\"><subfield code=\"a\">PRO Salter, Sumner, 1856-1944 (autograph, N.Y. City, 1919)</subfield><subfield code=\"5\">PU</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Songs.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014027103</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Songs.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1726744</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Musical settings.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2017026061</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Musical settings.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1423813</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Scores.</subfield><subfield code=\"2\">lcgft</subfield><subfield code=\"0\">http://id.loc.gov/authorities/genreForms/gf2014027077</subfield></datafield><datafield tag=\"655\" ind1=\" \" ind2=\"7\"><subfield code=\"a\">Scores.</subfield><subfield code=\"2\">fast</subfield><subfield code=\"0\">http://id.worldcat.org/fast/1692898</subfield></datafield><datafield tag=\"700\" ind1=\"1\" ind2=\" \"><subfield code=\"a\">Salaman, Nina,</subfield><subfield code=\"d\">1876-1925.</subfield><subfield code=\"0\">http://id.loc.gov/authorities/names/nr88002497</subfield></datafield><datafield tag=\"773\" ind1=\"0\" ind2=\" \"><subfield code=\"a\">Marian Anderson Collection of Printed Music.</subfield></datafield><datafield tag=\"856\" ind1=\"4\" ind2=\"1\"><subfield code=\"z\">Digital facsimile for browsing (Colenda)</subfield><subfield code=\"u\">https://colenda.library.upenn.edu/catalog/81431-p3th8cb15</subfield></datafield><datafield tag=\"902\" ind1=\" \" ind2=\" \"><subfield code=\"a\">MARCIVE 2022</subfield></datafield></record>"
+            ],
+            "label": "MARC XML"
+          }
+        },
+        "id": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#id",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "9960586893503681"
+            ],
+            "label": "MMS ID"
+          }
+        },
+        "isbn_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#isbn_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "9788862640008",
+              "8862640005"
+            ],
+            "label": "ISBN"
+          }
+        },
+        "oclc_id_ss": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#oclc_id_ss",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "229431838"
+            ],
+            "label": "OCLC ID"
+          }
+        },
+        "library_facet": {
+          "id": "https://find.library.upenn.edu/catalog/9960586893503681#library_facet",
+          "type": "document_value",
+          "attributes": {
+            "value": [
+              "Fisher Fine Arts Library",
+              "Special Collections"
+            ],
+            "label": "Library"
+          }
+        }
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/9960586893503681"
+      }
+    }
+  ],
+  "included": [
+    {
+      "type": "facet",
+      "id": "access_facet",
+      "attributes": {
+        "label": "Access",
+        "items": [
+          {
+            "attributes": {
+              "label": "At the library",
+              "value": "At the library",
+              "hits": 1
+            },
+            "links": {
+              "remove": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/access_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "format_facet",
+      "attributes": {
+        "label": "Format",
+        "items": [
+          {
+            "attributes": {
+              "label": "Book",
+              "value": "Book",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bformat_facet%5D%5B%5D=Book\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/format_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "creator_facet",
+      "attributes": {
+        "label": "Author/Creator",
+        "items": [
+          {
+            "attributes": {
+              "label": "Fondazione Renzo Piano",
+              "value": "Fondazione Renzo Piano",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Fondazione+Renzo+Piano\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Piano, Lia",
+              "value": "Piano, Lia",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Lia\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Piano, Renzo",
+              "value": "Piano, Renzo",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Renzo\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/creator_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "subject_facet",
+      "attributes": {
+        "label": "Subject",
+        "items": [
+          {
+            "attributes": {
+              "label": "Architects",
+              "value": "Architects",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Architects--Italy",
+              "value": "Architects--Italy",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects--Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art museum architecture",
+              "value": "Art museum architecture",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art museum architecture--Texas--Houston",
+              "value": "Art museum architecture--Texas--Houston",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art museums",
+              "value": "Art museums",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art museums--Texas--Houston",
+              "value": "Art museums--Texas--Houston",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Buildings",
+              "value": "Buildings",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Buildings--Texas--Houston",
+              "value": "Buildings--Texas--Houston",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Italy",
+              "value": "Italy",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Menil Collection (Houston, Tex.)",
+              "value": "Menil Collection (Houston, Tex.)",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Menil Collection (Houston, Tex.)--Designs and plans",
+              "value": "Menil Collection (Houston, Tex.)--Designs and plans",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29--Designs+and+plans\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/subject_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "language_facet",
+      "attributes": {
+        "label": "Language",
+        "items": [
+          {
+            "attributes": {
+              "label": "English",
+              "value": "English",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=English\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Italian",
+              "value": "Italian",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=Italian\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/language_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "library_facet",
+      "attributes": {
+        "label": "Library",
+        "items": [
+          {
+            "attributes": {
+              "label": "Fisher Fine Arts Library",
+              "value": "Fisher Fine Arts Library",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Special Collections",
+              "value": "Special Collections",
+              "hits": 1
+            },
+            "links": {
+              "remove": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/library_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "location_facet",
+      "attributes": {
+        "label": "Specific Location",
+        "items": [
+          {
+            "attributes": {
+              "label": "Fisher Fine Arts Library - Locked Case",
+              "value": "Fisher Fine Arts Library - Locked Case",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library+-+Locked+Case\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/location_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "classification_facet",
+      "attributes": {
+        "label": "Classification",
+        "items": [
+          {
+            "attributes": {
+              "label": "N - Fine Arts",
+              "value": "N - Fine Arts",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bclassification_facet%5D%5B%5D=N+-+Fine+Arts\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/classification_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "search_field",
+      "id": "all_fields",
+      "attributes": {
+        "label": "All Fields"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "score desc, publication_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Relevance"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "creator_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Author/Creator (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "creator_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Author/Creator (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "title_sort asc, publication_date_sort desc",
+      "attributes": {
+        "label": "Title (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+asc%2C+publication_date_sort+desc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "title_sort desc, publication_date_sort desc",
+      "attributes": {
+        "label": "Title (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+desc%2C+publication_date_sort+desc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "call_number_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Call Number (a-z)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "call_number_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Call Number (z-a)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "publication_date_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Publication date (old-new)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "publication_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Publication date (new-old)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+desc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "added_date_sort asc, title_sort asc",
+      "attributes": {
+        "label": "Date Added (old-new)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+asc%2C+title_sort+asc"
+      }
+    },
+    {
+      "type": "sort",
+      "id": "added_date_sort desc, title_sort asc",
+      "attributes": {
+        "label": "Date Added (new-old)"
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+desc%2C+title_sort+asc"
+      }
+    }
+  ]
+}

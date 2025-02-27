@@ -20,6 +20,18 @@ FactoryBot.define do
       data { attributes_for(:alma_loan, :renewable, :boundwith) }
     end
 
+    trait :overdue do
+      data { attributes_for(:alma_loan, :overdue) }
+    end
+
+    trait :due_in_five_days do
+      data { attributes_for(:alma_loan, due_date: 5.days.since.utc.iso8601) }
+    end
+
+    trait :due_in_ten_days do
+      data { attributes_for(:alma_loan, due_date: 10.days.since.utc.iso8601) }
+    end
+
     skip_create
     initialize_with { Shelf::Entry::IlsLoan.new(data.deep_stringify_keys) }
   end

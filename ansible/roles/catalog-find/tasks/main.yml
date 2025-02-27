@@ -103,6 +103,7 @@
     DATABASE_NAME: "{{ postgres_database_name }}"
     DATABASE_PASSWORD: "{{ postgres_database_versioned_secrets.database_password.secret_name_prefix + postgres_database_versioned_secrets.database_password.version }}"
     DATABASE_USER: "{{ postgres_database_user }}"
+    GOOGLE_PSE_API_KEY: "{{ 'catalog_find_google_pse_api_key_v' ~ catalog_find_versioned_secrets.google_pse_api_key.version }}"
     HONEYBADGER_API_KEY: "{{ 'catalog_find_honeybadger_api_key_v' ~ catalog_find_versioned_secrets.honeybadger_api_key.version }}"
     ILLIAD_API_KEY: "{{ 'catalog_find_illiad_api_key_v' ~ catalog_find_versioned_secrets.illiad_api_key.version }}"
     ILLIAD_LEGACY_USER_PASSWORD: "{{ 'catalog_find_illiad_legacy_user_password_v' ~ catalog_find_versioned_secrets.illiad_legacy_user_password.version }}"

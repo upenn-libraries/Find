@@ -4,3 +4,5 @@ additional_results_sources:
   summon:
     access_id: 'upenn'
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
+discover:
+  enabled: true
