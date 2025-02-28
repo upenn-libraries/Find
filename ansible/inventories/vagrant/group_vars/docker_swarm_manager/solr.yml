@@ -13,7 +13,7 @@ solr_configsets:
   - name: "catalog-find"
     path: "roles/catalog-find/files/src/solr/conf/"
 
-solr_docker_image_tag: 9.3.0
+solr_docker_image_tag: 9.6.1 # TODO: containers NOT starting Up!!!!!!!!!!!!!!!!!!!!!!!
 
 solr_proxy_host: "catalog-find-dev.library.upenn.int"
 
