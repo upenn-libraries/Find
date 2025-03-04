@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_04_11_192431) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_03_171549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_04_11_192431) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "discover_art_works", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.string "thumbnail_url"
+    t.string "location"
+    t.string "format"
+    t.string "creator"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|
