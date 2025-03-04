@@ -3,6 +3,7 @@
 module Discover
   # Render main page content the collection bento
   class MainPageComponent < ViewComponent::Base
+    # @param params [ActionController::Parameters]
     def initialize(params:)
       @params = params
     end
@@ -23,8 +24,9 @@ module Discover
       params[:no_pse] != 'true'
     end
 
+    # @return [String]
     def discover_query
-      params[:q]
+      params[:q].to_s
     end
   end
 end
