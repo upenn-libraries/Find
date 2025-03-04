@@ -59,13 +59,13 @@ module Discover
 
       # TODO: need to add "collection"(?)
       # @param record [Hash]
-      # @return [Hash{Symbol->String, nil}]
+      # @return [Hash{Symbol->Array, nil}]
       def body_from(record:)
-        { author: record.dig(*config_class::AUTHOR),
-          format: record.dig(*config_class::FORMAT),
-          location: record.dig(*config_class::LOCATION),
-          publication: Array.wrap(record.dig(*config_class::PUBLICATION)),
-          abstract: Array.wrap(record.dig(*config_class::ABSTRACT)) }
+        { author: json_extract(record: record, keys: config_class::AUTHOR),
+          format: json_extract(record: record, keys: config_class::FORMAT),
+          location: json_extract(record: record, keys: config_class::LOCATION),
+          publication: json_extract(record: record, keys: config_class::PUBLICATION),
+          abstract: json_extract(record: record, keys: config_class::ABSTRACT) }
       end
 
       # @param record [Hash]
@@ -94,10 +94,10 @@ module Discover
 
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param data [Array]
-      # @return [Array]
+      # @return [Array<Entry>]
       def entries_from(data:)
         data.filter_map do |record|
-          Entry.new(title: record.dig(*config_class::TITLE),
+          Entry.new(title: json_extract(record: record, keys: config_class::TITLE),
                     body: body_from(record: record),
                     identifiers: identifiers(record: record),
                     link_url: record.dig(*config_class::RECORD_URL),
@@ -134,6 +134,16 @@ module Discover
       # @return [Object]
       def config_class
         @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".safe_constantize
+      end
+
+      # Safely extract from record hash using provided keys, then ensuring that encoded chars are un-encoded
+      # @param record [Hash]
+      # @param keys [Array]
+      # @return [Array, nil]
+      def json_extract(record:, keys:)
+        return if record.blank? || keys.blank?
+
+        Array.wrap(record.dig(*keys))&.map { |v| CGI.unescapeHTML v }
       end
     end
   end
