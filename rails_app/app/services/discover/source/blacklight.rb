@@ -99,7 +99,7 @@ module Discover
 
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param data [Array]
-      # @return [Array]
+      # @return [Array<Discover::Entry>]
       def entries_from(data:)
         data.filter_map do |record|
           Entry.new(title: record.dig(*config_class::TITLE),

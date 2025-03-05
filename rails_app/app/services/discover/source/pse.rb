@@ -62,6 +62,8 @@ module Discover
         { description: Array.wrap(record.fetch('snippet')) }
       end
 
+      # @param data [Array]
+      # @return [Array<Discover::Entry>]
       def entries_from(data:)
         Array.wrap(data).filter_map do |item|
           Entry.new(title: Array.wrap(item.fetch('title')),
