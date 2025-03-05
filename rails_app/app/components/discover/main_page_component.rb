@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Discover
-  # Render main page content the collection bento
+  # Render main page content for the collection bento
   class MainPageComponent < ViewComponent::Base
     # @param params [ActionController::Parameters]
     def initialize(params:)
