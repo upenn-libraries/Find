@@ -1,6 +1,7 @@
 en:
   discover:
     site_name: 'Penn Collects'
+    tagline: 'Discover the treasures of Penn'
 
     images:
       site_logo:
