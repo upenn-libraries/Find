@@ -17,8 +17,6 @@ describe Discover::ArtWork do
     let!(:chair) { create(:art_work, location: 'Van Pelt Library') }
     let!(:moon_night) do
       create(:art_work, title: 'Moon Night',
-                        link: 'https://pennartcollection.com/collection/art/1268/moon-night/',
-                        thumbnail_url: 'https://pennartcollection.com/wp-content/themes/collection2015/images/objects/1268.thumb.jpg',
                         format: 'Lithograph',
                         creator: 'Yu, Chen',
                         description: 'This lithograph is by Chinese artist Chen Yu. The bright full moon illuminates ' \
@@ -29,8 +27,6 @@ describe Discover::ArtWork do
     let!(:fannie) do
       create(:art_work,
              title: 'Fannie',
-             link: 'https://pennartcollection.com/collection/art/1177/fannie/',
-             thumbnail_url: 'https://pennartcollection.com/wp-content/themes/collection2015/images/objects/1177.thumb.jpg',
              format: 'Lithograph',
              creator: 'Soyer, Raphael',
              description: 'Framing: Black wood frame with white window mat.',
