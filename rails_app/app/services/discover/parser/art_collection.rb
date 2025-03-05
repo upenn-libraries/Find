@@ -8,8 +8,10 @@ module Discover
     class ArtCollection
       ARTWORK_ATTRIBUTES = %i[title link identifier thumbnail_url location format creator description].freeze
 
+      class ParserError < StandardError; end
+
       class << self
-        # Import a given TSV to ArtWorks, from HTTP location (default) or specified file
+        # Import a given TSV to ArtWorks (default: TSV from server)
         #
         # @param file [String]
         # @return [nil]

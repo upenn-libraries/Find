@@ -24,12 +24,10 @@ describe Discover::Parser::ArtCollection do
     end
 
     it 'does not update unchanged artworks' do
-      format = Discover::ArtWork.second.format
-      updated_at = Discover::ArtWork.second.updated_at
+      attr = Discover::ArtWork.second.attributes
       described_class.import(file: tsv_updated)
 
-      expect(Discover::ArtWork.second.format).to eq format
-      expect(Discover::ArtWork.second.updated_at).to eq updated_at
+      expect(Discover::ArtWork.second.attributes).to eq attr
     end
   end
 end

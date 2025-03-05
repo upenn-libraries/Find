@@ -6,3 +6,6 @@ cleanup_guest_users:
 cleanup_searches:
   cron: 'every day at 5AM'
   class: 'CleanupSearchesJob'
+parse_art_collection:
+  cron: 'every monday at 6AM'
+  class: 'Discover::ParseArtCollectionJob'
