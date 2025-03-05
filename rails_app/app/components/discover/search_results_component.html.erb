@@ -1,26 +1,26 @@
 <h1 class="visually-hidden"><%= t('discover.results.title') %></h1>
 
 <div class="results-content container">
-  <%= render(Discover::ResultsOverviewComponent.new(query: @search_params)) %>
+  <%= render(Discover::ResultsOverviewComponent.new(query: query)) %>
 
   <div id="results" class="results row">
     <div class="col-12 col-lg-6">
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::Find::SOURCE,
-                                                        query: @search_params)) do %>
+                                                        query: query)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::FindingAids::SOURCE,
-                                                        query: @search_params)) do %>
+                                                        query: query)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
     </div>
     <div class="col-12 col-lg-6">
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::Museum::SOURCE,
-                                                        query: @search_params, disabled: no_pse?)) do %>
+                                                        query: query, disabled: !render_pse_sources)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::ArtCollection::SOURCE,
-                                                        query: @search_params, disabled: no_pse?)) do %>
+                                                        query: query, disabled: !render_pse_sources)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
     </div>

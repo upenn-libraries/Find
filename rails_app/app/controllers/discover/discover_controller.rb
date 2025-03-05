@@ -7,7 +7,9 @@ module Discover
 
     # /discover
     def index
-      @search_params = params[:q]
+      respond_to do |format|
+        format.html { render Discover::MainPageComponent.new params: params }
+      end
     end
   end
 end
