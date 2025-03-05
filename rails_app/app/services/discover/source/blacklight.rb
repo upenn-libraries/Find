@@ -39,6 +39,11 @@ module Discover
         false
       end
 
+      # @return [Boolean]
+      def database?
+        false
+      end
+
       private
 
       # @param response [Hash]
@@ -129,11 +134,6 @@ module Discover
         URI::HTTPS.build(host: config_class::HOST,
                          path: config_class::PATH,
                          query: URI.encode_www_form(query_params))
-      end
-
-      # @return [Object]
-      def config_class
-        @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".safe_constantize
       end
     end
   end

@@ -7,7 +7,7 @@ module Discover
       Discover::Configuration::Blacklight::Find::SOURCE => %w[bi bi-book],
       Discover::Configuration::Blacklight::FindingAids::SOURCE => %w[bi bi-archive],
       Discover::Configuration::PSE::Museum::SOURCE => %w[card-icon discover-icon discover-icon-museum],
-      Discover::Configuration::PSE::ArtCollection::SOURCE => %w[bi bi-brush]
+      Discover::Configuration::Database::ArtCollection::SOURCE => %w[bi bi-brush]
     }.freeze
 
     attr_reader :source, :query, :disabled, :results

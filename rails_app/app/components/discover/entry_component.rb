@@ -20,7 +20,7 @@ module Discover
       case args[:source]&.to_sym
       when Configuration::PSE::Museum::SOURCE
         Discover::Entry::MuseumPresenter.new(**args)
-      when Configuration::PSE::ArtCollection::SOURCE
+      when Configuration::Database::ArtCollection::SOURCE
         Discover::Entry::ArtCollectionPresenter.new(**args)
       else
         Discover::Entry::BasePresenter.new(**args)

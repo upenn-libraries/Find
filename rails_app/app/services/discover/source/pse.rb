@@ -37,6 +37,11 @@ module Discover
         true
       end
 
+      # @return [Boolean]
+      def database?
+        false
+      end
+
       private
 
       # @param [String] query
@@ -88,11 +93,6 @@ module Discover
         URI::HTTPS.build(host: Discover::Configuration::PSE::HOST,
                          path: Discover::Configuration::PSE::PATH,
                          query: URI.encode_www_form(query_params))
-      end
-
-      # @return [Object]
-      def config_class
-        @config_class ||= "Discover::Configuration::PSE::#{source.camelize}".safe_constantize
       end
     end
   end

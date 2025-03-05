@@ -68,7 +68,7 @@ module Discover
     end
 
     module PSE
-      SOURCES = %i[museum art_collection].freeze
+      SOURCES = %i[museum].freeze
 
       HOST = 'customsearch.googleapis.com'
       PATH = '/customsearch/v1'
@@ -83,13 +83,14 @@ module Discover
         RECORDS = ['items'].freeze
         IDENTIFIERS = {}.freeze
       end
+    end
 
+    module Database
+      SOURCES = %i[art_collection].freeze
       module ArtCollection
         SOURCE = :art_collection
-        CX = Settings.discover.source.art_collection.pse_cx
-        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
-        LINK_TO_SOURCE = false
-        RECORDS = ['items'].freeze
+        MODEL = Discover::ArtWork
+        LINK_TO_SOURCE = true
         IDENTIFIERS = {}.freeze
       end
     end
@@ -100,6 +101,8 @@ module Discover
         "Discover::Configuration::Blacklight::#{source.to_s.camelize}".safe_constantize
       elsif source.to_sym.in?(PSE::SOURCES)
         "Discover::Configuration::PSE::#{source.to_s.camelize}".safe_constantize
+      elsif source.to_sym.in?(Database::SOURCES)
+        "Discover::Configuration::Database::#{source.to_s.camelize}".safe_constantize
       else
         raise Discover::Source::Error, "source #{source} has not been configured"
       end

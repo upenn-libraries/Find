@@ -5,11 +5,6 @@
 module Discover
   class Entry
     # Prepares art collection entry values for display
-    class ArtCollectionPresenter < BasePresenter
-      # @return [String]
-      def title
-        entry.title.first.split(/[-|–—]/, 2).first.strip
-      end
-    end
+    class ArtCollectionPresenter < BasePresenter; end
   end
 end
