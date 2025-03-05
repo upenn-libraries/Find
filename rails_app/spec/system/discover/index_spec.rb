@@ -10,9 +10,11 @@ describe 'Discover Penn page' do
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
+    let(:art_work) { create(:art_work) }
 
     before do
       stub_all_responses(query: query)
+      allow(Discover::ArtWork).to receive(:search).and_return([art_work])
       fill_in 'q', with: query[:q]
       click_on I18n.t('discover.search.button.label')
     end
@@ -191,23 +193,24 @@ describe 'Discover Penn page' do
 
       it 'links to the item' do
         within '#penn-art-collection h3.results-list-item__heading' do
-          expect(page).to have_link("Leonardo's Lady",
-                                    href: 'https://pennartcollection.com/collection/art/194/leonardos-lady/',
+          expect(page).to have_link(art_work.title,
+                                    href: art_work.link,
                                     exact: true)
         end
       end
 
-      it 'displays snippet' do
+      it 'displays description' do
         within '#penn-art-collection dl.results-list-item__metadata' do
-          expect(page).to have_text(/... Photorealism, becoming one of the pioneering artists in the genre./)
+          expect(page).to have_content(
+            art_work.description.truncate(Discover::Entry::BasePresenter::MAX_STRING_LENGTH).squish
+          )
         end
       end
 
       it 'displays the thumbnail' do
         within '#penn-art-collection' do
           image = find('img.results-list-item__thumbnail')
-          expect(image[:src]).to include('https://encrypted-tbn0.gstatic.com/images?q=' \
-                                         'tbn:ANd9GcRCUpKWXMJZ1VIqw7H1RcnzcTFt44CGMyR_kRVMlrkz5MdtMhW7UyBCG-g&s')
+          expect(image[:src]).to include(art_work.thumbnail_url)
         end
       end
 
