@@ -5,7 +5,7 @@ module Discover
     # Prepares entry values for display
     class BasePresenter
       MAX_STRING_LENGTH = 255
-      DISPLAY_TERMS = %i[title link_url thumbnail_url creator formats location publication abstract snippet].freeze
+      DISPLAY_TERMS = %i[title link_url thumbnail_url creator formats location publication description].freeze
 
       attr_reader :entry, :source
 
@@ -25,7 +25,7 @@ module Discover
 
       # @return [String, NilClass]
       def creator
-        entry.body[:author]&.join(', ')
+        entry.body[:creator]&.join(', ')
       end
 
       # @return [String, NilClass]
@@ -44,13 +44,8 @@ module Discover
       end
 
       # @return [String, NilClass]
-      def abstract
-        entry.body[:abstract]&.first&.truncate(MAX_STRING_LENGTH)
-      end
-
-      # @return [String, NilClass]
-      def snippet
-        entry.body[:snippet]&.first&.truncate(MAX_STRING_LENGTH)
+      def description
+        entry.body[:description]&.first&.truncate(MAX_STRING_LENGTH)
       end
     end
   end

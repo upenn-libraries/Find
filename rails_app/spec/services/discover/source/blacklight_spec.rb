@@ -47,12 +47,12 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(author: ['Piano, Renzo.'],
+      expect(results.first.body).to include(creator: ['Piano, Renzo.'],
                                             format: ['Book'],
                                             location: ['Fisher Fine Arts Library', 'Special Collections'],
                                             publication: ["[Genova] : Fondazione Renzo Piano ; [Place of publication \
                                 not identified] : SOFP, Società operativa Fondazione Piano srl, [2007]".squish],
-                                            abstract: [])
+                                            description: [])
     end
 
     it 'assigns expected entry identifiers' do
@@ -86,12 +86,12 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(:author, :format, :location, :publication, :abstract)
+      expect(results.first.body).to include(:creator, :format, :location, :publication, :description)
     end
 
-    it 'assigns expected author' do
-      expect(results.first.body[:author]).to eq ['Kronish, Lieb, Weiner, and Hellman LLP',
-                                                 'National Bankruptcy Archives']
+    it 'assigns expected creator' do
+      expect(results.first.body[:creator]).to eq ['Kronish, Lieb, Weiner, and Hellman LLP',
+                                                  'National Bankruptcy Archives']
     end
 
     it 'assigns expected format' do
@@ -106,8 +106,8 @@ describe Discover::Source::Blacklight do
       expect(results.first.body[:publication]).to eq []
     end
 
-    it 'assigns expected abstract' do
-      expect(results.first.body[:abstract].first).to start_with('On July 11, 1984, William Foley')
+    it 'assigns expected description' do
+      expect(results.first.body[:description].first).to start_with('On July 11, 1984, William Foley')
     end
 
     it 'assigns expected thumbnail_url' do

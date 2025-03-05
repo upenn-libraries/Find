@@ -40,7 +40,7 @@ describe 'Discover Penn page' do
         end
       end
 
-      it 'displays author' do
+      it 'displays creator' do
         within '#libraries dl.results-list-item__metadata' do
           expect(page).to have_text('Piano, Renzo.')
         end
@@ -109,7 +109,7 @@ describe 'Discover Penn page' do
         end
       end
 
-      it 'displays abstract' do
+      it 'displays description' do
         within '#archives dl.results-list-item__metadata' do
           expect(page).to have_text(/On July 11, 1984, William Foley, Legislative Affairs Officer/)
         end

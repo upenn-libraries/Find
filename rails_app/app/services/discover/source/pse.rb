@@ -59,7 +59,7 @@ module Discover
       # @param [Hash] record
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { snippet: Array.wrap(record.fetch('snippet')) }
+        { description: Array.wrap(record.fetch('snippet')) }
       end
 
       def entries_from(data:)

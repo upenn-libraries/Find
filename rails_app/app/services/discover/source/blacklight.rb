@@ -66,11 +66,11 @@ module Discover
       # @param record [Hash]
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { author: record.dig(*config_class::AUTHOR),
+        { creator: record.dig(*config_class::CREATOR),
           format: record.dig(*config_class::FORMAT),
           location: record.dig(*config_class::LOCATION),
           publication: Array.wrap(record.dig(*config_class::PUBLICATION)),
-          abstract: Array.wrap(record.dig(*config_class::ABSTRACT)) }
+          description: Array.wrap(record.dig(*config_class::DESCRIPTION)) }
       end
 
       # @param record [Hash]
