@@ -256,3 +256,6 @@ discover:
       pse_cx: '76cf445db4aa14589'
     penn_museum:
       pse_cx: '8591e2ac8a6254ba9'
+    art_collection:
+      tsv_path: 'https://digital.library.upenn.edu/collects/PennArtCollection.tsv'
+
