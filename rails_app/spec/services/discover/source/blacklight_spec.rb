@@ -115,7 +115,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'properly un-encodes characters in body fields' do
-      expect(results.first.body[:abstract].first).to include '("Administrative Office")'
+      expect(results.first.body[:description].first).to include '("Administrative Office")'
     end
   end
 

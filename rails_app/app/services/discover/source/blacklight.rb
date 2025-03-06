@@ -66,7 +66,7 @@ module Discover
       # @param record [Hash]
       # @return [Hash{Symbol->Array, nil}]
       def body_from(record:)
-        { author: json_extract(record: record, keys: config_class::AUTHOR),
+        { creator: json_extract(record: record, keys: config_class::CREATOR),
           format: json_extract(record: record, keys: config_class::FORMAT),
           location: json_extract(record: record, keys: config_class::LOCATION),
           publication: json_extract(record: record, keys: config_class::PUBLICATION),
@@ -144,11 +144,11 @@ module Discover
       # Safely extract from record hash using provided keys, then ensuring that encoded chars are un-encoded
       # @param record [Hash]
       # @param keys [Array]
-      # @return [Array, nil]
+      # @return [Array]
       def json_extract(record:, keys:)
-        return if record.blank? || keys.blank?
+        return [] if record.blank? || keys.blank?
 
-        Array.wrap(record.dig(*keys))&.map { |v| CGI.unescapeHTML v }
+        Array.wrap(record.dig(*keys))&.map { |v| CGI.unescapeHTML v } || []
       end
     end
   end
