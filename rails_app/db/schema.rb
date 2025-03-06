@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_04_174124) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_04_173239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,8 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_174124) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "checksum"
-    t.index ["checksum"], name: "index_discover_art_works_on_checksum"
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|
