@@ -34,8 +34,8 @@ module Discover
         # @param data [String] the input file
         # @return [nil]
         def parse_tsv(data)
-          CSV.parse(data, col_sep: "\t", headers: true) do |row|
-            artwork = ArtWork.find_or_initialize_by(identifier: row['identifier'])
+          CSV.parse(data, col_sep: "\t", headers: true, quote_char: nil) do |row|
+            artwork = ArtWork.find_or_initialize_by(link: row['link'])
             attributes = ARTWORK_ATTRIBUTES.index_with { |attr| row[attr.to_s] }
             artwork.assign_attributes(attributes)
             artwork.save! if artwork.new_record? || artwork.changed?
