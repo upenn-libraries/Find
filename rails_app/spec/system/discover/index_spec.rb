@@ -10,9 +10,11 @@ describe 'Discover Penn page' do
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
+    let(:art_work) { create(:art_work, location: query[:q]) }
 
     before do
       stub_all_responses(query: query)
+      art_work
       fill_in 'q', with: query[:q]
       click_on I18n.t('discover.search.button.label')
     end
@@ -40,7 +42,7 @@ describe 'Discover Penn page' do
         end
       end
 
-      it 'displays author' do
+      it 'displays creator' do
         within '#libraries dl.results-list-item__metadata' do
           expect(page).to have_text('Piano, Renzo.')
         end
@@ -109,7 +111,7 @@ describe 'Discover Penn page' do
         end
       end
 
-      it 'displays abstract' do
+      it 'displays description' do
         within '#archives dl.results-list-item__metadata' do
           expect(page).to have_text(/On July 11, 1984, William Foley, Legislative Affairs Officer/)
         end
@@ -191,29 +193,48 @@ describe 'Discover Penn page' do
 
       it 'links to the item' do
         within '#penn-art-collection h3.results-list-item__heading' do
-          expect(page).to have_link("Leonardo's Lady",
-                                    href: 'https://pennartcollection.com/collection/art/194/leonardos-lady/',
+          expect(page).to have_link(art_work.title,
+                                    href: art_work.link,
                                     exact: true)
         end
       end
 
-      it 'displays snippet' do
+      it 'displays description' do
         within '#penn-art-collection dl.results-list-item__metadata' do
-          expect(page).to have_text(/... Photorealism, becoming one of the pioneering artists in the genre./)
+          expect(page).to have_text(
+            art_work.description.truncate(Discover::Entry::BasePresenter::MAX_STRING_LENGTH).squish
+          )
         end
       end
 
       it 'displays the thumbnail' do
         within '#penn-art-collection' do
           image = find('img.results-list-item__thumbnail')
-          expect(image[:src]).to include('https://encrypted-tbn0.gstatic.com/images?q=' \
-                                         'tbn:ANd9GcRCUpKWXMJZ1VIqw7H1RcnzcTFt44CGMyR_kRVMlrkz5MdtMhW7UyBCG-g&s')
+          expect(image[:src]).to include(art_work.thumbnail_url)
         end
       end
 
       it 'displays the total count in the overview area' do
         within '#art_collection-results-count' do
           expect(page).to have_text '(1)'
+        end
+      end
+
+      it 'displays location' do
+        within '#penn-art-collection dl.results-list-item__metadata dd.results-list-item__location' do
+          expect(page).to have_text(art_work.location)
+        end
+      end
+
+      it 'displays creator' do
+        within '#penn-art-collection dl.results-list-item__metadata' do
+          expect(page).to have_text(art_work.creator)
+        end
+      end
+
+      it 'displays format' do
+        within '#penn-art-collection dl.results-list-item__metadata' do
+          expect(page).to have_text(art_work.format)
         end
       end
     end

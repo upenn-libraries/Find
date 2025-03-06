@@ -1,6 +1,7 @@
 en:
   discover:
     site_name: 'Penn Collects'
+    tagline: 'Discover the treasures of Penn'
 
     images:
       site_logo:
@@ -38,11 +39,10 @@ en:
     entry:
       fields:
         creator: 'Author/Creator:'
+        description: 'Description'
         formats: 'Format:'
-        publication: 'Publication:'
-        abstract: 'Abstract:'
-        snippet: 'Snippet:'
         location: 'Location:'
+        publication: 'Publication:'
 
     links:
       skip_to_main:

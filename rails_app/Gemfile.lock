@@ -320,6 +320,9 @@ GEM
       marc (~> 1.2)
       nokogiri (~> 1.15)
     pg (1.5.4)
+    pg_search (2.3.7)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -557,6 +560,7 @@ DEPENDENCIES
   omniauth-saml
   pennmarc (~> 1)
   pg (~> 1.1)
+  pg_search
   puma (~> 6.5.0)
   put
   rails (~> 7.1)

@@ -39,6 +39,11 @@ module Discover
         false
       end
 
+      # @return [Boolean]
+      def database?
+        false
+      end
+
       private
 
       # @param response [Hash]
@@ -65,7 +70,7 @@ module Discover
           format: json_extract(record: record, keys: config_class::FORMAT),
           location: json_extract(record: record, keys: config_class::LOCATION),
           publication: json_extract(record: record, keys: config_class::PUBLICATION),
-          abstract: json_extract(record: record, keys: config_class::ABSTRACT) }
+          description: json_extract(record: record, keys: config_class::DESCRIPTION) }
       end
 
       # @param record [Hash]
@@ -94,7 +99,7 @@ module Discover
 
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param data [Array]
-      # @return [Array<Entry>]
+      # @return [Array<Discover::Entry>]
       def entries_from(data:)
         data.filter_map do |record|
           Entry.new(title: json_extract(record: record, keys: config_class::TITLE),

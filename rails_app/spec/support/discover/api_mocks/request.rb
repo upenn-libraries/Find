@@ -27,13 +27,13 @@ module Discover
       # @param [Symbol, Array<Symbol, String>, nil] except
       def stub_all_responses(query:, except: nil)
         except_sources = Array.wrap(except).map(&:to_sym)
-        stub_all_blacklight_response(query: query, except: except_sources)
-        stub_all_pse_response(query: query, except: except_sources)
+        stub_all_blacklight_responses(query: query, except: except_sources)
+        stub_all_pse_responses(query: query, except: except_sources)
       end
 
       # @param [Hash] query
       # @param [Array<Symbol>] except
-      def stub_all_blacklight_response(query:, except:)
+      def stub_all_blacklight_responses(query:, except:)
         Discover::Configuration::Blacklight::SOURCES.each do |source|
           next if source.in? except
 
@@ -46,7 +46,7 @@ module Discover
 
       # @param [Hash] query
       # @param [Array<Symbol>] except
-      def stub_all_pse_response(query:, except:)
+      def stub_all_pse_responses(query:, except:)
         Discover::Configuration::PSE::SOURCES.each do |source|
           next if source.in? except
 

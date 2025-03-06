@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Discover
-  # Helper for Discover Penn functionality
+  # Helper for Discover Penn functionality, mostly for the application layout
   module DiscoverHelper
     # Get the page's HTML title - query term if present, otherwise page name if defined, otherwise just site name
     #
@@ -45,10 +45,6 @@ module Discover
     # @return [Boolean]
     def discover_query_params?
       discover_query.present?
-    end
-
-    def no_pse?
-      params[:no_pse] == 'true'
     end
   end
 end

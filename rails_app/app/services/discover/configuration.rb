@@ -20,12 +20,12 @@ module Discover
         RESULTS_URL = %w[links self].freeze
 
         TITLE = %w[attributes title].freeze
-        AUTHOR = %w[attributes creator_ss attributes value].freeze
+        CREATOR = %w[attributes creator_ss attributes value].freeze
         FORMAT = %w[attributes format_facet attributes value].freeze
         LOCATION = %w[attributes library_facet attributes value].freeze
         PUBLICATION = %w[attributes publication_ss attributes value].freeze
         XML = %w[attributes marcxml_marcxml attributes value].freeze
-        ABSTRACT = [nil].freeze
+        DESCRIPTION = [nil].freeze
         RECORD_URL = %w[links self].freeze
         COLENDA_LINK_ARK_REGEX = %r{https://colenda.library.upenn.edu/catalog/(.{15})}
         IDENTIFIERS = { isbn: %w[attributes isbn_ss attributes value],
@@ -52,12 +52,12 @@ module Discover
         RESULTS_URL = %w[links self].freeze
 
         TITLE = %w[attributes title].freeze
-        AUTHOR = %w[attributes creators_ssim attributes value].freeze
+        CREATOR = %w[attributes creators_ssim attributes value].freeze
         FORMAT = %w[attributes genre_form_ssim attributes value].freeze
         LOCATION = %w[attributes repository_ssi attributes value].freeze
         PUBLICATION = [nil].freeze
         XML = [nil].freeze
-        ABSTRACT = %w[attributes abstract_scope_contents_tsi attributes value].freeze
+        DESCRIPTION = %w[attributes abstract_scope_contents_tsi attributes value].freeze
         RECORD_URL = %w[links self].freeze
         COLENDA_LINK_ARK_REGEX = %r{https://colenda.library.upenn.edu/catalog/(.{15})}
         IDENTIFIERS = {}.freeze
@@ -68,7 +68,7 @@ module Discover
     end
 
     module PSE
-      SOURCES = %i[museum art_collection].freeze
+      SOURCES = %i[museum].freeze
 
       HOST = 'customsearch.googleapis.com'
       PATH = '/customsearch/v1'
@@ -83,13 +83,14 @@ module Discover
         RECORDS = ['items'].freeze
         IDENTIFIERS = {}.freeze
       end
+    end
 
+    module Database
+      SOURCES = %i[art_collection].freeze
       module ArtCollection
         SOURCE = :art_collection
-        CX = Settings.discover.source.art_collection.pse_cx
-        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
-        LINK_TO_SOURCE = false
-        RECORDS = ['items'].freeze
+        MODEL = Discover::ArtWork
+        LINK_TO_SOURCE = true
         IDENTIFIERS = {}.freeze
       end
     end
@@ -100,6 +101,8 @@ module Discover
         "Discover::Configuration::Blacklight::#{source.to_s.camelize}".safe_constantize
       elsif source.to_sym.in?(PSE::SOURCES)
         "Discover::Configuration::PSE::#{source.to_s.camelize}".safe_constantize
+      elsif source.to_sym.in?(Database::SOURCES)
+        "Discover::Configuration::Database::#{source.to_s.camelize}".safe_constantize
       else
         raise Discover::Source::Error, "source #{source} has not been configured"
       end
