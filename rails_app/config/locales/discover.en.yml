@@ -39,11 +39,10 @@ en:
     entry:
       fields:
         creator: 'Author/Creator:'
+        description: 'Description'
         formats: 'Format:'
-        publication: 'Publication:'
-        abstract: 'Abstract:'
-        snippet: 'Snippet:'
         location: 'Location:'
+        publication: 'Publication:'
 
     links:
       skip_to_main:

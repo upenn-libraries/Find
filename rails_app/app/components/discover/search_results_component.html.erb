@@ -19,8 +19,8 @@
                                                         query: query, disabled: !render_pse_sources)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
-      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::ArtCollection::SOURCE,
-                                                        query: query, disabled: !render_pse_sources)) do %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Database::ArtCollection::SOURCE,
+                                                        query: query)) do %>
         <span class="text-center"><%= I18n.t('discover.results.messages.loading') %></span>
       <% end %>
     </div>

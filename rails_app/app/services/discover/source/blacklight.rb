@@ -39,6 +39,11 @@ module Discover
         false
       end
 
+      # @return [Boolean]
+      def database?
+        false
+      end
+
       private
 
       # @param response [Hash]
@@ -61,11 +66,11 @@ module Discover
       # @param record [Hash]
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
-        { author: record.dig(*config_class::AUTHOR),
+        { creator: record.dig(*config_class::CREATOR),
           format: record.dig(*config_class::FORMAT),
           location: record.dig(*config_class::LOCATION),
           publication: Array.wrap(record.dig(*config_class::PUBLICATION)),
-          abstract: Array.wrap(record.dig(*config_class::ABSTRACT)) }
+          description: Array.wrap(record.dig(*config_class::DESCRIPTION)) }
       end
 
       # @param record [Hash]
@@ -94,7 +99,7 @@ module Discover
 
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param data [Array]
-      # @return [Array]
+      # @return [Array<Discover::Entry>]
       def entries_from(data:)
         data.filter_map do |record|
           Entry.new(title: record.dig(*config_class::TITLE),
@@ -129,11 +134,6 @@ module Discover
         URI::HTTPS.build(host: config_class::HOST,
                          path: config_class::PATH,
                          query: URI.encode_www_form(query_params))
-      end
-
-      # @return [Object]
-      def config_class
-        @config_class ||= "Discover::Configuration::Blacklight::#{source.camelize}".safe_constantize
       end
     end
   end
