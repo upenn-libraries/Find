@@ -113,6 +113,10 @@ describe Discover::Source::Blacklight do
     it 'assigns expected thumbnail_url' do
       expect(results.first.thumbnail_url).to be nil
     end
+
+    it 'properly un-encodes characters in body fields' do
+      expect(results.first.body[:description].first).to include '("Administrative Office")'
+    end
   end
 
   describe '#blacklight?' do
