@@ -55,4 +55,10 @@ describe Discover::Source::PSE do
       expect(described_class.new(source: 'museum').pse?).to be true
     end
   end
+
+  describe '#database?' do
+    it 'returns false' do
+      expect(described_class.new(source: 'museum').database?).to be false
+    end
+  end
 end
