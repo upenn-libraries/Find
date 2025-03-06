@@ -10,9 +10,13 @@ module Discover
     def self.klass(source:)
       raise Error, "source #{source} has not been configured" unless source.to_sym.in?(Configuration::SOURCES)
 
-      return Discover::Source::Blacklight if source.to_sym.in?(Discover::Configuration::Blacklight::SOURCES)
-
-      Discover::Source::PSE if source.to_sym.in?(Discover::Configuration::PSE::SOURCES)
+      if source.to_sym.in?(Discover::Configuration::Blacklight::SOURCES)
+        Discover::Source::Blacklight
+      elsif source.to_sym.in?(Discover::Configuration::PSE::SOURCES)
+        Discover::Source::PSE
+      elsif source.to_sym.in?(Discover::Configuration::Database::SOURCES)
+        Discover::Source::Database
+      end
     end
 
     # @param [String] source
@@ -39,6 +43,11 @@ module Discover
       false
     end
 
+    # @return [Boolean]
+    def database?
+      false
+    end
+
     # Defining connection logic here ensures consistent header values
     def connection(base_url:)
       Faraday.new(url: base_url, headers: { 'Content-Type': 'application/json',
@@ -46,6 +55,13 @@ module Discover
         connection.response :raise_error
         connection.response :json
       end
+    end
+
+    private
+
+    # @return [Object]
+    def config_class
+      @config_class ||= Discover::Configuration.config_for(source: source)
     end
   end
 end

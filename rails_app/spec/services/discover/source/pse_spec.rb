@@ -40,32 +40,7 @@ describe Discover::Source::PSE do
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(snippet: ['Penn Museum Object B13186 - Hebrew Bowl.'])
-    end
-  end
-
-  context 'with Art Collection source' do
-    let(:search_term) { 'Photorealist' }
-
-    include_examples 'a PSE source', 'art_collection'
-
-    it 'assigns a total count' do
-      expect(results.total_count).to eq(1)
-    end
-
-    it 'assigns a results url' do
-      expect(results.results_url).to eq('https://pennartcollection.com/?s=Photorealist')
-    end
-
-    it 'assigns exptected entry title' do
-      expect(results.first.title)
-        .to contain_exactly("Leonardo's Lady — The Collection — The Penn Art Collection")
-    end
-
-    it 'assigns expected entry body' do
-      expect(results.first.body)
-        .to include(snippet: ['... Photorealism, becoming one of the pioneering artists in the genre. Flack has the ' \
-          'distinction of being the only Photorealist artist whose work is represented ...'])
+      expect(results.first.body).to include(description: ['Penn Museum Object B13186 - Hebrew Bowl.'])
     end
   end
 
@@ -78,6 +53,12 @@ describe Discover::Source::PSE do
   describe '#pse?' do
     it 'returns true' do
       expect(described_class.new(source: 'museum').pse?).to be true
+    end
+  end
+
+  describe '#database?' do
+    it 'returns false' do
+      expect(described_class.new(source: 'museum').database?).to be false
     end
   end
 end
