@@ -10,11 +10,11 @@ describe 'Discover Penn page' do
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
-    let(:art_work) { create(:art_work) }
+    let(:art_work) { create(:art_work, location: query[:q]) }
 
     before do
       stub_all_responses(query: query)
-      allow(Discover::ArtWork).to receive(:search).and_return([art_work])
+      art_work
       fill_in 'q', with: query[:q]
       click_on I18n.t('discover.search.button.label')
     end
@@ -201,7 +201,7 @@ describe 'Discover Penn page' do
 
       it 'displays description' do
         within '#penn-art-collection dl.results-list-item__metadata' do
-          expect(page).to have_content(
+          expect(page).to have_text(
             art_work.description.truncate(Discover::Entry::BasePresenter::MAX_STRING_LENGTH).squish
           )
         end
@@ -217,6 +217,24 @@ describe 'Discover Penn page' do
       it 'displays the total count in the overview area' do
         within '#art_collection-results-count' do
           expect(page).to have_text '(1)'
+        end
+      end
+
+      it 'displays location' do
+        within '#penn-art-collection dl.results-list-item__metadata dd.results-list-item__location' do
+          expect(page).to have_text(art_work.location)
+        end
+      end
+
+      it 'displays creator' do
+        within '#penn-art-collection dl.results-list-item__metadata' do
+          expect(page).to have_text(art_work.creator)
+        end
+      end
+
+      it 'displays format' do
+        within '#penn-art-collection dl.results-list-item__metadata' do
+          expect(page).to have_text(art_work.format)
         end
       end
     end
