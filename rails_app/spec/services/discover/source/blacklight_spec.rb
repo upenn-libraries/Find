@@ -37,9 +37,10 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns a results url' do
-      expect(results.results_url).to eq('https://find.library.upenn.edu/?f%5Baccess_facet%5D%5B%5D=' \
-                                          'At+the+library&f%5Blibrary_facet%5D%5B%5D=Special+Collections&' \
-                                          'q=%22Menil+%3A+the+Menil+collection%22&search_field=all_fields')
+      expect(results.results_url).to eq('https://find.library.upenn.edu/?f_inclusive%5Baccess_facet%5D%5B%5D=' \
+                                          'At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections' \
+                                          '&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&' \
+                                          'q=Menil+%3A+the+Menil+collection')
     end
 
     it 'assigns expected entry title' do
