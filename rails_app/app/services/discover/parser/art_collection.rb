@@ -51,7 +51,7 @@ module Discover
         # @param description [String]
         # @return [String]
         def sanitize(description)
-          ActionView::Base.full_sanitizer.sanitize(description)
+          ActionView::Base.full_sanitizer.sanitize(description)&.gsub(/Â|â/, '')
         end
       end
     end

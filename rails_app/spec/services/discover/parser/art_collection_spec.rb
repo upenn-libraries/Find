@@ -16,7 +16,7 @@ describe Discover::Parser::ArtCollection do
     end
 
     it 'strips html tags in description' do
-      expect(first_artwork.description).not_to match /<[^>]*>/
+      expect(first_artwork.description).not_to match(/<[^>]*>/)
     end
 
     described_class::ARTWORK_ATTRIBUTES.each do |a|
