@@ -71,7 +71,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#find-results-count' do
+        within '#libraries-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -124,7 +124,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#finding_aids-results-count' do
+        within '#archives-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -172,7 +172,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#museum-results-count' do
+        within '#penn-museum-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -208,6 +208,8 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the thumbnail' do
+        # wait to ensure placeholder image is replaced by actual thumbnail
+        sleep 1
         within '#penn-art-collection' do
           image = find('img.results-list-item__thumbnail')
           expect(image[:src]).to include(art_work.thumbnail_url)
@@ -215,7 +217,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#art_collection-results-count' do
+        within '#penn-art-collection-results-count' do
           expect(page).to have_text '(1)'
         end
       end
