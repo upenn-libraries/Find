@@ -1,6 +1,8 @@
 <turbo-frame id="<%= turbo_frame_id %>" class="card-body">
   <%= turbo_stream_action_tag :replace, target: results_dom_id, template: total_count_content %>
-  <%= turbo_stream_action_tag :replace, target: results_button_id, template: results_button_content %>
+  <% if results? %>
+    <%= turbo_stream_action_tag :replace, target: results_button_id, template: results_button_content %>
+  <% end %>
   <ul class="list-group list-group-flush results-list results-list">
     <% if results? %>
       <% results.take(count).each do |entry| %>

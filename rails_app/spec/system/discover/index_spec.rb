@@ -258,6 +258,18 @@ describe 'Discover Penn page' do
           expect(page).to have_text(I18n.t('discover.results.messages.no_results'))
         end
       end
+
+      it 'does not link to all results' do
+        within('#libraries') do
+          expect(page).not_to have_link(I18n.t('discover.results.view_all_button.label', count: 0))
+        end
+      end
+
+      it 'displays the total count in the overview area' do
+        within '#libraries-results-count' do
+          expect(page).to have_text '(0)'
+        end
+      end
     end
   end
 end
