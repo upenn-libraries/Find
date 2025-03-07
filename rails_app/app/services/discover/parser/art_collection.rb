@@ -49,7 +49,7 @@ module Discover
         # Sanitize string with HTML tags
         #
         # @param description [String]
-        # @return [String]
+        # @return [String, nil]
         def sanitize(description)
           ActionView::Base.full_sanitizer.sanitize(description)&.gsub(/Â|â/, '')
         end
