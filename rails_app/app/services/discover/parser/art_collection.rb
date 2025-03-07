@@ -39,8 +39,10 @@ module Discover
             attributes = ARTWORK_ATTRIBUTES.index_with do |attr|
               attr == :description ? sanitize(row[attr.to_s]) : row[attr.to_s]
             end
-            artwork.assign_attributes(attributes)
-            artwork.save! if artwork.new_record? || artwork.changed?
+            artwork.tap { |a| a.attributes = attributes }.save!
+          rescue StandardError => e
+            Honeybadger.notify(e)
+            next
           end
         end
 
