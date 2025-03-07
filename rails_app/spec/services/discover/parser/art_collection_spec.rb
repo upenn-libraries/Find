@@ -7,9 +7,14 @@ describe Discover::Parser::ArtCollection do
   let(:tsv_updated) { tsv_fixture('art_collection_updated') }
 
   context 'with new artworks' do
+    before { described_class.import(file: tsv) }
+
     it 'creates artworks' do
-      expect { described_class.import(file: tsv) }
-        .to change(Discover::ArtWork, :count).by(9)
+      expect(Discover::ArtWork.count).to eq 9
+    end
+
+    it 'strips html tags in description' do
+      expect(Discover::ArtWork.first.description).not_to match(/<[^>]*>/)
     end
   end
 

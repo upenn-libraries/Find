@@ -6,8 +6,6 @@ module Discover
   module Parser
     # Fetch and parse the scraped TSV
     class ArtCollection
-      include ActionView::Helpers::SanitizeHelper
-
       ARTWORK_ATTRIBUTES = %i[title link identifier thumbnail_url location format creator description].freeze
 
       class << self
@@ -39,11 +37,19 @@ module Discover
           CSV.parse(data, col_sep: "\t", headers: true, quote_char: nil) do |row|
             artwork = ArtWork.find_or_initialize_by(link: row['link'])
             attributes = ARTWORK_ATTRIBUTES.index_with do |attr|
-              attr == :desription ? strip_tags(row[attr.to_s]) : row[attr.to_s]
+              attr == :description ? sanitize(row[attr.to_s]) : row[attr.to_s]
             end
             artwork.assign_attributes(attributes)
             artwork.save! if artwork.new_record? || artwork.changed?
           end
+        end
+
+        # Sanitize string with HTML tags
+        #
+        # @param description [String]
+        # @return [String]
+        def sanitize(description)
+          ActionView::Base.full_sanitizer.sanitize(description)
         end
       end
     end
