@@ -15,40 +15,14 @@ describe Discover::Parser::ArtCollection do
       expect(Discover::ArtWork.count).to eq 10
     end
 
-    it 'assigns title' do
-      expect(first_artwork.title).not_to be_nil
-    end
-
-    it 'assigns link' do
-      expect(first_artwork.link).not_to be_nil
-    end
-
-    it 'assigns identifier' do
-      expect(first_artwork.identifier).not_to be_nil
-    end
-
-    it 'assigns thumbnail_url' do
-      expect(first_artwork.thumbnail_url).not_to be_nil
-    end
-
-    it 'assigns location' do
-      expect(first_artwork.location).not_to be_nil
-    end
-
-    it 'assigns format' do
-      expect(first_artwork.format).not_to be_nil
-    end
-
-    it 'assigns creator' do
-      expect(first_artwork.creator).not_to be_nil
-    end
-
-    it 'assigns description' do
-      expect(first_artwork.description).not_to be_nil
-    end
-
     it 'strips html tags in description' do
-      expect(first_artwork.description).not_to match(/<[^>]*>/)
+      expect(first_artwork.description).not_to match /<[^>]*>/
+    end
+
+    described_class::ARTWORK_ATTRIBUTES.each do |a|
+      it "assigns #{a}" do
+        expect(first_artwork.send(a)).not_to be_nil
+      end
     end
   end
 
