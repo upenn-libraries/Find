@@ -10,17 +10,18 @@ module Discover
       Discover::Configuration::Database::ArtCollection::SOURCE => %w[bi bi-brush]
     }.freeze
 
-    attr_reader :source, :query, :disabled, :results
+    attr_reader :source, :query, :disabled, :results, :count
 
     # @param source [String, Symbol]
     # @param query [String]
     # @param results [Array]
     # @param disabled [Boolean]
-    def initialize(source:, query: '', results: [], disabled: false)
+    def initialize(source:, query: '', results: [], disabled: false, count: Configuration::RESULT_MAX_COUNT)
       @source = source.to_s
       @query = query
       @results = results
       @disabled = disabled
+      @count = count
     end
 
     # @return [Boolean]
@@ -31,6 +32,16 @@ module Discover
     # @return [String]
     def id
       label.downcase.split(' ').join('-')
+    end
+
+    # @return [String]
+    def turbo_frame_id
+      "#{id}-turbo-frame"
+    end
+
+    # @return [String]
+    def results_button_id
+      "#{id}-results-button"
     end
 
     # @return [String]

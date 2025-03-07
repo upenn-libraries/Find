@@ -2,7 +2,7 @@
 
 module Discover
   # Renders many Entry components
-  class ResultsComponent < ViewComponent::Base
+  class ResultsComponent < ResultsSkeletonComponent
     include Turbo::Streams::ActionHelper
 
     attr_reader :source, :count, :results
@@ -15,13 +15,9 @@ module Discover
       @source = @results.source.source
     end
 
-    def results?
-      results.any?
-    end
-
     # @return [String]
     def results_dom_id
-      "#{source}-results-count"
+      "#{id}-results-count"
     end
 
     # @return [String]
@@ -29,6 +25,13 @@ module Discover
       total_count = number_with_delimiter(results&.total_count) || 0
       tag.span class: 'results-count', id: results_dom_id do
         "(#{total_count})"
+      end
+    end
+
+    # @return [String]
+    def results_button_content
+      tag.a(id: results_button_id, class: 'btn btn-sm btn-primary', href: results.results_url) do
+        t('discover.results.view_all_button.label', count: number_with_delimiter(results.total_count))
       end
     end
   end

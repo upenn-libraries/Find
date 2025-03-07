@@ -1,19 +1,51 @@
-<turbo-frame id="<%= id %>"
-             class="card"
-             src="<%= discover_search_results_path(source: source, q: query) %>"
-             <%= "disabled" if disabled %>>
+<div id="<%= id %>" class="card">
   <div class="card-header">
     <h3 class="card-title h4">
       <i class="<%= icon_classes.join(' ') %>"></i>
       <%= label %>
     </h3>
-    <% if results? %>
-      <a class="btn btn-sm btn-primary" href="<%= results.results_url %>"><%= t('discover.results.view_all_button.label', count: number_with_delimiter(results.total_count)) %></a>
-    <% end %>
+    <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary"  <%= "disabled" %>></a>
   </div>
-  <div class="card-body">
+  <turbo-frame id="<%= turbo_frame_id %>"
+               class="card-body"
+               src="<%= discover_search_results_path(source: source, q: query) %>"
+               <%= "disabled" if disabled %>>
     <ul class="list-group list-group-flush results-list results-list">
-      <%= content %>
+      <% count.times do %>
+        <li class="list-group-item results-list-item placeholder-glow" role="status">
+          <h3 class="results-list-item__heading h5 placeholder-glow">
+            <span class="visually-hidden"><%= t('discover.results.messages.loading', source: label) %></span>
+            <span class="placeholder col-10"></span>
+            <span class="placeholder col-10"></span>
+          </h3>
+          <div class="results-list-item__content placeholder-glow">
+            <div class="results-list-item__metadata placeholder-glow">
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="mh-lg placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+            </div>
+            <img src="" class="results-list-item__thumbnail placeholder" alt="<%= t('discover.results.messages.loading', source: label) %>">
+          </div>
+        </li>
+      <% end %>
     </ul>
-  </div>
-</turbo-frame>
+  </turbo-frame>
+</div>
