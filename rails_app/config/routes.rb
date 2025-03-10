@@ -92,6 +92,9 @@ Rails.application.routes.draw do
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
 
   if Settings.discover.enabled
+    scope module: :discover do
+      get '/collects', to: 'discover#index'
+    end
     namespace :discover do
       get '/', to: 'discover#index'
       get ':source/results', to: 'search#results', as: 'search_results'
