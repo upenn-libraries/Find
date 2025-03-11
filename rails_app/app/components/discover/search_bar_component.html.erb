@@ -8,6 +8,7 @@
         <%= f.hidden_field :no_pse, value: no_pse? %>
         <%= f.search_field :q,
                            value: params[:q],
+                           required: true,
                            class: "search-form__input form-control rounded-left",
                            aria: { label: t('discover.search.button.aria_label') } %>
 

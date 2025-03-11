@@ -17,7 +17,7 @@ module Discover
     private
 
     def validate_query
-      flash[:alert] = t('discover.empty_query') if params[:query].blank?
+      flash[:alert] = t('discover.empty_query') if params.key?(:q) && params[:q].blank?
     end
   end
 end

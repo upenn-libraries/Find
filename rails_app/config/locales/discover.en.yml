@@ -13,7 +13,7 @@ en:
     search:
       button:
         label: 'Search'
-        aria_label: 'Search for'
+        aria_label: 'Search for (required)'
 
     home:
       title: 'About Penn Collects'
