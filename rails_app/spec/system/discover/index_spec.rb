@@ -16,10 +16,12 @@ describe 'Discover Penn page' do
   end
 
   context 'with no query term provided' do
-    let(:query) { { q: ' ' } }
+    context 'with server-side validation' do
+      let(:query) { { q: ' ' } } # Space as a query satisfies the client-side validation, but not the server-side
 
-    it 'shows a message that a query term is required' do
-      expect(page).to have_text I18n.t('discover.empty_query')
+      it 'shows a message that a query term is required' do
+        expect(page).to have_text I18n.t('discover.empty_query')
+      end
     end
   end
 
