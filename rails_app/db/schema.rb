@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_03_171549) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_04_173239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_03_171549) do
   create_table "discover_art_works", force: :cascade do |t|
     t.string "title"
     t.string "link"
+    t.string "identifier"
     t.string "thumbnail_url"
     t.string "location"
     t.string "format"
