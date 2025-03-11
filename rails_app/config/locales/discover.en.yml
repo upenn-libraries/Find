@@ -2,6 +2,7 @@ en:
   discover:
     site_name: 'Penn Collects'
     tagline: 'Discover the treasures of Penn'
+    empty_query: 'Please provide a search term so that we know what to look for.'
 
     images:
       site_logo:

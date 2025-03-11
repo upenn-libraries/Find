@@ -6,18 +6,25 @@ describe 'Discover Penn page' do
   include Discover::ApiMocks::Request
   include FixtureHelpers
 
-  before { visit discover_path }
+  let!(:art_work) { create(:art_work, location: query[:q]) }
+
+  before do
+    stub_all_responses(query: query)
+    visit discover_path
+    fill_in 'q', with: query[:q]
+    click_on I18n.t('discover.search.button.label')
+  end
+
+  context 'with no query term provided' do
+    let(:query) { { q: ' ' } }
+
+    it 'shows a message that a query term is required' do
+      expect(page).to have_text I18n.t('discover.empty_query')
+    end
+  end
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
-    let(:art_work) { create(:art_work, location: query[:q]) }
-
-    before do
-      stub_all_responses(query: query)
-      art_work
-      fill_in 'q', with: query[:q]
-      click_on I18n.t('discover.search.button.label')
-    end
 
     context 'with libraries results' do
       it 'displays the expected icon' do
