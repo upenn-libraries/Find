@@ -28,7 +28,7 @@ redis:
 email:
   from_address: 'find-noreply@upenn.edu'
   smtp:
-    url: 'mailrelay.library.upenn.int'
+    url: 'smtp-relay.upenn.edu'
     port: 25
     domain: 'upenn.edu'
 library:
