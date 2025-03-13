@@ -4,7 +4,7 @@
       <i class="<%= icon_classes.join(' ') %>"></i>
       <%= label %>
     </h3>
-    <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary"  <%= "disabled" %>></a>
+    <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary disabled"></a>
   </div>
   <turbo-frame id="<%= turbo_frame_id %>"
                class="card-body"
@@ -15,8 +15,8 @@
         <li class="list-group-item results-list-item placeholder-glow" role="status">
           <h3 class="results-list-item__heading h5 placeholder-glow">
             <span class="visually-hidden"><%= t('discover.results.messages.loading', source: label) %></span>
-            <span class="placeholder col-10"></span>
-            <span class="placeholder col-10"></span>
+            <span class="placeholder col-12"></span>
+            <span class="placeholder col-12"></span>
           </h3>
           <div class="results-list-item__content placeholder-glow">
             <div class="results-list-item__metadata placeholder-glow">
