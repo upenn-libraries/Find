@@ -208,8 +208,6 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the thumbnail' do
-        # wait to ensure placeholder image is replaced by actual thumbnail
-        sleep 1
         within '#penn-art-collection' do
           image = find('img.results-list-item__thumbnail')
           expect(image[:src]).to include(art_work.thumbnail_url)
