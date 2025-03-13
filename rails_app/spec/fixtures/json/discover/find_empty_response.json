@@ -1,7 +1,7 @@
 {
   "links": {
-    "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric",
-    "last": "https://find.library.upenn.edu/catalog.json?page=0&q=somethingreallyesoteric"
+    "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric",
+    "last": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&page=0&q=somethingreallyesoteric"
   },
   "meta": {
     "pages": {
@@ -25,7 +25,7 @@
         "label": "All Fields"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&search_field=all_fields"
       }
     },
     {
@@ -35,7 +35,7 @@
         "label": "Relevance"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -45,7 +45,7 @@
         "label": "Author/Creator (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=creator_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=creator_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -55,7 +55,7 @@
         "label": "Author/Creator (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=creator_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=creator_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -65,7 +65,7 @@
         "label": "Title (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=title_sort+asc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=title_sort+asc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -75,7 +75,7 @@
         "label": "Title (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=title_sort+desc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=title_sort+desc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -85,7 +85,7 @@
         "label": "Call Number (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=call_number_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=call_number_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -95,7 +95,7 @@
         "label": "Call Number (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=call_number_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=call_number_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -105,7 +105,7 @@
         "label": "Publication date (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=publication_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=publication_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -115,7 +115,7 @@
         "label": "Publication date (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -125,7 +125,7 @@
         "label": "Date Added (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=added_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=added_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -135,7 +135,7 @@
         "label": "Date Added (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?q=somethingreallyesoteric&sort=added_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=somethingreallyesoteric&sort=added_date_sort+desc%2C+title_sort+asc"
       }
     }
   ]

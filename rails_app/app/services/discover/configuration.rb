@@ -31,14 +31,13 @@ module Discover
         IDENTIFIERS = { isbn: %w[attributes isbn_ss attributes value],
                         issn: %w[attributes issn_ss attributes value],
                         oclc_id: %w[attributes oclc_id_ss attributes value] }.freeze
-
-        # TODO: all special collections?, like 'Kislak Center for Special Collections' as well
-        LIBRARY_VALUES = ['Special Collections'].freeze
+        LIBRARY_VALUES = ['Special Collections', 'Fisher Fine Arts Library'].freeze
         ACCESS_VALUES = [PennMARC::Access::AT_THE_LIBRARY].freeze
-        # TODO: do these need to be inclusive? if we do exclusive, the first facet will limit the following facets
-        QUERY_PARAMS = { 'f[access_facet][]': ACCESS_VALUES,
-                         'f[library_facet][]': LIBRARY_VALUES,
-                         search_field: 'all_fields' }.freeze
+
+        QUERY_PARAMS = { op: 'must', 'clause[0][field]': 'all_fields_advanced',
+                         'f_inclusive[access_facet][]': ACCESS_VALUES,
+                         'f_inclusive[library_facet][]': LIBRARY_VALUES,
+                         'clause[0][query]': 'all_fields' }.freeze
       end
 
       # Configuration for Finding Aids

@@ -1,7 +1,8 @@
 {
   "links": {
-    "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields",
-    "last": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026page=1\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+    "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection",
+    "next": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&page=2&q=Menil+%3A+the+Menil+collection",
+    "last": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&page=8&q=Menil+%3A+the+Menil+collection"
   },
   "meta": {
     "pages": {
@@ -126,13 +127,13 @@
               "hits": 1
             },
             "links": {
-              "remove": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/access_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/access_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -145,16 +146,26 @@
             "attributes": {
               "label": "Book",
               "value": "Book",
+              "hits": 76
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bformat_facet%5D%5B%5D=Book&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Government document",
+              "value": "Government document",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bformat_facet%5D%5B%5D=Book\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bformat_facet%5D%5B%5D=Government+document&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/format_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/format_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -165,38 +176,118 @@
         "items": [
           {
             "attributes": {
-              "label": "Fondazione Renzo Piano",
-              "value": "Fondazione Renzo Piano",
-              "hits": 1
+              "label": "Menil Collection (Houston, Tex.)",
+              "value": "Menil Collection (Houston, Tex.)",
+              "hits": 46
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Fondazione+Renzo+Piano\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Piano, Lia",
-              "value": "Piano, Lia",
-              "hits": 1
+              "label": "White, Michelle, 1979-",
+              "value": "White, Michelle, 1979-",
+              "hits": 7
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Lia\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=White%2C+Michelle%2C+1979-&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Piano, Renzo",
-              "value": "Piano, Renzo",
-              "hits": 1
+              "label": "Elliott, Clare",
+              "value": "Elliott, Clare",
+              "hits": 4
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bcreator_facet%5D%5B%5D=Piano%2C+Renzo\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Elliott%2C+Clare&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Ernst, Max, 1891-1976",
+              "value": "Ernst, Max, 1891-1976",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Ernst%2C+Max%2C+1891-1976&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Helfenstein, Josef",
+              "value": "Helfenstein, Josef",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Helfenstein%2C+Josef&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Johns, Jasper, 1930-",
+              "value": "Johns, Jasper, 1930-",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Johns%2C+Jasper%2C+1930-&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Kopp, Édouard, 1974-",
+              "value": "Kopp, Édouard, 1974-",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Kopp%2C+E%CC%81douard%2C+1974-&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Museum of Modern Art (New York, N.Y.)",
+              "value": "Museum of Modern Art (New York, N.Y.)",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Museum+of+Modern+Art+%28New+York%2C+N.Y.%29&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art Institute of Chicago",
+              "value": "Art Institute of Chicago",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Art+Institute+of+Chicago&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Berkeley Art Museum and Pacific Film Archive",
+              "value": "Berkeley Art Museum and Pacific Film Archive",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Berkeley+Art+Museum+and+Pacific+Film+Archive&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Dalton, Karen C. C., 1948-",
+              "value": "Dalton, Karen C. C., 1948-",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bcreator_facet%5D%5B%5D=Dalton%2C+Karen+C.+C.%2C+1948-&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/creator_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/creator_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -207,118 +298,118 @@
         "items": [
           {
             "attributes": {
-              "label": "Architects",
-              "value": "Architects",
-              "hits": 1
+              "label": "Exhibitions",
+              "value": "Exhibitions",
+              "hits": 11
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Exhibitions&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Architects--Italy",
-              "value": "Architects--Italy",
-              "hits": 1
+              "label": "United States",
+              "value": "United States",
+              "hits": 10
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Architects--Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=United+States&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Art museum architecture",
-              "value": "Art museum architecture",
-              "hits": 1
+              "label": "Criticism and interpretation",
+              "value": "Criticism and interpretation",
+              "hits": 9
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Criticism+and+interpretation&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Art museum architecture--Texas--Houston",
-              "value": "Art museum architecture--Texas--Houston",
-              "hits": 1
+              "label": "Texas--Houston",
+              "value": "Texas--Houston",
+              "hits": 7
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museum+architecture--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Texas--Houston&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Art museums",
-              "value": "Art museums",
-              "hits": 1
+              "label": "Art, Modern",
+              "value": "Art, Modern",
+              "hits": 5
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Art museums--Texas--Houston",
-              "value": "Art museums--Texas--Houston",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Art+museums--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Buildings",
-              "value": "Buildings",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Buildings--Texas--Houston",
-              "value": "Buildings--Texas--Houston",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Buildings--Texas--Houston\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
-            }
-          },
-          {
-            "attributes": {
-              "label": "Italy",
-              "value": "Italy",
-              "hits": 1
-            },
-            "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Italy\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Art%2C+Modern&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
               "label": "Menil Collection (Houston, Tex.)",
               "value": "Menil Collection (Houston, Tex.)",
-              "hits": 1
+              "hits": 5
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
-              "label": "Menil Collection (Houston, Tex.)--Designs and plans",
-              "value": "Menil Collection (Houston, Tex.)--Designs and plans",
-              "hits": 1
+              "label": "Surrealism",
+              "value": "Surrealism",
+              "hits": 5
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Bsubject_facet%5D%5B%5D=Menil+Collection+%28Houston%2C+Tex.%29--Designs+and+plans\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Surrealism&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Surrealism--Exhibitions",
+              "value": "Surrealism--Exhibitions",
+              "hits": 5
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Surrealism--Exhibitions&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Ernst, Max, 1891-1976",
+              "value": "Ernst, Max, 1891-1976",
+              "hits": 4
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Ernst%2C+Max%2C+1891-1976&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "History",
+              "value": "History",
+              "hits": 4
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=History&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Art museums",
+              "value": "Art museums",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bsubject_facet%5D%5B%5D=Art+museums&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/subject_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/subject_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -331,26 +422,46 @@
             "attributes": {
               "label": "English",
               "value": "English",
-              "hits": 1
+              "hits": 76
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=English\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blanguage_facet%5D%5B%5D=English&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "German",
+              "value": "German",
+              "hits": 5
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blanguage_facet%5D%5B%5D=German&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "French",
+              "value": "French",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blanguage_facet%5D%5B%5D=French&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
               "label": "Italian",
               "value": "Italian",
-              "hits": 1
+              "hits": 2
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blanguage_facet%5D%5B%5D=Italian\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blanguage_facet%5D%5B%5D=Italian&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/language_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/language_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -363,26 +474,56 @@
             "attributes": {
               "label": "Fisher Fine Arts Library",
               "value": "Fisher Fine Arts Library",
-              "hits": 1
+              "hits": 74
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "LIBRA",
+              "value": "LIBRA",
+              "hits": 6
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=LIBRA&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           },
           {
             "attributes": {
               "label": "Special Collections",
               "value": "Special Collections",
+              "hits": 4
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Athenaeum of Philadelphia",
+              "value": "Athenaeum of Philadelphia",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Athenaeum+of+Philadelphia&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Van Pelt-Dietrich Library Center",
+              "value": "Van Pelt-Dietrich Library Center",
               "hits": 1
             },
             "links": {
-              "remove": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blibrary_facet%5D%5B%5D=Van+Pelt-Dietrich+Library+Center&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/library_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/library_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -393,18 +534,88 @@
         "items": [
           {
             "attributes": {
+              "label": "Fisher Fine Arts Library",
+              "value": "Fisher Fine Arts Library",
+              "hits": 67
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Fisher Fine Arts Library - Core Reading Collection",
+              "value": "Fisher Fine Arts Library - Core Reading Collection",
+              "hits": 7
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library+-+Core+Reading+Collection&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "LIBRA",
+              "value": "LIBRA",
+              "hits": 5
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=LIBRA&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Athenaeum of Philadelphia - Circulating Collection",
+              "value": "Athenaeum of Philadelphia - Circulating Collection",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=Athenaeum+of+Philadelphia+-+Circulating+Collection&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "LIBRA Special",
+              "value": "LIBRA Special",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=LIBRA+Special&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
               "label": "Fisher Fine Arts Library - Locked Case",
               "value": "Fisher Fine Arts Library - Locked Case",
               "hits": 1
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library+-+Locked+Case\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=Fisher+Fine+Arts+Library+-+Locked+Case&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "LIBRA Rare",
+              "value": "LIBRA Rare",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=LIBRA+Rare&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Van Pelt - Stacks",
+              "value": "Van Pelt - Stacks",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Blocation_facet%5D%5B%5D=Van+Pelt+-+Stacks&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/location_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/location_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -417,16 +628,110 @@
             "attributes": {
               "label": "N - Fine Arts",
               "value": "N - Fine Arts",
-              "hits": 1
+              "hits": 73
             },
             "links": {
-              "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Bclassification_facet%5D%5B%5D=N+-+Fine+Arts\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bclassification_facet%5D%5B%5D=N+-+Fine+Arts&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "T - Technology",
+              "value": "T - Technology",
+              "hits": 3
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Bclassification_facet%5D%5B%5D=T+-+Technology&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
             }
           }
         ]
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog/facet/classification_facet.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog/facet/classification_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "recently_published_facet",
+      "attributes": {
+        "label": "Recently Published",
+        "items": [
+          {
+            "attributes": {
+              "label": "Within 5 years",
+              "value": "last_5_years",
+              "hits": 9
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_published_facet%5D%5B%5D=last_5_years&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Within 10 years",
+              "value": "last_10_years",
+              "hits": 24
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_published_facet%5D%5B%5D=last_10_years&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Within 15 years",
+              "value": "last_15_years",
+              "hits": 36
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_published_facet%5D%5B%5D=last_15_years&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/recently_published_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+      }
+    },
+    {
+      "type": "facet",
+      "id": "recently_added_facet",
+      "attributes": {
+        "label": "Recently Added",
+        "items": [
+          {
+            "attributes": {
+              "label": "Within 30 days",
+              "value": "within_30_days",
+              "hits": 1
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_added_facet%5D%5B%5D=within_30_days&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Within 60 days",
+              "value": "within_60_days",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_added_facet%5D%5B%5D=within_60_days&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          },
+          {
+            "attributes": {
+              "label": "Within 90 days",
+              "value": "within_90_days",
+              "hits": 2
+            },
+            "links": {
+              "self": "https://find.library.upenn.edu/catalog.json?f%5Brecently_added_facet%5D%5B%5D=within_90_days&f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
+            }
+          }
+        ]
+      },
+      "links": {
+        "self": "https://find.library.upenn.edu/catalog/facet/recently_added_facet.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection"
       }
     },
     {
@@ -436,7 +741,7 @@
         "label": "All Fields"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&search_field=all_fields"
       }
     },
     {
@@ -446,7 +751,7 @@
         "label": "Relevance"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -456,7 +761,7 @@
         "label": "Author/Creator (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=creator_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -466,7 +771,7 @@
         "label": "Author/Creator (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=creator_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=creator_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -476,7 +781,7 @@
         "label": "Title (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+asc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=title_sort+asc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -486,7 +791,7 @@
         "label": "Title (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=title_sort+desc%2C+publication_date_sort+desc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=title_sort+desc%2C+publication_date_sort+desc"
       }
     },
     {
@@ -496,7 +801,7 @@
         "label": "Call Number (a-z)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=call_number_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -506,7 +811,7 @@
         "label": "Call Number (z-a)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=call_number_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=call_number_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -516,7 +821,7 @@
         "label": "Publication date (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=publication_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -526,7 +831,7 @@
         "label": "Publication date (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=publication_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=publication_date_sort+desc%2C+title_sort+asc"
       }
     },
     {
@@ -536,7 +841,7 @@
         "label": "Date Added (old-new)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+asc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=added_date_sort+asc%2C+title_sort+asc"
       }
     },
     {
@@ -546,7 +851,7 @@
         "label": "Date Added (new-old)"
       },
       "links": {
-        "self": "https://find.library.upenn.edu/catalog.json?f%5Baccess_facet%5D%5B%5D=At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil+collection%22\u0026search_field=all_fields\u0026sort=added_date_sort+desc%2C+title_sort+asc"
+        "self": "https://find.library.upenn.edu/catalog.json?f_inclusive%5Baccess_facet%5D%5B%5D=At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&q=Menil+%3A+the+Menil+collection&sort=added_date_sort+desc%2C+title_sort+asc"
       }
     }
   ]

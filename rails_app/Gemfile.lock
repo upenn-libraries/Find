@@ -496,7 +496,7 @@ GEM
       rubocop-rails
       rubocop-rake
       rubocop-rspec
-    uri (0.13.0)
+    uri (1.0.3)
     useragent (0.16.11)
     view_component (2.83.0)
       activesupport (>= 5.2.0, < 8.0)

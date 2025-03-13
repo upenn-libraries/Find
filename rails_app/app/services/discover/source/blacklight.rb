@@ -128,7 +128,6 @@ module Discover
       # @param query [String]
       # @return [URI::Generic]
       def query_uri(query:)
-        # (specifically for the library facet, do we want to be able to include two library facets and get all results?)
         query_config = config_class::QUERY_PARAMS
         query_params = query_config.merge({ q: query })
         URI::HTTPS.build(host: config_class::HOST,

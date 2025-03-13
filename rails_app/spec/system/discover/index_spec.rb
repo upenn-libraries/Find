@@ -27,9 +27,10 @@ describe 'Discover Penn page' do
       it 'links to all results' do
         within('#libraries div.card-header') do
           expect(page).to have_link(I18n.t('discover.results.view_all_button.label', count: 1),
-                                    href: 'https://find.library.upenn.edu/?f%5Baccess_facet%5D%5B%5D=' \
-          "At+the+library\u0026f%5Blibrary_facet%5D%5B%5D=Special+Collections\u0026q=%22Menil+%3A+the+Menil" \
-                                      "+collection%22\u0026search_field=all_fields".squish,
+                                    href: 'https://find.library.upenn.edu/?f_inclusive%5Baccess_facet%5D%5B%5D=' \
+                                      'At+the+library&f_inclusive%5Blibrary_facet%5D%5B%5D=Special+Collections' \
+                                      '&f_inclusive%5Blibrary_facet%5D%5B%5D=Fisher+Fine+Arts+Library&op=must&' \
+                                      'q=Menil+%3A+the+Menil+collection'.squish,
                                     exact: true)
         end
       end
