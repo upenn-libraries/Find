@@ -5,14 +5,21 @@ module Discover
   class ResultsComponent < ResultsSkeletonComponent
     include Turbo::Streams::ActionHelper
 
-    attr_reader :source, :count, :results
+    attr_reader :count, :results, :presenter
 
-    # @param [Discover::Results] results
-    # @param [Integer] count
+    delegate(*Discover::Results::ResultsPresenter::VALUES, to: :presenter)
+
+    # @param results [Discover::Results]
+    # @param count [Integer]
     def initialize(results:, count: Configuration::RESULT_MAX_COUNT)
       @results = results
       @count = count
-      @source = @results.source.source
+      @presenter = Discover::Results::ResultsPresenter.new(source: results.source.source)
+    end
+
+    # @return [Boolean]
+    def results?
+      results.any?
     end
 
     # @return [String]
