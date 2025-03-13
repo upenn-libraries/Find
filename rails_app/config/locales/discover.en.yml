@@ -31,7 +31,7 @@ en:
         art_collection:
           label: 'Penn Art Collection'
       messages:
-        loading: 'Loading Results..'
+        loading: 'Loading %{source} results..'
         no_results: 'We did not find any matches.'
       view_all_button:
         label: 'View all %{count} results'

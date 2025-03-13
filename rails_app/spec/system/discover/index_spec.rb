@@ -72,7 +72,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#find-results-count' do
+        within '#libraries-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -125,7 +125,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#finding_aids-results-count' do
+        within '#archives-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -173,7 +173,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#museum-results-count' do
+        within '#penn-museum-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -216,7 +216,7 @@ describe 'Discover Penn page' do
       end
 
       it 'displays the total count in the overview area' do
-        within '#art_collection-results-count' do
+        within '#penn-art-collection-results-count' do
           expect(page).to have_text '(1)'
         end
       end
@@ -255,6 +255,18 @@ describe 'Discover Penn page' do
       it 'displays expected message' do
         within('#libraries') do
           expect(page).to have_text(I18n.t('discover.results.messages.no_results'))
+        end
+      end
+
+      it 'does not link to all results' do
+        within('#libraries') do
+          expect(page).not_to have_link(I18n.t('discover.results.view_all_button.label', count: 0))
+        end
+      end
+
+      it 'displays the total count in the overview area' do
+        within '#libraries-results-count' do
+          expect(page).to have_text '(0)'
         end
       end
     end

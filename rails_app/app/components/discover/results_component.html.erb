@@ -1,10 +1,15 @@
-<%= render Discover::ResultsSkeletonComponent.new(source: source, results: results, disabled: true) do %>
+<turbo-frame id="<%= turbo_frame_id %>" class="card-body">
   <%= turbo_stream_action_tag :replace, target: results_dom_id, template: total_count_content %>
   <% if results? %>
-    <% results.take(count).each do |entry| %>
-      <%= render Discover::EntryComponent.new(entry: entry, source: source) %>
-    <% end %>
-  <% else %>
-    <span class="text-center"><%= t('discover.results.messages.no_results') %></span>
+    <%= turbo_stream_action_tag :replace, target: results_button_id, template: results_button_content %>
   <% end %>
-<% end %>
+  <ul class="list-group list-group-flush results-list results-list">
+    <% if results? %>
+      <% results.take(count).each do |entry| %>
+        <%= render Discover::EntryComponent.new(entry: entry, source: source) %>
+      <% end %>
+    <% else %>
+      <span class="py-3 text-center"><%= t('discover.results.messages.no_results') %></span>
+    <% end %>
+  </ul>
+</turbo-frame>
