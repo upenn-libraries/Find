@@ -10,6 +10,15 @@ describe Inventory::List::Entry::Ecollection do
     )
   end
 
+  let(:unsanitized_entry) do
+    create(
+      :ecollection_entry,
+      mms_id: '9977497628803681',
+      id: '61582131440003681',
+      public_note: '<font color="red"><b>Requires registration with Penn email.</b></font>'
+    )
+  end
+
   describe '#id' do
     it 'returns expected id' do
       expect(entry.id).to eq '61585817810003681'
@@ -41,6 +50,10 @@ describe Inventory::List::Entry::Ecollection do
   describe '#public_note' do
     it 'returns expected public_note' do
       expect(entry.public_note).to eql 'Lippincott Library On-site Database'
+    end
+
+    it 'removes unsafe html' do
+      expect(unsanitized_entry.public_note).to eql '<b>Requires registration with Penn email.</b>'
     end
   end
 

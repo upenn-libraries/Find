@@ -50,7 +50,7 @@ module Inventory
 
         # @return [String, nil]
         def public_note
-          data[:public_note]
+          ActionController::Base.helpers.sanitize(data[:public_note])
         end
 
         # @return [String, nil]

@@ -17,6 +17,22 @@ describe Inventory::List::Entry::Electronic do
     )
   end
 
+  let(:unsanitized_entry) do
+    create(
+      :electronic_entry,
+      mms_id: '9977047750803681',
+      portfolio_pid: '53649440860003681',
+      collection_id: '53649440860003681',
+      activation_status: Inventory::Constants::ELEC_AVAILABLE,
+      library_code: 'VanPeltLib',
+      collection: 'Publisher website (licensed ejournals)',
+      public_note: '<font color="red"><b><a href="http://spam.com">Penn-sponsored</a> access</b></font>',
+      coverage_statement: '<font color="pink"><b>Available from 1977.</b></font>',
+      interface_name: 'Miscellaneous ejournals',
+      inventory_type: Inventory::List::ELECTRONIC
+    )
+  end
+
   describe '#status' do
     it 'returns expected status' do
       expect(entry.status).to eq Inventory::Constants::ELEC_AVAILABLE
@@ -53,11 +69,19 @@ describe Inventory::List::Entry::Electronic do
     it 'returns expected coverage_statement' do
       expect(entry.coverage_statement).to eql 'Available from 1869 volume: 1 issue: 1.'
     end
+
+    it 'removes unsafe html' do
+      expect(unsanitized_entry.coverage_statement).to eql '<b>Available from 1977.</b>'
+    end
   end
 
   describe '#public_note' do
     it 'returns expected public_note' do
       expect(entry.public_note).to eql 'Note: Use this link for Penn-sponsored access to Nature.'
+    end
+
+    it 'removes unsafe html, note that a tags are not stripped' do
+      expect(unsanitized_entry.public_note).to eql '<b><a href="http://spam.com">Penn-sponsored</a> access</b>'
     end
   end
 
