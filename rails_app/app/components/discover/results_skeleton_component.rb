@@ -11,11 +11,11 @@ module Discover
     # @param query [String]
     # @param results [Array]
     # @param disabled [Boolean]
-    def initialize(source:, query: '', results: [], disabled: false, count: Configuration::RESULT_MAX_COUNT)
+    def initialize(source:, count:, query: '', results: [], disabled: false)
+      @count = count
       @query = query
       @results = results
       @disabled = disabled
-      @count = count
       @presenter = Discover::Results::ResultsPresenter.new(source: source)
     end
   end

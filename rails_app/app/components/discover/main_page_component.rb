@@ -10,7 +10,8 @@ module Discover
 
     def call
       component = if discover_query.present?
-                    Discover::SearchResultsComponent.new(query: discover_query, render_pse_sources: render_pse_sources?)
+                    Discover::SearchResultsComponent.new(query: discover_query, count: count,
+                                                         render_pse_sources: render_pse_sources?)
                   else
                     Discover::HomepageComponent.new
                   end
@@ -27,6 +28,11 @@ module Discover
     # @return [String]
     def discover_query
       params[:q].to_s
+    end
+
+    # @return [Integer]
+    def count
+      params[:count].present? ? params[:count].to_i : Configuration::RESULT_MAX_COUNT
     end
   end
 end
