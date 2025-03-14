@@ -520,7 +520,7 @@ en:
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
   statements:
-    harmful_language_html: 'The Penn Libraries is committed to describing library materials using accurate language. Please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> if you encounter any issues.'
+    harmful_language_html: 'The Penn Libraries is committed to describing library materials using current, accurate, and responsible language. If you discover outdated or inaccurate language, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> to report it and suggest alternative language.'
   sort:
     added_date_asc: 'Date Added (old-new)'
     added_date_desc: 'Date Added (new-old)'
