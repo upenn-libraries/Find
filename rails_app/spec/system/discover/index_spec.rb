@@ -271,4 +271,22 @@ describe 'Discover Penn page' do
       end
     end
   end
+
+  context 'when specifying a count parameter' do
+    let(:query) { { q: 'test' } }
+    let(:art_works) { create_list(:art_work, 3, location: query[:q]) }
+    let(:count) { 1 }
+
+    before do
+      stub_all_responses(query: query)
+      art_works
+      visit discover_path(q: query[:q], count: count)
+    end
+
+    it 'applies the count parameter to results' do
+      within('#penn-art-collection') do
+        expect(page).to have_selector('.results-list-item', count: count)
+      end
+    end
+  end
 end
