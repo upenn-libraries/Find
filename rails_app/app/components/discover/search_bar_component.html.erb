@@ -10,7 +10,7 @@
                            value: params[:q],
                            title: t('discover.search_bar_title'),
                            required: true,
-                           pattern: '\S+',
+                           pattern: Discover::Configuration::SEARCH_QUERY_PATTERN,
                            class: "search-form__input form-control rounded-left",
                            aria: { label: t('discover.search.button.aria_label') } %>
 
