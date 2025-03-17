@@ -26,7 +26,7 @@ module Discover
 
     # @return [String]
     def discover_query
-      params[:q].to_s
+      params[:q].to_s.strip
     end
   end
 end
