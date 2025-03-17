@@ -26,7 +26,7 @@ describe 'Discover Penn page' do
   context 'with an invalid query term provided' do
     let(:query) { { q: '   ' } }
 
-    it 'shows an HTML5 validation message that includes the title attribute text' do
+    it 'shows an HTML5 validation message' do
       expect(page).to have_field 'q', validation_message: /Please match the requested format/
     end
   end
