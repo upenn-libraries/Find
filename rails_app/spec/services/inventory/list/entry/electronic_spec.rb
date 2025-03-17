@@ -11,7 +11,7 @@ describe Inventory::List::Entry::Electronic do
       library_code: 'VanPeltLib',
       collection: 'Nature Publishing Journals',
       coverage_statement: 'Available from 1869 volume: 1 issue: 1.',
-      public_note: '<strong>Note</strong>: Use <a href="https://www.spam.com">this link</a> for Penn-sponsored access to Nature.',
+      public_note: '<strong>Note</strong>: Use <a href="https://www.spam.com">this link</a> for access to Nature.',
       interface_name: 'Nature',
       inventory_type: Inventory::List::ELECTRONIC
     )
