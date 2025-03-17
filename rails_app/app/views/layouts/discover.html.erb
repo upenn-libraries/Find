@@ -43,6 +43,12 @@
     <main id='main-container' class="container-fluid" role="main">
       <%= render Discover::SearchBarComponent.new(params: params) %>
 
+      <%# TODO: Container class needed here to prevent alerts from being full-width, but the layout could be altered to
+                render the full-width search bar element outside of the main content, like in the base layout %>
+      <div class="container">
+        <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+      </div>
+
       <%# Content from child view templates is included via this 'yield' %>
       <%= yield %>
     </main>

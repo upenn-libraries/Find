@@ -6,18 +6,33 @@ describe 'Discover Penn page' do
   include Discover::ApiMocks::Request
   include FixtureHelpers
 
-  before { visit discover_path }
+  let!(:art_work) { create(:art_work, location: query[:q]) }
+
+  before do
+    stub_all_responses(query: query)
+    visit discover_path
+    fill_in 'q', with: query[:q]
+    click_on I18n.t('discover.search.button.label')
+  end
+
+  context 'with no query term provided' do
+    let(:query) { { q: '' } }
+
+    it 'shows an HTML5 validation message that a query term is required' do
+      expect(page).to have_field 'q', validation_message: 'Please fill out this field.'
+    end
+  end
+
+  context 'with an invalid query term provided' do
+    let(:query) { { q: '   ' } }
+
+    it 'shows an HTML5 validation message' do
+      expect(page).to have_field 'q', validation_message: /Please match the requested format/
+    end
+  end
 
   context 'when submitting a query with results' do
     let(:query) { { q: 'test' } }
-    let(:art_work) { create(:art_work, location: query[:q]) }
-
-    before do
-      stub_all_responses(query: query)
-      art_work
-      fill_in 'q', with: query[:q]
-      click_on I18n.t('discover.search.button.label')
-    end
 
     context 'with libraries results' do
       it 'displays the expected icon' do

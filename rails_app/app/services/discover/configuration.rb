@@ -6,6 +6,7 @@ module Discover
     USER_AGENT = 'DiscoverPennFrontend'
     SOURCES = %i[find finding_aids archives museum art_collection].freeze
     RESULT_MAX_COUNT = 3
+    SEARCH_QUERY_PATTERN = '.*\S+.*'
 
     module Blacklight
       SOURCES = %i[find finding_aids].freeze
