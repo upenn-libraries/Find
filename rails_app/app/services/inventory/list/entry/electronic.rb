@@ -65,12 +65,12 @@ module Inventory
 
         # @return [String, nil]
         def coverage_statement
-          ActionController::Base.helpers.sanitize(data[:coverage_statement])
+          sanitize data[:coverage_statement], tags: ALLOWED_TAGS
         end
 
         # @return [String, nil]
         def public_note
-          ActionController::Base.helpers.sanitize(data[:public_note])
+          sanitize data[:public_note], tags: ALLOWED_TAGS
         end
 
         # @return [String, nil]

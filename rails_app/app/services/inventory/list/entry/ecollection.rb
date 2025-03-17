@@ -50,7 +50,7 @@ module Inventory
 
         # @return [String, nil]
         def public_note
-          ActionController::Base.helpers.sanitize(data[:public_note])
+          sanitize data[:public_note], tags: ALLOWED_TAGS
         end
 
         # @return [String, nil]
