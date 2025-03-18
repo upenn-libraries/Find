@@ -17,10 +17,11 @@ describe 'Catalog show page with an Electronic record' do
       click_button entries.second.description # second entry has additional details
     end
 
-    it 'displays additional details/notes' do
+    it 'displays additional details/notes with allowable markup' do
       within('#inventory-1') do
         expect(page).to have_selector '.inventory-item__notes',
                                       text: 'In this database, you may need to navigate to view your article.'
+        expect(page).not_to have_text '<strong>'
       end
     end
   end
