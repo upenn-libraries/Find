@@ -57,7 +57,7 @@ describe Inventory::List::Entry::Electronic do
 
   describe '#public_note' do
     it 'returns expected public_note containing only allowed HTML tags' do
-      expect(entry.public_note).to eql '<strong>Note</strong>: Use this link for Penn-sponsored access to Nature.'
+      expect(entry.public_note).to eql '<strong>Note</strong>: Use this link for access to Nature.'
     end
   end
 
