@@ -5,6 +5,8 @@ module Discover
   class DiscoverController < ApplicationController
     layout 'discover'
 
+    before_action :validate_query
+
     # /discover
     def index
       respond_to do |format|
@@ -13,6 +15,12 @@ module Discover
                                                  render_pse: params[:no_pse] != 'true')
         end
       end
+    end
+
+    private
+
+    def validate_query
+      flash[:alert] = t('discover.empty_query') if params.key?(:q) && params[:q].blank?
     end
   end
 end
