@@ -11,7 +11,7 @@ module Discover
     def index
       respond_to do |format|
         format.html do
-          render Discover::MainPageComponent.new(query: params[:q].to_s, count: params[:count],
+          render Discover::MainPageComponent.new(query: params[:q].to_s.strip, count: params[:count],
                                                  render_pse: params[:no_pse] != 'true')
         end
       end
