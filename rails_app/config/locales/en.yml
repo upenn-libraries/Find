@@ -492,7 +492,6 @@ en:
       place_of_publication: 'Place of Publication'
       publication: 'Publication'
     relation:
-      chronology: 'Penn Chronology'
       constituent_unit: 'Constituent Unit'
       contained_in: 'Contained In'
       contains: 'Contains'
