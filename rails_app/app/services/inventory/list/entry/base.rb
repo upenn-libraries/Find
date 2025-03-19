@@ -7,7 +7,7 @@ module Inventory
       class Base
         include ActionView::Helpers::SanitizeHelper
 
-        ALLOWED_TAGS = %w[strong].freeze
+        ALLOWED_TAGS = %w[strong b].freeze
 
         attr_reader :data, :mms_id
 
