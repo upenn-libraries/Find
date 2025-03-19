@@ -3,13 +3,15 @@
 module Discover
   # Render the search results
   class SearchResultsComponent < ViewComponent::Base
-    attr_reader :query, :render_pse_sources
+    attr_reader :query, :count, :render_pse
 
     # @param query [String] search query to use when loading source panels
-    # @param render_pse_sources [Boolean] whether or not to disable Google PSE-based sources
-    def initialize(query:, render_pse_sources: true)
+    # @param count [Integer] maximum number of results to render
+    # @param render_pse [Boolean] whether or not to disable Google PSE-based sources
+    def initialize(query:, count:, render_pse:)
       @query = query
-      @render_pse_sources = render_pse_sources
+      @count = count
+      @render_pse = render_pse
     end
   end
 end

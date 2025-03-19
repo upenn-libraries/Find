@@ -10,7 +10,10 @@ module Discover
     # /discover
     def index
       respond_to do |format|
-        format.html { render Discover::MainPageComponent.new params: params }
+        format.html do
+          render Discover::MainPageComponent.new(query: params[:q].to_s.strip, count: params[:count],
+                                                 render_pse: params[:no_pse] != 'true')
+        end
       end
     end
 

@@ -6,15 +6,15 @@
   <div id="results" class="results row">
     <div class="col-12 col-lg-6">
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::Find::SOURCE,
-                                                        query: query)) %>
+                                                        query: query, count: count)) %>
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::FindingAids::SOURCE,
-                                                        query: query)) %>
+                                                        query: query, count: count)) %>
     </div>
     <div class="col-12 col-lg-6">
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::PSE::Museum::SOURCE,
-                                                        query: query, disabled: !render_pse_sources)) %>
+                                                        query: query, count: count, disabled: !render_pse)) %>
       <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Database::ArtCollection::SOURCE,
-                                                        query: query))%>
+                                                        query: query, count: count))%>
     </div>
   </div>
 </div>

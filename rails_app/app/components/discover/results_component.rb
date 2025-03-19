@@ -11,9 +11,9 @@ module Discover
 
     # @param results [Discover::Results]
     # @param count [Integer]
-    def initialize(results:, count: Configuration::RESULT_MAX_COUNT)
+    def initialize(results:, count:)
       @results = results
-      @count = count
+      @count = count.to_i
       @presenter = Discover::Results::ResultsPresenter.new(source: results.source.source)
     end
 

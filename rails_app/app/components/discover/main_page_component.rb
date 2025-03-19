@@ -3,30 +3,24 @@
 module Discover
   # Render main page content for the collection bento
   class MainPageComponent < ViewComponent::Base
-    # @param params [ActionController::Parameters]
-    def initialize(params:)
-      @params = params
+    attr_reader :query, :count, :render_pse
+
+    # @param query [String]
+    # @param count [ActionController::Parameters]
+    # @param render_pse [Boolean] whether or not to render any PSE sources
+    def initialize(query:, count: nil, render_pse: true)
+      @query = query
+      @count = count&.to_i&.clamp(1, 10) || Configuration::RESULT_MAX_COUNT
+      @render_pse = render_pse
     end
 
     def call
-      component = if discover_query.present?
-                    Discover::SearchResultsComponent.new(query: discover_query, render_pse_sources: render_pse_sources?)
+      component = if query.present?
+                    Discover::SearchResultsComponent.new(query: query, count: count, render_pse: render_pse)
                   else
                     Discover::HomepageComponent.new
                   end
       render component
-    end
-
-    private
-
-    # @return [Boolean]
-    def render_pse_sources?
-      params[:no_pse] != 'true'
-    end
-
-    # @return [String]
-    def discover_query
-      params[:q].to_s.strip
     end
   end
 end
