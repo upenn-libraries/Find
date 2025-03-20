@@ -16,7 +16,7 @@ shared_examples_for 'RisExport' do
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - BOOK
 TI  - Report of the Conference of FAO : nineteenth session, Rome, 12 November - 1 December 1977.
-PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - )
+PY  - 1979\nCY  - Rome\nPB  - The Organization\nER  - )
       end
     end
 
@@ -25,7 +25,7 @@ PY  - 1979\nCY  - Rome :\nPB  - The Organization,\nER  - )
 
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nA2  - Elsevier Science (Firm)
-A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.\nER  - )
+A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York\nPB  - Elsevier Science\nER  - )
       end
     end
 
@@ -34,7 +34,7 @@ A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York :\nPB  - Elsevier Science.
 
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nA2  - Nature Publishing Group.
-PY  - 1869\nCY  - [London] :\nPB  - Nature Pub. Group\nER  - )
+PY  - 1869\nCY  - London\nPB  - Nature Pub. Group\nER  - )
       end
     end
 
@@ -43,7 +43,7 @@ PY  - 1869\nCY  - [London] :\nPB  - Nature Pub. Group\nER  - )
 
       it 'returns RIS text' do
         expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.
-A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London :\nPB  - Chemical Society.\nER  - )
+A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London\nPB  - Chemical Society\nER  - )
       end
     end
 
@@ -54,7 +54,7 @@ A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London :\nPB  - Chemic
         expect(object.export_as_ris).to eq %(TY  - BOOK
 TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.
 AU  - Bleier, Ruth\nA2  - Secondary Author A\nA2  - Secondary Author B\nA2  - Secondary Author C
-PY  - 1961\nCY  - Baltimore :\nPB  - John Hopkins Press,\nER  - )
+PY  - 1961\nCY  - Baltimore\nPB  - John Hopkins Press\nER  - )
       end
     end
   end
