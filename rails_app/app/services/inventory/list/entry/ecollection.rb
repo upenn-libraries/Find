@@ -51,7 +51,7 @@ module Inventory
         # @return [String, nil]
         # rubocop:disable Rails/OutputSafety
         def public_note
-          sanitize(data[:public_note], tags: ALLOWED_TAGS).html_safe
+          sanitize(data[:public_note], tags: ALLOWED_TAGS)&.html_safe
         end
         # rubocop:enable Rails/OutputSafety
 
