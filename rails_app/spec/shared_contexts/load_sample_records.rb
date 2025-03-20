@@ -168,7 +168,7 @@ shared_context 'with electronic journal record with 4 electronic entries' do
     details_params = { mms_id: electronic_journal_bib, portfolio_id: '2', collection_id: '1234' }
     details = instance_double(
       Inventory::Electronic, **details_params,
-      notes: ['In this database, you may need to navigate to view your article.']
+      notes: ['<strong>In this database, you may need to navigate to view your article.</strong>']
     )
     allow(Inventory::Electronic).to receive(:find).with(**details_params).and_return(details)
   end

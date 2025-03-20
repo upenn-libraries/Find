@@ -49,9 +49,11 @@ module Inventory
         end
 
         # @return [String, nil]
+        # rubocop:disable Rails/OutputSafety
         def public_note
-          data[:public_note]
+          sanitize(data[:public_note], tags: ALLOWED_TAGS).html_safe
         end
+        # rubocop:enable Rails/OutputSafety
 
         # @return [String, nil]
         def href

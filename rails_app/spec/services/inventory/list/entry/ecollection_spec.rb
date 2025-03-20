@@ -6,7 +6,7 @@ describe Inventory::List::Entry::Ecollection do
       :ecollection_entry,
       mms_id: '9956518803503681',
       id: '61585817810003681',
-      public_note: 'Lippincott Library On-site Database'
+      public_note: '<a href="https://www.spam.com">Lippincott Library</a> On-site <span>Database</span>'
     )
   end
 
@@ -39,7 +39,7 @@ describe Inventory::List::Entry::Ecollection do
   end
 
   describe '#public_note' do
-    it 'returns expected public_note' do
+    it 'returns expected public_note containing only allowed HTML tags' do
       expect(entry.public_note).to eql 'Lippincott Library On-site Database'
     end
   end
