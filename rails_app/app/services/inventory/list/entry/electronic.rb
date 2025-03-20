@@ -66,12 +66,12 @@ module Inventory
         # @return [String, nil]
         # rubocop:disable Rails/OutputSafety
         def coverage_statement
-          sanitize(data[:coverage_statement], tags: ALLOWED_TAGS).html_safe
+          sanitize(data[:coverage_statement], tags: ALLOWED_TAGS)&.html_safe
         end
 
         # @return [String, nil]
         def public_note
-          sanitize(data[:public_note], tags: ALLOWED_TAGS).html_safe
+          sanitize(data[:public_note], tags: ALLOWED_TAGS)&.html_safe
         end
         # rubocop:enable Rails/OutputSafety
 
