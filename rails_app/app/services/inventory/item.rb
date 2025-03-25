@@ -97,6 +97,17 @@ module Inventory
       physical_material_type['value']
     end
 
+    # @return [Alma::ItemRequestOptions, nil]
+    # @param [nil, String] user_id
+    def request_options(user_id: nil)
+      mms_id = bib_item['bib_data']['mms_id']
+      raise StandardError, "Problem getting Request Options via MMS ID for Item with PID #{id}." if mms_id.blank?
+
+      options = {}
+      options[:user_id] = user_id if user_id.present?
+      @request_options ||= Alma::ItemRequestOptions.get mms_id, holding_id, id, options
+    end
+
     private
 
     # Returns location object. If item in a temp location, returns that as the location. If a location is not
