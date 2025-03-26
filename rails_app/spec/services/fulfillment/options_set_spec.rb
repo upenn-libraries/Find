@@ -4,6 +4,12 @@ describe Fulfillment::OptionsSet do
   subject(:options) { described_class.new(item: item, user: user) }
 
   let(:user) { build(:user) }
+  let(:mock_request_options) { instance_double Alma::ItemRequestOptions }
+  let(:hold_allowed) { true }
+
+  before do
+    allow(item).to receive(:alma_pickup?).and_return(hold_allowed)
+  end
 
   context 'with an available circulating item' do
     let(:item) { build :item, *traits }
@@ -126,6 +132,18 @@ describe Fulfillment::OptionsSet do
 
   context 'with an item having a non-circ policy' do
     let(:item) { build :item, :non_circ }
+
+    it { is_expected.to be_restricted }
+    it { is_expected.not_to be_deliverable }
+
+    it 'includes only the on site option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Restricted::ONSITE]
+    end
+  end
+
+  context 'with a restricted circ item that the Alma Request Options API says cannot be requested' do
+    let(:item) { build :item, :in_place_with_restricted_short_loan_policy }
+    let(:hold_allowed) { false }
 
     it { is_expected.to be_restricted }
     it { is_expected.not_to be_deliverable }

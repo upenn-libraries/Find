@@ -108,6 +108,12 @@ module Inventory
       @request_options ||= Alma::ItemRequestOptions.get mms_id, holding_id, id, options
     end
 
+    # @param [nil, String] user_id
+    # @return [Boolean]
+    def alma_pickup?(user_id: nil)
+      request_options(user_id: user_id)&.hold_allowed? || false
+    end
+
     private
 
     # Returns location object. If item in a temp location, returns that as the location. If a location is not

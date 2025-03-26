@@ -39,12 +39,28 @@ describe 'Catalog show page requesting behaviors' do
       end
     end
 
+    context 'when an item is available but Alma prohibits pickup requests' do
+      let(:item) { build :item, :in_place_with_restricted_short_loan_policy }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(Inventory::Item).to receive(:find).and_return(item)
+        allow(item).to receive(:alma_pickup?).and_return(false)
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows on-site use messaging' do
+        expect(page).to have_text I18n.t('requests.form.options.onsite.info', library: item.location.library_name)
+      end
+    end
+
     context 'with a holding that has multiple checkoutable items' do
       let(:items) { build_list :item, 2 }
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return(items)
         allow(Inventory::Item).to receive(:find).and_return(items.first)
+        allow(items.first).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
       end
 
@@ -70,6 +86,7 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(item).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
@@ -100,6 +117,7 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(item).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
       end
 
@@ -136,6 +154,7 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
+        allow(item).to receive(:alma_pickup?).and_return(false)
         find('details.fulfillment > summary').click
       end
 

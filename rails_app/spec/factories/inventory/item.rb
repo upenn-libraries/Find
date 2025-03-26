@@ -170,4 +170,13 @@ FactoryBot.define do
       item
     end
   end
+
+  trait :in_place_with_restricted_short_loan_policy do
+    item do
+      item = attributes_for(:item)[:item]
+      item['item_data']['base_status'] = { 'value' => '1' }
+      item['item_data']['policy'] = { 'value' => '3 Day loan' }
+      item
+    end
+  end
 end

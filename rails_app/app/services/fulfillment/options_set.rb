@@ -109,7 +109,7 @@ module Fulfillment
     # @return [Boolean]
     def non_circulating_item?
       item.policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
-        (item.in_place? && not_loanable?) || !item.request_options(user_id: user.uid)&.hold_allowed?
+        (item.in_place? && not_loanable?) || !item&.alma_pickup?(user_id: user.uid)
     end
 
     # An item is accessible on-site if it is In Place ("Available") and otherwise non-circulating
