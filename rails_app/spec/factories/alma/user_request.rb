@@ -11,7 +11,7 @@ FactoryBot.define do
     user_primary_id { '123456' }
     request_id { '56352378420003681' }
     additional_id { '563-523-784-2' }
-    request_type { 'HOLD' }
+    request_type { Fulfillment::Endpoint::Alma::HOLD_TYPE }
     request_sub_type { { 'value' => 'PATRON_PHYSICAL', 'desc' => 'Patron physical item request' } }
     mms_id { '991462123503681' }
     pickup_location { 'Van Pelt Library' }
