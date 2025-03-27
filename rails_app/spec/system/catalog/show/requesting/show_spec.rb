@@ -31,7 +31,6 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(item).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
       end
 
