@@ -46,7 +46,6 @@ describe 'Catalog show page requesting behaviors' do
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
         allow(Inventory::Item).to receive(:find).and_return(item)
-        allow(item).to receive(:alma_pickup?).and_return(false)
         find('details.fulfillment > summary').click
       end
 
@@ -61,7 +60,6 @@ describe 'Catalog show page requesting behaviors' do
       before do
         allow(Inventory::Item).to receive(:find_all).and_return(items)
         allow(Inventory::Item).to receive(:find).and_return(items.first)
-        allow(items.first).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
       end
 
@@ -87,7 +85,6 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(item).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
         find('input#delivery_pickup').click
       end
@@ -118,7 +115,6 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(item).to receive(:alma_pickup?).and_return(true)
         find('details.fulfillment > summary').click
       end
 
@@ -155,7 +151,6 @@ describe 'Catalog show page requesting behaviors' do
 
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(item).to receive(:alma_pickup?).and_return(false)
         find('details.fulfillment > summary').click
       end
 

@@ -21,9 +21,19 @@ FactoryBot.define do
       }
     end
 
+    # request_options_list is lazy-loaded in this class, and has no setter method, so we need a transient
+    # attribute and corresponding after-build hook to be able to include this in our factory.
+    transient do
+      request_options_list { [Fulfillment::Endpoint::Alma::HOLD_TYPE] }
+    end
+
     skip_create
     initialize_with do
       new(Alma::BibItem.new(item))
+    end
+
+    after(:build) do |item, evaluator|
+      item.instance_variable_set :@request_options_list, evaluator.request_options_list
     end
   end
 
@@ -178,5 +188,6 @@ FactoryBot.define do
       item['item_data']['policy'] = { 'value' => '3 Day loan' }
       item
     end
+    request_options_list { [] }
   end
 end

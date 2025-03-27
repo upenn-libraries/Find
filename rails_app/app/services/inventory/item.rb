@@ -105,13 +105,15 @@ module Inventory
 
       options = {}
       options[:user_id] = user_id if user_id.present?
-      @request_options ||= Alma::ItemRequestOptions.get mms_id, holding_id, id, options
+      Alma::ItemRequestOptions.get mms_id, holding_id, id, options
     end
 
-    # @param [nil, String] user_id
-    # @return [Boolean]
-    def alma_pickup?(user_id: nil)
-      request_options(user_id: user_id)&.hold_allowed? || false
+    # Return an array of available request options as reported by Alma
+    # @return [Array]
+    def request_options_list(user_id: nil)
+      @request_options_list ||= request_options(user_id: user_id)&.filter_map do |option|
+        option.dig 'type', 'value'
+      end || []
     end
 
     private

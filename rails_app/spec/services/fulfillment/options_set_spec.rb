@@ -4,12 +4,6 @@ describe Fulfillment::OptionsSet do
   subject(:options) { described_class.new(item: item, user: user) }
 
   let(:user) { build(:user) }
-  let(:mock_request_options) { instance_double Alma::ItemRequestOptions }
-  let(:hold_allowed) { true }
-
-  before do
-    allow(item).to receive(:alma_pickup?).and_return(hold_allowed)
-  end
 
   context 'with an available circulating item' do
     let(:item) { build :item, *traits }

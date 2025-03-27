@@ -109,7 +109,7 @@ module Fulfillment
     # @return [Boolean]
     def non_circulating_item?
       item.policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
-        (item.in_place? && not_loanable?) || !item&.alma_pickup?(user_id: user.uid)
+        (item.in_place? && not_loanable?) || !item_allows_hold_request?
     end
 
     # An item is accessible on-site if it is In Place ("Available") and otherwise non-circulating
@@ -128,6 +128,12 @@ module Fulfillment
     # @return [Boolean]
     def item_material_type_excluded_from_scanning?
       item.material_type_value.in?(Settings.fulfillment.scan.excluded_material_types)
+    end
+
+    # Does Alma's reported Request Options include HOLD?
+    # @return [Boolean]
+    def item_allows_hold_request?
+      item.request_options_list.include? Fulfillment::Endpoint::Alma::HOLD_TYPE
     end
   end
 end

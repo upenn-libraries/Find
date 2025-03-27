@@ -7,8 +7,6 @@ describe Fulfillment::Service do
     let(:item) { build :item }
     let(:user) { build :user }
 
-    before { allow(item).to receive(:alma_pickup?).and_return(true) }
-
     it 'returns an OptionsSet' do
       expect(described_class.options(item: item, user: user)).to be_a Fulfillment::OptionsSet
     end
