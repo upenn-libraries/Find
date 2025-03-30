@@ -222,4 +222,12 @@ describe Inventory::Item do
         .to eq "#{item.bib_item.holding_library_name} - #{item.bib_item.holding_location_name}"
     end
   end
+
+  describe '#request_options_list' do
+    let(:item) { build :item }
+
+    it 'returns an array of request options' do
+      expect(item.request_options_list).to be_a Array
+    end
+  end
 end

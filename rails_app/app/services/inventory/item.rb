@@ -97,7 +97,27 @@ module Inventory
       physical_material_type['value']
     end
 
+    # Return an array of available request options as reported by Alma
+    # @return [Array]
+    def request_options_list(user_id: nil)
+      @request_options_list ||= request_options(user_id: user_id)&.filter_map do |option|
+        option.dig 'type', 'value'
+      end || []
+    end
+
     private
+
+    # Get an ItemRequestOptions object from the Alma gem, raising an exception if theres a problem getting an mms id
+    # @param user_id [nil, String] optionally send a user_id for more personalized results
+    # @return [Alma::ItemRequestOptions, nil]
+    def request_options(user_id: nil)
+      mms_id = bib_item['bib_data']['mms_id']
+      raise StandardError, "Problem getting Request Options via MMS ID for Item with PID #{id}." if mms_id.blank?
+
+      options = {}
+      options[:user_id] = user_id if user_id.present?
+      Alma::ItemRequestOptions.get mms_id, holding_id, id, options
+    end
 
     # Returns location object. If item in a temp location, returns that as the location. If a location is not
     # available in the item_data pulls location information from holding_data.

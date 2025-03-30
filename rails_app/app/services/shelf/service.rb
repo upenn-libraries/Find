@@ -147,7 +147,8 @@ module Shelf
 
       loop do
         response = Alma::UserRequest.where_user(
-          user_id, { request_type: 'HOLD', offset: offset, limit: ILS_REQUEST_LIMIT }
+          user_id, { request_type: Fulfillment::Endpoint::Alma::HOLD_TYPE,
+                     offset: offset, limit: ILS_REQUEST_LIMIT }
         )
         holds += response.map { |l| Entry::IlsHold.new(l.response) }
 
