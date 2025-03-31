@@ -98,25 +98,26 @@ module Inventory
     end
 
     # Return an array of available request options as reported by Alma
+    # @param user_id [String, nil] send a user_id for non-Guest results
     # @return [Array]
     def request_options_list(user_id: nil)
-      @request_options_list ||= request_options(user_id: user_id)&.filter_map do |option|
+      @request_options_list ||= request_options(user_id: user_id).map do |option|
         option.dig 'type', 'value'
-      end || []
+      end
     end
 
     private
 
     # Get an ItemRequestOptions object from the Alma gem, raising an exception if theres a problem getting an mms id
-    # @param user_id [nil, String] optionally send a user_id for more personalized results
-    # @return [Alma::ItemRequestOptions, nil]
+    # @param user_id [nil, String] send a user_id for non-Guest results
+    # @return [Array]
     def request_options(user_id: nil)
       mms_id = bib_item['bib_data']['mms_id']
-      raise StandardError, "Problem getting Request Options via MMS ID for Item with PID #{id}." if mms_id.blank?
+      return [] unless mms_id
 
       options = {}
       options[:user_id] = user_id if user_id.present?
-      Alma::ItemRequestOptions.get mms_id, holding_id, id, options
+      Alma::ItemRequestOptions.get(mms_id, holding_id, id, options)&.request_options || []
     end
 
     # Returns location object. If item in a temp location, returns that as the location. If a location is not

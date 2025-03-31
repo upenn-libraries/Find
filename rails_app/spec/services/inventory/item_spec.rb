@@ -224,10 +224,20 @@ describe Inventory::Item do
   end
 
   describe '#request_options_list' do
-    let(:item) { build :item }
+    context 'when item_data is present' do
+      let(:item) { build :item }
 
-    it 'returns an array of request options' do
-      expect(item.request_options_list).to be_a Array
+      it 'returns an array of request options' do
+        expect(item.request_options_list).to be_a Array
+      end
+    end
+
+    context 'when item_data is not present' do
+      let(:item) { build :item, :without_item }
+
+      it 'returns an empty array' do
+        expect(item.request_options_list).to be_empty
+      end
     end
   end
 end
