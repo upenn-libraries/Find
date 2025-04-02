@@ -66,6 +66,7 @@ FactoryBot.define do
   end
 
   trait :without_item do
+    request_options_list { nil }
     item do
       item = attributes_for(:item)[:item]
       item['item_data'] = {}
