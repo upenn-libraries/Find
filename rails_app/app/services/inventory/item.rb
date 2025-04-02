@@ -112,7 +112,7 @@ module Inventory
     # @return [Alma::ItemRequestOptions, nil]
     def request_options(user_id: nil)
       mms_id = bib_item['bib_data']['mms_id']
-      raise StandardError, "Problem getting Request Options via MMS ID for Item with PID #{id}." if mms_id.blank?
+      return [] unless mms_id && holding_id && id
 
       options = {}
       options[:user_id] = user_id if user_id.present?
