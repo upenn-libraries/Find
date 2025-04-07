@@ -1,10 +1,10 @@
 # scheduled job configuration - see Fugit gem docs for supported cron syntax
 
 cleanup_guest_users:
-  cron: 'every day at 4AM'
+  cron: 'every day at 4AM and 10PM'
   class: 'CleanupGuestUsersJob'
 cleanup_searches:
-  cron: 'every day at 5AM'
+  cron: 'every day at 5AM and 11PM'
   class: 'CleanupSearchesJob'
 parse_art_collection:
   cron: 'every monday at 6AM'
