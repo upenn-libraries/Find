@@ -133,7 +133,7 @@ module Fulfillment
     # Does Alma's reported Request Options include HOLD?
     # @return [Boolean]
     def item_allows_hold_request?
-      item.request_options_list(user_id: user.uid).include? Fulfillment::Endpoint::Alma::HOLD_TYPE
+      item.request_options_list(user_id: user&.uid).include? Fulfillment::Endpoint::Alma::HOLD_TYPE
     end
   end
 end
