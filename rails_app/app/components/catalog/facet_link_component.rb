@@ -3,7 +3,7 @@
 module Catalog
   # Renders links to corresponding facet search for record page show values. This is for use when the displayed value
   # and the facet value come from different stored fields or parser methods. If the field we want to link is identical,
-  # than using Blacklight's `link_to_facet` configuration is the preferred solution.
+  # then using Blacklight's `link_to_facet` configuration is the preferred solution.
   class FacetLinkComponent < Blacklight::MetadataFieldComponent
     attr_reader :matches
 
