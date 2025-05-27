@@ -317,20 +317,20 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
     end
 
-    config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do  |field|
-      field.include_in_advanced_search = !Rails.env.production?
+    config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
+      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
       field.clause_params = { edismax: QueryConfigs.basic_query_params }
     end
 
-    config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do  |field|
-      field.include_in_advanced_search = !Rails.env.production?
+    config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
+      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
       field.clause_params = { edismax: QueryConfigs.no_anchored_query_params }
     end
 
-    config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do  |field|
-      field.include_in_advanced_search = !Rails.env.production?
+    config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
+      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
       field.clause_params = { edismax: QueryConfigs.no_unstem_query_params }
     end
