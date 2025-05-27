@@ -435,6 +435,9 @@ en:
       pdf_viewed: 'PDF viewed'
   search:
     all_fields: 'All Fields'
+    no_unstem: 'All Fields (No Unstemmed)'
+    no_anchored: 'All Fields (No Anchored)'
+    basic: 'All Fields (Basic)'
     button:
       label: "Find it"
     advanced:
