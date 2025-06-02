@@ -83,16 +83,16 @@ class CatalogController < ApplicationController
     config.track_search_session.applied_params_component = Catalog::ServerAppliedParamsComponent
 
     config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
-                                     if: :render_bookmarks_control?)
+                                                if: :render_bookmarks_control?)
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)
     config.add_results_collection_tool(:view_type_group)
 
     config.add_show_tools_partial(:bookmark, component: Catalog::BookmarkComponent,
-                                  if: :render_bookmarks_control?)
+                                             if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
-                                  validator: :validate_email_params)
+                                          validator: :validate_email_params)
     config.add_show_tools_partial(:login_for_email, unless: :user_signed_in?, modal: false, path: 'login_path')
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false, unless: :bookmarks?)
@@ -124,19 +124,19 @@ class CatalogController < ApplicationController
     }
 
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
-                           show: database_selected,
-                           limit: -1, sort: 'index' do |field|
+                                                  show: database_selected,
+                                                  limit: -1, sort: 'index' do |field|
       field.include_in_advanced_search = false
     end
     config.add_facet_field :db_subject_facet, label: I18n.t('facets.databases.category'),
-                           show: database_selected,
-                           limit: -1, sort: 'index' do |field|
+                                              show: database_selected,
+                                              limit: -1, sort: 'index' do |field|
       field.include_in_advanced_search = false
     end
 
     config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'),
-                           show: database_selected,
-                           limit: -1, sort: 'index' do |field|
+                                           show: database_selected,
+                                           limit: -1, sort: 'index' do |field|
       field.include_in_advanced_search = false
     end
 
@@ -175,11 +175,11 @@ class CatalogController < ApplicationController
                                                          fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } }
     config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
       { 'facet.mincount': 1 }, query: {
-      within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
-      within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW/DAY-30DAYS TO *]' },
-      within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW/DAY-60DAYS TO *]' },
-      within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW/DAY-90DAYS TO *]' }
-    }
+        within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
+        within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW/DAY-30DAYS TO *]' },
+        within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW/DAY-60DAYS TO *]' },
+        within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW/DAY-90DAYS TO *]' }
+      }
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -261,7 +261,7 @@ class CatalogController < ApplicationController
                           label: I18n.t('show.subject.local'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     config.add_show_field :genre_show, label: I18n.t('show.genre'), accessor: :marc,
-                          component: Catalog::FacetLinkComponent, facet_target: :genre_facet
+                                       component: Catalog::FacetLinkComponent, facet_target: :genre_facet
     config.add_show_field :note_provenance_show,
                           label: I18n.t('show.notes.provenance'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :subject_search
@@ -280,7 +280,7 @@ class CatalogController < ApplicationController
     config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
     config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
-                          accessor: :marc
+                                                        accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language.main'), accessor: :marc
     config.add_show_field :note_system_details_show, label: I18n.t('show.notes.system_details'), accessor: :marc
     config.add_show_field :note_biography_show, label: I18n.t('show.notes.biography'), accessor: :marc
@@ -292,23 +292,23 @@ class CatalogController < ApplicationController
     config.add_show_field :note_local_notes_show, label: I18n.t('show.notes.local_notes'), accessor: :marc
     config.add_show_field :note_finding_aid_show, label: I18n.t('show.notes.finding_aid'), accessor: :marc
     config.add_show_field :relation_related_collections_show, label: I18n.t('show.relation.related_collections'),
-                          accessor: :marc
+                                                              accessor: :marc
     config.add_show_field :citation_cited_in_show, label: I18n.t('show.citation.cited_in'), accessor: :marc
     config.add_show_field :relation_publications_about_show, label: I18n.t('show.relation.publications_about'),
-                          accessor: :marc
+                                                             accessor: :marc
     config.add_show_field :citation_cite_as_show, label: I18n.t('show.citation.cited_as'), accessor: :marc
     config.add_show_field :relation_related_work_show, label: I18n.t('show.relation.related_work'), accessor: :marc
     config.add_show_field :relation_contains_show, label: I18n.t('show.relation.contains'), accessor: :marc
     config.add_show_field :edition_other_show, label: I18n.t('show.edition.other'), accessor: :marc
     config.add_show_field :relation_constituent_unit_show, label: I18n.t('show.relation.constituent_unit'),
-                          accessor: :marc
+                                                           accessor: :marc
     config.add_show_field :relation_has_supplement_show, label: I18n.t('show.relation.has_supplement'), accessor: :marc
     config.add_show_field :format_other_show, label: I18n.t('show.format.other'), accessor: :marc
     config.add_show_field :identifier_isbn_show, label: I18n.t('show.identifier.isbn'), accessor: :marc
     config.add_show_field :identifier_issn_show, label: I18n.t('show.identifier.issn'), accessor: :marc
     config.add_show_field :identifier_oclc_id_show, label: I18n.t('show.identifier.oclc_id'), accessor: :marc
     config.add_show_field :identifier_publisher_number_show, label: I18n.t('show.identifier.publisher_number'),
-                          accessor: :marc
+                                                             accessor: :marc
     config.add_show_field :note_access_restriction_show, label: I18n.t('show.notes.access_restriction'), accessor: :marc
     config.add_show_field :note_bound_with_show, label: I18n.t('show.notes.bound_with'), accessor: :marc
     config.add_show_field :link_web_links, label: I18n.t('show.web_links.main'), accessor: :marc
@@ -405,7 +405,8 @@ class CatalogController < ApplicationController
     config.add_search_field('publisher_search', label: I18n.t('advanced.publisher_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${publisher_qf}', pf: '${publisher_pf}', pf2: '${publisher_pf}', pf3: '${publisher_pf}' } }
+      field.clause_params = { edismax: { qf: '${publisher_qf}', pf: '${publisher_pf}', pf2: '${publisher_pf}',
+                                         pf3: '${publisher_pf}' } }
     end
 
     config.add_search_field('place_of_publication_search',
@@ -445,7 +446,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('publication_date_s', label: I18n.t('advanced.publication_date_search'),
-                            range: true, pattern: '^\\d{4}$') do |field|
+                                                  range: true, pattern: '^\\d{4}$') do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: '${publication_date_qf}', pf: '${publication_date_pf}' } }
