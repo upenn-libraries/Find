@@ -320,43 +320,49 @@ class CatalogController < ApplicationController
     config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
       field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
-      field.clause_params = { edismax: QueryConfigs.basic_query_params }
+      field.clause_params = { edismax: { qf: '${basic_qf}', pf: '${basic_pf}', pf2: '${basic_pf2}',
+                                         pf3: '${basic_pf3}' } }
     end
 
     config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
       field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
-      field.clause_params = { edismax: QueryConfigs.no_anchored_query_params }
+      field.clause_params = { edismax: { qf: '${noanchor_qf}', pf: '${noanchor_pf}', pf2: '${noanchor_pf2}',
+                                         pf3: '${noanchor_pf3}' } }
     end
 
     config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
       field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
       field.include_in_simple_select = false
-      field.clause_params = { edismax: QueryConfigs.no_unstem_query_params }
+      field.clause_params = { edismax: { qf: '${nounstem_qf}', pf: '${nounstem_pf}', pf2: '${nounstem_pf2}',
+                                         pf3: '${nounstem_pf3}' } }
     end
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${qf}', pf: '${pf}' } }
+      field.clause_params = { edismax: { qf: '${qf}', pf: '${pf}', pf2: '${pf2}', pf3: '${pf3}' } }
     end
 
     config.add_search_field('creator_search', label: I18n.t('advanced.creator_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${creator_qf}', pf: '${creator_pf}' } }
+      field.clause_params = { edismax: { qf: '${creator_qf}', pf: '${creator_pf}', pf2: '${creator_pf2}',
+                                         pf3: '${creator_pf3}' } }
     end
 
     config.add_search_field('title_search', label: I18n.t('advanced.title_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${title_qf}', pf: '${title_pf}' } }
+      field.clause_params = { edismax: { qf: '${title_qf}', pf: '${title_pf}', pf2: '${title_pf2}',
+                                         pf3: '${title_pf3}' } }
     end
 
     config.add_search_field('journal_title_search', label: I18n.t('advanced.journal_title_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${journal_title_qf}', pf: '${journal_title_pf}' } }
+      field.clause_params = { edismax: { qf: '${journal_title_qf}', pf: '${journal_title_pf}',
+                                         pf2: '${journal_title_pf2}', pf3: '${journal_title_pf3}' } }
     end
 
     config.add_search_field('subject_search', label: I18n.t('advanced.subject_search')) do |field|
@@ -392,47 +398,50 @@ class CatalogController < ApplicationController
     config.add_search_field('series_search', label: I18n.t('advanced.series_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${series_qf}', pf: '${series_pf}' } }
+      field.clause_params = { edismax: { qf: '${series_qf}', pf: '${series_pf}', pf2: '${series_pf2',
+                                         pf3: '${series_pf3}' } }
     end
 
     config.add_search_field('publisher_search', label: I18n.t('advanced.publisher_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${publisher_qf}', pf: '${publisher_pf}' } }
+      field.clause_params = { edismax: { qf: '${publisher_qf}', pf: '${publisher_pf}', pf2: '${publisher_pf}', pf3: '${publisher_pf}' } }
     end
 
     config.add_search_field('place_of_publication_search',
                             label: I18n.t('advanced.place_of_publication_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${place_of_publication_qf}',
-                                         pf: '${place_of_publication_pf}' } }
+      field.clause_params = { edismax: { qf: '${place_of_publication_qf}', pf: '${place_of_publication_pf}',
+                                         pf2: '${place_of_publication_pf}', pf3: '${place_of_publication_pf}' } }
     end
 
     config.add_search_field('conference_search', label: I18n.t('advanced.conference_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${conference_qf}', pf: '${conference_pf}' } }
+      field.clause_params = { edismax: { qf: '${conference_qf}', pf: '${conference_pf}', pf2: '${conference_pf2',
+                                         pf3: '${conference_pf3}' } }
     end
 
     config.add_search_field('corporate_author_search', label: I18n.t('advanced.corporate_author_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${corporate_author_qf}', pf: '${corporate_author_pf}' } }
+      field.clause_params = { edismax: { qf: '${corporate_author_qf}', pf: '${corporate_author_pf}',
+                                         pf2: '${corporate_author_pf}', pf3: '${corporate_author_pf}' } }
     end
 
     config.add_search_field('identifier_publisher_number_search',
                             label: I18n.t('advanced.identifier_publisher_number_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${publisher_number_qf}',
-                                         pf: '${publisher_number_pf}' } }
+      field.clause_params = { edismax: { qf: '${publisher_number_qf}', pf: '${publisher_number_pf}' } }
     end
 
     config.add_search_field('contents_note_search', label: I18n.t('advanced.contents_note_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${contents_note_qf}', pf: '${contents_note_pf}' } }
+      field.clause_params = { edismax: { qf: '${contents_note_qf}', pf: '${contents_note_pf}',
+                                         pf2: '${contents_note_pf2', pf3: '${contents_note_pf3}' } }
     end
 
     config.add_search_field('publication_date_s', label: I18n.t('advanced.publication_date_search'),
