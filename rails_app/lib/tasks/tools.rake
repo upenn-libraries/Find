@@ -4,7 +4,7 @@ namespace :tools do
   desc 'Initialize project, including Solr collections and database'
   task start: :environment do
     system('docker compose up -d')
-    sleep 4 # give services some time to start up before proceeding
+    sleep 2 # give services some time to start up before proceeding
     begin
       if Settings.solr_url.include?('catalog-manager')
         puts 'Our sensors detect that you are using a solr_url setting for a deployed Solr instance.'
