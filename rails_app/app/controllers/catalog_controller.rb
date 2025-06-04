@@ -398,7 +398,7 @@ class CatalogController < ApplicationController
     config.add_search_field('series_search', label: I18n.t('advanced.series_search')) do |field|
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${series_qf}', pf: '${series_pf}', pf2: '${series_pf2',
+      field.clause_params = { edismax: { qf: '${series_qf}', pf: '${series_pf}', pf2: '${series_pf2}',
                                          pf3: '${series_pf3}' } }
     end
 
