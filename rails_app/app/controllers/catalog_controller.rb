@@ -468,6 +468,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'publication_date_sort desc, title_sort asc', label: I18n.t('sort.publication_date_desc')
     config.add_sort_field 'added_date_sort asc, title_sort asc', label: I18n.t('sort.added_date_asc')
     config.add_sort_field 'added_date_sort desc, title_sort asc', label: I18n.t('sort.added_date_desc')
+    config.add_sort_field 'score desc', label: I18n.t('sort.intelligent'),
+                                        if: !(Rails.env.production? || Rails.env.test?)
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
