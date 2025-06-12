@@ -19,20 +19,20 @@ describe SearchBuilder do
 
       it 'escapes a single operator regarless of the amount of surrounding whitespace' do
         expect(search_builder.handle_standalone_boolean_operators(
-                 q: 'cookies   +  milk'
-               )).to include '\+  milk'
+                 q: 'cookies   -  milk'
+               )).to include '\-  milk'
       end
 
       it 'escapes multiple operators' do
         expect(search_builder.handle_standalone_boolean_operators(
-                 q: 'cookies + milk + pajamas'
-               )).to include '\+ milk \+'
+                 q: 'cookies + milk ! hooray'
+               )).to include '\+ milk \!'
       end
     end
 
     context 'with proper operator syntax' do
       let(:params) { ActionController::Parameters.new q: query }
-      let(:query) { 'hypothalamus +cat' }
+      let(:query) { 'hypothalamus +cat -dog' }
 
       it 'escapes the standalone boolean operator so Solr does not get confused' do
         expect(search_builder.handle_standalone_boolean_operators(params)).to eq query
