@@ -34,7 +34,7 @@ describe SearchBuilder do
       let(:params) { ActionController::Parameters.new q: query }
       let(:query) { 'hypothalamus +cat -dog' }
 
-      it 'escapes the standalone boolean operator so Solr does not get confused' do
+      it 'does not escape the operator characters' do
         expect(search_builder.handle_standalone_boolean_operators(params)).to eq query
       end
     end
