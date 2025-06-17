@@ -18,7 +18,7 @@ module Inventory
 
             # When Ruby compares arrays, each element in the array is compared to the other corresponding element,
             # and as soon as a comparison returns an unequal result, that result is returned for the entire
-            # array comparison. This means we can think of each value in the array as a kind of 'tie breaker' if the
+            # array comparison. This means we can think of each value in the array as a kind of 'tiebreaker' if the
             # previous elements were equal during a comparison.
 
             # When sorting physical inventory, we:
@@ -29,6 +29,8 @@ module Inventory
              # do not favor unavailable inventory, in practice this means ranking a 'check_holdings' status higher than
              # 'unavailable'
              (Put.last if unsorted_inventory.unavailable?),
+             # Downrank inventory in Athenaeum library locations due to circulation complexity
+             (Put.last if unsorted_inventory.athenaeum_library?),
              # favor inventory with 'higher' priority, we use an ascending order here because a lower number
              # denotes a higher priority
              Put.asc(unsorted_inventory.priority),
@@ -69,6 +71,11 @@ module Inventory
           # @return [Boolean]
           def coverage_statement?
             data['coverage_statement'].present?
+          end
+
+          # @return [Boolean]
+          def athenaeum_library?
+            data['library_code'] == Settings.library.athenaeum.code
           end
 
           # @return[Integer]
