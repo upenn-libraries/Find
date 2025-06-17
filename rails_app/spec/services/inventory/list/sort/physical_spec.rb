@@ -30,9 +30,10 @@ describe Inventory::List::Sort::Physical do
       end
     end
 
-    context 'when there are holdings in Athenaeum library locations' do
+    context 'when there are holdings in undesirable library locations' do
       let(:data) do
-        [{ 'availability' => Inventory::Constants::AVAILABLE, 'library_code' => Settings.library.athenaeum.code },
+        [{ 'availability' => Inventory::Constants::AVAILABLE,
+           'library_code' => Settings.library.undesirable_holdings.first },
          { 'availability' => Inventory::Constants::AVAILABLE, 'library_code' => 'VanPeltLib' },
          { 'availability' => Inventory::Constants::AVAILABLE, 'library_code' => 'BiomLib' }]
       end

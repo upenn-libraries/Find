@@ -32,8 +32,9 @@ email:
     port: 25
     domain: 'upenn.edu'
 library:
-  athenaeum:
-    code: 'AthLib'
+  undesirable_holdings:
+    - 'AthLib'
+    - 'HSPLib'
   info:
     base_url: 'https://www.library.upenn.edu/api/v1/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>

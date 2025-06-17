@@ -29,8 +29,8 @@ module Inventory
              # do not favor unavailable inventory, in practice this means ranking a 'check_holdings' status higher than
              # 'unavailable'
              (Put.last if unsorted_inventory.unavailable?),
-             # Downrank inventory in Athenaeum library locations due to circulation complexity
-             (Put.last if unsorted_inventory.athenaeum_library?),
+             # Downrank inventory in some configured library locations due to circulation complexity
+             (Put.last if unsorted_inventory.undesirable_library?),
              # favor inventory with 'higher' priority, we use an ascending order here because a lower number
              # denotes a higher priority
              Put.asc(unsorted_inventory.priority),
@@ -74,8 +74,8 @@ module Inventory
           end
 
           # @return [Boolean]
-          def athenaeum_library?
-            data['library_code'] == Settings.library.athenaeum.code
+          def undesirable_library?
+            data['library_code'].in? Settings.library.undesirable_holdings
           end
 
           # @return[Integer]
