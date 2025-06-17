@@ -113,6 +113,10 @@ module Inventory
         electronic_inventory?(data) ? only_available(data) : data
       end
 
+      def from_sru_availability(mms_id)
+        data = Alma::Bib.sru_availability(mms_id).holdings
+      end
+
       # Returns entries that can be generated without making additional calls to Alma. Currently,
       # this only includes resources links available in the Bib MARC record.
       #
