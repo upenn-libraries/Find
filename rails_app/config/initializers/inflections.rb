@@ -16,4 +16,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'MARC'
   inflect.acronym 'PSE'
+  inflect.acronym 'SRU'
 end

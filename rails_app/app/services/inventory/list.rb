@@ -113,8 +113,13 @@ module Inventory
         electronic_inventory?(data) ? only_available(data) : data
       end
 
+      # Grabs inventory data from Alma SRU Availability API. Returns only active entries if entries are electronic.
+      #
+      # @param mms_id [String]
+      # @return [Array, nil]
       def from_sru_availability(mms_id)
-        data = Alma::Bib.sru_availability(mms_id).holdings
+        data = AlmaSRU::Bib.get_availability(mms_id: mms_id).holdings
+        electronic_inventory?(data) ? only_available(data) : data
       end
 
       # Returns entries that can be generated without making additional calls to Alma. Currently,
