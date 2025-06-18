@@ -22,7 +22,6 @@ module Inventory
             # previous elements were equal during a comparison.
 
             # When sorting physical inventory, we:
-
             # favor inventory deemed available, that is inventory with an available status or inventory requestable
             # through aeon
             [(Put.first if unsorted_inventory.available?),
