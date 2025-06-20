@@ -4,11 +4,16 @@
 class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
-  self.default_processor_chain += %i[facets_for_advanced_search_form intelligent_sort]
+  self.default_processor_chain += %i[facets_for_advanced_search_form
+                                     intelligent_sort
+                                     handle_standalone_boolean_operators]
+
+  # When Solr encounters these in a query surrounded by space, they should be considered
+  # literal characters and not boolean operators. Otherwise, bad or no results are returned.
+  PROBLEMATIC_SOLR_BOOLEAN_OPERATORS = %w[+ \- !].freeze
 
   # Merge the advanced search form parameters into the solr parameters
-  # @param [Hash] solr_p the current solr parameters
-  # @return [Hash] the solr parameters with the additional advanced search form parameters
+  # @param solr_p [Hash] the current solr parameters
   def facets_for_advanced_search_form(solr_p)
     return unless search_state.controller&.action_name == 'advanced_search' &&
                   blacklight_config.advanced_search[:form_solr_parameters]
@@ -21,6 +26,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   #  - Records with inventory matching the access facet (if provided)
   #  - Encoding level rank (ascending)
   #  - Date last updated (descending)
+  # @param solr_p [Hash] the current solr parameters
   def intelligent_sort(solr_p)
     return unless intelligent_sort?
 
@@ -34,6 +40,14 @@ class SearchBuilder < Blacklight::SearchBuilder
                      end
 
     solr_p[:sort] = [inventory_sort, 'encoding_level_sort asc', 'updated_date_sort desc'].compact_blank.join(',')
+  end
+
+  # Escape certain Solr operators when they are found in the user's query surrounded by whitespace
+  # @param solr_p [Hash] the current solr parameters
+  def handle_standalone_boolean_operators(solr_p)
+    return if solr_p[:q].blank?
+
+    solr_p[:q] = solr_p[:q].gsub(/(?<=\s)([#{PROBLEMATIC_SOLR_BOOLEAN_OPERATORS.join}])(?=\s)/) { |match| "\\#{match}" }
   end
 
   private
