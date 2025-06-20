@@ -6,6 +6,7 @@ cleanup:
     days_old: 4
     batch_size: 1000
 alma:
+  sru_endpoint: 'https://na03.alma.exlibrisgroup.com/view/sru/01UPENN_INST'
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
   work_order_role_value: '214'
 illiad:

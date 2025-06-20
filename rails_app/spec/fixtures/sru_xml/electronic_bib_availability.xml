@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>03410nam  2200601 a 4500</leader>
+          <controlfield tag="001">9979240322003681</controlfield>
+          <controlfield tag="005">20250122020122.0</controlfield>
+          <controlfield tag="006">m     o  d |</controlfield>
+          <controlfield tag="007">cr||||||||||||</controlfield>
+          <controlfield tag="008">130815t20091989enk     o     001 0 eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9781139635707</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">1139635700</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9781316084595</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">1316084590</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9781139648523</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">1139648527</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9781139638043</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">1139638041</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9781139640886</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">1139640887</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">9780511804397</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="020">
+            <subfield code="a">0511804393</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CKB)2560000000091631</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EBL)1103731</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(SSID)ssj0000683602</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PQKBManifestationID)11425120</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PQKBTitleCode)TC0000683602</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PQKBWorkID)10702578</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PQKB)10480207</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(UkCbUP)CR9780511804397</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(MiAaPQ)EBC1103731</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLCZ)992560000000091631</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">MiAaPQ</subfield>
+            <subfield code="b">eng</subfield>
+            <subfield code="e">rda</subfield>
+            <subfield code="e">pn</subfield>
+            <subfield code="c">MiAaPQ</subfield>
+            <subfield code="d">MiAaPQ</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="041">
+            <subfield code="a">eng</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="4" tag="050">
+            <subfield code="a">P106</subfield>
+            <subfield code="b">.R678 2009</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="082">
+            <subfield code="a">401</subfield>
+            <subfield code="2">19</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="100">
+            <subfield code="a">Rorty, Richard.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="0" tag="245">
+            <subfield code="a">Contingency, irony, and solidarity /</subfield>
+            <subfield code="c">Richard Rorty.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">Cambridge, England :</subfield>
+            <subfield code="b">Cambridge University Press,</subfield>
+            <subfield code="c">2009, c1989.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 online resource (xvi, 201 pages) :</subfield>
+            <subfield code="b">digital, PDF file(s).</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">text</subfield>
+            <subfield code="b">txt</subfield>
+            <subfield code="2">rdacontent</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">computer</subfield>
+            <subfield code="b">c</subfield>
+            <subfield code="2">rdamedia</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">online resource</subfield>
+            <subfield code="b">cr</subfield>
+            <subfield code="2">rdacarrier</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="505">
+            <subfield code="a">Cover; Half Title; Title Page; Copyright; Dedication; Contents; Preface; Introduction; Part I: Contingency; 1 The contingency of language; 2 The contingency of selfhood; 3 The contingency of a liberal community; Part II: Ironism and Theory; 4 Private irony and liberal hope; 5 Self-creation and affiliation:Proust, Nietzsche, and Heidegger; 6 From ironist theory to private allusions: Derrida; Part III: Cruelty and Solidarity; 7 The barber of Kasbeam: Nabokov on cruelty; 8 The last intellectual in Europe: Orwell on cruelty; 9 Solidarity; Index of names</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="546">
+            <subfield code="a">English</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">In this 1989 book Rorty argues that thinkers such as Nietzsche, Freud, and Wittgenstein have enabled societies to see themselves as historical contingencies, rather than as expressions of underlying, ahistorical human nature or as realizations of suprahistorical goals. This ironic perspective on the human condition is valuable on a private level, although it cannot advance the social or political goals of liberalism. In fact Rorty believes that it is literature not philosophy that can do this, by promoting a genuine sense of human solidarity. A truly liberal culture, acutely aware of its own historical contingency, would fuse the private, individual freedom of the ironic, philosophical perspective with the public project of human solidarity as it is engendered through the insights and sensibilities of great writers. The book has a characteristically wide range of reference from philosophy through social theory to literary criticism. It confirms Rorty's status as a uniquely subtle theorist, whose writing will prove absorbing to academic and nonacademic readers alike.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="588">
+            <subfield code="a">Description based on online resource; title from title page (ebrary, viewed August 15, 2013).</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Includes index.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Language and languages</subfield>
+            <subfield code="x">Philosophy.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="z">9780521367813</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="z">0521367816</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="z">9780521353816</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="z">0521353815</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="906">
+            <subfield code="a">BOOK</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">53790612100003681</subfield>
+            <subfield code="c">61777719740003681</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="m">EBSCOhost Academic eBook Collection (North America)</subfield>
+            <subfield code="t">EBSCOhost</subfield>
+            <subfield code="a">01UPENN_INST</subfield>
+            <subfield code="0">9979240322003681</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>9979240322003681</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2025-06-20T10:20:55-0400</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

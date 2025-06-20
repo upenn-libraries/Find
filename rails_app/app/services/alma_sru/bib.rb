@@ -1,21 +1,21 @@
+# frozen_string_literal: true
+
 module AlmaSRU
+  # TODO:
   class Bib
-    SRU_ENDPOINT = 'https://na03.alma.exlibrisgroup.com/view/sru/01UPENN_INST' # TODO: move to config?
-
-    def self.get_availability(mms_id:)
+    # @param mms_id [String]
+    # @param args [Hash] additional query params
+    # @return [AlmaSRU::Response::Availability]
+    def self.get_availability(mms_id:, args: {})
       response = HTTParty.get(
-        SRU_ENDPOINT,
-        query: {
-          version: '1.2', operation: 'searchRetrieve', recordSchema: 'marcxml',
-          maximumRecords: 1, query: "alma.mms_id=#{id}"
-        }.merge(args), headers:, timeout:
+        Settings.alma.sru_endpoint,
+        query: { version: '1.2', operation: 'searchRetrieve', recordSchema: 'marcxml',
+                 maximumRecords: 1, query: "alma.mms_id=#{mms_id}" }.merge(args)
       )
+      resp = Response::Availability.new(response.body)
+      return resp if resp&.records&.first&.content.present?
 
-      if response.code == 200
-        SruAvailabilityResponse.new(response)
-      else
-        raise StandardError, response.to_s
-      end
+      raise StandardError, "SRU search failed for ID: #{mms_id}"
     end
   end
 end

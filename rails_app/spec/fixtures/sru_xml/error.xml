@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/" xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/">
+  <version>1.2</version>
+  <diagnostics>
+    <diag:diagnostic>
+      <diag:uri>200801</diag:uri>
+      <diag:message>Catalog search has encountered an error</diag:message>
+    </diag:diagnostic>
+  </diagnostics>
+</searchRetrieveResponse>

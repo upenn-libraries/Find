@@ -1,13 +1,29 @@
+# frozen_string_literal: true
+
 module AlmaSRU
   module Response
+    # TODO:
     class Availability
+      attr_reader :parsed_response
 
       def initialize(response_body)
         @parsed_response = Nokogiri::XML(response_body).remove_namespaces!
       end
 
+      # Was the search request successful but returned 0 results?
+      # @return [Boolean]
+      def empty?
+        parsed_response.xpath('//numberOfRecords')&.first&.content == '0'
+      end
+
+      # Did the search request fail for some documented reason (e.g., bad query syntax)?
+      # @return [Boolean, nil]
+      def failed?
+        parsed_response.xpath('//diagnostics')&.first&.present?
+      end
+
       def records
-        @records ||= @parsed_response.css('searchRetrievalResponse', 'records')
+        @records ||= parsed_response.css('searchRetrievalResponse', 'records')
       end
 
       def holdings
@@ -27,7 +43,7 @@ module AlmaSRU
 
           metadata.xpath("datafield[@tag='#{map[:datafield]}']").map do |holding|
             hash = { 'inventory_type' => map[:inventory_type] }
-            Alma::INVENTORY_SUBFIELD_MAPPING[map[:datafield]].each_with_object(hash) do |(subfield, name),hash|
+            Alma::INVENTORY_SUBFIELD_MAPPING[map[:datafield]].each_with_object(hash) do |(subfield, name), hash|
               value = holding.xpath("subfield[@code='#{subfield}']")&.first&.content
               next if value.blank?
 
