@@ -11,6 +11,16 @@ shared_context 'with stubbed availability_data' do
   end
 end
 
+# stub Alma SRU service to return availability_data from AlmaSRU::Bib.get_availability
+shared_context 'with stubbed SRU availability_data' do
+  before do
+    availability_double = instance_double(AlmaSRU::Response::Availability)
+    allow(AlmaSRU::Bib).to receive(:get_availability).and_return(availability_double)
+    # stub response double to return the availability data we want it to
+    allow(availability_double).to receive(:holdings).and_return(availability_data)
+  end
+end
+
 # stub Alma gem to return item_data from a call to Alma::Bib.find
 shared_context 'with stubbed availability item_data' do
   before do

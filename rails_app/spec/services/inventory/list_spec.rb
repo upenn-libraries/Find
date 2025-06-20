@@ -3,11 +3,11 @@
 describe Inventory::List do
   let(:document) { SolrDocument.new({ id: mms_id }) }
 
-  context 'when the API call times out' do
+  context 'when the SRU call times out' do
     let(:mms_id) { '123456789' }
 
     before do
-      stub_request(:any, /#{Alma.configuration.region}/).to_timeout
+      stub_request(:any, /#{Settings.alma.sru_endpoint}/).to_timeout
     end
 
     it 'returns a response object marked as not complete' do
@@ -17,7 +17,7 @@ describe Inventory::List do
   end
 
   describe '.full' do
-    include_context 'with stubbed availability_data'
+    include_context 'with stubbed SRU availability_data'
 
     let(:response) { described_class.full(document) }
     let(:mms_id) { '9979338417503681' }
@@ -121,7 +121,7 @@ describe Inventory::List do
   end
 
   describe '.brief' do
-    include_context 'with stubbed availability_data'
+    include_context 'with stubbed SRU availability_data'
     include_context 'with stubbed availability item_data'
 
     let(:mms_id) { '9979338417503681' }
