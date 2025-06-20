@@ -2,10 +2,12 @@
 
 module AlmaSRU
   module Response
-    # TODO:
+    # Represent an SRU response for a Bib availability call. Intended to serve as a drop-in replacement for the Alma gem
+    # `Alma::AvailabilityResponse` object.
     class Availability
       attr_reader :parsed_response
 
+      # @param response_body [String]
       def initialize(response_body)
         @parsed_response = Nokogiri::XML(response_body).remove_namespaces!
       end
@@ -22,34 +24,39 @@ module AlmaSRU
         parsed_response.xpath('//diagnostics')&.first&.present?
       end
 
+      # Parse out top level "records" from SRU response, but there will only be one
+      # @return [Nokogiri::XML::Element]
       def records
-        @records ||= parsed_response.css('searchRetrievalResponse', 'records')
+        @records ||= parsed_response.xpath('//searchRetrieveResponse/records').first
       end
 
+      # @return [Array]
       def holdings
-        @holdings ||= records.map do |rec|
-          metadata = rec.css 'recordData', 'record'
-          mms_id = metadata.xpath("//record/controlfield[@tag='001']")&.first&.content
+        record = records.xpath('//recordData/record').first
+        map = if record.xpath("datafield[@tag='AVA']").any?
+                { datafield: 'AVA', inventory_type: 'physical' }
+              elsif record.xpath("datafield[@tag='AVE']").any?
+                { datafield: 'AVE', inventory_type: 'electronic' }
+              end
+        return [] unless map # no inventory we care about
 
-          next unless mms_id
+        map_subfields_to_hashes record: record, map: map
+      end
 
-          map = if metadata.xpath("datafield[@tag='AVA']").any?
-                  { datafield: 'AVA', inventory_type: 'physical' }
-                elsif metadata.xpath("datafield[@tag='AVE']").any?
-                  { datafield: 'AVE', inventory_type: 'electronic' }
-                end
+      private
 
-          next unless map
-
-          metadata.xpath("datafield[@tag='#{map[:datafield]}']").map do |holding|
-            hash = { 'inventory_type' => map[:inventory_type] }
-            Alma::INVENTORY_SUBFIELD_MAPPING[map[:datafield]].each_with_object(hash) do |(subfield, name), hash|
+      # @param map [Hash]
+      # @param record [Nokogiri::XML::Element]
+      # @return [Array]
+      def map_subfields_to_hashes(record:, map:)
+        record.xpath("datafield[@tag='#{map[:datafield]}']").map do |holding|
+          { 'inventory_type' => map[:inventory_type] }.tap do |hash|
+            Alma::INVENTORY_SUBFIELD_MAPPING[map[:datafield]].each do |subfield, name|
               value = holding.xpath("subfield[@code='#{subfield}']")&.first&.content
               next if value.blank?
 
               hash[name] = value
             end
-            hash
           end
         end
       end

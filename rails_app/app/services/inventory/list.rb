@@ -74,7 +74,7 @@ module Inventory
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(document, limit = nil)
-        inventory_data = from_availability(document.id)
+        inventory_data = from_sru_availability(document.id)
         inventory_data += from_ecollections(document.id) if should_check_for_ecollections?(inventory_data)
         api_entries(inventory_data, document, limit: limit)
       end

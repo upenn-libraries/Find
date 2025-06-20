@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module AlmaSRU
-  # TODO:
+  # Provide access to Bib data, including availability (holding) information, via Alma SRU endpoint
+  # See: https://developers.exlibrisgroup.com/alma/integrations/SRU/
   class Bib
     # @param mms_id [String]
     # @param args [Hash] additional query params
@@ -13,7 +14,7 @@ module AlmaSRU
                  maximumRecords: 1, query: "alma.mms_id=#{mms_id}" }.merge(args)
       )
       resp = Response::Availability.new(response.body)
-      return resp if resp&.records&.first&.content.present?
+      return resp if resp&.records&.content.present?
 
       raise StandardError, "SRU search failed for ID: #{mms_id}"
     end
