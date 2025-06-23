@@ -4,7 +4,7 @@ describe Inventory::List do
   let(:document) { SolrDocument.new({ id: mms_id }) }
 
   context 'when the SRU call times out' do
-    let(:mms_id) { '123456789' }
+    let(:mms_id) { '9979240322003681' }
 
     before do
       stub_request(:any, /#{Settings.alma.sru_endpoint}/).to_timeout

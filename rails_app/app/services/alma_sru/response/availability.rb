@@ -5,11 +5,13 @@ module AlmaSRU
     # Represent an SRU response for a Bib availability call. Intended to serve as a drop-in replacement for the Alma gem
     # `Alma::AvailabilityResponse` object.
     class Availability
-      attr_reader :parsed_response
+      attr_reader :parsed_response, :mms_id
 
       # @param response_body [String]
-      def initialize(response_body)
+      # @param mms_id [String]
+      def initialize(response_body:, mms_id:)
         @parsed_response = Nokogiri::XML(response_body).remove_namespaces!
+        @mms_id = mms_id
       end
 
       # Was the search request successful but returned 0 results?
@@ -30,7 +32,7 @@ module AlmaSRU
         @records ||= parsed_response.xpath('//searchRetrieveResponse/records').first
       end
 
-      # @return [Array]
+      # @return [Hash]
       def holdings
         record = records.xpath('//recordData/record').first
         map = if record.xpath("datafield[@tag='AVA']").any?
@@ -38,9 +40,10 @@ module AlmaSRU
               elsif record.xpath("datafield[@tag='AVE']").any?
                 { datafield: 'AVE', inventory_type: 'electronic' }
               end
-        return [] unless map # no inventory we care about
 
-        map_subfields_to_hashes record: record, map: map
+        # if there are no holding fields, return an empty array. Mimic data structure returned by
+        # Alma::AvailabilityResponse#holdings.
+        { mms_id => { holdings: map ? map_subfields_to_hashes(record: record, map: map) : [] } }
       end
 
       private

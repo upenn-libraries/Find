@@ -13,7 +13,7 @@ module AlmaSRU
         query: { version: '1.2', operation: 'searchRetrieve', recordSchema: 'marcxml',
                  maximumRecords: 1, query: "alma.mms_id=#{mms_id}" }.merge(args)
       )
-      resp = Response::Availability.new(response.body)
+      resp = Response::Availability.new(response_body: response.body, mms_id: mms_id)
       return resp if resp&.records&.content.present?
 
       raise StandardError, "SRU search failed for ID: #{mms_id}"

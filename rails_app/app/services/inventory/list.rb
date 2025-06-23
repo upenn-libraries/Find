@@ -118,7 +118,7 @@ module Inventory
       # @param mms_id [String]
       # @return [Array, nil]
       def from_sru_availability(mms_id)
-        data = AlmaSRU::Bib.get_availability(mms_id: mms_id).holdings
+        data = AlmaSRU::Bib.get_availability(mms_id: mms_id).holdings.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
       end
 
