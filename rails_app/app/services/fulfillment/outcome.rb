@@ -50,7 +50,8 @@ module Fulfillment
     end
 
     def human_readable_pickup_location
-      Settings.locations.pickup.to_h.find { |_k, v| v[:ils] == request.pickup_location }
+      map_key = request.delivery == Options::Deliverable::ILL_PICKUP ? :ill : :ils
+      Settings.locations.pickup.to_h.find { |_k, v| v[map_key] == request.pickup_location }
               &.first.to_s || request.pickup_location
     end
   end
