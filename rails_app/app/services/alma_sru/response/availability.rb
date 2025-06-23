@@ -48,7 +48,6 @@ module AlmaSRU
 
       private
 
-      # @todo: this needs to be keyed by MMSID to properly parallel Alma::AvailabilityResponse
       # @param map [Hash]
       # @param record [Nokogiri::XML::Element]
       # @return [Array]
