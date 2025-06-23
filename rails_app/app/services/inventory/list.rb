@@ -74,7 +74,7 @@ module Inventory
       # @param limit [Integer, nil]
       # @return [Array<Inventory::Entry>] returns entries
       def from_api(document, limit = nil)
-        inventory_data = from_availability(document.id)
+        inventory_data = from_sru_availability(document.id)
         inventory_data += from_ecollections(document.id) if should_check_for_ecollections?(inventory_data)
         api_entries(inventory_data, document, limit: limit)
       end
@@ -106,10 +106,21 @@ module Inventory
 
       # Grabs inventory data from Alma Bib Availability API. Returns only active entries if entries are electronic.
       #
+      # @note this isn't currently in use as we've moved to using the SRU endpoint for availability lookups until the
+      #       usual Alma API is fixed to work with BIBFRAME-cataloged records
       # @param mms_id [String]
       # @return [Array, nil]
       def from_availability(mms_id)
         data = Alma::Bib.get_availability([mms_id]).availability.dig(mms_id, :holdings)
+        electronic_inventory?(data) ? only_available(data) : data
+      end
+
+      # Grabs inventory data from Alma SRU Availability API. Returns only active entries if entries are electronic.
+      #
+      # @param mms_id [String]
+      # @return [Array, nil]
+      def from_sru_availability(mms_id)
+        data = AlmaSRU::Bib.get_availability(mms_id: mms_id).holdings.dig(mms_id, :holdings)
         electronic_inventory?(data) ? only_available(data) : data
       end
 
