@@ -51,6 +51,11 @@
     </div>
   <% end %>
 
+  <%# TODO: contained link isn't working in the frame... %>
+  <div class="mt-2">
+    We'll email a notification to <strong><%= user.email %></strong> when your request is ready. Review email settings in <%= link_to 'your account', account_url, target: :blank %>.
+  </div>
+
   <%# Add hidden fields with values needed for form submission to the request endpoint. %>
   <% item.loan_params.each do |k, v| %>
     <%= hidden_field_tag k, v %>

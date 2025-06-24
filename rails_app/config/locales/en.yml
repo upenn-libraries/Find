@@ -378,7 +378,7 @@ en:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         scan:
-          info_html: '<a href="%{url}" target=_blank>About request scan</a>'
+          info_html: '<a href="%{url}" target=_blank>About this service.</a>'
           label: 'Email me a chapter or section'
         office:
           label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
