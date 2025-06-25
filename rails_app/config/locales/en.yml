@@ -227,6 +227,7 @@ en:
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
+        mass_renewal: 'We attempted to renew all your items. Examine your shelf below to see the new due dates for each item.'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
       bib_record_link: 'View title record page'
