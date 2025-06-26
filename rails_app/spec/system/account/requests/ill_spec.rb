@@ -7,8 +7,9 @@ describe 'Account Request ILL form' do
 
   include_context 'with mocked illiad_record on user'
 
-  let(:user) { create(:user) }
+  let(:user) { create(:user, ils_group: ils_group) }
   let(:open_params) { {} }
+  let(:ils_group) { 'undergrad' }
 
   before do
     stub_alma_user_find_success(id: user.uid, response_body: create(:alma_user_response))
@@ -21,13 +22,11 @@ describe 'Account Request ILL form' do
   end
 
   context 'when the user is ineligible for ILL services' do
-    before do
-      allow(user).to receive(:ils_group).and_return Settings.fulfillment.ill_restricted_user_groups.sample
-    end
+    let(:ils_group) { Settings.fulfillment.ill_restricted_user_groups.sample }
 
-    it 'redirects the user and shows an explanatory message' do
-      expect(page).not_to have_text I18n.t('account.ill.page_heading')
-      expect(page).to have_text I18n.t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
+    it 'redirects the user and shows an explanatory message with link to ILL guide' do
+      expect(page).not_to have_text I18n.t('account.ill.page_lede')
+      expect(page).to have_link 'Interlibrary Loan guide', href: I18n.t('urls.guides.ill')
     end
   end
 

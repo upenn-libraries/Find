@@ -16,7 +16,7 @@ describe Fulfillment::Endpoint::Illiad do
       end
     end
 
-    context 'when patron is a courtesy borrowers' do
+    context 'when patron is a courtesy borrower' do
       let(:requester) { create(:user, :courtesy_borrower) }
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 

@@ -66,7 +66,7 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def delivery_options
-      return [courtesy_borrower_option] if user.courtesy_borrower?
+      return [ill_restricted_option] if user.ill_restricted_user_group?
 
       options = pickup_option
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
@@ -90,7 +90,7 @@ module Fulfillment
     end
 
     # @return [Symbol]
-    def courtesy_borrower_option
+    def ill_restricted_option
       Options::Deliverable::PICKUP if item.in_place?
     end
 
