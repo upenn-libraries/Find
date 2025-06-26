@@ -9,16 +9,16 @@ describe 'Account Requests requests' do
   context 'when viewing ill form' do
     before { get ill_new_request_path }
 
-    context 'when user is a courtesy borrower' do
+    context 'when user is not eligible to make ILL requets' do
       let(:user) { create(:user, :courtesy_borrower) }
 
       it 'redirects to root_path' do
         expect(response).to redirect_to root_url
       end
 
-      it 'displays alert message' do
+      it 'displays alert message with link to ILL guide' do
         follow_redirect!
-        expect(response.body).to include I18n.t('fulfillment.validation.no_courtesy_borrowers')
+        expect(response.body).to include I18n.t('urls.guides.ill')
       end
     end
   end

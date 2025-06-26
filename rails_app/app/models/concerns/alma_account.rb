@@ -48,6 +48,14 @@ module AlmaAccount
     library_staff? || work_order_operator?
   end
 
+  # Should the user be restricted from making ILL request submissions?
+  # @return [Boolean]
+  def ill_restricted_user_group?
+    return true if ils_group&.in? Settings.fulfillment.ill_restricted_user_groups
+
+    false
+  end
+
   # Returns User's full name in Alma
   # @return [String, nil]
   def full_name

@@ -214,6 +214,20 @@ electronic_scoring:
     Nature: 90
     Elsevier ClinicalKey: 89
 fulfillment:
+  ill_restricted_user_groups:
+    - fact-proxy
+    - courtesy
+    - alum
+    - carrel
+    - drexgrad
+    - drexfac
+    - Bdplus
+    - RecipBorr
+    - ATHEN
+    - purge
+    - RetiredSTF
+    - ath-staff
+    - PALCI
   restricted_libraries:
     archives: 'UnivArcLib'
     hsp: 'HSPLib'

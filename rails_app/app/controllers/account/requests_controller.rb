@@ -4,7 +4,7 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :block_courtesy_borrowers, only: :ill
+    before_action :block_ineligible_user_groups, only: :ill
 
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
@@ -21,8 +21,6 @@ module Account
         flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
       elsif @request.proxied? && !@request.patron.alma_record?
         flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
-      elsif @request.patron.courtesy_borrower?
-        flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
       end
     end
 
@@ -118,10 +116,10 @@ module Account
       }.compact_blank
     end
 
-    def block_courtesy_borrowers
-      return unless current_user.courtesy_borrower?
+    def block_ineligible_user_groups
+      return unless current_user.ill_restricted_user_group?
 
-      redirect_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
+      redirect_to root_path, alert: t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
     end
   end
 end

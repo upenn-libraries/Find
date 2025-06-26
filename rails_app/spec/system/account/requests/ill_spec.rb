@@ -20,6 +20,17 @@ describe 'Account Request ILL form' do
     expect(page).not_to have_text I18n.t('account.ill.form.proxy.prompt')
   end
 
+  context 'when the user is ineligible for ILL services' do
+    before do
+      allow(user).to receive(:ils_group).and_return Settings.fulfillment.ill_restricted_user_groups.sample
+    end
+
+    it 'redirects the user and shows an explanatory message' do
+      expect(page).not_to have_text I18n.t('account.ill.page_heading')
+      expect(page).to have_text I18n.t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
+    end
+  end
+
   context 'when request has open params' do
     let(:open_params) { { 'requesttype' => 'book', 'booktitle' => 'Gone with the Wind', 'au' => 'Margaret Mitchell' } }
 

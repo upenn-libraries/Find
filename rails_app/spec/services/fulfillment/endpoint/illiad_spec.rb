@@ -21,7 +21,7 @@ describe Fulfillment::Endpoint::Illiad do
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
       it 'returns expected error message' do
-        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_courtesy_borrowers')
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.ineligible_user_group')
       end
     end
 
