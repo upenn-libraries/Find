@@ -227,6 +227,7 @@ en:
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
+        mass_renewal: 'We attempted to renew all your items. Examine your shelf below to see the new due dates for each item.'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
       bib_record_link: 'View title record page'
@@ -435,6 +436,9 @@ en:
       pdf_viewed: 'PDF viewed'
   search:
     all_fields: 'All Fields'
+    basic: 'All Fields (Basic)'
+    no_anchored: 'All Fields (No Anchored)'
+    no_unstem: 'All Fields (No Unstemmed)'
     button:
       label: "Find it"
     advanced:
@@ -527,6 +531,7 @@ en:
     creator_desc: 'Author/Creator (z-a)'
     call_num_asc: 'Call Number (a-z)'
     call_num_desc: 'Call Number (z-a)'
+    intelligent: 'Intelligent Sort'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'

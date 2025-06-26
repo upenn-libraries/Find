@@ -52,6 +52,14 @@ class SolrTools
     uri.path.delete_prefix('/solr/')
   end
 
+  # Check if Solr is up by checking cluster state API
+  # @return [Boolean]
+  def self.solr_available?
+    connection.get('solr/admin/collections', action: 'CLUSTERSTATUS').success?
+  rescue StandardError => _e
+    false
+  end
+
   def self.connection
     uri = URI.parse(Settings.solr_url) # Parsing out connection details from URL.
 

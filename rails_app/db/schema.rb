@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_173239) do
   create_table "discover_art_works", force: :cascade do |t|
     t.string "title"
     t.string "link"
-    t.string "identifier"
     t.string "thumbnail_url"
     t.string "location"
     t.string "format"
@@ -45,6 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_173239) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "identifier"
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|

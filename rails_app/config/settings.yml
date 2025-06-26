@@ -6,6 +6,7 @@ cleanup:
     days_old: 4
     batch_size: 1000
 alma:
+  sru_endpoint: 'https://na03.alma.exlibrisgroup.com/view/sru/01UPENN_INST'
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
   work_order_role_value: '214'
 illiad:
@@ -32,6 +33,9 @@ email:
     port: 25
     domain: 'upenn.edu'
 library:
+  undesirable_holdings:
+    - 'AthLib'
+    - 'HSPLib'
   info:
     base_url: 'https://www.library.upenn.edu/api/v1/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
@@ -184,6 +188,7 @@ locations:
     muselock: Museum Locked
 electronic_scoring:
   collection:
+    'Publisher website (licensed ejournals)': 101
     Publisher website: 100
     The New Republic Archive: 99
     Publishers Weekly Archive (1872- current): 98
@@ -192,6 +197,7 @@ electronic_scoring:
     'ProQuest Historical Newspapers: The New York Times': 95
     'ProQuest Historical Newspapers: Pittsburgh Post-Gazette': 94
     'ProQuest Historical Newspapers: The Washington Post': 93
+    Project Muse: 90
     Wiley Online Library - Current Journals: 88
     Academic OneFile: 87
     Academic Search Premier: 86
