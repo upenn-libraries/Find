@@ -123,17 +123,16 @@ class CatalogController < ApplicationController
         controller.params.dig(:f_inclusive, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
     }
 
+    config.add_facet_field :db_subject_facet, label: I18n.t('facets.databases.category'),
+                           show: database_selected,
+                           limit: -1, sort: 'index' do |field|
+      field.include_in_advanced_search = false
+    end
     config.add_facet_field :db_sub_subject_facet, label: I18n.t('facets.databases.subject'),
                                                   show: database_selected,
                                                   limit: -1, sort: 'index' do |field|
       field.include_in_advanced_search = false
     end
-    config.add_facet_field :db_subject_facet, label: I18n.t('facets.databases.category'),
-                                              show: database_selected,
-                                              limit: -1, sort: 'index' do |field|
-      field.include_in_advanced_search = false
-    end
-
     config.add_facet_field :db_type_facet, label: I18n.t('facets.databases.type'),
                                            show: database_selected,
                                            limit: -1, sort: 'index' do |field|
