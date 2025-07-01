@@ -66,7 +66,7 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def delivery_options
-      return [ill_restricted_option] if user.ill_restricted_user_group?
+      return [ill_restricted_option] if user.ill_restricted_user_group? || user.ill_blocked?
 
       options = pickup_option
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?

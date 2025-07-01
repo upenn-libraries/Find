@@ -54,7 +54,7 @@ shared_examples_for 'Illiad Account' do
       let(:illiad_record) { create :illiad_user, :blocked }
 
       it 'returns true' do
-        expect(object.blocked?).to be true
+        expect(object.ill_blocked?).to be true
       end
     end
 
@@ -62,7 +62,7 @@ shared_examples_for 'Illiad Account' do
       let(:illiad_record) { create :illiad_user }
 
       it 'returns true' do
-        expect(object.blocked?).to be false
+        expect(object.ill_blocked?).to be false
       end
     end
   end

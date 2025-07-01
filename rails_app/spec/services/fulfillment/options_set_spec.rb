@@ -5,6 +5,8 @@ describe Fulfillment::OptionsSet do
 
   let(:user) { build(:user) }
 
+  before { allow(user).to receive(:ill_blocked?).and_return false }
+
   context 'with an available circulating item' do
     let(:item) { build :item, *traits }
     let(:traits) { [] }
@@ -17,6 +19,14 @@ describe Fulfillment::OptionsSet do
         expect(options.to_a).to match_array [Fulfillment::Options::Deliverable::PICKUP,
                                              Fulfillment::Options::Deliverable::MAIL,
                                              Fulfillment::Options::Deliverable::ELECTRONIC]
+      end
+    end
+
+    context 'with a standard user with an ILL block' do
+      before { allow(user).to receive(:ill_blocked?).and_return true }
+
+      it 'includes only pickup option' do
+        expect(options.to_a).to match_array [Fulfillment::Options::Deliverable::PICKUP]
       end
     end
 

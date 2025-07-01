@@ -11,7 +11,7 @@ describe Fulfillment::Endpoint::Illiad do
     context 'when missing patron' do
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: nil) }
 
-      before { allow(bad_request.requester).to receive(:blocked?).and_return(false) }
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(false) }
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_user_id')
@@ -22,7 +22,7 @@ describe Fulfillment::Endpoint::Illiad do
       let(:requester) { create(:user, :courtesy_borrower) }
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
-      before { allow(bad_request.requester).to receive(:blocked?).and_return(false) }
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(false) }
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.ineligible_user_group')
@@ -33,7 +33,7 @@ describe Fulfillment::Endpoint::Illiad do
       let(:requester) { create(:user) }
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
-      before { allow(bad_request.requester).to receive(:blocked?).and_return(true) }
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(true) }
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.blocked')
@@ -48,7 +48,7 @@ describe Fulfillment::Endpoint::Illiad do
 
       before do
         allow(bad_request.requester).to receive(:work_order_operator?).and_return false
-        allow(bad_request.patron).to receive(:blocked?).and_return(false)
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
       end
 
       it 'returns expected error message' do
@@ -62,7 +62,7 @@ describe Fulfillment::Endpoint::Illiad do
 
       before do
         allow(Alma::User).to receive(:find).with('jdoe').and_raise(Alma::User::ResponseError, 'Error retrieving record')
-        allow(bad_request.patron).to receive(:blocked?).and_return(false)
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
       end
 
       it 'returns expected error message' do
