@@ -100,8 +100,8 @@ en:
           title: 'Fines and fees'
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
-      restricted_user_html: 'Your user type is not allowed to use ILL services. Visit our <a href="%{ill_guide_url}" target="blank">Interlibrary Loan guide</a> for more information.'
-      blocked: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}" target="blank">Interlibrary Loan guide</a> for more information.'
+      restricted_user_html: 'Your user type is not allowed to use ILL services. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
+      blocked_html: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
       staff_only: 'Visible to staff only'

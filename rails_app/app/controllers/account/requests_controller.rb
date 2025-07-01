@@ -120,7 +120,7 @@ module Account
       block_message = if current_user.ill_restricted_user_group?
                         t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
                       elsif current_user.ill_blocked?
-                        t('account.ill.blocked', ill_guide_url: I18n.t('urls.guides.ill'))
+                        t('account.ill.blocked_html', ill_guide_url: I18n.t('urls.guides.ill'))
                       end
 
       return if block_message.blank?
