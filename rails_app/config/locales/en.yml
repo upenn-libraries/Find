@@ -101,6 +101,7 @@ en:
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
       restricted_user_html: 'Your user type is not allowed to use ILL services. Visit our <a href="%{ill_guide_url}" target="blank">Interlibrary Loan guide</a> for more information.'
+      blocked: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}" target="blank">Interlibrary Loan guide</a> for more information.'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
       staff_only: 'Visible to staff only'
@@ -429,6 +430,7 @@ en:
       no_user_id: 'No user identifier provided'
       no_proxy_requests: 'Proxied request are not allowed'
       ineligible_user_group: 'Your user group is not allowed to make ILL requests'
+      blocked: 'Your user is blocked from making ILL requests'
       proxy_invalid: 'Proxy user not found in Alma'
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'

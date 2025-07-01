@@ -116,10 +116,16 @@ module Account
       }.compact_blank
     end
 
-    def block_ineligible_user_groups
-      return unless current_user.ill_restricted_user_group?
+    def block_ineligible_users
+      block_message = if current_user.ill_restricted_user_group?
+                        t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
+                      elsif current_user.ill_blocked?
+                        t('account.ill.blocked', ill_guide_url: I18n.t('urls.guides.ill'))
+                      end
 
-      redirect_to root_path, alert: t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
+      return if block_message.blank?
+
+      redirect_to root_path, alert: block_message
     end
   end
 end

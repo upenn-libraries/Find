@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 shared_examples_for 'Illiad Account' do
-  describe '#bbm_delivery_address' do
-    before do
-      allow(object).to receive(:illiad_record).and_return(illiad_record)
-    end
+  before do
+    allow(object).to receive(:illiad_record).and_return(illiad_record)
+  end
 
+  describe '#bbm_delivery_address' do
     context 'when bbm address is not set' do
       let(:illiad_record) { create(:illiad_user) }
 
@@ -24,10 +24,6 @@ shared_examples_for 'Illiad Account' do
   end
 
   describe '#office_delivery_address' do
-    before do
-      allow(object).to receive(:illiad_record).and_return(illiad_record)
-    end
-
     context 'when office address is not set' do
       let(:illiad_record) { create(:illiad_user, :with_bbm_address) }
 
@@ -49,6 +45,24 @@ shared_examples_for 'Illiad Account' do
 
       it 'returns expected address' do
         expect(object.office_delivery_address).to eql '123 Williams Hall'
+      end
+    end
+  end
+
+  describe '#blocked' do
+    context 'when user has a blocked indicator value' do
+      let(:illiad_record) { create :illiad_user, :blocked }
+
+      it 'returns true' do
+        expect(object.blocked?).to be true
+      end
+    end
+
+    context 'when the user does not have a blocked indicator value' do
+      let(:illiad_record) { create :illiad_user }
+
+      it 'returns true' do
+        expect(object.blocked?).to be false
       end
     end
   end

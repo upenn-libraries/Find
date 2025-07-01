@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :illiad_user, class: 'Illiad::User' do
     sequence(:UserName) { |n| "testuser#{n}" }
+    add_attribute(:Cleared) { 'Yes' }
 
     trait :with_office_address do
       add_attribute(:Address) { '123 College Hall' }
@@ -17,6 +18,10 @@ FactoryBot.define do
       add_attribute(:Address) { 'D1234 Books by Mail' }
       add_attribute(:Address2) { '1 Smith St./Philadelphia, PA' }
       add_attribute(:Zip) { '12345' }
+    end
+
+    trait :blocked do
+      add_attribute(:Cleared) { Settings.illiad.blocked_user_values.sample }
     end
 
     skip_create
