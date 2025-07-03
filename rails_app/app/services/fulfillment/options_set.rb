@@ -66,7 +66,7 @@ module Fulfillment
 
     # @return [Array<Symbol>]
     def delivery_options
-      return [ill_restricted_option] if user.ill_restricted_user_group? || user.ill_blocked?
+      return [ill_restricted_option] if user_is_ill_restricted?
       return [Options::Deliverable::ELECTRONIC] if non_circulating_item? && item_allows_digitization?
 
       options = pickup_option
@@ -130,6 +130,12 @@ module Fulfillment
     # @return [Boolean]
     def item_material_type_excluded_from_scanning?
       item.material_type_value.in?(Settings.fulfillment.scan.excluded_material_types)
+    end
+
+    # Does the user have some criteria for making them ineligible to use ILL services?
+    # @return [Boolean]
+    def user_is_ill_restricted?
+      user&.ill_restricted_user_group? || user&.ill_blocked?
     end
 
     # Does Alma's reported Request Options include HOLD?
