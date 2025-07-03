@@ -138,7 +138,7 @@ module Fulfillment
       item.request_options_list(user_id: user&.uid).include? Fulfillment::Endpoint::Alma::HOLD_TYPE
     end
 
-    # Does Alma's reported Request Options say that the item can be scanned, while the items is otherwise able to be
+    # Does Alma's reported Request Options say that the item can be scanned, while the item is otherwise able to be
     # processed via ILL?
     # @return [Boolean]
     def item_allows_digitization?
