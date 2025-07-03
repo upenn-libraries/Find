@@ -61,12 +61,13 @@ module Fulfillment
       return Options::Restricted::REFERENCE if item.policy == Settings.fulfillment.policies.reference
       return Options::Restricted::RESERVE if item.policy == Settings.fulfillment.policies.reserve
 
-      Options::Restricted::ONSITE if accessible_onsite?
+      Options::Restricted::ONSITE if only_accessible_onsite?
     end
 
     # @return [Array<Symbol>]
     def delivery_options
       return [ill_restricted_option] if user.ill_restricted_user_group? || user.ill_blocked?
+      return [Options::Deliverable::ELECTRONIC] if non_circulating_item? && item_allows_digitization?
 
       options = pickup_option
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
@@ -112,10 +113,11 @@ module Fulfillment
         (item.in_place? && not_loanable?) || !item_allows_hold_request?
     end
 
-    # An item is accessible on-site if it is In Place ("Available") and otherwise non-circulating
+    # An item is accessible on-site if it is In Place ("Available"), otherwise non-circulating, and doesn't explicitly
+    # allow digitization.
     # @return [Boolean]
-    def accessible_onsite?
-      non_circulating_item? && item.in_place?
+    def only_accessible_onsite?
+      non_circulating_item? && item.in_place? && !item_allows_digitization?
     end
 
     # Some item types don't make sense in an ILL requesting context (laptops, for example)
@@ -134,6 +136,18 @@ module Fulfillment
     # @return [Boolean]
     def item_allows_hold_request?
       item.request_options_list(user_id: user&.uid).include? Fulfillment::Endpoint::Alma::HOLD_TYPE
+    end
+
+    # Does Alma's reported Request Options say that the item can be scanned, while the item is otherwise able to be
+    # processed via ILL?
+    # @return [Boolean]
+    def item_allows_digitization?
+      return false if item_material_type_excluded_from_ill? || item_material_type_excluded_from_scanning?
+
+      options = item.request_options_list(user_id: user&.uid) || []
+      return false if options.empty?
+
+      (options & Settings.fulfillment.scan.request_option_indicators).any?
     end
   end
 end

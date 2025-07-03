@@ -32,8 +32,39 @@ describe Fulfillment::Outcome do
     end
 
     it 'has the proper fulfillment_desc' do
+      pickup_location = outcome.send(:human_readable_pickup_location)
+      expect(pickup_location).to be_present
       expect(outcome.fulfillment_desc).to eq(
         I18n.t('fulfillment.outcome.email.pickup', pickup_location: outcome.send(:human_readable_pickup_location))
+      )
+    end
+  end
+
+  context 'with a pickup request having a pickup location with no mapped pickup location name' do
+    let(:params) do
+      { request: build(:fulfillment_request, :with_item, :ill_pickup, pickup_location: pickup_location),
+        confirmation_number: '87654' }
+    end
+    let(:pickup_location) { 'myNewLocation' }
+
+    it 'has the proper fulfillment_desc' do
+      expect(outcome.fulfillment_desc).to eq(
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: pickup_location)
+      )
+    end
+  end
+
+  context 'with an ILL_PICKUP request' do
+    let(:params) do
+      { request: build(:fulfillment_request, :with_item, :ill_pickup, pickup_location: 'Van Pelt Library'),
+        confirmation_number: '87654' }
+    end
+
+    it 'has the proper fulfillment_desc' do
+      pickup_location = outcome.send(:human_readable_pickup_location)
+      expect(pickup_location).to be_present
+      expect(outcome.fulfillment_desc).to eq(
+        I18n.t('fulfillment.outcome.email.pickup', pickup_location: pickup_location)
       )
     end
   end

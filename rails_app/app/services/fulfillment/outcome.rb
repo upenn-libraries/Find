@@ -49,9 +49,11 @@ module Fulfillment
       end
     end
 
+    # Get a nice location from our Settings based off of the system location regardless of the request type
+    # @return [String]
     def human_readable_pickup_location
-      Settings.locations.pickup.to_h.find { |_k, v| v[:ils] == request.pickup_location }
-              &.first.to_s || request.pickup_location
+      Settings.locations.pickup.to_h.find { |_k, v| request.pickup_location.in? v.values }
+              &.first.to_s.presence || request.pickup_location
     end
   end
 end

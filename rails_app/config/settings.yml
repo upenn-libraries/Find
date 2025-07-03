@@ -245,6 +245,9 @@ fulfillment:
   due_date_policy:
     not_loanable: 'Not loanable'
   scan:
+    request_option_indicators:
+      - SCANDEL
+      - DIGITIZATION
     excluded_material_types:
       - RECORD
       - DVD
