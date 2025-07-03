@@ -137,13 +137,25 @@ describe Fulfillment::OptionsSet do
 
   context 'with a restricted circ item that the Alma Request Options API says cannot be requested' do
     let(:item) { build :item, :in_place_with_restricted_short_loan_policy }
-    let(:hold_allowed) { false }
 
     it { is_expected.to be_restricted }
     it { is_expected.not_to be_deliverable }
 
     it 'includes only the on site option' do
       expect(options.to_a).to eq [Fulfillment::Options::Restricted::ONSITE]
+    end
+  end
+
+  context 'with a non circ item that the Alma Request Options API says can be digitized' do
+    let(:item) do
+      build :item, :non_circ, request_options_list: [Settings.fulfillment.scan.request_option_indicators.sample]
+    end
+
+    it { is_expected.not_to be_restricted }
+    it { is_expected.to be_deliverable }
+
+    it 'includes only the scan option' do
+      expect(options.to_a).to eq [Fulfillment::Options::Deliverable::ELECTRONIC]
     end
   end
 
