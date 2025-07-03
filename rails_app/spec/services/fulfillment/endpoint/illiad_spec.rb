@@ -11,8 +11,6 @@ describe Fulfillment::Endpoint::Illiad do
     context 'when missing patron' do
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: nil) }
 
-      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(false) }
-
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_user_id')
       end
