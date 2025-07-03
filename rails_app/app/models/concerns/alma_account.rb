@@ -51,9 +51,7 @@ module AlmaAccount
   # Should the user be restricted from making ILL request submissions?
   # @return [Boolean]
   def ill_restricted_user_group?
-    return true if ils_group&.in? Settings.fulfillment.ill_restricted_user_groups
-
-    false
+    ils_group&.in? Settings.fulfillment.ill_restricted_user_groups
   end
 
   # Returns User's full name in Alma
