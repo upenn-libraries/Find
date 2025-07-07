@@ -52,7 +52,7 @@ class User < ApplicationRecord
     end
   end
 
-  # Returns true if provided credentials match an ALma internal account
+  # Returns true if provided credentials match an Alma internal account
   # @param [Hash] credentials
   # @return [Boolean]
   def self.authenticated_by_alma?(credentials)

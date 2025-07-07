@@ -45,7 +45,8 @@ module Fulfillment
           scope = %i[fulfillment validation]
           errors = []
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
-          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron&.courtesy_borrower?
+          errors << I18n.t(:ineligible_user_group, scope: scope) if request.patron&.ill_restricted_user_group?
+          errors << I18n.t(:blocked, scope: scope) if request.patron&.ill_blocked?
           errors << I18n.t(:proxy_invalid, scope: scope) if request.proxied? && !request.patron.alma_record?
           if request.proxied? && !request.requester.proxy_submit_eligible?
             errors << I18n.t(:no_proxy_requests, scope: scope)

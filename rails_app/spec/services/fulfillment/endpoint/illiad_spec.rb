@@ -16,12 +16,25 @@ describe Fulfillment::Endpoint::Illiad do
       end
     end
 
-    context 'when patron is a courtesy borrowers' do
+    context 'when patron is a courtesy borrower' do
       let(:requester) { create(:user, :courtesy_borrower) }
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(false) }
+
       it 'returns expected error message' do
-        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_courtesy_borrowers')
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.ineligible_user_group')
+      end
+    end
+
+    context 'when patron is blocked in Illiad' do
+      let(:requester) { create(:user) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
+
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(true) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.blocked')
       end
     end
 
@@ -31,7 +44,10 @@ describe Fulfillment::Endpoint::Illiad do
 
       include_context 'with mocked alma_record on proxy user'
 
-      before { allow(bad_request.requester).to receive(:work_order_operator?).and_return false }
+      before do
+        allow(bad_request.requester).to receive(:work_order_operator?).and_return false
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
+      end
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')
@@ -44,6 +60,7 @@ describe Fulfillment::Endpoint::Illiad do
 
       before do
         allow(Alma::User).to receive(:find).with('jdoe').and_raise(Alma::User::ResponseError, 'Error retrieving record')
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
       end
 
       it 'returns expected error message' do

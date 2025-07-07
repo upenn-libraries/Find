@@ -13,6 +13,11 @@ illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
   legacy_user_password: <%= DockerSecrets.lookup(:illiad_legacy_user_password, Rails.application.credentials.illiad_legacy_user_password) %>
+  blocked_user_values:
+    - B
+    - BO
+    - DIS
+    - BX
 aeon:
   requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
 hathi:
@@ -214,6 +219,20 @@ electronic_scoring:
     Nature: 90
     Elsevier ClinicalKey: 89
 fulfillment:
+  ill_restricted_user_groups:
+    - fact-proxy
+    - courtesy
+    - alum
+    - carrel
+    - drexgrad
+    - drexfac
+    - Bdplus
+    - RecipBorr
+    - ATHEN
+    - purge
+    - RetiredSTF
+    - ath-staff
+    - PALCI
   restricted_libraries:
     archives: 'UnivArcLib'
     hsp: 'HSPLib'

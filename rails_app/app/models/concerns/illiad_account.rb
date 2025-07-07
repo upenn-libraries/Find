@@ -47,6 +47,14 @@ module IlliadAccount
            .first
   end
 
+  # Does the user have a blocked attribute?
+  # @return [Boolean]
+  def ill_blocked?
+    return false unless illiad_record?
+
+    illiad_record.data[:Cleared].in? Settings.illiad.blocked_user_values
+  end
+
   private
 
   def fetch_illiad_record
