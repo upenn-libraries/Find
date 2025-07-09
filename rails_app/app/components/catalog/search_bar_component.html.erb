@@ -47,5 +47,5 @@
     <%= link_to t('search.advanced.label'), advanced_search_catalog_path %>
   <% end %>
 
-  <%= link_to t('search.databases'), databases_catalog_path %>
+  <%= link_to t('search.databases'), databases_catalog_path(sort: SearchBuilder::TITLE_SORT_ASC.join(',')) %>
 </search>
