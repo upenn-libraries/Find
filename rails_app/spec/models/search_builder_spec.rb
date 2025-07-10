@@ -78,7 +78,7 @@ describe SearchBuilder do
     context 'with a basic search term provided' do
       let(:blacklight_params) { { q: 'term' } }
 
-      it 'sets the expected sort value' do
+      it 'sets the sort value to relevance sort' do
         expect(blacklight_params[:sort]).to eq SearchBuilder::RELEVANCE_SORT.join(',')
       end
     end
@@ -86,7 +86,7 @@ describe SearchBuilder do
     context 'with no search term and an Access facet applied' do
       let(:blacklight_params) { { f: { access_facet: [PennMARC::Access::ONLINE] } } }
 
-      it 'sets the expected sort value' do
+      it 'sets the has-electronic-holdings sort dimension first' do
         expect(blacklight_params[:sort]).to eq(
           ['min(def(electronic_portfolio_count_i,0),1) desc',
            'encoding_level_sort asc',
