@@ -19,7 +19,8 @@ class SearchBuilder < Blacklight::SearchBuilder
   # Merge the advanced search form parameters into the solr parameters
   # @param solr_p [Hash] the current solr parameters
   def facets_for_advanced_search_form(solr_p)
-    return unless advanced_search? && blacklight_config.advanced_search[:form_solr_parameters]
+    return unless (search_state.controller&.action_name == 'advanced_search') &&
+                  blacklight_config.advanced_search[:form_solr_parameters]
 
     solr_p.merge!(blacklight_config.advanced_search[:form_solr_parameters])
   end
@@ -32,11 +33,11 @@ class SearchBuilder < Blacklight::SearchBuilder
   #  - Date last updated (descending)
   # @param solr_p [Hash] the current solr parameters
   def massage_sort(solr_p)
-    return if advanced_search? || scoreless_sort_parameter_present?(solr_p)
+    return if solr_p.key?(:clause) || non_relevance_sort_parameter_present?(solr_p)
     return solr_p[:sort] = TITLE_SORT_ASC.join(',') if database_search?(solr_p)
     return solr_p[:sort] = RELEVANCE_SORT.join(',') if search_term_provided?(solr_p)
 
-    solr_p[:sort] = INDUCED_SORT.dup.push(inventory_sort_addition(solr_p)).compact_blank.join(',')
+    solr_p[:sort] = INDUCED_SORT.dup.prepend(inventory_sort_addition(solr_p)).compact_blank.join(',')
   end
 
   # Escape certain Solr operators when they are found in the user's query surrounded by whitespace
@@ -62,7 +63,7 @@ class SearchBuilder < Blacklight::SearchBuilder
 
   # @param solr_p [Hash]
   # @return [Boolean]
-  def scoreless_sort_parameter_present?(solr_p)
+  def non_relevance_sort_parameter_present?(solr_p)
     solr_p[:sort].present? && solr_p[:sort] != RELEVANCE_SORT.join(',')
   end
 
@@ -76,10 +77,5 @@ class SearchBuilder < Blacklight::SearchBuilder
   # @return [Boolean, nil]
   def database_search?(solr_p)
     solr_p.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
-  end
-
-  # @return [Boolean]
-  def advanced_search?
-    search_state.controller&.action_name == 'advanced_search'
   end
 end
