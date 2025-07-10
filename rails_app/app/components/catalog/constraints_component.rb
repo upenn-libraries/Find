@@ -2,7 +2,7 @@
 
 module Catalog
   # Local component overriding version from Blacklight v8.11.0
-  # @todo as of 8.11.0 the ConstraintsComponent to sue can be specified in the BL config
+  # @todo as of 8.11.0 the ConstraintsComponent to use can be specified in the BL config
   class ConstraintsComponent < Blacklight::Component
     renders_many :query_constraints_area
     renders_many :facet_constraints_area
