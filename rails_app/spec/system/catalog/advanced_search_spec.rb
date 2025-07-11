@@ -33,7 +33,7 @@ describe 'Advanced Search Page' do
         click_on 'Search'
         expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
                                             '&clause%5B0%5D%5Bquery%5D=&'\
-                                            'sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc'\
+                                            'sort=score+desc%2Cpublication_date_sort+desc%2Ctitle_sort+asc'\
                                             '&commit=Search'
       end
     end
@@ -47,8 +47,8 @@ describe 'Advanced Search Page' do
       it 'makes the request to the expected path' do
         expect(page).to have_current_path '/?op=must&clause%5B0%5D%5Bfield%5D=all_fields_advanced'\
                                             '&clause%5B0%5D%5Bquery%5D=&clause%5B2%5D%5Bfield%5D=title_search'\
-                                            '&clause%5B2%5D%5Bquery%5D=Hypothalamus'\
-                                            '&sort=score+desc%2C+publication_date_sort+desc%2C+title_sort+asc'\
+                                            '&clause%5B2%5D%5Bquery%5D=Hypothalamus&'\
+                                            'sort=score+desc%2Cpublication_date_sort+desc%2Ctitle_sort+asc'\
                                             '&commit=Search'
       end
     end

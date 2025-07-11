@@ -534,7 +534,6 @@ en:
     creator_desc: 'Author/Creator (z-a)'
     call_num_asc: 'Call Number (a-z)'
     call_num_desc: 'Call Number (z-a)'
-    intelligent: 'Intelligent Sort'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'
