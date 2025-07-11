@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Inherits from Blacklight::ConstraintLayoutComponent v8.8.0 to ensure adv search constraints match style of
+  # Inherits from Blacklight::ConstraintLayoutComponent v8.11.0 to ensure adv search constraints match style of
   # constraints in catalog views
   class SearchHistoryConstraintLayoutComponent < Blacklight::ConstraintLayoutComponent
     def call
