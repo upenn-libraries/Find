@@ -83,12 +83,24 @@ describe SearchBuilder do
       end
     end
 
-    context 'with no search term and an Access facet applied' do
+    context 'with no search term and an "Online" Access facet applied' do
       let(:blacklight_params) { { f: { access_facet: [PennMARC::Access::ONLINE] } } }
 
       it 'sets the has-electronic-holdings sort dimension first' do
         expect(blacklight_params[:sort]).to eq(
           ['min(def(electronic_portfolio_count_i,0),1) desc',
+           'encoding_level_sort asc',
+           'updated_date_sort desc'].join(',')
+        )
+      end
+    end
+
+    context 'with no search term and an "At the Library" Access facet applied' do
+      let(:blacklight_params) { { f: { access_facet: [PennMARC::Access::AT_THE_LIBRARY] } } }
+
+      it 'sets the has-physical-holdings sort dimension first' do
+        expect(blacklight_params[:sort]).to eq(
+          ['min(def(physical_holding_count_i,0),1) desc',
            'encoding_level_sort asc',
            'updated_date_sort desc'].join(',')
         )
