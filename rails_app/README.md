@@ -116,7 +116,7 @@ Assuming you have configured your Ruby SDK (to use `rbenv` or `asdf`) in RubyMin
 
 In order to mitigate the potential for issues when updating Blacklight versions, all overridden Blacklight classes and templates should include documentation about the version from which the copied class or overriden template started from. This should help to ensure that our overrides continue to function as expected as we update Blacklight.
 
-When updating Blacklight, it is recommended to review each override and adapt to any changes in the latest version of the source file of the override, if needed. If no changes are needed, update the referenced version number ion the override file documentation to reflect that it was reviewed for compatibility with the version of Blacklight being updated to.
+When updating Blacklight, it is recommended to review each override and adapt to any changes in the latest version of the source file of the override, if needed. If no changes are needed, update the referenced version number in the override file documentation to reflect that it was reviewed for compatibility with the version of Blacklight being updated to.
 
 It can be helpful to use [GitHub's comparison tool](https://github.com/projectblacklight/blacklight/compare/v8.8.0...v8.11.0) with the original and target versions specified, so that all changed files are easily reviewable.
 
