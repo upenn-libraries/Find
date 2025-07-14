@@ -21,6 +21,17 @@ describe AlmaSRU::Response::Availability do
       end
     end
 
+    context 'with a print serial record' do
+      let(:mms_id) { '991856183503681' }
+      let(:response_body) { sru_xml_fixture 'physical_serial_availability' }
+
+      it 'returns the aggregate holding information' do
+        expect(holdings.first['holding_info']).to eq(
+          'v.1 (1844:June)-v.40 (1899), v.47 (1906)-v.49 (1908), v.56 (1915)-v.67 (1926) Suppl. (test)'
+        )
+      end
+    end
+
     context 'with an electronic record' do
       let(:mms_id) { '9979240322003681' }
       let(:response_body) { sru_xml_fixture 'electronic_bib_availability' }

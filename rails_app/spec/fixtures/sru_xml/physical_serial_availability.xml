@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<searchRetrieveResponse
+        xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record
+                xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>02824cas a2200649   4500</leader>
+          <controlfield tag="001">991856183503681</controlfield>
+          <controlfield tag="005">20220609131100.0</controlfield>
+          <controlfield tag="007">hdrafu---buuu</controlfield>
+          <controlfield tag="008">850531c18449999miuuu p a     0uu a1eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)ocm07546319</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)7546319</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CStRLIN)PAUG85-S980</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="9">ABA8702</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PUVoyagerBIBID)185618</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">185618</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(PU)185618-penndb-Voyager</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">MiU</subfield>
+            <subfield code="b">eng</subfield>
+            <subfield code="c">MiU</subfield>
+            <subfield code="d">PU</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="090">
+            <subfield code="b">\Micro- film 605\</subfield>
+            <subfield code="n">#39</subfield>
+            <subfield code="p">1</subfield>
+            <subfield code="i">05/31/85 CT</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Musical times.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="7" tag="246">
+            <subfield code="a">Musical times</subfield>
+            <subfield code="f">June 1844-1906</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="0" tag="247">
+            <subfield code="a">Musical times and singing-class circular</subfield>
+            <subfield code="f">June 1844-1906</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">[London, etc., Novello, etc.]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">volumes :</subfield>
+            <subfield code="b">illustrations, portraits ;</subfield>
+            <subfield code="c">27 cm</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="310">
+            <subfield code="a">Monthly,</subfield>
+            <subfield code="b">Aug. 1855-</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="321">
+            <subfield code="a">Monthly,</subfield>
+            <subfield code="b">June 1844-Jan. 1854</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="321">
+            <subfield code="a">Semimonthly (irregular)</subfield>
+            <subfield code="b">Feb. 1854-July 1855</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">text</subfield>
+            <subfield code="b">txt</subfield>
+            <subfield code="2">rdacontent</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">microform</subfield>
+            <subfield code="b">h</subfield>
+            <subfield code="2">rdamedia</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">microfilm reel</subfield>
+            <subfield code="b">hd</subfield>
+            <subfield code="2">rdacarrier</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="340">
+            <subfield code="b">35 mm</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="340">
+            <subfield code="g">monochrome</subfield>
+            <subfield code="2">rdacc</subfield>
+            <subfield code="0">http://rdaregistry.info/termList/RDAColourContent/1002</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="340">
+            <subfield code="o">positive</subfield>
+            <subfield code="2">rdapo</subfield>
+            <subfield code="0">http://rdaregistry.info/termList/RDAPolarity/1001</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="362">
+            <subfield code="a">v. 1-   (no. 1-   ) June 1844-</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Music in pockets.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Microfilm.</subfield>
+            <subfield code="b">Ann Arbor, Mich.:</subfield>
+            <subfield code="c">University Microfilms International,</subfield>
+            <subfield code="e">reels  ; 35 mm.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="590">
+            <subfield code="a">Acquired for the Penn Libraries with assistance from the Rosengarten Family Fund.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="525">
+            <subfield code="a">With supplements.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Music</subfield>
+            <subfield code="v">Periodicals.</subfield>
+            <subfield code="0">http://id.loc.gov/authorities/subjects/sh85088772</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="650">
+            <subfield code="a">Music.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">http://id.worldcat.org/fast/1030269</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Periodicals.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">http://id.worldcat.org/fast/1411641</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Periodicals.</subfield>
+            <subfield code="2">lcgft</subfield>
+            <subfield code="0">http://id.loc.gov/authorities/genreForms/gf2014026139</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Rosengarten Family Fund.</subfield>
+            <subfield code="5">PU</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="5" tag="780">
+            <subfield code="t">Musical review</subfield>
+            <subfield code="g">July 1852</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="2" tag="856">
+            <subfield code="3">The Rosengarten Family Fund Home Page</subfield>
+            <subfield code="u">http://hdl.library.upenn.edu/1017.12/366323</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="902">
+            <subfield code="a">MARCIVE 2022</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="950">
+            <subfield code="l">VPL</subfield>
+            <subfield code="d">\Music\</subfield>
+            <subfield code="e">105,106\\see also\ML\5\M85\</subfield>
+            <subfield code="v">v.1-40,47-49,56-67</subfield>
+            <subfield code="y">1844-99, 1906-1926</subfield>
+            <subfield code="i">05/31/85 C ?125:</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.1-14 Je 1844-F 1871)</subfield>
+            <subfield code="q">g. Prof. J. Kallberg</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.15-21 Mr 1871-D 1880)</subfield>
+            <subfield code="q">g. Prof. J. Kallberg</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.22-26 1881-1885)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.27-30 1886-1889)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.31-34 1890-1893)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.35-37 1894-1896)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.38-40 1897-1899)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.47-49 1906-1908)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.56-59 1915-1918)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.60-63 1919-1922)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="l">VPL</subfield>
+            <subfield code="c">1:(v.64-67 1923-1926)</subfield>
+            <subfield code="i">05/31/85 C</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVA">
+            <subfield code="0">991856183503681</subfield>
+            <subfield code="8">22653903260003681</subfield>
+            <subfield code="a">01UPENN_INST</subfield>
+            <subfield code="b">Libra</subfield>
+            <subfield code="c">LIBRA</subfield>
+            <subfield code="d">Music Microfilm 605</subfield>
+            <subfield code="e">available</subfield>
+            <subfield code="f">14</subfield>
+            <subfield code="g">0</subfield>
+            <subfield code="j">stor</subfield>
+            <subfield code="k">8</subfield>
+            <subfield code="p">1</subfield>
+            <subfield code="q">LIBRA</subfield>
+            <subfield code="t">v.1 (1844:June)-v.40 (1899),</subfield>
+            <subfield code="t">v.47 (1906)-v.49 (1908),</subfield>
+            <subfield code="t">v.56 (1915)-v.67 (1926)</subfield>
+            <subfield code="t">Suppl. (test)</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991856183503681</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData
+          xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2025-07-14T11:39:25-0400</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>
