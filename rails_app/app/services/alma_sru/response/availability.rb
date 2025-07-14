@@ -55,7 +55,7 @@ module AlmaSRU
         record.xpath("datafield[@tag='#{map[:datafield]}']").map do |holding|
           { 'inventory_type' => map[:inventory_type] }.tap do |hash|
             Alma::INVENTORY_SUBFIELD_MAPPING[map[:datafield]].each do |subfield, name|
-              value = holding.xpath("subfield[@code='#{subfield}']")&.first&.content
+              value = holding.xpath("subfield[@code='#{subfield}']")&.first&.content # TODO: join multiple subfield values
               next if value.blank?
 
               hash[name] = value
