@@ -157,7 +157,6 @@ en:
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'
-        email_notification_msg: "We'll send you an email notification when it is ready."
     bookmarks:
       page_heading: 'Bookmarks'
       page_lede: 'Create citations and email bookmarked items.'
@@ -377,18 +376,20 @@ en:
       options:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
+        email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
         scan:
           info_html: '<a href="%{url}" target=_blank>About this service.</a>'
           label: 'Email me a chapter or section'
         office:
           label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
-          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
+          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>.'
         pickup:
           label: 'Pick up'
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
           label: 'Mail it via Books by Mail'
+          restriction_message: 'Your address must be more than 50 miles from campus and in the U.S. to use this service.'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
         aeon:

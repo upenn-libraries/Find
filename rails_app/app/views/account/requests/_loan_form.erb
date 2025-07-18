@@ -68,7 +68,10 @@
       </fieldset>
 
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
-      <p><%= t('account.ill.form.email_notification_msg') %></p>
+      <p><%= t('requests.form.options.email_notification_message_html',
+               email: @request.patron.email,
+               account_link: link_to('your account', account_url, target: '_blank', rel: :noopener)
+             ) %></p>
 
       <%= button_tag t('account.ill.form.loan.submit'),
                      class: 'btn btn-success btn-lg',

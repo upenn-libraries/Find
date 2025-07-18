@@ -51,9 +51,11 @@
     </div>
   <% end %>
 
-  <%# TODO: contained link isn't working in the frame... %>
   <div class="mt-2">
-    We'll email a notification to <strong><%= user.email %></strong> when your request is ready. Review email settings in <%= link_to 'your account', account_url, target: :blank %>.
+    <%= t('requests.form.options.email_notification_message_html',
+           email: user.email,
+           account_link: link_to('your account', account_url, target: '_blank', rel: :noopener)
+         ) %>
   </div>
 
   <%# Add hidden fields with values needed for form submission to the request endpoint. %>
