@@ -51,6 +51,13 @@
     </div>
   <% end %>
 
+  <div class="mt-2">
+    <%= t('requests.form.options.email_notification_message_html',
+           email: user.email,
+           account_link: link_to('your account', account_url, target: '_blank', rel: :noopener)
+         ) %>
+  </div>
+
   <%# Add hidden fields with values needed for form submission to the request endpoint. %>
   <% item.loan_params.each do |k, v| %>
     <%= hidden_field_tag k, v %>

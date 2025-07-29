@@ -32,7 +32,7 @@ shared_context 'with user alma_record lookup returning false' do
   end
 end
 
-# For a proxy_user, mock an the Alma::User lookup with default ils_group and full_name.
+# For a proxy_user, mock the Alma::User lookup with default ils_group, full_name and preferred email.
 shared_context 'with mocked alma_record on proxy user' do
   let(:proxy_ils_group) { :undergraduate }
 
@@ -41,6 +41,7 @@ shared_context 'with mocked alma_record on proxy user' do
     mock_alma_user = instance_double(Alma::User)
     allow(mock_alma_user).to receive(:method_missing).with(:user_group).and_return(user_group)
     allow(mock_alma_user).to receive(:method_missing).with(:full_name).and_return('John Doe')
+    allow(mock_alma_user).to receive(:method_missing).with(:preferred_email).and_return('jdoe@upenn.edu')
     allow(Alma::User).to receive(:find).with(proxy.uid).and_return(mock_alma_user)
   end
 end

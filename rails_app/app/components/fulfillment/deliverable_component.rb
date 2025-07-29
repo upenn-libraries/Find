@@ -7,12 +7,13 @@ module Fulfillment
 
     delegate :item, :user, to: :options
 
+    # @param options_set [OptionsSet]
     def initialize(options_set:)
       @options = options_set
     end
 
     # Returns true if the request accepts a comment field.
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     def commentable?
       options.inquiry.any?(Fulfillment::Options::Deliverable::ILL_PICKUP,
                            Fulfillment::Options::Deliverable::PICKUP,
@@ -34,7 +35,7 @@ module Fulfillment
     def electronic_delivery_link
       link_to t('requests.form.buttons.scan'),
               ill_new_request_path(**item.scan_params),
-              class: 'd-none btn btn-success btn-lg', target: '_blank', rel: 'noopener',
+              class: 'd-none btn btn-success btn-lg', target: '_blank', rel: :noopener,
               data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
     end
 
