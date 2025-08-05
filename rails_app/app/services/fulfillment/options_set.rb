@@ -73,6 +73,7 @@ module Fulfillment
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
       options << Options::Deliverable::OFFICE if user.faculty_express?
       options << Options::Deliverable::ELECTRONIC unless item_material_type_excluded_from_scanning?
+      options << Options::Deliverable::DOCDEL # define a condition when known
       options
     end
 
