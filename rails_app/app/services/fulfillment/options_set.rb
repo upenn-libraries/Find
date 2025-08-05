@@ -67,7 +67,7 @@ module Fulfillment
     # @return [Array<Symbol>]
     def delivery_options
       return [ill_restricted_option] if user_is_ill_restricted?
-      return [electronic_only_options] if only_electronic_delivery?
+      return electronic_only_options if non_circulating_item? && item_allows_digitization?
 
       build_delivery_options
     end
@@ -104,7 +104,7 @@ module Fulfillment
     # @return [Array<Symbol>]
     def electronic_only_options
       options = [Options::Deliverable::ELECTRONIC]
-      options << [Options::Deliverable::DOCDEL] if user.docdel?
+      options << Options::Deliverable::DOCDEL if user.docdel?
       options
     end
 
@@ -124,12 +124,6 @@ module Fulfillment
     def non_circulating_item?
       item.policy.in?([Settings.fulfillment.policies.non_circ, Settings.fulfillment.policies.in_house]) ||
         (item.in_place? && not_loanable?) || !item_allows_hold_request?
-    end
-
-    # An item is available exclusively for electronic delivery if it is non-circulating but allows digitization.
-    # @return [Boolean]
-    def only_electronic_delivery?
-      non_circulating_item? && item_allows_digitization?
     end
 
     # An item is accessible on-site if it is In Place ("Available"), otherwise non-circulating, and doesn't explicitly
