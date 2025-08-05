@@ -22,6 +22,14 @@ module AlmaAccount
     ils_group == FACULTY_EXPRESS_GROUP
   end
 
+  # Returns true if a user is in the Alma DocDel group
+  # @return [Boolean]
+  # @todo Add actual condition here
+  def docdel?
+    # ils_group = DOCDEL_GROUP
+    false
+  end
+
   # Return true if the user is a library staff
   # @return [Boolean]
   def library_staff?
