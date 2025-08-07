@@ -276,6 +276,8 @@ fulfillment:
       - OTHER
       - KEYS
       - GLOBE
+  docdel:
+    email: 'docdel@wharton.upenn.edu'
 discover:
   enabled: false
   source:

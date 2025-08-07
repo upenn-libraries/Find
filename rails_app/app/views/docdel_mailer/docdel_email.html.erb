@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Find Catalog Document Delivery Submission</title>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+  <h1>New Request</h1>
+
+  <p>
+    Request from:
+  </p>
+
+  <ul>
+    <li>User: <%= @user.full_name %></li>
+    <li>Email: <%= @user.email %></li>
+    <li>Pennkey: <%= @user.uid %></li>
+  </ul>
+
+  <% if @params.source == Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID %>
+  <p>This request came from the "request an Item" form.</p>
+
+  <%# TODO: print form field data from @params %>
+
+  <% elsif @params.source == Fulfillment::Endpoint::Illiad::RECORD_PAGE_SOURCE_SID %>
+  <p>This request came from a catalog record page: <%= link_to solr_document_path(@params.mms_id, hld_id: @params.holding_id) %></p>
+
+  <%# TODO: print params derived from selected item and form data %>
+  <% end %>
+
+  <p>
+    User comments:
+  </p>
+
+  <p>
+    <%= @params.comments %>
+  </p>
+
+</body>
+</html>

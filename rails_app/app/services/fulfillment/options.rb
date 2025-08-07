@@ -14,6 +14,7 @@ module Fulfillment
 
     # Fulfillment options that involve delivering the item to the user, either as a physical object or a scan
     class Deliverable < Category
+      DOCDEL = :docdel
       ELECTRONIC = :electronic
       ILL_PICKUP = :ill_pickup
       MAIL = :mail

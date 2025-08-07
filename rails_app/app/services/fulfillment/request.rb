@@ -64,9 +64,10 @@ module Fulfillment
       delivery == Options::Deliverable::OFFICE
     end
 
-    # def aeon?
-    #   delivery == Options::AEON
-    # end
+    # @return [Boolean]
+    def docdel?
+      delivery == Options::Deliverable::DOCDEL
+    end
 
     # @return [Boolean]
     def pickup?
@@ -108,8 +109,8 @@ module Fulfillment
     def determine_endpoint
       if scan? || mail? || office? || ill_pickup?
         Fulfillment::Endpoint::Illiad
-        # elsif aeon?
-        #   Fulfillment::Endpoint::Aeon
+      elsif docdel?
+        Fulfillment::Endpoint::Docdel
       elsif pickup?
         Fulfillment::Endpoint::Alma
       else

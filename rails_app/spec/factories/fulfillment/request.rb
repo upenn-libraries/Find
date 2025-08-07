@@ -70,6 +70,10 @@ FactoryBot.define do
       endpoint { :illiad }
     end
 
+    trait :docdel do
+      delivery { Fulfillment::Options::Deliverable::DOCDEL }
+    end
+
     skip_create
     initialize_with { Fulfillment::Request.new(**attributes) }
   end
