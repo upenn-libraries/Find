@@ -33,7 +33,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   #  - Date last updated (descending)
   # @param solr_p [Hash] the current solr parameters
   def massage_sort(solr_p)
-    return if solr_p.key?(:clause) || non_relevance_sort_parameter_present?(solr_p)
+    return if advanced_search_params_present?(solr_p) || non_relevance_sort_parameter_present?(solr_p)
     return solr_p[:sort] = TITLE_SORT_ASC.join(',') if database_search?(solr_p)
     return solr_p[:sort] = RELEVANCE_SORT.join(',') if search_term_provided?(solr_p)
 
@@ -49,6 +49,12 @@ class SearchBuilder < Blacklight::SearchBuilder
   end
 
   private
+
+  # @param solr_p [Hash]
+  # @return [Boolean]
+  def advanced_search_params_present?(solr_p)
+    solr_p[:json].present?
+  end
 
   # @param solr_p [Hash]
   # @return [String, nil]
