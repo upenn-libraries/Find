@@ -45,7 +45,7 @@ describe Illiad::Request do
 
       before { stub_find_request_failure(id: request.id, response_body: response_body) }
 
-      it 'raises an error ' do
+      it 'raises an error' do
         expect { described_class.find(id: request.id) }
           .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
@@ -70,7 +70,7 @@ describe Illiad::Request do
 
       before { stub_add_note_failure(id: request.id, note: note, response_body: response_body) }
 
-      it 'raises an error ' do
+      it 'raises an error' do
         expect { described_class.add_note(id: request.id, note: note) }
           .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end
@@ -97,7 +97,7 @@ describe Illiad::Request do
 
       before { stub_route_request_failure(id: request.id, status: status, response_body: response_body) }
 
-      it 'raises an error ' do
+      it 'raises an error' do
         expect { described_class.route(id: request.id, status: status) }
           .to raise_error(Illiad::Client::Error, /#{Illiad::Client::ERROR_MESSAGE}/)
       end

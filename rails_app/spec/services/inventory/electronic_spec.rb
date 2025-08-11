@@ -95,7 +95,7 @@ describe Inventory::Electronic do
       let(:service) { { 'public_note' => '', 'authentication_note' => '' } }
 
       it 'returns expected values' do
-        expect(notes).to contain_exactly(*collection.values)
+        expect(notes).to match_array(collection.values)
       end
 
       it 'makes all api requests' do

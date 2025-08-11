@@ -62,7 +62,7 @@ describe Articles::Search do
         second_title = 'BOOK'
         third_title = 'Reading Beyond the Book: The Social Practices of Contemporary Literary Culture'
 
-        expect(search.documents&.map(&:title)).to match_array([first_title, second_title, third_title])
+        expect(search.documents&.map(&:title)).to contain_exactly(first_title, second_title, third_title)
       end
     end
 

@@ -32,7 +32,6 @@ module Articles
     #
     # @return [Summon::Search, nil] successful search response from the Summon API,
     #   or no response if there was an error
-    # rubocop:disable Metrics/MethodLength
     def response
       @response ||= client.search(
         {
@@ -51,7 +50,6 @@ module Articles
       handle_error(e)
       nil
     end
-    # rubocop:enable Metrics/MethodLength
 
     # @return [Array<Articles::Document>, nil] documents returned from the search
     def documents
@@ -67,8 +65,7 @@ module Articles
       response.query.query_string
     end
 
-    # @return [Boolean] whether or not the search connected successfully and
-    #   returned documents
+    # @return [Boolean] whether the search connected successfully and returned documents
     def success?
       response.present? && response.respond_to?(:documents)
     end

@@ -18,7 +18,7 @@ shared_examples_for 'Illiad Account' do
       let(:illiad_record) { create(:illiad_user, :with_bbm_address) }
 
       it 'returns expected address' do
-        expect(object.bbm_delivery_address).to match_array ['1 Smith St.', 'Philadelphia, PA 12345']
+        expect(object.bbm_delivery_address).to contain_exactly('1 Smith St.', 'Philadelphia, PA 12345')
       end
     end
   end
