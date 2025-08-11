@@ -67,12 +67,18 @@ module Fulfillment
     # @return [Array<Symbol>]
     def delivery_options
       return [ill_restricted_option] if user_is_ill_restricted?
-      return [Options::Deliverable::ELECTRONIC] if non_circulating_item? && item_allows_digitization?
+      return electronic_only_options if non_circulating_item? && item_allows_digitization?
 
+      build_delivery_options
+    end
+
+    # @return [Array<Symbol>]
+    def build_delivery_options
       options = pickup_option
       options << Options::Deliverable::MAIL unless item_material_type_excluded_from_ill?
       options << Options::Deliverable::OFFICE if user.faculty_express?
       options << Options::Deliverable::ELECTRONIC unless item_material_type_excluded_from_scanning?
+      options << Options::Deliverable::DOCDEL if user.docdel?
       options
     end
 
@@ -93,6 +99,13 @@ module Fulfillment
     # @return [Symbol]
     def ill_restricted_option
       Options::Deliverable::PICKUP if item.in_place?
+    end
+
+    # @return [Array<Symbol>]
+    def electronic_only_options
+      options = [Options::Deliverable::ELECTRONIC]
+      options << Options::Deliverable::DOCDEL if user.docdel?
+      options
     end
 
     # @return [Boolean]

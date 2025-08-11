@@ -11,6 +11,7 @@ en:
       office: "https://www.library.upenn.edu/services/facultyexpress"
       articles: "https://guides.library.upenn.edu/find-articlesplus"
       ill: "https://guides.library.upenn.edu/resourcesharing/ill"
+      lippincott_svc: "https://guides.library.upenn.edu/lippincottservices"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
       feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"

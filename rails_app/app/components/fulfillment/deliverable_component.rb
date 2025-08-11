@@ -18,7 +18,8 @@ module Fulfillment
       options.inquiry.any?(Fulfillment::Options::Deliverable::ILL_PICKUP,
                            Fulfillment::Options::Deliverable::PICKUP,
                            Fulfillment::Options::Deliverable::MAIL,
-                           Fulfillment::Options::Deliverable::OFFICE)
+                           Fulfillment::Options::Deliverable::OFFICE,
+                           Fulfillment::Options::Deliverable::DOCDEL)
     end
 
     # Generates the submit button for the given delivery type.

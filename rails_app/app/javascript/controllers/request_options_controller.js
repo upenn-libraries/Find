@@ -6,6 +6,7 @@ export default class extends Controller {
     "officeButton",
     "pickupButton",
     "ill_pickupButton",
+    "docdelButton",
     "mailButton",
   ];
   static outlets = ["comments"];
@@ -13,6 +14,7 @@ export default class extends Controller {
     "pickup",
     "ill_pickup",
     "mail",
+    "docdel",
     "office"
   ];
 
@@ -62,7 +64,8 @@ export default class extends Controller {
       this.officeButtonTarget,
       this.pickupButtonTarget,
       this.mailButtonTarget,
-      this.ill_pickupButtonTarget
+      this.ill_pickupButtonTarget,
+      this.docdelButtonTarget,
     ];
   }
 }
