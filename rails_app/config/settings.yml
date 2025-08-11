@@ -219,6 +219,10 @@ electronic_scoring:
     Nature: 90
     Elsevier ClinicalKey: 89
 fulfillment:
+  docdel_user_groups:
+    - zWhartonFaculty
+    - zWhartonStudent
+    - zWhartonStaff
   ill_restricted_user_groups:
     - fact-proxy
     - courtesy
