@@ -108,7 +108,7 @@ describe SearchBuilder do
     end
 
     context 'with an advanced search request' do
-      let(:blacklight_params) { { clause: {} } }
+      let(:blacklight_params) { { json: { query: { bool: { must: [] } } } } }
 
       it 'does not modify sort param' do
         expect(blacklight_params[:sort]).to be_nil

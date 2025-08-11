@@ -376,12 +376,13 @@ en:
         aeon: 'Schedule visit'
         placeholder: 'Request item'
         hsp: 'Schedule visit'
+        docdel: 'Place DocDel request'
       options:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
         scan:
-          info_html: '<a href="%{url}" target=_blank>About this service.</a>'
+          info_html: '<a href="%{url}" target=_blank>About this service</a>'
           label: 'Email me a chapter or section'
         office:
           label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
@@ -395,6 +396,9 @@ en:
           restriction_message: 'Your address must be more than 50 miles from campus and in the U.S. to use this service.'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
+        docdel:
+          label: "Request it through Wharton's Document Delivery service"
+          info_html: '<a href="%{url}" target="_blank">About Lippincott Library services</a>'
         aeon:
           info: 'Special collections materials are available to anyone who wishes to consult them in the reading room.'
         archives:
