@@ -44,7 +44,7 @@ module Fulfillment
         end
 
         # @return [String, nil]
-        def pub_year
+        def year
           params[:year].presence
         end
 
@@ -69,8 +69,40 @@ module Fulfillment
         end
 
         # @return [String, nil]
+        def article
+          params[:article].presence
+        end
+
+        # @return [String, nil]
+        def journal
+          params[:journal].presence
+        end
+
+        # @return [String, nil]
+        def volume
+          params[:volume].presence || item.volume
+        end
+
+        # @return [String, nil]
+        def issue
+          params[:issue].presence || item.issue
+        end
+
+        # @return [String, nil]
+        def pages
+          params[:pages].presence
+        end
+
+        # @return [String, nil]
         def source
           params[:source].presence
+        end
+
+        private
+
+        # @return [Inventory::Item]
+        def item
+          @item ||= Inventory::Item.find mms_id: mms_id, holding_id: holding_id, item_id: item_id
         end
       end
     end

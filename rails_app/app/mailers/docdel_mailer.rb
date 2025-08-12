@@ -2,6 +2,8 @@
 
 # Mail actions for Document Delivery fulfillment
 class DocdelMailer < ApplicationMailer
+  include Rails.application.routes.url_helpers
+
   # Send a document delivery request email to the requester
   # @param request [Fulfillment::Request]
   def docdel_email(request:)

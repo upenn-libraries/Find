@@ -53,9 +53,7 @@ describe Inventory::Electronic do
     let(:collection) { { 'public_note' => 'collection', 'authentication_note' => 'collection' } }
 
     before do
-      allow(electronic).to receive(:portfolio).and_return(portfolio)
-      allow(electronic).to receive(:collection).and_return(collection)
-      allow(electronic).to receive(:service).and_return(service)
+      allow(electronic).to receive_messages(portfolio: portfolio, collection: collection, service: service)
     end
 
     context 'when notes are found in portfolio' do

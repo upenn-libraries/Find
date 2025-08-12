@@ -19,14 +19,14 @@ describe Articles::Search do
 
   describe '#response' do
     it 'makes expected request to client' do
-      client = instance_spy('Summon::Service')
+      client = instance_spy(Summon::Service)
       allow(search).to receive(:client).and_return(client)
       search.response
       expect(client).to have_received(:search).with(a_hash_including('s.q' => query_term))
     end
 
     it 'does not raise error for Summon::Transport::TransportError' do
-      client = instance_spy('Summon::Service')
+      client = instance_spy(Summon::Service)
       allow(search).to receive(:client).and_return(client)
       allow(client).to receive(:search).and_raise(Summon::Transport::TransportError)
       expect(search.response).to be_nil
@@ -36,7 +36,7 @@ describe Articles::Search do
       let(:query_term) { Array.new(100, 'test').join(' ') }
 
       it 'truncates they query to an acceptable length' do
-        client = instance_spy('Summon::Service')
+        client = instance_spy(Summon::Service)
         allow(search).to receive(:client).and_return(client)
         search.response
         expect(client).to have_received(:search)

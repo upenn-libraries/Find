@@ -18,18 +18,22 @@
   </ul>
 
   <% if @params.source == Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID %>
-  <p>This request came from the "request an Item" form.</p>
+  <p>This request came from the "Request an Item" form.</p>
 
-  <%# TODO: print form field data from @params %>
+  <ul>
+    <% if @params.article.present? %>
+      <%= render 'scan_fields' %>
+    <% elsif @params.title.present? %>
+      <%= render 'loan_fields' %>
+    <% end %>
+  </ul>
 
   <% elsif @params.source == Fulfillment::Endpoint::Illiad::RECORD_PAGE_SOURCE_SID %>
-  <p>This request came from a catalog record page: <%= link_to solr_document_path(@params.mms_id, hld_id: @params.holding_id) %></p>
-
-  <%# TODO: print params derived from selected item and form data %>
+    <%= render 'item_fields' %>
   <% end %>
 
   <p>
-    User comments:
+    <%= t('account.ill.form.loan.comments.label') %>:
   </p>
 
   <p>

@@ -1,0 +1,11 @@
+<p>This request came from a catalog record page: <%= link_to solr_document_url(@params.mms_id, hld_id: @params.holding_id), solr_document_url(@params.mms_id, hld_id: @params.holding_id) %></p>
+
+<ul>
+  <li>MMS ID: <%= @params.mms_id %></li>
+  <li>Holding PID: <%= @params.holding_id %></li>
+  <li>Item PID: <%= @params.item_id || 'Not provided' %></li>
+  <li>Title: <%= @params.title || 'Not provided' %></li>
+  <li>Author: <%= @params.author || 'Not provided' %></li>
+  <li>Volume: <%= @params.volume || 'Not provided' %></li>
+  <li>Issue: <%= @params.issue || 'Not provided' %></li>
+</ul>
