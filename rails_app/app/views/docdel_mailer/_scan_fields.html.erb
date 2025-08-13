@@ -1,7 +1,14 @@
-<li><%= t('account.ill.form.scan.journal_title.label') %>: <%= @params.journal || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.article_title.label') %>: <%= @params.article || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.author.label') %>: <%= @params.author || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.publication_date.label') %>: <%= @params.date || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.volume') %>: <%= @params.volume || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.issue') %>: <%= @params.issue || 'Not provided' %></li>
-<li><%= t('account.ill.form.scan.pages') %>: <%= @params.pages || 'Not provided' %></li>
+<dt><%= t('account.ill.form.scan.journal_title.label') %>:</dt>
+<dd><%= @params.journal || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.article_title.label') %>:<dd>
+<dd> <%= @params.article || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.author.label') %>:</dt>
+<dd><%= @params.author || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.publication_date.label') %>:</dt>
+<dd><%= @params.date || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.volume') %>:</dt>
+<dd><%= @params.volume || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.issue') %>:</dt>
+<dd><%= @params.issue || 'Not provided' %></dd>
+<dt><%= t('account.ill.form.scan.pages') %>:</dt>
+<dd><%= @params.pages || 'Not provided' %></dd>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Find Request Confirmation</title>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
   </head>
   <body>
     <h1>Your Find request has been submitted</h1>
@@ -17,10 +17,12 @@
       This request was submitted on behalf of <strong><%= @outcome.request.patron.email %></strong>. This user will receive subsequent notifications about this request.
     </p>
     <% end %>
+    <% if @outcome.confirmation_number.present? %>
     <p>
       Your confirmation number is <strong><%= @outcome.confirmation_number %></strong>. Please reference it when inquiring
       about your request status or about any other issues.
     </p>
+    <% end %>
     <p>
       For questions regarding your request, <a href="<%= t('urls.guides.circulation') %>">see our guides</a>.
     </p>

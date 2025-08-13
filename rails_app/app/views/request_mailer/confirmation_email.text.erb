@@ -6,7 +6,9 @@ You have successfully submitted a request for: <%= @outcome.item_desc %>
 This request was submitted on behalf of <%= @outcome.request.patron.email %>. This user will receive subsequent notifications about this request.
 <% end %>
 
+<% if @outcome.confirmation_number.present? %>
 Your confirmation number is <%= @outcome.confirmation_number %>. Please reference it when inquiring about your request
 status or about any other issues.
+<% end %>
 
 For questions regarding your request, please see our guides: <%= t('urls.guides.circulation') %>

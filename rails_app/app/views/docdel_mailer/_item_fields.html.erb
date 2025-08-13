@@ -1,11 +1,18 @@
 <p>This request came from a catalog record page: <%= link_to solr_document_url(@params.mms_id, hld_id: @params.holding_id), solr_document_url(@params.mms_id, hld_id: @params.holding_id) %></p>
 
-<ul>
-  <li>MMS ID: <%= @params.mms_id %></li>
-  <li>Holding PID: <%= @params.holding_id %></li>
-  <li>Item PID: <%= @params.item_id || 'Not provided' %></li>
-  <li>Title: <%= @params.title || 'Not provided' %></li>
-  <li>Author: <%= @params.author || 'Not provided' %></li>
-  <li>Volume: <%= @params.volume || 'Not provided' %></li>
-  <li>Issue: <%= @params.issue || 'Not provided' %></li>
-</ul>
+<dl>
+  <dt>MMS ID:</dt>
+  <dd><%= @params.mms_id %></dd>
+  <dt>Holding PID:</dt>
+  <dd><%= @params.holding_id %></dd>
+  <dt>Item PID:</dt>
+  <dd><%= @params.item_id || 'Not provided' %></dd>
+  <dt>Title:</dt>
+  <dd><%= @params.title || 'Not provided' %></dd>
+  <dt>Author:</dt>
+  <dd><%= @params.author || 'Not provided' %></dd>
+  <dt>Volume:</dt>
+  <dd><%= @params.volume.presence || 'Not provided' %></dd>
+  <dt>Issue:</dt>
+  <dd><%= @params.issue.presence || 'Not provided' %></dd>
+</dl>
