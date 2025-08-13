@@ -1,0 +1,337 @@
+@page {
+  margin: 0.5in;
+}
+
+/* Variables */
+
+:root {
+  --font-size-h1: 20pt;
+  --font-size-h2: 18pt;
+  --font-size-h3: 16.5pt;
+  --font-size-h4: 14.5pt;
+  --font-size-h5: 13pt;
+  --font-size-h6: 11pt;
+  --font-size-body: 11pt;
+  --font-size-sm: 10pt;
+
+  --font-sans-serif: Arial, Helvetica, sans-serif;
+
+  --font-size: var(--font-size-body);
+  --font-family: var(--font-sans-serif);
+
+  --line-height: 1.4;
+
+  --print-text-color: #000000;
+  --bs-heading-color: var(--print-text-color);
+  --color-fg-accent: var(--print-text-color);
+  --color-fg-subtle: var(--print-text-color);
+
+  // Buttons + badges
+  &,
+  .btn,
+  [class*="btn-outline-"],
+  .btn-group .btn,
+  .badge {
+    --bs-btn-font-size: var(--font-size-sm);
+
+    --bs-background-opacity: 0;
+    --bs-btn-bg: transparent;
+    --bs-btn-hover-bg: transparent;
+
+    --bs-btn-border-color: var(--print-text-color);
+    --bs-btn-color: var(--print-text-color);
+    --bs-btn-hover-color: var(--print-text-color);
+    --bs-btn-active-color: var(--print-text-color);
+  }
+
+  // Alerts
+  [class*="alert"] {
+    --bs-alert-bg: transparent;
+    --bs-alert-border-color: var(--print-text-color);
+    --bs-alert-color: var(--print-text-color);
+  }
+
+  // Availability
+  [class*="holding"],
+  [class*="inventory-item"] {
+    --holding-accent-color: var(--print-text-color);
+  }
+}
+
+/* Typography */
+
+body {
+  color: var(--print-text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+h1, .h1 {
+  font-size: var(--font-size-h1);
+  font-weight: normal;
+}
+
+h2, .h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3, .h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4, .h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5, .h5 {
+  font-size: var(--font-size-h5);
+}
+
+h6, .h6 {
+  font-size: var(--font-size);
+  font-weight: bold;
+}
+
+.page__heading {
+  font-size: var(--font-size-h1);
+  font-weight: normal;
+}
+
+.page__lede {
+  font-size: var(--font-size);
+  margin-bottom: 1rem !important;
+}
+
+a,
+a:visited,
+a.inventory-item--hathitrust,
+a:hover {
+  color: var(--print-text-color);
+  text-decoration-color: var(--print-text-color);
+}
+
+/* Design system components */
+
+pennlibs-footer,
+pennlibs-chat {
+  display: none;
+}
+
+pennlibs-header {
+  --max-width: 100%;
+  --viewport-margins-gutter: calc(var(--bs-gutter-x) * 0.5);
+}
+
+/* Page break control */
+
+dt {
+  break-after: avoid;
+}
+
+.callout,
+.card,
+dd {
+  break-inside: avoid;
+}
+
+/* Bootstrap */
+
+.container {
+  max-width: unset;
+}
+
+[class*="col"] {
+  max-width: 100%;
+}
+
+.card {
+  break-inside: avoid;
+}
+
+/* Site-wide components */
+
+.navbar-search,
+#sidebar,
+.site-feedback {
+  display: none;
+}
+
+#content {
+  // Give full width since we got rid of the sidebar
+  width: 100%;
+}
+
+
+// Make buttons + badges plain with black text/border
+.btn,
+.btn-group .btn,
+.badge {
+  background-color: var(--bs-btn-bg) !important;
+  border: solid 1px var(--print-text-color);
+  border-radius: var(--bs-border-radius) !important;
+  color: var(--print-text-color);
+  font-weight: normal;
+}
+
+/* Homepage */
+
+.home-content {
+  margin-left: 0 !important;
+}
+
+/* Results list */
+
+.blacklight-catalog-index,
+.blacklight-bookmarks-index {
+  .constraints-container a.btn {
+    display: none;
+  }
+
+  .sort-pagination .search-widgets,
+  .sort-pagination a.btn {
+    display: none;
+  }
+
+  .document {
+    break-inside: avoid;
+
+    .document-counter {
+      font-weight: normal;
+    }
+
+    .document-title-heading {
+      font-size: var(--font-size) !important;
+      font-weight: bold !important;
+    }
+
+    .blacklight-score,
+    .checkbox.toggle-bookmark {
+      display: none;
+    }
+
+    [class*="holding"] {
+      color: var(--print-text-color);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+    }
+  }
+}
+
+/* Individual record */
+
+.blacklight-catalog-show {
+  .pagination-bar {
+    display: none;
+  }
+
+  // Inventory (sidebar)
+  .document__inventory {
+    .search-list {
+      display: none;
+    }
+
+    .document__inventory-heading {
+      font-size: var(--font-size);
+    }
+
+    // We want the locations to display above the record in as compact
+    // a grid as possible
+    .document__inventory-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: calc(var(--bs-gutter-x) * 0.5);
+    }
+
+    // Item within grid
+    .inventory-item,
+    .inventory-item.active {
+      background: transparent;
+      border: solid 1px var(--bs-border-color);
+      box-shadow: none;
+      color: var(--print-text-color);
+      margin: 0;
+      padding: calc(var(--bs-gutter-x) * 0.5);
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    #hathi_frame .inventory-item {
+      border: none;
+    }
+
+    .inventory-item.active {
+      clip-path: none;
+      border-color: var(--print-text-color);
+    }
+
+    [class*="inventory-item"] {
+      color: var(--print-text-color);
+      font-size: var(--font-size-sm) !important;
+      line-height: var(--line-height);
+      text-decoration-color: var(--print-text-color);
+    }
+  }
+
+  // Document
+  .document {
+    .show-document-container {
+      margin: 0;
+    }
+
+    .location-details__content {
+      background: transparent;
+
+      .library-hours a,
+      .library-url {
+        display: none;
+      }
+    }
+
+    .fulfillment,
+    a.btn {
+      display: none;
+    }
+
+    .document-metadata dt {
+      break-after: avoid;
+      color: var(--print-text-color);
+    }
+
+    .document-metadata dd {
+      break-inside: avoid;
+      color: var(--print-text-color);
+      margin-top: 0.25rem;
+    }
+
+    document-inventory,
+    [class*="inventory-item"] {
+      color: var(--print-text-color);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+    }
+  }
+}
+
+/* Account */
+
+// Shelf
+.blacklight-requests-index {
+  .shelf-listing-filters {
+    display: none;
+  }
+
+  .shelf-listing {
+    width: 100%;
+  }
+
+  input[type="submit"] {
+    display: none;
+  }
+}
+
+// Bookmarks
+.blacklight-bookmarks-index .bookmarksTools {
+  display: none;
+}
