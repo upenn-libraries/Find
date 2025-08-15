@@ -112,7 +112,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'assigns expected thumbnail_url' do
-      expect(results.first.thumbnail_url).to be nil
+      expect(results.first.thumbnail_url).to be_nil
     end
 
     it 'properly un-encodes characters in body fields' do

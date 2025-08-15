@@ -128,7 +128,7 @@ describe Shelf::Entry::IllTransaction do
       let(:illiad_transaction) { create(:illiad_request, :scan) }
 
       it 'returns nil' do
-        expect(transaction.expiry_date).to be nil
+        expect(transaction.expiry_date).to be_nil
       end
     end
   end

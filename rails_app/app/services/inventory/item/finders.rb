@@ -36,7 +36,7 @@ module Inventory
         return item_set if item_set.any?
 
         # if we have no items at this point, then Alma has no items in this holding. this is an unfortunate reality so
-        # we fake an items based on this bib and holding details.
+        # we fake an item based on this bib and holding details.
         holdings_data = Alma::BibHolding.find_all(mms_id: mms_id)
 
         raise 'Record has no holding.' if holdings_data['holding'].blank?

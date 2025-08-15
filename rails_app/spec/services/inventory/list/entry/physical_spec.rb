@@ -25,7 +25,7 @@ describe Inventory::List::Entry::Physical do
 
   # Mocking response for items.
   before do
-    bib_item_set = instance_double('Alma::BibItemSet')
+    bib_item_set = instance_double(Alma::BibItemSet)
     allow(bib_item_set).to receive(:items).and_return(
       [
         Alma::BibItem.new(

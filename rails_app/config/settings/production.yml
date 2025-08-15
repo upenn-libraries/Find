@@ -1,4 +1,5 @@
 solr_url: <%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>
+app_host: 'find.library.upenn.edu'
 additional_results_sources:
   position: 1
   summon:

@@ -53,9 +53,7 @@ describe Inventory::Electronic do
     let(:collection) { { 'public_note' => 'collection', 'authentication_note' => 'collection' } }
 
     before do
-      allow(electronic).to receive(:portfolio).and_return(portfolio)
-      allow(electronic).to receive(:collection).and_return(collection)
-      allow(electronic).to receive(:service).and_return(service)
+      allow(electronic).to receive_messages(portfolio: portfolio, collection: collection, service: service)
     end
 
     context 'when notes are found in portfolio' do
@@ -95,7 +93,7 @@ describe Inventory::Electronic do
       let(:service) { { 'public_note' => '', 'authentication_note' => '' } }
 
       it 'returns expected values' do
-        expect(notes).to contain_exactly(*collection.values)
+        expect(notes).to match_array(collection.values)
       end
 
       it 'makes all api requests' do

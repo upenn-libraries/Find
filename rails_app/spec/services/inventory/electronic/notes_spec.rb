@@ -25,7 +25,7 @@ describe Inventory::Electronic::Notes do
   describe '#missing?' do
     context 'with all notes present' do
       it 'return false' do
-        expect(notes.missing?).to eq false
+        expect(notes.missing?).to be false
       end
     end
 
@@ -33,7 +33,7 @@ describe Inventory::Electronic::Notes do
       let(:data) { { 'public_note' => 'pub note', 'authentication_note' => '' } }
 
       it 'return true' do
-        expect(notes.missing?).to eq true
+        expect(notes.missing?).to be true
       end
     end
   end

@@ -35,6 +35,17 @@ shared_context 'with stubbed availability item_data' do
   end
 end
 
+# stub Item finder to return mock item_data
+shared_context 'with Availability::Item.find lookup returning item_data' do
+  before do
+    bib_item_double = instance_double(Alma::BibItem)
+    # stub Alma API gem item lookup to return a double for an Alma::BibItem
+    allow(Alma::BibItem).to receive(:find_one).and_return(bib_item_double)
+    # stub the item_data for the Alma::BibItem object
+    allow(bib_item_double).to receive_messages(item_data: item_data)
+  end
+end
+
 shared_context 'with stubbed ecollections_data' do
   let(:ecollections_data) { [{ id: ecollection_data['id'] }] }
   let(:ecollections_response) do
