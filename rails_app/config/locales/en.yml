@@ -424,6 +424,7 @@ en:
     outcome:
       email:
         confirmation_subject: 'Find Request Confirmation'
+        docdel: 'This request will be delivered by Lippincott library staff.'
         pickup: 'This request will be available to pickup at %{pickup_location}.'
         electronic: 'This request will be made electronically available in your library account.'
         mail: 'This request will be delivered to your Books by Mail address.'
@@ -442,6 +443,9 @@ en:
       proxy_comment: 'Proxied by %{requester_id}'
       boundwith_comment: 'This request is for a boundwith record.'
       pdf_viewed: 'PDF viewed'
+    docdel:
+      email:
+        subject: 'DocDel submission from catalog'
   search:
     all_fields: 'All Fields'
     basic: 'All Fields (Basic)'

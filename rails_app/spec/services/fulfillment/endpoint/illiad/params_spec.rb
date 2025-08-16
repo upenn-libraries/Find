@@ -276,7 +276,7 @@ describe Fulfillment::Endpoint::Illiad::Params do
       let(:open_params) { { 'au' => 'Random Author', 'Author' => 'Other Random Author' } }
 
       it 'returns nil' do
-        expect(params.search('author', 'rft.au')).to be nil
+        expect(params.search('author', 'rft.au')).to be_nil
       end
     end
   end

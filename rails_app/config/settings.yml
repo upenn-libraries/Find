@@ -1,4 +1,5 @@
 pennlibs_web_version: '0'
+app_host: 'localhost:3000'
 cleanup:
   searches:
     days_old: 4
@@ -219,6 +220,10 @@ electronic_scoring:
     Nature: 90
     Elsevier ClinicalKey: 89
 fulfillment:
+  docdel_user_groups:
+    - zWhartonFaculty
+    - zWhartonStudent
+    - zWhartonStaff
   ill_restricted_user_groups:
     - fact-proxy
     - courtesy
@@ -276,6 +281,8 @@ fulfillment:
       - OTHER
       - KEYS
       - GLOBE
+  docdel:
+    email: 'docdel@wharton.upenn.edu'
 discover:
   enabled: false
   source:

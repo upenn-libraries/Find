@@ -41,6 +41,14 @@ FactoryBot.define do
       proxy_for { 'jdoe' }
     end
 
+    trait :record_page_source do
+      source { Fulfillment::Endpoint::Illiad::RECORD_PAGE_SOURCE_SID }
+    end
+
+    trait :request_form_source do
+      source { Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID }
+    end
+
     # BBM will come from Item Request form on show OR Illiad form page and go into Illiad
     trait :books_by_mail do
       delivery { Fulfillment::Options::Deliverable::MAIL }
@@ -68,6 +76,10 @@ FactoryBot.define do
 
     trait :illiad do
       endpoint { :illiad }
+    end
+
+    trait :docdel do
+      delivery { Fulfillment::Options::Deliverable::DOCDEL }
     end
 
     skip_create

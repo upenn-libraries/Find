@@ -43,8 +43,7 @@ describe 'Catalog show page requesting behaviors' do
       let(:item) { build :item, :in_place_with_restricted_short_loan_policy }
 
       before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        allow(Inventory::Item).to receive(:find).and_return(item)
+        allow(Inventory::Item).to receive_messages(find_all: [item], find: item)
         find('details.fulfillment > summary').click
       end
 
@@ -57,8 +56,7 @@ describe 'Catalog show page requesting behaviors' do
       let(:items) { build_list :item, 2 }
 
       before do
-        allow(Inventory::Item).to receive(:find_all).and_return(items)
-        allow(Inventory::Item).to receive(:find).and_return(items.first)
+        allow(Inventory::Item).to receive_messages(find_all: items, find: items.first)
         find('details.fulfillment > summary').click
       end
 

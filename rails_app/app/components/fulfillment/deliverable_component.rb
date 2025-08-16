@@ -41,10 +41,12 @@ module Fulfillment
     end
 
     # Determine if the pickup options should default to being checked. The pickup option should be checked only if no
-    # electronic or office delivery option is shown. See PickupComponent#checked? for similar logic.
+    # electronic, office or docdel delivery option is shown. See PickupComponent#checked? for similar logic.
     # @return [Boolean]
     def pickup_checked?
-      (options.to_a & [Options::Deliverable::ELECTRONIC, Options::Deliverable::OFFICE]).empty?
+      (options.to_a & [Options::Deliverable::ELECTRONIC,
+                       Options::Deliverable::OFFICE,
+                       Options::Deliverable::DOCDEL]).empty?
     end
   end
 end

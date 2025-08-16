@@ -16,9 +16,8 @@ describe Fulfillment::OptionsSet do
 
     context 'with a standard user' do
       it 'includes scan, pickup and delivery options' do
-        expect(options.to_a).to match_array [Fulfillment::Options::Deliverable::PICKUP,
-                                             Fulfillment::Options::Deliverable::MAIL,
-                                             Fulfillment::Options::Deliverable::ELECTRONIC]
+        expect(options.to_a).to contain_exactly(Fulfillment::Options::Deliverable::PICKUP,
+                                                Fulfillment::Options::Deliverable::MAIL, Fulfillment::Options::Deliverable::ELECTRONIC)
       end
     end
 
@@ -26,7 +25,7 @@ describe Fulfillment::OptionsSet do
       before { allow(user).to receive(:ill_blocked?).and_return true }
 
       it 'includes only pickup option' do
-        expect(options.to_a).to match_array [Fulfillment::Options::Deliverable::PICKUP]
+        expect(options.to_a).to contain_exactly(Fulfillment::Options::Deliverable::PICKUP)
       end
     end
 

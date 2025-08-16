@@ -22,12 +22,10 @@ module AlmaAccount
     ils_group == FACULTY_EXPRESS_GROUP
   end
 
-  # Returns true if a user is in the Alma DocDel group
-  # @return [Boolean]
-  # @todo Add actual condition here
+  # Returns true if a user is in one of the Alma DocDel groups
+  # @return [Boolean, nil]
   def docdel?
-    # ils_group = DOCDEL_GROUP
-    false
+    ils_group&.in? docdel_groups
   end
 
   # Return true if the user is a library staff
@@ -121,5 +119,10 @@ module AlmaAccount
   # @return [Boolean]
   def active_work_order_role?(role)
     (role.dig('role_type', 'value') == Settings.alma.work_order_role_value) && (role.dig('status', 'value') == 'ACTIVE')
+  end
+
+  # @return [Array<String>]
+  def docdel_groups
+    Settings.fulfillment.docdel_user_groups
   end
 end

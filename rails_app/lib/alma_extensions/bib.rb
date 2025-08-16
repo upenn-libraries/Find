@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/RedundantSelf, Style/HashSyntax, Style/GuardClause, Metrics/MethodLength
+# rubocop:disable Style/RedundantSelf, Style/HashSyntax, Style/GuardClause
 module AlmaExtensions
   # Additions for the Alma::Bib class that:
   #   - expose the "Get E-Collection for a Bib" API endpoint
@@ -31,6 +31,6 @@ module AlmaExtensions
     end
   end
 end
-# rubocop:enable Style/RedundantSelf, Style/HashSyntax, Style/GuardClause, Metrics/MethodLength
+# rubocop:enable Style/RedundantSelf, Style/HashSyntax, Style/GuardClause
 
 Alma::Bib.extend(AlmaExtensions::Bib)

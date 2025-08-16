@@ -20,14 +20,13 @@ describe Shelf::Listing do
     it 'removes expected entry' do
       ill_transactions = listing.select(&:ill_transaction?)
       expect(ill_transactions.count).to be 1
-      expect(ill_transactions.first.borrow_direct_identifier).to be nil
+      expect(ill_transactions.first.borrow_direct_identifier).to be_nil
     end
 
     it 'sorts entries by last updated at value' do
       expect(listing.first.send(sort_option)).to(satisfy { |d| d > listing.to_a.second.send(sort_option) })
     end
 
-    # rubocop:disable RSpec/NestedGroups
     context 'when sorting by due date' do
       let(:sort_option) { Shelf::Service::DUE_DATE }
       let(:entries) do
@@ -62,7 +61,6 @@ describe Shelf::Listing do
         end
       end
     end
-    # rubocop:enable RSpec/NestedGroups
 
     context 'when filtering entries' do
       let(:listing) { create(:shelf_listing, entries: entries, filters: [:requests]) }
