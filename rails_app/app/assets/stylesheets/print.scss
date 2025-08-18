@@ -1,5 +1,5 @@
-@page {
-  margin: 0.5in;
+body {
+  max-width: 8.5in;
 }
 
 /* Variables */
@@ -188,6 +188,7 @@ dd {
     display: none;
   }
 
+  .paginate-section,
   .sort-pagination .search-widgets,
   .sort-pagination a.btn {
     display: none;
@@ -227,6 +228,8 @@ dd {
 
   // Inventory (sidebar)
   .document__inventory {
+    width: 100%;
+
     .search-list {
       display: none;
     }
@@ -276,6 +279,8 @@ dd {
 
   // Document
   .document {
+    width: 100%;
+
     .show-document-container {
       margin: 0;
     }
