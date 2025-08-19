@@ -20,14 +20,16 @@
       </div>
 
       <%# Feedback card %>
-      <%# @todo Convert to CalloutComponent once exists %>
       <div class="callout my-0">
         <h2 class="h4 mb-3"><%= t('home.feedback.title') %></h2>
-        <p class="card-text">
-          <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %> <%= t('home.feedback.release_notes', url: t('urls.help.release_notes')).html_safe %>
-        </p>
-        <%# @todo Uncomment this and add link to release notes once they exist %>
-        <!-- <p><%# t('home.feedback.release_notes').html_safe %></p> -->
+        <div>
+          <p>
+            <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
+          </p>
+          <p>
+            <%= t('home.feedback.release_notes', url: t('urls.help.release_notes')).html_safe %>
+          </p>
+        </div>
       </div>
 
     </div>
@@ -42,13 +44,25 @@
           <h3 class="h5"><%= t('home.help.connect.title') %></h3>
           <ul class="list-unstyled card-text mb-4">
             <li class="mb-2">
-              <%= link_to(t('home.help.connect.chat.title'), t('urls.help.chat', request_url: request.original_url), target: '_blank') %>: <%= t('home.help.connect.chat.description') %>
+              <%= link_to(
+                    t('home.help.connect.chat.title'),
+                    t('urls.help.chat', request_url: request.original_url),
+                    target: '_blank')
+              %>: <%= t('home.help.connect.chat.description') %>
             </li>
             <li class="mb-2">
-              <%= link_to(t('home.help.connect.ask.title'), t('urls.help.ask'), target: '_blank') %>: <%= t('home.help.connect.ask.description') %>
+              <%= link_to(
+                    t('home.help.connect.ask.title'),
+                    t('urls.help.ask'),
+                    target: '_blank')
+              %>: <%= t('home.help.connect.ask.description') %>
             </li>
             <li class="mb-2">
-              <%= link_to(t('home.help.connect.appointment.title'), t('urls.help.appointment'), target: '_blank') %>: <%= t('home.help.connect.appointment.description') %>
+              <%= link_to(
+                    t('home.help.connect.appointment.title'),
+                    t('urls.help.appointment'),
+                    target: '_blank')
+              %>: <%= t('home.help.connect.appointment.description') %>
             </li>
           </ul>
 
@@ -96,7 +110,9 @@
                   </dd>
 
                   <dt>
-                    <%= link_to(t('home.resources.research.borrow.title.borrowdirect'), t('urls.external_services.borrowdirect'), target: '_blank') %> | <%= link_to(t('home.resources.research.borrow.title.easyborrow'), t('urls.external_services.easyborrow'), target: '_blank') %> | <%= link_to(t('footer.account.request'), ill_new_request_path,  target: '_blank') %>
+                    <%= link_to(t('home.resources.research.borrow.title.borrowdirect'), t('urls.external_services.borrowdirect'), target: '_blank') %>
+                    | <%= link_to(t('home.resources.research.borrow.title.easyborrow'), t('urls.external_services.easyborrow'), target: '_blank') %>
+                    | <%= link_to(t('footer.account.request'), ill_new_request_path, target: '_blank') %>
                   </dt>
                   <dd>
                     <%= t('home.resources.research.borrow.description') %>
