@@ -16,7 +16,7 @@ class Alert < ApplicationRecord
 
   # @return [NilClass]
   def maximum_alerts
-    errors.add(:base, 'Maxiumum alert count exceeded.') if Alert.count >= 2
+    errors.add(:base, 'Maximum alert count exceeded.') if Alert.count >= 2
   end
 
   # @return [TrueClass, FalseClass]
