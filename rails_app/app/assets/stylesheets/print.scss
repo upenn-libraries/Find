@@ -222,13 +222,15 @@ dd {
 /* Individual record */
 
 .blacklight-catalog-show {
+
+  display: block;
+
   .pagination-bar {
     display: none;
   }
 
   // Inventory (sidebar)
   .document__inventory {
-    width: 100%;
 
     .search-list {
       display: none;
@@ -244,6 +246,7 @@ dd {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: calc(var(--bs-gutter-x) * 0.5);
+      width: 100%;
     }
 
     // Item within grid
