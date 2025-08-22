@@ -466,6 +466,7 @@ en:
       conference_detail: 'Conference Name'
       contributor: 'Contributor'
       main: 'Author/Creator'
+      extended: 'Extended Author'
     edition:
       main: 'Edition'
       other: 'Other Edition'

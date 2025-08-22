@@ -235,6 +235,12 @@ class CatalogController < ApplicationController
                           label: I18n.t('show.creator.main'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                           facet_map: :creator_show_facet_map
+    unless Rails.env.production? || Rails.env.test?
+      config.add_show_field :creator_extended_show,
+                            label: I18n.t('show.creator.extended'), accessor: :marc,
+                            component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
+                            facet_map: :creator_extended_show_facet_map
+    end
     config.add_show_field :creator_contributor_show,
                           label: I18n.t('show.creator.contributor'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet
