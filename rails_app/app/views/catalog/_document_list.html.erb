@@ -10,9 +10,8 @@
     <%# Render Additional Results component after the configured (zero-indexed) catalog result (unless there's only one catalog result) %>
     <% if (counter == Settings.additional_results_sources.position) || (documents.size == 1) %>
       <%= render AdditionalResults::AdditionalResultsComponent.new(
-        query: params[:q],
+        params: params,
         sources: %w[summon],
-        hidden_sources_param: params[:hide_additional_sources],
         class: (documents.size > 1 ? 'border-bottom' : ''),
       ) %>
     <% end %>

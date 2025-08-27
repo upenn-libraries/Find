@@ -9,37 +9,43 @@ module AdditionalResults
 
     renders_many :results_sources, AdditionalResults::ResultsSourceComponent
 
-    # @param query [String] the search term
-    # @param hidden_sources_param [String, nil] the hide_additional_sources param value
+    # @param params [String] the URL parameters, including query and sometimes sources to hide
     # @param sources [Array<String>] array of all specified additional results sources
     # @param options [Hash] options for the component
-    def initialize(query:, hidden_sources_param:, sources: [], **options)
-      @query = query
+    def initialize(params:, sources: [], **options)
+      @params = params
       @sources = sources
-      @hidden_sources = hidden_sources_param.to_s.split(',')
       @classes = Array.wrap(options[:class])&.join(' ')
+    end
 
-      build_results_sources
+    # Adds ResultsSourceComponent for each visible (not specified to be hidden) source
+    # @return void
+    def before_render
+      filtered_sources.each do |source|
+        with_results_source(source, class: @classes)
+      end
     end
 
     # @return [Boolean] true if a search term has been provided and there are unhidden additional sources
     def render?
-      @query.present? && filtered_sources.any?
+      query.present? && filtered_sources.any?
     end
 
     private
 
     # @return [Array<String>] array of remaining sources after filtering out invalid or those hidden by param
     def filtered_sources
-      return [] if @hidden_sources.include?('all')
+      return [] if hidden_sources.include?('all')
 
-      @sources.reject { |source| !valid?(source) || @hidden_sources.include?(source) }
+      @sources.reject { |source| !valid?(source) || hidden_sources.include?(source) }
     end
 
-    def build_results_sources
-      filtered_sources.each do |source|
-        with_results_source(source, class: @classes)
-      end
+    def query
+      @query ||= @params[:q]
+    end
+
+    def hidden_sources
+      @hidden_sources ||= @params[:hide_additional_sources].to_s.split(',') || []
     end
   end
 end

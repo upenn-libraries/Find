@@ -28,6 +28,7 @@
   </div>
 </div>
 
-<%= render AdditionalResults::AdditionalResultsComponent.new(query: params[:q]) do |component| %>
-  <% component.with_results_source('summon') %>
-<% end %>
+<%= render AdditionalResults::AdditionalResultsComponent.new(
+  params: params,
+  sources: %w[summon]
+) %>
