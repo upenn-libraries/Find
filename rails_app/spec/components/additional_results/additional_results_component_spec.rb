@@ -50,7 +50,6 @@ describe AdditionalResults::AdditionalResultsComponent, type: :components do
     end
 
     context 'when some sources are excluded' do
-      # excluded: 'another_source'
       let(:trait) { :with_some_sources_excluded }
 
       it_behaves_like 'returns expected number of included sources', 2
@@ -58,14 +57,12 @@ describe AdditionalResults::AdditionalResultsComponent, type: :components do
     end
 
     context 'when all sources are generally excluded' do
-      # excluded: 'all'
       let(:trait) { :with_all_sources_generally_excluded }
 
       it_behaves_like 'returns expected number of included sources', 0
     end
 
     context 'when all sources are explicitly excluded' do
-      # excluded: 'summon,other_source,another_source'
       let(:trait) { :with_all_sources_explicitly_excluded }
 
       it_behaves_like 'returns expected number of included sources', 0

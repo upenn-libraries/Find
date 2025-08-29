@@ -18,7 +18,7 @@ module AdditionalResults
       @classes = Array.wrap(options[:class])&.join(' ')
     end
 
-    # Adds ResultsSourceComponent for each visible (not specified to be hidden) source
+    # Adds ResultsSourceComponent for each included source post-filtering
     # @return void
     def before_render
       filtered_sources.each do |source|
@@ -26,7 +26,7 @@ module AdditionalResults
       end
     end
 
-    # @return [Boolean] true if a search term has been provided and there are unhidden additional sources
+    # @return [Boolean] true if a search term has been provided and there are non-excluded sources
     def render?
       query.present? && filtered_sources.any?
     end
@@ -40,13 +40,12 @@ module AdditionalResults
       @sources.reject { |source| !valid?(source) || excluded_sources.include?(source) }
     end
 
-    # Returns the search query string from the request parameters
-    # @return [String, nil] The value of the `:q` parameter if present, otherwise `nil`
+    # @return [String, nil] the query param if present, otherwise `nil`
     def query
       @query ||= @params[:q]
     end
 
-    # @return [Array<String>] A comma-separated list of source ids to exclude (or 'all')
+    # @return [Array<String>] a comma-separated list of source ids to exclude (or 'all')
     def excluded_sources
       @excluded_sources ||= @params[:exclude_extra].to_s.split(',') || []
     end
