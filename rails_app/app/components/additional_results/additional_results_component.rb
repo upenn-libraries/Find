@@ -9,7 +9,7 @@ module AdditionalResults
 
     renders_many :results_sources, AdditionalResults::ResultsSourceComponent
 
-    # @param params [String] the URL parameters, including query and sometimes sources to hide
+    # @param params [Hash] the URL parameters, optionally including search term and sources to exclude
     # @param sources [Array<String>] array of all specified additional results sources
     # @param options [Hash] options for the component
     def initialize(params:, sources: [], **options)
@@ -35,17 +35,20 @@ module AdditionalResults
 
     # @return [Array<String>] array of remaining sources after filtering out invalid or those hidden by param
     def filtered_sources
-      return [] if hidden_sources.include?('all')
+      return [] if excluded_sources.include?('all')
 
-      @sources.reject { |source| !valid?(source) || hidden_sources.include?(source) }
+      @sources.reject { |source| !valid?(source) || excluded_sources.include?(source) }
     end
 
+    # Returns the search query string from the request parameters
+    # @return [String, nil] The value of the `:q` parameter if present, otherwise `nil`
     def query
       @query ||= @params[:q]
     end
 
-    def hidden_sources
-      @hidden_sources ||= @params[:hide_additional_sources].to_s.split(',') || []
+    # @return [Array<String>] A comma-separated list of source ids to exclude (or 'all')
+    def excluded_sources
+      @excluded_sources ||= @params[:exclude_extra].to_s.split(',') || []
     end
   end
 end
