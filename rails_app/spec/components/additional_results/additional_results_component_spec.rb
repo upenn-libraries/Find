@@ -12,7 +12,6 @@ describe AdditionalResults::AdditionalResultsComponent, type: :components do
   let(:rendered) { render_inline(component) }
 
   describe '#render?' do
-
     context 'when query is present and no sources are excluded' do
       it_behaves_like 'renders Additional Results component'
     end
