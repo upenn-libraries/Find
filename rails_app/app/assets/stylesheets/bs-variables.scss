@@ -3,7 +3,11 @@
   https://github.com/twbs/bootstrap/blob/v5.0.0/scss/_variables.scss
 */
 
-$font-family-sans-serif: var(--font-family);
+:root {
+  --pl-viewport-max-width: 1280px;
+}
+
+$font-family-sans-serif: var(--pl-font-family);
 
 $line-height-base: 1.4;
 

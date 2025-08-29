@@ -23,8 +23,8 @@ body {
 
   --print-text-color: #000000;
   --bs-heading-color: var(--print-text-color);
-  --color-fg-accent: var(--print-text-color);
-  --color-fg-subtle: var(--print-text-color);
+  --pl-color-fg-accent: var(--print-text-color);
+  --pl-color-fg-subtle: var(--print-text-color);
 
   // Buttons + badges
   &,

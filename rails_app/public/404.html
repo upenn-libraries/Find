@@ -1,110 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html class="pl-reset pl-typeset">
 <head>
-  <title>404 - Page not found | Penn Libraries</title>
+  <title>404 · Page not found · Find · Penn Libraries</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-  <link href="https://cdn.jsdelivr.net/npm/@penn-libraries/web@0/dist/web/web.css" rel="stylesheet"/>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@penn-libraries/web@0/dist/web/web.esm.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@penn-libraries/web@1.0.0-dev.1/dist/web/web.css" rel="stylesheet"/>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@penn-libraries/web@1.0.0-dev.1/dist/web/web.esm.js"></script>
 </head>
 
 <body>
   <style>
 
     html {
-      background: var(--color-penn-blue);
+      line-height: 1.5;
     }
     body {
-      margin: 0;
-      font-family: var(--font-family);
-      line-height: 1.5;
-      color: var(--color-fg-default);
-      
-      --heading-line-height: 1;
-      background: var(--color-bg-default);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--pl-color-bg-subtle);
+    }
+
+    pennlibs-header {
+      background: var(--pl-color-bg-default);
     }
 
     main {
-      background: var(--color-bg-subtle);
+      flex-grow: 1;
     }
 
-    h1, .h1 {
-      font-size: 2.25rem;
-      font-weight: bold;
-      line-height: var(--heading-line-height);
-    }
-
-    h2, .h2 {
-      font-size: 1.75rem;
-      font-weight: bold;
-      line-height: var(--heading-line-height);
-    }
-
-    .page-heading__error-prefix {
-      color: var(--color-fg-attention);
-      display: block;
-      font-size: 1.5rem
-    }
-
-    main {
-      padding: 4rem 0;
-    }
-
-    .page-not-found {
-      max-width: 32rem;
-      margin: 0 auto;
-      padding: 2rem;
-      background: var(--color-bg-default);
-      box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
-      border-top: solid 0.25rem var(--color-fg-attention);
-    }
-
-    .page-not-found > *:first-child {
-      margin-top: 0;
-    }
-
-    .page-not-found > *:last-child {
-      margin-bottom: 0;
-    }
-
-    a {
-      color: var(--color-fg-accent);
-      text-decoration: underline;
-      text-underline-offset: var(--link-text-underline-offset);
-      text-decoration-thickness: var(--link-text-decoration-thickness);
-    }
-
-    a:hover {
-      text-decoration-thickness: var(--link-hover-text-decoration-thickness);
+    p, ul {
+      margin-bottom: var(--pl-space-base);
     }
 
     li {
-      margin-bottom: 0.25rem;
+      margin-bottom: var(--pl-space-xs);
     }
 
+    .page-not-found {
+      max-width: 36rem;
+      margin: var(--pl-space-3xl) auto;
+      padding: 2rem;
+      background: var(--pl-color-bg-default);
+      box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+      border-top: solid 0.25rem var(--pl-color-fg-attention);
+    }
+
+    .page-heading::after {
+      background: var(--pl-color-fg-attention);
+    }
+
+    .page-heading__error-prefix {
+      color: var(--plcolor-fg-attention);
+      display: block;
+      font-size: var(--pl-font-size-xl);
+      font-family: var(--pl-font-family);
+    }
   </style>
   <pennlibs-header service-name="Find" service-lede="books, articles, and more"></pennlibs-header>
-  <main>
-    <div class="viewport-margins">
-      <div class="page-not-found">
-        <h1>
-          <span class="page-heading__error-prefix">404</span>
-          Page not found
-        </h1>
+  <main class="pl-viewport-margins">
+    <div class="page-not-found">
+      <h1 class="page-heading">
+        <span class="page-heading__error-prefix">404</span>
+        Page not found
+      </h1>
 
-        <p style="font-size: 1.15rem;">We can't find the page you're looking for. This can sometimes happen when:</p>
+      <p style="font-size: 1.15rem;">We can't find the page you're looking for. This can sometimes happen when:</p>
 
-        <ul style="font-size: 1.15rem;">
-          <li>We've moved or renamed the page</li>
-          <li>The page no longer exists</li>
-          <li>There's a slight typo in the web address </li>
-          <li>The web address wasn't copied fully</li>
-        </ul>
+      <ul style="font-size: 1.15rem;">
+        <li>We've moved or renamed the page</li>
+        <li>The page no longer exists</li>
+        <li>There's a slight typo in the web address </li>
+        <li>The web address wasn't copied fully</li>
+      </ul>
 
-        <p>You may visit the <a href="/">homepage</a> and navigate from there.</p>
+      <p>You may visit the <a href="/">homepage</a> and navigate from there.</p>
 
-        <p>If you have further questions, please <a href="https://www.library.upenn.edu/contact-us">contact us</a> with the web address of the page and we'll do our best to help find what you're looking for.</p>
-      </div>
+      <p>If you have further questions, please <a href="https://www.library.upenn.edu/contact-us">contact us</a> with the web address of the page and we'll do our best to help find what you're looking for.</p>
     </div>
   </main>
 

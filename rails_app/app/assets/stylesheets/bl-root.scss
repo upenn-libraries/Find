@@ -1,7 +1,12 @@
+*:focus {
+  box-shadow: var(--pl-focus-box-shadow);
+  outline: none;
+}
+
 .navbar-search {
-  background: var(--color-bg-gradient-2);
+  background: var(--pl-color-bg-gradient-2);
   padding: 1.5rem 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .navbar-search > .container {
@@ -14,7 +19,7 @@
 }
 
 .navbar-search a {
-  color: var(--color-fg-default);
+  color: var(--pl-color-fg-default);
   text-decoration: none;
 }
 
@@ -39,46 +44,32 @@
 
 .search-q {
   all: unset;
-  background: var(--color-bg-default);
+  background: var(--pl-color-bg-default);
   padding: 0 1rem;
   border-radius: 0.25rem 0 0 0.25rem !important;
-  color: var(--color-fg-default);
-  border: solid 1px var(--color-fg-subtle);
+  color: var(--pl-color-fg-default);
+  border: solid 1px var(--pl-color-fg-subtle);
   border-right: none;
   flex-grow: 1;
 }
 
 .search-btn {
   all: unset;
-  background: var(--color-bg-accent-emphasis);
-  color: var(--color-fg-on-emphasis);
+  background: var(--pl-color-bg-accent-emphasis);
+  color: var(--pl-color-fg-on-emphasis);
   padding: 0.5rem 1.5rem;
   border-radius: 0 0.25rem 0.25rem 0;
   cursor: pointer;
-  border: solid 1px var(--color-fg-subtle);
+  border: solid 1px var(--pl-color-fg-subtle);
 }
 
 .navbar-search *:focus {
-  box-shadow: 0 0 0 2px var(--color-bg-attention),0 0 0 4px var(--color-fg-default);
-}
-
-.facet-limit-active .card-header .btn,
-.facet-limit-active .card-header .btn:active {
-  background: var(--color-fg-success);
-  color: var(--color-fg-on-emphasis);
-}
-
-.facet-limit-active .card-header .btn:hover {
-  border: none;
-}
-
-.facet-limit-active .card-header .btn {
-  border: none;
+  box-shadow: 0 0 0 2px var(--pl-color-bg-attention),0 0 0 4px var(--pl-color-fg-default);
 }
 
 .document-counter {
   font-size: 1rem;
-  color: var(--color-fg-subtle);
+  color: var(--pl-color-fg-subtle);
 }
 
 .documents-list .document {
@@ -89,7 +80,15 @@
 
 .documents-list .document .document-title-heading {
   margin-bottom: 0.25rem;
-  font-size: 1.35rem;
+  font-size: var(--pl-font-size-xl);
+
+  & a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .documents-list .document-metadata dt {
@@ -103,7 +102,7 @@
 }
 
 .documents-list .document-metadata dd {
-  color: var(--color-fg-subtle);
+  color: var(--pl-color-fg-subtle);
 }
 
 .documents-list .blacklight-format_facet {
@@ -148,7 +147,7 @@
 }
 
 .document-metadata ul ::marker {
-  color: var(--color-fg-subtle);
+  color: var(--pl-color-fg-subtle);
 }
 
 pennlibs-footer {
@@ -156,7 +155,7 @@ pennlibs-footer {
 }
 
 .site-feedback {
-  background: var(--color-bg-subtle);
+  background: var(--pl-color-bg-subtle);
   padding: 2rem 0;
   margin-top: 3rem;
 }
@@ -168,7 +167,7 @@ pennlibs-footer {
 
 .site-feedback i {
   font-size: 1.5rem;
-  color: var(--color-fg-subtle);
+  color: var(--pl-color-fg-subtle);
 }
 
 label.toggle-bookmark {
@@ -176,12 +175,7 @@ label.toggle-bookmark {
 }
 
 form {
-  --bs-border-color: var(--color-fg-subtle);
-}
-
-.constraints-container {
-  margin-bottom: 1rem !important;
-  gap: 0.5rem;
+  --bs-border-color: var(--pl-color-fg-subtle);
 }
 
 .facets-header,
@@ -216,6 +210,20 @@ form {
   margin: 0 !important;
 }
 
+.constraints-container {
+  margin-bottom: 1rem !important;
+  gap: 0.5rem;
+}
+
+.sort-pagination {
+  justify-content: baseline;
+}
+
+.applied-filter,
+.search-widgets > * {
+  margin: 0 !important;
+}
+
 .search-widgets {
   gap: 0.5rem;
 }
@@ -239,22 +247,22 @@ form {
 }
 
 form {
-  --bs-border-color: var(--color-fg-subtle);
+  --bs-border-color: var(--pl-color-fg-subtle);
 }
 
 .form-group--error {
   padding-left: 0.75rem;
-  border-left: solid 0.25rem var(--color-fg-attention);
+  border-left: solid 0.25rem var(--pl-color-fg-attention);
 }
 
 .form-group--error .error-message {
-  color: var(--color-fg-attention);
+  color: var(--pl-color-fg-attention);
   font-weight: 600;
   margin-bottom: 0;
 }
 
 .form-group--error input {
-  border-color: var(--color-fg-attention);
+  border-color: var(--pl-color-fg-attention);
   border-width: 2px;
   line-height: 1.2;
   margin-top: 1rem;
@@ -267,10 +275,10 @@ form {
 }
 
 .cards-as-links a.card:hover {
-  --bs-card-border-color: var(--color-fg-default);
+  --bs-card-border-color: var(--pl-color-fg-default);
 }
 
 .cards-as-links a.card:hover .card-title  {
   text-decoration: underline;
-  text-underline-offset: var(--link-text-underline-offset);
+  text-underline-offset: var(--pl-link-text-underline-offset);
 }
