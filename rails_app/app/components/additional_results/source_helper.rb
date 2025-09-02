@@ -26,8 +26,7 @@ module AdditionalResults
     # @return [Class, nil] the component class corresponding to the source ID
     #   if defined under AdditionalResults::Sources::<SourceName>Component, or nil
     def component(source)
-      @components ||= {}
-      @components[source] ||= "AdditionalResults::Sources::#{source.camelcase}Component".safe_constantize
+      "AdditionalResults::Sources::#{source.camelcase}Component".safe_constantize
     end
 
     # @param source [String] the results source id
