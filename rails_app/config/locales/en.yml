@@ -229,6 +229,7 @@ en:
       renew_all:
         button: 'Renew all eligible'
         mass_renewal: 'We attempted to renew all your items. Examine your shelf below to see the new due dates for each item.'
+        mass_renewal_with_issues: 'We attempted to renew all your items, but not all renewals were successful. Examine your shelf below to see the new due dates for each item.'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
       bib_record_link: 'View title record page'

@@ -64,17 +64,15 @@ module Account
     def renew_all
       responses = shelf_service.renew_all_loans
 
-      # @note when a large amount of loans are renewed, the length of the alert content can lead to a cookie
-      #       overflow. When there are many items being renewed, show a special message without specific item renewal
-      #       details. This can be removed if/when we change our session storage backend.
-      alert_text = if responses.length < 10
-                     t('account.shelf.renew_all.alerts',
-                       alerts: responses.map { |r| t('account.shelf.renew_all.alert', alert: r.message) }.join)
-                   else
-                     t('account.shelf.renew_all.mass_renewal')
-                   end
-
-      flash_type = responses.all?(&:renewed?) ? :notice : :alert
+      # @note when a large group of loans is renewed, the length of the alert content can lead to a cookie
+      #       overflow. Existing cookies make precisely determining when it is OK to add a lot of flash content very
+      #       difficult. If/when we change our session storage backend, we can return the detailed renewal info to the
+      #       flash.
+      flash_type, alert_text = if responses.all?(&:renewed?)
+                                 [:notice, t('account.shelf.renew_all.mass_renewal')]
+                               else
+                                 [:alert, t('account.shelf.renew_all.mass_renewal_with_issues')]
+                               end
       flash[flash_type] = alert_text
 
       redirect_to requests_path
