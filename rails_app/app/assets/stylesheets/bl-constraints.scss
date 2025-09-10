@@ -1,19 +1,19 @@
 .constraints-container {
   align-items: baseline;
-  gap: var(--pl-space-sm);
-  margin: 0.5rem 0 !important;
+  gap: var(--pl-space-s);
+  margin: 0.5rem 0;
   align-self: end;
 
   --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
 
-  & .catalog_startOverLink,
-  & .catalog_startOverLink ~ .btn {
-    display: none;
-  }
+  // & .catalog_startOverLink,
+  // & .catalog_startOverLink ~ .btn {
+  //   display: none;
+  // }
 }
 
 .constraints-container > h2 {
-  font-size: var(--pl-font-size-base);
+  font-size: var(--pl-font-size-m);
   font-family: var(--pl-font-family);
   font-weight: 500;
   color: var(--pl-color-fg-default);
@@ -45,7 +45,7 @@
       top: 0;
       right: 0;
       bottom: 0;
-      border-radius: var(--pl-border-radius-base);
+      border-radius: var(--pl-border-radius);
     }
 
     &:hover {
@@ -68,15 +68,16 @@
     }
   }
 
-  & .filter-name {
-    display: none;
+  & .filter-name::after {
+    color: var(--pl-fg-subtle);
   }
 
   & .constraint-value {
     display: flex;
     align-items: center;
-    --bs-btn-padding-y: var(--pl-space-xs);
-    padding-right: var(--pl-space-sm);
+    --bs-btn-padding-y: var(--pl-space-2xs);
+    padding-right: var(--pl-space-s);
     font-weight: 500;
+    gap: var(--pl-space-2xs);
   }
 }

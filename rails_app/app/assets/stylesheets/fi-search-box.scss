@@ -3,10 +3,10 @@
   background: var(--pl-color-bg-default);
   flex-grow: 1;
   border-radius: 1.25rem;
-  padding: var(--pl-space-xs);
+  padding: var(--pl-space-2xs);
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
   border: solid 1px var(--pl-color-penn-blue);
-  padding-left: var(--pl-space-lg);
+  padding-left: var(--pl-space-l);
 
   & .search-query-form {
     width: 100%;
@@ -20,7 +20,7 @@
   }
 
   & .input-group {
-    gap: var(--pl-space-base);
+    gap: var(--pl-space-m);
   }
 
   &:focus-within {
@@ -31,7 +31,7 @@
     border-radius: 1.125rem !important;
     border: none;
     background: none;
-    font-size: var(--pl-font-size-lg);
+    font-size: var(--pl-font-size-l);
     padding: 0 !important;
     color: #0d1015; /* slightly darker shade */
 
@@ -46,12 +46,12 @@
   }
 
   & button.search-btn {
-    border-radius: var(--pl-border-radius-base) !important;
-    padding: var(--pl-space-sm) var(--pl-space-base);
-    font-size: var(--pl-font-size-lg);
+    border-radius: var(--pl-border-radius) !important;
+    padding: var(--pl-space-xs) var(--pl-space-m);
+    font-size: var(--pl-font-size-l);
 
     @media (min-width: 768px) {
-      padding: var(--pl-space-sm) var(--pl-space-lg);
+      padding: var(--pl-space-xs) var(--pl-space-l);
 
       & .blacklight-icons-search {
         display: none;

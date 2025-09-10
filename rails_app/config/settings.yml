@@ -1,4 +1,4 @@
-pennlibs_web_version: '1.0.0-dev.1'
+pennlibs_web_version: '1.0.0-dev.2'
 app_host: 'localhost:3000'
 cleanup:
   searches:
