@@ -1,13 +1,13 @@
 .site-alerts__container .alert-primary {
-  background: var(--color-bg-accent);
-  color: var(--color-fg-default);
+  background: var(--pl-color-bg-accent);
+  color: var(--pl-color-fg-default);
   margin-bottom: 0;
   margin-top: 1rem;
-  border-color: var(--color-fg-muted);
+  border-color: var(--pl-color-fg-muted);
 }
 
 .site-alerts__container a {
-  color: var(--color-fg-default);
+  color: var(--pl-color-fg-default);
 }
 
 .site-alerts__container p {

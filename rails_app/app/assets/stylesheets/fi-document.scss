@@ -25,7 +25,7 @@
 
 .document__tabpanel:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-accent), 0 0 0 4px var(--color-fg-default);
+  box-shadow: 0 0 0 2px var(--pl-color-bg-accent), 0 0 0 4px var(--pl-color-fg-default);
 }
 
 .documentHeader > h1 {
@@ -44,6 +44,6 @@
 
 .show-document__format {
   font-weight: 500;
-  color: var(--color-fg-subtle);
+  color: var(--pl-color-fg-subtle);
   margin-bottom: 0;
 }
