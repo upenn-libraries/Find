@@ -98,6 +98,43 @@ For MacOS users the `pg` gem may fail to install with an error concerning the `l
 
 [Refer to this gist](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e) to address this issue.
 
+#### Search Enhancements
+This branch is an experiment in using LLMs to expand a user's query with related subjects pulled from our subject facets.
+We could surface these subjects as recommendations or to help out when no results are found. The search builder method
+used here hijacks the solr request and makes a subject facet search for ALL queries, so things may be a little weird. The
+best way to test it out is to find a meaningful search that does not normally return any results and see what results pop up. I haven't yet
+configured the blacklight parameters to match up with the chosen subjects, so you can click into a record and look at the subject facets that way.
+
+Here are the dependencies introduced:
+
+##### pgvector
+This branch uses [pgvector](https://github.com/pgvector/pgvector), the
+[pgvector gem](https://github.com/pgvector/pgvector-ruby), and [neighbor gem](https://github.com/ankane/neighbor) to facilitate vector storage and searching.
+
+I had to install `pgvector` using `homebrew` on MacOS. There is a migration to enable to vector extension, but I am not sure if and how it
+actually works! After installing pgvector, I connected to the `find-development` database using `psql` to create the extension.
+
+```
+$ psql cli
+
+CREATE EXTENSION vector;
+```
+
+You can confirm the extension is available using the `psql` `\dx` command.
+
+##### ollama
+
+The LLM server runs locally using a [dockerized ollama](https://hub.docker.com/r/ollama/ollama) server. If you'd like, you can talk to
+it, once you've started the app services, on port 11434 and with docker using `docker exec -it rails_app-ollama-1 ollama run llama3`. You can replace 'llama3' with
+another model.
+
+Ollama provides [useful embeddings documentation](https://ollama.com/blog/embedding-models). I've used the `all-minilm` and it's set up as the default for the embeddings service.
+
+##### Subject Embeddings
+
+You can generate Subject embeddings using the rake task `bundle exec rake search_enhancements:generate_sample_subjects`.
+This generates Subject embeddings in the postgres database that we search against to find closest subjects related to a query.
+
 #### Start the development server
 
 ```bash
