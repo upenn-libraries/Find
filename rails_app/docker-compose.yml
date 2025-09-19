@@ -1,4 +1,10 @@
 services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
   chrome:
     image: browserless/chrome:latest
     ports:
@@ -36,3 +42,4 @@ services:
 volumes:
   db_data:
   solrcloud_data:
+  ollama:
