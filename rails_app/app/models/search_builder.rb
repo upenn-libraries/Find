@@ -6,7 +6,8 @@ class SearchBuilder < Blacklight::SearchBuilder
 
   self.default_processor_chain += %i[facets_for_advanced_search_form
                                      massage_sort
-                                     handle_standalone_boolean_operators]
+                                     handle_standalone_boolean_operators
+                                     filter_by_nearest_subjects]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
@@ -46,6 +47,18 @@ class SearchBuilder < Blacklight::SearchBuilder
     return if solr_p[:q].blank?
 
     solr_p[:q] = solr_p[:q].gsub(/(?<=\s)([#{PROBLEMATIC_SOLR_BOOLEAN_OPERATORS.join}])(?=\s)/) { |match| "\\#{match}" }
+  end
+
+  def filter_by_nearest_subjects(solr_p)
+    return solr_p if solr_p[:q].blank?
+
+    query = solr_p[:q]
+    embedding = Embeddings::Service.new(input: query).embeddings.first
+    neighbor = Subject.nearest_neighbors(:embedding, embedding.vector, distance: 'euclidean').first
+
+    solr_p[:q] = '' if neighbor.present?
+    solr_p[:fq] = "{!term f=subject_facet}#{neighbor.content}"
+    solr_p
   end
 
   private
