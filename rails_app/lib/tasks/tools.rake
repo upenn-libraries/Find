@@ -78,4 +78,24 @@ namespace :tools do
   task clean: :environment do
     system('docker compose down --volumes')
   end
+
+  desc 'Import existing creator facet values into PG for fuzzy search'
+  task import_creators: :environment do
+    return unless SolrTools.solr_available?
+
+    puts 'Connected to solr...'
+    solr = Blacklight.default_index
+    response = solr.search(params: { q: '*:*',
+                                     rows: 0,
+                                     omitHeader: true,
+                                     facet: true,
+                                     'facet.limit': -1,
+                                     'facet.field': 'creator_facet' })
+    puts 'Got creator facet values...'
+    creators = response.facet_fields['creator_facet'].reject { |c| c.is_a? Integer }
+    puts 'Creating Creator records...'
+    creators.each do |creator|
+      Creator.find_or_create_by(name: creator)
+    end
+  end
 end
