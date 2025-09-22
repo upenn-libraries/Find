@@ -7,6 +7,10 @@
         <%= t('blacklight.search.zero_results.suggestions.check_your_spelling') %>
       </li>
       <li class="pb-1">
+        <%= t('blacklight.search.zero_results.suggestions.subject_search') %>
+        <%= render(Catalog::SuggestionsComponent.new(query: query)) %>
+      </li>
+      <li class="pb-1">
         <%= t('blacklight.search.zero_results.suggestions.try_general_keywords') %>
       </li>
       <li class="pb-1">

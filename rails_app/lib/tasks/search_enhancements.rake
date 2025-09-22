@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 namespace :search_enhancements do
   desc 'Generate sample Subjects'
   task generate_sample_subjects: :environment do

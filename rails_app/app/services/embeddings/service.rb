@@ -10,6 +10,10 @@ module Embeddings
       @input = input
     end
 
+    def first_embedding
+      embeddings.first
+    end
+
     def embeddings
       @embeddings ||= Embeddings.all(input: input, embeddings: client.embeddings_for(input: input))
     end

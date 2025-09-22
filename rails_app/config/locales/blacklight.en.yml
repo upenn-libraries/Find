@@ -11,6 +11,7 @@ en:
         title: "Your search found no results in the <strong>Catalog</strong>"
         suggestions:
           check_your_spelling: 'Please double check your spelling.'
+          subject_search: 'Try searching these subjects to find related resources.'
           try_general_keywords: 'Try more general keywords.'
           try_different_keywords: 'Try different keywords that mean the same thing.'
           try_advanced_html: 'Try <a href="/catalog/advanced">advanced search</a> to construct a targeted query.'

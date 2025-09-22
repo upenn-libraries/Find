@@ -1,0 +1,5 @@
+<ul>
+  <% suggestions.each do |suggestion| %>
+  <li><%= link_to(suggestion.content, search_catalog_path("#{facet}": suggestion.content)) %></li>
+  <% end %>
+</ul>
