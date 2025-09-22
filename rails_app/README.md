@@ -99,11 +99,13 @@ For MacOS users the `pg` gem may fail to install with an error concerning the `l
 [Refer to this gist](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e) to address this issue.
 
 #### Search Enhancements
-This branch is an experiment in using LLMs to expand a user's query with related subjects pulled from our subject facets.
-We could surface these subjects as recommendations or to help out when no results are found. The search builder method
-used here hijacks the solr request and makes a subject facet search for ALL queries, so things may be a little weird. The
-best way to test it out is to find a meaningful search that does not normally return any results and see what results pop up. I haven't yet
-configured the blacklight parameters to match up with the chosen subjects, so you can click into a record and look at the subject facets that way.
+This branch is an experiment in using LLMs to suggest related subjects when there are no results. It grabs all the
+subject facets from solr, performs embedding via a local LLM, and stores embeddings in the postgres database. With the
+help of the `pgvector` and `neighbor` gems we can perform nearest neighbor searches on the user's no results query for 
+the most closely related subjects.
+
+The best way to test it out is to find a meaningful search that does not normally return any results and view the
+subject search suggestions on the no results page. 
 
 Here are the dependencies introduced:
 
