@@ -6,8 +6,7 @@ class SearchBuilder < Blacklight::SearchBuilder
 
   self.default_processor_chain += %i[facets_for_advanced_search_form
                                      massage_sort
-                                     handle_standalone_boolean_operators
-                                     process_query_with_ner]
+                                     handle_standalone_boolean_operators]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
@@ -47,17 +46,6 @@ class SearchBuilder < Blacklight::SearchBuilder
     return if solr_p[:q].blank?
 
     solr_p[:q] = solr_p[:q].gsub(/(?<=\s)([#{PROBLEMATIC_SOLR_BOOLEAN_OPERATORS.join}])(?=\s)/) { |match| "\\#{match}" }
-  end
-
-  # Process the user query
-  def process_query_with_ner(solr_p)
-    persons = NER::Service.extract_persons(solr_p[:q])
-    matches = persons.filter_map do |person|
-      Creator.search_by_name person
-    end
-    binding.b
-    puts "Matches:\n"
-    puts matches
   end
 
   private
