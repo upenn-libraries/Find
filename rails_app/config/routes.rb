@@ -100,4 +100,6 @@ Rails.application.routes.draw do
       get ':source/results', to: 'search#results', as: 'search_results'
     end
   end
+
+  get '/creator_suggest', to: "creator_suggest#suggest", as: :creator_suggest
 end

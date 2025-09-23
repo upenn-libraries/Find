@@ -49,3 +49,7 @@
 
   <%= link_to t('search.databases'), databases_catalog_path(sort: SearchBuilder::TITLE_SORT_ASC.join(',')) %>
 </search>
+
+<%= turbo_frame_tag "creator_suggest", src: creator_suggest_path(q: params[:q]), loading: "lazy" do %>
+  <div class="text-muted small">Finding people…</div>
+<% end %>

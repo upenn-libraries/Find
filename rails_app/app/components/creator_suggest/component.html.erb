@@ -1,0 +1,19 @@
+<%= turbo_frame_tag 'creator_suggest' do %>
+  <%# Renders inside a Turbo Frame %>
+  <div class="creator-suggest border rounded p-2 mb-3">
+  <div class="fw-semibold mb-1">People suggestions</div>
+
+    <ul class="list-unstyled mb-0">
+      <% results.each do |row| %>
+        <li class="mb-1">
+          <span class="text-muted">“<%= row[:mention] %>”</span>
+          <ul class="mb-0">
+            <% row[:creators].each do |creator| %>
+              <li><%= creator.name %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

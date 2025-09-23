@@ -3,6 +3,8 @@
 module Catalog
   # Local version of Blacklight v8.11.0 SearchBarComponent, overridden in order to customize template
   class SearchBarComponent < Blacklight::Component
+    include Turbo::FramesHelper
+
     renders_one :append
     renders_one :prepend
     renders_one :search_button
