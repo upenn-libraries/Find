@@ -1,15 +1,13 @@
 <%= turbo_frame_tag 'creator_suggest' do %>
-  <%# Renders inside a Turbo Frame %>
-  <div class="creator-suggest border rounded p-2 mb-3">
-  <div class="fw-semibold mb-1">People suggestions</div>
-
-    <ul class="list-unstyled mb-0">
+    <ul class="list-unstyled">
       <% results.each do |row| %>
-        <li class="mb-1">
-          <span class="text-muted">“<%= row[:mention] %>”</span>
-          <ul class="mb-0">
+        <li>
+          <span class="text-muted">It seems you're searching for an author: “<%= row[:person] %>”</span>
+          <ul>
             <% row[:creators].each do |creator| %>
-              <li><%= creator.name %></li>
+              <li>
+                <%= link_to creator.name, search_catalog_path({ "f[creator_facet][]": creator.name }), data: { turbo: false } %>
+              </li>
             <% end %>
           </ul>
         </li>

@@ -33,6 +33,10 @@
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
+    <%= turbo_frame_tag "creator_suggest", src: creator_suggest_path(q: params[:q]), loading: "lazy" do %>
+      <div class="text-muted small">Finding people…</div>
+    <% end %>
+
     <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
     <div class="row">
