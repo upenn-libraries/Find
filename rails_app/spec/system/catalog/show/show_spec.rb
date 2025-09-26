@@ -125,7 +125,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(print_monograph_bib)) }
 
       it 'links to creator facet search' do
-        within('.col-md-9.blacklight-creator_show') do
+        within('.col-md-9.blacklight-creator_extended_show') do
           expect(page).to have_link('Bleier, Ruth, 1923-',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Bleier, Ruth, 1923-' }))
         end
@@ -164,7 +164,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(electronic_db_bib)) }
 
       it 'links to a creator facet search' do
-        within('.col-md-9.blacklight-creator_contributor_show') do
+        within('.col-md-9.blacklight-creator_contributor_noauthor_show') do
           expect(page).to have_link('Geo Abstracts, Ltd.',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Geo Abstracts, Ltd' }))
         end
