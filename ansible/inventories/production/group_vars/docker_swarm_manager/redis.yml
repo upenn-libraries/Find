@@ -3,7 +3,7 @@ redis_docker_node_constraint: "catalog_find_redis"
 
 redis_docker_stack_name: "catalog_find"
 
-redis_network: "catalog-find-redis"
+redis_network: "catalog_find_redis"
 
 redis_users:
   - name: "sidekiq"
