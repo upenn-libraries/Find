@@ -2,3 +2,10 @@
 catalog_find_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/find/staging', engine_mount_point='kv-applications') }}"
 catalog_solr_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/solr/staging', engine_mount_point='kv-applications') }}"
 dld_sidekiq_pro_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'sidekiq_pro', engine_mount_point='dld') }}"
+
+# Ensure docker daemon uses internal registry mirror
+docker_daemon_config:
+  registry-mirrors:
+    - "http://registry-mirror.library.upenn.int:5000"
+  insecure-registries:
+    - "http://registry-mirror.library.upenn.int:5000"
