@@ -190,7 +190,7 @@ class CatalogController < ApplicationController
     config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss,
                            label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
-                           facet_target: :creator_facet, facet_map: :creator_extended_show_facet_map, limit: 3
+                           facet_target: :creator_facet, facet_map: :creator_extended_show_facet_map, limit: 2
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
     config.add_index_field :conference_ss, label: I18n.t('results.conference')
     config.add_index_field :series_ss, label: I18n.t('results.series')
