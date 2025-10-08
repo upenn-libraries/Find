@@ -15,6 +15,15 @@ describe Catalog::FacetLinkComponent do
       end
     end
 
+    context 'when the field configuration includes a limit value equal to the number of values' do
+      let(:limit) { 2 }
+      let(:values) { %w[a b] }
+
+      it 'return true' do
+        expect(component.truncate_values_list?).to be false
+      end
+    end
+
     context 'when the field configuration includes a limit value greater than the number of values' do
       let(:limit) { 2 }
       let(:values) { %w[a] }
