@@ -190,7 +190,7 @@ class CatalogController < ApplicationController
     config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss,
                            label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
-                           facet_target: :creator_facet, facet_map: :creator_show_facet_map
+                           facet_target: :creator_facet, facet_map: :creator_extended_show_facet_map, limit: 2
     config.add_index_field :edition_ss, label: I18n.t('results.edition')
     config.add_index_field :conference_ss, label: I18n.t('results.conference')
     config.add_index_field :series_ss, label: I18n.t('results.series')
@@ -231,16 +231,11 @@ class CatalogController < ApplicationController
     config.add_show_field :format_facet,
                           label: I18n.t('show.format.facet'),
                           component: Catalog::FacetLinkComponent, facet_target: :format_facet
-    config.add_show_field :creator_show,
+    config.add_show_field :creator_extended_show,
                           label: I18n.t('show.creator.main'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
-                          facet_map: :creator_show_facet_map
-    config.add_show_field :creator_extended_show,
-                          unless: Rails.env.production? || Rails.env.test?,
-                          label: I18n.t('show.creator.extended'), accessor: :marc,
-                          component: Catalog::FacetLinkComponent, facet_target: :creator_facet,
                           facet_map: :creator_extended_show_facet_map
-    config.add_show_field :creator_contributor_show,
+    config.add_show_field :creator_contributor_noauthor_show,
                           label: I18n.t('show.creator.contributor'), accessor: :marc,
                           component: Catalog::FacetLinkComponent, facet_target: :creator_facet
     config.add_show_field :creator_conference_detail_show,
