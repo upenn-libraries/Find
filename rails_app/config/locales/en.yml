@@ -263,7 +263,7 @@ en:
       heading: 'Guides'
   advanced:
     all_fields: 'Keyword'
-    creator_search: 'Author/Creator'
+    creator_search: 'Author/Contributor'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
     subject_search: 'Subject'
