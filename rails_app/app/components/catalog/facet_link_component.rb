@@ -5,11 +5,12 @@ module Catalog
   # and the facet value come from different stored fields or parser methods. If the field we want to link is identical,
   # then using Blacklight's `link_to_facet` configuration is the preferred solution.
   class FacetLinkComponent < Blacklight::MetadataFieldComponent
-    attr_reader :matches
+    attr_reader :matches, :limit
 
     def initialize(field:, layout: nil, show: nil, view_type: nil)
       super
       @matches = []
+      @limit = @field.field_config.limit
     end
 
     # If a limit value is set in the field configuration, this will return a limited set of the displayed fields based
@@ -18,7 +19,7 @@ module Catalog
     def limited_field_values
       return @field.values unless truncate_values_list?
 
-      @field.values.first(@field.field_config.limit) || []
+      @field.values.first(limit) || []
     end
 
     # @param [String] show_value
@@ -35,7 +36,7 @@ module Catalog
     # length of the values for display. This could be useful in rendering a "See More..." type interface element.
     # @return [Boolean]
     def truncate_values_list?
-      @truncate_values_list ||= @field.field_config.limit.present? && (@field.field_config.limit < @field.values.length)
+      @truncate_values_list ||= limit.present? && (limit < @field.values.length)
     end
 
     private
