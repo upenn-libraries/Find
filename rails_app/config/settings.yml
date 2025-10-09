@@ -221,9 +221,9 @@ electronic_scoring:
     Elsevier ClinicalKey: 89
 fulfillment:
   docdel_user_groups:
-    - zWhartonFaculty
-    - zWhartonStudent
-    - zWhartonStaff
+    - WhartonFAC
+    - WhartonPHD
+    - WhartonSTAFF
   ill_restricted_user_groups:
     - fact-proxy
     - courtesy
