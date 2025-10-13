@@ -98,7 +98,7 @@ For more information, see [Loading Data](#loading-data).
 
 ####
 
-This branch requires a special configset with the necessary Solr configurations. See the attached comment for the configset.
+This branch requires a special configset with the necessary Solr configurations. [See the attached comment for the configset.](https://gitlab.library.upenn.edu/dld/catalog/find/-/commit/35eb4082264ce194932c9742f5133d42b4db0874#note_51528)
 
 ```
 # start the app docker services, provision Solr collections and databases if not present, and run database migrations
