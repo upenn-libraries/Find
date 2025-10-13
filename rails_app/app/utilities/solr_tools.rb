@@ -55,6 +55,7 @@ class SolrTools
       req.params = { commit: 'true', "update.chain": 'textToVector' }
       req.headers['Content-Type'] = 'application/json'
       req.body = body
+      req.options.timeout = 600
     end
     raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
   end
