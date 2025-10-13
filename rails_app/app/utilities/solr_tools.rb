@@ -26,6 +26,29 @@ class SolrTools
     raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
   end
 
+  # Add llm configuration to solr
+  def self.load_model
+    model = {
+      "class": 'dev.langchain4j.model.openai.OpenAiEmbeddingModel',
+      "name": 'openai',
+      "params": {
+        "baseUrl": 'https://api.openai.com/v1',
+        "apiKey": Rails.application.credentials.openai_api_key,
+        "modelName": 'text-embedding-3-small',
+        "timeout": 60,
+        "logRequests": true,
+        "logResponses": true,
+        "maxRetries": 5
+      }
+    }.to_json
+
+    response = connection.put('/solr/find-development/schema/text-to-vector-model-store') do |req|
+      req.body = model
+      req.headers['Content-Type'] = 'application/json'
+    end
+    raise CommandError, "Solr command failed with response: #{response.body}" unless response.success?
+  end
+
   def self.load_data(collection_name, documents_file_path)
     body = "{ \"add\": [#{File.readlines(documents_file_path).join(',')}] }"
     response = connection.post("/solr/#{collection_name}/update") do |req|
