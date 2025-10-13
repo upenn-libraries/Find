@@ -18,6 +18,28 @@ High-level information about this repo and the available working environments ca
 2. [Contributing](#contributing)
    1. [Running the Test Suite](#running-the-test-suite)
    2. [Rubocop](#rubocop)
+   
+## Search Enhancements
+This branch builds a Solr 9.9 service with the [Solr Text to Vector module](https://solr.apache.org/guide/solr/latest/query-guide/text-to-vector.html).
+The Text to Vector module allows Solr to request a configured LLM platform for vector embeddings when indexing data and 
+receiving a search query. These numerical embeddings represent semantic meaning, and we can search over them to find records
+with vectors representing a similar meaning as an embedded query. Incorporating semantic search in our solr index allows users to write queries
+in natural language rather than traditional keyword search.
+
+To make things easy, you can select the following search type with a dropdown in the search bar: 
+
+- All Fields - keyword search
+- Natural Language - semantic/vector based search
+- Hybrid - combines keyword and natural language search 
+
+While this is an experiment, it requires an [Open AI API key](https://platform.openai.com/api-keys),
+that requires buying a minimum $5 credit to [cover the embedding costs](https://platform.openai.com/docs/pricing#embeddings).
+I will update the `development.yml.enc` once we have an institutional development key.
+
+
+Currently, the Text to Vector module only handles the embedding requests to externally hosted LLM platforms. 
+Since Solr supports [vector based searching](https://solr.apache.org/guide/solr/latest/query-guide/dense-vector-search.html), 
+it is possible to host a local embedding service to create the embeddings to index and query without needing the text to vector module.
 
 ## Local Development Environment
 
@@ -59,12 +81,24 @@ New credential values added to the Settings should be added **BOTH** to the Penn
 EDITOR=nano bundle exec rails credentials:edit -e development
 ```
 
+##### Open AI API Key
+
+This branch requires obtaining an [OpenAI api key](https://platform.openai.com/api-keys) with `ALL` permissions.
+The OpenAI embeddings API requires buying a minimum $5 credit to [cover the embedding costs](https://platform.openai.com/docs/pricing#embeddings).
+Add the API key to the Rails credential file with the name `openai_api_key`.
+I will update the `development.yml.enc` once we have an institutional development key.
+
+
 ### Starting App Services
 
 Helpful Rake tasks have been created to wrap up the initialization process for the development environment. Prior to
 starting this app, ensure you have a copy of the Solr configset and some sample data from another developer or by 
 running the appropriate commands in the `catalog-indexing` project and copying those files into the `solr` directory.
 For more information, see [Loading Data](#loading-data).
+
+####
+
+This branch requires a special configset with the necessary Solr configurations. See the attached comment for the configset.
 
 ```
 # start the app docker services, provision Solr collections and databases if not present, and run database migrations
@@ -84,6 +118,8 @@ this task, ensure you have a copy of the Solr configset as a zip file as well as
 `solr` directory. If the Solr container doesn't already have collections created, the `tools:start` command will attempt
 to create new collections using the newest `configset_*.zip` file in the `solr` directory, then load the records in the 
 newest `solrjson_*.jsonl` file in the `solr` directory.
+
+This command **WILL** reindex the sample data and Solr **WILL** request embeddings from OpenAI.
 
 ### Developing
 
