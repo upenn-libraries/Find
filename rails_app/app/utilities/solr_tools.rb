@@ -52,7 +52,7 @@ class SolrTools
   def self.load_data(collection_name, documents_file_path)
     body = "{ \"add\": [#{File.readlines(documents_file_path).join(',')}] }"
     response = connection.post("/solr/#{collection_name}/update") do |req|
-      req.params = { commit: 'true' }
+      req.params = { commit: 'true', "update.chain": 'textToVector' }
       req.headers['Content-Type'] = 'application/json'
       req.body = body
     end
