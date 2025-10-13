@@ -24,6 +24,8 @@ namespace :tools do
         puts 'Creating Solr collections for development and test'
         SolrTools.create_collection 'find-development', configset_name
         SolrTools.create_collection 'find-test', configset_name
+        puts 'Loading LLM configuration to Solr development collection'
+        SolrTools.load_model
         Rake::Task['tools:index_sample_file'].execute
       end
     rescue StandardError => e
