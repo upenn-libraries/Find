@@ -6,7 +6,8 @@ class SearchBuilder < Blacklight::SearchBuilder
 
   self.default_processor_chain += %i[facets_for_advanced_search_form
                                      massage_sort
-                                     handle_standalone_boolean_operators]
+                                     handle_standalone_boolean_operators
+                                     hybrid_query]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
@@ -48,6 +49,21 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_p[:q] = solr_p[:q].gsub(/(?<=\s)([#{PROBLEMATIC_SOLR_BOOLEAN_OPERATORS.join}])(?=\s)/) { |match| "\\#{match}" }
   end
 
+  # Build hybrid search when 'hybrid' search field selected. Uses boolean query parser to combine both keyword and
+  # natural language (vector) queries.
+  def hybrid_query(solr_p)
+    return if solr_p[:q].blank?
+    return unless search_field&.key == 'hybrid'
+
+    query = solr_p[:q]
+    local_params = vector_search_local_params.except(:includeTags).map { |k, v| "#{k}=#{v}" }.join(' ')
+    solr_p[:q] = '{!bool should=$keyword should=$vector}'
+    solr_p[:keyword] = "{!edismax}#{query}"
+    solr_p[:vector] = "{!#{local_params}}#{query}"
+
+    solr_p
+  end
+
   private
 
   # @param solr_p [Hash]
@@ -83,5 +99,10 @@ class SearchBuilder < Blacklight::SearchBuilder
   # @return [Boolean, nil]
   def database_search?(solr_p)
     solr_p.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE)
+  end
+
+  # @return [Hash]
+  def vector_search_local_params
+    blacklight_config.search_fields['composite_vector'].solr_local_parameters
   end
 end

@@ -461,6 +461,11 @@ class CatalogController < ApplicationController
                                       includeTags: 'for_knn' }
     end
 
+    config.add_search_field('hybrid', label: I18n.t('search.hybrid')) do |field|
+      field.include_in_simple_select = true
+      field.solr_parameters = { defType: 'lucene' }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc

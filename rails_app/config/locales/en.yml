@@ -450,6 +450,7 @@ en:
   search:
     all_fields: 'All Fields'
     basic: 'All Fields (Basic)'
+    hybrid: 'Hybrid'
     natural_language: 'Natural Language'
     no_anchored: 'All Fields (No Anchored)'
     no_unstem: 'All Fields (No Unstemmed)'
