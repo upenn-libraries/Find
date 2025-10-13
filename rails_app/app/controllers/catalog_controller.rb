@@ -451,6 +451,16 @@ class CatalogController < ApplicationController
       field.clause_params = { edismax: { qf: '${publication_date_qf}', pf: '${publication_date_pf}' } }
     end
 
+    config.add_search_field('composite_vector', label: I18n.t('search.natural_language')) do |field|
+      field.include_in_simple_select = true
+      # Defining the lucene query parser here allows the local parameters to override the defaults in the solr config.
+      # Without this the local parameters did not take effect and solr continued to use to default edismax query parser
+      # defined in the default request handler config.
+      field.solr_parameters = { defType: 'lucene' }
+      field.solr_local_parameters = { type: 'knn_text_to_vector', model: 'openai', f: 'composite_vector', topK: 5,
+                                      includeTags: 'for_knn' }
+    end
+
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
