@@ -19,4 +19,4 @@ roles:
   - name: solr
     src: https://gitlab.library.upenn.edu/devops/ansible/roles/solr.git
     scm: git
-    version: main
+    version: 2.2.0
