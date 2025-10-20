@@ -296,6 +296,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-gnu)
       racc (~> 1.4)
+    observer (0.1.2)
     omniauth (2.1.3)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
@@ -557,6 +558,7 @@ DEPENDENCIES
   importmap-rails
   marc
   mini_racer
+  observer
   omniauth
   omniauth-rails_csrf_protection
   omniauth-saml

@@ -20,6 +20,7 @@ gem 'honeybadger'
 gem 'importmap-rails'
 gem 'marc'
 gem 'mini_racer'
+gem 'observer', require: false
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-saml'
