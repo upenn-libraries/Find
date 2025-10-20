@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component overriding version from Blacklight v8.11.0
+  # Local component overriding version from Blacklight v8.12.2
   # @todo as of 8.11.0 the ConstraintsComponent to use can be specified in the BL config
   class ConstraintsComponent < Blacklight::Component
     renders_many :query_constraints_area

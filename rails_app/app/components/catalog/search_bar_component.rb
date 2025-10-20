@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local version of Blacklight v8.11.0 SearchBarComponent, overridden in order to customize template
+  # Local version of Blacklight v8.12.2 SearchBarComponent, overridden in order to customize template
   class SearchBarComponent < Blacklight::Component
     renders_one :append
     renders_one :prepend
