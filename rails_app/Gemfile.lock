@@ -92,14 +92,14 @@ GEM
     benchmark (0.4.1)
     bigdecimal (3.2.3)
     bindex (0.8.1)
-    blacklight (8.11.0)
+    blacklight (8.12.2)
       globalid
       i18n (>= 1.7.0)
       jbuilder (~> 2.7)
       kaminari (>= 0.15)
       ostruct (>= 0.3.2)
       rails (>= 6.1, < 9)
-      view_component (>= 2.74, < 4)
+      view_component (>= 2.74, < 5)
       zeitwerk
     blacklight-ris (0.2.0)
       blacklight (>= 7)
@@ -271,7 +271,6 @@ GEM
       rexml
     marcel (1.0.4)
     matrix (0.4.2)
-    method_source (1.1.0)
     mini_mime (1.1.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
@@ -503,10 +502,9 @@ GEM
       rubocop-rspec
     uri (1.0.3)
     useragent (0.16.11)
-    view_component (2.83.0)
-      activesupport (>= 5.2.0, < 8.0)
-      concurrent-ruby (~> 1.0)
-      method_source (~> 1.0)
+    view_component (4.0.2)
+      activesupport (>= 7.1.0, < 8.1)
+      concurrent-ruby (~> 1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -581,7 +579,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   upennlib-rubocop
-  view_component (~> 2.66)
+  view_component (~> 4.0)
   web-console
   webmock
 
