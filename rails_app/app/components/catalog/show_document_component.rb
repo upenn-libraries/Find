@@ -27,8 +27,8 @@ module Catalog
 
     def before_render
       super
-      set_slot(:inventory_navigation, nil) unless inventory_navigation
-      set_slot(:inventory_content, nil) unless inventory_content
+      with_inventory_navigation unless inventory_navigation
+      with_inventory_content unless inventory_content
     end
   end
 end

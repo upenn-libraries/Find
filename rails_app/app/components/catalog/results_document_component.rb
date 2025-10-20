@@ -8,7 +8,7 @@ module Catalog
 
     def before_render
       super
-      set_slot(:brief_inventory, nil) unless brief_inventory
+      with_brief_inventory unless brief_inventory
     end
   end
 end

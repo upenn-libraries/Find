@@ -21,7 +21,7 @@ module Catalog
     # Hack from Blacklight::HeaderComponent so that the default lambdas are triggered
     # so that we don't have to do c.with_top_bar() in the call.
     def before_render
-      set_slot(:search_bar, nil) unless search_bar
+      with_search_bar unless search_bar
     end
 
     # Memoize alerts to prevent doubling database queries
