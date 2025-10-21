@@ -14,3 +14,5 @@ email:
   from_address: 'find-staging-noreply@upenn.edu'
 discover:
   enabled: true
+suggester:
+  enabled: true

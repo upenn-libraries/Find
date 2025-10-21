@@ -7,3 +7,5 @@ additional_results_sources:
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 discover:
   enabled: true
+suggester:
+  enabled: true
