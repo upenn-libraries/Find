@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # DocumentComponent that inherits from Blacklight::DocumentComponent (from v8.11.0) in order to display
+  # DocumentComponent that inherits from Blacklight::DocumentComponent (from v8.12.2) in order to display
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
@@ -27,8 +27,8 @@ module Catalog
 
     def before_render
       super
-      set_slot(:inventory_navigation, nil) unless inventory_navigation
-      set_slot(:inventory_content, nil) unless inventory_content
+      with_inventory_navigation unless inventory_navigation
+      with_inventory_content unless inventory_content
     end
   end
 end

@@ -5,8 +5,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.4.7'
 
+# hoisted sprockets-rails to ensure sprockets loads before view_component to temporarily workaround known issue:
+# https://github.com/ViewComponent/view_component/issues/2433
+gem 'sprockets-rails'
+
 gem 'alma'
-gem 'blacklight', '~> 8.0'
+gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'release-8.x', ref: '70cd021fc56'
 gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false
@@ -35,13 +39,12 @@ gem 'rsolr'
 gem 'sassc-rails'
 gem 'sidekiq-cron'
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
-gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'summon'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'upennlib-rubocop', require: false
-gem 'view_component', '~> 2.66'
+gem 'view_component', '~> 4.0'
 
 group :development, :test do
   gem 'byebug'

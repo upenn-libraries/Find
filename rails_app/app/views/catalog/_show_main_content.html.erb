@@ -1,11 +1,11 @@
-<%# copied from Blacklight v8.11.0 to pass additional params into Catalog::ShowDocumentComponent and remove the display
+<%# copied from Blacklight v8.12.2 to pass additional params into Catalog::ShowDocumentComponent and remove the display
     of the pagination component, which is now rendered in show.html.erb as part of our local "document bar". %>
 
 <% @page_title = t('blacklight.search.show.title', document_title: document_presenter(@document).html_title, application_name: application_name).html_safe %>
 <% content_for(:head) { render_link_rel_alternates } %>
 
 <% document_component = blacklight_config.view_config(:show).document_component %>
-<%= render (document_component).new(document_component.collection_parameter => document_presenter(@document),
+<%= render (document_component).new(document: document_presenter(@document),
                                     component: :div, show: true, partials: blacklight_config.view_config(:show).partials,
                                     params: params, user: current_user) do |component| %>
   <% component.with_title(as: 'h1', classes: '', link_to_document: false, actions: false) %>
