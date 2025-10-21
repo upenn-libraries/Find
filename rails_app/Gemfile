@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.6'
+ruby '3.4.7'
 
 # hoisted sprockets-rails to ensure sprockets loads before view_component to temporarily workaround known issue:
 # https://github.com/ViewComponent/view_component/issues/2433
@@ -24,6 +24,7 @@ gem 'honeybadger'
 gem 'importmap-rails'
 gem 'marc'
 gem 'mini_racer'
+gem 'observer', require: false
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-saml'
