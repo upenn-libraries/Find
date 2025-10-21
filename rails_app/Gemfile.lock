@@ -1,3 +1,19 @@
+GIT
+  remote: https://github.com/projectblacklight/blacklight.git
+  revision: 70cd021fc56a95467dac82ef0a7af5dc04c3e763
+  ref: 70cd021fc56
+  branch: release-8.x
+  specs:
+    blacklight (8.12.2)
+      globalid
+      i18n (>= 1.7.0)
+      jbuilder (~> 2.7)
+      kaminari (>= 0.15)
+      ostruct (>= 0.3.2)
+      rails (>= 6.1, < 9)
+      view_component (>= 2.74, < 5)
+      zeitwerk
+
 GEM
   remote: https://gems.contribsys.com/
   specs:
@@ -92,15 +108,6 @@ GEM
     benchmark (0.4.1)
     bigdecimal (3.3.1)
     bindex (0.8.1)
-    blacklight (8.12.2)
-      globalid
-      i18n (>= 1.7.0)
-      jbuilder (~> 2.7)
-      kaminari (>= 0.15)
-      ostruct (>= 0.3.2)
-      rails (>= 6.1, < 9)
-      view_component (>= 2.74, < 5)
-      zeitwerk
     blacklight-ris (0.2.0)
       blacklight (>= 7)
       rails (>= 7)
@@ -540,7 +547,7 @@ PLATFORMS
 
 DEPENDENCIES
   alma
-  blacklight (~> 8.0)
+  blacklight!
   blacklight-ris
   blacklight_dynamic_sitemap
   bootsnap
