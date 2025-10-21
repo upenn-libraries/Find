@@ -12,5 +12,8 @@ honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
 email:
   from_address: 'find-staging-noreply@upenn.edu'
+fulfillment:
+  docdel:
+    email: 'mkanning@upenn.edu'
 discover:
   enabled: true
