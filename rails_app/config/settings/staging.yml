@@ -17,3 +17,5 @@ fulfillment:
     email: 'mkanning@upenn.edu'
 discover:
   enabled: true
+suggester:
+  enabled: true

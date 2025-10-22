@@ -100,4 +100,10 @@ Rails.application.routes.draw do
       get ':source/results', to: 'search#results', as: 'search_results'
     end
   end
+
+  if Settings.suggester.enabled
+    namespace :suggester do
+      get ':q', to: 'suggestions#show'
+    end
+  end
 end
