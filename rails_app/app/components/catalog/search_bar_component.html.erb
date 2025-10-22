@@ -7,7 +7,7 @@
 %>
 
 <search>
-  <pennlibs-autocomplete for="query_input">
+  <pennlibs-autocomplete for="query_input" data-controller="suggester">
     <div slot="start">
       <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
         <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
