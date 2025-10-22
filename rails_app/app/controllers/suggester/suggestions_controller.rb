@@ -3,12 +3,24 @@
 module Suggester
   # Controller actions for serving search suggestions
   class SuggestionsController < ApplicationController
+    class InvalidQueryError < StandardError; end
+
+    before_action :validate_query
+
+    rescue_from InvalidQueryError, with: :error_response
+
     # /suggester/:q?count=5
     def show
       render json: dummy_response(params)
     end
 
     private
+
+    def validate_query
+      return if params[:q].present?
+
+      raise InvalidQueryError, 'The given query parameters are invalid.'
+    end
 
     # @param [ActionController::Parameters] params
     # @return [Hash]
@@ -21,7 +33,7 @@ module Suggester
           }, # echo back received params
           suggestions: {
             actions: [ # actions are search actions and will redirect the user when selected
-              { label: 'Search titles for "query"', url: 'http://find.edu/?field=title&q=query' }
+              { label: 'Search titles for "query"', url: 'https://find.library.upenn.edu/?field=title&q=query' }
             ],
             completions: [ # completions are suggestions that can be selected and will fill the search bar
               'query syntax', 'query language', 'query errors', 'adversarial queries'
@@ -29,6 +41,11 @@ module Suggester
           } # end suggestions
         } # end data
       }
+    end
+
+    # @param [StandardError] exception
+    def error_response(exception)
+      render json: { status: :error, message: exception.message }, status: :bad_request
     end
 
     # @param params [ActionController::Params]
