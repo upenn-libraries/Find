@@ -3,7 +3,7 @@
 module Suggester
   # Controller actions for serving search suggestions
   class SuggestionsController < ApplicationController
-    # /suggestions/:q?count=5
+    # /suggester/:q?count=5
     def show
       render json: dummy_response(params)
     end
