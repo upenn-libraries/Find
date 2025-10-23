@@ -7,8 +7,8 @@ const RESPONSE = {
     suggestions: {
       actions: [
         {
-          label: 'Search titles for "query"',
-          url: "https://find.library.upenn.edu/?field=title&q=query",
+          label: 'query in Title',
+          url: "http://localhost:3000/?field=title&q=query",
         },
       ],
       completions: [
@@ -23,25 +23,16 @@ const RESPONSE = {
 
 export default class extends Controller {
   connect() {
-    this.autocomplete = this.element;
+    this.autocomplete = this.element; // <pennlibs-autocomplete>
     this.renderSuggestions(RESPONSE.data.suggestions);
     this.observeActivation();
   }
 
   renderSuggestions(suggestions) {
-    this.clearExistingListbox();
-    const listbox = this.createListbox();
-
-    this.addCompletions(listbox, suggestions.completions);
-    this.addActions(listbox, suggestions.actions);
-
-    this.autocomplete.appendChild(listbox);
-    this.notifyComponentOfChanges();
-  }
-
-  clearExistingListbox() {
-    const existing = this.autocomplete.querySelector('ol[role="listbox"]');
-    if (existing) existing.remove();
+    const ol = this.createListbox();
+    this.addCompletions(ol, suggestions.completions);
+    this.addActions(ol, suggestions.actions);
+    this.replaceListbox(ol);
   }
 
   createListbox() {
@@ -50,50 +41,46 @@ export default class extends Controller {
     return ol;
   }
 
-  addCompletions(listbox, completions = []) {
+  addCompletions(ol, completions) {
     completions.forEach((text) => {
-      listbox.appendChild(this.createCompletionOption(text));
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.innerHTML = this.markQuery(text);
+      ol.appendChild(li);
     });
   }
 
-  addActions(listbox, actions = []) {
+  addActions(ol, actions) {
     actions.forEach((action) => {
-      listbox.appendChild(this.createActionOption(action));
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.dataset.plValue = action.label;
+      li.innerHTML = this.markQuery(action.label);
+      ol.appendChild(li);
     });
   }
 
-  createCompletionOption(text) {
-    const li = document.createElement("li");
-    li.setAttribute("role", "option");
-    li.setAttribute("data-pl-value", text);
-    li.textContent = text;
-    return li;
+  replaceListbox(ol) {
+    const existing = this.autocomplete.querySelector('ol[role="listbox"]');
+    if (existing) existing.remove();
+    this.autocomplete.appendChild(ol);
   }
 
-  createActionOption(action) {
-    const li = document.createElement("li");
-    li.setAttribute("role", "option");
-    li.setAttribute("data-pl-value", action.label);
-    li.innerHTML = `<a href="${action.url}">${action.label}</a>`;
-    return li;
-  }
-
-  notifyComponentOfChanges() {
-    // Triggers the Stencil component to re-scan its DOM
-    this.autocomplete.dispatchEvent(new Event("slotchange"));
+  markQuery(text) {
+    const re = new RegExp(`(${RESPONSE.data.params.q})`, "ig");
+    return text.replace(re, "<mark>$1</mark>");
   }
 
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
-      const { value } = event.detail;
-      console.log("Activated:", value);
-
-      const match = RESPONSE.data.suggestions.actions.find(
-        (a) => a.label === value,
-      );
-
-      if (match) {
-        window.location.href = match.url;
+      const { index, value } = event.detail;
+      const suggestions = RESPONSE.data.suggestions;
+      const action =
+        suggestions.actions[index - suggestions.completions.length];
+      if (action) {
+        window.location.href = action.url;
+      } else {
+        this.element.querySelector("form.fi-search-box").submit();
       }
     });
   }
