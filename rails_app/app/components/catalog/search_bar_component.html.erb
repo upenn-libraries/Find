@@ -31,22 +31,12 @@
           <% end %>
 
           <%= f.label @query_param, scoped_t('search.label'), class: 'sr-only visually-hidden' %>
-          <% if autocomplete_path.present? %>
-            <auto-complete src="<%= autocomplete_path %>" for="autocomplete-popup" class="search-autocomplete-wrapper">
-              <%= f.search_field @query_param, value: @q, class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}",
-                autofocus: @autofocus,
-                aria: { label: scoped_t('search.label'), autocomplete: 'list', controls: 'autocomplete-popup' } 
-              %>
-              <ul id="autocomplete-popup" class="dropdown-menu" role="listbox" aria-label="<%= scoped_t('search.label') %>" hidden></ul>
-            </auto-complete>
-          <% else %>
-            <%= f.search_field @query_param, value: @q, class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}",
+          <%= f.search_field @query_param, value: @q, class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}",
               autofocus: @autofocus,
               autocomplete: 'off',
               aria: { label: scoped_t('search.label') },
               id: 'query_input'
             %>
-          <% end %>
 
           <%= append %>
           <%= search_button || render(Catalog::SearchButtonComponent.new(id: "#{@prefix}search", text: t('search.button.label'))) %>
