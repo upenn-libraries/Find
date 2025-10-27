@@ -45,7 +45,8 @@ export default class extends Controller {
     completions.forEach((text) => {
       const li = document.createElement("li");
       li.setAttribute("role", "option");
-      li.innerHTML = this.markQuery(text);
+      // li.innerHTML = this.markQuery(text);
+      li.innerHTML = text;
       ol.appendChild(li);
     });
   }
@@ -55,7 +56,8 @@ export default class extends Controller {
       const li = document.createElement("li");
       li.setAttribute("role", "option");
       li.dataset.plValue = action.label;
-      li.innerHTML = this.markQuery(action.label);
+      // li.innerHTML = this.markQuery(action.label);
+      li.innerHTML = action.label;
       ol.appendChild(li);
     });
   }
@@ -66,10 +68,10 @@ export default class extends Controller {
     this.autocomplete.appendChild(ol);
   }
 
-  markQuery(text) {
-    const re = new RegExp(`(${RESPONSE.data.params.q})`, "ig");
-    return text.replace(re, "<mark>$1</mark>");
-  }
+  // markQuery(text) {
+  //   const re = new RegExp(`(${RESPONSE.data.params.q})`, "ig");
+  //   return text.replace(re, "<mark>$1</mark>");
+  // }
 
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
