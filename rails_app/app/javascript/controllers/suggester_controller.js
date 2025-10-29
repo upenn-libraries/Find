@@ -8,7 +8,6 @@ export default class extends Controller {
   connect() {
     this.autocomplete = this.element;
     this.input = this.autocomplete.querySelector("#query_input");
-    this.latestSuggestions = null;
     this.debounceTimer = null;
     this.abortController = null;
 
@@ -32,15 +31,15 @@ export default class extends Controller {
     const url = `/suggester/${encodeURIComponent(query)}?count=5`;
 
     try {
-			// this takes an abort signal to allow canceling the async request to fetch suggestions
-			// if a new request is made, i.e. a new character is added to the query
-      const response = await fetch(url, { signal: this.abortController.signal });
+      const response = await fetch(url, {
+        signal: this.abortController.signal,
+        headers: {
+          Accept: "text/vnd.turbo-stream.html",
+        },
+      });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      if (data.status === "success") {
-        this.latestSuggestions = data.data.suggestions;
-        this.renderSuggestions(data.data.suggestions);
-      }
+      const html = await response.text();
+      Turbo.renderStreamMessage(html);
     } catch (error) {
       if (error.name !== "AbortError") {
         console.error("Suggestion fetch failed:", error);
@@ -57,56 +56,10 @@ export default class extends Controller {
     const query = event.target.value.trim();
     if (query.length < 2) return;
 
-		// clear any pending timeout from previous input events to prevent overlapping requests
     clearTimeout(this.debounceTimer);
-		// ensure the API is only called once after the user stops typing for 300ms rather than every keystroke
     this.debounceTimer = setTimeout(() => {
       this.fetchSuggestions(query);
     }, 300);
-  }
-
-  /**
-   * Renders the suggestions list in the DOM.
-   * Creates a listbox element and populates it with completions and actions.
-   * @param {Object} suggestions - Object containing completions and actions arrays
-   */
-  renderSuggestions(suggestions) {
-    const ol = this.createListbox();
-    this.addCompletions(ol, suggestions.completions);
-    this.addActions(ol, suggestions.actions);
-    this.replaceListbox(ol);
-  }
-
-  createListbox() {
-    const ol = document.createElement("ol");
-    ol.setAttribute("role", "listbox");
-    return ol;
-  }
-
-  addCompletions(ol, completions) {
-    completions.forEach((text) => {
-      const li = document.createElement("li");
-      li.setAttribute("role", "option");
-      li.textContent = text;
-      ol.appendChild(li);
-    });
-  }
-
-  addActions(ol, actions) {
-    actions.forEach((action) => {
-      const li = document.createElement("li");
-      li.setAttribute("role", "option");
-      li.dataset.plValue = action.label;
-      li.textContent = action.label;
-      ol.appendChild(li);
-    });
-  }
-
-  replaceListbox(ol) {
-    const existing = this.autocomplete.querySelector('ol[role="listbox"]');
-    if (existing) existing.remove();
-    this.autocomplete.appendChild(ol);
-    this.autocomplete.dispatchEvent(new Event("slotchange", { bubbles: true }));
   }
 
   /**
@@ -116,11 +69,15 @@ export default class extends Controller {
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
       const { index } = event.detail;
-      const suggestions = this.latestSuggestions;
-      const action =
-        suggestions.actions[index - suggestions.completions.length];
-      if (action) {
-        window.location.href = action.url;
+      const listbox = this.autocomplete.querySelector('ol[role="listbox"]');
+      if (!listbox) return;
+
+      const selectedOption = listbox.children[index];
+      if (!selectedOption) return;
+
+      const actionUrl = selectedOption.dataset.actionUrl;
+      if (actionUrl) {
+        window.location.href = actionUrl;
       } else {
         this.element.querySelector("form.fi-search-box").submit();
       }
