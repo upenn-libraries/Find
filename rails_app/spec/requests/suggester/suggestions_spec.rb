@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+Dir[Rails.root.join('app/services/suggester/**/*.rb')].each { |file| require file }
+
 describe 'Suggestions Requests' do
+  include Suggester::SpecHelpers
   let(:parsed_response) { JSON.parse(response.body).deep_symbolize_keys }
 
   context 'with an invalid query' do
@@ -12,8 +15,14 @@ describe 'Suggestions Requests' do
     end
   end
 
-  context 'with dummy response' do
-    before { get suggester_path(q: 'query', count: 5, filtered_param: true) }
+  context 'with valid query' do
+    let(:engines) { [Suggester::Engines::TitleSearch, Suggester::Engines::TitleCompletion] }
+    let(:params) { { q: 'query', filtered_param: true } }
+
+    before do
+      allow(Suggester::EngineRegistry).to receive(:registry).and_return engines
+      get suggester_path(params)
+    end
 
     it 'return proper headers' do
       expect(response.headers['Content-Type']).to eq 'application/json; charset=utf-8'
@@ -21,18 +30,31 @@ describe 'Suggestions Requests' do
 
     it 'returns proper actions' do
       expect(parsed_response.dig(:data, :suggestions, :actions)).to eq(
-        [{ label: 'Search titles for "query"', url: 'https://find.library.upenn.edu/?field=title&q=query' }]
+        [{ label: "Search 'query' in titles.",
+           url: 'https://find.library.upenn.edu?q=query&search_field=title_search' }]
       )
     end
 
     it 'returns proper completions' do
-      expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(
-        ['query syntax', 'query language', 'query errors', 'adversarial queries']
-      )
+      expect(parsed_response.dig(:data, :suggestions,
+                                 :completions)).to eq(['Title containing query', 'Another title containing query'])
     end
 
     it 'returns only allowed context params' do
-      expect(parsed_response.dig(:data, :params, :context).keys).to eq [:count]
+      expect(parsed_response.dig(:data, :params,
+                                 :context).keys).to contain_exactly(:actions_limit, :completions_limit)
+    end
+
+    context 'with limit parameters' do
+      let(:params) { { q: 'query', actions_limit: 0, completions_limit: 1 } }
+
+      it 'returns limited actions' do
+        expect(parsed_response.dig(:data, :suggestions, :actions)).to eq []
+      end
+
+      it 'returns limited completions' do
+        expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['Title containing query'])
+      end
     end
   end
 end

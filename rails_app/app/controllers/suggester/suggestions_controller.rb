@@ -11,7 +11,7 @@ module Suggester
 
     # /suggester/:q?count=5
     def show
-      render json: dummy_response(params)
+      render json: Suggester::SuggestionsService.call(query: params[:q].to_s, context: context_params(params))
     end
 
     private
@@ -49,9 +49,9 @@ module Suggester
     end
 
     # @param params [ActionController::Params]
-    # @return [ActionController::Params] filtered context params
+    # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
     def context_params(params)
-      params.permit(:count)
+      params.permit(:actions_limit, :completions_limit).to_h
     end
   end
 end
