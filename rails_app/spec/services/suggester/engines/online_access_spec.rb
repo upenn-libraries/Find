@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::OnlineAccess do
-  let(:engine) { described_class.new(query: 'test', context: {}) }
+  let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
     it 'returns expected base weight' do
@@ -12,7 +12,7 @@ describe Suggester::Engines::OnlineAccess do
   describe '.suggest?' do
     context 'with a query' do
       it 'returns true' do
-        expect(described_class.suggest?('test')).to be true
+        expect(described_class.suggest?('query')).to be true
       end
     end
 
@@ -32,8 +32,8 @@ describe Suggester::Engines::OnlineAccess do
 
     it 'returns contains expected entries' do
       expect(actions).to have_attributes(
-        entries: [{ label: "Search 'test' in online resources.",
-                    url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D=Online&q=test' }]
+        entries: [{ label: "Search 'query' in online resources.",
+                    url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D=Online&q=query' }]
       )
     end
   end

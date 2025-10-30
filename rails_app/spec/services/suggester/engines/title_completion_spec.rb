@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::TitleCompletion do
-  let(:engine) { described_class.new(query: 'test', context: {}) }
+  let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
     it 'returns expected base weight' do
@@ -12,7 +12,7 @@ describe Suggester::Engines::TitleCompletion do
   describe '.suggest?' do
     context 'with a query' do
       it 'returns true' do
-        expect(described_class.suggest?('test')).to be true
+        expect(described_class.suggest?('query')).to be true
       end
     end
 

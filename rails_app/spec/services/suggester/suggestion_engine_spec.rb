@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::SuggestionEngine do
-  let(:engine) { described_class.new(query: 'test', context: {}) }
+  let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
     it 'declares the expected weight' do

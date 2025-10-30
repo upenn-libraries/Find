@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::TitleSearch do
-  let(:engine) { described_class.new(query: 'test', context: {}) }
+  let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
     it 'returns expected base weight' do
@@ -12,7 +12,7 @@ describe Suggester::Engines::TitleSearch do
   describe '.suggest?' do
     context 'with a query' do
       it 'returns true' do
-        expect(described_class.suggest?('test')).to be true
+        expect(described_class.suggest?('query')).to be true
       end
     end
 
@@ -32,8 +32,8 @@ describe Suggester::Engines::TitleSearch do
 
     it 'contains expected entries' do
       expect(actions).to have_attributes(
-        entries: [{ label: "Search 'test' in titles.",
-                    url: 'https://find.library.upenn.edu?q=test&search_field=title_search' }]
+        entries: [{ label: "Search 'query' in titles.",
+                    url: 'https://find.library.upenn.edu?q=query&search_field=title_search' }]
       )
     end
   end

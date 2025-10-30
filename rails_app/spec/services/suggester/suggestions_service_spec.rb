@@ -2,7 +2,7 @@
 
 describe Suggester::SuggestionsService do
   include Suggester::SpecHelpers
-  let(:service) { described_class.new(query: 'test', context: { foo: 'bar' }, engine_classes: engines) }
+  let(:service) { described_class.new(query: 'query', context: { foo: 'bar' }, engine_classes: engines) }
   let(:engines) { [mock_engine_with_actions, mock_engine_with_completions] }
 
   describe '#context' do

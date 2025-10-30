@@ -2,7 +2,7 @@
 
 describe Suggester::EngineCollection do
   include Suggester::SpecHelpers
-  let(:engine_collection) { described_class.new(query: 'test', context: context, engine_classes: engines) }
+  let(:engine_collection) { described_class.new(query: 'query', context: context, engine_classes: engines) }
   let(:context) { Suggester::SuggestionsService::DEFAULT_CONTEXT }
   let(:engines) { [mock_engine_with_actions, mock_engine_with_completions] }
 
@@ -21,7 +21,7 @@ describe Suggester::EngineCollection do
 
     context 'with unsuccessful engines' do
       let(:engines) do
-        [mock_engine_class(actions: Suggester::Suggestion.new(entries: [{ label: 'test', url: '/)' }]), success: false),
+        [mock_engine_class(actions: Suggester::Suggestion.new(entries: [{ label: 'label', url: '/' }]), success: false),
          mock_engine_class(completions: Suggester::Suggestion.new(entries: ['some query completion']), success: false)]
       end
 

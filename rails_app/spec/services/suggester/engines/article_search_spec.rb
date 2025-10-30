@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::ArticleSearch do
-  let(:engine) { described_class.new(query: 'test', context: {}) }
+  let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
     it 'returns expected base weight' do
@@ -18,7 +18,7 @@ describe Suggester::Engines::ArticleSearch do
 
     context 'with a query containing less than 10 words' do
       it 'returns false' do
-        expect(described_class.suggest?('test')).to be false
+        expect(described_class.suggest?('query')).to be false
       end
     end
   end
@@ -31,9 +31,9 @@ describe Suggester::Engines::ArticleSearch do
     end
 
     it 'returns contains expected entries' do
-      url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=test'
+      url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=query'
       expect(actions).to have_attributes(
-        entries: [{ label: "Search 'test' in Articles+.", url: url }]
+        entries: [{ label: "Search 'query' in Articles+.", url: url }]
       )
     end
   end
