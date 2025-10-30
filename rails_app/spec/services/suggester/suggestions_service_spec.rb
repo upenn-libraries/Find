@@ -12,19 +12,35 @@ describe Suggester::SuggestionsService do
   end
 
   describe '#response' do
-    it 'returns expected response' do
-      expect(service.response).to eq({ status: :success,
-                                       data: {
-                                         params: { q: 'test',
-                                                   context: { foo: 'bar', 'actions_limit': 2,
-                                                              'completions_limit': 4 } },
-                                         suggestions: {
-                                           actions: [{ label: 'Search titles for "query"',
-                                                       url: 'https://find.library.upenn.edu/?field=title&q=query' }],
-                                           completions: ['query syntax', 'query language', 'query errors',
-                                                         'adversarial queries']
-                                         }
-                                       } })
+    context 'with successful engines' do
+      it 'returns expected response' do
+        expect(service.response).to eq({ status: :success,
+                                         data: {
+                                           params: { q: 'query',
+                                                     context: { foo: 'bar', 'actions_limit': 2,
+                                                                'completions_limit': 4 } },
+                                           suggestions: {
+                                             actions: [{ label: 'Search titles for "query"',
+                                                         url: 'https://find.library.upenn.edu/?field=title&q=query' }],
+                                             completions: ['query syntax', 'query language', 'query errors',
+                                                           'adversarial queries']
+                                           }
+                                         } })
+      end
+    end
+
+    context 'with unsuccessful engines' do
+      let(:engines) { [mock_engine_class(success: false)] }
+
+      it 'returns expected response' do
+        expect(service.response).to eq({ status: :failure,
+                                         data: {
+                                           params: { q: 'query',
+                                                     context: { foo: 'bar', 'actions_limit': 2,
+                                                                'completions_limit': 4 } },
+                                           suggestions: { actions: [], completions: [] }
+                                         } })
+      end
     end
   end
 end
