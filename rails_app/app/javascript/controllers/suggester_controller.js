@@ -28,7 +28,7 @@ export default class extends Controller {
     }
     this.abortController = new AbortController();
 
-    const url = `/suggester/${encodeURIComponent(query)}?count=5`;
+    const url = `/suggester/${encodeURIComponent(query)}?actions=2&completions=4`;
 
     try {
       const response = await fetch(url, {
