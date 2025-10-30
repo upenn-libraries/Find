@@ -37,7 +37,8 @@ describe 'Suggestions Requests' do
 
     it 'returns proper completions' do
       expect(parsed_response.dig(:data, :suggestions,
-                                 :completions)).to eq(['Title containing query', 'Another title containing query'])
+                                 :completions)).to eq(['Title containing <b>query</b>',
+                                                       'Another title containing <b>query</b>'])
     end
 
     it 'returns only allowed context params' do
@@ -53,7 +54,7 @@ describe 'Suggestions Requests' do
       end
 
       it 'returns limited completions' do
-        expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['Title containing query'])
+        expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['Title containing <b>query</b>'])
       end
     end
   end

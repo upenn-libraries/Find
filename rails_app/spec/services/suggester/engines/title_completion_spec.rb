@@ -43,7 +43,9 @@ describe Suggester::Engines::TitleCompletion do
     end
 
     it 'contains expected entries' do
-      expect(completions).to have_attributes(entries: ['Title containing test', 'Another title containing test'])
+      expect(completions).to have_attributes(
+        entries: ['Title containing <b>query</b>', 'Another title containing <b>query</b>']
+      )
     end
   end
 end

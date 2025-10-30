@@ -14,7 +14,7 @@ module Suggester
 
       # @return [Suggester::Suggestion]
       def completions
-        Suggestion.new(entries: [%(Title containing #{query}), %(Another title containing #{query})])
+        Suggestion.new(entries: [%(Title containing <b>#{query}</b>), %(Another title containing <b>#{query}</b>)])
       end
     end
   end
