@@ -16,7 +16,7 @@ module Suggester
         Suggestion.new(entries: [{ label: label,
                                    url: URI::HTTPS.build(host: Settings.suggestions.digital_catalog.host,
                                                          query: {
-                                                           "f[access_facet]": 'Online', q: query
+                                                           "f[access_facet][]": 'Online', q: query
                                                          }.to_query).to_s }],
                        engine_weight: self.class.weight)
       end
