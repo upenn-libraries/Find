@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-Dir[Rails.root.join('app/services/suggester/**/*.rb')].each { |file| require file }
-
 describe 'Suggestions Requests' do
-  include Suggester::SpecHelpers
   let(:parsed_response) { JSON.parse(response.body).deep_symbolize_keys }
 
   context 'with an invalid query' do
