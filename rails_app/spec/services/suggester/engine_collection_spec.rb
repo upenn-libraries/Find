@@ -39,10 +39,7 @@ describe Suggester::EngineCollection do
     end
 
     context 'without any successful engine calls' do
-      let(:engines) do
-        [mock_engine_class(actions: Suggester::Suggestion.new(entries: [{ label: 'test', url: '/)' }]),
-                           success: false)]
-      end
+      let(:engines) { [mock_engine_class(success: false)] }
 
       it 'returns failure' do
         expect(engine_collection.status).to eq :failure
