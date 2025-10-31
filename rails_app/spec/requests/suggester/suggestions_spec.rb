@@ -47,7 +47,7 @@ describe 'Suggestions Requests' do
     end
 
     context 'with limit parameters' do
-      let(:params) { { q: 'query', actions_limit: 0, completions_limit: 1 } }
+      let(:params) { { q: 'query', actions_limit: 0, completions_limit: '1' } }
 
       it 'returns limited actions' do
         expect(parsed_response.dig(:data, :suggestions, :actions)).to eq []
@@ -55,6 +55,11 @@ describe 'Suggestions Requests' do
 
       it 'returns limited completions' do
         expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['query syntax'])
+      end
+
+      it 'echoes back limit parameters as Integers' do
+        expect(parsed_response.dig(:data, :params, :context, :actions_limit)).to eq 0
+        expect(parsed_response.dig(:data, :params, :context, :completions_limit)).to eq 1
       end
     end
   end
