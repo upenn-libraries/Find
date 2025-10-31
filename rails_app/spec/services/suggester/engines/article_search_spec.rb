@@ -32,7 +32,7 @@ describe Suggester::Engines::ArticleSearch do
       expect(actions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
-    it 'returns contains expected entries' do
+    it 'returns expected entries' do
       url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=query'
       expect(actions).to have_attributes(
         entries: [{ label: "Search 'query' in Articles+.", url: url }]
