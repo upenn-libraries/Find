@@ -41,9 +41,10 @@ module Suggester
 
       private
 
-    # @return [Array<Suggester::SuggestionEngine>]
-    def build_engines
-      registry.available_engines(query: query, context: context, engines: engine_classes)
+      # @return [Array<Suggester::SuggestionEngine>]
+      def build_engines
+        registry.build_eligible_engines(query: query, context: context, engines: engine_classes)
+      end
     end
   end
 end

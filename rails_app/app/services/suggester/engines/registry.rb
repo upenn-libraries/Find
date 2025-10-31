@@ -8,21 +8,22 @@ module Suggester
       class Error < StandardError
       end
 
-    # @return [Array]
-    def self.registry
-      @registry ||= []
-    end
+      # @return [Array<Suggester::Engines::Engine>]
+      def self.engines
+        @engines ||= []
+      end
 
       # @return [Array<Suggester::Engines::Engine>]
       def self.register(subclass)
         raise(Error, "#{subclass} must inherit from #{BASE_CLASS}") unless subclass < BASE_CLASS
 
-      registry << subclass
-    end
+        engines << subclass unless engines.include?(subclass)
+      end
 
-    # @return [Array<Suggester::SuggestionEngine>]
-    def self.available_engines(query:, context:, engines: registry)
-      engines.filter_map { |engine| engine.new(query: query, context: context) if engine.suggest?(query) }
+      # @return [Array<Suggester::Engines::Engine>]
+      def self.build_eligible_engines(query:, context:, engines: self.engines)
+        engines.filter_map { |engine| engine.new(query: query, context: context) if engine.suggest?(query) }
+      end
     end
   end
 end

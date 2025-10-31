@@ -10,7 +10,7 @@ module Suggester
     # @param query [String]
     # @param context [Hash]
     # @param engine_classes [Array]
-    def self.call(query:, context: {}, engine_classes: EngineRegistry.registry)
+    def self.call(query:, context: {}, engine_classes: Engines::Registry.engines)
       new(query: query, context: context, engine_classes: engine_classes).response
     end
 
@@ -19,7 +19,7 @@ module Suggester
     # @param query [String]
     # @param context [Hash]
     # @param engine_classes [Array]
-    def initialize(query:, context: {}, engine_classes: EngineRegistry.registry)
+    def initialize(query:, context: {}, engine_classes: Engines::Registry.engines)
       @query = query
       @context = DEFAULT_CONTEXT.merge(context.symbolize_keys)
       @engine_classes = engine_classes
