@@ -11,7 +11,7 @@ module Suggester
 
     # /suggester/:q?count=5
     def show
-      render json: Suggester::SuggestionsService.call(query: params[:q].to_s, context: context_params(params))
+      render json: Suggester::Service.call(query: params[:q].to_s, context: context_params(params))
     end
 
     private

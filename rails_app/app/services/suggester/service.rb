@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Suggester
-  # Builds JSON from suggestions provided by registered Suggestions
-  class SuggestionsService
+  # Builds JSON from suggestions provided by registered Engines
+  class Service
     DEFAULT_ACTIONS_LIMIT = 2
     DEFAULT_COMPLETIONS_LIMIT = 4
     DEFAULT_CONTEXT = { actions_limit: DEFAULT_ACTIONS_LIMIT, completions_limit: DEFAULT_COMPLETIONS_LIMIT }.freeze
@@ -23,7 +23,7 @@ module Suggester
       @query = query
       @context = DEFAULT_CONTEXT.merge(context.symbolize_keys)
       @engine_classes = engine_classes
-      @engines = EngineCollection.new(query: query, context: @context, engine_classes: @engine_classes)
+      @engines = Engines::Collection.new(query: query, context: @context, engine_classes: @engine_classes)
     end
 
     # @return [Hash]

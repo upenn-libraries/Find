@@ -3,16 +3,16 @@
 module Suggester
   module Engines
     # Suggests a fielded title search
-    class TitleSearch < SuggestionEngine
-      EngineRegistry.register(self)
+    class TitleSearch < Engine
+      Registry.register(self)
       # @return [Integer]
       def self.weight
         5
       end
 
-      # @return [Suggester::Suggestion]
+      # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestion.new(entries: [{ label: label, url: url }], engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: [{ label: label, url: url }], engine_weight: self.class.weight)
       end
 
       private

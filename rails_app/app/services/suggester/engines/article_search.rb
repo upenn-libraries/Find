@@ -3,8 +3,8 @@
 module Suggester
   module Engines
     # Suggests an Articles+ search
-    class ArticleSearch < SuggestionEngine
-      EngineRegistry.register(self)
+    class ArticleSearch < Engine
+      Registry.register(self)
 
       # @return [Integer]
       def self.weight
@@ -17,10 +17,11 @@ module Suggester
         query.split.size > 10
       end
 
-      # @return [Suggester::Suggestion]
+      # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestion.new(entries: [{ label: I18n.t('suggestions.engines.articles_search.label', query: query),
-                                   url: proxy_url }], engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: [{ label: I18n.t('suggestions.engines.articles_search.label',
+                                                              query: query), url: proxy_url }],
+                                    engine_weight: self.class.weight)
       end
 
       private

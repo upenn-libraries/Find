@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::SuggestionsService do
+describe Suggester::Service do
   include Suggester::SpecHelpers
   let(:service) { described_class.new(query: 'query', context: { foo: 'bar' }, engine_classes: engines) }
   let(:engines) { [mock_engine_with_actions, mock_engine_with_completions] }

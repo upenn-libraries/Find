@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Suggester::EngineCollection do
+describe Suggester::Engines::Collection do
   include Suggester::SpecHelpers
   let(:engine_collection) { described_class.new(query: 'query', context: context, engine_classes: engines) }
-  let(:context) { Suggester::SuggestionsService::DEFAULT_CONTEXT }
+  let(:context) { Suggester::Service::DEFAULT_CONTEXT }
   let(:engines) { [mock_engine_with_actions, mock_engine_with_completions] }
 
   describe '#suggestions' do
@@ -21,8 +21,10 @@ describe Suggester::EngineCollection do
 
     context 'with unsuccessful engines' do
       let(:engines) do
-        [mock_engine_class(actions: Suggester::Suggestion.new(entries: [{ label: 'label', url: '/' }]), success: false),
-         mock_engine_class(completions: Suggester::Suggestion.new(entries: ['some query completion']), success: false)]
+        [mock_engine_class(actions: Suggester::Suggestions::Suggestion.new(entries: [{ label: 'label', url: '/' }]),
+                           success: false),
+         mock_engine_class(completions: Suggester::Suggestions::Suggestion.new(entries: ['some query completion']),
+                           success: false)]
       end
 
       it 'filters out suggestions' do

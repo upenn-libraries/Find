@@ -27,7 +27,7 @@ describe Suggester::Engines::TitleSearch do
     let(:actions) { engine.actions }
 
     it 'returns a Suggestions instance' do
-      expect(actions).to be_a(Suggester::Suggestion)
+      expect(actions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
     it 'contains expected entries' do
@@ -42,7 +42,7 @@ describe Suggester::Engines::TitleSearch do
     let(:completions) { engine.completions }
 
     it 'returns a Suggestions instance' do
-      expect(completions).to be_a(Suggester::Suggestion)
+      expect(completions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
     it 'contains no entries' do

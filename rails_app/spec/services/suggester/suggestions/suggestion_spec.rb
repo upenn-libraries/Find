@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Suggester::Suggestion do
+describe Suggester::Suggestions::Suggestion do
   let(:suggestion) { described_class.new(entries: entries, engine_weight: 5, weight: 10) }
   let(:entries) { ['some completion'] }
 

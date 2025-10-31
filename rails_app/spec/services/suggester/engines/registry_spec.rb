@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-describe Suggester::EngineRegistry do
+describe Suggester::Engines::Registry do
+  include_context 'with cleared engine registry'
   include Suggester::SpecHelpers
   describe '.register' do
     context 'when class inherits from SuggestionEngine' do

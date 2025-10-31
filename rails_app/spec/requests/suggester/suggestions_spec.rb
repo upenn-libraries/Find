@@ -17,7 +17,7 @@ describe 'Suggestions Requests' do
     let(:params) { { q: 'query', filtered_param: true } }
 
     before do
-      allow(Suggester::EngineRegistry).to receive(:registry).and_return engines
+      allow(Suggester::Engines::Registry).to receive(:engines).and_return engines
       get suggester_path(params)
     end
 

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-describe Suggester::SuggestionCollection do
+describe Suggester::Suggestions::Collection do
   let(:suggestion_collection) { described_class.new(suggestions: suggestions) }
-  let(:suggestions) { [Suggester::Suggestion.new(entries: ['foo'], weight: 0), Suggester::Suggestion.new(entries: %w[bar baz], weight: 1)] }
+  let(:suggestions) do
+    [Suggester::Suggestions::Suggestion.new(entries: ['foo'], weight: 0),
+     Suggester::Suggestions::Suggestion.new(entries: %w[bar baz], weight: 1)]
+  end
 
   describe '#suggestions' do
     it 'returns sorted suggestions' do
@@ -10,7 +13,7 @@ describe Suggester::SuggestionCollection do
     end
 
     context 'with blank suggestions' do
-      let(:suggestions) { [Suggester::Suggestion.new(entries: [])] }
+      let(:suggestions) { [Suggester::Suggestions::Suggestion.new(entries: [])] }
 
       it 'removes them from the array' do
         expect(suggestion_collection.suggestions).to eq []
@@ -40,7 +43,7 @@ describe Suggester::SuggestionCollection do
     end
 
     context 'without present suggestions' do
-      let(:suggestions) { [Suggester::Suggestion.new] }
+      let(:suggestions) { [Suggester::Suggestions::Suggestion.new] }
 
       it 'returns false' do
         expect(suggestion_collection.present?).to be false

@@ -3,22 +3,22 @@
 module Suggester
   module Engines
     # Suggests a search for the query within 'Online Access'
-    class OnlineAccess < SuggestionEngine
-      EngineRegistry.register(self)
+    class OnlineAccess < Engine
+      Registry.register(self)
 
       # @return [Integer]
       def self.weight
         2
       end
 
-      # @return [Suggester::Suggestion]
+      # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestion.new(entries: [{ label: label,
-                                   url: URI::HTTPS.build(host: Settings.suggestions.digital_catalog.host,
-                                                         query: {
-                                                           "f[access_facet][]": 'Online', q: query
-                                                         }.to_query).to_s }],
-                       engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: [{ label: label,
+                                                url: URI::HTTPS.build(host: Settings.suggestions.digital_catalog.host,
+                                                                      query: {
+                                                                        "f[access_facet][]": 'Online', q: query
+                                                                      }.to_query).to_s }],
+                                    engine_weight: self.class.weight)
       end
 
       private
