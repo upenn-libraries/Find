@@ -18,9 +18,6 @@ module Suggester
           @completions = suggestions[:completions]
           @actions = suggestions[:actions]
         end
-        format.json do
-          render json: dummy_response(params)
-        end
       end
     end
 

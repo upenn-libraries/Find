@@ -1,5 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
+const DEFAULT_ACTIONS_COUNT = 2;
+const DEFAULT_COMPLETIONS_COUNT = 4;
+const MIN_QUERY_LENGTH = 1;
+
 export default class extends Controller {
   /**
    * Initializes the suggester controller when connected to the DOM.
@@ -28,7 +32,7 @@ export default class extends Controller {
     }
     this.abortController = new AbortController();
 
-    const url = `/suggester/${encodeURIComponent(query)}?actions=2&completions=4`;
+    const url = `/suggester/${encodeURIComponent(query)}?actions=${DEFAULT_ACTIONS_COUNT}&completions=${DEFAULT_COMPLETIONS_COUNT}`;
 
     try {
       const response = await fetch(url, {
@@ -54,7 +58,7 @@ export default class extends Controller {
    */
   onInput(event) {
     const query = event.target.value.trim();
-    if (query.length < 2) return;
+    if (query.length <= MIN_QUERY_LENGTH) return;
 
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
