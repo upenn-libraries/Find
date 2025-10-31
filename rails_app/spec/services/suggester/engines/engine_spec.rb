@@ -22,7 +22,7 @@ describe Suggester::Engines::Engine do
   describe '#actions' do
     let(:actions) { engine.actions }
 
-    it 'returns a Suggestions instance' do
+    it 'returns a Suggestion instance' do
       expect(actions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
@@ -34,7 +34,7 @@ describe Suggester::Engines::Engine do
   describe '#completions' do
     let(:completions) { engine.completions }
 
-    it 'returns a Suggestions instance' do
+    it 'returns a Suggestion instance' do
       expect(completions).to be_a(Suggester::Suggestions::Suggestion)
     end
 

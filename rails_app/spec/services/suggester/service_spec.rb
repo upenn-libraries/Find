@@ -30,7 +30,7 @@ describe Suggester::Service do
       end
     end
 
-    context 'with unsuccessful engines' do
+    context 'with all engines running unsuccessfully' do
       let(:engines) { [mock_engine_class(success: false)] }
 
       it 'returns expected response' do
