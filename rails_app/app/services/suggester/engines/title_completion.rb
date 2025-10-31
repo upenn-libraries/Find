@@ -7,9 +7,11 @@ module Suggester
     class TitleCompletion < Engine
       Registry.register(self)
 
+      BASE_WEIGHT = 10
+
       # @return [Integer]
       def self.weight
-        2
+        BASE_WEIGHT
       end
 
       # @return [Suggester::Suggestions::Suggestion]

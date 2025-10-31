@@ -7,7 +7,7 @@ describe Suggester::Engines::TitleSearch do
 
   describe '.weight' do
     it 'returns expected base weight' do
-      expect(described_class.weight).to eq 5
+      expect(described_class.weight).to eq described_class::BASE_WEIGHT
     end
   end
 

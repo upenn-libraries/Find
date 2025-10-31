@@ -5,9 +5,11 @@ module Suggester
     # Suggests a fielded title search
     class TitleSearch < Engine
       Registry.register(self)
+
+      BASE_WEIGHT = 5
       # @return [Integer]
       def self.weight
-        5
+        BASE_WEIGHT
       end
 
       # @return [Suggester::Suggestions::Suggestion]

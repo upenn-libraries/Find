@@ -4,9 +4,10 @@ module Suggester
   module Engines
     # Class that Engines inherit from
     class Engine
+      BASE_WEIGHT = 0
       # @return [Integer]
       def self.weight
-        0
+        BASE_WEIGHT
       end
 
       # @param query [String]

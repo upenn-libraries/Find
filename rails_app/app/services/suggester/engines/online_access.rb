@@ -6,9 +6,11 @@ module Suggester
     class OnlineAccess < Engine
       Registry.register(self)
 
+      BASE_WEIGHT = 2
+
       # @return [Integer]
       def self.weight
-        2
+        BASE_WEIGHT
       end
 
       # @return [Suggester::Suggestions::Suggestion]

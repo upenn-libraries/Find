@@ -6,9 +6,11 @@ module Suggester
     class ArticleSearch < Engine
       Registry.register(self)
 
+      BASE_WEIGHT = 7
+
       # @return [Integer]
       def self.weight
-        7
+        BASE_WEIGHT
       end
 
       # @param query [String]

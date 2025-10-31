@@ -5,7 +5,7 @@ describe Suggester::Engines::Engine do
 
   describe '.weight' do
     it 'declares the expected weight' do
-      expect(described_class.weight).to eq 0
+      expect(described_class.weight).to eq described_class::BASE_WEIGHT
     end
   end
 
