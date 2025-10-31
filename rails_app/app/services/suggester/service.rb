@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# eagerly load classes in engine namespace to initialize engine registration
+Dir[File.join(__dir__, 'engines', '*.rb')].each { |file| require file }
+
 module Suggester
   # Builds JSON from suggestions provided by registered Engines
   class Service
