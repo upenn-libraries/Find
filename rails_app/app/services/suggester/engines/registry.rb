@@ -20,6 +20,11 @@ module Suggester
         engines << subclass unless engines.include?(subclass)
       end
 
+      # clear registered engines
+      def self.clear!
+        @engines = nil
+      end
+
       # @return [Array<Suggester::Engines::Engine>]
       def self.build_eligible_engines(query:, context:, engines: self.engines)
         engines.filter_map { |engine| engine.new(query: query, context: context) if engine.suggest?(query) }

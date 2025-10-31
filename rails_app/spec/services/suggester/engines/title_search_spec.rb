@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::TitleSearch do
+  include_context 'with cleared engine registry'
+
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
   describe '.weight' do
