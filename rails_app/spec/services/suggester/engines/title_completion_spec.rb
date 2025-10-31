@@ -13,8 +13,8 @@ describe Suggester::Engines::TitleCompletion do
 
   describe '.suggest?' do
     context 'with a query' do
-      it 'returns true' do
-        expect(described_class.suggest?('query')).to be true
+      it 'returns false' do
+        expect(described_class.suggest?('query')).to be false
       end
     end
 
@@ -42,12 +42,6 @@ describe Suggester::Engines::TitleCompletion do
 
     it 'returns a Suggestions instance' do
       expect(completions).to be_a(Suggester::Suggestions::Suggestion)
-    end
-
-    it 'contains expected entries' do
-      expect(completions).to have_attributes(
-        entries: ['Title containing <b>query</b>', 'Another title containing <b>query</b>']
-      )
     end
   end
 end

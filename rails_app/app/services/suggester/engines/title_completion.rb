@@ -9,15 +9,13 @@ module Suggester
 
       BASE_WEIGHT = 10
 
+      def self.suggest?(_query)
+        false
+      end
+
       # @return [Integer]
       def self.weight
         BASE_WEIGHT
-      end
-
-      # @return [Suggester::Suggestions::Suggestion]
-      def completions
-        Suggestions::Suggestion.new(entries: [%(Title containing <b>#{query}</b>),
-                                              %(Another title containing <b>#{query}</b>)])
       end
     end
   end

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 describe 'Suggestions Requests' do
+  include_context 'with cleared engine registry'
+  include Suggester::SpecHelpers
+
   let(:parsed_response) { JSON.parse(response.body).deep_symbolize_keys }
 
   context 'with an invalid query' do
@@ -13,7 +16,7 @@ describe 'Suggestions Requests' do
   end
 
   context 'with valid query' do
-    let(:engines) { [Suggester::Engines::TitleSearch, Suggester::Engines::TitleCompletion] }
+    let(:engines) { [Suggester::Engines::TitleSearch, mock_engine_with_completions] }
     let(:params) { { q: 'query', filtered_param: true } }
 
     before do
@@ -34,8 +37,8 @@ describe 'Suggestions Requests' do
 
     it 'returns proper completions' do
       expect(parsed_response.dig(:data, :suggestions,
-                                 :completions)).to eq(['Title containing <b>query</b>',
-                                                       'Another title containing <b>query</b>'])
+                                 :completions)).to eq(['query syntax', 'query language', 'query errors',
+                                                       'adversarial queries'])
     end
 
     it 'returns only allowed context params' do
@@ -51,7 +54,7 @@ describe 'Suggestions Requests' do
       end
 
       it 'returns limited completions' do
-        expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['Title containing <b>query</b>'])
+        expect(parsed_response.dig(:data, :suggestions, :completions)).to eq(['query syntax'])
       end
     end
   end
