@@ -32,7 +32,7 @@ export default class extends Controller {
     }
     this.abortController = new AbortController();
 
-    const url = `/suggester/${encodeURIComponent(query)}?actions=${DEFAULT_ACTIONS_COUNT}&completions=${DEFAULT_COMPLETIONS_COUNT}`;
+    const url = `/suggester/${encodeURIComponent(query)}?actions_limit=${DEFAULT_ACTIONS_COUNT}&completions_limit=${DEFAULT_COMPLETIONS_COUNT}`;
 
     try {
       const response = await fetch(url, {
