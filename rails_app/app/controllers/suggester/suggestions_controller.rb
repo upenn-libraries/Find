@@ -11,8 +11,8 @@ module Suggester
 
     # /suggester/:q?count=5
     def show
-      suggestions = dummy_suggestions(params)
-      
+      suggestions = Suggester::Service.call(query: params[:q].to_s, context: context_params)
+
       respond_to do |format|
         format.turbo_stream do
           @completions = suggestions[:completions]
@@ -31,27 +31,21 @@ module Suggester
 
     # @param [ActionController::Parameters] params
     # @return [Hash]
-    def dummy_suggestions(params)
-      {
-        actions: [ # actions are search actions and will redirect the user when selected
-          { label: 'Search titles for "query"', url: 'https://find.library.upenn.edu/?field=title&q=query' }
-        ],
-        completions: [ # completions are suggestions that can be selected and will fill the search bar
-          'query syntax', 'query language', 'query errors', 'adversarial queries'
-        ]
-      }
-    end
-
-    # @param [ActionController::Parameters] params
-    # @return [Hash]
     def dummy_response(params)
       {
         status: 'success', # if failure, the consuming app can act accordingly
         data: {
           params: {
-            q: params[:q], context: context_params(params).to_h
+            q: params[:q], context: context_params
           }, # echo back received params
-          suggestions: dummy_suggestions(params)
+          suggestions: {
+            actions: [ # actions are search actions and will redirect the user when selected
+              { label: 'Search titles for "query"', url: 'https://find.library.upenn.edu/?field=title&q=query' }
+            ],
+            completions: [ # completions are suggestions that can be selected and will fill the search bar
+              'query syntax', 'query language', 'query errors', 'adversarial queries'
+            ]
+          } # end suggestions
         } # end data
       }
     end
@@ -61,10 +55,14 @@ module Suggester
       render json: { status: :error, message: exception.message }, status: :bad_request
     end
 
-    # @param params [ActionController::Params]
-    # @return [ActionController::Params] filtered context params
-    def context_params(params)
-      params.permit(:count)
+    # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
+    def context_params
+      params.permit.merge(normalize_limit_params).to_h
+    end
+
+    # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
+    def normalize_limit_params
+      params.permit('actions_limit', 'completions_limit').transform_values(&:to_i)
     end
   end
 end
