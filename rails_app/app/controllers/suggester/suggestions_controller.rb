@@ -9,11 +9,10 @@ module Suggester
 
     rescue_from InvalidQueryError, with: :error_response
 
-    # /suggester/:q?count=5
+    # /suggester/:q?actions_limit=2&completions_limit=4
     def show
       suggestions = Suggester::Service.call(query: params[:q].to_s, context: context_params)
-      puts suggestions
-      
+
       respond_to do |format|
         format.turbo_stream do
           @completions = suggestions.dig(:data, :suggestions, :completions)
@@ -28,33 +27,6 @@ module Suggester
       return if params[:q].present?
 
       raise InvalidQueryError, 'The given query parameters are invalid.'
-    end
-
-    # @param [ActionController::Parameters] params
-    # @return [Hash]
-    def dummy_suggestions(params)
-      {
-        actions: [ # actions are search actions and will redirect the user when selected
-          { label: 'Search titles for "query"', url: 'https://find.library.upenn.edu/?field=title&q=query' }
-        ],
-        completions: [ # completions are suggestions that can be selected and will fill the search bar
-          'query syntax', 'query language', 'query errors', 'adversarial queries'
-        ]
-      }
-    end
-
-    # @param [ActionController::Parameters] params
-    # @return [Hash]
-    def dummy_response(params)
-      {
-        status: 'success', # if failure, the consuming app can act accordingly
-        data: {
-          params: {
-            q: params[:q], context: context_params
-          }, # echo back received params
-          suggestions: dummy_suggestions(params)
-        } # end data
-      }
     end
 
     # @param [StandardError] exception
