@@ -1,12 +1,12 @@
 <turbo-stream action="replace" target="suggestions-listbox">
   <template>
     <ol role="listbox" id="suggestions-listbox">
-      <% @actions.each do |action| %>
+      <% @actions&.each do |action| %>
         <li role="option" data-pl-value="<%= action[:label] %>" data-action-url="<%= action[:url] %>">
           <%= action[:label] %>
         </li>
       <% end %>
-      <% @completions.each do |text| %>
+      <% @completions&.each do |text| %>
         <li role="option"><%= text %></li>
       <% end %>
     </ol>
