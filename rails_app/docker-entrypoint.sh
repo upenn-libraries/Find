@@ -33,10 +33,10 @@ if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "bundle" -a
     fi
 
     # chown all dirs
-    find . -type d -exec chown app:app {} \;
+    find . -type d -exec chown app:app {} +
 
     # chown all files except keys
-    find . -type f \( ! -name "*.key" \) -exec chown app:app {} \;
+    find . -type f \( ! -name "*.key" \) -exec chown app:app {} +
 
     # run the application as the app user
     exec gosu app "$@"
