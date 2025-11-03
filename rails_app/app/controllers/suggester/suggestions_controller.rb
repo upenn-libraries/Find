@@ -11,12 +11,13 @@ module Suggester
 
     # /suggester/:q?count=5
     def show
-      suggestions = dummy_suggestions(params)
+      suggestions = Suggester::Service.call(query: params[:q].to_s, context: context_params)
+      puts suggestions
       
       respond_to do |format|
         format.turbo_stream do
-          @completions = suggestions[:completions]
-          @actions = suggestions[:actions]
+          @completions = suggestions.dig(:data, :suggestions, :completions)
+          @actions = suggestions.dig(:data, :suggestions, :actions)
         end
       end
     end
@@ -49,7 +50,7 @@ module Suggester
         status: 'success', # if failure, the consuming app can act accordingly
         data: {
           params: {
-            q: params[:q], context: context_params(params).to_h
+            q: params[:q], context: context_params
           }, # echo back received params
           suggestions: dummy_suggestions(params)
         } # end data
@@ -61,10 +62,14 @@ module Suggester
       render json: { status: :error, message: exception.message }, status: :bad_request
     end
 
-    # @param params [ActionController::Params]
-    # @return [ActionController::Params] filtered context params
-    def context_params(params)
-      params.permit(:count)
+    # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
+    def context_params
+      params.permit.merge(normalize_limit_params).to_h
+    end
+
+    # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
+    def normalize_limit_params
+      params.permit('actions_limit', 'completions_limit').transform_values(&:to_i)
     end
   end
 end

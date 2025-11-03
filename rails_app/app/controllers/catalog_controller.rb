@@ -263,7 +263,7 @@ class CatalogController < ApplicationController
                                        component: Catalog::FacetLinkComponent, facet_target: :genre_facet
     config.add_show_field :note_provenance_show,
                           label: I18n.t('show.notes.provenance'), accessor: :marc,
-                          component: Catalog::FacetLinkComponent, facet_target: :subject_search
+                          component: Catalog::FacetLinkComponent, facet_target: :subject_facet
     # non-clickable fields
     config.add_show_field :format_show, label: I18n.t('show.format.main'), accessor: :marc
     config.add_show_field :edition_show, label: I18n.t('show.edition.main'), accessor: :marc
