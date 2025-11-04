@@ -296,6 +296,13 @@ discover:
 suggestions:
   digital_catalog:
     host: 'find.library.upenn.edu'
+    solr:
+      host: 'localhost:8983'
+      path: '/solr/find-development/suggest'
+      scheme: 'http'
+      dictionary: 'title'
+      username: 'catalog'
+      password: 'catalog'
   summon:
     host: "upenn.summon.serialssolutions.com"
     path: "/search"
