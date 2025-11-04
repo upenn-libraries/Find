@@ -5,12 +5,19 @@ module Suggester
     # Factory class for SuggestionEngines
     class Registry
       BASE_CLASS = Engine
+      # Custom error
       class Error < StandardError
       end
 
       # @return [Array<Suggester::Engines::Engine>]
       def self.engines
+        load_engines if @engines.nil?
         @engines ||= []
+      end
+
+      # Eagerly load all engines into memory to initialize engine registration
+      def self.load_engines
+        Dir[File.join(__dir__, '*.rb')].each { |file| require file }
       end
 
       # @return [Array<Suggester::Engines::Engine>]

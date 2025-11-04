@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# eagerly load classes in engine namespace to initialize engine registration
-Dir[File.join(__dir__, 'engines', '*.rb')].each { |file| require file }
-
 module Suggester
   # Builds JSON from suggestions provided by registered Engines
   class Service
@@ -22,7 +19,7 @@ module Suggester
     # @param query [String]
     # @param context [Hash]
     # @param engine_classes [Array]
-    def initialize(query:, context: {}, engine_classes: Engines::Registry.engines)
+    def initialize(query:, context: {}, engine_classes: Suggester::Engines::Registry.engines)
       @query = query
       @context = DEFAULT_CONTEXT.merge(context.symbolize_keys)
       @engine_classes = engine_classes
