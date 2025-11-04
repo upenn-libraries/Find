@@ -58,7 +58,10 @@ export default class extends Controller {
    */
   onInput(event) {
     const query = event.target.value.trim();
-    if (query.length <= MIN_QUERY_LENGTH) return;
+    if (query.length <= MIN_QUERY_LENGTH) {
+      this.autocomplete.querySelector('ol[role="listbox"]')?.replaceChildren();
+      return;
+    }
 
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
