@@ -23,7 +23,6 @@ module Suggester
       def initialize(query:, context: {})
         @query = query
         @context = context
-        @suggestion_class = Suggester::Suggestions::Suggestion
       end
 
       # @return [Suggester::Suggestions::Suggestion]
