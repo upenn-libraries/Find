@@ -27,5 +27,16 @@ module Suggester
                                                                                       'adversarial queries']),
                         success: true)
     end
+
+    # Helper to mimic a response from the Suggester Service
+    # @param status [Symbol]
+    # @param actions [Array]
+    # @param completions [Array]
+    # @return [Hash]
+    def suggester_response(status: :success, actions: [], completions: [])
+      { status: status,
+        data: { params: {}, context: {},
+                suggestions: { actions: actions, completions: completions } } }
+    end
   end
 end

@@ -3,15 +3,17 @@
 module Suggester
   # Controller actions for serving search suggestions
   class SuggestionsController < ApplicationController
-    class InvalidQueryError < StandardError; end
+    class SuggesterFailed < StandardError; end
 
     before_action :validate_query
 
-    rescue_from InvalidQueryError, with: :error_response
+    rescue_from StandardError, with: :error_response
 
     # /suggester/:q?actions_limit=2&completions_limit=4
     def show
       suggestions = Suggester::Service.call(query: params[:q].to_s, context: context_params)
+
+      raise SuggesterFailed unless suggestions[:status] == :success
 
       respond_to do |format|
         format.turbo_stream do
@@ -29,9 +31,13 @@ module Suggester
       raise InvalidQueryError, 'The given query parameters are invalid.'
     end
 
-    # @param [StandardError] exception
-    def error_response(exception)
-      render json: { status: :error, message: exception.message }, status: :bad_request
+    # Empty the listbox if the suggester response is an error
+    def error_response
+      respond_to do |format|
+        format.turbo_stream do
+          render 'suggester/suggestions/error', layout: false, status: :internal_server_error
+        end
+      end
     end
 
     # @return filtered context params [ActiveSupport::HashWithIndifferentAccess]
