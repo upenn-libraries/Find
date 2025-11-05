@@ -8,52 +8,35 @@ module Suggester
         # Custom error
         class Error < StandardError; end
 
-        attr_reader :uri, :params
+        attr_reader :url, :query, :dictionary, :count, :build
 
-        PARAMS = %i[dictionary count build q].freeze
-
-        def initialize(url:, params: {})
-          @uri = URI.parse(url)
-          @params = params.slice(*PARAMS)
-          @config = config
+        def initialize(url:, query:, dictionary: [], count: nil, build: nil)
+          @url = url
+          @query = query
+          @dictionary = Array.wrap dictionary
+          @count = count
+          @build = build
         end
 
-        delegate :completions, :data, to: :parsed_response
+        delegate :terms, :suggestions, :for_suggester, :suggester, to: :response
+
+        def response
+          @response ||= Response.new(body: client.response_body, query: query)
+        end
 
         private
 
-        def parsed_response
-          @parsed_response ||= Response.new(response: response,
-                                            handler: request_handler,
-                                            dictionary: dictionary,
-                                            query: query)
+        def params
+          @params ||= {
+            "suggest.dictionary": dictionary,
+            "suggest.build": build,
+            "suggest.q": query,
+            "suggest.count": count
+          }.compact_blank
         end
 
-        def query
-          params[:q]
-        end
-
-        def dictionary
-          @dictionary ||= params[:dictionary] || Settings.suggester.suggestions.digital_catalog.solr.dictionary
-        end
-
-        def request_handler
-          uri.path.split('/').last
-        end
-
-        def response
-          connection.get(uri.path, params)
-        rescue Faraday::Error => e
-          Honeybadger.notify(e)
-          raise Error, "Failed to retrieve solr suggestions: #{e}"
-        end
-
-        def connection
-          @connection ||= Faraday.new(uri.to_s) do |conn|
-            conn.request :authorization, :basic, uri.user, uri.password
-            conn.response :json
-            conn.response :raise_error # raise Faraday::Error on status code 4xx or 5xx
-          end
+        def client
+          @client ||= Client.new(url: url, params: params)
         end
       end
     end

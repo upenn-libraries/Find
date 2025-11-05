@@ -5,27 +5,35 @@ module Suggester
     module Solr
       # Provides interface for interacting with Solr suggestion json response
       class Response
+        JSON_SUGGEST_FIELD = 'suggest'
         JSON_SUGGESTIONS_FIELD = 'suggestions'
+        JSON_TERM_FIELD = 'term'
 
-        attr_reader :handler, :dictionary, :query, :body
+        attr_reader :query, :body
 
-        def initialize(response:, handler:, dictionary:, query:)
-          @body = response.body
-          @handler = handler
-          @dictionary = dictionary
+        def initialize(body:, query:)
+          @body = body
           @query = query
         end
 
-        def completions
-          data.map { |suggestion| suggestion['term'] }
+        def terms
+          suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
         end
 
-        def data
-          body.dig(handler, dictionary, query, JSON_SUGGESTIONS_FIELD)
+        def suggestions
+          return {} unless body
+
+          body.fetch(JSON_SUGGEST_FIELD, {}).transform_values do |suggester|
+            suggester.dig(query, JSON_SUGGESTIONS_FIELD) || []
+          end
         end
 
-        def count
-          completions.size
+        def for_suggester(suggester)
+          suggestions.fetch(suggester, [])
+        end
+
+        def suggesters
+          suggestions.keys
         end
       end
     end
