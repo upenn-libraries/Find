@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 describe Suggester::Engines::TitleCompletion do
+  include Suggester::SpecHelpers
   include_context 'with cleared engine registry'
 
   let(:engine) { described_class.new(query: 'query', context: {}) }
@@ -37,11 +38,36 @@ describe Suggester::Engines::TitleCompletion do
     end
   end
 
-  describe '#completions', pending: 'need to mock solr request' do
-    let(:completions) { engine.completions }
+  describe '#completions' do
+    let(:query) { 'art' }
+    let(:engine) { described_class.new(query: query, context: {}) }
+    let(:parsed_solr_response) do
+    end
+
+    before do
+      stub_solr_suggestions_request(query_params: { "suggest.q": query },
+                                    response_body: json_fixture(
+                                      'solr_suggestions_response', :suggester
+                                    ))
+    end
 
     it 'returns a Suggestions instance' do
-      expect(completions).to be_a(Suggester::Suggestions::Suggestion)
+      expect(engine.completions).to be_a(Suggester::Suggestions::Suggestion)
+    end
+
+    it 'contains expected entries' do
+      expect(engine.completions).to have_attributes(
+        entries: [
+          'The dental <b>art</b> : practical treatise on dental surgery',
+          'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
+            ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
+          'An inquiry into the fine <b>art</b>s',
+          'Falasṭin(ah) : omanut nashim mi-Falasṭin = Filasṭīn(ah) : fann al-marʼah min'\
+          ' Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
+          'At the crossroads of Asia and Europe : 20th century masterpieces from the A.'\
+            ' Kasteyev State Museum of <b>Art</b>s in...'
+        ]
+      )
     end
   end
 end

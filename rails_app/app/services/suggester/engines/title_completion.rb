@@ -13,7 +13,7 @@ module Suggester
       end
 
       def completions
-        Suggestions::Suggestion.new(entries: solr_service.completions, engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: solr_service.terms, engine_weight: self.class.weight)
       rescue Suggestions::Solr::Service::Error => _e
         super
       end
@@ -22,7 +22,7 @@ module Suggester
 
       def solr_service
         @solr_service ||= Suggestions::Solr::Service.new(url: Settings.suggester.suggestions.digital_catalog.solr.url,
-                                                         params: { q: query })
+                                                         query: query)
       end
     end
   end
