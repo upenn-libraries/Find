@@ -20,7 +20,6 @@ module Suggester
 
         def response
           @response ||= connection.get(uri.path, params)
-          byebug
         rescue Faraday::Error => e
           Honeybadger.notify(e)
           raise Service::Error, "Failed to retrieve solr suggestions: #{e}"
