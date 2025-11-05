@@ -8,11 +8,11 @@ module Suggester
         # Custom error
         class Error < StandardError; end
 
-        attr_reader :uri, :params, :config, :parser
+        attr_reader :uri, :params
 
         PARAMS = %i[dictionary count build q].freeze
 
-        def initialize(url:, params:, config:)
+        def initialize(url:, params: {})
           @uri = URI.parse(url)
           @params = params.slice(*PARAMS)
           @config = config
@@ -34,7 +34,7 @@ module Suggester
         end
 
         def dictionary
-          params[:dictionary] || config.dictionary
+          @dictionary ||= params[:dictionary] || Settings.suggester.suggestions.digital_catalog.solr.dictionary
         end
 
         def request_handler
@@ -49,8 +49,8 @@ module Suggester
         end
 
         def connection
-          @connection ||= Faraday.new(uri.origin) do |conn|
-            conn.request :authorization, :basic, config.username, config.password
+          @connection ||= Faraday.new(uri.to_s) do |conn|
+            conn.request :authorization, :basic, uri.user, uri.password
             conn.response :json
             conn.response :raise_error # raise Faraday::Error on status code 4xx or 5xx
           end
