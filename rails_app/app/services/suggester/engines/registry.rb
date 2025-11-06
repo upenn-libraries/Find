@@ -11,7 +11,7 @@ module Suggester
 
       # @return [Array<Suggester::Engines::Engine>]
       def self.engines
-        load_engines if @engines.nil?
+        load_engines if @engines.blank?
         @engines ||= []
       end
 
