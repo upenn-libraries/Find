@@ -5,7 +5,7 @@ module Fulfillment
   class Outcome
     attr_reader :request, :confirmation_number, :errors, :item_desc, :fulfillment_desc
 
-    delegate :description, to: :request
+    delegate :delivery, :description, to: :request
 
     # @param request [Request] request as submitted
     # @param confirmation_number [String, nil] confirmation number if request was successful
