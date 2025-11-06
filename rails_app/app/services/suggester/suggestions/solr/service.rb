@@ -8,7 +8,7 @@ module Suggester
         # Custom error
         class Error < StandardError; end
 
-        attr_reader :url, :query, :dictionary, :count, :build
+        attr_reader :url, :query, :params
 
         # @param url [String]
         # @param query [String]
@@ -18,9 +18,7 @@ module Suggester
         def initialize(url:, query:, dictionary: [], count: nil, build: nil)
           @url = url
           @query = query
-          @dictionary = Array.wrap dictionary
-          @count = count
-          @build = build
+          @params = build_params(dictionary: dictionary, count: count, build: build)
         end
 
         delegate :terms, :suggestions, :for_suggester, :suggester, to: :response
@@ -33,8 +31,8 @@ module Suggester
         private
 
         # @return [Hash]
-        def params
-          @params ||= {
+        def build_params(dictionary:, count:, build:)
+          {
             "suggest.dictionary": dictionary,
             "suggest.build": build,
             "suggest.q": query,

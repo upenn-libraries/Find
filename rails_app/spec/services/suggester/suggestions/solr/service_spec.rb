@@ -5,21 +5,17 @@ describe Suggester::Suggestions::Solr::Service do
   let(:query) { 'query' }
   let(:service) { described_class.new(query: query, url: Settings.suggester.digital_catalog.solr.url) }
 
-  describe '#count' do
-    it 'defaults to nil' do
-      expect(service.count).to be_nil
+  describe '#params' do
+    let(:service) do
+      described_class.new(query: query, url: Settings.suggester.digital_catalog.solr.url,
+                          dictionary: %w[title author], count: 1, build: true)
     end
-  end
 
-  describe '#dictionary' do
-    it 'defaults to []' do
-      expect(service.dictionary).to eq []
-    end
-  end
-
-  describe '#build' do
-    it 'defaults to nil' do
-      expect(service.build).to be_nil
+    it 'returns configured params' do
+      expect(service.params).to eq(
+        { "suggest.q": query, "suggest.dictionary": %w[title author],
+          "suggest.build": true, "suggest.count": 1 }
+      )
     end
   end
 
