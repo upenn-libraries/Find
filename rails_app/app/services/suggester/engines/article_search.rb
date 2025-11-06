@@ -40,12 +40,12 @@ module Suggester
 
       # @return [String]
       def summon_settings
-        Settings.suggester.suggestions.summon
+        Settings.suggester.summon
       end
 
       # @return [String]
       def proxy_settings
-        Settings.suggester.suggestions.proxy
+        Settings.suggester.proxy
       end
     end
   end

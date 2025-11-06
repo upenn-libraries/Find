@@ -8,8 +8,7 @@ discover:
   enabled: true
 suggester:
   enabled: true
-  suggestions:
-    digital_catalog:
-      solr:
-        url: "http://catalog:catalog@127.0.0.1:8983/solr/find-development/suggest"
-        dictionary: 'title'
+  digital_catalog:
+   solr:
+    url: "http://catalog:catalog@127.0.0.1:8983/solr/find-development/suggest"
+    dictionary: 'title'

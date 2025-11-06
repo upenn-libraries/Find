@@ -33,7 +33,7 @@ module Suggester
     # @param url [String] solr url
     # @return [WebMock::RequestStub]
     def stub_solr_suggestions_request(query_params:, response_body:,
-                                      url: Settings.suggester.suggestions.digital_catalog.solr.url)
+                                      url: Settings.suggester.digital_catalog.solr.url)
       uri = URI.parse(url)
       stub_request(:get, "#{uri.origin}#{uri.path}").with(query: query_params)
                                                     .with(headers: { 'Accept'=>'*/*' })
