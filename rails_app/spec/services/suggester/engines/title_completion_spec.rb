@@ -46,9 +46,7 @@ describe Suggester::Engines::TitleCompletion do
 
     before do
       stub_solr_suggestions_request(query_params: { "suggest.q": query },
-                                    response_body: json_fixture(
-                                      'solr_suggestions_response', :suggester
-                                    ))
+                                    response_body: json_fixture('response', 'suggester/solr'))
     end
 
     it 'returns a Suggestions instance' do

@@ -13,6 +13,7 @@ module Suggester
       end
 
       attr_reader :solr_service
+
       def initialize(query:, context: {}, solr_service: default_solr_service(query))
         super(query: query, context: context)
         @solr_service = solr_service
