@@ -32,12 +32,12 @@ module Suggester
     # @param response_body [Hash]
     # @param url [String] solr url
     # @return [WebMock::RequestStub]
-    def stub_solr_suggestions_request(query_params:, response_body:,
+    def stub_solr_suggestions_request(query_params:, response_body:, status: 200,
                                       url: Settings.suggester.digital_catalog.solr.url)
       uri = URI.parse(url)
       stub_request(:get, "#{uri.origin}#{uri.path}").with(query: query_params)
                                                     .with(headers: { 'Accept'=>'*/*' })
-                                                    .to_return_json(status: 200, body: response_body)
+                                                    .to_return_json(status: status, body: response_body)
     end
 
     # @param [String] filename
