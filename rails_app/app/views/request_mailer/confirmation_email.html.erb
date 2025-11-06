@@ -24,7 +24,11 @@
     </p>
     <% end %>
     <p>
-      For questions regarding your request, <a href="<%= t('urls.guides.circulation') %>">see our guides</a>.
+      <% if @docdel %>
+      Contact <%= mail_to Settings.fulfillment.docdel.email %> with changes or questions concerning your request.
+      <% else %>
+      For questions regarding your request, <%= link_to 'see our guides', t('urls.guides.circulation') %>.
+      <% end %>
     </p>
   </body>
 </html>

@@ -44,6 +44,8 @@ module Fulfillment
       case request.delivery
       when Options::Deliverable::PICKUP, Options::Deliverable::ILL_PICKUP
         I18n.t('fulfillment.outcome.email.pickup', pickup_location: human_readable_pickup_location)
+      when Options::Deliverable::DOCDEL
+        I18n.t('fulfillment.outcome.email.docdel', docdel_email: Settings.fulfillment.docdel.email)
       else
         I18n.t(request.delivery, scope: 'fulfillment.outcome.email')
       end
