@@ -7,17 +7,21 @@ module Suggester
       class Client
         attr_reader :uri, :params
 
+        # @param url [String]
+        # @param params [Hash]
         def initialize(url:, params:)
           @uri = URI.parse(url)
           @params = params
         end
 
+        # @return [Hash]
         def response_body
           @response_body ||= response.body
         end
 
         private
 
+        # @return [Faraday::Response]
         def response
           @response ||= connection.get(uri.path, params)
         rescue Faraday::Error => e
@@ -25,6 +29,7 @@ module Suggester
           raise Service::Error, "Failed to retrieve solr suggestions: #{e}"
         end
 
+        # @return [Faraday::Connection]
         def connection
           @connection ||= Faraday.new(uri.to_s) do |conn|
             conn.request :authorization, :basic, uri.user, uri.password

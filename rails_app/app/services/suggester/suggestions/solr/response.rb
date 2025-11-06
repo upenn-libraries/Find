@@ -11,29 +11,25 @@ module Suggester
 
         attr_reader :query, :body
 
+        # @param body [Hash]
+        # @param query [Object]
         def initialize(body:, query:)
           @body = body
           @query = query
         end
 
+        # @return [Array<String>]
         def terms
           suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
         end
 
+        # @return [Hash<Array>]
         def suggestions
           return {} unless body
 
           body.fetch(JSON_SUGGEST_FIELD, {}).transform_values do |suggester|
             suggester.dig(query, JSON_SUGGESTIONS_FIELD) || []
           end
-        end
-
-        def for_suggester(suggester)
-          suggestions.fetch(suggester, [])
-        end
-
-        def suggesters
-          suggestions.keys
         end
       end
     end
