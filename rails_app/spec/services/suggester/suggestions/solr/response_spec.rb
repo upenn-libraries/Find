@@ -19,13 +19,13 @@ describe Suggester::Suggestions::Solr::Response do
       ]
     end
 
-      context 'with multiple suggesters' do
-        let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
+    context 'with multiple suggesters' do
+      let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
 
-        it 'returns all terms' do
-          expect(response.terms).to eq ["The dental <b>art</b> : practical treatise on dental surgery",
-                                        "<b>Art</b>uro Alfonso Schomburg"]
-        end
+      it 'returns all terms' do
+        expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
+                                      '<b>Art</b>uro Alfonso Schomburg']
+      end
     end
   end
 
