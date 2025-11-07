@@ -7,9 +7,14 @@ module Suggester
       Registry.register(self)
 
       BASE_WEIGHT = 10
+      MINIMUM_CHARS_REQUIRED = 3
 
       def self.weight
         BASE_WEIGHT
+      end
+
+      def self.suggest?(query)
+        query.length >= MINIMUM_CHARS_REQUIRED
       end
 
       attr_reader :solr_service

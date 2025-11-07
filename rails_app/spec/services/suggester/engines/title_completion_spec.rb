@@ -13,15 +13,23 @@ describe Suggester::Engines::TitleCompletion do
   end
 
   describe '.suggest?' do
-    context 'with a query' do
-      it 'returns false' do
-        expect(described_class.suggest?('query')).to be true
+    let(:minimum_chars_required) { described_class::MINIMUM_CHARS_REQUIRED }
+
+    context 'when the query length is equal to the minimum required characters' do
+      it 'returns true' do
+        expect(described_class.suggest?('a' * minimum_chars_required)).to be true
       end
     end
 
-    context 'without a query' do
+    context 'when the query length is greater than the minimum required characters' do
+      it 'returns true' do
+        expect(described_class.suggest?('a' * (minimum_chars_required + 1))).to be true
+      end
+    end
+
+    context 'when the query length is less than the minimum required characters' do
       it 'returns false' do
-        expect(described_class.suggest?('')).to be false
+        expect(described_class.suggest?('a' * (minimum_chars_required - 1))).to be false
       end
     end
   end
