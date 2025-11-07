@@ -49,8 +49,6 @@ describe Suggester::Engines::TitleCompletion do
   describe '#completions' do
     let(:query) { 'art' }
     let(:engine) { described_class.new(query: query, context: {}) }
-    let(:parsed_solr_response) do
-    end
 
     before do
       stub_solr_suggestions_request(query_params: { "suggest.q": query },
