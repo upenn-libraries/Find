@@ -17,9 +17,10 @@ module Suggester
         @weight = weight
       end
 
+      # Provide entries without duplicates
       # @return [Array]
       def provide
-        entries
+        entries.uniq
       end
 
       # @return [Integer]

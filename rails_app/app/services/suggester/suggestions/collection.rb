@@ -11,10 +11,11 @@ module Suggester
         @suggestions = suggestions.compact_blank.sort.reverse
       end
 
+      # Provides a flattened and deduplicated list of all suggestion entries up to the specified limit.
       # @param limit [Integer]
       # @return [Array]
       def provide(limit: total_entries)
-        suggestions.flat_map(&:provide).first(limit)
+        suggestions.flat_map(&:provide).uniq.first(limit)
       end
 
       # @return [Boolean]
