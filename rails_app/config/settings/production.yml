@@ -10,3 +10,5 @@ google_analytics:
   id: 'GTM-KMLQ6V6W'
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
+suggester:
+  enabled: false

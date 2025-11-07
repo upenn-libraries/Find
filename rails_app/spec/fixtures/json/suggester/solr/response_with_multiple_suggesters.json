@@ -1,0 +1,32 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 3
+  },
+  "suggest": {
+    "title": {
+      "art": {
+        "numFound": 1,
+        "suggestions":[
+          {
+          "term":"The dental <b>art</b> : practical treatise on dental surgery",
+          "weight":20,
+          "payload":"9977323252003681"
+        }
+        ]
+      }
+    },
+    "author": {
+      "art": {
+        "numFound": 1,
+        "suggestions":[
+          {
+          "term":"<b>Art</b>uro Alfonso Schomburg",
+          "weight":20,
+          "payload":""
+        }
+        ]
+      }
+    }
+  }
+}

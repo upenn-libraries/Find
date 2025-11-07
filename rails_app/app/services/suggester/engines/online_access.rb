@@ -16,10 +16,9 @@ module Suggester
       # @return [Suggester::Suggestions::Suggestion]
       def actions
         Suggestions::Suggestion.new(entries: [{ label: label,
-                                                url: URI::HTTPS.build(host: Settings.suggestions.digital_catalog.host,
-                                                                      query: {
-                                                                        "f[access_facet][]": 'Online', q: query
-                                                                      }.to_query).to_s }],
+                                                url: URI::HTTPS.build(host: Settings.suggester.digital_catalog.host,
+                                                                      query: { "f[access_facet][]": 'Online',
+                                                                               q: query }.to_query).to_s }],
                                     engine_weight: self.class.weight)
       end
 

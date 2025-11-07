@@ -5,6 +5,7 @@ module Suggester
     # Factory class for SuggestionEngines
     class Registry
       BASE_CLASS = Engine
+      # Custom error
       class Error < StandardError
       end
 
