@@ -32,7 +32,6 @@ module Suggester
         # @return [Faraday::Connection]
         def connection
           @connection ||= Faraday.new(uri.to_s) do |conn|
-            conn.request :authorization, :basic, uri.user, uri.password
             conn.response :json
             conn.response :raise_error # raise Faraday::Error on status code 4xx or 5xx
           end
