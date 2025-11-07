@@ -28,7 +28,7 @@ module Suggester
     def validate_query
       return if params[:q].present?
 
-      raise InvalidQueryError, 'The given query parameters are invalid.'
+      raise SuggesterFailed, 'The given query parameters are invalid.'
     end
 
     # Empty the listbox if the suggester response is an error
