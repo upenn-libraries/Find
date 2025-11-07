@@ -293,14 +293,17 @@ discover:
       tsv_path: 'https://digital.library.upenn.edu/collects/PennArtCollection.tsv'
     penn_museum:
       pse_cx: '8591e2ac8a6254ba9'
-suggestions:
+suggester:
+  enabled: false
   digital_catalog:
     host: 'find.library.upenn.edu'
+    solr:
+      url: <%= "#{ENV['SOLR_URL']}/suggest" %>
+      dictionary: 'title'
   summon:
     host: "upenn.summon.serialssolutions.com"
     path: "/search"
   proxy:
-      host: "proxy.library.upenn.edu"
-      path: "/login"
-suggester:
-  enabled: false
+    host: "proxy.library.upenn.edu"
+    path: "/login"
+

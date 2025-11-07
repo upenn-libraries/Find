@@ -33,6 +33,17 @@ describe Suggester::Suggestions::Collection do
         expect(suggestion_collection.provide(limit: 2)).to eq(%w[bar baz])
       end
     end
+
+    context 'with duplicate suggestions provided' do
+      let(:suggestions) do
+        [Suggester::Suggestions::Suggestion.new(entries: ['foo'], weight: 0),
+         Suggester::Suggestions::Suggestion.new(entries: %w[foo bar], weight: 1)]
+      end
+
+      it 'returns uniq suggestions' do
+        expect(suggestion_collection.provide).to eq(%w[foo bar])
+      end
+    end
   end
 
   describe '#present?' do

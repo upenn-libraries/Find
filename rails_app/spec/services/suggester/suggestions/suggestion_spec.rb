@@ -8,6 +8,14 @@ describe Suggester::Suggestions::Suggestion do
     it 'returns entries' do
       expect(suggestion.provide).to eq(entries)
     end
+
+    context 'with duplicate entries' do
+      let(:entries) { %w[foo foo bar] }
+
+      it 'removes duplicate entries' do
+        expect(suggestion.provide).to eq(%w[foo bar])
+      end
+    end
   end
 
   describe '#score' do
