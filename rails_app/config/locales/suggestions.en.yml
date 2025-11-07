@@ -2,11 +2,11 @@ en:
   suggestions:
     engines:
       title_search:
-        label: "Search '%{query}' in titles."
+        label: "%{query} in titles"
       articles_search:
-        label: "Search '%{query}' in Articles+."
+        label: "%{query} in Articles+"
       online_access_search:
-        label: "Search '%{query}' in online resources."
+        label: "%{query} in online resources"
     urls:
       external_services:
         proxy: "https://proxy.library.upenn.edu/login?url=%{url}"

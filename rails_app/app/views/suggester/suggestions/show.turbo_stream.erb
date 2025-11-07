@@ -2,7 +2,7 @@
   <template>
     <ol role="listbox" id="suggestions-listbox">
       <% @actions&.each do |action| %>
-        <li role="option" data-pl-value="<%= action[:label] %>" data-action-url="<%= action[:url] %>">
+        <li role="option" data-pl-value="<%= params[:q] %>" data-action-url="<%= action[:url] %>">
           <%= action[:label] %>
         </li>
       <% end %>
