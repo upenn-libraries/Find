@@ -7,7 +7,7 @@
         </li>
       <% end %>
       <% @completions&.each do |text| %>
-        <li role="option"><%= text %></li>
+        <li role="option"><%= sanitize text, tags: %w[b] %></li>
       <% end %>
     </ol>
   </template>
