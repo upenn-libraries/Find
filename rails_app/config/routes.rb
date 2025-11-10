@@ -103,7 +103,7 @@ Rails.application.routes.draw do
 
   if Settings.suggester.enabled
     namespace :suggester do
-      get ':q', to: 'suggestions#show'
+      get ':q', to: 'suggestions#show', constraints: { q: /.+/ }, format: false
     end
   end
 end
