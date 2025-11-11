@@ -30,7 +30,7 @@ module Account
       outcome = Fulfillment::Service.submit(requester: current_user, **raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
-        redirect_to shelf_path
+        contextual_outcome_redirect(outcome)
       else
         flash[:alert] = "We could not submit your request due to the following: #{outcome.error_message}"
         redirect_back_or_to root_path
@@ -98,6 +98,17 @@ module Account
 
     def shelf_service
       @shelf_service ||= Shelf::Service.new(current_user.uid)
+    end
+
+    # Redirect to the shelf only for request types that create an entry on the shelf
+    # @param outcome [Fulfillment::Service::Outcome]
+    def contextual_outcome_redirect(outcome)
+      case outcome.delivery
+      when Fulfillment::Options::Deliverable::DOCDEL
+        redirect_back_or_to root_path
+      else
+        redirect_to shelf_path
+      end
     end
 
     def raw_params

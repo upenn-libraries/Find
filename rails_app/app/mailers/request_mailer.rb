@@ -6,6 +6,7 @@ class RequestMailer < ApplicationMailer
   # @param [Fulfillment::Outcome] outcome
   def confirmation_email(outcome:)
     @outcome = outcome
+    @docdel = @outcome.request.delivery == Fulfillment::Options::Deliverable::DOCDEL
     mail(to: @outcome.request.requester.email, subject: I18n.t('fulfillment.outcome.email.confirmation_subject'))
   end
 end

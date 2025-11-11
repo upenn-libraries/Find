@@ -39,5 +39,32 @@ describe 'Account Requests requests' do
                                                 ill_guide_url: I18n.t('urls.guides.ill')).html_safe
       end
     end
+
+    context 'with a successful request submission' do
+      let(:user) { create :user }
+      let(:mock_outcome) { instance_double Fulfillment::Outcome, success?: true, delivery: delivery_method }
+
+      before do
+        allow(Fulfillment::Service).to receive(:submit).and_return(mock_outcome)
+        sign_in user
+        post requests_path
+      end
+
+      context 'with DocDel delivery' do
+        let(:delivery_method) { Fulfillment::Options::Deliverable::DOCDEL }
+
+        it 'redirects back or to the root path' do
+          expect(response).to redirect_to root_url
+        end
+      end
+
+      context 'with delivery method that creates an entry in the shelf' do
+        let(:delivery_method) { Fulfillment::Options::Deliverable::PICKUP }
+
+        it 'redirects to the shelf' do
+          expect(response).to redirect_to shelf_path
+        end
+      end
+    end
   end
 end

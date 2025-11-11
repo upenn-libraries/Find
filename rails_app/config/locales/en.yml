@@ -425,7 +425,7 @@ en:
     outcome:
       email:
         confirmation_subject: 'Find Request Confirmation'
-        docdel: 'This request will be delivered by Lippincott library staff.'
+        docdel: 'This request will be delivered by Lippincott Library staff.'
         pickup: 'This request will be available to pickup at %{pickup_location}.'
         electronic: 'This request will be made electronically available in your library account.'
         mail: 'This request will be delivered to your Books by Mail address.'

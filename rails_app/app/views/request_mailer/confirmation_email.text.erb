@@ -11,4 +11,8 @@ Your confirmation number is <%= @outcome.confirmation_number %>. Please referenc
 status or about any other issues.
 <% end %>
 
-For questions regarding your request, please see our guides: <%= t('urls.guides.circulation') %>
+<% if @docdel %>
+Contact <%= Settings.fulfillment.docdel.email %> with changes or questions concerning your request.
+<% else %>
+For questions regarding your request, see our guides at <%= t('urls.guides.circulation') %>.
+<% end %>
