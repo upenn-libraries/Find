@@ -5,6 +5,8 @@ const DEFAULT_COMPLETIONS_COUNT = 4;
 const MIN_QUERY_LENGTH = 1;
 
 export default class extends Controller {
+  static values = { enabled: Boolean }
+
   /**
    * Initializes the suggester controller when connected to the DOM.
    * Sets up event listeners for input changes and activation events.
@@ -15,7 +17,7 @@ export default class extends Controller {
     this.debounceTimer = null;
     this.abortController = null;
 
-    if (!this.input) return;
+    if (!this.input || !this.enabledValue) return;
 
     this.input.addEventListener("input", this.onInput.bind(this));
     this.observeActivation();
