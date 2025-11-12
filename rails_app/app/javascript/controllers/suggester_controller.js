@@ -88,6 +88,7 @@ export default class extends Controller {
       if (actionUrl) {
         window.location.href = actionUrl;
       } else {
+        event.preventDefault();
         this.element.querySelector("form.fi-search-box").submit();
       }
     });
