@@ -17,7 +17,7 @@ describe 'Application Controller Requests' do
 
       before do
         stub_alma_user_find_success(id: user.uid, response_body: create(:alma_user_response))
-        sign_in user
+        login_as user
         get ill_new_request_path(params)
       end
 

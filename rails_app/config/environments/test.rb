@@ -24,7 +24,7 @@ Rails.application.configure do
   config.public_file_server.enabled = true
   config.public_file_server.headers = { 'Cache-Control' => "public, max-age=#{1.hour.to_i}" }
 
-  # Show full error reports and disable caching.
+  # Show full error reports.
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
@@ -44,8 +44,7 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  # Unlike controllers, the mailer instance doesn't have any context about the
-  # incoming request so you'll need to provide the :host parameter yourself.
+  # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "www.example.com" }
 
 
@@ -72,4 +71,7 @@ Rails.application.configure do
   OmniAuth.config.mock_auth[:alma] = OmniAuth::AuthHash.new({ provider: 'alma',
                                                               info: OmniAuth::AuthHash::InfoHash
                                                                       .new({ uid: 'courtesy@borrower.com' }) })
+
+  # Raise error when a before_action's only/except options reference missing actions.
+  config.action_controller.raise_on_missing_callback_actions = true
 end

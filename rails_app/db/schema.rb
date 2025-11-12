@@ -10,60 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_04_173239) do
+ActiveRecord::Schema[8.1].define(version: 2025_03_04_173239) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "alerts", force: :cascade do |t|
-    t.string "scope"
-    t.boolean "on"
-    t.text "text"
     t.datetime "created_at", null: false
+    t.boolean "on"
+    t.string "scope"
+    t.text "text"
     t.datetime "updated_at", null: false
   end
 
   create_table "bookmarks", id: :serial, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "user_type"
+    t.datetime "created_at", precision: nil, null: false
     t.string "document_id"
     t.string "document_type"
     t.binary "title"
-    t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "user_id", null: false
+    t.string "user_type"
     t.index ["document_id"], name: "index_bookmarks_on_document_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "discover_art_works", force: :cascade do |t|
-    t.string "title"
-    t.string "link"
-    t.string "thumbnail_url"
-    t.string "location"
-    t.string "format"
+    t.datetime "created_at", null: false
     t.string "creator"
     t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "format"
     t.string "identifier"
+    t.string "link"
+    t.string "location"
+    t.string "thumbnail_url"
+    t.string "title"
+    t.datetime "updated_at", null: false
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
     t.binary "query_params"
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.string "user_type"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
     t.boolean "guest", default: false, null: false
+    t.string "ils_group"
     t.string "provider"
     t.string "uid"
-    t.string "ils_group"
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
