@@ -31,7 +31,6 @@ Rails.application.configure do
   # Change to :null_store to avoid any caching.
   config.cache_store = :null_store
 
-
   # Tell Action Mailer not to deliver emails to the real world.
   # The :file delivery method saves the emails in tmp/mails
   config.action_mailer.delivery_method = :file
@@ -44,7 +43,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -81,7 +80,6 @@ Rails.application.configure do
   #
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
-
 
   config.hosts << ENV.fetch('APP_URL', 'catalog-find-dev.library.upenn.edu')
 end
