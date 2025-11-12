@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   root to: 'catalog#index'
   concern :searchable, Blacklight::Routes::Searchable.new
 
-  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+  resource :catalog, only: [], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
 
     get 'databases', to: 'catalog#databases'
