@@ -6,7 +6,7 @@ describe 'Account Show Page' do
   let(:user) { create(:user) }
 
   before do
-    sign_in user
+    login_as user
     visit account_path
   end
 

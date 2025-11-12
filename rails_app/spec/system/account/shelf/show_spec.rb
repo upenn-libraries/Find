@@ -7,7 +7,7 @@ describe 'Account Shelf show page' do
   let(:shelf) { instance_double(Shelf::Service) }
 
   before do
-    sign_in user
+    login_as user
     # Stub creation of shelf instance, transaction find
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)

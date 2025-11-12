@@ -9,7 +9,7 @@ describe 'Account Settings show page' do
   include_context 'with mock alma_record on user'
 
   before do
-    sign_in user
+    login_as user
 
     # Stub Illiad User
     illiad_user = build(:illiad_user, Address2: '123 private road / Philadelphia PA', Zip: '19104')
