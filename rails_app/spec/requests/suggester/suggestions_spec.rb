@@ -58,7 +58,27 @@ describe 'Suggestions Requests' do
     it 'return proper suggestion elements' do
       li_elements = parsed_response.css('li')
       expect(li_elements.size).to eq 1
-      expect(li_elements.first['role']).to eq 'option'
+      expect(li_elements.first.attributes.keys).not_to include 'data-pl-value', 'data-action-url'
+    end
+  end
+
+  context 'with suggester service not stubbed' do
+    let(:engines) { [Suggester::Engines::TitleSearch, mock_engine_with_completions] }
+
+    before do
+      Suggester::Engines::Registry.clear!
+      allow(Suggester::Engines::Registry).to receive(:engines).and_return engines
+      get suggester_path('query', format: :turbo_stream)
+    end
+
+    it 'return one action element' do
+      li_elements = parsed_response.css('li')
+      expect(li_elements.count { |li| li.attributes.key?('data-action-url') }).to eq 1
+    end
+
+    it 'return three suggestion elements' do
+      li_elements = parsed_response.css('li')
+      expect(li_elements.count { |li| !li.attributes.key?('data-action-url') }).to eq 4
     end
   end
 end
