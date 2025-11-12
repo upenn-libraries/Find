@@ -34,7 +34,7 @@ describe Suggester::Engines::TitleSearch do
 
     it 'contains expected entries' do
       expect(actions).to have_attributes(
-        entries: [{ label: 'query in Titles',
+        entries: [{ label: '<b>query</b> in Titles',
                     url: 'https://find.library.upenn.edu?q=query&search_field=title_search' }]
       )
     end
