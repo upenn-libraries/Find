@@ -47,5 +47,16 @@ module Suggester
       dirs = ['json', directory.to_s, filename].compact_blank
       File.read(File.join(fixture_paths, dirs))
     end
+
+    # Helper to mimic a response from the Suggester Service
+    # @param status [Symbol]
+    # @param actions [Array]
+    # @param completions [Array]
+    # @return [Hash]
+    def suggester_response(status: :success, actions: [], completions: [])
+      { status: status,
+        data: { params: {}, context: {},
+                suggestions: { actions: actions, completions: completions } } }
+    end
   end
 end

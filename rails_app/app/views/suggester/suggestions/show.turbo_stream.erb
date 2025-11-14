@@ -1,0 +1,14 @@
+<turbo-stream action="replace" target="suggestions-listbox">
+  <template>
+    <ol role="listbox" id="suggestions-listbox">
+      <% @actions&.each do |action| %>
+        <li role="option" data-pl-value="<%= params[:q] %>" data-action-url="<%= action[:url] %>">
+          <%= sanitize action[:label], tags: %w[b] %>
+        </li>
+      <% end %>
+      <% @completions&.each do |text| %>
+        <li role="option"><%= sanitize text, tags: %w[b] %></li>
+      <% end %>
+    </ol>
+  </template>
+</turbo-stream>

@@ -6,7 +6,7 @@
   padding: var(--pl-space-2xs);
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
   border: solid 1px var(--pl-color-penn-blue);
-  padding-left: var(--pl-space-l);
+  padding-left: calc(var(--pl-space-l) - var(--pl-space-xs));
 
   & .search-query-form {
     width: 100%;
@@ -24,7 +24,7 @@
   }
 
   &:focus-within {
-    box-shadow: 0 0 0 1px var(--pl-color-penn-blue);
+    box-shadow: var(--pl-focus-box-shadow);
   }
 
   & .search-q {
@@ -33,6 +33,7 @@
     background: none;
     font-size: var(--pl-font-size-l);
     padding: 0 !important;
+    padding-left: var(--pl-space-xs) !important;
     color: #0d1015; /* slightly darker shade */
 
     &::placeholder {
