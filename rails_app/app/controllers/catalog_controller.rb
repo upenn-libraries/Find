@@ -75,7 +75,9 @@ class CatalogController < ApplicationController
     config.index.facet_group_component = Catalog::FacetGroupComponent
     config.index.document_component = Catalog::ResultsDocumentComponent
     config.show.document_component = Catalog::ShowDocumentComponent
+    config.show.document_header_component = Catalog::PageHeaderComponent
     config.show.show_tools_component = Catalog::ShowToolsComponent
+    config.show.show_header_tools_component = Catalog::ShowToolsComponent
     config.show.title_component = Catalog::DocumentTitleComponent
 
     # Configure local components for search session components that make the show page toolbar possible
