@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe 'Account Requests requests' do
-  before { sign_in user }
+  before { login_as user }
 
   # GET /account/requests/ill/new
   context 'when viewing ILL form' do
@@ -9,7 +9,7 @@ describe 'Account Requests requests' do
       let(:user) { create(:user, :courtesy_borrower) }
 
       before do
-        sign_in user
+        login_as user
         get ill_new_request_path
       end
 
@@ -29,7 +29,7 @@ describe 'Account Requests requests' do
 
       before do
         allow(user).to receive(:ill_blocked?).and_return(true)
-        sign_in user
+        login_as user
         get ill_new_request_path
       end
 
@@ -46,7 +46,7 @@ describe 'Account Requests requests' do
 
       before do
         allow(Fulfillment::Service).to receive(:submit).and_return(mock_outcome)
-        sign_in user
+        login_as user
         post requests_path
       end
 

@@ -31,7 +31,7 @@ describe 'Catalog Show Page' do
 
     context 'when a user is signed in' do
       before do
-        sign_in create(:user)
+        login_as create(:user)
         visit solr_document_path(mms_id)
       end
 

@@ -15,7 +15,7 @@ describe 'Catalog show page requesting behaviors' do
     let(:entries) { print_monograph_entries }
 
     before do
-      sign_in user
+      login_as user
       visit solr_document_path(mms_id)
       click_button entries.second.description
     end

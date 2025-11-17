@@ -8,7 +8,7 @@ describe 'Fines and Fees index page' do
   let(:alma_user) { instance_double(Alma::User) }
 
   before do
-    sign_in user
+    login_as user
 
     # Stub Alma User
     allow(user).to receive(:alma_record).and_return(alma_user)
