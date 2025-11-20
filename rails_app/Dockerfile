@@ -103,6 +103,7 @@ COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin
 COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
+    find ${GEM_PATH} -type f -name "dart" -exec chmod +x {} + && \
     SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
     find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
@@ -161,6 +162,7 @@ COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin
 COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
+    find ${GEM_PATH} -type f -name "dart" -exec chmod +x {} + && \
     SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
     find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
