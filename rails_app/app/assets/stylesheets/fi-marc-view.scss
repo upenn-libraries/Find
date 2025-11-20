@@ -15,7 +15,7 @@ $marc_item_separator: 1px solid $text-muted !default;
 
   .ind1, .ind2 {
     display: inline;
-    padding: 0 ($spacer / 2);
+    padding: 0 calc($spacer / 2);
   }
 
   .tag_ind {
