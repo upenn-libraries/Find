@@ -32,6 +32,12 @@ if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "bundle" -a
         fi
     fi
 
+    # run detached dart sass watch process
+    if [ "${RAILS_ENV}" = "development" ]; then
+      bundle exec rake dartsass:watch &
+    fi
+
+
     # chown all dirs
     find . -type d -exec chown app:app {} +
 
