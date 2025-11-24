@@ -50,8 +50,8 @@ describe 'Catalog Index Page' do
     end
 
     it 'limits facets to 10' do
+      click_on I18n.t('facets.library')
       within('div.blacklight-library_facet') do
-        click_on I18n.t('facets.library')
         expect(page).to have_selector 'ul.facet-values li', count: 10
       end
     end
@@ -163,23 +163,23 @@ describe 'Catalog Index Page' do
       let(:solr_time) { (Time.new(1970).to_f * 1000).to_i }
 
       it 'does not show recently published facet for 5 year range' do
+        click_on I18n.t('facets.recently_published.label')
         within('div.blacklight-recently_published_facet') do
-          click_on I18n.t('facets.recently_published.label')
           expect(page).not_to have_selector '.facet-select', text: I18n.t('facets.recently_published.5_years')
         end
       end
 
       it 'shows recently published facets for 10 and 15 year ranges' do
+        click_on I18n.t('facets.recently_published.label')
         within('div.blacklight-recently_published_facet') do
-          click_on I18n.t('facets.recently_published.label')
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_published.10_years')
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_published.15_years')
         end
       end
 
       it 'shows the expected facet count' do
+        click_on I18n.t('facets.recently_published.label')
         within('div.blacklight-recently_published_facet') do
-          click_on I18n.t('facets.recently_published.label')
           expect(page).to have_text(/\b1\b/, count: 2)
         end
       end
