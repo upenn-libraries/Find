@@ -115,7 +115,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3000
 VOLUME ${PROJECT_ROOT}
 
-CMD ["bundle", "exec", "puma", "-b", "tcp://0.0.0.0:3000"]
+CMD ["./bin/dev"]
 
 
 # Production Stage -----------------------------------

@@ -1,2 +1,2 @@
-web: bin/rails server -p 3000
-css: bin/rails dartsass:watch
+web: bundle exec puma -b tcp://0.0.0.0:3000
+css: bundle exec rake tools:dartsass_poll
