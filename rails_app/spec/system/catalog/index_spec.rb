@@ -269,17 +269,17 @@ describe 'Catalog Index Page' do
       let(:solr_time) { (Time.new(2024, 7, 10).to_f * 1000).to_i }
 
       it 'does not show the recently added facet for smaller date ranges' do
+        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
-          click_on I18n.t('facets.recently_added.label')
           expect(page).not_to have_text(/ Within 15|30|60 days/)
         end
       end
 
       it 'shows the recently added facet for 90 day range' do
+        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
-          click_on I18n.t('facets.recently_added.label')
-          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.90_days')
-          expect(page).to have_text('1', count: 1)
+          expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.90_days')
+          expect(page).to have_selector '.facet-count', text: '1', count: 1
         end
       end
     end
