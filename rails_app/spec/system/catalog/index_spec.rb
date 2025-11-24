@@ -138,15 +138,15 @@ describe 'Catalog Index Page' do
       it 'shows recently published for 5 year range' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
-          expect(page).to have_text I18n.t('facets.recently_published.5_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.5_years')
         end
       end
 
       it 'shows the recently published facet for 10 and 15 year ranges' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
-          expect(page).to have_text I18n.t('facets.recently_published.10_years')
-          expect(page).to have_text I18n.t('facets.recently_published.15_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.10_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.15_years')
         end
       end
 
@@ -172,8 +172,8 @@ describe 'Catalog Index Page' do
       it 'shows recently published facets for 10 and 15 year ranges' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
-          expect(page).to have_text I18n.t('facets.recently_published.10_years')
-          expect(page).to have_text I18n.t('facets.recently_published.15_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.10_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.15_years')
         end
       end
 
@@ -192,15 +192,15 @@ describe 'Catalog Index Page' do
       it 'does not show recently published facet for 5 and 10 year ranges' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
-          expect(page).not_to have_text I18n.t('facets.recently_published.5_years')
-          expect(page).not_to have_text I18n.t('facets.recently_published.10_years')
+          expect(page).not_to have_selector '.facet-content', text: I18n.t('facets.recently_published.5_years')
+          expect(page).not_to have_selector '.facet-content', text: I18n.t('facets.recently_published.10_years')
         end
       end
 
       it 'shows recently published facets the 15 year range' do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
-          expect(page).to have_text I18n.t('facets.recently_published.15_years')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_published.15_years')
           expect(page).to have_text(/\b1\b/, count: 1)
         end
       end
@@ -244,16 +244,16 @@ describe 'Catalog Index Page' do
       it 'shows the recently added facet for 15 and 30 day range' do
         within('div.blacklight-recently_added_facet') do
           click_on I18n.t('facets.recently_added.label')
-          expect(page).to have_text I18n.t('facets.recently_added.15_days')
-          expect(page).to have_text I18n.t('facets.recently_added.30_days')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.15_days')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.30_days')
         end
       end
 
       it 'shows the recently added facet for 60 and 90 day range' do
         within('div.blacklight-recently_added_facet') do
           click_on I18n.t('facets.recently_added.label')
-          expect(page).to have_text I18n.t('facets.recently_added.60_days')
-          expect(page).to have_text I18n.t('facets.recently_added.90_days')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.60_days')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.90_days')
         end
       end
 
@@ -278,7 +278,7 @@ describe 'Catalog Index Page' do
       it 'shows the recently added facet for 90 day range' do
         within('div.blacklight-recently_added_facet') do
           click_on I18n.t('facets.recently_added.label')
-          expect(page).to have_text I18n.t('facets.recently_added.90_days')
+          expect(page).to have_selector '.facet-content', text: I18n.t('facets.recently_added.90_days')
           expect(page).to have_text('1', count: 1)
         end
       end

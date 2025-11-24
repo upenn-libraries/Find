@@ -21,7 +21,7 @@ describe 'index page' do
       fill_in :password, with: '123456789'
       click_on I18n.t('login.alma.login')
       expect(page).to have_selector('div.alert', text: I18n.t('devise.omniauth_callbacks.success',
-                                       kind: I18n.t('devise.omniauth_callbacks.alma_display_value')))
+                                                              kind: I18n.t('devise.omniauth_callbacks.alma_display_value')))
     end
   end
 
