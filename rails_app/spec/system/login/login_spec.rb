@@ -28,7 +28,7 @@ describe 'login page' do
       it 'renders the failure message' do
         expect(page).to have_text(I18n.t('login.pennkey'))
         click_on(I18n.t('login.pennkey'))
-        expect(page).to have_text(I18n.t('devise.omniauth_callbacks.alma_failure'))
+        expect(page).to have_selector('div.alert', text: I18n.t('devise.omniauth_callbacks.alma_failure'))
       end
     end
 
@@ -36,7 +36,7 @@ describe 'login page' do
       it 'they can navigate to the courtesy borrower login page' do
         expect(page).to have_button(I18n.t('login.alma.name'))
         click_on(I18n.t('login.alma.name'))
-        expect(page).to have_text(I18n.t('login.alma.heading'))
+        expect(page).to have_selector('h1.page__heading', text: I18n.t('login.alma.heading'))
       end
     end
   end
