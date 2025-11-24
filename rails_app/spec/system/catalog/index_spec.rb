@@ -209,17 +209,19 @@ describe 'Catalog Index Page' do
 
   context 'when viewing the recently added facet' do
     let(:recently_added_bib) { '9979413181503681' }
-    let(:entries) { [create(:physical_entry, mms_id: recently_added_bib)] }
     let(:solr_time) { nil }
+    let(:inventory_response) do
+      Inventory::List::Response.new(entries: [create(:physical_entry, mms_id: recently_added_bib)])
+    end
 
     before do
       # added date of "2024-04-11"
       SampleIndexer.index 'record_with_added_date.json'
 
-      allow(Inventory::List).to receive(:full).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
-                                              .and_return(Inventory::List::Response.new(entries: entries))
-      allow(Inventory::List).to receive(:brief).with(satisfy { |d| d.fetch(:id) == recently_added_bib })
-                                               .and_return(Inventory::List::Response.new(entries: entries))
+      allow(Inventory::List).to receive(:full).with(hash_including(id: recently_added_bib))
+                                              .and_return(inventory_response)
+      allow(Inventory::List).to receive(:brief).with(hash_including(id: recently_added_bib))
+                                               .and_return(inventory_response)
 
       CatalogController.blacklight_config.default_solr_params = { qt: 'search', NOW: solr_time }
 

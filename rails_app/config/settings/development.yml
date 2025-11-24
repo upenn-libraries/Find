@@ -7,7 +7,7 @@ additional_results_sources:
 discover:
   enabled: true
 suggester:
-  enabled: true
+  enabled: false
   digital_catalog:
     host: 'find.library.upenn.edu'
     solr:
