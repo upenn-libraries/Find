@@ -39,10 +39,14 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
-RSpec.configure do |config|
-  # Increase max wait time to deal with CI spec run issues
-  Capybara.default_max_wait_time = 10
 
+# Increase max wait time to deal with CI spec run issues
+# Capybara.default_max_wait_time = 10
+
+# Disable animations to reduce flaky specs in CI
+Capybara.disable_animation = true
+
+RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = Rails.root.join('spec/fixtures')
 
@@ -51,22 +55,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, type: :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
