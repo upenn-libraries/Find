@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ]
-|| [ "$1" = "./bin/dev" ]
-|| [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "sidekiq" ]; then
+if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "./bin/dev" ] || [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "sidekiq" ]; then
     if [ ! -z "${APP_UID}" ] && [ ! -z "${APP_GID}" ]; then
         usermod -u ${APP_UID} app
         groupmod -g ${APP_GID} app
