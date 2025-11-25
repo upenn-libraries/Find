@@ -139,6 +139,8 @@ rspec_app_test:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
         POSTGRES_USER: "rspec_test"
+    - name: redis:7-alpine
+      alias: redis
     - name: bitnami/solr:9.3.0
       alias: solr
       entrypoint: [""]
