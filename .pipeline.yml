@@ -1,6 +1,7 @@
 variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
+  CI_DEBUG_SERVICES: "false" 
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
@@ -129,7 +130,7 @@ rspec_app_test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   services:
-    - name: browserless/chrome:latest
+    - name: ghcr.io/browserless/chromium
       alias: chrome
       variables:
         CONNECTION_TIMEOUT: 600000
@@ -138,8 +139,6 @@ rspec_app_test:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
         POSTGRES_USER: "rspec_test"
-    - name: browserless/chrome:latest
-      alias: redis
     - name: bitnami/solr:9.3.0
       alias: solr
       entrypoint: [""]
