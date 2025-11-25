@@ -19,3 +19,5 @@ discover:
   enabled: true
 suggester:
   enabled: true
+  digital_catalog:
+    host: 'find-staging.library.upenn.edu'
