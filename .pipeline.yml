@@ -130,7 +130,7 @@ rspec_app_test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   services:
-    - name: ghcr.io/browserless/chromium
+    - name: browserless/chrome:latest
       alias: chrome
       variables:
         CONNECTION_TIMEOUT: 600000
@@ -146,7 +146,7 @@ rspec_app_test:
       alias: solr
       entrypoint: [""]
       command: [
-        "/bin/bash",
+        "/bin/bash",K
         "-c",
         "./opt/bitnami/scripts/solr/entrypoint.sh /opt/bitnami/scripts/solr/run.sh & \n
         for ((i = 0; i <= 9; i += 1)); do \n
@@ -183,7 +183,6 @@ rspec_app_test:
     FF_NETWORK_PER_BUILD: "true"
     RAILS_ENV: "test"
     RAILS_SYSTEM_TESTING_SCREENSHOT_HTML: "1"
-    REDIS_URL: "redis:6379"
     SOLR_URL: "http://solr:8983"
     SOLR_TEST_URL: http://solr:8983/solr/find-test
   before_script:
