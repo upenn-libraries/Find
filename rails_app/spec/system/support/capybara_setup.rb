@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+#
+require 'capybara-playwright-driver'
 
 # Capybara config based on https://evilmartians.com/chronicles/system-of-a-test-setting-up-end-to-end-rails-testing
 
@@ -26,6 +28,17 @@ Capybara.app_host = if ENV.fetch('VAGRANT', false) || ENV.fetch('CI', false)
                     else
                       'http://host.docker.internal'
                     end
+
+Capybara.register_driver(:playwright_remote) do |app|
+  Capybara::Playwright::Driver.new(
+    app,
+    browser_type: :chromium,
+    headless: true,
+    browser_server_endpoint_url: "ws://#{ENV.fetch('PLAYWRIGHT_HOST', '0.0.0.0')}:3333/ws"
+  )
+end
+
+Capybara.default_driver = Capybara.javascript_driver = :playwright_remote
 
 RSpec.configure do |config|
   # Make sure this hook runs before others

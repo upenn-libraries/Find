@@ -60,6 +60,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-playwright-driver'
   gem 'cuprite', '0.15'
   gem 'webmock'
 end

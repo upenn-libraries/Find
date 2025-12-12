@@ -1,23 +1,24 @@
 services:
-  chrome:
-    image: browserless/chrome:latest
+  playwright: # this is our PLAYWRIGHT_HOST value
+    image: mcr.microsoft.com/playwright:v1.56.1-noble
+    command: >
+      /bin/sh -c "npx -y playwright@1.56.1 run-server --port 3333 --host 0.0.0.0 --path /ws"
     ports:
       - "3333:3333"
     volumes:
       - .:/app:cached
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    init: true
+    restart: unless-stopped
     environment:
       PORT: 3333
-      CONNECTION_TIMEOUT: 600000
-      KEEP_ALIVE: 'true'
-      FUNCTION_ENABLE_INCOGNITO_MODE: 'true'
   postgres:
     image: postgres:15.3
     environment:
       POSTGRES_PASSWORD: password
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
   solrcloud:
