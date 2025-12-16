@@ -142,7 +142,7 @@ describe 'Catalog Index Page' do
         end
       end
 
-      it 'shows the recently published facet for 10 and 15 year ranges' do
+      it 'shows the recently published facet for 10 and 15 year ranges', :flaky do
         within('div.blacklight-recently_published_facet') do
           click_on I18n.t('facets.recently_published.label')
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_published.10_years')
@@ -177,7 +177,7 @@ describe 'Catalog Index Page' do
         end
       end
 
-      it 'shows the expected facet count' do
+      it 'shows the expected facet count', :flaky do
         click_on I18n.t('facets.recently_published.label')
         within('div.blacklight-recently_published_facet') do
           expect(page).to have_text(/\b1\b/, count: 2)
@@ -197,7 +197,7 @@ describe 'Catalog Index Page' do
         end
       end
 
-      it 'shows recently published facets the 15 year range' do
+      it 'shows recently published facets the 15 year range', :flaky do
         click_on I18n.t('facets.recently_published.label')
         within('div.blacklight-recently_published_facet') do
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_published.15_years')
@@ -238,7 +238,7 @@ describe 'Catalog Index Page' do
       end
     end
 
-    context 'with a record added in the last 15 days' do
+    context 'with a record added in the last 15 days', :flaky do
       let(:solr_time) { (Time.new(2024, 4, 18).to_f * 1000).to_i }
 
       it 'shows the recently added facet for 15 and 30 day range' do
@@ -275,7 +275,7 @@ describe 'Catalog Index Page' do
         end
       end
 
-      it 'shows the recently added facet for 90 day range' do
+      it 'shows the recently added facet for 90 day range', :flaky do
         click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.90_days')

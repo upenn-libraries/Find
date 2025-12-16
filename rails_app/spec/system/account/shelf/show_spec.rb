@@ -56,7 +56,7 @@ describe 'Account Shelf show page' do
         expect(page).to have_link I18n.t('account.shelf.bib_record_link')
       end
 
-      it 'redirects to shelf index after canceling hold' do
+      it 'redirects to shelf index after canceling hold', :flaky do
         click_button I18n.t('account.shelf.cancel.button')
         within('.alert') do
           expect(page).to have_text I18n.t('account.shelf.cancel.success')

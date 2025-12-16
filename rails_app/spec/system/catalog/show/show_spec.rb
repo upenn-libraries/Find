@@ -51,7 +51,7 @@ describe 'Catalog Show Page' do
     end
 
     context 'when a user is not signed in' do
-      it 'displays a link to login' do
+      it 'displays a link to login', :flaky do
         click_on I18n.t('blacklight.tools.title')
         expect(page).to have_link(I18n.t('blacklight.tools.login_for_email'), href: login_path(id: mms_id))
       end

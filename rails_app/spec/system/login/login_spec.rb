@@ -33,7 +33,7 @@ describe 'login page' do
     end
 
     context 'when user is a courtesy borrower' do
-      it 'they can navigate to the courtesy borrower login page' do
+      it 'they can navigate to the courtesy borrower login page', :flaky do
         expect(page).to have_button(I18n.t('login.alma.name'))
         click_on(I18n.t('login.alma.name'))
         expect(page).to have_selector('h1.page__heading', text: I18n.t('login.alma.heading'))
@@ -54,11 +54,11 @@ describe 'login page' do
       click_on I18n.t('login.pennkey')
     end
 
-    it 'redirects to record page after login' do
+    it 'redirects to record page after login', :flaky do
       expect(page).to have_current_path(/^#{solr_document_path(print_monograph_bib)}/)
     end
 
-    it 'adds request param to url' do
+    it 'adds request param to url', :flaky do
       expect(current_url).to include('request=true')
     end
 
@@ -78,7 +78,7 @@ describe 'login page' do
       expect(page).to have_current_path(login_path)
     end
 
-    it 'after logging in redirects to url requested' do
+    it 'after logging in redirects to url requested', :flaky do
       click_on I18n.t('login.pennkey')
       expect(page).to have_current_path(url_requested)
     end

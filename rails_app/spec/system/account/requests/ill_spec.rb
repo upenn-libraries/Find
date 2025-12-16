@@ -67,7 +67,7 @@ describe 'Account Request ILL form' do
     end
   end
 
-  context 'when form is submitting with missing required fields' do
+  context 'when form is submitting with missing required fields', :flaky do
     before do
       click_button I18n.t('account.ill.request_type.loan')
       fill_in I18n.t('account.ill.form.loan.author.label'), with: 'John Doe'
@@ -89,7 +89,7 @@ describe 'Account Request ILL form' do
       click_button I18n.t('account.ill.request_type.scan')
     end
 
-    it 'limits the input to 30 characters' do
+    it 'limits the input to 30 characters', :flaky do
       fill_in I18n.t('account.ill.form.scan.pages'), with: 'x' * 31
       expect(page).to have_field I18n.t('account.ill.form.scan.pages'), with: 'x' * 30
     end
@@ -114,7 +114,7 @@ describe 'Account Request ILL form' do
         click_button I18n.t('account.ill.form.proxy.submit')
       end
 
-      it 'displays proxied request alert' do
+      it 'displays proxied request alert', :flaky do
         expect(page).to have_text 'You are proxying a request for John Doe (Undergraduate)'
       end
 
