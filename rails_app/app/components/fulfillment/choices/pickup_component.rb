@@ -6,12 +6,13 @@ module Fulfillment
     class PickupComponent < ViewComponent::Base
       DEFAULT_PICKUP = 'Van Pelt Library'
 
-      attr_accessor :user, :checked, :radio_options
+      attr_accessor :user, :checked, :radio_options, :holding_id
 
-      def initialize(user:, ill: false, checked: false, **radio_options)
+      def initialize(user:, ill: false, checked: false, holding_id: nil, **radio_options)
         @user = user
         @checked = checked
         @ill = ill
+        @holding_id = holding_id
         @radio_options = radio_options
       end
 
@@ -36,6 +37,10 @@ module Fulfillment
 
       def pickup_locations
         @pickup_locations ||= generate_pickup_locations
+      end
+
+      def radio_id
+        holding_id ? "delivery_#{delivery_value}_#{holding_id}" : "delivery_#{delivery_value}"
       end
 
       private

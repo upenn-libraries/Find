@@ -1,7 +1,7 @@
 <li class="list-group-item">
   <div class="form-check">
-    <%= radio_button_tag :delivery, delivery_value, checked, **radio_options, class: 'form-check-input' %>
-    <%= label_tag :delivery_office, t('requests.form.options.office.label_html'), class: 'form-check-label' %>
+    <%= radio_button_tag :delivery, delivery_value, checked, id: radio_id, class: 'form-check-input', **radio_options %>
+    <%= label_tag radio_id, t('requests.form.options.office.label_html'), class: 'form-check-label' %>
     <% if office_address.present? %>
       <p class="alert alert-info my-2">
         <%= office_address %>
