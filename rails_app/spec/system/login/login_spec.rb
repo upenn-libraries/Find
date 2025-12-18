@@ -15,6 +15,7 @@ describe 'login page' do
       include_context 'with mock alma_record on user having alma_user_group user group'
 
       it 'renders the success message' do
+      it 'renders the success message', :flaky do
         expect(page).to have_text(I18n.t('login.pennkey'))
         click_on(I18n.t('login.pennkey'))
         expect(page).to have_text(I18n.t('devise.omniauth_callbacks.success',

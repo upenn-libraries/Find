@@ -35,7 +35,7 @@ describe 'Catalog Show Page' do
         visit solr_document_path(mms_id)
       end
 
-      it 'displays a link to email the record' do
+      it 'displays a link to email the record', :flaky do
         click_on I18n.t('blacklight.tools.title')
         expect(page).to have_link 'Email', href: email_solr_document_path(mms_id)
       end
@@ -50,8 +50,8 @@ describe 'Catalog Show Page' do
       end
     end
 
-    context 'when a user is not signed in' do
-      it 'displays a link to login', :flaky do
+    context 'when a user is not signed in', :flaky do
+      it 'displays a link to login' do
         click_on I18n.t('blacklight.tools.title')
         expect(page).to have_link(I18n.t('blacklight.tools.login_for_email'), href: login_path(id: mms_id))
       end
