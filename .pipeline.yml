@@ -361,7 +361,7 @@ build_and_push_prod_app_image:
     JWT_ROLE: "sidekiq_pro_ro"
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
   needs:
-    - rspec_app_test
+    - rspec_app_unit_test
     - rubocop_app_test
   tags:
     - ${RUNNER}
