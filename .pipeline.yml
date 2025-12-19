@@ -1,6 +1,7 @@
 variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
+  CI_DEBUG_SERVICES: "false"
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
@@ -174,7 +175,6 @@ rspec_app_unit_test:
     FF_NETWORK_PER_BUILD: "true"
     RAILS_ENV: "test"
     RAILS_SYSTEM_TESTING_SCREENSHOT_HTML: "1"
-    REDIS_URL: "redis:6379"
     SOLR_URL: "http://solr:8983"
     SOLR_TEST_URL: http://solr:8983/solr/find-test
   before_script:
@@ -273,7 +273,6 @@ rspec_app_integraion_test:
     FF_NETWORK_PER_BUILD: "true"
     RAILS_ENV: "test"
     RAILS_SYSTEM_TESTING_SCREENSHOT_HTML: "1"
-    REDIS_URL: "redis:6379"
     SOLR_URL: "http://solr:8983"
     SOLR_TEST_URL: http://solr:8983/solr/find-test
   before_script:
