@@ -3,7 +3,7 @@
 # Capybara config based on https://evilmartians.com/chronicles/system-of-a-test-setting-up-end-to-end-rails-testing
 
 # We use a Capybara default value here explicitly.
-Capybara.default_max_wait_time = 3
+Capybara.default_max_wait_time = 10
 
 # Normalize whitespaces when using `has_text?` and similar matchers,
 # i.e., ignore newlines, trailing spaces, etc.

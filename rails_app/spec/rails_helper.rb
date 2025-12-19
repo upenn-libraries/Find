@@ -40,9 +40,6 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  # Increase max wait time to deal with CI spec run issues
-  Capybara.default_max_wait_time = 10
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = Rails.root.join('spec/fixtures')
 

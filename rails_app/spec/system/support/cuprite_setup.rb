@@ -46,7 +46,8 @@ Capybara.register_driver(:better_cuprite) do |app|
       inspector: true,
       # TODO: "expected" console error from importmaps shim (?) causes exception failing all system specs
       js_errors: false,
-      timeout: 10
+      timeout: 10,
+      wait_for_network_idle: true
     }.merge(remote_options)
   )
 end
