@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :user do
     transient do
-      identifier { Faker::Name.unique.first_name.downcase }
+      identifier { 'testuser' }
     end
 
     provider { 'test' }
@@ -14,7 +14,7 @@ FactoryBot.define do
 
   trait :alma_authenticated do
     transient do
-      identifier { Faker::Internet.email }
+      identifier { 'testemail@upenn.edu' }
     end
 
     provider { 'alma' }
