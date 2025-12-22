@@ -12,7 +12,7 @@ FactoryBot.define do
         'item_data' => {
           'base_status' => { 'value' => '1' },
           'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' },
-          'description' => "MS 1234",
+          'description' => 'MS 1234',
           'location' => { 'value' => 'thelocation', 'desc' => 'The Location' },
           'library' => { 'value' => 'thelibrary', 'desc' => 'The Library' },
           'pid' => '0123456789',
