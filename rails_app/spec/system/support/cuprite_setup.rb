@@ -7,7 +7,7 @@ require 'capybara/cuprite'
 
 # Parse URL
 # NOTE: REMOTE_CHROME_HOST should be added to Webmock/VCR allowlist if you use any of those.
-REMOTE_CHROME_URL = ENV.fetch('CHROME_URL', 'http://localhost:3333')
+REMOTE_CHROME_URL = ENV.fetch('CHROME_URL', 'ws://localhost:3333')
 REMOTE_CHROME_HOST, REMOTE_CHROME_PORT =
   if REMOTE_CHROME_URL
     URI.parse(REMOTE_CHROME_URL).then do |uri|
@@ -28,7 +28,7 @@ remote_chrome =
     false
   end
 
-remote_options = remote_chrome ? { url: REMOTE_CHROME_URL } : {}
+remote_options = remote_chrome ? { ws_url: REMOTE_CHROME_URL } : {}
 
 # Then, we need to register our driver to be able to use it later
 # with #driven_by method.
@@ -44,9 +44,7 @@ Capybara.register_driver(:better_cuprite) do |app|
       process_timeout: 10,
       # Enable debugging capabilities
       inspector: true,
-      # TODO: "expected" console error from importmaps shim (?) causes exception failing all system specs
-      js_errors: false,
-      timeout: 10
+      flatten: false
     }.merge(remote_options)
   )
 end

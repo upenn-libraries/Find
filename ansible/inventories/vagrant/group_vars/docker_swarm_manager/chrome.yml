@@ -1,6 +1,6 @@
 ---
 chrome:
   image:
-    name: "browserless/chrome"
-    tag: "latest"
+    name: "ghcr.io/browserless/chromium"
+    tag: "v2.38.2"
   port: 3333

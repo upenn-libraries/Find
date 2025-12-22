@@ -97,8 +97,8 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.8.8)
+      public_suffix (>= 2.0.2, < 8.0)
     alma (0.6.2)
       activesupport
       httparty
@@ -132,7 +132,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    concurrent-ruby (1.3.5)
+    concurrent-ruby (1.3.6)
     config (5.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
@@ -141,9 +141,9 @@ GEM
       rexml
     crass (1.0.6)
     csv (3.3.0)
-    cuprite (0.15)
+    cuprite (0.17)
       capybara (~> 3.0)
-      ferrum (~> 0.14.0)
+      ferrum (~> 0.17.0)
     date (3.5.0)
     debug (1.9.2)
       irb (~> 1.10)
@@ -210,11 +210,12 @@ GEM
       net-http
     faraday-retry (2.2.0)
       faraday (~> 2.0)
-    ferrum (0.14)
+    ferrum (0.17.1)
       addressable (~> 2.5)
+      base64 (~> 0.2)
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
-      websocket-driver (>= 0.6, < 0.8)
+      websocket-driver (~> 0.7)
     ffi (1.17.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
@@ -340,7 +341,7 @@ GEM
     psych (5.2.6)
       date
       stringio
-    public_suffix (6.0.2)
+    public_suffix (7.0.0)
     puma (6.5.0)
       nio4r (~> 2.0)
     put (0.1.0)
@@ -528,8 +529,8 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webrick (1.9.1)
-    websocket-driver (0.7.7)
+    webrick (1.9.2)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -558,7 +559,7 @@ DEPENDENCIES
   byebug
   capybara
   config
-  cuprite (= 0.15)
+  cuprite
   debug
   devise
   devise-guests (~> 0.8)
