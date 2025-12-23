@@ -1,15 +1,15 @@
-<%# Copied template from Blacklight v8.12.2 to add inventory information, etc. %>
+<%# Copied template from Blacklight v9.0 to add inventory information, etc. %>
 
 <div class="row">
   <%= inventory_navigation %>
   <%= content_tag @component,
                   id: @id,
                   data: {
-                    'document-id': @document.id.to_s.parameterize,
-                    'document-counter': @counter,
+                    'document-id': document.id.to_s.parameterize,
+                    'document-counter': counter,
                   },
                   itemscope: true,
-                  itemtype: @document.itemtype,
+                  itemtype: document.itemtype,
                   class: classes.flatten.join(' ') do %>
     <%= header %>
     <% if body.present? %>
