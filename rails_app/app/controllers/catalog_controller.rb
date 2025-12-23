@@ -72,7 +72,6 @@ class CatalogController < ApplicationController
     config.header_component = Catalog::HeaderComponent
     config.index.search_bar_component = Catalog::SearchBarComponent
     config.index.constraints_component = Catalog::ConstraintsComponent
-    config.index.facet_group_component = Catalog::FacetGroupComponent
     config.index.document_component = Catalog::ResultsDocumentComponent
     config.show.document_component = Catalog::ShowDocumentComponent
     config.show.document_header_component = Catalog::PageHeaderComponent
