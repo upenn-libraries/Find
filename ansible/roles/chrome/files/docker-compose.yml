@@ -8,7 +8,7 @@ services:
       PORT: ${CHROME_PORT}
       # Set connection timeout to avoid timeout exception during debugging
       # https://docs.browserless.io/docs/docker.html#connection-timeout
-      CONNECTION_TIMEOUT: 600000
+      TIMEOUT: 600000
     # Mount application source code to support file uploading
     # (otherwise Chrome won't be able to find files).
     # NOTE: Make sure you use absolute paths in `#attach_file`
