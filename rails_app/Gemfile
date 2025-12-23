@@ -10,7 +10,7 @@ ruby '3.4.7'
 gem 'sprockets-rails'
 
 gem 'alma'
-gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'release-8.x', ref: '70cd021fc56'
+gem 'blacklight', '~> 9'
 gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false
