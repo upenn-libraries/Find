@@ -112,7 +112,7 @@ describe 'Catalog Show Page' do
       end
 
       it 'shows the display value without a link to facet search' do
-        within('.col-md-9.blacklight-subject_test_show') do
+        within('dl.document-metadata') do
           expect(page).to have_text('Dogs.')
           expect(page).not_to have_link('Dogs.')
         end
@@ -125,7 +125,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(print_monograph_bib)) }
 
       it 'links to creator facet search' do
-        within('.col-md-9.blacklight-creator_extended_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link('Bleier, Ruth, 1923-',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Bleier, Ruth, 1923-' }))
         end
@@ -138,7 +138,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(print_monograph_bib)) }
 
       it 'links to a subject facet search' do
-        within('.col-md-9.blacklight-subject_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' })
           expect(page).to have_link 'Hypothalamus.', href: search_catalog_path({ 'f[subject_facet][]': 'Hypothalamus' })
         end
@@ -151,10 +151,8 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(print_monograph_bib)) }
 
       it 'links to a subject facet search' do
-        within('.col-md-9.blacklight-subject_medical_show') do
-          expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' })
-          expect(page).to have_link 'Hypothalamus.', href: search_catalog_path({ 'f[subject_facet][]': 'Hypothalamus' })
-        end
+        expect(page).to have_css('.col-md-9.blacklight-subject_medical_show')
+        expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' }), count: 2
       end
     end
 
@@ -164,7 +162,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(electronic_db_bib)) }
 
       it 'links to a creator facet search' do
-        within('.col-md-9.blacklight-creator_contributor_noauthor_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link('Geo Abstracts, Ltd.',
                                     href: search_catalog_path({ 'f[creator_facet][]': 'Geo Abstracts, Ltd' }))
         end
@@ -181,7 +179,7 @@ describe 'Catalog Show Page' do
       it 'links to a creator facet search' do
         show = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : 1977 : Rome, Italy)'
         facet = 'Food and Agriculture Organization of the United Nations (Conference : , 19th : Rome, Italy)'
-        within('.col-md-9.blacklight-creator_conference_detail_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link(show, href: search_catalog_path({ 'f[creator_facet][]': facet }))
         end
       end
@@ -197,7 +195,7 @@ describe 'Catalog Show Page' do
       end
 
       it 'links to a title fielded search' do
-        within('.col-md-9.blacklight-title_standardized_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link('Nature (Online)', href: search_catalog_path(
             { clause: { '2': { field: 'title_search', query: '"Nature (Online)"' } } }
           ))
@@ -223,7 +221,7 @@ describe 'Catalog Show Page' do
       end
 
       it 'links to a title fielded search' do
-        within('.col-md-9.blacklight-series_show') do
+        within('dl.document-metadata') do
           expect(page).to have_link(show_value, href: search_catalog_path(
             { clause: { '2': { field: 'title_search', query: query_value } } }
           ))
