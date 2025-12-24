@@ -1,9 +1,9 @@
-<%# Copied from Blacklight v8.12.2
+<%# Copied from Blacklight v9.0
     - Adding logic to render the div only if there will be pagination or sort and per page options displayed.
 %>
 
 <% if (show_pagination? && @response.total_pages > 1) || show_sort_and_per_page? %>
-  <div id="sortAndPerPage" class="sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
+  <div id="sortAndPerPage" class="sort-pagination pb-3 mb-3 d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
     <%= render partial: "paginate_compact", object: @response if show_pagination? %>
     <%= render_results_collection_tools wrapping_class: "search-widgets" %>
   </div>
