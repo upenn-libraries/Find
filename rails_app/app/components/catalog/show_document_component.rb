@@ -13,8 +13,9 @@ module Catalog
     }
 
     # @option params [ActionController::Parameters] parameters from request
+    # @option user [User] current user
     def initialize(**args)
-      super
+      super(**args.except(:user, :params))
       @inventory = @document.full_inventory
       @selected_id = args[:params][:hld_id] || @inventory.first&.id
       @user = args[:user]
