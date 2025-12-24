@@ -1,5 +1,5 @@
 <%
-  # Up to date with Blacklight v8.12.2
+  # Up to date with Blacklight v9.0
 %>
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
@@ -28,12 +28,12 @@
   <%= render blacklight_config.skip_link_component.new do %>
     <%= content_for(:skip_links) %>
   <% end %>
-  <%= render partial: 'shared/header_navbar' %>
+  <%= render blacklight_config.header_component.new(blacklight_config: blacklight_config, user: current_user) %>
 
-  <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
+  <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
-    <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+    <%= render 'shared/flash_msg', layout: 'shared/flash_messages' if flash.any? %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>
