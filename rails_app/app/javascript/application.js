@@ -5,4 +5,4 @@ import "controllers";
 import "popper";
 import "bootstrap";
 import "tom-select";
-import Blacklight from "blacklight";
+import Blacklight from "blacklight-frontend";
