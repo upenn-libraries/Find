@@ -1,7 +1,7 @@
 variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
-  CI_DEBUG_SERVICES: "true"
+  CI_DEBUG_SERVICES: "false"
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
@@ -223,6 +223,7 @@ rspec_app_integration_test:
   services:
     - name: ghcr.io/browserless/chromium:v2.38.2
       alias: chrome
+      port: 3333
       variables:
         TIMEOUT: 600000
     - name: postgres:15.3
