@@ -223,9 +223,9 @@ rspec_app_integration_test:
   services:
     - name: ghcr.io/browserless/chromium:v2.38.2
       alias: chrome
-      port: 3333
       variables:
         TIMEOUT: 600000
+        PORT: 3333
     - name: postgres:15.3
       variables:
         POSTGRES_DB: "find_test"
