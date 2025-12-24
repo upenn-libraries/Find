@@ -8,7 +8,7 @@ describe 'Catalog Bookmarks Page' do
   before do
     visit root_path
     click_on 'Find it'
-    check 'Bookmark'
+    find('.blacklight-icons-bookmark').click
     visit bookmarks_path
   end
 
