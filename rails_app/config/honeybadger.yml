@@ -31,13 +31,26 @@ exceptions:
 
 insights:
   enabled: true
+  registry_flush_interval: 120
 
 rails:
   insights:
-    metrics: true
+    enabled: false
+    events: false
+    metrics: false
 sidekiq:
   insights:
+    collection_interval: 60
+    enabled: true
+    events: true
     metrics: true
+net_http:
+  insights:
+    enabled: false
+    events: false
+    metrics: false
 puma:
   insights:
-    metrics: true
+    enabled: false
+    events: false
+    metrics: false
