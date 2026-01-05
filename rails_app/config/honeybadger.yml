@@ -28,3 +28,16 @@ debug: false
 exceptions:
   ignore:
     - 'Blacklight::Exceptions::RecordNotFound'
+
+insights:
+  enabled: true
+
+rails:
+  insights:
+    metrics: true
+sidekiq:
+  insights:
+    metrics: true
+puma:
+  insights:
+    metrics: true
