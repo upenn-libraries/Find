@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :library_info_api_request_response, class: 'Library::Info::Request' do add_attribute(:name) { 'The Library' }
+  factory :library_info_api_request_response, class: 'Library::Info::Request' do
+    add_attribute(:name) { 'The Library' }
     add_attribute(:node_id) { 1234 }
     add_attribute(:lib_code) { 'TheLib' }
     add_attribute(:formal_title) { 'The Fancy Name Library' }
