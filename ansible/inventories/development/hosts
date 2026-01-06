@@ -1,0 +1,24 @@
+---
+docker_swarm_managers:
+  hosts:
+    find:
+      ansible_host: 127.0.0.1
+      ansible_connection: local
+      swarm_labels:
+        - catalog_find_app
+        - catalog_find_postgres
+        - catalog_find_redis
+        - catalog_find_sidekiq
+        - solr-1
+        - solr-2
+        - solr-3
+        - traefik
+        - zookeeper-1
+        - zookeeper-2
+        - zookeeper-3
+
+swarm:
+  children:
+    find:
+  vars:
+    ansible_docker_privileged: "true"

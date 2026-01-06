@@ -1,0 +1,6 @@
+# Global settings
+verbose: true
+
+# Enable experimental features
+experiments:
+  REMOTE_TASKFILES: 1

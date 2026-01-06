@@ -1,4 +1,4 @@
 # Dont track IDE project settings
 .idea
-
+.ansible
 .DS_Store

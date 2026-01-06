@@ -1,16 +1,25 @@
 ---
-- name: "Provision Docker Swarm Cluster"
+- name: "Set up Docker and Docker Swarm"
   hosts: all
   become: true
-  collections:
-    - ansible.utils
-    - ansible.netcommon
-  tasks:
-    - ansible.builtin.import_tasks: "provision_docker.yml"
-      when: is_development | default (false, true)
+  gather_facts: true
+  pre_tasks:
+    - name: "Install OS deps"
+      block:
+        - name: "Install deps with package manager"
+          ansible.builtin.package:
+            name: "{{ os_dependencies[ansible_facts['os_family']] }}"
+            state: present
+
+    - name: "Install pip deps"
+      ansible.builtin.pip:
+        name: "{{ pip_dependencies }}"
+        break_system_packages: true
+  roles:
+    - docker-swarm
 
 - name: "Deploy application"
-  hosts: docker_swarm_manager
+  hosts: docker_swarm_managers
   become: true
   gather_facts: true
   tasks:

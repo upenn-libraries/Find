@@ -1,0 +1,5 @@
+catalog_indexing_config_repo_path: "/tmp/catalog-indexing"
+catalog_indexing_config_repo_name: "https://gitlab.library.upenn.edu/dld/catalog/catalog-indexing.git"
+catalog_indexing_config_repo_force: "true"
+catalog_indexing_config_repo_update: "true"
+catalog_indexing_config_repo_branch: "main"

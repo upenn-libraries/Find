@@ -1,0 +1,18 @@
+version: "3"
+
+includes:
+  remote:
+    taskfile: https://gitlab.library.upenn.edu/devops/taskfile/-/raw/main/Taskfile.yml
+    trusted-hosts:
+      - gitlab.library.upenn.edu
+    dir: .
+    vars:
+      ANSIBLE_CONTAINER_IP: "192.168.10.230"
+      ANSIBLE_NETWORK_SUBNET: "192.168.10.0/24"
+      DOCKER_TLS_PORT_INT: "2376"
+      DOCKER_TLS_PORT_EXT: "3486"
+      PROJECT_CONTAINER_NAME: "find"
+      PROJECT_DOMAIN: "find-dev"
+      PROJECT_PATH: "/app"
+      PROJECT_NAME: "find"
+      ANSIBLE_NETWORK_NAME: 'find'
