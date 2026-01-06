@@ -151,7 +151,7 @@ describe 'Catalog Show Page' do
       before { visit(solr_document_path(print_monograph_bib)) }
 
       it 'links to a subject facet search' do
-        expect(page).to have_css('.col-md-9.blacklight-subject_medical_show')
+        expect(page).to have_css('.blacklight-subject_medical_show')
         expect(page).to have_link 'Cats.', href: search_catalog_path({ 'f[subject_facet][]': 'Cats' }), count: 2
       end
     end
