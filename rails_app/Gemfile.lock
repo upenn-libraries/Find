@@ -116,7 +116,7 @@ GEM
     blacklight_dynamic_sitemap (1.0.0)
       blacklight (> 7.0)
       rails
-    bootsnap (1.17.1)
+    bootsnap (1.20.1)
       msgpack (~> 1.2)
     bootstrap (5.3.2)
       autoprefixer-rails (>= 9.1.0)
@@ -282,7 +282,7 @@ GEM
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
     minitest (5.27.0)
-    msgpack (1.7.2)
+    msgpack (1.8.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     net-http (0.4.1)
