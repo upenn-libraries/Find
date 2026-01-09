@@ -18,6 +18,8 @@ RSpec.configure do |config|
     begin
       require 'rake'
       Rails.application.load_tasks
+      # do not remove dartsass compiled assets from /assets/builds
+      Rake::Task['dartsass:clobber'].clear
       Rake::Task['assets:clobber'].invoke
     ensure
       $stdout.puts "Finished in #{(Time.current - start).round(2)} seconds"

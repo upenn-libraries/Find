@@ -43,3 +43,5 @@ vendor/bundle
 /config/credentials/staging.key
 
 .byebug_history
+/app/assets/builds/*
+!/app/assets/builds/.keep

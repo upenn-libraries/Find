@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "sidekiq" ]; then
+if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "./bin/dev" ] || [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "sidekiq" ]; then
     if [ ! -z "${APP_UID}" ] && [ ! -z "${APP_GID}" ]; then
         usermod -u ${APP_UID} app
         groupmod -g ${APP_GID} app
@@ -23,7 +23,7 @@ if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] || [ "$1" = "bundle" -a
     fi
 
     # run db migrations
-    if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ]; then
+    if [ "$1" = "bundle" -a "$2" = "exec" -a "$3" = "puma" ] ||  [ "$1" = "./bin/dev" ]; then
         bundle exec rake db:migrate
 
         if [ "${RAILS_ENV}" = "development" ] || [ "${RAILS_ENV}" = "test" ]; then

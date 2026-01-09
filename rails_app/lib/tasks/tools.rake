@@ -78,4 +78,9 @@ namespace :tools do
   task clean: :environment do
     system('docker compose down --volumes')
   end
+
+  desc 'Poll for CSS changes'
+  task dartsass_poll: :environment do
+    system(*Dartsass::Runner.dartsass_compile_command, '--watch', '--poll', exception: true)
+  end
 end

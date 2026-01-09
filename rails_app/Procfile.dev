@@ -1,0 +1,2 @@
+web: bundle exec puma -b tcp://0.0.0.0:3000
+css: bundle exec rake tools:dartsass_poll

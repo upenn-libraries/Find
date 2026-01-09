@@ -100,11 +100,33 @@ For MacOS users the `pg` gem may fail to install with an error concerning the `l
 
 #### Start the development server
 
+When you're developing your application, you want to run Dart Sass in watch mode, so scss changes are automatically
+reflected in the generated CSS output. You can start both the rails server and the Dart Sass watch mode with the following
+command:
+
+```bash
+bin/dev
+```
+
+If you prefer, you can run both processes separately in different terminal windows as well:
+
+```bash
+bundle exec rails dartsass:watch
+```
 ```bash
 bundle exec rails server
 ```
- 
+
 View the app at `localhost:3000`
+
+#### Build CSS
+
+When running Dart Sass in watch mode or the `bin/dev` development server, css files will build automatically when
+changes occur. You can always build the css files manually with the following command:
+
+```bash
+bundle exec rails dartsass:build
+```
 
 #### Start the development server in RubyMine
 
