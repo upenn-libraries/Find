@@ -43,6 +43,7 @@
 @import url('bs-containers.css');
 @import url('bs-accordion.css');
 @import url('bs-pagination.css');
+@import url('bs-alert.css');
 
 /**
 * Blacklight (prefix: "bl-")

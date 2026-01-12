@@ -272,9 +272,6 @@ a.inventory-item--hathitrust {
 }
 
 .document-inventory-container .btn-success {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--pl-space-xs);
   text-decoration: underline;
   text-decoration-thickness: var(--pl-link-text-decoration-thickness);
   text-underline-offset: var(--pl-link-text-underline-offset);
