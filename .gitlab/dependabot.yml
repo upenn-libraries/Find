@@ -2,6 +2,6 @@ version: 2
 updates:
   - name: "bundler-dependabot-check" 
     package-ecosystem: "bundler"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 3
     directories:
       - "rails_app/"
