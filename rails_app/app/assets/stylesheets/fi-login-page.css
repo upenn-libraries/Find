@@ -1,3 +1,7 @@
+/*
+* Find login page styles
+*/
+
 .login__container {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -5,8 +9,10 @@
 
 .login__options {
   margin: 1.5rem 0;
+}
 
-  @media (max-width: 620px) {
+@media (max-width: 620px) {
+  .login__options {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -19,16 +25,14 @@
   letter-spacing: 0.05rem;
   font-weight: 600;
   padding: 1rem;
+}
 
-  @media (max-width: 620px) {
+@media (max-width: 620px) {
+  .login__options > span {
     display: none;
   }
 }
 
 .login__options > form.button_to {
   display: inline-flex;
-}
-
-.login__help-link {
-
 }

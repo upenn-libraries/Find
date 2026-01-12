@@ -1,3 +1,7 @@
+/*
+* Bootstrap link customizations
+*/
+
 a {
   --bs-link-color: var(--pl-color-fg-accent);
   --bs-link-color-rgb: 14, 86, 150;
