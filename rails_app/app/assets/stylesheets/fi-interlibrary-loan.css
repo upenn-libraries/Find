@@ -1,3 +1,7 @@
+/*
+* Find interlibrary loan styles
+*/
+
 .interlibrary-loan__scan-or-loanable {
   display: flex;
   align-items: baseline;
