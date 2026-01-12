@@ -1,3 +1,7 @@
+/*
+* Find site alerts styles
+*/
+
 .site-alerts__container .alert-primary {
   background: var(--pl-color-bg-accent);
   color: var(--pl-color-fg-default);

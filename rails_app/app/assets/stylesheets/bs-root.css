@@ -1,0 +1,28 @@
+/*
+* Bootstrap root customizations
+* Customizations to Bootstrap's theme variables using CSS custom properties.
+* https://github.com/twbs/bootstrap/blob/v5.0.0/scss/_variables.scss
+*/
+
+:root {
+  --pl-viewport-margins-max-width: 1280px;
+}
+
+body {
+  --bs-font-sans-serif: var(--pl-font-family);
+  --bs-body-font-family: var(--pl-font-family);
+  --bs-body-line-height: 1.4;
+
+  /* Bootstrap theme colors mapped to design system */
+  --bs-primary: #0E5696;
+  --bs-secondary: #595F6A;
+  --bs-success: #267434;
+  --bs-info: #80317F;
+  --bs-warning: #BD4718;
+  --bs-danger: #BD4718;
+  --bs-light: #F5F5F6;
+  --bs-dark: #2D3545;
+
+  /* Font weight for .fw-bolder */
+  --bs-font-weight-semibold: 500;
+}

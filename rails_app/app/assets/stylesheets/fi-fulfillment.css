@@ -1,3 +1,7 @@
+/*
+* Find fulfillment form styles
+*/
+
 .fulfillment-form .form-select {
   border-color: var(--pl-color-fg-subtle);
 }

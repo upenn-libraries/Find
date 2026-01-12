@@ -1,3 +1,7 @@
+/*
+* Find inventory/holdings styles
+*/
+
 .holdings {
   list-style: none;
   padding: 0;
@@ -13,7 +17,6 @@
 }
 
 .holdings__other-link {
-  text-decoration: none;
   text-decoration: underline;
   text-underline-offset: .15em;
 }
@@ -161,8 +164,10 @@
   padding-top: 0.95rem;
   padding-bottom: 0.95rem;
   margin: -0.2rem;
+}
 
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
+  .inventory-item.active {
     clip-path: inset(-0.5rem 1px -0.5rem -0.5rem);
     margin-right: 0;
   }
@@ -198,13 +203,13 @@
 }
 
 .location-details summary {
-  cursor:pointer;
+  cursor: pointer;
+}
 
-  .inventory-item__container {
-    display: inline-grid;
-    /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
-    max-width: calc(100% - 2rem);
-  }
+.location-details summary .inventory-item__container {
+  display: inline-grid;
+  /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
+  max-width: calc(100% - 2rem);
 }
 
 a.inventory-item--hathitrust {
@@ -218,15 +223,15 @@ a.inventory-item--hathitrust {
 .inventory-item--hathitrust {
   background: var(--pl-color-bg-default);
   border-left-color: #f3b688;
+}
 
-  .inventory-item__header {
-    color: var(--pl-color-fg-default);
-  }
+.inventory-item--hathitrust .inventory-item__header {
+  color: var(--pl-color-fg-default);
+}
 
-  .inventory-item__main {
-    color: #c35400;
-    text-decoration-color: #c35400;
-  }
+.inventory-item--hathitrust .inventory-item__main {
+  color: #c35400;
+  text-decoration-color: #c35400;
 }
 
 .inventory-item--hathitrust:hover {
@@ -246,7 +251,7 @@ a.inventory-item--hathitrust {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   padding: 1rem;
-  background: var(--pl-color-bg-subtle)
+  background: var(--pl-color-bg-subtle);
 }
 
 .location-details__content ul {
@@ -266,13 +271,35 @@ a.inventory-item--hathitrust {
   margin-bottom: 0;
 }
 
+.document-inventory-container .btn-success {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+  text-decoration: underline;
+  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+}
+
+.document-inventory-container .btn-success:hover {
+  text-decoration-thickness: var(--pl-link-hover-text-decoration-thickness);
+}
+
+.document-inventory-container .btn-success:focus {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px, var(--pl-focus-box-shadow);
+}
+
+.document-inventory-container .btn-success svg {
+  max-width: 1rem;
+  max-height: 1rem;
+}
+
 @media (min-width: 992px) {
   .show-document-container {
     padding: 1.5rem;
     border: solid 1px var(--pl-color-fg-subtle);
     border-radius: 0.5rem;
     box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
-
     margin-left: calc(var(--bs-gutter-x) * -1 - 0.15rem);
     background: var(--pl-color-bg-default);
     height: 100%;
