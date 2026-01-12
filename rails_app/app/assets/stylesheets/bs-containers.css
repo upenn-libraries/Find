@@ -1,3 +1,7 @@
+/*
+* Bootstrap container customizations
+*/
+
 .container {
   max-width: var(--pl-viewport-margins-max-width);
   margin: 0 auto;
