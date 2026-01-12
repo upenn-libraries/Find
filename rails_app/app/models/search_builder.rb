@@ -4,9 +4,10 @@
 class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
-  self.default_processor_chain += %i[facets_for_advanced_search_form
-                                     massage_sort
-                                     handle_standalone_boolean_operators]
+  self.default_processor_chain += %i[
+    massage_sort
+    handle_standalone_boolean_operators
+  ]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
@@ -15,15 +16,6 @@ class SearchBuilder < Blacklight::SearchBuilder
   INDUCED_SORT = ['encoding_level_sort asc', 'updated_date_sort desc'].freeze
   RELEVANCE_SORT = ['score desc', 'publication_date_sort desc', 'title_sort asc'].freeze
   TITLE_SORT_ASC = ['title_sort asc', 'publication_date_sort desc'].freeze
-
-  # Merge the advanced search form parameters into the solr parameters
-  # @param solr_p [Hash] the current solr parameters
-  def facets_for_advanced_search_form(solr_p)
-    return unless (search_state.controller&.action_name == 'advanced_search') &&
-                  blacklight_config.advanced_search[:form_solr_parameters]
-
-    solr_p.merge!(blacklight_config.advanced_search[:form_solr_parameters])
-  end
 
   # Applies an alternative sort order when a blank query is set to be sorted by score. This would require more work
   # to work with Advanced Search params (and may not be desirable), so we exit early in those cases to avoid munging
