@@ -14,14 +14,38 @@ body {
   --bs-body-line-height: 1.4;
 
   /* Bootstrap theme colors mapped to design system */
-  --bs-primary: #0E5696;
-  --bs-secondary: #595F6A;
-  --bs-success: #267434;
-  --bs-info: #80317F;
-  --bs-warning: #BD4718;
-  --bs-danger: #BD4718;
-  --bs-light: #F5F5F6;
-  --bs-dark: #2D3545;
+  --bs-primary: var(--pl-color-fg-accent);
+  --bs-primary-bg-subtle: var(--pl-color-bg-accent);
+  --bs-primary-border-subtle: var(--pl-color-fg-accent);
+  --bs-primary-text-emphasis: var(--pl-color-fg-accent);
+
+  --bs-secondary: var(--pl-color-fg-subtle);
+  --bs-secondary-bg-subtle: var(--pl-color-bg-subtle);
+  --bs-secondary-border-subtle: var(--pl-color-fg-subtle);
+  --bs-secondary-text-emphasis: var(--pl-color-fg-default);
+
+  --bs-success: var(--pl-color-fg-success);
+  --bs-success-bg-subtle: var(--pl-color-bg-success);
+  --bs-success-border-subtle: var(--pl-color-fg-success);
+  --bs-success-text-emphasis: var(--pl-color-fg-success);
+
+  --bs-info: var(--pl-color-fg-info);
+  --bs-info-bg-subtle: var(--pl-color-bg-info);
+  --bs-info-border-subtle: var(--pl-color-fg-info);
+  --bs-info-text-emphasis: var(--pl-color-fg-info);
+
+  --bs-warning: var(--pl-color-fg-attention);
+  --bs-warning-bg-subtle: var(--pl-color-bg-attention);
+  --bs-warning-border-subtle: var(--pl-color-fg-attention);
+  --bs-warning-text-emphasis: var(--pl-color-fg-attention);
+
+  --bs-danger: var(--pl-color-fg-attention);
+  --bs-danger-bg-subtle: var(--pl-color-bg-attention);
+  --bs-danger-border-subtle: var(--pl-color-fg-attention);
+  --bs-danger-text-emphasis: var(--pl-color-fg-attention);
+
+  --bs-light: var(--pl-color-bg-subtle);
+  --bs-dark: var(--pl-color-fg-default);
 
   /* Font weight for .fw-bolder */
   --bs-font-weight-semibold: 500;
