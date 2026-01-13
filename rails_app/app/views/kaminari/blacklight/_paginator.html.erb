@@ -1,4 +1,7 @@
-<%# Override of Blacklight v9.0 template @ views/kaminari/blacklight/_paginator.html.erb to disallow deep pagination %>
+<%# Override of Blacklight v9.0 to:
+      - change pagination bar to display "Page 1 of 2" with next and previous links
+      - removing pagination bar with links to each page
+      - changing outer ol element to be a div %>
 
 <%# The container tag
   - available local variables
@@ -11,15 +14,9 @@
    Paginator now using the Bootstrap paginator class
 -%>
 <%= paginator.render do -%>
-  <ul class="pagination">
+  <div class="d-flex align-items-center gap-3 pl-margin-t-xl">
     <%= prev_page_tag %>
-    <%= next_page_tag  %>
-    <% each_relevant_page do |page| -%>
-      <% if page.left_outer? ||  page.inside_window? -%>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? -%>
-        <%= gap_tag %>
-      <% end -%>
-    <% end -%>
-  </ul>
+    <p class="mb-0">Page <%= current_page %> of <%= total_pages %></p>
+    <%= next_page_tag %>
+  </div>
 <% end -%>
