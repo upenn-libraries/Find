@@ -21,6 +21,7 @@
   --bs-pagination-disabled-border-color: var(--pl-color-fg-subtle);
 }
 
+/* TODO: this causes the leftmost "Next" button to not have rounded corners and look awkward */
 .pagination .page-item.disabled {
   display: none;
 }
