@@ -5,7 +5,9 @@
   <% documents.map { |doc| document_presenter(doc) }.each_with_index do |doc, i| %>
     <% counter = (@response&.start || 0) + i %>
     <%= render view_config.document_component.with_collection([doc], partials: view_config.partials, counter_offset:
-      counter) %>
+      counter) do |component| %>
+      <% component.with_metadata(classes: 'pl-dl--inline') %>
+    <% end %>
 
     <%# Render Additional Results component after the configured (zero-indexed) catalog result (unless there's only one catalog result) %>
     <% if (counter == Settings.additional_results_sources.position) || (documents.size == 1) %>
