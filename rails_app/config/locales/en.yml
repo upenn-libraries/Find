@@ -345,6 +345,8 @@ en:
     help: 'Help with your library account'
     pennkey: 'Continue with PennKey'
   results:
+    singular: 'result'
+    none: 'No results'
     creator: 'Author/Creator'
     edition: 'Edition'
     conference: 'Conference name'

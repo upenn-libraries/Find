@@ -70,6 +70,7 @@ class CatalogController < ApplicationController
 
     # Some components can be configured
     config.header_component = Catalog::HeaderComponent
+    config.index.search_header_component = Catalog::SearchHeaderComponent
     config.index.search_bar_component = Catalog::SearchBarComponent
     config.index.constraints_component = Catalog::ConstraintsComponent
     config.index.sidebar_component = Catalog::SidebarComponent
