@@ -1,0 +1,68 @@
+.accordion {
+  --bs-accordion-active-color: var(--pl-color-fg-default);
+  --bs-accordion-border-width: 0;
+  --bs-accordion-transition: 0;
+  --bs-accordion-btn-padding-y: var(--pl-space-xs);
+  --bs-accordion-btn-padding-x: var(--pl-space-m);
+  --bs-accordion-btn-bg: var(--pl-color-bg-subtle);
+  --bs-accordion-inner-border-radius: var(--pl-space-s);
+  --bs-btn-hover-bg: auto;
+  --bs-btn-active-bg: var(--pl-color-bg-subtle);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 2px var(--pl-color-bg-accent), 0 0 0 4px var(--pl-color-fg-default);
+  --bs-accordion-btn-bg: var(--pl-color-bg-subtle);
+  --bs-accordion-active-bg: var(--pl-color-bg-subtle);
+  --bs-border-color-translucent: rgb(from var(--pl-color-fg-subtle) r g b / 1);
+
+  display: flex !important;
+  flex-direction: column;
+  gap: var(--pl-space-s);
+}
+
+.accordion-button:active {
+  --bs-btn-active-color: var(--pl-color-fg-default);
+}
+
+.accordion-item,
+.accordion-button {
+  border-radius: var(--bs-accordion-inner-border-radius);
+}
+
+.accordion-button {
+  font-weight: 500;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
+  /* border: solid 1px var(--bs-border-color-translucent); */
+  background: none;
+}
+
+.accordion-button[aria-expanded="true"] {
+  border-bottom: none;
+  border: solid 1px var(--bs-border-color-translucent);
+  border-bottom: 0;
+  border-radius: var(--bs-accordion-inner-border-radius) var(--bs-accordion-inner-border-radius) 0 0;
+}
+
+.accordion-button[aria-expanded=true]:hover {
+  border-bottom: 0;
+}
+
+.accordion-button:focus {
+  box-shadow: auto;
+}
+
+.accordion-button:hover {
+  text-decoration: underline;
+}
+
+.accordion-item > :is(.show, .collapsing) {
+  border: solid 1px var(--bs-border-color-translucent);
+  border-radius: 0 0 var(--bs-accordion-inner-border-radius) var(--bs-accordion-inner-border-radius);
+}
+
+.facet-limit-active {
+  --bs-accordion-btn-icon: unset;
+}
+
+.accordion-button::after {
+  color: var(--pl-color-fg-default);
+}
