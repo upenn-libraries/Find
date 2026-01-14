@@ -16,7 +16,7 @@ en:
         cta_html: 'Go to %{link}.'
     resources:
       heading: 'More tools for your research'
-      lede: 'There is no single search box that can be for all items. Expand your research using one of the following popular specialized tools.'
+      lede: 'No single search tool covers everything. Expand your research with these popular specialized tools.'
       research:
         articles:
           heading: 'Articles+'
