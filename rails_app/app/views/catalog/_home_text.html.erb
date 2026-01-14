@@ -9,8 +9,10 @@
 
   <h2><%= t('home.info.manage.heading') %></h2>
   <p class="pl-line-length">
-    <strong><%= link_to t('home.info.manage.heading'), account_path %></strong>. <%= t('home.info.manage.description') %>
+    <%= t('home.info.manage.description') %>
   </p>
+
+  <p><%= t('home.info.manage.cta_html', link: link_to(t('header.account'), account_path)) %></p>
 
   <h2 class="pl-h2"><%= t('home.resources.heading') %></h2>
   <p class="pl-line-length"><%= t('home.resources.lede') %></p>

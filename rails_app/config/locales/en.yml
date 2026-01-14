@@ -12,7 +12,8 @@ en:
       description: 'Find is the definitive place to <strong>search and find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
       manage:
         heading: 'Manage your account'
-        description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
+        description: 'Create and manage item requests on your shelf, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
+        cta_html: 'Go to %{link}.'
     resources:
       heading: 'More tools for your research'
       lede: 'There is no single search box that can be for all items. Expand your research using one of the following popular specialized tools.'
