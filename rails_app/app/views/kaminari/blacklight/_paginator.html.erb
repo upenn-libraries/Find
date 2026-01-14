@@ -16,7 +16,7 @@
 <%= paginator.render do -%>
   <div class="d-flex align-items-center pl-gap-m">
     <%= prev_page_tag %>
-    <p class="mb-0">Page <%= current_page %> of <%= total_pages %></p>
+    <p class="mb-0">Page <%= number_with_delimiter(current_page) %> of <%= number_with_delimiter(total_pages) %></p>
     <%= next_page_tag %>
   </div>
 <% end -%>
