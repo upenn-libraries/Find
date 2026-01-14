@@ -30,6 +30,10 @@ pennlibs-footer {
 }
 
 .site-feedback p {
+  margin-bottom: var(--pl-space-xs);
+}
+
+.site-feedback p:last-of-type {
   margin-bottom: 0;
 }
 

@@ -1,6 +1,7 @@
 .toggle-bookmark-label {
   display: flex;
   gap: var(--pl-space-2xs);
+  justify-content: flex-end;
 }
 
 .bookmarksTools {

@@ -82,6 +82,10 @@
   border-bottom: solid 1px var(--pl-color-bg-subtle-brand);
   padding-top: 0;
   margin-bottom: 1rem;
+
+  & .pl-dl--inline {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .documents-list .document .document-title-heading {

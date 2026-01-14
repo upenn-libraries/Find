@@ -1,7 +1,7 @@
 en:
   feedback:
     heading: 'Feedback'
-    description: 'We encourage you to <a href="%{url}" target="_blank">share your feedback</a> so that we can make improvements. For help, please <a href="%{contact_url}" target="_blank">contact us</a>.'
+    description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help with a search or your account.'
   guides:
     use_catalog: 'Using the Find catalog'
     articles+: 'Using Articles+'

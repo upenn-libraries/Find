@@ -65,6 +65,10 @@
   margin-bottom: 0.025em;
 }
 
+.constraint .filter-name {
+  display: none;
+}
+
 .constraint .filter-name::after {
   color: var(--pl-fg-subtle);
 }
