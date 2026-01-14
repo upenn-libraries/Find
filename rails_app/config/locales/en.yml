@@ -58,7 +58,7 @@ en:
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_heading: 'Account overview'
+      page_heading: 'My Account'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
         request:
