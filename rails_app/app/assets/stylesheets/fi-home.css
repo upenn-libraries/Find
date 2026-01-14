@@ -14,3 +14,18 @@
 .home-content dd:last-of-type {
   margin-bottom: 0;
 }
+
+.fi-home #content {
+  & h1 {
+    margin-top: 2rem;
+  }
+
+  & .page__lede {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  & h2 {
+    margin-top: 2rem;
+  }
+}
