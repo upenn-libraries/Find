@@ -37,7 +37,7 @@ module Discover
 
     # @return [String]
     def results_button_content
-      tag.a(id: results_button_id, class: 'btn btn-sm btn-primary', href: results.results_url) do
+      tag.a(id: results_button_id, href: results.results_url) do
         t('discover.results.view_all_button.label', count: number_with_delimiter(results.total_count))
       end
     end

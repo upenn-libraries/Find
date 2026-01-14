@@ -4,7 +4,7 @@
     <div class="row align-items-center mb-1">
       <%# Additional Results source title %>
       <div class="col-sm">
-        <h2 class="h5 mb-2">
+        <h2 class="pl-h3 mb-2">
           <%= t('additional_results.header_text.results_html', source: display_name('summon')) %>
         </h2>
 
@@ -15,7 +15,6 @@
         <div class="view-all col-sm-auto mb-2">
           <%= link_to t('additional_results.view_all', count: record_count, source: display_name('summon')),
                       summon_url,
-                      class: 'btn btn-sm btn-primary',
                       target: '_blank',
                       rel: 'noopener'
           %>
@@ -72,7 +71,7 @@
 
   <% else %>
 
-    <h2 class="h5 mb-0">
+    <h2 class="pl-h3 mb-0">
       <%= t('additional_results.header_text.no_results_html', source: display_name('summon')) %>
     </h2>
 

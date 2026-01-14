@@ -11,11 +11,10 @@
   --bs-accordion-btn-focus-box-shadow: 0 0 0 2px var(--pl-color-bg-accent), 0 0 0 4px var(--pl-color-fg-default);
   --bs-accordion-btn-bg: var(--pl-color-bg-subtle);
   --bs-accordion-active-bg: var(--pl-color-bg-subtle);
-  --bs-border-color-translucent: rgb(from var(--pl-color-fg-subtle) r g b / 1);
 
   display: flex !important;
   flex-direction: column;
-  gap: var(--pl-space-s);
+  gap: var(--pl-space-m);
 }
 
 .accordion-button:active {
@@ -28,22 +27,16 @@
 }
 
 .accordion-button {
+  border: solid 1px transparent;
   font-weight: 500;
   text-underline-offset: var(--pl-link-text-underline-offset);
   text-decoration-thickness: var(--pl-link-text-decoration-thickness);
-  /* border: solid 1px var(--bs-border-color-translucent); */
-  background: none;
 }
 
 .accordion-button[aria-expanded="true"] {
+  border: solid 1px var(--pl-color-fg-subtle);
   border-bottom: none;
-  border: solid 1px var(--bs-border-color-translucent);
-  border-bottom: 0;
   border-radius: var(--bs-accordion-inner-border-radius) var(--bs-accordion-inner-border-radius) 0 0;
-}
-
-.accordion-button[aria-expanded=true]:hover {
-  border-bottom: 0;
 }
 
 .accordion-button:focus {
@@ -55,14 +48,10 @@
 }
 
 .accordion-item > :is(.show, .collapsing) {
-  border: solid 1px var(--bs-border-color-translucent);
+  border: solid 1px var(--pl-color-fg-subtle);
   border-radius: 0 0 var(--bs-accordion-inner-border-radius) var(--bs-accordion-inner-border-radius);
 }
 
 .facet-limit-active {
   --bs-accordion-btn-icon: unset;
-}
-
-.accordion-button::after {
-  color: var(--pl-color-fg-default);
 }

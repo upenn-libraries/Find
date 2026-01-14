@@ -1,0 +1,8 @@
+.toggle-bookmark-label {
+  display: flex;
+  gap: var(--pl-space-2xs);
+}
+
+.bookmarksTools {
+  margin-bottom: var(--pl-space-l);
+}

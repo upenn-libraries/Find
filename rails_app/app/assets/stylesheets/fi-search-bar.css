@@ -2,6 +2,16 @@
 * Find search bar styles
 */
 
+.fi-search-box-container {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-m);
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+}
+
 .fi-search-box {
   margin: 0 auto;
   background: var(--pl-color-bg-default);

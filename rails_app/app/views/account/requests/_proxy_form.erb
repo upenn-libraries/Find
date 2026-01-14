@@ -6,7 +6,7 @@
           <%= t('account.ill.staff_only') %>
         </div>
         <div class="card-body">
-          <h2 class="card-title h5"><%= t('account.ill.form.proxy.prompt') %></h2>
+          <h2 class="card-title pl-h3"><%= t('account.ill.form.proxy.prompt') %></h2>
 
           <%= form_with(url: ill_new_request_url, method: :get) do %>
             <%= render 'hidden_fields' %>

@@ -16,9 +16,10 @@ module Catalog
           **)
     end
 
-    def initialize(**)
-      super
+    def initialize(edit_search: true, **)
+      super(**)
 
+      @edit_search = edit_search
       @heading_classes = nil
     end
 

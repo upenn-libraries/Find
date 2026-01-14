@@ -7,48 +7,50 @@
 %>
 
 <search>
-  <pennlibs-autocomplete for="query_input" data-controller="suggester"<% if Settings.suggester.enabled %> data-suggester-enabled-value="true"<% end %>>
-    <div slot="start">
-      <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
-        <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
-        <% if search_fields.length > 1 %>
-          <%= f.label :search_field, scoped_t('search_field.label'), class: 'visually-hidden' %>
-        <% end %>
-        <% before_input_groups.each do |input_group| %>
-          <%= input_group %>
-        <% end %>
-        <div class="input-group">
-          <%= prepend %>
-
+  <div class="fi-search-box-container">
+    <pennlibs-autocomplete for="query_input" data-controller="suggester"<% if Settings.suggester.enabled %> data-suggester-enabled-value="true"<% end %>>
+      <div slot="start">
+        <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
+          <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
           <% if search_fields.length > 1 %>
-            <%= f.select(:search_field,
-                        options_for_select(search_fields, h(@search_field)),
-                        {},
-                        title: scoped_t('search_field.title'),
-                        class: "form-select search-field") %>
-          <% elsif search_fields.length == 1 %>
-            <%= f.hidden_field :search_field, value: search_fields.first.last %>
+            <%= f.label :search_field, scoped_t('search_field.label'), class: 'visually-hidden' %>
           <% end %>
+          <% before_input_groups.each do |input_group| %>
+            <%= input_group %>
+          <% end %>
+          <div class="input-group">
+            <%= prepend %>
 
-          <%= f.label @query_param, scoped_t('search.label'), class: 'visually-hidden' %>
-          <%= f.search_field @query_param, value: @q, class: "search-q q form-control #{rounded_border_class}",
-              autofocus: @autofocus,
-              autocomplete: 'off',
-              aria: { label: scoped_t('search.label') },
-              id: 'query_input'
-            %>
+            <% if search_fields.length > 1 %>
+              <%= f.select(:search_field,
+                          options_for_select(search_fields, h(@search_field)),
+                          {},
+                          title: scoped_t('search_field.title'),
+                          class: "form-select search-field") %>
+            <% elsif search_fields.length == 1 %>
+              <%= f.hidden_field :search_field, value: search_fields.first.last %>
+            <% end %>
 
-          <%= append %>
-          <%= search_button || render(Catalog::SearchButtonComponent.new(id: "#{@prefix}search", text: t('search.button.label'))) %>
-        </div>
-      <% end %>
-    </div>
-    <ol role="listbox" id="suggestions-listbox"></ol>
-  </pennlibs-autocomplete>
+            <%= f.label @query_param, scoped_t('search.label'), class: 'visually-hidden' %>
+            <%= f.search_field @query_param, value: @q, class: "search-q q form-control #{rounded_border_class}",
+                autofocus: @autofocus,
+                autocomplete: 'off',
+                aria: { label: scoped_t('search.label') },
+                id: 'query_input'
+              %>
 
-  <% if advanced_search_enabled? %>
-    <%= link_to t('search.advanced.label'), advanced_search_catalog_path %>
-  <% end %>
+            <%= append %>
+            <%= search_button || render(Catalog::SearchButtonComponent.new(id: "#{@prefix}search", text: t('search.button.label'))) %>
+          </div>
+        <% end %>
+      </div>
+      <ol role="listbox" id="suggestions-listbox"></ol>
+    </pennlibs-autocomplete>
 
-  <%= link_to t('search.databases'), databases_catalog_path(sort: SearchBuilder::TITLE_SORT_ASC.join(',')) %>
+    <% if advanced_search_enabled? %>
+      <%= link_to t('search.advanced.label'), advanced_search_catalog_path %>
+    <% end %>
+
+    <%= link_to t('search.databases'), databases_catalog_path(sort: SearchBuilder::TITLE_SORT_ASC.join(',')) %>
+  </div>
 </search>

@@ -5,7 +5,7 @@
 .constraints-container {
   align-items: baseline;
   gap: var(--pl-space-s);
-  margin: 0.5rem 0;
+  margin: 0 !important;
   align-self: end;
   --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
 }

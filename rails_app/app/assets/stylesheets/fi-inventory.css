@@ -43,6 +43,7 @@
   border-left: solid 3px var(--holding-accent-color);
   padding: 0 0.5rem;
   line-height: 1.25;
+  font-weight: 400;
 }
 
 .holding__header {
@@ -272,9 +273,6 @@ a.inventory-item--hathitrust {
 }
 
 .document-inventory-container .btn-success {
-  text-decoration: underline;
-  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
-  text-underline-offset: var(--pl-link-text-underline-offset);
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
 }
 
