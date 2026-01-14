@@ -5,6 +5,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
   self.default_processor_chain += %i[
+    restore_deftype
     massage_sort
     handle_standalone_boolean_operators
   ]
@@ -30,6 +31,16 @@ class SearchBuilder < Blacklight::SearchBuilder
     return solr_p[:sort] = RELEVANCE_SORT.join(',') if search_term_provided?(solr_p)
 
     solr_p[:sort] = INDUCED_SORT.dup.prepend(inventory_sort_addition(solr_p)).compact_blank.join(',')
+  end
+
+  # This is necessary for an empty search from Advanced Search to return all results. BL9 set the `defType`
+  # param to 'lucene' at the top-level. We must set it back to 'edismax' for the expected behavior.
+  # Refer to this commit for the changes:
+  # https://github.com/projectblacklight/blacklight/pull/3742/changes#diff-685346ee7cdd740dec27e95aa2a2ac51e156043a6a455ab9c5f751e2da6ea3e8R100
+  def restore_deftype(solr_p)
+    return if solr_p[:json].present?
+
+    solr_p[:defType] = 'edismax'
   end
 
   # Escape certain Solr operators when they are found in the user's query surrounded by whitespace
