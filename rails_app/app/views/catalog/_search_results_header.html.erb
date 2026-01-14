@@ -2,7 +2,7 @@
 
 <h1 class="pl-h2 pl-margin-b-0">
   <% if @response.total_count > 0 %>
-    <%= pluralize(@response.total_count, t('results.singular')) %>
+    <%= pluralize(number_with_delimiter(@response.total_count), t('results.singular')) %>
   <% else %>
     <%= t('results.none') %>
   <% end %>
