@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :alma_user_request, aliases: [:alma_hold], class: 'Alma::UserRequest' do
-    title { 'Test Title' }
-    author { 'Test Author' }
+    title { Faker::Book.title }
+    author { Faker::Book.author }
     volume { '' }
     issue { '' }
     part { '' }

@@ -5,17 +5,17 @@ FactoryBot.define do
     item do
       {
         'bib_data' => {
-          'title' => 'Test Title',
-          'author' => 'Test Author'
+          'title' => Faker::Book.title,
+          'author' => Faker::Book.author
         },
         'holding_data' => { 'holding_id' => '456' },
         'item_data' => {
           'base_status' => { 'value' => '1' },
           'policy' => { 'value' => 'book/seria', 'desc' => 'Book/serial' },
-          'description' => 'MS 1234',
+          'description' => "MS #{Faker::Number.number(digits: 4)}",
           'location' => { 'value' => 'thelocation', 'desc' => 'The Location' },
           'library' => { 'value' => 'thelibrary', 'desc' => 'The Library' },
-          'pid' => '0123456789',
+          'pid' => Faker::Number.number(digits: 10),
           'physical_material_type' => { 'value' => 'BOOK', 'desc' => 'Book' }
         }
       }

@@ -5,8 +5,8 @@ FactoryBot.define do
   factory :alma_user_response, class: Hash do
     status { { 'value' => 'ACTIVE', 'desc' => 'Active' } }
     primary_id { '12345678' }
-    first_name { 'Test' }
-    last_name { 'User' }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     user_group { { 'value' => 'undergrad', 'desc' => 'Undergraduate Student' } }
     user_statistic do
       [

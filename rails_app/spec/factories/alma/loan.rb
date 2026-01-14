@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  sequence(:loan_id) { |n| n }
-
   factory :alma_loan, class: 'Alma::Loan' do
-    loan_id
+    loan_id { Faker::Number.number(digits: 16).to_s }
     circ_desk { { 'value' => 'DEFAULT_CIRC_DESK', 'desc' => 'Van Pelt Circulation' } }
     return_circ_desk { {} }
     library { { 'value' => 'VanPeltLib', 'desc' => 'Van Pelt Library' } }
     user_id { '123456' }
-    item_barcode { '1234567891234' }
+    item_barcode { Faker::Barcode.ean(13) }
     due_date { 45.days.since.utc.iso8601 }
     loan_status { 'ACTIVE' }
     loan_date { '2021-08-16T22:46:53.670Z' }
@@ -18,9 +16,9 @@ FactoryBot.define do
     mms_id { '9938978223503681' }
     holding_id { '22379246830003681' }
     item_id { '23379246820003681' }
-    title { 'Test Alma Loan Title' }
-    author { 'Test Author' }
-    publication_year { '1999' }
+    title { Faker::Book.title }
+    author { Faker::Book.author }
+    publication_year { Faker::Date.between(from: 1956, to: 2020).to_s }
     location_code { { 'value' => 'vanp', 'name' => 'Stacks' } }
     item_policy { { 'value' => 'book/seria', 'description' => 'Book/serial' } }
     call_number { 'PS3537.A426 C3 1979' }
