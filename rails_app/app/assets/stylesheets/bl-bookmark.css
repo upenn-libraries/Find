@@ -7,3 +7,7 @@
 .bookmarksTools {
   margin-bottom: var(--pl-space-l);
 }
+
+.bookmark-toggle .toggle-bookmark .toggle-bookmark-label {
+  min-width: auto;
+}
