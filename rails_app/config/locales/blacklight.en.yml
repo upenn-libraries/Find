@@ -26,6 +26,8 @@ en:
       facets:
         group:
           none: 'There are no results to filter.'
+      filters:
+        title: 'You searched for:'
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
