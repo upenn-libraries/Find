@@ -7,37 +7,10 @@
   <fieldset>
     <legend class="h6"> <%= t('requests.form.options.label') %></legend>
     <ul class="list-group">
-      <% if options.inquiry.electronic? %>
-        <%= render(Fulfillment::Choices::ElectronicComponent.new(checked: true, holding_id: item.holding_id, data: { action: 'change->request-options#optionChanged' })) %>
-      <% end %>
-
-      <% if options.inquiry.office? %>
-        <%= render(Fulfillment::Choices::OfficeComponent.new(user: user,
-                                                             checked: pickup_checked?,
-                                                             holding_id: item.holding_id,
-                                                             data: { action: 'change->request-options#optionChanged' })) %>
-      <% end %>
-
-      <% if options.inquiry.pickup? %>
-        <%= render(Fulfillment::Choices::PickupComponent.new(user: user,
-                                                             checked: pickup_checked?,
-                                                             holding_id: item.holding_id,
-                                                             data: { action: 'change->request-options#optionChanged' })) %>
-      <% end %>
-
-      <% if options.inquiry.ill_pickup? %>
-        <%= render(Fulfillment::Choices::PickupComponent.new(user: user, ill: true,
-                                                             checked: pickup_checked?,
-                                                             holding_id: item.holding_id,
-                                                             data: { action: 'change->request-options#optionChanged' })) %>
-      <% end %>
-
-      <% if options.inquiry.docdel? %>
-        <%= render(Fulfillment::Choices::DocdelComponent.new(user: user, holding_id: item.holding_id, data: { action: 'change->request-options#optionChanged' })) %>
-      <% end %>
-
-      <% if options.inquiry.mail? %>
-        <%= render(Fulfillment::Choices::MailComponent.new(user: user, holding_id: item.holding_id, data: { action: 'change->request-options#optionChanged' })) %>
+      <% options.each do |deliverable_option| %>
+        <%= render(component_class_for(option: deliverable_option).new(
+          user: user, holding_id: item.holding_id, checked: deliverable_option == preselected_option
+        )) %>
       <% end %>
     </ul>
   </fieldset>

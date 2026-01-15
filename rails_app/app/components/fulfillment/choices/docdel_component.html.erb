@@ -1,7 +1,7 @@
 <li class="list-group-item">
   <div class="form-check">
-    <%= radio_button_tag :delivery, delivery_value, true, id: radio_id, class: 'form-check-input', **radio_options %>
-    <%= label_tag radio_id, t('requests.form.options.docdel.label'), class: 'form-check-label' %>
+    <%= radio_input_element %>
+    <%= radio_input_label %>
     <div>
       <small class="text-muted">
         <%= t('requests.form.options.docdel.info_html', url: t('urls.guides.lippincott_svc')) %>

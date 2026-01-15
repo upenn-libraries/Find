@@ -3,17 +3,11 @@
 module Fulfillment
   module Choices
     # Pickup component logic
-    class PickupComponent < ViewComponent::Base
+    class PickupComponent < BaseComponent
       DEFAULT_PICKUP = 'Van Pelt Library'
 
-      attr_accessor :user, :checked, :radio_options, :holding_id
-
-      def initialize(user:, ill: false, checked: false, holding_id: nil, **radio_options)
-        @user = user
-        @checked = checked
-        @ill = ill
-        @holding_id = holding_id
-        @radio_options = radio_options
+      def radio_label_content
+        t('requests.form.options.pickup.label')
       end
 
       # @return [String]
@@ -28,19 +22,8 @@ module Fulfillment
         @ill ? Fulfillment::Options::Deliverable::ILL_PICKUP : Fulfillment::Options::Deliverable::PICKUP
       end
 
-      # If the options for the item include a scan or office option, don't check the pickup option
-      # Otherwise, check the pickup option. See DeliverableComponent#pickup_checked? for similar logic.
-      # @return [Hash, NilClass]
-      def checked?
-        %i[scan office].any? { |option| options.include?(option) } ? nil : { checked: true }
-      end
-
       def pickup_locations
         @pickup_locations ||= generate_pickup_locations
-      end
-
-      def radio_id
-        holding_id ? "delivery_#{delivery_value}_#{holding_id}" : "delivery_#{delivery_value}"
       end
 
       private
