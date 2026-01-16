@@ -24,7 +24,7 @@ pennlibs-footer {
 }
 
 .site-feedback {
-  background: var(--pl-color-bg-subtle);
+  background: var(--pl-color-bg-subtle-brand);
   padding: 2rem 0;
   margin-top: 2rem;
 }
