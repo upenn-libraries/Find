@@ -78,7 +78,7 @@ class CatalogController < ApplicationController
     config.add_show_tools_partial(:bookmark, component: Catalog::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
-                                          validator: :validate_email_params)
+                                          validator: :email_params_valid?)
     config.add_show_tools_partial(:login_for_email, unless: :user_signed_in?, modal: false, path: 'login_path')
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false, unless: :bookmarks?)
