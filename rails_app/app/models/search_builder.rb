@@ -4,9 +4,11 @@
 class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
-  self.default_processor_chain += %i[facets_for_advanced_search_form
-                                     massage_sort
-                                     handle_standalone_boolean_operators]
+  self.default_processor_chain += %i[
+    restore_deftype
+    massage_sort
+    handle_standalone_boolean_operators
+  ]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
@@ -15,15 +17,6 @@ class SearchBuilder < Blacklight::SearchBuilder
   INDUCED_SORT = ['encoding_level_sort asc', 'updated_date_sort desc'].freeze
   RELEVANCE_SORT = ['score desc', 'publication_date_sort desc', 'title_sort asc'].freeze
   TITLE_SORT_ASC = ['title_sort asc', 'publication_date_sort desc'].freeze
-
-  # Merge the advanced search form parameters into the solr parameters
-  # @param solr_p [Hash] the current solr parameters
-  def facets_for_advanced_search_form(solr_p)
-    return unless (search_state.controller&.action_name == 'advanced_search') &&
-                  blacklight_config.advanced_search[:form_solr_parameters]
-
-    solr_p.merge!(blacklight_config.advanced_search[:form_solr_parameters])
-  end
 
   # Applies an alternative sort order when a blank query is set to be sorted by score. This would require more work
   # to work with Advanced Search params (and may not be desirable), so we exit early in those cases to avoid munging
@@ -38,6 +31,16 @@ class SearchBuilder < Blacklight::SearchBuilder
     return solr_p[:sort] = RELEVANCE_SORT.join(',') if search_term_provided?(solr_p)
 
     solr_p[:sort] = INDUCED_SORT.dup.prepend(inventory_sort_addition(solr_p)).compact_blank.join(',')
+  end
+
+  # This is necessary for an empty search from Advanced Search to return all results. BL9 set the `defType`
+  # param to 'lucene' at the top-level. We must set it back to 'edismax' for the expected behavior.
+  # Refer to this commit for the changes:
+  # https://github.com/projectblacklight/blacklight/pull/3742/changes#diff-685346ee7cdd740dec27e95aa2a2ac51e156043a6a455ab9c5f751e2da6ea3e8R100
+  def restore_deftype(solr_p)
+    return if solr_p[:json].present?
+
+    solr_p[:defType] = 'edismax'
   end
 
   # Escape certain Solr operators when they are found in the user's query surrounded by whitespace

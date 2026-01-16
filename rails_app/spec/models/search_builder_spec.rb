@@ -9,15 +9,6 @@ describe SearchBuilder do
   let(:blacklight_config) { CatalogController.blacklight_config }
   let(:scope) { instance_double CatalogController, blacklight_config: blacklight_config, action_name: 'index' }
 
-  describe '#facets_for_advanced_search_form' do
-    before { allow(scope).to receive(:action_name).and_return('advanced_search') }
-
-    it 'appends advanced search form_solr_parameters to blacklight_params' do
-      search_builder.facets_for_advanced_search_form(blacklight_params)
-      expect(blacklight_params).to eq scope.blacklight_config.advanced_search[:form_solr_parameters]
-    end
-  end
-
   describe '#handle_standalone_boolean_operators' do
     before { search_builder.handle_standalone_boolean_operators(blacklight_params) }
 
