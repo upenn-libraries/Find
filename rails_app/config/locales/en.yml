@@ -1,15 +1,15 @@
 en:
   feedback:
     heading: 'Feedback'
-    description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help with a search or your account.'
+    description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help.'
   guides:
     use_catalog: 'Using the Find catalog'
     articles+: 'Using Articles+'
     library_account: 'Using your account'
   home:
     info:
-      heading: 'Discover library materials'
-      description: 'Find is the definitive place to <strong>search and find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      heading: 'Search our catalog'
+      description: 'Find is the definitive place to search and <strong>find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
       manage:
         heading: 'Manage your account'
         description: 'Create and manage item requests on your shelf, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
