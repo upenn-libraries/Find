@@ -24,7 +24,8 @@ module LayoutHelper
   # search params), advanced search, or account pages. The fi-home class is used for CSS grid targeting.
   # @return [String]
   def container_classes
-    if controller_name == 'catalog' && action_name == 'index' && respond_to?(:has_search_parameters?) && has_search_parameters?
+    if controller_name == 'catalog' && action_name == 'index' && respond_to?(:has_search_parameters?) &&
+       has_search_parameters?
       'container-fluid'
     elsif controller_name == 'catalog' && action_name == 'index'
       'container fi-home'
