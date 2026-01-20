@@ -392,6 +392,7 @@ trivy_app_container_scanning:
     - amend_prod_image
   variables:
     CI_IMAGE_NAME: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}
+    TRIVY_VERSION: 0.68.1
   allow_failure: true
   tags:
     - build
