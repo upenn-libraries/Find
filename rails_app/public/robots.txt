@@ -9,7 +9,6 @@ Disallow: /*?*
 Disallow: /bookmarks
 Disallow: /catalog/advanced
 Disallow: /catalog/facet
-Disallow: /catalog
 Disallow: /catalog.atom
 Disallow: /catalog.rss
 Disallow: /catalog/email
