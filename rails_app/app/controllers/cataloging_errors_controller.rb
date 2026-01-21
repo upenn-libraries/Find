@@ -8,8 +8,6 @@ class CatalogingErrorsController < ApplicationController
     CatalogingErrorsMailer.report(
       user: current_user,
       mms_id: params[:mms_id],
-      # TODO: not everything will have a holding id?
-      holding_id: params[:holding_id],
       message: params[:message]
     ).deliver_now
 
