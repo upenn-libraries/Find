@@ -1,0 +1,10 @@
+Cataloging Error Report
+
+Reported by: <%= @user.email %>
+MMS ID: <%= @mms_id %>
+<% if @holding_id.present? %>
+Holding ID: <%= @holding_id %>
+<% end %>
+
+Message:
+<%= @message %>

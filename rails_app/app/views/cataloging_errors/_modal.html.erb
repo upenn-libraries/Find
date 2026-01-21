@@ -1,0 +1,72 @@
+<div
+  class="modal fade"
+  id="catalogingErrorModal"
+  tabindex="-1"
+  aria-hidden="true">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <%= t("cataloging_errors.form.title") %>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close">
+        </button>
+      </div>
+
+      <!-- Modal Form -->
+      <%= form_with url: cataloging_errors_create_path, method: :post, local: true do |f| %>
+        <div class="modal-body">
+
+          <!-- Hidden field for MMS ID -->
+          <%= hidden_field_tag :mms_id, mms_id %>
+
+          <!-- Metadata Section -->
+          <div class="mb-3 p-3 border rounded bg-light">
+            <h6 class="mb-2"><%= t("cataloging_errors.form.record_info") %></h6>
+            <p class="mb-1"><strong><%= t("cataloging_errors.form.mms_id") %>:</strong> <%= mms_id %></p>
+          </div>
+
+          <!-- User Message -->
+          <div class="mb-3">
+            <%= f.label :message,
+              t("cataloging_errors.form.message_label"),
+              class: "form-label" %>
+
+            <%= f.text_area :message,
+              class: "form-control",
+              rows: 6,
+              placeholder: t("cataloging_errors.form.message_placeholder"),
+              required: true %>
+          </div>
+
+          <!-- Optional instructions -->
+          <p class="text-muted small">
+            <%= t("cataloging_errors.form.instructions") %>
+          </p>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal">
+            <%= t("cataloging_errors.form.cancel") %>
+          </button>
+
+          <%= f.submit t("cataloging_errors.form.submit"),
+            class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

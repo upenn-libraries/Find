@@ -306,4 +306,5 @@ suggester:
   proxy:
     host: "proxy.library.upenn.edu"
     path: "/login"
-
+cataloging_errors:
+  email: 'fixopac@pobox.upenn.edu'

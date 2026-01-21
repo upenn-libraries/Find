@@ -1,0 +1,26 @@
+<h2>Cataloging Error Report</h2>
+
+<p>
+  <strong>Reported by:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>MMS ID:</strong>
+  <%= @mms_id %>
+</p>
+
+<% if @holding_id.present? %>
+  <p>
+    <strong>Holding ID:</strong>
+    <%= @holding_id %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Message:</strong>
+</p>
+
+<p>
+  <%= simple_format(@message) %>
+</p>
