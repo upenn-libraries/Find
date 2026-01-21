@@ -7,7 +7,7 @@ require 'capybara/cuprite'
 
 # Parse URL
 # NOTE: REMOTE_CHROME_HOST should be added to Webmock/VCR allowlist if you use any of those.
-REMOTE_CHROME_URL = ENV.fetch('CHROME_URL', 'ws://localhost:3333')
+REMOTE_CHROME_URL = ENV.fetch('CHROME_URL', 'ws://chrome:3333')
 REMOTE_CHROME_HOST, REMOTE_CHROME_PORT =
   if REMOTE_CHROME_URL
     URI.parse(REMOTE_CHROME_URL).then do |uri|
