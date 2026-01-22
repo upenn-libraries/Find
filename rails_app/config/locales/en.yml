@@ -460,7 +460,6 @@ en:
     email:
       subject: "Cataloging Error Report - MMS ID: %{mms_id}"
     flash:
-      no_description: 'Please provide a description of the error.'
       success: 'Your error report has been submitted. Thank you for helping us improve our catalog!'
       failure: 'Something went wrong. Please try again later.'
   search:
