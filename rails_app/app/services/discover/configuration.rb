@@ -44,7 +44,7 @@ module Discover
       # Configuration for Finding Aids
       module FindingAids
         SOURCE = :finding_aids
-        HOST = 'findingaids.library.upenn.edu'
+        HOST = 'findingaids-staging.library.upenn.edu'
         PATH = '/records.json'
         LINK_TO_SOURCE = true
         RECORDS = ['data'].freeze
