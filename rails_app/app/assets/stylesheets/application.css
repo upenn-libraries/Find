@@ -44,6 +44,7 @@
 @import url('bs-accordion.css');
 @import url('bs-pagination.css');
 @import url('bs-alert.css');
+@import url('bs-form.css');
 
 /**
 * Blacklight (prefix: "bl-")
@@ -64,6 +65,7 @@
 @import url('fi-home.css');
 @import url('fi-search-bar.css');
 @import url('fi-document.css');
+@import url('fi-facet.css');
 @import url('fi-inventory.css');
 @import url('fi-pagination.css');
 @import url('fi-site-alerts.css');
