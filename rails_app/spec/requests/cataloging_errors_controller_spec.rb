@@ -5,7 +5,7 @@ describe 'cataloging errors requests', type: :request do
 
   describe 'POST /cataloging_errors' do
     context 'when not logged it' do
-      it 'returns a forbidden' do
+      it 'redirects to login' do
         post cataloging_errors_create_path
 
         expect(response).to redirect_to(login_path)
