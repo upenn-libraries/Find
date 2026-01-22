@@ -59,6 +59,12 @@ class SolrDocument
     fetch(:indexed_date_s, nil)
   end
 
+  # Get value used as description of the record
+  # @return [String, nil]
+  def description
+    fetch(:note_summary_show, []).first
+  end
+
   # Identifier to be used by Hathi API service to get Hathi link
   # @return [Hash]
   def identifier_map
