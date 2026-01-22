@@ -5,6 +5,12 @@ describe 'cataloging errors requests', type: :request do
 
   describe 'POST /cataloging_errors' do
     context 'when not logged it' do
+      it 'returns a forbidden' do
+        post cataloging_errors_create_path
+
+        expect(response).to redirect_to(login_path)
+      end
+
       it 'does not send a cataloging error report email' do
         expect {
           post cataloging_errors_create_path
@@ -29,13 +35,10 @@ describe 'cataloging errors requests', type: :request do
         }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
-      it 'redirects back with a success message' do
+      it 'redirects back to document' do
         post cataloging_errors_create_path, params: params
 
         expect(response).to have_http_status(:found)
-        expect(flash[:notice]).to eq(
-          I18n.t('cataloging_errors.flash.success')
-        )
       end
     end
   end

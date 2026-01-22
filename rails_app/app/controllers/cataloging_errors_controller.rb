@@ -11,12 +11,17 @@ class CatalogingErrorsController < ApplicationController
       message: params[:message]
     ).deliver_now
 
-    redirect_back fallback_location: solr_document_path(params[:mms_id]),
-                  notice: t('cataloging_errors.flash.success')
+    redirect_to_document(flash: t('cataloging_errors.flash.success'))
   rescue StandardError
+    redirect_to_document(flash: t('cataloging_errors.flash.error'))
+  end
+
+  private
+
+  def redirect_to_document(flash:)
     redirect_back(
       fallback_location: solr_document_path(params[:mms_id]),
-      alert: t('cataloging_errors.flash.failure')
+      alert: flash
     )
   end
 end
