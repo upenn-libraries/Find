@@ -12,14 +12,14 @@ module Catalog
 
     # @return [String, nil]
     def description
-      return unless document?
+      return unless document? && title?
 
-      @description ||= document.description
+      @description ||= I18n.t('head.meta.description.record', title: document.title)
     end
 
     # @return [Boolean]
     def render?
-      document? && description?
+      description?
     end
 
     def call
@@ -31,6 +31,11 @@ module Catalog
     # @return [Boolean]
     def document?
       document.present?
+    end
+
+    # @return [Boolean]
+    def title?
+      document.title.present?
     end
 
     # @return [Boolean]

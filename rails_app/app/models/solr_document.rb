@@ -41,6 +41,12 @@ class SolrDocument
     fetch(:host_record_id_ss, []).first
   end
 
+  # Get title
+  # @return [String, nil]
+  def title
+    fetch(:title_ss, []).first
+  end
+
   # Get alternate title (field is not indexed yet - should it be?)
   # @return [String, nil]
   def alternate_title
@@ -57,12 +63,6 @@ class SolrDocument
   # @return [String, nil]
   def last_indexed
     fetch(:indexed_date_s, nil)
-  end
-
-  # Get value used as description of the record
-  # @return [String, nil]
-  def description
-    fetch(:note_summary_show, []).first
   end
 
   # Identifier to be used by Hathi API service to get Hathi link
