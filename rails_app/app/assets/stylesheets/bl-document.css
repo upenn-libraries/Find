@@ -85,6 +85,25 @@
 
   & .pl-dl--inline {
     margin-bottom: 0.5rem;
+
+    & dd {
+      &::after {
+        content: " ·";
+        padding-left: var(--pl-space-xs);
+      }
+    }
+    
+    /* if a dd has a dt that follows, don't render the delineator */
+    & dd:has(+ dt) {
+      &::after {
+        all: unset;
+      }
+    }
+    
+    /* no delineator for last dl child */
+    & > *:last-child::after {
+      all: unset;
+    }
   }
 }
 
