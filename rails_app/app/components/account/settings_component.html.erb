@@ -1,5 +1,5 @@
 
-<h2 class="h4 mt-4 mb-3"><%= t('account.settings.information.heading') %></h2>
+<h2 class="mt-4 mb-3"><%= t('account.settings.information.heading') %></h2>
 <div class="table-responsive">
   <table class="table align-middle">
     <tbody>
@@ -35,7 +35,7 @@
   <strong><%= t('account.guide_callout') %></strong> <%= t('account.settings.information.update_details_html', url: t('urls.guides.account') ) %>
 </p>
 
-<h2 class="h4 mt-5 mb-3"><%= t('account.settings.bbm.heading') %></h2>
+<h2 class="mt-5 mb-3"><%= t('account.settings.bbm.heading') %></h2>
 <% if bbm_delivery_address.present? %>
   <p><%= bbm_delivery_address.join('<br />').html_safe %></p>
 <% else %>
@@ -49,7 +49,7 @@
 </p>
 
 <% if user.faculty_express? %>
-<h2 class="h4 mt-5 mb-3"><%= t('account.settings.faculty_express.heading') %></h2>
+<h2 class="mt-5 mb-3"><%= t('account.settings.faculty_express.heading') %></h2>
 <% if office_delivery_address.present? %>
   <p><%= office_delivery_address %></p>
 <% else %>

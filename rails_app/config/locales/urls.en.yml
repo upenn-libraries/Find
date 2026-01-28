@@ -1,5 +1,7 @@
 en:
   urls:
+    contact: "https://www.library.upenn.edu/contact-us"
+    release_notes: "https://www.library.upenn.edu/release-notes/find"
     guides:
       use_catalog: "https://guides.library.upenn.edu/find-catalog"
       circulation: "https://www.library.upenn.edu/borrowing"

@@ -25,7 +25,9 @@ en:
         other: '%{current} of %{total}'
       facets:
         group:
-          none: 'Your search found no results to limit in the Catalog. Change or start your search over for filters.'
+          none: 'There are no results to filter.'
+      filters:
+        title: 'You searched for:'
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'

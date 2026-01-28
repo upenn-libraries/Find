@@ -10,7 +10,6 @@ a {
   --bs-link-hover-color-rgb: 14, 86, 150;
 
   text-underline-offset: var(--pl-link-text-underline-offset);
-  text-decoration-thickness: 1px;
 }
 
 a:hover {

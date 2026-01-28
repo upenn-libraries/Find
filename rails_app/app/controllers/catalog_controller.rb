@@ -41,7 +41,7 @@ class CatalogController < ApplicationController
     config.json_solr_path = 'advanced'
 
     # items to show per page, each number in the array represent another option to choose from.
-    config.per_page = [10, 20, 50, 100]
+    config.per_page = [10, 25, 50, 100]
 
     # solr field configuration for search results/index views
     config.index.title_field = :title_ss
@@ -53,6 +53,7 @@ class CatalogController < ApplicationController
 
     # Some components can be configured
     config.header_component = Catalog::HeaderComponent
+    config.index.search_header_component = Catalog::SearchHeaderComponent
     config.index.search_bar_component = Catalog::SearchBarComponent
     config.index.constraints_component = Catalog::ConstraintsComponent
     config.index.sidebar_component = Catalog::SidebarComponent
@@ -68,7 +69,7 @@ class CatalogController < ApplicationController
     config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent
     config.track_search_session.applied_params_component = Catalog::ServerAppliedParamsComponent
 
-    config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
+    config.add_results_document_tool(:bookmark, component: Catalog::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
 
     config.add_results_collection_tool(:sort_widget)

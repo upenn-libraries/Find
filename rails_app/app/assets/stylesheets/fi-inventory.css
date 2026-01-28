@@ -16,16 +16,6 @@
   display: contents;
 }
 
-.holdings__other-link {
-  text-decoration: underline;
-  text-underline-offset: .15em;
-}
-
-.holdings__other-link:hover {
-  text-decoration-thickness: 2px;
-  text-decoration-color: var(--pl-color-fg-subtle);
-}
-
 .holding__item {
   --holding-accent-color: var(--pl-color-fg-subtle);
 }
@@ -43,6 +33,7 @@
   border-left: solid 3px var(--holding-accent-color);
   padding: 0 0.5rem;
   line-height: 1.25;
+  font-weight: 400;
 }
 
 .holding__header {
@@ -276,9 +267,7 @@ a.inventory-item--hathitrust {
 }
 
 .document-inventory-container .btn-success:hover {
-  text-decoration: underline;
-  text-underline-offset: var(--pl-link-text-underline-offset);
-  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
+  text-decoration-thickness: var(--pl-link-hover-text-decoration-thickness);
 }
 
 .document-inventory-container .btn-success:focus {

@@ -1,0 +1,8 @@
+<%# Override of Blacklight 9.0 to add per_page dropdown after pagination %>
+
+<% if show_pagination? and @response.total_pages > 1 %>
+  <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
+    <%= render Blacklight::Response::PaginationComponent.new(response: @response, classes: 'paginate-section') %>
+    <%= render Blacklight::Search::PerPageComponent.new(blacklight_config: blacklight_config, response: @response, search_state: search_state) %>
+  </div>
+<% end %>

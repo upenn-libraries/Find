@@ -4,9 +4,8 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <div>
-        <h2 class="h5 mb-2"><%= t('home.feedback.title') %></h2>
         <p>
-          <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
+          <%= t('feedback.description', url: t('urls.forms.feedback', request_url: request.original_url), contact_url: t('urls.contact')).html_safe %>
         </p>
       </div>
       <div>
@@ -28,9 +27,13 @@
   </section>
   <section>
     <h2><%= t('footer.guides.heading') %></h2>
-    <%= link_to t('home.help.self_service.use_catalog'), t('urls.guides.use_catalog') %>
-    <%= link_to t('home.help.self_service.articles+'), t('urls.guides.articles') %>
-    <%= link_to t('home.help.self_service.library_account'), t('urls.guides.account') %>
+    <%= link_to t('guides.use_catalog'), t('urls.guides.use_catalog') %>
+    <%= link_to t('guides.articles+'), t('urls.guides.articles') %>
+    <%= link_to t('guides.library_account'), t('urls.guides.account') %>
+  </section>
+  <section>
+    <h2><%= t('footer.about.heading') %></h2>
+    <%= link_to t('footer.about.release_notes'), t('urls.release_notes') %>
   </section>
 </pennlibs-footer>
 

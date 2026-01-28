@@ -1,0 +1,17 @@
+.toggle-bookmark-label {
+  display: flex;
+  gap: var(--pl-space-2xs);
+  justify-content: flex-end;
+  width: fit-content;
+  margin-left: auto;
+  cursor: pointer;
+  padding: var(--pl-space-xs);
+}
+
+.bookmarksTools {
+  margin-bottom: var(--pl-space-l);
+}
+
+.bookmark-toggle .toggle-bookmark .toggle-bookmark-label {
+  min-width: auto;
+}

@@ -7,8 +7,10 @@
         <% component.with_body do %>
         <%# Display message if there are no results present. %>
         <% if response.total_count.zero? %>
-          <div class="alert alert-light my-1">
-            <p class="mb-0"><%= t('blacklight.search.facets.group.none') %></p>
+          <div class="card my-1">
+            <div class="card-body">
+              <p class="mb-0"><%= t('blacklight.search.facets.group.none') %></p>
+            </div>
           </div>
           <% else %>
           <%= render Blacklight::FacetComponent.with_collection(fields, response: response) %>
