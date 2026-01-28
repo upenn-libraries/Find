@@ -23,6 +23,7 @@
 .navbar-search a {
   color: var(--pl-color-fg-default);
   text-decoration: none;
+  font-weight: 400;
 }
 
 .navbar-search a:hover {
@@ -78,18 +79,42 @@
 
 /* Document list */
 .documents-list .document {
-  border-bottom-style: solid;
+  border-bottom: solid 1px var(--pl-color-bg-subtle-brand);
   padding-top: 0;
   margin-bottom: 1rem;
+
+  & .pl-dl--inline {
+    margin-bottom: 0.5rem;
+
+    & dd {
+      &::after {
+        content: " ·";
+        padding-left: var(--pl-space-xs);
+      }
+    }
+    
+    /* if a dd has a dt that follows, don't render the delineator */
+    & dd:has(+ dt) {
+      &::after {
+        all: unset;
+      }
+    }
+    
+    /* no delineator for last dl child */
+    & > *:last-child::after {
+      all: unset;
+    }
+  }
 }
 
 .documents-list .document .document-title-heading {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   font-size: var(--pl-font-size-xl);
 }
 
 .documents-list .document .document-title-heading a {
   text-decoration: none;
+  font-weight: 600;
 }
 
 .documents-list .document .document-title-heading a:hover {
@@ -109,10 +134,6 @@
 
 .documents-list .document-metadata dd {
   color: var(--pl-color-fg-subtle);
-}
-
-.documents-list .blacklight-format_facet {
-  font-weight: 500;
 }
 
 .documents-list .document-metadata ul {
