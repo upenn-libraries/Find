@@ -9,7 +9,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h2 class="modal-title">
+        <h2 class="modal-title fs-5">
           <%= t("cataloging_errors.form.title") %>
         </h2>
         <button
@@ -29,13 +29,13 @@
 
           <!-- Metadata Section -->
           <div class="mb-3 p-3 border rounded bg-light">
-            <h3 class="mb-2"><%= t("cataloging_errors.form.record_info") %></h3>
+            <h3 class="mb-2 fs-6 fw-bold"><%= t("cataloging_errors.form.record_info") %></h3>
             <p class="mb-1"><strong><%= t("cataloging_errors.form.mms_id") %>:</strong> <%= mms_id %></p>
           </div>
 
           <!-- User Message -->
           <div class="mb-3">
-            <h3>
+            <h3 class="fs-6">
               <%= f.label :message,
                 t("cataloging_errors.form.instructions"),
                 class: "form-label" %>
