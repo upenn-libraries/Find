@@ -449,16 +449,15 @@ en:
         subject: 'DocDel submission from catalog'
   cataloging_errors:
     form:
-      title: "Report a Cataloging Error"
-      record_info: "Record Information"
+      title: "Report a cataloging error"
+      record_info: "Record information"
       mms_id: "MMS ID"
       message_label: "Describe the issue"
-      message_placeholder: "Please provide details about the error..."
-      instructions: "Your report will be sent to the cataloging team for review."
-      submit: "Send Report"
+      instructions: "Please provide details about the error"
+      submit: "Send report"
       cancel: "Cancel"
     email:
-      subject: "Cataloging Error Report - MMS ID: %{mms_id}"
+      subject: "Cataloging error report - MMS ID: %{mms_id}"
     flash:
       success: 'Your error report has been submitted. Thank you for helping us improve our catalog!'
       failure: 'Something went wrong. Please try again later.'

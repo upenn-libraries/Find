@@ -36,13 +36,12 @@
           <!-- User Message -->
           <div class="mb-3">
             <%= f.label :message,
-              t("cataloging_errors.form.message_label"),
-              class: "form-label" %>
+              t("cataloging_errors.form.instructions"),
+              class: "form-label text-muted" %>
 
             <%= f.text_area :message,
               class: "form-control",
               rows: 6,
-              placeholder: t("cataloging_errors.form.message_placeholder"),
               required: true %>
           </div>
 
