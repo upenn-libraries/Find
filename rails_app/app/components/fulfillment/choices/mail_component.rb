@@ -4,10 +4,6 @@ module Fulfillment
   module Choices
     # Mail delivery component
     class MailComponent < BaseComponent
-      def radio_label_content
-        t('requests.form.options.mail.label')
-      end
-
       def delivery_value
         Fulfillment::Options::Deliverable::MAIL
       end

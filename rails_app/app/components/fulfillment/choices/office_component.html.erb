@@ -1,7 +1,6 @@
 <li class="list-group-item">
   <div class="form-check">
-    <%= radio_input_element %>
-    <%= radio_input_label %>
+    <%= render radio_button_component %>
     <% if office_address.present? %>
       <p class="alert alert-info my-2">
         <%= office_address %>

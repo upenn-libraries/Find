@@ -6,20 +6,13 @@ module Fulfillment
     class PickupComponent < BaseComponent
       DEFAULT_PICKUP = 'Van Pelt Library'
 
-      def radio_label_content
-        t('requests.form.options.pickup.label')
-      end
-
       # @return [String]
       def default_pickup_location
         pickup_locations[DEFAULT_PICKUP]
       end
 
-      # Since this component is used both on the record page and the ILL form, we need to know the right pickup value
-      # to include so the right fulfillment endpoint is used.
-      # @return [Symbol]
       def delivery_value
-        @ill ? Fulfillment::Options::Deliverable::ILL_PICKUP : Fulfillment::Options::Deliverable::PICKUP
+        Fulfillment::Options::Deliverable::PICKUP
       end
 
       def pickup_locations
