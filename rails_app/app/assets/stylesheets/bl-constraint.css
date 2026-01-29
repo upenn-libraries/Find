@@ -1,21 +1,21 @@
 /*
-* Blacklight constraint/filter customizations
-*/
+ * Blacklight constraint/filter customizations
+ */
 
 .constraints-container {
   align-items: baseline;
+  align-self: end;
   gap: var(--pl-space-s);
   margin: 0 !important;
-  align-self: end;
   --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
 }
 
 .constraints-container > h2 {
-  font-size: var(--pl-font-size-m);
+  margin: 0;
   font-family: var(--pl-font-family);
+  font-size: var(--pl-font-size-m);
   font-weight: 500;
   color: var(--pl-color-fg-default);
-  margin: 0;
 }
 
 .constraints-container > h2::after {
@@ -33,18 +33,15 @@
 
 .constraint .remove {
   position: static;
-  padding-left: var(--pl-space-2xs) !important;
   display: flex;
   align-items: center;
+  padding-left: var(--pl-space-2xs) !important;
 }
 
 .constraint .remove::after {
-  content: '';
+  content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   border-radius: var(--pl-border-radius);
 }
 
@@ -57,27 +54,43 @@
 }
 
 .constraint .remove .bi {
-  height: 0.875em;
   width: 0.875em;
+  height: 0.875em;
 }
 
 .constraint .remove .blacklight-icons-remove {
   margin-bottom: 0.025em;
 }
 
+.constraint.query .constraint-value::before,
 .constraint .filter-name {
-  display: none;
+  color: var(--pl-color-fg-subtle);
+  font-size: 0.675rem;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.075rem;
 }
 
 .constraint .filter-name::after {
-  color: var(--pl-fg-subtle);
+  display: none !important;
+  content: "";
 }
 
 .constraint .constraint-value {
   display: flex;
-  align-items: center;
-  --bs-btn-padding-y: var(--pl-space-2xs);
-  padding-right: var(--pl-space-s);
-  font-weight: 500;
-  gap: var(--pl-space-2xs);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-weight: 600;
+  --bs-btn-padding-y: var(--pl-space-xs);
+}
+
+.constraint .filter-value {
+  font-weight: 400;
+  line-height: 1;
+}
+
+.constraint.query .constraint-value::before {
+  content: "All fields";
 }
