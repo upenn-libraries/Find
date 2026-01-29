@@ -1,7 +1,7 @@
 .blacklight-catalog-index {
   & #main-container {
     display: flex;
-    gap: 2rem;
+    gap: var(--pl-space-l) var(--pl-space-xl);
     flex-direction: column;
 
     width: 100%;
@@ -23,7 +23,6 @@
     & #sidebar {
       width: 100%;
       grid-column: 1;
-      order: initial !important;
     }
 
     &:not(.fi-home) #sidebar {
@@ -109,4 +108,16 @@
 .document:first-child {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+
+@media (max-width: 820px) {
+  .fi-home {
+    & #content {
+      order: 1 !important;
+    }
+
+    & #sidebar {
+      order: 2 !important;
+    }
+  }        
 }

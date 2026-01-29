@@ -3,11 +3,6 @@
 */
 
 /* Search bar */
-.navbar-search {
-  background: var(--pl-color-bg-gradient-2);
-  padding: 1.5rem 0;
-  margin-bottom: 1rem;
-}
 
 .navbar-search > .container {
   justify-content: center;
@@ -18,16 +13,6 @@
   .navbar-search > .container {
     flex-wrap: nowrap;
   }
-}
-
-.navbar-search a {
-  color: var(--pl-color-fg-default);
-  text-decoration: none;
-  font-weight: 400;
-}
-
-.navbar-search a:hover {
-  text-decoration: underline;
 }
 
 .navbar-search .search-query-form {

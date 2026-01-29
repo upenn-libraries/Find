@@ -1,0 +1,25 @@
+<%# Override of Blacklight 9.0 to add breadcrumb navigation %>
+
+<% @page_title = t('blacklight.advanced_search.page_title', application_name: application_name) %>
+
+<%= render BreadcrumbsComponent.new do |component| %>
+  <% component.with_breadcrumb(href: root_path) { t('breadcrumbs.root') } %>
+  <% component.with_breadcrumb(active: true) { t('blacklight.advanced_search.form.title') } %>
+<% end %>
+
+<div class="advanced-search-form col-sm-12">
+  <h1 class="page__heading">
+      <%= t('blacklight.advanced_search.form.title') %>
+  </h1>
+  <p class="page__lede"><%= t('advanced_search.lede') %></p>
+
+  <div class="row">
+    <div class="col-md-8">
+        <%= render 'advanced_search_form' %>
+    </div>
+
+    <div class="col-md-4">
+        <%= render "advanced_search_help" %>
+    </div>
+  </div>
+</div>

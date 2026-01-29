@@ -1,10 +1,10 @@
 .alert {
-  --bs-alert-bg: transparent;
+  --bs-alert-bg: var(--pl-color-bg-subtle);
   --bs-alert-padding-x: var(--pl-space-s);
   --bs-alert-padding-y: var(--pl-space-xs);
   --bs-alert-margin-bottom: var(--pl-space-m);
   --bs-alert-color: inherit;
-  --bs-alert-border-color: transparent;
+  --bs-alert-border-color: var(--pl-color-bg-subtle-brand);
   --bs-alert-border-radius: var(--pl-border-radius-subtle);
   --bs-alert-link-color: inherit;
 }

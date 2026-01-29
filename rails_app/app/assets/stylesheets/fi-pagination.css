@@ -3,7 +3,7 @@
 */
 
 .pagination-bar {
-  margin-bottom: 1rem;
+  margin: var(--pl-space-l) 0;
 }
 
 .pagination-bar,

@@ -1,4 +1,8 @@
 en:
+  advanced_search:
+    lede: 'Search multiple fields at once to find exactly what you need.'
+  breadcrumbs:
+    root: 'Find'
   feedback:
     heading: 'Feedback'
     description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help.'
@@ -241,6 +245,7 @@ en:
       heading: 'Guides'
     about:
       heading: 'Find'
+      home: 'Home'
       release_notes: 'Release notes'
   advanced:
     all_fields: 'Keyword'

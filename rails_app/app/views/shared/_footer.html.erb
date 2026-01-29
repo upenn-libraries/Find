@@ -18,6 +18,11 @@
 
 <pennlibs-footer>
   <section>
+    <h2><%= t('footer.about.heading') %></h2>
+    <%= link_to t('footer.about.home'), root_path %>
+    <%= link_to t('footer.about.release_notes'), t('urls.release_notes') %>
+  </section>
+  <section>
     <h2><%= t('footer.account.heading') %></h2>
     <%= link_to t('footer.account.shelf'), shelf_path %>
     <%= link_to t('footer.account.request'), ill_new_request_path unless current_user&.courtesy_borrower? %>
@@ -30,10 +35,6 @@
     <%= link_to t('guides.use_catalog'), t('urls.guides.use_catalog') %>
     <%= link_to t('guides.articles+'), t('urls.guides.articles') %>
     <%= link_to t('guides.library_account'), t('urls.guides.account') %>
-  </section>
-  <section>
-    <h2><%= t('footer.about.heading') %></h2>
-    <%= link_to t('footer.about.release_notes'), t('urls.release_notes') %>
   </section>
 </pennlibs-footer>
 

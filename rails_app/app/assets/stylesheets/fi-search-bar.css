@@ -14,7 +14,7 @@
 
 .fi-search-box {
   margin: 0 auto;
-  background: var(--pl-color-bg-default);
+  background: var(--pl-color-bg-subtle);
   flex-grow: 1;
   border-radius: 1.25rem;
   padding: var(--pl-space-2xs);
