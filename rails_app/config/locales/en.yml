@@ -445,6 +445,7 @@ en:
     advanced:
       label: "Advanced"
     databases: "Databases"
+    more_options: "Advanced search & Databases"
     edit:
       label: 'Edit Search'
   show:
