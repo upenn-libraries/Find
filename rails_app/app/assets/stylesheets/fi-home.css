@@ -16,16 +16,7 @@
 }
 
 .fi-home #content {
-  & h1 {
-    margin-top: 2rem;
-  }
-
-  & .page__lede {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
-
   & h2 {
-    margin-top: 2rem;
+    margin-top: var(--pl-space-xl);
   }
 }
