@@ -24,6 +24,8 @@ en:
       entry_pagination_info:
         other: '%{current} of %{total}'
       facets:
+        title: 'Filter results'
+        filter: 'Filter'
         group:
           none: 'There are no results to filter.'
       filters:

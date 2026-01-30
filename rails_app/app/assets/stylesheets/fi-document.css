@@ -37,6 +37,21 @@
   margin-bottom: 0;
 }
 
+.document .documentHeader {
+  display: flex;
+  gap: var(--pl-space-s);
+}
+
+.document .documentHeader .index_title {
+  flex: 1;
+}
+
+.document .documentHeader .index-document-functions {
+  flex-shrink: 0;
+  width: auto;
+  margin-bottom: 0;
+}
+
 .show-document {
   display: block;
   width: 100%;

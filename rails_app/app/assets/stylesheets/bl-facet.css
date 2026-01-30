@@ -114,3 +114,25 @@
 
   margin-bottom: var(--pl-space-xl);
 }
+
+.fi-filter-btn {
+  display: flex;
+}
+
+.fi-facets-offcanvas {
+  --bs-offcanvas-width: min(90vw, 400px);
+
+  & .offcanvas-body {
+    display: block;
+  }
+}
+
+@media (min-width: 820px) {
+  .fi-filter-btn {
+    display: none;
+  }
+
+  .fi-facets-offcanvas {
+    display: none;
+  }
+}

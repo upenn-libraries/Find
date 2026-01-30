@@ -1,8 +1,8 @@
 <%# Copied template from Blacklight v9.0 to add stimulus controller that supports range search fields %>
 
 <% if constraints? %>
-  <div class="constraints well search_history">
-    <h4><%= t 'blacklight.advanced_search.form.search_context' %></h4>
+  <div class="constraints well search_history pl-margin-b-l">
+    <h2 class="pl-h3"><%= t 'blacklight.advanced_search.form.search_context' %></h2>
     <% constraints.each do |constraint| %>
       <%= constraint %>
     <% end %>

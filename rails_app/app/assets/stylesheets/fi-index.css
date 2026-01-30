@@ -74,7 +74,12 @@
   align-items: center;
 
   & .sort-pagination {
-    margin-left: auto !important;
+    display: flex;
+    gap: var(--pl-space-xs);
+
+    @media (min-width: 819px) {
+      margin-left: auto !important;
+    }
 
     & .paginate-section,
     & .per_page-dropdown {
@@ -93,14 +98,6 @@
   margin: 0 !important;
 }
 
-.search-widgets .btn {
-  --bs-btn-padding-y: var(--pl-space-2xs);
-}
-
-.view-type-group .btn {
-  --bs-btn-padding-x: var(--pl-space-s);
-}
-
 .search-widgets {
   gap: var(--pl-space-s);
   align-items: center;
@@ -111,7 +108,11 @@
   padding-top: 0 !important;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 819px) {
+  .blacklight-catalog-index #main-container:not(.fi-home) #sidebar {
+    display: none;
+  }
+
   .fi-home {
     & #content {
       order: 1 !important;
@@ -120,5 +121,5 @@
     & #sidebar {
       order: 2 !important;
     }
-  }        
+  }
 }

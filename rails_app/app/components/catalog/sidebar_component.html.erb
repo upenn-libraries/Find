@@ -1,21 +1,20 @@
 <%# Copied template from Blacklight v9.0 to add message when there are no results present %>
 
-<search>
-    <% facet_group_names.each do |groupname| %>
-      <% fields = facet_fields_in_group(groupname) %>
-      <%= render group_component_class.new(id: groupname) do |component| %>
-        <% component.with_body do %>
-        <%# Display message if there are no results present. %>
-        <% if response.total_count.zero? %>
-          <div class="card my-1">
-            <div class="card-body">
-              <p class="mb-0"><%= t('blacklight.search.facets.group.none') %></p>
-            </div>
-          </div>
-          <% else %>
-          <%= render Blacklight::FacetComponent.with_collection(fields, response: response) %>
-        <% end %>
+
+<% facet_group_names.each do |groupname| %>
+  <% fields = facet_fields_in_group(groupname) %>
+  <%= render group_component_class.new(id: groupname) do |component| %>
+    <% component.with_body do %>
+    <%# Display message if there are no results present. %>
+    <% if response.total_count.zero? %>
+      <div class="card my-1">
+        <div class="card-body">
+          <p class="mb-0"><%= t('blacklight.search.facets.group.none') %></p>
+        </div>
+      </div>
+      <% else %>
+        <%= render Blacklight::FacetComponent.with_collection(fields, response: response) %>
       <% end %>
     <% end %>
   <% end %>
-</search>
+<% end %>
