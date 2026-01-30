@@ -1,4 +1,8 @@
 en:
+  head:
+    meta:
+      description:
+        record: Access '%{title}' through the Penn Libraries catalog.
   home:
     info:
       heading: 'What can I do here?'
