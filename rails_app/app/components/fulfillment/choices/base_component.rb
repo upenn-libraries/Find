@@ -6,14 +6,24 @@ module Fulfillment
     class BaseComponent < ViewComponent::Base
       attr_accessor :user, :checked, :holding_id
 
-      def initialize(user:, ill: false, checked: false, holding_id: nil)
+      renders_one :radio_button_component
+
+      # @param [User] user
+      # @param [Boolean] checked
+      # @param [String, nil] holding_id
+      def initialize(user:, checked: false, holding_id: nil)
         @user = user
         @checked = checked
-        @ill = ill
         @holding_id = holding_id
       end
 
-      def radio_button_component
+      # Subclasses must implement a Symbol value here, coming from Fulfillment::Options
+      def delivery_value
+        raise NotImplementedError
+      end
+
+      # Value for radio_button_component slot, rendered by subclass templates
+      def default_radio_button_component
         Fulfillment::Choices::RadioButtonComponent.new(
           checked: checked, holding_id: holding_id, delivery_value: delivery_value
         )

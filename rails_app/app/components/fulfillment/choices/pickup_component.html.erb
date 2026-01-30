@@ -1,6 +1,6 @@
 <li class="list-group-item">
   <div class="form-check">
-    <%= render radio_button_component %>
+    <%= radio_button_component %>
     <%= select_tag(:pickup_location, options_for_select(pickup_locations, default_pickup_location), { class: 'form-select my-1' }) %>
     <small class="text-muted">
       <%= t('requests.form.options.pickup.info_html', url: t('urls.guides.pickup')) %>
