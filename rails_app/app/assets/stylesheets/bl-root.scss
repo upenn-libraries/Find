@@ -3,6 +3,10 @@
   outline: none;
 }
 
+.tab-pane.fade.show.active:focus {
+  box-shadow: none;
+}
+
 .navbar-search {
   background: var(--pl-color-bg-gradient-2);
   padding: 1.5rem 0;

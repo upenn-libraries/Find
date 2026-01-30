@@ -13,3 +13,22 @@
   padding: 1rem 0;
   margin: 1rem 0;
 }
+
+// Make the entire list-group-item clickable to select the radio button
+// Uses the pseudo-content trick: https://inclusive-components.design/cards/
+.fulfillment-form .list-group-item {
+  position: relative;
+
+  .form-check-label::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  // Raise interactive elements above the pseudo-element overlay
+  .form-select,
+  a,
+  .alert {
+    position: relative;
+  }
+}

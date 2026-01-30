@@ -386,7 +386,7 @@ en:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
-        scan:
+        electronic:
           info_html: '<a href="%{url}" target=_blank>About this service</a>'
           label: 'Email me a chapter or section'
         office:
@@ -395,6 +395,9 @@ en:
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>.'
         pickup:
           label: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        ill_pickup:
+          label: 'ILL Pick up'
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
           label: 'Mail it via Books by Mail'
