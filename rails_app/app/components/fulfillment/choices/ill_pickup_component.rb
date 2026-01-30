@@ -7,6 +7,10 @@ module Fulfillment
       def delivery_value
         Fulfillment::Options::Deliverable::ILL_PICKUP
       end
+
+      def pickup_locations
+        @pickup_locations ||= generate_pickup_locations(:ill)
+      end
     end
   end
 end

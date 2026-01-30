@@ -16,16 +16,7 @@ module Fulfillment
       end
 
       def pickup_locations
-        @pickup_locations ||= generate_pickup_locations
-      end
-
-      private
-
-      def generate_pickup_locations
-        locations = Settings.locations.pickup.to_h
-        locations.transform_keys(&:to_s) # Transform keys to strings
-                 .transform_values { |v| @ill ? v[:ill] : v[:ils] } # Retrieve code based on type of pickup request
-                 .reject { |_, v| v.blank? } # Remove any locations that don't have codes
+        @pickup_locations ||= generate_pickup_locations(:ils)
       end
     end
   end

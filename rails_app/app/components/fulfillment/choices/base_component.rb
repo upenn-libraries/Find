@@ -28,6 +28,15 @@ module Fulfillment
           checked: checked, holding_id: holding_id, delivery_value: delivery_value
         )
       end
+
+      private
+
+      def generate_pickup_locations(type)
+        locations = Settings.locations.pickup.to_h
+        locations.transform_keys(&:to_s) # Transform keys to strings
+                 .transform_values { |v| v[type] } # Retrieve :ils or :ill location values
+                 .reject { |_, v| v.blank? } # Remove any locations that don't have codes
+      end
     end
   end
 end
