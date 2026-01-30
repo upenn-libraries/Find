@@ -16,10 +16,10 @@ module Fulfillment
       end
 
       def call
-        label_tag(radio_id, label_text, class: 'form-check-label') +
-          radio_button_tag(:delivery, delivery_value,
-                           checked, id: radio_id, class: 'form-check-input',
-                                    data: { action: 'change->request-options#optionChanged' })
+        radio_button_tag(:delivery, delivery_value,
+                         checked, id: radio_id, class: 'form-check-input',
+                                  data: { action: 'change->request-options#optionChanged' }) +
+          label_tag(radio_id, label_text, class: 'form-check-label')
       end
 
       private
