@@ -27,7 +27,7 @@ en:
         group:
           none: 'There are no results to filter.'
       filters:
-        title: 'You searched for:'
+        title: 'Searching for'
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'

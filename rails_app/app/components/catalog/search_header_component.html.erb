@@ -5,6 +5,6 @@
     .blacklight_config
     .view_config(helpers.document_index_view_type)
     .constraints_component
-    .new(search_state: helpers.search_state, start_over_component: nil, edit_search: false) %>
+    .new(search_state: helpers.search_state, start_over_component: Catalog::StartOverButtonComponent, edit_search: true) %>
   <%= render "sort_and_per_page" %>
 </nav>

@@ -5,7 +5,7 @@
 .constraints-container {
   align-items: baseline;
   align-self: end;
-  gap: var(--pl-space-s);
+  gap: var(--pl-space-xs);
   margin: 0 !important;
   --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
 }
@@ -60,6 +60,7 @@
 
 .constraint .remove .blacklight-icons-remove {
   margin-bottom: 0.025em;
+  padding-top: 2px;
 }
 
 .constraint.query .constraint-value::before,
@@ -92,5 +93,5 @@
 }
 
 .constraint.query .constraint-value::before {
-  content: "All fields";
+  content: "Keyword";
 }
