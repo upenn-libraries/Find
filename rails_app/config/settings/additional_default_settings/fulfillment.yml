@@ -1,0 +1,64 @@
+fulfillment:
+  docdel_user_groups:
+    - WhartonFAC
+    - WhartonPHD
+    - WhartonSTAFF
+  ill_restricted_user_groups:
+    - fact-proxy
+    - courtesy
+    - alum
+    - carrel
+    - drexgrad
+    - drexfac
+    - Bdplus
+    - RecipBorr
+    - ATHEN
+    - purge
+    - RetiredSTF
+    - ath-staff
+    - PALCI
+  restricted_libraries:
+    archives: 'UnivArcLib'
+    hsp: 'HSPLib'
+    libra: 'Libra'
+  policies:
+    non_circ: 'non-circ'
+    reserve: 'reserve'
+    reference: 'reference'
+    in_house: 'InHouseView'
+  due_date_policy:
+    not_loanable: 'Not loanable'
+  scan:
+    request_option_indicators:
+      - SCANDEL
+      - DIGITIZATION
+    excluded_material_types:
+      - RECORD
+      - DVD
+      - CDROM
+      - BLURAY
+      - BLURAYDVD
+      - LP
+      - FLOPPY_DISK
+      - DAT
+      - GLOBE
+      - AUDIOCASSETTE
+      - VIDEOCASSETTE
+      - HEAD
+      - LRDSC
+      - CALC
+      - KEYS
+      - RECORD
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - AUDIOVM
+  ill:
+    excluded_material_types:
+      - LPTOP
+      - EQUIP
+      - OTHER
+      - KEYS
+      - GLOBE
+  docdel:
+    email: 'docdel@wharton.upenn.edu'
