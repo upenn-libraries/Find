@@ -2,8 +2,18 @@
 <%# https://github.com/projectblacklight/blacklight-marc/blob/7c27d41abc2fb88c5104bfbaac15622aec1c23b3/app/views/catalog/_marc_view.html.erb %>
 <%= page_title t('staff_view.title'), document_title: document_presenter(@document).html_title %>
 
-<div class="pb-2">
+<div class="pb-2 d-flex justify-content-between align-items-center">
   <%= link_to sanitize(t('staff_view.back')), solr_document_path(@document) %>
+
+  <% if user_signed_in? %>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#catalogingErrorModal">
+      <%= t("cataloging_errors.form.title") %>
+    </button>
+  <% end %>
 </div>
 
 <h3><%= t('staff_view.title') %></h3>
@@ -42,3 +52,6 @@
     </div>
   <%- end -%>
 </div>
+
+<%= render "cataloging_errors/modal",
+  mms_id: @document.id %>

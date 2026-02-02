@@ -3,13 +3,14 @@
 module Fulfillment
   # Deliverable component logic
   class DeliverableComponent < ViewComponent::Base
-    attr_accessor :options
+    attr_accessor :options, :preselected_option
 
     delegate :item, :user, to: :options
 
     # @param options_set [OptionsSet]
     def initialize(options_set:)
       @options = options_set
+      @preselected_option = determine_preselected_option
     end
 
     # Returns true if the request accepts a comment field.
@@ -20,6 +21,23 @@ module Fulfillment
                            Fulfillment::Options::Deliverable::MAIL,
                            Fulfillment::Options::Deliverable::OFFICE,
                            Fulfillment::Options::Deliverable::DOCDEL)
+    end
+
+    # Helper to determine if an option should be preselected. See #determine_preselected_option for logic.
+    # @param delivery_option [Object]
+    # @return [Boolean]
+    def preselect?(delivery_option)
+      delivery_option == preselected_option
+    end
+
+    # Generate class name for a given option, which must follow the naming convention corresponding to the constant's
+    # symbol value.
+    # @param option [Symbol]
+    # @return [Class] corresponding view component class
+    def component_class_for(option:)
+      raise ArgumentError unless Options::Deliverable.all.include? option
+
+      "Fulfillment::Choices::#{option.to_s.camelize}Component".safe_constantize
     end
 
     # Generates the submit button for the given delivery type.
@@ -40,13 +58,16 @@ module Fulfillment
               data: { request_options_target: 'electronicButton', turbo_frame: '_top' }
     end
 
-    # Determine if the pickup options should default to being checked. The pickup option should be checked only if no
-    # electronic, office or docdel delivery option is shown. See PickupComponent#checked? for similar logic.
-    # @return [Boolean]
-    def pickup_checked?
-      (options.to_a & [Options::Deliverable::ELECTRONIC,
-                       Options::Deliverable::OFFICE,
-                       Options::Deliverable::DOCDEL]).empty?
+    private
+
+    def determine_preselected_option
+      return Options::Deliverable::DOCDEL if options.inquiry.docdel?
+
+      return Options::Deliverable::OFFICE if options.inquiry.office?
+
+      return Options::Deliverable::ELECTRONIC if options.inquiry.electronic?
+
+      Options::Deliverable::PICKUP
     end
   end
 end

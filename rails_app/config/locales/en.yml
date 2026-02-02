@@ -1,4 +1,8 @@
 en:
+  head:
+    meta:
+      description:
+        record: Access '%{title}' through the Penn Libraries catalog.
   home:
     info:
       heading: 'What can I do here?'
@@ -382,7 +386,7 @@ en:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
-        scan:
+        electronic:
           info_html: '<a href="%{url}" target=_blank>About this service</a>'
           label: 'Email me a chapter or section'
         office:
@@ -391,6 +395,9 @@ en:
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>.'
         pickup:
           label: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        ill_pickup:
+          label: 'ILL Pick up'
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
           label: 'Mail it via Books by Mail'
@@ -447,6 +454,20 @@ en:
     docdel:
       email:
         subject: 'DocDel submission from catalog'
+  cataloging_errors:
+    form:
+      title: "Report a cataloging error"
+      record_info: "Record information"
+      mms_id: "MMS ID"
+      message_label: "Describe the issue"
+      instructions: "Please provide details about the error"
+      submit: "Send report"
+      cancel: "Cancel"
+    email:
+      subject: "Cataloging error report - MMS ID: %{mms_id}"
+    flash:
+      success: 'Your error report has been submitted. Thank you for helping us improve our catalog!'
+      failure: 'Something went wrong. Please try again later.'
   search:
     all_fields: 'All Fields'
     basic: 'All Fields (Basic)'
