@@ -44,9 +44,11 @@ module Catalog
     # @param facet_field [Symbol, String] the facet field name
     # @return [Blacklight::ConstraintPresenter] constraint presenter for the inclusive facet
     def inclusive_facet_constraint_presenter(facet_field_presenter, facet_config, facet_item, facet_field)
+      item_presenter = Blacklight::InclusiveFacetItemPresenter.new(
+        facet_item, facet_config, helpers, facet_field
+      )
       facet_config.constraint_presenter.new(
-        facet_item_presenter: Blacklight::InclusiveFacetItemPresenter.new(facet_item, facet_config, helpers,
-                                                                          facet_field),
+        facet_item_presenter: item_presenter,
         field_label: facet_field_presenter.label
       )
     end
