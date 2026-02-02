@@ -26,7 +26,7 @@ module Fulfillment
 
       # @return [String]
       def label_text
-        t("requests.form.options.#{delivery_value}.label")
+        t("requests.form.options.#{delivery_value}.label_html")
       end
 
       # @return [String]
