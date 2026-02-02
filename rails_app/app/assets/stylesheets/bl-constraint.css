@@ -99,3 +99,8 @@
 .constraint.query .constraint-value::before {
   content: "Keyword";
 }
+
+.edit-search-btn,
+.catalog_startOverLink {
+  --bs-btn-padding-x: var(--pl-space-xs);
+}
