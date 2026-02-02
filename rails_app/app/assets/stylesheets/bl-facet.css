@@ -136,3 +136,7 @@
     display: none;
   }
 }
+
+.facet-values:has( + .more_facets) {
+  padding-bottom: 0;
+}
