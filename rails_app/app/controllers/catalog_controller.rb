@@ -43,6 +43,9 @@ class CatalogController < ApplicationController
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 25, 50, 100]
 
+    # default number of facet values to show before "more" link
+    config.default_facet_limit = 7
+
     # solr field configuration for search results/index views
     config.index.title_field = :title_ss
     # config.index.display_type_field = 'format'
@@ -128,7 +131,7 @@ class CatalogController < ApplicationController
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access'), collapse: false
-    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: -1 do |field|
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: 7 do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), suggest: true, limit: true do |field|

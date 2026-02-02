@@ -8,11 +8,19 @@
   margin-bottom: 1.25rem;
   border: 1px solid var(--bs-border-color);
   border-left-width: 0.25rem;
-  border-radius: 0.25rem;
+  border-radius: var(--pl-border-radius-subtle);
   border-left-color: var(--pl-color-fg-accent);
 }
 
 .callout > .bi {
   color: var(--pl-color-fg-accent);
   margin: 0;
+}
+
+.callout--info {
+  border-left-color: var(--pl-color-fg-info);
+}
+
+.callout--success {
+  border-left-color: var(--pl-color-fg-success);
 }

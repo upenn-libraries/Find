@@ -1,9 +1,9 @@
 <div class="documents-list <%= @classes %>">
-  <div class='card col-12 mb-3'>
+  <div class='callout callout--success'>
     <% results_sources.each_with_index do |component, i| %>
       <% source = component.source %>
       <% if valid?(source) %>
-        <div class="card-body <%= i > 0 ? 'border-top' : '' %>">
+        <div class="<%= i > 0 ? 'border-top' : '' %>">
           <%= turbo_frame_tag turbo_id(source),
                               src: results_path(source: source, query: @query),
                               data: { controller: 'missing-frame',

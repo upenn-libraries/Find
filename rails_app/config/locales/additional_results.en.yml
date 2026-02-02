@@ -4,7 +4,7 @@ en:
     turbo_frame_id: '%{source}-frame'
     header_text:
       loading_html: 'Looking for <strong>%{source}</strong> results...'
-      results_html: 'Your search found results in <strong>%{source}</strong>'
+      results_html: 'Your search found results in <strong class="text-success">%{source}</strong>'
       no_results_html: 'Your search found no results in <strong>%{source}</strong>'
     summon:
       display_name: 'Articles+'

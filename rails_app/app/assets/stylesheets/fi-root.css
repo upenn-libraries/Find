@@ -21,3 +21,14 @@
   --fi-orange-medium: #BD4718;
   --fi-orange-light: #FEEDDD;
 }
+
+.fi-link--subtle {
+  color: var(--pl-color-fg-default);
+  text-decoration-style: dotted;
+  font-weight: 400;
+
+  &:hover {
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+  }
+}
