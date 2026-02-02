@@ -26,7 +26,7 @@ describe 'Catalog show page requesting behaviors' do
       before do
         allow(Inventory::Item).to receive(:find_all).and_return([item])
         find('details.fulfillment > summary').click
-        find('input#delivery_pickup').click
+        find("input#delivery_pickup_#{item.holding_id}").trigger('click')
       end
 
       it 'shows a button to add comments when the option is changed from scan' do
@@ -36,7 +36,7 @@ describe 'Catalog show page requesting behaviors' do
       end
 
       it 'hides the comments area when the option is changed back to scan' do
-        find('input#delivery_electronic').click
+        find("input#delivery_electronic_#{item.holding_id}").trigger('click')
         within('form.fulfillment-form') do
           expect(page).not_to have_selector '#add-comments'
         end
