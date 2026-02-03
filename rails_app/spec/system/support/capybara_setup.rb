@@ -28,6 +28,11 @@ Capybara.app_host = if ENV.fetch('VAGRANT', false) || ENV.fetch('CI', false)
                     end
 
 RSpec.configure do |config|
+  # Not loading Adobe typekit fonts to limit pending connections
+  config.before(:each, type: :system) do
+    page.driver.browser.url_blacklist = [/typekit/]
+  end
+
   # Make sure this hook runs before others
   config.prepend_before(:each, type: :system) do
     # Use JS driver always
