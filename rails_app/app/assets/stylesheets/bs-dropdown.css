@@ -1,0 +1,30 @@
+.dropdown-menu {
+  --bs-dropdown-zindex: 1000;
+  --bs-dropdown-min-width: 10rem;
+  --bs-dropdown-padding-x: 0;
+  --bs-dropdown-padding-y: var(--pl-space-xs);
+  --bs-dropdown-spacer: var(--pl-space-2xs);
+  --bs-dropdown-color: var(--bs-body-color);
+  --bs-dropdown-bg: var(--bs-body-bg);
+  --bs-dropdown-border-color: var(--pl-color-fg-subtle);
+  --bs-dropdown-border-radius: var(--pl-border-radius-subtle);
+  --bs-dropdown-border-width: 1px;
+  --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
+  --bs-dropdown-divider-margin-y: var(--pl-space-m);
+  --bs-dropdown-box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+  --bs-dropdown-link-color: var(--bs-body-color);
+  --bs-dropdown-link-hover-color: var(--bs-body-color);
+  --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
+  --bs-dropdown-link-active-color: var(--pl-color-fg-on-emphasis);;
+  --bs-dropdown-link-active-bg: var(--pl-color-bg-accent-emphasis);
+  --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
+  --bs-dropdown-item-padding-x: var(--pl-space-m);
+  --bs-dropdown-item-padding-y: var(--pl-space-xs);
+
+  margin-top: var(--pl-space-s);
+}
+
+.dropdown-menu.show {
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
