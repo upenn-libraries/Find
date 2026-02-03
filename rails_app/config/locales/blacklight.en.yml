@@ -4,7 +4,7 @@ en:
       previous: 'Previous'
       next: 'Next'
   blacklight:
-    application_name: 'Find | Penn Libraries'
+    application_name: 'Find · Penn Libraries'
     back_to_search: 'Back to Results'
     search:
       zero_results:
@@ -30,9 +30,15 @@ en:
           none: 'There are no results to filter.'
       filters:
         title: 'Searching for'
+        all: 'All'
+      show:
+        title: "%{document_title} · %{application_name}"
+      page_title:
+        title: "%{constraints} · %{application_name}"
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
     advanced_search:
+      page_title: "Advanced search · %{application_name}"
       form:
         limit_criteria_heading_html: 'Limit your search'

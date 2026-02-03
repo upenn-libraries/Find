@@ -23,6 +23,44 @@ module Catalog
       @heading_classes = nil
     end
 
+    # Always render the component, even when there are no constraints
+    # This allows us to show "Searching for all" when browsing without filters
+    #
+    # @return [Boolean] true
+    def render?
+      true
+    end
+
+    # Checks if there are no search constraints (query or facets)
+    #
+    # @return [Boolean] true if no constraints present
+    def no_constraints?
+      @search_state.query_param.blank? &&
+        @search_state.filters.empty? &&
+        clause_queries_blank?
+    end
+
+    # Renders an "All" constraint pill when there are no search constraints
+    #
+    # @return [ActiveSupport::SafeBuffer] HTML for the "All" constraint
+    def all_constraint
+      tag.span(class: 'btn-group applied-filter constraint filter mx-1') do
+        tag.span(class: 'constraint-value btn btn-outline-secondary') do
+          tag.span(t('blacklight.search.filters.all'), class: 'filter-value')
+        end + all_constraint_remove_button
+      end
+    end
+
+    # Renders the remove button for the "All" constraint
+    #
+    # @return [ActiveSupport::SafeBuffer] HTML for the remove button
+    def all_constraint_remove_button
+      helpers.link_to(helpers.root_path, class: 'btn btn-outline-secondary remove') do
+        render(Blacklight::Icons::RemoveComponent.new(aria_hidden: true)) +
+          tag.span(t('blacklight.search.filters.remove.value', value: 'All'), class: 'visually-hidden')
+      end
+    end
+
     private
 
     # Creates a facet constraint presenter for a single facet item
@@ -63,6 +101,16 @@ module Catalog
         t('blacklight.search.filters.title'),
         class: @heading_classes
       )
+    end
+
+    # Checks if advanced search clause queries are blank
+    #
+    # @return [Boolean] true if no clause queries present
+    def clause_queries_blank?
+      clauses = @search_state.params[:clause]
+      return true if clauses.blank?
+
+      clauses.values.all? { |c| c[:query].blank? }
     end
   end
 end
