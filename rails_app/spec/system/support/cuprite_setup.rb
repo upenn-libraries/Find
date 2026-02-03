@@ -19,6 +19,10 @@ Capybara.register_driver(:better_cuprite) do |app|
     **{
       window_size: [1600, 1200],
       browser_options: { 'no-sandbox' => nil },
+      # Re-raise js errors in Ruby
+      js_errors: true,
+      # How long to wait for a response from browser before raising a pending connection error
+      timeout: 30,
       # Increase Chrome startup wait time (required for stable CI builds)
       process_timeout: 10,
       # Enable debugging capabilities
