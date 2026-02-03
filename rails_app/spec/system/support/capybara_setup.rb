@@ -24,7 +24,7 @@ Capybara.server_host = '0.0.0.0'
 Capybara.app_host = if ENV.fetch('VAGRANT', false) || ENV.fetch('CI', false)
                       "http://#{`hostname`.strip&.downcase || '0.0.0.0'}"
                     else
-                      'http://localhost'
+                      'http://host.docker.internal'
                     end
 
 RSpec.configure do |config|
