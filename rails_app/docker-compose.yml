@@ -4,12 +4,13 @@ services:
     ports:
       - "3333:3333"
     volumes:
-      - .:/app:cached
+      - ./tmp/capybara:/screenshots
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       PORT: 3333
-      CONNECTION_TIMEOUT: 60000
+      CONCURRENT: 1
+      TIMEOUT: 1200000 # 20min should cover the system test run period
   postgres:
     image: postgres:15.3
     environment:
