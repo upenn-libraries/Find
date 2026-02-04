@@ -34,9 +34,9 @@ module CupriteHelpers
     page.driver.pause
   end
 
-  # TODO: this isn't working now that browserless2 runs over websockets
+  # Drop #debug in a system spec and navigate to the printed URL to access the remote debugger
   def debug(binding = nil)
-    $stdout.puts '🔎 Open Chrome inspector at http://localhost:3333'
+    $stdout.puts '🔎 Open Chrome inspector at http://localhost:3333/debugger/'
     return binding.break if binding
 
     page.driver.pause
