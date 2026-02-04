@@ -1,17 +1,16 @@
 services:
   chrome:
-    image: browserless/chrome:latest
+    image: "ghcr.io/browserless/chromium:v2.38.4"
     ports:
       - "3333:3333"
     volumes:
-      - .:/app:cached
+      - ./tmp/capybara:/screenshots
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       PORT: 3333
-      CONNECTION_TIMEOUT: 600000
-      KEEP_ALIVE: 'true'
-      FUNCTION_ENABLE_INCOGNITO_MODE: 'true'
+      CONCURRENT: 1
+      TIMEOUT: 1200000 # 20min should cover the system test run period
   postgres:
     image: postgres:15.3
     environment:

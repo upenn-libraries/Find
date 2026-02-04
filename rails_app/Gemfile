@@ -58,6 +58,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'cuprite', '0.15'
+  gem 'cuprite'
   gem 'webmock'
 end
