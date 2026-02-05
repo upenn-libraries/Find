@@ -61,7 +61,8 @@
             <%= render(Fulfillment::Choices::OfficeComponent.new(user: @request.patron, checked: true)) %>
           <% end %>
 
-          <%= render(Fulfillment::Choices::PickupComponent.new(user: @request.patron, ill: true, checked: !@request.patron.faculty_express?)) %>
+          <%= render(Fulfillment::Choices::IllPickupComponent.new(user: @request.patron,
+                                                               checked: !@request.patron.faculty_express?)) %>
 
           <%= render(Fulfillment::Choices::MailComponent.new(user: @request.patron)) %>
         </ul>
