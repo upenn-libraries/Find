@@ -46,12 +46,9 @@ describe Inventory::List::Entry::Physical do
         { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
       end
 
-      before do
+      it 'returns unavailable' do
         entry.data[:availability] = Inventory::Constants::AVAILABLE
         entry.data[:total_items] = '1'
-      end
-
-      it 'returns unavailable' do
         expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
       end
     end
@@ -61,12 +58,9 @@ describe Inventory::List::Entry::Physical do
         { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
       end
 
-      before do
+      it 'returns available' do
         entry.data[:availability] = Inventory::Constants::AVAILABLE
         entry.data[:total_items] = '2'
-      end
-
-      it 'returns available' do
         expect(entry.status).to eq Inventory::Constants::AVAILABLE
       end
     end
