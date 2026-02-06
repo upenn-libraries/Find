@@ -24,13 +24,13 @@ describe Inventory::List::Entry::Physical do
   end
 
   # Mocking response for items.
+  let(:item_data) { { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
+
   before do
     bib_item_set = instance_double(Alma::BibItemSet)
     allow(bib_item_set).to receive(:items).and_return(
       [
-        Alma::BibItem.new(
-          { 'item_data' => { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' } } }
-        )
+        Alma::BibItem.new({ 'item_data' => item_data })
       ]
     )
     allow(Alma::BibItem).to receive(:find).with(mms_id, any_args).and_return(bib_item_set)
@@ -39,6 +39,36 @@ describe Inventory::List::Entry::Physical do
   describe '#status' do
     it 'returns expected status' do
       expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+    end
+
+    context 'with one requested item' do
+      let(:item_data) do
+        { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
+      end
+
+      before do
+        entry.data[:availability] = Inventory::Constants::AVAILABLE
+        entry.data[:total_items] = '1'
+      end
+
+      it 'returns unavailable' do
+        expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+      end
+    end
+
+    context 'with one requested item and other items' do
+      let(:item_data) do
+        { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
+      end
+
+      before do
+        entry.data[:availability] = Inventory::Constants::AVAILABLE
+        entry.data[:total_items] = '2'
+      end
+
+      it 'returns available' do
+        expect(entry.status).to eq Inventory::Constants::AVAILABLE
+      end
     end
   end
 
