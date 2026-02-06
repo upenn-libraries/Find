@@ -14,7 +14,7 @@ gem 'blacklight', github: 'projectblacklight/blacklight', branch: 'release-8.x',
 gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false
-gem 'bootstrap', '~> 5.1'
+gem 'bootstrap', '~> 5.3'
 gem 'config'
 gem 'devise'
 gem 'devise-guests', '~> 0.8'
