@@ -28,7 +28,7 @@ gem 'observer', require: false
 gem 'omniauth', '~> 2'
 gem 'omniauth-saml'
 gem 'pennmarc', '~> 1'
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.6'
 gem 'pg_search'
 gem 'puma', '~> 6.5.0'
 gem 'put'
