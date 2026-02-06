@@ -186,7 +186,7 @@ GEM
     hashdiff (1.0.1)
     hashie (5.1.0)
       logger
-    honeybadger (6.2.0)
+    honeybadger (6.3.0)
       logger
       ostruct
     httparty (0.22.0)
