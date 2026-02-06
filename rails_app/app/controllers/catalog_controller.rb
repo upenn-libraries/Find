@@ -262,8 +262,12 @@ class CatalogController < ApplicationController
     config.add_show_field :identifier_fingerprint_show, label: I18n.t('show.identifier.fingerprint'), accessor: :marc
     config.add_show_field :note_arrangement_show, label: I18n.t('show.notes.arrangement'), accessor: :marc
     config.add_show_field :title_former_show, label: I18n.t('show.title.former'), accessor: :marc
-    config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc
-    config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc
+    config.add_show_field :series_get_continues_show, label: I18n.t('show.series.continues'), accessor: :marc,
+                                                      component: Catalog::QueryLinkComponent,
+                                                      search_target: :journal_title_search
+    config.add_show_field :series_get_continued_by_show, label: I18n.t('show.series.continued_by'), accessor: :marc,
+                                                         component: Catalog::QueryLinkComponent,
+                                                         search_target: :journal_title_search
     config.add_show_field :production_publication_show, label: I18n.t('show.production.place_of_publication'),
                                                         accessor: :marc
     config.add_show_field :language_show, label: I18n.t('show.language.main'), accessor: :marc

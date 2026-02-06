@@ -82,6 +82,7 @@ RSpec.configure do |config|
   config.include ViewComponent::TestHelpers, type: :components
   config.include ViewComponent::SystemTestHelpers, type: :components
   config.include Capybara::RSpecMatchers, type: :components
+  config.include Rails.application.routes.url_helpers, type: :components
 
   # Global Hathi request mock
   config.include Hathi::ApiMocks::Request
