@@ -12,7 +12,7 @@ services:
       CONCURRENT: 1
       TIMEOUT: 1200000 # 20min should cover the system test run period
   postgres:
-    image: postgres:15.3
+    image: postgres:15.15
     environment:
       POSTGRES_PASSWORD: password
     ports:
