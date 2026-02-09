@@ -1,0 +1,6 @@
+<%# Copied from Blacklight v9.0 %>
+<%= link_to start_over_path, class: 'catalog_startOverLink btn btn-light',
+                           aria: { label: t('blacklight.search.start_over') },
+                           data: { bs_toggle: 'tooltip', bs_title: t('blacklight.search.start_over') } do %>
+  <%= render 'shared/svgs/start_over' %>
+<% end %>
