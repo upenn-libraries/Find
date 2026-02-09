@@ -13,7 +13,7 @@ en:
   home:
     info:
       heading: 'Search our catalog'
-      description: 'Find is the definitive place to search and <strong>find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      description: 'The definitive place to search and <strong>find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
       manage:
         heading: 'Manage your account'
         description: 'Create and manage item requests on your shelf, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
@@ -320,15 +320,19 @@ en:
       missing_frame: "We're having trouble getting additional information for this library location. Please try again."
       no_info: 'No additional information is available for this location.'
   login:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Login'
+      alma: 'Courtesy borrower'
     alma:
       credentials:
         email: 'Email'
         password: 'Password'
-      heading: 'Courtesy Borrower Login'
-      login: 'Borrower Login'
-      name: 'Courtesy Borrower'
+      heading: 'Courtesy borrower login'
+      login: 'Borrower login'
+      name: 'Courtesy borrower'
     developer: 'Developer'
-    help: 'Help with your library account'
+    help: 'Your library account'
     pennkey: 'Continue with PennKey'
   results:
     singular: 'result'

@@ -1,6 +1,12 @@
+<%= render BreadcrumbsComponent.new do |component| %>
+  <% component.with_breadcrumb(href: root_path) { t('login.breadcrumbs.root') } %>
+  <% component.with_breadcrumb(href: login_path) { t('login.breadcrumbs.base') } %>
+  <% component.with_breadcrumb(active: true) { t('login.breadcrumbs.alma') } %>
+<% end %>
+
 <div class="login__container">
   <h1 class="page__heading"><%= t('login.alma.heading') %></h1>
-  <div class="login__options">
+  <div class="login__options courtesy-borrower">
     <%= form_with(url: user_alma_omniauth_callback_path, method: :post) do |form| %>
       <div class="mb-3">
         <%= form.label(:email, t('login.alma.credentials.email'), { class: 'form-label' }) %>
@@ -12,8 +18,7 @@
         <%= form.password_field(:password, { class: 'form-control' }) %>
       </div>
 
-      <%= submit_tag(t('login.alma.login'), { class: 'btn btn-primary' }) %>
+      <%= submit_tag(t('login.alma.login'), { class: 'btn btn-primary mt-4' }) %>
     <% end %>
   </div>
-  <%= link_to t('login.help'), t('urls.guides.account'), class: 'login__help-link' %>
 </div>

@@ -1,3 +1,7 @@
+#main-container {
+  margin-top: var(--pl-space-l);
+}
+
 .blacklight-catalog-index {
   & #main-container {
     display: flex;
@@ -5,9 +9,7 @@
     flex-direction: column;
 
     width: 100%;
-    margin: 0px auto;
     padding: 0 var(--pl-viewport-margins-gutter, 1em);
-    margin-top: var(--pl-space-l);
 
     @media (min-width: 820px) {
       display: grid;

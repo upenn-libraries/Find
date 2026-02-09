@@ -1,3 +1,8 @@
+<%= render BreadcrumbsComponent.new do |component| %>
+  <% component.with_breadcrumb(href: root_path) { t('login.breadcrumbs.root') } %>
+  <% component.with_breadcrumb(active: true) { t('login.breadcrumbs.base') } %>
+<% end %>
+
 <div class="login__container">
   <h1 class="page__heading">Login</h1>
   <p class="page__lede">Access your library account and Find.</p>
@@ -10,6 +15,4 @@
       <%= button_to t('login.developer'), user_developer_omniauth_authorize_path, class: 'btn btn-outline-primary' %>
     <% end %>
   </div>
-
-  <%= link_to t('login.help'), t('urls.guides.account'), class: 'login__help-link' %>
 </div>

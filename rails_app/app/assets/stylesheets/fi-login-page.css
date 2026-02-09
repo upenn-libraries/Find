@@ -3,7 +3,6 @@
 */
 
 .login__container {
-  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -35,4 +34,8 @@
 
 .login__options > form.button_to {
   display: inline-flex;
+}
+
+.courtesy-borrower {
+  max-width: 32rem;;
 }

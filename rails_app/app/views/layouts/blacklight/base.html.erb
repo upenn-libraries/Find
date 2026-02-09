@@ -34,7 +34,7 @@
   <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
-    <%= render 'shared/flash_msg', layout: 'shared/flash_messages' if flash.any? %>
+    <%= render 'shared/flash_msg' %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>
