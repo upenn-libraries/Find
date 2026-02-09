@@ -7,7 +7,7 @@ postgres_database_versioned_secrets:
     value: "password"
     version: "1"
 
-postgres_docker_image_tag: 15.3
+postgres_docker_image_tag: 15.15
 
 postgres_docker_node_constraint: catalog_find_postgres
 postgres_network: catalog_find_postgres
