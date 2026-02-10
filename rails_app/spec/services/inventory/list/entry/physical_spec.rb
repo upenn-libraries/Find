@@ -34,24 +34,32 @@ describe Inventory::List::Entry::Physical do
   end
 
   describe '#status' do
-    subject(:status) { entry.status }
-
-    it 'is unavailable by default' do
-      expect(status).to eq Inventory::Constants::UNAVAILABLE
+    it 'returns expected status' do
+      expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
     end
 
     context 'when the only item is requested' do
       let(:requested) { true }
       let(:entry) { create(:physical_entry, :single_item, :available, mms_id: mms_id) }
 
-      it { is_expected.to eq Inventory::Constants::UNAVAILABLE }
+      it 'returns unavailable' do
+        expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+      end
     end
 
     context 'when one item is requested but others exist' do
       let(:requested) { true }
       let(:entry) { create(:physical_entry, :multiple_items, :available, mms_id: mms_id) }
 
-      it { is_expected.to eq Inventory::Constants::AVAILABLE }
+      it 'returns available' do
+        expect(entry.status).to eq Inventory::Constants::AVAILABLE
+      end
+    end
+  end
+
+  describe '#human_readable_status' do
+    it 'returns expected human_readable_status' do
+      expect(entry.human_readable_status).to eq I18n.t('alma.availability.physical.unavailable.label')
     end
   end
 
