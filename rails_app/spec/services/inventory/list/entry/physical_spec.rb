@@ -64,19 +64,19 @@ describe Inventory::List::Entry::Physical do
   end
 
   describe '#policy' do
-    it 'returns the item policy' do
+    it 'returns expected policy' do
       expect(entry.policy).to eq 'Non-circ'
     end
   end
 
   describe '#format' do
-    it 'returns the physical material type' do
+    it 'returns the expected format' do
       expect(entry.format).to eq 'Book'
     end
   end
 
   describe '#coverage_statement' do
-    it 'returns the holding info' do
+    it 'returns expected value' do
       expect(entry.coverage_statement).to eq 'v1'
     end
   end
@@ -88,13 +88,13 @@ describe Inventory::List::Entry::Physical do
   end
 
   describe '#id' do
-    it 'returns the holding id' do
+    it 'returns the expected id' do
       expect(entry.id).to eq '22810131440003681'
     end
   end
 
   describe '#description' do
-    it 'returns the call number' do
+    it 'returns expected description' do
       expect(entry.description).to eq entry.data[:call_number]
     end
   end
