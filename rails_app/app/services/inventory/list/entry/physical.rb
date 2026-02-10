@@ -7,7 +7,7 @@ module Inventory
       class Physical < Base
         # @return [String, nil]
         def status
-          return Constants::UNAVAILABLE if first_item_requested?
+          return Constants::UNAVAILABLE if only_item_requested?
 
           data[:availability]
         end
@@ -104,7 +104,7 @@ module Inventory
         # shelf and scanned, which could be several hours.
         #
         # @return [Boolean] if the first item has been requested
-        def first_item_requested?
+        def only_item_requested?
           return false unless count.to_i == 1 && first_item.present?
 
           first_item.item_data.fetch('requested', false)
