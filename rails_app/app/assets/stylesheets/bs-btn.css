@@ -195,3 +195,22 @@
   --bs-btn-disabled-border-color: var(--pl-color-fg-info);
   --bs-gradient: none;
 }
+
+.btn-group {
+  & .btn.active {
+      --bs-btn-color: var(--pl-color-fg-on-emphasis);
+      --bs-btn-bg: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-border-color: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-hover-color: var(--pl-color-fg-on-emphasis);
+      --bs-btn-hover-bg: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-hover-border-color: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-focus-shadow-rgb: 14, 86, 150;
+      --bs-btn-active-color: var(--pl-color-fg-on-emphasis);
+      --bs-btn-active-bg: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-active-border-color: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      --bs-btn-disabled-color: var(--pl-color-fg-on-emphasis);
+      --bs-btn-disabled-bg: var(--pl-color-bg-accent-emphasis);
+      --bs-btn-disabled-border-color: var(--pl-color-bg-accent-emphasis);
+  }
+}

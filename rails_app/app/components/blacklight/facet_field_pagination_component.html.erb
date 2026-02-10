@@ -1,0 +1,38 @@
+<%# Copied from Blacklight v9.0 %>
+<nav class="facet-paginate-section" aria-label="pagination">
+  <ul class="pagination">
+    <% if @facet_field.paginator.first_page? %>
+      <li class="page-item disabled">
+        <a rel="prev" onclick="return false;" class="page-link" aria-label="<%= t('views.pagination.previous') %>" href="#"><%= t('views.pagination.previous') %></a>
+      </li>
+    <% else %>
+      <li class="page-item">
+        <%= helpers.link_to_previous_page @facet_field.paginator, raw(t('views.pagination.previous')), params: @facet_field.search_state.to_h, param_name: param_name, class: 'page-link', aria: { label: t('views.pagination.previous') }, data: { blacklight_modal: "preserve" } %>
+      </li>
+    <% end %>
+
+    <li class="page-item active" aria-current="page">
+      <span class="page-link"><%= t('blacklight.search.facets.page', page: @facet_field.paginator.current_page) %></span>
+    </li>
+
+    <% if @facet_field.paginator.last_page? %>
+      <li class="page-item disabled">
+        <a rel="next" onclick="return false;" class="page-link" aria-label="<%= t('views.pagination.next') %>" href="#"><%= t('views.pagination.next') %></a>
+      </li>
+    <% else %>
+      <li class="page-item">
+        <%= helpers.link_to_next_page @facet_field.paginator, raw(t('views.pagination.next')), params: @facet_field.search_state.to_h, param_name: param_name, class: 'page-link', aria: { label: t('views.pagination.next') }, data: { blacklight_modal: "preserve" } %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
+<div class="sort-options btn-group">
+  <% if @facet_field.paginator.sort == 'index' -%>
+    <span class="active az <%= @button_classes %>"><%= t('blacklight.search.facets.sort.index') %></span>
+    <%= helpers.link_to(t('blacklight.search.facets.sort.count'), sort_facet_url('count'), class: "sort_change numeric #{@button_classes}", data: { blacklight_modal: "preserve" }) %>
+  <% elsif @facet_field.paginator.sort == 'count' -%>
+    <%= helpers.link_to(t('blacklight.search.facets.sort.index'), sort_facet_url('index'), class: "sort_change az #{@button_classes}",  data: { blacklight_modal: "preserve" }) %>
+    <span class="active numeric <%= @button_classes %>"><%= t('blacklight.search.facets.sort.count') %></span>
+  <% end -%>
+</div>

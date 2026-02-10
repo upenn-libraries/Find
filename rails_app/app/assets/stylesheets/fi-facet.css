@@ -5,3 +5,20 @@
 .facet-multi-select {
   margin: var(--pl-space-s) var(--pl-space-m);
 }
+
+.facet-extended-list {
+  margin-top: var(--pl-space-m);
+  
+  ul {
+    padding: 0;
+  }
+
+  & li {
+    padding: var(--pl-space-xs) var(--pl-space-m);
+    border-radius: var(--pl-border-radius-subtle);
+  }
+
+  & li:nth-child(odd) {
+    background: var(--pl-color-bg-subtle);
+  }
+}

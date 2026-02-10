@@ -1,0 +1,41 @@
+dialog.modal[open]::backdrop {
+  backdrop-filter: blur(4px);
+  --bl-modal-backdrop-bg: rgb(from var(--pl-color-fg-default) r g b / 0.25);
+}
+
+.modal-dialog {
+  --bs-modal-title-line-height: 1.125;
+  --bs-modal-padding: var(--pl-space-m) var(--pl-space-l);
+  --bs-modal-color: var(--pl-color-fg-default);
+  --bs-border-color: var(--pl-color-fg-default);
+
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+}
+
+.modal-dialog,
+.modal-dialog .modal-content {
+  border-radius: var(--pl-border-radius);
+  border: none;
+}
+
+.modal-dialog {
+  & .modal-header {
+    padding: var(--pl-space-m) var(--pl-space-l);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .border-bottom {
+    --bs-border-color: var(--pl-color-bg-subtle);
+  }
+
+  & .input-group-text {
+    border-radius: var(--pl-border-radius);
+    box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+    padding: var(--pl-space-s) var(--pl-space-m);
+  }
+
+  & .modal-footer {
+    padding: var(--pl-space-s) var(--pl-space-m);
+  }
+}

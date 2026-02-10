@@ -26,6 +26,7 @@ en:
       facets:
         title: 'Filter results'
         filter: 'Filter'
+        page: 'Page %{page}'
         group:
           none: 'There are no results to filter.'
       filters:

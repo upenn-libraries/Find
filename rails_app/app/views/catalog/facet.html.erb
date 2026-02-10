@@ -1,0 +1,17 @@
+<%# Copied from Blacklight v9.0 %>
+<%= render Blacklight::System::ModalComponent.new do |component| %>
+  <% component.with_title { facet_field_label(@facet.key) } %>
+  <% view_config = blacklight_config.view_config(document_index_view_type) %>
+
+  <%= render view_config.facet_filters_component.new(presenter: @presenter) %>
+
+  <div class="facet-pagination d-flex flex-wrap w-100 justify-content-between gap-2 pl-margin-y-m">
+    <%= render view_config.facet_pagination_component.new(facet_field: @presenter) %>
+  </div>
+
+  <div class="facet-extended-list">
+    <%= render Blacklight::FacetComponent.new(display_facet: @display_facet,
+                                              blacklight_config: blacklight_config,
+                                              layout: false) %>
+  </div>
+<% end %>
