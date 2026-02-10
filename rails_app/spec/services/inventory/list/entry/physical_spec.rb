@@ -8,17 +8,12 @@ describe Inventory::List::Entry::Physical do
       mms_id: mms_id,
       holding_id: '22810131440003681',
       institution: '01UPENN_INST',
-      library_code: 'VanPeltLib',
-      location: 'Stacks',
-      call_number: 'HQ801 .D43 1997',
       availability: Inventory::Constants::UNAVAILABLE,
       total_items: '1',
       non_available_items: '0',
-      location_code: 'vanp',
       call_number_type: '0',
       priority: '1',
       holding_info: 'v1',
-      library: 'Van Pelt Library',
       inventory_type: Inventory::List::PHYSICAL
     )
   end
@@ -45,10 +40,9 @@ describe Inventory::List::Entry::Physical do
       let(:item_data) do
         { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
       end
+      let(:entry) { create(:physical_entry, :single_item, :available, mms_id: mms_id) }
 
       it 'returns unavailable' do
-        entry.data[:availability] = Inventory::Constants::AVAILABLE
-        entry.data[:total_items] = '1'
         expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
       end
     end
@@ -57,10 +51,9 @@ describe Inventory::List::Entry::Physical do
       let(:item_data) do
         { 'policy' => { 'desc' => 'Non-circ' }, 'physical_material_type' => { 'desc' => 'Book' }, 'requested' => true }
       end
+      let(:entry) { create(:physical_entry, :multiple_items, :available, mms_id: mms_id) }
 
       it 'returns available' do
-        entry.data[:availability] = Inventory::Constants::AVAILABLE
-        entry.data[:total_items] = '2'
         expect(entry.status).to eq Inventory::Constants::AVAILABLE
       end
     end
@@ -80,7 +73,7 @@ describe Inventory::List::Entry::Physical do
 
   describe '#description' do
     it 'returns expected description' do
-      expect(entry.description).to eql 'HQ801 .D43 1997'
+      expect(entry.description).to eql entry.data[:call_number]
     end
   end
 
