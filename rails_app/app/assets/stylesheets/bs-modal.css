@@ -7,7 +7,6 @@ dialog.modal[open]::backdrop {
   --bs-modal-title-line-height: 1.125;
   --bs-modal-padding: var(--pl-space-m) var(--pl-space-l);
   --bs-modal-color: var(--pl-color-fg-default);
-  --bs-border-color: var(--pl-color-fg-default);
 
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
 }
@@ -23,6 +22,14 @@ dialog.modal[open]::backdrop {
     padding: var(--pl-space-m) var(--pl-space-l);
     display: flex;
     justify-content: space-between;
+  }
+
+  & input {
+    --bs-border-color: var(--pl-color-fg-default);
+  }
+
+  & .modal-body {
+    padding: var(--pl-space-l);
   }
 
   & .border-bottom {

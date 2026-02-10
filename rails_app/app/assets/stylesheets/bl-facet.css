@@ -28,7 +28,7 @@
 
 .facet-values li:has(.selected) {
   color: var(--pl-color-fg-on-emphasis);
-  background: var(--pl-color-bg-accent-emphasis);
+  background: var(--pl-color-bg-accent-emphasis) !important;
 }
 
 .facet-values .remove,
@@ -62,6 +62,8 @@
 
 .more_facets {
   padding: var(--pl-space-s) var(--pl-space-m);
+  padding-top: var(--pl-space-xs);
+  margin-bottom: var(--pl-space-s);
 }
 
 .blacklight-year_isim {

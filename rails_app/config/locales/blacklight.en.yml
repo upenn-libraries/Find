@@ -27,6 +27,16 @@ en:
         title: 'Filter results'
         filter: 'Filter'
         page: 'Page %{page}'
+        modal_title: 'Filter by %{field_name}'
+        more_html: 'More %{field_name}'
+        suggest:
+          label: 'Search for %{field_label}'
+          placeholder: 'Search'
+          no_results: 'No results found.'
+        sort:
+          label: 'Sort by %{sort}'
+          index: 'A-Z'
+          count: 'Frequency'
         group:
           none: 'There are no results to filter.'
       filters:

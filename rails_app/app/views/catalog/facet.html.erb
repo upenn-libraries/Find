@@ -1,6 +1,6 @@
 <%# Copied from Blacklight v9.0 %>
 <%= render Blacklight::System::ModalComponent.new do |component| %>
-  <% component.with_title { facet_field_label(@facet.key) } %>
+  <% component.with_title { t('blacklight.search.facets.modal_title', field_name: facet_field_label(@facet.key).downcase) } %>
   <% view_config = blacklight_config.view_config(document_index_view_type) %>
 
   <%= render view_config.facet_filters_component.new(presenter: @presenter) %>

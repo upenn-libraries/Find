@@ -2,6 +2,24 @@
 * Find facet customizations
 */
 
+.facet-page-info {
+  padding: var(--pl-space-xs) var(--pl-space-s);
+  color: var(--pl-color-fg-muted);
+}
+
+.facet-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pl-space-xs);
+}
+
+.facet-nav-icon {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
 .facet-multi-select {
   margin: var(--pl-space-s) var(--pl-space-m);
 }
