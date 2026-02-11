@@ -91,6 +91,9 @@ Rails.application.routes.draw do
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
 
+  # Allow users to report cataloging errors
+  post 'cataloging_errors/create', to: 'cataloging_errors#create'
+
   if Settings.discover.enabled
     scope module: :discover do
       get '/collects', to: 'discover#index'

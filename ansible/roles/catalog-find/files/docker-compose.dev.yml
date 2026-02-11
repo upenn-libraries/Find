@@ -25,7 +25,7 @@ services:
     environment:
       APP_UID: ${UID:-1000}
       APP_GID: ${GID:-1000}
-      CHROME_URL: "http://chrome:${CHROME_PORT}"
+      CHROME_URL: "ws://chrome:${CHROME_PORT}"
       SOLR_TEST_URL: "${SOLR_TEST_URL}"
       SOLR_URL: "${SOLR_URL}"
       VAGRANT: "true"

@@ -81,18 +81,16 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.8.8)
+      public_suffix (>= 2.0.2, < 8.0)
     alma (0.6.2)
       activesupport
       httparty
       xml-simple
     ast (2.4.3)
-    autoprefixer-rails (10.4.16.0)
-      execjs (~> 2)
     base64 (0.3.0)
-    bcrypt (3.1.20)
-    bigdecimal (3.3.1)
+    bcrypt (3.1.21)
+    bigdecimal (4.0.1)
     bindex (0.8.1)
     blacklight (9.0.0)
       globalid
@@ -111,9 +109,6 @@ GEM
       rails
     bootsnap (1.17.1)
       msgpack (~> 1.2)
-    bootstrap (5.3.2)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.11.8, < 3)
     builder (3.3.0)
     byebug (11.1.3)
     capybara (3.40.0)
@@ -125,27 +120,28 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    concurrent-ruby (1.3.5)
-    config (5.1.0)
+    concurrent-ruby (1.3.6)
+    config (5.6.1)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
-    connection_pool (2.5.4)
+      ostruct
+    connection_pool (3.0.2)
     crack (0.4.5)
       rexml
     crass (1.0.6)
     csv (3.3.0)
-    cuprite (0.15)
+    cuprite (0.17)
       capybara (~> 3.0)
-      ferrum (~> 0.14.0)
-    date (3.5.0)
+      ferrum (~> 0.17.0)
+    date (3.5.1)
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
     deep_merge (1.2.2)
-    devise (4.9.4)
+    devise (5.0.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
+      railties (>= 7.0)
       responders
       warden (~> 1.2.3)
     devise-guests (0.8.3)
@@ -185,56 +181,57 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
-    erb (6.0.0)
+    erb (6.0.1)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
-    execjs (2.9.1)
-    factory_bot (6.2.1)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
-      railties (>= 5.0.0)
-    faker (3.2.3)
-      i18n (>= 1.8.11, < 2)
+    factory_bot (6.5.6)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
     faraday-retry (2.2.0)
       faraday (~> 2.0)
-    ferrum (0.14)
+    ferrum (0.17.1)
       addressable (~> 2.5)
+      base64 (~> 0.2)
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
-      websocket-driver (>= 0.6, < 0.8)
+      websocket-driver (~> 0.7)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
     globalid (1.3.0)
       activesupport (>= 6.1)
     hashdiff (1.0.1)
-    hashie (5.0.0)
-    honeybadger (5.10.0)
+    hashie (5.1.0)
+      logger
+    honeybadger (6.2.0)
+      logger
+      ostruct
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.8.1)
-    irb (1.15.3)
+    io-console (0.8.2)
+    irb (1.16.0)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (2.16.0)
+    json (2.18.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -256,7 +253,7 @@ GEM
     libv8-node (18.16.0.0-x86_64-linux)
     lint_roller (1.1.0)
     logger (1.7.0)
-    loofah (2.24.1)
+    loofah (2.25.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.9.0)
@@ -273,10 +270,11 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
-    minitest (5.26.2)
+    minitest (6.0.1)
+      prism (~> 1.5)
     msgpack (1.7.2)
-    multi_xml (0.7.1)
-      bigdecimal (~> 3.1)
+    multi_xml (0.8.1)
+      bigdecimal (>= 3.1, < 5)
     net-http (0.4.1)
       uri
     net-imap (0.5.12)
@@ -289,23 +287,21 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
-    nokogiri (1.18.10-aarch64-linux-gnu)
+    nokogiri (1.19.0-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.10-arm64-darwin)
+    nokogiri (1.19.0-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-darwin)
+    nokogiri (1.19.0-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-linux-gnu)
+    nokogiri (1.19.0-x86_64-linux-gnu)
       racc (~> 1.4)
     observer (0.1.2)
-    omniauth (2.1.3)
+    omniauth (2.1.4)
       hashie (>= 3.4.6)
+      logger
       rack (>= 2.2.3)
       rack-protection
-    omniauth-rails_csrf_protection (1.0.1)
-      actionpack (>= 4.2)
-      omniauth (~> 2.0)
-    omniauth-saml (2.2.3)
+    omniauth-saml (2.2.4)
       omniauth (~> 2.1)
       ruby-saml (~> 1.18)
     orm_adapter (0.5.0)
@@ -320,39 +316,42 @@ GEM
       library_stdnums (~> 1.6)
       marc (~> 1.2)
       nokogiri (~> 1.15)
-    pg (1.5.4)
+    pg (1.6.3-aarch64-linux)
+    pg (1.6.3-arm64-darwin)
+    pg (1.6.3-x86_64-darwin)
+    pg (1.6.3-x86_64-linux)
     pg_search (2.3.7)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
-    popper_js (2.11.8)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
-    prism (1.4.0)
+    prism (1.9.0)
     propshaft (1.3.1)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
-    psych (5.2.6)
+    psych (5.3.1)
       date
       stringio
-    public_suffix (6.0.2)
+    public_suffix (7.0.0)
     puma (6.5.0)
       nio4r (~> 2.0)
     put (0.1.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (2.2.21)
-    rack-protection (3.2.0)
+    rack (3.2.4)
+    rack-protection (4.2.1)
       base64 (>= 0.1.0)
-      rack (~> 2.2, >= 2.2.4)
-    rack-session (1.0.2)
-      rack (< 3)
+      logger (>= 1.6.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
-    rackup (1.0.1)
-      rack (< 3)
-      webrick
+    rackup (2.3.1)
+      rack (>= 3)
     rails (8.1.1)
       actioncable (= 8.1.1)
       actionmailbox (= 8.1.1)
@@ -385,7 +384,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.1)
-    rdoc (6.15.1)
+    rdoc (7.1.0)
       erb
       psych (>= 4.0.0)
       tsort
@@ -396,9 +395,9 @@ GEM
       io-console (~> 0.5)
     requestjs-rails (0.0.11)
       railties (>= 6.1.0)
-    responders (3.1.1)
-      actionpack (>= 5.2)
-      railties (>= 5.2)
+    responders (3.2.0)
+      actionpack (>= 7.0)
+      railties (>= 7.0)
     rexml (3.4.4)
     rsolr (2.6.0)
       builder (>= 2.1.2)
@@ -454,7 +453,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
-    ruby-saml (1.18.0)
+    ruby-saml (1.18.1)
       nokogiri (>= 1.13.10)
       rexml
     securerandom (0.4.1)
@@ -469,10 +468,10 @@ GEM
       sidekiq (>= 6)
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
-    stringio (3.1.8)
+    stringio (3.2.0)
     summon (2.0.5)
       json
-    thor (1.4.0)
+    thor (1.5.0)
     timeout (0.4.4)
     tsort (0.2.0)
     turbo-rails (1.5.0)
@@ -508,8 +507,8 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webrick (1.9.1)
-    websocket-driver (0.7.7)
+    webrick (1.9.2)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -517,7 +516,7 @@ GEM
       rexml
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.3)
+    zeitwerk (2.7.4)
 
 PLATFORMS
   aarch64-linux
@@ -534,16 +533,14 @@ DEPENDENCIES
   blacklight-ris
   blacklight_dynamic_sitemap
   bootsnap
-  bootstrap (~> 5.1)
   byebug
   capybara
   config
-  cuprite (= 0.15)
+  cuprite
   debug
   devise
   devise-guests (~> 0.8)
   factory_bot_rails
-  faker
   faraday
   faraday-retry
   honeybadger
@@ -551,11 +548,10 @@ DEPENDENCIES
   marc
   mini_racer
   observer
-  omniauth
-  omniauth-rails_csrf_protection
+  omniauth (~> 2)
   omniauth-saml
   pennmarc (~> 1)
-  pg (~> 1.1)
+  pg (~> 1.6)
   pg_search
   propshaft
   puma (~> 6.5.0)

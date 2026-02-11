@@ -1,0 +1,13 @@
+suggester:
+  enabled: false
+  digital_catalog:
+    host: 'find.library.upenn.edu'
+    solr:
+      url: "<%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>/suggest"
+      dictionary: 'title'
+  summon:
+    host: "upenn.summon.serialssolutions.com"
+    path: "/search"
+  proxy:
+    host: "proxy.library.upenn.edu"
+    path: "/login"

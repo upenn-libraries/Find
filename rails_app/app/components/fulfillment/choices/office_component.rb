@@ -3,15 +3,7 @@
 module Fulfillment
   module Choices
     # office delivery component logic
-    class OfficeComponent < ViewComponent::Base
-      attr_accessor :user, :checked, :radio_options
-
-      def initialize(user:, checked: false, **radio_options)
-        @user = user
-        @checked = checked
-        @radio_options = radio_options
-      end
-
+    class OfficeComponent < BaseComponent
       def delivery_value
         Fulfillment::Options::Deliverable::OFFICE
       end

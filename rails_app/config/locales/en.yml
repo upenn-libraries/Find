@@ -10,6 +10,10 @@ en:
     use_catalog: 'Using the Find catalog'
     articles+: 'Using Articles+'
     library_account: 'Using your account'
+  head:
+    meta:
+      description:
+        record: Access '%{title}' through the Penn Libraries catalog.
   home:
     info:
       heading: 'Search our catalog'
@@ -374,23 +378,26 @@ en:
         label: 'How would you like it delivered?'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
         email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
-        scan:
+        electronic:
           info_html: '<a href="%{url}" target=_blank>About this service</a>'
-          label: 'Email me a chapter or section'
+          label_html: 'Email me a chapter or section'
         office:
           label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
           warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>.'
         pickup:
-          label: 'Pick up'
+          label_html: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        ill_pickup:
+          label_html: 'ILL Pick up'
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
-          label: 'Mail it via Books by Mail'
+          label_html: 'Mail it via Books by Mail'
           restriction_message: 'Your address must be more than 50 miles from campus and in the U.S. to use this service.'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
         docdel:
-          label: "Request it through Wharton's Document Delivery service"
+          label_html: "Request it through Wharton's Document Delivery service"
           info_html: '<a href="%{url}" target="_blank">About Lippincott Library services</a>'
         aeon:
           info: 'Special collections materials are available to anyone who wishes to consult them in the reading room.'
@@ -439,6 +446,20 @@ en:
     docdel:
       email:
         subject: 'DocDel submission from catalog'
+  cataloging_errors:
+    form:
+      title: "Report a cataloging error"
+      record_info: "Record information"
+      mms_id: "MMS ID"
+      message_label: "Describe the issue"
+      instructions: "Please provide details about the error"
+      submit: "Send report"
+      cancel: "Cancel"
+    email:
+      subject: "Cataloging error report - MMS ID: %{mms_id}"
+    flash:
+      success: 'Your error report has been submitted. Thank you for helping us improve our catalog!'
+      failure: 'Something went wrong. Please try again later.'
   search:
     all_fields: 'All Fields'
     basic: 'All Fields (Basic)'
