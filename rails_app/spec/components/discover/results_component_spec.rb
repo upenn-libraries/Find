@@ -26,7 +26,7 @@ describe Discover::ResultsComponent, type: :components do
     end
   end
 
-  context 'with a count parameter specified' do
+  context 'with a lower count parameter specified' do
     let(:count) { 1 }
     let(:results) do
       Discover::Results.new(entries: build_pair(:discover_record),
