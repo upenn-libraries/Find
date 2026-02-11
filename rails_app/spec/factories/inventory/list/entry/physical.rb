@@ -14,5 +14,17 @@ FactoryBot.define do
 
     skip_create
     initialize_with { new(**attributes) }
+
+    trait :single_item do
+      total_items { '1' }
+    end
+
+    trait :multiple_items do
+      total_items { '2' }
+    end
+
+    trait :available do
+      availability { Inventory::Constants::AVAILABLE }
+    end
   end
 end
