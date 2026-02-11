@@ -14,8 +14,15 @@
   margin: 0;
   font-family: var(--pl-font-family);
   font-size: var(--pl-font-size-m);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--pl-color-fg-default);
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 
   @media (max-width: 620px) {
     flex-basis: 100%;
