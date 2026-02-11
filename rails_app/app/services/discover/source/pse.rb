@@ -66,11 +66,11 @@ module Discover
       # @return [Array<Discover::Entry>]
       def entries_from(data:)
         Array.wrap(data).filter_map do |item|
-          Entry.new(title: Array.wrap(item.fetch('title')),
-                    body: body_from(record: item), # author, collection, format, location w/ call num?
-                    identifiers: config_class::IDENTIFIERS,
-                    link_url: item.fetch('link'),
-                    thumbnail_url: item.dig('pagemap', 'cse_thumbnail')&.first&.fetch('src'))
+          Record.new(title: Array.wrap(item.fetch('title')),
+                     body: body_from(record: item), # author, collection, format, location w/ call num?
+                     identifiers: config_class::IDENTIFIERS,
+                     link_url: item.fetch('link'),
+                     thumbnail_url: item.dig('pagemap', 'cse_thumbnail')&.first&.fetch('src'))
         rescue StandardError => e
           Honeybadger.notify(e)
 

@@ -52,7 +52,7 @@ module Discover
         I18n.t("discover.links.all_results.#{source}", query: query)
       end
 
-      # @param [Hash] record
+      # @param [ApplicationRecord] record
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
         { creator: Array.wrap(record.creator),
@@ -62,14 +62,14 @@ module Discover
       end
 
       # @param data [Array<ApplicationRecord>]
-      # @return [Array<Discover::Entry>]
+      # @return [Array<Discover::Record>]
       def entries_from(data:)
         Array.wrap(data).filter_map do |record|
-          Entry.new(title: Array.wrap(record.title),
-                    body: body_from(record: record),
-                    identifiers: config_class::IDENTIFIERS,
-                    link_url: record.link,
-                    thumbnail_url: record.thumbnail_url)
+          Record.new(title: Array.wrap(record.title),
+                     body: body_from(record: record),
+                     identifiers: config_class::IDENTIFIERS,
+                     link_url: record.link,
+                     thumbnail_url: record.thumbnail_url)
         rescue StandardError => e
           Honeybadger.notify(e)
 

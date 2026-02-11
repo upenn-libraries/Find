@@ -102,11 +102,11 @@ module Discover
       # @return [Array<Discover::Entry>]
       def entries_from(data:)
         data.filter_map do |record|
-          Entry.new(title: json_extract(record: record, keys: config_class::TITLE),
-                    body: body_from(record: record),
-                    identifiers: identifiers(record: record),
-                    link_url: record.dig(*config_class::RECORD_URL),
-                    thumbnail_url: colenda_thumbnail_url(record: record))
+          Record.new(title: json_extract(record: record, keys: config_class::TITLE),
+                     body: body_from(record: record),
+                     identifiers: identifiers(record: record),
+                     link_url: record.dig(*config_class::RECORD_URL),
+                     thumbnail_url: colenda_thumbnail_url(record: record))
         rescue StandardError => e
           Honeybadger.notify(e)
           next

@@ -7,10 +7,10 @@ module Discover
 
     attr_reader :source, :total_count, :results_url
 
-    # @param entries [Array<Hash>]
-    # @param [Discover::Source] source
-    # @param [Integer] total_count
-    # @param [String] results_url
+    # @param entries [Array<Discover::Record>]
+    # @param source [Discover::Source]
+    # @param total_count [Integer]
+    # @param results_url [String]
     def initialize(entries:, source:, total_count:, results_url:)
       @entries = entries
       @source = source
