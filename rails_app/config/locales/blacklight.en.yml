@@ -28,7 +28,7 @@ en:
         filter: 'Filter'
         page: 'Page %{page}'
         modal_title: 'Filter by %{field_name}'
-        more_html: 'More %{field_name}'
+        more_html: 'All %{field_name}'
         suggest:
           label: 'Search for %{field_label}'
           placeholder: 'Search'

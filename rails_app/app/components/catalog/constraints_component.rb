@@ -45,9 +45,9 @@ module Catalog
     # @return [ActiveSupport::SafeBuffer] HTML for the "All" constraint
     def all_constraint
       tag.span(class: 'btn-group applied-filter constraint filter mx-1') do
-        tag.span(class: 'constraint-value btn btn-outline-secondary') do
+        tag.span(class: 'constraint-value btn btn-outline-secondary') {
           tag.span(t('blacklight.search.filters.all'), class: 'filter-value')
-        end + all_constraint_remove_button
+        } + all_constraint_remove_button
       end
     end
 
