@@ -25,6 +25,9 @@ services:
       - library_info_api_key
       - summon_api_key
       - google_pse_api_key
+      - aws_region
+      - aws_access_key_id
+      - aws_secret_access_key
     volumes:
       - catalog_find_app_storage:/home/app/storage
 
