@@ -6,19 +6,21 @@ module Discover
   module Parser
     # Parse Penn Museum CSV
     class PennMuseum
-      ARTIFACT_ATTRIBUTES = %i[title link identifier thumbnail_url location format creator description on_display].freeze
+      ARTIFACT_ATTRIBUTES = %i[title link identifier thumbnail_url
+                               location format creator description
+                               on_display].freeze
 
       ARTIFACT_ATTRIBUTE_MAP = {
         title: :objectName,
-        link: :url,
+        link: :'Record URL',
         identifier: :identifier,
         # thumbnail_url: :tbd,
-        # location: :tbd,
+        location: :curatorialSection,
         format: :material,
         creator: :creator,
         description: :description,
         on_display: :onDisplay
-      }
+      }.freeze
 
       # title = objectName OR title (maybe both?)
       # link = url
@@ -49,15 +51,18 @@ module Discover
         # @return [String, nil]
         def csv_file
           # file location (local?)
-          File.read('Sample_PM.csv')
+          'Penn_Museum_Collections_Data.csv'
         end
 
         # Parse given CSV into Artifacts.
         #
         # @param data [String] the input file content
         # @return [nil]
-        def parse_csv(data)
-          CSV.parse(data, headers: true) do |row|
+        def parse_csv(file)
+          CSV.foreach(file, headers: true).each_with_index do |row, index|
+            # for testing - we can remove this later
+            break if index >= 100
+
             process_row(row)
           rescue StandardError => e
             Honeybadger.notify(e)
@@ -99,6 +104,14 @@ module Discover
           else
             value.presence
           end
+        end
+
+        # Sanitize string with HTML tags
+        #
+        # @param description [String]
+        # @return [String, nil]
+        def sanitize(description)
+          ActionView::Base.full_sanitizer.sanitize(description)&.gsub(/[Ââ]/, '')&.gsub('&nbsp;', ' ')
         end
       end
     end
