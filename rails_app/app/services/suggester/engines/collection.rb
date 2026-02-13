@@ -22,9 +22,9 @@ module Suggester
         @suggestions ||= {
           suggestions: {
             actions: Suggester::Suggestions::Collection.new(suggestions: engines.flat_map(&:actions))
-                                                       .provide(limit: context[:actions_limit]),
+                     .provide(limit: context[:actions_limit]),
             completions: Suggester::Suggestions::Collection.new(suggestions: engines.flat_map(&:completions))
-                                                           .provide(limit: context[:completions_limit])
+                         .provide(limit: context[:completions_limit])
           }
         }
       end

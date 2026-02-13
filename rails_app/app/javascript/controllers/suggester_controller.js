@@ -59,13 +59,12 @@ export default class extends Controller {
    * @param {Event} event - The input event from the search field
    */
   onInput(event) {
+    clearTimeout(this.debounceTimer);
     const query = event.target.value.trim();
     if (query.length <= MIN_QUERY_LENGTH) {
       this.autocomplete.querySelector('ol[role="listbox"]')?.replaceChildren();
       return;
     }
-
-    clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
       this.fetchSuggestions(query);
     }, 300);
