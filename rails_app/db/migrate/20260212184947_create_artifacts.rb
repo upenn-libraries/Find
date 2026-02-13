@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength
 class CreateArtifacts < ActiveRecord::Migration[7.2]
   def change
     create_table :discover_artifacts do |t|
@@ -18,3 +19,4 @@ class CreateArtifacts < ActiveRecord::Migration[7.2]
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
