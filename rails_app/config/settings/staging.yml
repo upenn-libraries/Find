@@ -8,6 +8,8 @@ additional_results_sources:
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 google_analytics:
   id: 'GTM-WS2TBPLM'
+ms_clarity:
+  id: 'vcqbrc973h'
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
 email:
