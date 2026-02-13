@@ -64,11 +64,11 @@ Rails.application.configure do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:saml] = OmniAuth::AuthHash.new({ provider: 'test',
                                                               info: OmniAuth::AuthHash::InfoHash
-                                                                      .new({ uid: 'aalten@upenn.edu' }) })
+                                                                    .new({ uid: 'aalten@upenn.edu' }) })
 
   OmniAuth.config.mock_auth[:alma] = OmniAuth::AuthHash.new({ provider: 'alma',
                                                               info: OmniAuth::AuthHash::InfoHash
-                                                                      .new({ uid: 'courtesy@borrower.com' }) })
+                                                                    .new({ uid: 'courtesy@borrower.com' }) })
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
