@@ -13,7 +13,7 @@ describe Discover::Source::Blacklight do
       stub_blacklight_response(
         source: source_name,
         query: "Discover::Configuration::Blacklight::#{source_name.camelize}::QUERY_PARAMS"
-               .safe_constantize.merge(query),
+                 .safe_constantize.merge(query),
         response: json_fixture("#{source_name}_response", :discover)
       )
     end
