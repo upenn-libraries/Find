@@ -25,6 +25,7 @@
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
+  <%= render('shared/ms_clarity/script', id: Settings.ms_clarity.id) if render_clarity_script? %>
   <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
   <%= render blacklight_config.skip_link_component.new do %>
     <%= content_for(:skip_links) %>
