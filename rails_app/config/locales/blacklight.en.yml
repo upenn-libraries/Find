@@ -4,7 +4,7 @@ en:
       previous: 'Previous'
       next: 'Next'
   blacklight:
-    application_name: 'Find | Penn Libraries'
+    application_name: 'Find · Penn Libraries'
     back_to_search: 'Back to Results'
     search:
       zero_results:
@@ -26,6 +26,11 @@ en:
       facets:
         group:
           none: 'Your search found no results to limit in the Catalog. Change or start your search over for filters.'
+      show:
+        title: "%{document_title} · %{application_name}"
+      page_title:
+        title: "%{constraints} · %{application_name}"
+        joiner: ' · '
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'

@@ -1,5 +1,5 @@
 <%
-  # Up to date with Blacklight v8.12.2
+  # Up to date with Blacklight v9.0
 %>
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
@@ -14,6 +14,7 @@
     <%= favicon_link_tag %>
     <link rel="stylesheet" href="https://use.typekit.net/gbh8cmg.css">
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.css" %>
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "print", media: "print", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -30,12 +31,12 @@
   <%= render blacklight_config.skip_link_component.new do %>
     <%= content_for(:skip_links) %>
   <% end %>
-  <%= render partial: 'shared/header_navbar' %>
+  <%= render blacklight_config.header_component.new(blacklight_config: blacklight_config, user: current_user) %>
 
-  <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
+  <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
-    <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+    <%= render 'shared/flash_msg', layout: 'shared/flash_messages' if flash.any? %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>

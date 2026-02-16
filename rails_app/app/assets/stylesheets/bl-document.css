@@ -1,0 +1,179 @@
+/*
+* Blacklight document/search result customizations
+*/
+
+/* Search bar */
+.navbar-search {
+  background: var(--pl-color-bg-gradient-2);
+  padding: 1.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.navbar-search > .container {
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 620px) {
+  .navbar-search > .container {
+    flex-wrap: nowrap;
+  }
+}
+
+.navbar-search a {
+  color: var(--pl-color-fg-default);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.navbar-search a:hover {
+  text-decoration: underline;
+}
+
+.navbar-search .search-query-form {
+  display: flex;
+  font-size: 1.125rem;
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+  flex-grow: 1;
+  width: auto;
+  margin-right: 1rem;
+}
+
+@media (max-width: 620px) {
+  .navbar-search .search-query-form {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+.search-q {
+  all: unset;
+  background: var(--pl-color-bg-default);
+  padding: 0 1rem;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+  color: var(--pl-color-fg-default);
+  border: solid 1px var(--pl-color-fg-subtle);
+  border-right: none;
+  flex-grow: 1;
+}
+
+.search-btn {
+  all: unset;
+  background: var(--pl-color-bg-accent-emphasis);
+  color: var(--pl-color-fg-on-emphasis);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+  cursor: pointer;
+  border: solid 1px var(--pl-color-fg-subtle);
+}
+
+.navbar-search *:focus {
+  box-shadow: 0 0 0 2px var(--pl-color-bg-attention), 0 0 0 4px var(--pl-color-fg-default);
+}
+
+/* Document counter */
+.document-counter {
+  font-size: 1rem;
+  color: var(--pl-color-fg-subtle);
+}
+
+/* Document list */
+.documents-list .document {
+  border-bottom: solid 1px var(--pl-color-bg-subtle-brand);
+  padding-top: 0;
+  margin-bottom: 1rem;
+
+  & .pl-dl--inline {
+    margin-bottom: 0.5rem;
+
+    & dd {
+      &::after {
+        content: " ·";
+        padding-left: var(--pl-space-xs);
+      }
+    }
+    
+    /* if a dd has a dt that follows, don't render the delineator */
+    & dd:has(+ dt) {
+      &::after {
+        all: unset;
+      }
+    }
+    
+    /* no delineator for last dl child */
+    & > *:last-child::after {
+      all: unset;
+    }
+  }
+}
+
+.documents-list .document .document-title-heading {
+  margin-bottom: 0.5rem;
+  font-size: var(--pl-font-size-xl);
+}
+
+.documents-list .document .document-title-heading a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.documents-list .document .document-title-heading a:hover {
+  text-decoration: underline;
+}
+
+/* Document metadata - visually hidden labels in list view */
+.documents-list .document-metadata dt {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.documents-list .document-metadata dd {
+  color: var(--pl-color-fg-subtle);
+}
+
+.documents-list .document-metadata ul {
+  list-style: none;
+}
+
+/* Document metadata - detail view */
+.document-metadata.row {
+  margin: 0;
+  display: block;
+}
+
+.document-metadata dt {
+  display: block;
+  width: 100%;
+  font-size: 0.875em;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+  text-align: left;
+  padding: 0;
+}
+
+.document-metadata dt:not(:first-of-type) {
+  padding-top: 1rem;
+}
+
+.document-metadata dd {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.document-metadata ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+  list-style-type: "- ";
+}
+
+.document-metadata ul ::marker {
+  color: var(--pl-color-fg-subtle);
+}

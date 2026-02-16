@@ -1,0 +1,29 @@
+/*
+* Bootstrap pagination customizations
+*/
+
+.pagination {
+  --bs-pagination-padding-x: var(--pl-space-m);
+  --bs-pagination-padding-y: var(--pl-space-s);
+  --bs-pagination-color: var(--pl-color-fg-default);
+  --bs-pagination-bg: var(--pl-color-bg-subtle);
+  --bs-pagination-border-width: 1px;
+  --bs-pagination-border-color: var(--pl-color-fg-subtle);
+  --bs-pagination-border-radius: var(--pl-border-radius);
+  --bs-pagination-hover-color: var(--pl-color-fg-default);
+  --bs-pagination-hover-bg: var(--pl-color-bg-subtle);
+  --bs-pagination-hover-border-color: var(--pl-color-fg-subtle);
+  --bs-pagination-focus-color: var(--pl-color-fg-default);
+  --bs-pagination-focus-bg: var(--pl-color-bg-subtle);
+  --bs-pagination-focus-box-shadow: var(--pl-focus-box-shadow);
+  --bs-pagination-active-color: var(--pl-color-fg-on-emphasis);
+  --bs-pagination-active-bg: var(--pl-color-bg-accent-emphasis);
+  --bs-pagination-active-border-color: var(--pl-color-bg-accent-emphasis);
+  --bs-pagination-disabled-color: var(--pl-color-fg-subtle);
+  --bs-pagination-disabled-bg: transparent;
+  --bs-pagination-disabled-border-color: var(--pl-color-fg-subtle);
+}
+
+.pagination .page-link:not(.disabled):hover {
+  text-decoration: underline;
+}

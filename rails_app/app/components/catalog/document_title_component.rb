@@ -2,7 +2,7 @@
 
 module Catalog
   # Use our own title component to include vernacular titles
-  # Local component overriding version from Blacklight v8.12.2
+  # Local component overriding version from Blacklight v9.0
   class DocumentTitleComponent < Blacklight::DocumentTitleComponent
   end
 end

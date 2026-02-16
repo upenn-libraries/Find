@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local version of Blacklight v8.12.2 SearchBarComponent, overridden in order to customize template
+  # Local version of Blacklight v9.0 SearchBarComponent, overridden in order to customize template
   class SearchBarComponent < Blacklight::Component
     renders_one :append
     renders_one :prepend
@@ -62,6 +62,12 @@ module Catalog
 
     def advanced_search_enabled?
       blacklight_config.advanced_search.enabled
+    end
+
+    def rounded_border_class
+      return 'rounded-0' if search_fields.length > 1
+
+      'rounded-start'
     end
 
     private

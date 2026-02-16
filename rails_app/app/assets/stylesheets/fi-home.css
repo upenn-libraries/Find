@@ -1,0 +1,16 @@
+/*
+* Find homepage styles
+*/
+
+/* Homepage "more resources" lists */
+.home-content dt {
+  font-weight: normal;
+}
+
+.home-content dd {
+  margin-bottom: 1rem;
+}
+
+.home-content dd:last-of-type {
+  margin-bottom: 0;
+}

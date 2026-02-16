@@ -1,0 +1,7 @@
+/*
+* Find facet customizations
+*/
+
+.facet-multi-select {
+  margin: var(--pl-space-s) var(--pl-space-m);
+}

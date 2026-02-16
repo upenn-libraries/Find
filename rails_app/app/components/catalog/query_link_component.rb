@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Catalog
+  # Copied from Blacklight v9.0
+  #
   # Renders links to fielded searches for record page show values
   class QueryLinkComponent < Blacklight::MetadataFieldComponent
     # Generates a link to perform a fielded search based on the provided show value.

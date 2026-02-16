@@ -1,0 +1,102 @@
+/*
+* Bootstrap root customizations
+* Customizations to Bootstrap's theme variables using CSS custom properties.
+* https://github.com/twbs/bootstrap/blob/v5.0.0/scss/_variables.scss
+*/
+
+:root {
+  --pl-viewport-margins-max-width: 1280px;
+}
+
+body {
+  /* Typography */
+  --bs-font-sans-serif: var(--pl-font-family);
+  --bs-body-font-family: var(--pl-font-family);
+  --bs-body-line-height: 1.4;
+  --bs-font-weight-semibold: 500;
+
+  /* Body colors */
+  --bs-body-color: var(--pl-color-fg-default);
+  --bs-body-bg: var(--pl-color-bg-default);
+  --bs-emphasis-color: var(--pl-color-fg-default);
+
+  /* Secondary/Tertiary colors */
+  --bs-secondary-color: var(--pl-color-fg-subtle);
+  --bs-secondary-bg: var(--pl-color-bg-subtle);
+  --bs-tertiary-color: var(--pl-color-fg-muted);
+  --bs-tertiary-bg: var(--pl-color-bg-subtle);
+
+  /* Link colors */
+  --bs-link-color: var(--pl-color-fg-accent);
+  --bs-link-hover-color: var(--pl-color-fg-accent);
+
+  /* Border colors */
+  --bs-border-color: #dee2e6;
+
+  /* Border radius */
+  --bs-border-radius: var(--pl-border-radius-subtle);
+  --bs-border-radius-sm: var(--pl-border-radius-subtle);
+  --bs-border-radius-lg: var(--pl-border-radius-default);
+
+  /* Focus ring */
+  --bs-focus-ring-color: var(--pl-color-fg-accent);
+
+  /* Form validation colors */
+  --bs-form-valid-color: var(--pl-color-fg-success);
+  --bs-form-valid-border-color: var(--pl-color-fg-success);
+  --bs-form-invalid-color: var(--pl-color-fg-attention);
+  --bs-form-invalid-border-color: var(--pl-color-fg-attention);
+
+  /* Theme colors - Primary (accent/blue #0E5696) */
+  --bs-primary: var(--pl-color-fg-accent);
+  --bs-primary-rgb: 14, 86, 150;
+  --bs-primary-bg-subtle: var(--pl-color-bg-accent);
+  --bs-primary-border-subtle: var(--pl-color-fg-accent);
+  --bs-primary-text-emphasis: var(--pl-color-fg-accent);
+
+  /* Theme colors - Secondary (subtle/gray #595F6A) */
+  --bs-secondary: var(--pl-color-fg-subtle);
+  --bs-secondary-rgb: 89, 95, 106;
+  --bs-secondary-bg-subtle: var(--pl-color-bg-subtle);
+  --bs-secondary-border-subtle: var(--pl-color-fg-subtle);
+  --bs-secondary-text-emphasis: var(--pl-color-fg-default);
+
+  /* Theme colors - Success (green #267434) */
+  --bs-success: var(--pl-color-fg-success);
+  --bs-success-rgb: 38, 116, 52;
+  --bs-success-bg-subtle: var(--pl-color-bg-success);
+  --bs-success-border-subtle: var(--pl-color-fg-success);
+  --bs-success-text-emphasis: var(--pl-color-fg-success);
+
+  /* Theme colors - Info (purple #80317F) */
+  --bs-info: var(--pl-color-fg-info);
+  --bs-info-rgb: 128, 49, 127;
+  --bs-info-bg-subtle: var(--pl-color-bg-info);
+  --bs-info-border-subtle: var(--pl-color-fg-info);
+  --bs-info-text-emphasis: var(--pl-color-fg-info);
+
+  /* Theme colors - Warning (orange/attention #BD4718) */
+  --bs-warning: var(--pl-color-fg-attention);
+  --bs-warning-rgb: 189, 71, 24;
+  --bs-warning-bg-subtle: var(--pl-color-bg-attention);
+  --bs-warning-border-subtle: var(--pl-color-fg-attention);
+  --bs-warning-text-emphasis: var(--pl-color-fg-attention);
+
+  /* Theme colors - Danger (orange/attention #BD4718) */
+  --bs-danger: var(--pl-color-fg-attention);
+  --bs-danger-rgb: 189, 71, 24;
+  --bs-danger-bg-subtle: var(--pl-color-bg-attention);
+  --bs-danger-border-subtle: var(--pl-color-fg-attention);
+  --bs-danger-text-emphasis: var(--pl-color-fg-attention);
+
+  /* Theme colors - Light (#F5F5F6) / Dark (#2D3545) */
+  --bs-light: var(--pl-color-bg-subtle);
+  --bs-light-rgb: 245, 245, 246;
+  --bs-dark: var(--pl-color-fg-default);
+  --bs-dark-rgb: 45, 53, 69;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--pl-color-bg-accent-emphasis);
+  --bs-dropdown-link-active-color: var(--pl-color-fg-on-emphasis);
+}

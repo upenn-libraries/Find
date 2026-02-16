@@ -1,0 +1,79 @@
+/*
+* Blacklight constraint/filter customizations
+*/
+
+.constraints-container {
+  align-items: baseline;
+  gap: var(--pl-space-s);
+  margin: 0.5rem 0;
+  align-self: end;
+  --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
+}
+
+.constraints-container > h2 {
+  font-size: var(--pl-font-size-m);
+  font-family: var(--pl-font-family);
+  font-weight: 500;
+  color: var(--pl-color-fg-default);
+  margin: 0;
+}
+
+.constraints-container > h2::after {
+  content: none;
+}
+
+.constraint {
+  position: relative;
+  margin: 0 !important;
+}
+
+.constraint .btn {
+  border: none;
+}
+
+.constraint .remove {
+  position: static;
+  padding-left: var(--pl-space-2xs) !important;
+  display: flex;
+  align-items: center;
+}
+
+.constraint .remove::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--pl-border-radius);
+}
+
+.constraint .remove:hover::after {
+  border: 1px solid var(--pl-color-fg-subtle);
+}
+
+.constraint .remove:active {
+  color: var(--pl-color-fg-default);
+}
+
+.constraint .remove .bi {
+  height: 0.875em;
+  width: 0.875em;
+}
+
+.constraint .remove .blacklight-icons-remove {
+  margin-bottom: 0.025em;
+}
+
+.constraint .filter-name::after {
+  color: var(--pl-fg-subtle);
+}
+
+.constraint .constraint-value {
+  display: flex;
+  align-items: center;
+  --bs-btn-padding-y: var(--pl-space-2xs);
+  padding-right: var(--pl-space-s);
+  font-weight: 500;
+  gap: var(--pl-space-2xs);
+}

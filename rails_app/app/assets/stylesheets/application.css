@@ -1,0 +1,79 @@
+/*
+* CSS ORGANIZATION STRATEGY:
+* ========================
+* We organize styles using a consistent naming convention with prefixes to maintain clarity
+* and prevent conflicts when reading class names in templates.
+*
+* The Penn Libraries Design System provides foundational styles with the "pl-" prefix. Classes
+* like pl-reset, pl-typeset, pl-spacing, pl-font-size, and pl-line-length establish base
+* typography, spacing, and layout utilities.
+*
+* Bootstrap CSS framework comes from the Blacklight gem and uses no prefix. Classes like btn,
+* form-control, dropdown-menu, and navbar provide UI components for buttons, forms, and
+* navigation. We load the main Bootstrap CSS but create local overrides in the bs-*.css
+* files to customize components for our needs.
+*
+* Find application styles use the "fi-" prefix. Classes like fi-root, fi-home, and fi-search-bar
+* contain custom styling specific to this application interface. We create these styles to
+* extend and customize both the design system and Bootstrap components.
+*
+* We also have a custom Blacklight theme that extends the Blacklight gem's styles.
+* Blacklight framework styles come from the gem and provide search and discovery interface
+* components. These styles work alongside Bootstrap to create the core functionality of the
+* application.
+*
+* This naming strategy helps developers immediately understand the source and purpose of any
+* CSS class when reading HTML templates or debugging styles.
+*/
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url("https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css");
+
+@import url(blacklight.css);
+
+/**
+* Bootstrap (prefix: "bs-")
+*
+* Custom Bootstrap overrides and extensions for this application.
+* The main Bootstrap CSS is loaded from CDN in the layout file.
+*/
+@import url('bs-root.css');
+@import url('bs-link.css');
+@import url('bs-btn.css');
+@import url('bs-containers.css');
+@import url('bs-accordion.css');
+@import url('bs-pagination.css');
+@import url('bs-alert.css');
+@import url('bs-form.css');
+
+/**
+* Blacklight (prefix: "bl-")
+*
+* Custom Blacklight overrides and extensions for this application.
+*/
+@import url('bl-root.css');
+@import url('bl-constraint.css');
+@import url('bl-facet.css');
+@import url('bl-document.css');
+
+/**
+* Find Application Styles (prefix: "fi-")
+*
+* Application-specific styles for the Find interface.
+*/
+@import url('fi-root.css');
+@import url('fi-home.css');
+@import url('fi-search-bar.css');
+@import url('fi-document.css');
+@import url('fi-facet.css');
+@import url('fi-inventory.css');
+@import url('fi-pagination.css');
+@import url('fi-site-alerts.css');
+@import url('fi-fulfillment.css');
+@import url('fi-interlibrary-loan.css');
+@import url('fi-login-page.css');
+@import url('fi-marc-view.css');
+@import url('fi-callout.css');
+@import url('fi-web-components.css');
+@import url('fi-search-list-element.css');
+@import url('fi-fixes.css');
