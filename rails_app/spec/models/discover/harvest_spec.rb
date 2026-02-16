@@ -27,15 +27,14 @@ describe Discover::Harvest do
   end
 
   describe '#update_from_response_headers!' do
-    let(:harvest) { build(:harvest) }
-    let(:headers) { { 'last-modified' => 'Mon, 16 Feb 26 07:28:00 GMT', 'etag' => '123456' } }
+    let(:harvest) { described_class.new(source: 'penn_museum') }
+    let(:headers) { { 'last-modified' => 'Mon, 16 Feb 26 07:28:00 GMT', 'etag' => '123456', 'exclude' => 'Ignore' } }
 
     it 'updates harvest from response headers' do
-      expect(harvest).to receive(:update!).with(
-        resource_last_modified: headers['last-modified'],
-        etag: headers['etag']
-      )
+      allow(harvest).to receive(:update!)
       harvest.update_from_response_headers!(headers)
+      expect(harvest).to have_received(:update!).with(resource_last_modified: headers['last-modified'],
+                                                      etag: headers['etag'])
     end
   end
 end
