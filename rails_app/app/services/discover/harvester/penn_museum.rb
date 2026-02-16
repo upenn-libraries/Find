@@ -52,23 +52,31 @@ module Discover
         handle_error!(tempfile, I18n.t('discover.harvesters.penn_museum.errors.download', error: e))
       end
 
+      # @return [String]
       def csv_path
         Settings.discover.source.penn_museum.csv.path
       end
 
+      # @return [Hash]
       def default_headers
         Harvest.find_or_initialize_by(source: 'penn_museum').headers
       end
 
       # @param message [String]
+      # @raise Discover::Harvester::PennMuseum::Error
       def raise_error(message)
         raise Error, message
       end
 
+      # @param tempfile [Tempfile]
+      # @return [Boolean]
       def cleanup!(tempfile)
         tempfile&.close!
       end
 
+      # @raise Discover::Harvester::PennMuseum::Error
+      # @param  tempfile [Tempfile]
+      # @param message [String]
       def handle_error!(tempfile, message)
         cleanup!(tempfile)
         raise_error(message)

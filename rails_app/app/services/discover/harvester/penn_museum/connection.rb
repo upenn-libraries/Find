@@ -3,7 +3,7 @@
 module Discover
   module Harvester
     class PennMuseum
-      # Faraday connection to Penn Museum host server to request CSV file and stream its contents
+      # Establishes connection with penn museum server
       class Connection
         class Error < StandardError; end
 

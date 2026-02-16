@@ -8,6 +8,7 @@ module Discover
         NOT_MODIFIED_STATUS = 304
 
         # @param code [Integer]
+        # @return [Boolean]
         def self.not_modified?(code)
           code == NOT_MODIFIED_STATUS
         end
