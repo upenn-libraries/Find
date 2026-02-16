@@ -74,3 +74,10 @@ en:
       all_results:
         museum: "https://www.penn.museum/collections/search.php?term=%{query}"
         art_collection: "https://pennartcollection.com/?s=%{query}"
+
+    harvesters:
+      penn_museum:
+          errors:
+            download: 'Something went wrong with the file download: %{error}'
+            argument: 'A block is required to handle downloaded file'
+
