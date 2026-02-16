@@ -9,7 +9,7 @@ module Discover
 
       attr_reader :record
 
-      # @param [HaDiscover::Record] record
+      # @param [Discover::Record] record
       def initialize(record:)
         @record = record
       end

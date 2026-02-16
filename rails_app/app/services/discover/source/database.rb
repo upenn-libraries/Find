@@ -52,7 +52,7 @@ module Discover
         I18n.t("discover.links.all_results.#{source}", query: query)
       end
 
-      # @param [ApplicationRecord] record
+      # @param record [ApplicationRecord]
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
         { creator: Array.wrap(record.creator),
