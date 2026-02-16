@@ -103,7 +103,7 @@ COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin
 COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
-    SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+    SECRET_KEY_BASE_DUMMY=1 bundle exec rake assets:precompile && \
     find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
     chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/ && \
@@ -161,7 +161,7 @@ COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin
 COPY --chmod=644 --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
-    SECRET_KEY_BASE=x bundle exec rake assets:precompile && \
+    SECRET_KEY_BASE_DUMMY=1 bundle exec rake assets:precompile && \
     find . -type d -exec chmod 755 {} + && \
     chmod 744 -R ./bin && \
     chmod +x -R ${PROJECT_ROOT}/${BUNDLE_HOME}/ruby/${RUBY_MAJOR}/bin/ && \
