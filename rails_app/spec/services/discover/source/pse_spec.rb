@@ -13,7 +13,7 @@ describe Discover::Source::PSE do
       stub_pse_response(
         query: "Discover::Configuration::PSE::#{source_name.camelize}::QUERY_PARAMS"
                .safe_constantize.merge(query),
-        response: json_fixture("#{source_name}_response", :discover)
+        response: json_fixture("#{source_name}_response", directory: :discover)
       )
     end
 

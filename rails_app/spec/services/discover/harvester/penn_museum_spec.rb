@@ -7,7 +7,7 @@ describe Discover::Harvester::PennMuseum do
   let(:harvester) { described_class.new }
 
   describe '#download' do
-    let(:csv) { File.read('spec/fixtures/discover/csv/penn_museum.csv') }
+    let(:csv) { csv_fixture('penn_museum', namespace: :discover) }
     let(:headers) { { 'last-modified' => 'yesterday', 'etag' => '"123456"' } }
 
     context 'with no block given' do
@@ -78,8 +78,10 @@ describe Discover::Harvester::PennMuseum do
         end
 
         it 'raises an error' do
+          path = URI::HTTPS.build(host: Settings.discover.source.penn_museum.host,
+                                  path: Settings.discover.source.penn_museum.csv.path)
           error_message = I18n.t('discover.harvesters.penn_museum.errors.download',
-                                 error: 'the server responded with status 500')
+                                 error: "the server responded with status 500 for GET #{path}")
           expect { harvester.download { |_f| } }.to raise_error(described_class::Error, error_message)
         end
       end

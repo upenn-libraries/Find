@@ -40,7 +40,7 @@ module Discover
           config = Discover::Configuration.config_for(source: source)
           stub_blacklight_response(source: source.to_s,
                                    query: config::QUERY_PARAMS.merge(query),
-                                   response: json_fixture("#{source}_response", :discover))
+                                   response: json_fixture("#{source}_response", directory: :discover))
         end
       end
 
@@ -52,7 +52,7 @@ module Discover
 
           config = Discover::Configuration.config_for(source: source)
           stub_pse_response(query: config::QUERY_PARAMS.merge(query),
-                            response: json_fixture("#{source}_response", :discover))
+                            response: json_fixture("#{source}_response", directory: :discover))
         end
       end
 
@@ -62,7 +62,7 @@ module Discover
         config = Discover::Configuration.config_for(source: source)
         stub_blacklight_response(source: source,
                                  query: config::QUERY_PARAMS.merge(query),
-                                 response: json_fixture('find_empty_response', :discover))
+                                 response: json_fixture('find_empty_response', directory: :discover))
       end
     end
   end
