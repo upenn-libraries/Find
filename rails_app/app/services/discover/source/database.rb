@@ -19,7 +19,7 @@ module Discover
       # @return [Discover::Results]
       def results(query:)
         data = config_class::MODEL.search(query)
-        Results.new(entries: entries_from(data: data),
+        Results.new(records: records_from(data: data),
                     source: self,
                     total_count: data.count,
                     results_url: results_url(query: query))
@@ -63,7 +63,7 @@ module Discover
 
       # @param data [Array<ApplicationRecord>]
       # @return [Array<Discover::Record>]
-      def entries_from(data:)
+      def records_from(data:)
         Array.wrap(data).filter_map do |record|
           Record.new(title: Array.wrap(record.title),
                      body: body_from(record: record),
