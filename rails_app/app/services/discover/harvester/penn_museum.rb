@@ -4,82 +4,47 @@ module Discover
   module Harvester
     # Downloads and exposes Penn Museum CSV
     class PennMuseum
-      class Error < StandardError; end
-
       FILENAME = 'penn_museum_artifacts'
       EXTENSION = '.csv'
 
-      # @param connection [Connection]
-      # @param headers [Harvest]
-      def initialize(connection: Connection.new, headers: default_headers)
-        @connection = connection
-        @headers = headers
+      # @param  downloader [Discover::Harvester::Downloader]
+      def initialize(downloader: Harvester::Downloader.new(connection: Connection.new(base_url: host)))
+        @downloader = downloader
       end
 
       # @raise [ArgumentError] if no block provided to handle downloaded file
       # @return [Response]
-      def download(&block)
-        raise_error(I18n.t('discover.harvesters.penn_museum.errors.argument')) if block.nil?
+      def harvest(headers: default_headers, &block)
+        raise ArgumentError, I18n.t('discover.harvesters.penn_museum.errors.argument') if block.nil?
 
-        harvest_response, tempfile = stream_csv
+        faraday_response, tempfile = @downloader.download(path: csv_path,
+                                                          headers: headers,
+                                                          filename: FILENAME,
+                                                          extension: EXTENSION)
+
+        harvest_response = Response.new(response: faraday_response)
 
         yield tempfile if harvest_response.success? && tempfile
 
         harvest_response
       ensure
-        cleanup!(tempfile)
+        tempfile&.close!
       end
 
       private
-
-      # An array containing the Response object and the downloaded Tempfile or Nil if the response does not have 2xx
-      # status code.
-      # @return [Array(Response, Tempfile | nil)]
-      def stream_csv
-        tempfile = nil
-        faraday_response = @connection.get(csv_path, headers: @headers) do |req|
-          req.options.on_data = proc do |chunk, _overall_received_bytes, env|
-            # Do not create empty TempFile when resource has not been modified
-            next if Response.not_modified?(env.status)
-
-            tempfile ||= Tempfile.new([FILENAME, EXTENSION], binmode: true)
-            tempfile.write chunk
-          end
-        end
-        tempfile&.rewind
-        [Response.new(response: faraday_response), tempfile]
-      rescue StandardError => e
-        handle_error!(tempfile, I18n.t('discover.harvesters.penn_museum.errors.download', error: e))
-      end
 
       # @return [String]
       def csv_path
         Settings.discover.source.penn_museum.csv.path
       end
 
+      def host
+        URI::HTTPS.build(host: Settings.discover.source.penn_museum.host)
+      end
+
       # @return [Hash]
       def default_headers
         Harvest.find_or_initialize_by(source: 'penn_museum').headers
-      end
-
-      # @param message [String]
-      # @raise Discover::Harvester::PennMuseum::Error
-      def raise_error(message)
-        raise Error, message
-      end
-
-      # @param tempfile [Tempfile]
-      # @return [Boolean]
-      def cleanup!(tempfile)
-        tempfile&.close!
-      end
-
-      # @raise Discover::Harvester::PennMuseum::Error
-      # @param  tempfile [Tempfile]
-      # @param message [String]
-      def handle_error!(tempfile, message)
-        cleanup!(tempfile)
-        raise_error(message)
       end
     end
   end
