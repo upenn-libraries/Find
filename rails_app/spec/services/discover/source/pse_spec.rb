@@ -35,12 +35,12 @@ describe Discover::Source::PSE do
       expect(results.results_url).to eq('https://www.penn.museum/collections/search.php?term=B13186')
     end
 
-    it 'assigns exptected entry title' do
+    it 'assigns expected entry title' do
       expect(results.first.title).to contain_exactly('Hebrew Bowl - B13186 | Collections - Penn Museum')
     end
 
     it 'assigns expected entry body' do
-      expect(results.first.body).to include(description: ['Penn Museum Object B13186 - Hebrew Bowl.'])
+      expect(results.first.description).to eq ['Penn Museum Object B13186 - Hebrew Bowl.']
     end
   end
 

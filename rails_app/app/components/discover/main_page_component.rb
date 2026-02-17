@@ -6,8 +6,8 @@ module Discover
     attr_reader :query, :count, :render_pse
 
     # @param query [String]
-    # @param count [ActionController::Parameters]
-    # @param render_pse [Boolean] whether or not to render any PSE sources
+    # @param count [Integer]
+    # @param render_pse [Boolean] whether to render any PSE sources
     def initialize(query:, count: nil, render_pse: true)
       @query = query
       @count = count&.to_i&.clamp(1, 10) || Configuration::RESULT_MAX_COUNT

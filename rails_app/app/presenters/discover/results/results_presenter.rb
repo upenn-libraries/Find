@@ -2,7 +2,7 @@
 
 module Discover
   class Results
-    # Derives shared html attribute values shared between the ResultsSkeleton and Results components
+    # Derives shared HTML attribute values shared between the ResultsSkeleton and Results components
     class ResultsPresenter
       ICON_CLASS_MAPPINGS = {
         Discover::Configuration::Blacklight::Find::SOURCE => %w[bi bi-book],
