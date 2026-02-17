@@ -33,12 +33,15 @@ class SearchBuilder < Blacklight::SearchBuilder
     solr_p[:sort] = INDUCED_SORT.dup.prepend(inventory_sort_addition(solr_p)).compact_blank.join(',')
   end
 
-  # This is necessary for an empty search from Advanced Search to return all results. BL9 set the `defType`
-  # param to 'lucene' at the top-level. We must set it back to 'edismax' for the expected behavior.
+  # BL9 makes it possible to use a single Solr request handler by setting defType values based on certain conditions.
+  # This is sometimes problematic for us on our Solr version and configuration. Here we set defType to edismax except
+  # for some conditions.
+  # TODO: update our Solr version and config so we don't have to do this
   # Refer to this commit for the changes:
   # https://github.com/projectblacklight/blacklight/pull/3742/changes#diff-685346ee7cdd740dec27e95aa2a2ac51e156043a6a455ab9c5f751e2da6ea3e8R100
   def restore_deftype(solr_p)
-    return if solr_p[:json].present?
+    # don't set edismax for advanced search or if lucene is set using local params syntax
+    return if advanced_search_params_present?(solr_p) || solr_p[:q]&.starts_with?('{!lucene}')
 
     solr_p[:defType] = 'edismax'
   end
