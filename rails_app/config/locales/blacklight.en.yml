@@ -39,6 +39,13 @@ en:
           count: 'Frequency'
         group:
           none: 'Your search found no results to limit in the Catalog. Change or start your search over for filters.'
+      filters:
+        title: 'Searching for'
+        all: 'All'
+      show:
+        title: "%{document_title} · %{application_name}"
+      page_title:
+        title: "%{constraints} · %{application_name}"
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
