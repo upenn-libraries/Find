@@ -11,7 +11,7 @@ module Discover
 
       # @return [String, nil]
       def location
-        record.location&.first&.split('|')&.last
+        record.title&.first&.split('|')&.last
       end
     end
   end
