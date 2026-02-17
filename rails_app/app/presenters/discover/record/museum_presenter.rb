@@ -6,12 +6,12 @@ module Discover
     class MuseumPresenter < BasePresenter
       # @return [String, nil]
       def title
-        record.title.first&.split('|')&.first
+        record.title.first&.split('|')&.first&.strip
       end
 
       # @return [String, nil]
       def location
-        record.title&.first&.split('|')&.last
+        record.title&.first&.split('|')&.last&.strip
       end
     end
   end

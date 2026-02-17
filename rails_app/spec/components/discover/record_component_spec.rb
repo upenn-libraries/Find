@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 describe Discover::RecordComponent, type: :components do
-  let(:component) { described_class.new(record: record, source: nil) }
+  let(:component) { described_class.new(record: record, source: source) }
   let(:rendered) { render_inline(component) }
+  let(:source) { nil }
 
   context 'with a robust entry' do
     let(:record) { build(:discover_record) }
     let(:record_presenter) { Discover::Record::BasePresenter.new(record: record) }
 
     it 'displays location data' do
-      expect(rendered).to have_text record_presenter.location
+      expect(rendered).to have_selector '.results-list-item__location', text: record_presenter.location
     end
 
     it 'displays creator data' do
@@ -45,13 +46,14 @@ describe Discover::RecordComponent, type: :components do
   context 'with a museum entry' do
     let(:record) { build(:discover_record, :from_museum) }
     let(:record_presenter) { Discover::Record::MuseumPresenter.new(record: record) }
+    let(:source) { Discover::Configuration::PSE::Museum::SOURCE }
 
     it 'renders the title' do
       expect(rendered).to have_text record_presenter.title
     end
 
     it 'renders the location' do
-      expect(rendered).to have_text record_presenter.location
+      expect(rendered).to have_selector '.results-list-item__location', text: record_presenter.location
     end
   end
 end
