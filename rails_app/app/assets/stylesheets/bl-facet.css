@@ -115,7 +115,25 @@
   }
 
   margin-bottom: var(--pl-space-xl);
+
+  & .inclusive_or {
+    margin: var(--pl-space-s);
+
+    & .facet-values li:has(.selected) {
+      border-radius: var(--pl-border-radius-subtle);
+    }
+  }
 }
+
+.advanced-facet-limits{
+  & .facet-limit-active {
+    --bs-accordion-btn-bg: var(--pl-color-bg-subtle);
+    --bs-btn-hover-bg: var(--pl-color-bg-subtle);
+    --bs-btn-active-bg: var(--pl-color-bg-subtle);
+    --bs-btn-active-color: var(--pl-color-fg-default);
+  }
+}
+
 
 .fi-filter-btn {
   display: flex;

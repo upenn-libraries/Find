@@ -10,11 +10,12 @@ module Discover
     delegate(*Discover::Results::ResultsPresenter::VALUES, to: :presenter)
 
     # @param results [Discover::Results]
+    # @param source [Symbol]
     # @param count [Integer]
-    def initialize(results:, count:)
+    def initialize(results:, source:, count:)
       @results = results
       @count = count.to_i
-      @presenter = Discover::Results::ResultsPresenter.new(source: results.source.source)
+      @presenter = Discover::Results::ResultsPresenter.new(source: source)
     end
 
     # @return [Boolean]

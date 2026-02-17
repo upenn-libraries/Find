@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_03_04_173239) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_12_184947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_03_04_173239) do
     t.string "identifier"
     t.string "link"
     t.string "location"
+    t.string "thumbnail_url"
+    t.string "title"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "discover_artifacts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "creator"
+    t.string "description"
+    t.string "format"
+    t.string "identifier"
+    t.string "link"
+    t.string "location"
+    t.boolean "on_display"
+    t.string "other_values", default: [], array: true
     t.string "thumbnail_url"
     t.string "title"
     t.datetime "updated_at", null: false

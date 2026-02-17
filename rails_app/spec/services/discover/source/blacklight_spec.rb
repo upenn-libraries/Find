@@ -13,7 +13,7 @@ describe Discover::Source::Blacklight do
       stub_blacklight_response(
         source: source_name,
         query: "Discover::Configuration::Blacklight::#{source_name.camelize}::QUERY_PARAMS"
-                 .safe_constantize.merge(query),
+               .safe_constantize.merge(query),
         response: json_fixture("#{source_name}_response", :discover)
       )
     end
@@ -22,8 +22,8 @@ describe Discover::Source::Blacklight do
       expect(results).to be_a(Discover::Results)
     end
 
-    it 'creates entries' do
-      expect(results.first).to be_a(Discover::Entry)
+    it 'creates records' do
+      expect(results.first).to be_a(Discover::Record)
     end
   end
 
@@ -47,13 +47,8 @@ describe Discover::Source::Blacklight do
       expect(results.first.title).to contain_exactly 'Menil : the Menil collection'
     end
 
-    it 'assigns expected entry body' do
-      expect(results.first.body).to include(creator: ['Piano, Renzo.'],
-                                            format: ['Book'],
-                                            location: ['Fisher Fine Arts Library', 'Special Collections'],
-                                            publication: ["[Genova] : Fondazione Renzo Piano ; [Place of publication \
-                                not identified] : SOFP, Società operativa Fondazione Piano srl, [2007]".squish],
-                                            description: [])
+    it 'assigns expected location' do
+      expect(results.first.location).to eq(['Fisher Fine Arts Library', 'Special Collections'])
     end
 
     it 'assigns expected entry identifiers' do
@@ -86,29 +81,25 @@ describe Discover::Source::Blacklight do
         .to contain_exactly 'Kronish, Lieb, Weiner, and Hellman LLP Bankruptcy Judges Lawsuit files'
     end
 
-    it 'assigns expected entry body' do
-      expect(results.first.body).to include(:creator, :format, :location, :publication, :description)
-    end
-
     it 'assigns expected creator' do
-      expect(results.first.body[:creator]).to eq ['Kronish, Lieb, Weiner, and Hellman LLP',
-                                                  'National Bankruptcy Archives']
+      expect(results.first.creator).to eq ['Kronish, Lieb, Weiner, and Hellman LLP',
+                                           'National Bankruptcy Archives']
     end
 
-    it 'assigns expected format' do
-      expect(results.first.body[:format]).to eq ['Legal files']
+    it 'assigns expected formats' do
+      expect(results.first.formats).to eq ['Legal files']
     end
 
     it 'assigns expected location' do
-      expect(results.first.body[:location]).to eq ['University of Pennsylvania: Biddle Law Library']
+      expect(results.first.location).to eq ['University of Pennsylvania: Biddle Law Library']
     end
 
     it 'assigns expected publication' do
-      expect(results.first.body[:publication]).to eq []
+      expect(results.first.publication).to eq []
     end
 
     it 'assigns expected description' do
-      expect(results.first.body[:description].first).to start_with('On July 11, 1984, William Foley')
+      expect(results.first.description.first).to start_with('On July 11, 1984, William Foley')
     end
 
     it 'assigns expected thumbnail_url' do
@@ -116,7 +107,7 @@ describe Discover::Source::Blacklight do
     end
 
     it 'properly un-encodes characters in body fields' do
-      expect(results.first.body[:description].first).to include '("Administrative Office")'
+      expect(results.first.description.first).to include '("Administrative Office")'
     end
   end
 
