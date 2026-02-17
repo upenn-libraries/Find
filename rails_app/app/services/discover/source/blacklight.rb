@@ -19,14 +19,14 @@ module Discover
         request_url = query_uri query: query
         connection = connection(base_url: request_url.host)
         response = connection.get(request_url).body
-        data = records_from(response: response)
-        Results.new(entries: entries_from(data: data), source: self,
+        data = results_from(response: response)
+        Results.new(records: records_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(response: response))
       rescue StandardError => e
         Honeybadger.notify(e)
         # return results with no entries
-        Results.new(entries: [], source: self, total_count: 0, results_url: '')
+        Results.new(records: [], source: self, total_count: 0, results_url: '')
       end
 
       # @return [Boolean]
@@ -100,7 +100,7 @@ module Discover
       # Extract entries from response data, mapping response fields to a structure the view can consistently render
       # @param data [Array]
       # @return [Array<Discover::Entry>]
-      def entries_from(data:)
+      def records_from(data:)
         data.filter_map do |record|
           Record.new(title: json_extract(record: record, keys: config_class::TITLE),
                      body: body_from(record: record),
@@ -115,14 +115,14 @@ module Discover
 
       # Logic for getting at result data from response
       # @param response [Faraday::Response]
-      def records_from(response:)
-        records = response.dig(*config_class::RECORDS)
+      def results_from(response:)
+        data = response.dig(*config_class::RECORDS)
 
-        unless records.is_a?(Array)
-          raise Error, "Malformed Blacklight source #{source} json response. Expected an array but got #{records.class}"
+        unless data.is_a?(Array)
+          raise Error, "Malformed Blacklight source #{source} json response. Expected an array but got #{data.class}"
         end
 
-        records
+        data
       end
 
       # @param query [String]

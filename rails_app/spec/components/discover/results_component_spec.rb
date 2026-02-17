@@ -8,7 +8,7 @@ describe Discover::ResultsComponent, type: :components do
   context 'with no count parameter specified' do
     let(:count) { Discover::Configuration::RESULT_MAX_COUNT }
     let(:results) do
-      Discover::Results.new(entries: build_pair(:discover_record),
+      Discover::Results.new(records: build_pair(:discover_record),
                             source: source, total_count: 2, results_url: 'https://www.results.com')
     end
 
@@ -29,7 +29,7 @@ describe Discover::ResultsComponent, type: :components do
   context 'with a lower count parameter specified' do
     let(:count) { 1 }
     let(:results) do
-      Discover::Results.new(entries: build_pair(:discover_record),
+      Discover::Results.new(records: build_pair(:discover_record),
                             source: source, total_count: 2, results_url: nil)
     end
 
@@ -41,7 +41,7 @@ describe Discover::ResultsComponent, type: :components do
   context 'with no results' do
     let(:count) { Discover::Configuration::RESULT_MAX_COUNT }
     let(:results) do
-      Discover::Results.new(entries: [], source: source, total_count: 0, results_url: nil)
+      Discover::Results.new(records: [], source: source, total_count: 0, results_url: nil)
     end
 
     it 'renders the no results message' do

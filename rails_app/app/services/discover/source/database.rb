@@ -26,7 +26,7 @@ module Discover
       rescue StandardError => e
         Honeybadger.notify(e)
         # return results with no entries
-        Results.new(entries: [], source: self, total_count: 0, results_url: '')
+        Results.new(records: [], source: self, total_count: 0, results_url: '')
       end
 
       # @return [Boolean]

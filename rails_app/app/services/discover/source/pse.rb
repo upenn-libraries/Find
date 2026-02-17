@@ -6,25 +6,27 @@ module Discover
     class PSE < Source
       attr_reader :source
 
+      # @param source [String, Symbol]
       def initialize(source:)
         raise ArgumentError, "PSE source #{source} not supported" unless source.to_sym.in?(Configuration::PSE::SOURCES)
 
         @source = source
       end
 
+      # @param query [String]
       def results(query:)
         request_url = query_uri query: query
         connection = connection(base_url: request_url.host)
         response = connection.get(request_url).body
         # use the response to get total count and all results url
-        data = records_from(response: response)
-        Results.new(entries: entries_from(data: data), source: self,
+        data = results_from(response: response)
+        Results.new(records: records_from(data: data), source: self,
                     total_count: total_count(response: response),
                     results_url: results_url(query: query))
       rescue StandardError => _e
         # TODO: send redacted honeybadger notification
-        # return results with no entries
-        Results.new(entries: [], source: self, total_count: 0, results_url: '')
+        # return results with no records
+        Results.new(records: [], source: self, total_count: 0, results_url: '')
       end
 
       # @return [Boolean]
@@ -50,13 +52,13 @@ module Discover
         I18n.t("discover.links.all_results.#{source}", query: query)
       end
 
-      # @param [Hash] response
+      # @param response [Hash]
       # @return [Integer]
       def total_count(response:)
         response.dig(*Discover::Configuration::PSE::TOTAL_COUNT).to_i
       end
 
-      # @param [Hash] record
+      # @param record [Hash]
       # @return [Hash{Symbol->String, nil}]
       def body_from(record:)
         { description: Array.wrap(record.fetch('snippet')) }
@@ -64,7 +66,7 @@ module Discover
 
       # @param data [Array]
       # @return [Array<Discover::Entry>]
-      def entries_from(data:)
+      def records_from(data:)
         Array.wrap(data).filter_map do |item|
           Record.new(title: Array.wrap(item.fetch('title')),
                      body: body_from(record: item), # author, collection, format, location w/ call num?
@@ -79,17 +81,20 @@ module Discover
       end
 
       # Logic for getting at result data from response
-      # @param response [Faraday::Response]
-      def records_from(response:)
-        records = response.dig(*config_class::RECORDS)
+      # @param response [Hash]
+      # @return [Array]
+      def results_from(response:)
+        data = response.dig(*config_class::RECORDS)
 
-        unless records.is_a?(Array)
-          raise Error, "Malformed PSE source #{source} json response. Expected an array but got #{records.class}"
+        unless data.is_a?(Array)
+          raise Error, "Malformed PSE source #{source} json response. Expected an array but got #{data.class}"
         end
 
-        records
+        data
       end
 
+      # @param query [String]
+      # @return [URI::Generic]
       def query_uri(query:)
         query_params = { cx: config_class::CX, key: Discover::Configuration::PSE::KEY, q: query }
         URI::HTTPS.build(host: Discover::Configuration::PSE::HOST,
