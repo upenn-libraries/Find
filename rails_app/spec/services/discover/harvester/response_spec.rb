@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Discover::Harvester::PennMuseum::Response do
+describe Discover::Harvester::Response do
   let(:headers) { { 'last-modified' => 'yesterday', 'etag' => '"123456"', 'excluded-header' => 'ignore' } }
   let(:faraday_response) { instance_double(Faraday::Response, status: 200, headers: headers, success?: true) }
   let(:harvest_response) { described_class.new(response: faraday_response) }

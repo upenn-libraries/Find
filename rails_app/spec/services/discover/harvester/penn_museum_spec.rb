@@ -33,7 +33,7 @@ describe Discover::Harvester::PennMuseum do
 
       it 'returns a successful response' do
         response = harvester.harvest { |_f| }
-        expect(response).to be_a Discover::Harvester::PennMuseum::Response
+        expect(response).to be_a Discover::Harvester::Response
         expect(response.success?).to be true
       end
 
