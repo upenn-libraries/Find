@@ -341,6 +341,7 @@ en:
   results:
     singular: 'result'
     none: 'No results'
+    alternate_title: 'Parallel title'
     creator: 'Author/Creator'
     edition: 'Edition'
     conference: 'Conference name'

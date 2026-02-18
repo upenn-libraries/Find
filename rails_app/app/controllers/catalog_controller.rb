@@ -175,7 +175,7 @@ class CatalogController < ApplicationController
     # handler defaults, or have no facets.
     config.add_facet_fields_to_solr_request!
 
-    config.add_index_field :title_alternate_show, accessor: :marc
+    config.add_index_field :title_alternate_show, accessor: :marc, label: I18n.t('results.alternate_title')
     config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
     config.add_index_field :format_facet, label: I18n.t('results.format')
     config.add_index_field :creator_ss,
