@@ -26,11 +26,13 @@
     <%= constraints %>
   <% end %>
 
-  <% if @edit_search %>
-    <%= link_to advanced_search_catalog_path(@search_state.params), class: 'btn btn-light edit-search-btn', aria: { label: t('search.edit.label') }, data: { bs_toggle: 'tooltip', bs_title: t('search.edit.label') } do %>
-      <%= render 'shared/svgs/edit' %>
+  <div>
+    <% if @edit_search %>
+      <%= link_to advanced_search_catalog_path(@search_state.params), class: 'btn btn-light edit-search-btn', aria: { label: t('search.edit.label') }, data: { bs_toggle: 'tooltip', bs_title: t('search.edit.label') } do %>
+        <%= render 'shared/svgs/edit' %>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <%= render @start_over_component.new if @start_over_component %>
+    <%= render @start_over_component.new if @start_over_component %>
+  </div>
 <% end %>
