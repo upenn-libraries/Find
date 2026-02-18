@@ -18,8 +18,8 @@ module Discover
 
         faraday_response, tempfile = @downloader.download(path: csv_path,
                                                           headers: headers,
-                                                          filename: FILENAME,
-                                                          extension: EXTENSION)
+                                                          filename: filename,
+                                                          extension: extension)
 
         harvest_response = Response.new(response: faraday_response)
 
@@ -37,6 +37,17 @@ module Discover
         Settings.discover.source.penn_museum.csv.path
       end
 
+      # @return [String]
+      def filename
+        Settings.discover.source.penn_museum.csv.download.filename
+      end
+
+      # @return [String]
+      def extension
+        Settings.discover.source.penn_museum.csv.download.extension
+      end
+
+      # @return [URI::Generic]
       def host
         URI::HTTPS.build(host: Settings.discover.source.penn_museum.host)
       end

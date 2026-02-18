@@ -9,4 +9,7 @@ discover:
       host: 'www.penn.museum'
       csv:
         path: '/collections/assets/data/Penn_Museum_Collections_Data.csv'
+        download:
+          filename: 'penn_museum_artifacts'
+          extension: '.csv'
       pse_cx: '8591e2ac8a6254ba9'
