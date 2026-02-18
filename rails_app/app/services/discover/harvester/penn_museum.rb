@@ -4,8 +4,7 @@ module Discover
   module Harvester
     # Downloads and exposes Penn Museum CSV
     class PennMuseum
-      FILENAME = 'penn_museum_artifacts'
-      EXTENSION = '.csv'
+      class Error < StandardError; end
 
       # @param  downloader [Discover::Harvester::Downloader]
       def initialize(downloader: Harvester::Downloader.new(connection: Connection.new(base_url: host)))
@@ -15,7 +14,7 @@ module Discover
       # @raise [ArgumentError] if no block provided to handle downloaded file
       # @return [Response]
       def harvest(headers: default_headers, &block)
-        raise ArgumentError, I18n.t('discover.harvesters.penn_museum.errors.argument') if block.nil?
+        raise Error, 'A block is required to handle downloaded file.' if block.nil?
 
         faraday_response, tempfile = @downloader.download(path: csv_path,
                                                           headers: headers,

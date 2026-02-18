@@ -14,7 +14,7 @@ describe Discover::Harvester::PennMuseum do
       it 'raises an ArgumentError' do
         expect {
           harvester.harvest
-        }.to raise_error(ArgumentError, I18n.t('discover.harvesters.penn_museum.errors.argument'))
+        }.to raise_error(Discover::Harvester::PennMuseum::Error, 'A block is required to handle downloaded file.')
       end
     end
 
