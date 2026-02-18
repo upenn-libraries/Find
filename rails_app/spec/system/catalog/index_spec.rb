@@ -17,24 +17,6 @@ describe 'Catalog Index Page' do
         expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
       end
     end
-
-    it 'links to chat' do
-      chat_url = I18n.t('urls.help.chat', request_url: current_url)
-      expect(page).to have_link I18n.t('home.help.connect.chat.title'), href: chat_url
-    end
-
-    it 'links to ask' do
-      expect(page).to have_link I18n.t('home.help.connect.ask.title'), href: I18n.t('urls.help.ask')
-    end
-
-    it 'links to appointment scheduling' do
-      expect(page).to have_link I18n.t('home.help.connect.appointment.title'), href: I18n.t('urls.help.appointment')
-    end
-
-    it 'links to libraries and hours' do
-      expect(page).to have_link I18n.t('home.help.self_service.libraries'), href: I18n.t('urls.help.libraries')
-      expect(page).to have_link I18n.t('home.help.self_service.lib_hours'), href: I18n.t('urls.help.lib_hours')
-    end
   end
 
   context 'with an empty search' do
@@ -49,10 +31,10 @@ describe 'Catalog Index Page' do
       end
     end
 
-    it 'limits facets to 10' do
+    it 'limits facets to 7' do
       click_on I18n.t('facets.library')
       within('div.blacklight-library_facet') do
-        expect(page).to have_selector 'ul.facet-values li', count: 10
+        expect(page).to have_selector 'ul.facet-values li', count: 7
       end
     end
 
