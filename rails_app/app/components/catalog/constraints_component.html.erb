@@ -4,7 +4,7 @@
 
   <%= constraints_heading %>
 
-  <% if no_constraints? %>
+  <% if no_constraints? && @show_all_constraint %>
     <%= all_constraint %>
   <% elsif query_constraints_area.present? %>
     <% query_constraints_area.each do |constraint| %>

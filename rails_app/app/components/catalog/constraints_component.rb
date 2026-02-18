@@ -13,22 +13,23 @@ module Catalog
           facet_constraint_component_options: { layout: Catalog::SearchHistoryConstraintLayoutComponent },
           start_over_component: nil,
           edit_search: false,
+          show_all_constraint: false,
           **)
     end
 
-    def initialize(edit_search: true, **)
+    def initialize(edit_search: true, show_all_constraint: true, **)
       super(**)
 
       @edit_search = edit_search
+      @show_all_constraint = show_all_constraint
       @heading_classes = nil
     end
 
-    # Always render the component, even when there are no constraints
-    # This allows us to show "Searching for all" when browsing without filters
+    # Render the component when there are constraints, or when showing "All" is enabled
     #
-    # @return [Boolean] true
+    # @return [Boolean]
     def render?
-      true
+      !no_constraints? || @show_all_constraint
     end
 
     # Checks if there are no search constraints (query or facets)
