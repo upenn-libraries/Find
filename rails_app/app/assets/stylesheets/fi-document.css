@@ -44,6 +44,7 @@
 
 .document .documentHeader .index_title {
   flex: 1;
+  align-content: end;
 }
 
 .document .documentHeader .index-document-functions {

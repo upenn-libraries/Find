@@ -66,10 +66,15 @@
 .documents-list .document {
   border-bottom: solid 1px var(--pl-color-bg-subtle-brand);
   padding-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: var(--pl-space-m);
+  padding-bottom: var(--pl-space-l);
 
   & .pl-dl--inline {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--pl-space-xs);
+
+    & dt:not(:first-of-type)::before {
+      margin-bottom: 0.25rem;
+    }
 
     & dd {
       &::after {
@@ -93,7 +98,7 @@
 }
 
 .documents-list .document .document-title-heading {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--pl-space-xs);
   font-size: var(--pl-font-size-xl);
 }
 
