@@ -18,4 +18,18 @@ module LayoutHelper
   def page_title(title, document_title: nil)
     content_for(:page_title) { [title, document_title, application_name].compact.join(' · ') }
   end
+
+  # Overriding method to support using full-width layout for search results.
+  # We want container-fluid only for catalog search results, not the home page (catalog#index without
+  # search params), advanced search, or account pages. The fi-home class is used for CSS grid targeting.
+  # @return [String]
+  def container_classes
+    if controller_name == 'catalog' && action_name == 'index' && has_search_parameters?
+      'container-fluid'
+    elsif controller_name == 'catalog' && action_name == 'index'
+      'container fi-home'
+    else
+      'container'
+    end
+  end
 end
