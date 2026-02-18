@@ -6,7 +6,7 @@ module Discover
     class PennMuseum
       class Error < StandardError; end
 
-      # @param  downloader [Discover::Harvester::Downloader]
+      # @param downloader [Discover::Harvester::Downloader]
       def initialize(downloader: Harvester::Downloader.new(connection: Connection.new(base_url: host)))
         @downloader = downloader
       end

@@ -15,7 +15,7 @@ module Discover
       }
     end
 
-    # @return [Hash]
+    # @return [Discover::Harvest]
     def update_from_response_headers!(response_headers)
       update!(resource_last_modified: response_headers['last-modified'], etag: response_headers['etag'])
     end
