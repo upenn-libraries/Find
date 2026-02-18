@@ -21,7 +21,7 @@ module Discover
         response = @connection.get(path, headers: headers) do |req|
           req.options.on_data = proc do |chunk, _overall_received_bytes, env|
             # Do not create empty TempFile when resource has not been modified
-            next if env.status == 304
+            next if Response.not_modified?(env.status)
 
             tempfile ||= Tempfile.new([filename, extension], binmode: true)
             tempfile.write chunk
