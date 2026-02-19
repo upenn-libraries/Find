@@ -130,7 +130,7 @@ rspec_app_unit_test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   services:
-    - name: postgres:15.15
+    - name: postgres:16.12
       variables:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
