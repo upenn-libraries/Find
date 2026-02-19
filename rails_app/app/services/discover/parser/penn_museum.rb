@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require 'csv'
-
 module Discover
   module Parser
     # Parse Penn Museum CSV
-    class PennMuseum
+    class PennMuseum < Base
       ARTIFACT_ATTRIBUTES = %i[title link identifier thumbnail_url
                                location format creator description
                                on_display].freeze
@@ -23,38 +21,21 @@ module Discover
       }.freeze
 
       class << self
-        # Import a given CSV to Objects
-        #
-        # @return [Discover::Harvester::Response]
-        def import
-          Harvester::PennMuseum.new.harvest do |file|
-            parse_csv(file)
-          end
-        end
-
         private
 
         # Parse given CSV into Artifacts.
         #
-        # @param data [String] the input file content
+        # @param file [String] the input file path
         # @return [nil]
-        def parse_csv(file)
-          CSV.foreach(file, headers: true).each_with_index do |row, index|
-            # for testing - we can remove this later
-            break if index >= 100
-
-            process_row(row)
+        def parse_tabular_data(file)
+          CSV.foreach(file, headers: true) do |row|
+            artifact = find_or_initialize_artifact(row)
+            attributes = build_attributes(row)
+            artifact.update!(attributes)
           rescue StandardError => e
             Honeybadger.notify(e)
             next
           end
-        end
-
-        # Process CSV row
-        def process_row(row)
-          artifact = find_or_initialize_artifact(row)
-          attributes = build_attributes(row)
-          artifact.update!(attributes)
         end
 
         # Find/create new artifact
@@ -84,14 +65,6 @@ module Discover
           else
             value.presence
           end
-        end
-
-        # Sanitize string with HTML tags
-        #
-        # @param description [String]
-        # @return [String, nil]
-        def sanitize(description)
-          ActionView::Base.full_sanitizer.sanitize(description)&.gsub(/[Ââ]/, '')&.gsub('&nbsp;', ' ')
         end
       end
     end

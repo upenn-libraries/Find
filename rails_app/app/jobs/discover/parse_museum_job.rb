@@ -6,7 +6,9 @@ module Discover
     include Sidekiq::Job
 
     def perform
-      Parser::PennMuseum.import
+      Harvester::PennMuseum.new.harvest do |file|
+        Parser::PennMuseum.import(file: file)
+      end
     end
   end
 end
