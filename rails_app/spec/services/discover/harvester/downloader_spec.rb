@@ -10,7 +10,7 @@ describe Discover::Harvester::Downloader do
   end
 
   describe '#download' do
-    let(:csv) { csv_fixture('penn_museum', namespace: :discover) }
+    let(:csv) { tabular_fixture('penn_museum', namespace: :discover) }
     let(:response_headers) { { 'last-modified' => 'yesterday', 'etag' => '"123456"' } }
     let(:request_headers) { { 'If-None-Match' => '123456', 'If-Modified-Since' => 'yesterday' } }
     let(:result) do

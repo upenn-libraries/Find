@@ -31,23 +31,13 @@ module FixtureHelpers
     File.read(File.join(fixture_paths, dirs))
   end
 
-  # @param filename [String]
-  # @param namespace [String, Symbol, nil]
-  # @param directory [String, Symbol, nil]
+  # @param [String] filename
+  # @param [Symbol, String] format - :csv or :tsv
+  # @param [String, nil] directory
   # @return [String]
-  def tsv_fixture(filename, namespace: nil, directory: nil)
-    filename = "#{filename}.tsv" unless filename.ends_with?('.tsv')
-    dirs = [namespace.to_s, 'tsv', directory.to_s, filename].compact_blank
-    File.read(File.join(fixture_paths, dirs))
-  end
-
-  # @param filename [String]
-  # @param namespace [String, Symbol, nil]
-  # @param directory [String, Symbol, nil]
-  # @return [String]
-  def csv_fixture(filename, namespace: nil, directory: nil)
-    filename = "#{filename}.csv" unless filename.ends_with?('.csv')
-    dirs = [namespace.to_s, 'csv', directory.to_s, filename].compact_blank
+  def tabular_fixture(filename, namespace: nil, format: :csv, directory: nil)
+    filename = "#{filename}.#{format}" unless filename.ends_with?(format.to_s)
+    dirs = [namespace.to_s, format.to_s, directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
 end

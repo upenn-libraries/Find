@@ -22,37 +22,17 @@ module Discover
         on_display: :onDisplay
       }.freeze
 
-      # title = objectName OR title (maybe both?)
-      # link = url
-      # identifier = identifier
-      # thumbnail_url = do we have the thumbnail urls?
-      # location = not really sure? maybe on display instead?
-      # format = material
-      # creator = creator
-      # description = description
-      # onDisplay would be nice
-
       class << self
         # Import a given CSV to Objects
         #
-        # @param file [String]
-        # @return [nil]
-        def import(file: csv_file)
-          return unless file
-
-          parse_csv(file)
+        # @return [Discover::Harvester::Response]
+        def import
+          Harvester::PennMuseum.new.harvest do |file|
+            parse_csv(file)
+          end
         end
 
         private
-
-        # Get CSV file body content from static location (for now)
-        # TODO: do we want to pull this?
-        #
-        # @return [String, nil]
-        def csv_file
-          # file location (local?)
-          'Penn_Museum_Collections_Data.csv'
-        end
 
         # Parse given CSV into Artifacts.
         #
@@ -99,7 +79,7 @@ module Discover
           when :description
             sanitize(value)
           when :onDisplay
-            # Cast "true"/"false" strings to actual booleans
+            # Cast true/false strings to actual booleans
             ActiveModel::Type::Boolean.new.cast(value)
           else
             value.presence
