@@ -7,7 +7,7 @@ module Discover
 
     # @param query [String] search query to use when loading source panels
     # @param count [Integer] maximum number of results to render
-    # @param render_pse [Boolean] whether or not to disable Google PSE-based sources
+    # @param render_pse [Boolean] whether to disable Google PSE-based sources
     def initialize(query:, count:, render_pse:)
       @query = query
       @count = count

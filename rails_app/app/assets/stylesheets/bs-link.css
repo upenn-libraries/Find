@@ -1,0 +1,18 @@
+/*
+* Bootstrap link customizations
+*/
+
+a {
+  --bs-link-color: var(--pl-color-fg-accent);
+  --bs-link-color-rgb: 14, 86, 150;
+  --bs-link-decoration: underline;
+  --bs-link-hover-color: var(--pl-color-fg-accent);
+  --bs-link-hover-color-rgb: 14, 86, 150;
+
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: var(--pl-link-hover-text-decoration-thickness);
+}

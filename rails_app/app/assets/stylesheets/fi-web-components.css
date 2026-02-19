@@ -1,0 +1,19 @@
+/*
+* Find web components styles
+*/
+
+pennlibs-header {
+  --max-width: calc(1080px - 1.5rem);
+}
+
+pennlibs-header:not(.hydrated) {
+  display: block;
+  height: 87.5px;
+  opacity: 0;
+}
+
+@media (max-width: 920px) {
+  pennlibs-header:not(.hydrated) {
+    height: 70px;
+  }
+}

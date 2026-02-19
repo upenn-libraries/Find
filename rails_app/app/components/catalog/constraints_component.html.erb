@@ -1,18 +1,13 @@
-<% # Copied from Blacklight v8.12.2 %>
+<% # Copied from Blacklight v9.0 %>
 
 <%= content_tag @tag || :div, id: @id, class: @classes do %>
-  <% if @render_headers %>
-    <h2 class="sr-only visually-hidden"><%= t('blacklight.search.search_constraints_header') %></h2>
-  <% end %>
 
   <%= render @start_over_component.new if @start_over_component %>
 
   <%= link_to(t('search.edit.label'), advanced_search_catalog_path(@search_state.params),  class: 'btn btn-light') if @edit_search %>
 
+  <%= constraints_heading %>
 
-  <% if @render_headers %>
-    <span class="constraints-label sr-only visually-hidden"><%= t('blacklight.search.filters.title') %></span>
-  <% end %>
   <% if query_constraints_area.present? %>
     <% query_constraints_area.each do |constraint| %>
       <%= constraint %>

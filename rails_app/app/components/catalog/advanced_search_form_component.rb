@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v8.12.2 to:
+  # Local component copied from Blacklight v9.0 to:
   # - accommodate range search fields
   # - attach AdvancedSearchForm Stimulus controller
   # - match "q" parameter to keyword search clause
@@ -19,7 +19,8 @@ module Catalog
     end
 
     def initialize_constraints
-      params = helpers.search_state.params_for_search.except :page, :f_inclusive, :q, :search_field, :op, :index, :sort
+      params = helpers.search_state.params_for_search.except :clause, :page, :f_inclusive, :q, :search_field, :op,
+                                                             :index, :sort
 
       adv_search_context = helpers.search_state.reset(params)
 

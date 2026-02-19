@@ -23,13 +23,12 @@ describe Discover::Source::Database do
         expect(results.results_url).to eq("https://pennartcollection.com/?s=#{art_work.title}")
       end
 
-      it 'assigns exptected entry title' do
+      it 'assigns expected record title' do
         expect(results.first.title).to contain_exactly(art_work.title)
       end
 
-      it 'assigns expected entry body' do
-        expect(results.first.body).to include(creator: [art_work.creator], format: [art_work.format],
-                                              description: [art_work.description], location: [art_work.location])
+      it 'assigns expected record description' do
+        expect(results.first.description).to eq([art_work.description])
       end
     end
   end

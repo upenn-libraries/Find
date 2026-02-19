@@ -1,35 +1,53 @@
 # frozen_string_literal: true
 
 module FixtureHelpers
-  # @param [String] filename
+  # @param filename [String]
+  # @param namespace [String, Symbol, nil]
+  # @param directory [String, Symbol, nil]
   # @return [String]
-  def json_fixture(filename, directory = nil)
+  def json_fixture(filename, namespace: nil, directory: nil)
     filename = "#{filename}.json" unless filename.ends_with?('.json')
-    dirs = ['json', directory.to_s, filename].compact_blank
+    dirs = [namespace.to_s, 'json', directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
 
-  # @param [String] filename
+  # @param filename [String]
+  # @param namespace [String, Symbol, nil]
+  # @param directory [String, Symbol, nil]
   # @return [String]
-  def marc_xml_fixture(filename, directory = nil)
+  def marc_xml_fixture(filename, namespace: nil, directory: nil)
     filename = "#{filename}.xml" unless filename.ends_with?('.xml')
-    dirs = ['marc_xml', directory.to_s, filename].compact_blank
+    dirs = [namespace.to_s, 'marc_xml', directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
 
-  # @param [String] filename
+  # @param filename [String]
+  # @param namespace [String, Symbol, nil]
+  # @param directory [String, Symbol, nil]
   # @return [String]
-  def sru_xml_fixture(filename, directory = nil)
+  def sru_xml_fixture(filename, namespace: nil, directory: nil)
     filename = "#{filename}.xml" unless filename.ends_with?('.xml')
-    dirs = ['sru_xml', directory.to_s, filename].compact_blank
+    dirs = [namespace.to_s, 'sru_xml', directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
 
-  # @param [String] filename
+  # @param filename [String]
+  # @param namespace [String, Symbol, nil]
+  # @param directory [String, Symbol, nil]
   # @return [String]
-  def tsv_fixture(filename, directory = nil)
+  def tsv_fixture(filename, namespace: nil, directory: nil)
     filename = "#{filename}.tsv" unless filename.ends_with?('.tsv')
-    dirs = ['tsv', directory.to_s, filename].compact_blank
+    dirs = [namespace.to_s, 'tsv', directory.to_s, filename].compact_blank
+    File.read(File.join(fixture_paths, dirs))
+  end
+
+  # @param filename [String]
+  # @param namespace [String, Symbol, nil]
+  # @param directory [String, Symbol, nil]
+  # @return [String]
+  def csv_fixture(filename, namespace: nil, directory: nil)
+    filename = "#{filename}.csv" unless filename.ends_with?('.csv')
+    dirs = [namespace.to_s, 'csv', directory.to_s, filename].compact_blank
     File.read(File.join(fixture_paths, dirs))
   end
 end

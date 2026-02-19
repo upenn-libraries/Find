@@ -56,11 +56,6 @@ class InventoryController < ApplicationController
 
   private
 
-  # Default to no search state.
-  def search_state
-    nil
-  end
-
   def load_document
     @document = search_service.fetch(params[:id])
   end

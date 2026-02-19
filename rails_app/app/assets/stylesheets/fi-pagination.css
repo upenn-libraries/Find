@@ -1,0 +1,42 @@
+/*
+* Find pagination styles
+*/
+
+.pagination-bar {
+  margin-bottom: 1rem;
+}
+
+.pagination-bar,
+.pagination-bar__previous-and-next {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pagination-bar__previous-and-next {
+  align-items: baseline;
+}
+
+.pagination-bar__previous-and-next strong {
+  font-weight: 500;
+}
+
+.pagination-bar__previous-and-next > span {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.pagination-bar span.previous {
+  display: none;
+}
+
+.paginate-section {
+  display: flex;
+  align-items: center;
+}
+
+.documents-list .document .index-document-functions {
+  margin-bottom: 0.25rem;
+}

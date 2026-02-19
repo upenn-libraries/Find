@@ -1,0 +1,23 @@
+/*
+* Find application root styles
+* CSS custom properties and base application styles
+*/
+
+:root {
+  /* Penn institution colors (reference values) */
+  --fi-penn-blue: #011F5B;
+  --fi-penn-red: #990000;
+
+  /* Application color palette */
+  --fi-blue-medium: #0E5696;
+  --fi-blue-light: #D4E4F2;
+  --fi-gray-dark: #2D3545;
+  --fi-gray-medium: #595F6A;
+  --fi-gray-light: #F5F5F6;
+  --fi-green-medium: #267434;
+  --fi-green-light: #F1F7E1;
+  --fi-purple-medium: #80317F;
+  --fi-purple-light: #F2DFED;
+  --fi-orange-medium: #BD4718;
+  --fi-orange-light: #FEEDDD;
+}

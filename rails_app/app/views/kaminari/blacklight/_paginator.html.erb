@@ -1,4 +1,4 @@
-<%# Override of Blacklight v8.12.2 template @ views/kaminari/blacklight/_paginator.html.erb to disallow deep pagination %>
+<%# Override of Blacklight v9.0 template @ views/kaminari/blacklight/_paginator.html.erb to disallow deep pagination %>
 
 <%# The container tag
   - available local variables
@@ -13,7 +13,6 @@
 <%= paginator.render do -%>
   <ul class="pagination">
     <%= prev_page_tag %>
-    <%= next_page_tag  %>
     <% each_relevant_page do |page| -%>
       <% if page.left_outer? ||  page.inside_window? -%>
         <%= page_tag page %>
@@ -21,5 +20,6 @@
         <%= gap_tag %>
       <% end -%>
     <% end -%>
+    <%= next_page_tag  %>
   </ul>
 <% end -%>

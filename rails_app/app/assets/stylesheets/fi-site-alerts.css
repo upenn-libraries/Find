@@ -1,0 +1,32 @@
+/*
+* Find site alerts styles
+*/
+
+.site-alerts__container .alert-primary {
+  background: var(--pl-color-bg-accent);
+  color: var(--pl-color-fg-default);
+  margin-bottom: 0;
+  margin-top: 1rem;
+  border-color: var(--pl-color-fg-muted);
+}
+
+.site-alerts__container a {
+  color: var(--pl-color-fg-default);
+}
+
+.site-alerts__container p {
+  margin: 0;
+}
+
+.site-alerts__container p + p {
+  margin-top: 0.5rem;
+}
+
+.site-alerts__container .btn-close {
+  --bs-btn-close-opacity: 1;
+  --bs-btn-close-hover-opacity: 1;
+}
+
+.site-alerts__container .alert > p:last-of-type {
+  margin-bottom: 0;
+}

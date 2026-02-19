@@ -1,0 +1,134 @@
+.sidenav {
+  --bl-facet-active-bg: var(--pl-color-bg-subtle);
+  --bl-facet-active-item-color: var(--pl-color-fg-on-emphasis);
+}
+
+.facets-header {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.facet-limit-active {
+  --bs-accordion-btn-color: var(--pl-color-fg-default);
+}
+
+.facet-values {
+  padding: var(--pl-space-s) 0;
+}
+
+.facet-values li {
+  padding: var(--pl-space-xs) var(--pl-space-m);
+  position: relative;
+}
+
+.facet-values li:has(.selected) {
+  color: var(--pl-color-fg-on-emphasis);
+  background: var(--pl-color-bg-accent-emphasis);
+}
+
+.facet-values .remove,
+.facet-values a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.facet-values .blacklight-icons-remove {
+  display: none;
+}
+
+.facet-values a {
+  color: var(--pl-color-fg-default);
+  font-weight: 400;
+}
+
+.facet-values li:hover .facet-label {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-color: currentColor;
+}
+
+.facet-values .facet-count {
+  color: var(--pl-color-fg-subtle);
+}
+
+.more_facets {
+  padding: var(--pl-space-s) var(--pl-space-m);
+}
+
+.blacklight-year_isim {
+  --bs-border-color: var(--pl-color-fg-subtle);
+
+  & .chart-wrapper {
+    padding: var(--pl-space-m);
+    padding-bottom: 0;
+  }
+
+  & details {
+    margin-top: var(--pl-space-s) !important;
+  }
+
+  & .text-muted {
+    color: var(--pl-color-fg-default) !important;
+  }
+
+  & .distribution summary {
+    color: var(--pl-color-fg-default);
+    padding: var(--pl-space-s) var(--pl-space-m);
+
+    & ~ ul {
+      margin-top: 0 !important;
+    }
+  }
+
+  & .missing {
+    margin-top: 0 !important;
+  }
+}
+
+.facet-field-heading {
+  margin-bottom: 0 !important;
+}
+
+.range_limit_form {
+  margin: var(--pl-space-m) 0;
+}
+
+.facets {
+  & .accordion {
+    --bs-accordion-body-padding-y: 0;
+    --bs-accordion-body-padding-x: 0;
+  }
+
+  & .facet-field-heading {
+    margin-bottom: 0;
+  }
+
+  margin-bottom: var(--pl-space-xl);
+
+  & .inclusive_or {
+    margin: var(--pl-space-s);
+
+    & .facet-values li:has(.selected) {
+      border-radius: var(--pl-border-radius-subtle);
+    }
+  }
+}
+
+.advanced-facet-limits{
+  & .facet-limit-active {
+    --bs-accordion-btn-bg: var(--pl-color-bg-subtle);
+    --bs-btn-hover-bg: var(--pl-color-bg-subtle);
+    --bs-btn-active-bg: var(--pl-color-bg-subtle);
+    --bs-btn-active-color: var(--pl-color-fg-default);
+  }
+}
+

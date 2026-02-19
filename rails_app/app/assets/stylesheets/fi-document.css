@@ -1,0 +1,59 @@
+/*
+* Find document/record styles
+*/
+
+.document__inventory {
+  margin-bottom: 1.5rem;
+}
+
+.document__inventory-heading {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+  font-weight: 500;
+  padding: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.document__inventory-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.document__tabpanel {
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.document__tabpanel:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pl-color-bg-accent), 0 0 0 4px var(--pl-color-fg-default);
+}
+
+.documentHeader > h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0;
+}
+
+.show-document {
+  display: block;
+  width: 100%;
+}
+
+.document-inventory {
+  margin-bottom: 0.5rem;
+}
+
+.show-document__format {
+  font-weight: 500;
+  color: var(--pl-color-fg-subtle);
+  margin-bottom: 0;
+}
+
+.show-document {
+  & .record-title {
+    font-size: 2rem;
+  }
+}

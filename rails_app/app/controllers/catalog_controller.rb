@@ -40,23 +40,6 @@ class CatalogController < ApplicationController
     config.document_solr_path = 'get'
     config.json_solr_path = 'advanced'
 
-    # Remove facet limits on the advanced search form; if we limit these, we see the modal that does not allow for
-    # multiple selection, which is essential to the advanced search facet functionality.
-    config.advanced_search = Blacklight::OpenStructWithHashAccess.new(
-      enabled: true,
-      form_solr_parameters: {
-        'facet.field': %w[access_facet format_facet language_facet library_facet
-                          location_facet classification_facet recently_published_facet],
-        'f.access_facet.facet.limit': '-1',
-        'f.format_facet.facet.limit': '-1',
-        'f.language_facet.facet.limit': '-1',
-        'f.library_facet.facet.limit': '-1',
-        'f.location_facet.facet.limit': '-1',
-        'f.classification_facet.facet.limit': '-1',
-        'f.recently_published_facet.facet.limit': '-1'
-      }
-    )
-
     # items to show per page, each number in the array represent another option to choose from.
     config.per_page = [10, 20, 50, 100]
 
@@ -72,13 +55,14 @@ class CatalogController < ApplicationController
     config.header_component = Catalog::HeaderComponent
     config.index.search_bar_component = Catalog::SearchBarComponent
     config.index.constraints_component = Catalog::ConstraintsComponent
-    config.index.facet_group_component = Catalog::FacetGroupComponent
+    config.index.sidebar_component = Catalog::SidebarComponent
     config.index.document_component = Catalog::ResultsDocumentComponent
     config.show.document_component = Catalog::ShowDocumentComponent
     config.show.document_header_component = Catalog::PageHeaderComponent
     config.show.show_tools_component = Catalog::ShowToolsComponent
     config.show.show_header_tools_component = Catalog::ShowToolsComponent
     config.show.title_component = Catalog::DocumentTitleComponent
+    config.index.document_metadata_component = Catalog::DocumentMetadataComponent
 
     # Configure local components for search session components that make the show page toolbar possible
     config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent
@@ -94,7 +78,7 @@ class CatalogController < ApplicationController
     config.add_show_tools_partial(:bookmark, component: Catalog::BookmarkComponent,
                                              if: :render_bookmarks_control?)
     config.add_show_tools_partial(:email, if: :user_signed_in?, callback: :email_action,
-                                          validator: :validate_email_params)
+                                          validator: :email_params_valid?)
     config.add_show_tools_partial(:login_for_email, unless: :user_signed_in?, modal: false, path: 'login_path')
     config.add_show_tools_partial(:citation)
     config.add_show_tools_partial(:staff_view, modal: false, unless: :bookmarks?)
@@ -455,6 +439,13 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = true
       field.include_in_simple_select = false
       field.clause_params = { edismax: { qf: '${publication_date_qf}', pf: '${publication_date_pf}' } }
+    end
+
+    # Set up a default advanced search configuration by using the current
+    # search_fields and facet_fields configs.
+    if config.advanced_search.enabled
+      config.copy_search_field_config_to_advanced!
+      config.copy_facet_field_config_to_advanced!
     end
 
     # "sort results by" select (pulldown)

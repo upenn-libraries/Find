@@ -1,12 +1,12 @@
+<% # Copied from Blacklight version v9.0 %>
+
 <%= render(@layout.new(field: @field)) do |component| %>
   <% component.with_label do %>
     <%= label %>
   <% end %>
-  <% component.with_value do %>
-    <ul>
-      <% @field.values.each do |show_value| %>
-        <li><%= link_to_query(show_value) %></li>
+      <% @field.values.each_with_index do |show_value, index| %>
+        <% component.with_value(value: show_value, index: index) do %>
+        <%= link_to_query(show_value) %>
       <% end %>
-    </ul>
   <% end %>
 <% end %>

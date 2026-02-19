@@ -1,0 +1,120 @@
+/*
+* Blacklight root customizations
+* Global focus states and page-level elements
+*/
+
+body {
+  --bs-border-radius: var(--pl-space-m);
+  --bs-gray-100: var(--pl-color-bg-subtle);
+  --bs-gray-200: var(--pl-color-bg-subtle);
+}
+
+
+*:focus {
+  box-shadow: var(--pl-focus-box-shadow);
+  outline: none;
+}
+
+.tab-pane.fade.show.active:focus {
+    box-shadow: none;
+}
+
+
+form {
+  --bs-border-color: var(--pl-color-fg-subtle);
+}
+
+pennlibs-footer {
+  display: block;
+}
+
+.site-feedback {
+  background: var(--pl-color-bg-subtle);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.site-feedback p {
+  max-width: 60ch;
+  margin-bottom: 0;
+}
+
+.site-feedback i {
+  font-size: 1.5rem;
+  color: var(--pl-color-fg-subtle);
+}
+
+label.toggle-bookmark {
+  min-width: auto;
+}
+
+.page__heading {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0;
+  margin-top: 2rem;
+}
+
+.page__lede {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  max-width: 52ch;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Form error states */
+.form-group--error {
+  padding-left: 0.75rem;
+  border-left: solid 0.25rem var(--pl-color-fg-attention);
+}
+
+.form-group--error .error-message {
+  color: var(--pl-color-fg-attention);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.form-group--error input {
+  border-color: var(--pl-color-fg-attention);
+  border-width: 2px;
+  line-height: 1.2;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Card links */
+.cards-as-links a.card {
+  display: block;
+  text-decoration: none;
+}
+
+.cards-as-links a.card:hover {
+  --bs-card-border-color: var(--pl-color-fg-default);
+}
+
+.cards-as-links a.card:hover .card-title {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+}
+
+/* Search widgets */
+.sort-pagination {
+  justify-content: baseline;
+}
+
+.applied-filter,
+.search-widgets > * {
+  margin: 0 !important;
+}
+
+.search-widgets {
+  gap: 0.5rem;
+}
+
+.constraints-container {
+  margin-bottom: 1rem !important;
+  gap: 0.5rem;
+}

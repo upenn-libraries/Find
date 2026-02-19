@@ -1,5 +1,5 @@
 <%
-  # Copied from Blacklight v8.12.2
+  # Copied from Blacklight v9.0
   # Adapted for the search box to be customized.
   # - "Find it" button label
   # - Center search box
@@ -12,7 +12,7 @@
       <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
         <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
         <% if search_fields.length > 1 %>
-          <%= f.label :search_field, scoped_t('search_field.label'), class: 'sr-only visually-hidden' %>
+          <%= f.label :search_field, scoped_t('search_field.label'), class: 'visually-hidden' %>
         <% end %>
         <% before_input_groups.each do |input_group| %>
           <%= input_group %>
@@ -25,13 +25,13 @@
                         options_for_select(search_fields, h(@search_field)),
                         {},
                         title: scoped_t('search_field.title'),
-                        class: "custom-select form-select search-field") %>
+                        class: "form-select search-field") %>
           <% elsif search_fields.length == 1 %>
             <%= f.hidden_field :search_field, value: search_fields.first.last %>
           <% end %>
 
-          <%= f.label @query_param, scoped_t('search.label'), class: 'sr-only visually-hidden' %>
-          <%= f.search_field @query_param, value: @q, class: "search-q q form-control rounded-#{search_fields.length > 1 ? '0' : 'left'}",
+          <%= f.label @query_param, scoped_t('search.label'), class: 'visually-hidden' %>
+          <%= f.search_field @query_param, value: @q, class: "search-q q form-control #{rounded_border_class}",
               autofocus: @autofocus,
               autocomplete: 'off',
               aria: { label: scoped_t('search.label') },

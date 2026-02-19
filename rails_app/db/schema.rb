@@ -62,6 +62,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_12_184947) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "discover_harvests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "etag"
+    t.datetime "resource_last_modified"
+    t.string "source"
+    t.datetime "updated_at", null: false
+    t.index ["source"], name: "index_discover_harvests_on_source", unique: true
+  end
+
   create_table "searches", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.binary "query_params"

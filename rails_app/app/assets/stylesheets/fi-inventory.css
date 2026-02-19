@@ -1,0 +1,303 @@
+/*
+* Find inventory/holdings styles
+*/
+
+.holdings {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.holdings > turbo-frame {
+  display: contents;
+}
+
+.holdings__other-link {
+  text-decoration: underline;
+  text-underline-offset: .15em;
+}
+
+.holdings__other-link:hover {
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--pl-color-fg-subtle);
+}
+
+.holding__item {
+  --holding-accent-color: var(--pl-color-fg-subtle);
+}
+
+.holding__item--available {
+  --holding-accent-color: var(--pl-color-fg-success);
+}
+
+.holding__item--loading,
+.holding__link {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  color: var(--pl-color-fg-subtle);
+  border-left: solid 3px var(--holding-accent-color);
+  padding: 0 0.5rem;
+  line-height: 1.25;
+}
+
+.holding__header {
+  color: var(--holding-accent-color);
+}
+
+.holding__main {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--holding-accent-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+}
+
+.holding__link:hover .holding__main {
+  text-decoration-thickness: 2px;
+}
+
+.holding__link--more {
+  text-underline-offset: 1px;
+}
+
+.holding__link--more:hover {
+  text-decoration: underline;
+}
+
+.inventory-item__header {
+  display: block;
+  color: var(--pl-color-fg-subtle);
+}
+
+.inventory-item__main {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.inventory-item__sub-main {
+  display: block;
+}
+
+.inventory-item .inventory-item__sub-main {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.inventory-item__footer {
+  color: var(--holding-accent-color);
+  font-weight: 600;
+}
+
+.document__inventory-list .inventory-item__main {
+  font-size: 1rem;
+}
+
+.document-inventory-container {
+  margin-top: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.inventory-item__availability {
+  --holding-accent-color: var(--pl-color-fg-subtle);
+}
+
+.inventory-item__availability--easy {
+  --holding-accent-color: var(--pl-color-fg-success);
+}
+
+.inventory-item__availability--difficult {
+  --holding-accent-color: var(--pl-color-fg-subtle);
+}
+
+.inventory-item__status--blocked {
+  --holding-accent-color: var(--pl-color-fg-attention);
+}
+
+.inventory-item__availability-summary {
+  border-left: solid 3px var(--holding-accent-color);
+  padding-left: 0.75rem;
+}
+
+.inventory-item__availability-summary .inventory-item__availability-main {
+  color: var(--holding-accent-color);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.inventory-item__availability-main,
+.inventory-item__availability-footer {
+  display: block;
+  line-height: 1.25;
+}
+
+.inventory-item {
+  all: unset;
+  padding: 0.75rem 1rem;
+  border: solid 1px transparent;
+  border-bottom-color: var(--bs-border-color);
+  border-right-color: var(--bs-border-color);
+  border-left: solid 3px var(--bs-border-color);
+  font-size: 0.875rem;
+  background: var(--pl-color-bg-subtle);
+}
+
+.inventory-item:hover,
+.inventory-item:focus {
+  border-left-color: var(--pl-color-fg-accent);
+}
+
+.inventory-item.active {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+  border: solid 1px var(--pl-color-fg-subtle);
+  border-left: solid 6px var(--pl-color-bg-accent-emphasis);
+  background: var(--pl-color-bg-default);
+  padding-left: calc(1rem - 3px + .2rem);
+  padding-top: 0.95rem;
+  padding-bottom: 0.95rem;
+  margin: -0.2rem;
+}
+
+@media (min-width: 992px) {
+  .inventory-item.active {
+    clip-path: inset(-0.5rem 1px -0.5rem -0.5rem);
+    margin-right: 0;
+  }
+}
+
+.inventory-item .inventory-item__main {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+  text-decoration-color: var(--pl-color-fg-default);
+}
+
+.inventory-item:focus .inventory-item__main,
+.inventory-item:hover .inventory-item__main {
+  text-decoration-thickness: 2px;
+}
+
+.inventory-item__description {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inventory-item__status {
+  display: block;
+  color: var(--pl-color-fg-success);
+  font-weight: 700;
+}
+
+.inventory-item__notes {
+  margin-top: 0.5rem;
+  color: var(--pl-color-fg-subtle);
+  margin-bottom: 0.5rem;
+}
+
+.location-details summary {
+  cursor: pointer;
+}
+
+.location-details summary .inventory-item__container {
+  display: inline-grid;
+  /* Keep the location/details/coverage statement on the same line as the detail dropdown toggle, even if there's a long line of text (ex: large number years in the coverage statement) */
+  max-width: calc(100% - 2rem);
+}
+
+a.inventory-item--hathitrust {
+  display: block;
+  text-decoration: none;
+  color: #c35400;
+  margin-top: 1.5rem;
+  border-top: solid 1px var(--bs-border-color);
+}
+
+.inventory-item--hathitrust {
+  background: var(--pl-color-bg-default);
+  border-left-color: #f3b688;
+}
+
+.inventory-item--hathitrust .inventory-item__header {
+  color: var(--pl-color-fg-default);
+}
+
+.inventory-item--hathitrust .inventory-item__main {
+  color: #c35400;
+  text-decoration-color: #c35400;
+}
+
+.inventory-item--hathitrust:hover {
+  cursor: pointer;
+  color: #c35400;
+  border-left-color: #c35400;
+}
+
+.location-details summary:hover .inventory-item__container span {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
+}
+
+.location-details__content {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: var(--pl-color-bg-subtle);
+}
+
+.location-details__content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.location-details__content li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location-details__content p {
+  margin-bottom: 0;
+}
+
+.document-inventory-container .btn-success {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+}
+
+.document-inventory-container .btn-success:hover {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-thickness: var(--pl-link-text-decoration-thickness);
+}
+
+.document-inventory-container .btn-success:focus {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px, var(--pl-focus-box-shadow);
+}
+
+.document-inventory-container .btn-success svg {
+  max-width: 1rem;
+  max-height: 1rem;
+}
+
+@media (min-width: 992px) {
+  .show-document-container {
+    padding: 1.5rem;
+    border: solid 1px var(--pl-color-fg-subtle);
+    border-radius: 0.5rem;
+    box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+    margin-left: calc(var(--bs-gutter-x) * -1 - 0.15rem);
+    background: var(--pl-color-bg-default);
+    height: 100%;
+  }
+}
