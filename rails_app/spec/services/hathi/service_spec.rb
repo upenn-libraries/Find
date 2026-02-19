@@ -14,11 +14,11 @@ describe Hathi::Service do
 
     context 'when a Hathi record is present' do
       let(:response) do
-        JSON.parse(json_fixture('single_id_response', :hathi))
+        JSON.parse(json_fixture('single_id_response', directory: :hathi))
       end
 
       it 'returns the record' do
-        expect(record).to eq(JSON.parse(json_fixture('single_id_record', :hathi)))
+        expect(record).to eq(JSON.parse(json_fixture('single_id_record', directory: :hathi)))
       end
     end
 
@@ -38,11 +38,11 @@ describe Hathi::Service do
 
     context 'when a Hathi record is present' do
       let(:response) do
-        JSON.parse(json_fixture('multi_id_response', :hathi))
+        JSON.parse(json_fixture('multi_id_response', directory: :hathi))
       end
 
       it 'returns the record' do
-        expect(record).to eq(JSON.parse(json_fixture('multi_id_record', :hathi)))
+        expect(record).to eq(JSON.parse(json_fixture('multi_id_record', directory: :hathi)))
       end
     end
 
