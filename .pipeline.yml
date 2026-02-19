@@ -130,7 +130,7 @@ rspec_app_unit_test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   services:
-    - name: postgres:15.3
+    - name: postgres:16.12
       variables:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
@@ -227,7 +227,7 @@ rspec_app_integration_test:
         PORT: 3333
         CONCURRENT: 1
         TIMEOUT: 1200000 # 20min should cover the system test run period
-    - name: postgres:15.3
+    - name: postgres:16.12
       variables:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
