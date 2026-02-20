@@ -7,7 +7,7 @@ module Discover
     # Abstract class that all Discover parser classes inherit from.
     class Base
       class << self
-        # Import data from source. 
+        # Import data from source.
         #
         # @param file [String] the input file path or content
         # @return [nil]

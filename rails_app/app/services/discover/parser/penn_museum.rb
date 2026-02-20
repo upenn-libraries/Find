@@ -23,6 +23,9 @@ module Discover
       class << self
         private
 
+        # TODO: we need to figure out a way to remove records if the museum removes
+        # them from the CSV - we do something similar in finding aids
+        #
         # Parse given CSV into Artifacts.
         #
         # @param file [String] the input file path
