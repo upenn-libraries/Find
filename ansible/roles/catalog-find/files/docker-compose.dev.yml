@@ -33,11 +33,19 @@ services:
       retries: 8
       start_period: 60s
     secrets:
+      - aws_access_key
+      - aws_secret_access_key
       - sidekiq_pro_credentials
     volumes:
       - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app
 
 secrets:
+  aws_access_key:
+    external: true
+    name: ${AWS_ACCESS_KEY}
+  aws_secret_access_key:
+    external: true
+    name: ${AWS_SECRET_ACCESS_KEY}
   sidekiq_pro_credentials:
     external: true
     name: ${SIDEKIQ_PRO_CREDENTIALS}

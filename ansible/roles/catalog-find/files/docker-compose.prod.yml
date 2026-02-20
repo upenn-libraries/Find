@@ -16,46 +16,54 @@ services:
       start_period: 60s
       timeout: 120s
     secrets:
-      - honeybadger_api_key
-      - illiad_legacy_user_password
-      - solr_url
       - alert_webhooks_token
       - alma_api_key
+      - aws_access_key
+      - aws_secret_access_key
+      - honeybadger_api_key
       - illiad_api_key
+      - illiad_legacy_user_password
       - library_info_api_key
-      - summon_api_key
       - google_pse_api_key
+      - solr_url
+      - summon_api_key
     volumes:
       - catalog_find_app_storage:/home/app/storage
 
 secrets:
-  honeybadger_api_key:
+  aws_access_key:
     external: true
-    name: ${HONEYBADGER_API_KEY}
-  illiad_legacy_user_password:
+    name: ${AWS_ACCESS_KEY}
+  aws_secret_access_key:
     external: true
-    name: ${ILLIAD_LEGACY_USER_PASSWORD}
-  solr_url:
-    external: true
-    name: ${SOLR_URL}
+    name: ${AWS_SECRET_ACCESS_KEY}
   alert_webhooks_token:
     external: true
     name: ${ALERT_WEBHOOKS_TOKEN}
   alma_api_key:
     external: true
     name: ${ALMA_API_KEY}
-  illiad_api_key:
-    external: true
-    name: ${ILLIAD_API_KEY}
-  library_info_api_key:
-    external: true
-    name: ${LIBRARY_INFO_API_KEY}
-  summon_api_key:
-    external: true
-    name: ${SUMMON_API_KEY}
   google_pse_api_key:
     external: true
     name: ${GOOGLE_PSE_API_KEY}
+  honeybadger_api_key:
+    external: true
+    name: ${HONEYBADGER_API_KEY}
+  illiad_api_key:
+    external: true
+    name: ${ILLIAD_API_KEY}
+  illiad_legacy_user_password:
+    external: true
+    name: ${ILLIAD_LEGACY_USER_PASSWORD}
+  library_info_api_key:
+    external: true
+    name: ${LIBRARY_INFO_API_KEY}
+  solr_url:
+    external: true
+    name: ${SOLR_URL}
+  summon_api_key:
+    external: true
+    name: ${SUMMON_API_KEY}
 
 volumes:
   catalog_find_app_storage:
