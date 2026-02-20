@@ -3,9 +3,9 @@ discover:
   thumbnails:
     aws:
       bucket: 'upennlib-penncollects'
-      aws_region: 'us-east-1'
-      aws_access_key: <%= DockerSecrets.lookup(:aws_access_key, Rails.application.credentials.aws_access_key) %>
-      aws_secret_access_key: <%= DockerSecrets.lookup(:aws_secret_access_key, Rails.application.credentials.aws_secret_access_key) %>
+      region: 'us-east-1'
+      access_key: <%= DockerSecrets.lookup(:aws_access_key, Rails.application.credentials.aws_access_key) %>
+      secret_access_key: <%= DockerSecrets.lookup(:aws_secret_access_key, Rails.application.credentials.aws_secret_access_key) %>
   source:
     google_pse_api_key: <%= DockerSecrets.lookup(:google_pse_api_key, Rails.application.credentials.google_pse_api_key) %>
     art_collection:

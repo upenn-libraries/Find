@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.4.8'
 
 gem 'alma'
+gem 'aws-sdk-s3', '~> 1'
 gem 'blacklight', '~> 9'
 gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
