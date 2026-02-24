@@ -117,12 +117,6 @@ describe Discover::Source::Blacklight do
     end
   end
 
-  describe '#pse?' do
-    it 'returns false' do
-      expect(described_class.new(source: 'find').pse?).to be false
-    end
-  end
-
   describe '#database?' do
     it 'returns false' do
       expect(described_class.new(source: 'find').database?).to be false

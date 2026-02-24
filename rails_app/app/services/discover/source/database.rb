@@ -35,11 +35,6 @@ module Discover
       end
 
       # @return [Boolean]
-      def pse?
-        false
-      end
-
-      # @return [Boolean]
       def database?
         true
       end

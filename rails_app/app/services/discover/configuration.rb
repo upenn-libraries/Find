@@ -4,7 +4,7 @@ module Discover
   # Defines configuration values needed to make requests to sources
   class Configuration
     USER_AGENT = 'DiscoverPennFrontend'
-    SOURCES = %i[find finding_aids museum art_collection].freeze
+    SOURCES = %i[find finding_aids penn_museum art_collection].freeze
     RESULT_MAX_COUNT = 3
     SEARCH_QUERY_PATTERN = '.*\S+.*'
 
@@ -67,29 +67,18 @@ module Discover
       end
     end
 
-    module PSE
-      SOURCES = %i[museum].freeze
-
-      HOST = 'customsearch.googleapis.com'
-      PATH = '/customsearch/v1'
-      KEY = Settings.discover.source.google_pse_api_key
-      TOTAL_COUNT = %w[searchInformation totalResults].freeze
-
-      module Museum
-        SOURCE = :museum
-        CX = Settings.discover.source.penn_museum.pse_cx
-        QUERY_PARAMS = { cx: CX, key: KEY }.freeze
-        LINK_TO_SOURCE = true
-        RECORDS = ['items'].freeze
-        IDENTIFIERS = {}.freeze
-      end
-    end
-
     module Database
-      SOURCES = %i[art_collection].freeze
+      SOURCES = %i[art_collection penn_museum].freeze
       module ArtCollection
         SOURCE = :art_collection
         MODEL = Discover::ArtWork
+        LINK_TO_SOURCE = true
+        IDENTIFIERS = {}.freeze
+      end
+
+      module PennMuseum
+        SOURCE = :penn_museum
+        MODEL = Discover::Artifact
         LINK_TO_SOURCE = true
         IDENTIFIERS = {}.freeze
       end
@@ -99,8 +88,6 @@ module Discover
     def self.config_for(source:)
       if source.to_sym.in?(Blacklight::SOURCES)
         "Discover::Configuration::Blacklight::#{source.to_s.camelize}".safe_constantize
-      elsif source.to_sym.in?(PSE::SOURCES)
-        "Discover::Configuration::PSE::#{source.to_s.camelize}".safe_constantize
       elsif source.to_sym.in?(Database::SOURCES)
         "Discover::Configuration::Database::#{source.to_s.camelize}".safe_constantize
       else
