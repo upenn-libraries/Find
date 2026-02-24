@@ -19,6 +19,7 @@ module Discover
         description: :description,
         on_display: :onDisplay
       }.freeze
+      BATCH_SIZE = 500
 
       class << self
         private
@@ -31,15 +32,29 @@ module Discover
         # @param file [String] the input file path
         # @return [nil]
         def parse_tabular_data(file)
-          CSV.foreach(file, headers: true) do |row|
-            artifact = Artifact.find_or_initialize_by(identifier: row[ARTIFACT_ATTRIBUTE_MAP[:identifier].to_s])
+          CSV.foreach(file, headers: true).each_slice(BATCH_SIZE) do |rows|
+            upsert_rows(rows)
+          end
+        end
+
+        # Build attributes, validate and upsert a batch of rows.
+        # Handle any row errors by ignoring the row and reporting.
+        # @param rows [Array]
+        # rubocop:disable Rails/SkipsModelValidations
+        # @return [ActiveRecord::Result]
+        def upsert_rows(rows)
+          records = rows.each_with_object([]) do |row, acc|
             attributes = build_attributes(row)
-            artifact.update!(attributes)
+            next unless valid_attributes?(attributes)
+
+            acc << attributes
           rescue StandardError => e
             Honeybadger.notify(e)
             next
           end
+          Artifact.upsert_all(records, unique_by: :index_discover_artifacts_on_identifier) if records.any?
         end
+        # rubocop:enable Rails/SkipsModelValidations
 
         # Transforms the raw CSV data into model attributes.
         def build_attributes(row)
@@ -63,6 +78,14 @@ module Discover
           else
             value.presence
           end
+        end
+
+        # Are the attributes sufficient to create a quality record? This stands in for AR validations since
+        # we are using `upsert` here for efficiency.
+        # @param attributes [Hash]
+        # @return [Boolean]
+        def valid_attributes?(attributes)
+          attributes[:link].present? || attributes[:title].present?
         end
       end
     end
