@@ -1,0 +1,93 @@
+# frozen_string_literal: true
+
+module Discover
+  module Parser
+    # Parse Penn Museum CSV
+    class PennMuseum < Base
+      ARTIFACT_ATTRIBUTES = %i[title link identifier thumbnail_url
+                               location format creator description
+                               on_display].freeze
+
+      ARTIFACT_ATTRIBUTE_MAP = {
+        title: :objectName,
+        link: :'Record URL',
+        identifier: :identifier,
+        # thumbnail_url: :tbd,
+        location: :curatorialSection,
+        format: :material,
+        creator: :creator,
+        description: :description,
+        on_display: :onDisplay
+      }.freeze
+      BATCH_SIZE = 500
+
+      class << self
+        private
+
+        # TODO: we need to figure out a way to remove records if the museum removes
+        # them from the CSV - we do something similar in finding aids
+        #
+        # Parse given CSV into Artifacts.
+        #
+        # @param file [String] the input file path
+        # @return [nil]
+        def parse_tabular_data(file)
+          CSV.foreach(file, headers: true).each_slice(BATCH_SIZE) do |rows|
+            upsert_rows(rows)
+          end
+        end
+
+        # Build attributes, validate and upsert a batch of rows.
+        # Handle any row errors by ignoring the row and reporting.
+        # @param rows [Array]
+        # rubocop:disable Rails/SkipsModelValidations
+        # @return [ActiveRecord::Result]
+        def upsert_rows(rows)
+          records = rows.each_with_object([]) do |row, acc|
+            attributes = build_attributes(row)
+            next unless valid_attributes?(attributes)
+
+            acc << attributes
+          rescue StandardError => e
+            Honeybadger.notify(e)
+            next
+          end
+          Artifact.upsert_all(records, unique_by: :index_discover_artifacts_on_identifier) if records.any?
+        end
+        # rubocop:enable Rails/SkipsModelValidations
+
+        # Transforms the raw CSV data into model attributes.
+        def build_attributes(row)
+          ARTIFACT_ATTRIBUTE_MAP.transform_values do |csv_header|
+            raw_value = row[csv_header.to_s]
+            transform_value(csv_header, raw_value)
+          end
+        end
+
+        # Handles data hygiene (cleaning, casting, sanitizing)
+        # @param csv_header [Symbol] The CSV header name from our map (e.g., :description)
+        # @param value [String] The raw value from the CSV row
+        # @return [String, nil]
+        def transform_value(csv_header, value)
+          case csv_header
+          when :description
+            sanitize(value)
+          when :onDisplay
+            # Cast true/false strings to actual booleans
+            ActiveModel::Type::Boolean.new.cast(value)
+          else
+            value.presence
+          end
+        end
+
+        # Are the attributes sufficient to create a quality record? This stands in for AR validations since
+        # we are using `upsert` here for efficiency.
+        # @param attributes [Hash]
+        # @return [Boolean]
+        def valid_attributes?(attributes)
+          attributes[:link].present? || attributes[:title].present?
+        end
+      end
+    end
+  end
+end
