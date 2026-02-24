@@ -5,7 +5,6 @@ describe Discover::Parser::PennMuseum do
   include Discover::ApiMocks::Harvester::PennMuseum
 
   let(:csv) { tabular_fixture('penn_museum', namespace: :discover) }
-  let(:csv_updated) { tabular_fixture('penn_museum_updated', namespace: :discover) }
 
   def import_csv(csv_data)
     stub_csv_download_response(status: 200, body: csv_data)
@@ -27,6 +26,8 @@ describe Discover::Parser::PennMuseum do
   end
 
   context 'with updated artifacts' do
+    let(:csv_updated) { tabular_fixture('penn_museum_updated', namespace: :discover) }
+
     before { import_csv(csv) }
 
     it 'updates changed artifacts' do
