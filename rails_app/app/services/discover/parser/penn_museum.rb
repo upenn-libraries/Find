@@ -52,6 +52,7 @@ module Discover
         # Handles data hygiene (cleaning, casting, sanitizing)
         # @param csv_header [Symbol] The CSV header name from our map (e.g., :description)
         # @param value [String] The raw value from the CSV row
+        # @return [String, nil]
         def transform_value(csv_header, value)
           case csv_header
           when :description
