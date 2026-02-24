@@ -32,19 +32,13 @@ module Discover
         # @return [nil]
         def parse_tabular_data(file)
           CSV.foreach(file, headers: true) do |row|
-            artifact = find_or_initialize_artifact(row)
+            artifact = Artifact.find_or_initialize_by(identifier: row[ARTIFACT_ATTRIBUTE_MAP[:identifier].to_s])
             attributes = build_attributes(row)
             artifact.update!(attributes)
           rescue StandardError => e
             Honeybadger.notify(e)
             next
           end
-        end
-
-        # Find/create new artifact
-        def find_or_initialize_artifact(row)
-          url_header = ARTIFACT_ATTRIBUTE_MAP[:link].to_s
-          Artifact.find_or_initialize_by(link: row[url_header])
         end
 
         # Transforms the raw CSV data into model attributes.
