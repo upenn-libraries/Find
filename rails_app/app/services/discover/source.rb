@@ -12,8 +12,6 @@ module Discover
 
       if source.to_sym.in?(Discover::Configuration::Blacklight::SOURCES)
         Discover::Source::Blacklight
-      elsif source.to_sym.in?(Discover::Configuration::PSE::SOURCES)
-        Discover::Source::PSE
       elsif source.to_sym.in?(Discover::Configuration::Database::SOURCES)
         Discover::Source::Database
       end
@@ -35,11 +33,6 @@ module Discover
 
     # @return [Boolean]
     def blacklight?
-      false
-    end
-
-    # @return [Boolean]
-    def pse?
       false
     end
 
