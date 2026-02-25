@@ -6,9 +6,17 @@ module Discover
     include Sidekiq::Job
 
     def perform
-      Harvester::PennMuseum.new.harvest do |file|
+      harvest_response = Harvester::PennMuseum.new.harvest do |file|
         Parser::PennMuseum.import(file: file)
       end
+      harvest.update_from_response_headers! harvest_response.headers
+    end
+
+    private
+
+    # @return [Discover::Harvest]
+    def harvest
+      Harvest.find_or_initialize_by(source: 'penn_museum')
     end
   end
 end
