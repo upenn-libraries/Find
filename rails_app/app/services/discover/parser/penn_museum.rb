@@ -92,7 +92,7 @@ module Discover
         # @param identifier [String]
         # @return [String]
         def thumbnail_filename(identifier)
-          mapped = Discover::Mapper.museum_thumbnails[identifier]
+          mapped = Discover::Mappings.museum_thumbnails[identifier]
           return if mapped.blank?
 
           "#{mapped}_300.jpg"
