@@ -2,11 +2,8 @@
 
 FactoryBot.define do
   factory :artifact, class: 'Discover::Artifact' do
-    sequence(:artifact_identifier) { |n| "ABCD-#{n}" }
-
-    identifier { generate(:artifact_identifier) }
     title { 'Statue Fragment' }
-    link {  "https://penn.museum/collections/object/#{identifier}" }
+    link {  'https://penn.museum/collections/object/420280' }
     thumbnail { '1234_300.jpg' }
     location { 'American' }
     format { 'Volcanic Stone' }
