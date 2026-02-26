@@ -45,11 +45,15 @@ describe Discover::RecordComponent, type: :components do
 
   context 'with a museum entry' do
     let(:record) { build(:discover_record, :from_museum) }
-    let(:record_presenter) { Discover::Record::MuseumPresenter.new(record: record) }
+    let(:record_presenter) { Discover::Record::PennMuseumPresenter.new(record: record) }
     let(:source) { Discover::Configuration::Database::PennMuseum::SOURCE }
 
     it 'renders the title' do
       expect(rendered).to have_text record_presenter.title
+    end
+
+    it 'renders the formats' do
+      expect(rendered).to have_selector '.results-list-item__metadata', text: record_presenter.formats
     end
 
     it 'renders the location' do
