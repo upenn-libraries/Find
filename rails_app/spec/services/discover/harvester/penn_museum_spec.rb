@@ -7,7 +7,7 @@ describe Discover::Harvester::PennMuseum do
   let(:harvester) { described_class.new }
 
   describe '#harvest' do
-    let(:csv) { csv_fixture('penn_museum', namespace: :discover) }
+    let(:csv) { tabular_fixture('penn_museum', namespace: :discover) }
     let(:headers) { { 'last-modified' => 'yesterday', 'etag' => '"123456"' } }
 
     context 'with no block given' do

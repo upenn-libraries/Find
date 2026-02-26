@@ -5,7 +5,6 @@
                   role: 'search',
                   class: 'search-form' do |f| %>
       <div class="input-group">
-        <%= f.hidden_field :no_pse, value: no_pse? %>
         <%= f.search_field :q,
                            value: params[:q],
                            title: t('discover.search_bar_title'),
