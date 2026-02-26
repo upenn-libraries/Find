@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_24_165858) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_26_193650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -57,10 +57,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_165858) do
     t.string "location"
     t.boolean "on_display"
     t.string "other_values", default: [], array: true
+    t.virtual "search_vector", type: :tsvector, as: "to_tsvector('english'::regconfig, (((((((((COALESCE(title, ''::character varying))::text || ' '::text) || (COALESCE(description, ''::character varying))::text) || ' '::text) || (COALESCE(creator, ''::character varying))::text) || ' '::text) || (COALESCE(location, ''::character varying))::text) || ' '::text) || (COALESCE(format, ''::character varying))::text))", stored: true
     t.string "thumbnail_url"
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["identifier"], name: "index_discover_artifacts_on_identifier", unique: true
+    t.index ["on_display"], name: "index_discover_artifacts_on_on_display"
+    t.index ["search_vector"], name: "index_discover_artifacts_on_search_vector", using: :gin
   end
 
   create_table "discover_harvests", force: :cascade do |t|
