@@ -1,3 +1,5 @@
+# This mapping file was generated as part of a scrape of the Penn Museum search results, and maps record identifiers to
+# a prefix that can be used to generate a filename that corresponds to a JPEG file in our thumbnail cache
 "10458": 960254
 "11274": 376523
 "117": 765361
