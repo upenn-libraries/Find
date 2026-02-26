@@ -43,67 +43,6 @@ en:
         button:
           label: 'How to Access'
           aria_label: 'Learn how to access %{source} items'
-        find:
-          content_html: |
-            <p>The physical collections of the Penn Libraries can be accessed
-            <a href="https://www.library.upenn.edu/about/hours">while our libraries are open</a>.  Our 
-            <a href="https://www.library.upenn.edu/spaces/access-and-visitor-information">Access and Visitor Information</a> includes information on access available to
-            researchers associated with the University of Pennsylvania as well as to other
-            visitors.
-            </p>
-            <p>
-            Special arrangements may be needed to 
-            <a href="https://www.library.upenn.edu/services/access-special-collections">access items in our special collections</a>, to 
-            <a href="https://www.library.upenn.edu/libra">retrieve items from LIBRA</a> (our high-density storage facility), and to 
-            <a href="https://guides.library.upenn.edu/resourcesharing">request other items not available for immediate on-site access</a>.
-            </p>
-        finding_aids:
-          content_html: |
-            <p>Most of the contents of the University of Pennsylvania's archives
-            can be accessed by advance arrangement.
-            Our <a href="https://findingaids-staging.library.upenn.edu/?f[record_source][]=upenn">archives listings</a> include contact links for individual items.</p>
-            <p>We also have more specific information on our archival repositories, including:</p>
-            <ul>
-              <li><a href="https://www.nursing.upenn.edu/history/">Barbara Bates Center for the Study of The History of Nursing</a></li>
-              <li><a href="https://www.asc.upenn.edu/research/centers/annenberg-school-for-communication-library-archives">Annenberg School for Communication Library Archives</a></li>
-              <li><a href="https://www.design.upenn.edu/architectural-archives/home">Architectural Archives</a></li>
-              <li><a href="https://www.library.upenn.edu/lkcajs/lkcajs-collections">Archives at the Library of the Katz Center for Advanced Judaic Studies</a></li>
-              <li><a href="https://law.upenn.libguides.com/biddle_archives">Biddle Law Library Archives and Special Collections</a></li>
-              <li><a href="https://www.library.upenn.edu/kislak">Kislak Center for Special Collections, Rare Books and Manuscripts</a></li>
-              <li><a href="https://www.penn.museum/about-collections/museum-archives">Penn Museum Archives</a></li>
-              <li><a href="https://archives.upenn.edu/">University Archives and Records Center</a></li>
-            </ul>
-        museum:
-          content_html: |
-            <p><a href="https://penn.museum/">Penn Museum</a>
-            items <a href="https://penn.museum/on-view/galleries-exhibitions">on display</a> can be viewed 
-            <a href="https://penn.museum/visit/getting-here">at the Museum</a> when
-            <a href="https://penn.museum/visit/plan-your-visit">the Museum is open</a>.
-            Admission is free to Penn faculty, staff and students with Penncards,
-            as well as to Penn Museum members.
-            </p>
-            <p>
-            Researchers can also
-            <a href="https://penn.museum/about-collections/access-the-collections">arrange in advance to examine items not currently on display</a>.
-            Many items on and off display have one or more digital images
-            that can be viewed from the Museum's
-            <a href="https://www.penn.museum/collections/">Online Collections search</a>.
-            </p>
-        art_collection:
-          content_html: |
-            <p>The <a href="https://pennartcollection.com/">Penn Art Collection</a>
-            includes more than 9,000 artworks found indoors and outdoors
-            on <a href="https://facilities.upenn.edu/maps">Penn's campuses</a>.
-            Not all works are on public display.
-            You can find many of them via Penn's
-            <a href="https://pennartcollection.com/about/bloomberg-connects/">Bloomberg Connects Digital Guide</a>, or our
-            <a href="https://pennartcollection.com/exhibitions/campus-sculpture-tour/">campus sculpture tour</a>.
-            </p>
-            <p>
-            For more information on other works, or to arrange access to a work not currently
-            on display,
-            <a href="https://pennartcollection.com/about/contact-us/">contact the Office of the Curator</a>.
-            </p>
 
     entry:
       fields:

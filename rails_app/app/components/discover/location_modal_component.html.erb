@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('discover.results.location_modal.close') %>"></button>
       </div>
       <div class="modal-body">
-        <%= modal_content %>
+        <%= render "discover/location_modal/#{source}" %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= t('discover.results.location_modal.close') %></button>

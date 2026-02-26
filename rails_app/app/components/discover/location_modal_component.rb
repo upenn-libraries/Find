@@ -13,11 +13,6 @@ module Discover
     end
 
     # @return [String]
-    def modal_content
-      t("discover.results.location_modal.#{source}.content_html").html_safe
-    end
-
-    # @return [String]
     def location_modal_id
       "#{id}-location-modal"
     end
