@@ -14,10 +14,11 @@ class AddVectorFieldToArtifact < ActiveRecord::Migration[8.1]
                              coalesce(format, ''))
     SQL
 
-    # create a "virtual" column that is not used by the ORM. store the data do it can be indexed.
+    # Create a "virtual" column that is not used by the ORM, storing the data so it can be indexed.
     add_column :discover_artifacts, :search_vector, :virtual, type: :tsvector, stored: true,
                                                               as: searched_fields_aggregator_sql
 
+    # Index the vector field so lookups are fast
     add_index :discover_artifacts, :search_vector, using: :gin
     add_index :discover_artifacts, :on_display
   end
