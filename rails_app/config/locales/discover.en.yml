@@ -37,6 +37,20 @@ en:
         no_results: 'We did not find any matches.'
       view_all_button:
         label: 'View all %{count} results'
+      location_modal:
+        title: 'How to Access %{source}'
+        close: 'Close'
+        button:
+          label: 'How to Access'
+          aria_label: 'Learn how to access %{source} items'
+        find:
+          content_html: 'Information about accessing Libraries items will appear here.'
+        finding_aids:
+          content_html: 'Information about accessing Archives items will appear here.'
+        museum:
+          content_html: 'Information about accessing Penn Museum items will appear here.'
+        art_collection:
+          content_html: 'Information about accessing Penn Art Collection items will appear here.'
 
     entry:
       fields:

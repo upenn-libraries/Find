@@ -4,7 +4,12 @@
       <i class="<%= icon_classes.join(' ') %>"></i>
       <%= label %>
     </h3>
-    <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary disabled"></a>
+    <div class="d-flex gap-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#<%= location_modal_id %>" aria-label="<%= t('discover.results.location_modal.button.aria_label', source: label) %>">
+        <i class="bi bi-geo-alt" aria-hidden="true"></i>
+      </button>
+      <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary disabled"></a>
+    </div>
   </div>
   <turbo-frame id="<%= turbo_frame_id %>"
                class="card-body"
@@ -49,3 +54,5 @@
     </ul>
   </turbo-frame>
 </div>
+
+<%= render(Discover::LocationModalComponent.new(source: source)) %>
