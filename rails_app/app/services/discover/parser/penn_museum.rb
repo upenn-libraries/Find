@@ -20,9 +20,6 @@ module Discover
       class << self
         private
 
-        # TODO: we need to figure out a way to remove records if the museum removes
-        # them from the CSV - we do something similar in finding aids
-        #
         # Parse given CSV into Artifacts.
         #
         # @param file [String] the input file path
@@ -92,10 +89,21 @@ module Discover
         # @param identifier [String]
         # @return [String]
         def thumbnail_filename(identifier)
-          mapped = Discover::Mappings.museum_thumbnails[identifier]
+          mapped = Mappings.museum_thumbnails[identifier]
           return if mapped.blank?
 
           "#{mapped}_300.jpg"
+        end
+
+        # Delete any records currently in the database that are not present in the file
+        #
+        # @param file [String] the input file path
+        # @return frozen deleted record objects
+        def delete_absent_records(file)
+          existing_identifiers = Artifact.pluck :identifier
+          incoming_identifiers = CSV.foreach(file, headers: true).collect { |row| row['identifier'] }
+          absent_record_identifiers = existing_identifiers.difference(incoming_identifiers)
+          Artifact.where(identifier: absent_record_identifiers).delete_all
         end
       end
     end
