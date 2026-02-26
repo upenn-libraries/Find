@@ -20,7 +20,7 @@ module Discover
         section = record.location.first
         return unless section
 
-        "#{SECTION_MAP.fetch(location, location)} #{SECTION_TERM}"
+        "#{SECTION_MAP.fetch(section, section)} #{SECTION_TERM}"
       end
 
       # @return [String, nil]
