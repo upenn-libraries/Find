@@ -19,7 +19,7 @@ module Discover
     def create_presenter(record:, source:)
       case source&.to_sym
       when Configuration::Database::PennMuseum::SOURCE
-        Discover::Record::MuseumPresenter.new(record: record)
+        Discover::Record::PennMuseumPresenter.new(record: record)
       else
         Discover::Record::BasePresenter.new(record: record)
       end
