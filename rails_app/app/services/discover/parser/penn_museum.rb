@@ -4,20 +4,16 @@ module Discover
   module Parser
     # Parse Penn Museum CSV
     class PennMuseum < Base
-      ARTIFACT_ATTRIBUTES = %i[title link identifier thumbnail_url
-                               location format creator description
-                               on_display].freeze
-
       ARTIFACT_ATTRIBUTE_MAP = {
         title: :objectName,
         link: :'Record URL',
         identifier: :identifier,
-        # thumbnail_url: :tbd,
         location: :curatorialSection,
         format: :material,
         creator: :creator,
         description: :description,
-        on_display: :onDisplay
+        on_display: :onDisplay,
+        thumbnail: :thumbnail
       }.freeze
       BATCH_SIZE = 500
 
@@ -56,27 +52,30 @@ module Discover
         end
         # rubocop:enable Rails/SkipsModelValidations
 
-        # Transforms the raw CSV data into model attributes.
+        # Transforms the raw CSV data into model attributes
+        # @param row [Hash]
+        # @return [Hash{Symbol->String}]
         def build_attributes(row)
           ARTIFACT_ATTRIBUTE_MAP.transform_values do |csv_header|
-            raw_value = row[csv_header.to_s]
-            transform_value(csv_header, raw_value)
+            transform_value(csv_header.to_s, row)
           end
         end
 
-        # Handles data hygiene (cleaning, casting, sanitizing)
-        # @param csv_header [Symbol] The CSV header name from our map (e.g., :description)
-        # @param value [String] The raw value from the CSV row
+        # Handles data hygiene (cleaning, casting, sanitizing, mapping)
+        # @param csv_header [String] The CSV header name from our map (e.g. 'description')
+        # @param row [Hash] The row from the CSV
         # @return [String, nil]
-        def transform_value(csv_header, value)
+        def transform_value(csv_header, row)
           case csv_header
-          when :description
-            sanitize(value)
-          when :onDisplay
+          when 'thumbnail'
+            thumbnail_filename(row['identifier'])
+          when 'description'
+            sanitize(row[csv_header])
+          when 'onDisplay'
             # Cast true/false strings to actual booleans
-            ActiveModel::Type::Boolean.new.cast(value)
+            ActiveModel::Type::Boolean.new.cast(row[csv_header])
           else
-            value.presence
+            row[csv_header].presence
           end
         end
 
@@ -86,6 +85,17 @@ module Discover
         # @return [Boolean]
         def valid_attributes?(attributes)
           attributes[:link].present? || attributes[:title].present?
+        end
+
+        # Generate a thumbnail filename for an identifier, provided the identifier has a mapped filename
+        # base in our loaded mapper.
+        # @param identifier [String]
+        # @return [String]
+        def thumbnail_filename(identifier)
+          mapped = Discover::Mappings.museum_thumbnails[identifier]
+          return if mapped.blank?
+
+          "#{mapped}_300.jpg"
         end
       end
     end

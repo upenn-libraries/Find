@@ -7,7 +7,7 @@ module Discover
       ICON_CLASS_MAPPINGS = {
         Discover::Configuration::Blacklight::Find::SOURCE => %w[bi bi-book],
         Discover::Configuration::Blacklight::FindingAids::SOURCE => %w[bi bi-archive],
-        Discover::Configuration::PSE::Museum::SOURCE => %w[card-icon discover-icon discover-icon-museum],
+        Discover::Configuration::Database::PennMuseum::SOURCE => %w[card-icon discover-icon discover-icon-museum],
         Discover::Configuration::Database::ArtCollection::SOURCE => %w[bi bi-brush]
       }.freeze
 

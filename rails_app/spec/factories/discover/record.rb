@@ -15,11 +15,11 @@ FactoryBot.define do
     thumbnail_url { nil }
 
     trait :from_museum do
-      title { ['Title | Location'] }
+      title { ['Title1,Title2'] }
       body do
         { creator: ['Record Creator'],
-          format: ['Record Format'],
-          location: [],
+          format: ['Record Format,Record Format,Record Format'],
+          location: ['Record Location'],
           publication: ['Record Publication Place', 'Record Publication Date'],
           description: ['Record Description'] }
       end
