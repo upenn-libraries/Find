@@ -14,12 +14,6 @@ module Discover
                     against: %i[creator description format location title],
                     using: { tsearch: { any_word: true, prefix: true } },
                     # TODO: is this the best way to sort? descending with "true" values at the top?
-                    order_within_rank: 'discover_artifacts.on_display DESC'
-
-    # TODO: the Database source expects a thumbnail_url accessor on the associated model, eventually this can
-    #       return a AWS presigned URL
-    def thumbnail_url
-      nil
-    end
+                    order_within_rank: 'discover_artifacts.thumbnail DESC'
   end
 end

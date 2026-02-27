@@ -3,18 +3,20 @@
 module Discover
   # Represent a single returned record from a source
   class Record
-    attr_reader :title, :identifiers, :link_url, :thumbnail_url
+    attr_reader :title, :identifiers, :link_url, :thumbnail_url, :thumbnail
 
     # @param title [Array]
     # @param body [Hash]
     # @param identifiers [Hash]
     # @param link_url [String]
+    # @param thumbnail [String, nil]
     # @param thumbnail_url [String, nil]
-    def initialize(title:, body:, identifiers:, link_url:, thumbnail_url: nil)
+    def initialize(title:, body:, identifiers:, link_url:, thumbnail: nil, thumbnail_url: nil)
       @title = title
       @body = body
       @identifiers = identifiers
       @link_url = link_url
+      @thumbnail = thumbnail
       @thumbnail_url = thumbnail_url
     end
 

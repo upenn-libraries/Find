@@ -23,10 +23,10 @@ module Discover
                     source: self,
                     total_count: data.count,
                     results_url: results_url(query: query))
-      rescue StandardError => e
-        Honeybadger.notify(e)
-        # return results with no entries
-        Results.new(records: [], source: self, total_count: 0, results_url: '')
+        rescue StandardError => e
+          Honeybadger.notify(e)
+          # return results with no entries
+          Results.new(records: [], source: self, total_count: 0, results_url: '')
       end
 
       # @return [Boolean]
@@ -64,11 +64,12 @@ module Discover
                      body: body_from(record: record),
                      identifiers: config_class::IDENTIFIERS,
                      link_url: record.link,
-                     thumbnail_url: record.thumbnail_url)
-        rescue StandardError => e
-          Honeybadger.notify(e)
+                     thumbnail: record.try(:thumbnail),
+                     thumbnail_url: record.try(:thumbnail_url))
+          rescue StandardError => e
+            Honeybadger.notify(e)
 
-          next
+            next
         end
       end
     end
