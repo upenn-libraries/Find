@@ -31,13 +31,14 @@ module FixtureHelpers
     File.read(File.join(fixture_paths, dirs))
   end
 
+  # Returns file object, not content, for a tabular fixture. Use #read on response to get content.
   # @param [String] filename
   # @param [Symbol, String] format - :csv or :tsv
   # @param [String, nil] directory
-  # @return [String]
-  def tabular_fixture(filename, namespace: nil, format: :csv, directory: nil)
+  # @return [IO]
+  def tabular_fixture_file(filename, namespace: nil, format: :csv, directory: nil)
     filename = "#{filename}.#{format}" unless filename.ends_with?(format.to_s)
     dirs = [namespace.to_s, format.to_s, directory.to_s, filename].compact_blank
-    File.read(File.join(fixture_paths, dirs))
+    File.open(File.join(fixture_paths, dirs))
   end
 end

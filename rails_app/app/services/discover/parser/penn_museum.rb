@@ -98,7 +98,7 @@ module Discover
         # Delete any records currently in the database that are not present in the file
         #
         # @param file [String] the input file path
-        # @return frozen deleted record objects
+        # @return [Integer] number of records deleted
         def delete_absent_records(file)
           existing_identifiers = Artifact.pluck :identifier
           incoming_identifiers = CSV.foreach(file, headers: true).collect { |row| row['identifier'] }
