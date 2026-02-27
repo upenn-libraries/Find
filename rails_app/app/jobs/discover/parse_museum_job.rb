@@ -8,6 +8,7 @@ module Discover
     def perform
       harvest_response = Harvester::PennMuseum.new.harvest do |file|
         Parser::PennMuseum.import(file: file)
+        Parser::PennMuseum.delete_missing(file: file)
       end
       harvest.update_from_response_headers! harvest_response.headers
     end

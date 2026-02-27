@@ -17,7 +17,22 @@ module Discover
           parse_tabular_data(file)
         end
 
+        def delete_missing(file:)
+          return unless file
+
+          delete_absent_records(file)
+        end
+
         private
+
+        # Delete existing records not included in present harvest.
+        # Must be implemented by subclasses.
+        #
+        # @param file [String] the input file path or content
+        # @return [nil]
+        def delete_absent_records(file)
+          raise NotImplementedError
+        end
 
         # Parse given tabular data into records.
         # Must be implemented by subclasses.
