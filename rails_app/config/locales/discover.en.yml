@@ -38,7 +38,7 @@ en:
       view_all_button:
         label: 'View all %{count} results'
       location_modal:
-        title: 'How to Access %{source}'
+        title: 'How to access %{source} material'
         close: 'Close'
         button:
           label: 'How to Access'
