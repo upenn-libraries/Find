@@ -1,5 +1,5 @@
 discover:
-  enabled: false
+  enabled: true
   thumbnails:
     aws:
       bucket: 'upennlib-penncollects'
