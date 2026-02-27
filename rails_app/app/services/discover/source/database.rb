@@ -23,10 +23,10 @@ module Discover
                     source: self,
                     total_count: data.count,
                     results_url: results_url(query: query))
-        rescue StandardError => e
-          Honeybadger.notify(e)
-          # return results with no entries
-          Results.new(records: [], source: self, total_count: 0, results_url: '')
+      rescue StandardError => e
+        Honeybadger.notify(e)
+        # return results with no entries
+        Results.new(records: [], source: self, total_count: 0, results_url: '')
       end
 
       # @return [Boolean]
