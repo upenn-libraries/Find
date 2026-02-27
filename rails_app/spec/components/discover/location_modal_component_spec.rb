@@ -20,8 +20,21 @@ describe Discover::LocationModalComponent, type: :components do
         )
       end
 
-      it 'renders the partial content' do
+      it 'renders the modal body with content' do
         expect(rendered).to have_selector('.modal-body')
+      end
+
+      it 'renders the partial content dynamically' do
+        expected_text = {
+          find: 'Penn Libraries',
+          finding_aids: "University of Pennsylvania's archives",
+          museum: 'Penn Museum',
+          art_collection: 'Penn Art Collection'
+        }
+
+        within('.modal-body') do
+          expect(rendered).to have_text(expected_text[test_source])
+        end
       end
     end
   end
