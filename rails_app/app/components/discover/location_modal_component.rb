@@ -11,10 +11,5 @@ module Discover
     def initialize(source:)
       @presenter = Discover::Results::ResultsPresenter.new(source: source)
     end
-
-    # @return [String]
-    def location_modal_id
-      "#{id}-location-modal"
-    end
   end
 end
