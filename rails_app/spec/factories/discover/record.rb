@@ -12,7 +12,7 @@ FactoryBot.define do
     end
     identifiers { {} }
     link_url { 'https://www.test.com/record' }
-    thumbnail_url { nil }
+    thumbnail { nil }
 
     trait :from_museum do
       title { ['Title1,Title2'] }
@@ -26,7 +26,7 @@ FactoryBot.define do
     end
 
     trait :with_thumbnail do
-      thumbnail_url { 'https://www.file.com/thumbnail.jpg' }
+      thumbnail { 'https://www.file.com/thumbnail.jpg' }
     end
 
     skip_create
