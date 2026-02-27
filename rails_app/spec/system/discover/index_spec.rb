@@ -56,6 +56,22 @@ describe 'Discover Penn page' do
       it 'displays the total count in the overview area' do
         expect(page).to have_selector '#libraries-results-count.results-count', text: '(1)'
       end
+
+      it 'displays the location access button' do
+        within('#libraries .card-header') do
+          expect(page).to have_selector('button[data-bs-toggle="modal"][data-bs-target="#libraries-location-modal"]')
+          expect(page).to have_css('i.bi.bi-geo-alt')
+        end
+      end
+
+      it 'opens the location modal when button is clicked' do
+        within('#libraries .card-header') do
+          find('button[data-bs-toggle="modal"]').click
+        end
+
+        expect(page).to have_selector('.modal.show#libraries-location-modal', visible: :visible)
+        expect(page).to have_text(I18n.t('discover.results.location_modal.title', source: 'Libraries'))
+      end
     end
   end
 end
