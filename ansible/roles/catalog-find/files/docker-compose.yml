@@ -42,6 +42,7 @@ services:
         max-size: "10m"
     networks:
       - catalog_find_postgres
+      - catalog_find_redis
       - traefik
     secrets:
       - database_password
@@ -54,6 +55,8 @@ services:
 
 networks:
   catalog_find_postgres:
+    external: true
+  catalog_find_redis:
     external: true
   traefik:
     external: true

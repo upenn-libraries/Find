@@ -9,3 +9,6 @@ cleanup_searches:
 parse_art_collection:
   cron: 'every monday at 6AM'
   class: 'Discover::ParseArtCollectionJob'
+parse_penn_museum:
+  cron: every day at 6AM'
+  class: 'Discover::ParseMuseumJob'

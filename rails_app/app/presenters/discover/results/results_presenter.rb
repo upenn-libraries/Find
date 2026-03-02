@@ -7,11 +7,11 @@ module Discover
       ICON_CLASS_MAPPINGS = {
         Discover::Configuration::Blacklight::Find::SOURCE => %w[bi bi-book],
         Discover::Configuration::Blacklight::FindingAids::SOURCE => %w[bi bi-archive],
-        Discover::Configuration::PSE::Museum::SOURCE => %w[card-icon discover-icon discover-icon-museum],
+        Discover::Configuration::Database::PennMuseum::SOURCE => %w[card-icon discover-icon discover-icon-museum],
         Discover::Configuration::Database::ArtCollection::SOURCE => %w[bi bi-brush]
       }.freeze
 
-      VALUES = %i[id turbo_frame_id results_button_id label icon_classes source results_button_id].freeze
+      VALUES = %i[id turbo_frame_id results_button_id label icon_classes source location_modal_id].freeze
 
       attr_reader :source, :results
 
@@ -33,6 +33,11 @@ module Discover
       # @return [String]
       def results_button_id
         "#{id}-results-button"
+      end
+
+      # @return [String]
+      def location_modal_id
+        "#{id}-location-modal"
       end
 
       # @return [String]
