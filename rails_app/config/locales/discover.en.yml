@@ -37,6 +37,12 @@ en:
         no_results: 'We did not find any matches.'
       view_all_button:
         label: 'View all %{count} results'
+      location_modal:
+        title: 'How to access %{source} material'
+        close: 'Close'
+        button:
+          label: 'How to Access'
+          aria_label: 'Learn how to access %{source} items'
 
     entry:
       fields:

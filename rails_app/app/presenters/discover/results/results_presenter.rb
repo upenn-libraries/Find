@@ -11,7 +11,7 @@ module Discover
         Discover::Configuration::Database::ArtCollection::SOURCE => %w[bi bi-brush]
       }.freeze
 
-      VALUES = %i[id turbo_frame_id results_button_id label icon_classes source results_button_id].freeze
+      VALUES = %i[id turbo_frame_id results_button_id label icon_classes source location_modal_id].freeze
 
       attr_reader :source, :results
 
@@ -33,6 +33,11 @@ module Discover
       # @return [String]
       def results_button_id
         "#{id}-results-button"
+      end
+
+      # @return [String]
+      def location_modal_id
+        "#{id}-location-modal"
       end
 
       # @return [String]
