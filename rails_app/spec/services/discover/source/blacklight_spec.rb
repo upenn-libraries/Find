@@ -57,8 +57,8 @@ describe Discover::Source::Blacklight do
                                                    oclc_id: ['229431838'])
     end
 
-    it 'assigns expected thumbnail_url' do
-      expect(results.first.thumbnail_url).to eq 'https://colenda.library.upenn.edu/items/ark:/81431/p3th8cb15/thumbnail'
+    it 'assigns expected thumbnail' do
+      expect(results.first.thumbnail).to eq 'https://colenda.library.upenn.edu/items/ark:/81431/p3th8cb15/thumbnail'
     end
   end
 
@@ -102,8 +102,8 @@ describe Discover::Source::Blacklight do
       expect(results.first.description.first).to start_with('On July 11, 1984, William Foley')
     end
 
-    it 'assigns expected thumbnail_url' do
-      expect(results.first.thumbnail_url).to be_nil
+    it 'assigns expected thumbnail' do
+      expect(results.first.thumbnail).to be_nil
     end
 
     it 'properly un-encodes characters in body fields' do

@@ -2,7 +2,7 @@
 
 module Discover
   class Record
-    # Prepares penn museum record values for display
+    # Prepares Penn Museum record values for display
     class PennMuseumPresenter < BasePresenter
       SECTION_TERM = 'Section'
       SECTION_MAP = {
@@ -26,6 +26,16 @@ module Discover
       # @return [String, nil]
       def formats
         join(record.formats.first)
+      end
+
+      # Return an AWS presigned URL to our S3 cache of Penn Museum thumbnails
+      # @return [String]
+      def thumbnail_url
+        return nil if record.thumbnail.blank?
+
+        s3 = Aws::S3::Resource.new
+        obj = s3.bucket(Settings.discover.thumbnails.aws.bucket).object(record.thumbnail)
+        obj.presigned_url(:get, expires_in: 300)
       end
 
       private

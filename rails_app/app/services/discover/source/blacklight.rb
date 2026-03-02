@@ -101,7 +101,7 @@ module Discover
                      body: body_from(record: record),
                      identifiers: identifiers(record: record),
                      link_url: record.dig(*config_class::RECORD_URL),
-                     thumbnail_url: colenda_thumbnail_url(record: record))
+                     thumbnail: colenda_thumbnail_url(record: record))
         rescue StandardError => e
           Honeybadger.notify(e)
           next

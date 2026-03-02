@@ -7,13 +7,13 @@ module Discover
 
     delegate(*Discover::Record::BasePresenter::DISPLAY_TERMS, to: :presenter)
 
-    # @param record [Hash]
+    # @param record [Discover::Record]
     # @param source [String]
     def initialize(record:, source:)
       @presenter = create_presenter(record: record, source: source)
     end
 
-    # @param record [Hash]
+    # @param record [Discover::Record]
     # @param source [String, nil]
     # @return [Discover::Record::BasePresenter]
     def create_presenter(record:, source:)

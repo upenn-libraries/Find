@@ -59,17 +59,25 @@ module Discover
       # @param data [Array<ApplicationRecord>]
       # @return [Array<Discover::Record>]
       def records_from(data:)
-        Array.wrap(data).filter_map do |record|
-          Record.new(title: Array.wrap(record.title),
-                     body: body_from(record: record),
+        Array.wrap(data).filter_map do |db_record|
+          Record.new(title: Array.wrap(db_record.title),
+                     body: body_from(record: db_record),
                      identifiers: config_class::IDENTIFIERS,
-                     link_url: record.link,
-                     thumbnail_url: record.thumbnail_url)
+                     link_url: db_record.link,
+                     thumbnail: thumbnail_data_from(db_record))
         rescue StandardError => e
           Honeybadger.notify(e)
 
           next
         end
+      end
+
+      # Thumbnail data can be stored in either a thumbnail or thumbnail_url field. The Record doesn't care,
+      # but the rendering component will know which to use. This should probably be rethought in the future.
+      # @param [ApplicationRecord] db_record
+      # @return [String, nil]
+      def thumbnail_data_from(db_record)
+        db_record.try(:thumbnail) || db_record.try(:thumbnail_url)
       end
     end
   end

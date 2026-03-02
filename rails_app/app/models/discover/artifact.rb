@@ -15,11 +15,5 @@ module Discover
                     using: { tsearch: { any_word: true, prefix: true, tsvector_column: 'search_vector',
                                         dictionary: 'english' } },
                     order_within_rank: 'discover_artifacts.on_display DESC'
-
-    # TODO: the Database source expects a thumbnail_url accessor on the associated model, eventually this can
-    #       return a AWS presigned URL
-    def thumbnail_url
-      nil
-    end
   end
 end
