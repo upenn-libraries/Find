@@ -194,7 +194,6 @@ module Fulfillment
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
             Department: user.alma_affiliation,
-            PlainTextPassword: Settings.illiad.legacy_user_password
           }
         end
       end
