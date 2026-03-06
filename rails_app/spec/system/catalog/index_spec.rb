@@ -241,25 +241,27 @@ describe 'Catalog Index Page' do
     context 'with a record added in the last 15 days' do
       let(:solr_time) { (Time.new(2024, 4, 18).to_f * 1000).to_i }
 
+      before { click_on I18n.t('facets.recently_added.label') }
+
       it 'shows the recently added facet for 15 and 30 day range' do
-        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
+          find('.facet-values', visible: :visible)
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.15_days')
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.30_days')
         end
       end
 
       it 'shows the recently added facet for 60 and 90 day range' do
-        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
+          find('.facet-values', visible: :visible)
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.60_days')
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.90_days')
         end
       end
 
       it 'shows the expected facet count' do
-        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
+          find('.facet-values', visible: :visible)
           expect(page).to have_text(/\b1\b/, count: 4)
         end
       end
@@ -268,16 +270,18 @@ describe 'Catalog Index Page' do
     context 'with a record added in the last 90 days' do
       let(:solr_time) { (Time.new(2024, 7, 10).to_f * 1000).to_i }
 
+      before { click_on I18n.t('facets.recently_added.label') }
+
       it 'does not show the recently added facet for smaller date ranges' do
-        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
+          find('.facet-values', visible: :visible)
           expect(page).not_to have_text(/ Within 15|30|60 days/)
         end
       end
 
       it 'shows the recently added facet for 90 day range' do
-        click_on I18n.t('facets.recently_added.label')
         within('div.blacklight-recently_added_facet') do
+          find('.facet-values', visible: :visible)
           expect(page).to have_selector '.facet-select', text: I18n.t('facets.recently_added.90_days')
           expect(page).to have_selector '.facet-count', text: '1', count: 1
         end
