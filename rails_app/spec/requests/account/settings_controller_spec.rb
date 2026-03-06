@@ -12,8 +12,7 @@ describe 'Account Settings Controller Requests' do
     let(:user) { create(:user) }
 
     before do
-      allow(user).to receive(:alma_record).and_return(false)
-      allow(user).to receive(:illiad_record).and_return(false)
+      allow(user).to receive_messages(alma_record: false, illiad_record: false)
       login_as user
       get settings_path
     end
