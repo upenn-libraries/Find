@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'an authenticated controller' do
+shared_examples_for 'an authenticated controller' do
   let(:user_stubs) { {} }
 
   context 'when not authenticated' do
