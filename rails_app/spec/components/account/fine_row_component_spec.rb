@@ -59,8 +59,8 @@ describe Account::FineRowComponent, type: :components do
         'creation_time' => '2023-04-07T14:51:52.457Z' }
     end
 
-    it 'renders without a title' do
-      expect(rendered).to have_text 'WIC Equipment Fine'
+    it 'properly renders available information' do
+      expect(rendered).to have_text(penalty_data.dig('type', 'desc'))
     end
   end
 end
