@@ -11,7 +11,7 @@ class AlertWebhooksController < ApplicationController
     find_and_update_alert(payload)
   rescue JSON::ParserError => e
     Honeybadger.notify(e)
-    head(:unprocessable_entity)
+    head(:unprocessable_content)
   rescue ActiveRecord::RecordInvalid => e
     Honeybadger.notify(e)
     head(:internal_server_error)
