@@ -16,12 +16,6 @@ describe Discover::Source do
         expect(described_class.klass(source: 'find')).to eq(Discover::Source::Blacklight)
       end
     end
-
-    context 'with a pse source' do
-      it 'returns the pse source class' do
-        expect(described_class.klass(source: 'museum')).to eq(Discover::Source::PSE)
-      end
-    end
   end
 
   describe '.create_source' do
@@ -35,12 +29,6 @@ describe Discover::Source do
     context 'with a blacklight source' do
       it 'returns a blacklight source object' do
         expect(described_class.create_source(source: 'find')).to be_a(Discover::Source::Blacklight)
-      end
-    end
-
-    context 'with a pse source' do
-      it 'returns a pse source object' do
-        expect(described_class.create_source(source: 'museum')).to be_a(Discover::Source::PSE)
       end
     end
   end

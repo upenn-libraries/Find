@@ -419,9 +419,13 @@ main .results .card .card-body .results-list-item .results-list-item__thumbnail 
 
 /* Penn Museum icon */
 .discover-icon-museum::before {
-  content: url('../images/discover/icons/museum.svg');
+    content: url('/discover/icons/museum.svg');
+    width: 1.498rem;
+    height: 1.498rem;
 }
 
 .discover-icon-museum-fill::before {
-  content: url('../images/discover/icons/museum-fill.svg');
+    content: url('/discover/icons/museum-fill.svg');
+    width: 1.498rem;
+    height: 1.498rem;
 }

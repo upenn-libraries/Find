@@ -1,9 +1,18 @@
 discover:
   enabled: false
+  thumbnails:
+    aws:
+      bucket: 'upennlib-penncollects'
+      region: 'us-east-1'
+      access_key: <%= DockerSecrets.lookup(:aws_access_key, Rails.application.credentials.aws_access_key) %>
+      secret_access_key: <%= DockerSecrets.lookup(:aws_secret_access_key, Rails.application.credentials.aws_secret_access_key) %>
   source:
-    google_pse_api_key: <%= DockerSecrets.lookup(:google_pse_api_key, Rails.application.credentials.google_pse_api_key) %>
     art_collection:
-      pse_cx: '76cf445db4aa14589'
       tsv_path: 'https://digital.library.upenn.edu/collects/PennArtCollection.tsv'
     penn_museum:
-      pse_cx: '8591e2ac8a6254ba9'
+      host: 'www.penn.museum'
+      csv:
+        path: '/collections/assets/data/Penn_Museum_Collections_Data.csv'
+        download:
+          filename: 'penn_museum_artifacts'
+          extension: '.csv'

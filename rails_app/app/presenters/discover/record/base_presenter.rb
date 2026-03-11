@@ -44,11 +44,14 @@ module Discover
         record.description&.first&.truncate(MAX_STRING_LENGTH)
       end
 
+      # Return a full thumbnail URL
       # @return [String, NilClass]
-      delegate :link_url, to: :record
+      def thumbnail_url
+        record.thumbnail
+      end
 
       # @return [String, NilClass]
-      delegate :thumbnail_url, to: :record
+      delegate :link_url, to: :record
     end
   end
 end

@@ -31,7 +31,7 @@ describe Discover::Record do
     expect(record.link_url).to eq 'https://www.test.com/record'
   end
 
-  it 'returns a string for thumbnail_url' do
-    expect(record.thumbnail_url).to eq 'https://www.file.com/thumbnail.jpg'
+  it 'returns a string for thumbnail' do
+    expect(record.thumbnail).to eq 'https://www.file.com/thumbnail.jpg'
   end
 end

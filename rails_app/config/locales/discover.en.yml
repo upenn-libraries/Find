@@ -28,7 +28,7 @@ en:
           label: 'Libraries'
         finding_aids:
           label: 'Archives'
-        museum:
+        penn_museum:
           label: 'Penn Museum'
         art_collection:
           label: 'Penn Art Collection'
@@ -37,6 +37,12 @@ en:
         no_results: 'We did not find any matches.'
       view_all_button:
         label: 'View all %{count} results'
+      location_modal:
+        title: 'How to access %{source} material'
+        close: 'Close'
+        button:
+          label: 'How to Access'
+          aria_label: 'Learn how to access %{source} items'
 
     entry:
       fields:
@@ -72,5 +78,5 @@ en:
         text: 'Copyright Infringement'
         url: 'https://www.upenn.edu/about/report-copyright-infringement'
       all_results:
-        museum: "https://www.penn.museum/collections/search.php?term=%{query}"
+        penn_museum: "https://www.penn.museum/collections/search.php?term=%{query}"
         art_collection: "https://pennartcollection.com/?s=%{query}"

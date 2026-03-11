@@ -3,8 +3,8 @@
 describe Discover::Parser::ArtCollection do
   include FixtureHelpers
 
-  let(:tsv) { tsv_fixture('art_collection') }
-  let(:tsv_updated) { tsv_fixture('art_collection_updated') }
+  let(:tsv) { tabular_fixture_file('art_collection', namespace: 'discover', format: :tsv).read }
+  let(:tsv_updated) { tabular_fixture_file('art_collection_updated', namespace: 'discover', format: :tsv).read }
 
   context 'with new artworks' do
     let(:first_artwork) { Discover::ArtWork.first }

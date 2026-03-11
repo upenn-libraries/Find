@@ -39,12 +39,6 @@ describe Discover::Source::Database do
     end
   end
 
-  describe '#pse?' do
-    it 'returns false' do
-      expect(described_class.new(source: 'art_collection').pse?).to be false
-    end
-  end
-
   describe '#database?' do
     it 'returns true' do
       expect(described_class.new(source: 'art_collection').database?).to be true

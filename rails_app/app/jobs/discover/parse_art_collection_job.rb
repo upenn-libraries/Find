@@ -6,7 +6,8 @@ module Discover
     include Sidekiq::Job
 
     def perform
-      Parser::ArtCollection.import
+      file = Faraday.get(Settings.discover.source.art_collection.tsv_path)&.body
+      Parser::ArtCollection.import(file: file)
     end
   end
 end

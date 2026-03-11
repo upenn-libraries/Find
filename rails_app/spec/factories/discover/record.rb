@@ -12,21 +12,21 @@ FactoryBot.define do
     end
     identifiers { {} }
     link_url { 'https://www.test.com/record' }
-    thumbnail_url { nil }
+    thumbnail { nil }
 
     trait :from_museum do
-      title { ['Title | Location'] }
+      title { ['Title1,Title2'] }
       body do
         { creator: ['Record Creator'],
-          format: ['Record Format'],
-          location: [],
+          format: ['Record Format,Record Format,Record Format'],
+          location: ['Record Location'],
           publication: ['Record Publication Place', 'Record Publication Date'],
           description: ['Record Description'] }
       end
     end
 
     trait :with_thumbnail do
-      thumbnail_url { 'https://www.file.com/thumbnail.jpg' }
+      thumbnail { 'https://www.file.com/thumbnail.jpg' }
     end
 
     skip_create
