@@ -90,7 +90,7 @@ en:
       blocked_html: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
-      staff_only: 'Making requests for someone else is only visible to staff'
+      staff_only: 'This option is only visible to staff'
       proxy_alert_html: 'You are proxying a request for <strong>%{name} (%{group})</strong>'
       request_type:
         prompt: "What's the item you are requesting?"
