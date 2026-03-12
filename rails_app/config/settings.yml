@@ -42,7 +42,7 @@ library:
     - 'AthLib'
     - 'HSPLib'
   info:
-    base_url: 'https://www.library.upenn.edu/api/v1/libraries'
+    base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
 cataloging_errors:
   email: 'fixopac@pobox.upenn.edu'
