@@ -33,7 +33,7 @@ module Suggester
         # @return [Hash]
         def build_params(dictionary:, count:, build:)
           {
-            "suggest.dictionary": dictionary,
+            "suggest.dictionary": dictionary, # TODO: could be multiple dictionaries - but we don't HAVE to include this
             "suggest.build": build,
             "suggest.q": query,
             "suggest.count": count

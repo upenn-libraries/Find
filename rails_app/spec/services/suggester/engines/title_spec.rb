@@ -1,18 +1,11 @@
 # frozen_string_literal: true
 
-describe Suggester::Engines::TitleCompletion do
+describe Suggester::Engines::Title do
   include Suggester::SpecHelpers
   include_context 'with cleared engine registry'
 
-  let(:engine) { described_class.new(query: 'query', context: {}) }
-
-  describe '.weight' do
-    it 'returns expected base weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
-    end
-  end
-
   describe '.suggest?' do
+    let(:engine) { described_class.new(query: 'query', context: {}) }
     let(:minimum_chars_required) { described_class::MINIMUM_CHARS_REQUIRED }
 
     context 'when the query length is equal to the minimum required characters' do
@@ -35,14 +28,23 @@ describe Suggester::Engines::TitleCompletion do
   end
 
   describe '#actions' do
+    let(:query) { 'art' }
+    let(:engine) { described_class.new(query: query, context: {}) }
     let(:actions) { engine.actions }
+
+    before do
+      stub_solr_suggestions_request(query_params: { "suggest.q": query },
+                                    response_body: json_fixture('response_suggested_actions', 'suggester/solr'))
+    end
 
     it 'returns a Suggestions instance' do
       expect(actions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
-    it 'contains no entries' do
-      expect(actions).to have_attributes(entries: [])
+    it 'returns expected entries' do
+      expect(actions).to have_attributes(
+        entries: [{ label: 'The Journal of Art (online)', url: '/catalog/9977045594503681' }]
+      )
     end
   end
 

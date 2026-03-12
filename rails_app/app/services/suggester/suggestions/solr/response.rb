@@ -20,8 +20,10 @@ module Suggester
 
         # Returns an array of all suggestion terms across all suggesters in the response.
         # @return [Array<String>]
-        def terms
-          suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
+        def terms(dictionary: nil)
+          return suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] } if dictionary.blank?
+
+          suggestions[dictionary].flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
         end
 
         # Returns a hash mapping each suggester name to its list of suggestion hashes.
