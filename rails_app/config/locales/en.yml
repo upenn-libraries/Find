@@ -17,10 +17,10 @@ en:
   home:
     info:
       heading: 'Search our catalog'
-      description: 'The definitive place to search and <strong>find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      description: '<strong>The definitive place to find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
       manage:
         heading: 'Manage your account'
-        description: 'Create and manage item requests on your shelf, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
+        description: 'Create and manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
         cta_html: 'Go to %{link}.'
     resources:
       heading: 'More tools for your research'
@@ -43,6 +43,9 @@ en:
         worldcat:
           heading: 'WorldCat'
           description: 'Union catalog listing 540 million records held by member institutions'
+        research_guides:
+          heading: 'Research Guides'
+          description: 'Find resources on a variety of research topics, specially curated by our librarians'
       archival:
         colenda:
           heading: 'Colenda Digital Repository'

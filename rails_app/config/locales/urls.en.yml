@@ -31,6 +31,7 @@ en:
       search_center: "https://www.law.upenn.edu/library/research.php"
       summon: "https://upenn.summon.serialssolutions.com/search"
       worldcat: "http://hdl.library.upenn.edu/1017/7158"
+      research_guides: "https://guides.library.upenn.edu/"
     help:
       appointment: "https://libcal.library.upenn.edu/appointments"
       ask: "https://faq.library.upenn.edu/ask"
