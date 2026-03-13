@@ -26,5 +26,7 @@ Disallow: /catalog/*.ris
 Disallow: /catalog/*.marc
 Disallow: /catalog/*.marcxml
 Disallow: /catalog/*.endnote
+Disallow: /collects
+Disallow: /discover
 Disallow: /fulfillment
 Disallow: /inventory

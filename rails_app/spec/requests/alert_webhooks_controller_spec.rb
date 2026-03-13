@@ -36,7 +36,7 @@ describe 'Alert Webhooks Requests' do
 
     it 'handles bad JSON' do
       post webhooks_alerts_path, params: 'bad params', headers: headers
-      expect(response).to have_http_status :unprocessable_entity
+      expect(response).to have_http_status :unprocessable_content
     end
   end
 end
