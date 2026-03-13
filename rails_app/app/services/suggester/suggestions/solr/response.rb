@@ -19,6 +19,7 @@ module Suggester
         end
 
         # Returns an array of all suggestion terms across all suggesters in the response.
+        # @param dictionary [String]
         # @return [Array<String>]
         def terms(dictionary: nil)
           return suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] } if dictionary.blank?

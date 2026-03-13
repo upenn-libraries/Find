@@ -26,6 +26,10 @@ describe Suggester::Suggestions::Solr::Response do
         expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
                                       '<b>Art</b>uro Alfonso Schomburg']
       end
+
+      it 'returns only terms from a specified dictionary' do
+        expect(response.terms(dictionary: 'author')).to eq ['<b>Art</b>uro Alfonso Schomburg']
+      end
     end
   end
 

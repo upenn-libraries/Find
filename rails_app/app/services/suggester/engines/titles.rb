@@ -3,7 +3,7 @@
 module Suggester
   module Engines
     # Suggests title completions and bestbet actions from a solr suggestions endpoint
-    class Title < Engine
+    class Titles < Engine
       Registry.register(self)
 
       COMPLETION_WEIGHT = 10
@@ -21,6 +21,7 @@ module Suggester
         @solr_service = solr_service
       end
 
+      # Return completions from the suggester dictionary of all titles
       def completions
         Suggestions::Suggestion.new(
           entries: solr_service.terms(dictionary: completions_dictionary),
@@ -30,6 +31,7 @@ module Suggester
         super
       end
 
+      # Return actions that link to specific "best bet" records from the dictionary of best bet data
       def actions
         Suggestions::Suggestion.new(
           entries: action_entries(solr_service.suggestions[actions_dictionary]),
@@ -41,6 +43,9 @@ module Suggester
 
       private
 
+      # Parse Solr payload JSON object into a hash of data for rendering in the suggester UI as an action
+      # @param terms [Hash]
+      # @return [Array<Hash>]
       def action_entries(terms)
         terms.filter_map do |term|
           data = JSON.parse(term['payload'])
