@@ -1,17 +1,5 @@
 <%# This file is empty in Blacklight v9.0. This file overrides that to render our footer content. %>
-
-<div class="site-feedback">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        <p>
-          <%= t('feedback.description', url: t('urls.forms.feedback', request_url: request.original_url), contact_url: t('urls.contact')).html_safe %>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
+<pennlibs-feedback></pennlibs-feedback>
 <pennlibs-footer show-built-with>
   <section>
     <h2><%= t('footer.about.heading') %></h2>
