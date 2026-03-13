@@ -40,7 +40,7 @@ class CatalogController < ApplicationController
     config.document_solr_path = 'get'
     config.json_solr_path = 'select'
 
-    # items to show per page, each number in the array represent another option to choose from.
+    # items to show per page, each number in the array represents another option to choose from.
     config.per_page = [10, 20, 50, 100]
 
     # solr field configuration for search results/index views
