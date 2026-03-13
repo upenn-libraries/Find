@@ -1,7 +1,6 @@
-<% # Copied from Blacklight v9.0 %>
+<%# Copied from Blacklight v9.0 %>
 
 <%= content_tag @tag || :div, id: @id, class: @classes do %>
-
   <%= constraints_heading %>
 
   <% if no_constraints? && @show_all_constraint %>
@@ -28,7 +27,10 @@
 
   <div>
     <% if @edit_search %>
-      <%= link_to advanced_search_catalog_path(@search_state.params), class: 'btn btn-light edit-search-btn', aria: { label: t('search.edit.label') }, data: { bs_toggle: 'tooltip', bs_title: t('search.edit.label') } do %>
+      <%= link_to advanced_search_catalog_path(@search_state.params),
+        class: 'btn btn-light edit-search-btn',
+        aria: { label: t('search.edit.label') },
+        data: { controller: 'tooltip', bs_title: t('search.edit.label') } do %>
         <%= render 'shared/svgs/edit' %>
       <% end %>
     <% end %>
@@ -36,3 +38,4 @@
     <%= render @start_over_component.new if @start_over_component %>
   </div>
 <% end %>
+
