@@ -331,6 +331,7 @@ en:
   library:
     info:
       about: 'About location'
+      floor_plans: 'Floor plans'
       todays_hours: "Today's hours: %{hours}"
       view_hours: 'View hours'
       view_more_hours: 'View more hours'
