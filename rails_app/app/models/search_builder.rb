@@ -5,7 +5,6 @@ class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
   self.default_processor_chain += %i[
-    restore_deftype
     massage_sort
     handle_standalone_boolean_operators
   ]
@@ -31,19 +30,6 @@ class SearchBuilder < Blacklight::SearchBuilder
     return solr_p[:sort] = RELEVANCE_SORT.join(',') if search_term_provided?(solr_p)
 
     solr_p[:sort] = INDUCED_SORT.dup.prepend(inventory_sort_addition(solr_p)).compact_blank.join(',')
-  end
-
-  # BL9 makes it possible to use a single Solr request handler by setting defType values based on certain conditions.
-  # This is sometimes problematic for us on our Solr version and configuration. Here we set defType to edismax except
-  # for some conditions.
-  # TODO: update our Solr version and config so we don't have to do this
-  # Refer to this commit for the changes:
-  # https://github.com/projectblacklight/blacklight/pull/3742/changes#diff-685346ee7cdd740dec27e95aa2a2ac51e156043a6a455ab9c5f751e2da6ea3e8R100
-  def restore_deftype(solr_p)
-    # don't set edismax for advanced search or if lucene is set using local params syntax
-    return if advanced_search_params_present?(solr_p) || solr_p[:q]&.starts_with?('{!lucene}')
-
-    solr_p[:defType] = 'edismax'
   end
 
   # Escape certain Solr operators when they are found in the user's query surrounded by whitespace
