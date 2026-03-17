@@ -20,6 +20,7 @@ FactoryBot.define do
     add_attribute(:hours_url) { '' }
     add_attribute(:libcal_id) { '' }
     add_attribute(:thumbnail) { '' }
+    add_attribute(:floor_plans) { [] }
 
     trait :with_all_info do
       add_attribute(:url) { 'https://www.library.upenn.edu/lib' }
@@ -36,6 +37,7 @@ FactoryBot.define do
       add_attribute(:hours_url) { 'https://www.library.upenn.edu/lib/hours' }
       add_attribute(:libcal_id) { 123 }
       add_attribute(:thumbnail) { 'https://www.library.upenn.edu/sites/default/files/styles/libraries_api_thumbnail/public/2022-08/lippincott-brian.jpg?itok=20zXWmft' }
+      add_attribute(:floor_plans) { { 'building' => { 'url' => 'https://www.library.upenn.edu/floor-plans/lib' } } }
     end
 
     trait :without_links do
