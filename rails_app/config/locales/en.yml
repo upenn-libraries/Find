@@ -330,7 +330,7 @@ en:
       placeholder: 'Select facets...'
   library:
     info:
-      about: 'About location'
+      about: 'More about this location'
       floor_plans: 'Floor plans'
       todays_hours: "Today's hours: %{hours}"
       view_hours: 'View hours'
