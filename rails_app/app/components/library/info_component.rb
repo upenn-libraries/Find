@@ -5,7 +5,23 @@ module Library
   class InfoComponent < ViewComponent::Base
     attr_reader :info, :code
 
-    delegate(*%i[address1 address2 city state_code zip hours hours_url maps_url phone email library_url], to: :info)
+    delegate(
+      *%i[
+        address1
+        address2
+        city
+        state_code
+        zip
+        hours
+        hours_url
+        maps_url
+        phone
+        email
+        library_url
+        floor_plans
+      ],
+      to: :info
+    )
 
     # @param library_code [String]
     def initialize(library_code:)
@@ -54,6 +70,11 @@ module Library
       return if address1.blank?
 
       [address1, address2, city_state_zip].compact
+    end
+
+    # @return [String, nil]
+    def floor_plans_url
+      floor_plans&.dig('building', 'url')
     end
   end
 end

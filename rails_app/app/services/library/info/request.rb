@@ -99,6 +99,15 @@ module Library
       def library_url
         data[:url]
       end
+
+      # Array of floor plan data for library with name and
+      # url for building landing page (under "building") and
+      # for each floor within (under "floors")
+      #
+      # @return [Array<String>]
+      def floor_plans
+        data[:floor_plans]
+      end
     end
   end
 end
