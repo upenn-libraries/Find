@@ -1,12 +1,8 @@
 <% if current_user.proxy_submit_eligible? %>
   <div class="row">
     <div class="col-md-7">
-      <div class="card mb-3">
-        <div class="card-header">
-          <%= t('account.ill.staff_only') %>
-        </div>
-        <div class="card-body">
-          <h2 class="card-title pl-h3"><%= t('account.ill.form.proxy.prompt') %></h2>
+      <div class="callout mb-3">
+          <h2 class="pl-h3 mt-1 mb-2 fs-5"><%= t('account.ill.form.proxy.prompt') %></h2>
 
           <%= form_with(url: ill_new_request_url, method: :get) do %>
             <%= render 'hidden_fields' %>
@@ -14,12 +10,13 @@
             <div class="d-flex align-items-end">
               <div class="form-group flex-grow-1">
                 <%= label_tag :proxy_for, t('account.ill.form.proxy.pennkey') %>
-                <%= text_field_tag :proxy_for, @request.proxied? ? @request.patron.uid : '', class: 'form-control mt-1' %>
+                <%= text_field_tag :proxy_for, @request.proxied? ? @request.patron.uid : '', class: 'form-control mt-2' %>
               </div>
               <%= button_tag t('account.ill.form.proxy.submit'), name: nil, class: 'btn btn-primary mx-2 mt-2' %>
             </div>
+
+            <p class="text-secondary mb-0 mt-2"><%= t('account.ill.staff_only') %></p>
           <% end %>
-        </div>
       </div>
     </div>
   </div>
