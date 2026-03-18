@@ -16,8 +16,8 @@ module Suggester
       mock_engine_class(
         actions: Suggester::Suggestions::Suggestion.new(
           entries: [
-          Suggester::Engines::Engine::Action.new(label: 'Search titles for "query"',
-                                                 url: 'https://find.library.upenn.edu/?field=title&q=query')
+            Suggester::Engines::Engine::Action.new(label: 'Search titles for "query"',
+                                                   url: 'https://find.library.upenn.edu/?field=title&q=query')
           ], success: true
         )
       )

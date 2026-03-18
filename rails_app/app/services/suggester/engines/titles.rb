@@ -59,11 +59,11 @@ module Suggester
       end
 
       def completions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.completions.to_sym
+        Settings.suggester.digital_catalog.solr.dictionaries.title.completions.to_sym
       end
 
       def actions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.actions.to_sym
+        Settings.suggester.digital_catalog.solr.dictionaries.title.actions.to_sym
       end
 
       # @param query [String]
