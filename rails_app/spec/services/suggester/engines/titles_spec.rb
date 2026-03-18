@@ -34,17 +34,29 @@ describe Suggester::Engines::Titles do
 
     before do
       stub_solr_suggestions_request(query_params: { "suggest.q": query },
-                                    response_body: json_fixture('response', 'suggester/solr'))
+                                    response_body: json_fixture(fixture, 'suggester/solr'))
     end
 
-    it 'returns a Suggestions instance' do
-      expect(actions).to be_a(Suggester::Suggestions::Suggestion)
+    context 'with a suggester response containing action payload data' do
+      let(:fixture) { 'response' }
+
+      it 'returns a Suggestions instance' do
+        expect(actions).to be_a(Suggester::Suggestions::Suggestion)
+      end
+
+      it 'returns expected entries' do
+        expect(actions.entries).to contain_exactly(
+          an_object_having_attributes(label: 'The Journal of Art (online)', url: '/catalog/9977045594503681')
+        )
+      end
     end
 
-    it 'returns expected entries' do
-      expect(actions.entries.first).to have_attributes(
-        label: 'The Journal of Art (online)', url: '/catalog/9977045594503681'
-      )
+    context 'with a suggester response containing malformed payload data' do
+      let(:fixture) { 'response_including_malformed_payload' }
+
+      it 'excludes problematic suggestion' do
+        expect(actions.entries.length).to eq 1
+      end
     end
   end
 

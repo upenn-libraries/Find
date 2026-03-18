@@ -33,9 +33,11 @@ describe Suggester::Engines::OnlineAccess do
     end
 
     it 'returns contains expected entries' do
-      expect(actions).to have_attributes(
-        entries: [{ label: '<b>query</b> in Online Resources',
-                    url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D%5B%5D=Online&q=query' }]
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(
+          label: '<b>query</b> in Online Resources',
+          url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D%5B%5D=Online&q=query'
+        )
       )
     end
   end

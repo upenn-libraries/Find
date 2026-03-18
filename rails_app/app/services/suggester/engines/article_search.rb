@@ -21,9 +21,11 @@ module Suggester
 
       # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestions::Suggestion.new(entries: [{ label: I18n.t('suggestions.engines.articles_search.label',
-                                                              query: query), url: proxy_url }],
-                                    engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(
+          entries: [Action.new(label: I18n.t('suggestions.engines.articles_search.label', query: query),
+                               url: proxy_url)],
+          engine_weight: self.class.weight
+        )
       end
 
       private

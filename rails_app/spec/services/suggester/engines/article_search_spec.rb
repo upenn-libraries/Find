@@ -34,8 +34,10 @@ describe Suggester::Engines::ArticleSearch do
 
     it 'returns expected entries' do
       url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=query'
-      expect(actions).to have_attributes(
-        entries: [{ label: '<b>query</b> in Articles+', url: url }]
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(
+          label: '<b>query</b> in Articles+', url: url
+        )
       )
     end
   end

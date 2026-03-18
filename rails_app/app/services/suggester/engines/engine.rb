@@ -16,6 +16,9 @@ module Suggester
         query.present?
       end
 
+      # Simple class for recommended action
+      Action = Data.define(:label, :url)
+
       attr_reader :query, :context
 
       # @param query [String]

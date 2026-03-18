@@ -20,35 +20,15 @@ describe Suggester::Suggestions::Solr::Response do
 
   describe '#suggestions' do
     let(:fixture_name) { 'response' }
+    let(:fixture_suggesters) { %i[title notable_title] }
 
     it 'returns the hash containing expected suggester keys' do
-      expect(response.suggestions.keys).to eq described_class::SUGGESTER_MAPPING.keys
+      expect(response.suggestions.keys).to eq fixture_suggesters
     end
 
-    it 'returns an array of the mapped suggestion objects for each suggester' do
-      described_class::SUGGESTER_MAPPING.each_key do |suggester|
-        expect(response.suggestions[suggester].first).to be_a described_class::SUGGESTER_MAPPING[suggester]
-      end
-    end
-
-    it 'parses the JSON payload of the notable title suggester response' do
-      expect(response.suggestions[:notable_title].first).to(have_attributes(label: 'The Journal of Art (online)',
-                                                                            mmsid: '9977045594503681'))
-    end
-
-    context 'with an unsupported suggester' do
-      let(:fixture_name) { 'response_including_unsupported_suggester' }
-
-      it 'raises an exception calling out the unsupported response data' do
-        expect { response.suggestions }.to raise_error(StandardError, /author/)
-      end
-    end
-
-    context 'with a malformed JSON payload' do
-      let(:fixture_name) { 'response_including_malformed_payload' }
-
-      it 'ignores the problematic suggestion' do
-        expect(response.suggestions[:notable_title]).to eq []
+    it 'returns an array of the suggestion data provided by each suggester' do
+      fixture_suggesters.each do |suggester|
+        expect(response.suggestions[suggester].first.keys).to contain_exactly('payload', 'term', 'weight')
       end
     end
   end

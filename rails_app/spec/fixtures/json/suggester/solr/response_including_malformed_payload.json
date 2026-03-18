@@ -18,9 +18,13 @@
     },
     "notable_title": {
       "art": {
-        "numFound": 1,
+        "numFound": 2,
         "suggestions":[{
           "term":"journal of <b>art</b>",
+          "weight": 1,
+          "payload":"{\"disp\": \"The Journal of Art (online)\", \"id\": \"9977045594503681\"}"
+        },{
+          "term":"journal of <b>art</b> history",
           "weight": 1,
           "payload":"error"
         }

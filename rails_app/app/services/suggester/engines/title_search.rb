@@ -14,7 +14,7 @@ module Suggester
 
       # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestions::Suggestion.new(entries: [{ label: label, url: url }], engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: [Action.new(label: label, url: url)], engine_weight: self.class.weight)
       end
 
       private
