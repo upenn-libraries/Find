@@ -24,24 +24,13 @@ form {
   --bs-border-color: var(--pl-color-fg-subtle);
 }
 
+pennlibs-feedback {
+  margin-top: var(--pl-space-l);
+}
+
+pennlibs-feedback,
 pennlibs-footer {
   display: block;
-}
-
-.site-feedback {
-  background: var(--pl-color-bg-subtle);
-  padding: 2rem 0;
-  margin-top: 3rem;
-}
-
-.site-feedback p {
-  max-width: 60ch;
-  margin-bottom: 0;
-}
-
-.site-feedback i {
-  font-size: 1.5rem;
-  color: var(--pl-color-fg-subtle);
 }
 
 label.toggle-bookmark {
