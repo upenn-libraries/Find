@@ -7,9 +7,10 @@
     "title": {
       "art": {
         "numFound": 1,
-        "suggestions":[{
+        "suggestions":[
+          {
           "term":"The dental <b>art</b> : practical treatise on dental surgery",
-          "weight": 16,
+          "weight": 20,
           "payload":"9977323252003681"
         }
         ]
@@ -21,7 +22,7 @@
         "suggestions":[{
           "term":"journal of <b>art</b>",
           "weight": 1,
-          "payload":"{\"disp\": \"The Journal of Art (online)\", \"id\": \"9977045594503681\"}"
+          "payload":"error"
         }
         ]
       }

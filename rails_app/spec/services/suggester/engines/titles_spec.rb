@@ -34,7 +34,7 @@ describe Suggester::Engines::Titles do
 
     before do
       stub_solr_suggestions_request(query_params: { "suggest.q": query },
-                                    response_body: json_fixture('response_with_suggested_actions', 'suggester/solr'))
+                                    response_body: json_fixture('response', 'suggester/solr'))
     end
 
     it 'returns a Suggestions instance' do
@@ -42,8 +42,8 @@ describe Suggester::Engines::Titles do
     end
 
     it 'returns expected entries' do
-      expect(actions).to have_attributes(
-        entries: [{ label: 'The Journal of Art (online)', url: '/catalog/9977045594503681' }]
+      expect(actions.entries.first).to have_attributes(
+        label: 'The Journal of Art (online)', url: '/catalog/9977045594503681'
       )
     end
   end
@@ -60,18 +60,7 @@ describe Suggester::Engines::Titles do
       end
 
       it 'contains expected entries' do
-        expect(engine.completions).to have_attributes(
-          entries: [
-            'The dental <b>art</b> : practical treatise on dental surgery',
-            'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
-              ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
-            'An inquiry into the fine <b>art</b>s',
-            'Falasṭin(ah) : omanut nashim mi-Falasṭin = Filasṭīn(ah) : fann al-marʼah min'\
-              ' Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
-            'At the crossroads of Asia and Europe : 20th century masterpieces from the A.'\
-              ' Kasteyev State Museum of <b>Art</b>s in...'
-          ]
-        )
+        expect(engine.completions.entries).to eq ['The dental <b>art</b> : practical treatise on dental surgery']
       end
     end
   end

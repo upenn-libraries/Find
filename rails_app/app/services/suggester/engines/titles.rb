@@ -34,7 +34,7 @@ module Suggester
       # Return actions that link to specific "best bet" records from the dictionary of best bet data
       def actions
         Suggestions::Suggestion.new(
-          entries: action_entries(solr_service.suggestions[actions_dictionary]),
+          entries: solr_service.suggestions[actions_dictionary],
           engine_weight: ACTION_WEIGHT
         )
       rescue Suggestions::Solr::Service::Error => _e
@@ -43,24 +43,12 @@ module Suggester
 
       private
 
-      # Parse Solr payload JSON object into a hash of data for rendering in the suggester UI as an action
-      # @param terms [Hash]
-      # @return [Array<Hash>]
-      def action_entries(terms)
-        terms.filter_map do |term|
-          data = JSON.parse(term['payload'])
-          { label: data['disp'], url: Rails.application.routes.url_helpers.solr_document_path(id: data['id']) }
-        rescue JSON::ParserError => _e # malformed payload
-          next
-        end
-      end
-
       def completions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.completions
+        Settings.suggester.digital_catalog.solr.dictionaries.completions.to_sym
       end
 
       def actions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.actions
+        Settings.suggester.digital_catalog.solr.dictionaries.actions.to_sym
       end
 
       def default_solr_service(query)

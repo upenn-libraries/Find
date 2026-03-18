@@ -2,71 +2,53 @@
 
 describe Suggester::Suggestions::Solr::Response do
   include Suggester::SpecHelpers
-  let(:parsed_body) { JSON.parse json_fixture('response', 'suggester/solr') }
+
+  let(:fixture_name) { 'response' }
+  let(:parsed_body) { JSON.parse json_fixture(fixture_name, 'suggester/solr') }
   let(:response) { described_class.new(body: parsed_body, query: 'art') }
 
   describe '#terms' do
     it 'returns all the terms' do
-      expect(response.terms).to eq [
-        'The dental <b>art</b> : practical treatise on dental surgery',
-        'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
-          ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
-        'An inquiry into the fine <b>art</b>s',
-        'Falasṭin(ah) : omanut nashim mi-Falasṭin = Filasṭīn(ah) : fann al-marʼah min'\
-          ' Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
-        'At the crossroads of Asia and Europe : 20th century masterpieces from the A.'\
-          ' Kasteyev State Museum of <b>Art</b>s in...'
-      ]
+      expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
+                                    'journal of <b>art</b>']
     end
 
-    context 'with multiple suggesters' do
-      let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
-
-      it 'returns all terms' do
-        expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
-                                      '<b>Art</b>uro Alfonso Schomburg']
-      end
-
-      it 'returns only terms from a specified dictionary' do
-        expect(response.terms(dictionary: 'author')).to eq ['<b>Art</b>uro Alfonso Schomburg']
-      end
+    it 'returns only terms from a specified dictionary' do
+      expect(response.terms(dictionary: 'title')).to eq ['The dental <b>art</b> : practical treatise on dental surgery']
     end
   end
 
   describe '#suggestions' do
-    it 'returns the hash containing solr suggestions payload' do
-      expect(response.suggestions).to eq(
-        { 'title' => [{ 'term' => 'The dental <b>art</b> : practical treatise on dental surgery',
-                        'payload' => '9977323252003681', 'weight' => 16 },
+    let(:fixture_name) { 'response' }
 
-                      { 'term' => 'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
-                        ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
-                        'payload' => '9934303363503681', 'weight' => 12 },
-
-                      { 'payload' => '9920306233503681', 'term' => 'An inquiry into the fine <b>art</b>s',
-                        'weight' => 9 },
-
-                      { 'payload' => '9978884923903681', 'term' => 'Falasṭin(ah) : omanut nashim mi-Falasṭin = '\
-                        'Filasṭīn(ah) : fann al-marʼah min Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
-                        'weight' => -7 },
-
-                      { 'payload' => '9979083013503681', 'term' => 'At the crossroads of Asia and Europe : 20th '\
-                      'century masterpieces from the A. Kasteyev State Museum of <b>Art</b>s in...',
-                        'weight' => -20 }] }
-      )
+    it 'returns the hash containing expected suggester keys' do
+      expect(response.suggestions.keys).to eq described_class::SUGGESTER_MAPPING.keys
     end
 
-    context 'with multiple suggesters' do
-      let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
+    it 'returns an array of the mapped suggestion objects for each suggester' do
+      described_class::SUGGESTER_MAPPING.each_key do |suggester|
+        expect(response.suggestions[suggester].first).to be_a described_class::SUGGESTER_MAPPING[suggester]
+      end
+    end
 
-      it 'returns the suggestions from each suggester' do
-        expect(response.suggestions).to eq(
-          { 'author' => [{ 'payload' => '', 'term' => '<b>Art</b>uro Alfonso Schomburg', 'weight' => 20 }],
+    it 'parses the JSON payload of the notable title suggester response' do
+      expect(response.suggestions[:notable_title].first).to(have_attributes(label: 'The Journal of Art (online)',
+                                                                            mmsid: '9977045594503681'))
+    end
 
-            'title' => [{ 'payload' => '9977323252003681',
-                          'term' => 'The dental <b>art</b> : practical treatise on dental surgery',
-                          'weight' => 20 }] }
-        )
+    context 'with an unsupported suggester' do
+      let(:fixture_name) { 'response_including_unsupported_suggester' }
+
+      it 'raises an exception calling out the unsupported response data' do
+        expect { response.suggestions }.to raise_error(StandardError, /author/)
+      end
+    end
+
+    context 'with a malformed JSON payload' do
+      let(:fixture_name) { 'response_including_malformed_payload' }
+
+      it 'ignores the problematic suggestion' do
+        expect(response.suggestions[:notable_title]).to eq []
       end
     end
   end
