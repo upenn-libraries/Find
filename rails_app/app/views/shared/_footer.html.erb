@@ -1,5 +1,24 @@
 <%# This file is empty in Blacklight v9.0. This file overrides that to render our footer content. %>
-<pennlibs-feedback></pennlibs-feedback>
+<% if Settings.pennlibs_feedback.enabled %>
+  <pennlibs-feedback></pennlibs-feedback>
+<% else %>
+  <div class="site-feedback">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="h5 mb-2"><%= t('home.feedback.title') %></h2>
+          <p>
+            <%= t('home.feedback.description', url: t('urls.forms.feedback', request_url: request.original_url)).html_safe %>
+          </p>
+        </div>
+        <div>
+          <i class="bi bi-hand-thumbs-up"></i>
+          <i class="bi bi-hand-thumbs-down"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 <pennlibs-footer>
   <section>
     <h2><%= t('footer.account.heading') %></h2>
