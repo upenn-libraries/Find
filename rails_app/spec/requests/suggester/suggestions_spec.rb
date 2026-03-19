@@ -33,7 +33,11 @@ describe 'Suggestions Requests' do
   end
 
   context 'with actions returned' do
-    let(:mock_suggester_response) { suggester_response(actions: [{ label: 'Test', url: 'https://test.com' }]) }
+    let(:mock_suggester_response) do
+      suggester_response(
+        actions: [Suggester::Engines::Engine::Action.new(label: 'Test', url: 'https://test.com')]
+      )
+    end
 
     before do
       allow(Suggester::Service).to receive(:call).and_return(mock_suggester_response)
