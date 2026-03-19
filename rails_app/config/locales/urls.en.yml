@@ -14,7 +14,7 @@ en:
       lippincott_svc: "https://guides.library.upenn.edu/lippincottservices"
     forms:
       bbm: "https://upenn.libwizard.com/f/books-by-mail"
-      feedback: "https://upenn.libwizard.com/f/find-feedback?page_url_-optio=%{request_url}"
+      feedback: "https://upenn.co1.qualtrics.com/jfe/form/SV_3xVrP7EKWS92zfE?reporting_from_url=%{request_url}"
     external_services:
       borrowdirect: "https://upenn-borrowdirect.reshare.indexdata.com"
       colenda: "https://colenda.library.upenn.edu"
