@@ -3,9 +3,15 @@
 describe Suggester::Engines::Engine do
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
-  describe '.weight' do
-    it 'declares the expected weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
+  describe '.actions_weight' do
+    it 'declares the expected actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
+    end
+  end
+
+  describe '.completions_weight' do
+    it 'declares the expected completions weight' do
+      expect(described_class.completions_weight).to eq described_class::BASE_COMPLETIONS_WEIGHT
     end
   end
 

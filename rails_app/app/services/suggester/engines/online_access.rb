@@ -6,12 +6,7 @@ module Suggester
     class OnlineAccess < Engine
       Registry.register(self)
 
-      BASE_WEIGHT = 2
-
-      # @return [Integer]
-      def self.weight
-        BASE_WEIGHT
-      end
+      BASE_ACTIONS_WEIGHT = 2
 
       # @return [Suggester::Suggestions::Suggestion]
       def actions
@@ -22,7 +17,7 @@ module Suggester
               url: URI::HTTPS.build(host: Settings.suggester.digital_catalog.host,
                                     query: { "f[access_facet][]": 'Online', q: query }.to_query).to_s
             )
-          ], engine_weight: self.class.weight
+          ], engine_weight: self.class.actions_weight
         )
       end
 

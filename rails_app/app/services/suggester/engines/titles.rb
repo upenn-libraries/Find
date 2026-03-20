@@ -6,8 +6,8 @@ module Suggester
     class Titles < Engine
       Registry.register(self)
 
-      COMPLETION_WEIGHT = 10
-      ACTION_WEIGHT = 25
+      BASE_COMPLETIONS_WEIGHT = 10
+      BASE_ACTIONS_WEIGHT = 25
       MINIMUM_CHARS_REQUIRED = 3
 
       def self.suggest?(query)
@@ -25,7 +25,7 @@ module Suggester
       def completions
         Suggestions::Suggestion.new(
           entries: solr_service.terms(dictionary: completions_dictionary),
-          engine_weight: COMPLETION_WEIGHT
+          engine_weight: self.class.completions_weight
         )
       rescue Suggestions::Solr::Service::Error => _e
         super
@@ -35,7 +35,7 @@ module Suggester
       def actions
         Suggestions::Suggestion.new(
           entries: actions_from(solr_service.suggestions[actions_dictionary]),
-          engine_weight: ACTION_WEIGHT
+          engine_weight: self.class.actions_weight
         )
       rescue Suggestions::Solr::Service::Error => _e
         super

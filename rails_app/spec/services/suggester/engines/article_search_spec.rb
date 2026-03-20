@@ -5,9 +5,9 @@ describe Suggester::Engines::ArticleSearch do
 
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
-  describe '.weight' do
-    it 'returns expected base weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
     end
   end
 

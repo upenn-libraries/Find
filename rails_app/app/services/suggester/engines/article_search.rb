@@ -6,12 +6,7 @@ module Suggester
     class ArticleSearch < Engine
       Registry.register(self)
 
-      BASE_WEIGHT = 7
-
-      # @return [Integer]
-      def self.weight
-        BASE_WEIGHT
-      end
+      BASE_ACTIONS_WEIGHT = 7
 
       # @param query [String]
       # @return [Boolean]
@@ -24,7 +19,7 @@ module Suggester
         Suggestions::Suggestion.new(
           entries: [Action.new(label: I18n.t('suggestions.engines.articles_search.label', query: query),
                                url: proxy_url)],
-          engine_weight: self.class.weight
+          engine_weight: self.class.actions_weight
         )
       end
 
