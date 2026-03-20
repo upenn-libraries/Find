@@ -8,13 +8,13 @@ describe Suggester::Suggestions::Solr::Response do
   let(:response) { described_class.new(body: parsed_body, query: 'art') }
 
   describe '#terms' do
-    it 'returns all the terms' do
+    it 'returns all the terms when no suggester name is provided' do
       expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
                                     'journal of <b>art</b>']
     end
 
-    it 'returns only terms from a specified dictionary' do
-      expect(response.terms(dictionary: 'title')).to eq ['The dental <b>art</b> : practical treatise on dental surgery']
+    it 'returns only terms from a provided suggester name' do
+      expect(response.terms(suggester: 'title')).to eq ['The dental <b>art</b> : practical treatise on dental surgery']
     end
   end
 

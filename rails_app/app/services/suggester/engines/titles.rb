@@ -21,20 +21,20 @@ module Suggester
         @solr_service = solr_service
       end
 
-      # Return completions from the suggester dictionary of all titles
+      # Return completions from the suggester for all titles
       def completions
         Suggestions::Suggestion.new(
-          entries: solr_service.terms(dictionary: completions_dictionary),
+          entries: solr_service.terms(suggester: completions_suggester_name),
           engine_weight: self.class.completions_weight
         )
       rescue Suggestions::Solr::Service::Error => _e
         super
       end
 
-      # Return actions that link to specific "best bet" records from the dictionary of best bet data
+      # Return actions that link to specific "best bet" records from the suggester for best bet data
       def actions
         Suggestions::Suggestion.new(
-          entries: actions_from(solr_service.suggestions[actions_dictionary]),
+          entries: actions_from(solr_service.suggestions[actions_suggester_name]),
           engine_weight: self.class.actions_weight
         )
       rescue Suggestions::Solr::Service::Error => _e
@@ -58,12 +58,12 @@ module Suggester
         end
       end
 
-      def completions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.title.completions.to_sym
+      def completions_suggester_name
+        Settings.suggester.digital_catalog.solr.suggesters.title.completions.to_sym
       end
 
-      def actions_dictionary
-        Settings.suggester.digital_catalog.solr.dictionaries.title.actions.to_sym
+      def actions_suggester_name
+        Settings.suggester.digital_catalog.solr.suggesters.title.actions.to_sym
       end
 
       # @param query [String]

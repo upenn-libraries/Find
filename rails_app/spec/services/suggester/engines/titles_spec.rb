@@ -61,7 +61,7 @@ describe Suggester::Engines::Titles do
   end
 
   describe '#completions' do
-    context 'with a single dictionary response' do
+    context 'with a single suggester response' do
       before do
         stub_solr_suggestions_request(query_params: { "suggest.q": query },
                                       response_body: json_fixture('response', 'suggester/solr'))

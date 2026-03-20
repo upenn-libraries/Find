@@ -4,7 +4,7 @@ suggester:
     host: 'find.library.upenn.edu'
     solr:
       url: "<%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>/suggest"
-      dictionaries:
+      suggesters:
         title:
           completions: 'title'
           actions: 'notable_title'

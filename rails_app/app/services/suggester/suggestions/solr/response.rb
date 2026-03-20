@@ -18,18 +18,18 @@ module Suggester
           @query = query
         end
 
-        # Returns an array of suggestion terms for a given suggester in the response - or all terms if no dictionary
+        # Returns an array of suggestion terms for a given suggester in the response - or all terms if no suggester
         # name is provided.
-        # @param dictionary [String, Symbol, nil]
+        # @param suggester [String, Symbol, nil]
         # @return [Array]
-        def terms(dictionary: nil)
-          hash = dictionary ? suggestions.slice(dictionary.to_sym) : suggestions
+        def terms(suggester: nil)
+          hash = suggester ? suggestions.slice(suggester.to_sym) : suggestions
 
           hash.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
         end
 
         # Simplify the suggestions data returned by Solr, keeping top-level keys corresponding to
-        # the suggester/dictionary names.
+        # the suggester names.
         # @return [Hash]
         def suggestions
           @suggestions ||= begin

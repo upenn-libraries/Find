@@ -12,4 +12,7 @@ suggester:
   digital_catalog:
     solr:
       url: "http://catalog:catalog@127.0.0.1:8983/solr/find-test/suggest"
-      dictionary: 'title'
+      suggesters:
+        title:
+          completions: 'title'
+          actions: 'notable_title'
