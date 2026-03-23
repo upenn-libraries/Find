@@ -7,6 +7,18 @@ describe Suggester::Engines::Titles do
   let(:query) { 'art' }
   let(:engine) { described_class.new(query: query, context: {}) }
 
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
+    end
+  end
+
+  describe '.completions_weight' do
+    it 'returns expected base completions weight' do
+      expect(described_class.completions_weight).to eq described_class::BASE_COMPLETIONS_WEIGHT
+    end
+  end
+
   describe '.suggest?' do
     let(:minimum_chars_required) { described_class::MINIMUM_CHARS_REQUIRED }
 
