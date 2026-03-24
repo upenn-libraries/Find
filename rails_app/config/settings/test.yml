@@ -6,7 +6,7 @@ additional_results_sources:
     base_url: 'upenn.summon.serialssolutions.com'
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 pennlibs_feedback:
-  enabled: true
+  enabled: false
 discover:
   enabled: true
 suggester:

@@ -17,8 +17,6 @@ email:
 fulfillment:
   docdel:
     email: 'mkanning@upenn.edu'
-pennlibs_feedback:
-  enabled: true
 discover:
   enabled: true
 suggester:
