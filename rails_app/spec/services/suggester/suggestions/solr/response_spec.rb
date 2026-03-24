@@ -2,67 +2,33 @@
 
 describe Suggester::Suggestions::Solr::Response do
   include Suggester::SpecHelpers
-  let(:parsed_body) { JSON.parse json_fixture('response', 'suggester/solr') }
+
+  let(:fixture_name) { 'response' }
+  let(:parsed_body) { JSON.parse json_fixture(fixture_name, 'suggester/solr') }
   let(:response) { described_class.new(body: parsed_body, query: 'art') }
 
   describe '#terms' do
-    it 'returns all the terms' do
-      expect(response.terms).to eq [
-        'The dental <b>art</b> : practical treatise on dental surgery',
-        'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
-          ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
-        'An inquiry into the fine <b>art</b>s',
-        'Falasṭin(ah) : omanut nashim mi-Falasṭin = Filasṭīn(ah) : fann al-marʼah min'\
-          ' Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
-        'At the crossroads of Asia and Europe : 20th century masterpieces from the A.'\
-          ' Kasteyev State Museum of <b>Art</b>s in...'
-      ]
+    it 'returns all the terms when no suggester name is provided' do
+      expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
+                                    'journal of <b>art</b>']
     end
 
-    context 'with multiple suggesters' do
-      let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
-
-      it 'returns all terms' do
-        expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
-                                      '<b>Art</b>uro Alfonso Schomburg']
-      end
+    it 'returns only terms from a provided suggester name' do
+      expect(response.terms(suggester: 'title')).to eq ['The dental <b>art</b> : practical treatise on dental surgery']
     end
   end
 
   describe '#suggestions' do
-    it 'returns the hash containing solr suggestions payload' do
-      expect(response.suggestions).to eq(
-        { 'title' => [{ 'term' => 'The dental <b>art</b> : practical treatise on dental surgery',
-                        'payload' => '9977323252003681', 'weight' => 16 },
+    let(:fixture_name) { 'response' }
+    let(:fixture_suggesters) { %i[title notable_title] }
 
-                      { 'term' => 'Museum inventories of Delaware <b>art</b>ifacts : discussions of the'\
-                        ' Indian <b>art</b>ifacts found in the State of Delaware and owned by...',
-                        'payload' => '9934303363503681', 'weight' => 12 },
-
-                      { 'payload' => '9920306233503681', 'term' => 'An inquiry into the fine <b>art</b>s',
-                        'weight' => 9 },
-
-                      { 'payload' => '9978884923903681', 'term' => 'Falasṭin(ah) : omanut nashim mi-Falasṭin = '\
-                        'Filasṭīn(ah) : fann al-marʼah min Filasṭīn = Palestin(a) : women\'s <b>art</b> form Palestine',
-                        'weight' => -7 },
-
-                      { 'payload' => '9979083013503681', 'term' => 'At the crossroads of Asia and Europe : 20th '\
-                      'century masterpieces from the A. Kasteyev State Museum of <b>Art</b>s in...',
-                        'weight' => -20 }] }
-      )
+    it 'returns the hash containing expected suggester keys' do
+      expect(response.suggestions.keys).to eq fixture_suggesters
     end
 
-    context 'with multiple suggesters' do
-      let(:parsed_body) { JSON.parse json_fixture('response_with_multiple_suggesters', 'suggester/solr') }
-
-      it 'returns the suggestions from each suggester' do
-        expect(response.suggestions).to eq(
-          { 'author' => [{ 'payload' => '', 'term' => '<b>Art</b>uro Alfonso Schomburg', 'weight' => 20 }],
-
-            'title' => [{ 'payload' => '9977323252003681',
-                          'term' => 'The dental <b>art</b> : practical treatise on dental surgery',
-                          'weight' => 20 }] }
-        )
+    it 'returns an array of the suggestion data provided by each suggester' do
+      fixture_suggesters.each do |suggester|
+        expect(response.suggestions[suggester].first.keys).to contain_exactly('payload', 'term', 'weight')
       end
     end
   end

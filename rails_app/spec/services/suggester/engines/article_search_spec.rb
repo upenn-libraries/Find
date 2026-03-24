@@ -5,9 +5,9 @@ describe Suggester::Engines::ArticleSearch do
 
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
-  describe '.weight' do
-    it 'returns expected base weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
     end
   end
 
@@ -34,8 +34,10 @@ describe Suggester::Engines::ArticleSearch do
 
     it 'returns expected entries' do
       url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=query'
-      expect(actions).to have_attributes(
-        entries: [{ label: '<b>query</b> in Articles+', url: url }]
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(
+          label: '<b>query</b> in Articles+', url: url
+        )
       )
     end
   end

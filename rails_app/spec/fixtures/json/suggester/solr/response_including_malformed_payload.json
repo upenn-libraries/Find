@@ -10,20 +10,23 @@
         "suggestions":[
           {
           "term":"The dental <b>art</b> : practical treatise on dental surgery",
-          "weight":20,
+          "weight": 20,
           "payload":"9977323252003681"
         }
         ]
       }
     },
-    "author": {
+    "notable_title": {
       "art": {
-        "numFound": 1,
-        "suggestions":[
-          {
-          "term":"<b>Art</b>uro Alfonso Schomburg",
-          "weight":20,
-          "payload":""
+        "numFound": 2,
+        "suggestions":[{
+          "term":"journal of <b>art</b>",
+          "weight": 1,
+          "payload":"{\"disp\": \"The Journal of Art (online)\", \"id\": \"9977045594503681\"}"
+        },{
+          "term":"journal of <b>art</b> history",
+          "weight": 1,
+          "payload":"error"
         }
         ]
       }

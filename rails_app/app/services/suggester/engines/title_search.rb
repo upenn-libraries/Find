@@ -6,15 +6,12 @@ module Suggester
     class TitleSearch < Engine
       Registry.register(self)
 
-      BASE_WEIGHT = 5
-      # @return [Integer]
-      def self.weight
-        BASE_WEIGHT
-      end
+      BASE_ACTIONS_WEIGHT = 5
 
       # @return [Suggester::Suggestions::Suggestion]
       def actions
-        Suggestions::Suggestion.new(entries: [{ label: label, url: url }], engine_weight: self.class.weight)
+        Suggestions::Suggestion.new(entries: [Action.new(label: label, url: url)],
+                                    engine_weight: self.class.actions_weight)
       end
 
       private

@@ -4,10 +4,17 @@ module Suggester
   module Engines
     # Class that Engines inherit from
     class Engine
-      BASE_WEIGHT = 0
+      BASE_ACTIONS_WEIGHT = 0
+      BASE_COMPLETIONS_WEIGHT = 0
+
       # @return [Integer]
-      def self.weight
-        BASE_WEIGHT
+      def self.actions_weight
+        self::BASE_ACTIONS_WEIGHT
+      end
+
+      # @return [Integer]
+      def self.completions_weight
+        self::BASE_COMPLETIONS_WEIGHT
       end
 
       # @param query [String]
@@ -15,6 +22,9 @@ module Suggester
       def self.suggest?(query)
         query.present?
       end
+
+      # Simple class for recommended action
+      Action = Data.define(:label, :url)
 
       attr_reader :query, :context
 

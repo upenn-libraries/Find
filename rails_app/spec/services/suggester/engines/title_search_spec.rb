@@ -5,9 +5,15 @@ describe Suggester::Engines::TitleSearch do
 
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
-  describe '.weight' do
-    it 'returns expected base weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
+    end
+  end
+
+  describe '.completions_weight' do
+    it 'returns expected base completions weight' do
+      expect(described_class.completions_weight).to eq described_class::BASE_COMPLETIONS_WEIGHT
     end
   end
 
@@ -33,9 +39,9 @@ describe Suggester::Engines::TitleSearch do
     end
 
     it 'contains expected entries' do
-      expect(actions).to have_attributes(
-        entries: [{ label: '<b>query</b> in Titles',
-                    url: 'https://find.library.upenn.edu?q=query&search_field=title_search' }]
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(label: '<b>query</b> in Titles',
+                                    url: 'https://find.library.upenn.edu?q=query&search_field=title_search')
       )
     end
   end

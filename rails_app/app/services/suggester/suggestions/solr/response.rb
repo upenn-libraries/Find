@@ -18,20 +18,26 @@ module Suggester
           @query = query
         end
 
-        # Returns an array of all suggestion terms across all suggesters in the response.
-        # @return [Array<String>]
-        def terms
-          suggestions.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
+        # Returns an array of suggestion terms for a given suggester in the response - or all terms if no suggester
+        # name is provided.
+        # @param suggester [String, Symbol, nil]
+        # @return [Array]
+        def terms(suggester: nil)
+          hash = suggester ? suggestions.slice(suggester.to_sym) : suggestions
+
+          hash.values.flatten.map { |suggestion| suggestion[JSON_TERM_FIELD] }
         end
 
-        # Returns a hash mapping each suggester name to its list of suggestion hashes.
-        # Each list contains entries with "term", "weight" and "payload" fields.
-        # @return [Hash<Array>]
+        # Simplify the suggestions data returned by Solr, keeping top-level keys corresponding to
+        # the suggester names.
+        # @return [Hash]
         def suggestions
-          return {} unless body
+          @suggestions ||= begin
+            return {} unless body
 
-          body.fetch(JSON_SUGGEST_FIELD, {}).transform_values do |suggester|
-            suggester.dig(query, JSON_SUGGESTIONS_FIELD) || []
+            body.fetch(JSON_SUGGEST_FIELD, {}).transform_values { |values|
+              values.dig(query, JSON_SUGGESTIONS_FIELD)
+            }.symbolize_keys
           end
         end
       end
