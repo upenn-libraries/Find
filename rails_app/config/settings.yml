@@ -45,6 +45,6 @@ library:
     base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
 pennlibs_feedback:
-  enabled: false
+  enabled: true
 cataloging_errors:
   email: 'fixopac@pobox.upenn.edu'
