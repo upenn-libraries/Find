@@ -350,6 +350,7 @@ en:
     help: 'Help with your library account'
     pennkey: 'Continue with PennKey'
   results:
+    alternate_title: 'Parallel Title'
     creator: 'Author/Creator'
     edition: 'Edition'
     conference: 'Conference name'
