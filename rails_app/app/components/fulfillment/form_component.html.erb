@@ -21,7 +21,7 @@
             <% elsif items.length > 1 %>
               <div class="mb-3">
                 <%= form.label :item_id, t('requests.form.item_label'), { class: 'form-label h6' } %>
-                <%= form.select(:item_id, item_labels, { include_blank: t('requests.form.item_placeholder') },
+                <%= form.select(:item_id, item_labels, {},
                                 { class: 'form-select',
                                   data: { action: 'change->item-select#selectChanged' } }) %>
               </div>
@@ -43,9 +43,11 @@
                 <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
               </template>
 
-              <%= turbo_frame_tag 'options_frame', data: { item_select_target: 'optionsFrame',
-                                                           controller: 'missing-frame',
-                                                           missing_frame_error_value: t('requests.form.missing_frame') } %>
+              <%= turbo_frame_tag 'options_frame',
+                                   src: fulfillment_options_path(mms_id: @mms_id, holding_id: @holding_id, item_id: items.first.id),
+                                   data: { item_select_target: 'optionsFrame',
+                                           controller: 'missing-frame',
+                                           missing_frame_error_value: t('requests.form.missing_frame') } %>
             <% end %>
           <% end %>
         </div>

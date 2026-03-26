@@ -13,6 +13,16 @@ export default class extends Controller {
         }
     }
 
+
+    // Begin loading the fulfillment form frame on hover so the Alma API calls are already
+    // in flight by the time the user clicks and the <details> opens.
+    prefetch() {
+        const frame = this.element.querySelector('turbo-frame');
+        if (frame && frame.getAttribute('loading') === 'lazy') {
+            frame.setAttribute('loading', 'eager');
+        }
+    }
+
     // Add a 'request=true' query param to the current url and follow the link. This allows us to open the options
     // frame on redirect after signing in.
     addRequestQueryToUrl(event) {
