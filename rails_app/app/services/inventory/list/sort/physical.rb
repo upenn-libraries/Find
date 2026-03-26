@@ -22,14 +22,17 @@ module Inventory
             # previous elements were equal during a comparison.
 
             # When sorting physical inventory, we:
-            # favor inventory deemed available, that is inventory with an available status or inventory requestable
-            # through aeon
-            [(Put.first if unsorted_inventory.available?),
+            # favor freely-circulating available holdings above all others
+            [(Put.first if unsorted_inventory.circulating_available?),
+             # favor aeon-requestable holdings second — they are "available" but not freely circulating
+             (Put.first if unsorted_inventory.aeon_requestable?),
              # do not favor unavailable inventory, in practice this means ranking a 'check_holdings' status higher than
              # 'unavailable'
              (Put.last if unsorted_inventory.unavailable?),
              # Downrank inventory in some configured library locations due to circulation complexity
              (Put.last if unsorted_inventory.undesirable_library?),
+             # favor inventory in configured priority library locations (e.g. Van Pelt) to win tiebreaks
+             (Put.first if unsorted_inventory.priority_library?),
              # favor inventory with 'higher' priority, we use an ascending order here because a lower number
              # denotes a higher priority
              Put.asc(unsorted_inventory.priority),
@@ -57,9 +60,18 @@ module Inventory
             @data = data
           end
 
+          # Returns true for holdings that are available and freely circulating (not Aeon-restricted).
+          # These rank above aeon-requestable holdings in the sort.
           # @return [Boolean]
-          def available?
-            (data['availability'] == Inventory::Constants::AVAILABLE) || aeon_requestable?
+          def circulating_available?
+            (data['availability'] == Inventory::Constants::AVAILABLE) && !aeon_location?
+          end
+
+          # Returns true for Aeon-location holdings that are not unavailable.
+          # These rank below freely-circulating available holdings but above check_holdings/unavailable.
+          # @return [Boolean]
+          def aeon_requestable?
+            aeon_location? && (data['availability'] != Inventory::Constants::UNAVAILABLE)
           end
 
           # @return [Boolean]
@@ -75,6 +87,13 @@ module Inventory
           # @return [Boolean]
           def undesirable_library?
             data['library_code'].in? Settings.library.undesirable_holdings
+          end
+
+          # Returns true for holdings in configured priority libraries (e.g. Van Pelt).
+          # Used to break ties between available holdings of equal rank.
+          # @return [Boolean]
+          def priority_library?
+            data['library_code'].in? Settings.library.priority_holdings
           end
 
           # @return[Integer]
@@ -100,11 +119,6 @@ module Inventory
           # @return [Boolean]
           def aeon_location?
             data['location_code'].in?(Mappings.aeon_locations)
-          end
-
-          # @return [Boolean]
-          def aeon_requestable?
-            aeon_location? && (data['availability'] != Inventory::Constants::UNAVAILABLE)
           end
 
           # @return [Boolean]

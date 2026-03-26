@@ -41,6 +41,8 @@ library:
   undesirable_holdings:
     - 'AthLib'
     - 'HSPLib'
+  priority_holdings:
+    - 'VanPeltLib'
   info:
     base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
