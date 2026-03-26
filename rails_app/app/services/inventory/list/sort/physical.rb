@@ -10,41 +10,36 @@ module Inventory
         # values for each of these criteria. Inventory are sorted by comparing these arrays.
         # @return [Array]
         def sort
-          inventory_data.sort_by do |data|
-            unsorted_inventory = UnsortedInventory.new(data)
-            # The Put DSL wraps each criteria value in a Put::PutThings object for convenience. We can use Put.first
-            # and Put.last to convert boolean values into values that can be compared. On the other hand,
-            # Put.asc  and Put.desc handles values that have their own comparators such as Integers or Strings.
+          inventory_data.sort_by { |data| sort_key_for(UnsortedInventory.new(data)) }
+        end
 
-            # When Ruby compares arrays, each element in the array is compared to the other corresponding element,
-            # and as soon as a comparison returns an unequal result, that result is returned for the entire
-            # array comparison. This means we can think of each value in the array as a kind of 'tiebreaker' if the
-            # previous elements were equal during a comparison.
+        private
 
-            # When sorting physical inventory, we:
-            # favor freely-circulating available holdings above all others
-            [(Put.first if unsorted_inventory.circulating_available?),
-             # favor aeon-requestable holdings second — they are "available" but not freely circulating
-             (Put.first if unsorted_inventory.aeon_requestable?),
-             # do not favor unavailable inventory, in practice this means ranking a 'check_holdings' status higher than
-             # 'unavailable'
-             (Put.last if unsorted_inventory.unavailable?),
-             # Downrank inventory in some configured library locations due to circulation complexity
-             (Put.last if unsorted_inventory.undesirable_library?),
-             # favor inventory in configured priority library locations (e.g. Van Pelt) to win tiebreaks
-             (Put.first if unsorted_inventory.priority_library?),
-             # favor inventory with 'higher' priority, we use an ascending order here because a lower number
-             # denotes a higher priority
-             Put.asc(unsorted_inventory.priority),
-             # favor items with more desirable locations - we lower the score of offsite locations and greatly lower the
-             # score of unavailable locations, all other locations receive the same base score
-             Put.desc(unsorted_inventory.location_score),
-             # favor inventory with more available items
-             Put.desc(unsorted_inventory.available_items),
-             # favor items with coverage statement. This is the ultimate 'tie-breaker' if all the previous values
-             # are equal
-             (Put.first if unsorted_inventory.coverage_statement?)]
-          end
+        # Returns an array of sort criteria for a given holding. Ruby compares arrays element-by-element,
+        # so each value acts as a tiebreaker when all previous values are equal.
+        # The Put DSL wraps criteria in comparable objects: Put.first/last for booleans,
+        # Put.asc/desc for values with natural ordering.
+        # @param inv [UnsortedInventory]
+        # @return [Array]
+        def sort_key_for(inv)
+          # favor freely-circulating available holdings above all others
+          [(Put.first if inv.circulating_available?),
+           # favor aeon-requestable holdings second — available but not freely circulating
+           (Put.first if inv.aeon_requestable?),
+           # do not favor unavailable inventory ('check_holdings' ranks above 'unavailable')
+           (Put.last if inv.unavailable?),
+           # downrank inventory in configured library locations due to circulation complexity
+           (Put.last if inv.undesirable_library?),
+           # favor inventory in configured priority library locations (e.g. Van Pelt) to win tiebreaks
+           (Put.first if inv.priority_library?),
+           # favor inventory with 'higher' priority (lower number = higher priority)
+           Put.asc(inv.priority),
+           # favor more desirable locations (offsite and unavailable locations receive lower scores)
+           Put.desc(inv.location_score),
+           # favor inventory with more available items
+           Put.desc(inv.available_items),
+           # favor items with a coverage statement — ultimate tiebreaker
+           (Put.first if inv.coverage_statement?)]
         end
 
         # Provides a convenient interface to retrieve sorting criteria for unsorted data
