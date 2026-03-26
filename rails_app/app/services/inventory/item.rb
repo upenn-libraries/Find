@@ -97,6 +97,17 @@ module Inventory
       physical_material_type['value']
     end
 
+    # Returns true if the item can be borrowed based on policy and material type.
+    # Used to sort the best candidate to the top of the fulfillment form dropdown.
+    # Intentionally excludes checks requiring additional Alma API calls (e.g. request_options_list)
+    # since this is evaluated at sort time.
+    # @return [Boolean]
+    def loanable?
+      !policy.in?(non_loanable_policies) &&
+        !material_type_value.in?(Settings.fulfillment.ill.excluded_material_types) &&
+        user_due_date_policy != Settings.fulfillment.due_date_policy.not_loanable
+    end
+
     # Return an array of available request options as reported by Alma
     # @param user_id [String, nil] send a user_id for non-Guest results
     # @return [Array]
@@ -107,6 +118,17 @@ module Inventory
     end
 
     private
+
+    # Policies that indicate an item cannot be borrowed
+    # @return [Array<String>]
+    def non_loanable_policies
+      [
+        Settings.fulfillment.policies.non_circ,
+        Settings.fulfillment.policies.in_house,
+        Settings.fulfillment.policies.reference,
+        Settings.fulfillment.policies.reserve
+      ]
+    end
 
     # Get an ItemRequestOptions object from the Alma gem, raising an exception if theres a problem getting an mms id
     # @param user_id [nil, String] send a user_id for non-Guest results

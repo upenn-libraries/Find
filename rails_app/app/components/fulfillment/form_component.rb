@@ -20,12 +20,12 @@ module Fulfillment
 
     private
 
-    # Sort items so in-place (available) items appear first in the dropdown,
-    # ensuring the pre-selected first item is requestable.
+    # Sort items so the best candidate appears first in the dropdown.
+    # In-place items rank above unavailable ones; loanable items break ties.
     # @param items [Array<Inventory::Item>]
     # @return [Array<Inventory::Item>]
     def sort_items(items)
-      items.sort_by { |item| item.in_place? ? 0 : 1 }
+      items.sort_by { |item| [item.in_place? ? 0 : 1, item.loanable? ? 0 : 1] }
     end
   end
 end
