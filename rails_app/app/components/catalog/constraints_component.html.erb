@@ -1,4 +1,6 @@
-<%# Copied from Blacklight v9.0 %>
+<%# Overrides template from Blacklight v9.0 to add an "All" constraint pill
+    when no search constraints are present, and an edit search button linking
+    to the advanced search form. %>
 
 <%= content_tag @tag || :div, id: @id, class: @classes do %>
   <%= constraints_heading %>
