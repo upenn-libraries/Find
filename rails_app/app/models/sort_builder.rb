@@ -7,7 +7,7 @@ class SortBuilder
 
   ONLINE_ACCESS = PennMARC::Access::ONLINE
   PHYSICAL_ACCESS = PennMARC::Access::AT_THE_LIBRARY
-  JOURNAL_PERIODICAL = PennMARC::Format::JOURNAL_PERIODICAL
+  JOURNAL_PERIODICAL = "'#{PennMARC::Format::JOURNAL_PERIODICAL}'".freeze
 
   # @param blacklight_params [Hash]
   def initialize(blacklight_params)
