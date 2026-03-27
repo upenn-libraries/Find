@@ -97,6 +97,12 @@ module Inventory
       physical_material_type['value']
     end
 
+    # Returns true if the item's due date policy explicitly prohibits borrowing.
+    # @return [Boolean]
+    def due_date_restricted?
+      user_due_date_policy == Settings.fulfillment.due_date_policy.not_loanable
+    end
+
     # Returns true if the item can be borrowed based on policy and material type.
     # Used to sort the best candidate to the top of the fulfillment form dropdown.
     # Intentionally excludes checks requiring additional Alma API calls (e.g. request_options_list)
@@ -105,7 +111,7 @@ module Inventory
     def loanable?
       !policy.in?(non_loanable_policies) &&
         !material_type_value.in?(Settings.fulfillment.ill.excluded_material_types) &&
-        user_due_date_policy != Settings.fulfillment.due_date_policy.not_loanable
+        !due_date_restricted?
     end
 
     # Return an array of available request options as reported by Alma

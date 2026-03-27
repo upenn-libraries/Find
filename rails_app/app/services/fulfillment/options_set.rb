@@ -110,7 +110,7 @@ module Fulfillment
 
     # @return [Boolean]
     def not_loanable?
-      item.user_due_date_policy == Settings.fulfillment.due_date_policy.not_loanable
+      item.due_date_restricted?
     end
 
     # Consider an Item non-circulating IF:
