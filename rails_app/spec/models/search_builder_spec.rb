@@ -64,7 +64,7 @@ describe SearchBuilder do
         expect(SortBuilder).to have_received(:new).with(blacklight_params)
       end
 
-      it 'sets the induced sort' do
+      it 'sets the sort to a browse sort value' do
         expect(solr_params[:sort]).to eq 'mock_browse_sort'
       end
     end
@@ -80,7 +80,7 @@ describe SearchBuilder do
     context 'with a basic search term provided' do
       let(:solr_params) { { q: 'term' } }
 
-      it 'sets the sort value to relevance sort' do
+      it 'sets the sort value to a relevance sort value' do
         expect(solr_params[:sort]).to eq 'mock_relevance_sort'
       end
     end
@@ -88,7 +88,7 @@ describe SearchBuilder do
     context 'with no search term and an "Online" Access facet applied' do
       let(:blacklight_params) { { f: { access_facet: [PennMARC::Access::ONLINE] } } }
 
-      it 'sets the has-electronic-holdings sort dimension first' do
+      it 'sets the sort value to a browse sort value' do
         expect(solr_params[:sort]).to eq 'mock_browse_sort'
       end
     end
@@ -96,7 +96,7 @@ describe SearchBuilder do
     context 'with no search term and an "At the Library" Access facet applied' do
       let(:blacklight_params) { { f: { access_facet: [PennMARC::Access::AT_THE_LIBRARY] } } }
 
-      it 'sets the has-physical-holdings sort dimension first' do
+      it 'sets the sort to a browse sort value' do
         expect(solr_params[:sort]).to eq('mock_browse_sort')
       end
     end

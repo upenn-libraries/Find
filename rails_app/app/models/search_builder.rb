@@ -13,12 +13,10 @@ class SearchBuilder < Blacklight::SearchBuilder
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
   PROBLEMATIC_SOLR_BOOLEAN_OPERATORS = %w[+ \- !].freeze
 
-  # Applies an alternative sort order when a blank query is set to be sorted by score. This would require more work
+  # Applies an alternative sort order when a query is set to be sorted by score. This would require more work
   # to work with Advanced Search params (and may not be desirable), so we exit early in those cases to avoid munging
-  # sort values. The modified sort prioritizes records as follows:
-  #  - Records with inventory matching the access facet (if provided)
-  #  - Encoding level rank (ascending)
-  #  - Date last updated (descending)
+  # sort values.
+  # @see SortBuilder for sort implementation
   # @param solr_p [Hash] the current solr parameters
   def massage_sort(solr_p)
     return if advanced_search_params_present?(solr_p) || non_relevance_sort_parameter_present?(solr_p)

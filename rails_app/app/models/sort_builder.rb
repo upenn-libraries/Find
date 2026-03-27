@@ -74,7 +74,7 @@ class SortBuilder
       "#{sort_value} desc"
     end
 
-    # Builds a solr min() function that caps a field's value at a given limit.
+    # Builds a solr min() function that caps a field's value at a given limit
     # When limit is 1, this results in a boolean presence for the given field (i.e. 0 or 1).
     # @param field [Symbol, String] a numeric solr field
     # @param limit [Integer] the maximum score to allow
@@ -83,7 +83,7 @@ class SortBuilder
       "min(#{field},#{limit})"
     end
 
-    # Builds a solr sum() expression that combines a term-based boost with a minimum field count score (capped at 10).
+    # Builds a solr sum() expression that combines a term-based boost with a minimum field count score (capped at 10)
     # Used to elevate records that match a given term (e.g. "Journal/Periodical" format_facet) while
     # still rewarding records with higher inventory counts.
     # @param field [Symbol, String] a numeric solr field to use as base score
@@ -101,7 +101,7 @@ class SortBuilder
       "sum(#{boost},#{count})"
     end
 
-    # Builds a solr max() expression that returns the higher of two scores.
+    # Builds a solr max() expression that returns the higher of two scores
     # @param first_score [String] a solr sort expression
     # @param second_score [String] a solr sort expression
     # @return [String] solr max() function
@@ -202,8 +202,8 @@ class SortBuilder
       SolrSort.boosted_field_score(field: :physical_holding_count_i, term_boost: PHYSICAL_JOURNAL_BOOST)
     end
 
-    # Electronic inventory are boosted by 3 for Journal/Periodical records.
-    # Additionally, electronic inventory get a baseline boost (term_default_weight: 1) even for non-journal formats.
+    # Electronic inventory are boosted by 3 for Journal/Periodical records
+    # Additionally, electronic inventory get a baseline boost (term_default_weight: 1) even for non-journal formats
     # This reflects a preference for online availability in default search results
     # @return [String]
     def journal_boosted_electronic_inventory_score
