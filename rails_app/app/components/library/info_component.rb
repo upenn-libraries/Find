@@ -3,7 +3,7 @@
 module Library
   # Component rendering the location information for a library.
   class InfoComponent < ViewComponent::Base
-    attr_reader :info, :code
+    attr_reader :info, :code, :location_code, :call_number, :floor_plan
 
     delegate(
       *%i[
@@ -18,14 +18,16 @@ module Library
         phone
         email
         library_url
-        floor_plans
       ],
       to: :info
     )
 
     # @param library_code [String]
-    def initialize(library_code:)
+    def initialize(library_code:, call_number: nil, location_code: nil)
       @code = library_code
+      @call_number = call_number
+      @location_code = location_code
+
       @info = Library::Info::Request.find(library_code: code)
     end
 
@@ -39,6 +41,15 @@ module Library
       address_content&.map do |line|
         content_tag :p, line
       end
+    end
+
+    # @return [String, nil]
+    def floor_plan_link
+      Library::Info::FloorPlanUrl.new(
+        library_info: info,
+        call_number: call_number,
+        location_code: location_code
+      ).get
     end
 
     private
@@ -70,11 +81,6 @@ module Library
       return if address1.blank?
 
       [address1, address2, city_state_zip].compact
-    end
-
-    # @return [String, nil]
-    def floor_plans_url
-      floor_plans&.dig('building', 'url')
     end
   end
 end
