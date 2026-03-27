@@ -124,6 +124,24 @@ describe Fulfillment::Endpoint::Illiad::Params do
     end
   end
 
+  describe '#issn' do
+    context 'when issn is provided in isxn field' do
+      let(:open_params) { { 'isxn' => '0000-0000' } }
+
+      it 'returns issn' do
+        expect(params.issn).to eql '0000-0000'
+      end
+    end
+
+    context 'when isbn is provided in isxn field' do
+      let(:open_params) { { 'isxn' => '978-0-439-02348-1' } }
+
+      it 'returns issn' do
+        expect(params.issn).to eql '978-0-439-02348-1'
+      end
+    end
+  end
+
   describe '#pages' do
     context 'when start and end page numbers provided in different values' do
       let(:open_params) { { 'spage' => '1', 'epage' => '25' } }

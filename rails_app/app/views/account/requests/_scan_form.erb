@@ -47,6 +47,10 @@
         <%= text_field_tag :pages, @request.params.pages, class: 'form-control mt-1', maxlength: '30' %>
       </div>
       <div class="form-group mt-3">
+        <%= label_tag :isxn, t('account.ill.form.scan.isxn') %>
+        <%= text_field_tag :isxn, (@request.params.issn || @request.params.isbn), class: 'form-control mt-1' %>
+      </div>
+      <div class="form-group mt-3">
         <%= label_tag :comments do %>
           <%= t('account.ill.form.scan.comments.label') %>
           <br>
