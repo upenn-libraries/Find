@@ -5,6 +5,7 @@ require 'rails_helper'
 describe SearchBuilder do
   subject(:search_builder) { described_class.new(scope).with(blacklight_params) }
 
+  # user params coming from the search state
   let(:blacklight_params) { {} }
   # solr friendly processed params passed down the search builder processor chain
   let(:solr_params) { {} }
@@ -12,38 +13,38 @@ describe SearchBuilder do
   let(:scope) { instance_double CatalogController, blacklight_config: blacklight_config, action_name: 'index' }
 
   describe '#handle_standalone_boolean_operators' do
-    before { search_builder.handle_standalone_boolean_operators(blacklight_params) }
+    before { search_builder.handle_standalone_boolean_operators(solr_params) }
 
     context 'with standalone operators' do
-      let(:blacklight_params) { { q: 'cookies + milk' } }
+      let(:solr_params) { { q: 'cookies + milk' } }
 
       it 'escapes a single operator' do
-        expect(blacklight_params[:q]).to include '\+ milk'
+        expect(solr_params[:q]).to include '\+ milk'
       end
     end
 
     context 'with standalone operators and whitespace' do
-      let(:blacklight_params) { { q: 'cookies   -  milk' } }
+      let(:solr_params) { { q: 'cookies   -  milk' } }
 
       it 'escapes a single operator regardless of the amount of surrounding whitespace' do
-        expect(blacklight_params[:q]).to include '\-  milk'
+        expect(solr_params[:q]).to include '\-  milk'
       end
     end
 
     context 'with multiple standalone operators' do
-      let(:blacklight_params) { { q: 'cookies + milk ! hooray' } }
+      let(:solr_params) { { q: 'cookies + milk ! hooray' } }
 
       it 'escapes multiple operators' do
-        expect(blacklight_params[:q]).to include '\+ milk \!'
+        expect(solr_params[:q]).to include '\+ milk \!'
       end
     end
 
     context 'with proper operator syntax' do
       let(:search_term) { 'hypothalamus +cat -dog' }
-      let(:blacklight_params) { { q: search_term } }
+      let(:solr_params) { { q: search_term } }
 
       it 'does not escape the operator characters' do
-        expect(blacklight_params[:q]).to eq search_term
+        expect(solr_params[:q]).to eq search_term
       end
     end
   end
