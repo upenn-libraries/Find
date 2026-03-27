@@ -41,6 +41,13 @@ module Fulfillment
       (options & Options::Restricted.all).any?
     end
 
+    # Returns true if the item is likely loanable based on local data only, without Alma API calls.
+    # Used to sort the best candidate to the top of the fulfillment form item dropdown.
+    # @return [Boolean]
+    def likely_loanable?
+      !non_loanable_policy? && !item_material_type_excluded_from_ill? && !not_loanable?
+    end
+
     private
 
     # @return [Array<Symbol>]
@@ -110,7 +117,7 @@ module Fulfillment
 
     # @return [Boolean]
     def not_loanable?
-      item.due_date_restricted?
+      item.user_due_date_policy == Settings.fulfillment.due_date_policy.not_loanable
     end
 
     # Consider an Item non-circulating IF:
@@ -131,6 +138,17 @@ module Fulfillment
     # @return [Boolean]
     def only_accessible_onsite?
       non_circulating_item? && item.in_place? && !item_allows_digitization?
+    end
+
+    # Returns true if the item's circulation policy precludes borrowing.
+    # @return [Boolean]
+    def non_loanable_policy?
+      item.policy.in?([
+        Settings.fulfillment.policies.non_circ,
+        Settings.fulfillment.policies.in_house,
+        Settings.fulfillment.policies.reference,
+        Settings.fulfillment.policies.reserve
+      ])
     end
 
     # Some item types don't make sense in an ILL requesting context (laptops, for example)

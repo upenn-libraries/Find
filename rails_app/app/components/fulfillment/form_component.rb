@@ -21,11 +21,14 @@ module Fulfillment
     private
 
     # Sort items so the best candidate appears first in the dropdown.
-    # In-place items rank above unavailable ones; loanable items break ties.
+    # In-place items rank above unavailable ones; likely-loanable items break ties.
     # @param items [Array<Inventory::Item>]
     # @return [Array<Inventory::Item>]
     def sort_items(items)
-      items.sort_by { |item| [item.in_place? ? 0 : 1, item.loanable? ? 0 : 1] }
+      items.sort_by do |item|
+        options = Fulfillment::OptionsSet.new(item: item, user: @user)
+        [item.in_place? ? 0 : 1, options.likely_loanable? ? 0 : 1]
+      end
     end
   end
 end
