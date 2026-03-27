@@ -30,6 +30,18 @@ describe Inventory::List::Sort::Physical do
       end
     end
 
+    context 'when there is a reference/reserve location holding among other holdings' do
+      let(:data) do
+        [{ 'availability' => Inventory::Constants::UNAVAILABLE },
+         { 'availability' => Inventory::Constants::AVAILABLE, 'location_name' => 'Reference Collection' },
+         { 'availability' => Inventory::Constants::CHECK_HOLDINGS }]
+      end
+
+      it 'sorts the reference location below check_holdings but above unavailable' do
+        expect(sorted_data).to eq [data.third, data.second, data.first]
+      end
+    end
+
     context 'when there are holdings in undesirable library locations' do
       let(:data) do
         [{ 'availability' => Inventory::Constants::AVAILABLE,
@@ -95,6 +107,32 @@ describe Inventory::List::Sort::Physical do
 
       it 'sorts based on coverage statement' do
         expect(sorted_data).to eq [data.second, data.first]
+      end
+    end
+  end
+end
+
+describe Inventory::List::Sort::Physical::UnsortedInventory do
+  describe '#availability_tier' do
+    subject(:tier) { described_class.new(data).availability_tier }
+
+    context 'with a reference location that is available' do
+      let(:data) { { 'availability' => Inventory::Constants::AVAILABLE, 'location_name' => 'Reference Collection' } }
+
+      it { is_expected.to eq 1 }
+    end
+
+    context 'with a reserve location that is available' do
+      let(:data) { { 'availability' => Inventory::Constants::AVAILABLE, 'location_name' => 'Course Reserves' } }
+
+      it { is_expected.to eq 1 }
+    end
+
+    context 'with a reference location that is also unavailable' do
+      let(:data) { { 'availability' => Inventory::Constants::UNAVAILABLE, 'location_name' => 'Reference Collection' } }
+
+      it 'returns 0 — unavailable takes precedence over reference' do
+        is_expected.to eq 0
       end
     end
   end

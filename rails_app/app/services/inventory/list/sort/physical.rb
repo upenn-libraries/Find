@@ -61,10 +61,10 @@ module Inventory
           #   0 — unavailable
           # @return [Integer]
           def availability_tier
-            return 4 if circulating_available?
-            return 3 if aeon_requestable?
             return 0 if unavailable?
             return 1 if reference_or_reserve_location?
+            return 4 if circulating_available?
+            return 3 if aeon_requestable?
 
             2
           end
