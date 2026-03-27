@@ -8,8 +8,8 @@ describe SortBuilder::DefaultSort do
       sort = <<~SOLR_SORT.delete("\n")
         score desc,
         publication_date_sort desc,
-        max(sum(if(termfreq(format_facet,Journal/Periodical),2,0),min(physical_holding_count_i,10)),
-        sum(if(termfreq(format_facet,Journal/Periodical),3,1),min(electronic_portfolio_count_i,10))) desc,
+        max(sum(if(termfreq(format_facet,'Journal/Periodical'),2,0),min(physical_holding_count_i,10)),
+        sum(if(termfreq(format_facet,'Journal/Periodical'),3,1),min(electronic_portfolio_count_i,10))) desc,
         updated_date_sort desc
       SOLR_SORT
       expect(default_sort.enriched_relevance_sort).to eq sort

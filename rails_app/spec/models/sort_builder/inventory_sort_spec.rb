@@ -9,7 +9,7 @@ describe SortBuilder::InventorySort do
     sort = <<~SOLR_SORT.delete("\n")
       score desc,
       publication_date_sort desc,
-      sum(if(termfreq(format_facet,Journal/Periodical),1,0),min(electronic_portfolio_count_i,10)) desc,
+      sum(if(termfreq(format_facet,'Journal/Periodical'),1,0),min(electronic_portfolio_count_i,10)) desc,
       min(physical_holding_count_i,10) desc,
       updated_date_sort desc
     SOLR_SORT
