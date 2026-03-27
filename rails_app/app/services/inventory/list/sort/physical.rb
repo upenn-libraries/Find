@@ -22,24 +22,21 @@ module Inventory
         # @param inv [UnsortedInventory]
         # @return [Array]
         def sort_key_for(inv)
-          # favor freely-circulating available holdings above all others
-          [(Put.first if inv.circulating_available?),
-           # favor aeon-requestable holdings second — available but not freely circulating
-           (Put.first if inv.aeon_requestable?),
-           # do not favor unavailable inventory ('check_holdings' ranks above 'unavailable')
-           (Put.last if inv.unavailable?),
-           # downrank inventory in configured library locations due to circulation complexity
-           (Put.last if inv.undesirable_library?),
-           # favor inventory in configured priority library locations (e.g. Van Pelt) to win tiebreaks
-           (Put.first if inv.priority_library?),
-           # favor inventory with 'higher' priority (lower number = higher priority)
-           Put.asc(inv.priority),
-           # favor more desirable locations (offsite and unavailable locations receive lower scores)
-           Put.desc(inv.location_score),
-           # favor inventory with more available items
-           Put.desc(inv.available_items),
-           # favor items with a coverage statement — ultimate tiebreaker
-           (Put.first if inv.coverage_statement?)]
+          [ # availability_tier is a numeric score — higher tiers sort first via Put.desc
+            Put.desc(inv.availability_tier),
+            # downrank inventory in configured library locations due to circulation complexity
+            (Put.last if inv.undesirable_library?),
+            # favor inventory in configured preferred library locations (e.g. Van Pelt) to win tiebreaks
+            (Put.first if inv.preferred_library?),
+            # favor inventory with 'higher' priority (lower number = higher priority)
+            Put.asc(inv.priority),
+            # favor more desirable locations (offsite and unavailable locations receive lower scores)
+            Put.desc(inv.location_score),
+            # favor inventory with more available items
+            Put.desc(inv.available_items),
+            # favor items with a coverage statement — ultimate tiebreaker
+            (Put.first if inv.coverage_statement?)
+          ]
         end
 
         # Provides a convenient interface to retrieve sorting criteria for unsorted data
@@ -55,23 +52,21 @@ module Inventory
             @data = data
           end
 
-          # Returns true for holdings that are available and freely circulating (not Aeon-restricted).
-          # These rank above aeon-requestable holdings in the sort.
-          # @return [Boolean]
-          def circulating_available?
-            (data['availability'] == Inventory::Constants::AVAILABLE) && !aeon_location?
-          end
+          # Returns a numeric tier representing how likely a holding is to yield a loanable item.
+          # Higher values sort first. Tiers:
+          #   4 — freely circulating and available
+          #   3 — Aeon-requestable (available but not freely circulating)
+          #   2 — intermediate (e.g. check_holdings)
+          #   1 — reference or reserve location (unlikely to be loanable despite non-unavailable status)
+          #   0 — unavailable
+          # @return [Integer]
+          def availability_tier
+            return 4 if circulating_available?
+            return 3 if aeon_requestable?
+            return 0 if unavailable?
+            return 1 if reference_or_reserve_location?
 
-          # Returns true for Aeon-location holdings that are not unavailable.
-          # These rank below freely-circulating available holdings but above check_holdings/unavailable.
-          # @return [Boolean]
-          def aeon_requestable?
-            aeon_location? && (data['availability'] != Inventory::Constants::UNAVAILABLE)
-          end
-
-          # @return [Boolean]
-          def unavailable?
-            data['availability'] == Inventory::Constants::UNAVAILABLE
+            2
           end
 
           # @return [Boolean]
@@ -87,8 +82,8 @@ module Inventory
           # Returns true for holdings in configured priority libraries (e.g. Van Pelt).
           # Used to break ties between available holdings of equal rank.
           # @return [Boolean]
-          def priority_library?
-            data['library_code'].in? Settings.library.priority_holdings
+          def preferred_library?
+            data['library_code'].in? Settings.library.preferred_holdings
           end
 
           # @return[Integer]
@@ -110,6 +105,28 @@ module Inventory
           end
 
           private
+
+          # @return [Boolean]
+          def circulating_available?
+            (data['availability'] == Inventory::Constants::AVAILABLE) && !aeon_location?
+          end
+
+          # @return [Boolean]
+          def aeon_requestable?
+            aeon_location? && (data['availability'] != Inventory::Constants::UNAVAILABLE)
+          end
+
+          # @return [Boolean]
+          def unavailable?
+            data['availability'] == Inventory::Constants::UNAVAILABLE
+          end
+
+          # Returns true if the location name contains "reference" or "reserve/reserves",
+          # indicating items are unlikely to be loanable despite a non-unavailable availability status.
+          # @return [Boolean]
+          def reference_or_reserve_location?
+            data['location_name'].to_s.match?(/reference|reserves?/i)
+          end
 
           # @return [Boolean]
           def aeon_location?

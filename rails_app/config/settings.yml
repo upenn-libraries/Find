@@ -41,7 +41,7 @@ library:
   undesirable_holdings:
     - 'AthLib'
     - 'HSPLib'
-  priority_holdings:
+  preferred_holdings:
     - 'VanPeltLib'
   info:
     base_url: 'https://www.library.upenn.edu/api/v2/libraries'
