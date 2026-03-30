@@ -18,6 +18,8 @@ en:
     info:
       heading: 'Search our catalog'
       description: '<strong>The definitive place to find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      guide_cta_html: 'For search tips, %{link}.'
+      guide_link_text: 'visit our catalog guide'
       manage:
         heading: 'Manage your account'
         description: 'Create and manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'

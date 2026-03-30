@@ -3,12 +3,14 @@
 <div class="pl-margin-b-xl">
   <h1 class="page__heading"><%= t('home.info.heading') %></h1>
 
-  <p class="pl-line-length page__lede">
+  <p class="pl-line-length page__lede mb-2">
     <%= t('home.info.description').html_safe %>
   </p>
 
+  <p class="pl-line-length"><%= t('home.info.guide_cta_html', link: link_to(t('home.info.guide_link_text'), t('urls.guides.use_catalog'), target: '_blank')) %></p>
+
   <h2><%= t('home.info.manage.heading') %></h2>
-  <p class="pl-line-length">
+  <p class="pl-line-length">u
     <%= t('home.info.manage.description') %>
   </p>
 
