@@ -453,10 +453,10 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case). Add the sort: option to configure a
     # custom Blacklight url parameter value separate from the Solr sort fields.
-    config.add_sort_field SearchBuilder::RELEVANCE_SORT.join(','), label: I18n.t('sort.relevance')
+    config.add_sort_field SortBuilder.relevance_sort, label: I18n.t('sort.relevance')
     config.add_sort_field 'creator_sort asc, title_sort asc', label: I18n.t('sort.creator_asc')
     config.add_sort_field 'creator_sort desc, title_sort asc', label: I18n.t('sort.creator_desc')
-    config.add_sort_field SearchBuilder::TITLE_SORT_ASC.join(','), label: I18n.t('sort.title_asc')
+    config.add_sort_field SortBuilder.title_sort_asc, label: I18n.t('sort.title_asc')
     config.add_sort_field 'title_sort desc, publication_date_sort desc', label: I18n.t('sort.title_desc')
     config.add_sort_field 'call_number_sort asc, title_sort asc', label: I18n.t('sort.call_num_asc')
     config.add_sort_field 'call_number_sort desc, title_sort asc', label: I18n.t('sort.call_num_desc')
