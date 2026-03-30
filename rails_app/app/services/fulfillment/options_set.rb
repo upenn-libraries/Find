@@ -144,11 +144,11 @@ module Fulfillment
     # @return [Boolean]
     def non_loanable_policy?
       item.policy.in?([
-        Settings.fulfillment.policies.non_circ,
-        Settings.fulfillment.policies.in_house,
-        Settings.fulfillment.policies.reference,
-        Settings.fulfillment.policies.reserve
-      ])
+                        Settings.fulfillment.policies.non_circ,
+                        Settings.fulfillment.policies.in_house,
+                        Settings.fulfillment.policies.reference,
+                        Settings.fulfillment.policies.reserve
+                      ])
     end
 
     # Some item types don't make sense in an ILL requesting context (laptops, for example)
