@@ -125,7 +125,7 @@ module Inventory
           # indicating items are unlikely to be loanable despite a non-unavailable availability status.
           # @return [Boolean]
           def reference_or_reserve_location?
-            data['location_name'].to_s.match?(/reference|reserves?/i)
+            data['location'].to_s.match?(/reference|reserves?/i)
           end
 
           # @return [Boolean]
