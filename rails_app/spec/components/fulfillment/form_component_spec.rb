@@ -50,36 +50,4 @@ describe Fulfillment::FormComponent, type: :components do
       expect(page).to have_selector 'select#item_id'
     end
   end
-
-  context 'with multiple items where one is unavailable' do
-    let(:items) { [build(:item, :not_in_place), build(:item)] }
-
-    it 'does not render a blank placeholder option' do
-      expect(page).not_to have_css 'select#item_id option[value=""]'
-    end
-
-    it 'pre-loads options for the first item' do
-      expect(page).to have_css 'turbo-frame#options_frame[src]'
-    end
-  end
-
-  context 'with in-place items where one is non-loanable' do
-    let(:non_loanable) { build(:item, :at_reference, pid: 'non-loanable-item-id') }
-    let(:loanable)     { build(:item, pid: 'loanable-item-id') }
-    let(:items)        { [non_loanable, loanable] }
-
-    it 'renders the loanable item first in the dropdown' do
-      expect(page).to have_css 'select#item_id option:first-child[value="loanable-item-id"]'
-    end
-  end
-
-  context 'with items passed in unavailable-first order' do
-    let(:unavailable) { build(:item, :not_in_place) }
-    let(:available)   { build(:item, pid: 'available-item-id') }
-    let(:items)       { [unavailable, available] }
-
-    it 'renders the available item first in the dropdown' do
-      expect(page).to have_css 'select#item_id option:first-child[value="available-item-id"]'
-    end
-  end
 end

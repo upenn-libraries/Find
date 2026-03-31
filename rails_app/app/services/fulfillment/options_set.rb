@@ -140,17 +140,6 @@ module Fulfillment
       non_circulating_item? && item.in_place? && !item_allows_digitization?
     end
 
-    # Returns true if the item's circulation policy precludes borrowing.
-    # @return [Boolean]
-    def non_loanable_policy?
-      item.policy.in?([
-                        Settings.fulfillment.policies.non_circ,
-                        Settings.fulfillment.policies.in_house,
-                        Settings.fulfillment.policies.reference,
-                        Settings.fulfillment.policies.reserve
-                      ])
-    end
-
     # Some item types don't make sense in an ILL requesting context (laptops, for example)
     # @return [Boolean]
     def item_material_type_excluded_from_ill?
