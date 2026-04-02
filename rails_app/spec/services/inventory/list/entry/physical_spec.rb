@@ -157,4 +157,18 @@ describe Inventory::List::Entry::Physical do
       expect(entry).not_to be_resource_link
     end
   end
+
+  describe '#displayable?' do
+    it 'returns true' do
+      expect(entry.displayable?).to be true
+    end
+
+    context 'when in a resource sharing library' do
+      let(:entry) { create(:physical_entry, library_code: Settings.fulfillment.restricted_libraries.res_share) }
+
+      it 'returns false' do
+        expect(entry.displayable?).to be false
+      end
+    end
+  end
 end
