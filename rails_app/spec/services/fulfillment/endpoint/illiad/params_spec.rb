@@ -136,7 +136,7 @@ describe Fulfillment::Endpoint::Illiad::Params do
     context 'when isbn is provided in isxn field' do
       let(:open_params) { { 'isxn' => '978-0-439-02348-1' } }
 
-      it 'returns issn' do
+      it 'returns isbn' do
         expect(params.issn).to eql '978-0-439-02348-1'
       end
     end
