@@ -135,6 +135,7 @@ en:
           volume: 'Volume'
           issue: 'Issue'
           pages: 'Pages'
+          isxn: 'ISSN/ISBN'
           comments:
             label: 'Comments'
             help_text: 'Describe the item further to help us find it.'
