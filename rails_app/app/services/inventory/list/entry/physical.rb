@@ -97,6 +97,11 @@ module Inventory
           true
         end
 
+        # @return [Boolean]
+        def displayable?
+          !location.resource_sharing_library?
+        end
+
         private
 
         # Check if the first item is requested - this is implemented for a specific condition:
