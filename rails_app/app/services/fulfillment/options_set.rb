@@ -41,6 +41,13 @@ module Fulfillment
       (options & Options::Restricted.all).any?
     end
 
+    # Returns true if the item is likely loanable based on local data only, without Alma API calls.
+    # Used to sort the best candidate to the top of the fulfillment form item dropdown.
+    # @return [Boolean]
+    def likely_loanable?
+      !non_loanable_policy? && !item_material_type_excluded_from_ill? && !not_loanable?
+    end
+
     private
 
     # @return [Array<Symbol>]
