@@ -2,6 +2,11 @@
 * Find fulfillment form styles
 */
 
+:is(.fulfillment) .btn-success:hover {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+}
+
 .fulfillment-form .form-select {
   border-color: var(--pl-color-fg-subtle);
 }
