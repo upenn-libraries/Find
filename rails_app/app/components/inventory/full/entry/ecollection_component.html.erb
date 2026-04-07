@@ -3,7 +3,7 @@
   <span class="inventory-item__policy"><%= entry.status %></span>
 </p>
 
-<a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
+<%= render Inventory::Full::Entry::OnlineCtaComponent.new(href: entry.href) %>
 
 <% if entry.public_note %>
   <p class="inventory-item__notes"><%= entry.public_note %></p>
