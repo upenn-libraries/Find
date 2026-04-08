@@ -98,16 +98,14 @@ module Library
       #
       # @return [Array<Hash>]
       def floors_data
-        return [] unless floor_plan_data['floors']&.any?
-
-        floor_plan_data['floors']
+        @floors_data ||= Array(floor_plan_data&.dig('floors'))
       end
 
       # Returns the floor plans portion of the data returned from the Libraries API for this library.
       #
       # @return [Hash, nil]
       def floor_plan_data
-        library_info.data[:floor_plans]
+        @floor_plan_data ||= library_info.floor_plans
       end
     end
   end
