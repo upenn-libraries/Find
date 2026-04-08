@@ -6,19 +6,19 @@ module Library
     class FloorPlanUrl
       attr_reader :library_info, :call_number, :location_code
 
-      # Returns the url for an item's floor's floor plan, or building if no specific floor can be
-      # found, or nil if a floor plan could not be connected.
-      #
       # @param library_info [Library::Info::Request]
       # @param call_number [String, nil]
       # @param location_code [String, nil]
-      # @return [String, nil]
       def initialize(library_info:, call_number:, location_code: nil)
         @library_info = library_info
         @call_number = call_number
         @location_code = location_code
       end
 
+      # Returns the url for an item's floor's floor plan, or building if no specific floor can be
+      # found, or nil if a floor plan could not be connected.
+      #
+      # @return [String, nil]
       def get
         return unless floor_plan_data
 
