@@ -100,11 +100,11 @@ module Library
         data[:url]
       end
 
-      # Array of floor plan data for library with name and
+      # Hash of floor plan data for library with name and
       # url for building landing page (under "building") and
       # for each floor within (under "floors")
       #
-      # @return [Array<String>]
+      # @return [Hash, nil]
       def floor_plans
         data[:floor_plans]
       end
