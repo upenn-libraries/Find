@@ -37,7 +37,41 @@ FactoryBot.define do
       add_attribute(:hours_url) { 'https://www.library.upenn.edu/lib/hours' }
       add_attribute(:libcal_id) { 123 }
       add_attribute(:thumbnail) { 'https://www.library.upenn.edu/sites/default/files/styles/libraries_api_thumbnail/public/2022-08/lippincott-brian.jpg?itok=20zXWmft' }
-      add_attribute(:floor_plans) { { 'building' => { 'url' => 'https://www.library.upenn.edu/floor-plans/lib' } } }
+      add_attribute(:floor_plans) do
+        { 'building' => { 'name' => 'Floor Plans: Van Pelt-Dietrich Library Center',
+                          'url' => 'https://www.library.upenn.edu/floor-plans/van-pelt' },
+          'floors' => [
+            { 'name' => 'Fourth Floor',
+              'url' => 'https://www.library.upenn.edu/floor-plans/van-pelt/fourth-floor',
+              'alma_location_codes' => %w[
+                musicsem
+                musisemres
+                musinwbk
+                musicrese
+                musictech
+                musiclist
+              ],
+              'loc_classification_ranges' => [
+                {
+                  'start' => 'M',
+                  'end' => ''
+                },
+                {
+                  'start' => 'NX',
+                  'end' => 'P'
+                },
+                {
+                  'start' => 'P',
+                  'end' => ''
+                },
+                {
+                  'start' => 'Q',
+                  'end' => 'Z'
+                }
+              ] }
+
+          ] }
+      end
     end
 
     trait :without_links do
