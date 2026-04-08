@@ -27,13 +27,6 @@ module Library
 
       private
 
-      # Returns the specific floor plan floor URL for the item.
-      #
-      # @return [String, nil]
-      def floor_url
-        floor_url_by_location_code || floor_url_by_call_number
-      end
-
       # Returns the floor plan landing page URL for the library's building.
       #
       # @return [String, nil]
