@@ -82,7 +82,7 @@ module Library
       # @param range [Hash] hash of 'start' and (optional) 'end' classification code values
       # @return [Boolean]
       def call_number_in_range?(range)
-        if range['end'].nil?
+        if range['end'].blank?
           call_number.start_with?(range['start'])
         else
           Range.new(range['start'], range['end']).cover?(call_number)
