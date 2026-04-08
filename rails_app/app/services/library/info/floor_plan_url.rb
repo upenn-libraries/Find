@@ -38,6 +38,8 @@ module Library
       #
       # @return [String, nil]
       def floor_url_by_location_code
+        return unless location_code
+
         matched_floor, _codes = location_codes_by_floor.find do |_url, codes|
           codes&.include?(location_code)
         end
@@ -58,6 +60,8 @@ module Library
       #
       # @return [String, nil]
       def floor_url_by_call_number
+        return unless call_number
+
         matched_floor, _ranges = call_number_ranges_by_floor.find do |_url, ranges|
           ranges.any? { |range| call_number_in_range?(range) }
         end
