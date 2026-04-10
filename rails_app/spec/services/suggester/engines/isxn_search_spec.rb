@@ -1,0 +1,66 @@
+# frozen_string_literal: true
+
+describe Suggester::Engines::IsxnSearch do
+  include_context 'with cleared engine registry'
+  let(:query) { 'dawn of formosa 9573291088' }
+  let(:engine) { described_class.new(query: query, context: {}) }
+
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
+    end
+  end
+
+  describe '.completions_weight' do
+    it 'returns expected base completions weight' do
+      expect(described_class.completions_weight).to eq described_class::BASE_COMPLETIONS_WEIGHT
+    end
+  end
+
+  describe '.suggest?' do
+    context 'with a query including an isxn' do
+      it 'returns true' do
+        expect(described_class.suggest?(query)).to be true
+      end
+    end
+
+    context 'without a query including an isxn' do
+      it 'returns false' do
+        expect(described_class.suggest?('9573abcd291088')).to be false
+      end
+    end
+
+    context 'with a query including an mms id' do
+      it 'returns false' do
+        expect(described_class.suggest?('9923274333503681')).to be false
+      end
+    end
+  end
+
+  describe '#actions' do
+    let(:actions) { engine.actions }
+
+    it 'returns a Suggestions instance' do
+      expect(actions).to be_a(Suggester::Suggestions::Suggestion)
+    end
+
+    it 'contains expected entries' do
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(label: "<b>#{engine.isxn}</b> in ISBN/ISSN",
+                                    url: "https://find.library.upenn.edu?q=#{engine.isxn}&search_field=isxn_search")
+      )
+    end
+  end
+
+  describe '#completions' do
+    let(:completions) { engine.completions }
+
+    it 'returns a Suggestions instance' do
+      expect(completions).to be_a(Suggester::Suggestions::Suggestion)
+    end
+
+    it 'contains no entries' do
+      expect(completions).to have_attributes(entries: [])
+    end
+  end
+end
