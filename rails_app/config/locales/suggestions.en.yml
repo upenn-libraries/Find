@@ -7,6 +7,8 @@ en:
         label: "<b>%{query}</b> in Articles+"
       online_access_search:
         label: "<b>%{query}</b> in Online Resources"
+      internal_identifier:
+        label: "View record <b>%{query}</b>"
     urls:
       external_services:
         proxy: "https://proxy.library.upenn.edu/login?url=%{url}"
