@@ -26,7 +26,7 @@ module Hathi
 
     # @return [String]
     def header
-      full_viewability? ? I18n.t('inventory.hathi.header.full') : I18n.t('inventory.hathi.header.limited')
+      I18n.t(viewability, scope: 'inventory.hathi.header')
     end
 
     # Render the component only if the record exists in HathiTrust, as indicated by the presence of the 'records' hash
@@ -39,9 +39,14 @@ module Hathi
 
     private
 
-    # @return [Boolean]
-    def full_viewability?
-      hathi_record['items'].any? { |item| item['usRightsString'] == FULL_VIEW }
+    # @return [Symbol]
+    def viewability
+      rights = hathi_record['items'].map { |item| item['usRightsString'] }
+
+      return :full if rights.all?(FULL_VIEW)
+      return :partial if rights.any?(FULL_VIEW)
+
+      :limited
     end
   end
 end

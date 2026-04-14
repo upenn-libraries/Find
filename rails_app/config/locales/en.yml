@@ -301,6 +301,7 @@ en:
     hathi:
       header:
         full: 'Full viewability at'
+        partial: 'More viewability at'
         limited: 'Limited (search-only) viewability at'
       main: 'HathiTrust Digital Library'
       missing_frame: "We're having trouble getting the HathiTrust link for this record. Please try again."
