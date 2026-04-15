@@ -31,16 +31,6 @@ module Suggester
         super
       end
 
-      # Return actions that link to specific "best bet" records from the suggester for best bet data
-      def actions
-        Suggestions::Suggestion.new(
-          entries: actions_from(solr_service.suggestions[actions_suggester_name]),
-          engine_weight: self.class.actions_weight
-        )
-      rescue Suggestions::Solr::Service::Error => _e
-        super
-      end
-
       private
 
       # Parse suggester data from Solr service response, including encoded JSON payload. Skip over any suggestions

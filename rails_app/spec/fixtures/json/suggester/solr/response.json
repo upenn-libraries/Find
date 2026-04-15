@@ -15,13 +15,13 @@
         ]
       }
     },
-    "notable_title": {
+    "author": {
       "art": {
         "numFound": 1,
         "suggestions":[{
-          "term":"journal of <b>art</b>",
+          "term":"<b>Art</b> Rosenbaum",
           "weight": 1,
-          "payload":"{\"disp\": \"The Journal of Art (online)\", \"id\": \"9977045594503681\"}"
+          "payload":""
         }
         ]
       }

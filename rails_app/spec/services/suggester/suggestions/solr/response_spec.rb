@@ -10,7 +10,7 @@ describe Suggester::Suggestions::Solr::Response do
   describe '#terms' do
     it 'returns all the terms when no suggester name is provided' do
       expect(response.terms).to eq ['The dental <b>art</b> : practical treatise on dental surgery',
-                                    'journal of <b>art</b>']
+                                    '<b>Art</b> Rosenbaum']
     end
 
     it 'returns only terms from a provided suggester name' do
@@ -20,7 +20,7 @@ describe Suggester::Suggestions::Solr::Response do
 
   describe '#suggestions' do
     let(:fixture_name) { 'response' }
-    let(:fixture_suggesters) { %i[title notable_title] }
+    let(:fixture_suggesters) { %i[title author] }
 
     it 'returns the hash containing expected suggester keys' do
       expect(response.suggestions.keys).to eq fixture_suggesters
