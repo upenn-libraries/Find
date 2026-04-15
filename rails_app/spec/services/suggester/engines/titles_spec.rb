@@ -41,15 +41,6 @@ describe Suggester::Engines::Titles do
     end
   end
 
-  describe '#actions' do
-    let(:actions) { engine.actions }
-
-    before do
-      stub_solr_suggestions_request(query_params: { "suggest.q": query },
-                                    response_body: json_fixture(fixture, 'suggester/solr'))
-    end
-  end
-
   describe '#completions' do
     context 'with a single suggester response' do
       before do
