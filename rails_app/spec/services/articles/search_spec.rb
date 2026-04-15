@@ -130,7 +130,7 @@ describe Articles::Search do
     summon_url = I18n.t('urls.external_services.summon')
 
     it 'starts with expected base url with proxy' do
-      expect(described_class.summon_url(query: search.query_string))
+      expect(described_class.summon_url(query: search.query_string, proxy: true))
         .to start_with(I18n.t('urls.external_services.proxy', url: summon_url).to_s)
     end
 
