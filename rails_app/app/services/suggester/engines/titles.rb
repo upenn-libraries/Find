@@ -7,7 +7,6 @@ module Suggester
       Registry.register(self)
 
       BASE_COMPLETIONS_WEIGHT = 10
-      BASE_ACTIONS_WEIGHT = 25
       MINIMUM_CHARS_REQUIRED = 3
 
       def self.suggest?(query)
@@ -33,27 +32,8 @@ module Suggester
 
       private
 
-      # Parse suggester data from Solr service response, including encoded JSON payload. Skip over any suggestions
-      # with malformed JSON payloads. Return Action objects.
-      # @param suggestions [Array<Hash>]
-      # @return [Array<Suggester::Engines::Engine::Action>]
-      def actions_from(suggestions)
-        suggestions.filter_map do |suggestion|
-          parsed_payload = JSON.parse suggestion['payload']
-          Action.new label: parsed_payload['disp'],
-                     url: Rails.application.routes.url_helpers.solr_document_path(id: parsed_payload['id'])
-        rescue JSON::ParserError => _e
-          Honeybadger.notify "Malformed JSON in suggester payload: #{suggestion['payload']}"
-          next
-        end
-      end
-
       def completions_suggester_name
         Settings.suggester.digital_catalog.solr.suggesters.title.completions.to_sym
-      end
-
-      def actions_suggester_name
-        Settings.suggester.digital_catalog.solr.suggesters.title.actions.to_sym
       end
 
       # @param query [String]

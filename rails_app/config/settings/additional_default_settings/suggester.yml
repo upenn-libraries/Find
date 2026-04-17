@@ -6,7 +6,6 @@ suggester:
       url: "<%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>/suggest"
       suggesters:
         title:
-          query_word_limit: 20
           completions: 'title'
   summon:
     host: "upenn.summon.serialssolutions.com"
