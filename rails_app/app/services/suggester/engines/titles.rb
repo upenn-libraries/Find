@@ -48,14 +48,15 @@ module Suggester
       # @param suggestions [Array<Hash>]
       # @return [Array<Suggester::Engines::Engine::Action>]
       def actions_from(suggestions)
-        suggestions.filter_map do |suggestion|
-          parsed_payload = JSON.parse suggestion['payload']
-          Action.new label: parsed_payload['disp'],
-                     url: Rails.application.routes.url_helpers.solr_document_path(id: parsed_payload['id'])
-        rescue JSON::ParserError => _e
-          Honeybadger.notify "Malformed JSON in suggester payload: #{suggestion['payload']}"
-          next
-        end
+        # suggestions.filter_map do |suggestion|
+        #   parsed_payload = JSON.parse suggestion['payload']
+        #   Action.new label: parsed_payload['disp'],
+        #              url: Rails.application.routes.url_helpers.solr_document_path(id: parsed_payload['id'])
+        # rescue JSON::ParserError => _e
+        #   Honeybadger.notify "Malformed JSON in suggester payload: #{suggestion['payload']}"
+        #   next
+        # end
+        []
       end
 
       def completions_suggester_name
