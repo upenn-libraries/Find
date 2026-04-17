@@ -154,6 +154,7 @@ detectors:
       - AdditionalResults::Sources::SummonComponent#publication_title_display
       - Catalog::HeaderComponent#joined_alert_values
       - Hathi::HathiComponent#link
+      - Hathi::HathiComponent#viewability
       - AlertWebhooksController#find_and_update_alert
       - CitationExport#format_apa_publisher
       - CitationExport#format_authors
