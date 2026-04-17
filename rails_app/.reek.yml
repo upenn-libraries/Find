@@ -300,7 +300,6 @@ detectors:
       - Shelf::Listing#filter_and_sort
       - Shelf::Service#ils_holds
       - Shelf::Service#ils_loans
-      - Suggester::Engines::Titles#actions_from
       - SolrTools#self.clear_collection
       - SolrTools#self.load_data
   UncommunicativeMethodName:
