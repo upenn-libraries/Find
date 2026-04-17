@@ -70,6 +70,12 @@ export default class extends Controller {
     }, 300);
   }
 
+  appendSuggestionParam(rawUrl) {
+    const url = new URL(rawUrl, window.location.href);
+    url.searchParams.set('suggest', 'true');
+    return url.toString();
+  }
+
   /**
    * Sets up listener for suggestion activation events.
    * Navigates to action URLs or submits the search form when a suggestion is selected.
@@ -85,10 +91,14 @@ export default class extends Controller {
 
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
-        window.location.href = actionUrl;
+        window.location.href = this.appendSuggestionParam(actionUrl);
       } else {
         event.preventDefault();
-        this.element.querySelector("form.fi-search-box").submit();
+        const form = this.element.querySelector('form.fi-search-box');
+        if (!form) return;
+
+        form.action = this.appendSuggestionParam(form.action);
+        form.submit();
       }
     });
   }
