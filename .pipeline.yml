@@ -346,7 +346,7 @@ reek_app_test:
       when: never
     - exists:
         - rails_app/.reek.yml
-  allow_failure: true
+  allow_failure: false
   tags:
     - build
 # -- End - test dev image
