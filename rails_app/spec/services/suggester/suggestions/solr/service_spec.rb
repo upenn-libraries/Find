@@ -17,18 +17,6 @@ describe Suggester::Suggestions::Solr::Service do
           "suggest.build": true, "suggest.count": 1 }
       )
     end
-
-    context 'with a very long query' do
-      let(:query) do
-        Array.new(Settings.suggester.digital_catalog.solr.suggesters.title.query_word_limit + 1, 'word').join(' ')
-      end
-
-      it 'truncates the query value' do
-        expect(service.params[:'suggest.q']).to eq(
-          Array.new(Settings.suggester.digital_catalog.solr.suggesters.title.query_word_limit, 'word').join(' ')
-        )
-      end
-    end
   end
 
   describe '#response' do

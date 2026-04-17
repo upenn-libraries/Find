@@ -30,18 +30,12 @@ module Suggester
 
         private
 
-        # Truncate the query to avoid issues with Solr
-        # @return [String, nil]
-        def truncated_query
-          query&.truncate_words(Settings.suggester.digital_catalog.solr.suggesters.title.query_word_limit, omission: '')
-        end
-
         # @return [Hash]
         def build_params(dictionary:, count:, build:)
           {
             "suggest.dictionary": dictionary, # TODO: could be multiple dictionaries - but we don't HAVE to include this
             "suggest.build": build,
-            "suggest.q": truncated_query,
+            "suggest.q": query,
             "suggest.count": count
           }.compact_blank
         end
