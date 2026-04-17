@@ -83,11 +83,11 @@ export default class extends Controller {
       const selectedOption = listbox.children[index];
       if (!selectedOption) return;
 
+      this.input.preventDefault();
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
         window.location.href = actionUrl;
       } else {
-        event.preventDefault();
         this.element.querySelector("form.fi-search-box").submit();
       }
     });
