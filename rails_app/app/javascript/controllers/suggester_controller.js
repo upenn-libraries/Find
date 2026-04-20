@@ -85,6 +85,7 @@ export default class extends Controller {
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
+      event.preventDefault();
       const { index } = event.detail;
       const listbox = this.autocomplete.querySelector('ol[role="listbox"]');
       if (!listbox) return;
@@ -99,7 +100,7 @@ export default class extends Controller {
         const form = this.element.querySelector("form.fi-search-box");
         if (!form) return;
 
-        form.action = this.appendSuggestionParam(this.form.action);
+        form.action = this.appendSuggestionParam(form.action);
       }
     });
   }
