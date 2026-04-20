@@ -82,6 +82,7 @@ export default class extends Controller {
   /**
    * Sets up listener for suggestion activation events. Navigates to action URLs
    * or updates action for a form submit when suggestions are selected.
+   * Disables turbo to avoid double navigation issues.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
@@ -93,13 +94,14 @@ export default class extends Controller {
       const selectedOption = listbox.children[index];
       if (!selectedOption) return;
 
+      const form = this.element.querySelector("form.fi-search-box");
+      if (!form) return;
+
+      form.setAttribute('data-turbo', 'false');
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
         window.location.href = this.appendSuggestionParam(actionUrl);
       } else {
-        const form = this.element.querySelector("form.fi-search-box");
-        if (!form) return;
-
         form.action = this.appendSuggestionParam(form.action);
       }
     });
