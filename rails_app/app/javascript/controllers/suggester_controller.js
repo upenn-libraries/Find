@@ -78,11 +78,23 @@ export default class extends Controller {
     url.searchParams.set("suggest", "true");
     return url.toString();
   }
-  
+
+  /**
+   * Appends a hidden field to the form to indicate that suggestions are being
+   * requested
+   */
+  appendSuggestionHiddenField(form) {
+    const hiddenField = document.createElement("input");
+    hiddenField.type = "hidden";
+    hiddenField.name = "suggest";
+    hiddenField.value = "true";
+    form.appendChild(hiddenField);
+  }
+
   /**
    * Sets up listener for suggestion activation events. Navigates to action URLs
-   * or updates action for a form submit when suggestions are selected.
-   * Disables turbo to avoid double navigation issues.
+   * if an action is selected. Appends 'request' param or hidden field. When
+   * selecting a completion, the default form submission behavior is used.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
@@ -102,7 +114,7 @@ export default class extends Controller {
       if (actionUrl) {
         window.location.href = this.appendSuggestionParam(actionUrl);
       } else {
-        form.action = this.appendSuggestionParam(form.action);
+        this.appendSuggestionHiddenField(form);
       }
     });
   }
