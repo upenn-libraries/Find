@@ -7,7 +7,6 @@ suggester:
       suggesters:
         title:
           completions: 'title'
-          actions: 'notable_title'
   summon:
     host: "upenn.summon.serialssolutions.com"
     path: "/search"
