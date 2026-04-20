@@ -70,21 +70,22 @@ export default class extends Controller {
     }, 300);
   }
 
-    /**
-     * Appends suggest param to query URLs
-     */
+  /**
+   * Appends suggest param to query URLs
+   */
   appendSuggestionParam(rawUrl) {
     const url = new URL(rawUrl, window.location.href);
     url.searchParams.set("suggest", "true");
     return url.toString();
   }
-
+  
   /**
-   * Sets up listener for suggestion activation events.
-   * Navigates to action URLs or submits the search form when a suggestion is selected.
+   * Sets up listener for suggestion activation events. Navigates to action URLs
+   * or updates action for a form submit when suggestions are selected.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
+      event.preventDefault();
       const { index } = event.detail;
       const listbox = this.autocomplete.querySelector('ol[role="listbox"]');
       if (!listbox) return;
@@ -92,7 +93,6 @@ export default class extends Controller {
       const selectedOption = listbox.children[index];
       if (!selectedOption) return;
 
-      this.input.preventDefault();
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
         window.location.href = this.appendSuggestionParam(actionUrl);
@@ -101,7 +101,6 @@ export default class extends Controller {
         if (!form) return;
 
         form.action = this.appendSuggestionParam(form.action);
-        form.submit();
       }
     });
   }
