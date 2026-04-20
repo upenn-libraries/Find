@@ -28,6 +28,7 @@ module Suggester
           entries: [
             Action.new(label: I18n.t('suggestions.engines.isxn_search.label', query: @isxn),
                        url: URI::HTTPS.build(host: Settings.suggester.digital_catalog.host,
+                                             port: Settings.suggester.digital_catalog.port,
                                              query: { search_field: 'isxn_search', q: @isxn }
                                                       .to_query).to_s)
           ],

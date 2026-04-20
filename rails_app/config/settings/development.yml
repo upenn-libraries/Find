@@ -9,6 +9,7 @@ discover:
 suggester:
   enabled: true
   digital_catalog:
-    host: 'find.library.upenn.edu'
+    host: 'localhost'
+    port: 3000
     solr:
       url: <%= "#{ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development')}/suggest" %>

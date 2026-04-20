@@ -23,7 +23,7 @@ module Suggester
 
       # @return [String]
       def url
-        URI::HTTPS.build(host: Settings.suggester.digital_catalog.host,
+        URI::HTTPS.build(host: Settings.suggester.digital_catalog.host, port: Settings.suggester.digital_catalog.port,
                          query: { search_field: 'title_search', q: query }.to_query).to_s
       end
     end
