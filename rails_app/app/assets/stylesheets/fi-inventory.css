@@ -290,3 +290,24 @@ a.inventory-item--hathitrust {
     height: 100%;
   }
 }
+
+.inventory-item__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+  text-decoration-thickness: 1px;
+
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+}
+
+.inventory-item__cta svg {
+  max-width: 1rem;
+  max-height: 1rem;
+}
+
+.inventory-item__cta:hover {
+  text-decoration-thickness: 2px;
+}

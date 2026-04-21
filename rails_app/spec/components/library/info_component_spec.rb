@@ -125,6 +125,27 @@ describe Library::InfoComponent, type: :components do
     end
   end
 
+  describe 'library floor plans display' do
+    context 'when a library floor plans url is available' do
+      include_context 'with a successful Library Info request', :with_all_info
+
+      it 'renders a link to the library building\'s floor plans landing page' do
+        expect(rendered).to have_link(
+          I18n.t('library.info.floor_plans'),
+          href: api_response[:floor_plans]['building']['url']
+        )
+      end
+    end
+
+    context 'when no library floor plans url is available' do
+      include_context 'with a successful Library Info request'
+
+      it 'does not render a link to the library building\'s floor plans landing page' do
+        expect(rendered).not_to have_selector('.library-floor-plans')
+      end
+    end
+  end
+
   context 'when no library information is available' do
     include_context 'with a failed Library Info request'
 

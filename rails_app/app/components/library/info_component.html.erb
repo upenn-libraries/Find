@@ -44,6 +44,15 @@
         </li>
       <% end %>
 
+      <% if floor_plans_url %>
+        <li class="library-floor-plans">
+          <i class="bi bi-stack"></i>
+          <div>
+            <%= link_to t('library.info.floor_plans'), floor_plans_url %>
+          </div>
+        </li>
+      <% end %>
+
       <% if library_url %>
         <li class="library-url">
           <div>

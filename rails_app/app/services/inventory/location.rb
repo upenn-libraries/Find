@@ -76,6 +76,13 @@ module Inventory
       Settings.locations.aeon_location_map[library_code]
     end
 
+    # Returns true if material is in resource sharing library.
+    #
+    # @return [Boolean]
+    def resource_sharing_library?
+      library_code == Settings.fulfillment.restricted_libraries.res_share
+    end
+
     private
 
     # Location may have an overridden location name that doesn't reflect the location values in the availability data.

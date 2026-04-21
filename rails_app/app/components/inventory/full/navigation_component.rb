@@ -18,7 +18,11 @@ module Inventory
       # @param entry [Inventory::Entry]
       # @return [Boolean]
       def active?(entry)
-        @selected_id == entry.id
+        if @selected_id.blank?
+          entry == @inventory.first
+        else
+          @selected_id == entry.id
+        end
       end
 
       # Classes to use in rendering the inventory entry element

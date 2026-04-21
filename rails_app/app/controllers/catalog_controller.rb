@@ -38,9 +38,9 @@ class CatalogController < ApplicationController
     # solr path which will be added to solr base url before the other solr params.
     config.solr_path = 'select'
     config.document_solr_path = 'get'
-    config.json_solr_path = 'advanced'
+    config.json_solr_path = 'select'
 
-    # items to show per page, each number in the array represent another option to choose from.
+    # items to show per page, each number in the array represents another option to choose from.
     config.per_page = [10, 25, 50, 100]
 
     # default number of facet values to show before "more" link
@@ -457,10 +457,10 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case). Add the sort: option to configure a
     # custom Blacklight url parameter value separate from the Solr sort fields.
-    config.add_sort_field SearchBuilder::RELEVANCE_SORT.join(','), label: I18n.t('sort.relevance')
+    config.add_sort_field SortBuilder.relevance_sort, label: I18n.t('sort.relevance')
     config.add_sort_field 'creator_sort asc, title_sort asc', label: I18n.t('sort.creator_asc')
     config.add_sort_field 'creator_sort desc, title_sort asc', label: I18n.t('sort.creator_desc')
-    config.add_sort_field SearchBuilder::TITLE_SORT_ASC.join(','), label: I18n.t('sort.title_asc')
+    config.add_sort_field SortBuilder.title_sort_asc, label: I18n.t('sort.title_asc')
     config.add_sort_field 'title_sort desc, publication_date_sort desc', label: I18n.t('sort.title_desc')
     config.add_sort_field 'call_number_sort asc, title_sort asc', label: I18n.t('sort.call_num_asc')
     config.add_sort_field 'call_number_sort desc, title_sort asc', label: I18n.t('sort.call_num_desc')

@@ -18,7 +18,7 @@ describe 'Catalog Show Page' do
     end
 
     it 'still shows any resource link holdings' do
-      expect(page).to have_link 'Connect to resource', href: 'http://hdl.library.upenn.edu/1017/126017'
+      expect(page).to have_link 'View online', href: 'http://hdl.library.upenn.edu/1017/126017'
     end
   end
 

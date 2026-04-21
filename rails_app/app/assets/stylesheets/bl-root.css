@@ -24,6 +24,11 @@ form {
   --bs-border-color: var(--pl-color-fg-subtle);
 }
 
+pennlibs-feedback {
+  margin-top: var(--pl-space-l);
+}
+
+pennlibs-feedback,
 pennlibs-footer {
   display: block;
 }

@@ -13,10 +13,14 @@ module Suggester
 
     # @return [Class]
     def mock_engine_with_actions
-      mock_engine_class(actions: Suggester::Suggestions::Suggestion.new(entries: [{
-                                                                          label: 'Search titles for "query"',
-                                                                          url: 'https://find.library.upenn.edu/?field=title&q=query'
-                                                                        }]), success: true)
+      mock_engine_class(
+        actions: Suggester::Suggestions::Suggestion.new(
+          entries: [
+            Suggester::Engines::Engine::Action.new(label: 'Search titles for "query"',
+                                                   url: 'https://find.library.upenn.edu/?field=title&q=query')
+          ]
+        ), success: true
+      )
     end
 
     # @return [Class]

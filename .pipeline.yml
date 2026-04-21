@@ -59,7 +59,7 @@ stages:
 
 workflow:
   rules:
-  - when: always 
+  - when: always
 
 # -- Start - build and push base image
 build_and_push_base_app_image:
@@ -329,6 +329,24 @@ rubocop_app_test:
       when: never
     - exists:
         - rails_app/.rubocop.yml
+  tags:
+    - build
+
+reek_app_test:
+  stage: test
+  image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
+  needs:
+    - amend_tmp_base_dev_images
+  before_script:
+    cd ${CI_PROJECT_DIR}/rails_app/
+  script:
+    bundle exec reek app
+  rules:
+    - if: $DISABLE_REEK == "true"
+      when: never
+    - exists:
+        - rails_app/.reek.yml
+  allow_failure: false
   tags:
     - build
 # -- End - test dev image

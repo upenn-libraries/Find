@@ -5,9 +5,9 @@ describe Suggester::Engines::OnlineAccess do
 
   let(:engine) { described_class.new(query: 'query', context: {}) }
 
-  describe '.weight' do
-    it 'returns expected base weight' do
-      expect(described_class.weight).to eq described_class::BASE_WEIGHT
+  describe '.actions_weight' do
+    it 'returns expected base actions weight' do
+      expect(described_class.actions_weight).to eq described_class::BASE_ACTIONS_WEIGHT
     end
   end
 
@@ -33,9 +33,11 @@ describe Suggester::Engines::OnlineAccess do
     end
 
     it 'returns contains expected entries' do
-      expect(actions).to have_attributes(
-        entries: [{ label: '<b>query</b> in Online Resources',
-                    url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D%5B%5D=Online&q=query' }]
+      expect(actions.entries).to contain_exactly(
+        an_object_having_attributes(
+          label: '<b>query</b> in Online Resources',
+          url: 'https://find.library.upenn.edu?f%5Baccess_facet%5D%5B%5D=Online&q=query'
+        )
       )
     end
   end

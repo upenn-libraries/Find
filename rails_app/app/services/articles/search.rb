@@ -85,7 +85,7 @@ module Articles
     class << self
       # @param query [String] the search query string from which to generate the URL
       # @return [String] URL linking to the results of the search on Articles+
-      def summon_url(query: query_string, proxy: true)
+      def summon_url(query: query_string, proxy: false)
         if proxy
           I18n.t('urls.external_services.proxy', url: "#{I18n.t('urls.external_services.summon')}?#{query}").to_s
         else

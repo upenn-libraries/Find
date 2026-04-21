@@ -8,15 +8,16 @@ describe Suggester::Engines::Collection do
 
   describe '#suggestions' do
     it 'returns actions and completions' do
-      expect(engine_collection.suggestions).to eq({ suggestions: {
-                                                    actions: [
-                                                      { label: 'Search titles for "query"',
-                                                        url: 'https://find.library.upenn.edu/?field=title&q=query' }
-                                                    ],
-                                                    completions: ['query syntax', 'query language', 'query errors',
-                                                                  'adversarial queries']
-
-                                                  } })
+      expect(engine_collection.suggestions).to match(
+        { suggestions: { actions: [
+                           an_object_having_attributes(
+                             label: 'Search titles for "query"',
+                             url: 'https://find.library.upenn.edu/?field=title&q=query'
+                           )
+                         ],
+                         completions: ['query syntax', 'query language', 'query errors',
+                                       'adversarial queries'] } }
+      )
     end
 
     context 'with unsuccessful engines' do

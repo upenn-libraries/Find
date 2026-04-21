@@ -15,18 +15,20 @@ describe Suggester::Service do
   describe '#response' do
     context 'with successful engines' do
       it 'returns expected response' do
-        expect(service.response).to eq({ status: :success,
-                                         data: {
-                                           params: { q: 'query',
-                                                     context: { foo: 'bar', 'actions_limit': 2,
-                                                                'completions_limit': 4 } },
-                                           suggestions: {
-                                             actions: [{ label: 'Search titles for "query"',
-                                                         url: 'https://find.library.upenn.edu/?field=title&q=query' }],
-                                             completions: ['query syntax', 'query language', 'query errors',
-                                                           'adversarial queries']
-                                           }
-                                         } })
+        expect(service.response).to match(
+          { status: :success,
+            data: {
+              params: { q: 'query',
+                        context: { foo: 'bar', 'actions_limit': 2,
+                                   'completions_limit': 4 } },
+              suggestions: {
+                actions: [an_object_having_attributes(label: 'Search titles for "query"',
+                                                      url: 'https://find.library.upenn.edu/?field=title&q=query')],
+                completions: ['query syntax', 'query language', 'query errors',
+                              'adversarial queries']
+              }
+            } }
+        )
       end
     end
 
