@@ -12,15 +12,17 @@ describe Suggester::Engines::ArticleSearch do
   end
 
   describe '.suggest?' do
-    context 'with a query containing more than 10 words' do
+    let(:word_count_threshold) { Settings.suggester.summon.query_words_threshold }
+
+    context 'with a query containing more than the configured word count threshold' do
       it 'returns true' do
-        expect(described_class.suggest?('oh what a coincidence this query has more than ten words')).to be true
+        expect(described_class.suggest?(Array.new(word_count_threshold + 1, 'word').join(' '))).to be true
       end
     end
 
-    context 'with a query containing less than 10 words' do
+    context 'with a query containing less than the configured word count threshold' do
       it 'returns false' do
-        expect(described_class.suggest?('query')).to be false
+        expect(described_class.suggest?(Array.new(word_count_threshold - 1, 'word').join(' '))).to be false
       end
     end
   end
