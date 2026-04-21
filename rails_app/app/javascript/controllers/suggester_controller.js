@@ -72,8 +72,30 @@ export default class extends Controller {
   }
 
   /**
+   * Appends suggest param to query URLs to indicate that the suggester was
+   * used.
+   */
+  appendSuggestionParam(rawUrl) {
+    const url = new URL(rawUrl, window.location.href);
+    url.searchParams.set("suggest", "true");
+    return url.toString();
+  }
+
+  /**
+   * Appends a hidden field to the form to indicate that the suggester was used.
+   */
+  appendSuggestionHiddenField(form) {
+    const hiddenField = document.createElement("input");
+    hiddenField.type = "hidden";
+    hiddenField.name = "suggest";
+    hiddenField.value = "true";
+    form.appendChild(hiddenField);
+  }
+
+  /**
    * Sets up listener for suggestion activation events.Navigates to action URLs
-   * or submits the search form when a suggestion is selected.
+   * or submits the search form when a suggestion is selected. In both cases, a
+   * param is added to identify the request as coming from the suggester.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
@@ -84,11 +106,15 @@ export default class extends Controller {
       const selectedOption = listbox.children[index];
       if (!selectedOption) return;
 
+      const form = this.element.querySelector("form.fi-search-box");
+      if(!form) return;
+
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
-        window.location.href = actionUrl;
+        window.location.href = this.appendSuggestionParam(actionUrl);
       } else {
-        this.element.querySelector("form.fi-search-box").submit();
+        this.appendSuggestionHiddenField(form);
+        form.submit();
       }
     });
   }
