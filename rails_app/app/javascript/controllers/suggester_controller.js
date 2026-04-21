@@ -111,6 +111,7 @@ export default class extends Controller {
 
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
+        form.addEventListener('submit', (e) => e.preventDefault(), { once: true });
         window.location.href = this.appendSuggestionParam(actionUrl);
       } else {
         this.appendSuggestionHiddenField(form);
