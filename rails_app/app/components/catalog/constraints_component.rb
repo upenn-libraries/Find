@@ -71,7 +71,7 @@ module Catalog
       clauses = @search_state.params[:clause]
       return true if clauses.blank?
 
-      clauses.values.all? { |c| c[:query].blank? }
+      clauses.values.all? { |clause| clause[:query].blank? }
     end
   end
 end
