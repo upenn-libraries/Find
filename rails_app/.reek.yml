@@ -146,10 +146,7 @@ detectors:
       - Shelf::Entry::IlsLoan#renewable?
       - Shelf::Listing#filter
       - Shelf::Listing#sorting_value
-      - Suggester::Engines::IsxnSearch#actions
-      - Suggester::Engines::OnlineAccess#actions
       - Suggester::Engines::Titles#actions_from
-      - Suggester::Engines::TitleSearch#url
   FeatureEnvy:
     exclude:
       - AdditionalResults::Sources::SummonComponent#availability_display

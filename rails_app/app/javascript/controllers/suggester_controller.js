@@ -59,46 +59,24 @@ export default class extends Controller {
    * @param {Event} event - The input event from the search field
    */
   onInput(event) {
-    clearTimeout(this.debounceTimer);
     const query = event.target.value.trim();
     if (query.length <= MIN_QUERY_LENGTH) {
       this.autocomplete.querySelector('ol[role="listbox"]')?.replaceChildren();
       return;
     }
+
+    clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
       this.fetchSuggestions(query);
     }, 300);
   }
 
   /**
-   * Appends suggest param to query URLs
-   */
-  appendSuggestionParam(rawUrl) {
-    const url = new URL(rawUrl, window.location.href);
-    url.searchParams.set("suggest", "true");
-    return url.toString();
-  }
-
-  /**
-   * Appends a hidden field to the form to indicate that suggestions are being
-   * requested
-   */
-  appendSuggestionHiddenField(form) {
-    const hiddenField = document.createElement("input");
-    hiddenField.type = "hidden";
-    hiddenField.name = "suggest";
-    hiddenField.value = "true";
-    form.appendChild(hiddenField);
-  }
-
-  /**
-   * Sets up listener for suggestion activation events. Navigates to action URLs
-   * if an action is selected. Appends 'request' param or hidden field. When
-   * selecting a completion, the default form submission behavior is used.
+   * Sets up listener for suggestion activation events.
+   * Navigates to action URLs or submits the search form when a suggestion is selected.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
-      event.preventDefault();
       const { index } = event.detail;
       const listbox = this.autocomplete.querySelector('ol[role="listbox"]');
       if (!listbox) return;
@@ -106,15 +84,9 @@ export default class extends Controller {
       const selectedOption = listbox.children[index];
       if (!selectedOption) return;
 
-      const form = this.element.querySelector("form.fi-search-box");
-      if (!form) return;
-
-      form.setAttribute('data-turbo', 'false');
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
-        window.location.href = this.appendSuggestionParam(actionUrl);
-      } else {
-        this.appendSuggestionHiddenField(form);
+        window.location.href = actionUrl;
       }
     });
   }
