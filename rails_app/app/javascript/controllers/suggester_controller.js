@@ -72,8 +72,8 @@ export default class extends Controller {
   }
 
   /**
-   * Sets up listener for suggestion activation events.
-   * Navigates to action URLs or submits the search form when a suggestion is selected.
+   * Sets up listener for suggestion activation events.Navigates to action URLs
+   * or submits the search form when a suggestion is selected.
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
@@ -87,6 +87,8 @@ export default class extends Controller {
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
         window.location.href = actionUrl;
+      } else {
+        this.element.querySelector("form.fi-search-box").submit();
       }
     });
   }
