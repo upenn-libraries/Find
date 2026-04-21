@@ -15,7 +15,6 @@ module Suggester
             Action.new(
               label: label,
               url: URI::HTTPS.build(host: Settings.suggester.digital_catalog.host,
-                                    port: Settings.suggester.digital_catalog.port,
                                     query: { "f[access_facet][]": 'Online', q: query }.to_query).to_s
             )
           ], engine_weight: self.class.actions_weight
