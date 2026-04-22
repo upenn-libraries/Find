@@ -95,7 +95,8 @@ export default class extends Controller {
   /**
    * Sets up listener for suggestion activation events.Navigates to action URLs
    * or submits the search form when a suggestion is selected. In both cases, a
-   * param is added to identify the request as coming from the suggester.
+   * param is added to identify the request as coming from the suggester, but
+   * only for upenn.edu domain links (i.e. not to summon).
    */
   observeActivation() {
     this.autocomplete.addEventListener("pl:activated", (event) => {
@@ -112,7 +113,11 @@ export default class extends Controller {
       const actionUrl = selectedOption.dataset.actionUrl;
       if (actionUrl) {
         form.addEventListener('submit', (e) => e.preventDefault(), { once: true });
-        window.location.href = this.appendSuggestionParam(actionUrl);
+        if (actionUrl.includes("summon")) {
+          window.location.href = actionUrl;
+        } else {
+          window.location.href = this.appendSuggestionParam(actionUrl);
+        }
       } else {
         this.appendSuggestionHiddenField(form);
         form.submit();
