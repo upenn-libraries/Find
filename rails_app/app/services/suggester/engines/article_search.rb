@@ -11,7 +11,7 @@ module Suggester
       # @param query [String]
       # @return [Boolean]
       def self.suggest?(query)
-        query.split.size > 10
+        query.split.size > Settings.suggester.summon.query_words_threshold
       end
 
       # @return [Suggester::Suggestions::Suggestion]

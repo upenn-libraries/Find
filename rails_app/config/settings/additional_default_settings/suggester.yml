@@ -8,6 +8,7 @@ suggester:
         title:
           completions: 'title'
   summon:
+    query_words_threshold: 7
     host: "upenn.summon.serialssolutions.com"
     path: "/search"
   proxy:
