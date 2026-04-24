@@ -4,7 +4,7 @@
   <span class="inventory-item__status"><%= entry.human_readable_status %></span>
 </p>
 
-<a href="<%= entry.href %>" class="btn btn-success"><%= entry.description %></a>
+<%= render Inventory::Full::Entry::OnlineCtaComponent.new(href: entry.href) %>
 
 <%# Lazy loading additional details %>
 <% if additional_details? %>

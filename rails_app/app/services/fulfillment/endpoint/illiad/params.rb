@@ -113,12 +113,12 @@ module Fulfillment
 
         # @return [String, nil]
         def issn
-          search('issn', 'ISSN', 'rft.issn')
+          search('issn', 'ISSN', 'rft.issn', 'isxn')
         end
 
         # @return [String, nil]
         def isbn
-          search('isbn', 'ISBN', 'rft.isbn')
+          search('isbn', 'ISBN', 'rft.isbn', 'isxn')
         end
 
         # Citation source.

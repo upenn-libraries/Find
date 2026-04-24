@@ -1,4 +1,4 @@
-pennlibs_web_version: '1.2.1-dev.1'
+pennlibs_web_version: '1.2.1'
 app_host: 'localhost:3000'
 cleanup:
   searches:
@@ -41,6 +41,8 @@ library:
   undesirable_holdings:
     - 'AthLib'
     - 'HSPLib'
+  preferred_holdings:
+    - 'VanPeltLib'
   info:
     base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>

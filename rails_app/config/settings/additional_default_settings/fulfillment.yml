@@ -21,6 +21,7 @@ fulfillment:
     archives: 'UnivArcLib'
     hsp: 'HSPLib'
     libra: 'Libra'
+    res_share: 'RES_SHARE'
   policies:
     non_circ: 'non-circ'
     reserve: 'reserve'

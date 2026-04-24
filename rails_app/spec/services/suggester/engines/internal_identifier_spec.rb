@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Suggester::Engines::ArticleSearch do
+describe Suggester::Engines::InternalIdentifier do
   include_context 'with cleared engine registry'
-
-  let(:engine) { described_class.new(query: 'query', context: {}) }
+  let(:query) { '9977568423203681' }
+  let(:engine) { described_class.new(query: query, context: {}) }
 
   describe '.actions_weight' do
     it 'returns expected base actions weight' do
@@ -11,18 +11,22 @@ describe Suggester::Engines::ArticleSearch do
     end
   end
 
-  describe '.suggest?' do
-    let(:word_count_threshold) { Settings.suggester.summon.query_words_threshold }
+  describe '.completions_weight' do
+    it 'returns expected base completions weight' do
+      expect(described_class.completions_weight).to eq described_class::BASE_COMPLETIONS_WEIGHT
+    end
+  end
 
-    context 'with a query containing more than the configured word count threshold' do
+  describe '.suggest?' do
+    context 'with a query including an mms id' do
       it 'returns true' do
-        expect(described_class.suggest?(Array.new(word_count_threshold + 1, 'word').join(' '))).to be true
+        expect(described_class.suggest?(query)).to be true
       end
     end
 
-    context 'with a query containing less than the configured word count threshold' do
+    context 'without a query including an mms id' do
       it 'returns false' do
-        expect(described_class.suggest?(Array.new(word_count_threshold - 1, 'word').join(' '))).to be false
+        expect(described_class.suggest?('997756abcd8423203681')).to be false
       end
     end
   end
@@ -34,12 +38,10 @@ describe Suggester::Engines::ArticleSearch do
       expect(actions).to be_a(Suggester::Suggestions::Suggestion)
     end
 
-    it 'returns expected entries' do
-      url = 'https://proxy.library.upenn.edu/login?url=https://upenn.summon.serialssolutions.com/search?s.q=query'
+    it 'contains expected entries' do
       expect(actions.entries).to contain_exactly(
-        an_object_having_attributes(
-          label: '<b>query</b> in Articles+', url: url
-        )
+        an_object_having_attributes(label: "View record <b>#{engine.mms_id}</b>",
+                                    url: "/catalog/#{engine.mms_id}")
       )
     end
   end

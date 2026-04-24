@@ -73,4 +73,16 @@ describe Inventory::Location do
       expect(location.hsp?).to be false
     end
   end
+
+  describe '#resource_sharing_library?' do
+    it 'returns true if item is at resource sharing library' do
+      location = create :location, :res_share
+      expect(location.resource_sharing_library?).to be true
+    end
+
+    it 'returns false if item is not at resource sharing library' do
+      location = create :location
+      expect(location.resource_sharing_library?).to be false
+    end
+  end
 end

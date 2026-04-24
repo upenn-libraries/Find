@@ -36,6 +36,11 @@ FactoryBot.define do
       location_code { 'stor' }
     end
 
+    trait :res_share do
+      library_code { Settings.fulfillment.restricted_libraries.res_share }
+      location_code { 'IN_RS_REQ' }
+    end
+
     skip_create
     initialize_with { new(**attributes) }
   end
