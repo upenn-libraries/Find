@@ -23,6 +23,8 @@ module Library
     )
 
     # @param library_code [String]
+    # @param call_number [String, nil]
+    # @param location_code [String, nil]
     def initialize(library_code:, call_number: nil, location_code: nil)
       @code = library_code
       @call_number = call_number
