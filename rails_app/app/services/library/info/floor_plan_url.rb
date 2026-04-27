@@ -15,12 +15,14 @@ module Library
         @location_code = location_code
       end
 
+      delegate :floor_plans, :floors_data, to: :library_info
+
       # Returns the url for an item's floor's floor plan, or building if no specific floor can be
       # found, or nil if a floor plan could not be connected.
       #
       # @return [String, nil]
       def get
-        return unless floor_plan_data
+        return unless floor_plans
 
         floor_url_by_location_code || floor_url_by_call_number || landing_page_url
       end
@@ -31,7 +33,7 @@ module Library
       #
       # @return [String, nil]
       def landing_page_url
-        floor_plan_data&.dig('building', 'url')
+        floor_plans&.dig('building', 'url')
       end
 
       # Returns the floor plan "floor" URL if a floor has a matching Alma location code.
@@ -89,20 +91,6 @@ module Library
         floors_data.to_h do |floor|
           [floor['url'], floor['loc_classification_ranges']]
         end
-      end
-
-      # Returns the 'floors' portion of the floor plans data returned from the Libraries API for this library.
-      #
-      # @return [Array<Hash>]
-      def floors_data
-        @floors_data ||= Array(floor_plan_data&.dig('floors'))
-      end
-
-      # Returns the floor plans portion of the data returned from the Libraries API for this library.
-      #
-      # @return [Hash, nil]
-      def floor_plan_data
-        @floor_plan_data ||= library_info.floor_plans
       end
     end
   end

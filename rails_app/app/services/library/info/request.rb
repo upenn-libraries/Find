@@ -106,7 +106,14 @@ module Library
       #
       # @return [Hash, nil]
       def floor_plans
-        data[:floor_plans]
+        @floor_plans ||= data[:floor_plans]
+      end
+
+      # Returns the 'floors' portion of the floor plans data returned from the Libraries API for this library.
+      #
+      # @return [Array<Hash>]
+      def floors_data
+        @floors_data ||= Array(floor_plans&.dig('floors'))
       end
     end
   end
