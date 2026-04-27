@@ -9,8 +9,8 @@ class LibraryController < ApplicationController
       format.html do
         render(Library::InfoComponent.new(
                  library_code: params[:library_code].to_s,
-                 call_number: params[:call_number],
-                 location_code: params[:location_code]
+                 call_number: params[:call_number].to_s,
+                 location_code: params[:location_code].to_s
                ), layout: false)
       end
     end
