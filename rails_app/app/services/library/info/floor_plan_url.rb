@@ -42,11 +42,9 @@ module Library
       def floor_url_by_location_code
         return unless location_code
 
-        matched_floor, _codes = location_codes_by_floor.find do |_url, codes|
-          codes&.include?(location_code)
-        end
+        match = location_codes_by_floor.find { |_url, codes| codes&.include?(location_code) }
 
-        matched_floor
+        match&.first
       end
 
       # Creates a hash mapping each floor's url to its Alma location codes.
@@ -64,11 +62,11 @@ module Library
       def floor_url_by_call_number
         return unless call_number
 
-        matched_floor, _ranges = call_number_ranges_by_floor.find do |_url, ranges|
+        match = call_number_ranges_by_floor.find do |_url, ranges|
           ranges.any? { |range| call_number_in_range?(range) }
         end
 
-        matched_floor
+        match&.first
       end
 
       # Checks whether the call number falls within a classification code range.
