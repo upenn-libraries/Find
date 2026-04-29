@@ -140,6 +140,7 @@ detectors:
       - Inventory::List#create_entry
       - Inventory::List#from_api
       - Inventory::List#from_marc
+      - Library::Info::FloorPlanUrl#call_number_in_range?
       - Library::Info::Request#find
       - Shelf::Entry::IllTransaction#title
       - Shelf::Entry::IlsHold#status
@@ -172,6 +173,9 @@ detectors:
       - Inventory::Item::Finders#boundwith_item
       - Inventory::Item::Finders#holding_as_item
       - Shelf::Listing#filter
+      - Library::Info::FloorPlanUrl#call_number_in_range?
+      - Library::Info::FloorPlanUrl#call_number_ranges_by_floor
+      - Library::Info::FloorPlanUrl#location_codes_by_floor
   InstanceVariableAssumption:
     exclude:
       - Catalog::AdvancedSearchFormComponent
@@ -225,6 +229,7 @@ detectors:
       - Illiad::Client#connection
       - Inventory::Holding#notes
       - Library::Info::Client#connection
+      - Library::Info::FloorPlanUrl#floor_url_by_call_number
   NilCheck:
     exclude:
       - Catalog::SearchBarComponent#autofocus
