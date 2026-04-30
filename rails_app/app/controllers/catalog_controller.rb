@@ -310,6 +310,7 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
     end
 
+    # TODO: add these back after 1.7 preview period
     # config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
     #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
     #   field.include_in_simple_select = false
