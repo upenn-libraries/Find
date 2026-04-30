@@ -306,26 +306,26 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
     end
 
-    config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${basic_qf}', pf: '${basic_pf}', pf2: '${basic_pf2}',
-                                         pf3: '${basic_pf3}' } }
-    end
+    # config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${basic_qf}', pf: '${basic_pf}', pf2: '${basic_pf2}',
+    #                                      pf3: '${basic_pf3}' } }
+    # end
 
-    config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${noanchor_qf}', pf: '${noanchor_pf}', pf2: '${noanchor_pf2}',
-                                         pf3: '${noanchor_pf3}' } }
-    end
+    # config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${noanchor_qf}', pf: '${noanchor_pf}', pf2: '${noanchor_pf2}',
+    #                                      pf3: '${noanchor_pf3}' } }
+    # end
 
-    config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${nounstem_qf}', pf: '${nounstem_pf}', pf2: '${nounstem_pf2}',
-                                         pf3: '${nounstem_pf3}' } }
-    end
+    # config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${nounstem_qf}', pf: '${nounstem_pf}', pf2: '${nounstem_pf2}',
+    #                                      pf3: '${nounstem_pf3}' } }
+    # end
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true
