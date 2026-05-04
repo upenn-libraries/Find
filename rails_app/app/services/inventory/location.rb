@@ -23,6 +23,8 @@ module Inventory
     # @param [String, nil] call_number_type
     # @return [String]
     def location_name(call_number: nil, call_number_type: nil)
+      return I18n.t('inventory.res_share_location_label') if resource_sharing_library?
+
       location_name_override(call_number, call_number_type) ||
         Mappings.locations.dig(location_code.to_sym, :display) ||
         raw_location_name

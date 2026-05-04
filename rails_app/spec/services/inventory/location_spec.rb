@@ -36,6 +36,14 @@ describe Inventory::Location do
         expect(location.location_name).to eq 'alma_location'
       end
     end
+
+    context 'when the item is in a RES_SHARE library' do
+      let(:location) { create :location, :res_share }
+
+      it 'returns our custom label' do
+        expect(location.location_name).to eq I18n.t('inventory.res_share_location_label')
+      end
+    end
   end
 
   describe '#aeon?' do
