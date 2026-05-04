@@ -15,7 +15,8 @@ describe Fulfillment::FrameComponent, type: :components do
   end
 
   it 'renders a lazy fulfillment form frame' do
-    expect(rendered).to have_selector("turbo-frame#form_frame[src*='#{fulfillment_form_path}']", visible: :all)
+    expect(rendered).to have_selector("turbo-frame#form_frame_9913203433503681_1234[src*='#{fulfillment_form_path}']",
+                                      visible: :all)
     expect(rendered).to have_text I18n.t('requests.form.heading')
   end
 end

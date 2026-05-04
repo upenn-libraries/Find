@@ -5,14 +5,21 @@ module Fulfillment
   class FrameComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
+    attr_reader :frame_id
+
     def initialize(form_params:)
       @form_params = form_params
+      @frame_id = build_frame_id
     end
 
     private
 
     def fulfillment_form_params
-      @form_params
+      @form_params.merge(frame_id: frame_id)
+    end
+
+    def build_frame_id
+      "form_frame_#{@form_params[:mms_id]}_#{@form_params[:holding_id]}"
     end
   end
 end
