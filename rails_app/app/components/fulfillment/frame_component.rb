@@ -5,22 +5,14 @@ module Fulfillment
   class FrameComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
-    def initialize(mms_id:, holding_id:, host_record_id:, location_code:)
-      @mms_id = mms_id
-      @holding_id = holding_id
-      @host_record_id = host_record_id
-      @location_code = location_code
+    def initialize(form_params:)
+      @form_params = form_params
     end
 
     private
 
     def fulfillment_form_params
-      {
-        mms_id: @mms_id,
-        holding_id: @holding_id,
-        host_record_id: @host_record_id,
-        location_code: @location_code
-      }
+      @form_params
     end
   end
 end
