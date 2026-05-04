@@ -33,6 +33,20 @@ module Inventory
           user.nil? && !entry.location.aeon? && !entry.location.archives? && !entry.location.hsp?
         end
 
+        def fulfillment_frame(&)
+          turbo_frame_tag('form_frame', **fulfillment_frame_options, &)
+        end
+
+        private
+
+        def fulfillment_frame_options
+          {
+            src: fulfillment_form_path(fulfillment_form_params),
+            loading: 'lazy',
+            data: { controller: 'missing-frame', missing_frame_error_value: t('requests.form.missing_frame') }
+          }
+        end
+
         def fulfillment_form_params
           {
             mms_id: entry.mms_id,
