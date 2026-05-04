@@ -34,7 +34,10 @@ module Inventory
         end
 
         def fulfillment_frame_component
-          Fulfillment::FrameComponent.new(form_params: fulfillment_form_params)
+          Fulfillment::FrameComponent.new(
+            form_params: fulfillment_form_params,
+            frame_id: "form_frame_#{entry.mms_id}_#{entry.id}"
+          )
         end
 
         private
