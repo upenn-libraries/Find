@@ -32,6 +32,15 @@ module Inventory
         def require_authentication_for_requesting?
           user.nil? && !entry.location.aeon? && !entry.location.archives? && !entry.location.hsp?
         end
+
+        def fulfillment_form_params
+          {
+            mms_id: entry.mms_id,
+            holding_id: entry.id,
+            host_record_id: entry.host_record_id,
+            location_code: entry.location.code
+          }
+        end
       end
     end
   end

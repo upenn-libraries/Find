@@ -35,6 +35,16 @@ describe Fulfillment::FormComponent, type: :components do
     end
   end
 
+  context 'with a single Aeon item' do
+    let(:items) { [build(:item, :aeon_location)] }
+
+    it 'shows the Aeon schedule visit option' do
+      expect(page).to have_selector '#aeon-option'
+      expect(page).to have_link I18n.t('requests.form.buttons.aeon'),
+                                href: /^#{Regexp.escape(Settings.aeon.requesting_url)}/
+    end
+  end
+
   context 'with an unavailable item' do
     let(:items) { [build(:item, :not_in_place)] }
 
@@ -48,6 +58,22 @@ describe Fulfillment::FormComponent, type: :components do
 
     it 'renders the item picker' do
       expect(page).to have_selector 'select#item_id'
+    end
+  end
+
+  context 'with multiple Aeon items' do
+    let(:items) { build_list :item, 2, :aeon_location }
+    let(:expected_options) { [I18n.t('requests.form.item_placeholder')] + item_options }
+    let(:item_options) do
+      items.map do |item|
+        label = item.select_label.first
+        label.is_a?(Array) ? label.first : label
+      end
+    end
+
+    it 'renders the item picker with a blank option before the item options' do
+      expect(page).to have_select 'item_id', options: expected_options
+      expect(page).to have_no_selector 'select#item_id option[value]:not([value=""])[selected]'
     end
   end
 end
