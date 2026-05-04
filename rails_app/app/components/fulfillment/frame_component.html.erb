@@ -1,0 +1,24 @@
+<%= turbo_frame_tag 'form_frame',
+                    src: fulfillment_form_path(fulfillment_form_params),
+                    loading: 'lazy',
+                    data: { controller: 'missing-frame', missing_frame_error_value: t('requests.form.missing_frame') } do %>
+  <div class="fulfillment__container">
+    <h2 class="fulfillment__heading h4"><%= t('requests.form.heading') %></h2>
+    <div class="row">
+      <div class="col-md-7 placeholder-glow">
+        <p class="mb-2"><span class="placeholder w-75"></span></p>
+        <ul class="list-group">
+          <li class="list-group-item placeholder-glow">
+            <span class="placeholder w-75"></span>
+            <span class="placeholder w-50"></span>
+          </li>
+          <li class="list-group-item placeholder-glow">
+            <span class="placeholder w-75"></span>
+            <span class="placeholder w-50"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button class="btn btn-success mt-3 btn-lg" disabled><%= t('requests.form.buttons.placeholder') %></button>
+  </div>
+<% end %>
