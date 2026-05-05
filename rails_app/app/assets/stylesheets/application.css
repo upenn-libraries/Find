@@ -47,6 +47,7 @@
 @import url('bs-form.css');
 @import url('bs-dropdown.css');
 @import url('bs-modal.css');
+@import url('bs-tooltip.css');
 
 /**
 * Blacklight (prefix: "bl-")

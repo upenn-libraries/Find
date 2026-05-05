@@ -1,0 +1,8 @@
+.tooltip {
+  --bs-tooltip-bg: var(--pl-color-bg-emphasis);
+  --bs-tooltip-color: var(--pl-color-fg-on-emphasis);
+  --bs-tooltip-font-size: var(--pl-font-size-s);
+  --bs-tooltip-padding-x: var(--pl-space-xs);
+  --bs-tooltip-padding-y: var(--pl-space-2xs);
+  --bs-tooltip-border-radius: var(--pl-border-radius-subtle);
+}
