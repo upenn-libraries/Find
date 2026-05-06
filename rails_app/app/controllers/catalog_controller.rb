@@ -105,6 +105,9 @@ class CatalogController < ApplicationController
     # config.show.sidebar_component = MyApp::SidebarComponent
     # config.show.embed_component = MyApp::EmbedComponent
 
+    # Enable autofocus of the search bar. See Catalog::SearchBarComponent for logic.
+    config.enable_search_bar_autofocus = true
+
     # Configure database facets
 
     # lambda to control database facets display

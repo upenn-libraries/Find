@@ -33,7 +33,7 @@
 
             <%= f.label @query_param, scoped_t('search.label'), class: 'visually-hidden' %>
             <%= f.search_field @query_param, value: @q, class: "search-q q form-control #{rounded_border_class}",
-                autofocus: @autofocus,
+                autofocus: autofocus,
                 autocomplete: 'off',
                 aria: { label: scoped_t('search.label') },
                 id: 'query_input'
