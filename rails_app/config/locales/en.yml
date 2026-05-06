@@ -294,6 +294,7 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    res_share_location_label: 'Loaned to Another Library'
     fallback_electronic_access_button_label: 'Online'
     online_cta: 'View online'
     incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'

@@ -97,11 +97,6 @@ module Inventory
           true
         end
 
-        # @return [Boolean]
-        def displayable?
-          !location.resource_sharing_library?
-        end
-
         private
 
         # Check if the first item is requested - this is implemented for a specific condition:
@@ -113,6 +108,10 @@ module Inventory
           return false unless count.to_i == 1 && first_item.present?
 
           first_item.item_data.fetch('requested', false)
+        end
+
+        def loaned_via_resource_sharing?
+          !location.resource_sharing_library?
         end
 
         # User-friendly availability status.
