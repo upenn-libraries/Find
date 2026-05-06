@@ -11,10 +11,12 @@
                inprogress: t('blacklight.search.bookmarks.inprogress')
              }) do %>
   <div class="toggle-bookmark">
-    <label class="toggle-bookmark-label" data-checkboxsubmit-target="label" <% if bookmark_icon %>tabindex="0"<% end %>>
+    <label class="toggle-bookmark-label"
+           <%= tag.attributes(data: bookmark_label_data, aria: { label: bookmark_label }) %>
+           <% if bookmark_icon %>tabindex="0"<% end %>>
       <input type="checkbox" class="toggle-bookmark-input <%= bookmark_icon ? 'visually-hidden' : '' %>" data-checkboxsubmit-target="checkbox" <%= 'checked="checked"' if bookmarked? %>>
       <%= bookmark_icon %>
-      <span class="visually-hidden" data-checkboxsubmit-target="span"><%= bookmarked? ? t('blacklight.search.bookmarks.present') : t('blacklight.search.bookmarks.absent') %></span>
+      <span class="visually-hidden" data-checkboxsubmit-target="span"><%= bookmark_label %></span>
     </label>
   </div>
 
