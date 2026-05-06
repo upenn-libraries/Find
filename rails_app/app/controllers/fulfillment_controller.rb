@@ -16,8 +16,7 @@ class FulfillmentController < ApplicationController
     render(Fulfillment::FormComponent.new(mms_id: params[:mms_id],
                                           holding_id: params[:holding_id] || items.first.holding_id,
                                           items: items,
-                                          user: current_user,
-                                          frame_id: params[:frame_id] || 'form_frame'), layout: false)
+                                          user: current_user), layout: false)
   end
 
   # Return fulfillment options based on mms id/holding id/item id. Options are dependent

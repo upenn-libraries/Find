@@ -42,11 +42,11 @@
   <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success',
               data: { controller: 'request-button', action: 'click->request-button#addRequestQueryToUrl' } %>
 <% elsif entry.location.aeon? %>
-  <%= render fulfillment_frame_component %>
+  <%= render Fulfillment::FrameComponent.new(form_params: fulfillment_form_params) %>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">
     <summary id="request_item" class="btn btn-success fulfillment__summary"
              data-action="mouseenter->request-button#prefetch"><%= t('requests.form.request_item') %></summary>
-    <%= render fulfillment_frame_component %>
+    <%= render Fulfillment::FrameComponent.new(form_params: fulfillment_form_params) %>
   </details>
 <% end %>

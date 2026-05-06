@@ -1,5 +1,5 @@
-<%= turbo_frame_tag frame_id,
-                    src: fulfillment_form_path(fulfillment_form_params),
+<%= turbo_frame_tag 'form_frame',
+                    src: fulfillment_form_path(@form_params),
                     loading: 'lazy',
                     data: { controller: 'missing-frame', missing_frame_error_value: t('requests.form.missing_frame') } do %>
   <div class="fulfillment__container">

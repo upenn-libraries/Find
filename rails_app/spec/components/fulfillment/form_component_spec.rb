@@ -41,7 +41,7 @@ describe Fulfillment::FormComponent, type: :components do
     it 'shows the Aeon schedule visit option' do
       expect(page).to have_selector '#aeon-option'
       expect(page).to have_link I18n.t('requests.form.buttons.aeon'),
-                                href: /^#{Regexp.escape(Settings.aeon.requesting_url)}/
+                                href: /#{Regexp.escape(CGI.escape(items.first.bib_data['title']))}/
     end
   end
 
