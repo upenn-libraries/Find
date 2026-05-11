@@ -7,11 +7,13 @@ class SearchBuilder < Blacklight::SearchBuilder
   self.default_processor_chain += %i[
     massage_sort
     handle_standalone_boolean_operators
+    escape_special_characters
   ]
 
   # When Solr encounters these in a query surrounded by space, they should be considered
   # literal characters and not boolean operators. Otherwise, bad or no results are returned.
   PROBLEMATIC_SOLR_BOOLEAN_OPERATORS = %w[+ \- !].freeze
+  SPECIAL_CHARACTERS_TO_ESCAPE = %w[?].freeze
 
   # Applies an alternative sort order when a query is set to be sorted by score. This would require more work
   # to work with Advanced Search params (and may not be desirable), so we exit early in those cases to avoid munging
@@ -33,6 +35,15 @@ class SearchBuilder < Blacklight::SearchBuilder
     return if solr_p[:q].blank?
 
     solr_p[:q] = solr_p[:q].gsub(/(?<=\s)([#{PROBLEMATIC_SOLR_BOOLEAN_OPERATORS.join}])(?=\s)/) { |match| "\\#{match}" }
+  end
+
+  # Escape certain Solr special characters when they are found in the user's query
+  # @param solr_p [Hash] the current solr parameters
+  def escape_special_characters(solr_p)
+    query = solr_p[:q]
+    return if query.blank?
+
+    solr_p[:q] = query.gsub(/[#{SPECIAL_CHARACTERS_TO_ESCAPE.join}]/) { |match| "\\#{match}" }
   end
 
   private
