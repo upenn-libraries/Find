@@ -10,6 +10,18 @@ module Catalog
       I18n.t(bookmarked? ? 'blacklight.search.bookmarks.present' : 'blacklight.search.bookmarks.absent')
     end
 
+    def bookmark_label_options
+      options = {
+        class: "toggle-bookmark-label",
+        data: bookmark_label_data,
+        aria: { label: bookmark_label }
+      }
+      options[:tabindex] = "0" if bookmark_icon
+      options
+    end
+
+    private
+
     def bookmark_label_data
       {
         checkboxsubmit_target: 'label',
