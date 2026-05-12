@@ -4,10 +4,6 @@
 * https://github.com/twbs/bootstrap/blob/v5.0.0/scss/_variables.scss
 */
 
-:root {
-  --pl-viewport-margins-max-width: 1280px;
-}
-
 body {
   /* Typography */
   --bs-font-sans-serif: var(--pl-font-family);
