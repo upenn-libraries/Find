@@ -8,7 +8,8 @@ Alma.configure do |config|
 
   # Default timeout is set to 5 seconds; can only provide integers
   # NOTE: during periods of Alma API service interruptions, a longer timeout can lead to a lot of
-  # waiting connections that can end up blocking new connections. As of 2/2026, this has been returned
-  # to the default.
-  # config.timeout = 10
+  # waiting connections that can end up blocking new connections.
+  # TODO: we need to find a better way to ensure long-running calls don't time out (e.g. bulk
+  #       renewals), while avoiding service disruptions during API downtime or slowness.
+  config.timeout = 10
 end
