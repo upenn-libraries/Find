@@ -9,7 +9,7 @@ describe Catalog::BookmarkComponent, type: :components do
   context 'when the document is not bookmarked' do
     let(:checked) { false }
 
-    it 'renders the bookmark control with absent lable' do
+    it 'renders the bookmark control with absent label' do
       expect(bookmark_label['data-bs-title']).to eq(I18n.t('blacklight.search.bookmarks.absent'))
     end
   end
@@ -17,7 +17,7 @@ describe Catalog::BookmarkComponent, type: :components do
   context 'when the document is bookmarked' do
     let(:checked) { true }
 
-    it 'renders the bookmark control with present lable' do
+    it 'renders the bookmark control with present label' do
       expect(bookmark_label['data-bs-title']).to eq(I18n.t('blacklight.search.bookmarks.present'))
     end
   end
