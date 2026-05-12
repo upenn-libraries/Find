@@ -2,6 +2,7 @@
 
 describe Shelf::Service do
   include Illiad::ApiMocks::Request
+  include Alma::ApiMocks::User
 
   let(:user_id) { 'test_user' }
   let(:shelf) { described_class.new(user_id) }
@@ -88,17 +89,19 @@ describe Shelf::Service do
   describe '#renew_loan' do
     let(:loan_id) { '123456' }
 
+    before do
+      stub_alma_user_renew_loan_success(user_id: user_id, loan_id: loan_id, response_body: build(:alma_loan, :renewed))
+    end
+
     context 'when successful' do
-      it 'calls renew_loan' do
-        allow(Alma::User).to receive(:renew_loan)
-        shelf.renew_loan(loan_id)
-        expect(Alma::User).to have_received(:renew_loan).with({ user_id: user_id, loan_id: loan_id })
+      it 'returns an alma renewal response' do
+        expect(shelf.renew_loan(loan_id)).to be_a Alma::RenewalResponse
       end
     end
 
     context 'when unsuccessful' do
       before do
-        allow(Alma::User).to receive(:renew_loan).with({ user_id: user_id, loan_id: loan_id }).and_raise(StandardError)
+        allow(Alma::Net).to receive(:post).and_raise(StandardError)
       end
 
       it 'raises Shelf::Service::AlmaRequestError' do
