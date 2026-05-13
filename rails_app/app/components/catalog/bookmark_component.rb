@@ -12,11 +12,11 @@ module Catalog
 
     def bookmark_label_options
       options = {
-        class: "toggle-bookmark-label",
+        class: 'toggle-bookmark-label',
         data: bookmark_label_data,
         aria: { label: bookmark_label }
       }
-      options[:tabindex] = "0" if bookmark_icon
+      options[:tabindex] = '0' if bookmark_icon
       options
     end
 
