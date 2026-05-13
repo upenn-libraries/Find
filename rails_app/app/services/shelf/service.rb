@@ -17,6 +17,7 @@ module Shelf
     DUE_DATE = :due_date
     SORTS = [LAST_UPDATED_AT, TITLE, DUE_DATE].freeze
     ORDERS = [ASCENDING, DESCENDING].freeze
+    RENEW_LOAN_TIMEOUT = 10
 
     attr_reader :user_id
 
@@ -64,7 +65,11 @@ module Shelf
     # @raise [Shelf::Service::AlmaRequestError] when there was an unexpected issue with request
     # @return [Alma::RenewalResponse] when request returns expected success or failure response
     def renew_loan(loan_id)
-      Alma::User.renew_loan({ user_id: user_id, loan_id: loan_id })
+      response = Alma::Net.post("#{Alma::User.users_base_path}/#{user_id}/loans/#{loan_id}",
+                                query: { op: 'renew' },
+                                headers: Alma::User.headers,
+                                timeout: RENEW_LOAN_TIMEOUT)
+      Alma::RenewalResponse.new(response)
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
