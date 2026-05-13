@@ -391,6 +391,7 @@ detectors:
       - CleanupGuestUsersJob#perform
       - CleanupSearchesJob#perform
       - Discover::ParseArtCollectionJob#perform
+      - SearchBuilder#escape_special_characters
       - SearchBuilder#handle_standalone_boolean_operators
       - SortBuilder::DefaultSort#browse_sort
       - Discover::Source#connection
