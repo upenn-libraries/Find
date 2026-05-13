@@ -88,21 +88,31 @@ describe Shelf::Service do
 
   describe '#renew_loan' do
     let(:loan_id) { '123456' }
-
-    before do
-      stub_alma_user_renew_loan_success(user_id: user_id, loan_id: loan_id, response_body: build(:alma_loan, :renewed))
-    end
+    let(:renewal) { shelf.renew_loan(loan_id) }
 
     context 'when successful' do
-      it 'returns an alma renewal response' do
-        expect(shelf.renew_loan(loan_id)).to be_a Alma::RenewalResponse
+      before do
+        stub_alma_user_renew_loan_success(user_id: user_id, loan_id: loan_id,
+                                          response_body: build(:alma_loan, :renewed).response)
+      end
+
+      it 'returns a successful alma renewal response with expected data' do
+        expect(renewal).to be_a Alma::RenewalResponse
+        expect(renewal.renewed?).to be true
       end
     end
 
     context 'when unsuccessful' do
-      before do
-        allow(Alma::Net).to receive(:post).and_raise(StandardError)
+      before { stub_alma_user_renew_loan_failure(user_id: user_id, loan_id: loan_id) }
+
+      it 'returns an alma renewal response with expected data' do
+        expect(renewal).to be_a Alma::RenewalResponse
+        expect(renewal.renewed?).to be false
       end
+    end
+
+    context 'when there is an unexpected issue with the request' do
+      before { allow(Alma::Net).to receive(:post).and_raise(StandardError) }
 
       it 'raises Shelf::Service::AlmaRequestError' do
         expect { shelf.renew_loan(loan_id) }.to raise_error(Shelf::Service::AlmaRequestError)
