@@ -49,6 +49,18 @@ describe SearchBuilder do
     end
   end
 
+  describe '#escape_special_characters' do
+    before { search_builder.escape_special_characters(solr_params) }
+
+    context 'with special characters to escape' do
+      let(:solr_params) { { q: 'Do Androids Dream of Electric Sheep?' } }
+
+      it 'escapes special characters' do
+        expect(solr_params[:q]).to eq 'Do Androids Dream of Electric Sheep\?'
+      end
+    end
+  end
+
   describe '#massage_sort' do
     let(:sort_builder) { instance_double SortBuilder }
 
