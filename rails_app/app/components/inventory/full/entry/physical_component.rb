@@ -33,6 +33,7 @@ module Inventory
           user.nil? && !entry.location.aeon? && !entry.location.archives? && !entry.location.hsp?
         end
 
+        # @return [Hash] parameters for the fulfillment form
         def fulfillment_form_params
           {
             mms_id: entry.mms_id,

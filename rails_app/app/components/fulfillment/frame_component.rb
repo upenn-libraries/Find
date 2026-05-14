@@ -5,6 +5,7 @@ module Fulfillment
   class FrameComponent < ViewComponent::Base
     include Turbo::FramesHelper
 
+    # @param form_params [Hash] parameters passed to the fulfillment form
     def initialize(form_params:)
       @form_params = form_params
     end
