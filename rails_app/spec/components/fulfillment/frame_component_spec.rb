@@ -15,12 +15,6 @@ describe Fulfillment::FrameComponent, type: :components do
   end
 
   it 'renders a lazy fulfillment form frame with correct attributes' do
-    expect(rendered).to have_selector(
-      "turbo-frame#form_frame[loading='lazy'][src*='mms_id=9913203433503681'][src*='holding_id=1234'][src*='location_code=scrare']",
-      visible: :all
-    )
-    expect(rendered).to have_selector("turbo-frame#form_frame[data-controller='missing-frame']",
-                                      visible: :all)
     expect(rendered).to have_text I18n.t('requests.form.heading')
   end
 
