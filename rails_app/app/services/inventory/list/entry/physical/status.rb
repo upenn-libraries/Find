@@ -4,11 +4,11 @@ module Inventory
   class List
     module Entry
       class Physical
-        # Translating Alma statuses for physical holdings to a user-friendly status label and description. If the status
-        # is "available" or "check_holdings" we provide a more specific status label and description based on
-        # its location. For example, material at one Penn location can only be accessed by request even though Alma
-        # reports it as "Available". This class adjusts the terminology used when labeling availability so that it
-        # displays appropriate guidance for the holding's location.
+        # Translating Alma statuses for physical holdings to a user-friendly status label and description. For all three
+        # statuses ("available", "check_holdings", and "unavailable") we provide a more specific status label and
+        # description based on location. For example, material at one Penn location can only be accessed by request
+        # even though Alma reports it as "Available". This class adjusts the terminology used when labeling
+        # availability so that it displays appropriate guidance for the holding's location.
         class Status
           attr_accessor :status, :location
 
@@ -57,7 +57,7 @@ module Inventory
             @status_keys ||= case status
                              when Constants::AVAILABLE then [:available, refined_available_key]
                              when Constants::CHECK_HOLDINGS then [:check_holdings, refined_check_holdings_key]
-                             when Constants::UNAVAILABLE then [:unavailable]
+                             when Constants::UNAVAILABLE then [:unavailable, refined_unavailable_key].compact
                              end
           end
 
@@ -88,6 +88,14 @@ module Inventory
             else
               :mixed_availability
             end
+          end
+
+          # Return a refined unavailable status key.
+          #
+          # Alma marks items as unavailable for various reasons. For Aeon items, the material is still
+          # accessible by appointment in the reading room despite the unavailable Alma status.
+          def refined_unavailable_key
+            location.aeon? ? :appointment : nil
           end
         end
       end

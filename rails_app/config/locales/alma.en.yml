@@ -18,6 +18,9 @@ en:
         unavailable:
           label: 'By Request'
           description: 'Item cannot be checked out at the library but can be requested.'
+          appointment:
+            label: 'Available by appointment'
+            description: 'This item can be accessed by appointment in the library reading room.'
         check_holdings:
           mixed_availability:
             label: 'Mixed Availability'
