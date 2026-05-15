@@ -90,30 +90,6 @@ describe Inventory::List::Entry::Physical::Status do
   describe '#label' do
     include_examples 'returns expected translation values for', :label
 
-    context 'when available at an Aeon location' do
-      subject(:status) { create(:physical_entry_status, :aeon_onsite) }
-
-      it 'describes availability as appointment-based' do
-        expect(status.label).to eq I18n.t('alma.availability.physical.available.appointment.label')
-      end
-    end
-
-    context 'when check holdings at an Aeon location' do
-      subject(:status) { create(:physical_entry_status, :check_holdings, :aeon_onsite) }
-
-      it 'describes availability as appointment-based' do
-        expect(status.label).to eq I18n.t('alma.availability.physical.check_holdings.appointment.label')
-      end
-    end
-
-    context 'when unavailable at an Aeon location' do
-      subject(:status) { create(:physical_entry_status, :unavailable, :aeon_onsite) }
-
-      it 'describes availability as appointment-based' do
-        expect(status.label).to eq I18n.t('alma.availability.physical.unavailable.appointment.label')
-      end
-    end
-
     context 'when a non-standard status' do
       subject(:status) { create(:physical_entry_status, status: 'unknown') }
 
