@@ -17,7 +17,6 @@ module Shelf
     DUE_DATE = :due_date
     SORTS = [LAST_UPDATED_AT, TITLE, DUE_DATE].freeze
     ORDERS = [ASCENDING, DESCENDING].freeze
-    RENEW_LOAN_TIMEOUT = 10
 
     attr_reader :user_id
 
@@ -54,8 +53,8 @@ module Shelf
     # @raise [Shelf::Service::AlmaRequestError] when there was an unexpected issue with request
     # @return [Array<Alma::RenewalResponse>] when request returns expected success or failure response
     def renew_all_loans
-      renewable_loans = Alma::Loan.where_user(user_id).select(&:renewable?)
-      renewable_loans.map { |loan| renew_loan(loan.loan_id) }
+      renewable_loans = ils_loans(expand: 'renewable').select(&:renewable?)
+      renewable_loans.map { |loan| renew_loan(loan.id) }
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
@@ -65,11 +64,7 @@ module Shelf
     # @raise [Shelf::Service::AlmaRequestError] when there was an unexpected issue with request
     # @return [Alma::RenewalResponse] when request returns expected success or failure response
     def renew_loan(loan_id)
-      response = Alma::Net.post("#{Alma::User.users_base_path}/#{user_id}/loans/#{loan_id}",
-                                query: { op: 'renew' },
-                                headers: Alma::User.headers,
-                                timeout: RENEW_LOAN_TIMEOUT)
-      Alma::RenewalResponse.new(response)
+      Alma::User.renew_loan({ user_id: user_id, loan_id: loan_id })
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
@@ -119,17 +114,18 @@ module Shelf
 
     # Returns all Alma loans for the given user.
     #
-    # Does not return renewable information because expanding the request to include renewable information
+    # Does not return renewable information by default because expanding the request to include renewable information
     # increases the wait time significantly.
     #
+    # @param expand [String] expand params to pass to Alma. Use `renewable` for renewability info
     # @raise [Shelf::Service::AlmaRequestError] when unsuccessful
-    # @return [Array<Shelf::Entry::IlsLoan>] when successful
-    def ils_loans
+    # @return [Enumerator] when successful
+    def ils_loans(expand: '')
       offset = 0
       loans = []
 
       loop do
-        response = Alma::Loan.where_user(user_id, { expand: '', offset: offset, limit: ILS_REQUEST_LIMIT })
+        response = Alma::Loan.where_user(user_id, { expand: expand, offset: offset, limit: ILS_REQUEST_LIMIT })
         loans += response.map { |l| Entry::IlsLoan.new(l.response) }
 
         break if response.total_record_count == loans.count
