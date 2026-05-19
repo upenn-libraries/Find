@@ -119,7 +119,7 @@ module Shelf
     #
     # @param expand [String] expand params to pass to Alma. Use `renewable` for renewability info
     # @raise [Shelf::Service::AlmaRequestError] when unsuccessful
-    # @return [Enumerator] when successful
+    # @return [Array<Shelf::Entry::IlsLoan>] when successful
     def ils_loans(expand: '')
       offset = 0
       loans = []
