@@ -122,10 +122,20 @@ describe SearchBuilder do
     end
 
     context 'with a database search' do
-      let(:blacklight_params) { { f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+      context 'with no query term' do
+        let(:blacklight_params) { { f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
 
-      it 'sets the database sort' do
-        expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        it 'sets the database sort' do
+          expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        end
+      end
+
+      context 'with a query term' do
+        let(:blacklight_params) { { q: 'newspapers', f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+
+        it 'does not set the sort if a query term is provided' do
+          expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        end
       end
     end
   end
