@@ -41,7 +41,10 @@ class CatalogController < ApplicationController
     config.json_solr_path = 'select'
 
     # items to show per page, each number in the array represents another option to choose from.
-    config.per_page = [10, 20, 50, 100]
+    config.per_page = [10, 25, 50, 100]
+
+    # default number of facet values to show before "more" link
+    config.default_facet_limit = 7
 
     # solr field configuration for search results/index views
     config.index.title_field = :title_ss
@@ -53,6 +56,7 @@ class CatalogController < ApplicationController
 
     # Some components can be configured
     config.header_component = Catalog::HeaderComponent
+    config.index.search_header_component = Catalog::SearchHeaderComponent
     config.index.search_bar_component = Catalog::SearchBarComponent
     config.index.constraints_component = Catalog::ConstraintsComponent
     config.index.sidebar_component = Catalog::SidebarComponent
@@ -68,7 +72,7 @@ class CatalogController < ApplicationController
     config.track_search_session.item_pagination_component = Catalog::ServerItemPaginationComponent
     config.track_search_session.applied_params_component = Catalog::ServerAppliedParamsComponent
 
-    config.add_results_document_tool(:bookmark, component: Blacklight::Document::BookmarkComponent,
+    config.add_results_document_tool(:bookmark, component: Catalog::BookmarkComponent,
                                                 if: :render_bookmarks_control?)
 
     config.add_results_collection_tool(:sort_widget)
@@ -101,6 +105,9 @@ class CatalogController < ApplicationController
     # config.show.sidebar_component = MyApp::SidebarComponent
     # config.show.embed_component = MyApp::EmbedComponent
 
+    # Enable autofocus of the search bar. See Catalog::SearchBarComponent for logic.
+    config.enable_search_bar_autofocus = true
+
     # Configure database facets
 
     # lambda to control database facets display
@@ -127,7 +134,7 @@ class CatalogController < ApplicationController
 
     # Configure general facets
     config.add_facet_field :access_facet, label: I18n.t('facets.access'), collapse: false
-    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: -1 do |field|
+    config.add_facet_field :format_facet, label: I18n.t('facets.format'), collapse: false, limit: 7 do |field|
       field.advanced_search_component = Catalog::AdvancedSearch::MultiSelectFacetComponent
     end
     config.add_facet_field :creator_facet, label: I18n.t('facets.creator'), suggest: true, limit: true do |field|
@@ -306,26 +313,27 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
     end
 
-    config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${basic_qf}', pf: '${basic_pf}', pf2: '${basic_pf2}',
-                                         pf3: '${basic_pf3}' } }
-    end
+    # TODO: add these back after 1.7 preview period
+    # config.add_search_field 'all_fields_basic', label: I18n.t('search.basic') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${basic_qf}', pf: '${basic_pf}', pf2: '${basic_pf2}',
+    #                                      pf3: '${basic_pf3}' } }
+    # end
 
-    config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${noanchor_qf}', pf: '${noanchor_pf}', pf2: '${noanchor_pf2}',
-                                         pf3: '${noanchor_pf3}' } }
-    end
+    # config.add_search_field 'all_fields_no_anchored', label: I18n.t('search.no_anchored') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${noanchor_qf}', pf: '${noanchor_pf}', pf2: '${noanchor_pf2}',
+    #                                      pf3: '${noanchor_pf3}' } }
+    # end
 
-    config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
-      field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
-      field.include_in_simple_select = false
-      field.clause_params = { edismax: { qf: '${nounstem_qf}', pf: '${nounstem_pf}', pf2: '${nounstem_pf2}',
-                                         pf3: '${nounstem_pf3}' } }
-    end
+    # config.add_search_field 'all_fields_no_unstem', label: I18n.t('search.no_unstem') do |field|
+    #   field.include_in_advanced_search = !(Rails.env.production? || Rails.env.test?)
+    #   field.include_in_simple_select = false
+    #   field.clause_params = { edismax: { qf: '${nounstem_qf}', pf: '${nounstem_pf}', pf2: '${nounstem_pf2}',
+    #                                      pf3: '${nounstem_pf3}' } }
+    # end
 
     config.add_search_field 'all_fields_advanced', label: I18n.t('advanced.all_fields') do |field|
       field.include_in_advanced_search = true

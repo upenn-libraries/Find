@@ -3,14 +3,12 @@
 */
 
 /* Homepage "more resources" lists */
-.home-content dt {
-  font-weight: normal;
+.fi-home #content {
+  & h2 {
+    margin-top: var(--pl-space-xl);
+  }
 }
 
-.home-content dd {
-  margin-bottom: 1rem;
-}
-
-.home-content dd:last-of-type {
+.fi-home .flash_messages {
   margin-bottom: 0;
 }

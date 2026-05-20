@@ -3,8 +3,10 @@
   # See flash_message_component for reasoning.
 %>
 
-<div class="flash_messages">
-  <% [:success, :notice, :error, :alert].each do |type| %>
-    <%= render(Catalog::FlashMessageComponent.with_collection(Array.wrap(flash[type]), type: type)) if flash[type] %>
-  <% end %>
-</div>
+<% if flash.any? %>
+  <div class="flash_messages" data-controller="flash-messages">
+    <% [:success, :notice, :error, :alert].each do |type| %>
+      <%= render(Catalog::FlashMessageComponent.with_collection(Array.wrap(flash[type]), type: type)) if flash[type] %>
+    <% end %>
+  </div>
+<% end %>

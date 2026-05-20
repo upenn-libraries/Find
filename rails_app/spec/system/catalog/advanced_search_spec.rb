@@ -72,7 +72,7 @@ describe 'Advanced Search Page' do
 
       it 'displays the query constraint' do
         within('#appliedParams') do
-          expect(page).to have_text("#{I18n.t('advanced.publication_date_search')} [1865 TO 1965]")
+          expect(page).to have_text(/#{I18n.t('advanced.publication_date_search')} \[1865 TO 1965\]/i)
         end
       end
     end
@@ -92,7 +92,7 @@ describe 'Advanced Search Page' do
 
       it 'displays the query constraint' do
         within('#appliedParams') do
-          expect(page).to have_text("#{I18n.t('advanced.publication_date_search')} [1900 TO *]")
+          expect(page).to have_text(/#{I18n.t('advanced.publication_date_search')} \[1900 TO \*\]/i)
         end
       end
     end
@@ -112,7 +112,7 @@ describe 'Advanced Search Page' do
 
       it 'displays the query constraint' do
         within('#appliedParams') do
-          expect(page).to have_text("#{I18n.t('advanced.publication_date_search')} [* TO 1900]")
+          expect(page).to have_text(/#{Regexp.escape(I18n.t('advanced.publication_date_search'))} \[\* TO 1900\]/i)
         end
       end
     end
@@ -177,7 +177,7 @@ describe 'Advanced Search Page' do
     before do
       stub_summon_search_success(query: params[:q], fixture: 'book.json')
       visit search_catalog_path(params)
-      click_on I18n.t('search.edit.label')
+      find_link(nil, class: 'edit-search-btn').click
     end
 
     context 'with parameters included in the form' do

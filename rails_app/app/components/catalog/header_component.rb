@@ -5,7 +5,7 @@
 module Catalog
   # Our HeaderComponent that displays the Web Component header and the search bar component
   class HeaderComponent < Blacklight::Component
-    renders_one :search_bar, lambda { |component: Blacklight::SearchNavbarComponent|
+    renders_one :search_bar, lambda { |component: Catalog::SearchNavbarComponent|
       component.new(blacklight_config: blacklight_config)
     }
 

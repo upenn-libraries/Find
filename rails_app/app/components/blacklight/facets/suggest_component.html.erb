@@ -1,0 +1,16 @@
+<%# Copied from Blacklight v9.0 %>
+<label class="input-group-text visually-hidden" for="facet_suggest_<%= key %>">
+  <%= I18n.t('blacklight.search.facets.suggest.label', field_label: label.downcase.pluralize) %>
+</label>
+<div class="input-group">
+  <%= search_field_tag "facet_suggest_#{key}",
+    nil,
+    class: "facet-suggest form-control",
+    autofocus: true,
+    data: {
+      facet_field: key,
+      facet_search_context: helpers.search_facet_path(id: key)
+    },
+    placeholder: I18n.t('blacklight.search.facets.suggest.placeholder')
+  %>
+</div>

@@ -2,11 +2,7 @@
 
 module Catalog
   # Local component overriding version from Blacklight v9.0
-  class ConstraintsComponent < Blacklight::Component
-    renders_many :query_constraints_area
-    renders_many :facet_constraints_area
-    renders_many :additional_constraints
-
+  class ConstraintsComponent < Blacklight::ConstraintsComponent
     # Constraints are stored and used to display search history - with this method, we initialize the
     # ConstraintsComponent in a way that displays well in a table (and without a start-over button)
     def self.for_search_history(**)
@@ -17,152 +13,65 @@ module Catalog
           facet_constraint_component_options: { layout: Catalog::SearchHistoryConstraintLayoutComponent },
           start_over_component: nil,
           edit_search: false,
+          show_all_constraint: false,
           **)
     end
 
-    # rubocop:disable Metrics/ParameterLists
-    def initialize(search_state:,
-                   tag: :div,
-                   render_headers: true,
-                   heading_classes: 'constraints-label h6 mb-0',
-                   id: 'appliedParams', classes: 'clearfix constraints-container mb-2 align-items-center',
-                   query_constraint_component: Blacklight::ConstraintLayoutComponent,
-                   query_constraint_component_options: {},
-                   facet_constraint_component: Blacklight::ConstraintComponent,
-                   facet_constraint_component_options: {},
-                   start_over_component: Catalog::StartOverButtonComponent,
-                   edit_search: true)
-      @search_state = search_state
-      @query_constraint_component = query_constraint_component
-      @query_constraint_component_options = query_constraint_component_options
-      @facet_constraint_component = facet_constraint_component
-      @facet_constraint_component_options = facet_constraint_component_options
-      @start_over_component = start_over_component
-      @render_headers = render_headers
-      @heading_classes = heading_classes
-      @tag = tag
-      @id = id
-      @classes = classes
+    def initialize(edit_search: true, show_all_constraint: true, **)
+      super(**)
+
       @edit_search = edit_search
-    end
-    # rubocop:enable Metrics/ParameterLists
-
-    # @return [String] HTML representation of query constraints
-    def query_constraints
-      if @search_state.query_param.present?
-        render(
-          @query_constraint_component.new(
-            search_state: @search_state,
-            value: @search_state.query_param,
-            label: label,
-            remove_path: remove_path,
-            classes: 'query',
-            **@query_constraint_component_options
-          )
-        )
-      else
-        ''.html_safe
-      end + render(@facet_constraint_component.with_collection(clause_presenters.to_a,
-                                                               **@facet_constraint_component_options))
+      @show_all_constraint = show_all_constraint
+      @heading_classes = nil
     end
 
-    # @return [String] URL path to remove the current query
-    def remove_path
-      helpers.search_action_path(@search_state.remove_query_params)
-    end
-
-    # @return [String] HTML representation of facet constraints
-    def facet_constraints
-      render(@facet_constraint_component.with_collection(constraint_presenters.to_a,
-                                                         **@facet_constraint_component_options))
-    end
-
-    # @return [Boolean] true if search state has constraints
+    # Render the component when there are constraints, or when showing "All" is enabled
+    #
+    # @return [Boolean]
     def render?
-      @search_state.has_constraints?
+      !no_constraints? || @show_all_constraint
+    end
+
+    # Checks if there are no search constraints (query or facets)
+    #
+    # @return [Boolean] true if no constraints present
+    def no_constraints?
+      @search_state.query_param.blank? &&
+        @search_state.filters.empty? &&
+        clause_queries_blank?
+    end
+
+    # Renders an "All" constraint pill when there are no search constraints
+    #
+    # @return [ActiveSupport::SafeBuffer] HTML for the "All" constraint
+    def all_constraint
+      tag.span(class: 'btn-group applied-filter constraint filter mx-1') do
+        tag.span(class: 'constraint-value btn btn-outline-secondary') {
+          tag.span(t('blacklight.search.filters.all'), class: 'filter-value')
+        } + all_constraint_remove_button
+      end
+    end
+
+    # Renders the remove button for the "All" constraint
+    #
+    # @return [ActiveSupport::SafeBuffer] HTML for the remove button
+    def all_constraint_remove_button
+      helpers.link_to(helpers.root_path, class: 'btn btn-outline-secondary remove') do
+        render(Blacklight::Icons::RemoveComponent.new(aria_hidden: true)) +
+          tag.span(t('blacklight.search.filters.remove.value', value: 'All'), class: 'visually-hidden')
+      end
     end
 
     private
 
-    # @return [String, nil] label for the search field if not the default search field
-    def label
-      search_field = @search_state.params[:search_field]
-      helpers.label_for_search_field(search_field) unless helpers.default_search_field?(search_field)
-    end
-
-    # Yields constraint presenters for each facet value
+    # Checks if advanced search clause queries are blank
     #
-    # @yield [Blacklight::ConstraintPresenter] facet constraint presenter
-    # @return [Enumerator] if no block given
-    def constraint_presenters
-      return to_enum(:constraint_presenters) unless block_given?
+    # @return [Boolean] true if no clause queries present
+    def clause_queries_blank?
+      clauses = @search_state.params[:clause]
+      return true if clauses.blank?
 
-      @search_state.filters.map do |facet|
-        facet_field_presenter = helpers.facet_field_presenter(facet.config, {})
-        facet.each_value do |val|
-          next if val.blank?
-
-          if val.is_a?(Array)
-            if val.any?(&:present?)
-              yield inclusive_facet_constraint_presenter(facet_field_presenter, facet.config, val,
-                                                         facet.key)
-            end
-          else
-            yield facet_constraint_presenter(facet_field_presenter, facet.config, val)
-          end
-        end
-      end
-    end
-
-    # Yields clause presenters for search clauses
-    #
-    # @yield [Blacklight::ClausePresenter] clause presenter
-    # @return [Enumerator] if no block given
-    def clause_presenters
-      return to_enum(:clause_presenters) unless block_given?
-
-      @search_state.clause_params.each do |key, clause|
-        field_config = helpers.blacklight_config.search_fields[clause[:field]]
-        yield Blacklight::ClausePresenter.new(key, clause, field_config, helpers)
-      end
-    end
-
-    # Creates a facet constraint presenter for a single facet item
-    #
-    # @param facet_field_presenter [Blacklight::FacetFieldPresenter] presenter for the facet field
-    # @param facet_config [Blacklight::Configuration::FacetField] configuration for the facet
-    # @param facet_item [String] the facet item
-    # @return [Blacklight::ConstraintPresenter] constraint presenter for the facet item
-    def facet_constraint_presenter(facet_field_presenter, facet_config, facet_item)
-      facet_config.constraint_presenter.new(facet_item_presenter: facet_field_presenter.item_presenter(facet_item),
-                                            field_label: facet_field_presenter.label)
-    end
-
-    # Creates a constraint presenter for an inclusive facet (multiple values)
-    #
-    # @param facet_field_presenter [Blacklight::FacetFieldPresenter] presenter for the facet field
-    # @param facet_config [Blacklight::Configuration::FacetField] configuration for the facet
-    # @param facet_item [Array] array of facet items
-    # @param facet_field [Symbol, String] the facet field name
-    # @return [Blacklight::ConstraintPresenter] constraint presenter for the inclusive facet
-    def inclusive_facet_constraint_presenter(facet_field_presenter, facet_config, facet_item, facet_field)
-      facet_config.constraint_presenter.new(
-        facet_item_presenter: Blacklight::InclusiveFacetItemPresenter.new(facet_item, facet_config, helpers,
-                                                                          facet_field),
-        field_label: facet_field_presenter.label
-      )
-    end
-
-    # Returns a heading tag for the constraints section
-    #
-    # @return [ActiveSupport::SafeBuffer, nil] constraints heading html
-    def constraints_heading
-      return unless @render_headers
-
-      tag.h2(
-        t('blacklight.search.filters.title'),
-        class: @heading_classes
-      )
+      clauses.values.all? { |clause| clause[:query].blank? }
     end
   end
 end

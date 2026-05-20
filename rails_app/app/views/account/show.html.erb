@@ -1,11 +1,13 @@
 <%= page_title t('account.show.page_heading') %>
 
-<%= render BreadcrumbsComponent.new do |component|%>
-  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>%>
+<%= render BreadcrumbsComponent.new do |component| %>
+  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
+  %>
   <% component.with_breadcrumb(active: true) { t('account.breadcrumbs.base') } %>
 <% end %>
 
 <h1 class="page__heading"><%= t('account.show.page_heading') %></h1>
+
 <p class="page__lede mb-4"><%= t('account.show.page_lede') %></p>
 
 <div class="row">
