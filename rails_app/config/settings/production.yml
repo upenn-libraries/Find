@@ -13,4 +13,4 @@ ms_clarity:
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
 suggester:
-  enabled: false
+  enabled: true
