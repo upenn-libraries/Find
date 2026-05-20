@@ -22,7 +22,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   # @param solr_p [Hash] the current solr parameters
   def massage_sort(solr_p)
     return if advanced_search_params_present?(solr_p) || non_relevance_sort_parameter_present?(solr_p)
-    return solr_p[:sort] = SortBuilder.title_sort_asc if database_search?
+    return solr_p[:sort] = SortBuilder.title_sort_asc if database_search? && !search_term_provided?(solr_p)
 
     sort_builder = SortBuilder.new(blacklight_params)
 
