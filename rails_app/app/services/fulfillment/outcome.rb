@@ -5,7 +5,7 @@ module Fulfillment
   class Outcome
     attr_reader :request, :confirmation_number, :errors, :item_desc, :fulfillment_desc
 
-    delegate :description, to: :request
+    delegate :delivery, :description, to: :request
 
     # @param request [Request] request as submitted
     # @param confirmation_number [String, nil] confirmation number if request was successful
@@ -42,16 +42,20 @@ module Fulfillment
 
     def fulfillment_description
       case request.delivery
-      when Request::Options::PICKUP, Request::Options::ILL_PICKUP
+      when Options::Deliverable::PICKUP, Options::Deliverable::ILL_PICKUP
         I18n.t('fulfillment.outcome.email.pickup', pickup_location: human_readable_pickup_location)
+      when Options::Deliverable::DOCDEL
+        I18n.t('fulfillment.outcome.email.docdel', docdel_email: Settings.fulfillment.docdel.email)
       else
         I18n.t(request.delivery, scope: 'fulfillment.outcome.email')
       end
     end
 
+    # Get a nice location from our Settings based off of the system location regardless of the request type
+    # @return [String]
     def human_readable_pickup_location
-      Settings.locations.pickup.to_h.find { |_k, v| v[:ils] == request.pickup_location }
-              &.first.to_s || request.pickup_location
+      Settings.locations.pickup.to_h.find { |_k, v| request.pickup_location.in? v.values }
+                                    &.first.to_s.presence || request.pickup_location
     end
   end
 end

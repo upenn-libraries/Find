@@ -6,10 +6,17 @@ export default class extends Controller {
     "officeButton",
     "pickupButton",
     "ill_pickupButton",
+    "docdelButton",
     "mailButton",
   ];
   static outlets = ["comments"];
-  COMMENTABLE = ["pickup", "ill_pickup", "mail", "office"];
+  COMMENTABLE = [
+    "pickup",
+    "ill_pickup",
+    "mail",
+    "docdel",
+    "office"
+  ];
 
   // On load of controller containing the radio buttons, check which radio button is
   // selected and show the corresponding button
@@ -58,6 +65,7 @@ export default class extends Controller {
       this.pickupButtonTarget,
       this.mailButtonTarget,
       this.ill_pickupButtonTarget,
+      this.docdelButtonTarget,
     ];
   }
 }

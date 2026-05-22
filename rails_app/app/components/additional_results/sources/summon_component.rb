@@ -18,7 +18,6 @@ module AdditionalResults
         @facet_counts = @search.facet_manager&.counts || nil
       end
 
-      # @param query [String] the query string
       # @return [String] the URL linking to the results of the search on Articles+
       def summon_url
         Articles::Search.summon_url(query: @search.query_string)
@@ -80,7 +79,7 @@ module AdditionalResults
         doc_count = number_with_delimiter(facet_count[:doc_count])
 
         content_tag(:li, class: 'list-inline-item') do
-          link_to(facet_count[:url], target: '_blank', rel: 'noopener') do
+          link_to(facet_count[:url], class: 'fi-link--subtle', target: '_blank', rel: 'noopener') do
             "#{facet_count[:label]} (#{doc_count})"
           end
         end

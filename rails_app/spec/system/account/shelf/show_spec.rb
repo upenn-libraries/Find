@@ -7,7 +7,7 @@ describe 'Account Shelf show page' do
   let(:shelf) { instance_double(Shelf::Service) }
 
   before do
-    sign_in user
+    login_as user
     # Stub creation of shelf instance, transaction find
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)
@@ -45,8 +45,7 @@ describe 'Account Shelf show page' do
 
       before do
         # Stub cancellation of hold, find all requests
-        allow(shelf).to receive(:cancel_hold).and_return(nil)
-        allow(shelf).to receive(:find_all).and_return(shelf_listing)
+        allow(shelf).to receive_messages(cancel_hold: nil, find_all: shelf_listing)
       end
 
       it 'displays cancel button' do

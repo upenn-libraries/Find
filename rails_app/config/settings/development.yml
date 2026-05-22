@@ -4,3 +4,11 @@ additional_results_sources:
   summon:
     access_id: 'upenn'
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
+discover:
+  enabled: true
+suggester:
+  enabled: true
+  digital_catalog:
+    host: 'find.library.upenn.edu'
+    solr:
+      url: <%= "#{ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development')}/suggest" %>

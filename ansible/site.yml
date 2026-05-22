@@ -46,18 +46,18 @@
         name: solr
       tags: solr
       when: is_development | default (false, true)
-    # - ansible.builtin.import_role:
-    #     name: redis
-    #   tags: redis
+    - ansible.builtin.import_role:
+        name: redis
+      tags: redis
     - ansible.builtin.import_role:
         name: postgres
       tags: postgres
     - ansible.builtin.import_role:
         name: catalog-find
       tags: catalog-find
-    # - ansible.builtin.import_role:
-    #     name: sidekiq
-    #   tags: sidekiq
+    - ansible.builtin.import_role:
+        name: sidekiq
+      tags: sidekiq
     - ansible.builtin.import_role:
         name: chrome
       tags: chrome

@@ -5,8 +5,8 @@ FactoryBot.define do
   factory :alma_user_response, class: Hash do
     status { { 'value' => 'ACTIVE', 'desc' => 'Active' } }
     primary_id { '12345678' }
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name { 'Test' }
+    last_name { 'User' }
     user_group { { 'value' => 'undergrad', 'desc' => 'Undergraduate Student' } }
     user_statistic do
       [
@@ -14,8 +14,27 @@ FactoryBot.define do
           'category_type' => { 'value' => 'AFFILIATION', 'desc' => '' } }
       ]
     end
+    user_role { [] }
 
     skip_create
     initialize_with { attributes }
+
+    trait :work_order_operator_active do
+      user_role do
+        [{ 'status' => { 'value' => 'ACTIVE', 'desc' => 'Active' },
+           'scope' => { 'value' => '01UPENN_INST', 'desc' => 'University of Pennsylvania' },
+           'role_type' => { 'value' => Settings.alma.work_order_role_value.to_s, 'desc' => 'Work Order Operator' },
+           'parameter' => [] }]
+      end
+    end
+
+    trait :work_order_operator_inactive do
+      user_role do
+        [{ 'status' => { 'value' => 'INACTIVE', 'desc' => 'Inactive' },
+           'scope' => { 'value' => '01UPENN_INST', 'desc' => 'University of Pennsylvania' },
+           'role_type' => { 'value' => Settings.alma.work_order_role_value.to_s, 'desc' => 'Work Order Operator' },
+           'parameter' => [] }]
+      end
+    end
   end
 end

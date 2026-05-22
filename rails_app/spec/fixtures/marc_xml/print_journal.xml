@@ -1,0 +1,271 @@
+<record>
+  <leader>03120cas a2200733 4500</leader>
+  <controlfield tag="001">991844363503681</controlfield>
+  <controlfield tag="005">20220609192122.0</controlfield>
+  <controlfield tag="008">850726d19651971enkbr p 0uu a0eng d</controlfield>
+  <datafield tag="010" ind1=" " ind2=" ">
+    <subfield code="a">65009871</subfield>
+  </datafield>
+  <datafield tag="022" ind1=" " ind2=" ">
+    <subfield code="a">0577-6058</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(OCoLC)ocm01553959</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(OCoLC)1553959</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(CStRLIN)PAUG85-S1361</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="9">ABA6623</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">184436</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(PU)184436-penndb-Voyager</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">MnMULS</subfield>
+    <subfield code="b">eng</subfield>
+    <subfield code="c">MnMULS</subfield>
+    <subfield code="d">CU-UC</subfield>
+    <subfield code="d">NIC</subfield>
+    <subfield code="d">CStRLIN</subfield>
+    <subfield code="d">NjR</subfield>
+    <subfield code="d">PU</subfield>
+  </datafield>
+  <datafield tag="050" ind1="0" ind2=" ">
+    <subfield code="a">QD1</subfield>
+    <subfield code="b">.C48</subfield>
+  </datafield>
+  <datafield tag="082" ind1=" " ind2=" ">
+    <subfield code="a">540</subfield>
+  </datafield>
+  <datafield tag="090" ind1=" " ind2=" ">
+    <subfield code="a">QD1</subfield>
+    <subfield code="b">.C48</subfield>
+    <subfield code="f">S-Recon</subfield>
+    <subfield code="p">1</subfield>
+    <subfield code="i">12/13/85 RT</subfield>
+    <subfield code="h">07/26/85 CT</subfield>
+  </datafield>
+  <datafield tag="245" ind1="0" ind2="0">
+    <subfield code="a">Chemical communications.</subfield>
+  </datafield>
+  <datafield tag="246" ind1="0" ind2="3">
+    <subfield code="a">Journal of the Chemical Society.</subfield>
+    <subfield code="n">D,</subfield>
+    <subfield code="p">Chemical communications</subfield>
+  </datafield>
+  <datafield tag="246" ind1="1" ind2="0">
+    <subfield code="a">Chem Comm</subfield>
+  </datafield>
+  <datafield tag="246" ind1="1" ind2="0">
+    <subfield code="a">ChemComm</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">London :</subfield>
+    <subfield code="b">Chemical Society.</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">7 volumes :</subfield>
+    <subfield code="b">illustrations ;</subfield>
+    <subfield code="c">26 cm</subfield>
+  </datafield>
+  <datafield tag="336" ind1=" " ind2=" ">
+    <subfield code="a">text</subfield>
+    <subfield code="b">txt</subfield>
+    <subfield code="2">rdacontent</subfield>
+  </datafield>
+  <datafield tag="337" ind1=" " ind2=" ">
+    <subfield code="a">unmediated</subfield>
+    <subfield code="b">n</subfield>
+    <subfield code="2">rdamedia</subfield>
+  </datafield>
+  <datafield tag="338" ind1=" " ind2=" ">
+    <subfield code="a">volume</subfield>
+    <subfield code="b">nc</subfield>
+    <subfield code="2">rdacarrier</subfield>
+  </datafield>
+  <datafield tag="362" ind1="0" ind2=" ">
+    <subfield code="a">Jan. 13, 1965-Dec. 22, 1971.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">"Issued as the Journal of the Chemical Society, Section D."</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2="0">
+    <subfield code="a">Chemistry</subfield>
+    <subfield code="v">Periodicals.</subfield>
+    <subfield code="0">http://id.loc.gov/authorities/subjects/sh2008100340</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2="7">
+    <subfield code="a">Chemistry</subfield>
+    <subfield code="x">Periodicals.</subfield>
+    <subfield code="2">fast</subfield>
+    <subfield code="0">http://id.worldcat.org/fast/853406</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2="7">
+    <subfield code="a">Periodicals.</subfield>
+    <subfield code="2">lcgft</subfield>
+    <subfield code="0">http://id.loc.gov/authorities/genreForms/gf2014026139</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2="7">
+    <subfield code="a">Periodicals.</subfield>
+    <subfield code="2">fast</subfield>
+    <subfield code="0">http://id.worldcat.org/fast/1411641</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">Chemical Society (Great Britain)</subfield>
+    <subfield code="0">http://id.loc.gov/authorities/names/n79032053</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2="2">
+    <subfield code="a">Chemical Society (Great Britain).</subfield>
+    <subfield code="t">Journal of the Chemical Society.</subfield>
+    <subfield code="n">Section D,</subfield>
+    <subfield code="p">Chemical communications.</subfield>
+  </datafield>
+  <datafield tag="730" ind1="0" ind2="2">
+    <subfield code="a">Journal of the Chemical Society.</subfield>
+    <subfield code="n">Section D,</subfield>
+    <subfield code="p">Chemical communications.</subfield>
+  </datafield>
+  <datafield tag="785" ind1="0" ind2="0">
+    <subfield code="t">Journal of the Chemical Society. Chemical communications</subfield>
+    <subfield code="x">0022-4936</subfield>
+  </datafield>
+  <datafield tag="902" ind1=" " ind2=" ">
+    <subfield code="a">MARCIVE 2022</subfield>
+  </datafield>
+  <datafield tag="948" ind1=" " ind2=" ">
+    <subfield code="a">fg</subfield>
+  </datafield>
+  <datafield tag="950" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="e">100,104,106Anotherset inTowne540.5C413</subfield>
+    <subfield code="y">1967-1971</subfield>
+    <subfield code="z">Not currently received</subfield>
+    <subfield code="n">#34</subfield>
+    <subfield code="n">#39</subfield>
+    <subfield code="i">12/13/85 N</subfield>
+    <subfield code="h">07/26/85 N ?104:rme ?105:rsl</subfield>
+  </datafield>
+  <datafield tag="950" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="a">540.5</subfield>
+    <subfield code="b">C413</subfield>
+    <subfield code="y">1965-1971</subfield>
+    <subfield code="z">Not currently received</subfield>
+    <subfield code="i">12/13/85 N</subfield>
+    <subfield code="h">07/26/85 N ?105:rsl</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Ja-Je 1967)</subfield>
+    <subfield code="q">CHEM</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Jl-D 1967)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Ja-Je 1968)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Jl-D 1968)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Ja-Je 1969)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Jl-D 1969)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Ja-Je 1970)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Jl-D 1970)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Ja-Je 1971)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">CHEM</subfield>
+    <subfield code="c">1:(Jl-D 1971)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(1965)</subfield>
+    <subfield code="q">TN</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(1966)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(1967)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Ja-Je 1968)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Jl-D 1968)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Ja-Je 1969)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Jl-D 1969)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Ja-Je 1970)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Jl-D 1970)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Ja-Je 1971)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="l">TOWNE</subfield>
+    <subfield code="c">1:(Jl-D 1971)</subfield>
+    <subfield code="h">07/26/85 C</subfield>
+  </datafield>
+</record>

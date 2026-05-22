@@ -5,7 +5,7 @@ module LayoutHelper
   include Blacklight::LayoutHelperBehavior
 
   # Set different classes for layout of show page main content section. We want full-width because we're relocating
-  # the sidebar tools. Blacklight 8.3.0 still uses these helpers to render classes
+  # the sidebar tools. Blacklight v9.0 still uses these helpers to render classes
   # @return [String (frozen)]
   def show_content_classes
     'col-lg-12 show-document'
@@ -16,6 +16,27 @@ module LayoutHelper
   # @param document_title [String, nil] the title of the document
   # @return [String (frozen)]
   def page_title(title, document_title: nil)
-    content_for(:page_title) { [title, document_title, application_name].compact.join(' - ') }
+    content_for(:page_title) { [title, document_title, application_name].compact.join(' · ') }
+  end
+
+  # Overriding method to support using full-width layout for search results.
+  # We want container-fluid only for catalog search results, not the home page (catalog#index without
+  # search params), advanced search, or account pages. The fi-home class is used for CSS grid targeting.
+  # @return [String]
+  def container_classes
+    return 'container-fluid' if catalog_index_page_with_results?
+    return 'container fi-home' if catalog_index_page?
+
+    'container'
+  end
+
+  # @return [Boolean]
+  def catalog_index_page?
+    controller_name == 'catalog' && action_name == 'index'
+  end
+
+  # @return [Boolean]
+  def catalog_index_page_with_results?
+    catalog_index_page? && has_search_parameters?
   end
 end

@@ -1,19 +1,13 @@
-<% # Copied from Blacklight v8.3.0@5a779c5a9 %>
+<%# Overrides template from Blacklight v9.0 to add an "All" constraint pill
+    when no search constraints are present, and an edit search button linking
+    to the advanced search form. %>
 
 <%= content_tag @tag || :div, id: @id, class: @classes do %>
-  <% if @render_headers %>
-    <h2 class="sr-only visually-hidden"><%= t('blacklight.search.search_constraints_header') %></h2>
-  <% end %>
+  <%= constraints_heading %>
 
-  <%= render @start_over_component.new if @start_over_component %>
-
-  <%= link_to(t('search.edit.label'), advanced_search_catalog_path(@search_state.params),  class: 'btn btn-light') if @edit_search %>
-
-
-  <% if @render_headers %>
-    <span class="constraints-label sr-only visually-hidden"><%= t('blacklight.search.filters.title') %></span>
-  <% end %>
-  <% if query_constraints_area.present? %>
+  <% if no_constraints? && @show_all_constraint %>
+    <%= all_constraint %>
+  <% elsif query_constraints_area.present? %>
     <% query_constraints_area.each do |constraint| %>
       <%= constraint %>
     <% end %>
@@ -32,4 +26,18 @@
   <% additional_constraints.each do |constraints| %>
     <%= constraints %>
   <% end %>
+
+  <div>
+    <% if @edit_search %>
+      <%= link_to advanced_search_catalog_path(@search_state.params),
+        class: 'btn btn-light edit-search-btn',
+        aria: { label: t('search.edit.label') },
+        data: { controller: 'tooltip', bs_title: t('search.edit.label') } do %>
+        <%= render 'shared/svgs/edit' %>
+      <% end %>
+    <% end %>
+
+    <%= render @start_over_component.new if @start_over_component %>
+  </div>
 <% end %>
+

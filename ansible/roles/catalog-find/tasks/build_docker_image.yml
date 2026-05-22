@@ -1,8 +1,13 @@
 ---
-- name: Create custom docker image using buildkit
-  ansible.builtin.shell:
-    cmd: |-
-      docker build --build-arg RAILS_ENV="{{ catalog_find_rails_env }}" --target=development -t {{ catalog_find_image_name }}:{{ catalog_find_image_tag }} .
-    chdir: "/catalog-find/ansible/roles/catalog-find/files/src/"
-  environment:
-    DOCKER_BUILDKIT: "true"
+- name: Create custom docker image
+  community.docker.docker_image_build:
+    name: "{{ catalog_find_image_name }}:{{ catalog_find_image_tag }}"
+    path: "/catalog-find/ansible/roles/catalog-find/files/src/"
+    dockerfile: "Dockerfile"
+    target: "development"
+    secrets:
+      - id: sidekiq_pro_credentials
+        type: value
+        value: "{{ dld_sidekiq_pro_vault_values.secret.credentials }}"
+    args:
+      RAILS_ENV: "{{ catalog_find_rails_env }}"

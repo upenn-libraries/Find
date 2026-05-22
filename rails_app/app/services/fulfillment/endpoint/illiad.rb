@@ -18,7 +18,8 @@ module Fulfillment
     class Illiad < Endpoint
       class UserError < StandardError; end
 
-      CITED_IN = 'info:sid/library.upenn.edu'
+      ILL_FORM_SOURCE_SID = 'info:sid/find.library.upenn.edu/account/requests/ill/new'
+      RECORD_PAGE_SOURCE_SID = 'info:sid/find.library.upenn.edu/catalog/record'
       BASE_USER_ATTRIBUTES = { NVTGC: 'VPL', Address: '', DeliveryMethod: 'Mail to Address', Cleared: 'Yes',
                                ArticleBillingCategory: 'Exempt', LoanBillingCategory: 'Exempt' }.freeze
       BASE_TRANSACTION_ATTRIBUTES = { ProcessType: 'Borrowing' }.freeze
@@ -44,9 +45,12 @@ module Fulfillment
           scope = %i[fulfillment validation]
           errors = []
           errors << I18n.t(:no_user_id, scope: scope) if request.patron&.uid.blank?
-          errors << I18n.t(:no_courtesy_borrowers, scope: scope) if request.patron&.courtesy_borrower?
-          errors << I18n.t(:no_proxy_requests, scope: scope) if request.proxied? && !request.requester.library_staff?
+          errors << I18n.t(:ineligible_user_group, scope: scope) if request.patron&.ill_restricted_user_group?
+          errors << I18n.t(:blocked, scope: scope) if request.patron&.ill_blocked?
           errors << I18n.t(:proxy_invalid, scope: scope) if request.proxied? && !request.patron.alma_record?
+          if request.proxied? && !request.requester.proxy_submit_eligible?
+            errors << I18n.t(:no_proxy_requests, scope: scope)
+          end
           errors
         end
 
@@ -124,7 +128,7 @@ module Fulfillment
         # @return [Hash{Symbol->String (frozen)}]
         def book_request_body(request)
           { Username: request.patron.uid,
-            RequestType: ::Illiad::Request::LOAN,
+            RequestType: Shelf::Entry::IllTransaction::Type::LOAN,
             DocumentType: 'Book',
             LoanAuthor: request.params.author,
             LoanTitle: request.params.book_title,
@@ -136,7 +140,7 @@ module Fulfillment
             CallNumber: request.params.call_number,
             ISSN: request.params.isbn,
             ESPNumber: request.params.pmid,
-            CitedIn: request.params.sid || CITED_IN,
+            CitedIn: request.params.sid,
             ItemInfo3: request.params.barcode }
         end
 
@@ -146,7 +150,7 @@ module Fulfillment
         # @return [Hash{Symbol->String (frozen)}]
         def scandelivery_request_body(request)
           { Username: request.patron.uid,
-            DocumentType: ::Illiad::Request::ARTICLE,
+            DocumentType: Shelf::Entry::IllTransaction::Type::ARTICLE,
             PhotoJournalTitle: request.params.title,
             PhotoJournalVolume: request.params.volume,
             PhotoJournalIssue: request.params.issue,
@@ -157,7 +161,7 @@ module Fulfillment
             ESPNumber: request.params.pmid,
             PhotoArticleAuthor: request.params.author,
             PhotoArticleTitle: request.params.chapter_title || request.params.article,
-            CitedIn: request.params.sid || CITED_IN }
+            CitedIn: request.params.sid }
         end
 
         # @note See class level docs above
@@ -165,11 +169,11 @@ module Fulfillment
         # @param [Request] request
         # @return [Hash]
         def append_routing_info(body, request)
-          if request.delivery == Request::Options::MAIL
+          if request.delivery == Options::Deliverable::MAIL
             # Set "BBM" title prefix so requests are routes to BBM staff
             body[:LoanTitle] = "#{BOOKS_BY_MAIL_PREFIX} #{body[:LoanTitle]}"
             body[:ItemInfo1] = BOOKS_BY_MAIL
-          elsif request.delivery == Request::Options::OFFICE
+          elsif request.delivery == Options::Deliverable::OFFICE
             # Set ItemInfo1 to BBM for Office delivery so requests are routed to FacEx staff
             body[:ItemInfo1] = BOOKS_BY_MAIL
           else
@@ -189,8 +193,7 @@ module Fulfillment
             EMailAddress: user.email,
             SSN: user.alma_record.id,
             Status: user.ils_group_name,
-            Department: user.alma_affiliation,
-            PlainTextPassword: Settings.illiad.legacy_user_password
+            Department: user.alma_affiliation
           }
         end
       end

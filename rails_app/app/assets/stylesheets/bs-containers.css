@@ -1,0 +1,9 @@
+/*
+* Bootstrap container customizations
+*/
+
+.container {
+  max-width: var(--pl-viewport-margins-max-width);
+  margin: 0 auto;
+  padding: 0 var(--pl-viewport-margins-gutter, 1em);
+}

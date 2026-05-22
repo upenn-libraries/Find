@@ -13,8 +13,9 @@ module Shelf
     DESCENDING = :desc
     ASCENDING = :asc
     TITLE = :title
-    LAST_UPDATED_BY = :last_updated_at
-    SORTS = [LAST_UPDATED_BY, TITLE].freeze
+    LAST_UPDATED_AT = :last_updated_at
+    DUE_DATE = :due_date
+    SORTS = [LAST_UPDATED_AT, TITLE, DUE_DATE].freeze
     ORDERS = [ASCENDING, DESCENDING].freeze
 
     attr_reader :user_id
@@ -29,7 +30,7 @@ module Shelf
     # @param sort [Symbol] field we should sort on
     # @param order [Symbol] direction of sorting
     # @return [Shelf::Listing]
-    def find_all(filters: FILTERS, sort: LAST_UPDATED_BY, order: DESCENDING)
+    def find_all(filters: FILTERS, sort: LAST_UPDATED_AT, order: DESCENDING)
       # Doing some pre-filtering to avoid unnecessary API calls.
       entries = if filters.eql?([:scans])
                   ill_transactions
@@ -52,8 +53,8 @@ module Shelf
     # @raise [Shelf::Service::AlmaRequestError] when there was an unexpected issue with request
     # @return [Array<Alma::RenewalResponse>] when request returns expected success or failure response
     def renew_all_loans
-      renewable_loans = Alma::Loan.where_user(user_id).select(&:renewable?)
-      renewable_loans.map { |loan| renew_loan(loan.loan_id) }
+      renewable_loans = ils_loans(expand: 'renewable').select(&:renewable?)
+      renewable_loans.map { |loan| renew_loan(loan.id) }
     rescue StandardError => e
       raise AlmaRequestError, e.message
     end
@@ -90,7 +91,21 @@ module Shelf
       # In order to "delete" a transaction, it must be a scan request where the status is "Delivered to Web".
       raise IlliadRequestError, 'Transaction cannot be deleted' if entry.blank? || !entry.pdf_available?
 
-      Illiad::Request.route(id: entry.id, status: Illiad::Request::FINISHED)
+      Illiad::Request.route(id: entry.id, status: Entry::IllTransaction::Status::FINISHED)
+    rescue StandardError => e
+      raise IlliadRequestError, e.message
+    end
+
+    # Adding history entry to ILL transaction to mark that the user has viewed the PDF.
+    #
+    # @raise [Shelf::Service::IlliadRequestError] when unsuccessful
+    def mark_pdf_viewed(id)
+      entry = ill_transaction(id)
+
+      # In order to mark a PDF as viewed, it must be a scan request where the status is "Delivered to Web".
+      raise IlliadRequestError, 'Transaction does not have a PDF' unless entry.pdf_available?
+
+      Illiad::Request.history(id: entry.id, entry: I18n.t('fulfillment.illiad.pdf_viewed'))
     rescue StandardError => e
       raise IlliadRequestError, e.message
     end
@@ -99,17 +114,18 @@ module Shelf
 
     # Returns all Alma loans for the given user.
     #
-    # Does not return renewable information because expanding the request to include renewable information
+    # Does not return renewable information by default because expanding the request to include renewable information
     # increases the wait time significantly.
     #
+    # @param expand [String] expand params to pass to Alma. Use `renewable` for renewability info
     # @raise [Shelf::Service::AlmaRequestError] when unsuccessful
     # @return [Array<Shelf::Entry::IlsLoan>] when successful
-    def ils_loans
+    def ils_loans(expand: '')
       offset = 0
       loans = []
 
       loop do
-        response = Alma::Loan.where_user(user_id, { expand: '', offset: offset, limit: ILS_REQUEST_LIMIT })
+        response = Alma::Loan.where_user(user_id, { expand: expand, offset: offset, limit: ILS_REQUEST_LIMIT })
         loans += response.map { |l| Entry::IlsLoan.new(l.response) }
 
         break if response.total_record_count == loans.count
@@ -132,7 +148,8 @@ module Shelf
 
       loop do
         response = Alma::UserRequest.where_user(
-          user_id, { request_type: 'HOLD', offset: offset, limit: ILS_REQUEST_LIMIT }
+          user_id, { request_type: Fulfillment::Endpoint::Alma::HOLD_TYPE,
+                     offset: offset, limit: ILS_REQUEST_LIMIT }
         )
         holds += response.map { |l| Entry::IlsHold.new(l.response) }
 
@@ -158,9 +175,9 @@ module Shelf
       #   - All requests that are checked out to customer.
       # rubocop:disable Layout/LineLength
       filter = [
-        "(TransactionStatus eq '#{Illiad::Request::CANCELLED}' and TransactionDate ge datetime'#{2.weeks.ago.utc.iso8601}')",
-        "(TransactionStatus eq '#{Illiad::Request::FINISHED}' and SystemID eq '#{Illiad::Request::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
-        "(TransactionStatus ne '#{Illiad::Request::CHECKED_OUT}' and TransactionStatus ne '#{Illiad::Request::CANCELLED}' and TransactionStatus ne '#{Illiad::Request::FINISHED}')"
+        "(TransactionStatus eq '#{Entry::IllTransaction::Status::CANCELLED}' and TransactionDate ge datetime'#{2.weeks.ago.utc.iso8601}')",
+        "(TransactionStatus eq '#{Entry::IllTransaction::Status::FINISHED}' and SystemID eq '#{Entry::IllTransaction::BD_SYSTEM_ID}' and TransactionDate ge datetime'#{10.days.ago.utc.iso8601}')",
+        "(TransactionStatus ne '#{Entry::IllTransaction::Status::CHECKED_OUT}' and TransactionStatus ne '#{Entry::IllTransaction::Status::CANCELLED}' and TransactionStatus ne '#{Entry::IllTransaction::Status::FINISHED}')"
       ].join(' or ')
       # rubocop:enable Layout/LineLength
 

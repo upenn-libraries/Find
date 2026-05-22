@@ -22,15 +22,42 @@ module AlmaAccount
     ils_group == FACULTY_EXPRESS_GROUP
   end
 
+  # Returns true if a user is in one of the Alma DocDel groups
+  # @return [Boolean, nil]
+  def docdel?
+    ils_group&.in? docdel_groups
+  end
+
   # Return true if the user is a library staff
   # @return [Boolean]
   def library_staff?
     ils_group == LIBRARY_STAFF_GROUP
   end
 
-  # Return true if the user is a courtesy_borrower
+  # @return [Boolean]
   def courtesy_borrower?
     ils_group == COURTESY_BORROWER_GROUP
+  end
+
+  # Does the user have an Active Work Order Operator role?
+  # @return [Boolean]
+  def work_order_operator?
+    roles = alma_record&.user_role
+    return false if roles.blank?
+
+    roles.find { |role| active_work_order_role?(role) }.present?
+  end
+
+  # Should the user be eligible to make "proxy" ILL request submissions?
+  # @return [Boolean]
+  def proxy_submit_eligible?
+    library_staff? || work_order_operator?
+  end
+
+  # Should the user be restricted from making ILL request submissions?
+  # @return [Boolean]
+  def ill_restricted_user_group?
+    ils_group&.in? Settings.fulfillment.ill_restricted_user_groups
   end
 
   # Returns User's full name in Alma
@@ -86,5 +113,16 @@ module AlmaAccount
     Alma::User.find(uid)
   rescue Alma::User::ResponseError
     false
+  end
+
+  # @param [Hash] role
+  # @return [Boolean]
+  def active_work_order_role?(role)
+    (role.dig('role_type', 'value') == Settings.alma.work_order_role_value) && (role.dig('status', 'value') == 'ACTIVE')
+  end
+
+  # @return [Array<String>]
+  def docdel_groups
+    Settings.fulfillment.docdel_user_groups
   end
 end

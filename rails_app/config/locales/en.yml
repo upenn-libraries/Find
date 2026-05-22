@@ -1,74 +1,70 @@
 en:
+  advanced_search:
+    lede: 'Search multiple fields at once to find exactly what you need.'
+  breadcrumbs:
+    root: 'Find'
+  feedback:
+    heading: 'Feedback'
+    description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help.'
+  guides:
+    use_catalog: 'Using the Find catalog'
+    articles+: 'Using Articles+'
+    library_account: 'Using your account'
+  head:
+    meta:
+      description:
+        record: Access '%{title}' through the Penn Libraries catalog.
   home:
     info:
-      heading: 'What can I do here?'
-      discover:
-        title: 'Discover library materials.'
-        description: 'Use the search box to find books, ebooks, articles, journals, digital media, and more.'
+      heading: 'Search our catalog'
+      description: '<strong>The definitive place to find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      guide_cta_html: 'For search tips, %{link}.'
+      guide_link_text: 'visit our catalog guide'
       manage:
-        title: 'Manage your Library Account.'
-        description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
-    feedback:
-      title: 'We want your feedback!'
-      description: 'Thanks for using the Penn Libraries new search tool. We encourage you to <a href="%{url}" target="_blank">submit feedback</a> as we continue to improve the site.'
-      release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
-    help:
-      heading: 'Where can I get help?'
-      connect:
-        title: 'Connect with us'
-        chat:
-          title: 'Chat'
-          description: 'Get live assistance M-F 9-5'
-        ask:
-          title: 'Ask'
-          description: 'Send us a question and we’ll respond in 24 hours or less'
-        appointment:
-          title: 'Make an appointment'
-          description: 'Consult a subject specialist'
-      self_service:
-        title: 'Self-service'
-        faq: 'Check our FAQ'
-        guides: 'View our research guides'
-        libraries: 'Visit a library location'
-        lib_hours: '(see hours)'
+        heading: 'Manage your account'
+        description: 'Create and manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
+        cta_html: 'Go to %{link}.'
     resources:
-      title: 'More resources for your research'
-      lede: 'Expand your search using one of the following specialized tools.'
+      heading: 'More tools for your research'
+      lede: 'No single search tool covers everything. Expand your research with these popular specialized tools.'
       research:
-        title: 'Research materials'
         articles:
-          title: 'Articles+'
+          heading: 'Articles+'
           description: 'Full-text articles and book chapters'
         borrow:
-          title:
+          heading:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
           description: 'Find and borrow materials from partner libraries'
         scholarlycommons:
-          title: 'ScholarlyCommons'
+          heading: 'ScholarlyCommons'
           description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
         search_center:
-          title: 'Search Center'
+          heading: 'Search Center'
           description: 'Biddle Law Library catalog'
         worldcat:
-          title: 'WorldCat'
+          heading: 'WorldCat'
           description: 'Union catalog listing 540 million records held by member institutions'
+        research_guides:
+          heading: 'Research Guides'
+          description: 'Find resources on a variety of research topics, specially curated by our librarians'
       archival:
-        title: 'Additional archival materials'
         colenda:
-          title: 'Colenda Digital Repository'
+          heading: 'Colenda Digital Repository'
           description: 'Digitized and born-digital material'
         finding_aids:
-          title: 'Finding Aids | Philadelphia Area Archives'
-          description: 'Special collections and archival material across Penn and repositories in the greater Philadelphia region'
+          heading: 'Finding Aids'
+          description: 'Penn special collections and archival material as well as collections at repositories in the greater Philadelphia region'
+        philly_archives:
+          heading: 'Philadelphia Area Archives'
         hathi:
-          title: 'HathiTrust'
+          heading: 'HathiTrust'
           description: 'A partnership of academic and research institutions offering millions of digitized titles from libraries around the world'
         jstor:
-          title: 'JSTOR Images'
+          heading: 'JSTOR Images'
           description: 'Image collections from Penn and other institutions'
         openn:
-          title: 'OPenn'
+          heading: 'OPenn'
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
   account:
     breadcrumbs:
@@ -76,7 +72,7 @@ en:
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_heading: 'Account overview'
+      page_heading: 'My Account'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
         request:
@@ -95,9 +91,11 @@ en:
           title: 'Fines and fees'
           description: 'View fines for overdue, lost, or damaged items.'
     ill:
+      restricted_user_html: 'Your user type is not allowed to use ILL services. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
+      blocked_html: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
-      staff_only: 'Visible to staff only'
+      staff_only: 'This option is only visible to staff'
       proxy_alert_html: 'You are proxying a request for <strong>%{name} (%{group})</strong>'
       request_type:
         prompt: "What's the item you are requesting?"
@@ -106,7 +104,7 @@ en:
       form:
         proxy:
           prompt: 'Is this request for a patron?'
-          pennkey: 'Their PennKey'
+          pennkey: 'Enter their PennKey to make this request on their behalf'
           submit: 'Apply'
         scan:
           journal_title:
@@ -124,6 +122,7 @@ en:
           volume: 'Volume'
           issue: 'Issue'
           pages: 'Pages'
+          isxn: 'ISSN/ISBN'
           comments:
             label: 'Comments'
             help_text: 'Describe the item further to help us find it.'
@@ -152,7 +151,6 @@ en:
           delivery_msg: 'Processing time can vary widely depending on the nature and availability of the item.'
           submit: 'Place request'
         required: '(required)'
-        email_notification_msg: "We'll send you an email notification when it is ready."
     bookmarks:
       page_heading: 'Bookmarks'
       page_lede: 'Create citations and email bookmarked items.'
@@ -206,6 +204,9 @@ en:
             last_updated_at:
               desc: 'Most recently updated'
               asc: 'Least recently updated'
+            due_date:
+              desc: 'Due Date (Latest)'
+              asc: 'Due Date (Soonest)'
         submit: 'Refine'
       table:
         th:
@@ -219,6 +220,8 @@ en:
           transaction_number: 'Transaction Number'
       renew_all:
         button: 'Renew all eligible'
+        mass_renewal: 'We attempted to renew all your items. Examine your shelf below to see the new due dates for each item.'
+        mass_renewal_with_issues: 'We attempted to renew all your items, but not all renewals were successful. Examine your shelf below to see the new due dates for each item.'
         alerts: '<ul>%{alerts}</ul>'
         alert: '<li>%{alert}</li>'
       bib_record_link: 'View title record page'
@@ -248,9 +251,15 @@ en:
       bookmarks: 'Bookmarks'
       fines: 'Fines and fees'
       settings: 'Settings'
+    guides:
+      heading: 'Guides'
+    about:
+      heading: 'Find'
+      home: 'Home'
+      release_notes: 'Release notes'
   advanced:
     all_fields: 'Keyword'
-    creator_search: 'Author/Creator'
+    creator_search: 'Author/Contributor'
     title_search: 'Title'
     journal_title_search: 'Journal Title'
     subject_search: 'Subject'
@@ -276,8 +285,19 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    res_share_location_label: 'Loaned to Another Library'
+    fallback_electronic_access_button_label: 'Online'
+    online_cta: 'View online'
+    incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
     physical_missing_frame: "We're having trouble getting the availability for this item. Please try again."
     details_missing_frame: "We're having trouble getting additional details for this resource. Please try again."
+    hathi:
+      header:
+        full: 'Full viewability at'
+        partial: 'More viewability at'
+        limited: 'Limited (search-only) viewability at'
+      main: 'HathiTrust Digital Library'
+      missing_frame: "We're having trouble getting the HathiTrust link for this record. Please try again."
   facets:
     access: 'Access'
     classification: 'Classification'
@@ -285,6 +305,7 @@ en:
     databases:
       subject: 'Database Subject'
       type: 'Database Type'
+      category: 'Database Subject Group'
     format: 'Format'
     genre: 'Genre'
     language: 'Language'
@@ -306,7 +327,8 @@ en:
       placeholder: 'Select facets...'
   library:
     info:
-      about: 'About location'
+      about: 'More about this location'
+      floor_plans: 'Floor plans'
       todays_hours: "Today's hours: %{hours}"
       view_hours: 'View hours'
       view_more_hours: 'View more hours'
@@ -314,17 +336,24 @@ en:
       missing_frame: "We're having trouble getting additional information for this library location. Please try again."
       no_info: 'No additional information is available for this location.'
   login:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Login'
+      alma: 'Courtesy borrower'
     alma:
       credentials:
         email: 'Email'
         password: 'Password'
-      heading: 'Courtesy Borrower Login'
-      login: 'Borrower Login'
-      name: 'Courtesy Borrower'
+      heading: 'Courtesy borrower login'
+      login: 'Borrower login'
+      name: 'Courtesy borrower'
     developer: 'Developer'
-    help: 'Help with your library account'
+    help: 'Your library account'
     pennkey: 'Continue with PennKey'
   results:
+    singular: 'result'
+    none: 'No results'
+    alternate_title: 'Parallel title'
     creator: 'Author/Creator'
     edition: 'Edition'
     conference: 'Conference name'
@@ -336,9 +365,16 @@ en:
     contained_within: 'Contained in'
     format: 'Format'
     score: 'Score'
+    json:
+      marcxml: 'MARC XML'
+      mmsid: 'MMS ID'
+      isbn: 'ISBN'
+      issn: 'ISSN'
+      oclc_id: 'OCLC ID'
+      library: 'Library'
   requests:
     form:
-      heading: 'Request an item'
+      heading: 'Access options'
       item_label: 'What item are you requesting?'
       item_placeholder: 'Choose an item...'
       buttons:
@@ -350,42 +386,58 @@ en:
         aeon: 'Schedule visit'
         placeholder: 'Request item'
         hsp: 'Schedule visit'
+        docdel: 'Place DocDel request'
       options:
         label: 'How would you like it delivered?'
-        only_ill_requestable: 'This item is unavailable from the Penn libraries and will be sourced from another lending institution.'
         boundwith: 'The item is bound together with other titles, but can still be requested.'
-        scan:
-          info_html: '<a href="%{url}" target=_blank>About request scan</a>'
-          label: 'Email me a chapter or section'
+        email_notification_message_html: "We'll email a notification to <strong>%{email}</strong> when your request is ready. Review email settings in %{account_link}."
+        electronic:
+          info_html: '<a href="%{url}" target=_blank>About this service</a>'
+          label_html: 'Email me a chapter or section'
         office:
           label_html: 'Office Delivery via <strong>FacultyEXPRESS</strong>'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Faculty Express</a>'
-          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>'
+          warning_html: 'You do not have a preferred Faculty Express delivery address. Set one up by contacting <a href="%{url}" target="_blank">Faculty Express</a>.'
         pickup:
-          label: 'Pick up'
+          label_html: 'Pick up'
+          info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
+        ill_pickup:
+          label_html: 'ILL Pick up'
           info_html: '<a href="%{url}" target="_blank">How to Pickup @ Penn</a>'
         mail:
-          label: 'Mail it via Books by Mail'
+          label_html: 'Mail it via Books by Mail'
+          restriction_message: 'Your address must be more than 50 miles from campus and in the U.S. to use this service.'
           info_html: '<a href="%{url}" target="_blank">Change your delivery address and contact Books by Mail</a>'
           warning_html: 'Registration with <a href="%{url}" target="_blank">Books by Mail</a> is required.'
+        docdel:
+          label_html: "Request it through Wharton's Document Delivery service"
+          info_html: '<a href="%{url}" target="_blank">About Lippincott Library services</a>'
         aeon:
           info: 'Special collections materials are available to anyone who wishes to consult them in the reading room.'
         archives:
           info_html: 'Accessing this item requires <a href="%{visit_url}">visiting</a> the <a href="%{contact_url}">Penn University Archives & Records Center</a>.'
         hsp:
           info_html: 'Materials kept by the <a href="%{url}" target="_blank">Historical Society of Pennsylvania</a> are <strong>accessed by appointment</strong>.'
+        reserve:
+          info_html: 'This item cannot be requested because it is being held in <a href="%{reserves_url}" target="_blank">reserves</a> at the %{library}.'
+        reference:
+          info: 'This item can be consulted for a limited time by visiting the reference desk at %{library}'
+        onsite:
+          info: 'This item can be consulted by visiting %{library}.'
         none:
-          info: 'This item is unavailable from the Penn libraries.'
+          info: 'This item is currently unavailable from the Penn Libraries.'
       request_item: 'Request an item'
       log_in_to_request_item: 'Log in to request item'
       add_comments: 'Add comments'
       comments_label: 'Comments'
+      only_ill_requestable: 'This item is currently unavailable from the Penn Libraries. If you request this item, we will attempt to get it from another lending institution by submitting an InterLibrary loan request.'
       missing_frame: "We're having trouble getting the requesting options for this item. Please try again."
   fulfillment:
     public_error_message: 'An internal error occurred.'
     outcome:
       email:
         confirmation_subject: 'Find Request Confirmation'
+        docdel: 'This request will be delivered by Lippincott Library staff.'
         pickup: 'This request will be available to pickup at %{pickup_location}.'
         electronic: 'This request will be made electronically available in your library account.'
         mail: 'This request will be delivered to your Books by Mail address.'
@@ -396,19 +448,42 @@ en:
       no_holding_id: 'No holding identifier provided'
       no_user_id: 'No user identifier provided'
       no_proxy_requests: 'Proxied request are not allowed'
-      no_courtesy_borrowers: 'Courtesy borrowers cannot place Interlibrary Loan requests'
+      ineligible_user_group: 'Your user group is not allowed to make ILL requests'
+      blocked: 'Your account is blocked from making ILL requests'
       proxy_invalid: 'Proxy user not found in Alma'
     illiad:
       comment: '%{comment} - comments submitted by %{user_id}'
       proxy_comment: 'Proxied by %{requester_id}'
       boundwith_comment: 'This request is for a boundwith record.'
+      pdf_viewed: 'PDF viewed'
+    docdel:
+      email:
+        subject: 'DocDel submission from catalog'
+  cataloging_errors:
+    form:
+      title: "Report a cataloging error"
+      record_info: "Record information"
+      mms_id: "MMS ID"
+      message_label: "Describe the issue"
+      instructions: "Please provide details about the error"
+      submit: "Send report"
+      cancel: "Cancel"
+    email:
+      subject: "Cataloging error report - MMS ID: %{mms_id}"
+    flash:
+      success: 'Your error report has been submitted. Thank you for helping us improve our catalog!'
+      failure: 'Something went wrong. Please try again later.'
   search:
     all_fields: 'All Fields'
+    basic: 'All Fields (Basic)'
+    no_anchored: 'All Fields (No Anchored)'
+    no_unstem: 'All Fields (No Unstemmed)'
     button:
       label: "Find it"
     advanced:
       label: "Advanced"
     databases: "Databases"
+    more_options: "Advanced search & Databases"
     edit:
       label: 'Edit Search'
   show:
@@ -419,15 +494,16 @@ en:
       conference_detail: 'Conference Name'
       contributor: 'Contributor'
       main: 'Author/Creator'
+      extended: 'Extended Author'
     edition:
       main: 'Edition'
       other: 'Other Edition'
     format:
+      facet: 'Format'
       cartographic: 'Cartographic Data'
       main: 'Physical Description'
       other: 'Other Format'
     genre: 'Genre'
-    harmful_language_statement_html: 'As you encounter harmful or offensive language and have questions or suggestions, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a>. More information at <a href="https://guides.library.upenn.edu/deidiscovery/concerning-harmful-language" target="_blank">Statement on Harmful Language</a>.'
     identifier:
       fingerprint: 'Fingerprint'
       isbn: 'ISBN'
@@ -435,7 +511,8 @@ en:
       oclc_id: 'OCLC'
       publisher_number: 'Publisher Number'
     language:
-      main: 'Language'
+      facet: 'Language'
+      main: 'Language Note'
     link:
       full_text: 'Online'
       web: 'Web Link'
@@ -443,6 +520,7 @@ en:
       access_restriction: 'Access Restriction'
       arrangement: 'Arrangement'
       biography: 'Biography/History'
+      bound_with: 'Bound With'
       contents: 'Contents'
       credits: 'Credits'
       finding_aid: 'Finding Aid/Index'
@@ -459,7 +537,6 @@ en:
       place_of_publication: 'Place of Publication'
       publication: 'Publication'
     relation:
-      chronology: 'Penn Chronology'
       constituent_unit: 'Constituent Unit'
       contained_in: 'Contained In'
       contains: 'Contains'
@@ -486,11 +563,15 @@ en:
     title: 'Staff View'
     leader: 'LEADER %{leader}'
     back: '&laquo; Back to Record'
+  statements:
+    harmful_language_html: 'The Penn Libraries is committed to describing library materials using current, accurate, and responsible language. If you discover outdated or inaccurate language, please fill out this <a href="https://faq.library.upenn.edu/ask" target="_blank">feedback form</a> to report it and suggest alternative language.'
   sort:
     added_date_asc: 'Date Added (old-new)'
     added_date_desc: 'Date Added (new-old)'
     creator_asc: 'Author/Creator (a-z)'
     creator_desc: 'Author/Creator (z-a)'
+    call_num_asc: 'Call Number (a-z)'
+    call_num_desc: 'Call Number (z-a)'
     publication_date_asc: 'Publication date (old-new)'
     publication_date_desc: 'Publication date (new-old)'
     relevance: 'Relevance'

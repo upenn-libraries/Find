@@ -3,11 +3,14 @@
 User-agent: *
 Crawl-delay: 5
 
+Sitemap: https://find.library.upenn.edu/sitemap
+
 Disallow: /*?*
 Disallow: /bookmarks
 Disallow: /catalog/advanced
 Disallow: /catalog/facet
-Disallow: /catalog
+Disallow: /catalog*f%5B
+Disallow: /catalog*f[
 Disallow: /catalog.atom
 Disallow: /catalog.rss
 Disallow: /catalog/email
@@ -23,5 +26,7 @@ Disallow: /catalog/*.ris
 Disallow: /catalog/*.marc
 Disallow: /catalog/*.marcxml
 Disallow: /catalog/*.endnote
+Disallow: /collects
+Disallow: /discover
 Disallow: /fulfillment
 Disallow: /inventory

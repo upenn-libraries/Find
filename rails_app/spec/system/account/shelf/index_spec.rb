@@ -8,7 +8,7 @@ describe 'Account Shelf index page' do
   let(:shelf_listing) { create(:shelf_listing) }
 
   before do
-    sign_in user
+    login_as user
 
     # Stub Shelf Listing
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf_service)

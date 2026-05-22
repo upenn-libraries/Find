@@ -3,13 +3,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.5'
+ruby '3.4.8'
 
 gem 'alma'
-gem 'blacklight', github: 'projectblacklight/blacklight', ref: '5a779c5a96a835152df5bee9f2e7b6088aaee5a9'
+gem 'aws-sdk-s3', '~> 1'
+# Use this BL ref to get adv search bugfix until a new 9.x release is available
+gem 'blacklight', git: 'https://github.com/projectblacklight/blacklight.git',
+                  ref: '0e12a84b55a4db07f853a349ee040295ba5b09ee'
+gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false
-gem 'bootstrap', '~> 5.1'
 gem 'config'
 gem 'devise'
 gem 'devise-guests', '~> 0.8'
@@ -19,31 +22,33 @@ gem 'honeybadger'
 gem 'importmap-rails'
 gem 'marc'
 gem 'mini_racer'
-gem 'omniauth'
-gem 'omniauth-rails_csrf_protection'
+gem 'observer', require: false
+gem 'omniauth', '~> 2'
 gem 'omniauth-saml'
 gem 'pennmarc', '~> 1'
-gem 'pg', '~> 1.1'
-gem 'puma', '~> 6.0'
+gem 'pg', '~> 1.6'
+gem 'pg_search'
+gem 'propshaft'
+gem 'puma', '~> 6.5.0'
 gem 'put'
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 8'
 gem 'requestjs-rails'
 gem 'rsolr'
-gem 'sassc-rails'
-gem 'sprockets-rails'
+gem 'sidekiq-cron'
+gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
 gem 'stimulus-rails'
 gem 'summon'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'upennlib-rubocop', require: false
-gem 'view_component', '~> 2.66'
+gem 'view_component', '~> 4.0'
 
 group :development, :test do
   gem 'byebug'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'rspec-rails', '~> 6.0.0'
+  gem 'reek'
+  gem 'rspec-rails', '~> 8.0.0'
 end
 
 group :development do

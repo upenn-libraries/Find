@@ -1,0 +1,45 @@
+{
+  "oclc:1259467;lccn:10022969": {
+    "records": {
+      "001377411": {
+        "recordURL": "https://catalog.hathitrust.org/Record/001377411",
+        "titles": [
+          "The town down the river : a book of poems"
+        ],
+        "isbns": [],
+        "issns": [],
+        "oclcs": [
+          "1259467"
+        ],
+        "lccns": [
+          "10022969"
+        ],
+        "publishDates": [
+          "1910"
+        ]
+      }
+    },
+    "items": [
+      {
+        "orig": "University of Michigan",
+        "fromRecord": "001377411",
+        "htid": "mdp.39015002741158",
+        "itemURL": "https://babel.hathitrust.org/cgi/pt?id=mdp.39015002741158",
+        "rightsCode": "pd",
+        "lastUpdate": "20230801",
+        "enumcron": false,
+        "usRightsString": "Full view"
+      },
+      {
+        "orig": "University of California",
+        "fromRecord": "001377411",
+        "htid": "uc2.ark:/13960/fk57d2qj4c",
+        "itemURL": "https://babel.hathitrust.org/cgi/pt?id=uc2.ark:/13960/fk57d2qj4c",
+        "rightsCode": "pd",
+        "lastUpdate": "20190104",
+        "enumcron": false,
+        "usRightsString": "Full view"
+      }
+    ]
+  }
+}

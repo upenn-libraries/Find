@@ -4,7 +4,7 @@ en:
       previous: 'Previous'
       next: 'Next'
   blacklight:
-    application_name: 'Find | Penn Libraries'
+    application_name: 'Find · Penn Libraries'
     back_to_search: 'Back to Results'
     search:
       zero_results:
@@ -15,6 +15,7 @@ en:
           try_different_keywords: 'Try different keywords that mean the same thing.'
           try_advanced_html: 'Try <a href="/catalog/advanced">advanced search</a> to construct a targeted query.'
           get_help_html: '<a href="%{url}">Get help from a librarian</a> to find what you are looking for.'
+          external_request_html: 'Borrow from partner libraries with <a href="%{ezborrow_url}">EZBorrow</a>, <a href="%{borrowdirect_url}">BorrowDirect</a>, and our <a href="%{ill_url}">request an item</a> form.'
       pagination_info:
         single_item_found: '1 %{entry_name} found'
         pages:
@@ -23,11 +24,32 @@ en:
       entry_pagination_info:
         other: '%{current} of %{total}'
       facets:
+        title: 'Filter results'
+        filter: 'Filter'
+        page: 'Page %{page}'
+        modal_title: 'Filter by %{field_name}'
+        more_html: 'All %{field_name}'
+        suggest:
+          label: 'Search for %{field_label}'
+          placeholder: 'Search'
+          no_results: 'No results found.'
+        sort:
+          label: 'Sort by %{sort}'
+          index: 'A-Z'
+          count: 'Frequency'
         group:
           none: 'Your search found no results to limit in the Catalog. Change or start your search over for filters.'
+      filters:
+        title: 'Searching for'
+        all: 'All'
+      show:
+        title: "%{document_title} · %{application_name}"
+      page_title:
+        title: "%{constraints} · %{application_name}"
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
     advanced_search:
+      page_title: "Advanced search · %{application_name}"
       form:
         limit_criteria_heading_html: 'Limit your search'

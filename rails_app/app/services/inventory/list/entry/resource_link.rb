@@ -49,6 +49,11 @@ module Inventory
           nil
         end
 
+        # @return [nil]
+        def public_note
+          nil
+        end
+
         # @return [Boolean]
         def resource_link?
           true

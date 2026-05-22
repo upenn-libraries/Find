@@ -1,0 +1,24 @@
+/*
+* Bootstrap form customizations
+*/
+
+.form-control,
+.form-select {
+  border-radius: var(--pl-border-radius-subtle);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--pl-color-fg-accent);
+  box-shadow: var(--pl-focus-box-shadow);
+}
+
+.form-check-input:focus {
+  border-color: var(--pl-color-fg-accent);
+  box-shadow: var(--pl-focus-box-shadow);
+}
+
+.form-check-input:checked {
+  background-color: var(--pl-color-fg-accent);
+  border-color: var(--pl-color-fg-accent);
+}

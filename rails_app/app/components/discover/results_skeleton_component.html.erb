@@ -1,0 +1,58 @@
+<div id="<%= id %>" class="card">
+  <div class="card-header">
+    <h3 class="card-title h4">
+      <i class="<%= icon_classes.join(' ') %>"></i>
+      <%= label %>
+    </h3>
+    <div class="d-flex gap-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#<%= location_modal_id %>" aria-label="<%= t('discover.results.location_modal.button.aria_label', source: label) %>">
+        <i class="bi bi-geo-alt" aria-hidden="true"></i>
+      </button>
+      <a id="<%= results_button_id %>" class="visually-hidden btn btn-sm btn-primary disabled"></a>
+    </div>
+  </div>
+  <turbo-frame id="<%= turbo_frame_id %>"
+               class="card-body"
+               src="<%= discover_search_results_path(source: source, q: query, count: count) %>"
+               <%= "disabled" if disabled %>>
+    <ul class="list-group list-group-flush results-list results-list">
+      <% count.times do %>
+        <li class="list-group-item results-list-item placeholder-glow" role="status">
+          <h3 class="results-list-item__heading h5 placeholder-glow">
+            <span class="visually-hidden"><%= t('discover.results.messages.loading', source: label) %></span>
+            <span class="placeholder col-12"></span>
+            <span class="placeholder col-12"></span>
+          </h3>
+          <div class="results-list-item__content placeholder-glow">
+            <div class="results-list-item__metadata placeholder-glow">
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+              <div class="placeholder-glow">
+                <span class="placeholder col-10"></span>
+              </div>
+            </div>
+            <img src="" class="results-list-item__thumbnail placeholder" alt="<%= t('discover.results.messages.loading', source: label) %>">
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </turbo-frame>
+</div>
+
+<%= render(Discover::LocationModalComponent.new(source: source)) %>

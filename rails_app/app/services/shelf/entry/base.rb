@@ -55,6 +55,12 @@ module Shelf
         raise NotImplementedError
       end
 
+      # Not all types will have a due date - to support sorting use nil by default
+      # @return [nil]
+      def due_date
+        nil
+      end
+
       # Method to format date to user-friendly string. Does not include time.
       #
       # @param [Time] date

@@ -21,10 +21,12 @@ Rails.application.routes.draw do
   end
 
   mount Blacklight::Engine => '/'
+  mount BlacklightDynamicSitemap::Engine => '/'
+
   root to: 'catalog#index'
   concern :searchable, Blacklight::Routes::Searchable.new
 
-  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+  resource :catalog, only: [], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
 
     get 'databases', to: 'catalog#databases'
@@ -45,6 +47,7 @@ Rails.application.routes.draw do
       get 'brief'
       get 'portfolio/:pid/collection/:cid/detail', to: 'inventory#electronic_detail', as: :electronic_detail
       get 'holding/:holding_id/detail', to: 'inventory#physical_detail', as: :physical_detail
+      get 'hathi_link', to: 'inventory#hathi_link', as: :hathi_link
     end
   end
 
@@ -87,4 +90,23 @@ Rails.application.routes.draw do
   get 'additional_results/:source', to: 'additional_results#results', as: 'additional_results'
   post 'webhooks/alerts', to: 'alert_webhooks#listen'
   post 'alerts/dismiss', to: 'alert_dismiss#dismiss'
+
+  # Allow users to report cataloging errors
+  post 'cataloging_errors/create', to: 'cataloging_errors#create'
+
+  if Settings.discover.enabled
+    scope module: :discover do
+      get '/collects', to: 'discover#index'
+    end
+    namespace :discover do
+      get '/', to: 'discover#index'
+      get ':source/results', to: 'search#results', as: 'search_results'
+    end
+  end
+
+  if Settings.suggester.enabled
+    namespace :suggester do
+      get ':q', to: 'suggestions#show', constraints: { q: /.+/ }, format: false
+    end
+  end
 end

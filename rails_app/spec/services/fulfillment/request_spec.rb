@@ -15,7 +15,7 @@ describe Fulfillment::Request do
 
       it 'creates a new user for proxied patron' do
         expect(request.patron).to be_a Fulfillment::User
-        expect(request.patron.uid).to be 'jdoe'
+        expect(request.patron.uid).to eql 'jdoe'
       end
 
       it 'sets the correct user as the requester' do

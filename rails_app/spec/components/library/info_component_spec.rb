@@ -35,7 +35,7 @@ describe Library::InfoComponent, type: :components do
       it_behaves_like 'generates expected Library Info address', expected_line_count: 3
     end
 
-    context 'when no addess line 2 is available' do
+    context 'when no address line 2 is available' do
       include_context 'with a successful Library Info request', :with_all_info, address2: ''
       it_behaves_like 'generates expected Library Info address', expected_line_count: 2
     end
@@ -121,6 +121,39 @@ describe Library::InfoComponent, type: :components do
 
       it 'does not render a link to the library homepage' do
         expect(rendered).not_to have_selector('.library-about')
+      end
+    end
+  end
+
+  describe 'library floor plans display' do
+    context 'when a specific library floor plan url is available' do
+      include_context 'with a successful Library Info request', :with_all_info
+      let(:component) { described_class.new(library_code: code, location_code: 'musicsem') }
+
+      it 'renders a link to the library building\'s floor plan' do
+        expect(rendered).to have_link(
+          I18n.t('library.info.floor_plans'),
+          href: api_response[:floor_plans]['floors'].first['url']
+        )
+      end
+    end
+
+    context 'when a library floor plans url is available' do
+      include_context 'with a successful Library Info request', :with_all_info
+
+      it 'renders a link to the library building\'s floor plans landing page' do
+        expect(rendered).to have_link(
+          I18n.t('library.info.floor_plans'),
+          href: api_response[:floor_plans]['building']['url']
+        )
+      end
+    end
+
+    context 'when no library floor plans url is available' do
+      include_context 'with a successful Library Info request'
+
+      it 'does not render a link to the library building\'s floor plans landing page' do
+        expect(rendered).not_to have_selector('.library-floor-plans')
       end
     end
   end

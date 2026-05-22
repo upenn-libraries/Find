@@ -1,0 +1,124 @@
+# frozen_string_literal: true
+
+require 'system_helper'
+
+describe 'Catalog show page requesting behaviors' do
+  include_context 'with print monograph record with 2 physical entries'
+  include_context 'with empty hathi response'
+
+  let(:user) { create(:user) }
+  let(:mms_id) { print_monograph_bib }
+
+  context 'when logged in' do
+    include_context 'with mocked illiad_record on user'
+
+    let(:entries) { print_monograph_entries }
+
+    before do
+      login_as user
+      visit solr_document_path(mms_id)
+      click_button entries.second.description
+    end
+
+    context 'when adding comments to a request' do
+      let(:item) { build :item }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+        find("input#delivery_pickup_#{item.holding_id}").trigger('click')
+      end
+
+      it 'shows a button to add comments when the option is changed from scan' do
+        within('#add-comments') do
+          expect(page).to have_link I18n.t('requests.form.add_comments')
+        end
+      end
+
+      it 'hides the comments area when the option is changed back to scan' do
+        find("input#delivery_electronic_#{item.holding_id}").trigger('click')
+        within('form.fulfillment-form') do
+          expect(page).not_to have_selector '#add-comments'
+        end
+      end
+
+      it 'expands the comments area when the button is clicked' do
+        click_link I18n.t('requests.form.add_comments')
+        within('#add-comments') do
+          expect(page).to have_selector 'textarea#comments'
+        end
+      end
+    end
+  end
+
+  context 'when not logged in' do
+    before do
+      visit solr_document_path(mms_id)
+      click_button print_monograph_entries.first.description
+    end
+
+    context 'with an aeon requestable item' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
+      end
+      let(:item) { build :item, :aeon_location }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the aeon request options' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#aeon-option'
+        end
+      end
+
+      it 'shows the schedule visit button with aeon href' do
+        within('.request-buttons') do
+          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
+          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
+          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
+        end
+      end
+    end
+
+    context 'with an item at the archives' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
+                                 library_code: Settings.fulfillment.restricted_libraries.archives)]
+      end
+      let(:item) { build :item, :at_archives }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives text' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#archives-option'
+        end
+      end
+    end
+
+    context 'with an item at HSP' do
+      let(:print_monograph_entries) do
+        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',
+                                 library_code: Settings.fulfillment.restricted_libraries.hsp)]
+      end
+      let(:item) { build :item, :at_hsp }
+
+      before do
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
+
+      it 'shows the archives text' do
+        within('.fulfillment__container') do
+          expect(page).to have_selector '#hsp-option'
+        end
+      end
+    end
+  end
+end

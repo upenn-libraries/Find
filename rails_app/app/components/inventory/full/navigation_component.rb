@@ -5,6 +5,8 @@ module Inventory
     # Renders vertical navigation pane for record show page inventory entries. Uses tab pill nav functionality
     # provided by Bootstrap.
     class NavigationComponent < ViewComponent::Base
+      include Turbo::FramesHelper
+
       # @param inventory [Inventory::Response] inventory response object
       # @param selected_id [String] entry id for selected entry
       def initialize(inventory:, selected_id:)
@@ -16,7 +18,11 @@ module Inventory
       # @param entry [Inventory::Entry]
       # @return [Boolean]
       def active?(entry)
-        @selected_id == entry.id
+        if @selected_id.blank?
+          entry == @inventory.first
+        else
+          @selected_id == entry.id
+        end
       end
 
       # Classes to use in rendering the inventory entry element

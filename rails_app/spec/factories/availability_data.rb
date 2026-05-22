@@ -56,6 +56,8 @@ FactoryBot.define do
     policy do
       { 'value' => 'book/seria', 'desc' => 'Book/serial' }
     end
+    enumeration_a { 'Volume 1' }
+    enumeration_b { 'Issue 1' }
 
     skip_create
     initialize_with { attributes.stringify_keys }

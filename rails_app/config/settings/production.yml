@@ -1,4 +1,5 @@
 solr_url: <%= DockerSecrets.lookup(:solr_url, ENV['SOLR_URL']) %>
+app_host: 'find.library.upenn.edu'
 additional_results_sources:
   position: 1
   summon:
@@ -7,5 +8,9 @@ additional_results_sources:
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 google_analytics:
   id: 'GTM-KMLQ6V6W'
+ms_clarity:
+  id: 'vcqg5eo9ty'
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
+suggester:
+  enabled: true

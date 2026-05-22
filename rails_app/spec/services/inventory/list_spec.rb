@@ -1,12 +1,26 @@
 # frozen_string_literal: true
 
 describe Inventory::List do
+  let(:document) { SolrDocument.new({ id: mms_id }) }
+
+  context 'when the SRU call times out' do
+    let(:mms_id) { '9979240322003681' }
+
+    before do
+      stub_request(:any, /#{Settings.alma.sru_endpoint}/).to_timeout
+    end
+
+    it 'returns a response object marked as not complete' do
+      expect(described_class.full(document).complete?).to be false
+      expect(described_class.brief(document).complete?).to be false
+    end
+  end
+
   describe '.full' do
-    include_context 'with stubbed availability_data'
+    include_context 'with stubbed SRU availability_data'
 
     let(:response) { described_class.full(document) }
     let(:mms_id) { '9979338417503681' }
-    let(:document) { SolrDocument.new({ id: mms_id }) }
 
     context 'with a record having Physical inventory' do
       include_context 'with stubbed availability item_data'
@@ -57,6 +71,11 @@ describe Inventory::List do
         expect(entry.description).to eq ecollection_data['public_name_override']
         expect(entry.href).to eq ecollection_data['url_override']
       end
+
+      it 'entry includes public note' do
+        entry = response.first
+        expect(entry.public_note).to eq ecollection_data['public_note']
+      end
     end
 
     context 'with a record having poorly coded Ecollection inventory' do
@@ -102,11 +121,10 @@ describe Inventory::List do
   end
 
   describe '.brief' do
-    include_context 'with stubbed availability_data'
+    include_context 'with stubbed SRU availability_data'
     include_context 'with stubbed availability item_data'
 
     let(:mms_id) { '9979338417503681' }
-    let(:document) { SolrDocument.new({ id: mms_id }) }
     let(:response) { described_class.brief(document) }
     let(:availability_data) do
       { mms_id => { holdings: build_list(:physical_availability_data, 4) } }

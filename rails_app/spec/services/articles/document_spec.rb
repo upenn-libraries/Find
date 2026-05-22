@@ -27,9 +27,9 @@ describe Articles::Document do
     end
   end
 
-  describe '#proxy_link' do
-    it 'returns the proxy link' do
-      expect(doc.proxy_link).to eq(I18n.t('urls.external_services.proxy', url: doc.link))
+  describe '#https_link' do
+    it 'returns the link with the https protocol' do
+      expect(doc.https_link).to start_with 'https'
     end
   end
 

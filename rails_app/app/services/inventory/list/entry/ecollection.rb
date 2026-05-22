@@ -12,9 +12,10 @@ module Inventory
           data[:id]
         end
 
-        # @return [String, nil]
+        # @return [String]
         def description
-          data[:public_name_override].presence || data[:public_name].presence
+          data[:public_name_override].presence || data[:public_name].presence ||
+            I18n.t('inventory.fallback_electronic_access_button_label')
         end
 
         # @return [String]
@@ -46,6 +47,13 @@ module Inventory
         def coverage_statement
           nil
         end
+
+        # @return [String, nil]
+        # rubocop:disable Rails/OutputSafety
+        def public_note
+          sanitize(data[:public_note], tags: ALLOWED_TAGS)&.html_safe
+        end
+        # rubocop:enable Rails/OutputSafety
 
         # @return [String, nil]
         def href

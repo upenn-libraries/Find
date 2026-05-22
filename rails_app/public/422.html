@@ -1,67 +1,83 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" class="pl-reset pl-typeset">
 <head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>422 Error &middot; Find &middot; Penn Libraries</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://cdn.jsdelivr.net/npm/@penn-libraries/web@1.0.0/dist/web/web.css" rel="stylesheet"/>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@penn-libraries/web@1.0.0/dist/web/web.esm.js"></script>
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    html {
+      line-height: 1.5;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--pl-color-bg-subtle);
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    pennlibs-header {
+      background: var(--pl-color-bg-default);
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    main {
+      flex-grow: 1;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    p, ul {
+      margin-bottom: var(--pl-space-m);
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    li {
+      margin-bottom: var(--pl-space-xs);
+    }
+
+    .page-not-found {
+      max-width: 36rem;
+      margin: var(--pl-space-3xl) auto;
+      padding: 2rem;
+      background: var(--pl-color-bg-default);
+      box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+      border-top: solid 0.25rem var(--pl-color-fg-attention);
+    }
+
+    .page-heading::after {
+      background: var(--pl-color-fg-attention);
+    }
+
+    .page-heading__error-prefix {
+      color: var(--plcolor-fg-attention);
+      display: block;
+      font-size: var(--pl-font-size-xl);
+      font-family: var(--pl-font-family);
+    }
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
+<body>
+<pennlibs-header service-name="Find" service-lede="books, articles, and more"></pennlibs-header>
+<main class="pl-viewport-margins">
+  <div class="page-not-found">
+    <h1 class="page-heading">
+      <span class="page-heading__error-prefix">422</span>
+      An unexpected error
+    </h1>
+
+    <p class="pl-font-size-l">Sorry about this. Something is not working properly. Here is what you can do:</p>
+
+    <ul class="pl-font-size-l">
+      <li>Refresh the page and see if that helps</li>
+      <li>Try again later</li>
+      <li>Start again from the <a href="/">homepage</a> and navigate from there</li>
+    </ul>
+
+    <p>If this error persists, please <a href="https://www.library.upenn.edu/contact-us">contact us</a> with what happened and we'll do our best to help.</p>
   </div>
+</main>
+<pennlibs-footer></pennlibs-footer>
+<pennlibs-chat></pennlibs-chat>
 </body>
 </html>

@@ -4,7 +4,8 @@ namespace :tools do
   desc 'Initialize project, including Solr collections and database'
   task start: :environment do
     system('docker compose up -d')
-    sleep 2 # give services some time to start up before proceeding
+    puts 'Waiting for Solr to be available...'
+    sleep 1 until SolrTools.solr_available?
     begin
       if Settings.solr_url.include?('catalog-manager')
         puts 'Our sensors detect that you are using a solr_url setting for a deployed Solr instance.'
@@ -17,10 +18,9 @@ namespace :tools do
         latest_configset_file = Rails.root.join('solr').glob('configset_*.zip').max_by { |f| File.mtime(f) }
         raise StandardError, 'Configset file missing' unless latest_configset_file
 
-        config_zip_path = Rails.root.join('solr', latest_configset_file)
         configset_name = "find-configset-#{latest_configset_file.basename.to_s.split('_').last.gsub('.zip', '')}"
         puts "Loading Solr configset from : #{latest_configset_file}"
-        SolrTools.load_configset configset_name, config_zip_path
+        SolrTools.load_configset configset_name, latest_configset_file
         puts 'Creating Solr collections for development and test'
         SolrTools.create_collection 'find-development', configset_name
         SolrTools.create_collection 'find-test', configset_name
@@ -32,12 +32,8 @@ namespace :tools do
       system('docker compose stop')
       next # rake for early return
     end
-    begin
-      ActiveRecord::Base.connection
-    rescue ActiveRecord::NoDatabaseError
-      puts 'Creating databases...'
-      ActiveRecord::Tasks::DatabaseTasks.create_current
-    end
+    puts 'Creating databases...'
+    ActiveRecord::Tasks::DatabaseTasks.create_current
     # Migrate databases
     puts 'Migrating databases...'
     system('RAILS_ENV=development rake db:migrate')

@@ -7,7 +7,7 @@ FactoryBot.define do
     end
 
     filters { Shelf::Service::FILTERS }
-    sort { Shelf::Service::LAST_UPDATED_BY }
+    sort { Shelf::Service::LAST_UPDATED_AT }
     order { Shelf::Service::DESCENDING }
 
     skip_create

@@ -30,6 +30,11 @@ module Inventory
         join_fields entry.description
       end
 
+      # @return [String, nil]
+      def public_note_content
+        entry.public_note if entry.electronic?
+      end
+
       # @return [String]
       def footer_content
         fields = [entry.human_readable_location]

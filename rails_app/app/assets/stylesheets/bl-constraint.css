@@ -1,0 +1,113 @@
+/*
+ * Blacklight constraint/filter customizations
+ */
+
+.constraints-container {
+  align-items: baseline;
+  align-self: end;
+  gap: var(--pl-space-xs);
+  margin: 0 !important;
+  --bl-constraint-remove-hover-bg: var(--pl-color-bg-subtle);
+}
+
+.constraints-container > h2 {
+  margin: 0;
+  font-family: var(--pl-font-family);
+  font-size: var(--pl-font-size-m);
+  font-weight: 600;
+  color: var(--pl-color-fg-default);
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+
+  @media (max-width: 620px) {
+    flex-basis: 100%;
+  }
+}
+
+.constraints-container > h2::after {
+  content: none;
+}
+
+.constraint {
+  position: relative;
+  margin: 0 !important;
+}
+
+.constraint .btn {
+  border: none;
+}
+
+.constraint .remove {
+  position: static;
+  display: flex;
+  align-items: center;
+  padding-left: var(--pl-space-2xs) !important;
+}
+
+.constraint .remove::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--pl-border-radius);
+}
+
+.constraint .remove:hover::after {
+  border: 1px solid var(--pl-color-fg-subtle);
+}
+
+.constraint .remove:active {
+  color: var(--pl-color-fg-default);
+}
+
+.constraint .remove .bi {
+  width: 0.875em;
+  height: 0.875em;
+}
+
+.constraint .remove .blacklight-icons-remove {
+  margin-bottom: 0.025em;
+  padding-top: 2px;
+}
+
+.constraint.query .constraint-value::before,
+.constraint .filter-name {
+  color: var(--pl-color-fg-subtle);
+  font-size: 0.675rem;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.075rem;
+}
+
+.constraint .filter-name::after {
+  display: none !important;
+  content: "";
+}
+
+.constraint .constraint-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-weight: 600;
+  --bs-btn-padding-y: var(--pl-space-xs);
+}
+
+.constraint .filter-value {
+  font-weight: 400;
+  line-height: 1;
+}
+
+.constraint.query .constraint-value::before {
+  content: "Keyword";
+}
+
+.edit-search-btn,
+.catalog_startOverLink {
+  --bs-btn-padding-x: var(--pl-space-xs);
+}

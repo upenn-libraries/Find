@@ -36,6 +36,14 @@ describe Inventory::Location do
         expect(location.location_name).to eq 'alma_location'
       end
     end
+
+    context 'when the item is in a RES_SHARE library' do
+      let(:location) { create :location, :res_share }
+
+      it 'returns our custom label' do
+        expect(location.location_name).to eq I18n.t('inventory.res_share_location_label')
+      end
+    end
   end
 
   describe '#aeon?' do
@@ -71,6 +79,18 @@ describe Inventory::Location do
     it 'returns false if item is not at HSP' do
       location = create :location
       expect(location.hsp?).to be false
+    end
+  end
+
+  describe '#resource_sharing_library?' do
+    it 'returns true if item is at resource sharing library' do
+      location = create :location, :res_share
+      expect(location.resource_sharing_library?).to be true
+    end
+
+    it 'returns false if item is not at resource sharing library' do
+      location = create :location
+      expect(location.resource_sharing_library?).to be false
     end
   end
 end

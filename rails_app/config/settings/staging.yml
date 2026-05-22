@@ -1,4 +1,5 @@
 solr_url: <%= DockerSecrets.lookup(:solr_url, ENV.fetch('SOLR_URL', 'http://catalog:catalog@127.0.0.1:8983/solr/find-development')) %>
+app_host: 'find-staging.library.upenn.edu'
 additional_results_sources:
   position: 1
   summon:
@@ -7,7 +8,18 @@ additional_results_sources:
     api_key: <%= DockerSecrets.lookup(:summon_api_key, Rails.application.credentials.summon_api_key) %>
 google_analytics:
   id: 'GTM-WS2TBPLM'
+ms_clarity:
+  id: 'vcqbrc973h'
 honeybadger:
   api_key: <%= DockerSecrets.lookup(:honeybadger_api_key) %>
 email:
-  from_address: 'find-staging-noreply@library.upenn.edu'
+  from_address: 'find-staging-noreply@upenn.edu'
+fulfillment:
+  docdel:
+    email: 'mkanning@upenn.edu'
+discover:
+  enabled: true
+suggester:
+  enabled: true
+  digital_catalog:
+    host: 'find-staging.library.upenn.edu'

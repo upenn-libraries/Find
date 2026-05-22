@@ -53,22 +53,26 @@
       </div>
 
       <fieldset>
-        <legend class="h4 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
+        <legend class="pl-h2 mt-4"><%= t('account.ill.form.loan.delivery.label') %></legend>
         <p><%= t('account.ill.form.loan.delivery.help_text_html', pickup_url: t('urls.guides.pickup'), bbm_url: t('urls.guides.bbm')) %></p>
 
         <ul class="list-group">
           <% if @request.patron.faculty_express? %>
-            <%= render(Fulfillment::Options::OfficeComponent.new(user: @request.patron, checked: true)) %>
+            <%= render(Fulfillment::Choices::OfficeComponent.new(user: @request.patron, checked: true)) %>
           <% end %>
 
-          <%= render(Fulfillment::Options::PickupComponent.new(user: @request.patron, ill: true, checked: !@request.patron.faculty_express?)) %>
+          <%= render(Fulfillment::Choices::IllPickupComponent.new(user: @request.patron,
+                                                               checked: !@request.patron.faculty_express?)) %>
 
-          <%= render(Fulfillment::Options::MailComponent.new(user: @request.patron)) %>
+          <%= render(Fulfillment::Choices::MailComponent.new(user: @request.patron)) %>
         </ul>
       </fieldset>
 
       <p class="mt-4 mb-1"><%= t('account.ill.form.loan.delivery_msg') %></p>
-      <p><%= t('account.ill.form.email_notification_msg') %></p>
+      <p><%= t('requests.form.options.email_notification_message_html',
+               email: @request.patron.email,
+               account_link: link_to('your account', account_url, target: '_blank', rel: :noopener)
+             ) %></p>
 
       <%= button_tag t('account.ill.form.loan.submit'),
                      class: 'btn btn-success btn-lg',

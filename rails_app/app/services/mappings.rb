@@ -30,8 +30,6 @@ class Mappings
     end
 
     # @return [Hash]
-    def electronic_scoring
-      Settings.electronic_scoring
-    end
+    delegate :electronic_scoring, to: :Settings
   end
 end

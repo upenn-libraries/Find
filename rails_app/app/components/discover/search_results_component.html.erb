@@ -1,0 +1,20 @@
+<h1 class="visually-hidden"><%= t('discover.results.title') %></h1>
+
+<div class="results-content container">
+  <%= render(Discover::ResultsOverviewComponent.new(query: query)) %>
+
+  <div id="results" class="results row">
+    <div class="col-12 col-lg-6">
+      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::Find::SOURCE,
+                                                        query: query, count: count)) %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Blacklight::FindingAids::SOURCE,
+                                                        query: query, count: count)) %>
+    </div>
+    <div class="col-12 col-lg-6">
+      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Database::PennMuseum::SOURCE,
+                                                        query: query, count: count)) %>
+      <%= render(Discover::ResultsSkeletonComponent.new(source: Discover::Configuration::Database::ArtCollection::SOURCE,
+                                                        query: query, count: count))%>
+    </div>
+  </div>
+</div>

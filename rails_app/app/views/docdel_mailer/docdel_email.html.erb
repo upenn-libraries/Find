@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Find Catalog Document Delivery Submission</title>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+</head>
+<body>
+  <h1>New Request</h1>
+
+  <h2>Patron Details</h2>
+
+  <dl>
+    <dt>User:</dt>
+    <dd><%= @user.full_name %></dd>
+    <dt>Email:</dt>
+    <dd><%= @user.email %></dd>
+    <dt>Pennkey:</dt>
+    <dd><%= @user.uid %></dd>
+  </dl>
+
+  <h2>Item Details</h2>
+
+  <% if @params.source == Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID %>
+  <p>This request came from the "Request an Item" form.</p>
+
+  <dl>
+    <% if @params.article.present? %>
+      <%= render 'scan_fields' %>
+    <% elsif @params.title.present? %>
+      <%= render 'loan_fields' %>
+    <% end %>
+  </dl>
+
+  <% elsif @params.source == Fulfillment::Endpoint::Illiad::RECORD_PAGE_SOURCE_SID %>
+    <%= render 'item_fields' %>
+  <% end %>
+
+  <p>
+    <%= t('account.ill.form.loan.comments.label') %>:
+  </p>
+
+  <p>
+    <%= @params.comments || 'None provided' %>
+  </p>
+</body>
+</html>

@@ -5,6 +5,10 @@ module Inventory
     module Entry
       # Abstract class that all Inventory entry classes inherit from. Establishes API that subclasses should adhere to.
       class Base
+        include ActionView::Helpers::SanitizeHelper
+
+        ALLOWED_TAGS = %w[strong b].freeze
+
         attr_reader :data, :mms_id
 
         # @param mms_id [String]
@@ -44,6 +48,10 @@ module Inventory
         end
 
         def coverage_statement
+          raise NotImplementedError
+        end
+
+        def public_note
           raise NotImplementedError
         end
 

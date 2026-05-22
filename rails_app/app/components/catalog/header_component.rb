@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-# Copied from Blacklight v8.3.0@5a779c5a9
+# Copied from Blacklight v9.0
 
 module Catalog
   # Our HeaderComponent that displays the Web Component header and the search bar component
   class HeaderComponent < Blacklight::Component
-    renders_one :search_bar, lambda { |component: Blacklight::SearchNavbarComponent|
+    renders_one :search_bar, lambda { |component: Catalog::SearchNavbarComponent|
       component.new(blacklight_config: blacklight_config)
     }
 
@@ -19,9 +19,9 @@ module Catalog
     end
 
     # Hack from Blacklight::HeaderComponent so that the default lambdas are triggered
-    # so that we don't have to do c.with_top_bar() in the call.
+    # so that we don't have to do c.with_search_bar() in the call.
     def before_render
-      set_slot(:search_bar, nil) unless search_bar
+      with_search_bar unless search_bar
     end
 
     # Memoize alerts to prevent doubling database queries

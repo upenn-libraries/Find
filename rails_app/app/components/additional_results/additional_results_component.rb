@@ -9,17 +9,45 @@ module AdditionalResults
 
     renders_many :results_sources, AdditionalResults::ResultsSourceComponent
 
-    # @param query [String] the search term
+    # @param params [Hash] the URL parameters, optionally including search term and sources to exclude
+    # @param sources [Array<String>] array of all specified additional results sources
     # @param options [Hash] options for the component
-    # @option options [String] :class class(es) to apply to the component template
-    def initialize(query:, **options)
-      @query = query
+    def initialize(params:, sources: [], **options)
+      @params = params
+      @sources = sources
       @classes = Array.wrap(options[:class])&.join(' ')
     end
 
-    # @return [Boolean] true if a search term has been provided
+    # Adds ResultsSourceComponent for each included source post-filtering
+    # @return void
+    def before_render
+      filtered_sources.each do |source|
+        with_results_source(source, class: @classes)
+      end
+    end
+
+    # @return [Boolean] true if a search term has been provided and there are non-excluded sources
     def render?
-      @query.present?
+      query.present? && filtered_sources.any?
+    end
+
+    private
+
+    # @return [Array<String>] array of remaining sources after filtering out invalid or those hidden by param
+    def filtered_sources
+      return [] if excluded_sources.include?('all')
+
+      @sources.reject { |source| !valid?(source) || excluded_sources.include?(source) }
+    end
+
+    # @return [String, nil] the query param if present, otherwise `nil`
+    def query
+      @query ||= @params[:q]
+    end
+
+    # @return [Array<String>] a comma-separated list of source ids to exclude (or 'all')
+    def excluded_sources
+      @excluded_sources ||= @params[:exclude_extra].to_s.split(',') || []
     end
   end
 end

@@ -124,6 +124,24 @@ describe Fulfillment::Endpoint::Illiad::Params do
     end
   end
 
+  describe '#issn' do
+    context 'when issn is provided in isxn field' do
+      let(:open_params) { { 'isxn' => '0000-0000' } }
+
+      it 'returns issn' do
+        expect(params.issn).to eql '0000-0000'
+      end
+    end
+
+    context 'when isbn is provided in isxn field' do
+      let(:open_params) { { 'isxn' => '978-0-439-02348-1' } }
+
+      it 'returns isbn' do
+        expect(params.issn).to eql '978-0-439-02348-1'
+      end
+    end
+  end
+
   describe '#pages' do
     context 'when start and end page numbers provided in different values' do
       let(:open_params) { { 'spage' => '1', 'epage' => '25' } }
@@ -155,6 +173,17 @@ describe Fulfillment::Endpoint::Illiad::Params do
 
     it 'returns pubmed identifier' do
       expect(params.pmid).to eql '123456'
+    end
+  end
+
+  describe '#sid' do
+    let(:sid) { 'SomeExternal:SystemIdentifier' }
+    let(:open_params) do
+      { 'sid' => sid, 'source' => Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID }
+    end
+
+    it 'returns the preferred sid value even when a source is set' do
+      expect(params.sid).to eql sid
     end
   end
 
@@ -265,7 +294,7 @@ describe Fulfillment::Endpoint::Illiad::Params do
       let(:open_params) { { 'au' => 'Random Author', 'Author' => 'Other Random Author' } }
 
       it 'returns nil' do
-        expect(params.search('author', 'rft.au')).to be nil
+        expect(params.search('author', 'rft.au')).to be_nil
       end
     end
   end

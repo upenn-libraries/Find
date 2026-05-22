@@ -4,9 +4,9 @@ FactoryBot.define do
   factory :alma_bib_set, class: 'Alma::BibSet' do
     bib do
       {
-        'title' => Faker::Book.title,
-        'author' => Faker::Book.author,
-        'date_of_publication' => Faker::Date.between(from: 1956, to: 2020).to_s
+        'title' => 'Test Book',
+        'author' => 'Test Author',
+        'date_of_publication' => '1999'
       }
     end
 

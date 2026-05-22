@@ -25,12 +25,27 @@ services:
     environment:
       APP_UID: ${UID:-1000}
       APP_GID: ${GID:-1000}
-      CHROME_URL: "http://chrome:${CHROME_PORT}"
+      CHROME_URL: "ws://chrome:${CHROME_PORT}"
       SOLR_TEST_URL: "${SOLR_TEST_URL}"
       SOLR_URL: "${SOLR_URL}"
       VAGRANT: "true"
     healthcheck:
       retries: 8
-      start_period: 20s
+      start_period: 60s
+    secrets:
+      - aws_access_key
+      - aws_secret_access_key
+      - sidekiq_pro_credentials
     volumes:
       - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app
+
+secrets:
+  aws_access_key:
+    external: true
+    name: ${AWS_ACCESS_KEY}
+  aws_secret_access_key:
+    external: true
+    name: ${AWS_SECRET_ACCESS_KEY}
+  sidekiq_pro_credentials:
+    external: true
+    name: ${SIDEKIQ_PRO_CREDENTIALS}

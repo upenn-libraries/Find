@@ -71,7 +71,7 @@
       <%= form.submit t('account.shelf.delete.button'), class: "btn btn-danger mx-1" %>
     <% end %>
 
-    <%= link_to t('account.shelf.download.button'), ill_download_request_path(entry.id), class: 'btn btn-primary mx-1' %>
+    <%= link_to t('account.shelf.download.button'), ill_download_request_path(entry.id), class: 'btn btn-primary mx-1', data: { turbo: false } %>
   <% end %>
 
   <% if entry.mms_id %>

@@ -99,6 +99,22 @@ module Library
       def library_url
         data[:url]
       end
+
+      # Hash of floor plan data for library with name and
+      # url for building landing page (under "building") and
+      # for each floor within (under "floors")
+      #
+      # @return [Hash, nil]
+      def floor_plans
+        @floor_plans ||= data[:floor_plans]
+      end
+
+      # Returns the 'floors' portion of the floor plans data returned from the Libraries API for this library.
+      #
+      # @return [Array<Hash>]
+      def floors_data
+        @floors_data ||= Array(floor_plans&.dig('floors'))
+      end
     end
   end
 end

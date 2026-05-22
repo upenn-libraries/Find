@@ -113,21 +113,21 @@ module Fulfillment
 
         # @return [String, nil]
         def issn
-          search('issn', 'ISSN', 'rft.issn')
+          search('issn', 'ISSN', 'rft.issn', 'isxn')
         end
 
         # @return [String, nil]
         def isbn
-          search('isbn', 'ISBN', 'rft.isbn')
+          search('isbn', 'ISBN', 'rft.isbn', 'isxn')
         end
 
         # Citation source.
         #
-        # This field was in our previous form but was removed in this iteration. This value is
-        # used when submitting an Illiad request.
+        # This value is used when submitting an Illiad request. 'sid' and 'rfr_id' are probably set by external sites
+        # that route to our requesting endpoint. 'source' is used to help track the origin of our requests.
         # @return [String, nil]
         def sid
-          search('sid', 'rfr_id')
+          search('sid', 'rfr_id', 'source')
         end
 
         # @return [String, nil]

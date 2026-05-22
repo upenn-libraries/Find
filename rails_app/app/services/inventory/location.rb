@@ -4,10 +4,6 @@ module Inventory
   # Representing an Alma location. Alma locations are always within a library. This class centralizes information we
   # often extrapolate about a location in Alma.
   class Location
-    ARCHIVES = 'UnivArcLib'
-    HSP = 'HSPLib'
-    LIBRA = 'Libra'
-
     attr_reader :location_code, :library_code, :raw_location_name, :raw_library_name
 
     def initialize(library_code:, library_name:, location_code:, location_name:)
@@ -27,6 +23,8 @@ module Inventory
     # @param [String, nil] call_number_type
     # @return [String]
     def location_name(call_number: nil, call_number_type: nil)
+      return I18n.t('inventory.res_share_location_label') if resource_sharing_library?
+
       location_name_override(call_number, call_number_type) ||
         Mappings.locations.dig(location_code.to_sym, :display) ||
         raw_location_name
@@ -43,7 +41,7 @@ module Inventory
     #
     # @return [Boolean]
     def hsp?
-      library_code == HSP
+      library_code == Settings.fulfillment.restricted_libraries.hsp
     end
 
     # Return true if material is requestable via Aeon.
@@ -57,13 +55,13 @@ module Inventory
     #
     # @return [Boolean]
     def archives?
-      library_code == ARCHIVES
+      library_code == Settings.fulfillment.restricted_libraries.archives
     end
 
     # Return true if material is in LIBRA. LIBRA materials cannot be "picked up at the library" they must be requested.
     # @return [Boolean]
     def libra?
-      library_code == LIBRA
+      library_code == Settings.fulfillment.restricted_libraries.libra
     end
 
     # Return location's Aeon sublocation code from PennMARC locations config file
@@ -78,6 +76,13 @@ module Inventory
     # @return [String]
     def aeon_site
       Settings.locations.aeon_location_map[library_code]
+    end
+
+    # Returns true if material is in resource sharing library.
+    #
+    # @return [Boolean]
+    def resource_sharing_library?
+      library_code == Settings.fulfillment.restricted_libraries.res_share
     end
 
     private

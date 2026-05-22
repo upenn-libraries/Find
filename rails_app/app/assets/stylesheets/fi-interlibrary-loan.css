@@ -1,0 +1,15 @@
+/*
+* Find interlibrary loan styles
+*/
+
+.interlibrary-loan__scan-or-loanable {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.interlibrary-loan__scan-or-loanable > .btn {
+  display: flex;
+  gap: 0.5rem;
+}

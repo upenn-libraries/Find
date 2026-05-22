@@ -4,7 +4,7 @@ default: &default
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
   port: 5432
   password: <%= DockerSecrets.lookup(:database_password, ENV.fetch('DATABASE_PASSWORD', 'password')) %>
-  pool: <%= ENV['DB_POOL'] || ENV['RAILS_MAX_THREADS'] || 5 %>
+  pool: 100
   username: <%= ENV.fetch('DATABASE_USER', 'postgres') %>
 
 development:

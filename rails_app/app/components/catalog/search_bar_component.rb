@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local version of Blacklight v8.3.0@5a779c5a9 SearchBarComponent, overridden in order to customize template
+  # Local version of Blacklight v9.0 SearchBarComponent, overridden in order to customize template
   class SearchBarComponent < Blacklight::Component
     renders_one :append
     renders_one :prepend
@@ -12,7 +12,7 @@ module Catalog
     def initialize(
       url:, params:,
       advanced_search_url: nil,
-      classes: ['search-query-form'], prefix: nil,
+      classes: ['fi-search-box'], prefix: nil,
       method: 'GET', q: nil, query_param: :q,
       search_field: nil, autocomplete_path: nil,
       autofocus: nil, i18n: { scope: 'blacklight.search.form' },
@@ -55,13 +55,19 @@ module Catalog
       @search_fields ||= blacklight_config.search_fields.values
                                           .select { |field_def| helpers.should_render_field?(field_def) }
                                           .collect do |field_def|
-        [helpers.label_for_search_field(field_def.key),
-         field_def.key]
+                                            [helpers.label_for_search_field(field_def.key),
+                                             field_def.key]
       end
     end
 
     def advanced_search_enabled?
       blacklight_config.advanced_search.enabled
+    end
+
+    def rounded_border_class
+      return 'rounded-0' if search_fields.length > 1
+
+      'rounded-start'
     end
 
     private

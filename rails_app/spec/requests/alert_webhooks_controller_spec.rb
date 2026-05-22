@@ -14,28 +14,29 @@ describe 'Alert Webhooks Requests' do
     let(:headers) { { 'Authorization': "Bearer #{token}" } }
 
     it 'validates message integrity' do
-      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks), headers: { 'Token': 'bad' }
+      post webhooks_alerts_path, params: json_fixture('general_updated', directory: :alert_webhooks),
+                                 headers: { 'Token': 'bad' }
       expect(response).to have_http_status :unauthorized
     end
 
     it 'handles general alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('general_updated', :alert_webhooks), headers: headers
+      post webhooks_alerts_path, params: json_fixture('general_updated', directory: :alert_webhooks), headers: headers
       expect(response).to have_http_status :ok
     end
 
     it 'handles find only alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('find_only_updated', :alert_webhooks), headers: headers
+      post webhooks_alerts_path, params: json_fixture('find_only_updated', directory: :alert_webhooks), headers: headers
       expect(response).to have_http_status :ok
     end
 
     it 'handles invalid alert updated event' do
-      post webhooks_alerts_path, params: json_fixture('invalid_updated', :alert_webhooks), headers: headers
+      post webhooks_alerts_path, params: json_fixture('invalid_updated', directory: :alert_webhooks), headers: headers
       expect(response).to have_http_status :not_found
     end
 
     it 'handles bad JSON' do
       post webhooks_alerts_path, params: 'bad params', headers: headers
-      expect(response).to have_http_status :unprocessable_entity
+      expect(response).to have_http_status :unprocessable_content
     end
   end
 end

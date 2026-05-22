@@ -4,6 +4,9 @@ module Fulfillment
   class Endpoint
     # Alma submission endpoint
     class Alma < Endpoint
+      # String used internally by Alma to denote a pickup request
+      HOLD_TYPE = 'HOLD'
+
       class << self
         # Submit a Request to the Alma endpoint using either the BibRequest or ItemRequest API endpoints
         # @param request [Request]
@@ -40,7 +43,7 @@ module Fulfillment
         # @return [Hash{Symbol->String (frozen)}]
         def submission_params(request:)
           { user_id: request.patron.uid,
-            request_type: 'HOLD',
+            request_type: HOLD_TYPE,
             comment: request.params.comments,
             mms_id: request.params.mms_id,
             holding_id: request.params.holding_id,

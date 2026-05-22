@@ -16,20 +16,38 @@ describe Fulfillment::Endpoint::Illiad do
       end
     end
 
-    context 'when patron is a courtesy borrowers' do
+    context 'when patron is a courtesy borrower' do
       let(:requester) { create(:user, :courtesy_borrower) }
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(false) }
+
       it 'returns expected error message' do
-        expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_courtesy_borrowers')
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.ineligible_user_group')
       end
     end
 
-    context 'when proxied request is not submitted by a library staff member' do
-      include_context 'with mocked alma_record on proxy user'
+    context 'when patron is blocked in Illiad' do
+      let(:requester) { create(:user) }
+      let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, requester: requester) }
 
+      before { allow(bad_request.requester).to receive(:ill_blocked?).and_return(true) }
+
+      it 'returns expected error message' do
+        expect(errors).to contain_exactly I18n.t('fulfillment.validation.blocked')
+      end
+    end
+
+    context 'when proxied request is not submitted by a proxy eligible user' do
       let(:bad_request) { build(:fulfillment_request, :with_bib_info, :ill_pickup, proxy_for: proxy.uid) }
       let(:proxy) { Fulfillment::User.new('jdoe') }
+
+      include_context 'with mocked alma_record on proxy user'
+
+      before do
+        allow(bad_request.requester).to receive(:work_order_operator?).and_return false
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
+      end
 
       it 'returns expected error message' do
         expect(errors).to contain_exactly I18n.t('fulfillment.validation.no_proxy_requests')
@@ -42,6 +60,7 @@ describe Fulfillment::Endpoint::Illiad do
 
       before do
         allow(Alma::User).to receive(:find).with('jdoe').and_raise(Alma::User::ResponseError, 'Error retrieving record')
+        allow(bad_request.patron).to receive(:ill_blocked?).and_return(false)
       end
 
       it 'returns expected error message' do
@@ -154,8 +173,7 @@ describe Fulfillment::Endpoint::Illiad do
             LastName: request.requester.alma_record.last_name,
             EMailAddress: request.requester.email,
             Status: request.requester.ils_group_name,
-            Department: request.requester.alma_affiliation,
-            PlainTextPassword: Settings.illiad.legacy_user_password }
+            Department: request.requester.alma_affiliation }
         )
       end
       let(:request) { build(:fulfillment_request, :with_bib_info, :books_by_mail) }
@@ -202,6 +220,17 @@ describe Fulfillment::Endpoint::Illiad do
 
       it 'does not append any books by mail params' do
         expect(submission_body[:LoanTitle]).to eql request.params.title
+      end
+    end
+
+    context 'with a source param set' do
+      let(:source) { Fulfillment::Endpoint::Illiad::ILL_FORM_SOURCE_SID }
+      let(:request) do
+        build(:fulfillment_request, :with_bib_info, :ill_pickup, source: source)
+      end
+
+      it 'sets the CitedIn value properly' do
+        expect(submission_body[:CitedIn]).to eq source
       end
     end
   end

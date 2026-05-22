@@ -119,3 +119,7 @@ Guidance for working in this environment - with the above provision - can be fou
 3. Add a local settings file at `rails_app/config/settings.local.yml` that defines a `solr_url` setting with the deployed Solr URL.
 4. In the Vagrant environment, restart the Rails server by running `touch tmp/restart.txt` command in the running `catalog-find_catalog_find` container.
 5. DO NOT run any SolrTools methods that are going to modify the deployed Solr collection!
+
+## Design System
+
+In the `Settings` file, the `pennlibs_web_version` value controls the [version of the Penn Libraries design system](https://gitlab.library.upenn.edu/dld/design/web-components/-/releases) assets (Javascript and Stylesheet) that will be [loaded in the application](https://upennlibrary.atlassian.net/wiki/spaces/designsystem/pages/741474353/Get+started) layout. Currently this configuration allows for minor and patch releases to be effective automatically, but it can be modified to pin a specific release.

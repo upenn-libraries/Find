@@ -13,7 +13,8 @@ module Account
     # Download PDF of ILL scan
     # GET /account/requests/ill/transaction/:id/download
     def scan
-      @entry = Shelf::Service.new(current_user.uid).find(:ill, :transaction, params[:id])
+      shelf = Shelf::Service.new(current_user.uid)
+      @entry = shelf.find(:ill, :transaction, params[:id])
 
       return head :not_found unless @entry.pdf_available?
 
@@ -22,6 +23,8 @@ module Account
           stream.write chunk
         end
       end
+      # update transaction history in illiad to show that the pdf was downloaded
+      shelf.mark_pdf_viewed(params[:id])
     end
   end
 end

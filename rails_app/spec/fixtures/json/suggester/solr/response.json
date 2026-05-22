@@ -1,0 +1,30 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 3
+  },
+  "suggest": {
+    "title": {
+      "art": {
+        "numFound": 1,
+        "suggestions":[{
+          "term":"The dental <b>art</b> : practical treatise on dental surgery",
+          "weight": 16,
+          "payload":"9977323252003681"
+        }
+        ]
+      }
+    },
+    "author": {
+      "art": {
+        "numFound": 1,
+        "suggestions":[{
+          "term":"<b>Art</b> Rosenbaum",
+          "weight": 1,
+          "payload":""
+        }
+        ]
+      }
+    }
+  }
+}

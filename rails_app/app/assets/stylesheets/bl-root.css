@@ -1,0 +1,130 @@
+/*
+* Blacklight root customizations
+* Global focus states and page-level elements
+*/
+
+body {
+  --bs-border-radius: var(--pl-border-radius);
+  --bs-gray-100: var(--pl-color-bg-subtle);
+  --bs-gray-200: var(--pl-color-bg-subtle);
+}
+
+
+*:focus {
+  box-shadow: var(--pl-focus-box-shadow);
+  outline: none;
+}
+
+.tab-pane.fade.show.active:focus {
+    box-shadow: none;
+}
+
+
+form {
+  --bs-border-color: var(--pl-color-fg-subtle);
+}
+
+pennlibs-feedback {
+  margin-top: var(--pl-space-l);
+}
+
+pennlibs-feedback,
+pennlibs-footer {
+  display: block;
+}
+
+.site-feedback {
+  background: var(--pl-color-bg-subtle-brand);
+  padding: var(--pl-space-l) 0;
+  margin-top: 2rem;
+}
+
+.site-feedback p {
+  margin-bottom: var(--pl-space-xs);
+}
+
+.site-feedback p:last-of-type {
+  margin-bottom: 0;
+}
+
+.site-feedback i {
+  font-size: 1.5rem;
+  color: var(--pl-color-fg-subtle);
+}
+
+.site-feedback a {
+  font-weight: 500;
+}
+
+label.toggle-bookmark {
+  min-width: auto;
+}
+
+.page__heading {
+  display: block;
+  margin-bottom: 0;
+  margin-top: 2rem;
+}
+
+.page__lede {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  max-width: 52ch;
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Form error states */
+.form-group--error {
+  padding-left: 0.75rem;
+  border-left: solid 0.25rem var(--pl-color-fg-attention);
+}
+
+.form-group--error .error-message {
+  color: var(--pl-color-fg-attention);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.form-group--error input {
+  border-color: var(--pl-color-fg-attention);
+  border-width: 2px;
+  line-height: 1.2;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Card links */
+.cards-as-links a.card {
+  display: block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.cards-as-links a.card:hover {
+  --bs-card-border-color: var(--pl-color-fg-default);
+}
+
+.cards-as-links a.card:hover .card-title {
+  text-decoration: underline;
+  text-underline-offset: var(--pl-link-text-underline-offset);
+}
+
+/* Search widgets */
+.sort-pagination {
+  justify-content: baseline;
+}
+
+.applied-filter,
+.search-widgets > * {
+  margin: 0 !important;
+}
+
+.search-widgets {
+  gap: 0.5rem;
+}
+
+.constraints-container {
+  margin-bottom: 1rem !important;
+  gap: 0.5rem;
+}

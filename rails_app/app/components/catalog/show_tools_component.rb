@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local show tools component for use in a more toolbar-like fashion
+  # Local show tools component for use in a more toolbar-like fashion. Extends Blacklight v9.0 component.
   class ShowToolsComponent < Blacklight::Document::ShowToolsComponent
     # Return bookmark action config from array of actions
     # @return [Blacklight::Configuration::ToolConfig]

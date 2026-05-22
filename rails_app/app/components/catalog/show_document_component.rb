@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # DocumentComponent that inherits from Blacklight::DocumentComponent in order to display
+  # DocumentComponent that inherits from Blacklight::DocumentComponent (from Blacklight v9.0) in order to display
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
@@ -13,8 +13,9 @@ module Catalog
     }
 
     # @option params [ActionController::Parameters] parameters from request
+    # @option user [User] current user
     def initialize(**args)
-      super
+      super(**args.except(:user, :params))
       @inventory = @document.full_inventory
       @selected_id = args[:params][:hld_id] || @inventory.first&.id
       @user = args[:user]
@@ -27,8 +28,8 @@ module Catalog
 
     def before_render
       super
-      set_slot(:inventory_navigation, nil) unless inventory_navigation
-      set_slot(:inventory_content, nil) unless inventory_content
+      with_inventory_navigation unless inventory_navigation
+      with_inventory_content unless inventory_content
     end
   end
 end

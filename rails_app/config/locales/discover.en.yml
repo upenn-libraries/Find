@@ -1,0 +1,82 @@
+en:
+  discover:
+    site_name: 'Penn Collects'
+    tagline: 'Discover the treasures of Penn'
+    empty_query: 'Enter a search term so that we know what to look for.'
+    search_bar_title: 'Enter some words to search for'
+
+    images:
+      site_logo:
+        label: 'Penn Collects logo'
+      libraries_logo:
+        label: 'Penn Libraries logo'
+
+    search:
+      button:
+        label: 'Search'
+        aria_label: 'Search for (required)'
+
+    home:
+      title: 'About Penn Collects'
+
+    results:
+      title: 'Search Results'
+      nav:
+        label: 'Results for'
+      source:
+        find:
+          label: 'Libraries'
+        finding_aids:
+          label: 'Archives'
+        penn_museum:
+          label: 'Penn Museum'
+        art_collection:
+          label: 'Penn Art Collection'
+      messages:
+        loading: 'Loading %{source} results..'
+        no_results: 'We did not find any matches.'
+      view_all_button:
+        label: 'View all %{count} results'
+      location_modal:
+        title: 'How to access %{source} material'
+        close: 'Close'
+        button:
+          label: 'How to Access'
+          aria_label: 'Learn how to access %{source} items'
+
+    entry:
+      fields:
+        creator: 'Author/Creator:'
+        description: 'Description'
+        formats: 'Format:'
+        location: 'Location:'
+        publication: 'Publication:'
+
+    links:
+      skip_to_main:
+        text: 'Skip to main content'
+        url: '#main-container'
+      libraries:
+        text: 'Penn Libraries homepage'
+        url: 'https://www.library.upenn.edu/'
+      upenn:
+        text: 'UPenn'
+        url: 'https://www.upenn.edu/'
+      privacy:
+        text: 'Privacy Policy'
+        url: 'https://www.upenn.edu/about/privacy-policy'
+      accessibility:
+        text: 'Report Accessibility Issues and Get Help'
+        url: 'https://accessibility.web-resources.upenn.edu/get-help'
+      disclaimer:
+        text: 'Disclaimer'
+        url: 'https://www.upenn.edu/about/disclaimer'
+      emergency:
+        text: 'Emergency Services'
+        url: 'https://www.publicsafety.upenn.edu/contact'
+      copyright:
+        text: 'Copyright Infringement'
+        url: 'https://www.upenn.edu/about/report-copyright-infringement'
+      all_results:
+        penn_museum: "https://www.penn.museum/collections/search.php?term=%{query}"
+        art_collection: "https://pennartcollection.com/?s=%{query}"

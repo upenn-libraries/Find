@@ -44,12 +44,17 @@ class InventoryController < ApplicationController
     end
   end
 
-  private
-
-  # Default to no search state.
-  def search_state
-    nil
+  # GET /inventory/:id/hathi_link
+  # Returns Hathi link component
+  def hathi_link
+    respond_to do |format|
+      format.html do
+        render(Hathi::HathiComponent.new(identifier_map: @document.identifier_map), layout: false)
+      end
+    end
   end
+
+  private
 
   def load_document
     @document = search_service.fetch(params[:id])

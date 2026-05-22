@@ -1,7 +1,8 @@
 ---
-#Variables for Vault
+# Variables for Vault
 catalog_find_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/find/vagrant', engine_mount_point='kv-applications') }}"
 catalog_solr_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'catalog/solr/vagrant', engine_mount_point='kv-applications') }}"
+dld_sidekiq_pro_vault_values: "{{ lookup('community.hashi_vault.vault_kv2_get', 'sidekiq_pro', engine_mount_point='dld') }}"
 
 docker_swarm_addr: "{{ ansible_host }}"
 
@@ -14,6 +15,10 @@ skip_swarm: false
 skip_group: false
 skip_docker_py: false
 skip_docker_compose: false
+
+# temporarily pin docker package versions
+docker_cli_package_version: "5:28.5.2-1~ubuntu.22.04~jammy"
+docker_package_version: "5:28.5.2-1~ubuntu.22.04~jammy"
 
 # expose the docker api (only for dev env) to allow IDE's to add remote interpreters for debugging
 docker_daemon_config:

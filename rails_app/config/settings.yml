@@ -1,113 +1,50 @@
-pennlibs_web_version: '0.1.4'
+pennlibs_web_version: '1.3.1'
+app_host: 'localhost:3000'
+cleanup:
+  searches:
+    days_old: 4
+  guest_users:
+    days_old: 4
+    batch_size: 1000
 alma:
+  sru_endpoint: 'https://na03.alma.exlibrisgroup.com/view/sru/01UPENN_INST'
   api_key: <%= DockerSecrets.lookup(:alma_api_key, Rails.application.credentials.alma_api_key) %>
+  work_order_role_value: '214'
 illiad:
   base_url: 'https://illiad.library.upenn.edu/ILLiadWebPlatform'
   api_key: <%= DockerSecrets.lookup(:illiad_api_key, Rails.application.credentials.illiad_api_key) %>
-  legacy_user_password: <%= DockerSecrets.lookup(:illiad_legacy_user_password, Rails.application.credentials.illiad_legacy_user_password) %>
+  blocked_user_values:
+    - B
+    - BO
+    - DIS
+    - BX
 aeon:
   requesting_url: 'https://aeon.library.upenn.edu/logon?Action=10&Form=30&'
+hathi:
+  base_url: 'https://catalog.hathitrust.org/api/volumes/brief/json'
 alert_webhooks_token: <%= DockerSecrets.lookup(:alert_webhooks_token, Rails.application.credentials.alert_webhooks_token) %>
 google_analytics:
   id: ~
 honeybadger:
   api_key: '12345'
+redis:
+  url: <%= ENV['REDIS_URL'] %>
+  username: <%= ENV['REDIS_SIDEKIQ_USER'] %>
+  password: <%= DockerSecrets.lookup(:catalog_find_redis_sidekiq_password) %>
 email:
-  from_address: 'find-noreply@library.upenn.edu'
+  from_address: 'find-noreply@upenn.edu'
   smtp:
     url: 'mailrelay.library.upenn.int'
     port: 25
     domain: 'upenn.edu'
 library:
+  undesirable_holdings:
+    - 'AthLib'
+    - 'HSPLib'
+  preferred_holdings:
+    - 'VanPeltLib'
   info:
-    base_url: 'https://www.library.upenn.edu/api/v1/libraries'
+    base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
-locations:
-  offsite:
-    - lippb10
-    - athstorcir
-    - stor
-    - storcirc
-    - storcrstxt
-    - storm
-  unavailable:
-    - athNoCirc
-    - storNoCirc
-    - vpunavail
-    - vanpNocirc
-  pickup:
-    Van Pelt Library:
-      ils: VanPeltLib
-      ill: Van Pelt Library
-    Lockers at Van Pelt Library:
-      ils: VPLOCKER
-      ill: Lockers at Van Pelt
-    Annenberg Library:
-      ils: AnnenLib
-      ill: Annenberg Library
-    Athenaeum Library:
-      ils: AthLib
-    Holman Biotech Commons:
-      ils: BiomLib
-      ill: Biotech Commons
-    Chemistry Library:
-      ils: ChemLib
-      ill: Chemistry Library
-    Dental Medicine Library:
-      ils: DentalLib
-      ill: Dental Library
-    Lockers at Dental Medicine Library:
-      ils: DENTLOCKER
-      ill: Lockers at Dental
-    Fisher Fine Arts Library:
-      ils: FisherFAL
-      ill: Fine Arts Library
-    Library at the Katz Center:
-      ils: KatzLib
-      ill: Katz Library
-    Math/Physics/Astronomy Library:
-      ils: MPALib
-      ill: Math/Physics/Astronomy Library
-    Museum Library:
-      ils: MuseumLib
-      ill: Museum Library
-    Ormandy Music and Media Center:
-      ils: MusicLib
-    Pennsylvania Hospital Library - PAH Staff Only:
-      ils: PAHospLib
-      ill: PA Hospital Library
-    Veterinary Library - New Bolton Center:
-      ils: VetNBLib
-      ill: New Bolton Center
-    Veterinary Library - Penn Campus:
-      ils: VetPennLib
-      ill: Veterinary Library
-  aeon_location_map:
-    KislakCntr: KISLAK
-    KatzLib: KATZ
-    FisherFAL: FISHER
-electronic_scoring:
-  collection:
-    Publisher website: 100
-    The New Republic Archive: 99
-    Publishers Weekly Archive (1872- current): 98
-    American Association for the Advancement of Science: 97
-    Vogue Magazine Archive: 96
-    'ProQuest Historical Newspapers: The New York Times': 95
-    'ProQuest Historical Newspapers: Pittsburgh Post-Gazette': 94
-    'ProQuest Historical Newspapers: The Washington Post': 93
-    Wiley Online Library - Current Journals: 88
-    Academic OneFile: 87
-    Academic Search Premier: 86
-    LexisNexis Academic: -1
-    Factiva: -2
-    Gale Cengage GreenR: -3
-    Nature Free: -4
-    DOAJ Directory of Open Access Journals: -5
-    Highwire Press Free: -6
-    Biography In Context: -7
-  interface:
-    Highwire Press: 92
-    Elsevier ScienceDirect: 91
-    Nature: 90
-    Elsevier ClinicalKey: 89
+cataloging_errors:
+  email: 'fixopac@pobox.upenn.edu'

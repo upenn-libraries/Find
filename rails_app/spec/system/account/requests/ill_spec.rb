@@ -3,19 +3,31 @@
 require 'system_helper'
 
 describe 'Account Request ILL form' do
+  include Alma::ApiMocks::User
+
   include_context 'with mocked illiad_record on user'
 
-  let(:user) { create(:user) }
+  let(:user) { create(:user, ils_group: ils_group) }
   let(:open_params) { {} }
+  let(:ils_group) { 'undergrad' }
 
   before do
-    sign_in user
-
+    stub_alma_user_find_success(id: user.uid, response_body: create(:alma_user_response))
+    login_as user
     visit ill_new_request_path(**open_params)
   end
 
   it 'does not display option to proxy' do
     expect(page).not_to have_text I18n.t('account.ill.form.proxy.prompt')
+  end
+
+  context 'when the user is ineligible for ILL services' do
+    let(:ils_group) { Settings.fulfillment.ill_restricted_user_groups.sample }
+
+    it 'redirects the user and shows an explanatory message with link to ILL guide' do
+      expect(page).not_to have_text I18n.t('account.ill.page_lede')
+      expect(page).to have_link 'Interlibrary Loan guide', href: I18n.t('urls.guides.ill')
+    end
   end
 
   context 'when request has open params' do
@@ -90,7 +102,7 @@ describe 'Account Request ILL form' do
       expect(page).to have_text I18n.t('account.ill.form.proxy.prompt')
     end
 
-    context 'when library staff submits proxy form' do
+    context 'with proxy fields' do
       include_context 'with mocked alma_record on proxy user'
 
       let(:proxy) { Fulfillment::User.new('jdoe') }
@@ -103,7 +115,10 @@ describe 'Account Request ILL form' do
       end
 
       it 'displays proxied request alert' do
-        expect(page).to have_text 'You are proxying a request for John Doe (Undergraduate)'
+        expected_text = ActionView::Base.full_sanitizer.sanitize(
+          I18n.t('account.ill.proxy_alert_html', name: proxy.full_name, group: proxy.ils_group_name)
+        )
+        expect(page).to have_text expected_text
       end
 
       it 'fills in proxied user id' do

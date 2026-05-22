@@ -4,7 +4,7 @@ module Account
   # Controller for submitting new Alma/ILL requests and displaying the "shelf" (containing Alma requests &
   # Illiad transactions & Alma loans).
   class RequestsController < AccountController
-    before_action :block_courtesy_borrowers, only: :ill
+    before_action :block_ineligible_users, only: :ill
 
     rescue_from Shelf::Service::AlmaRequestError, Shelf::Service::IlliadRequestError do |e|
       Honeybadger.notify(e)
@@ -12,17 +12,15 @@ module Account
       redirect_back_or_to requests_path, alert: 'There was an unexpected issue with your request.'
     end
 
-    # Form for initializing an ILL form.
+    # Action for initializing an ILL form.
     # GET /account/requests/ill/new
     def ill
       @request = Fulfillment::Service.request(requester: current_user, endpoint: :illiad, **raw_params)
 
-      if @request.proxied? && !current_user.library_staff?
+      if @request.proxied? && !current_user.proxy_submit_eligible?
         flash.now[:alert] = t('fulfillment.validation.no_proxy_requests')
       elsif @request.proxied? && !@request.patron.alma_record?
         flash.now[:alert] = t('fulfillment.validation.proxy_invalid')
-      elsif @request.patron.courtesy_borrower?
-        flash.now[:alert] = t('fulfillment.validation.no_courtesy_borrowers')
       end
     end
 
@@ -32,7 +30,7 @@ module Account
       outcome = Fulfillment::Service.submit(requester: current_user, **raw_params)
       if outcome.success?
         flash[:notice] = 'Your request has been successfully submitted.'
-        redirect_to shelf_path
+        contextual_outcome_redirect(outcome)
       else
         flash[:alert] = "We could not submit your request due to the following: #{outcome.error_message}"
         redirect_back_or_to root_path
@@ -66,10 +64,15 @@ module Account
     def renew_all
       responses = shelf_service.renew_all_loans
 
-      alert_text = t('account.shelf.renew_all.alerts',
-                     alerts: responses.map { |r| t('account.shelf.renew_all.alert', alert: r.message) }.join)
-
-      flash_type = responses.all?(&:renewed?) ? :notice : :alert
+      # @note when a large group of loans is renewed, the length of the alert content can lead to a cookie
+      #       overflow. Existing cookies make precisely determining when it is OK to add a lot of flash content very
+      #       difficult. If/when we change our session storage backend, we can return the detailed renewal info to the
+      #       flash.
+      flash_type, alert_text = if responses.all?(&:renewed?)
+                                 [:notice, t('account.shelf.renew_all.mass_renewal')]
+                               else
+                                 [:alert, t('account.shelf.renew_all.mass_renewal_with_issues')]
+                               end
       flash[flash_type] = alert_text
 
       redirect_to requests_path
@@ -97,6 +100,17 @@ module Account
       @shelf_service ||= Shelf::Service.new(current_user.uid)
     end
 
+    # Redirect to the shelf only for request types that create an entry on the shelf
+    # @param outcome [Fulfillment::Service::Outcome]
+    def contextual_outcome_redirect(outcome)
+      case outcome.delivery
+      when Fulfillment::Options::Deliverable::DOCDEL
+        redirect_back_or_to root_path
+      else
+        redirect_to shelf_path
+      end
+    end
+
     def raw_params
       params.except(:controller, :action).to_unsafe_h.deep_symbolize_keys
     end
@@ -111,10 +125,16 @@ module Account
       }.compact_blank
     end
 
-    def block_courtesy_borrowers
-      return unless current_user.courtesy_borrower?
+    def block_ineligible_users
+      block_message = if current_user.ill_restricted_user_group?
+                        t('account.ill.restricted_user_html', ill_guide_url: I18n.t('urls.guides.ill'))
+                      elsif current_user.ill_blocked?
+                        t('account.ill.blocked_html', ill_guide_url: I18n.t('urls.guides.ill'))
+                      end
 
-      redirect_to root_path, alert: t('fulfillment.validation.no_courtesy_borrowers')
+      return if block_message.blank?
+
+      redirect_to root_path, alert: block_message
     end
   end
 end
