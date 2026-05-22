@@ -14,9 +14,14 @@ shared_examples_for 'RisExport' do
       let(:marcxml) { JSON.parse(json_fixture('conference'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - BOOK
-TI  - Report of the Conference of FAO : nineteenth session, Rome, 12 November - 1 December 1977.
-PY  - 1979\nCY  - Rome\nPB  - The Organization\nER  - )
+        expect(object.export_as_ris).to eq <<~RIS.chomp("\n")
+          TY  - BOOK
+          TI  - Report of the Conference of FAO : nineteenth session, Rome, 12 November - 1 December 1977.
+          PY  - 1979
+          CY  - Rome
+          PB  - The Organization
+          ER  - 
+        RIS
       end
     end
 
@@ -24,8 +29,16 @@ PY  - 1979\nCY  - Rome\nPB  - The Organization\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('electronic_database'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - GEN\nTI  - GEOBASE\nA2  - Elsevier Science (Firm)
-A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York\nPB  - Elsevier Science\nER  - )
+        expect(object.export_as_ris).to eq <<~RIS.chomp("\n")
+          TY  - GEN
+          TI  - GEOBASE
+          A2  - Elsevier Science (Firm)
+          A2  - Geo Abstracts, Ltd.
+          PY  - 1900
+          CY  - New York
+          PB  - Elsevier Science
+          ER  - 
+        RIS
       end
     end
 
@@ -33,8 +46,15 @@ A2  - Geo Abstracts, Ltd.\nPY  - 1900\nCY  - New York\nPB  - Elsevier Science\nE
       let(:marcxml) { JSON.parse(json_fixture('electronic_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Nature.\nA2  - Nature Publishing Group.
-PY  - 1869\nCY  - London\nPB  - Nature Pub. Group\nER  - )
+        expect(object.export_as_ris).to eq <<~RIS.chomp("\n")
+          TY  - JOUR
+          TI  - Nature.
+          A2  - Nature Publishing Group
+          PY  - 1869
+          CY  - London
+          PB  - Nature Pub. Group
+          ER  - 
+        RIS
       end
     end
 
@@ -42,8 +62,15 @@ PY  - 1869\nCY  - London\nPB  - Nature Pub. Group\nER  - )
       let(:marcxml) { JSON.parse(json_fixture('print_journal'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - JOUR\nTI  - Chemical communications.
-A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London\nPB  - Chemical Society\nER  - )
+        expect(object.export_as_ris).to eq <<~RIS.chomp("\n")
+          TY  - JOUR
+          TI  - Chemical communications.
+          A2  - Chemical Society (Great Britain)
+          PY  - 1965
+          CY  - London
+          PB  - Chemical Society
+          ER  - 
+        RIS
       end
     end
 
@@ -51,10 +78,15 @@ A2  - Chemical Society (Great Britain)\nPY  - 1965\nCY  - London\nPB  - Chemical
       let(:marcxml) { JSON.parse(json_fixture('print_monograph'))['marcxml_marcxml'].first }
 
       it 'returns RIS text' do
-        expect(object.export_as_ris).to eq %(TY  - BOOK
-TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.
-AU  - Bleier, Ruth\nA2  - Secondary Author A\nA2  - Secondary Author B\nA2  - Secondary Author C
-PY  - 1961\nCY  - Baltimore\nPB  - John Hopkins Press\nER  - )
+        expect(object.export_as_ris).to eq <<~RIS.chomp("\n")
+          TY  - BOOK
+          TI  - The hypothalamus of the cat; a cytoarchitectonic atlas in the Horsley-Clarke co-ordinate system.
+          AU  - Bleier, Ruth
+          PY  - 1961
+          CY  - Baltimore
+          PB  - John Hopkins Press
+          ER  - 
+        RIS
       end
     end
   end
