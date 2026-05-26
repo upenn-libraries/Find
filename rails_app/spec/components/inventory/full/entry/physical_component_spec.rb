@@ -34,7 +34,7 @@ describe Inventory::Full::Entry::PhysicalComponent, type: :components do
     end
 
     it 'does not render the fulfillment frame' do
-      expect(rendered).to have_no_selector("turbo-frame#form_frame", visible: :all)
+      expect(rendered).to have_no_selector('turbo-frame#form_frame', visible: :all)
     end
 
     it 'does not render a request disclosure' do
