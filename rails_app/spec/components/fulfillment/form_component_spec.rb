@@ -65,10 +65,7 @@ describe Fulfillment::FormComponent, type: :components do
     let(:items) { build_list :item, 2, :aeon_location }
     let(:expected_options) { [I18n.t('requests.form.item_placeholder')] + item_options }
     let(:item_options) do
-      items.map do |item|
-        label = item.select_label.first
-        label.is_a?(Array) ? label.first : label
-      end
+      items.map { |item| item.select_label.first }
     end
 
     it 'renders the item picker with a blank option before the item options' do

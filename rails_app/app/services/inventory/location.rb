@@ -94,6 +94,39 @@ module Inventory
       !aeon? && !archives? && !hsp?
     end
 
+    # Return the status key to use for available items at this location.
+    # Priority ordering: offsite special collections > special collections >
+    # offsite general > on-site restricted > general circulation.
+    #
+    # @return [Symbol]
+    def available_status_key
+      if aeon? && libra?
+        :offsite_appointment
+      elsif aeon?
+        :appointment
+      elsif libra?
+        :offsite
+      elsif archives? || hsp?
+        :unrequestable
+      else
+        :circulates
+      end
+    end
+
+    # Return the status key to use for check_holdings items at this location.
+    #
+    # @return [Symbol]
+    def check_holdings_status_key
+      aeon? ? :appointment : :mixed_availability
+    end
+
+    # Return the status key to use for unavailable items at this location.
+    #
+    # @return [Symbol, nil]
+    def unavailable_status_key
+      aeon? ? :appointment : nil
+    end
+
     private
 
     # Location may have an overridden location name that doesn't reflect the location values in the availability data.

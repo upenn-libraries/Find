@@ -115,4 +115,60 @@ describe Inventory::Location do
       expect(location.requires_authentication?).to be true
     end
   end
+
+  describe '#available_status_key' do
+    it 'returns :offsite_appointment for an Aeon+LIBRA location' do
+      location = create(:location, :aeon_offsite)
+      expect(location.available_status_key).to eq :offsite_appointment
+    end
+
+    it 'returns :appointment for an Aeon location' do
+      location = create(:location, :aeon)
+      expect(location.available_status_key).to eq :appointment
+    end
+
+    it 'returns :offsite for a LIBRA location' do
+      location = create(:location, :libra)
+      expect(location.available_status_key).to eq :offsite
+    end
+
+    it 'returns :unrequestable for an Archives location' do
+      location = create(:location, :archives)
+      expect(location.available_status_key).to eq :unrequestable
+    end
+
+    it 'returns :unrequestable for an HSP location' do
+      location = create(:location, :hsp)
+      expect(location.available_status_key).to eq :unrequestable
+    end
+
+    it 'returns :circulates for a standard location' do
+      location = create(:location)
+      expect(location.available_status_key).to eq :circulates
+    end
+  end
+
+  describe '#check_holdings_status_key' do
+    it 'returns :appointment for an Aeon location' do
+      location = create(:location, :aeon)
+      expect(location.check_holdings_status_key).to eq :appointment
+    end
+
+    it 'returns :mixed_availability for a non-Aeon location' do
+      location = create(:location)
+      expect(location.check_holdings_status_key).to eq :mixed_availability
+    end
+  end
+
+  describe '#unavailable_status_key' do
+    it 'returns :appointment for an Aeon location' do
+      location = create(:location, :aeon)
+      expect(location.unavailable_status_key).to eq :appointment
+    end
+
+    it 'returns nil for a non-Aeon location' do
+      location = create(:location)
+      expect(location.unavailable_status_key).to be_nil
+    end
+  end
 end
