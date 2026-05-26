@@ -85,6 +85,15 @@ module Inventory
       library_code == Settings.fulfillment.restricted_libraries.res_share
     end
 
+    # Return true if the location requires the user to log in before requesting.
+    # Locations like Aeon, Archives, and HSP bypass the login gate because their
+    # request flows are handled outside the standard Alma fulfillment form.
+    #
+    # @return [Boolean]
+    def requires_authentication?
+      !aeon? && !archives? && !hsp?
+    end
+
     private
 
     # Location may have an overridden location name that doesn't reflect the location values in the availability data.

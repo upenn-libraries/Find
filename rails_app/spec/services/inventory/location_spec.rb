@@ -93,4 +93,26 @@ describe Inventory::Location do
       expect(location.resource_sharing_library?).to be false
     end
   end
+
+  describe '#requires_authentication?' do
+    it 'returns false for an Aeon location' do
+      location = create(:location, :aeon)
+      expect(location.requires_authentication?).to be false
+    end
+
+    it 'returns false for an Archives location' do
+      location = create(:location, :archives)
+      expect(location.requires_authentication?).to be false
+    end
+
+    it 'returns false for an HSP location' do
+      location = create(:location, :hsp)
+      expect(location.requires_authentication?).to be false
+    end
+
+    it 'returns true for a standard location' do
+      location = create(:location)
+      expect(location.requires_authentication?).to be true
+    end
+  end
 end

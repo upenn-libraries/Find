@@ -5,8 +5,6 @@ module Inventory
     module Entry
       # Component rendering the full view of a Physical entry.
       class PhysicalComponent < ViewComponent::Base
-        include Turbo::FramesHelper
-
         attr_reader :entry, :user
 
         # @param entry [Inventory::Entry]
@@ -30,7 +28,7 @@ module Inventory
 
         # Return true if request options are only available after login
         def require_authentication_for_requesting?
-          user.nil? && !entry.location.aeon? && !entry.location.archives? && !entry.location.hsp?
+          user.nil? && entry.location.requires_authentication?
         end
 
         # @return [Hash] parameters for the fulfillment form

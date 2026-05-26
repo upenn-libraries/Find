@@ -59,4 +59,23 @@ describe Inventory::Full::Entry::PhysicalComponent, type: :components do
       expect(rendered).to have_text I18n.t('requests.form.heading')
     end
   end
+
+  context 'with an unauthenticated user at an Archives location' do
+    let(:entry) do
+      create(:physical_entry, library_code: Settings.fulfillment.restricted_libraries.archives)
+    end
+    let(:user) { nil }
+
+    it 'renders the request disclosure (bypasses login gate)' do
+      expect(rendered).to have_selector('details.fulfillment > summary',
+                                        text: I18n.t('requests.form.request_item'))
+    end
+
+    it 'renders the fulfillment frame inside the disclosure' do
+      expect(rendered).to have_selector(
+        "details.fulfillment turbo-frame#form_frame[src*='#{fulfillment_form_path}']",
+        visible: :all
+      )
+    end
+  end
 end

@@ -3,7 +3,7 @@
 module Fulfillment
   # Lazy-loaded frame for retrieving fulfillment options.
   class FrameComponent < ViewComponent::Base
-    include Turbo::FramesHelper
+    attr_reader :form_params
 
     # @param form_params [Hash] parameters passed to the fulfillment form
     def initialize(form_params:)
