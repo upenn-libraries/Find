@@ -25,7 +25,7 @@
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
-  <body class="<%= render_body_class %>">
+  <body class="<%= render_body_class %> pl-reset pl-typeset">
   <%= render('shared/ms_clarity/script', id: Settings.ms_clarity.id) if render_clarity_script? %>
   <%= render('shared/google_analytics/tags_noscript', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
   <%= render blacklight_config.skip_link_component.new do %>
@@ -36,7 +36,7 @@
   <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
-    <%= render 'shared/flash_msg', layout: 'shared/flash_messages' if flash.any? %>
+    <%= render 'shared/flash_msg' %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>
@@ -45,5 +45,6 @@
 
   <%= render partial: 'shared/footer' %>
   <%= render partial: 'shared/modal' %>
+  <%= content_for(:offcanvas) %>
   </body>
 <% end %>

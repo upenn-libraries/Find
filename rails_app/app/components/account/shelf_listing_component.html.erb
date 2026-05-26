@@ -1,7 +1,5 @@
 <% if @listing.count.zero? %>
-  <div class="alert alert-light">
-    <p class="mb-0"><%= t('account.shelf.no_items') %></p>
-  </div>
+  <p class="callout"><%= t('account.shelf.no_items') %></p>
 <% else %>
 <div class="table-responsive">
   <table class="table table-bordered">

@@ -153,6 +153,7 @@ detectors:
       - AdditionalResults::Sources::SummonComponent#availability_display
       - AdditionalResults::Sources::SummonComponent#info_display
       - AdditionalResults::Sources::SummonComponent#publication_title_display
+      - Catalog::ConstraintsComponent#clause_queries_blank?
       - Catalog::HeaderComponent#joined_alert_values
       - Hathi::HathiComponent#link
       - Hathi::HathiComponent#viewability
@@ -178,6 +179,7 @@ detectors:
   InstanceVariableAssumption:
     exclude:
       - Catalog::AdvancedSearchFormComponent
+      - Catalog::ConstraintsComponent
       - Catalog::FacetLinkComponent
       - Catalog::QueryLinkComponent
       - Catalog::SearchHistoryConstraintLayoutComponent
@@ -389,6 +391,7 @@ detectors:
       - CleanupGuestUsersJob#perform
       - CleanupSearchesJob#perform
       - Discover::ParseArtCollectionJob#perform
+      - SearchBuilder#escape_special_characters
       - SearchBuilder#handle_standalone_boolean_operators
       - SortBuilder::DefaultSort#browse_sort
       - Discover::Source#connection

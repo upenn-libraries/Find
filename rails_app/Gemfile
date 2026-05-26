@@ -7,7 +7,9 @@ ruby '3.4.8'
 
 gem 'alma'
 gem 'aws-sdk-s3', '~> 1'
-gem 'blacklight', '~> 9'
+# Use this BL ref to get adv search bugfix until a new 9.x release is available
+gem 'blacklight', git: 'https://github.com/projectblacklight/blacklight.git',
+                  ref: '0e12a84b55a4db07f853a349ee040295ba5b09ee'
 gem 'blacklight_dynamic_sitemap'
 gem 'blacklight-ris'
 gem 'bootsnap', require: false

@@ -49,6 +49,18 @@ describe SearchBuilder do
     end
   end
 
+  describe '#escape_special_characters' do
+    before { search_builder.escape_special_characters(solr_params) }
+
+    context 'with special characters to escape' do
+      let(:solr_params) { { q: 'Do Androids Dream of Electric Sheep?' } }
+
+      it 'escapes special characters' do
+        expect(solr_params[:q]).to eq 'Do Androids Dream of Electric Sheep\?'
+      end
+    end
+  end
+
   describe '#massage_sort' do
     let(:sort_builder) { instance_double SortBuilder }
 
@@ -110,10 +122,20 @@ describe SearchBuilder do
     end
 
     context 'with a database search' do
-      let(:blacklight_params) { { f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+      context 'with no query term' do
+        let(:blacklight_params) { { f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
 
-      it 'sets the database sort' do
-        expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        it 'sets the database sort' do
+          expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        end
+      end
+
+      context 'with a query term' do
+        let(:blacklight_params) { { q: 'newspapers', f: { format_facet: [PennMARC::Database::DATABASES_FACET_VALUE] } } }
+
+        it 'does not set the sort if a query term is provided' do
+          expect(solr_params[:sort]).to eq SortBuilder.title_sort_asc
+        end
       end
     end
   end

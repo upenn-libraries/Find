@@ -1,83 +1,70 @@
 en:
+  advanced_search:
+    lede: 'Search multiple fields at once to find exactly what you need.'
+  breadcrumbs:
+    root: 'Find'
+  feedback:
+    heading: 'Feedback'
+    description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help.'
+  guides:
+    use_catalog: 'Using the Find catalog'
+    articles+: 'Using Articles+'
+    library_account: 'Using your account'
   head:
     meta:
       description:
         record: Access '%{title}' through the Penn Libraries catalog.
   home:
     info:
-      heading: 'What can I do here?'
-      discover:
-        title: 'Discover library materials.'
-        description: 'Use the search box to find books, ebooks, articles, journals, digital media, and more.'
+      heading: 'Search our catalog'
+      description: '<strong>The definitive place to find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
+      guide_cta_html: 'For search tips, %{link}.'
+      guide_link_text: 'visit our catalog guide'
       manage:
-        title: 'Manage your Library Account.'
-        description: 'Create and manage item requests, renew checked out items, bookmark individual titles, and request delivery from other libraries across the country.'
-    feedback:
-      title: 'We want your feedback!'
-      description: 'Thanks for using the Penn Libraries new search tool. We encourage you to <a href="%{url}" target="_blank">submit feedback</a> as we continue to improve the site.'
-      release_notes: '<a href="%{url}" target="_blank">View latest updates and known issues</a>.'
-    help:
-      heading: 'Where can I get help?'
-      connect:
-        title: 'Connect with us'
-        chat:
-          title: 'Chat'
-          description: 'Get live assistance M-F 9-5'
-        ask:
-          title: 'Ask'
-          description: 'Send us a question and we’ll respond in 24 hours or less'
-        appointment:
-          title: 'Make an appointment'
-          description: 'Consult a subject specialist'
-      self_service:
-        title: 'Self-service'
-        use_catalog: 'Using the Library Catalog'
-        faq: 'Check our FAQ'
-        guides: 'View our research guides'
-        libraries: 'Visit a library location'
-        lib_hours: '(see hours)'
-        articles+: 'Using Articles+'
-        library_account: 'Library Account'
+        heading: 'Manage your account'
+        description: 'Create and manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
+        cta_html: 'Go to %{link}.'
     resources:
-      title: 'More resources for your research'
-      lede: 'Expand your search using one of the following specialized tools.'
+      heading: 'More tools for your research'
+      lede: 'No single search tool covers everything. Expand your research with these popular specialized tools.'
       research:
-        title: 'Research materials'
         articles:
-          title: 'Articles+'
+          heading: 'Articles+'
           description: 'Full-text articles and book chapters'
         borrow:
-          title:
+          heading:
             borrowdirect: 'BorrowDirect'
             easyborrow: 'EZBorrow'
           description: 'Find and borrow materials from partner libraries'
         scholarlycommons:
-          title: 'ScholarlyCommons'
+          heading: 'ScholarlyCommons'
           description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
         search_center:
-          title: 'Search Center'
+          heading: 'Search Center'
           description: 'Biddle Law Library catalog'
         worldcat:
-          title: 'WorldCat'
+          heading: 'WorldCat'
           description: 'Union catalog listing 540 million records held by member institutions'
+        research_guides:
+          heading: 'Research Guides'
+          description: 'Find resources on a variety of research topics, specially curated by our librarians'
       archival:
-        title: 'Additional archival materials'
         colenda:
-          title: 'Colenda Digital Repository'
+          heading: 'Colenda Digital Repository'
           description: 'Digitized and born-digital material'
         finding_aids:
-          title: 'Finding Aids'
+          heading: 'Finding Aids'
           description: 'Penn special collections and archival material as well as collections at repositories in the greater Philadelphia region'
         philly_archives:
-          title: 'Philadelphia Area Archives'
+          heading: 'Philadelphia Area Archives'
         hathi:
-          title: 'HathiTrust'
+          heading: 'HathiTrust'
           description: 'A partnership of academic and research institutions offering millions of digitized titles from libraries around the world'
         jstor:
-          title: 'JSTOR Images'
+          heading: 'JSTOR Images'
           description: 'Image collections from Penn and other institutions'
         openn:
-          title: 'OPenn'
+          heading: 'OPenn'
           description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
   account:
     breadcrumbs:
@@ -85,7 +72,7 @@ en:
       base: 'Account'
     guide_callout: 'Guide:'
     show:
-      page_heading: 'Account overview'
+      page_heading: 'My Account'
       page_lede: 'View and renew items on your shelf, create citations and email bookmarked items, view fines, and check on your mailing address.'
       cards:
         request:
@@ -108,7 +95,7 @@ en:
       blocked_html: 'You are blocked from making ILL requests. Visit our <a href="%{ill_guide_url}">Interlibrary Loan guide</a> for more information.'
       page_heading: 'Request an item'
       page_lede: "Describe an article, book, chapter, or other item — whether or not it's in our collection — and we'll get it delivered to you."
-      staff_only: 'Visible to staff only'
+      staff_only: 'This option is only visible to staff'
       proxy_alert_html: 'You are proxying a request for <strong>%{name} (%{group})</strong>'
       request_type:
         prompt: "What's the item you are requesting?"
@@ -117,7 +104,7 @@ en:
       form:
         proxy:
           prompt: 'Is this request for a patron?'
-          pennkey: 'Their PennKey'
+          pennkey: 'Enter their PennKey to make this request on their behalf'
           submit: 'Apply'
         scan:
           journal_title:
@@ -266,6 +253,10 @@ en:
       settings: 'Settings'
     guides:
       heading: 'Guides'
+    about:
+      heading: 'Find'
+      home: 'Home'
+      release_notes: 'Release notes'
   advanced:
     all_fields: 'Keyword'
     creator_search: 'Author/Contributor'
@@ -294,6 +285,7 @@ en:
     entries:
       loading: 'Loading option...'
     see_all: 'See %{count} more %{options}'
+    res_share_location_label: 'Loaned to Another Library'
     fallback_electronic_access_button_label: 'Online'
     online_cta: 'View online'
     incomplete_inventory: 'We are having trouble retrieving some holdings at the moment. Refresh the page to try again.'
@@ -344,18 +336,24 @@ en:
       missing_frame: "We're having trouble getting additional information for this library location. Please try again."
       no_info: 'No additional information is available for this location.'
   login:
+    breadcrumbs:
+      root: 'Find'
+      base: 'Login'
+      alma: 'Courtesy borrower'
     alma:
       credentials:
         email: 'Email'
         password: 'Password'
-      heading: 'Courtesy Borrower Login'
-      login: 'Borrower Login'
-      name: 'Courtesy Borrower'
+      heading: 'Courtesy borrower login'
+      login: 'Borrower login'
+      name: 'Courtesy borrower'
     developer: 'Developer'
-    help: 'Help with your library account'
+    help: 'Your library account'
     pennkey: 'Continue with PennKey'
   results:
-    alternate_title: 'Parallel Title'
+    singular: 'result'
+    none: 'No results'
+    alternate_title: 'Parallel title'
     creator: 'Author/Creator'
     edition: 'Edition'
     conference: 'Conference name'
@@ -485,6 +483,7 @@ en:
     advanced:
       label: "Advanced"
     databases: "Databases"
+    more_options: "Advanced search & Databases"
     edit:
       label: 'Edit Search'
   show:

@@ -1,4 +1,4 @@
-pennlibs_web_version: '1.2.1'
+pennlibs_web_version: '1.3.1'
 app_host: 'localhost:3000'
 cleanup:
   searches:
@@ -46,7 +46,5 @@ library:
   info:
     base_url: 'https://www.library.upenn.edu/api/v2/libraries'
     api_key: <%= DockerSecrets.lookup(:library_info_api_key, Rails.application.credentials.library_info_api_key) %>
-pennlibs_feedback:
-  enabled: true
 cataloging_errors:
   email: 'fixopac@pobox.upenn.edu'

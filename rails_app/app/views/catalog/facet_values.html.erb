@@ -1,0 +1,8 @@
+<%# Copied from Blacklight v9.0 %>
+<% if @display_facet.items.any? %>
+  <%= render Blacklight::FacetComponent.new(display_facet: @display_facet,
+                                            blacklight_config: blacklight_config,
+                                            layout: false) %>
+<% else %>
+  <p class="callout"><%= t('blacklight.search.facets.suggest.no_results') %></p>
+<% end %>

@@ -3,7 +3,7 @@
 */
 
 .pagination-bar {
-  margin-bottom: 1rem;
+  margin-bottom: var(--pl-space-l);
 }
 
 .pagination-bar,
@@ -35,8 +35,4 @@
 .paginate-section {
   display: flex;
   align-items: center;
-}
-
-.documents-list .document .index-document-functions {
-  margin-bottom: 0.25rem;
 }

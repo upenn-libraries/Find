@@ -24,16 +24,32 @@ en:
       entry_pagination_info:
         other: '%{current} of %{total}'
       facets:
+        title: 'Filter results'
+        filter: 'Filter'
+        page: 'Page %{page}'
+        modal_title: 'Filter by %{field_name}'
+        more_html: 'All %{field_name}'
+        suggest:
+          label: 'Search for %{field_label}'
+          placeholder: 'Search'
+          no_results: 'No results found.'
+        sort:
+          label: 'Sort by %{sort}'
+          index: 'A-Z'
+          count: 'Frequency'
         group:
           none: 'Your search found no results to limit in the Catalog. Change or start your search over for filters.'
+      filters:
+        title: 'Searching for'
+        all: 'All'
       show:
         title: "%{document_title} · %{application_name}"
       page_title:
         title: "%{constraints} · %{application_name}"
-        joiner: ' · '
     tools:
       staff_view: 'Staff View'
       login_for_email: 'Login to Email'
     advanced_search:
+      page_title: "Advanced search · %{application_name}"
       form:
         limit_criteria_heading_html: 'Limit your search'

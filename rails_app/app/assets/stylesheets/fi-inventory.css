@@ -9,21 +9,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .holdings > turbo-frame {
   display: contents;
-}
-
-.holdings__other-link {
-  text-decoration: underline;
-  text-underline-offset: .15em;
-}
-
-.holdings__other-link:hover {
-  text-decoration-thickness: 2px;
-  text-decoration-color: var(--pl-color-fg-subtle);
 }
 
 .holding__item {
@@ -43,6 +33,7 @@
   border-left: solid 3px var(--holding-accent-color);
   padding: 0 0.5rem;
   line-height: 1.25;
+  font-weight: 400;
 }
 
 .holding__header {
@@ -271,6 +262,23 @@ a.inventory-item--hathitrust {
   margin-bottom: 0;
 }
 
+.document-inventory-container .btn-success {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
+}
+
+.document-inventory-container .btn-success:hover {
+  text-decoration-thickness: var(--pl-link-hover-text-decoration-thickness);
+}
+
+.document-inventory-container .btn-success:focus {
+  box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px, var(--pl-focus-box-shadow);
+}
+
+.document-inventory-container .btn-success svg {
+  max-width: 1rem;
+  max-height: 1rem;
+}
+
 @media (min-width: 992px) {
   .show-document-container {
     padding: 1.5rem;
@@ -291,7 +299,7 @@ a.inventory-item--hathitrust {
   text-decoration: underline;
   text-underline-offset: var(--pl-link-text-underline-offset);
   text-decoration-thickness: 1px;
-  
+
   box-shadow: rgba(140, 149, 159, 0.2) 0px 3px 6px 0px;
 }
 

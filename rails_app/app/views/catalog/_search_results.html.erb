@@ -1,4 +1,7 @@
-<%# Overriding view from Blacklight 9.0.0 to display "All" when there are no search constraints %>
+<%# Overriding view from Blacklight 9.0 to:
+      - render both `search_results_header` and `search_header_component` in the container header
+      - remove constraints component rendering - it is now rendered in the search header component
+      - in page title if there are no constraints, display "All" %>
 
 <% content_for(:page_title) do %>
   <% constraints = render_search_to_page_title(search_state) %>
@@ -19,10 +22,8 @@
 
 <% content_for(:container_header) do -%>
   <%= render 'search_results_header' %>
-  <%= render blacklight_config.view_config(document_index_view_type).constraints_component.new(search_state: search_state) %>
+  <%= render blacklight_config.view_config(document_index_view_type).search_header_component.new %>
 <% end %>
-
-<%= render blacklight_config.view_config(document_index_view_type).search_header_component.new %>
 
 <h2 class="visually-hidden"><%= t('blacklight.search.search_results') %></h2>
 

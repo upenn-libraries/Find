@@ -115,7 +115,10 @@ describe 'Account Request ILL form' do
       end
 
       it 'displays proxied request alert' do
-        expect(page).to have_text 'You are proxying a request for John Doe (Undergraduate)'
+        expected_text = ActionView::Base.full_sanitizer.sanitize(
+          I18n.t('account.ill.proxy_alert_html', name: proxy.full_name, group: proxy.ils_group_name)
+        )
+        expect(page).to have_text expected_text
       end
 
       it 'fills in proxied user id' do

@@ -1,0 +1,127 @@
+#main-container {
+  margin-top: var(--pl-space-l);
+}
+
+.blacklight-catalog-index {
+  & #main-container {
+    display: flex;
+    gap: var(--pl-space-l) var(--pl-space-xl);
+    flex-direction: column;
+
+    width: 100%;
+    padding: 0 var(--pl-viewport-margins-gutter, 1em);
+
+    @media (min-width: 820px) {
+      display: grid;
+      grid-template-columns: 18rem 1fr;
+      align-items: start;
+    }
+
+    & h1 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    & #sidebar {
+      width: 100%;
+      grid-column: 1;
+    }
+
+    &:not(.fi-home) #sidebar {
+      grid-row: 2;
+    }
+
+    & #content {
+      grid-column: 2;
+      width: 100%;
+    }
+
+    &:not(.fi-home) #content {
+      grid-row: 2;
+    }
+
+    & .sort-pagination {
+      border-bottom: none;
+    }
+  }
+  
+  & .row:has(#content) {
+    display: contents;
+  }
+
+  & .row:has(#main-flashes) {
+    display: contents;
+
+    & > * {
+      display: contents;
+    }
+  }
+
+  & #sidebar,
+  & #content,
+  & .sort-pagination,
+  & #content > .container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.fi-constraints-and-sort {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--pl-space-m);
+  align-self: end;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+
+  & .sort-pagination {
+    display: flex;
+    gap: var(--pl-space-xs);
+
+    @media (min-width: 819px) {
+      margin-left: auto !important;
+    }
+
+    & .paginate-section,
+    & .per_page-dropdown {
+      display: none;
+    }
+  }
+
+  & .view-type-group .btn.active {
+    --bs-btn-active-bg: var(--pl-color-bg-accent-emphasis);
+    --bs-btn-active-border-color: var(--pl-color-bg-accent-emphasis);
+    --bs-btn-active-color: var(--pl-color-fg-on-emphasis);
+  }
+}
+
+.sort-dropdown {
+  margin: 0 !important;
+}
+
+.search-widgets {
+  gap: var(--pl-space-s);
+  align-items: center;
+}
+
+.document:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media (max-width: 819px) {
+  .blacklight-catalog-index #main-container:not(.fi-home) #sidebar {
+    display: none;
+  }
+
+  .fi-home {
+    & #content {
+      order: 1 !important;
+    }
+
+    & #sidebar {
+      order: 2 !important;
+    }
+  }
+}

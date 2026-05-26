@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 describe Catalog::FacetLinkComponent do
-  let(:field) { instance_double Blacklight::FieldPresenter, field_config: field_config, values: values }
+  let(:field) do
+    instance_double Blacklight::FieldPresenter, field_config: field_config, values: values,
+                                                layout_component: nil
+  end
   let(:field_config) { OpenStruct.new(limit: limit) }
   let(:component) { described_class.new(field: field) }
 
