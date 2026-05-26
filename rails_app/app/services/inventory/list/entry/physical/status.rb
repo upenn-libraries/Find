@@ -61,41 +61,22 @@ module Inventory
                              end
           end
 
-          # Return a refined available status key, because some things Alma reports as available are available only
-          # under some restrictions we want to make explicit in our status display. Order of the logic here matters, so
-          # that items at LIBRA that require an Aeon Request are properly handled, for example.
-          # @return [Symbol]
+          # Delegate to location for the status key appropriate to this item's Alma status.
+          # The location knows its own access policies (Aeon, LIBRA, Archives, HSP, etc.).
+          #
+          # @return [Symbol, nil]
           def refined_available_key
-            if location.aeon?
-              :appointment
-            elsif location.libra?
-              :offsite
-            elsif location.archives? || location.hsp?
-              :unrequestable
-            else
-              :circulates
-            end
+            location.available_status_key
           end
 
-          # Return a refined check holdings status key.
-          #
-          # This status means that some items are available and some are not. For most items, displaying a "mixed
-          # availability" message is accurate but in the case of items that are only available by appointment
-          # it's clearer for the user to display the "available via appointment" message.
+          # @return [Symbol]
           def refined_check_holdings_key
-            if location.aeon?
-              :appointment
-            else
-              :mixed_availability
-            end
+            location.check_holdings_status_key
           end
 
-          # Return a refined unavailable status key.
-          #
-          # Alma marks items as unavailable for various reasons. For Aeon items, the material is still
-          # accessible by appointment in the reading room despite the unavailable Alma status.
+          # @return [Symbol, nil]
           def refined_unavailable_key
-            location.aeon? ? :appointment : nil
+            location.unavailable_status_key
           end
         end
       end

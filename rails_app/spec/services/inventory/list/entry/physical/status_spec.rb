@@ -25,7 +25,7 @@ describe Inventory::List::Entry::Physical::Status do
         subject(:status) { create(:physical_entry_status, :aeon_offsite) }
 
         it 'returns expected translation' do
-          expect(status.send(value)).to eql I18n.t([:appointment, value].join('.'), scope: namespace)
+          expect(status.send(value)).to eql I18n.t([:offsite_appointment, value].join('.'), scope: namespace)
         end
       end
 

@@ -15,6 +15,9 @@ en:
           appointment: &appointment_shared
             label: 'Available by appointment'
             description: 'This item can be accessed by appointment in the library reading room.'
+          offsite_appointment:
+            label: 'Available from offsite location'
+            description: 'This item is stored offsite; please allow extra time for retrieval.'
         unavailable:
           label: 'By Request'
           description: 'Item cannot be checked out at the library but can be requested.'
