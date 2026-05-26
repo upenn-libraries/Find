@@ -55,8 +55,8 @@ module Catalog
       @search_fields ||= blacklight_config.search_fields.values
                                           .select { |field_def| helpers.should_render_field?(field_def) }
                                           .collect do |field_def|
-                                            [helpers.label_for_search_field(field_def.key),
-                                             field_def.key]
+        [helpers.label_for_search_field(field_def.key),
+         field_def.key]
       end
     end
 
