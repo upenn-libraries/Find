@@ -111,7 +111,12 @@ module Inventory
         end
 
         def loaned_via_resource_sharing?
-          !location.resource_sharing_library?
+          !location_policy.resource_sharing_library?
+        end
+
+        # @return [Inventory::LocationPolicy]
+        def location_policy
+          @location_policy ||= location.policy
         end
 
         # User-friendly availability status.

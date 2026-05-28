@@ -41,7 +41,7 @@
 <% if require_authentication_for_requesting? %>
   <%= link_to t('requests.form.log_in_to_request_item'), login_path, class: 'btn btn-success',
               data: { controller: 'request-button', action: 'click->request-button#addRequestQueryToUrl' } %>
-<% elsif entry.location.aeon? %>
+<% elsif policy.aeon? %>
   <%= render Fulfillment::FrameComponent.new(form_params: fulfillment_form_params) %>
 <% else %>
   <details class="fulfillment" data-controller="request-button" data-request-button-target="requestButton">

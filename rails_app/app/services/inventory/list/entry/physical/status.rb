@@ -14,9 +14,11 @@ module Inventory
 
           # @param status [String]
           # @param location [Inventory::Location]
-          def initialize(status:, location:)
+          # @param policy [Inventory::LocationPolicy, nil]
+          def initialize(status:, location:, policy: nil)
             @status = status
             @location = location
+            @policy = policy
           end
 
           # Return user-friendly status.
@@ -55,10 +57,15 @@ module Inventory
           # @return [Array<Symbol>]
           def status_keys
             @status_keys ||= case status
-                             when Constants::AVAILABLE then [:available, location.available_status_key]
-                             when Constants::CHECK_HOLDINGS then [:check_holdings, location.check_holdings_status_key]
-                             when Constants::UNAVAILABLE then [:unavailable, location.unavailable_status_key].compact
+                             when Constants::AVAILABLE then [:available, policy.available_status_key]
+                             when Constants::CHECK_HOLDINGS then [:check_holdings, policy.check_holdings_status_key]
+                             when Constants::UNAVAILABLE then [:unavailable, policy.unavailable_status_key].compact
                              end
+          end
+
+          # @return [Inventory::LocationPolicy]
+          def policy
+            @policy || location.policy
           end
         end
       end

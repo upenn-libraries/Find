@@ -23,7 +23,12 @@ module Fulfillment
 
     # @return [ActiveSupport::ArrayInquirer]
     def inquiry
-      @inquiry = options.inquiry
+      options.inquiry
+    end
+
+    # @return [Inventory::LocationPolicy]
+    def policy
+      @policy ||= item.location.policy
     end
 
     # Does this options set represent a deliverable item? If no user is provided, delivery is impossible.
@@ -62,9 +67,9 @@ module Fulfillment
 
     # @return [Symbol, nil]
     def restricted_option
-      return Options::Restricted::AEON if item.location.aeon?
-      return Options::Restricted::ARCHIVES if item.location.archives?
-      return Options::Restricted::HSP if item.location.hsp?
+      return Options::Restricted::AEON if policy.aeon?
+      return Options::Restricted::ARCHIVES if policy.archives?
+      return Options::Restricted::HSP if policy.hsp?
       return Options::Restricted::REFERENCE if item.policy == Settings.fulfillment.policies.reference
       return Options::Restricted::RESERVE if item.policy == Settings.fulfillment.policies.reserve
 
