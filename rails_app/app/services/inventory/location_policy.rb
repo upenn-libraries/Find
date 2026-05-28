@@ -130,10 +130,8 @@ module Inventory
     #
     # @return [Symbol]
     def profile
-      if aeon_library? && libra?
-        :aeon_offsite
-      elsif aeon_library?
-        :aeon_onsite
+      if aeon_library?
+        libra? ? :aeon_offsite : :aeon_onsite
       elsif libra?
         :offsite
       elsif archives? || hsp?

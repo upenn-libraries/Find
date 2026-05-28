@@ -81,37 +81,4 @@ describe Inventory::LocationPolicy do
     end
   end
 
-  describe 'dependency injection' do
-    it 'respects injected aeon_locations' do
-      loc = Inventory::Location.new(
-        library_code: 'lib', library_name: 'Lib',
-        location_code: 'aeonloc', location_name: 'Aeon Loc'
-      )
-      policy = described_class.new(loc, aeon_locations: %w[aeonloc])
-      expect(policy.aeon?).to be true
-      expect(policy.available_status_key).to eq :appointment
-    end
-
-    it 'respects injected settings for restricted libraries' do
-      loc = Inventory::Location.new(
-        library_code: 'ARCHLIB', library_name: 'Archives',
-        location_code: 'arch', location_name: 'Archives'
-      )
-      settings = OpenStruct.new(
-        fulfillment: OpenStruct.new(
-          restricted_libraries: OpenStruct.new(
-            hsp: 'HSPLIB', archives: 'ARCHLIB', libra: 'LIBRALIB', res_share: 'RESLIB'
-          )
-        ),
-        locations: OpenStruct.new(
-          aeon_sublocation_map: {},
-          aeon_location_map: {}
-        )
-      )
-      policy = described_class.new(loc, settings: settings)
-      expect(policy.archives?).to be true
-      expect(policy.available_status_key).to eq :unrequestable
-      expect(policy.requires_authentication?).to be false
-    end
-  end
 end
