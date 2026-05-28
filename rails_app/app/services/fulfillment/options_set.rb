@@ -22,9 +22,7 @@ module Fulfillment
     end
 
     # @return [ActiveSupport::ArrayInquirer]
-    def inquiry
-      options.inquiry
-    end
+    delegate :inquiry, to: :options
 
     # @return [Inventory::LocationPolicy]
     def policy

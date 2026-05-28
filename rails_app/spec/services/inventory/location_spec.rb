@@ -45,5 +45,4 @@ describe Inventory::Location do
       end
     end
   end
-
 end

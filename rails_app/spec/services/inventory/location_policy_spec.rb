@@ -80,5 +80,4 @@ describe Inventory::LocationPolicy do
       expect(policy.unavailable_status_key).to be_nil
     end
   end
-
 end
