@@ -2,24 +2,6 @@
 * Find callout styles
 */
 
-.callout {
-  padding: var(--pl-space-m) var(--pl-space-l);
-  margin-bottom: var(--pl-space-l);
-  border: 1px solid var(--bs-border-color);
-  border-left-width: 0.25rem;
-  border-radius: var(--pl-border-radius-subtle);
-  border-left-color: var(--pl-color-fg-accent);
-}
-
-.callout > .bi {
-  color: var(--pl-color-fg-accent);
-  margin: 0;
-}
-
-.callout--info {
-  border-left-color: var(--pl-color-fg-info);
-}
-
-.callout--success {
+.pl-callout--success {
   border-left-color: var(--pl-color-fg-success);
 }

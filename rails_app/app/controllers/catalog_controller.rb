@@ -180,7 +180,7 @@ class CatalogController < ApplicationController
 
     config.add_index_field :title_alternate_show, accessor: :marc, label: I18n.t('results.alternate_title')
     config.add_index_field :score, label: I18n.t('results.score'), if: :show_score?, helper_method: :as_badge
-    config.add_index_field :format_facet, label: I18n.t('results.format')
+    config.add_index_field :format_facet, label: I18n.t('results.format'), link_to_facet: true
     config.add_index_field :creator_ss,
                            label: I18n.t('results.creator'), component: Catalog::FacetLinkComponent,
                            facet_target: :creator_facet, facet_map: :creator_extended_show_facet_map, limit: 2

@@ -22,7 +22,7 @@ en:
       guide_link_text: 'visit our catalog guide'
       manage:
         heading: 'Manage your account'
-        description: 'Create and manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
+        description: 'Manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
         cta_html: 'Go to %{link}.'
     resources:
       heading: 'More tools for your research'
@@ -189,7 +189,7 @@ en:
     shelf:
       page_heading: 'Shelf'
       page_lede: "View and renew items you've loaned or requested from the library."
-      no_items: 'No items found.'
+      no_items: "Your shelf is empty. Items you've borrowed or requested will show up here."
       identifier: '%{system} %{type} ID: %{id}'
       boundwith_notice: 'This title is not representative of the title requested because it is bound together with other works.'
       refine:
@@ -338,7 +338,7 @@ en:
   login:
     breadcrumbs:
       root: 'Find'
-      base: 'Login'
+      base: 'Log in'
       alma: 'Courtesy borrower'
     alma:
       credentials:

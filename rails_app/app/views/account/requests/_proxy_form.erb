@@ -1,7 +1,7 @@
 <% if current_user.proxy_submit_eligible? %>
   <div class="row">
     <div class="col-md-7">
-      <div class="callout mb-3">
+      <div class="pl-callout mb-3">
           <h2 class="pl-h3 mt-1 mb-2 fs-5"><%= t('account.ill.form.proxy.prompt') %></h2>
 
           <%= form_with(url: ill_new_request_url, method: :get) do %>
@@ -12,7 +12,7 @@
                 <%= label_tag :proxy_for, t('account.ill.form.proxy.pennkey') %>
                 <%= text_field_tag :proxy_for, @request.proxied? ? @request.patron.uid : '', class: 'form-control mt-2' %>
               </div>
-              <%= button_tag t('account.ill.form.proxy.submit'), name: nil, class: 'btn btn-primary mx-2 mt-2' %>
+              <%= button_tag t('account.ill.form.proxy.submit'), name: nil, class: 'pl-button pl-button--accent mx-2 mt-2' %>
             </div>
 
             <p class="text-secondary mb-0 mt-2"><%= t('account.ill.staff_only') %></p>

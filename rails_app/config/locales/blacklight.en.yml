@@ -6,6 +6,8 @@ en:
   blacklight:
     application_name: 'Find · Penn Libraries'
     back_to_search: 'Back to Results'
+    bookmarks:
+      no_bookmarks_html: 'You haven''t bookmarked anything yet. <a href="%{url}">Search the catalog</a> and select the bookmark icon on any result to save it here.'
     search:
       zero_results:
         title: "Your search found no results in the <strong>Catalog</strong>"
