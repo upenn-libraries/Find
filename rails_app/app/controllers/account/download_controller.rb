@@ -8,6 +8,8 @@ module Account
   # for all actions. This would be undesirable for most actions, which is why this action had to be moved to
   # its own controller.
   class DownloadController < AccountController
+    before_action :authenticate_user!
+
     include ActionController::Live
 
     # Download PDF of ILL scan

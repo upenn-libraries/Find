@@ -3,6 +3,8 @@
 module Account
   # Controller for user-account-settings-related actions.
   class SettingsController < AccountController
+    before_action :authenticate_user!
+
     # GET /account/settings
     # Show user details (user group, addresses, service eligibility, fines/fees form Alma)
     def show; end

@@ -241,7 +241,7 @@ en:
     login: 'Log in'
     service_lede: 'books, articles, and more'
     service_name: 'Find'
-    sign_out: 'Sign out'
+    sign_out: 'Log out'
     account: 'My Account'
   footer:
     account:
@@ -345,8 +345,8 @@ en:
         email: 'Email'
         password: 'Password'
       heading: 'Courtesy borrower login'
-      login: 'Borrower login'
-      name: 'Courtesy borrower'
+      login: 'Log in'
+      name: 'Courtesy borrower login'
     developer: 'Developer'
     help: 'Your library account'
     pennkey: 'Continue with PennKey'

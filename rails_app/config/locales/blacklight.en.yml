@@ -50,7 +50,7 @@ en:
         title: "%{constraints} · %{application_name}"
     tools:
       staff_view: 'Staff View'
-      login_for_email: 'Login to Email'
+      login_for_email: 'Log in to email'
     advanced_search:
       page_title: "Advanced search · %{application_name}"
       form:

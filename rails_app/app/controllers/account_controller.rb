@@ -2,7 +2,6 @@
 
 # Parent controller for all Account-related controllers.
 class AccountController < ApplicationController
-  before_action :authenticate_user!
   # GET /account
   def show; end
 end
