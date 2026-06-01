@@ -75,20 +75,26 @@ describe 'Catalog Index Page' do
       end
     end
 
-    it 'renders physical entries as an inline summary with status, location, and call-number fragments' do
+    it 'renders physical entries as inline summary fragments' do
+      selectors = [
+        'a.fi-option__link span.fi-option__summary',
+        'span.fi-option__field--status',
+        'span.fi-option__field--location',
+        'span.fi-option__field--call-number'
+      ]
       within("article.document[data-document-id=\"#{print_monograph_bib}\"] .fi-options") do
-        expect(page).to have_selector 'a.fi-option__link span.fi-option__summary'
-        expect(page).to have_selector 'span.fi-option__field--status'
-        expect(page).to have_selector 'span.fi-option__field--location'
-        expect(page).to have_selector 'span.fi-option__field--call-number'
+        selectors.each { |selector| expect(page).to have_selector(selector) }
       end
     end
 
-    it 'renders electronic entries as an inline summary with status and collection fragments' do
+    it 'renders electronic entries as inline summary fragments' do
+      selectors = [
+        'a.fi-option__link span.fi-option__summary',
+        'span.fi-option__field--status',
+        'span.fi-option__field--collection'
+      ]
       within("article.document[data-document-id=\"#{electronic_journal_bib}\"] .fi-options") do
-        expect(page).to have_selector 'a.fi-option__link span.fi-option__summary'
-        expect(page).to have_selector 'span.fi-option__field--status'
-        expect(page).to have_selector 'span.fi-option__field--collection'
+        selectors.each { |selector| expect(page).to have_selector(selector) }
       end
     end
 

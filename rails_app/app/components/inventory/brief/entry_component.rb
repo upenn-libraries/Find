@@ -25,15 +25,13 @@ module Inventory
       #
       # @return [Array<Hash>]
       def summary_fields
-        fields_for_entry.reject { |f| f[:value].blank? }
+        fields_for_entry.reject { |field| field[:value].blank? }
       end
 
       # The electronic public note, surfaced separately so it can be opened in
       # a popover instead of bloating the inline summary.
       # @return [String, nil] sanitized HTML
       def note_content
-        return nil unless entry.respond_to?(:public_note)
-
         entry.public_note.presence
       end
 
@@ -58,7 +56,7 @@ module Inventory
       # @return [Array<Hash>]
       def fields_for_entry
         return physical_fields if entry.physical?
-        return resource_link_fields if entry.respond_to?(:resource_link?) && entry.resource_link?
+        return resource_link_fields if entry.resource_link?
 
         electronic_fields
       end
