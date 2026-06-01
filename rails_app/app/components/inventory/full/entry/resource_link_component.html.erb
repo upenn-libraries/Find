@@ -1,7 +1,6 @@
-<p class="document-inventory">
-  <span class="inventory-item__header"><%= entry.human_readable_location %></span>
-</p>
 <p class="inventory-item__availability--easy inventory-item__availability-summary">
+  <span class="inventory-item__main"><%= entry.description %></span>
   <span class="inventory-item__status"><%= entry.human_readable_status %></span>
+
 </p>
 <%= render Inventory::Full::Entry::OnlineCtaComponent.new(href: entry.href) %>
