@@ -14,10 +14,12 @@ module Inventory
       @document = document
     end
 
-    # Determine the number of "skeleton" entries to render
+    # Determine the number of "skeleton" entries to render. We always show at
+    # least one so resource-link-only records (which have inventory_count of 0)
+    # still get a loading placeholder while the turbo-frame fetches.
     # @return [Integer]
     def skeleton_entry_count
-      [document.inventory_count, Inventory::List::DEFAULT_LIMIT].min
+      [[document.inventory_count, 1].max, Inventory::List::DEFAULT_LIMIT].min
     end
 
     # Get "full text link" (856 with indicator 0 or 1) values and render them using the

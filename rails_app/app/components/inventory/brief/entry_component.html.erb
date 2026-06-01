@@ -1,22 +1,26 @@
 <li class="<%= classes.join(' ') %>">
-  <a href="<%= href %>" class="holding__link link-prevent-default">
-  <% if header_content.present? %>
-  <span class="holding__header">
-    <%= header_content %>
-  </span>
-  <% end %>
-  <span class="holding__main">
-    <%= main_content %>
-  </span>
-  <% if public_note_content %>
-  <span class="holding__public_note">
-    <%= public_note_content %>
-  </span>
-  <% end %>
-  <% if footer_content.present? %>
-  <span class="holding__footer">
-    <%= footer_content %>
-  </span>
-  <% end %>
+  <a href="<%= href %>" class="fi-option__link pl-button link-prevent-default">
+    <span class="fi-option__summary">
+      <% summary_fields.each do |field| %>
+        <span class="fi-option__field fi-option__field--<%= field[:key].to_s.dasherize %>"><%= field[:value] %></span>
+        <% if field[:key] == :collection && note_content %>
+          <span class="fi-option__field fi-option__field--note">
+            <%= tag.button(type: 'button',
+                            class: 'fi-option__note-trigger',
+                            aria: { label: t('inventory.entries.note_label') },
+                            data: {
+                              controller: 'tooltip',
+                              action: 'click->tooltip#stop',
+                              bs_title: note_content,
+                              bs_html: 'true',
+                              bs_sanitize: 'false',
+                              bs_placement: 'top'
+                            }) do %>
+              <%= t('inventory.entries.note_trigger') %>
+            <% end %>
+          </span>
+        <% end %>
+      <% end %>
+    </span>
   </a>
 </li>

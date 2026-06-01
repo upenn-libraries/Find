@@ -1,5 +1,5 @@
 <turbo-frame id="inventory_<%= document.id %>" target="_top">
-  <ol class="holdings">
+  <ol class="fi-options">
     <% entries.each do |entry| %>
       <%= render(Inventory::Brief::EntryComponent.new(entry: entry)) %>
     <% end %>

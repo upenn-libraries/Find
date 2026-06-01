@@ -12,6 +12,16 @@
   }
 }
 
+/* Reserve flex space for the search autocomplete host before the custom
+   element registers. Without this, undefined `<pennlibs-autocomplete>` is
+   inline / zero-width and the right-side nav links flash on the left until
+   the web component upgrades. */
+.fi-search-box-container > pennlibs-autocomplete {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .fi-search-box {
   margin: 0 auto;
   background: var(--pl-color-bg-subtle);

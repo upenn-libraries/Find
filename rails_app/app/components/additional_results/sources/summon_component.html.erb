@@ -46,7 +46,7 @@
             <%# Format and availability %>
             <% if availability_display(doc).present? %>
               <dt><%= t('additional_results.summon.fields.availability') %></dt>
-              <dd class="holdings">
+              <dd class="fi-options">
                 <%= availability_display(doc).html_safe %>
               </dd>
             <% end %>

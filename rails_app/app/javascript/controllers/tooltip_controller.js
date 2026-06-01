@@ -36,4 +36,12 @@ export default class extends Controller {
 
     return this.element.getAttribute("data-bs-title");
   }
+
+  // Use as `data-action="click->tooltip#stop"` on a tooltip trigger that
+  // lives inside another interactive element (e.g. a holding row anchor),
+  // so clicking the trigger doesn't activate the wrapping element.
+  stop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 }

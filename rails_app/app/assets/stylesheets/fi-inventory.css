@@ -2,64 +2,132 @@
 * Find inventory/holdings styles
 */
 
-.holdings {
+.fi-options {
   list-style: none;
   padding: 0;
-  margin-top: 0.5rem;
+  margin-top: var(--pl-space-xs);
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 0;
+  gap: var(--pl-space-xs);
+
+  & > li {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.holdings > turbo-frame {
+.fi-options > turbo-frame {
   display: contents;
 }
 
-.holding__item {
-  --holding-accent-color: var(--pl-color-fg-subtle);
+.fi-option {
+  --option-accent-color: var(--pl-color-fg-default);
 }
 
-.holding__item--available {
-  --holding-accent-color: var(--pl-color-fg-success);
+.fi-option--available {
+  --option-accent-color: var(--pl-color-fg-success);
 }
 
-.holding__item--loading,
-.holding__link {
+/* Skeleton loading row: same outer shape as a rendered .fi-option (the inner
+   .fi-option__link picks up the standard padding/border via the shared class),
+   but each fragment is a Bootstrap placeholder bar instead of real text. */
+.fi-option--loading .fi-option__link {
+  pointer-events: none;
+}
+
+.fi-option--loading {
+  max-width: 100%;
+  min-width: 0;
+
+  & .placeholder {
+    border-radius: var(--pl-border-radius-subtle);
+    opacity: 0.25;
+    height: 1.2rem;
+    margin: 0.15rem 0;
+    max-width: 100%;
+  }
+}
+
+.fi-option__link {
   text-decoration: none;
-  display: inline-flex;
-  flex-direction: column;
+  display: block;
   color: var(--pl-color-fg-subtle);
-  border-left: solid 3px var(--holding-accent-color);
-  padding: 0 0.5rem;
-  line-height: 1.25;
   font-weight: 400;
 }
 
-.holding__header {
-  color: var(--holding-accent-color);
+.fi-option__link {
+  padding: var(--pl-space-2xs) var(--pl-space-s);
+  border: solid 1px transparent;
+
+  &:hover {
+    border: solid 1px var(--pl-color-fg-subtle);
+    text-decoration: none;
+  }
 }
 
-.holding__main {
+.fi-option__field {
+  display: inline;
+  color: var(--pl-color-fg-default);
+}
+
+.fi-option__field--location {
+  /* font-weight: 600; */
+}
+
+.fi-option__field:not(:last-child)::after {
+  content: "·";
+  padding-left: var(--pl-space-xs);
+  padding-right: var(--pl-space-2xs);
+  color: var(--pl-color-fg-default);
+  font-weight: 400;
+}
+
+.fi-option__field--status {
+  color: var(--option-accent-color);
   font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--holding-accent-color);
+  /* font-size: 0.825rem;
+  text-transform: uppercase;
+  letter-spacing: 0.075em; */
+}
+
+.fi-option__field--note {
+  display: inline-flex;
+  align-items: center;
+}
+
+.fi-option__field--note::after {
+  content: none !important;
+}
+
+.fi-option__note-trigger {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pl-color-fg-subtle);
+  font: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .15em;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.2em;
+  cursor: help;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--pl-color-fg-default);
+  }
 }
 
-.holding__link:hover .holding__main {
-  text-decoration-thickness: 2px;
-}
+/* .fi-options__other-link {
+  text-decoration-style: dotted;
+  color: var(--pl-color-fg-default);
+  font-weight: 400;
 
-.holding__link--more {
-  text-underline-offset: 1px;
-}
-
-.holding__link--more:hover {
-  text-decoration: underline;
-}
+  &:hover {
+    text-decoration-style: solid;
+  }
+} */
 
 .inventory-item__header {
   display: block;
@@ -84,7 +152,7 @@
 }
 
 .inventory-item__footer {
-  color: var(--holding-accent-color);
+  color: var(--option-accent-color);
   font-weight: 600;
 }
 
@@ -98,28 +166,28 @@
 }
 
 .inventory-item__availability {
-  --holding-accent-color: var(--pl-color-fg-subtle);
+  --option-accent-color: var(--pl-color-fg-subtle);
 }
 
 .inventory-item__availability--easy {
-  --holding-accent-color: var(--pl-color-fg-success);
+  --option-accent-color: var(--pl-color-fg-success);
 }
 
 .inventory-item__availability--difficult {
-  --holding-accent-color: var(--pl-color-fg-subtle);
+  --option-accent-color: var(--pl-color-fg-subtle);
 }
 
 .inventory-item__status--blocked {
-  --holding-accent-color: var(--pl-color-fg-attention);
+  --option-accent-color: var(--pl-color-fg-attention);
 }
 
 .inventory-item__availability-summary {
-  border-left: solid 3px var(--holding-accent-color);
+  border-left: solid 3px var(--option-accent-color);
   padding-left: 0.75rem;
 }
 
 .inventory-item__availability-summary .inventory-item__availability-main {
-  color: var(--holding-accent-color);
+  color: var(--option-accent-color);
   font-weight: 600;
   font-size: 1.15rem;
 }

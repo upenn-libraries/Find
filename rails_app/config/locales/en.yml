@@ -284,7 +284,11 @@ en:
         header: 'option'
     entries:
       loading: 'Loading option...'
-    see_all: 'See %{count} more %{options}'
+      note_label: 'See note for this holding'
+      note_trigger: 'Note'
+    location_modifiers:
+      offsite: 'In storage at %{location}'
+    see_all: 'Compare all %{count} %{options}'
     res_share_location_label: 'Loaned to Another Library'
     fallback_electronic_access_button_label: 'Online'
     online_cta: 'View online'

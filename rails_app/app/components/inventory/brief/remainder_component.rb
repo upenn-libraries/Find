@@ -16,14 +16,20 @@ module Inventory
         @remainder_count ||= calculate_remainder
       end
 
+      # Total entries (shown + remainder) across all access paths.
+      # @return [Integer]
+      def total_count
+        @total_count ||= document.inventory_count + document.marc_resource_links.count
+      end
+
       def render?
         remainder_count.positive?
       end
 
       def call
         tag.li do
-          link_to solr_document_path(document.id), class: 'holdings__other-link' do
-            t('inventory.see_all', count: remainder_count, options: 'option'.pluralize(remainder_count))
+          link_to solr_document_path(document.id), class: 'fi-options__compare-link' do
+            t('inventory.see_all', count: total_count, options: 'option'.pluralize(total_count))
           end
         end
       end

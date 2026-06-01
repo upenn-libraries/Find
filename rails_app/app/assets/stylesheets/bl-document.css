@@ -65,11 +65,11 @@
 /* Document list */
 .documents-list .document {
   padding-top: 0;
-  margin-bottom: var(--pl-space-l);
+  margin-bottom: var(--pl-space-m);
   border-bottom: none;
 
   & .pl-dl--inline {
-    margin-bottom: var(--pl-space-xs);
+    margin-bottom: 0;
 
     & dt:not(:first-of-type)::before {
       margin-bottom: 0.25rem;
