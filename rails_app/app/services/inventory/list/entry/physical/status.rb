@@ -57,9 +57,9 @@ module Inventory
           # @return [Array<Symbol>]
           def status_keys
             @status_keys ||= case status
-                             when Constants::AVAILABLE then [:available, policy.available_status_key]
-                             when Constants::CHECK_HOLDINGS then [:check_holdings, policy.check_holdings_status_key]
-                             when Constants::UNAVAILABLE then [:unavailable, policy.unavailable_status_key].compact
+                             when Constants::AVAILABLE then [Constants::AVAILABLE_KEY, policy.available_status_key]
+                             when Constants::CHECK_HOLDINGS then [Constants::CHECK_HOLDINGS_KEY, policy.check_holdings_status_key]
+                             when Constants::UNAVAILABLE then [Constants::UNAVAILABLE_KEY, policy.unavailable_status_key].compact
                              end
           end
 

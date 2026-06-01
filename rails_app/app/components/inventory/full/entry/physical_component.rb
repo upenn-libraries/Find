@@ -9,11 +9,11 @@ module Inventory
 
         # @param entry [Inventory::Entry]
         # @param user [User] user is necessary to show `Log in to request item`
-        # @param policy [Inventory::LocationPolicy, nil]
-        def initialize(entry:, user: nil, policy: nil)
+        # @param location_policy [Inventory::LocationPolicy, nil]
+        def initialize(entry:, user: nil, location_policy: nil)
           @entry = entry
           @user = user
-          @policy = policy
+          @location_policy = location_policy
         end
 
         # Class to use when rendering the availability summary
@@ -29,13 +29,13 @@ module Inventory
         end
 
         # @return [Inventory::LocationPolicy]
-        def policy
-          @policy || entry.location.policy
+        def location_policy
+          @location_policy || entry.location.policy
         end
 
         # Return true if request options are only available after login
         def require_authentication_for_requesting?
-          user.nil? && policy.requires_authentication?
+          user.nil? && location_policy.requires_authentication?
         end
 
         # @return [Hash] parameters for the fulfillment form

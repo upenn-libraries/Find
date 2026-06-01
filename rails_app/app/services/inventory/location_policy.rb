@@ -6,22 +6,24 @@ module Inventory
   # what type of access it requires, what status labels apply, and how to route
   # to external systems like Aeon.
   class LocationPolicy
+    # Top-level keys mirror Constants::AVAILABLE_KEY / CHECK_HOLDINGS_KEY / UNAVAILABLE_KEY
+    # so that renaming a status key in one place updates both consumers.
     STATUS_KEYS = {
-      available: {
+      Constants::AVAILABLE_KEY => {
         aeon_offsite: :offsite_appointment,
         aeon_onsite: :appointment,
         offsite: :offsite,
         restricted_onsite: :unrequestable,
         general: :circulates
       },
-      check_holdings: {
+      Constants::CHECK_HOLDINGS_KEY => {
         aeon_offsite: :appointment,
         aeon_onsite: :appointment,
         offsite: :mixed_availability,
         restricted_onsite: :mixed_availability,
         general: :mixed_availability
       },
-      unavailable: {
+      Constants::UNAVAILABLE_KEY => {
         aeon_offsite: :appointment,
         aeon_onsite: :appointment
       }
@@ -31,32 +33,30 @@ module Inventory
 
     # @param location [Inventory::Location]
     # @param aeon_locations [Array<Symbol>] collection of location codes that route through Aeon
-    # @param settings [#fulfillment, #locations] settings object with fulfillment and location config
-    def initialize(location, aeon_locations: Mappings.aeon_locations, settings: Settings)
+    def initialize(location, aeon_locations: Mappings.aeon_locations)
       @location = location
       @aeon_locations = aeon_locations
-      @settings = settings
     end
 
     # Return location's Aeon sublocation code.
     #
     # @return [String]
     def aeon_sublocation
-      @settings.locations.aeon_sublocation_map[location.code]
+      Settings.locations.aeon_sublocation_map[location.code]
     end
 
     # Return location's Aeon site code.
     #
     # @return [String]
     def aeon_site
-      @settings.locations.aeon_location_map[location.library_code]
+      Settings.locations.aeon_location_map[location.library_code]
     end
 
     # Returns true if material is in resource sharing library.
     #
     # @return [Boolean]
     def resource_sharing_library?
-      location.library_code == @settings.fulfillment.restricted_libraries.res_share
+      location.library_code == Settings.fulfillment.restricted_libraries.res_share
     end
 
     # Return true if the location requires the user to log in before requesting.
@@ -103,7 +103,7 @@ module Inventory
     #
     # @return [Boolean]
     def archives?
-      location.library_code == @settings.fulfillment.restricted_libraries.archives
+      location.library_code == Settings.fulfillment.restricted_libraries.archives
     end
 
     # Return true if material is at the Historical Society of Pennsylvania (HSP).
@@ -111,7 +111,7 @@ module Inventory
     #
     # @return [Boolean]
     def hsp?
-      location.library_code == @settings.fulfillment.restricted_libraries.hsp
+      location.library_code == Settings.fulfillment.restricted_libraries.hsp
     end
 
     # Return true if material is in LIBRA. LIBRA materials cannot be "picked up
@@ -119,7 +119,7 @@ module Inventory
     #
     # @return [Boolean]
     def libra?
-      location.library_code == @settings.fulfillment.restricted_libraries.libra
+      location.library_code == Settings.fulfillment.restricted_libraries.libra
     end
 
     private
