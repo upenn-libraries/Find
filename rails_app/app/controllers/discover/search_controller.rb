@@ -21,14 +21,10 @@ module Discover
 
     private
 
-    def search_params
-      params.permit :q
-    end
-
     # @param [String] source
     # @return [Discover::Results]
     def results_for(source:)
-      source_klass(source: source).results(query: search_params[:q])
+      source_klass(source: source).results(query: params.permit(:q)[:q])
     end
 
     # @return [Discover::Source]
