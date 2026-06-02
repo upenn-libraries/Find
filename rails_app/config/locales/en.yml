@@ -177,7 +177,6 @@ en:
         name: 'Name'
         email: 'Email'
         user_group: 'Patron group'
-        update_details_html: '<a href="%{url}" target=_blank>Update your contact information</a>'
       bbm:
         heading: 'Delivery address for Books by Mail'
         empty_address: "You don't have a delivery address set."
