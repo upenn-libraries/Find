@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 describe 'Account Requests requests' do
-  before { login_as user }
+  describe 'when not authenticated' do
+    it 'redirects shelf reads to login' do
+      get shelf_path
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it 'redirects request submissions to login' do
+      post requests_path
+      expect(response).to redirect_to new_user_session_path
+    end
+  end
 
   # GET /account/requests/ill/new
   context 'when viewing ILL form' do
