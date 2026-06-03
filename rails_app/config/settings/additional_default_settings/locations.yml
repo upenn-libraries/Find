@@ -6,6 +6,10 @@ locations:
     - storcirc
     - storcrstxt
     - storm
+    - vanpcgc
+    - vanpcgccm
+    - eastasia
+    - easiaover
   unavailable:
     - athNoCirc
     - storNoCirc
