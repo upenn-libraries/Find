@@ -14,4 +14,16 @@ describe Inventory::Full::Entry::ResourceLinkComponent, type: :components do
       expect(rendered).to have_link I18n.t('inventory.online_cta'), href: entry.href
     end
   end
+
+  context 'with an entry with a website_name' do
+    let(:entry) { create(:digital_collections_resource_link_entry) }
+
+    it 'renders the description' do
+      expect(rendered).to have_text entry.description
+    end
+
+    it 'renders the coverage information' do
+      expect(rendered).to have_text entry.coverage_statement
+    end
+  end
 end

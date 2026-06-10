@@ -7,20 +7,26 @@ module Inventory
       class ResourceLink < Base
         ID_PREFIX = 'resource_link_'
 
-        attr_reader :id, :href, :description
+        attr_reader :id, :href
 
-        # @param href [String]
-        # @param description [String]
+        # @param link_url [String]
+        # @param link_text [String]
         # @param id [String]
-        def initialize(href:, description:, id:, **)
-          @href = href
-          @description = description.strip
+        def initialize(link_url:, link_text:, id:, **)
+          @href = link_url
+          @link_text = link_text.strip
           @id = "#{ID_PREFIX}#{id}"
         end
 
-        # @return [String]
+        # Description would ideally be the website_name, in cases were the website_name
+        # is not available use the link_text.
+        def description
+          website_name || @link_text
+        end
+
+        # No location needed for resource link.
         def human_readable_location
-          'Online'
+          nil
         end
 
         # Policy not available for resource link.
@@ -44,9 +50,12 @@ module Inventory
           nil
         end
 
-        # Coverage statement not available for resource link.
+        # Coverage statement should be the link_text provided. In cases where a hostname is not
+        # extracted, the link_text is used at the description and shouldn't be displayed again.
+        #
+        # @return [String, nil]
         def coverage_statement
-          nil
+          website_name ? @link_text : nil
         end
 
         # @return [nil]
@@ -57,6 +66,18 @@ module Inventory
         # @return [Boolean]
         def resource_link?
           true
+        end
+
+        private
+
+        # Extract hostname from URL. Eventually we should pull this value from 856$a.
+        def hostname
+          @hostname ||= URI.parse(href).host
+        end
+
+        # Map hostname to a website name we can display to users.
+        def website_name
+          @website_name ||= Settings.websites[hostname]
         end
       end
     end
