@@ -118,8 +118,8 @@ shared_context 'with electronic database record' do
   let(:electronic_db_bib) { '9977577951303681' }
   let(:electronic_db_entries) do
     [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,
-                                  href: 'http://hdl.library.upenn.edu/1017/126017',
-                                  description: 'Connect to resource')]
+                                  link_url: 'http://hdl.library.upenn.edu/1017/126017',
+                                  link_text: 'Connect to resource')]
   end
 
   before do
@@ -198,8 +198,8 @@ shared_context 'with electronic database record having a resource link entry but
   let(:electronic_db_bib) { '9977577951303681' }
   let(:electronic_db_entries) do
     [create(:resource_link_entry, id: '1', inventory_type: Inventory::List::RESOURCE_LINK,
-                                  href: 'http://hdl.library.upenn.edu/1017/126017',
-                                  description: 'Connect to resource')]
+                                  link_url: 'http://hdl.library.upenn.edu/1017/126017',
+                                  link_text: 'Connect to resource')]
   end
 
   before do
