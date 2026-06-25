@@ -74,8 +74,8 @@ build_and_push_base_app_image:
     - export SIDEKIQ_PRO_CREDENTIALS="$(vault kv get -field=credentials ${VAULT_SIDEKIQ_ENDPOINT})"
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
@@ -96,8 +96,8 @@ build_and_push_dev_app_image:
     - .build_and_push_docker_images
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
@@ -359,8 +359,8 @@ build_and_push_prod_app_image:
     - .vault_jwt_auth
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
       - RUNNER: build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   before_script:
