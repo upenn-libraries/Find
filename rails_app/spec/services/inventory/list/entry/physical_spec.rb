@@ -158,33 +158,27 @@ describe Inventory::List::Entry::Physical do
     end
   end
 
-  describe '#status when Alma API returns an error' do
+  context 'when the Alma API raises an error' do
     before do
-      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+      allow(Alma::BibItem).to receive(:find).and_raise(StandardError)
     end
 
-    it 'returns unavailable' do
-      expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
-    end
-  end
-
-  describe '#policy when Alma API returns an error' do
-    before do
-      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+    describe '#status' do
+      it 'returns unavailable' do
+        expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+      end
     end
 
-    it 'returns nil' do
-      expect(entry.policy).to be_nil
-    end
-  end
-
-  describe '#format when Alma API returns an error' do
-    before do
-      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+    describe '#policy' do
+      it 'returns nil' do
+        expect(entry.policy).to be_nil
+      end
     end
 
-    it 'returns nil' do
-      expect(entry.format).to be_nil
+    describe '#format' do
+      it 'returns nil' do
+        expect(entry.format).to be_nil
+      end
     end
   end
 end
