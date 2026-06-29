@@ -157,4 +157,34 @@ describe Inventory::List::Entry::Physical do
       expect(entry).not_to be_resource_link
     end
   end
+
+  describe '#status when Alma API returns an error' do
+    before do
+      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+    end
+
+    it 'returns unavailable' do
+      expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+    end
+  end
+
+  describe '#policy when Alma API returns an error' do
+    before do
+      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+    end
+
+    it 'returns nil' do
+      expect(entry.policy).to be_nil
+    end
+  end
+
+  describe '#format when Alma API returns an error' do
+    before do
+      allow(Alma::BibItem).to receive(:find).and_raise(NoMethodError.new("undefined method '[]' for nil"))
+    end
+
+    it 'returns nil' do
+      expect(entry.format).to be_nil
+    end
+  end
 end
