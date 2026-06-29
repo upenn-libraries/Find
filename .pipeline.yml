@@ -232,7 +232,7 @@ rspec_app_integration_test:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
         POSTGRES_USER: "rspec_test"
-    - name: bitnami/solr:9.3.0
+    - name: bitnamilegacy/solr:9.6.1
       alias: solr
       entrypoint: [""]
       command: [
