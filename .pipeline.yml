@@ -25,7 +25,6 @@ include:
       deploy_environment: "staging"
       deploy_environment_url: "https://find-staging.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
-      deploy_debug: true
       job_suffix: "staging"
       runner_tags:
         - new_deploy
@@ -38,7 +37,6 @@ include:
       deploy_environment: "production"
       deploy_environment_url: "https://find.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
-      deploy_debug: true
       job_suffix: "production"
       runner_tags:
         - new_deploy
