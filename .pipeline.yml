@@ -26,6 +26,8 @@ include:
       deploy_environment_url: "https://find-staging.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
       job_suffix: "staging"
+      runner_tags:
+        - new_deploy
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
@@ -36,6 +38,8 @@ include:
       deploy_environment_url: "https://find.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
       job_suffix: "production"
+      runner_tags:
+        - new_deploy
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
