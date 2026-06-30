@@ -2,7 +2,6 @@ variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
   CI_DEBUG_SERVICES: "false"
-  DEBUG_DEPLOY: "false"
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
@@ -26,7 +25,7 @@ include:
       deploy_environment: "staging"
       deploy_environment_url: "https://find-staging.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
-      deploy_debug: ${DEBUG_DEPLOY}
+      deploy_debug: true
       job_suffix: "staging"
       runner_tags:
         - new_deploy
@@ -39,7 +38,7 @@ include:
       deploy_environment: "production"
       deploy_environment_url: "https://find.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
-      deploy_debug: ${DEBUG_DEPLOY}
+      deploy_debug: true
       job_suffix: "production"
       runner_tags:
         - new_deploy
