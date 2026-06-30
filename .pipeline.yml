@@ -26,6 +26,8 @@ include:
       deploy_environment_url: "https://find-staging.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
       job_suffix: "staging"
+      runner_tags:
+        - new_deploy
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
@@ -36,6 +38,8 @@ include:
       deploy_environment_url: "https://find.library.upenn.edu"
       deploy_host: ${DEPLOY_HOST}
       job_suffix: "production"
+      runner_tags:
+        - new_deploy
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
@@ -74,9 +78,9 @@ build_and_push_base_app_image:
     - export SIDEKIQ_PRO_CREDENTIALS="$(vault kv get -field=credentials ${VAULT_SIDEKIQ_ENDPOINT})"
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
-      - RUNNER: build
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
+      - RUNNER: new_build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
     DOCKER_BUILD_CONTEXT: "rails_app/"
@@ -96,9 +100,9 @@ build_and_push_dev_app_image:
     - .build_and_push_docker_images
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
-      - RUNNER: build
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
+      - RUNNER: new_build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   variables:
     DOCKER_ADDITIONAL_CACHE_TARGETS: "base"
@@ -122,7 +126,7 @@ amend_tmp_base_dev_images:
   variables:
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
   tags:
-    - build
+    - new_build
 # -- End - build, push temp dev image
 
 # -- Start - run unit tests in dev image
@@ -135,7 +139,7 @@ rspec_app_unit_test:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
         POSTGRES_USER: "rspec_test"
-    - name: bitnami/solr:9.3.0
+    - name: bitnamilegacy/solr:9.6.1
       alias: solr
       entrypoint: [""]
       command: [
@@ -214,7 +218,7 @@ rspec_app_unit_test:
         - rails_app/spec/**.rb
         - rails_app/spec/**/**.rb
   tags:
-    - build
+    - new_build
 
 # -- integration tests for dev image
 rspec_app_integration_test:
@@ -232,7 +236,7 @@ rspec_app_integration_test:
         POSTGRES_DB: "find_test"
         POSTGRES_PASSWORD: "rspec_test"
         POSTGRES_USER: "rspec_test"
-    - name: bitnami/solr:9.3.0
+    - name: bitnamilegacy/solr:9.6.1
       alias: solr
       entrypoint: [""]
       command: [
@@ -313,7 +317,7 @@ rspec_app_integration_test:
         - rails_app/spec/**/**.rb
   allow_failure: true
   tags:
-    - build
+    - new_build
 
 rubocop_app_test:
   stage: test
@@ -330,7 +334,7 @@ rubocop_app_test:
     - exists:
         - rails_app/.rubocop.yml
   tags:
-    - build
+    - new_build
 
 reek_app_test:
   stage: test
@@ -359,9 +363,9 @@ build_and_push_prod_app_image:
     - .vault_jwt_auth
   parallel:
     matrix:
-      - RUNNER: build-arm
-        DOCKER_BUILD_PLATFORM: "linux/arm64"
-      - RUNNER: build
+      # - RUNNER: build-arm
+      #   DOCKER_BUILD_PLATFORM: "linux/arm64"
+      - RUNNER: new_build
         DOCKER_BUILD_PLATFORM: "linux/amd64"
   before_script:
     - !reference [.install_hashicorp_vault, before_script]
@@ -394,7 +398,7 @@ amend_prod_image:
     REGISTRY_REPOSITORY: "${CI_PIPELINE_ID}"
     TAG_WITH_DOCKER_TARGET: "false"
   tags:
-    - build
+    - new_build
 # -- End - build and push temp prod image
 
 # -- Start - SAST images
@@ -414,7 +418,7 @@ trivy_app_container_scanning:
     TRIVY_VERSION: 0.68.1
   allow_failure: true
   tags:
-    - build
+    - new_build
 # -- End - SAST images
 
 # -- Start - Copy app docker images
@@ -427,7 +431,7 @@ copy_app_docker_images:
   extends:
     - .copy_docker_images
   tags:
-    - build
+    - new_build
 # -- End - Copy app docker images
 
 # -- Start - remove tmp registry repository
@@ -441,7 +445,7 @@ remove_tmp_registry:
     - copy_app_docker_images
   allow_failure: true
   tags:
-    - build
+    - new_build
 # -- End - remove tmp registry repository
 
 # Deploy staging
