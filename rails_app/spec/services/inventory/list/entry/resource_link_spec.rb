@@ -110,7 +110,7 @@ describe Inventory::List::Entry::ResourceLink do
       end
 
       it 'return nil' do
-        expect(entry.send(:hostname)).to be nil
+        expect(entry.send(:hostname)).to be_nil
       end
     end
   end

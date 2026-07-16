@@ -73,10 +73,10 @@ module Inventory
         # Extract hostname from URL. Eventually we should pull this value from 856$a.
         def hostname
           @hostname ||= begin
-                          URI.parse(href).host
-                        rescue URI::InvalidURIError
-                          nil
-                        end
+            URI.parse(href).host
+          rescue URI::InvalidURIError
+            nil
+          end
         end
 
         # Map hostname to a website name we can display to users.
