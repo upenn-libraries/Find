@@ -68,6 +68,12 @@ module Inventory
           true
         end
 
+        # Only consider displayable if a valid URL href is provided
+        # @return [Boolean]
+        def displayable?
+          href.present?
+        end
+
         private
 
         # Extract hostname from URL. Eventually we should pull this value from 856$a.

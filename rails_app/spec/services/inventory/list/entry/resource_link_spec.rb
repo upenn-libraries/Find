@@ -97,6 +97,24 @@ describe Inventory::List::Entry::ResourceLink do
     end
   end
 
+  describe '#displayable?' do
+    context 'when an href value is present' do
+      it 'returns true' do
+        expect(entry.resource_link?).to be true
+      end
+    end
+
+    context 'when an href value is not present' do
+      let(:entry) do
+        create(:resource_link_entry, id: '1', link_url: '', link_text: 'Digital Edition')
+      end
+
+      it 'returns false' do
+        expect(entry.resource_link?).to be true
+      end
+    end
+  end
+
   describe '#hostname' do
     context 'when href is valid url' do
       it 'returns hostname' do
