@@ -337,7 +337,7 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.4.6)
+    pennmarc (1.4.7)
       activesupport (>= 8)
       lcsort (~> 0.9)
       library_stdnums (~> 1.6)
