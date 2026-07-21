@@ -68,10 +68,10 @@ module Inventory
           true
         end
 
-        # Only consider displayable if a valid URL href is provided
+        # Only consider displayable if a href is present
         # @return [Boolean]
         def displayable?
-          hostname.present?
+          href.present?
         end
 
         private
