@@ -13,7 +13,7 @@ module Inventory
         # @param link_text [String]
         # @param id [String]
         def initialize(link_url:, link_text:, id:, **)
-          @href = link_url
+          @href = link_url.strip
           @link_text = link_text.strip
           @id = "#{ID_PREFIX}#{id}"
         end
@@ -68,11 +68,21 @@ module Inventory
           true
         end
 
+        # Only consider displayable if a valid URL href is provided
+        # @return [Boolean]
+        def displayable?
+          hostname.present?
+        end
+
         private
 
         # Extract hostname from URL. Eventually we should pull this value from 856$a.
         def hostname
-          @hostname ||= URI.parse(href).host
+          @hostname ||= begin
+            URI.parse(href).host
+          rescue URI::InvalidURIError
+            nil
+          end
         end
 
         # Map hostname to a website name we can display to users.
