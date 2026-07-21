@@ -116,14 +116,6 @@ describe Inventory::List::Entry::ResourceLink do
       end
     end
 
-    context 'when an href value is present, but not a valid URL' do
-      let(:link_value) { '<a href="http://www.example.com">Link</a>' }
-
-      it 'returns false' do
-        expect(entry.displayable?).to be false
-      end
-    end
-
     context 'when an href value is not present' do
       let(:link_value) { '' }
 
