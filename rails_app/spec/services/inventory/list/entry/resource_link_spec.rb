@@ -98,19 +98,37 @@ describe Inventory::List::Entry::ResourceLink do
   end
 
   describe '#displayable?' do
+    let(:entry) { create(:resource_link_entry, link_url: link_value, link_text: 'Digital Edition') }
+
     context 'when an href value is present' do
+      let(:link_value) { 'http://example.com' }
+
       it 'returns true' do
-        expect(entry.resource_link?).to be true
+        expect(entry.displayable?).to be true
+      end
+    end
+
+    context 'when an href value is present, but includes errant whitespace' do
+      let(:link_value) { ' http://www.example.com ' }
+
+      it 'returns true' do
+        expect(entry.displayable?).to be true
+      end
+    end
+
+    context 'when an href value is present, but not a valid URL' do
+      let(:link_value) { '<a href="http://www.example.com">Link</a>' }
+
+      it 'returns false' do
+        expect(entry.displayable?).to be false
       end
     end
 
     context 'when an href value is not present' do
-      let(:entry) do
-        create(:resource_link_entry, id: '1', link_url: '', link_text: 'Digital Edition')
-      end
+      let(:link_value) { '' }
 
       it 'returns false' do
-        expect(entry.resource_link?).to be true
+        expect(entry.displayable?).to be false
       end
     end
   end

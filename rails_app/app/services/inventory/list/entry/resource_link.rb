@@ -13,7 +13,7 @@ module Inventory
         # @param link_text [String]
         # @param id [String]
         def initialize(link_url:, link_text:, id:, **)
-          @href = link_url
+          @href = link_url.strip
           @link_text = link_text.strip
           @id = "#{ID_PREFIX}#{id}"
         end
@@ -71,7 +71,7 @@ module Inventory
         # Only consider displayable if a valid URL href is provided
         # @return [Boolean]
         def displayable?
-          href.present?
+          hostname.present?
         end
 
         private
