@@ -2,8 +2,7 @@ variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
   CI_DEBUG_SERVICES: "false"
-  variables:
-      SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
+  SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
