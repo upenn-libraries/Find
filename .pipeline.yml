@@ -2,7 +2,6 @@ variables:
   FF_SCRIPT_SECTIONS: "true"
   GIT_CLONE_PATH: "${CI_BUILDS_DIR}/${CI_PROJECT_NAME}/${CI_JOB_ID}"
   CI_DEBUG_SERVICES: "false"
-  SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
 
 include:
   - project: "devops/gitlab/ci-templates/ruby"
@@ -47,6 +46,8 @@ include:
       docker_build_secrets: "--secret id=sidekiq_pro_credentials,env=SIDEKIQ_PRO_CREDENTIALS"
       docker_target: "base"
       job_suffix: "_base"
+    variables:
+      SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
     inputs:
       docker_build_context: "rails_app/"
@@ -57,6 +58,8 @@ include:
       docker_target: "development"
       job_suffix: "_development"
       docker_build_args: "--build-arg RAILS_ENV=development"
+    variables:
+      SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
     inputs:
       dockerfile_path: "rails_app/"
@@ -67,6 +70,8 @@ include:
       docker_build_args: "--build-arg RAILS_ENV=production"
       docker_target: "production"
       job_suffix: "_production"
+    variables:
+      SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: $CI_SERVER_FQDN/devops/gitlab/components/sast/trivy@~latest
     inputs:
       docker_tag_to_scan: "${CI_COMMIT_SHA}"
