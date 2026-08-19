@@ -78,7 +78,9 @@ include:
         - trivy_scan
  
 stages:
-  - build
+  - build_base
+  - build_development
+  - build_production
   - test
   - finalize
   - deploy
