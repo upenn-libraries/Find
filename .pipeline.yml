@@ -46,6 +46,9 @@ include:
       docker_build_secrets: "--secret id=sidekiq_pro_credentials,env=SIDEKIQ_PRO_CREDENTIALS"
       docker_target: "base"
       job_suffix: "_base"
+      matrix:
+        - RUNNER: build
+          DOCKER_BUILD_PLATFORM: "linux/amd64"
     variables:
       SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
@@ -58,6 +61,9 @@ include:
       docker_target: "development"
       job_suffix: "_development"
       docker_build_args: "--build-arg RAILS_ENV=development"
+      matrix:
+      - RUNNER: build
+        DOCKER_BUILD_PLATFORM: "linux/amd64"
     variables:
       SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
@@ -70,6 +76,9 @@ include:
       docker_build_args: "--build-arg RAILS_ENV=production"
       docker_target: "production"
       job_suffix: "_production"
+      matrix:
+      - RUNNER: build
+        DOCKER_BUILD_PLATFORM: "linux/amd64"
     variables:
       SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: $CI_SERVER_FQDN/devops/gitlab/components/sast/trivy@~latest
