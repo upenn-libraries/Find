@@ -22,7 +22,7 @@ include:
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
-      image_tag: ${CI_COMMIT_SHORT_SHA}
+      image_tag: "${CI_COMMIT_SHORT_SHA}-development"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/deploy/deploy@~latest
     inputs:
       deploy_environment: "production"
@@ -32,7 +32,7 @@ include:
       valid_principals: ${VALID_PRINCIPALS}
       vault_auth_role: ${JWT_ROLE}
       vault_ssh_client_role: ${VAULT_SSH_CLIENT_ROLE}
-      image_tag: ${CI_COMMIT_SHORT_SHA}
+      image_tag: "${CI_COMMIT_SHORT_SHA}-production"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/general/vault_jwt_auth@~latest
     inputs:
       vault_auth_role: ${JWT_ROLE}
