@@ -68,7 +68,7 @@ module Inventory
           def refined_available_key
             if location.aeon?
               :appointment
-            elsif location.libra?
+            elsif location.offsite?
               :offsite
             elsif location.archives? || location.hsp?
               :unrequestable

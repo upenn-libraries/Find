@@ -1,0 +1,3 @@
+# Map of hostnames to website name. Used for enriched display of resource links.
+websites:
+  digitalcollections.library.upenn.edu: Digital Collections
