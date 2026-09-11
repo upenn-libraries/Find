@@ -303,6 +303,7 @@ detectors:
       - Inventory::List#brief
       - Inventory::List#from_ecollections
       - Inventory::List#full
+      - Inventory::List::Entry::Physical#find_first_item
       - Library::Info::Client#connection
       - Shelf::Listing#filter_and_sort
       - Shelf::Service#ils_holds
@@ -354,6 +355,7 @@ detectors:
       - Inventory::List#from_marc
       - Inventory::List#full
       - Inventory::List#only_available
+      - Inventory::List::Entry::Physical#find_first_item
       - Library::Info::Request#find
       - Shelf::Listing#filter_and_sort
       - Shelf::Listing#remove_duplicate_entries

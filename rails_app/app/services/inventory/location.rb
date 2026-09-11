@@ -58,10 +58,11 @@ module Inventory
       library_code == Settings.fulfillment.restricted_libraries.archives
     end
 
-    # Return true if material is in LIBRA. LIBRA materials cannot be "picked up at the library" they must be requested.
+    # Return true if the holding is in a defined offsite location. Offsite materials cannot be "picked up at the
+    # library" they must be requested.
     # @return [Boolean]
-    def libra?
-      library_code == Settings.fulfillment.restricted_libraries.libra
+    def offsite?
+      location_code.in? Mappings.offsite_locations
     end
 
     # Return location's Aeon sublocation code.

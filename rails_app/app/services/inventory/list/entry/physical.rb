@@ -129,6 +129,9 @@ module Inventory
           default_options = { holding_id: id, expand: 'due_date,due_date_policy', limit: 1 }
           resp = Alma::BibItem.find(mms_id, default_options.merge(options))
           resp.items.first
+        rescue StandardError => e
+          Honeybadger.notify(e)
+          nil
         end
       end
     end

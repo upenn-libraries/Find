@@ -133,8 +133,7 @@ module Inventory
       def from_marc(document, limit = nil)
         entries = limit ? document.marc_resource_links.first(limit) : document.marc_resource_links
         entries.map.with_index do |link_data, i|
-          create_entry(document.id, inventory_type: RESOURCE_LINK, id: i, href: link_data[:link_url],
-                                    description: link_data[:link_text])
+          create_entry(document.id, inventory_type: RESOURCE_LINK, id: i, **link_data)
         end
       end
 

@@ -49,9 +49,9 @@ en:
           heading: 'Research Guides'
           description: 'Find resources on a variety of research topics, specially curated by our librarians'
       archival:
-        colenda:
-          heading: 'Colenda Digital Repository'
-          description: 'Digitized and born-digital material'
+        digital_collections:
+          heading: 'Digital Collections'
+          description: 'A selection of digitized originals from across our libraries, archives, and partners'
         finding_aids:
           heading: 'Finding Aids'
           description: 'Penn special collections and archival material as well as collections at repositories in the greater Philadelphia region'
