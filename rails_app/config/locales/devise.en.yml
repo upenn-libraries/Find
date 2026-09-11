@@ -1,68 +1,68 @@
-# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
-
+## Additional translations at https://github.com/heartcombo/devise/wiki/I18n
+#
 en:
   devise:
-    confirmations:
-      confirmed: "Your email address is confirmed."
-      send_instructions: "We'll send confirmation instructions to your email in a few minutes."
-      send_paranoid_instructions: "If that email address is in our system, we'll send confirmation instructions in a few minutes."
+#    confirmations:
+#      confirmed: "Your email address is confirmed."
+#      send_instructions: "We'll send confirmation instructions to your email in a few minutes."
+#      send_paranoid_instructions: "If that email address is in our system, we'll send confirmation instructions in a few minutes."
     failure:
-      already_authenticated: "You're already logged in."
-      inactive: "Your account isn't activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
-      locked: "Your account is locked."
-      last_attempt: "One more try before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
+#      already_authenticated: "You're already logged in."
+#      inactive: "Your account isn't activated yet."
+#      invalid: "Invalid %{authentication_keys} or password."
+#      locked: "Your account is locked."
+#      last_attempt: "One more try before your account is locked."
+#      not_found_in_database: "Invalid %{authentication_keys} or password."
       timeout: "Your session expired. Log in again to continue."
       unauthenticated: "Log in to continue."
-      unconfirmed: "Confirm your email address to continue."
-    mailer:
-      confirmation_instructions:
-        subject: "Confirmation instructions"
-      reset_password_instructions:
-        subject: "Reset password instructions"
-      unlock_instructions:
-        subject: "Unlock instructions"
-      email_changed:
-        subject: "Email changed"
-      password_change:
-        subject: "Password changed"
+#      unconfirmed: "Confirm your email address to continue."
+#    mailer:
+#      confirmation_instructions:
+#        subject: "Confirmation instructions"
+#      reset_password_instructions:
+#        subject: "Reset password instructions"
+#      unlock_instructions:
+#        subject: "Unlock instructions"
+#      email_changed:
+#        subject: "Email changed"
+#      password_change:
+#        subject: "Password changed"
     omniauth_callbacks:
       saml_display_value: "PennKey"
       alma_display_value: "Alma"
       failure: "Couldn't log you in via %{kind}: \"%{reason}\"."
       success: "You're logged in via your %{kind} account."
       alma_failure: "These credentials aren't registered in our library system. If you're a CHOP affiliate, contact libcircbio@pobox.upenn.edu. If you're a Penn alumnus, visit https://guides.library.upenn.edu/alumniservices/eres. Otherwise, contact the circulation desk at vpcircdk@pobox.upenn.edu for help."
-    passwords:
-      no_token: "This page is only accessible from a password reset email. Make sure you used the full URL from that email."
-      send_instructions: "We'll send password reset instructions to your email in a few minutes."
-      send_paranoid_instructions: "If that email address is in our system, we'll send a password reset link in a few minutes."
-      updated: "Your password is updated. You're now logged in."
-      updated_not_active: "Your password is updated."
-    registrations:
-      destroyed: "Your account is cancelled. We hope to see you again."
-      signed_up: "Welcome! You're signed up."
-      signed_up_but_inactive: "You're signed up. We couldn't log you in because your account isn't activated yet."
-      signed_up_but_locked: "You're signed up. We couldn't log you in because your account is locked."
-      signed_up_but_unconfirmed: "We sent a confirmation link to your email. Follow the link to activate your account."
-      update_needs_confirmation: "Your account is updated. Check your email for a link to confirm your new email address."
-      updated: "Your account is updated."
-      updated_but_not_signed_in: "Your account is updated. Since your password changed, log in again."
+#    passwords:
+#      no_token: "This page is only accessible from a password reset email. Make sure you used the full URL from that email."
+#      send_instructions: "We'll send password reset instructions to your email in a few minutes."
+#      send_paranoid_instructions: "If that email address is in our system, we'll send a password reset link in a few minutes."
+#      updated: "Your password is updated. You're now logged in."
+#      updated_not_active: "Your password is updated."
+#    registrations:
+#      destroyed: "Your account is cancelled. We hope to see you again."
+#      signed_up: "Welcome! You're signed up."
+#      signed_up_but_inactive: "You're signed up. We couldn't log you in because your account isn't activated yet."
+#      signed_up_but_locked: "You're signed up. We couldn't log you in because your account is locked."
+#      signed_up_but_unconfirmed: "We sent a confirmation link to your email. Follow the link to activate your account."
+#      update_needs_confirmation: "Your account is updated. Check your email for a link to confirm your new email address."
+#      updated: "Your account is updated."
+#      updated_but_not_signed_in: "Your account is updated. Since your password changed, log in again."
     sessions:
       signed_in: "You're logged in."
       signed_out: "You're logged out."
       already_signed_out: "You're logged out."
-    unlocks:
-      send_instructions: "We'll send unlock instructions to your email in a few minutes."
-      send_paranoid_instructions: "If your account exists, we'll send unlock instructions to your email in a few minutes."
-      unlocked: "Your account is unlocked. Log in to continue."
-  errors:
-    messages:
-      already_confirmed: "was already confirmed, try logging in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, request a new one"
-      expired: "has expired, request a new one"
-      not_found: "not found"
-      not_locked: "wasn't locked"
-      not_saved:
-        one: "1 error stopped this %{resource} from being saved:"
-        other: "%{count} errors stopped this %{resource} from being saved:"
+#    unlocks:
+#      send_instructions: "We'll send unlock instructions to your email in a few minutes."
+#      send_paranoid_instructions: "If your account exists, we'll send unlock instructions to your email in a few minutes."
+#      unlocked: "Your account is unlocked. Log in to continue."
+#  errors:
+#    messages:
+#      already_confirmed: "was already confirmed, try logging in"
+#      confirmation_period_expired: "needs to be confirmed within %{period}, request a new one"
+#      expired: "has expired, request a new one"
+#      not_found: "not found"
+#      not_locked: "wasn't locked"
+#      not_saved:
+#        one: "1 error stopped this %{resource} from being saved:"
+#        other: "%{count} errors stopped this %{resource} from being saved:"
