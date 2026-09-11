@@ -80,7 +80,7 @@ en:
           description: "Describe what you need and we'll get it to you."
         shelf:
           title: 'Shelf'
-          description: "Renew items you've loaned and see when they're due."
+          description: "Renew items you've borrowed and see when they're due."
         settings:
           title: 'Settings'
           description: 'Your account details and request item delivery address.'
