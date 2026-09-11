@@ -10,8 +10,4 @@
 
 <p class="page__lede mb-4"><%= t('account.show.page_lede') %></p>
 
-<div class="row">
-  <div class="col-lg-9">
-    <%= render Account::ShowComponent.new(user: current_user) %>
-  </div>
-</div>
+<%= render Account::ShowComponent.new(user: current_user) %>

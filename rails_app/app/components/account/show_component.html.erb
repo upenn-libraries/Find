@@ -1,72 +1,72 @@
-<ul class="fi-cards">
-  <li class="fi-card">
+<ul class="pl-cards">
+  <li class="pl-card pl-card--callout">
     <div class="fi-card__header">
-      <h2 class="fi-card__heading pl-h3">
-        <a href="<%= shelf_path %>" class="fi-card__link">
+      <h2 class="pl-card__heading pl-h3">
+        <a href="<%= shelf_path %>" class="pl-card__link">
           <%= t('account.show.cards.shelf.title') %>
         </a>
       </h2>
       <i class="bi bi-book h4 mb-0" aria-hidden="true"></i>
     </div>
-    <p class="fi-card__description">
+    <p class="pl-card__description">
       <%= t('account.show.cards.shelf.description') %>
     </p>
   </li>
 
   <% unless user&.courtesy_borrower? %>
-    <li class="fi-card">
+    <li class="pl-card pl-card--callout">
       <div class="fi-card__header">
-        <h2 class="fi-card__heading pl-h3">
-          <a href="<%= ill_new_request_path %>" class="fi-card__link">
+        <h2 class="pl-card__heading pl-h3">
+          <a href="<%= ill_new_request_path %>" class="pl-card__link">
             <%= t('account.show.cards.request.title') %>
           </a>
         </h2>
         <i class="bi bi-person-raised-hand h4 mb-0" aria-hidden="true"></i>
       </div>
-      <p class="fi-card__description">
+      <p class="pl-card__description">
         <%= t('account.show.cards.request.description') %>
       </p>
     </li>
   <% end %>
 
-  <li class="fi-card">
+  <li class="pl-card pl-card--callout">
     <div class="fi-card__header">
-      <h2 class="fi-card__heading pl-h3">
-        <a href="<%= bookmarks_path %>" class="fi-card__link">
+      <h2 class="pl-card__heading pl-h3">
+        <a href="<%= bookmarks_path %>" class="pl-card__link">
           <%= t('account.show.cards.bookmarks.title') %>
         </a>
       </h2>
       <i class="bi bi-bookmark h4 mb-0" aria-hidden="true"></i>
     </div>
-    <p class="fi-card__description">
+    <p class="pl-card__description">
       <%= t('account.show.cards.bookmarks.description') %>
     </p>
   </li>
 
-  <li class="fi-card">
+  <li class="pl-card pl-card--callout">
     <div class="fi-card__header">
-      <h2 class="fi-card__heading pl-h3">
-        <a href="<%= fines_and_fees_path %>" class="fi-card__link">
+      <h2 class="pl-card__heading pl-h3">
+        <a href="<%= fines_and_fees_path %>" class="pl-card__link">
           <%= t('account.show.cards.fines_and_fees.title') %>
         </a>
       </h2>
       <i class="bi bi-currency-dollar h4 mb-0" aria-hidden="true"></i>
     </div>
-    <p class="fi-card__description">
+    <p class="pl-card__description">
       <%= t('account.show.cards.fines_and_fees.description') %>
     </p>
   </li>
 
-  <li class="fi-card">
+  <li class="pl-card pl-card--callout">
     <div class="fi-card__header">
-      <h2 class="fi-card__heading pl-h3">
-        <a href="<%= settings_path %>" class="fi-card__link">
+      <h2 class="pl-card__heading pl-h3">
+        <a href="<%= settings_path %>" class="pl-card__link">
           <%= t('account.show.cards.settings.title') %>
         </a>
       </h2>
       <i class="bi bi-gear h4 mb-0" aria-hidden="true"></i>
     </div>
-    <p class="fi-card__description">
+    <p class="pl-card__description">
       <%= t('account.show.cards.settings.description') %>
     </p>
   </li>
