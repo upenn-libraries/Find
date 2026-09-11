@@ -187,7 +187,7 @@ en:
         set_your_address_html: '<a href="%{url}" target=_blank>Set your address with FacultyExpress</a>'
     shelf:
       page_heading: 'Shelf'
-      page_lede: "View and renew items you've loaned or requested from the library."
+      page_lede: "View and renew items you've borrowed or requested from the library."
       no_items: "Your shelf is empty. Items you've borrowed or requested will show up here."
       identifier: '%{system} %{type} ID: %{id}'
       boundwith_notice: 'This title is not representative of the title requested because it is bound together with other works.'
