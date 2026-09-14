@@ -6,6 +6,8 @@ en:
   blacklight:
     application_name: 'Find · Penn Libraries'
     back_to_search: 'Back to Results'
+    bookmarks:
+      no_bookmarks_html: 'You haven''t bookmarked anything yet. <a href="%{url}">Search the catalog</a> and select the bookmark icon on any result to save it here.'
     search:
       zero_results:
         title: "Your search found no results in the <strong>Catalog</strong>"
@@ -48,7 +50,7 @@ en:
         title: "%{constraints} · %{application_name}"
     tools:
       staff_view: 'Staff View'
-      login_for_email: 'Login to Email'
+      login_for_email: 'Log in to email'
     advanced_search:
       page_title: "Advanced search · %{application_name}"
       form:

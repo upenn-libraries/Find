@@ -3,6 +3,8 @@
 module Account
   # Controller for user-profile-related actions.
   class ProfileController < AccountController
+    before_action :authenticate_user!
+
     # GET /account/profile
     # Show user details (user group, addresses, service eligibility, fines/fees form Alma
     def show; end

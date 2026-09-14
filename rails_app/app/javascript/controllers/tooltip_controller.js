@@ -9,7 +9,7 @@ export default class extends Controller {
   connect() {
     this.tooltip = new bootstrap.Tooltip(this.element, {
       container: "body",
-      trigger: "hover",
+      trigger: "hover focus",
     });
   }
 
