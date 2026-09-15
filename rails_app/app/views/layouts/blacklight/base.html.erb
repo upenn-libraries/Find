@@ -1,5 +1,9 @@
 <%
-  # Up to date with Blacklight v9.0
+  # Up to date with Blacklight v9.1
+  # - removed JS iin head for dark mode support
+  # - adds head content for analytics and design system assets
+  # - adds head content to improve SEO and page appearance in search results
+  # - adds support for "off canvas" content
 %>
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
@@ -8,20 +12,22 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <%= render Catalog::MetaDescriptionComponent.new(document: @document) %>
+
     <title><%= render_page_title %></title>
     <%= opensearch_description_tag application_name, opensearch_catalog_url(format: 'xml') %>
     <%= favicon_link_tag %>
+
     <link rel="stylesheet" href="https://use.typekit.net/gbh8cmg.css">
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.css" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "print", media: "print", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
     <%= javascript_import_module_tag "https://cdn.jsdelivr.net/npm/@penn-libraries/web@#{Settings.pennlibs_web_version}/dist/web/web.esm.js" %>
-    <script>
-        document.querySelector('html').classList.remove('no-js');
-    </script>
+
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
@@ -36,7 +42,7 @@
   <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
 
-    <%= render 'shared/flash_msg' %>
+    <%= render 'shared/flash_msg' if flash.any? %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>
