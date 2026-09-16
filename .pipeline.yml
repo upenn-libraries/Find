@@ -9,10 +9,6 @@ include:
     file:
       - ".rspec.yml"
       - ".rubocop.yml"
-  - project: "devops/gitlab/ci-templates/sast"
-    ref: "master"
-    file:
-      - ".trivy_container_scanning.yml"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/deploy/deploy@~latest
     inputs:
       deploy_environment: "staging"
@@ -39,7 +35,7 @@ include:
   - component: gitlab.library.upenn.edu/devops/gitlab/components/general/install_hashicorp_vault@~latest
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
     inputs:
-      docker_build_context: "rails_app/"
+      docker_build_context: "rails_a
       dockerfile_path: "rails_app/"
       dockerfile_filename: "Dockerfile"
       stage: "build_base"
@@ -83,7 +79,7 @@ include:
       SIDEKIQ_PRO_CREDENTIALS: "$SIDEKIQ_PRO_CREDENTIALS"
   - component: $CI_SERVER_FQDN/devops/gitlab/components/sast/trivy@~latest
     inputs:
-      docker_tag_to_scan: "${CI_COMMIT_SHA}"
+      docker_tag_to_scan: "${CI_COMMIT_SHA}-production"
       job_image_tag: "29-dind"
       needs:
         - "amend_manifest_production"
