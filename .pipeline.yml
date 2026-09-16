@@ -35,7 +35,7 @@ include:
   - component: gitlab.library.upenn.edu/devops/gitlab/components/general/install_hashicorp_vault@~latest
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
     inputs:
-      docker_build_context: "rails_a
+      docker_build_context: "rails_app/"
       dockerfile_path: "rails_app/"
       dockerfile_filename: "Dockerfile"
       stage: "build_base"
