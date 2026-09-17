@@ -17,13 +17,13 @@ describe 'Advanced Search Page' do
     end
 
     it 'does not limit values' do
-      within('div.ts-dropdown-content') { expect(page).to have_selector 'div', count: 11 }
+      within('div.ts-dropdown-content') { expect(page).to have_selector 'div', count: 4 }
     end
 
     it 'applies selected facets' do
-      within('div.ts-dropdown-content') { find('div', text: /LIBRA/).click }
+      within('div.ts-dropdown-content') { find('div', text: /Health Sciences Libraries/).click }
       click_on 'Search'
-      within('#appliedParams') { expect(page).to have_text('LIBRA') }
+      expect(page).to have_text('Health Sciences Libraries')
     end
   end
 

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :artifact, class: 'Discover::Artifact' do
     title { 'Statue Fragment' }
-    link {  'https://penn.museum/collections/object/420280' }
+    link {  'https://collections.penn.museum/collections/object/420280' }
     thumbnail { '1234_300.jpg' }
     location { 'American' }
     format { 'Volcanic Stone' }
