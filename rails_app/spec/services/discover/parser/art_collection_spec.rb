@@ -4,12 +4,18 @@ describe Discover::Parser::ArtCollection do
   include FixtureHelpers
 
   let(:tsv) { tabular_fixture_file('art_collection', namespace: 'discover', format: :tsv).read }
-  let(:tsv_updated) { tabular_fixture_file('art_collection_updated', namespace: 'discover', format: :tsv).read }
 
-  context 'with new artworks' do
+  context 'when creating artworks' do
     let(:first_artwork) { Discover::ArtWork.first }
 
     before { described_class.import(file: tsv) }
+
+    it 'first truncates the table' do
+      artwork = create(:art_work)
+      expect(Discover::ArtWork.find(artwork.id)).to eq artwork
+      described_class.import(file: tsv)
+      expect { Discover::ArtWork.find(artwork.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
 
     it 'creates artworks' do
       expect(Discover::ArtWork.count).to eq 10
@@ -26,21 +32,13 @@ describe Discover::Parser::ArtCollection do
     end
   end
 
-  context 'with updated artworks' do
-    before { described_class.import(file: tsv) }
-
-    it 'updates changed artworks' do
-      format = Discover::ArtWork.first.format
-      described_class.import(file: tsv_updated)
-
-      expect(Discover::ArtWork.first.format).not_to eq format
-    end
-
-    it 'does not update unchanged artworks' do
-      attr = Discover::ArtWork.second.attributes
-      described_class.import(file: tsv_updated)
-
-      expect(Discover::ArtWork.second.attributes).to eq attr
+  context 'when there is an error' do
+    it 'rolls back the database actions' do
+      allow(CSV).to receive(:parse).and_raise(StandardError)
+      create(:art_work)
+      expect(Discover::ArtWork.count).to eq 1
+      described_class.import(file: tsv)
+      expect(Discover::ArtWork.count).to eq 1
     end
   end
 end
