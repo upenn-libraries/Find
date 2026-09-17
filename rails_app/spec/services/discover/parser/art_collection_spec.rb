@@ -32,7 +32,7 @@ describe Discover::Parser::ArtCollection do
     end
   end
 
-  context 'when there is an error' do
+  context 'when there is an error outside the parsing block' do
     it 'rolls back the database actions' do
       allow(CSV).to receive(:parse).and_raise(StandardError)
       create(:art_work)
