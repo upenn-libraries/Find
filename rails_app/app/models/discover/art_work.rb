@@ -11,7 +11,7 @@ module Discover
 
     # Configure search scope to return all artworks containing any word or partial word in the query
     pg_search_scope :search,
-                    against: %i[creator description format location title],
+                    against: { creator: 'A', description: 'B', format: 'C', location: 'C', title: 'A' },
                     using: { tsearch: { any_word: true, prefix: true } }
   end
 end
