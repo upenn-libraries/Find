@@ -63,6 +63,22 @@ module Inventory
                              end
           end
 
+          # Return a refined available status key, because some things Alma reports as available are available only
+          # under some restrictions we want to make explicit in our status display. Order of the logic here matters, so
+          # that items at LIBRA that require an Aeon Request are properly handled, for example.
+          # @return [Symbol]
+          def refined_available_key
+            if location.aeon?
+              :appointment
+            elsif location.offsite?
+              :offsite
+            elsif location.archives? || location.hsp?
+              :unrequestable
+            else
+              :circulates
+            end
+          end
+
           # @return [Inventory::LocationPolicy]
           def policy
             @policy || location.policy

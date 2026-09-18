@@ -70,7 +70,7 @@ describe 'login page' do
   context 'when visiting a page that requires authentication' do
     include_context 'with mock alma_record on user having alma_user_group user group'
 
-    let(:url_requested) { account_path }
+    let(:url_requested) { settings_path }
 
     before { visit url_requested }
 

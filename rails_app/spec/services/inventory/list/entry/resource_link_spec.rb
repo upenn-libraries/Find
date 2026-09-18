@@ -2,7 +2,7 @@
 
 describe Inventory::List::Entry::ResourceLink do
   let(:entry) do
-    create(:resource_link_entry, id: '1', href: 'http://example.com', description: 'Digital Edition')
+    create(:resource_link_entry, id: '1', link_url: 'http://example.com', link_text: 'Digital Edition')
   end
 
   describe '#status' do
@@ -18,8 +18,18 @@ describe Inventory::List::Entry::ResourceLink do
   end
 
   describe '#description' do
-    it 'returns expected description' do
-      expect(entry.description).to eql 'Digital Edition'
+    context 'when hostname is mapped to website name' do
+      let(:entry) { create(:digital_collections_resource_link_entry) }
+
+      it 'returns website name' do
+        expect(entry.description).to eq 'Digital Collections'
+      end
+    end
+
+    context 'when hostname is not mapped to website name' do
+      it 'returns link_text' do
+        expect(entry.description).to eql 'Digital Edition'
+      end
     end
   end
 
@@ -48,14 +58,24 @@ describe Inventory::List::Entry::ResourceLink do
   end
 
   describe '#coverage_statement' do
-    it 'returns nil' do
-      expect(entry.coverage_statement).to be_nil
+    context 'when hostname is mapped to website name' do
+      let(:entry) { create(:digital_collections_resource_link_entry) }
+
+      it 'returns link_text' do
+        expect(entry.coverage_statement).to eq 'Full Resource'
+      end
+    end
+
+    context 'when hostname is not mapped to website name' do
+      it 'returns coverage_statement' do
+        expect(entry.coverage_statement).to be_nil
+      end
     end
   end
 
   describe '#human_readable_location' do
-    it 'returns expected location' do
-      expect(entry.human_readable_location).to eq 'Online'
+    it 'returns nil' do
+      expect(entry.human_readable_location).to be_nil
     end
   end
 
@@ -74,6 +94,52 @@ describe Inventory::List::Entry::ResourceLink do
   describe '#resource_link?' do
     it 'returns true' do
       expect(entry.resource_link?).to be true
+    end
+  end
+
+  describe '#displayable?' do
+    let(:entry) { create(:resource_link_entry, link_url: link_value, link_text: 'Digital Edition') }
+
+    context 'when an href value is present' do
+      let(:link_value) { 'http://example.com' }
+
+      it 'returns true' do
+        expect(entry.displayable?).to be true
+      end
+    end
+
+    context 'when an href value is present, but includes errant whitespace' do
+      let(:link_value) { ' http://www.example.com ' }
+
+      it 'returns true' do
+        expect(entry.displayable?).to be true
+      end
+    end
+
+    context 'when an href value is not present' do
+      let(:link_value) { '' }
+
+      it 'returns false' do
+        expect(entry.displayable?).to be false
+      end
+    end
+  end
+
+  describe '#hostname' do
+    context 'when href is valid url' do
+      it 'returns hostname' do
+        expect(entry.send(:hostname)).to eql 'example.com'
+      end
+    end
+
+    context 'when href is not a valid url' do
+      let(:entry) do
+        create(:resource_link_entry, id: '1', link_url: '[invalid url]', link_text: 'Digital Edition')
+      end
+
+      it 'return nil' do
+        expect(entry.send(:hostname)).to be_nil
+      end
     end
   end
 end

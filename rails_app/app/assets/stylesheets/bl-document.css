@@ -64,10 +64,9 @@
 
 /* Document list */
 .documents-list .document {
-  border-bottom: solid 1px var(--pl-color-bg-subtle-brand);
   padding-top: 0;
-  margin-bottom: var(--pl-space-m);
-  padding-bottom: var(--pl-space-l);
+  margin-bottom: var(--pl-space-l);
+  border-bottom: none;
 
   & .pl-dl--inline {
     margin-bottom: var(--pl-space-xs);

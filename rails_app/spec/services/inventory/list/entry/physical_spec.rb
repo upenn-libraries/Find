@@ -157,4 +157,28 @@ describe Inventory::List::Entry::Physical do
       expect(entry).not_to be_resource_link
     end
   end
+
+  context 'when the Alma API raises an error' do
+    before do
+      allow(Alma::BibItem).to receive(:find).and_raise(StandardError)
+    end
+
+    describe '#status' do
+      it 'returns unavailable' do
+        expect(entry.status).to eq Inventory::Constants::UNAVAILABLE
+      end
+    end
+
+    describe '#policy' do
+      it 'returns nil' do
+        expect(entry.policy).to be_nil
+      end
+    end
+
+    describe '#format' do
+      it 'returns nil' do
+        expect(entry.format).to be_nil
+      end
+    end
+  end
 end

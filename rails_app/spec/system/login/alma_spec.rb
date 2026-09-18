@@ -19,7 +19,7 @@ describe 'index page' do
     it 'renders success message' do
       fill_in :email, with: user.email
       fill_in :password, with: '123456789'
-      click_on I18n.t('login.alma.login')
+      within('.login__container') { click_on I18n.t('login.alma.login') }
       expect(page).to have_selector(
         'div.alert',
         text: I18n.t('devise.omniauth_callbacks.success', kind: I18n.t('devise.omniauth_callbacks.alma_display_value'))
@@ -35,7 +35,7 @@ describe 'index page' do
     it 'renders failure message' do
       fill_in :email, with: user.email
       fill_in :password, with: '123456789'
-      click_on I18n.t('login.alma.login')
+      within('.login__container') { click_on I18n.t('login.alma.login') }
       expect(page).to have_selector('div.alert', text: I18n.t('devise.omniauth_callbacks.alma_failure'))
     end
   end

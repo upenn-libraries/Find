@@ -187,7 +187,7 @@ describe Inventory::List do
     end
 
     context 'with resource link inventory type' do
-      let(:data) { { inventory_type: Inventory::List::RESOURCE_LINK, href: '', description: '', id: 1 } }
+      let(:data) { { inventory_type: Inventory::List::RESOURCE_LINK, link_url: '', link_text: '', id: 1 } }
 
       it 'returns Inventory::Entry::ResourceLink object' do
         expect(inventory_class).to be_a(Inventory::List::Entry::ResourceLink)

@@ -1,0 +1,7 @@
+/* Find-specific addition to the design system card: a header row that pairs the heading with an icon. */
+.fi-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--pl-space-s);
+}

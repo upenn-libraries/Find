@@ -19,7 +19,7 @@ en:
       feedback: "https://upenn.co1.qualtrics.com/jfe/form/SV_3xVrP7EKWS92zfE?reporting_from_url=%{request_url}"
     external_services:
       borrowdirect: "https://upenn-borrowdirect.reshare.indexdata.com"
-      colenda: "https://colenda.library.upenn.edu"
+      digital_collections: "https://digitalcollections.library.upenn.edu/"
       easyborrow: "https://ezborrow.reshare.indexdata.com"
       finding_aids: "https://findingaids.library.upenn.edu/upenn"
       philly_archives: "https://findingaids.library.upenn.edu/"

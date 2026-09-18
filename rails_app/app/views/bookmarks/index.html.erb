@@ -14,11 +14,11 @@
 
   <%- if current_or_guest_user.blank? -%>
 
-    <h2 class='section-heading'><%= t('blacklight.bookmarks.need_login') %></h2>
+    <p class='pl-callout'><%= t('blacklight.bookmarks.need_login') %></p>
 
   <%- elsif @response.documents.blank? -%>
 
-    <h2 class='section-heading'><%= t('blacklight.bookmarks.no_bookmarks') %></h2>
+    <p class='pl-callout pl-line-length'><%= t('blacklight.bookmarks.no_bookmarks_html', url: search_catalog_path) %></p>
   <% else %>
     <%= render 'sort_and_per_page' %>
     <%= render partial: 'tools', locals: { document_list: @response.documents } %>
