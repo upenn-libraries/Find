@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v9.0
+  # Local component copied from Blacklight v9.2.1
   class StartOverButtonComponent < Blacklight::Component
     private
 

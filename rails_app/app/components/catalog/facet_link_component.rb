@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Copied from Blacklight v9.0.
+  # Extended Blacklight::MetadataFieldComponent from Blacklight v9.0.
   #
   # Renders links to corresponding facet search for record page show values. This is for use when the displayed value
   # and the facet value come from different stored fields or parser methods. If the field we want to link is identical,

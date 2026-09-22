@@ -1,6 +1,4 @@
-<%# Copied template from Blacklight v9.0 to add message when there are no results present %>
-
-
+<%# Copied template from Blacklight v9.2.1 to add local styles and message when there are no results present %>
 <% facet_group_names.each do |groupname| %>
   <% fields = facet_fields_in_group(groupname) %>
   <%= render group_component_class.new(id: groupname) do |component| %>

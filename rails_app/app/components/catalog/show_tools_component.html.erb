@@ -1,5 +1,4 @@
-<%# Copied template from Blacklight v9.0 to customize layout %>
-
+<%# Custom layout for SHow Tools with drop-down tools menu. Wholly different from BL template. %>
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group me-2">
     <%= render bookmark_action.component.new(document: @document, action: bookmark_action) %>
@@ -10,7 +9,10 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="document-tools-dropdown">
       <% other_actions.each do |action| %>
-        <%= render Blacklight::Document::ActionComponent.new(document: @document, action: action, url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h), link_classes: 'dropdown-item') %>
+        <%= render Blacklight::Document::ActionComponent.new(document: @document,
+                                                             action: action,
+                                                             url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h),
+                                                             link_classes: 'dropdown-item') %>
       <% end %>
     </div>
   </div>

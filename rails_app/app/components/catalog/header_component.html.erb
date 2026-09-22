@@ -1,9 +1,4 @@
-<%
-  # Copied from Blacklight v9.0
-
-  # Uses the custom pennlibs-header design system component.
-%>
-
+<%# Replaces template from Blacklight v9.2.1 to use the custom pennlibs-header design system component. %>
 <div class="site-alerts__container container">
   <% if !alerts_dismissed? && alerts.any?(&:on) %>
     <div class="alert alert-primary alert-dismissible fade show" role="alert" data-controller="alert" data-alert-target="alert">

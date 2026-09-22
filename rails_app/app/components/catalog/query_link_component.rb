@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Copied from Blacklight v9.0
+  # Extends Blacklight::MetadataFieldComponent from Blacklight v9.2.1
   #
   # Renders links to fielded searches for record page show values
   class QueryLinkComponent < Blacklight::MetadataFieldComponent
