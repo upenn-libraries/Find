@@ -1,0 +1,14 @@
+.fi-menu .pl-line-clamp {
+  --pl-line-clamp: 3;
+}
+
+.fi-menu__button {
+  all: unset;
+  cursor: pointer;
+  color: var(--pl-color-fg-default);
+  font: inherit;
+}
+
+.fi-menu__button:hover {
+  text-decoration: underline;
+}

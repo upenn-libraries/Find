@@ -13,7 +13,11 @@ export default class extends Controller {
    */
   connect() {
     this.autocomplete = this.element;
-    this.input = this.autocomplete.querySelector("#query_input");
+    // The box names its own input, since a page can hold more than one search box
+    const inputId = this.autocomplete.getAttribute("for");
+    this.input = inputId
+      ? this.autocomplete.querySelector(`#${CSS.escape(inputId)}`)
+      : this.autocomplete.querySelector('input[type="search"]');
     this.debounceTimer = null;
     this.abortController = null;
 
@@ -34,7 +38,9 @@ export default class extends Controller {
     }
     this.abortController = new AbortController();
 
-    const url = `/suggester/${encodeURIComponent(query)}?actions_limit=${DEFAULT_ACTIONS_COUNT}&completions_limit=${DEFAULT_COMPLETIONS_COUNT}`;
+    // A page can hold more than one search box, so name the listbox this one wants replaced
+    const listboxId = this.autocomplete.querySelector('ol[role="listbox"]')?.id;
+    const url = `/suggester/${encodeURIComponent(query)}?actions_limit=${DEFAULT_ACTIONS_COUNT}&completions_limit=${DEFAULT_COMPLETIONS_COUNT}&listbox=${encodeURIComponent(listboxId ?? "")}`;
 
     try {
       const response = await fetch(url, {

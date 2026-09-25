@@ -1,6 +1,7 @@
-<%# Overrides component from Blacklight 9.0.0 to update styles and html elements %>
-<div class="navbar-search">
-  <%= tag.div class: 'pl-viewport-margins', role: 'navigation', aria: { label: t('blacklight.search.header') } do %>
-    <%= search_bar %>
-  <% end %>
-</div>
+<%# Overrides component from Blacklight 9.0.0 to render the search bar inside the design system
+    header (see Catalog::HeaderComponent's slot="end"), which supplies the viewport margins.
+
+    No wrapper here. Blacklight's version wraps the box in a navigation landmark, but the search bar
+    is already a <search> landmark, and a search is not navigation. Both callers supply their own
+    positioning element (.fi-header-search in the header, .fi-intro__search-container on the home page). %>
+<%= search_bar %>

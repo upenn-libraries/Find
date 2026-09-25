@@ -13,7 +13,14 @@ module Catalog
     end
 
     def call
-      tag.button(@text, class: 'pl-button pl-button--accent search-btn', type: 'submit', id: @id)
+      tag.button(@text, class: button_classes, type: 'submit', id: @id)
+    end
+
+    private
+
+    # @return [String]
+    def button_classes
+      'pl-button pl-button--accent pl-padding-y-xs pl-padding-x-m pl-border-radius pl-font-size-m search-btn'
     end
   end
 end

@@ -33,10 +33,42 @@
   <% end %>
   <%= render blacklight_config.header_component.new(blacklight_config: blacklight_config, user: current_user) %>
 
+  <%# The page's intro, under the site header: the breadcrumb on every page, and on a landing page the
+      heading, lede, art and a larger search box. The breadcrumb renders here for every page, like the
+      header does; pages add their own crumbs with the breadcrumb helper rather than rendering the
+      component themselves. The stylesheet spots the art with :has, so there is no modifier to set. %>
+  <div class="fi-intro fi-bg-subtle">
+    <div class="fi-intro__inner-container pl-viewport-margins">
+      <%= render BreadcrumbsComponent.new(crumbs: page_breadcrumbs) %>
+      <% if content_for?(:intro_heading) %>
+        <div class="fi-intro__content-container">
+          <%= yield :intro_heading %>
+        </div>
+      <% end %>
+      <%# A landing page's own intro search box. The header keeps its own too,
+          so search sits in the same place on every page. %>
+      <% if content_for?(:intro_search) %>
+        <div class="fi-intro__search-container">
+          <%= yield :intro_search %>
+        </div>
+      <% end %>
+    </div>
+    <%# Last, so the art's caption link comes after the breadcrumb, heading and search box when
+        tabbing. The picture and caption are both positioned, so their place in the markup doesn't
+        move them. %>
+    <%= yield :intro_art %>
+  </div>
+
+  <%# Below the intro, on the page background rather than the intro's tint. On a landing page that puts
+      it under the hero rather than under the breadcrumb, which is the trade we settled on. %>
+  <% if flash.any? %>
+    <div class="pl-viewport-margins">
+      <%= render 'shared/flash_msg' %>
+    </div>
+  <% end %>
+
   <main id="main-container" class="<%= container_classes %>" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
-
-    <%= render 'shared/flash_msg' %>
 
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>

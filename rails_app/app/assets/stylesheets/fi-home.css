@@ -1,14 +1,22 @@
-/*
-* Find homepage styles
-*/
-
-/* Homepage "more resources" lists */
-.fi-home #content {
-  & h2 {
-    margin-top: var(--pl-space-xl);
-  }
+.fi-home__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pl-space-2xl);
+  margin-top: var(--pl-space-2xl);
 }
 
-.fi-home .flash_messages {
+.fi-home__inline-list {
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--pl-space-l);
+  row-gap: var(--pl-space-2xs);
+}
+
+.fi-home__link-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: var(--pl-space-2xs) var(--pl-space-l);
   margin-bottom: 0;
 }

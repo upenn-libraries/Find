@@ -1,113 +1,99 @@
 <%# Override of file from Blacklight v9.0 to fully customize. This file seems unlikely to change in BL.  %>
+<%# MOCKUP: a landing page in the shape of the design system home, Digital Collections, and Finding Aids:
+    ways into the catalog by access and by facet, quick links to the account, and the other search tools. %>
 
-<div class="pl-margin-b-xl">
-  <h1 class="page__heading"><%= t('home.info.heading') %></h1>
+<%# Landing page: the heading and lede sit in the intro under the header, like the design system's home page %>
+<% content_for(:intro_heading) do %>
+  <h1><%= t('home.heading') %></h1>
+  <p class="pl-line-length pl-font-size-l"><%= t('home.lede_html') %></p>
+<% end %>
 
-  <p class="pl-line-length page__lede mb-2">
-    <%= t('home.info.description').html_safe %>
-  </p>
+<%# Art in the intro, the same picture as the design system home page %>
+<% content_for(:intro_art) { render Home::IntroArtComponent.new } %>
 
-  <p class="pl-line-length"><%= t('home.info.guide_cta_html', link: link_to(t('home.info.guide_link_text'), t('urls.guides.use_catalog'), target: '_blank')) %></p>
+<%# The home page carries a large search box in the intro. The header keeps its own, so search sits in
+    the same place on every page; the two boxes need distinct ids to coexist. %>
+<% content_for(:intro_search) do %>
+  <%= render Catalog::SearchNavbarComponent.new(blacklight_config: blacklight_config, id_prefix: 'home_') %>
+<% end %>
 
-  <h2><%= t('home.info.manage.heading') %></h2>
-  <p class="pl-line-length">
-    <%= t('home.info.manage.description') %>
-  </p>
+<% facet_modal = { blacklight_modal: 'trigger', turbo: false } %>
+<% browse_facets = { format: 'format_facet', subject: 'subject_facet', library: 'library_facet', language: 'language_facet',
+                     creator: 'creator_facet', genre: 'genre_facet', location: 'location_facet', classification: 'classification_facet',
+                     'recently_published.label': 'recently_published_facet', 'recently_added.label': 'recently_added_facet' } %>
+<% tools = %w[articles digital_collections philly_archives research_guides worldcat hathi borrowdirect easyborrow ill
+              scholarlycommons search_center jstor openn] %>
+<% tools -= %w[ill] if current_user&.courtesy_borrower? %>
+<% tool_url = ->(key) { key == 'ill' ? ill_new_request_path : t("urls.external_services.#{key == 'articles' ? 'summon' : key}") } %>
 
-  <p><%= t('home.info.manage.cta_html', link: link_to(t('header.account'), account_path)) %></p>
+<div class="fi-home__sections">
+  <section>
+    <h2><%= t('home.browse.heading') %></h2>
+    <ul class="pl-cards">
+      <% [PennMARC::Access::ONLINE, PennMARC::Access::AT_THE_LIBRARY].each do |access| %>
+        <% key = access.parameterize(separator: '_') %>
+        <li class="pl-card pl-card--callout">
+          <h3 class="pl-card__heading">
+            <%= link_to t("home.browse.access.#{key}.heading"), search_catalog_path(f: { access_facet: [access] }), class: 'pl-card__link' %>
+          </h3>
+          <p class="pl-card__description"><%= t("home.browse.access.#{key}.description") %></p>
+        </li>
+      <% end %>
+      <li class="pl-card pl-card--callout">
+        <h3 class="pl-card__heading">
+          <%= link_to t('home.browse.databases.heading'), databases_catalog_path(sort: SortBuilder.title_sort_asc), class: 'pl-card__link' %>
+        </h3>
+        <p class="pl-card__description"><%= t('home.browse.databases.description') %></p>
+      </li>
+    </ul>
 
-  <h2 class="pl-h2"><%= t('home.resources.heading') %></h2>
-  <p class="pl-line-length"><%= t('home.resources.lede') %></p>
-
-  <div class="row gx-5">
-    <div class="col-sm-6">
-      <dl class="mb-4 mb-sm-0">
-        <dt>
-          <%= link_to(t('home.resources.research.articles.heading'), t('urls.external_services.summon'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.articles.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.research.borrow.heading.borrowdirect'), t('urls.external_services.borrowdirect'), target: '_blank') %>
-          · <%= link_to(t('home.resources.research.borrow.heading.easyborrow'), t('urls.external_services.easyborrow'), target: '_blank') %>
-          · <%= link_to(t('footer.account.request'), ill_new_request_path, target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.borrow.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.research.scholarlycommons.heading'), t('urls.external_services.scholarlycommons'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.scholarlycommons.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.research.search_center.heading'), t('urls.external_services.search_center'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.search_center.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.research.worldcat.heading'), t('urls.external_services.worldcat'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.worldcat.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.research.research_guides.heading'), t('urls.external_services.research_guides'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.research.research_guides.description') %>
-        </dd>
-      </dl>
+    <%# Inline caps label with its links, like the design system menu's "What's new" row %>
+    <div class="fi-home__inline-list pl-flex pl-margin-t-l">
+      <h3 class="pl-caps--subtle pl-margin-0"><%= t('home.browse.by_facet') %></h3>
+      <ul class="fi-home__link-list">
+        <% browse_facets.each do |label, facet| %>
+          <li><%= link_to t("facets.#{label}"), facet_catalog_path(id: facet), data: facet_modal %></li>
+        <% end %>
+      </ul>
     </div>
+  </section>
 
-    <%# Archival resource links %>
-    <div class="col-sm-6">
-      <dl class="mb-0">
-        <dt>
-          <%= link_to(t('home.resources.archival.digital_collections.heading'), t('urls.external_services.digital_collections'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.archival.digital_collections.description') %>
-        </dd>
+  <section>
+    <h2><%= t('home.account.heading') %></h2>
+    <%# The two things people come to do are cards; the rest follow as a link list, like "Try more filters" %>
+    <ul class="pl-cards">
+      <li class="pl-card pl-card--callout">
+        <h3 class="pl-card__heading"><%= link_to t('account.show.cards.shelf.title'), shelf_path, class: 'pl-card__link' %></h3>
+        <p class="pl-card__description"><%= t('account.show.cards.shelf.description') %></p>
+      </li>
+      <% unless current_user&.courtesy_borrower? %>
+        <li class="pl-card pl-card--callout">
+          <h3 class="pl-card__heading">
+            <%= link_to t('account.show.cards.request.title'), ill_new_request_path, class: 'pl-card__link' %>
+          </h3>
+          <p class="pl-card__description"><%= t('account.show.cards.request.description') %></p>
+        </li>
+      <% end %>
+    </ul>
 
-        <dt>
-          <%= link_to(t('home.resources.archival.finding_aids.heading'), t('urls.external_services.finding_aids'), target: '_blank') %>
-          ·
-          <%= link_to(t('home.resources.archival.philly_archives.heading'), t('urls.external_services.philly_archives'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.archival.finding_aids.description') %>
-        </dd>
+    <ul class="fi-home__link-list pl-margin-t-l">
+      <li><%= link_to t('account.show.cards.bookmarks.title'), bookmarks_path %></li>
+      <li><%= link_to t('account.show.cards.fines_and_fees.title'), fines_and_fees_path %></li>
+      <li><%= link_to t('account.show.cards.settings.title'), settings_path %></li>
+    </ul>
+  </section>
 
-        <dt>
-          <%= link_to(t('home.resources.archival.hathi.heading'), t('urls.external_services.hathi'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.archival.hathi.description') %>
-        </dd>
+  <section>
+    <h2><%= t('home.resources.heading') %></h2>
+    <p class="pl-line-length"><%= t('home.resources.lede') %></p>
 
-        <dt>
-          <%= link_to(t('home.resources.archival.jstor.heading'), t('urls.external_services.jstor'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.archival.jstor.description') %>
-        </dd>
-
-        <dt>
-          <%= link_to(t('home.resources.archival.openn.heading'), t('urls.external_services.openn'), target: '_blank') %>
-        </dt>
-        <dd>
-          <%= t('home.resources.archival.openn.description') %>
-        </dd>
-      </dl>
-    </div>
-  </div>
+    <ul class="pl-cards">
+      <% tools.each do |key| %>
+        <li class="pl-card">
+          <h3 class="pl-card__heading"><%= link_to t("home.resources.items.#{key}.heading"), tool_url.call(key), class: 'pl-card__link' %></h3>
+          <p class="pl-card__description"><%= t("home.resources.items.#{key}.description") %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 </div>

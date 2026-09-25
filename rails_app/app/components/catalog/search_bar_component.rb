@@ -13,6 +13,7 @@ module Catalog
       url:, params:,
       advanced_search_url: nil,
       classes: ['fi-search-box'], prefix: nil,
+      id_prefix: nil,
       method: 'GET', q: nil, query_param: :q,
       search_field: nil, autocomplete_path: nil,
       autofocus: nil, i18n: { scope: 'blacklight.search.form' },
@@ -25,6 +26,7 @@ module Catalog
       @search_field = search_field || params[:search_field]
       @params = params.except(:q, :search_field, :utf8, :page)
       @prefix = prefix
+      @id_prefix = id_prefix
       @classes = classes
       @method = method
       @autocomplete_path = autocomplete_path

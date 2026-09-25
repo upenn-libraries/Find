@@ -1,8 +1,11 @@
 en:
   advanced_search:
-    lede: 'Search multiple fields at once to find exactly what you need.'
+    lede: 'Search multiple fields to find what you need.'
   breadcrumbs:
+    aria: 'Breadcrumb'
+    home: 'Penn Libraries'
     root: 'Find'
+    results: 'Results'
   feedback:
     heading: 'Feedback'
     description: '<a href="%{url}" target="_blank">Share your feedback</a> to help us improve, or <a href="%{contact_url}" target="_blank">contact us</a> if you need help.'
@@ -15,60 +18,76 @@ en:
       description:
         record: Access '%{title}' through the Penn Libraries catalog.
   home:
-    info:
-      heading: 'Search our catalog'
-      description: '<strong>The definitive place to find materials held by Penn Libraries</strong>. Your results will include books, ebooks, articles, journals, digital media, and more.'
-      guide_cta_html: 'For search tips, %{link}.'
-      guide_link_text: 'visit our catalog guide'
-      manage:
-        heading: 'Manage your account'
-        description: 'Manage item requests, renew checked out items, view bookmarked items, review fines, and check on your mailing address.'
-        cta_html: 'Go to %{link}.'
+    heading: 'Find and request from our catalog'
+    intro_art:
+      campus:
+        alt: 'A watercolour of the campus gate and the towers behind it, painted for The Record, 1917'
+        caption: 'The Record 1917'
+      weightman:
+        alt: 'A pencil sketch of Weightman Hall, then the Gymnasium, its tower rising among trees, drawn in 1923'
+        caption: 'Weightman Hall, 1923'
+    lede_html: 'Search what we hold and then view it online or request it.'
+    browse:
+      heading: 'Start with a filter'
+      by_facet: 'Or filter by'
+      databases:
+        heading: 'Databases'
+        description: 'Search only our databases and reference tools.'
+      access:
+        at_the_library:
+          heading: 'Available at the library'
+          description: 'Search only what you can request or use in person.'
+        online:
+          heading: 'Available online'
+          description: 'Search only what you can view online now.'
+    account:
+      heading: 'Manage your account'
+      lede: 'Your shelf, bookmarks, fines, and settings.'
     resources:
-      heading: 'More tools for your research'
+      heading: 'Beyond the catalog'
       lede: 'No single search tool covers everything. Expand your research with these popular specialized tools.'
-      research:
+      items:
         articles:
           heading: 'Articles+'
-          description: 'Full-text articles and book chapters'
-        borrow:
-          heading:
-            borrowdirect: 'BorrowDirect'
-            easyborrow: 'EZBorrow'
-          description: 'Find and borrow materials from partner libraries'
-        scholarlycommons:
-          heading: 'ScholarlyCommons'
-          description: 'Penn dissertations, Penn research papers and datasets, and Penn Libraries publications'
-        search_center:
-          heading: 'Search Center'
-          description: 'Biddle Law Library catalog'
-        worldcat:
-          heading: 'WorldCat'
-          description: 'Union catalog listing 540 million records held by member institutions'
-        research_guides:
-          heading: 'Research Guides'
-          description: 'Find resources on a variety of research topics, specially curated by our librarians'
-      archival:
+          description: 'Full-text articles and book chapters.'
         digital_collections:
           heading: 'Digital Collections'
-          description: 'A selection of digitized originals from across our libraries, archives, and partners'
-        finding_aids:
-          heading: 'Finding Aids'
-          description: 'Penn special collections and archival material as well as collections at repositories in the greater Philadelphia region'
-        philly_archives:
-          heading: 'Philadelphia Area Archives'
+          description: 'Digitized originals from our libraries, archives, and partners.'
+        research_guides:
+          heading: 'Research Guides'
+          description: 'Resources on research topics, curated by our librarians.'
+        worldcat:
+          heading: 'WorldCat'
+          description: 'Discover items held in libraries worldwide.'
         hathi:
           heading: 'HathiTrust'
-          description: 'A partnership of academic and research institutions offering millions of digitized titles from libraries around the world'
+          description: 'Read millions of digitized books and journals online.'
+        borrowdirect:
+          heading: 'BorrowDirect'
+          description: 'Books from partner libraries, delivered to Penn.'
+        easyborrow:
+          heading: 'EZBorrow'
+          description: 'Books from partner libraries, delivered to Penn.'
+        ill:
+          heading: 'Request from another library'
+          description: "Request what we don't hold through interlibrary loan."
+        philly_archives:
+          heading: 'Philadelphia Area Archives'
+          description: 'Guides to archives at Penn and across the region.'
+        scholarlycommons:
+          heading: 'ScholarlyCommons'
+          description: 'Penn dissertations, research papers, datasets, and publications.'
+        search_center:
+          heading: 'Search Center'
+          description: 'The Biddle Law Library catalog.'
         jstor:
           heading: 'JSTOR Images'
-          description: 'Image collections from Penn and other institutions'
+          description: 'Image collections from Penn and other institutions.'
         openn:
           heading: 'OPenn'
-          description: 'Images of cultural heritage material, along with descriptive metadata, from the collections of contributing institutions'
+          description: 'Images and metadata for cultural heritage material.'
   account:
     breadcrumbs:
-      root: 'Find'
       base: 'Account'
     guide_callout: 'Guide:'
     show:
@@ -80,10 +99,10 @@ en:
           description: "Describe what you need and we'll get it to you."
         shelf:
           title: 'Shelf'
-          description: "Renew items you've borrowed and see when they're due."
+          description: "Renew your borrowed items and check due dates."
         settings:
           title: 'Settings'
-          description: 'Your account details and request item delivery address.'
+          description: 'Account details and request item delivery address.'
         bookmarks:
             title: 'Bookmarks'
             description: 'Create citations and email bookmarked items.'
@@ -234,17 +253,24 @@ en:
       delete:
         button: 'Delete'
         success: 'Scan request deleted.'
+  # MOCKUP: header menu, modeled on the design system's docs menu
+  menu:
+    new_search:
+      heading: 'Start a new search'
+      description: 'Get started with what the catalog offers.'
+    log_in_description: 'Request items and manage your account.'
+    log_out_description: "End your session when you're finished."
   header:
     shelf: 'Shelf'
     bookmarks: 'Bookmarks'
     login: 'Log in'
-    service_lede: 'books, articles, and more'
     service_name: 'Find'
+    service_lede: 'books, articles, and more'
     sign_out: 'Log out'
     account: 'My Account'
   footer:
     account:
-      heading: 'My Account'
+      heading: 'My account'
       request: "Request an item"
       shelf: 'Shelf'
       bookmarks: 'Bookmarks'
@@ -336,7 +362,6 @@ en:
       no_info: 'No additional information is available for this location.'
   login:
     breadcrumbs:
-      root: 'Find'
       base: 'Log in'
       alma: 'Courtesy borrower'
     alma:
@@ -479,10 +504,7 @@ en:
     no_unstem: 'All Fields (No Unstemmed)'
     button:
       label: "Find it"
-    advanced:
-      label: "Advanced"
-    databases: "Databases"
-    more_options: "Advanced search & Databases"
+    placeholder: 'Search the catalog'
     edit:
       label: 'Edit Search'
   show:

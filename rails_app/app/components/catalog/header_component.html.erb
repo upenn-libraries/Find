@@ -18,12 +18,41 @@
                  service-name="<%= t('header.service_name') %>"
                  service-lede="<%= t('header.service_lede') %>">
 
-  <%= link_to t('header.account'), account_path %>
-  <% if user %>
-    <%= button_to t('header.sign_out'), sign_out_path %>
-  <% else %>
-    <%= link_to t('header.login'), login_path %>
+  <% if search_bar %>
+    <div slot="end" class="fi-header-search">
+      <%= search_bar %>
+    </div>
   <% end %>
-</pennlibs-header>
 
-<%= search_bar %>
+  <%# MOCKUP: the header renders the Menu toggle and panel; this slot supplies what the panel holds.
+      Cards are the places people go on purpose; the utility row is the session and the way home. %>
+  <div slot="menu" class="fi-menu">
+    <ul class="pl-cards">
+      <li class="pl-card pl-card--callout">
+        <h2 class="pl-card__heading pl-h3"><%= link_to t('menu.new_search.heading'), root_path, class: 'pl-card__link' %></h2>
+        <p class="pl-card__description pl-line-clamp"><%= t('menu.new_search.description') %></p>
+      </li>
+      <li class="pl-card pl-card--callout">
+        <h2 class="pl-card__heading pl-h3"><%= link_to t('header.account'), account_path, class: 'pl-card__link' %></h2>
+        <p class="pl-card__description pl-line-clamp"><%= t('home.account.lede') %></p>
+      </li>
+      <li class="pl-card pl-card--callout">
+        <h2 class="pl-card__heading pl-h3"><%= link_to t('blacklight.advanced_search.form.title'), advanced_search_catalog_path, class: 'pl-card__link' %></h2>
+        <p class="pl-card__description pl-line-clamp"><%= t('advanced_search.lede') %></p>
+      </li>
+      <li class="pl-card pl-card--callout">
+        <h2 class="pl-card__heading pl-h3"><%= link_to t('home.browse.databases.heading'), databases_catalog_path(sort: SortBuilder.title_sort_asc), class: 'pl-card__link' %></h2>
+        <p class="pl-card__description pl-line-clamp"><%= t('home.browse.databases.description') %></p>
+      </li>
+      <li class="pl-card pl-card--callout">
+        <% if user %>
+          <h2 class="pl-card__heading pl-h3"><%= button_to t('header.sign_out'), sign_out_path, class: 'pl-card__link fi-menu__button' %></h2>
+          <p class="pl-card__description pl-line-clamp"><%= t('menu.log_out_description') %></p>
+        <% else %>
+          <h2 class="pl-card__heading pl-h3"><%= link_to t('header.login'), login_path, class: 'pl-card__link' %></h2>
+          <p class="pl-card__description pl-line-clamp"><%= t('menu.log_in_description') %></p>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</pennlibs-header>

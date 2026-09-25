@@ -1,8 +1,5 @@
-<%= render BreadcrumbsComponent.new do |component| %>
-  <% component.with_breadcrumb(href: root_path) { t('login.breadcrumbs.root') } %>
-  <% component.with_breadcrumb(href: login_path) { t('login.breadcrumbs.base') } %>
-  <% component.with_breadcrumb(active: true) { t('login.breadcrumbs.alma') } %>
-<% end %>
+<% breadcrumb t('login.breadcrumbs.base'), href: login_path %>
+<% breadcrumb t('login.breadcrumbs.alma') %>
 
 <div class="login__container">
   <h1 class="page__heading"><%= t('login.alma.heading') %></h1>

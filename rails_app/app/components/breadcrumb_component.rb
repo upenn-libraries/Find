@@ -6,8 +6,7 @@ class BreadcrumbComponent < ViewComponent::Base
     @href = href
     @options = options
 
-    @options[:class] = Array.wrap(@options[:class]).append('breadcrumb-item')
-    @options[:class] << 'active' if active
+    @options[:class] = Array.wrap(@options[:class]).append('pl-crumb')
     @options['aria-current'] = 'page' if active
   end
 

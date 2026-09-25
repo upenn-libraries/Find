@@ -32,11 +32,6 @@
   box-shadow: 0 0 0 2px var(--pl-color-bg-accent), 0 0 0 4px var(--pl-color-fg-default);
 }
 
-.documentHeader > h1 {
-  font-size: 1.75rem;
-  margin-bottom: 0;
-}
-
 .document .documentHeader {
   display: flex;
   gap: var(--pl-space-s);
@@ -53,6 +48,11 @@
   margin-bottom: 0 !important;
 }
 
+h1.pl-h3 {
+  font-size: var(--pl-font-size-3xl);
+  line-height: 1.4;
+}
+
 .show-document {
   display: block;
   width: 100%;
@@ -66,10 +66,4 @@
   font-weight: 500;
   color: var(--pl-color-fg-subtle);
   margin-bottom: 0;
-}
-
-.show-document {
-  & .record-title {
-    font-size: 2rem;
-  }
 }

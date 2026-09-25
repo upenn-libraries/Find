@@ -1,5 +1,6 @@
 en:
   urls:
+    home: "https://www.library.upenn.edu/"
     contact: "https://www.library.upenn.edu/contact-us"
     release_notes: "https://www.library.upenn.edu/release-notes/find"
     guides:

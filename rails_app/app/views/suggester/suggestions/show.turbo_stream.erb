@@ -1,6 +1,6 @@
-<turbo-stream action="replace" target="suggestions-listbox">
+<turbo-stream action="replace" target="<%= @listbox_id %>">
   <template>
-    <ol role="listbox" id="suggestions-listbox">
+    <ol role="listbox" id="<%= @listbox_id %>">
       <% @actions&.each do |action| %>
         <li role="option" data-pl-value="<%= params[:q] %>" data-action-url="<%= action.url %>">
           <%= sanitize action.label, tags: %w[b] %>

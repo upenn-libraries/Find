@@ -5,6 +5,11 @@ module Suggester
   class SuggestionsController < ApplicationController
     class SuggesterFailed < StandardError; end
 
+    # The listbox a search box replaces when it has no say in the matter
+    DEFAULT_LISTBOX_ID = 'suggestions-listbox'
+
+    # Before validate_query, so an error response knows where to render too
+    before_action :set_listbox_id
     before_action :validate_query
 
     rescue_from StandardError, with: :error_response
@@ -24,6 +29,15 @@ module Suggester
     end
 
     private
+
+    # A page can hold more than one search box, so the box that asked names the listbox to replace.
+    # Constrained to the shape of an html id, since it is echoed back into the response.
+    # @return [String]
+    def set_listbox_id
+      id = params[:listbox].to_s
+
+      @listbox_id = id.match?(/\A[A-Za-z][\w-]*\z/) ? id : DEFAULT_LISTBOX_ID
+    end
 
     def validate_query
       return if params[:q].present?

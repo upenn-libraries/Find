@@ -1,10 +1,7 @@
 <%= page_title t('account.fines_and_fees.page_heading') %>
 
-<%= render BreadcrumbsComponent.new do |component|%>
-  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
-  <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
-  <% component.with_breadcrumb(active: true) { t('account.fines_and_fees.page_heading') } %>
-<% end %>
+<% breadcrumb t('account.breadcrumbs.base'), href: account_path %>
+<% breadcrumb t('account.fines_and_fees.page_heading') %>
 
 <h1 class="page__heading"><%= t('account.fines_and_fees.page_heading') %></h1>
 <p class="page__lede mb-4"><%= t('account.fines_and_fees.page_lede') %></p>

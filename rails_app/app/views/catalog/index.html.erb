@@ -6,6 +6,7 @@
 
 <% conf = blacklight_config.view_config(document_index_view_type) %>
 
+<% if has_search_parameters? %>
 <%# Sidebar content for desktop (>= 820px) %>
 <% content_for(:sidebar) do %>
   <%= render conf.sidebar_component.new(blacklight_config: blacklight_config,
@@ -26,6 +27,7 @@
                                             view_config: conf) %>
     </div>
   </div>
+<% end %>
 <% end %>
 
 <% unless has_search_parameters? %>

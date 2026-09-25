@@ -1,8 +1,5 @@
-<%= render BreadcrumbsComponent.new do |component|%>
-  <% component.with_breadcrumb(href: root_path) { t('account.breadcrumbs.root') } %>
-  <% component.with_breadcrumb(href: account_path) { t('account.breadcrumbs.base') } %>
-  <% component.with_breadcrumb(href: requests_path) { t('account.shelf.page_heading') } %>
-  <% component.with_breadcrumb(active: true) { (@entry.title || @entry.id)&.truncate(50, separator: /\s/) } %>
-<% end %>
+<% breadcrumb t('account.breadcrumbs.base'), href: account_path %>
+<% breadcrumb t('account.shelf.page_heading'), href: requests_path %>
+<% breadcrumb tag.span(@entry.title || @entry.id, class: 'pl-line-clamp', style: '--pl-line-clamp: 1') %>
 
 <%= render(Account::ShelfEntryComponent.new(@entry)) %>

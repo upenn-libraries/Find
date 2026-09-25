@@ -1,6 +1,6 @@
-<turbo-stream action="replace" target="suggestions-listbox">
+<turbo-stream action="replace" target="<%= @listbox_id %>">
   <template>
-    <ol role="listbox" id="suggestions-listbox" class="suggestions-error">
+    <ol role="listbox" id="<%= @listbox_id %>" class="suggestions-error">
       <li>There was a problem getting suggestions for your query. Try again!</li>
     </ol>
   </template>

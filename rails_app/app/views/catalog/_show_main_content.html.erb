@@ -3,6 +3,8 @@
 <%# locals: (presenter: nil) %>
 <% presenter ||= document_presenter(@document) %>
 
+<% breadcrumb tag.span(presenter.heading, class: 'pl-line-clamp', style: '--pl-line-clamp: 1') %>
+
 <% @page_title = t('blacklight.search.show.title', document_title: presenter.html_title, application_name: application_name).html_safe %>
 
 <% content_for(:head) { render_link_rel_alternates } %>
@@ -13,7 +15,7 @@
 <%= render document_component.new(id: 'document', document: presenter, component: :div, show: true,
                                   partials: presenter.view_config.partials, params: params,
                                   user: current_user) do |component| %>
-  <% component.with_title(as: 'h1', classes: '', link_to_document: false, actions: false) %>
+  <% component.with_title(as: 'h1', classes: 'pl-h3 pl-margin-b-l', link_to_document: false, actions: false) %>
   <% component.with_metadata(classes: 'pl-dl') %>
   <% component.with_footer do %>
     <% if @document.respond_to?(:export_as_openurl_ctx_kev) %>

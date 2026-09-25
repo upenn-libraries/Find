@@ -147,7 +147,8 @@ dd {
 }
 
 /* Site-wide components */
-.navbar-search,
+.fi-header-search,
+.fi-intro__search-container,
 #sidebar,
 .site-feedback {
   display: none;

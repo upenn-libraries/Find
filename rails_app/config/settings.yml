@@ -1,5 +1,27 @@
-pennlibs_web_version: '1.6.0'
+pennlibs_web_version: '1.7.0-dev.0'
 app_host: 'localhost:3000'
+# Penn's IIIF image server, used for the home page intro art
+iiif_image_base_url: 'https://iiif-images.library.upenn.edu/iiif/3'
+# MOCKUP: art for the home page intro, a IIIF image cropped two ways for regular and wide screens.
+# Pick one of the options by name. Regions are IIIF percentage crops of the full image: left, top,
+# width, height. Alt text and caption live in config/locales under home.intro_art.<name>.
+home_intro_art:
+  active: 'campus'
+  options:
+    # "The Campus" by Lancelot Suckert, a watercolour of the gate and towers, from The Record, 1917
+    campus:
+      uuid: '0ac82fa7-bda0-44f7-911a-a07142c41298'
+      region: 'pct:12,32,76,20'
+      wide_region: 'pct:0,20,76,60'
+      source_url: 'https://digitalcollections.library.upenn.edu/items/0e4f2a9a-ba89-4e4b-a81f-afc6fe29bae1?asset-id=0ac82fa7-bda0-44f7-911a-a07142c41298'
+      treatment: 'color'
+    # The pencil sketch of Weightman Hall shared with the design system home page
+    weightman:
+      uuid: 'd6a839db-1f7f-4d7a-8d54-bcf31edbe794'
+      region: 'pct:20,34.5,62,17.6'
+      wide_region: 'pct:20,36.5,62,20'
+      source_url: '/catalog/991851493503681?hld_id=resource_link_45'
+      treatment: 'sketch'
 cleanup:
   searches:
     days_old: 4

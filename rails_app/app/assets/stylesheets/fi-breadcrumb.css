@@ -1,3 +1,25 @@
-.breadcrumb {
-  margin-bottom: var(--pl-space-l);
+/*
+* The breadcrumb itself comes from the design system: .pl-breadcrumb and .pl-crumb are in its global
+* stylesheet as of @penn-libraries/web 1.7. Only what the design system doesn't cover lives here.
+*/
+
+/* A record title in the last crumb can run to hundreds of characters. The design system's breadcrumb
+   wraps, so such a crumb goes to a line of its own and fills it, and its clamp never gets a narrow
+   box to clamp inside. Keep that trail on one line instead: the short crumbs hold their size, and the
+   title shrinks into whatever is left, where the clamp gives it an ellipsis.
+
+   Scoped to trails that actually carry a clamped crumb, so an ordinary breadcrumb still wraps.
+   Worth upstreaming if other apps put long titles in a crumb. */
+.pl-breadcrumb:has(.pl-line-clamp) {
+  flex-wrap: nowrap;
+
+  & .pl-crumb {
+    flex-shrink: 0;
+  }
+
+  /* `all: unset` leaves min-width at auto, which refuses to shrink below the text */
+  & .pl-crumb:has(> .pl-line-clamp) {
+    flex-shrink: 1;
+    min-width: 0;
+  }
 }

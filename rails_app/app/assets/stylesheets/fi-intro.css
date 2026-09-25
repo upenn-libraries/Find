@@ -1,0 +1,107 @@
+/*
+* The page's intro, directly below the site header. Holds the breadcrumb on every page, and on a
+* landing page the heading, lede, art and a larger search box.
+*/
+
+.fi-intro {
+  position: relative;
+}
+
+.fi-intro__figure {
+  display: contents;
+}
+
+.fi-intro__art {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .fi-intro__art {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 62%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    mask-image: linear-gradient(112.5deg, transparent 20%, #000 80%);
+  }
+
+  .fi-intro__art--sketch {
+    filter: grayscale(1) contrast(1.8);
+  }
+
+  .fi-intro:has(.fi-intro__figure) .fi-intro__inner-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .fi-intro:has(.fi-intro__figure) .fi-intro__content-container {
+    padding-right: 45%;
+  }
+
+}
+
+.fi-intro__caption {
+  display: none;
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  margin: 0;
+  padding-bottom: var(--pl-space-s);
+  text-align: right;
+  pointer-events: none;
+}
+
+@media (min-width: 48em) {
+  .fi-intro__caption {
+    display: block;
+  }
+}
+
+.fi-intro__caption-text {
+  font-family: var(--pl-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.075rem;
+  text-transform: uppercase;
+  pointer-events: auto;
+  color: var(--pl-color-fg-on-emphasis);
+  text-shadow: 1px 1px 2px var(--pl-color-fg-default);
+
+  & a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: var(--pl-link-text-underline-offset);
+    text-decoration-thickness: 0.5px;
+
+    &:hover {
+      text-decoration-thickness: var(--pl-link-hover-text-decoration-thickness);
+    }
+  }
+}
+
+.fi-intro__content-container {
+  padding-block: var(--pl-space-2xl);
+}
+
+.fi-intro__content-container h1 {
+  margin-bottom: var(--pl-space-s);
+  max-width: 34ch;
+}
+
+.fi-intro__content-container p {
+  margin: 0;
+}
+
+/* A landing page's search box: the header box, on its own line under the lede */
+.fi-intro__content-container:has(+ .fi-intro__search-container) {
+  padding-bottom: var(--pl-space-l);
+}
+
+.fi-intro__search-container {
+  max-width: 36rem;
+  padding-bottom: var(--pl-space-2xl);
+}

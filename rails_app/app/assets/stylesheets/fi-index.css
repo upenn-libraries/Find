@@ -1,9 +1,12 @@
-#main-container {
+/* The home page's first section brings its own top spacing below the intro */
+#main-container:not(.fi-home) {
   margin-top: var(--pl-space-l);
 }
 
+/* The results page lays out the facet sidebar and results as a grid. The home page (.fi-home) has
+   neither, so it keeps the plain container. */
 .blacklight-catalog-index {
-  & #main-container {
+  & #main-container:not(.fi-home) {
     display: flex;
     gap: var(--pl-space-l) var(--pl-space-xl);
     flex-direction: column;
@@ -25,19 +28,13 @@
     & #sidebar {
       width: 100%;
       grid-column: 1;
-    }
-
-    &:not(.fi-home) #sidebar {
       grid-row: 2;
     }
 
     & #content {
       grid-column: 2;
-      width: 100%;
-    }
-
-    &:not(.fi-home) #content {
       grid-row: 2;
+      width: 100%;
     }
 
     & .sort-pagination {
@@ -47,14 +44,6 @@
   
   & .row:has(#content) {
     display: contents;
-  }
-
-  & .row:has(#main-flashes) {
-    display: contents;
-
-    & > * {
-      display: contents;
-    }
   }
 
   & #sidebar,
@@ -111,17 +100,7 @@
 }
 
 @media (max-width: 819px) {
-  .blacklight-catalog-index #main-container:not(.fi-home) #sidebar {
+  .blacklight-catalog-index #main-container #sidebar {
     display: none;
-  }
-
-  .fi-home {
-    & #content {
-      order: 1 !important;
-    }
-
-    & #sidebar {
-      order: 2 !important;
-    }
   }
 }

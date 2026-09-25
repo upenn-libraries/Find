@@ -22,6 +22,10 @@
   --fi-orange-light: #FEEDDD;
 }
 
+.fi-bg-subtle {
+  background: var(--pl-color-bg-subtle);
+}
+
 .fi-link--subtle {
   color: var(--pl-color-fg-default);
   text-decoration-style: dotted;

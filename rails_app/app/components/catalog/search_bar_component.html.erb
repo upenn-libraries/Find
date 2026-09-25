@@ -6,9 +6,14 @@
   # - Rename advanced search link to match page heading
 %>
 
+<%# Ids are prefixed so a page can carry more than one search box (the home page has the header's and
+    its own) without duplicating ids, which would be invalid and would point every label and
+    "for" attribute at the first box on the page. %>
+<% query_input_id = "#{@id_prefix}query_input" %>
+
 <search>
   <div class="fi-search-box-container">
-    <pennlibs-autocomplete for="query_input" data-controller="suggester"<% if Settings.suggester.enabled %> data-suggester-enabled-value="true"<% end %>>
+    <pennlibs-autocomplete for="<%= query_input_id %>" data-controller="suggester"<% if Settings.suggester.enabled %> data-suggester-enabled-value="true"<% end %>>
       <div slot="start">
         <%= form_with url: @url, local: true, method: @method, class: @classes.join(' '), scope: @prefix, role: 'search', **@form_options do |f| %>
           <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
@@ -31,45 +36,22 @@
               <%= f.hidden_field :search_field, value: search_fields.first.last %>
             <% end %>
 
-            <%= f.label @query_param, scoped_t('search.label'), class: 'visually-hidden' %>
+            <%# The visually hidden label names the field. No aria-label here: a real label wins on
+                voice control and translation, and it keeps one source for the name. %>
+            <%= f.label @query_param, scoped_t('search.label'), for: query_input_id, class: 'visually-hidden' %>
             <%= f.search_field @query_param, value: @q, class: "search-q q form-control #{rounded_border_class}",
                 autofocus: autofocus,
                 autocomplete: 'off',
-                aria: { label: scoped_t('search.label') },
-                id: 'query_input'
+                placeholder: t('search.placeholder'),
+                id: query_input_id
               %>
 
             <%= append %>
-            <%= search_button || render(Catalog::SearchButtonComponent.new(id: "#{@prefix}search", text: t('search.button.label'))) %>
+            <%= search_button || render(Catalog::SearchButtonComponent.new(id: "#{@id_prefix}#{@prefix}search", text: t('search.button.label'))) %>
           </div>
         <% end %>
       </div>
-      <ol role="listbox" id="suggestions-listbox"></ol>
+      <ol role="listbox" id="<%= @id_prefix %>suggestions-listbox"></ol>
     </pennlibs-autocomplete>
-
-    <%# Desktop: show links inline %>
-    <span class="search-nav-links">
-      <% if advanced_search_enabled? %>
-        <%= link_to t('search.advanced.label'), advanced_search_catalog_path %>
-      <% end %>
-      <%= link_to t('search.databases'), databases_catalog_path(sort: SortBuilder.title_sort_asc) %>
-    </span>
-
-    <%# Mobile: show links in dropdown %>
-    <div class="dropdown search-nav-dropdown">
-      <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<%= t('search.more_options') %>">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <% if advanced_search_enabled? %>
-          <li><%= link_to t('search.advanced.label'), advanced_search_catalog_path, class: 'dropdown-item' %></li>
-        <% end %>
-        <li><%= link_to t('search.databases'), databases_catalog_path(sort: SortBuilder.title_sort_asc), class: 'dropdown-item' %></li>
-      </ul>
-    </div>
   </div>
 </search>

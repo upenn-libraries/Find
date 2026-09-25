@@ -20,6 +20,8 @@
   <%= render Blacklight::SkipLinkItemComponent.new(text: t('blacklight.skip_links.first_result'), href: '#documents') %>
 <% end %>
 
+<% breadcrumb t('breadcrumbs.results') %>
+
 <% content_for(:container_header) do -%>
   <%= render 'search_results_header' %>
   <%= render blacklight_config.view_config(document_index_view_type).search_header_component.new %>

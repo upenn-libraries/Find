@@ -11,11 +11,17 @@ describe 'Catalog Index Page' do
   context 'without a search' do
     before { visit search_catalog_path }
 
-    it 'displays facets' do
-      within('div.blacklight-access_facet') do
-        expect(page).to have_text I18n.t('facets.access')
-        expect(page).to have_text PennMARC::Access::AT_THE_LIBRARY
-      end
+    it 'offers browsing by access' do
+      expect(page).to have_link I18n.t('home.browse.access.at_the_library.heading')
+      expect(page).to have_link I18n.t('home.browse.access.online.heading')
+    end
+
+    it 'offers browsing by format' do
+      expect(page).to have_link I18n.t('facets.format')
+    end
+
+    it 'does not display the facet sidebar' do
+      expect(page).to have_no_css('div.blacklight-access_facet')
     end
   end
 
