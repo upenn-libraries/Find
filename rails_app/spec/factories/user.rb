@@ -14,7 +14,7 @@ FactoryBot.define do
 
   trait :alma_authenticated do
     transient do
-      identifier { 'testemail@upenn.edu' }
+      identifier { 'JIM.Bob.1964@yahoo.COM' }
     end
 
     provider { 'alma' }

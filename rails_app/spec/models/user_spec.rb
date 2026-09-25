@@ -57,9 +57,9 @@ describe User do
     context 'when the user does not exist' do
       let(:user) { build(:user, :alma_authenticated) }
 
-      it 'creates and returns the user' do
-        expect(returned_user.uid).to eq user.uid
-        expect(returned_user.email).to eq user.email
+      it 'creates and returns the user with lowercase email and UID' do
+        expect(returned_user.uid).to eq user.uid.downcase
+        expect(returned_user.email).to eq user.email.downcase
       end
     end
   end
@@ -82,9 +82,9 @@ describe User do
     expect(user.errors[:uid]).to include "can't be blank"
   end
 
-  it 'requires a unique uid per provider' do
+  it 'requires a case-insensitive unique uid per provider' do
     create(:user, uid: 'test', provider: 'saml')
-    user = build(:user, uid: 'test', provider: 'saml')
+    user = build(:user, uid: 'TEST', provider: 'saml')
     expect(user.valid?).to be false
     expect(user.errors[:uid]).to include 'has already been taken'
   end
