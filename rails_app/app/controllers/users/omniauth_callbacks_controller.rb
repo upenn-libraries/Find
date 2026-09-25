@@ -30,7 +30,7 @@ module Users
     # Alma logins usernames are explicitly case-insensitive. Alma auth API performs a case-insensitive check.
     def alma
       if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
-        user = User.from_omniauth_alma(request.env['omniauth.auth'].downcase)
+        user = User.from_omniauth_alma(request.env['omniauth.auth'])
         handle_user(user: user, kind: I18n.t('devise.omniauth_callbacks.alma_display_value'))
       else
         redirect_to alma_login_path
