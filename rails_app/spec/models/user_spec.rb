@@ -48,9 +48,9 @@ describe User do
     context 'when the user already exists' do
       let(:user) { create(:user, :alma_authenticated) }
 
-      it 'finds and returns the user' do
-        expect(returned_user.uid).to eq user.uid
-        expect(returned_user.email).to eq user.email
+      it 'finds and returns the user with lowercase email and UID' do
+        expect(returned_user.uid).to eq user.uid.downcase
+        expect(returned_user.email).to eq user.email.downcase
       end
     end
 
