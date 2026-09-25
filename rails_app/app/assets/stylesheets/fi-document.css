@@ -48,9 +48,10 @@
   margin-bottom: 0 !important;
 }
 
-h1.pl-h3 {
+.record-title {
   font-size: var(--pl-font-size-3xl);
   line-height: 1.4;
+  margin-bottom: var(--pl-space-l);
 }
 
 .show-document {

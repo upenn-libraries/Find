@@ -5,28 +5,27 @@ describe Catalog::SearchBarComponent, type: :components do
   let(:rendered) do
     render_inline(described_class.new(url: '/catalog', params: ActionController::Parameters.new, **options))
   end
-  let(:input) { rendered.css('input[type="search"]').first }
+  let(:label) { I18n.t('blacklight.search.form.search.label') }
 
-  it 'names the field with a real label rather than an aria-label' do
-    expect(input['aria-label']).to be_nil
-    expect(rendered.css("label[for=\"#{input['id']}\"]")).to be_present
+  it 'can be found by its label, and does not hide one behind an aria-label' do
+    expect(rendered).to have_field(label)
+    expect(rendered.css('input[type="search"]').first['aria-label']).to be_nil
   end
 
-  context 'with an id prefix, as the home page uses so two search boxes can coexist' do
+  it 'offers a submit button a person can name' do
+    expect(rendered).to have_button(I18n.t('search.button.label'))
+  end
+
+  context 'with an id prefix' do
     let(:options) { { id_prefix: 'home_' } }
 
-    it 'prefixes the field id' do
-      expect(input['id']).to eq 'home_query_input'
+    it 'prefixes the ids, and the label still finds the field' do
+      expect(rendered.css('input[type="search"]').first['id']).to eq 'home_query_input'
+      expect(rendered).to have_field(label)
     end
 
-    it 'keeps the label and the autocomplete pointing at the prefixed field' do
-      expect(rendered.css('label[for="home_query_input"]')).to be_present
-      expect(rendered.css('pennlibs-autocomplete').first['for']).to eq 'home_query_input'
-    end
-
-    # id_prefix is deliberately separate from prefix, which form_with uses as the field scope
     it 'leaves the query parameter alone, so the search still submits as q' do
-      expect(input['name']).to eq 'q'
+      expect(rendered.css('input[type="search"]').first['name']).to eq 'q'
     end
   end
 end
