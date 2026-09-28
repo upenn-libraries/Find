@@ -52,9 +52,11 @@ module Home
     # sketch needs different handling from a painting.
     # @return [String]
     def default_image
-      image_tag iiif_url(art.region, WIDTHS.first),
+      region = art.region
+
+      image_tag iiif_url(region, WIDTHS.first),
                 class: ['fi-intro__art', "fi-intro__art--#{art.treatment}"],
-                srcset: srcset(art.region, WIDTHS),
+                srcset: srcset(region, WIDTHS),
                 sizes: SIZES,
                 alt: t("home.intro_art.#{name}.alt")
     end

@@ -5,8 +5,8 @@
 class BreadcrumbComponent < ViewComponent::Base
   # @param href [String, nil] leave it out for the page you are on
   # @param active [Boolean] whether this is the page you are on; follows href unless you say otherwise
-  def initialize(href: nil, active: href.nil?, **options)
-    @href = href
+  def initialize(href: nil, active: href.blank?, **options)
+    @href = href.presence
     @options = options
 
     @options[:class] = Array.wrap(@options[:class]).append('pl-crumb')

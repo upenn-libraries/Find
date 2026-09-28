@@ -20,6 +20,8 @@
   --fi-purple-light: #F2DFED;
   --fi-orange-medium: #BD4718;
   --fi-orange-light: #FEEDDD;
+
+  --pl-viewport-margins-max-width: 1568px;
 }
 
 .fi-bg-subtle {

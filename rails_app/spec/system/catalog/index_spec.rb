@@ -105,7 +105,8 @@ describe 'Catalog Index Page' do
 
     before do
       CatalogController.blacklight_config.default_solr_params = { qt: 'search', NOW: solr_time }
-      visit search_catalog_path
+      # A search, not the bare path: the landing page has no facet sidebar
+      visit search_catalog_path(params: { q: '', search_field: 'all_fields' })
     end
 
     context 'without a recently published record' do
@@ -213,7 +214,8 @@ describe 'Catalog Index Page' do
 
       CatalogController.blacklight_config.default_solr_params = { qt: 'search', NOW: solr_time }
 
-      visit search_catalog_path
+      # A search, not the bare path: the landing page has no facet sidebar
+      visit search_catalog_path(params: { q: '', search_field: 'all_fields' })
     end
 
     context 'without a recently added record' do
