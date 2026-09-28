@@ -3,7 +3,7 @@
 describe Home::IntroArtComponent, type: :components do
   let(:name) { Settings.home_intro_art.active }
   let(:art) { Settings.home_intro_art.options[name] }
-  let(:rendered) { render_inline(described_class.new) }
+  let(:rendered) { render_inline(described_class.new(name: name, art: art)) }
 
   it 'describes the picture for anyone who cannot see it' do
     expect(rendered).to have_css("img[alt='#{I18n.t("home.intro_art.#{name}.alt")}']")
@@ -14,7 +14,7 @@ describe Home::IntroArtComponent, type: :components do
   end
 
   context 'when the named art is not configured' do
-    let(:rendered) { render_inline(described_class.new(name: 'nonesuch')) }
+    let(:rendered) { render_inline(described_class.new(name: 'nonesuch', art: nil)) }
 
     it 'renders nothing rather than a broken picture' do
       expect(rendered.to_html).to be_blank

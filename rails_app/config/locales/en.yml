@@ -253,7 +253,7 @@ en:
       delete:
         button: 'Delete'
         success: 'Scan request deleted.'
-  # MOCKUP: header menu, modeled on the design system's docs menu
+  # Header menu, modeled on the design system's docs menu
   menu:
     new_search:
       heading: 'Start a new search'

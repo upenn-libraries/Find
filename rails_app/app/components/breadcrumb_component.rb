@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-# Component to create a section of a breadcrumb path.
+# One step in a breadcrumb path. A crumb with no href is the page you are on, so it renders as text
+# and announces itself as the current page.
 class BreadcrumbComponent < ViewComponent::Base
-  def initialize(href: nil, active: false, **options)
+  # @param href [String, nil] leave it out for the page you are on
+  # @param active [Boolean] whether this is the page you are on; follows href unless you say otherwise
+  def initialize(href: nil, active: href.nil?, **options)
     @href = href
     @options = options
 
@@ -12,11 +15,7 @@ class BreadcrumbComponent < ViewComponent::Base
 
   def call
     tag.li(**@options) do
-      if @href
-        tag.a(href: @href) { content }
-      else
-        content
-      end
+      @href ? tag.a(href: @href) { content } : content
     end
   end
 end

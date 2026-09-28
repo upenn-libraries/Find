@@ -1,5 +1,5 @@
 <%# Override of file from Blacklight v9.0 to fully customize. This file seems unlikely to change in BL.  %>
-<%# MOCKUP: a landing page in the shape of the design system home, Digital Collections, and Finding Aids:
+<%# A landing page in the shape of the design system home, Digital Collections, and Finding Aids:
     ways into the catalog by access and by facet, quick links to the account, and the other search tools. %>
 
 <%# Landing page: the heading and lede sit in the intro under the header, like the design system's home page %>
@@ -9,7 +9,10 @@
 <% end %>
 
 <%# Art in the intro, the same picture as the design system home page %>
-<% content_for(:intro_art) { render Home::IntroArtComponent.new } %>
+<% art_name = Settings.home_intro_art.active %>
+<% content_for(:intro_art) do %>
+  <%= render Home::IntroArtComponent.new(name: art_name, art: Settings.home_intro_art.options[art_name]) %>
+<% end %>
 
 <%# The home page carries a large search box in the intro. The header keeps its own, so search sits in
     the same place on every page; the two boxes need distinct ids to coexist. %>

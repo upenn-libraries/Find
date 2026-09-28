@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module Home
-  # MOCKUP: art for the page intro under the header, ported from the design system docs
-  # (docs-page.njk bandArt). A IIIF image cropped to a wide strip, with a wider crop for very wide
-  # screens, and a
+  # Art for the page intro under the header, ported from the design system docs (docs-page.njk
+  # bandArt). A IIIF image cropped to a wide strip, with a wider crop for very wide screens, and a
   # caption crediting the source.
   #
   # Mirrors Finding Aids' HeroPictureComponent: the picture is assembled with Rails helpers rather
   # than written out as markup, so the IIIF urls are built in one place and can be tested.
   #
-  # See the `home_intro_art` config for the shape this expects, and config/locales for the alt text
-  # and caption under `home.intro_art.<name>`.
+  # Takes its art rather than reading the config itself, so it can be rendered with any option. See
+  # the `home_intro_art` config for the shape it expects, and config/locales for the alt text and
+  # caption under `home.intro_art.<name>`.
   class IntroArtComponent < Blacklight::Component
     # The art sits in the intro's right portion, so it never needs more than half the viewport
     SIZES = '50vw'
@@ -23,10 +23,11 @@ module Home
 
     attr_reader :name, :art
 
-    # @param name [String] which of the configured options to render
-    def initialize(name: Settings.home_intro_art.active)
+    # @param name [String] the option's name, which also keys its alt text and caption in the locales
+    # @param art [Config::Options, nil] the crops and source for that option
+    def initialize(name:, art:)
       @name = name
-      @art = Settings.home_intro_art.options[name]
+      @art = art
     end
 
     def render?

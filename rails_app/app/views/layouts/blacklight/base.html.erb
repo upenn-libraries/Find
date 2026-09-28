@@ -39,7 +39,11 @@
       component themselves. The stylesheet spots the art with :has, so there is no modifier to set. %>
   <div class="fi-intro fi-bg-subtle">
     <div class="fi-intro__inner-container pl-viewport-margins">
-      <%= render BreadcrumbsComponent.new(crumbs: page_breadcrumbs) %>
+      <%= render BreadcrumbsComponent.new do |trail| %>
+        <% page_breadcrumbs.each do |crumb| %>
+          <% trail.with_breadcrumb(href: crumb[:href]) { crumb[:label] } %>
+        <% end %>
+      <% end %>
       <% if content_for?(:intro_heading) %>
         <div class="fi-intro__content-container">
           <%= yield :intro_heading %>
