@@ -6,10 +6,17 @@ module Catalog
   class StartOverButtonComponent < Blacklight::StartOverButtonComponent
     def call
       link_to start_over_path, class: 'catalog_startOverLink btn btn-light',
-                                       aria: { label: t('blacklight.search.start_over') },
-                                       data: { controller: 'tooltip', bs_title: t('blacklight.search.start_over') } do
+                               aria: { label: start_over_label },
+                               data: { controller: 'tooltip', bs_title: start_over_label } do
         render 'shared/svgs/start_over'
       end
+    end
+
+    private
+
+    # @return [String]
+    def start_over_label
+      t('blacklight.search.start_over')
     end
   end
 end
