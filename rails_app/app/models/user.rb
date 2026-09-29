@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   validates :email, presence: true, uniqueness: true
-  validates :uid, presence: true, uniqueness: { scope: :provider }, if: :provider_provided?
+  validates :uid, presence: true, uniqueness: { scope: :provider, case_sensitive: false }, if: :provider_provided?
   validates :provider, presence: true, if: :uid_provided?
 
   # Configuration added by Blacklight; Blacklight::User uses a method key on your user class to get a user-displayable
@@ -44,15 +44,16 @@ class User < ApplicationRecord
     end
   end
 
+  # Lookup a Alma-scope user based on a lower-cased username value. Ensure any persisted values are lower-cased.
   # @param [OmniAuth::AuthHash] auth
   # @return [User]
   def self.from_omniauth_alma(auth)
-    where(provider: auth.provider, uid: auth.info.uid).first_or_initialize do |user|
-      user.email = auth.info.uid
+    where(provider: auth.provider, uid: auth.info.uid.downcase).first_or_initialize do |user|
+      user.email = auth.info.uid.downcase
     end
   end
 
-  # Returns true if provided credentials match an Alma internal account
+  # Returns true if provided credentials match an Alma internal account (case-insensitive)
   # @param [Hash] credentials
   # @return [Boolean]
   def self.authenticated_by_alma?(credentials)

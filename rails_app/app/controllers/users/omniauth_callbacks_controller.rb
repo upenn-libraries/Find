@@ -27,6 +27,7 @@ module Users
       end
     end
 
+    # Alma logins usernames are explicitly case-insensitive. Alma auth API performs a case-insensitive check.
     def alma
       if User.authenticated_by_alma?(request.env['omniauth.auth'].credentials)
         user = User.from_omniauth_alma(request.env['omniauth.auth'])
