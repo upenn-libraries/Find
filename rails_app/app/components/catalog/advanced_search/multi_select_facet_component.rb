@@ -6,7 +6,7 @@ module Catalog
     class MultiSelectFacetComponent < Blacklight::Component
       def initialize(facet_field:, layout: nil)
         @facet_field = facet_field
-        @layout = layout == false ? FacetFieldNoLayoutComponent : Blacklight::FacetFieldComponent
+        @layout = layout == false ? FacetFieldNoLayoutComponent : Blacklight::Facets::FieldComponent
       end
 
       # @return [Boolean] whether to render the component

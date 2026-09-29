@@ -181,6 +181,7 @@ detectors:
       - Catalog::AdvancedSearchFormComponent
       - Catalog::ConstraintsComponent
       - Catalog::FacetLinkComponent
+      - Catalog::FlashMessageComponent
       - Catalog::QueryLinkComponent
       - Catalog::SearchHistoryConstraintLayoutComponent
       - Catalog::ShowDocumentComponent

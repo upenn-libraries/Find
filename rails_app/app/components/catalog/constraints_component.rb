@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component overriding version from Blacklight v9.0
+  # Local component overriding version from Blacklight v9.2.1
   class ConstraintsComponent < Blacklight::ConstraintsComponent
     # Constraints are stored and used to display search history - with this method, we initialize the
     # ConstraintsComponent in a way that displays well in a table (and without a start-over button)

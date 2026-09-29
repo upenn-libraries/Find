@@ -24,7 +24,7 @@ class SearchBuilder < Blacklight::SearchBuilder
     return if advanced_search_params_present?(solr_p) || non_relevance_sort_parameter_present?(solr_p)
     return solr_p[:sort] = SortBuilder.title_sort_asc if database_listing?(solr_p)
 
-    sort_builder = SortBuilder.new(blacklight_params)
+    sort_builder = SortBuilder.new(search_state.params)
 
     solr_p[:sort] = search_term_provided?(solr_p) ? sort_builder.enriched_relevance_sort : sort_builder.browse_sort
   end
@@ -69,7 +69,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   # Is the request only listing database, with no search query?
   # @return [Boolean, nil]
   def database_listing?(solr_p)
-    blacklight_params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE) &&
+    search_state.params.dig(:f, :format_facet)&.include?(PennMARC::Database::DATABASES_FACET_VALUE) &&
       !search_term_provided?(solr_p)
   end
 end

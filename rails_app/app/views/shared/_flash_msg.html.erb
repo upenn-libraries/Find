@@ -1,8 +1,4 @@
-<%
-  # Copied from Blacklight v9.0
-  # See flash_message_component for reasoning.
-%>
-
+<%# Copied from Blacklight v9.2.1 -  See flash_message_component for reasoning. %>
 <% if flash.any? %>
   <div class="flash_messages" data-controller="flash-messages">
     <% [:success, :notice, :error, :alert].each do |type| %>

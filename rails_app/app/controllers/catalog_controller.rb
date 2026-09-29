@@ -32,6 +32,10 @@ class CatalogController < ApplicationController
     ## Should the raw solr document endpoint (e.g. /catalog/:id/raw) be enabled
     # config.raw_endpoint.enabled = false
 
+    # Disable "dark mode" switcher, even though we don't render the BL default header content. If we want to enable
+    # support, changes to local styles and BL code for the <head> section needs to be added.
+    config.dark_mode_support = false
+
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = { qt: 'search' }
 

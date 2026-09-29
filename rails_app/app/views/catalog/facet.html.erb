@@ -1,4 +1,4 @@
-<%# Copied from Blacklight v9.0 %>
+<%# Copied from Blacklight v9.2.1 %>
 <%= render Blacklight::System::ModalComponent.new do |component| %>
   <% component.with_title { t('blacklight.search.facets.modal_title', field_name: facet_field_label(@facet.key).downcase) } %>
   <% view_config = blacklight_config.view_config(document_index_view_type) %>

@@ -1,19 +1,22 @@
 # frozen_string_literal: true
 
 module Catalog
-  # Local component copied from Blacklight v9.0
-  class StartOverButtonComponent < Blacklight::Component
+  # Local component copied from Blacklight v9.2.1 to allow us to use a custom layout template.
+  # Adds icon, tooltip and aria markup, overriding the #call method on the component.
+  class StartOverButtonComponent < Blacklight::StartOverButtonComponent
+    def call
+      link_to start_over_path, class: 'catalog_startOverLink btn btn-light',
+                               aria: { label: start_over_label },
+                               data: { controller: 'tooltip', bs_title: start_over_label } do
+        render 'shared/svgs/start_over'
+      end
+    end
+
     private
 
-    ##
-    # Get the path to the search action with any parameters (e.g. view type)
-    # that should be persisted across search sessions.
-    def start_over_path(query_params = params)
-      h = {}
-      current_index_view_type = helpers.document_index_view_type(query_params)
-      h[:view] = current_index_view_type unless current_index_view_type == helpers.default_document_index_view_type
-
-      helpers.search_action_path(h)
+    # @return [String]
+    def start_over_label
+      t('blacklight.search.start_over')
     end
   end
 end
