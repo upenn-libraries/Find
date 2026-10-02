@@ -15,9 +15,7 @@ export default class extends Controller {
 
     // Add holding ID to URL when a new holding is selected
     entryChanged(event) {
-        const dataSet = event.currentTarget.dataset;
-        this.addIDToURL(dataSet.entryId);
-        this.focusTarget(dataSet.focusTarget);
+        this.addIDToURL(event.currentTarget.dataset.entryId);
     }
 
     // Set holding ID in URL and replace current history state
@@ -29,9 +27,5 @@ export default class extends Controller {
             url.searchParams.delete('hld_id');
         }
         history.replaceState(history.state, '', url);
-    }
-
-    focusTarget(target) {
-        document.querySelector(target)?.focus();
     }
 }
