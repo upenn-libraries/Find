@@ -16,6 +16,7 @@ export default class extends Controller {
     // Add holding ID to URL when a new holding is selected
     entryChanged(event) {
         this.addIDToURL(event.currentTarget.dataset.entryId);
+        this.scrollToHeading();
     }
 
     // Set holding ID in URL and replace current history state
@@ -27,5 +28,9 @@ export default class extends Controller {
             url.searchParams.delete('hld_id');
         }
         history.replaceState(history.state, '', url);
+    }
+
+    scrollToHeading() {
+        document.querySelector('h1').scrollIntoView({ behavior: 'instant'});
     }
 }
