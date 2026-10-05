@@ -80,7 +80,6 @@ include:
   - component: $CI_SERVER_FQDN/devops/gitlab/components/sast/trivy@~latest
     inputs:
       docker_tag_to_scan: "${CI_COMMIT_SHA}-production"
-      job_image_tag: "29-dind"
       needs:
         - "amend_manifest_production"
       stage: "test"
