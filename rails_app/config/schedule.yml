@@ -8,7 +8,9 @@ cleanup_searches:
   class: 'CleanupSearchesJob'
 parse_art_collection:
   cron: 'every monday at 6AM'
-  class: 'Discover::ParseArtCollectionJob'
+  namespace: 'Discover'
+  class: 'ParseArtCollectionJob'
 parse_penn_museum:
-  cron: every day at 6AM'
-  class: 'Discover::ParseMuseumJob'
+  cron: 'every day at 6AM'
+  namespace: 'Discover'
+  class: 'ParseMuseumJob'
