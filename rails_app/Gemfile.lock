@@ -331,7 +331,7 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
-    pennmarc (1.4.8)
+    pennmarc (1.4.11)
       activesupport (>= 8)
       lcsort (~> 0.9)
       library_stdnums (~> 1.6)
@@ -519,7 +519,7 @@ GEM
       rubocop-rails
       rubocop-rake
       rubocop-rspec
-    uri (1.1.1)
+    uri (1.1.2)
     useragent (0.16.11)
     view_component (4.15.0)
       actionview (>= 7.1.0)
