@@ -1,6 +1,6 @@
 <div class="document__inventory col-lg-3">
   <h2 class="pl-h3 document__inventory-heading">
-    <%= pluralize(@inventory.count, t('inventory.show.navigation.header')) %>
+    <%= pluralize(@tabs.count, t('inventory.show.navigation.header')) %>
   </h2>
   <div data-controller="search-list">
     <div class="search-list d-none" data-search-list-target="search">
@@ -25,8 +25,8 @@
       aria-orientation="vertical"
       data-controller="inventory-list"
     >
-      <% @inventory.each_with_index do |entry, i| %>
-        <button class="<%= classes(entry).join(' ') %> <%= " active" if active?(entry) %>"
+      <% @tabs.each_with_index do |tab, i| %>
+        <button class="<%= classes(tab).join(' ') %> <%= " active" if active?(tab) %>"
                 id="inventory-pills-<%= i %>"
                 data-bs-toggle="pill"
                 data-bs-target="#inventory-<%= i %>"
@@ -34,20 +34,22 @@
                 type="button"
                 role="tab"
                 aria-controls="inventory-<%= i %>"
-                aria-selected="<%= active?(entry) ? 'true' : 'false' %>"
+                aria-selected="<%= active?(tab) ? 'true' : 'false' %>"
                 data-inventory-list-target="entryButton"
                 data-action="click->inventory-list#entryChanged"
-                data-entry-id="<%= entry.id %>"
+                data-entry-id="<%= tab.id %>"
         >
-          <span class="inventory-item__header"><%= entry.human_readable_location %></span>
-          <span class="inventory-item__main"><%= entry.description %></span>
-          <% if entry.coverage_statement %>
-            <span class="inventory-item__sub-main"><%= entry.coverage_statement %></span>
+          <% if tab.human_readable_location %>
+          <span class="inventory-item__header"><%= tab.human_readable_location %></span>
+            <% end  %>
+          <span class="inventory-item__main"><%= tab.description %></span>
+          <% if tab.coverage_statement %>
+            <span class="inventory-item__sub-main"><%= tab.coverage_statement %></span>
           <% end %>
-          <% if entry.public_note %>
-            <span class="inventory-item__sub-main"><%= entry.public_note %></span>
+          <% if tab.public_note %>
+            <span class="inventory-item__sub-main"><%= tab.public_note %></span>
           <% end %>
-          <span class="inventory-item__footer"><%= entry.human_readable_status %></span>
+          <span class="inventory-item__footer"><%= tab.human_readable_status %></span>
         </button>
       <% end %>
       <%= turbo_frame_tag 'hathi_frame', src: hathi_link_inventory_path,

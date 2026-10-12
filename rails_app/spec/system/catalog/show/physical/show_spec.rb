@@ -9,7 +9,7 @@ describe 'Catalog show page with a Physical record' do
     include_context 'with print monograph record with 2 physical entries'
 
     let(:mms_id) { print_monograph_bib }
-    let(:entries) { print_monograph_entries }
+    let(:entries) { Inventory::List::TabCollection.new(inventory: Inventory::List::Response.new(entries: print_monograph_entries)).entries }
 
     include_examples 'core show page features'
 

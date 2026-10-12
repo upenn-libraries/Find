@@ -5,11 +5,11 @@ module Catalog
   # inventory information and provide other customizations.
   class ShowDocumentComponent < Blacklight::DocumentComponent
     renders_one :inventory_navigation, lambda {
-      Inventory::Full::NavigationComponent.new(inventory: @inventory, selected_id: @selected_id)
+      Inventory::Full::NavigationComponent.new(inventory: @tabs, selected_id: @selected_id)
     }
 
     renders_one :inventory_content, lambda {
-      Inventory::Full::ContentComponent.new(inventory: @inventory, selected_id: @selected_id, user: @user)
+      Inventory::Full::ContentComponent.new(inventory: @tabs, selected_id: @selected_id, user: @user)
     }
 
     # @option params [ActionController::Parameters] parameters from request
@@ -17,7 +17,8 @@ module Catalog
     def initialize(**args)
       super(**args.except(:user, :params))
       @inventory = @document.full_inventory
-      @selected_id = args[:params][:hld_id] || @inventory.first&.id
+      @tabs = Inventory::List::TabCollection.new(inventory: @inventory)
+      @selected_id = args[:params][:hld_id] || @tabs.tabs.first&.id
       @user = args[:user]
     end
 

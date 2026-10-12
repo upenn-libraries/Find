@@ -74,8 +74,6 @@ module Inventory
           href.present?
         end
 
-        private
-
         # Extract hostname from URL. Eventually we should pull this value from 856$a.
         def hostname
           @hostname ||= begin

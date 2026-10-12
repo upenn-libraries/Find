@@ -7,7 +7,7 @@ describe 'Catalog show page with an Electronic record' do
   include_context 'with empty hathi response'
 
   let(:mms_id) { electronic_journal_bib }
-  let(:entries) { electronic_journal_entries }
+  let(:entries) { Inventory::List::TabCollection.new(inventory: Inventory::List::Response.new(entries: electronic_journal_entries)).entries }
 
   include_examples 'core show page features'
 

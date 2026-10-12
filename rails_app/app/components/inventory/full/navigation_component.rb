@@ -7,22 +7,21 @@ module Inventory
     class NavigationComponent < ViewComponent::Base
       include Turbo::FramesHelper
 
-      # @param inventory [Inventory::Response] inventory response object
+      attr_reader :inventory
+
+      # @param inventory [Inventory::List::TabCollection]
       # @param selected_id [String] entry id for selected entry
       def initialize(inventory:, selected_id:)
         @inventory = inventory
+        @tabs = inventory.tabs
         @selected_id = selected_id
       end
 
-      # Is a passed-in entry currently selected? Used to add 'active' class
-      # @param entry [Inventory::Entry]
+      # Is a passed-in tab currently selected? Used to add 'active' class
+      # @param tab [Inventory::List::Tab]
       # @return [Boolean]
-      def active?(entry)
-        if @selected_id.blank?
-          entry == @inventory.first
-        else
-          @selected_id == entry.id
-        end
+      def active?(tab)
+        inventory.active?(@selected_id, tab)
       end
 
       # Classes to use in rendering the inventory entry element

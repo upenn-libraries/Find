@@ -1,9 +1,26 @@
 <div class="tab-content" id="inventory-pills-tabContent">
-  <% @inventory.each_with_index do |entry, i| %>
-    <div class="tab-pane fade<%= " show active" if active?(entry) %>" id="inventory-<%= i %>" role="tabpanel" aria-labelledby="inventory-<%= i %>-tab" tabindex="0">
+  <% @tabs.each_with_index do |tab, i| %>
+    <div class="tab-pane fade<%= " show active" if active?(tab) %>" id="inventory-<%= i %>" role="tabpanel" aria-labelledby="inventory-<%= i %>-tab" tabindex="0">
       <div class="document-inventory-container">
-        <%= render_entry(entry) %>
+        <% if tab.grouped? %>
+          <div data-controller="inventory-grouped-resource-link">
+              <p class="inventory-item__availability--easy inventory-item__availability-summary">
+                <span class="inventory-item__main"><%= tab.description %></span>
+                <span class="inventory-item__coverage_statement" data-inventory-grouped-resource-link-target="coverage"><%= tab.coverage_statement %></span>
+                <span class="inventory-item__status"><%= tab.human_readable_status %></span>
+              </p>
+              <label class="form-label h6" for="resource_links"> Which item do you want to view?</label>
+              <%= select_tag(:resource_links,
+                             options_for_select(tab.entries.map { |e| [e.coverage_statement, e.href] }, tab.primary.coverage_statement),
+                             { class: 'form-select mb-3', data: { "inventory-grouped-resource-link-target": "select", action: "inventory-grouped-resource-link#selectChanged" } }) %>
+
+              <%= render Inventory::Full::Entry::OnlineCtaComponent.new(href: tab.primary.href) %>
+          </div>
+        <% else %>
+          <%= render_entry(tab.primary) %>
+        <% end %>
       </div>
     </div>
   <% end %>
 </div>
+
