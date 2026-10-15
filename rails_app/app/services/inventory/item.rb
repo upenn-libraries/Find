@@ -24,6 +24,11 @@ module Inventory
       @location ||= create_location
     end
 
+    # @return [Inventory::LocationPolicy]
+    def location_policy
+      @location_policy ||= location.policy
+    end
+
     # @return [Hash]
     def bib_data
       @bib_item.item.fetch('bib_data', {})

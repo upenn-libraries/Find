@@ -58,8 +58,8 @@ module Inventory
           ItemNumber: item_data['barcode'],
           Location: location.code,
           ReferenceNumber: bib_data['mms_id'],
-          Site: location.aeon_site,
-          SubLocation: location.aeon_sublocation }
+          Site: location_policy.aeon_site,
+          SubLocation: location_policy.aeon_sublocation }
       end
 
       # All parameters to be passed to the Aeon request form
