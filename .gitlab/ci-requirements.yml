@@ -10,8 +10,8 @@ collections:
       /packages/generic/collections/services-v1.9.0/library-services-1.9.0.tar.gz"
     type: url
   - name: "https://gitlab.library.upenn.edu/api/v4/projects/devops%2Fansible%2Fcollection\
-      /packages/generic/collections/infra-v4.3.0/library-infra-4.3.0.tar.gz"
+      /packages/generic/collections/infra-v4.4.0/library-infra-4.4.0.tar.gz"
     type: url
   - name: "https://gitlab.library.upenn.edu/api/v4/projects/devops%2Fansible%2Fcollection\
-      /packages/generic/collections/ci-v0.3.1/library-ci-0.3.1.tar.gz"
+      /packages/generic/collections/ci-v0.5.0/library-ci-0.5.0.tar.gz"
     type: url
