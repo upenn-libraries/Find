@@ -120,7 +120,7 @@ stages:
         SOLR_HOST: "solr"
         SOLR_JAVA_MEM: "-Xms4g -Xmx4g"
         SOLR_MODE: "solrcloud"
-        SOLR_OPTS: "-Dsolr.disableConfigSetsCreateAuthChecks=true"
+        SOLR_OPTS: "-Dsolr.disableConfigSetsCreateAuthChecks=true -Dsolr.modules=analysis-extras"
         ZK_CREATE_CHROOT: "true"
   variables:
     ANSIBLE_COLLECTIONS_CACHE_DIR: .cache/ansible/collections
@@ -153,6 +153,7 @@ stages:
     - git checkout
     - rm -fr ${CI_PROJECT_DIR}/rails_app/solr/*
     - mv /tmp/indexing/rails_app/solr/conf ${CI_PROJECT_DIR}/rails_app/solr
+    - sed -i '/<lib /d' ${CI_PROJECT_DIR}/rails_app/solr/conf/solrconfig.xml
     - cd ${CI_PROJECT_DIR}
   script:
     - >-
@@ -209,7 +210,7 @@ rspec_app_integration_test:
         SOLR_HOST: "solr"
         SOLR_JAVA_MEM: "-Xms4g -Xmx4g"
         SOLR_MODE: "solrcloud"
-        SOLR_OPTS: "-Dsolr.disableConfigSetsCreateAuthChecks=true"
+        SOLR_OPTS: "-Dsolr.disableConfigSetsCreateAuthChecks=true -Dsolr.modules=analysis-extras"
         ZK_CREATE_CHROOT: "true"
   variables:
     CHROME_URL: "ws://chrome:3333"
