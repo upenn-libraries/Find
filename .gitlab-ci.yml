@@ -156,14 +156,13 @@ stages:
     - sed -i '/<lib /d' ${CI_PROJECT_DIR}/rails_app/solr/conf/solrconfig.xml
     - cd ${CI_PROJECT_DIR}
   script:
+    - tail -F --pid=$$ rails_app/rspec.log 2>/dev/null &
     - >-
       ansible-playbook library.ci.rails_test
       -e rails_test_app_dir="rails_app"
       -e rails_test_solr_url="http://solr:8983"
       -e rails_test_solr_username="admin"
       -e rails_test_solr_password="Bitnami"
-  after_script:
-    - cat rails_app/rspec.log 2>/dev/null || true
   coverage: '/\(\d+.\d+\%\) covered/'
   artifacts:
     paths:
