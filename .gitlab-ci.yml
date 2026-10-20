@@ -49,6 +49,10 @@ include:
       stage: "build_production"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/general/install_ansible@~latest
   - component: gitlab.library.upenn.edu/devops/gitlab/components/general/ci_requirements@~latest
+  - component: gitlab.library.upenn.edu/devops/gitlab/components/general/vault_jwt_auth@~latest
+    inputs:
+      ci_requirements_file: ".gitlab/ci-requirements.yml"
+      vault_auth_role: "sidekiq_pro_ro"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/tests/rubocop@~latest
     inputs:
       app_dir: "rails_app"
@@ -99,6 +103,16 @@ stages:
   - test
   - finalize
   - deploy
+
+.sidekiq_pro_from_vault: &sidekiq_pro_from_vault
+  extends: .vault_jwt_auth
+  before_script:
+    - !reference [.vault_jwt_auth, before_script]
+    - export SIDEKIQ_PRO_CREDENTIALS="$(vault kv get -field=credentials dld/sidekiq_pro)"
+
+build_and_push_docker_images_base: *sidekiq_pro_from_vault
+build_and_push_docker_images_development: *sidekiq_pro_from_vault
+build_and_push_docker_images_production: *sidekiq_pro_from_vault
 
 .rspec_app_test:
   stage: test
