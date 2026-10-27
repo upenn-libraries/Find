@@ -5,7 +5,7 @@ variables:
   WAIT_FOR_SERVICES_TIMEOUT: "120"
 
 include:
-  - component: gitlab.library.upenn.edu/devops/gitlab/components/sast/secret_scan@2.5.0
+  - component: gitlab.library.upenn.edu/devops/gitlab/components/sast/secret_scan@~latest
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_build@~latest
     inputs:
       ci_requirements_file: ".gitlab/ci-requirements.yml"
@@ -56,7 +56,7 @@ include:
   - component: gitlab.library.upenn.edu/devops/gitlab/components/tests/rubocop@~latest
     inputs:
       app_dir: "rails_app"
-  - component: gitlab.library.upenn.edu/devops/gitlab/components/sast/trivy@2.5.0
+  - component: gitlab.library.upenn.edu/devops/gitlab/components/sast/trivy@~latest
     inputs:
       ci_requirements_file: ".gitlab/ci-requirements.yml"
       docker_tag_to_scan: "${CI_COMMIT_SHA}"
