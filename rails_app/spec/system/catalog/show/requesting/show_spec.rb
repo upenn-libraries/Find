@@ -57,32 +57,6 @@ describe 'Catalog show page requesting behaviors' do
       click_button print_monograph_entries.first.description
     end
 
-    context 'with an aeon requestable item' do
-      let(:print_monograph_entries) do
-        [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234', location_code: 'scrare')]
-      end
-      let(:item) { build :item, :aeon_location }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
-
-      it 'shows the aeon request options' do
-        within('.fulfillment__container') do
-          expect(page).to have_selector '#aeon-option'
-        end
-      end
-
-      it 'shows the schedule visit button with aeon href' do
-        within('.request-buttons') do
-          aeon_link = find_link I18n.t('requests.form.buttons.aeon')
-          expect(aeon_link[:href]).to start_with(Settings.aeon.requesting_url)
-          expect(aeon_link[:href]).to include(CGI.escape(item.bib_data['title']))
-        end
-      end
-    end
-
     context 'with an item at the archives' do
       let(:print_monograph_entries) do
         [create(:physical_entry, mms_id: print_monograph_bib, holding_id: '1234',

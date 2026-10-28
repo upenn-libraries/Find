@@ -6,6 +6,12 @@ module Inventory
     AVAILABLE = 'available'
     CHECK_HOLDINGS = 'check_holdings'
     UNAVAILABLE = 'unavailable'
+
+    # Symbol keys shared between Status and LocationPolicy for top-level status dispatch.
+    # Defined here so that renaming a key in one place updates both consumers.
+    AVAILABLE_KEY = :available
+    CHECK_HOLDINGS_KEY = :check_holdings
+    UNAVAILABLE_KEY = :unavailable
     ELEC_AVAILABLE = 'Available'
     ELEC_UNAVAILABLE = 'Not Available'
 

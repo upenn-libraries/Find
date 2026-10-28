@@ -12,19 +12,21 @@ en:
           unrequestable:
             label: 'Available in person'
             description: 'This item cannot be requested but can be accessed at the library.'
-          appointment:
-            label: 'Available in person'
-            description: 'This item can be accessed at the library reading room.'
+          appointment: &appointment_shared
+            label: 'Available by appointment'
+            description: 'This item can be accessed by appointment in the library reading room.'
+          offsite_appointment:
+            label: 'Available from offsite location'
+            description: 'This item is stored offsite; please allow extra time for retrieval.'
         unavailable:
           label: 'By Request'
           description: 'Item cannot be checked out at the library but can be requested.'
+          appointment: *appointment_shared
         check_holdings:
           mixed_availability:
             label: 'Mixed Availability'
             description: 'Some items are available, others may be requested.'
-          appointment:
-            label: 'Available in person'
-            description: 'This item can be accessed at the library reading room.'
+          appointment: *appointment_shared
       electronic:
         available:
           label: 'Available online'
