@@ -13,4 +13,4 @@ includes:
       DOCKER_CONTAINER_NAME: "catalog-find"
       DOCKER_API_TLS_PORT_EXT: 127.0.0.1:2389
       DOCKER_CONTEXT_HOST: tcp://127.0.0.1:2389
-      ANSIBLE_REQUIREMENTS_FILE: "requirements.yml"
+      ANSIBLE_REQUIREMENTS_FILE: "requirements.dev.yml"
