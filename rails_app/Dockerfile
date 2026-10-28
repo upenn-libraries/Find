@@ -102,7 +102,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 COPY --chmod=755 --from=base ${PROJECT_ROOT}/docker-entrypoint.sh /usr/local/bin/
 COPY --chmod=644 --chown=app:app --from=base ${PROJECT_ROOT} ${PROJECT_ROOT}
 
-
 RUN mkdir -p ${PROJECT_ROOT}/app/assets/builds/ && \
     SECRET_KEY_BASE_DUMMY=1 bundle exec rake assets:precompile
 
