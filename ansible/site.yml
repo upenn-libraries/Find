@@ -3,8 +3,11 @@
   hosts: all
   become: true
   gather_facts: true
-  roles:
-    - docker-swarm
+  tasks:
+    - name: Set up the development swarm
+      ansible.builtin.include_role:
+        name: docker-swarm
+      when: is_development | default(false, true)
 
 - name: "Deploy application"
   hosts: docker_swarm_managers
