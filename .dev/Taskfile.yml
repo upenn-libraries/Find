@@ -1,0 +1,14 @@
+version: "3"
+
+includes:
+  app:
+    taskfile: https://gitlab.library.upenn.edu/devops/taskfile/-/raw/main/DevEnvTasks.yml?ref_type=heads
+    flatten: true
+    vars:
+      PROJECT_NAME: "catalog-find"
+      DOMAINS:
+        - catalog-find-dev
+      DOCKER_NETWORK_SUBNET: 172.16.10.0/24
+      DOCKER_CONTAINER_IP: "172.16.10.10"
+      DOCKER_CONTAINER_NAME: "catalog-find"
+      ANSIBLE_REQUIREMENTS_FILE: "requirements.yml"

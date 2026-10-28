@@ -1,18 +1,20 @@
 ---
-- name: "Provision Docker Swarm Cluster"
+- name: "Set up Docker and Docker Swarm"
   hosts: all
   become: true
-  collections:
-    - ansible.utils
-    - ansible.netcommon
-  tasks:
-    - ansible.builtin.import_tasks: "provision_docker.yml"
-      when: is_development | default (false, true)
+  gather_facts: true
+  roles:
+    - docker-swarm
 
 - name: "Deploy application"
-  hosts: docker_swarm_manager
+  hosts: docker_swarm_managers
   become: true
   gather_facts: true
+  pre_tasks:
+    - name: Resolve Vault secrets once, before the roles downgrade requests
+      ansible.builtin.set_fact:
+        "{{ item }}": "{{ lookup('ansible.builtin.vars', item) }}"
+      loop: "{{ hostvars[inventory_hostname] | select('match', '.+_vault_values$') }}"
   tasks:
     - ansible.builtin.import_role:
         name: catalog-find
@@ -31,7 +33,7 @@
         - name: Copy content of directory 'files'
           copy:
             src: /tmp/catalog-indexing/rails_app/solr/
-            dest: /catalog-find/rails_app/solr/
+            dest: /home/app/rails_app/solr/
             remote_src: true
       when: is_development | default (false, true)
     - ansible.builtin.import_role:

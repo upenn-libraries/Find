@@ -37,7 +37,7 @@ services:
       - aws_secret_access_key
       - sidekiq_pro_credentials
     volumes:
-      - /catalog-find/ansible/roles/catalog-find/files/src/:/home/app
+      - /home/app/rails_app/:/home/app
 
 secrets:
   aws_access_key:

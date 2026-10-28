@@ -1,5 +1,5 @@
 [staging]
 swarm-01
 
-[docker_swarm_manager]
+[docker_swarm_managers]
 swarm-01

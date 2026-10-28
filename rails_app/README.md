@@ -31,10 +31,10 @@ I suggest installing Ruby via [`rbenv`](https://github.com/rbenv/rbenv) or [`asd
 plenty of guidance available on the open web about installing and using these tools. The `.ruby-version` and
 `.tool-versions` files in this repo explicitly define the version of Ruby to be installed.
 
-> __Important Note:__ The available Vagrant environment relies on a Bundler configuration that houses the installed gems in the `vendor/bundle` directory.
+> __Important Note:__ The available Taskfile development environment relies on a Bundler configuration that houses the installed gems in the `vendor/bundle` directory.
 > If you want to use local services, and a local Ruby interpreter (via `rbenv`, `asdf` or somesuch), you'll need to instruct bundler to ignore this configuration when running commands with `bundle` (including `bundle exec`).
 >
-> To ignore the vagrant-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you cna prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
+> To ignore the container-specific Bundler config in a terminal session, run `export BUNDLE_IGNORE_CONFIG=true`. Alternatively, you can prepend the environment variable with each command; e.g. `BUNDLE_IGNORE_CONFIG=true bundle exec rails c`.
 
 #### Docker Compose
 
@@ -49,9 +49,9 @@ from [the IT Helpdesk](https://ithelp.library.upenn.edu/support/home) for full f
 
 #### Development Credentials
  
-Building the Vagrant environment should pull in the needed development key. If using the Vagrant environment for development, all secret values will be pulled from Vault. 
+Building the Taskfile development environment should pull in the needed development key. If using the Taskfile environment for development, all secret values will be pulled from Vault. 
 
-Settings files are, and should continue to be, structured to support credentials being made available by different means. For example, the Alma API keys is available via `DockerSecrets` in the Vagrant environment, but via the encrypted credential file when not using the Vagrant environment.
+Settings files are, and should continue to be, structured to support credentials being made available by different means. For example, the Alma API keys is available via `DockerSecrets` in the Taskfile environment, but via the encrypted credential file when not using the Taskfile environment.
 
 New credential values added to the Settings should be added **BOTH** to the Penn Vault as well as the encrypted Rails `development.yml.enc` file. This can be done with:
 
