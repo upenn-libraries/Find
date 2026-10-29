@@ -7,6 +7,13 @@
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
   <head>
+    <!-- OneTrust Cookies Consent Notice start for upenn.edu -->
+    <script type="text/javascript" src="https://cdn.cookielaw.org/consent/019efefd-a67f-723b-a8f3-c265c8af6b83/OtAutoBlock.js" ></script>
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="019efefd-a67f-723b-a8f3-c265c8af6b83" ></script>
+    <script type="text/javascript">
+        function OptanonWrapper() { }
+    </script>
+    <!-- OneTrust Cookies Consent Notice end for upenn.edu -->
     <%= render('shared/google_analytics/tags', gtag_id: Settings.google_analytics.id) if Settings.google_analytics.id %>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
