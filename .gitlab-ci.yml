@@ -60,7 +60,9 @@ include:
       ci_requirements_file: ".gitlab/ci-requirements.yml"
       docker_tag_to_scan: "${CI_COMMIT_SHA}"
       needs:
-        - "amend_manifest_production"
+        - "build_and_push_docker_images_production"
+        - job: "amend_manifest_production"
+          optional: true
       stage: "test"
   - component: gitlab.library.upenn.edu/devops/gitlab/components/docker/stage_finalize@~latest
     inputs:
@@ -117,7 +119,9 @@ build_and_push_docker_images_production: *sidekiq_pro_from_vault
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   needs:
-    - amend_manifest_development
+    - build_and_push_docker_images_development
+    - job: amend_manifest_development
+      optional: true
   services:
     - name: postgres:16.12
       variables:
@@ -233,7 +237,9 @@ reek_app_test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_PIPELINE_ID}:${CI_COMMIT_SHORT_SHA}-development
   needs:
-    - amend_manifest_development
+    - build_and_push_docker_images_development
+    - job: amend_manifest_development
+      optional: true
   script:
     - cd rails_app && bundle exec reek app
   rules:
