@@ -5,9 +5,9 @@ describe Inventory::List::Sort::Physical do
 
   describe '#sort' do
     let(:data) do
-      [{  'availability' => Inventory::Constants::UNAVAILABLE },
-       {  'availability' => Inventory::Constants::AVAILABLE },
-       {  'availability' => Inventory::Constants::CHECK_HOLDINGS }]
+      [{ 'availability' => Inventory::Constants::UNAVAILABLE },
+       { 'availability' => Inventory::Constants::AVAILABLE },
+       { 'availability' => Inventory::Constants::CHECK_HOLDINGS }]
     end
 
     it 'puts available holdings first' do
