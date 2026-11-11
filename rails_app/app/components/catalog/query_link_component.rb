@@ -44,7 +44,7 @@ module Catalog
     # Clause index associated with search field
     # @return [Integer]
     def clause_index
-      @clause_index ||=  begin
+      @clause_index ||= begin
         fields = @field.view_context.blacklight_config.search_fields.select { |_k, v| v.include_in_advanced_search }
         fields.keys.find_index(search_target.to_s)
       end
