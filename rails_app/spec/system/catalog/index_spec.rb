@@ -32,8 +32,8 @@ describe 'Catalog Index Page' do
     end
 
     it 'limits facets to 7' do
-      click_on I18n.t('facets.library')
-      within('div.blacklight-library_facet') do
+      click_on I18n.t('facets.subject')
+      within('div.blacklight-subject_facet') do
         expect(page).to have_selector 'ul.facet-values li', count: 7
       end
     end
