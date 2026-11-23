@@ -164,17 +164,17 @@ class CatalogController < ApplicationController
     end
     config.add_facet_field :recently_published_facet, label: I18n.t('facets.recently_published.label'), solr_params:
       { 'facet.mincount': 1 }, query: { last_5_years: { label: I18n.t('facets.recently_published.5_years'),
-                                                        fq: 'publication_date_sort:[NOW/YEAR-4YEARS TO *]' },
+                                                        fq: DateMathBuilder.recently_published(5) },
                                         last_10_years: { label: I18n.t('facets.recently_published.10_years'),
-                                                         fq: 'publication_date_sort:[NOW/YEAR-9YEARS TO *]' },
+                                                         fq: DateMathBuilder.recently_published(10) },
                                         last_15_years: { label: I18n.t('facets.recently_published.15_years'),
-                                                         fq: 'publication_date_sort:[NOW/YEAR-14YEARS TO *]' } }
+                                                         fq: DateMathBuilder.recently_published(15) } }
     config.add_facet_field :recently_added_facet, label: I18n.t('facets.recently_added.label'), solr_params:
       { 'facet.mincount': 1 }, query: {
-        within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: 'added_date_sort:[NOW/DAY-15DAYS TO *]' },
-        within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: 'added_date_sort:[NOW/DAY-30DAYS TO *]' },
-        within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: 'added_date_sort:[NOW/DAY-60DAYS TO *]' },
-        within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: 'added_date_sort:[NOW/DAY-90DAYS TO *]' }
+        within_15_days: { label: I18n.t('facets.recently_added.15_days'), fq: DateMathBuilder.recently_added(15) },
+        within_30_days: { label: I18n.t('facets.recently_added.30_days'), fq: DateMathBuilder.recently_added(30) },
+        within_60_days: { label: I18n.t('facets.recently_added.60_days'), fq: DateMathBuilder.recently_added(60) },
+        within_90_days: { label: I18n.t('facets.recently_added.90_days'), fq: DateMathBuilder.recently_added(90) }
       }
 
     # Have BL send all facet field names to Solr, which has been the default
