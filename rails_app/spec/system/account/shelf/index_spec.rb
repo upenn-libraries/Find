@@ -9,11 +9,11 @@ describe 'Account Shelf index page' do
 
   before do
     login_as user
-
     # Stub Shelf Listing
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf_service)
     allow(shelf_service).to receive(:find_all).with(no_args).and_return(shelf_listing)
 
+    page.driver.browser.disable_javascript
     visit requests_path
   end
 

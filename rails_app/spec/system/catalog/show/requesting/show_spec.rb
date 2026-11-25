@@ -24,9 +24,11 @@ describe 'Catalog show page requesting behaviors' do
       let(:item) { build :item }
 
       before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-        find("input#delivery_pickup_#{item.holding_id}").trigger('click')
+        page.document.synchronize do
+          allow(Inventory::Item).to receive(:find_all).and_return([item])
+          find('details.fulfillment > summary').click
+          find("input#delivery_pickup_#{item.holding_id}").trigger('click')
+        end
       end
 
       it 'shows a button to add comments when the option is changed from scan' do
@@ -53,8 +55,12 @@ describe 'Catalog show page requesting behaviors' do
 
   context 'when not logged in' do
     before do
-      visit solr_document_path(mms_id)
-      click_button print_monograph_entries.first.description
+      page.document.synchronize do
+        visit solr_document_path(mms_id)
+        click_button print_monograph_entries.first.description
+        allow(Inventory::Item).to receive(:find_all).and_return([item])
+        find('details.fulfillment > summary').click
+      end
     end
 
     context 'with an item at the archives' do
@@ -63,11 +69,6 @@ describe 'Catalog show page requesting behaviors' do
                                  library_code: Settings.fulfillment.restricted_libraries.archives)]
       end
       let(:item) { build :item, :at_archives }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
 
       it 'shows the archives text' do
         within('.fulfillment__container') do
@@ -82,11 +83,6 @@ describe 'Catalog show page requesting behaviors' do
                                  library_code: Settings.fulfillment.restricted_libraries.hsp)]
       end
       let(:item) { build :item, :at_hsp }
-
-      before do
-        allow(Inventory::Item).to receive(:find_all).and_return([item])
-        find('details.fulfillment > summary').click
-      end
 
       it 'shows the archives text' do
         within('.fulfillment__container') do

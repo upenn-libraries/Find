@@ -11,6 +11,7 @@ describe 'Account Shelf show page' do
     # Stub creation of shelf instance, transaction find
     allow(Shelf::Service).to receive(:new).with(user.uid).and_return(shelf)
     allow(shelf).to receive(:find).with(entry.system.to_s, entry.type.to_s, entry.id.to_s).and_return(entry)
+    page.driver.browser.disable_javascript
     visit request_path(entry.system, entry.type, entry.id)
   end
 

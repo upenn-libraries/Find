@@ -9,7 +9,10 @@ describe 'index page' do
   include_context 'with User.new returning user'
   include_context 'with mock alma_record on user having alma_user_group user group'
 
-  before { visit alma_login_path }
+  before do
+    page.driver.browser.disable_javascript
+    visit alma_login_path
+  end
 
   context 'when Alma authentication succeeds' do
     before do

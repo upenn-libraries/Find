@@ -69,9 +69,11 @@ describe 'Account Request ILL form' do
 
   context 'when form is submitting with missing required fields' do
     before do
-      click_button I18n.t('account.ill.request_type.loan')
-      fill_in I18n.t('account.ill.form.loan.author.label'), with: 'John Doe'
-      click_button I18n.t('account.ill.form.loan.submit')
+      page.document.synchronize do
+        click_button I18n.t('account.ill.request_type.loan')
+        fill_in I18n.t('account.ill.form.loan.author.label'), with: 'John Doe'
+        click_button I18n.t('account.ill.form.loan.submit')
+      end
     end
 
     it 'display error messages' do
@@ -85,12 +87,11 @@ describe 'Account Request ILL form' do
   end
 
   context 'when pages input has more than 30 characters' do
-    before do
-      click_button I18n.t('account.ill.request_type.scan')
-    end
-
     it 'limits the input to 30 characters' do
-      fill_in I18n.t('account.ill.form.scan.pages'), with: 'x' * 31
+      page.document.synchronize do
+        click_button I18n.t('account.ill.request_type.scan')
+        fill_in I18n.t('account.ill.form.scan.pages'), with: 'x' * 31
+      end
       expect(page).to have_field I18n.t('account.ill.form.scan.pages'), with: 'x' * 30
     end
   end
@@ -108,10 +109,11 @@ describe 'Account Request ILL form' do
       let(:proxy) { Fulfillment::User.new('jdoe') }
 
       before do
-        allow(Illiad::User).to receive(:find).with(id: proxy.uid).and_return(create(:illiad_user))
-
-        fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy.uid
-        click_button I18n.t('account.ill.form.proxy.submit')
+        page.document.synchronize do
+          allow(Illiad::User).to receive(:find).with(id: proxy.uid).and_return(create(:illiad_user))
+          fill_in I18n.t('account.ill.form.proxy.pennkey'), with: proxy.uid
+          click_button I18n.t('account.ill.form.proxy.submit')
+        end
       end
 
       it 'displays proxied request alert' do

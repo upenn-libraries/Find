@@ -40,6 +40,13 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # Access Devise controller helper methods in component tests
+  config.include Devise::Test::ControllerHelpers, type: :component
+
+  config.before(:each, type: :component) do
+    @request = vc_test_controller.request
+  end
+
   # Increase max wait time to deal with CI spec run issues
   Capybara.default_max_wait_time = 10
 

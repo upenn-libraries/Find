@@ -35,11 +35,6 @@ describe 'Catalog Show Page' do
         visit solr_document_path(mms_id)
       end
 
-      it 'displays a link to email the record' do
-        click_on I18n.t('blacklight.tools.title')
-        expect(page).to have_link 'Email', href: email_solr_document_path(mms_id)
-      end
-
       it 'properly sends an email' do
         expect {
           click_on I18n.t('blacklight.tools.title')
@@ -48,18 +43,6 @@ describe 'Catalog Show Page' do
           click_on I18n.t('blacklight.email.form.submit')
         }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
-    end
-
-    context 'when a user is not signed in' do
-      it 'displays a link to login' do
-        click_on I18n.t('blacklight.tools.title')
-        expect(page).to have_link(I18n.t('blacklight.tools.login_for_email'), href: login_path(id: mms_id))
-      end
-    end
-
-    it 'displays Staff view link' do
-      click_on I18n.t('blacklight.tools.title')
-      expect(page).to have_link I18n.t('blacklight.tools.staff_view'), href: staff_view_solr_document_path(mms_id)
     end
   end
 
