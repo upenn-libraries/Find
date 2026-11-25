@@ -193,7 +193,7 @@ rspec_app_integration_test:
   extends:
     - .rspec_app_test
   services:
-    - name: ghcr.io/browserless/chromium:v2.38.4
+    - name: ghcr.io/rubycdp/chrome:158
       alias: chrome
       variables:
         PORT: 3333
@@ -216,7 +216,7 @@ rspec_app_integration_test:
         SOLR_OPTS: "-Dsolr.disableConfigSetsCreateAuthChecks=true -Dsolr.modules=analysis-extras"
         ZK_CREATE_CHROOT: "true"
   variables:
-    CHROME_URL: "ws://chrome:3333"
+    CHROME_URL: "http://chrome:3333"
     SPEC_OPTS: "--tag type:system"
   allow_failure: true
 

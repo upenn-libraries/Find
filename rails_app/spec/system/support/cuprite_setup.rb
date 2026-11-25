@@ -16,9 +16,9 @@ Capybara.register_driver(:better_cuprite) do |app|
       inspector: !ENV['CI'], # Enable debugging capabilities
       js_errors: true, # Re-raise js errors in Ruby
       timeout: 30, # How long to wait for a response from browser before raising a pending connection error
-      url_blacklist: [/typekit/, /favicon/, /footer-bg/], # block some frivolous requests
+      url_blacklist: [/typekit/, /favicon/, /footer-bg/, /clarity\.ms/], # block some frivolous requests
       window_size: [1600, 1200],
-      ws_url: ENV.fetch('CHROME_URL', 'ws://localhost:3333')
+      url: ENV.fetch('CHROME_URL', 'http://localhost:3333')
     }
   )
 end
@@ -36,7 +36,7 @@ module CupriteHelpers
 
   # Drop #debug in a system spec and navigate to the printed URL to access the remote debugger
   def debug(binding = nil)
-    $stdout.puts '🔎 Open Chrome inspector at http://localhost:3333/debugger/'
+    $stdout.puts '🔎 Open Chrome inspector at http://localhost:3333/'
     return binding.break if binding
 
     page.driver.pause
